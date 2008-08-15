@@ -1,0 +1,98 @@
+<refentry id="gluQuadricNormals.3G">
+	<refmeta id="gluQuadricNormals.3G-meta">
+		<refentrytitle>gluQuadricNormals</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluQuadricNormals.3G-name">
+		<refname>gluQuadricNormals</refname>
+		<refpurpose>specify what kind of normals are desired for quadrics</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluQuadricNormals.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluQuadricNormals</function></funcdef>
+				<paramdef>GLUquadric*&nbsp;<parameter>quad</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>normal</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluQuadricNormals.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>quad</parameter></term>
+				<listitem>
+					<simpara>
+						Specifes the quadrics object (created with <function moreinfo="refentry">gluNewQuadric</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>normal</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the desired type of normals. Valid values are <constant>GLU_NONE</constant>,
+						<constant>GLU_FLAT</constant>, and <constant>GLU_SMOOTH</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluQuadricNormals.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluQuadricNormals</function> specifies what kind of normals are desired for quadrics rendered with
+			<parameter>quad</parameter>. The legal values are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GLU_NONE</constant></term>
+				<listitem>
+					<simpara>
+						No normals are generated.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLU_FLAT</constant></term>
+				<listitem>
+					<simpara>
+						One normal is generated for every facet of a quadric.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLU_SMOOTH</constant></term>
+				<listitem>
+					<simpara>
+						One normal is generated for every vertex of a quadric. This is the initial value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluQuadricNormals.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluNewQuadric</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricDrawStyle</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricOrientation</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricTexture</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

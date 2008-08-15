@@ -1,0 +1,85 @@
+<refentry id="glClearAccum.3G">
+	<refmeta id="glClearAccum.3G-meta">
+		<refentrytitle>glClearAccum</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glClearAccum.3G-name">
+		<refname>glClearAccum</refname>
+		<refpurpose>specify clear values for the accumulation buffer</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glClearAccum.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glClearAccum</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glClearAccum.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>red</parameter></term>
+				<term><parameter>green</parameter></term>
+				<term><parameter>blue</parameter></term>
+				<term><parameter>alpha</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the red, green, blue, and alpha values used when the accumulation buffer is cleared. The initial
+						values are all 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glClearAccum.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glClearAccum</function> specifies the red, green, blue, and alpha values used by <function
+			moreinfo="refentry">glClear</function> to clear the accumulation buffer.
+		</para>
+		<para>
+			Values specified by <function>glClearAccum</function> are clamped to the range <inlineequation>
+				<mml:math>
+					<mml:mfenced open="[" close="]">
+						<mml:mn>-1</mml:mn>
+						<mml:mn>1</mml:mn>
+					</mml:mfenced>
+				</mml:math>
+			</inlineequation>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClearAccum.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glClearAccum</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClearAccum.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_ACCUM_CLEAR_VALUE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glClearAccum.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glAccum</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glClear</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

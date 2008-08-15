@@ -1,0 +1,83 @@
+<refentry id="glutBitmapWidth.3GLUT">
+	<refmeta id="glutBitmapWidth.3GLUT-meta">
+		<refentrytitle>glutBitmapWidth</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutBitmapWidth.3GLUT-name">
+		<refname>glutBitmapWidth</refname>
+		<refname>glutBitmapLength</refname>
+		<refpurpose>returns the width/length of a bitmap character/string.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutBitmapWidth.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutBitmapWidth</function></funcdef>
+				<paramdef>void&nbsp;*<parameter>font</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>character</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutBitmapLength</function></funcdef>
+				<paramdef>void&nbsp;*<parameter>font</parameter></paramdef>
+				<paramdef>const&nbsp;unsigned&nbsp;char&nbsp;*<parameter>string</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutBitmapWidth.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>font</parameter></term>
+				<listitem>
+					<simpara>
+						Bitmap font to use. For valid values, see the <function moreinfo="refentry">glutBitmapCharacter</function>
+						description.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>character</parameter></term>
+				<listitem>
+					<simpara>
+						Character to return width of (not confined to 8 bits).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>string</parameter></term>
+				<listitem>
+					<simpara>
+						Text string (8-bit characters), nul terminated.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutBitmapWidth.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutBitmapWidth</function> returns the width in pixels of a bitmap character in a supported bitmap font.
+			While the width of characters in a font may vary (though fixed width fonts do not vary), the maximum height
+			characteristics of a particular font are fixed.
+		</para>
+		<para>
+			<function>glutBitmapLength</function> returns the length in pixels of a string (8-bit characters). This length is
+			equivalent to summing all the widths returned by glutBitmapWidth for each character in the string.
+		</para>
+	</refsect1>
+	<refsect1 id="glutBitmapWidth.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutBitmapCharacter</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutStrokeWidth</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

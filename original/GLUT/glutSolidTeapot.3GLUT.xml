@@ -1,0 +1,102 @@
+<refentry id="glutSolidTeapot.3GLUT">
+	<refmeta id="glutSolidTeapot.3GLUT-meta">
+		<refentrytitle>glutSolidTeapot</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSolidTeapot.3GLUT-name">
+		<refname>glutSolidTeapot</refname>
+		<refname>glutWireTeapot</refname>
+		<refpurpose>render a solid or wireframe teapot respectively.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSolidTeapot.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSolidTeapot</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>size</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutWireTeapot</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>size</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSolidTeapot.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>size</parameter></term>
+				<listitem>
+					<simpara>
+						Relative size of the teapot.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSolidTeapot.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSolidTeapot</function> and <function>glutWireTeapot</function> render a solid or wireframe teapot
+			respectively. Both surface normals and texture coordinates for the teapot are generated. The teapot is generated with
+			OpenGL evaluators.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSolidTeapot.3GLUT-bugs">
+		<title>Bugs</title>
+		<para>
+			The teapot is greatly over-tesselated; it renders way too slow. OpenGL's default <function
+			moreinfo="refentry">glFrontFace</function> state assumes that front facing polygons (for the purpose of face culling)
+			have vertices that wind counter clockwise when projected into window space. This teapot is rendered with its front
+			facing polygon vertices winding clockwise. For OpenGL's default back face culling to work, you should use:
+		</para>
+		<programlisting>glFrontFace(GL_CW);
+glutSolidTeapot(size);
+glFrontFace(GL_CCW);</programlisting>
+		<para>
+			Both these bugs reflect issues in the original aux toolkit's teapot rendering routines (GLUT used the same teapot
+			rendering routine).
+		</para>
+	</refsect1>
+	<refsect1 id="glutSolidTeapot.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSolidSphere</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidCube</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidCone</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTorus</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidDodecahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidOctahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTetrahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidIcosahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

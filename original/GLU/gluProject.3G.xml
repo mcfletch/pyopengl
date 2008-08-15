@@ -1,0 +1,210 @@
+<refentry id="gluProject.3G">
+	<refmeta id="gluProject.3G-meta">
+		<refentrytitle>gluProject</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluProject.3G-name">
+		<refname>gluProject</refname>
+		<refpurpose>map object coordinates to window coordinates</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluProject.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>GLint&nbsp;<function>gluProject</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>objX</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>objY</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>objZ</parameter></paramdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>model</parameter></paramdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>proj</parameter></paramdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>view</parameter></paramdef>
+				<paramdef>GLdouble*&nbsp;<parameter>winX</parameter></paramdef>
+				<paramdef>GLdouble*&nbsp;<parameter>winY</parameter></paramdef>
+				<paramdef>GLdouble*&nbsp;<parameter>winZ</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluProject.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>objX</parameter>, <parameter>objY</parameter>, <parameter>objZ</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the object coordinates.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>model</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the current modelview matrix (as from a <function moreinfo="refentry">glGetDoublev</function>
+						call).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>proj</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the current projection matrix (as from a <function moreinfo="refentry">glGetDoublev</function>
+						call).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>view</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the current viewport (as from a <function moreinfo="refentry">glGetIntegerv</function> call).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>winX</parameter>, <parameter>winY</parameter>, <parameter>winZ</parameter></term>
+				<listitem>
+					<simpara>
+						Return the computed window coordinates.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluProject.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluProject</function> transforms the specified object coordinates into window coordinates using
+			<parameter>model</parameter>, <parameter>proj</parameter>, and <parameter>view</parameter>. The result is stored in
+			<parameter>winX</parameter>, <parameter>winY</parameter>, and <parameter>winZ</parameter>. A return value of
+			<constant>GL_TRUE</constant> indicates success, a return value of <constant>GL_FALSE</constant> indicates failure.
+		</para>
+		<para>
+			To compute the coordinates, let <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>v</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mo>(</mml:mo>
+						<mml:mi>objX</mml:mi>
+						<mml:mi>objY</mml:mi>
+						<mml:mi>objZ</mml:mi>
+						<mml:mn>1.0</mml:mn>
+						<mml:mo>)</mml:mo>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> represented as a matrix with 4 rows and 1 column. Then <function>gluProject</function> computes
+			<inlineequation>
+				<mml:math>
+					<mml:msup>
+						<mml:mi>v</mml:mi>
+						<mml:mo>'</mml:mo>
+					</mml:msup>
+				</mml:math>
+			</inlineequation> as follows: <informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:msup>
+							<mml:mi>v</mml:mi>
+							<mml:mo>'</mml:mo>
+						</mml:msup>
+						<mml:mo>=</mml:mo>
+						<mml:mi>P</mml:mi>
+						<mml:mo>&times;</mml:mo>
+						<mml:mi>M</mml:mi>
+						<mml:mo>&times;</mml:mo>
+						<mml:mi>v</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>where <inlineequation>
+				<mml:math>
+					<mml:mi>P</mml:mi>
+				</mml:math>
+			</inlineequation> is the current projection matrix <parameter>proj</parameter>, <inlineequation>
+				<mml:math>
+					<mml:mi>M</mml:mi>
+				</mml:math>
+			</inlineequation> is the current modelview matrix <parameter>model</parameter> (both represented as <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>4</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>4</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> matrices in column-major order) and '<inlineequation>
+				<mml:math>
+					<mml:mo>&times;</mml:mo>
+				</mml:math>
+			</inlineequation>' represents matrix multiplication.
+		</para>
+		<para>
+			The window coordinates are then computed as follows: <informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:mi>winX</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>view</mml:mi>
+						<mml:mo>(</mml:mo>
+						<mml:mn>0</mml:mn>
+						<mml:mo>)</mml:mo>
+						<mml:mo>+</mml:mo>
+						<mml:mi>view</mml:mi>
+						<mml:mo>(</mml:mo>
+						<mml:mn>2</mml:mn>
+						<mml:mo>)</mml:mo>
+						<mml:mo>*</mml:mo>
+						<mml:mo>(</mml:mo>
+						<mml:msup>
+							<mml:mi>v</mml:mi>
+							<mml:mo>'</mml:mo>
+						</mml:msup>
+						<mml:mo>(</mml:mo>
+						<mml:mn>0</mml:mn>
+						<mml:mo>)</mml:mo>
+						<mml:mo>+</mml:mo>
+						<mml:mn>1</mml:mn>
+						<mml:mo>)</mml:mo>
+						<mml:mo>/</mml:mo>
+						<mml:mn>2</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</informalequation><informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:mi>winZ</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mo>(</mml:mo>
+						<mml:msup>
+							<mml:mi>v</mml:mi>
+							<mml:mo>'</mml:mo>
+						</mml:msup>
+						<mml:mo>(</mml:mo>
+						<mml:mn>2</mml:mn>
+						<mml:mo>)</mml:mo>
+						<mml:mo>+</mml:mo>
+						<mml:mn>1</mml:mn>
+						<mml:mo>)</mml:mo>
+						<mml:mo>/</mml:mo>
+						<mml:mn>2</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>
+		</para>
+	</refsect1>
+	<refsect1 id="gluProject.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glGet</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluUnProject</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

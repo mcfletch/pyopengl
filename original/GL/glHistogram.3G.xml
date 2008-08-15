@@ -1,0 +1,163 @@
+<refentry id="glHistogram.3G">
+	<refmeta id="glHistogram.3G-meta">
+		<refentrytitle>glHistogram</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glHistogram.3G-name">
+		<refname>glHistogram</refname>
+		<refpurpose>define histogram table</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glHistogram.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glHistogram</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>width</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>internalformat</parameter></paramdef>
+				<paramdef>GLboolean&nbsp;<parameter>sink</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glHistogram.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>target</parameter></term>
+				<listitem>
+					<simpara>
+						The histogram whose parameters are to be set. Must be one of <constant>GL_HISTOGRAM</constant> or
+						<constant>GL_PROXY_HISTOGRAM</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>width</parameter></term>
+				<listitem>
+					<simpara>
+						The number of entries in the histogram table. Must be a power of 2.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>internalformat</parameter></term>
+				<listitem>
+					<simpara>
+						The of entries in the histogram table. Must be one of <constant>GL_ALPHA</constant>,
+						<constant>GL_ALPHA4</constant>, <constant>GL_ALPHA8</constant>, <constant>GL_ALPHA12</constant>,
+						<constant>GL_ALPHA16</constant>, <constant>GL_LUMINANCE</constant>, <constant>GL_LUMINANCE4</constant>,
+						<constant>GL_LUMINANCE8</constant>, <constant>GL_LUMINANCE12</constant>,
+						<constant>GL_LUMINANCE16</constant>, <constant>GL_LUMINANCE_ALPHA</constant>,
+						<constant>GL_LUMINANCE4_ALPHA4</constant>, <constant>GL_LUMINANCE6_ALPHA2</constant>,
+						<constant>GL_LUMINANCE8_ALPHA8</constant>, <constant>GL_LUMINANCE12_ALPHA4</constant>,
+						<constant>GL_LUMINANCE12_ALPHA12</constant>, <constant>GL_LUMINANCE16_ALPHA16</constant>,
+						<constant>GL_R3_G3_B2</constant>, <constant>GL_RGB</constant>, <constant>GL_RGB4</constant>,
+						<constant>GL_RGB5</constant>, <constant>GL_RGB8</constant>, <constant>GL_RGB10</constant>,
+						<constant>GL_RGB12</constant>, <constant>GL_RGB16</constant>, <constant>GL_RGBA</constant>,
+						<constant>GL_RGBA2</constant>, <constant>GL_RGBA4</constant>, <constant>GL_RGB5_A1</constant>,
+						<constant>GL_RGBA8</constant>, <constant>GL_RGB10_A2</constant>, <constant>GL_RGBA12</constant>, or
+						<constant>GL_RGBA16</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>sink</parameter></term>
+				<listitem>
+					<simpara>
+						If <constant>GL_TRUE</constant>, pixels will be consumed by the histogramming process and no drawing or
+						texture loading will take place. If <constant>GL_FALSE</constant>, pixels will proceed to the minmax
+						process after histogramming.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glHistogram.3G-description">
+		<title>Description</title>
+		<para>
+			When <constant>GL_HISTOGRAM</constant> is enabled, RGBA color components are converted to histogram table indices by
+			clamping to the range [0,1], multiplying by the width of the histogram table, and rounding to the nearest integer. The
+			table entries selected by the RGBA indices are then incremented. (If the internal of the histogram table includes
+			luminance, then the index derived from the R color component determines the luminance table entry to be incremented.)
+			If a histogram table entry is incremented beyond its maximum value, then its value becomes undefined. (This is not an
+			error.)
+		</para>
+		<para>
+			Histogramming is performed only for RGBA pixels (though these may be specified originally as color indices and
+			converted to RGBA by index table lookup). Histogramming is enabled with <function
+			moreinfo="refentry">glEnable</function> and disabled with <function moreinfo="refentry">glDisable</function>.
+		</para>
+		<para>
+			When <parameter>target</parameter> is <constant>GL_HISTOGRAM</constant>, <function>glHistogram</function> redefines the
+			current histogram table to have <parameter>width</parameter> entries of the specified by
+			<parameter>internalformat</parameter>. The entries are indexed 0 through <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>width</mml:mi>
+						<mml:mo>-</mml:mo>
+						<mml:mn>1</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, and all entries are initialized to zero. The values in the previous histogram table, if any, are
+			lost. If <parameter>sink</parameter> is <constant>GL_TRUE</constant>, then pixels are discarded after histogramming; no
+			further processing of the pixels takes place, and no drawing, texture loading, or pixel readback will result.
+		</para>
+		<para>
+			When <parameter>target</parameter> is <constant>GL_PROXY_HISTOGRAM</constant>, <function>glHistogram</function>
+			computes all state information as if the histogram table were to be redefined, but does not actually define the new
+			table. If the requested histogram table is too large to be supported, then the state information will be set to zero.
+			This provides a way to determine if a histogram table with the given parameters can be supported.
+		</para>
+	</refsect1>
+	<refsect1 id="glHistogram.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>glHistogram</function> is present only if <constant>GL_ARB_imaging</constant> is returned when <function
+			moreinfo="refentry">glGetString</function> is called with an argument of <constant>GL_EXTENSIONS</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glHistogram.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not one of the allowable values.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if <parameter>width</parameter> is less than zero or is not a power
+			of 2.
+		</para>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>internalformat</parameter> is not one of the allowable
+			values.
+		</para>
+		<para>
+			<constant>GL_TABLE_TOO_LARGE</constant> is generated if <parameter>target</parameter> is
+			<constant>GL_HISTOGRAM</constant> and the histogram table specified is too large for the implementation.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glHistogram</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glHistogram.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGetHistogramParameter</function>
+		</para>
+	</refsect1>
+	<refsect1 id="glHistogram.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glGetHistogram</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glResetHistogram</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

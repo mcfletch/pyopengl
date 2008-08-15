@@ -1,0 +1,285 @@
+<refentry id="glTexCoord.3G">
+	<refmeta id="glTexCoord.3G-meta">
+		<refentrytitle>glTexCoord</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glTexCoord.3G-name">
+		<refname>glTexCoord1d</refname>
+		<refname>glTexCoord1f</refname>
+		<refname>glTexCoord1i</refname>
+		<refname>glTexCoord1s</refname>
+		<refname>glTexCoord2d</refname>
+		<refname>glTexCoord2f</refname>
+		<refname>glTexCoord2i</refname>
+		<refname>glTexCoord2s</refname>
+		<refname>glTexCoord3d</refname>
+		<refname>glTexCoord3f</refname>
+		<refname>glTexCoord3i</refname>
+		<refname>glTexCoord3s</refname>
+		<refname>glTexCoord4d</refname>
+		<refname>glTexCoord4f</refname>
+		<refname>glTexCoord4i</refname>
+		<refname>glTexCoord4s</refname>
+		<refname>glTexCoord1dv</refname>
+		<refname>glTexCoord1fv</refname>
+		<refname>glTexCoord1iv</refname>
+		<refname>glTexCoord1sv</refname>
+		<refname>glTexCoord2dv</refname>
+		<refname>glTexCoord2fv</refname>
+		<refname>glTexCoord2iv</refname>
+		<refname>glTexCoord2sv</refname>
+		<refname>glTexCoord3dv</refname>
+		<refname>glTexCoord3fv</refname>
+		<refname>glTexCoord3iv</refname>
+		<refname>glTexCoord3sv</refname>
+		<refname>glTexCoord4dv</refname>
+		<refname>glTexCoord4fv</refname>
+		<refname>glTexCoord4iv</refname>
+		<refname>glTexCoord4sv</refname>
+		<refpurpose>set the current texture coordinates</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glTexCoord.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord1d</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>s</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord1f</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>s</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord1i</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>s</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord1s</function></funcdef>
+				<paramdef>GLshort&nbsp;<parameter>s</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord2d</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>t</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord2f</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>t</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord2i</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>t</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord2s</function></funcdef>
+				<paramdef>GLshort&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>t</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord3d</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>r</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord3f</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>r</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord3i</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>r</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord3s</function></funcdef>
+				<paramdef>GLshort&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>r</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord4d</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>r</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>q</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord4f</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>r</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>q</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord4i</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>r</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>q</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord4s</function></funcdef>
+				<paramdef>GLshort&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>r</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>q</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glTexCoord.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>s</parameter>, <parameter>t</parameter>, <parameter>r</parameter>, <parameter>q</parameter></term>
+				<listitem>
+					<simpara>
+						Specify <parameter>s</parameter>, <parameter>t</parameter>, <parameter>r</parameter>, and
+						<parameter>q</parameter> texture coordinates. Not all parameters are present in all forms of the command.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsynopsisdiv id="glTexCoord.3G-c_spec-v">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord1dv</function></funcdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord1fv</function></funcdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord1iv</function></funcdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord1sv</function></funcdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord2dv</function></funcdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord2fv</function></funcdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord2iv</function></funcdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord2sv</function></funcdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord3dv</function></funcdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord3fv</function></funcdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord3iv</function></funcdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord3sv</function></funcdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord4dv</function></funcdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord4fv</function></funcdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord4iv</function></funcdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glTexCoord4sv</function></funcdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glTexCoord.3G-parameters-v">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>v</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to an array of one, two, three, or four elements, which in turn specify the
+						<parameter>s</parameter>, <parameter>t</parameter>, <parameter>r</parameter>, and <parameter>q</parameter>
+						texture coordinates.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glTexCoord.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glTexCoord</function> specifies texture coordinates in one, two, three, or four
+			dimensions. <function moreinfo="refentry">glTexCoord1</function> sets the current texture coordinates to
+			(<parameter>s</parameter>, 0, 0, 1); a call to
+		</para>
+		<para>
+			<function moreinfo="refentry">glTexCoord2</function> sets them to (<parameter>s</parameter>, <parameter>t</parameter>,
+			0, 1). Similarly, <function moreinfo="refentry">glTexCoord3</function> specifies the texture coordinates as
+			(<parameter>s</parameter>, <parameter>t</parameter>, <parameter>r</parameter>, 1), and <function
+			moreinfo="refentry">glTexCoord4</function> defines all four components explicitly as (<parameter>s</parameter>,
+			<parameter>t</parameter>, <parameter>r</parameter>, <parameter>q</parameter>).
+		</para>
+		<para>
+			The current texture coordinates are part of the data that is associated with each vertex and with the current raster
+			position. Initially, the values for <parameter>s</parameter>, <parameter>t</parameter>, <parameter>r</parameter>, and
+			<parameter>q</parameter> are (0, 0, 0, 1).
+		</para>
+	</refsect1>
+	<refsect1 id="glTexCoord.3G-notes">
+		<title>Notes</title>
+		<para>
+			The current texture coordinates can be updated at any time. In particular, <function
+			moreinfo="refentry">glTexCoord</function> can be called between a call to <function
+			moreinfo="refentry">glBegin</function> and the corresponding call to <function moreinfo="refentry">glEnd</function>.
+		</para>
+		<para>
+			When the <constant>GL_ARB_imaging</constant> extension is supported, <function
+			moreinfo="refentry">glTexCoord</function> always updates texture unit <constant>GL_TEXTURE0_ARB</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glTexCoord.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_CURRENT_TEXTURE_COORDS</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glTexCoord.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glTexCoordPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glVertex</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

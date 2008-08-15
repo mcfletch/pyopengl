@@ -1,0 +1,144 @@
+<refentry id="glIndex.3G">
+	<refmeta id="glIndex.3G-meta">
+		<refentrytitle>glIndex</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glIndex.3G-name">
+		<refname>glIndexd</refname>
+		<refname>glIndexf</refname>
+		<refname>glIndexi</refname>
+		<refname>glIndexs</refname>
+		<refname>glIndexub</refname>
+		<refname>glIndexdv</refname>
+		<refname>glIndexfv</refname>
+		<refname>glIndexiv</refname>
+		<refname>glIndexsv</refname>
+		<refname>glIndexubv</refname>
+		<refpurpose>set the current color index</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glIndex.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexd</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>c</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexf</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>c</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexi</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>c</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexs</function></funcdef>
+				<paramdef>GLshort&nbsp;<parameter>c</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexub</function></funcdef>
+				<paramdef>GLubyte&nbsp;<parameter>c</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glIndex.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>c</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the new value for the current color index.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsynopsisdiv id="glIndex.3G-c_spec-v">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexdv</function></funcdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>c</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexfv</function></funcdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>c</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexiv</function></funcdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>c</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexsv</function></funcdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>c</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glIndexubv</function></funcdef>
+				<paramdef>const&nbsp;GLubyte&nbsp;*<parameter>c</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glIndex.3G-parameters-v">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>c</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to a one-element array that contains the new value for the current color index.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glIndex.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glIndex</function> updates the current (single-valued) color index. It takes one
+			argument, the new value for the current color index.
+		</para>
+		<para>
+			The current index is stored as a floating-point value. Integer values are converted directly to floating-point values,
+			with no special mapping. The initial value is 1.
+		</para>
+		<para>
+			Index values outside the representable range of the color index buffer are not clamped. However, before an index is
+			dithered (if enabled) and written to the frame buffer, it is converted to fixed-point . Any bits in the integer portion
+			of the resulting fixed-point value that do not correspond to bits in the frame buffer are masked out.
+		</para>
+	</refsect1>
+	<refsect1 id="glIndex.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>glIndexub</function> and <function>glIndexubv</function> are available only if the GL version is 1.1 or
+			greater.
+		</para>
+		<para>
+			The current index can be updated at any time. In particular, <function moreinfo="refentry">glIndex</function> can be
+			called between a call to <function moreinfo="refentry">glBegin</function> and the corresponding call to <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glIndex.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_CURRENT_INDEX</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glIndex.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glColor</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIndexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

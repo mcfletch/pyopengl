@@ -1,0 +1,96 @@
+<refentry id="glutIdleFunc.3GLUT">
+	<refmeta id="glutIdleFunc.3GLUT-meta">
+		<refentrytitle>glutIdleFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutIdleFunc.3GLUT-name">
+		<refname>glutIdleFunc</refname>
+		<refpurpose>sets the global idle callback.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutIdleFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutIdleFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)()</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutIdleFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new idle callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutIdleFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutIdleFunc</function> sets the global idle callback to be func so a GLUT program can perform background
+			processing tasks or continuous animation when window system events are not being received. If enabled, the idle
+			callback is continuously called when events are not being received. The callback routine has no parameters. The current
+			window and current menu will not be changed before the idle callback. Programs with multiple windows and/or menus
+			should explicitly set the current window and/or current menu and not rely on its current setting.
+		</para>
+		<para>
+			The amount of computation and rendering done in an idle callback should be minimized to avoid affecting the program's
+			interactive response. In general, not more than a single frame of rendering should be done in an idle callback.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutIdleFunc</function> disables the generation of the idle callback.
+		</para>
+	</refsect1>
+	<refsect1 id="glutIdleFunc.3GLUT-example">
+		<title>Example</title>
+		<para>
+			A typical idle callback to animate a window might look like:
+		</para>
+		<programlisting>void idle(void)
+{
+    time += 0.05;
+    glutSetWindow(window);
+    glutPostRedisplay();
+}</programlisting>
+		<para>
+			Notice how the idle callback does not do any actual drawing; it only advances the time scene state global variable.
+			That is left to the window's display callback which will be triggered by the call to glutPostRedisplay.
+		</para>
+		<para>
+			If you use the idle callback for animation, you should be sure to stop rendering when the window is not visible. This
+			is easy to set up with a visibility callback. For example:
+		</para>
+		<programlisting>void visible(int vis)
+{
+    if (vis == GLUT_VISIBLE)
+        glutIdleFunc(idle);
+    else
+        glutIdleFunc(NULL);
+}</programlisting>
+		<para>
+			If you do use the idle callback for animation, one thing you should <emphasis>not</emphasis> do is setup the idle
+			callback before calling <function moreinfo="refentry">glutMainLoop</function>. It is much better to use the visibility
+			callback to install idle callback when the window first becomes visible on the screen.
+		</para>
+	</refsect1>
+	<refsect1 id="glutIdleFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutTimerFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutVisibilityFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

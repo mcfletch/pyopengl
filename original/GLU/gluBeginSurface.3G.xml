@@ -1,0 +1,103 @@
+<refentry id="gluBeginSurface.3G">
+	<refmeta id="gluBeginSurface.3G-meta">
+		<refentrytitle>gluBeginSurface</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluBeginSurface.3G-name">
+		<refname>gluBeginSurface</refname>
+		<refname>gluEndSurface</refname>
+		<refpurpose>delimit a NURBS surface definition</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluBeginSurface.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluBeginSurface</function></funcdef>
+				<paramdef>GLUnurbs*&nbsp;<parameter>nurb</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluEndSurface</function></funcdef>
+				<paramdef>GLUnurbs*&nbsp;<parameter>nurb</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluBeginSurface.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>nurb</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the NURBS object (created with <function moreinfo="refentry">gluNewNurbsRenderer</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluBeginSurface.3G-description">
+		<title>Description</title>
+		<para>
+			Use <function>gluBeginSurface</function> to mark the beginning of a NURBS surface definition. After calling
+			<function>gluBeginSurface</function>, make one or more calls to <function
+			moreinfo="refentry">gluNurbsSurface</function> to define the attributes of the surface. Exactly one of these calls to
+			<function moreinfo="refentry">gluNurbsSurface</function> must have a surface type of
+			<constant>GL_MAP2_VERTEX_3</constant> or <constant>GL_MAP2_VERTEX_4</constant>. To mark the end of the NURBS surface
+			definition, call <function>gluEndSurface</function>.
+		</para>
+		<para>
+			Trimming of NURBS surfaces is supported with <function moreinfo="refentry">gluBeginTrim</function>, <function
+			moreinfo="refentry">gluPwlCurve</function>, <function moreinfo="refentry">gluNurbsCurve</function>, and <function
+			moreinfo="refentry">gluEndTrim</function>. See the <function moreinfo="refentry">gluBeginTrim</function> reference page
+			for details.
+		</para>
+		<para>
+			GL evaluators are used to render the NURBS surface as a set of polygons. Evaluator state is preserved during rendering
+			with <function moreinfo="refentry">glPushAttrib</function>(<constant>GL_EVAL_BIT</constant>) and <function
+			moreinfo="refentry">glPopAttrib</function>(). See the <function moreinfo="refentry">glPushAttrib</function> reference
+			page for details on exactly what state these calls preserve.
+		</para>
+	</refsect1>
+	<refsect1 id="gluBeginSurface.3G-example">
+		<title>Example</title>
+		<para>
+			The following commands render a textured NURBS surface with normals; the texture coordinates and normals are also
+			described as NURBS surfaces:
+		</para>
+		<programlisting>gluBeginSurface(nobj);
+gluNurbsSurface(nobj, ..., GL_MAP2_TEXTURE_COORD_2);
+gluNurbsSurface(nobj, ..., GL_MAP2_NORMAL);
+gluNurbsSurface(nobj, ..., GL_MAP2_VERTEX_4);
+gluEndSurface(nobj);</programlisting>
+	</refsect1>
+	<refsect1 id="gluBeginSurface.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluBeginCurve</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluBeginTrim</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNewNurbsRenderer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNurbsCurve</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNurbsSurface</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluPwlCurve</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

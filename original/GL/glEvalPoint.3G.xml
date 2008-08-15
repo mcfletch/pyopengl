@@ -1,0 +1,375 @@
+<refentry id="glEvalPoint.3G">
+	<refmeta id="glEvalPoint.3G-meta">
+		<refentrytitle>glEvalPoint</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glEvalPoint.3G-name">
+		<refname>glEvalPoint1</refname>
+		<refname>glEvalPoint2</refname>
+		<refpurpose>generate and evaluate a single point in a mesh</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glEvalPoint.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glEvalPoint1</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>i</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glEvalPoint2</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>i</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>j</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glEvalPoint.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>i</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the integer value for grid domain variable <inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>j</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the integer value for grid domain variable <inlineequation>
+							<mml:math>
+								<mml:mi>j</mml:mi>
+							</mml:math>
+						</inlineequation> (<function>glEvalPoint2</function> only).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glEvalPoint.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glMapGrid</function> and <function moreinfo="refentry">glEvalMesh</function> are used in
+			tandem to efficiently generate and evaluate a series of evenly spaced map domain values. <function
+			moreinfo="refentry">glEvalPoint</function> can be used to evaluate a single grid point in the same gridspace that is
+			traversed by <function moreinfo="refentry">glEvalMesh</function>. Calling <function>glEvalPoint1</function> is
+			equivalent to calling
+		</para>
+		<para>
+			glEvalCoord1( i<inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mo>&CenterDot;</mml:mo>
+						<mml:mi>&Delta;</mml:mi>
+						<mml:mi>u</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:msub>
+							<mml:mi>u</mml:mi>
+							<mml:mn>1</mml:mn>
+						</mml:msub>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> );
+		</para>
+		<para>
+			where <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>&Delta;</mml:mi>
+						<mml:mi>u</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mo>(</mml:mo>
+						<mml:msub>
+							<mml:mi>u</mml:mi>
+							<mml:mn>2</mml:mn>
+						</mml:msub>
+						<mml:mo>-</mml:mo>
+						<mml:msub>
+							<mml:mi>u</mml:mi>
+							<mml:mn>1</mml:mn>
+						</mml:msub>
+						<mml:mo>)</mml:mo>
+						<mml:mo>/</mml:mo>
+						<mml:mi>n</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>
+		</para>
+		<para>
+			and <inlineequation>
+				<mml:math>
+					<mml:mi>n</mml:mi>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>u</mml:mi>
+						<mml:mn>1</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation>, and <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>u</mml:mi>
+						<mml:mn>2</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation> are the arguments to the most recent <function moreinfo="refentry">glMapGrid1</function> command. The
+			one absolute numeric requirement is that if <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>i</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>n</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, then the value computed from <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>i</mml:mi>
+						<mml:mo>&CenterDot;</mml:mo>
+						<mml:mi>&Delta;</mml:mi>
+						<mml:mi>u</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:msub>
+							<mml:mi>u</mml:mi>
+							<mml:mn>1</mml:mn>
+						</mml:msub>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> is exactly <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>u</mml:mi>
+						<mml:mn>2</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation>.
+		</para>
+		<para>
+			In the two-dimensional case, <function>glEvalPoint2</function>, let
+		</para>
+		<para>
+			<inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>&Delta;</mml:mi>
+						<mml:mi>u</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mo>(</mml:mo>
+						<mml:msub>
+							<mml:mi>u</mml:mi>
+							<mml:mn>2</mml:mn>
+						</mml:msub>
+						<mml:mo>-</mml:mo>
+						<mml:msub>
+							<mml:mi>u</mml:mi>
+							<mml:mn>1</mml:mn>
+						</mml:msub>
+						<mml:mo>)</mml:mo>
+						<mml:mo>/</mml:mo>
+						<mml:mi>n</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>&Delta;</mml:mi>
+						<mml:mi>v</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mo>(</mml:mo>
+						<mml:msub>
+							<mml:mi>v</mml:mi>
+							<mml:mn>2</mml:mn>
+						</mml:msub>
+						<mml:mo>-</mml:mo>
+						<mml:msub>
+							<mml:mi>v</mml:mi>
+							<mml:mn>1</mml:mn>
+						</mml:msub>
+						<mml:mo>)</mml:mo>
+						<mml:mo>/</mml:mo>
+						<mml:mi>m</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>
+		</para>
+		<para>
+			where <inlineequation>
+				<mml:math>
+					<mml:mi>n</mml:mi>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>u</mml:mi>
+						<mml:mn>1</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>u</mml:mi>
+						<mml:mn>2</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:mi>m</mml:mi>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>v</mml:mi>
+						<mml:mn>1</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation>, and <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>v</mml:mi>
+						<mml:mn>2</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation> are the arguments to the most recent <function moreinfo="refentry">glMapGrid2</function> command.
+			Then the <function>glEvalPoint2</function> command is equivalent to calling
+		</para>
+		<para>
+			glEvalCoord2( i<inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mo>&CenterDot;</mml:mo>
+						<mml:mi>&Delta;</mml:mi>
+						<mml:mi>u</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:msub>
+							<mml:mi>u</mml:mi>
+							<mml:mn>1</mml:mn>
+						</mml:msub>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, j<inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mo>&CenterDot;</mml:mo>
+						<mml:mi>&Delta;</mml:mi>
+						<mml:mi>v</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:msub>
+							<mml:mi>v</mml:mi>
+							<mml:mn>1</mml:mn>
+						</mml:msub>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> );
+		</para>
+		<para>
+			The only absolute numeric requirements are that if <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>i</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>n</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, then the value computed from <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>i</mml:mi>
+						<mml:mo>&CenterDot;</mml:mo>
+						<mml:mi>&Delta;</mml:mi>
+						<mml:mi>u</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:msub>
+							<mml:mi>u</mml:mi>
+							<mml:mn>1</mml:mn>
+						</mml:msub>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> is exactly <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>u</mml:mi>
+						<mml:mn>2</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation>, and if <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>j</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>m</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, then the value computed from <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>i</mml:mi>
+						<mml:mo>&CenterDot;</mml:mo>
+						<mml:mi>&Delta;</mml:mi>
+						<mml:mi>v</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:msub>
+							<mml:mi>v</mml:mi>
+							<mml:mn>1</mml:mn>
+						</mml:msub>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> is exactly <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>v</mml:mi>
+						<mml:mn>2</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation>.
+		</para>
+	</refsect1>
+	<refsect1 id="glEvalPoint.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAP1_GRID_DOMAIN</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAP2_GRID_DOMAIN</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAP1_GRID_SEGMENTS</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAP2_GRID_SEGMENTS</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glEvalPoint.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glEvalCoord</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEvalMesh</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMap1</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMap2</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMapGrid</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

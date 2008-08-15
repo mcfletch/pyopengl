@@ -1,0 +1,54 @@
+<refentry id="glutDestroyMenu.3GLUT">
+	<refmeta id="glutDestroyMenu.3GLUT-meta">
+		<refentrytitle>glutDestroyMenu</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutDestroyMenu.3GLUT-name">
+		<refname>glutDestroyMenu</refname>
+		<refpurpose>destroys the specified menu.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutDestroyMenu.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutDestroyMenu</function></funcdef>
+				<paramdef>int&nbsp;<parameter>menu</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutDestroyMenu.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>menu</parameter></term>
+				<listitem>
+					<simpara>
+						The identifier of the menu to destroy.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutDestroyMenu.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutDestroyMenu</function> destroys the specified menu by menu. If menu was the current menu, the current
+			menu becomes invalid and <function moreinfo="refentry">glutGetMenu</function> will return zero.
+		</para>
+	</refsect1>
+	<refsect1 id="glutDestroyMenu.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDestroyWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

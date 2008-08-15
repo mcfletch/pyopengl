@@ -1,0 +1,383 @@
+<refentry id="glIsEnabled.3G">
+	<refmeta id="glIsEnabled.3G-meta">
+		<refentrytitle>glIsEnabled</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glIsEnabled.3G-name">
+		<refname>glIsEnabled</refname>
+		<refpurpose>test whether a capability is enabled</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glIsEnabled.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>GLboolean&nbsp;<function>glIsEnabled</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>cap</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glIsEnabled.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>cap</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a symbolic constant indicating a GL capability.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glIsEnabled.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glIsEnabled</function> returns <constant>GL_TRUE</constant> if <parameter>cap</parameter> is an enabled
+			capability and returns <constant>GL_FALSE</constant> otherwise. Initially all capabilities except
+			<constant>GL_DITHER</constant> are disabled; <constant>GL_DITHER</constant> is initially enabled.
+		</para>
+		<para>
+			The following capabilities are accepted for <parameter>cap</parameter>:
+		</para>
+		<informaltable frame="topbot">
+			<tgroup cols="2">
+				<tbody>
+					<row>
+						<entry><emphasis role="bold">Constant</emphasis></entry>
+						<entry><emphasis role="bold">See</emphasis></entry>
+					</row>
+					<row>
+						<entry><constant>GL_ALPHA_TEST</constant></entry>
+						<entry><citerefentry><refentrytitle>glAlphaFunc</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_AUTO_NORMAL</constant></entry>
+						<entry><citerefentry><refentrytitle>glEvalCoord</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_BLEND</constant></entry>
+						<entry><simplelist type="inline">
+							<member><citerefentry><refentrytitle>glBlendFunc</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						<member><citerefentry><refentrytitle>glLogicOp</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						</simplelist></entry>
+					</row>
+					<row>
+						<entry><constant>GL_CLIP_PLANE</constant><parameter>i</parameter></entry>
+						<entry><citerefentry><refentrytitle>glClipPlane</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_ARRAY</constant></entry>
+						<entry><citerefentry><refentrytitle>glColorPointer</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_LOGIC_OP</constant></entry>
+						<entry><citerefentry><refentrytitle>glLogicOp</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_MATERIAL</constant></entry>
+						<entry><citerefentry><refentrytitle>glColorMaterial</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_TABLE</constant></entry>
+						<entry><citerefentry><refentrytitle>glColorTable</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_CONVOLUTION_1D</constant></entry>
+						<entry><citerefentry><refentrytitle>glConvolutionFilter1D</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_CONVOLUTION_2D</constant></entry>
+						<entry><citerefentry><refentrytitle>glConvolutionFilter2D</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_CULL_FACE</constant></entry>
+						<entry><citerefentry><refentrytitle>glCullFace</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_DEPTH_TEST</constant></entry>
+						<entry><simplelist type="inline">
+							<member><citerefentry><refentrytitle>glDepthFunc</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						<member><citerefentry><refentrytitle>glDepthRange</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						</simplelist></entry>
+					</row>
+					<row>
+						<entry><constant>GL_DITHER</constant></entry>
+						<entry><citerefentry><refentrytitle>glEnable</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_EDGE_FLAG_ARRAY</constant></entry>
+						<entry><citerefentry><refentrytitle>glEdgeFlagPointer</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_FOG</constant></entry>
+						<entry><citerefentry><refentrytitle>glFog</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_HISTOGRAM</constant></entry>
+						<entry><citerefentry><refentrytitle>glHistogram</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_INDEX_ARRAY</constant></entry>
+						<entry><citerefentry><refentrytitle>glIndexPointer</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_INDEX_LOGIC_OP</constant></entry>
+						<entry><citerefentry><refentrytitle>glLogicOp</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_LIGHT</constant><parameter>i</parameter></entry>
+						<entry><simplelist type="inline">
+							<member><citerefentry><refentrytitle>glLightModel</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						<member><citerefentry><refentrytitle>glLight</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						</simplelist></entry>
+					</row>
+					<row>
+						<entry><constant>GL_LIGHTING</constant></entry>
+						<entry><simplelist type="inline">
+							<member><citerefentry><refentrytitle>glMaterial</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						<member><citerefentry><refentrytitle>glLightModel</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						<member><citerefentry><refentrytitle>glLight</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						</simplelist></entry>
+					</row>
+					<row>
+						<entry><constant>GL_LINE_SMOOTH</constant></entry>
+						<entry><citerefentry><refentrytitle>glLineWidth</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_LINE_STIPPLE</constant></entry>
+						<entry><citerefentry><refentrytitle>glLineStipple</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP1_COLOR_4</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap1</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP1_INDEX</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap1</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP1_NORMAL</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap1</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP1_TEXTURE_COORD_1</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap1</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP1_TEXTURE_COORD_2</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap1</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP1_TEXTURE_COORD_3</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap1</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP1_TEXTURE_COORD_4</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap1</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP2_COLOR_4</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap2</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP2_INDEX</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap2</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP2_NORMAL</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap2</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP2_TEXTURE_COORD_1</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap2</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP2_TEXTURE_COORD_2</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap2</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP2_TEXTURE_COORD_3</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap2</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP2_TEXTURE_COORD_4</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap2</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP2_VERTEX_3</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap2</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MAP2_VERTEX_4</constant></entry>
+						<entry><citerefentry><refentrytitle>glMap2</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_MINMAX</constant></entry>
+						<entry><citerefentry><refentrytitle>glMinmax</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_NORMAL_ARRAY</constant></entry>
+						<entry><citerefentry><refentrytitle>glNormalPointer</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_NORMALIZE</constant></entry>
+						<entry><citerefentry><refentrytitle>glNormal</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_POINT_SMOOTH</constant></entry>
+						<entry><citerefentry><refentrytitle>glPointSize</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_POLYGON_SMOOTH</constant></entry>
+						<entry><citerefentry><refentrytitle>glPolygonMode</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_POLYGON_OFFSET_FILL</constant></entry>
+						<entry><citerefentry><refentrytitle>glPolygonOffset</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_POLYGON_OFFSET_LINE</constant></entry>
+						<entry><citerefentry><refentrytitle>glPolygonOffset</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_POLYGON_OFFSET_POINT</constant></entry>
+						<entry><citerefentry><refentrytitle>glPolygonOffset</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_POLYGON_STIPPLE</constant></entry>
+						<entry><citerefentry><refentrytitle>glPolygonStipple</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_POST_COLOR_MATRIX_COLOR_TABLE</constant></entry>
+						<entry><citerefentry><refentrytitle>glColorTable</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_POST_CONVOLUTION_COLOR_TABLE</constant></entry>
+						<entry><citerefentry><refentrytitle>glColorTable</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_RESCALE_NORMAL</constant></entry>
+						<entry><citerefentry><refentrytitle>glNormal</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_SCISSOR_TEST</constant></entry>
+						<entry><citerefentry><refentrytitle>glScissor</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_SEPARABLE_2D</constant></entry>
+						<entry><citerefentry><refentrytitle>glSeparableFilter2D</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_STENCIL_TEST</constant></entry>
+						<entry><simplelist type="inline">
+							<member><citerefentry><refentrytitle>glStencilFunc</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						<member><citerefentry><refentrytitle>glStencilOp</refentrytitle><manvolnum>3G</manvolnum></citerefentry></member>
+						</simplelist></entry>
+					</row>
+					<row>
+						<entry><constant>GL_TEXTURE_1D</constant></entry>
+						<entry><citerefentry><refentrytitle>glTexImage1D</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_TEXTURE_2D</constant></entry>
+						<entry><citerefentry><refentrytitle>glTexImage2D</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_TEXTURE_3D</constant></entry>
+						<entry><citerefentry><refentrytitle>glTexImage3D</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_TEXTURE_COORD_ARRAY</constant></entry>
+						<entry><citerefentry><refentrytitle>glTexCoordPointer</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_TEXTURE_GEN_Q</constant></entry>
+						<entry><citerefentry><refentrytitle>glTexGen</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_TEXTURE_GEN_R</constant></entry>
+						<entry><citerefentry><refentrytitle>glTexGen</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_TEXTURE_GEN_S</constant></entry>
+						<entry><citerefentry><refentrytitle>glTexGen</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_TEXTURE_GEN_T</constant></entry>
+						<entry><citerefentry><refentrytitle>glTexGen</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+					<row>
+						<entry><constant>GL_VERTEX_ARRAY</constant></entry>
+						<entry><citerefentry><refentrytitle>glVertexPointer</refentrytitle><manvolnum>3G</manvolnum></citerefentry></entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</informaltable>
+	</refsect1>
+	<refsect1 id="glIsEnabled.3G-notes">
+		<title>Notes</title>
+		<para>
+			If an error is generated, <function>glIsEnabled</function> returns 0.
+		</para>
+		<para>
+			<constant>GL_COLOR_LOGIC_OP</constant>, <constant>GL_COLOR_ARRAY</constant>, <constant>GL_EDGE_FLAG_ARRAY</constant>,
+			<constant>GL_INDEX_ARRAY</constant>, <constant>GL_INDEX_LOGIC_OP</constant>, <constant>GL_NORMAL_ARRAY</constant>,
+			<constant>GL_POLYGON_OFFSET_FILL</constant>, <constant>GL_POLYGON_OFFSET_LINE</constant>,
+			<constant>GL_POLYGON_OFFSET_POINT</constant>, <constant>GL_TEXTURE_COORD_ARRAY</constant>, and
+			<constant>GL_VERTEX_ARRAY</constant> are available only if the GL version is 1.1 or greater
+		</para>
+		<para>
+			<constant>GL_RESCALE_NORMAL</constant>, and <constant>GL_TEXTURE_3D</constant> are available only if the GL version is
+			1.2 or greater.
+		</para>
+		<para>
+			<constant>GL_COLOR_TABLE</constant>, <constant>GL_CONVOLUTION_1D</constant>, <constant>GL_CONVOLUTION_2D</constant>,
+			<constant>GL_HISTOGRAM</constant>, <constant>GL_MINMAX</constant>,
+			<constant>GL_POST_COLOR_MATRIX_COLOR_TABLE</constant>, <constant>GL_POST_CONVOLUTION_COLOR_TABLE</constant>, and
+			<constant>GL_SEPARABLE_2D</constant> are available only if <constant>GL_ARB_imaging</constant> is returned when
+			<function moreinfo="refentry">glGet</function> is called with <constant>GL_EXTENSIONS</constant>.
+		</para>
+		<para>
+			When the <constant>GL_ARB_multitexture</constant> extension is supported, the following parameters return the
+			associated value for the active texture unit. <constant>GL_TEXTURE_1D</constant>,
+			<constant>GL_TEXTURE_BINDING_1D</constant>, <constant>GL_TEXTURE_2D</constant>,
+			<constant>GL_TEXTURE_BINDING_2D</constant>, <constant>GL_TEXTURE_3D</constant>,
+			<constant>GL_TEXTURE_BINDING_3D</constant>, <constant>GL_TEXTURE_GEN_S</constant>,
+			<constant>GL_TEXTURE_GEN_T</constant>, <constant>GL_TEXTURE_GEN_R</constant>, <constant>GL_TEXTURE_GEN_Q</constant>,
+			<constant>GL_TEXTURE_MATRIX</constant>, and <constant>GL_TEXTURE_STACK_DEPTH</constant>. Likewise, the following
+			parameters return the associated value for the active client texture unit: <constant>GL_TEXTURE_COORD_ARRAY</constant>,
+			<constant>GL_TEXTURE_COORD_ARRAY_SIZE</constant>, <constant>GL_TEXTURE_COORD_ARRAY_STRIDE</constant>,
+			<constant>GL_TEXTURE_COORD_ARRAY_TYPE</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glIsEnabled.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>cap</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glIsEnabled</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glIsEnabled.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glEnable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEnableClientState</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGet</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

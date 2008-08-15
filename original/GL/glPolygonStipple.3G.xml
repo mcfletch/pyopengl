@@ -1,0 +1,158 @@
+<refentry id="glPolygonStipple.3G">
+	<refmeta id="glPolygonStipple.3G-meta">
+		<refentrytitle>glPolygonStipple</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glPolygonStipple.3G-name">
+		<refname>glPolygonStipple</refname>
+		<refpurpose>set the polygon stippling pattern</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glPolygonStipple.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glPolygonStipple</function></funcdef>
+				<paramdef>const&nbsp;GLubyte&nbsp;*<parameter>mask</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glPolygonStipple.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>mask</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to a <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mn>32</mml:mn>
+									<mml:mo>&times;</mml:mo>
+									<mml:mn>32</mml:mn>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> stipple pattern that will be unpacked from memory in the same way that <function
+						moreinfo="refentry">glDrawPixels</function> unpacks pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glPolygonStipple.3G-description">
+		<title>Description</title>
+		<para>
+			Polygon stippling, like line stippling (see <citerefentry>
+				<refentrytitle>glLineStipple</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>), masks out certain fragments produced by rasterization, creating a pattern. Stippling is independent
+			of polygon antialiasing.
+		</para>
+		<para>
+			<parameter>mask</parameter> is a pointer to a <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>32</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>32</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> stipple pattern that is stored in memory just like the pixel data supplied to a <function
+			moreinfo="refentry">glDrawPixels</function> call with <emphasis>height</emphasis>and <emphasis>width</emphasis>both
+			equal to 32, a pixel of <constant>GL_COLOR_INDEX</constant>, and data type of <constant>GL_BITMAP</constant>. That is,
+			the stipple pattern is represented as a <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>32</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>32</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> array of 1-bit color indices packed in unsigned bytes. <function
+			moreinfo="refentry">glPixelStore</function> parameters like <constant>GL_UNPACK_SWAP_BYTES</constant> and
+			<constant>GL_UNPACK_LSB_FIRST</constant> affect the assembling of the bits into a stipple pattern. Pixel transfer
+			operations (shift, offset, pixel map) are not applied to the stipple image, however.
+		</para>
+		<para>
+			To enable and disable polygon stippling, call <function moreinfo="refentry">glEnable</function> and <function
+			moreinfo="refentry">glDisable</function> with argument <constant>GL_POLYGON_STIPPLE</constant>. Polygon stippling is
+			initially disabled. If it's enabled, a rasterized polygon fragment with window coordinates <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>x</mml:mi>
+						<mml:mi>w</mml:mi>
+					</mml:msub>
+				</mml:math>
+			</inlineequation> and <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>y</mml:mi>
+						<mml:mi>w</mml:mi>
+					</mml:msub>
+				</mml:math>
+			</inlineequation> is sent to the next stage of the GL if and only if the (<inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:msub>
+							<mml:mi>x</mml:mi>
+							<mml:mi>w</mml:mi>
+						</mml:msub>
+						<mml:mi>mod</mml:mi>
+						<mml:mn>32</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>)th bit in the (<inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:msub>
+							<mml:mi>y</mml:mi>
+							<mml:mi>w</mml:mi>
+						</mml:msub>
+						<mml:mi>mod</mml:mi>
+						<mml:mn>32</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>)th row of the stipple pattern is 1 (one). When polygon stippling is disabled, it is as if the stipple
+			pattern consists of all 1's.
+		</para>
+	</refsect1>
+	<refsect1 id="glPolygonStipple.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glPolygonStipple</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glPolygonStipple.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGetPolygonStipple</function>
+		</para>
+		<para>
+			<function moreinfo="refentry">glIsEnabled</function> with argument <constant>GL_POLYGON_STIPPLE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glPolygonStipple.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glDrawPixels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glLineStipple</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelStore</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelTransfer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

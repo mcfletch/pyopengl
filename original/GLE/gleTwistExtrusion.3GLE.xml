@@ -1,0 +1,144 @@
+<refentry id="gleTwistExtrusion.3GLE">
+	<refmeta id="gleTwistExtrusion.3GLE-meta">
+		<refentrytitle>gleTwistExtrusion</refentrytitle>
+		<manvolnum>3GLE</manvolnum>
+	</refmeta>
+	<refnamediv id="gleTwistExtrusion.3GLE-name">
+		<refname>gleTwistExtrusion</refname>
+		<refpurpose>Extrude arbitrary 2D contour along arbitrary 3D path, specifying local rotations (twists).</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gleTwistExtrusion.3GLE-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gleTwistExtrusion</function></funcdef>
+				<paramdef>int&nbsp;<parameter>ncp</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>contour</parameter>[][2]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>cont_normal</parameter>[][2]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>up</parameter>[3]</paramdef>
+				<paramdef>int&nbsp;<parameter>npoints</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>point_array</parameter>[][3]</paramdef>
+				<paramdef>float&nbsp;<parameter>color_array</parameter>[][3]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>twist_array</parameter>[]</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gleTwistExtrusion.3GLE-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>ncp</parameter></term>
+				<listitem>
+					<simpara>
+						number of contour points
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>contour</parameter></term>
+				<listitem>
+					<simpara>
+						2D contour
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>cont_normal</parameter></term>
+				<listitem>
+					<simpara>
+						2D contour normals
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>up</parameter></term>
+				<listitem>
+					<simpara>
+						up vector for contour
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>npoints</parameter></term>
+				<listitem>
+					<simpara>
+						numpoints in poly-line
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>point_array</parameter></term>
+				<listitem>
+					<simpara>
+						polyline vertices
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>color_array</parameter></term>
+				<listitem>
+					<simpara>
+						colors at polyline verts
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>twist_array</parameter></term>
+				<listitem>
+					<simpara>
+						contour twists (in degrees)
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gleTwistExtrusion.3GLE-description">
+		<title>Description</title>
+		<para>
+			Extrude arbitrary 2D contour along arbitrary 3D path, specifying local rotations (twists). As the contour is extruded,
+			it will be twisted by the amount specified in the array <parameter>twist_array</parameter>. The angles are measured in
+			degrees, and the rotation is about the origin of the contour coordinate system.
+		</para>
+		<para>
+			The argument <parameter>contour</parameter> specifies the 2D contour to be extruded, while the argument
+			<parameter>point_array</parameter> specifies the path along which to extrude. The vector <parameter>up</parameter>
+			defines the orientation of the contour y-axis in real 3D space.
+		</para>
+		<para>
+			Note that neither the very first segment, nor the very last segment are drawn. The first and last segments serve only
+			to define the angle of the join at the very ends of the polyline. Thus, to draw one segment, three must be specified.
+			To draw two segments, four must be specified, etc.
+		</para>
+		<para>
+			The normal array may be <constant>NULL</constant>. If it is, normal vectors will <emphasis role="bold">not</emphasis>
+			be automatically generated, and the object will look terrible when lit.
+		</para>
+		<para>
+			The color array may be <constant>NULL</constant>. If <constant>NULL</constant>, the current color is used. If not
+			<constant>NULL</constant>, the <function moreinfo="refentry">glColor3f</function> routine is used to set the color;
+			therefore, specifying the <function moreinfo="refentry">glColorMaterial</function> subroutine before this primitive can
+			be used to set diffuse, specular, ambient, etc. colors.
+		</para>
+	</refsect1>
+	<refsect1 id="gleTwistExtrusion.3GLE-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gleExtrusion</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleSuperExtrusion</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+	<refsect1 id="gleTwistExtrusion.3GLE-author">
+		<title>Author</title>
+		<para>
+			Linas Vepstas
+		</para>
+	</refsect1>
+</refentry>

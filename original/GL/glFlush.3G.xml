@@ -1,0 +1,60 @@
+<refentry id="glFlush.3G">
+	<refmeta id="glFlush.3G-meta">
+		<refentrytitle>glFlush</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glFlush.3G-name">
+		<refname>glFlush</refname>
+		<refpurpose>force execution of GL commands in finite time</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glFlush.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glFlush</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glFlush.3G-description">
+		<title>Description</title>
+		<para>
+			Different GL implementations buffer commands in several different locations, including network buffers and the graphics
+			accelerator itself. <function>glFlush</function> empties all of these buffers, causing all issued commands to be
+			executed as quickly as they are accepted by the actual rendering engine. Though this execution may not be completed in
+			any particular time period, it does complete in finite time.
+		</para>
+		<para>
+			Because any GL program might be executed over a network, or on an accelerator that buffers commands, all programs
+			should call <function>glFlush</function> whenever they count on having all of their previously issued commands
+			completed. For example, call <function>glFlush</function> before waiting for user input that depends on the generated
+			image.
+		</para>
+	</refsect1>
+	<refsect1 id="glFlush.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>glFlush</function> can return at any time. It does not wait until the execution of all previously issued GL
+			commands is complete.
+		</para>
+	</refsect1>
+	<refsect1 id="glFlush.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glFlush</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glFlush.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glFinish</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

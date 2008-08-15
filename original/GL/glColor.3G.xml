@@ -1,0 +1,314 @@
+<refentry id="glColor.3G">
+	<refmeta id="glColor.3G-meta">
+		<refentrytitle>glColor</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glColor.3G-name">
+		<refname>glColor3b</refname>
+		<refname>glColor3d</refname>
+		<refname>glColor3f</refname>
+		<refname>glColor3i</refname>
+		<refname>glColor3s</refname>
+		<refname>glColor3ub</refname>
+		<refname>glColor3ui</refname>
+		<refname>glColor3us</refname>
+		<refname>glColor4b</refname>
+		<refname>glColor4d</refname>
+		<refname>glColor4f</refname>
+		<refname>glColor4i</refname>
+		<refname>glColor4s</refname>
+		<refname>glColor4ub</refname>
+		<refname>glColor4ui</refname>
+		<refname>glColor4us</refname>
+		<refname>glColor3bv</refname>
+		<refname>glColor3dv</refname>
+		<refname>glColor3fv</refname>
+		<refname>glColor3iv</refname>
+		<refname>glColor3sv</refname>
+		<refname>glColor3ubv</refname>
+		<refname>glColor3uiv</refname>
+		<refname>glColor3usv</refname>
+		<refname>glColor4bv</refname>
+		<refname>glColor4dv</refname>
+		<refname>glColor4fv</refname>
+		<refname>glColor4iv</refname>
+		<refname>glColor4sv</refname>
+		<refname>glColor4ubv</refname>
+		<refname>glColor4uiv</refname>
+		<refname>glColor4usv</refname>
+		<refpurpose>set the current color</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glColor.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3b</function></funcdef>
+				<paramdef>GLbyte&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLbyte&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLbyte&nbsp;<parameter>blue</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3d</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>blue</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3f</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>blue</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3i</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>blue</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3s</function></funcdef>
+				<paramdef>GLshort&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>blue</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3ub</function></funcdef>
+				<paramdef>GLubyte&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLubyte&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLubyte&nbsp;<parameter>blue</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3ui</function></funcdef>
+				<paramdef>GLuint&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLuint&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLuint&nbsp;<parameter>blue</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3us</function></funcdef>
+				<paramdef>GLushort&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLushort&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLushort&nbsp;<parameter>blue</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4b</function></funcdef>
+				<paramdef>GLbyte&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLbyte&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLbyte&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLbyte&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4d</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4f</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4i</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4s</function></funcdef>
+				<paramdef>GLshort&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4ub</function></funcdef>
+				<paramdef>GLubyte&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLubyte&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLubyte&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLubyte&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4ui</function></funcdef>
+				<paramdef>GLuint&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLuint&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLuint&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLuint&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4us</function></funcdef>
+				<paramdef>GLushort&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLushort&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLushort&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLushort&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glColor.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>red</parameter>, <parameter>green</parameter>, <parameter>blue</parameter></term>
+				<listitem>
+					<simpara>
+						Specify new red, green, and blue values for the current color.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>alpha</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a new alpha value for the current color. Included only in the four-argument <function
+						moreinfo="refentry">glColor4</function> commands.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsynopsisdiv id="glColor.3G-c_spec-v">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3bv</function></funcdef>
+				<paramdef>const&nbsp;GLbyte&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3dv</function></funcdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3fv</function></funcdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3iv</function></funcdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3sv</function></funcdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3ubv</function></funcdef>
+				<paramdef>const&nbsp;GLubyte&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3uiv</function></funcdef>
+				<paramdef>const&nbsp;GLuint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor3usv</function></funcdef>
+				<paramdef>const&nbsp;GLushort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4bv</function></funcdef>
+				<paramdef>const&nbsp;GLbyte&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4dv</function></funcdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4fv</function></funcdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4iv</function></funcdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4sv</function></funcdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4ubv</function></funcdef>
+				<paramdef>const&nbsp;GLubyte&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4uiv</function></funcdef>
+				<paramdef>const&nbsp;GLuint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColor4usv</function></funcdef>
+				<paramdef>const&nbsp;GLushort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glColor.3G-parameters-v">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>v</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to an array that contains red, green, blue, and (sometimes) alpha values.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glColor.3G-description">
+		<title>Description</title>
+		<para>
+			The GL stores both a current single-valued color index and a current four-valued RGBA color. <function
+			moreinfo="refentry">glColor</function> sets a new four-valued RGBA color. <function
+			moreinfo="refentry">glColor</function> has two major variants: <function moreinfo="refentry">glColor3</function> and
+			<function moreinfo="refentry">glColor4</function>. <function moreinfo="refentry">glColor3</function> variants specify
+			new red, green, and blue values explicitly and set the current alpha value to 1.0 (full intensity) implicitly.
+			<function moreinfo="refentry">glColor4</function> variants specify all four color components explicitly.
+		</para>
+		<para>
+			<function>glColor3b</function>, <function>glColor4b</function>, <function>glColor3s</function>,
+			<function>glColor4s</function>, <function>glColor3i</function>, and <function>glColor4i</function> take three or four
+			signed byte, short, or long integers as arguments. When <emphasis role="bold">v</emphasis> is appended to the name, the
+			color commands can take a pointer to an array of such values.
+		</para>
+		<para>
+			Current color values are stored in floating-point , with unspecified mantissa and exponent sizes. Unsigned integer
+			color components, when specified, are linearly mapped to floating-point values such that the largest representable
+			value maps to 1.0 (full intensity), and 0 maps to 0.0 (zero intensity). Signed integer color components, when
+			specified, are linearly mapped to floating-point values such that the most positive representable value maps to 1.0,
+			and the most negative representable value maps to -1.0. (Note that this mapping does not convert 0 precisely to 0.0.)
+			Floating-point values are mapped directly.
+		</para>
+		<para>
+			Neither floating-point nor signed integer values are clamped to the range [0,1] before the current color is updated.
+			However, color components are clamped to this range before they are interpolated or written into a color buffer.
+		</para>
+	</refsect1>
+	<refsect1 id="glColor.3G-notes">
+		<title>Notes</title>
+		<para>
+			The initial value for the current color is (1, 1, 1, 1).
+		</para>
+		<para>
+			The current color can be updated at any time. In particular, <function moreinfo="refentry">glColor</function> can be
+			called between a call to <function moreinfo="refentry">glBegin</function> and the corresponding call to <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glColor.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_CURRENT_COLOR</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_RGBA_MODE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glColor.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glIndex</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

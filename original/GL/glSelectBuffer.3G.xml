@@ -1,0 +1,157 @@
+<refentry id="glSelectBuffer.3G">
+	<refmeta id="glSelectBuffer.3G-meta">
+		<refentrytitle>glSelectBuffer</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glSelectBuffer.3G-name">
+		<refname>glSelectBuffer</refname>
+		<refpurpose>establish a buffer for selection mode values</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glSelectBuffer.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glSelectBuffer</function></funcdef>
+				<paramdef>GLsizei&nbsp;<parameter>size</parameter></paramdef>
+				<paramdef>GLuint&nbsp;*<parameter>buffer</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glSelectBuffer.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>size</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the size of <parameter>buffer</parameter>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>buffer</parameter></term>
+				<listitem>
+					<simpara>
+						Returns the selection data.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glSelectBuffer.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glSelectBuffer</function> has two arguments: <parameter>buffer</parameter> is a pointer to an array of
+			unsigned integers, and <parameter>size</parameter> indicates the size of the array. <parameter>buffer</parameter>
+			returns values from the name stack (see <citerefentry>
+				<refentrytitle>glInitNames</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>, <function moreinfo="refentry">glLoadName</function>, <function
+			moreinfo="refentry">glPushName</function>) when the rendering mode is <constant>GL_SELECT</constant> (see
+			<citerefentry>
+				<refentrytitle>glRenderMode</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>). <function>glSelectBuffer</function> must be issued before selection mode is enabled, and it must not
+			be issued while the rendering mode is <constant>GL_SELECT</constant>.
+		</para>
+		<para>
+			A programmer can use selection to determine which primitives are drawn into some region of a window. The region is
+			defined by the current modelview and perspective matrices.
+		</para>
+		<para>
+			In selection mode, no pixel fragments are produced from rasterization. Instead, if a primitive or a raster position
+			intersects the clipping volume defined by the viewing frustum and the user-defined clipping planes, this primitive
+			causes a selection hit. (With polygons, no hit occurs if the polygon is culled.) When a change is made to the name
+			stack, or when <function moreinfo="refentry">glRenderMode</function> is called, a hit record is copied to
+			<parameter>buffer</parameter> if any hits have occurred since the last such event (name stack change or <function
+			moreinfo="refentry">glRenderMode</function> call). The hit record consists of the number of names in the name stack at
+			the time of the event, followed by the minimum and maximum depth values of all vertices that hit since the previous
+			event, followed by the name stack contents, bottom name first.
+		</para>
+		<para>
+			Depth values (which are in the range [0,1]) are multiplied by 2^32 - 1, before being placed in the hit record.
+		</para>
+		<para>
+			An internal index into <parameter>buffer</parameter> is reset to 0 whenever selection mode is entered. Each time a hit
+			record is copied into <parameter>buffer</parameter>, the index is incremented to point to the cell just past the end of
+			the block of names - that is, to the next available cell. If the hit record is larger than the number of remaining
+			locations in <parameter>buffer</parameter>, as much data as can fit is copied, and the overflow flag is set. If the
+			name stack is empty when a hit record is copied, that record consists of 0 followed by the minimum and maximum depth
+			values.
+		</para>
+		<para>
+			To exit selection mode, call <function moreinfo="refentry">glRenderMode</function> with an argument other than
+			<constant>GL_SELECT</constant>. Whenever <function moreinfo="refentry">glRenderMode</function> is called while the
+			render mode is <constant>GL_SELECT</constant>, it returns the number of hit records copied to
+			<parameter>buffer</parameter>, resets the overflow flag and the selection buffer pointer, and initializes the name
+			stack to be empty. If the overflow bit was set when <function moreinfo="refentry">glRenderMode</function> was called, a
+			negative hit record count is returned.
+		</para>
+	</refsect1>
+	<refsect1 id="glSelectBuffer.3G-notes">
+		<title>Notes</title>
+		<para>
+			The contents of <parameter>buffer</parameter> is undefined until <function moreinfo="refentry">glRenderMode</function>
+			is called with an argument other than <constant>GL_SELECT</constant>.
+		</para>
+		<para>
+			<function moreinfo="refentry">glBegin</function>/<function moreinfo="refentry">glEnd</function> primitives and calls to
+			<function moreinfo="refentry">glRasterPos</function> can result in hits.
+		</para>
+	</refsect1>
+	<refsect1 id="glSelectBuffer.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if <parameter>size</parameter> is negative.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glSelectBuffer</function> is called while the
+			render mode is <constant>GL_SELECT</constant>, or if <function moreinfo="refentry">glRenderMode</function> is called
+			with argument <constant>GL_SELECT</constant> before <function>glSelectBuffer</function> is called at least once.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glSelectBuffer</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glSelectBuffer.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_NAME_STACK_DEPTH</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_SELECTION_BUFFER_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGetPointerv</function> with argument <constant>GL_SELECTION_BUFFER_POINTER</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glSelectBuffer.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glFeedbackBuffer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glInitNames</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glLoadName</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPushName</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glRenderMode</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

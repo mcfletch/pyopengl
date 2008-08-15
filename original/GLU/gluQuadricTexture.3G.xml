@@ -1,0 +1,76 @@
+<refentry id="gluQuadricTexture.3G">
+	<refmeta id="gluQuadricTexture.3G-meta">
+		<refentrytitle>gluQuadricTexture</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluQuadricTexture.3G-name">
+		<refname>gluQuadricTexture</refname>
+		<refpurpose>specify if texturing is desired for quadrics</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluQuadricTexture.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluQuadricTexture</function></funcdef>
+				<paramdef>GLUquadric*&nbsp;<parameter>quad</parameter></paramdef>
+				<paramdef>GLboolean&nbsp;<parameter>texture</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluQuadricTexture.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>quad</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the quadrics object (created with <function moreinfo="refentry">gluNewQuadric</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>texture</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a flag indicating if texture coordinates should be generated.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluQuadricTexture.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluQuadricTexture</function> specifies if texture coordinates should be generated for quadrics rendered with
+			<parameter>quad</parameter>. If the value of <parameter>texture</parameter> is <constant>GL_TRUE</constant>, then
+			texture coordinates are generated, and if <parameter>texture</parameter> is <constant>GL_FALSE</constant>, they are
+			not. The initial value is <constant>GL_FALSE</constant>.
+		</para>
+		<para>
+			The manner in which texture coordinates are generated depends upon the specific quadric rendered.
+		</para>
+	</refsect1>
+	<refsect1 id="gluQuadricTexture.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluNewQuadric</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricDrawStyle</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricNormals</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricOrientation</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

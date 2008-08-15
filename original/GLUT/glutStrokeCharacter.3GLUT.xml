@@ -1,0 +1,112 @@
+<refentry id="glutStrokeCharacter.3GLUT">
+	<refmeta id="glutStrokeCharacter.3GLUT-meta">
+		<refentrytitle>glutStrokeCharacter</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutStrokeCharacter.3GLUT-name">
+		<refname>glutStrokeCharacter</refname>
+		<refpurpose>renders a stroke character using OpenGL.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutStrokeCharacter.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutStrokeCharacter</function></funcdef>
+				<paramdef>void&nbsp;*<parameter>font</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>character</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutStrokeCharacter.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>font</parameter></term>
+				<listitem>
+					<simpara>
+						Stroke font to use.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>character</parameter></term>
+				<listitem>
+					<simpara>
+						Character to render (not confined to 8 bits).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutStrokeCharacter.3GLUT-description">
+		<title>Description</title>
+		<para>
+			Without using any display lists, <function>glutStrokeCharacter</function> renders the character in the named stroke
+			font. The available fonts are:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GLUT_STROKE_ROMAN</constant></term>
+				<listitem>
+					<simpara>
+						A proportionally spaced Roman Simplex font for ASCII characters 32 through 127. The maximum top character
+						in the font is 119.05 units; the bottom descends 33.33 units.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_STROKE_MONO_ROMAN</constant></term>
+				<listitem>
+					<simpara>
+						A mono-spaced spaced Roman Simplex font (same characters as <constant>GLUT_STROKE_ROMAN</constant>) for
+						ASCII characters 32 through 127. The maximum top character in the font is 119.05 units; the bottom descends
+						33.33 units. Each character is 104.76 units wide.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			Rendering a nonexistent character has no effect. A <function moreinfo="refentry">glTranslatef</function> is used to
+			translate the current model view matrix to advance the width of the character.
+		</para>
+	</refsect1>
+	<refsect1 id="glutStrokeCharacter.3GLUT-example">
+		<title>Example</title>
+		<para>
+			Here is a routine that shows how to render a string of ASCII text with <function>glutStrokeCharacter</function>:
+		</para>
+		<programlisting>void output(GLfloat x, GLfloat y, char *text)
+{
+    char *p;
+    
+    glPushMatrix();
+    glTranslatef(x, y, 0);
+    for (p = text; *p; p++)
+        glutStrokeCharacter(GLUT_STROKE_ROMAN, *p);
+    glPopMatrix();
+}</programlisting>
+		<para>
+			If you want to draw stroke font text using wide, antialiased lines, use:
+		</para>
+		<programlisting>glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+glEnable(GL_BLEND);
+glEnable(GL_LINE_SMOOTH);
+glLineWidth(2.0);
+output(200, 225, &quot;This is antialiased.&quot;);</programlisting>
+	</refsect1>
+	<refsect1 id="glutStrokeCharacter.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutBitmapCharacter</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutStrokeWidth</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

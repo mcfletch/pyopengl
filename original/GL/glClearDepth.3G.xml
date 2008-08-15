@@ -1,0 +1,66 @@
+<refentry id="glClearDepth.3G">
+	<refmeta id="glClearDepth.3G-meta">
+		<refentrytitle>glClearDepth</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glClearDepth.3G-name">
+		<refname>glClearDepth</refname>
+		<refpurpose>specify the clear value for the depth buffer</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glClearDepth.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glClearDepth</function></funcdef>
+				<paramdef>GLclampd&nbsp;<parameter>depth</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glClearDepth.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>depth</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the depth value used when the depth buffer is cleared. The initial value is 1.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glClearDepth.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glClearDepth</function> specifies the depth value used by <function moreinfo="refentry">glClear</function> to
+			clear the depth buffer. Values specified by <function>glClearDepth</function> are clamped to the range <inlineequation>
+				<mml:math>
+					<mml:mfenced open="[" close="]">
+						<mml:mn>0</mml:mn>
+						<mml:mn>1</mml:mn>
+					</mml:mfenced>
+				</mml:math>
+			</inlineequation>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClearDepth.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glClearDepth</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClearDepth.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_DEPTH_CLEAR_VALUE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glClearDepth.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<function moreinfo="refentry">glClear</function>
+		</para>
+	</refsect1>
+</refentry>

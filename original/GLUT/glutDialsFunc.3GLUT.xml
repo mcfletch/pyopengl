@@ -1,0 +1,67 @@
+<refentry id="glutDialsFunc.3GLUT">
+	<refmeta id="glutDialsFunc.3GLUT-meta">
+		<refentrytitle>glutDialsFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutDialsFunc.3GLUT-name">
+		<refname>glutDialsFunc</refname>
+		<refpurpose>sets the dial &amp; button box dials callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutDialsFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutDialsFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;dial,&nbsp;int&nbsp;value)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutDialsFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new dials callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutDialsFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutDialsFunc</function> sets the dial &amp; button box dials callback for the current window. The dial &amp;
+			button box dials callback for a window is called when the window has dial &amp; button box input focus (normally, when
+			the mouse is in the window) and the user generates dial &amp; button box dial changes. The dial parameter will be the
+			dial number (starting at one). The number of available dial &amp; button box dials can be determined with <function
+			moreinfo="refentry">glutDeviceGet(GLUT_NUM_DIALS)</function>. The value measures the absolute rotation in degrees. Dial
+			values do not "roll over" with each complete rotation but continue to accumulate degrees (until the int dial value
+			overflows).
+		</para>
+		<para>
+			Registering a dial &amp; button box dials callback when a dial &amp; button box device is not available is ineffectual
+			and not an error. In this case, no dial &amp; button box dials callbacks will be generated.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutDialsFunc</function> disables the generation of dial &amp; button
+			box dials callbacks. When a new window is created, no dial &amp; button box dials callback is initially registered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutDialsFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutButtonBoxFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

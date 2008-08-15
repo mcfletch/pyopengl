@@ -1,0 +1,182 @@
+<refentry id="glViewport.3G">
+	<refmeta id="glViewport.3G-meta">
+		<refentrytitle>glViewport</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glViewport.3G-name">
+		<refname>glViewport</refname>
+		<refpurpose>set the viewport</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glViewport.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glViewport</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>x</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>y</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>width</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>height</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glViewport.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>x</parameter></term>
+				<term><parameter>y</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the lower left corner of the viewport rectangle, in pixels. The initial value is <inlineequation>
+							<mml:math>
+								<mml:mfenced>
+									<mml:mn>0</mml:mn>
+									<mml:mn>0</mml:mn>
+								</mml:mfenced>
+							</mml:math>
+						</inlineequation>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>width</parameter></term>
+				<term><parameter>height</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the width and height of the viewport. When a GL context is first attached to a window,
+						<parameter>width</parameter> and <parameter>height</parameter> are set to the dimensions of that window.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glViewport.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glViewport</function> specifies the affine transformation of <parameter>x</parameter> and
+			<parameter>y</parameter> from normalized device coordinates to window coordinates. Let <inlineequation>
+				<mml:math>
+					<mml:mfenced>
+						<mml:msub>
+							<mml:mi>x</mml:mi>
+							<mml:mi>nd</mml:mi>
+						</mml:msub>
+						<mml:msub>
+							<mml:mi>y</mml:mi>
+							<mml:mi>nd</mml:mi>
+						</mml:msub>
+					</mml:mfenced>
+				</mml:math>
+			</inlineequation> be normalized device coordinates. Then the window coordinates <inlineequation>
+				<mml:math>
+					<mml:mfenced>
+						<mml:msub>
+							<mml:mi>x</mml:mi>
+							<mml:mi>w</mml:mi>
+						</mml:msub>
+						<mml:msub>
+							<mml:mi>y</mml:mi>
+							<mml:mi>w</mml:mi>
+						</mml:msub>
+					</mml:mfenced>
+				</mml:math>
+			</inlineequation> are computed as follows:
+		</para>
+		<informalequation>
+			<mml:math>
+				<mml:mtable>
+					<mml:mtr>
+						<mml:mtd>
+							<mml:msub>
+								<mml:mi>x</mml:mi>
+								<mml:mi>w</mml:mi>
+							</mml:msub>
+							<mml:mo>=</mml:mo>
+							<mml:mfenced>
+								<mml:mrow>
+									<mml:msub>
+										<mml:mi>x</mml:mi>
+										<mml:mi>nd</mml:mi>
+									</mml:msub>
+									<mml:mo>+</mml:mo>
+									<mml:mn>1</mml:mn>
+								</mml:mrow>
+							</mml:mfenced>
+							<mml:mfenced>
+								<mml:mfrac>
+									<mml:mi>width</mml:mi>
+									<mml:mn>2</mml:mn>
+								</mml:mfrac>
+							</mml:mfenced>
+							<mml:mo>+</mml:mo>
+							<mml:mi>x</mml:mi>
+						</mml:mtd>
+					</mml:mtr>
+					<mml:mtr>
+						<mml:mtd>
+							<mml:msub>
+								<mml:mi>y</mml:mi>
+								<mml:mi>w</mml:mi>
+							</mml:msub>
+							<mml:mo>=</mml:mo>
+							<mml:mfenced>
+								<mml:mrow>
+									<mml:msub>
+										<mml:mi>y</mml:mi>
+										<mml:mi>nd</mml:mi>
+									</mml:msub>
+									<mml:mo>+</mml:mo>
+									<mml:mn>1</mml:mn>
+								</mml:mrow>
+							</mml:mfenced>
+							<mml:mfenced>
+								<mml:mfrac>
+									<mml:mi>height</mml:mi>
+									<mml:mn>2</mml:mn>
+								</mml:mfrac>
+							</mml:mfenced>
+							<mml:mo>+</mml:mo>
+							<mml:mi>y</mml:mi>
+						</mml:mtd>
+					</mml:mtr>
+				</mml:mtable>
+			</mml:math>
+		</informalequation>
+		<para>
+			Viewport width and height are silently clamped to a range that depends on the implementation. To query this range, call
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAX_VIEWPORT_DIMS</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glViewport.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if either <parameter>width</parameter> or
+			<parameter>height</parameter> is negative.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glViewport</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glViewport.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_VIEWPORT</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAX_VIEWPORT_DIMS</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glViewport.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glDepthRange</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

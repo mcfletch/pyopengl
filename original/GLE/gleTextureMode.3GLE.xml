@@ -1,0 +1,547 @@
+<refentry id="gleTextureMode.3GLE">
+	<refmeta id="gleTextureMode.3GLE-meta">
+		<refentrytitle>gleTextureMode</refentrytitle>
+		<manvolnum>3GLE</manvolnum>
+	</refmeta>
+	<refnamediv id="gleTextureMode.3GLE-name">
+		<refname>gleTextureMode</refname>
+		<refpurpose>set the type of GLE automatic texture coordinate generation.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gleTextureMode.3GLE-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gleTextureMode</function></funcdef>
+				<paramdef>int&nbsp;<parameter>mode</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gleTextureMode.3GLE-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>mode</parameter></term>
+				<listitem>
+					<simpara>
+						bitwise OR of GLE texture mode flags
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gleTextureMode.3GLE-description">
+		<title>Description</title>
+		<para>
+			In addition to the default glTexGen modes that are supplied by OpenGL, the tubing library also contains some of its own
+			automatic texture coordinate generation routines. In addition, user-defined texture coord generation routines can be
+			supplied. To use texture mapping with the extrusion library, one must remember to &quot;do the obvious&quot;:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<simpara>
+					Enable texture mapping through OpenGL
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					Define and load (<function moreinfo="refentry">glTexImage2D</function>/<function
+					moreinfo="refentry">glBindTexture</function>) a texture
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					If using the routine below, then disable glTexgGen
+				</simpara>
+			</listitem>
+		</itemizedlist>
+		<para>
+			<function>gleTextureMode</function> can be used to set the type of automatic texture coordinate generation to be used. The argument should
+			be a bitwise-OR of any of the following flags:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GLE_TEXTURE_ENABLE</constant></term>
+				<listitem>
+					<simpara>
+						If this bit is set, then texturing is enabled. If this bit is NOT set, then automatic texture coordinate
+						generation is disabled.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			The way in which the automatic texture coordinate generation occurs is determined by one of the following flags. One
+			and only one of these should be selected at a time. These tokens are enumerants, not bit-flags.
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GLE_TEXTURE_VERTEX_FLAT</constant></term>
+				<listitem>
+					<simpara>
+						Uses the vertexes &quot;x&quot; coordinate as the texture &quot;u&quot; coordinate, and the accumulated
+						segment length as the &quot;v&quot; coordinate.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLE_TEXTURE_NORMAL_FLAT</constant></term>
+				<listitem>
+					<simpara>
+						Uses the normal vector's &quot;x&quot; coordinate as the texture &quot;u&quot; coordinate, and the
+						accumulated segment length as the &quot;v&quot; coordinate.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLE_TEXTURE_VERTEX_CYL</constant></term>
+				<listitem>
+					<simpara>
+						Uses
+					</simpara>
+					<informalequation>
+						<mml:math>
+							<mml:mrow>
+								<mml:mi>u</mml:mi>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mi>&phi;</mml:mi>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mn>1</mml:mn>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mrow>
+									<mml:mo>arctan</mml:mo>
+									<mml:mfenced>
+										<mml:mfrac>
+											<mml:mi>vy</mml:mi>
+											<mml:mi>vx</mml:mi>
+										</mml:mfrac>
+									</mml:mfenced>
+								</mml:mrow>
+							</mml:mrow>
+						</mml:math>
+					</informalequation>
+					<simpara>
+						as the texture &quot;u&quot; coordinate, and the accumulated segment length as the &quot;v&quot;
+						coordinate. In the above equation, &quot;vx&quot; and &quot;vy&quot; stand for the vertex's x and y
+						coordinates.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLE_TEXTURE_NORMAL_CYL</constant></term>
+				<listitem>
+					<simpara>
+						Uses
+					</simpara>
+					<informalequation>
+						<mml:math>
+							<mml:mrow>
+								<mml:mi>u</mml:mi>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mi>&phi;</mml:mi>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mn>1</mml:mn>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mrow>
+									<mml:mo>arctan</mml:mo>
+									<mml:mfenced>
+										<mml:mfrac>
+											<mml:mi>ny</mml:mi>
+											<mml:mi>nx</mml:mi>
+										</mml:mfrac>
+									</mml:mfenced>
+								</mml:mrow>
+							</mml:mrow>
+						</mml:math>
+					</informalequation>
+					<simpara>
+						as the texture &quot;u&quot; coordinate, and the accumulated segment length as the &quot;v&quot;
+						coordinate. In the above equation, &quot;nx&quot; and &quot;ny&quot; stand for the normal's x and y
+						coordinates.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLE_TEXTURE_VERTEX_SPH</constant></term>
+				<listitem>
+					<simpara>
+						Uses
+					</simpara>
+					<informalequation>
+						<mml:math>
+							<mml:mrow>
+								<mml:mi>u</mml:mi>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mi>&phi;</mml:mi>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mn>1</mml:mn>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mrow>
+									<mml:mo>arctan</mml:mo>
+									<mml:mfenced>
+										<mml:mfrac>
+											<mml:mi>vy</mml:mi>
+											<mml:mi>vx</mml:mi>
+										</mml:mfrac>
+									</mml:mfenced>
+								</mml:mrow>
+							</mml:mrow>
+						</mml:math>
+					</informalequation>
+					<simpara>
+						as the texture &quot;u&quot; coordinate, and
+					</simpara>
+					<informalequation>
+						<mml:math>
+							<mml:mrow>
+								<mml:mi>u</mml:mi>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mi>&theta;</mml:mi>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mn>1</mml:mn>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mfenced>
+									<mml:mrow>
+										<mml:mn>1</mml:mn>
+										<mml:mo>-</mml:mo>
+										<mml:mrow>
+											<mml:mo>arccos</mml:mo>
+											<mml:mfenced>
+												<mml:mi>vz</mml:mi>
+											</mml:mfenced>
+										</mml:mrow>
+									</mml:mrow>
+								</mml:mfenced>
+							</mml:mrow>
+						</mml:math>
+					</informalequation>
+					<simpara>
+						as the texture &quot;v&quot; coordinate. In the above equation, &quot;vx&quot;, &quot;vy&quot; and
+						&quot;vz&quot; stand for the vertex's x, y and z coordinates.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLE_TEXTURE_NORMAL_SPH</constant></term>
+				<listitem>
+					<simpara>
+						Uses
+					</simpara>
+					<informalequation>
+						<mml:math>
+							<mml:mrow>
+								<mml:mi>u</mml:mi>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mi>&phi;</mml:mi>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mn>1</mml:mn>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mrow>
+									<mml:mo>arctan</mml:mo>
+									<mml:mfenced>
+										<mml:mfrac>
+											<mml:mi>ny</mml:mi>
+											<mml:mi>nx</mml:mi>
+										</mml:mfrac>
+									</mml:mfenced>
+								</mml:mrow>
+							</mml:mrow>
+						</mml:math>
+					</informalequation>
+					<simpara>
+						as the texture &quot;u&quot; coordinate, and
+					</simpara>
+					<informalequation>
+						<mml:math>
+							<mml:mrow>
+								<mml:mi>u</mml:mi>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mi>&theta;</mml:mi>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mo>=</mml:mo>
+								<mml:mfrac>
+									<mml:mn>1</mml:mn>
+									<mml:mrow>
+										<mml:mn>2</mml:mn>
+										<mml:mi>&pi;</mml:mi>
+									</mml:mrow>
+								</mml:mfrac>
+								<mml:mfenced>
+									<mml:mrow>
+										<mml:mn>1</mml:mn>
+										<mml:mo>-</mml:mo>
+										<mml:mrow>
+											<mml:mo>arccos</mml:mo>
+											<mml:mfenced>
+												<mml:mi>vz</mml:mi>
+											</mml:mfenced>
+										</mml:mrow>
+									</mml:mrow>
+								</mml:mfenced>
+							</mml:mrow>
+						</mml:math>
+					</informalequation>
+					<simpara>
+						as the texture &quot;v&quot; coordinate. In the above equation, &quot;nx&quot;, &quot;ny&quot; and
+						&quot;nz&quot; stand for the normal's x, y and z coordinates.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLE_TEXTURE_NORMAL_MODEL_FLAT</constant></term>
+				<term><constant>GLE_TEXTURE_VERTEX_MODEL_CYL</constant></term>
+				<term><constant>GLE_TEXTURE_NORMAL_MODEL_CYL</constant></term>
+				<term><constant>GLE_TEXTURE_VERTEX_MODEL_SPH</constant></term>
+				<term><constant>GLE_TEXTURE_NORMAL_MODEL_SPH</constant></term>
+				<term><constant>GLE_TEXTURE_VERTEX_MODEL_FLAT</constant></term>
+				<listitem>
+					<simpara>
+						These define texture mapping modes that are very similar to those described above, except that the
+						untransformed vertices and/or normals are used. As a result, textures tends to stick to the extrusion
+						according to the extrusions local surface coordinates rather than according to real-space coordinates. This
+						will in general provide the correct style of texture mapping when affine transforms are being applied to
+						the contour, since the coordinates used are those prior to the affine transform.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gleTextureMode.3GLE-operation">
+		<title>Operation</title>
+		<para>
+			To best understand how to use the above functions, it is best to understand how the tubing is actually drawn. Let us
+			start by defining some terms. The tubing library &quot;extrudes&quot; a &quot;contour&quot; along a &quot;path&quot;.
+			The contour is a 2D polyline. The path is a 3D polyline. We use the word &quot;segment&quot; to refer to a
+			straight-line segment of the path polyline. We also interchangeably use the word &quot;segment&quot; to stand for the
+			section of the extrusion that lies along a path segment.
+		</para>
+		<para>
+			The tubing library draws segments one at a time. It uses <function moreinfo="refentry">glPushMatrix</function> and
+			<function moreinfo="refentry">glPopMatrix</function> to orient each segment along the negative z-axis. The segment
+			starts at <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>z</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mn>0</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> and ends at some negative z-value (equal to the length of the segment). The segment is then drawn by
+			calling <function moreinfo="refentry">glVertex3f</function> (and <function moreinfo="refentry">glNormal3f</function>)
+			by drawing the 2D contour at <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>z</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mn>0</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> and again at <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>z</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mo>-len</mml:mo>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>. (Of course, if the join style is one of the fancy ones, then the end-points are trimmed in a variety
+			of ways, and do not land exactly on <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>z</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mn>0</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, or <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>z</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mo>-len</mml:mo>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, but they do come close). Note that <function moreinfo="refentry">glBegin</function> and <function
+			moreinfo="refentry">glEnd</function> are called around each segment. (Note also that additional <function
+			moreinfo="refentry">glBegin</function>/<function moreinfo="refentry">glEnd</function>s may be called to draw end-caps
+			or filleting triangles for the more complex join styles.)
+		</para>
+		<para>
+			The obvious way to automatically generate textures is to warp the <function moreinfo="refentry">glVertex</function> and
+			<function moreinfo="refentry">glNormal</function> functions, and compute texture coordinates based on the 3-space
+			vertex and normal coordinates. This is essentially what the tubing code does, except that it passes some extra
+			parameters. The <function moreinfo="refentry">glBegin</function> calls are wrapped, and the integer segment number and
+			the floating-point length of the segment are passed in. By knowing the segment number, and the segment length, the
+			texture coordinates can be adjusted. Knowing the length allows the length to be accumulated, so that a texture is
+			applied lengthwise along the extrusion. It is this accumulated length that is used in the FLAT and CYL mapping modes.
+		</para>
+		<para>
+			For each vertex, not only are the vertex x,y,z coordinates available, but so is a contour vertex counter indicating
+			which contour vertex this corresponds to. There is also a flag indicating whether the vertex corresponds to a front or
+			back vertex (i.e. a <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>z</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mn>0</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> or <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>z</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mo>-len</mml:mo>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> vertex). Again, this info can be used to avoid confusion when drawing the more complex join styles.
+		</para>
+	</refsect1>
+	<refsect1 id="gleTextureMode.3GLE-hints">
+		<title>Hints</title>
+		<para>
+			Here are a few hints, tips, and techniques:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<simpara>
+					Confused? <emphasis role="bold">Run the demos!</emphasis> The best way to understand what all the different
+					texture modes are doing is to see them in action.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					The texture matrix can be used to your advantage! That is, you can use <function
+					moreinfo="refentry">glMatrixMode(GL_TEXTURE)</function> to control how textures are mapped to the surface. In
+					particular, you may/will want to use it to to rescale the V coordinate.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					The origin of the contour will in general change the vertex x's and y's, thus changing the texture coordinates.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					The contour <parameter>up</parameter> vector will NOT influence the texture coordinates.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					For the FLAT and CYL modes, the accumulated length really is the accumulated length of the segments in modeling
+					coordinates. Unless the extrusion is very small, this length will probably be much larger than 1.0, and so the
+					resulting texture coordinate will wrap. You will generally want to rescale the &quot;V&quot; coordinate to make
+					the texture map fit.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					If the texture is &quot;swimming&quot; around on the surface in an undesired way, try using the
+					&quot;MODEL&quot; version of the texture generation flag.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					Typically, you will <emphasis role="bold">not</emphasis> want to use the &quot;SPH&quot; versions of the
+					texture generation engine unless you really, really have an extrusion for which spherical coordinates are
+					appropriate. Most uses of extrusions are best handled with the &quot;FLAT&quot; and &quot;CYL&quot; generation
+					methods.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					User-defined texture generation callbacks are not currently implemented, but these should be very, very easy to
+					hack in as desired. It should be easy to let your imagination run wild in here. Look at
+					<filename>texgen.c</filename> &mdash; what needs to be done should be obvious, I hope. When in doubt,
+					experiment.
+				</simpara>
+			</listitem>
+		</itemizedlist>
+	</refsect1>
+	<refsect1 id="gleTextureMode.3GLE-bugs">
+		<title>Bugs</title>
+		<para>
+			Multiple threads using GLE share a single texture mode.
+		</para>
+	</refsect1>
+	<refsect1 id="gleTextureMode.3GLE-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gleExtrusion</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleSetJoinStyle</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+	<refsect1 id="gleTextureMode.3GLE-author">
+		<title>Author</title>
+		<para>
+			Linas Vepstas
+		</para>
+	</refsect1>
+</refentry>

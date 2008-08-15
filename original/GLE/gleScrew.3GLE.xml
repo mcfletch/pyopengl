@@ -1,0 +1,108 @@
+<refentry id="gleScrew.3GLE">
+	<refmeta id="gleScrew.3GLE-meta">
+		<refentrytitle>gleScrew</refentrytitle>
+		<manvolnum>3GLE</manvolnum>
+	</refmeta>
+	<refnamediv id="gleScrew.3GLE-name">
+		<refname>gleScrew</refname>
+		<refpurpose>Draws screw-type shapes.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gleScrew.3GLE-c_spec">
+		<title>C specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gleScrew</function></funcdef>
+				<paramdef>int&nbsp;<parameter>ncp</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>contour</parameter>[][2]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>cont_normal</parameter>[][2]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>up</parameter>[3]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>startz</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>endz</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>twist</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gleScrew.3GLE-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>ncp</parameter></term>
+				<listitem>
+					<simpara>
+						number of contour points
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>contour</parameter></term>
+				<listitem>
+					<simpara>
+						2D contour
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>cont_normal</parameter></term>
+				<listitem>
+					<simpara>
+						2D contour normals
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>up</parameter></term>
+				<listitem>
+					<simpara>
+						up vector for contour
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>startx</parameter></term>
+				<listitem>
+					<simpara>
+						start of segment
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>endz</parameter></term>
+				<listitem>
+					<simpara>
+						end of segment
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>twist</parameter></term>
+				<listitem>
+					<simpara>
+						number of rotations
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gleScrew.3GLE-description">
+		<title>Description</title>
+		<para>
+			Draws screw-type shapes. Takes a contour, and extrudes it along the z-axis, from a start z value of startz to an end
+			z-value of endz. During the extrusion, it will spin the contour along the contour origin by twist degrees.
+		</para>
+	</refsect1>
+	<refsect1 id="gleScrew.3GLE-see_also">
+		<title>See Also</title>
+		<para>
+			<citerefentry>
+				<refentrytitle>gleExtrusion</refentrytitle>
+				<manvolnum>3GLE</manvolnum>
+			</citerefentry>
+		</para>
+	</refsect1>
+	<refsect1 id="gleScrew.3GLE-author">
+		<title>Author</title>
+		<para>
+			Linas Vepstas
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,148 @@
+<refentry id="gluNextContour.3G">
+	<refmeta id="gluNextContour.3G-meta">
+		<refentrytitle>gluNextContour</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluNextContour.3G-name">
+		<refname>gluNextContour</refname>
+		<refpurpose>mark the beginning of another contour</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluNextContour.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluNextContour</function></funcdef>
+				<paramdef>GLUtesselator*&nbsp;<parameter>tess</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>type</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluNextContour.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>tess</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the tessellation object (created with <function moreinfo="refentry">gluNewTess</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>type</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the type of the contour being defined. Valid values are <constant>GLU_EXTERIOR</constant>,
+						<constant>GLU_INTERIOR</constant>, <constant>GLU_UNKNOWN</constant>, <constant>GLU_CCW</constant>, and
+						<constant>GLU_CW</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluNextContour.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluNextContour</function> is used in describing polygons with multiple contours. After the first contour has
+			been described through a series of <function moreinfo="refentry">gluTessVertex</function> calls, a
+			<function>gluNextContour</function> call indicates that the previous contour is complete and that the next contour is
+			about to begin. Another series of <function moreinfo="refentry">gluTessVertex</function> calls is then used to describe
+			the new contour. This process can be repeated until all contours have been described.
+		</para>
+		<para>
+			<parameter>type</parameter> defines what type of contour follows. The legal contour types are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GLU_EXTERIOR</constant></term>
+				<listitem>
+					<simpara>
+						An exterior contour defines an exterior boundary of the polygon.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLU_INTERIOR</constant></term>
+				<listitem>
+					<simpara>
+						An interior contour defines an interior boundary of the polygon (such as a hole).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLU_UNKNOWN</constant></term>
+				<listitem>
+					<simpara>
+						An unknown contour is analyzed by the library to determine if it is interior or exterior.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLU_CW</constant></term>
+				<term><constant>GLU_CCW</constant>,</term>
+				<listitem>
+					<simpara>
+						The first <constant>GLU_CCW</constant> or <constant>GLU_CW</constant> contour defined is considered to be
+						exterior. All other contours are considered to be exterior if they are oriented in the same direction
+						(clockwise or counterclockwise) as the first contour, and interior if they are not.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			If one contour is of type <constant>GLU_CCW</constant> or <constant>GLU_CW</constant>, then all contours must be of the
+			same type (if they are not, then all <constant>GLU_CCW</constant> and <constant>GLU_CW</constant> contours will be
+			changed to <constant>GLU_UNKNOWN</constant>).
+		</para>
+		<para>
+			Note that there is no real difference between the <constant>GLU_CCW</constant> and <constant>GLU_CW</constant> contour
+			types.
+		</para>
+		<para>
+			Before the first contour is described, <function>gluNextContour</function> can be called to define the type of the
+			first contour. If <function>gluNextContour</function> is not called before the first contour, then the first contour is
+			marked <constant>GLU_EXTERIOR</constant>.
+		</para>
+		<para>
+			This command is obsolete and is provided for backward compatibility only. Calls to <function>gluNextContour</function>
+			are mapped to <function moreinfo="refentry">gluTessEndContour</function> followed by <function
+			moreinfo="refentry">gluTessBeginContour</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="gluNextContour.3G-example">
+		<title>Example</title>
+		<para>
+			A quadrilateral with a triangular hole in it can be described as follows: gluBeginPolygon(tobj); gluTessVertex(tobj,
+			v1, v1); gluTessVertex(tobj, v2, v2); gluTessVertex(tobj, v3, v3); gluTessVertex(tobj, v4, v4); gluNextContour(tobj,
+			GLU_INTERIOR); gluTessVertex(tobj, v5, v5); gluTessVertex(tobj, v6, v6); gluTessVertex(tobj, v7, v7);
+			gluEndPolygon(tobj);
+		</para>
+	</refsect1>
+	<refsect1 id="gluNextContour.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluBeginPolygon</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNewTess</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessCallback</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessVertex</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessBeginContour</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

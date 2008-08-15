@@ -1,0 +1,47 @@
+<refentry id="glutRemoveOverlay.3GLUT">
+	<refmeta id="glutRemoveOverlay.3GLUT-meta">
+		<refentrytitle>glutRemoveOverlay</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutRemoveOverlay.3GLUT-name">
+		<refname>glutRemoveOverlay</refname>
+		<refpurpose>removes the overlay (if one exists) from the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutRemoveOverlay.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutRemoveOverlay</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutRemoveOverlay.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutRemoveOverlay</function> removes the overlay (if one exists). It is safe to call
+			<function>glutRemoveOverlay</function> even if no overlay is currently established&mdash;it does nothing in this case.
+			Implicitly, the window's layer in use changes to the normal plane immediately once the overlay is removed.
+		</para>
+		<para>
+			If the program intends to re-establish the overlay later, it is typically faster and less resource intensive to use
+			<function moreinfo="refentry">glutHideOverlay</function> and <function moreinfo="refentry">glutShowOverlay</function>
+			to simply change the display status of the overlay.
+		</para>
+	</refsect1>
+	<refsect1 id="glutRemoveOverlay.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutEstablishOverlay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDestroyWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

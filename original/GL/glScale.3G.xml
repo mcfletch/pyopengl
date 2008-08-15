@@ -1,0 +1,192 @@
+<refentry id="glScale.3G">
+	<refmeta id="glScale.3G-meta">
+		<refentrytitle>glScale</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glScale.3G-name">
+		<refname>glScaled</refname>
+		<refname>glScalef</refname>
+		<refpurpose>multiply the current matrix by a general scaling matrix</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glScale.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glScaled</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>x</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>y</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>z</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glScalef</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>x</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>y</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>z</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glScale.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>x</parameter>, <parameter>y</parameter>, <parameter>z</parameter></term>
+				<listitem>
+					<simpara>
+						Specify scale factors along the <parameter>x</parameter>, <parameter>y</parameter>, and
+						<parameter>z</parameter> axes, respectively.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glScale.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glScale</function> produces a nonuniform scaling along the <parameter>x</parameter>,
+			<parameter>y</parameter>, and <parameter>z</parameter> axes. The three parameters indicate the desired scale factor
+			along each of the three axes.
+		</para>
+		<para>
+			The current matrix (see <citerefentry>
+				<refentrytitle>glMatrixMode</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>) is multiplied by this scale matrix, and the product replaces the current matrix as if <function
+			moreinfo="refentry">glScale</function> were called with the following matrix as its argument:
+		</para>
+		<para>
+			<informalequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mo>(</mml:mo>
+						<mml:mtable>
+							<mml:mtr>
+								<mml:mtd columnalign="center">
+									<mml:mi>x</mml:mi>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+							</mml:mtr>
+							<mml:mtr>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mi>y</mml:mi>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+							</mml:mtr>
+							<mml:mtr>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mi>z</mml:mi>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+							</mml:mtr>
+							<mml:mtr>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>1</mml:mn>
+								</mml:mtd>
+							</mml:mtr>
+						</mml:mtable>
+						<mml:mo>)</mml:mo>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>If the matrix mode is either <constant>GL_MODELVIEW</constant> or
+			<constant>GL_PROJECTION</constant>, all objects drawn after <function moreinfo="refentry">glScale</function> is called
+			are scaled.
+		</para>
+		<para>
+			Use <function moreinfo="refentry">glPushMatrix</function> and <function moreinfo="refentry">glPopMatrix</function> to
+			save and restore the unscaled coordinate system.
+		</para>
+	</refsect1>
+	<refsect1 id="glScale.3G-notes">
+		<title>Notes</title>
+		<para>
+			If scale factors other than 1 are applied to the modelview matrix and lighting is enabled, lighting often appears
+			wrong. In that case, enable automatic normalization of normals by calling <function
+			moreinfo="refentry">glEnable</function> with the argument <constant>GL_NORMALIZE</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glScale.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function moreinfo="refentry">glScale</function> is executed
+			between the execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glScale.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MATRIX_MODE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_COLOR_MATRIX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MODELVIEW_MATRIX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PROJECTION_MATRIX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_TEXTURE_MATRIX</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glScale.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glMatrixMode</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMultMatrix</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPushMatrix</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glRotate</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTranslate</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

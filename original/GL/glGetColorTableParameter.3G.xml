@@ -1,0 +1,182 @@
+<refentry id="glGetColorTableParameter.3G">
+	<refmeta id="glGetColorTableParameter.3G-meta">
+		<refentrytitle>glGetColorTableParameter</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glGetColorTableParameter.3G-name">
+		<refname>glGetColorTableParameterfv</refname>
+		<refname>glGetColorTableParameteriv</refname>
+		<refpurpose>get color lookup table parameters</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glGetColorTableParameter.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetColorTableParameterfv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;*<parameter>params</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetColorTableParameteriv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLint&nbsp;*<parameter>params</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glGetColorTableParameter.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>target</parameter></term>
+				<listitem>
+					<simpara>
+						The target color table. Must be <constant>GL_COLOR_TABLE</constant>,
+						<constant>GL_POST_CONVOLUTION_COLOR_TABLE</constant>,
+						<constant>GL_POST_COLOR_MATRIX_COLOR_TABLE</constant>, <constant>GL_PROXY_COLOR_TABLE</constant>,
+						<constant>GL_PROXY_POST_CONVOLUTION_COLOR_TABLE</constant>,
+						<constant>GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>pname</parameter></term>
+				<listitem>
+					<simpara>
+						The symbolic name of a color lookup table parameter. Must be one of
+						<constant>GL_COLOR_TABLE_BIAS</constant>, <constant>GL_COLOR_TABLE_SCALE</constant>,
+						<constant>GL_COLOR_TABLE_FORMAT</constant>, <constant>GL_COLOR_TABLE_WIDTH</constant>,
+						<constant>GL_COLOR_TABLE_RED_SIZE</constant>, <constant>GL_COLOR_TABLE_GREEN_SIZE</constant>,
+						<constant>GL_COLOR_TABLE_BLUE_SIZE</constant>, <constant>GL_COLOR_TABLE_ALPHA_SIZE</constant>,
+						<constant>GL_COLOR_TABLE_LUMINANCE_SIZE</constant>, or <constant>GL_COLOR_TABLE_INTENSITY_SIZE</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>params</parameter></term>
+				<listitem>
+					<simpara>
+						A pointer to an array where the values of the parameter will be stored.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glGetColorTableParameter.3G-description">
+		<title>Description</title>
+		<para>
+			Returns parameters specific to color table <parameter>target</parameter>.
+		</para>
+		<para>
+			When <parameter>pname</parameter> is set to <constant>GL_COLOR_TABLE_SCALE</constant> or
+			<constant>GL_COLOR_TABLE_BIAS</constant>, <function moreinfo="refentry">glGetColorTableParameter</function> returns the
+			color table scale or bias parameters for the table specified by <parameter>target</parameter>. For these queries,
+			<parameter>target</parameter> must be set to <constant>GL_COLOR_TABLE</constant>,
+			<constant>GL_POST_CONVOLUTION_COLOR_TABLE</constant>, or <constant>GL_POST_COLOR_MATRIX_COLOR_TABLE</constant> and
+			<parameter>params</parameter> points to an array of four elements, which receive the scale or bias factors for red,
+			green, blue, and alpha, in that order.
+		</para>
+		<para>
+			<function moreinfo="refentry">glGetColorTableParameter</function> can also be used to retrieve the and size parameters
+			for a color table. For these queries, set <parameter>target</parameter> to either the color table target or the proxy
+			color table target. The and size parameters are set by <function moreinfo="refentry">glColorTable</function>.
+		</para>
+		<para>
+			The following table lists the and size parameters that may be queried. For each symbolic constant listed below for
+			<parameter>pname</parameter>, <parameter>params</parameter> must point to an array of the given length, and receive the
+			values indicated.
+		</para>
+		<informaltable frame="topbot">
+			<tgroup cols="3">
+				<tbody>
+					<row>
+						<entry><emphasis role="bold">Parameter</emphasis></entry>
+						<entry align="center"><emphasis role="bold">N</emphasis></entry>
+						<entry><emphasis role="bold">Meaning</emphasis></entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_TABLE_FORMAT</constant></entry>
+						<entry align="center">1</entry>
+						<entry>Internal (e.g. <constant>GL_RGBA</constant>)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_TABLE_WIDTH</constant></entry>
+						<entry align="center">1</entry>
+						<entry>Number of elements in table</entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_TABLE_RED_SIZE</constant></entry>
+						<entry align="center">1</entry>
+						<entry>Size of red component, in bits</entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_TABLE_GREEN_SIZE</constant></entry>
+						<entry align="center">1</entry>
+						<entry>Size of green component</entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_TABLE_BLUE_SIZE</constant></entry>
+						<entry align="center">1</entry>
+						<entry>Size of blue component</entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_TABLE_ALPHA_SIZE</constant></entry>
+						<entry align="center">1</entry>
+						<entry>Size of alpha component</entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_TABLE_LUMINANCE_SIZE</constant></entry>
+						<entry align="center">1</entry>
+						<entry>Size of luminance component</entry>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_TABLE_INTENSITY_SIZE</constant></entry>
+						<entry align="center">1</entry>
+						<entry>Size of intensity component</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</informaltable>
+	</refsect1>
+	<refsect1 id="glGetColorTableParameter.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function moreinfo="refentry">glGetColorTableParameter</function> is present only if
+			<constant>GL_ARB_imaging</constant> is returned when <function moreinfo="refentry">glGetString</function> is called
+			with an argument of <constant>GL_EXTENSIONS</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetColorTableParameter.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> or <parameter>pname</parameter> is
+			not an acceptable value.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function
+			moreinfo="refentry">glGetColorTableParameter</function> is executed between the execution of <function
+			moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetColorTableParameter.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glColorTable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColorTableParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

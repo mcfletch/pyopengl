@@ -1,0 +1,78 @@
+<refentry id="glutTimerFunc.3GLUT">
+	<refmeta id="glutTimerFunc.3GLUT-meta">
+		<refentrytitle>glutTimerFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutTimerFunc.3GLUT-name">
+		<refname>glutTimerFunc</refname>
+		<refpurpose>registers a timer callback to be triggered in a specified number of milliseconds.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutTimerFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutTimerFunc</function></funcdef>
+				<paramdef>unsigned int&nbsp;<parameter>msecs</parameter></paramdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;value)</paramdef>
+				<paramdef>value</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutTimerFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>msecs</parameter></term>
+				<listitem>
+					<simpara>
+						Number of milliseconds to pass before calling the callback.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The timer callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>value</parameter></term>
+				<listitem>
+					<simpara>
+						Integer value to pass to the timer callback.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutTimerFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutTimerFunc</function> registers the timer callback func to be triggered in at least msecs milliseconds.
+			The <parameter>value</parameter> parameter to the timer callback will be the value of the <parameter>value</parameter>
+			parameter to <function>glutTimerFunc</function>. Multiple timer callbacks at same or differing times may be registered
+			simultaneously.
+		</para>
+		<para>
+			The number of milliseconds is a lower bound on the time before the callback is generated. GLUT attempts to deliver the
+			timer callback as soon as possible after the expiration of the callback's time interval.
+		</para>
+		<para>
+			There is no support for canceling a registered callback. Instead, ignore a callback based on its value parameter when
+			it is triggered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutTimerFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutIdleFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,89 @@
+<refentry id="glutSetColor.3GLUT">
+	<refmeta id="glutSetColor.3GLUT-meta">
+		<refentrytitle>glutSetColor</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSetColor.3GLUT-name">
+		<refname>glutSetColor</refname>
+		<refpurpose>sets the color of a colormap entry in the layer of use for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSetColor.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSetColor</function></funcdef>
+				<paramdef>int&nbsp;<parameter>cell</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>blue</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSetColor.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>cell</parameter></term>
+				<listitem>
+					<simpara>
+						Color cell index (starting at zero).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>red</parameter></term>
+				<listitem>
+					<simpara>
+						Red intensity (clamped between 0.0 and 1.0 inclusive).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>green</parameter></term>
+				<listitem>
+					<simpara>
+						Green intensity (clamped between 0.0 and 1.0 inclusive).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>blue</parameter></term>
+				<listitem>
+					<simpara>
+						Blue intensity (clamped between 0.0 and 1.0 inclusive).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSetColor.3GLUT-description">
+		<title>Description</title>
+		<para>
+			Sets the cell color index colormap entry of the current window's logical colormap for the layer in use with the color
+			specified by <parameter>red</parameter>, <parameter>green</parameter>, and <parameter>blue</parameter>. The layer in
+			use of the current window should be a color index window. <parameter>cell</parameter> should be zero or greater and
+			less than the total number of colormap entries for the window. If the layer in use's colormap was copied by reference,
+			a <function>glutSetColor</function> call will force the duplication of the colormap. Do not attempt to set the color of
+			an overlay's transparent index.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSetColor.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutGetColor</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCopyColormap</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutInitDisplayMode</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

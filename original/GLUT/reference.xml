@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DocBook MathML Module V1.0//EN"
+"http://www.oasis-open.org/docbook/xml/mathml/1.0/dbmathml.dtd" [
+<!ENTITY glut.3GLUT SYSTEM "glut.3GLUT.xml">
+<!ENTITY glutAddMenuEntry.3GLUT SYSTEM "glutAddMenuEntry.3GLUT.xml">
+<!ENTITY glutAddSubMenu.3GLUT SYSTEM "glutAddSubMenu.3GLUT.xml">
+<!ENTITY glutAttachMenu.3GLUT SYSTEM "glutAttachMenu.3GLUT.xml">
+<!ENTITY glutBitmapCharacter.3GLUT SYSTEM "glutBitmapCharacter.3GLUT.xml">
+<!ENTITY glutBitmapWidth.3GLUT SYSTEM "glutBitmapWidth.3GLUT.xml">
+<!ENTITY glutButtonBoxFunc.3GLUT SYSTEM "glutButtonBoxFunc.3GLUT.xml">
+<!ENTITY glutChangeToMenuEntry.3GLUT SYSTEM "glutChangeToMenuEntry.3GLUT.xml">
+<!ENTITY glutChangeToSubMenu.3GLUT SYSTEM "glutChangeToSubMenu.3GLUT.xml">
+<!ENTITY glutCopyColormap.3GLUT SYSTEM "glutCopyColormap.3GLUT.xml">
+<!ENTITY glutCreateMenu.3GLUT SYSTEM "glutCreateMenu.3GLUT.xml">
+<!ENTITY glutCreateSubWindow.3GLUT SYSTEM "glutCreateSubWindow.3GLUT.xml">
+<!ENTITY glutCreateWindow.3GLUT SYSTEM "glutCreateWindow.3GLUT.xml">
+<!ENTITY glutDestroyMenu.3GLUT SYSTEM "glutDestroyMenu.3GLUT.xml">
+<!ENTITY glutDestroyWindow.3GLUT SYSTEM "glutDestroyWindow.3GLUT.xml">
+<!ENTITY glutDeviceGet.3GLUT SYSTEM "glutDeviceGet.3GLUT.xml">
+<!ENTITY glutDialsFunc.3GLUT SYSTEM "glutDialsFunc.3GLUT.xml">
+<!ENTITY glutDisplayFunc.3GLUT SYSTEM "glutDisplayFunc.3GLUT.xml">
+<!ENTITY glutEnterGameMode.3GLUT SYSTEM "glutEnterGameMode.3GLUT.xml">
+<!ENTITY glutEntryFunc.3GLUT SYSTEM "glutEntryFunc.3GLUT.xml">
+<!ENTITY glutEstablishOverlay.3GLUT SYSTEM "glutEstablishOverlay.3GLUT.xml">
+<!ENTITY glutExtensionSupported.3GLUT SYSTEM "glutExtensionSupported.3GLUT.xml">
+<!ENTITY glutForceJoystickFunc.3GLUT SYSTEM "glutForceJoystickFunc.3GLUT.xml">
+<!ENTITY glutFullScreen.3GLUT SYSTEM "glutFullScreen.3GLUT.xml">
+<!ENTITY glutGameModeGet.3GLUT SYSTEM "glutGameModeGet.3GLUT.xml">
+<!ENTITY glutGameModeString.3GLUT SYSTEM "glutGameModeString.3GLUT.xml">
+<!ENTITY glutGet.3GLUT SYSTEM "glutGet.3GLUT.xml">
+<!ENTITY glutGetColor.3GLUT SYSTEM "glutGetColor.3GLUT.xml">
+<!ENTITY glutGetModifiers.3GLUT SYSTEM "glutGetModifiers.3GLUT.xml">
+<!ENTITY glutIdleFunc.3GLUT SYSTEM "glutIdleFunc.3GLUT.xml">
+<!ENTITY glutIgnoreKeyRepeat.3GLUT SYSTEM "glutIgnoreKeyRepeat.3GLUT.xml">
+<!ENTITY glutInit.3GLUT SYSTEM "glutInit.3GLUT.xml">
+<!ENTITY glutInitDisplayMode.3GLUT SYSTEM "glutInitDisplayMode.3GLUT.xml">
+<!ENTITY glutInitDisplayString.3GLUT SYSTEM "glutInitDisplayString.3GLUT.xml">
+<!ENTITY glutInitWindowPosition.3GLUT SYSTEM "glutInitWindowPosition.3GLUT.xml">
+<!ENTITY glutJoystickFunc.3GLUT SYSTEM "glutJoystickFunc.3GLUT.xml">
+<!ENTITY glutKeyboardFunc.3GLUT SYSTEM "glutKeyboardFunc.3GLUT.xml">
+<!ENTITY glutKeyboardUpFunc.3GLUT SYSTEM "glutKeyboardUpFunc.3GLUT.xml">
+<!ENTITY glutLayerGet.3GLUT SYSTEM "glutLayerGet.3GLUT.xml">
+<!ENTITY glutMainLoop.3GLUT SYSTEM "glutMainLoop.3GLUT.xml">
+<!ENTITY glutMenuStatusFunc.3GLUT SYSTEM "glutMenuStatusFunc.3GLUT.xml">
+<!ENTITY glutMotionFunc.3GLUT SYSTEM "glutMotionFunc.3GLUT.xml">
+<!ENTITY glutMouseFunc.3GLUT SYSTEM "glutMouseFunc.3GLUT.xml">
+<!ENTITY glutOverlayDisplayFunc.3GLUT SYSTEM "glutOverlayDisplayFunc.3GLUT.xml">
+<!ENTITY glutPopWindow.3GLUT SYSTEM "glutPopWindow.3GLUT.xml">
+<!ENTITY glutPositionWindow.3GLUT SYSTEM "glutPositionWindow.3GLUT.xml">
+<!ENTITY glutPostOverlayRedisplay.3GLUT SYSTEM "glutPostOverlayRedisplay.3GLUT.xml">
+<!ENTITY glutPostRedisplay.3GLUT SYSTEM "glutPostRedisplay.3GLUT.xml">
+<!ENTITY glutRemoveMenuItem.3GLUT SYSTEM "glutRemoveMenuItem.3GLUT.xml">
+<!ENTITY glutRemoveOverlay.3GLUT SYSTEM "glutRemoveOverlay.3GLUT.xml">
+<!ENTITY glutReportErrors.3GLUT SYSTEM "glutReportErrors.3GLUT.xml">
+<!ENTITY glutReshapeFunc.3GLUT SYSTEM "glutReshapeFunc.3GLUT.xml">
+<!ENTITY glutReshapeWindow.3GLUT SYSTEM "glutReshapeWindow.3GLUT.xml">
+<!ENTITY glutSetColor.3GLUT SYSTEM "glutSetColor.3GLUT.xml">
+<!ENTITY glutSetCursor.3GLUT SYSTEM "glutSetCursor.3GLUT.xml">
+<!ENTITY glutSetKeyRepeat.3GLUT SYSTEM "glutSetKeyRepeat.3GLUT.xml">
+<!ENTITY glutSetMenu.3GLUT SYSTEM "glutSetMenu.3GLUT.xml">
+<!ENTITY glutSetWindow.3GLUT SYSTEM "glutSetWindow.3GLUT.xml">
+<!ENTITY glutSetWindowTitle.3GLUT SYSTEM "glutSetWindowTitle.3GLUT.xml">
+<!ENTITY glutShowOverlay.3GLUT SYSTEM "glutShowOverlay.3GLUT.xml">
+<!ENTITY glutShowWindow.3GLUT SYSTEM "glutShowWindow.3GLUT.xml">
+<!ENTITY glutSolidCone.3GLUT SYSTEM "glutSolidCone.3GLUT.xml">
+<!ENTITY glutSolidCube.3GLUT SYSTEM "glutSolidCube.3GLUT.xml">
+<!ENTITY glutSolidDodecahedron.3GLUT SYSTEM "glutSolidDodecahedron.3GLUT.xml">
+<!ENTITY glutSolidIcosahedron.3GLUT SYSTEM "glutSolidIcosahedron.3GLUT.xml">
+<!ENTITY glutSolidOctahedron.3GLUT SYSTEM "glutSolidOctahedron.3GLUT.xml">
+<!ENTITY glutSolidSphere.3GLUT SYSTEM "glutSolidSphere.3GLUT.xml">
+<!ENTITY glutSolidTeapot.3GLUT SYSTEM "glutSolidTeapot.3GLUT.xml">
+<!ENTITY glutSolidTetrahedron.3GLUT SYSTEM "glutSolidTetrahedron.3GLUT.xml">
+<!ENTITY glutSolidTorus.3GLUT SYSTEM "glutSolidTorus.3GLUT.xml">
+<!ENTITY glutSpaceballButtonFunc.3GLUT SYSTEM "glutSpaceballButtonFunc.3GLUT.xml">
+<!ENTITY glutSpaceballMotionFunc.3GLUT SYSTEM "glutSpaceballMotionFunc.3GLUT.xml">
+<!ENTITY glutSpaceballRotateFunc.3GLUT SYSTEM "glutSpaceballRotateFunc.3GLUT.xml">
+<!ENTITY glutSpecialFunc.3GLUT SYSTEM "glutSpecialFunc.3GLUT.xml">
+<!ENTITY glutSpecialUpFunc.3GLUT SYSTEM "glutSpecialUpFunc.3GLUT.xml">
+<!ENTITY glutStrokeCharacter.3GLUT SYSTEM "glutStrokeCharacter.3GLUT.xml">
+<!ENTITY glutStrokeWidth.3GLUT SYSTEM "glutStrokeWidth.3GLUT.xml">
+<!ENTITY glutSwapBuffers.3GLUT SYSTEM "glutSwapBuffers.3GLUT.xml">
+<!ENTITY glutTabletButtonFunc.3GLUT SYSTEM "glutTabletButtonFunc.3GLUT.xml">
+<!ENTITY glutTabletMotionFunc.3GLUT SYSTEM "glutTabletMotionFunc.3GLUT.xml">
+<!ENTITY glutTimerFunc.3GLUT SYSTEM "glutTimerFunc.3GLUT.xml">
+<!ENTITY glutUseLayer.3GLUT SYSTEM "glutUseLayer.3GLUT.xml">
+<!ENTITY glutVideoResizeGet.3GLUT SYSTEM "glutVideoResizeGet.3GLUT.xml">
+<!ENTITY glutVisibilityFunc.3GLUT SYSTEM "glutVisibilityFunc.3GLUT.xml">
+<!ENTITY glutWarpPointer.3GLUT SYSTEM "glutWarpPointer.3GLUT.xml">
+<!ENTITY glutWindowStatusFunc.3GLUT SYSTEM "glutWindowStatusFunc.3GLUT.xml">
+
+] >
+<reference>
+&glut.3GLUT;
+&glutAddMenuEntry.3GLUT;
+&glutAddSubMenu.3GLUT;
+&glutAttachMenu.3GLUT;
+&glutBitmapCharacter.3GLUT;
+&glutBitmapWidth.3GLUT;
+&glutButtonBoxFunc.3GLUT;
+&glutChangeToMenuEntry.3GLUT;
+&glutChangeToSubMenu.3GLUT;
+&glutCopyColormap.3GLUT;
+&glutCreateMenu.3GLUT;
+&glutCreateSubWindow.3GLUT;
+&glutCreateWindow.3GLUT;
+&glutDestroyMenu.3GLUT;
+&glutDestroyWindow.3GLUT;
+&glutDeviceGet.3GLUT;
+&glutDialsFunc.3GLUT;
+&glutDisplayFunc.3GLUT;
+&glutEnterGameMode.3GLUT;
+&glutEntryFunc.3GLUT;
+&glutEstablishOverlay.3GLUT;
+&glutExtensionSupported.3GLUT;
+&glutForceJoystickFunc.3GLUT;
+&glutFullScreen.3GLUT;
+&glutGameModeGet.3GLUT;
+&glutGameModeString.3GLUT;
+&glutGet.3GLUT;
+&glutGetColor.3GLUT;
+&glutGetModifiers.3GLUT;
+&glutIdleFunc.3GLUT;
+&glutIgnoreKeyRepeat.3GLUT;
+&glutInit.3GLUT;
+&glutInitDisplayMode.3GLUT;
+&glutInitDisplayString.3GLUT;
+&glutInitWindowPosition.3GLUT;
+&glutJoystickFunc.3GLUT;
+&glutKeyboardFunc.3GLUT;
+&glutKeyboardUpFunc.3GLUT;
+&glutLayerGet.3GLUT;
+&glutMainLoop.3GLUT;
+&glutMenuStatusFunc.3GLUT;
+&glutMotionFunc.3GLUT;
+&glutMouseFunc.3GLUT;
+&glutOverlayDisplayFunc.3GLUT;
+&glutPopWindow.3GLUT;
+&glutPositionWindow.3GLUT;
+&glutPostOverlayRedisplay.3GLUT;
+&glutPostRedisplay.3GLUT;
+&glutRemoveOverlay.3GLUT;
+&glutRemoveMenuItem.3GLUT;
+&glutReportErrors.3GLUT;
+&glutReshapeFunc.3GLUT;
+&glutReshapeWindow.3GLUT;
+&glutSetColor.3GLUT;
+&glutSetCursor.3GLUT;
+&glutSetKeyRepeat.3GLUT;
+&glutSetMenu.3GLUT;
+&glutSetWindow.3GLUT;
+&glutSetWindowTitle.3GLUT;
+&glutShowOverlay.3GLUT;
+&glutShowWindow.3GLUT;
+&glutSolidCone.3GLUT;
+&glutSolidCube.3GLUT;
+&glutSolidDodecahedron.3GLUT;
+&glutSolidIcosahedron.3GLUT;
+&glutSolidOctahedron.3GLUT;
+&glutSolidSphere.3GLUT;
+&glutSolidTeapot.3GLUT;
+&glutSolidTetrahedron.3GLUT;
+&glutSolidTorus.3GLUT;
+&glutSpaceballButtonFunc.3GLUT;
+&glutSpaceballMotionFunc.3GLUT;
+&glutSpaceballRotateFunc.3GLUT;
+&glutSpecialFunc.3GLUT;
+&glutSpecialUpFunc.3GLUT;
+&glutStrokeCharacter.3GLUT;
+&glutStrokeWidth.3GLUT;
+&glutSwapBuffers.3GLUT;
+&glutTabletButtonFunc.3GLUT;
+&glutTabletMotionFunc.3GLUT;
+&glutTimerFunc.3GLUT;
+&glutUseLayer.3GLUT;
+&glutVideoResizeGet.3GLUT;
+&glutVisibilityFunc.3GLUT;
+&glutWarpPointer.3GLUT;
+&glutWindowStatusFunc.3GLUT;
+</reference>
+
+

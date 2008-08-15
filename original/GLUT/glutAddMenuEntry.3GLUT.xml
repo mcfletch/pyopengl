@@ -1,0 +1,72 @@
+<refentry id="glutAddMenuEntry.3GLUT">
+	<refmeta id="glutAddMenuEntry.3GLUT-meta">
+		<refentrytitle>glutAddMenuEntry</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutAddMenuEntry.3GLUT-name">
+		<refname>glutAddMenuEntry</refname>
+		<refpurpose>adds a menu entry to the bottom of the current menu.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutAddMenuEntry.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutAddMenuEntry</function></funcdef>
+				<paramdef>char&nbsp;*<parameter>name</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>value</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutAddMenuEntry.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>name</parameter></term>
+				<listitem>
+					<simpara>
+						ASCII character string to display in the menu entry.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>value</parameter></term>
+				<listitem>
+					<simpara>
+						Value to return to the menu's callback function if the menu entry is selected.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutAddMenuEntry.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutAddMenuEntry</function> adds a menu entry to the bottom of the current menu. The string name will be
+			displayed for the newly added menu entry. If the menu entry is selected by the user, the menu's callback will be called
+			passing value as the callback's parameter.
+		</para>
+	</refsect1>
+	<refsect1 id="glutAddMenuEntry.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutAddSubMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutChangeToMenuEntry</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutRemoveMenuItem</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

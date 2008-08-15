@@ -1,0 +1,320 @@
+<refentry id="glMapGrid.3G">
+	<refmeta id="glMapGrid.3G-meta">
+		<refentrytitle>glMapGrid</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glMapGrid.3G-name">
+		<refname>glMapGrid1d</refname>
+		<refname>glMapGrid1f</refname>
+		<refname>glMapGrid2d</refname>
+		<refname>glMapGrid2f</refname>
+		<refpurpose>define a one- or two-dimensional mesh</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glMapGrid.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMapGrid1d</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>un</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>u1</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>u2</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMapGrid1f</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>un</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>u1</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>u2</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMapGrid2d</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>un</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>u1</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>u2</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>vn</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>v1</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>v2</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMapGrid2f</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>un</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>u1</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>u2</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>vn</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>v1</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>v2</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glMapGrid.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>un</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the number of partitions in the grid range interval [<parameter>u1</parameter>,
+						<parameter>u2</parameter>]. Must be positive.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>u1</parameter>, <parameter>u2</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the mappings for integer grid domain values <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>i</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mn>0</mml:mn>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> and <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>i</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mi>un</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>vn</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the number of partitions in the grid range interval [<parameter>v1</parameter>,
+						<parameter>v2</parameter>]
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			(<function moreinfo="refentry">glMapGrid2</function> only).
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>v1</parameter>, <parameter>v2</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the mappings for integer grid domain values <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>j</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mn>0</mml:mn>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> and <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>j</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mi>vn</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			(<function moreinfo="refentry">glMapGrid2</function> only).
+		</para>
+	</refsect1>
+	<refsect1 id="glMapGrid.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glMapGrid</function> and <function moreinfo="refentry">glEvalMesh</function> are used
+			together to efficiently generate and evaluate a series of evenly-spaced map domain values. <function
+			moreinfo="refentry">glEvalMesh</function> steps through the integer domain of a one- or two-dimensional grid, whose
+			range is the domain of the evaluation maps specified by <function moreinfo="refentry">glMap1</function> and <function
+			moreinfo="refentry">glMap2</function>.
+		</para>
+		<para>
+			<function moreinfo="refentry">glMapGrid1</function> and <function moreinfo="refentry">glMapGrid2</function> specify the
+			linear grid mappings between the <inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation> (or <inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation> and <inlineequation>
+				<mml:math>
+					<mml:mi>j</mml:mi>
+				</mml:math>
+			</inlineequation>) integer grid coordinates, to the <inlineequation>
+				<mml:math>
+					<mml:mi>u</mml:mi>
+				</mml:math>
+			</inlineequation> (or <inlineequation>
+				<mml:math>
+					<mml:mi>u</mml:mi>
+				</mml:math>
+			</inlineequation> and <inlineequation>
+				<mml:math>
+					<mml:mi>v</mml:mi>
+				</mml:math>
+			</inlineequation>) floating-point evaluation map coordinates. See <function moreinfo="refentry">glMap1</function> and
+			<function moreinfo="refentry">glMap2</function> for details of how <inlineequation>
+				<mml:math>
+					<mml:mi>u</mml:mi>
+				</mml:math>
+			</inlineequation> and <inlineequation>
+				<mml:math>
+					<mml:mi>v</mml:mi>
+				</mml:math>
+			</inlineequation> coordinates are evaluated.
+		</para>
+		<para>
+			<function moreinfo="refentry">glMapGrid1</function> specifies a single linear mapping such that integer grid coordinate
+			0 maps exactly to <parameter>u1</parameter>, and integer grid coordinate <parameter>un</parameter> maps exactly to
+			<parameter>u2</parameter>. All other integer grid coordinates <inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation> are mapped so that <informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:mi>u</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>i</mml:mi>
+						<mml:mo>(</mml:mo>
+						<mml:mi>u2</mml:mi>
+						<mml:mo>-</mml:mo>
+						<mml:mi>u1</mml:mi>
+						<mml:mo>)</mml:mo>
+						<mml:mo>/</mml:mo>
+						<mml:mi>un</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:mi>u1</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</informalequation><function moreinfo="refentry">glMapGrid2</function> specifies two such linear mappings. One maps
+			integer grid coordinate <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>i</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mn>0</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> exactly to <parameter>u1</parameter>, and integer grid coordinate <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>i</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>un</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> exactly to <parameter>u2</parameter>. The other maps integer grid coordinate <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>j</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mn>0</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> exactly to <parameter>v1</parameter>, and integer grid coordinate <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>j</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>vn</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> exactly to <parameter>v2</parameter>. Other integer grid coordinates <inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation> and <inlineequation>
+				<mml:math>
+					<mml:mi>j</mml:mi>
+				</mml:math>
+			</inlineequation> are mapped such that
+		</para>
+		<para>
+			<informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:mi>u</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>i</mml:mi>
+						<mml:mo>(</mml:mo>
+						<mml:mi>u2</mml:mi>
+						<mml:mo>-</mml:mo>
+						<mml:mi>u1</mml:mi>
+						<mml:mo>)</mml:mo>
+						<mml:mo>/</mml:mo>
+						<mml:mi>un</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:mi>u1</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>
+		</para>
+		<para>
+			<informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:mi>v</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>j</mml:mi>
+						<mml:mo>(</mml:mo>
+						<mml:mi>v2</mml:mi>
+						<mml:mo>-</mml:mo>
+						<mml:mi>v1</mml:mi>
+						<mml:mo>)</mml:mo>
+						<mml:mo>/</mml:mo>
+						<mml:mi>vn</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:mi>v1</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>
+		</para>
+		<para>
+			The mappings specified by <function moreinfo="refentry">glMapGrid</function> are used identically by <function
+			moreinfo="refentry">glEvalMesh</function> and <function moreinfo="refentry">glEvalPoint</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glMapGrid.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if either <parameter>un</parameter> or <parameter>vn</parameter> is
+			not positive.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function moreinfo="refentry">glMapGrid</function> is
+			executed between the execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of
+			<function moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glMapGrid.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAP1_GRID_DOMAIN</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAP2_GRID_DOMAIN</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAP1_GRID_SEGMENTS</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAP2_GRID_SEGMENTS</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glMapGrid.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<function moreinfo="refentry">glEvalCoord</function>, <function moreinfo="refentry">glEvalMesh</function>, <function
+			moreinfo="refentry">glEvalPoint</function>, <function moreinfo="refentry">glMap1</function>, <function
+			moreinfo="refentry">glMap2</function>
+		</para>
+	</refsect1>
+</refentry>

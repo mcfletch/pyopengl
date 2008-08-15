@@ -1,0 +1,98 @@
+<refentry id="gluLoadSamplingMatrices.3G">
+	<refmeta id="gluLoadSamplingMatrices.3G-meta">
+		<refentrytitle>gluLoadSamplingMatrices</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluLoadSamplingMatrices.3G-name">
+		<refname>gluLoadSamplingMatrices</refname>
+		<refpurpose>load NURBS sampling and culling matrices</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluLoadSamplingMatrices.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluLoadSamplingMatrices</function></funcdef>
+				<paramdef>GLUnurbs*&nbsp;<parameter>nurb</parameter></paramdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>model</parameter></paramdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>perspective</parameter></paramdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>view</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluLoadSamplingMatrices.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>nurb</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the NURBS object (created with <function moreinfo="refentry">gluNewNurbsRenderer</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>model</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a modelview matrix (as from a <function moreinfo="refentry">glGetFloatv</function> call).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>perspective</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a projection matrix (as from a <function moreinfo="refentry">glGetFloatv</function> call).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>view</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a viewport (as from a <function moreinfo="refentry">glGetIntegerv</function> call).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluLoadSamplingMatrices.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluLoadSamplingMatrices</function> uses <parameter>model</parameter>, <parameter>perspective</parameter>, and
+			<parameter>view</parameter> to recompute the sampling and culling matrices stored in <parameter>nurb</parameter>. The
+			sampling matrix determines how finely a NURBS curve or surface must be tessellated to satisfy the sampling tolerance
+			(as determined by the <constant>GLU_SAMPLING_TOLERANCE</constant> property). The culling matrix is used in deciding if
+			a NURBS curve or surface should be culled before rendering (when the <constant>GLU_CULLING</constant> property is
+			turned on).
+		</para>
+		<para>
+			<function>gluLoadSamplingMatrices</function> is necessary only if the <constant>GLU_AUTO_LOAD_MATRIX</constant>
+			property is turned off (see <citerefentry>
+				<refentrytitle>gluNurbsProperty</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>). Although it can be convenient to leave the <constant>GLU_AUTO_LOAD_MATRIX</constant> property turned
+			on, there can be a performance penalty for doing so. (A round trip to the GL server is needed to fetch the current
+			values of the modelview matrix, projection matrix, and viewport.)
+		</para>
+	</refsect1>
+	<refsect1 id="gluLoadSamplingMatrices.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluGetNurbsProperty</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNewNurbsRenderer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNurbsProperty</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

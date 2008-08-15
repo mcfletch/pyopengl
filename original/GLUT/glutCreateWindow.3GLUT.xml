@@ -1,0 +1,83 @@
+<refentry id="glutCreateWindow.3GLUT">
+	<refmeta id="glutCreateWindow.3GLUT-meta">
+		<refentrytitle>glutCreateWindow</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutCreateWindow.3GLUT-name">
+		<refname>glutCreateWindow</refname>
+		<refpurpose>creates a top-level window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutCreateWindow.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutCreateWindow</function></funcdef>
+				<paramdef>char&nbsp;*<parameter>name</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutCreateWindow.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>name</parameter></term>
+				<listitem>
+					<simpara>
+						ASCII character string for use as window name.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutCreateWindow.3GLUT-description">
+		<title>Description</title>
+		<para>
+			glutCreateWindow creates a top-level window. The name will be provided to the window system as the window's name. The
+			intent is that the window system will label the window with the name.
+		</para>
+		<para>
+			Implicitly, the current window is set to the newly created window.
+		</para>
+		<para>
+			Each created window has a unique associated OpenGL context. State changes to a window's associated OpenGL context can
+			be done immediately after the window is created.
+		</para>
+		<para>
+			The display state of a window is initially for the window to be shown. But the window's display state is not actually
+			acted upon until <function moreinfo="refentry">glutMainLoop</function> is entered. This means until <function
+			moreinfo="refentry">glutMainLoop</function> is called, rendering to a created window is ineffective because the window
+			can not yet be displayed.
+		</para>
+		<para>
+			The value returned is a unique small integer identifier for the window. The range of allocated identifiers starts at
+			one. This window identifier can be used when calling <function moreinfo="refentry">glutSetWindow</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutCreateWindow.3GLUT-x_implementation_notes">
+		<title>X Implementation Notes</title>
+		<para>
+			The proper X Inter-Client Communication Conventions Manual (ICCCM) top-level properties are established. The
+			<constant>WM_COMMAND</constant> property that lists the command line used to invoke the GLUT program is only
+			established for the first window created.
+		</para>
+	</refsect1>
+	<refsect1 id="glutCreateWindow.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateSubWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDestroyWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

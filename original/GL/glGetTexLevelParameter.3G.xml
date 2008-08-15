@@ -1,0 +1,294 @@
+<refentry id="glGetTexLevelParameter.3G">
+	<refmeta id="glGetTexLevelParameter.3G-meta">
+		<refentrytitle>glGetTexLevelParameter</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glGetTexLevelParameter.3G-name">
+		<refname>glGetTexLevelParameterfv</refname>
+		<refname>glGetTexLevelParameteriv</refname>
+		<refpurpose>return texture parameter values for a specific level of detail</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glGetTexLevelParameter.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetTexLevelParameterfv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>level</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;*<parameter>params</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetTexLevelParameteriv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>level</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLint&nbsp;*<parameter>params</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glGetTexLevelParameter.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>target</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the symbolic name of the target texture, either <constant>GL_TEXTURE_1D</constant>,
+						<constant>GL_TEXTURE_2D</constant>, <constant>GL_TEXTURE_3D</constant>,
+						<constant>GL_PROXY_TEXTURE_1D</constant>, <constant>GL_PROXY_TEXTURE_2D</constant>, or
+						<constant>GL_PROXY_TEXTURE_3D</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>level</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the level-of-detail number of the desired image. Level 0 is the base image level. Level
+						<inlineequation>
+							<mml:math>
+								<mml:mi>n</mml:mi>
+							</mml:math>
+						</inlineequation> is the <inlineequation>
+							<mml:math>
+								<mml:mi>n</mml:mi>
+							</mml:math>
+						</inlineequation>th mipmap reduction image.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>pname</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the symbolic name of a texture parameter. <constant>GL_TEXTURE_WIDTH</constant>,
+						<constant>GL_TEXTURE_HEIGHT</constant>, <constant>GL_TEXTURE_DEPTH</constant>,
+						<constant>GL_TEXTURE_INTERNAL_FORMAT</constant>, <constant>GL_TEXTURE_BORDER</constant>,
+						<constant>GL_TEXTURE_RED_SIZE</constant>, <constant>GL_TEXTURE_GREEN_SIZE</constant>,
+						<constant>GL_TEXTURE_BLUE_SIZE</constant>, <constant>GL_TEXTURE_ALPHA_SIZE</constant>,
+						<constant>GL_TEXTURE_LUMINANCE_SIZE</constant>, and <constant>GL_TEXTURE_INTENSITY_SIZE</constant> are
+						accepted.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>params</parameter></term>
+				<listitem>
+					<simpara>
+						Returns the requested data.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glGetTexLevelParameter.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glGetTexLevelParameter</function> returns in <parameter>params</parameter> texture
+			parameter values for a specific level-of-detail value, specified as <parameter>level</parameter>.
+			<parameter>target</parameter> defines the target texture, either <constant>GL_TEXTURE_1D</constant>,
+			<constant>GL_TEXTURE_2D</constant>, <constant>GL_TEXTURE_3D</constant>, <constant>GL_PROXY_TEXTURE_1D</constant>,
+			<constant>GL_PROXY_TEXTURE_2D</constant>, or <constant>GL_PROXY_TEXTURE_3D</constant>.
+		</para>
+		<para>
+			<constant>GL_MAX_TEXTURE_SIZE</constant>, and <constant>GL_MAX_3D_TEXTURE_SIZE</constant> are not really descriptive
+			enough. It has to report the largest square texture image that can be accommodated with mipmaps and borders, but a long
+			skinny texture, or a texture without mipmaps and borders, may easily fit in texture memory. The proxy targets allow the
+			user to more accurately query whether the GL can accommodate a texture of a given configuration. If the texture cannot
+			be accommodated, the texture state variables, which may be queried with <function
+			moreinfo="refentry">glGetTexLevelParameter</function>, are set to 0. If the texture can be accommodated, the texture
+			state values will be set as they would be set for a non-proxy target.
+		</para>
+		<para>
+			<parameter>pname</parameter> specifies the texture parameter whose value or values will be returned.
+		</para>
+		<para>
+			The accepted parameter names are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_TEXTURE_WIDTH</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> returns a single value, the width of the texture image. This value includes
+						the border of the texture image. The initial value is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_TEXTURE_HEIGHT</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> returns a single value, the height of the texture image. This value includes
+						the border of the texture image. The initial value is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_TEXTURE_DEPTH</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> returns a single value, the depth of the texture image. This value includes
+						the border of the texture image. The initial value is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_TEXTURE_INTERNAL_FORMAT</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> returns a single value, the internal of the texture image.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_TEXTURE_BORDER</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> returns a single value, the width in pixels of the border of the texture
+						image. The initial value is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_TEXTURE_GREEN_SIZE</constant>,</term>
+				<term><constant>GL_TEXTURE_BLUE_SIZE</constant>,</term>
+				<term><constant>GL_TEXTURE_ALPHA_SIZE</constant>,</term>
+				<term><constant>GL_TEXTURE_LUMINANCE_SIZE</constant>,</term>
+				<term><constant>GL_TEXTURE_INTENSITY_SIZE</constant></term>
+				<term><constant>GL_TEXTURE_RED_SIZE</constant>,</term>
+				<listitem>
+					<simpara>
+						The internal storage resolution of an individual component. The resolution chosen by the GL will be a close
+						match for the resolution requested by the user with the component argument of <function
+						moreinfo="refentry">glTexImage1D</function>, <function moreinfo="refentry">glTexImage2D</function>,
+						<function moreinfo="refentry">glTexImage3D</function>, <function
+						moreinfo="refentry">glCopyTexImage1D</function>, and <function
+						moreinfo="refentry">glCopyTexImage2D</function>. The initial value is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glGetTexLevelParameter.3G-notes">
+		<title>Notes</title>
+		<para>
+			If an error is generated, no change is made to the contents of <parameter>params</parameter>.
+		</para>
+		<para>
+			<constant>GL_TEXTURE_INTERNAL_FORMAT</constant> is available only if the GL version is 1.1 or greater. In version 1.0,
+			use <constant>GL_TEXTURE_COMPONENTS</constant> instead.
+		</para>
+		<para>
+			<constant>GL_PROXY_TEXTURE_1D</constant> and <constant>GL_PROXY_TEXTURE_2D</constant> are available only if the GL
+			version is 1.1 or greater.
+		</para>
+		<para>
+			<constant>GL_TEXTURE_3D</constant>, <constant>GL_PROXY_TEXTURE_3D</constant>, and <constant>GL_TEXTURE_DEPTH</constant>
+			are available only if the GL version is 1.2 or greater.
+		</para>
+		<para>
+			When the <constant>GL_ARB_multitexture</constant> extension is supported, <function
+			moreinfo="refentry">glGetTexLevelParameter</function> returns the texture level parameters for the active texture unit.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetTexLevelParameter.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> or <parameter>pname</parameter> is
+			not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if <parameter>level</parameter> is less than 0.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> may be generated if <parameter>level</parameter> is greater than <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>log</mml:mi>
+						<mml:mn>2</mml:mn>
+					</mml:msub>
+				</mml:math>
+			</inlineequation> <parameter>max</parameter>, where <parameter>max</parameter> is the returned value of
+			<constant>GL_MAX_TEXTURE_SIZE</constant>.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function
+			moreinfo="refentry">glGetTexLevelParameter</function> is executed between the execution of <function
+			moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetTexLevelParameter.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glActiveTextureARB</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexSubImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexSubImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexSubImage3D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexEnv</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexGen</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage3D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexSubImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexSubImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexSubImage3D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

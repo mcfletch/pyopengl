@@ -1,0 +1,70 @@
+<refentry id="glutSolidIcosahedron.3GLUT">
+	<refmeta id="glutSolidIcosahedron.3GLUT-meta">
+		<refentrytitle>glutSolidIcosahedron</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSolidIcosahedron.3GLUT-name">
+		<refname>glutSolidIcosahedron</refname>
+		<refname>glutWireIcosahedron</refname>
+		<refpurpose>render a solid or wireframe icosahedron (20-sided regular solid) respectively.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSolidIcosahedron.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSolidIcosahedron</function></funcdef>
+				<void/>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutWireIcosahedron</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSolidIcosahedron.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSolidIcosahedron</function> and <function>glutWireIcosahedron</function> render a solid or wireframe
+			icosahedron respectively. The icosahedron is centered at the modeling coordinates origin and has a radius of 1.0.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSolidIcosahedron.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSolidSphere</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidCube</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidCone</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTorus</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidDodecahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidOctahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTetrahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTeapot</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

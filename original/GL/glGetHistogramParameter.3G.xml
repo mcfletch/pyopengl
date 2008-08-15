@@ -1,0 +1,162 @@
+<refentry id="glGetHistogramParameter.3G">
+	<refmeta id="glGetHistogramParameter.3G-meta">
+		<refentrytitle>glGetHistogramParameter</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glGetHistogramParameter.3G-name">
+		<refname>glGetHistogramParameterfv</refname>
+		<refname>glGetHistogramParameteriv</refname>
+		<refpurpose>get histogram parameters</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glGetHistogramParameter.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetHistogramParameterfv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;*<parameter>params</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetHistogramParameteriv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLint&nbsp;*<parameter>params</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glGetHistogramParameter.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>target</parameter></term>
+				<listitem>
+					<simpara>
+						Must be one of <constant>GL_HISTOGRAM</constant> or <constant>GL_PROXY_HISTOGRAM</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>pname</parameter></term>
+				<listitem>
+					<simpara>
+						The name of the parameter to be retrieved. Must be one of <constant>GL_HISTOGRAM_WIDTH</constant>,
+						<constant>GL_HISTOGRAM_FORMAT</constant>, <constant>GL_HISTOGRAM_RED_SIZE</constant>,
+						<constant>GL_HISTOGRAM_GREEN_SIZE</constant>, <constant>GL_HISTOGRAM_BLUE_SIZE</constant>,
+						<constant>GL_HISTOGRAM_ALPHA_SIZE</constant>, <constant>GL_HISTOGRAM_LUMINANCE_SIZE</constant>, or
+						<constant>GL_HISTOGRAM_SINK</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>params</parameter></term>
+				<listitem>
+					<simpara>
+						Pointer to storage for the returned values.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glGetHistogramParameter.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glGetHistogramParameter</function> is used to query parameter values for the current
+			histogram or for a proxy. The histogram state information may be queried by calling <function
+			moreinfo="refentry">glGetHistogramParameter</function> with a <parameter>target</parameter> of
+			<constant>GL_HISTOGRAM</constant> (to obtain information for the current histogram table) or
+			<constant>GL_PROXY_HISTOGRAM</constant> (to obtain information from the most recent proxy request) and one of the
+			following values for the <parameter>pname</parameter> argument:
+		</para>
+		<informaltable frame="topbot">
+			<tgroup cols="2">
+				<tbody>
+					<row>
+						<entry><emphasis role="bold">Parameter</emphasis></entry>
+						<entry><emphasis role="bold">Description</emphasis></entry>
+					</row>
+					<row>
+						<entry><constant>GL_HISTOGRAM_WIDTH</constant></entry>
+						<entry>Histogram table width</entry>
+					</row>
+					<row>
+						<entry><constant>GL_HISTOGRAM_FORMAT</constant></entry>
+						<entry>Internal</entry>
+					</row>
+					<row>
+						<entry><constant>GL_HISTOGRAM_RED_SIZE</constant></entry>
+						<entry>Red component counter size, in bits</entry>
+					</row>
+					<row>
+						<entry><constant>GL_HISTOGRAM_GREEN_SIZE</constant></entry>
+						<entry>Green component counter size, in bits</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</informaltable>
+		<informaltable frame="topbot">
+			<tgroup cols="2">
+				<tbody>
+					<row>
+						<entry><emphasis role="bold">Parameter</emphasis></entry>
+						<entry><emphasis role="bold">Description</emphasis></entry>
+					</row>
+					<row>
+						<entry><constant>GL_HISTOGRAM_BLUE_SIZE</constant></entry>
+						<entry>Blue component counter size, in bits</entry>
+					</row>
+					<row>
+						<entry><constant>GL_HISTOGRAM_ALPHA_SIZE</constant></entry>
+						<entry>Alpha component counter size, in bits</entry>
+					</row>
+					<row>
+						<entry><constant>GL_HISTOGRAM_LUMINANCE_SIZE</constant></entry>
+						<entry>Luminance component counter size, in bits</entry>
+					</row>
+					<row>
+						<entry><constant>GL_HISTOGRAM_SINK</constant></entry>
+						<entry>Value of the <parameter>sink</parameter> parameter</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</informaltable>
+	</refsect1>
+	<refsect1 id="glGetHistogramParameter.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function moreinfo="refentry">glGetHistogramParameter</function> is present only if <constant>GL_ARB_imaging</constant>
+			is returned when <function moreinfo="refentry">glGetString</function> is called with an argument of
+			<constant>GL_EXTENSIONS</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetHistogramParameter.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not one of the allowable values.
+		</para>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>pname</parameter> is not one of the allowable values.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function
+			moreinfo="refentry">glGetHistogramParameter</function> is executed between the execution of <function
+			moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetHistogramParameter.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glGetHistogram</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glHistogram</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

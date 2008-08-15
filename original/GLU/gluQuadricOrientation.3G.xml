@@ -1,0 +1,94 @@
+<refentry id="gluQuadricOrientation.3G">
+	<refmeta id="gluQuadricOrientation.3G-meta">
+		<refentrytitle>gluQuadricOrientation</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluQuadricOrientation.3G-name">
+		<refname>gluQuadricOrientation</refname>
+		<refpurpose>specify inside/outside orientation for quadrics</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluQuadricOrientation.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluQuadricOrientation</function></funcdef>
+				<paramdef>GLUquadric*&nbsp;<parameter>quad</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>orientation</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluQuadricOrientation.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>quad</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the quadrics object (created with <function moreinfo="refentry">gluNewQuadric</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>orientation</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the desired orientation. Valid values are <constant>GLU_OUTSIDE</constant> and
+						<constant>GLU_INSIDE</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluQuadricOrientation.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluQuadricOrientation</function> specifies what kind of orientation is desired for quadrics rendered with
+			<parameter>quad</parameter>. The <parameter>orientation</parameter> values are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GLU_OUTSIDE</constant></term>
+				<listitem>
+					<simpara>
+						Quadrics are drawn with normals pointing outward (the initial value).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLU_INSIDE</constant></term>
+				<listitem>
+					<simpara>
+						Quadrics are drawn with normals pointing inward.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			Note that the interpretation of <parameter>outward</parameter> and <parameter>inward</parameter> depends on the quadric
+			being drawn.
+		</para>
+	</refsect1>
+	<refsect1 id="gluQuadricOrientation.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluNewQuadric</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricDrawStyle</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricNormals</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricTexture</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

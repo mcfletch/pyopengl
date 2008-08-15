@@ -1,0 +1,107 @@
+<refentry id="gluQuadricDrawStyle.3G">
+	<refmeta id="gluQuadricDrawStyle.3G-meta">
+		<refentrytitle>gluQuadricDrawStyle</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluQuadricDrawStyle.3G-name">
+		<refname>gluQuadricDrawStyle</refname>
+		<refpurpose>specify the draw style desired for quadrics</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluQuadricDrawStyle.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluQuadricDrawStyle</function></funcdef>
+				<paramdef>GLUquadric*&nbsp;<parameter>quad</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>draw</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluQuadricDrawStyle.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>quad</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the quadrics object (created with <function moreinfo="refentry">gluNewQuadric</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>draw</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the desired draw style. Valid values are <constant>GLU_FILL</constant>,
+						<constant>GLU_LINE</constant>, <constant>GLU_SILHOUETTE</constant>, and <constant>GLU_POINT</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluQuadricDrawStyle.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluQuadricDrawStyle</function> specifies the draw style for quadrics rendered with
+			<parameter>quad</parameter>. The legal values are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GLU_FILL</constant></term>
+				<listitem>
+					<simpara>
+						Quadrics are rendered with polygon primitives. The polygons are drawn in a counterclockwise fashion with
+						respect to their normals (as defined with <function moreinfo="refentry">gluQuadricOrientation</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLU_LINE</constant></term>
+				<listitem>
+					<simpara>
+						Quadrics are rendered as a set of lines.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLU_SILHOUETTE</constant></term>
+				<listitem>
+					<simpara>
+						Quadrics are rendered as a set of lines, except that edges separating coplanar faces will not be drawn.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLU_POINT</constant></term>
+				<listitem>
+					<simpara>
+						Quadrics are rendered as a set of points.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluQuadricDrawStyle.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluNewQuadric</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricNormals</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricOrientation</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricTexture</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

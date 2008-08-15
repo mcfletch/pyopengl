@@ -1,0 +1,79 @@
+<refentry id="glClearColor.3G">
+	<refmeta id="glClearColor.3G-meta">
+		<refentrytitle>glClearColor</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glClearColor.3G-name">
+		<refname>glClearColor</refname>
+		<refpurpose>specify clear values for the color buffers</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glClearColor.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glClearColor</function></funcdef>
+				<paramdef>GLclampf&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLclampf&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLclampf&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLclampf&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glClearColor.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>red</parameter></term>
+				<term><parameter>green</parameter></term>
+				<term><parameter>blue</parameter></term>
+				<term><parameter>alpha</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the red, green, blue, and alpha values used when the color buffers are cleared. The initial values
+						are all 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glClearColor.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glClearColor</function> specifies the red, green, blue, and alpha values used by <function
+			moreinfo="refentry">glClear</function> to clear the color buffers. Values specified by
+			<function>glClearColor</function> are clamped to the range <inlineequation>
+				<mml:math>
+					<mml:mfenced open="[" close="]">
+						<mml:mn>0</mml:mn>
+						<mml:mn>1</mml:mn>
+					</mml:mfenced>
+				</mml:math>
+			</inlineequation>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClearColor.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glClearColor</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClearColor.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_COLOR_CLEAR_VALUE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glClearColor.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glClear</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

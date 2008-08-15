@@ -1,0 +1,76 @@
+<refentry id="glutTabletButtonFunc.3GLUT">
+	<refmeta id="glutTabletButtonFunc.3GLUT-meta">
+		<refentrytitle>glutTabletButtonFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutTabletButtonFunc.3GLUT-name">
+		<refname>glutTabletButtonFunc</refname>
+		<refpurpose>sets the special keyboard callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutTabletButtonFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutTabletButtonFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;button,&nbsp;int&nbsp;state,&nbsp;int&nbsp;x,&nbsp;int&nbsp;y)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutTabletButtonFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new tablet button callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutTabletButtonFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutTabletButtonFunc</function> sets the tablet button callback for the current window. The tablet button
+			callback for a window is called when the window has tablet input focus (normally, when the mouse is in the window) and
+			the user generates tablet button presses. The <parameter>button</parameter> parameter will be the button number
+			(starting at one). The number of available tablet buttons can be determined with <function
+			moreinfo="refentry">glutDeviceGet(GLUT_NUM_TABLET_BUTTONS)</function>. The <parameter>state</parameter> is either
+			<constant>GLUT_UP</constant> or <constant>GLUT_DOWN</constant> indicating whether the callback was due to a release or
+			press respectively. The <parameter>x</parameter> and <parameter>y</parameter> callback parameters indicate the window
+			relative coordinates when the tablet button state changed.
+		</para>
+		<para>
+			Registering a tablet button callback when a tablet device is not available is ineffectual and not an error. In this
+			case, no tablet button callbacks will be generated.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutTabletButtonFunc</function> disables the generation of tablet button
+			callbacks. When a new window is created, no tablet button callback is initially registered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutTabletButtonFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutTabletMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

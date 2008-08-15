@@ -1,0 +1,113 @@
+<refentry id="gluTessBeginPolygon.3G">
+	<refmeta id="gluTessBeginPolygon.3G-meta">
+		<refentrytitle>gluTessBeginPolygon</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluTessBeginPolygon.3G-name">
+		<refname>gluTessBeginPolygon</refname>
+		<refpurpose>delimit a polygon description</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluTessBeginPolygon.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluTessBeginPolygon</function></funcdef>
+				<paramdef>GLUtesselator*&nbsp;<parameter>tess</parameter></paramdef>
+				<paramdef>GLvoid*&nbsp;<parameter>data</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluTessBeginPolygon.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>tess</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the tessellation object (created with <function moreinfo="refentry">gluNewTess</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>data</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to user polygon data.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluTessBeginPolygon.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluTessBeginPolygon</function> and <function moreinfo="refentry">gluTessEndPolygon</function> delimit the
+			definition of a convex, concave or self-intersecting polygon. Within each
+			<function>gluTessBeginPolygon</function>/<function moreinfo="refentry">gluTessEndPolygon</function> pair, there must be
+			one or more calls to <function moreinfo="refentry">gluTessBeginContour</function>/<function
+			moreinfo="refentry">gluTessEndContour</function>. Within each contour, there are zero or more calls to <function
+			moreinfo="refentry">gluTessVertex</function>. The vertices specify a closed contour (the last vertex of each contour is
+			automatically linked to the first). See the <function moreinfo="refentry">gluTessVertex</function>, <function
+			moreinfo="refentry">gluTessBeginContour</function>, and <function moreinfo="refentry">gluTessEndContour</function>
+			reference pages for more details.
+		</para>
+		<para>
+			<parameter>data</parameter> is a pointer to a user-defined data structure. If the appropriate callback(s) are specified
+			(see <citerefentry>
+				<refentrytitle>gluTessCallback</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>), then this pointer is returned to the callback function(s). Thus, it is a convenient way to store
+			per-polygon information.
+		</para>
+		<para>
+			Once <function moreinfo="refentry">gluTessEndPolygon</function> is called, the polygon is tessellated, and the
+			resulting triangles are described through callbacks. See <function moreinfo="refentry">gluTessCallback</function> for
+			descriptions of the callback functions.
+		</para>
+	</refsect1>
+	<refsect1 id="gluTessBeginPolygon.3G-example">
+		<title>Example</title>
+		<para>
+			A quadrilateral with a triangular hole in it can be described as follows: gluTessBeginPolygon(tobj,
+			<constant>NULL</constant>); gluTessBeginContour(tobj); gluTessVertex(tobj, v1, v1); gluTessVertex(tobj, v2, v2);
+			gluTessVertex(tobj, v3, v3); gluTessVertex(tobj, v4, v4); gluTessEndContour(tobj); gluTessBeginContour(tobj);
+			gluTessVertex(tobj, v5, v5); gluTessVertex(tobj, v6, v6); gluTessVertex(tobj, v7, v7); gluTessEndContour(tobj);
+			gluTessEndPolygon(tobj);
+		</para>
+	</refsect1>
+	<refsect1 id="gluTessBeginPolygon.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluNewTess</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessBeginContour</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessVertex</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessCallback</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessProperty</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessNormal</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessEndPolygon</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

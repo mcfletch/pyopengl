@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DocBook MathML Module V1.0//EN"
+"http://www.oasis-open.org/docbook/xml/mathml/1.0/dbmathml.dtd" [
+<!ENTITY gluBeginCurve.3G SYSTEM "gluBeginCurve.3G.xml">
+<!ENTITY gluBeginPolygon.3G SYSTEM "gluBeginPolygon.3G.xml">
+<!ENTITY gluBeginSurface.3G SYSTEM "gluBeginSurface.3G.xml">
+<!ENTITY gluBeginTrim.3G SYSTEM "gluBeginTrim.3G.xml">
+<!ENTITY gluBuild1DMipmapLevels.3G SYSTEM "gluBuild1DMipmapLevels.3G.xml">
+<!ENTITY gluBuild1DMipmaps.3G SYSTEM "gluBuild1DMipmaps.3G.xml">
+<!ENTITY gluBuild2DMipmapLevels.3G SYSTEM "gluBuild2DMipmapLevels.3G.xml">
+<!ENTITY gluBuild2DMipmaps.3G SYSTEM "gluBuild2DMipmaps.3G.xml">
+<!ENTITY gluBuild3DMipmapLevels.3G SYSTEM "gluBuild3DMipmapLevels.3G.xml">
+<!ENTITY gluBuild3DMipmaps.3G SYSTEM "gluBuild3DMipmaps.3G.xml">
+<!ENTITY gluCheckExtension.3G SYSTEM "gluCheckExtension.3G.xml">
+<!ENTITY gluCylinder.3G SYSTEM "gluCylinder.3G.xml">
+<!ENTITY gluDeleteNurbsRenderer.3G SYSTEM "gluDeleteNurbsRenderer.3G.xml">
+<!ENTITY gluDeleteQuadric.3G SYSTEM "gluDeleteQuadric.3G.xml">
+<!ENTITY gluDeleteTess.3G SYSTEM "gluDeleteTess.3G.xml">
+<!ENTITY gluDisk.3G SYSTEM "gluDisk.3G.xml">
+<!ENTITY gluErrorString.3G SYSTEM "gluErrorString.3G.xml">
+<!ENTITY gluGetNurbsProperty.3G SYSTEM "gluGetNurbsProperty.3G.xml">
+<!ENTITY gluGetString.3G SYSTEM "gluGetString.3G.xml">
+<!ENTITY gluGetTessProperty.3G SYSTEM "gluGetTessProperty.3G.xml">
+<!ENTITY gluLoadSamplingMatrices.3G SYSTEM "gluLoadSamplingMatrices.3G.xml">
+<!ENTITY gluLookAt.3G SYSTEM "gluLookAt.3G.xml">
+<!ENTITY gluNewNurbsRenderer.3G SYSTEM "gluNewNurbsRenderer.3G.xml">
+<!ENTITY gluNewQuadric.3G SYSTEM "gluNewQuadric.3G.xml">
+<!ENTITY gluNewTess.3G SYSTEM "gluNewTess.3G.xml">
+<!ENTITY gluNextContour.3G SYSTEM "gluNextContour.3G.xml">
+<!ENTITY gluNurbsCallback.3G SYSTEM "gluNurbsCallback.3G.xml">
+<!ENTITY gluNurbsCallbackData.3G SYSTEM "gluNurbsCallbackData.3G.xml">
+<!ENTITY gluNurbsCallbackDataEXT.3G SYSTEM "gluNurbsCallbackDataEXT.3G.xml">
+<!ENTITY gluNurbsCurve.3G SYSTEM "gluNurbsCurve.3G.xml">
+<!ENTITY gluNurbsProperty.3G SYSTEM "gluNurbsProperty.3G.xml">
+<!ENTITY gluNurbsSurface.3G SYSTEM "gluNurbsSurface.3G.xml">
+<!ENTITY gluOrtho2D.3G SYSTEM "gluOrtho2D.3G.xml">
+<!ENTITY gluPartialDisk.3G SYSTEM "gluPartialDisk.3G.xml">
+<!ENTITY gluPerspective.3G SYSTEM "gluPerspective.3G.xml">
+<!ENTITY gluPickMatrix.3G SYSTEM "gluPickMatrix.3G.xml">
+<!ENTITY gluProject.3G SYSTEM "gluProject.3G.xml">
+<!ENTITY gluPwlCurve.3G SYSTEM "gluPwlCurve.3G.xml">
+<!ENTITY gluQuadricCallback.3G SYSTEM "gluQuadricCallback.3G.xml">
+<!ENTITY gluQuadricDrawStyle.3G SYSTEM "gluQuadricDrawStyle.3G.xml">
+<!ENTITY gluQuadricNormals.3G SYSTEM "gluQuadricNormals.3G.xml">
+<!ENTITY gluQuadricOrientation.3G SYSTEM "gluQuadricOrientation.3G.xml">
+<!ENTITY gluQuadricTexture.3G SYSTEM "gluQuadricTexture.3G.xml">
+<!ENTITY gluScaleImage.3G SYSTEM "gluScaleImage.3G.xml">
+<!ENTITY gluSphere.3G SYSTEM "gluSphere.3G.xml">
+<!ENTITY gluTessBeginContour.3G SYSTEM "gluTessBeginContour.3G.xml">
+<!ENTITY gluTessBeginPolygon.3G SYSTEM "gluTessBeginPolygon.3G.xml">
+<!ENTITY gluTessCallback.3G SYSTEM "gluTessCallback.3G.xml">
+<!ENTITY gluTessEndPolygon.3G SYSTEM "gluTessEndPolygon.3G.xml">
+<!ENTITY gluTessNormal.3G SYSTEM "gluTessNormal.3G.xml">
+<!ENTITY gluTessProperty.3G SYSTEM "gluTessProperty.3G.xml">
+<!ENTITY gluTessVertex.3G SYSTEM "gluTessVertex.3G.xml">
+<!ENTITY gluUnProject.3G SYSTEM "gluUnProject.3G.xml">
+<!ENTITY gluUnProject4.3G SYSTEM "gluUnProject4.3G.xml">
+
+] >
+<reference>
+&gluBeginCurve.3G;
+&gluBeginPolygon.3G;
+&gluBeginSurface.3G;
+&gluBeginTrim.3G;
+&gluBuild1DMipmapLevels.3G;
+&gluBuild1DMipmaps.3G;
+&gluBuild2DMipmapLevels.3G;
+&gluBuild2DMipmaps.3G;
+&gluBuild3DMipmapLevels.3G;
+&gluBuild3DMipmaps.3G;
+&gluCheckExtension.3G;
+&gluCylinder.3G;
+&gluDeleteNurbsRenderer.3G;
+&gluDeleteQuadric.3G;
+&gluDeleteTess.3G;
+&gluDisk.3G;
+&gluErrorString.3G;
+&gluGetNurbsProperty.3G;
+&gluGetString.3G;
+&gluGetTessProperty.3G;
+&gluLoadSamplingMatrices.3G;
+&gluLookAt.3G;
+&gluNewNurbsRenderer.3G;
+&gluNewQuadric.3G;
+&gluNewTess.3G;
+&gluNextContour.3G;
+&gluNurbsCallback.3G;
+&gluNurbsCallbackData.3G;
+&gluNurbsCallbackDataEXT.3G;
+&gluNurbsCurve.3G;
+&gluNurbsProperty.3G;
+&gluNurbsSurface.3G;
+&gluOrtho2D.3G;
+&gluPartialDisk.3G;
+&gluPerspective.3G;
+&gluPickMatrix.3G;
+&gluProject.3G;
+&gluPwlCurve.3G;
+&gluQuadricCallback.3G;
+&gluQuadricDrawStyle.3G;
+&gluQuadricNormals.3G;
+&gluQuadricOrientation.3G;
+&gluQuadricTexture.3G;
+&gluScaleImage.3G;
+&gluSphere.3G;
+&gluTessBeginContour.3G;
+&gluTessBeginPolygon.3G;
+&gluTessCallback.3G;
+&gluTessEndPolygon.3G;
+&gluTessNormal.3G;
+&gluTessProperty.3G;
+&gluTessVertex.3G;
+&gluUnProject.3G;
+&gluUnProject4.3G;
+</reference>
