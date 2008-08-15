@@ -1,0 +1,100 @@
+<refentry id="glePolyCylinder.3GLE">
+	<refmeta id="glePolyCylinder.3GLE-meta">
+		<refentrytitle>glePolyCylinder</refentrytitle>
+		<manvolnum>3GLE</manvolnum>
+	</refmeta>
+	<refnamediv id="glePolyCylinder.3GLE-name">
+		<refname>glePolyCylinder</refname>
+		<refpurpose>Draw polycylinder, specified as a polyline.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glePolyCylinder.3GLE-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glePolyCylinder</function></funcdef>
+				<paramdef>int&nbsp;<parameter>npoints</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>point_array</parameter>[][3]</paramdef>
+				<paramdef>float&nbsp;<parameter>color_array</parameter>[][3]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>radius</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glePolyCylinder.3GLE-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>npoints</parameter></term>
+				<listitem>
+					<simpara>
+						numpoints in poly-line
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>point_array</parameter></term>
+				<listitem>
+					<simpara>
+						polyline vertices
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>color_array</parameter></term>
+				<listitem>
+					<simpara>
+						colors at polyline verts
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>radius</parameter></term>
+				<listitem>
+					<simpara>
+						cylinder radius
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glePolyCylinder.3GLE-description">
+		<title>Description</title>
+		<para>
+			Draw polycylinder, specified as a polyline. <para>
+				
+			</para> Note that neither the very first segment, nor the very last segment are drawn. The first and last segments
+			serve only to define the angle of the join at the very ends of the polyline. Thus, to draw one segment, three must be
+			specified. To draw two segments, four must be specified, etc.
+		</para>
+		<para>
+			The color array may be <constant>NULL</constant>. If <constant>NULL</constant>, the current color is used. If not
+			<constant>NULL</constant>, the <function moreinfo="refentry">glColor3f</function> routine is used to set the color;
+			therefore, specifying the <function moreinfo="refentry">glColorMaterial</function> subroutine before this primitive can
+			be used to set diffuse, specular, ambient, etc. colors.
+		</para>
+		<para>
+			By default, the cross-section of the cylinder is drawn as a 20-sided polygon. This number can be changed using the
+			<function moreinfo="refentry">gleSetNumSides</function> routine.
+		</para>
+	</refsect1>
+	<refsect1 id="glePolyCylinder.3GLE-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glePolyCone</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleSetNumSides</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+	<refsect1 id="glePolyCylinder.3GLE-author">
+		<title>Author</title>
+		<para>
+			Linas Vepstas
+		</para>
+	</refsect1>
+</refentry>

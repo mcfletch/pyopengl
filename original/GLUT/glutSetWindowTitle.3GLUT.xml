@@ -1,0 +1,63 @@
+<refentry id="glutSetWindowTitle.3GLUT">
+	<refmeta id="glutSetWindowTitle.3GLUT-meta">
+		<refentrytitle>glutSetWindowTitle</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSetWindowTitle.3GLUT-name">
+		<refname>glutSetWindowTitle</refname>
+		<refname>glutSetIconTitle</refname>
+		<refpurpose>change the window or icon title respectively of the current top-level window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSetWindowTitle.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSetWindowTitle</function></funcdef>
+				<paramdef>char&nbsp;*<parameter>name</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSetIconTitle</function></funcdef>
+				<paramdef>char&nbsp;*<parameter>name</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSetWindowTitle.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>name</parameter></term>
+				<listitem>
+					<simpara>
+						ASCII character string for the window or icon name to be set for the window.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSetWindowTitle.3GLUT-description">
+		<title>Description</title>
+		<para>
+			These routines should be called only when the current window is a top-level window. Upon creation of a top-level
+			window, the window and icon names are determined by the name parameter to <function
+			moreinfo="refentry">glutCreateWindow</function>. Once created, <function>glutSetWindowTitle</function> and
+			<function>glutSetIconTitle</function> can change the window and icon names respectively of top-level windows. Each call
+			requests the window system change the title appropriately. Requests are not buffered or coalesced. The policy by which
+			the window and icon name are displayed is window system dependent.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSetWindowTitle.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutIconifyWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,353 @@
+<refentry id="glLoadMatrix.3G">
+	<refmeta id="glLoadMatrix.3G-meta">
+		<refentrytitle>glLoadMatrix</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glLoadMatrix.3G-name">
+		<refname>glLoadMatrixd</refname>
+		<refname>glLoadMatrixf</refname>
+		<refpurpose>replace the current matrix with the specified matrix</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glLoadMatrix.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glLoadMatrixd</function></funcdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>m</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glLoadMatrixf</function></funcdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>m</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glLoadMatrix.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>m</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to 16 consecutive values, which are used as the elements of a <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mn>4</mml:mn>
+									<mml:mo>&times;</mml:mo>
+									<mml:mn>4</mml:mn>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> column-major matrix.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glLoadMatrix.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glLoadMatrix</function> replaces the current matrix with the one whose elements are
+			specified by <parameter>m</parameter>. The current matrix is the projection matrix, modelview matrix, or texture
+			matrix, depending on the current matrix mode (see <citerefentry>
+				<refentrytitle>glMatrixMode</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>).
+		</para>
+		<para>
+			The current matrix, M, defines a transformation of coordinates. For instance, assume M refers to the modelview matrix.
+			If <inlineequation>
+				<mml:math>
+						<mml:mi>v</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mfenced>
+							<mml:mrow>
+								<mml:mi>v</mml:mi>
+								<mml:mfenced open="[" close="]">
+									<mml:mn>0</mml:mn>
+								</mml:mfenced>
+							</mml:mrow>
+							<mml:mrow>
+								<mml:mi>v</mml:mi>
+								<mml:mfenced open="[" close="]">
+								<mml:mn>1</mml:mn>
+								</mml:mfenced>
+							</mml:mrow>
+							<mml:mrow>
+								<mml:mi>v</mml:mi>
+								<mml:mfenced open="[" close="]">
+								<mml:mn>2</mml:mn>
+								</mml:mfenced>
+							</mml:mrow>
+							<mml:mrow>
+								<mml:mi>v</mml:mi>
+								<mml:mfenced open="[" close="]">
+								<mml:mn>3</mml:mn>
+								</mml:mfenced>
+							</mml:mrow>
+						</mml:mfenced>
+				</mml:math>
+			</inlineequation> is the set of object coordinates of a vertex, and <parameter>m</parameter> points to an array of
+			<inlineequation>
+				<mml:math>
+					<mml:mn>16</mml:mn>
+				</mml:math>
+			</inlineequation> single- or double-precision floating-point values <inlineequation>
+				<mml:math>
+					<mml:mfenced open="" close="">
+							<mml:mrow>
+							<mml:mi>m</mml:mi>
+							<mml:mfenced open="[" close="]">
+							<mml:mn>0</mml:mn>
+							</mml:mfenced>
+							</mml:mrow>
+							<mml:mrow>
+							<mml:mi>m</mml:mi>
+							<mml:mfenced open="[" close="]">
+							<mml:mn>1</mml:mn>
+							</mml:mfenced>
+							</mml:mrow>
+							&hellip;
+							<mml:mrow>
+							<mml:mi>m</mml:mi>
+							<mml:mfenced open="[" close="]">
+							<mml:mn>15</mml:mn>
+							</mml:mfenced>
+							</mml:mrow>
+					</mml:mfenced>
+				</mml:math>
+			</inlineequation>, then the modelview transformation <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>M</mml:mi>
+						<mml:mfenced>
+						<mml:mi>v</mml:mi>
+						</mml:mfenced>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> does the following:
+		</para>
+		<para>
+			<informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:mi>M</mml:mi>
+						<mml:mfenced>
+						<mml:mi>v</mml:mi>
+						</mml:mfenced>
+						<mml:mo>=</mml:mo>
+								<mml:mfenced>
+								<mml:mtable>
+									<mml:mtr>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>0</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>4</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>8</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>12</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+									</mml:mtr>
+									<mml:mtr>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>1</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>5</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>9</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>13</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+									</mml:mtr>
+									<mml:mtr>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>2</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>6</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>10</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>14</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+									</mml:mtr>
+									<mml:mtr>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>3</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>7</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>11</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+										<mml:mtd columnalign="center">
+											<mml:mi>m</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>15</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+									</mml:mtr>
+								</mml:mtable>
+								</mml:mfenced>
+							<mml:mo>&times;</mml:mo>
+								<mml:mfenced>
+								<mml:mtable>
+									<mml:mtr>
+										<mml:mtd columnalign="center">
+											<mml:mi>v</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>0</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+									</mml:mtr>
+									<mml:mtr>
+										<mml:mtd columnalign="center">
+											<mml:mi>v</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>1</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+									</mml:mtr>
+									<mml:mtr>
+										<mml:mtd columnalign="center">
+											<mml:mi>v</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>2</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+									</mml:mtr>
+									<mml:mtr>
+										<mml:mtd columnalign="center">
+											<mml:mi>v</mml:mi>
+											<mml:mfenced open="[" close="]">
+											<mml:mn>3</mml:mn>
+											</mml:mfenced>
+										</mml:mtd>
+									</mml:mtr>
+								</mml:mtable>
+								</mml:mfenced>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>
+		</para>
+		<para>
+			Where "<inlineequation>
+				<mml:math>
+					<mml:mo>&times;</mml:mo>
+				</mml:math>
+			</inlineequation>" denotes matrix multiplication.
+		</para>
+		<para>
+			Projection and texture transformations are similarly defined.
+		</para>
+	</refsect1>
+	<refsect1 id="glLoadMatrix.3G-notes">
+		<title>Notes</title>
+		<para>
+			While the elements of the matrix may be specified with single or double precision, the GL implementation may store or
+			operate on these values in less than single precision.
+		</para>
+	</refsect1>
+	<refsect1 id="glLoadMatrix.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function moreinfo="refentry">glLoadMatrix</function> is
+			executed between the execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of
+			<function moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glLoadMatrix.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MATRIX_MODE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_COLOR_MATRIX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MODELVIEW_MATRIX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PROJECTION_MATRIX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_TEXTURE_MATRIX</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glLoadMatrix.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glLoadIdentity</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMatrixMode</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMultMatrix</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPushMatrix</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

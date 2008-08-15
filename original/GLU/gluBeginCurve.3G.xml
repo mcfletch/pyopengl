@@ -1,0 +1,92 @@
+<refentry id="gluBeginCurve.3G">
+	<refmeta id="gluBeginCurve.3G-meta">
+		<refentrytitle>gluBeginCurve</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluBeginCurve.3G-name">
+		<refname>gluBeginCurve</refname>
+		<refname>gluEndCurve</refname>
+		<refpurpose>delimit a NURBS curve definition</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluBeginCurve.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluBeginCurve</function></funcdef>
+				<paramdef>GLUnurbs&nbsp;*<parameter>nurb</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluEndCurve</function></funcdef>
+				<paramdef>GLUnurbs&nbsp;*<parameter>nurb</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluBeginCurve.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>nurb</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the NURBS object (created with <function moreinfo="refentry">gluNewNurbsRenderer</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluBeginCurve.3G-description">
+		<title>Description</title>
+		<para>
+			Use <function>gluBeginCurve</function> to mark the beginning of a NURBS curve definition. After calling
+			<function>gluBeginCurve</function>, make one or more calls to <function moreinfo="refentry">gluNurbsCurve</function> to
+			define the attributes of the curve. Exactly one of the calls to <function moreinfo="refentry">gluNurbsCurve</function>
+			must have a curve type of <constant>GL_MAP1_VERTEX_3</constant> or <constant>GL_MAP1_VERTEX_4</constant>. To mark the
+			end of the NURBS curve definition, call <function>gluEndCurve</function>.
+		</para>
+		<para>
+			GL evaluators are used to render the NURBS curve as a series of line segments. Evaluator state is preserved during
+			rendering with <function moreinfo="refentry">glPushAttrib</function>(<constant>GL_EVAL_BIT</constant>) and <function
+			moreinfo="refentry">glPopAttrib</function>(). See the <function moreinfo="refentry">glPushAttrib</function> reference
+			page for details on exactly what state these calls preserve.
+		</para>
+	</refsect1>
+	<refsect1 id="gluBeginCurve.3G-example">
+		<title>Example</title>
+		<para>
+			The following commands render a textured NURBS curve with normals; texture coordinates and normals are also specified
+			as NURBS curves:
+		</para>
+		<programlisting>gluBeginCurve(nobj);
+gluNurbsCurve(nobj, ..., GL_MAP1_TEXTURE_COORD_2);
+gluNurbsCurve(nobj, ..., GL_MAP1_NORMAL);
+gluNurbsCurve(nobj, ..., GL_MAP1_VERTEX_4);
+gluEndCurve(nobj);</programlisting>
+	</refsect1>
+	<refsect1 id="gluBeginCurve.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluBeginSurface</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluBeginTrim</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNewNurbsRenderer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNurbsCurve</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPushAttrib</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

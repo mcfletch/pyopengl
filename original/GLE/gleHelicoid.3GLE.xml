@@ -1,0 +1,133 @@
+<refentry id="gleHelicoid.3GLE">
+	<refmeta id="gleHelecoid.3GLE-meta">
+		<refentrytitle>gleHelicoid</refentrytitle>
+		<manvolnum>3GLE</manvolnum>
+	</refmeta>
+	<refnamediv id="gleHelicoid.3GLE-name">
+		<refname>gleHelicoid</refname>
+		<refpurpose>Generalized torus, spiral with circle contour.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gleHelicoid.3GLE-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gleHelicoid</function></funcdef>
+				<paramdef>gleDouble&nbsp;<parameter>rToroid</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>up</parameter>[3]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>startRadius</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>drdTheta</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>startZ</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>dzdTheta</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>startXform</parameter>[2][3]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>dXformdTheta</parameter>[2][3]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>startTheta</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>sweepTheta</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gleHelicoid.3GLE-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>rToroid</parameter></term>
+				<listitem>
+					<simpara>
+						circle contour (torus) radius
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>startRadius</parameter></term>
+				<listitem>
+					<simpara>
+						spiral starts in x-y plane
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>drdTheta</parameter></term>
+				<listitem>
+					<simpara>
+						change in radius per revolution
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>startZ</parameter></term>
+				<listitem>
+					<simpara>
+						starting z value
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>dzdTheta</parameter></term>
+				<listitem>
+					<simpara>
+						change in Z per revolution
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>startXform</parameter></term>
+				<listitem>
+					<simpara>
+						starting contour affine transformation
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>dXformdTheta</parameter></term>
+				<listitem>
+					<simpara>
+						tangent change xform per revolution
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>startTheta</parameter></term>
+				<listitem>
+					<simpara>
+						start angle in x-y plane
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>sweepTheta</parameter></term>
+				<listitem>
+					<simpara>
+						degrees to spiral around
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gleHelicoid.3GLE-description">
+		<title>Description</title>
+		<para>
+			Generalized Torus. Similar to <function moreinfo="refentry">gleSpiral</function>, except contour is a circle. Uses
+			<function moreinfo="refentry">gleSpiral</function> to draw.
+		</para>
+	</refsect1>
+	<refsect1 id="gleHelicoid.3GLE-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gleSpiral</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleToroid</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+	<refsect1 id="gleHelicoid.3GLE-author">
+		<title>Author</title>
+		<para>
+			Linas Vepstas
+		</para>
+	</refsect1>
+</refentry>

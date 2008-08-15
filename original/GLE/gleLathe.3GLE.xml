@@ -1,0 +1,160 @@
+<refentry id="gleLathe.3GLE">
+	<refmeta id="gleLathe.3GLE-meta">
+		<refentrytitle>gleLathe</refentrytitle>
+		<manvolnum>3GLE</manvolnum>
+	</refmeta>
+	<refnamediv id="gleLathe.3GLE-name">
+		<refname>gleLathe</refname>
+		<refpurpose>Sweep using a Z-axis shear to create an arbitrary contour along a helical path.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gleLathe.3GLE-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gleLathe</function></funcdef>
+				<paramdef>int&nbsp;<parameter>ncp</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>contour</parameter>[][2]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>cont_normal</parameter>[][2]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>up</parameter>[3]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>startRadius</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>drdTheta</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>startZ</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>dzdTheta</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>startXform</parameter>[2][3]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>dXformdTheta</parameter>[2][3]</paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>startTheta</parameter></paramdef>
+				<paramdef>gleDouble&nbsp;<parameter>sweepTheta</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gleLathe.3GLE-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>ncp</parameter></term>
+				<listitem>
+					<simpara>
+						number of contour points
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>contour</parameter></term>
+				<listitem>
+					<simpara>
+						2D contour
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>cont_normal</parameter></term>
+				<listitem>
+					<simpara>
+						2D contour normals
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>up</parameter></term>
+				<listitem>
+					<simpara>
+						up vector for contour
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>startRadius</parameter></term>
+				<listitem>
+					<simpara>
+						spiral starts in x-y plane
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>drdTheta</parameter></term>
+				<listitem>
+					<simpara>
+						change in radius per revolution
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>startZ</parameter></term>
+				<listitem>
+					<simpara>
+						starting z value
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>dzdTheta</parameter></term>
+				<listitem>
+					<simpara>
+						change in Z per revolution
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>startXform</parameter></term>
+				<listitem>
+					<simpara>
+						starting contour affine transformation
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>dXformdTheta</parameter></term>
+				<listitem>
+					<simpara>
+						tangent change xform per revolution
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>startTheta</parameter></term>
+				<listitem>
+					<simpara>
+						start angle in x-y plane
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>sweepTheta</parameter></term>
+				<listitem>
+					<simpara>
+						degrees to spiral around
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gleLathe.3GLE-description">
+		<title>Description</title>
+		<para>
+			Sweep an arbitrary contour along a helical path. The sweep will be performed as a shear along the z-axis, so that the
+			orientation of the contour is displaced, rather than translated, as the contour is swept.
+		</para>
+		<para>
+			The axis of the helix lies along the modeling coordinate z-axis.
+		</para>
+		<para>
+			An affine transform can be applied as the contour is swept. For most ordinary usage, the affines should be given as
+			<constant>NULL</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="gleLathe.3GLE-see_also">
+		<title>See Also</title>
+		<para>
+			<citerefentry>
+				<refentrytitle>gleSpiral</refentrytitle>
+				<manvolnum>3GLE</manvolnum>
+			</citerefentry>
+		</para>
+	</refsect1>
+	<refsect1 id="gleLathe.3GLE-author">
+		<title>Author</title>
+		<para>
+			Linas Vepstas
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,189 @@
+<refentry id="glGetConvolutionParameter.3G">
+	<refmeta id="glGetConvolutionParameter.3G-meta">
+		<refentrytitle>glGetConvolutionParameter</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glGetConvolutionParameter.3G-name">
+		<refname>glGetConvolutionParameterfv</refname>
+		<refname>glGetConvolutionParameteriv</refname>
+		<refpurpose>get convolution parameters</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glGetConvolutionParameter.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetConvolutionParameterfv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;*<parameter>params</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetConvolutionParameteriv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLint&nbsp;*<parameter>params</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glGetConvolutionParameter.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>target</parameter></term>
+				<listitem>
+					<simpara>
+						The filter whose parameters are to be retrieved. Must be one of <constant>GL_CONVOLUTION_1D</constant>,
+						<constant>GL_CONVOLUTION_2D</constant>, or <constant>GL_SEPARABLE_2D</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>pname</parameter></term>
+				<listitem>
+					<simpara>
+						The parameter to be retrieved. Must be one of <constant>GL_CONVOLUTION_BORDER_MODE</constant>,
+						<constant>GL_CONVOLUTION_BORDER_COLOR</constant>, <constant>GL_CONVOLUTION_FILTER_SCALE</constant>,
+						<constant>GL_CONVOLUTION_FILTER_BIAS</constant>, <constant>GL_CONVOLUTION_FORMAT</constant>,
+						<constant>GL_CONVOLUTION_WIDTH</constant>, <constant>GL_CONVOLUTION_HEIGHT</constant>,
+						<constant>GL_MAX_CONVOLUTION_WIDTH</constant>, or <constant>GL_MAX_CONVOLUTION_HEIGHT</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>params</parameter></term>
+				<listitem>
+					<simpara>
+						Pointer to storage for the parameters to be retrieved.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glGetConvolutionParameter.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glGetConvolutionParameter</function> retrieves convolution parameters.
+			<parameter>target</parameter> determines which convolution filter is queried. <parameter>pname</parameter> determines
+			which parameter is returned:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_CONVOLUTION_BORDER_MODE</constant></term>
+				<listitem>
+					<simpara>
+						The convolution border mode. See <function moreinfo="refentry">glConvolutionParameter</function> for a list
+						of border modes.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_CONVOLUTION_BORDER_COLOR</constant></term>
+				<listitem>
+					<simpara>
+						The current convolution border color. <parameter>params</parameter> must be a pointer to an array of four
+						elements, which will receive the red, green, blue, and alpha border colors.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_CONVOLUTION_FILTER_SCALE</constant></term>
+				<listitem>
+					<simpara>
+						The current filter scale factors. <parameter>params</parameter> must be a pointer to an array of four
+						elements, which will receive the red, green, blue, and alpha filter scale factors in that order.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_CONVOLUTION_FILTER_BIAS</constant></term>
+				<listitem>
+					<simpara>
+						The current filter bias factors. <parameter>params</parameter> must be a pointer to an array of four
+						elements, which will receive the red, green, blue, and alpha filter bias terms in that order.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_CONVOLUTION_FORMAT</constant></term>
+				<listitem>
+					<simpara>
+						The current internal . See <function moreinfo="refentry">glConvolutionFilter1D</function>, <function
+						moreinfo="refentry">glConvolutionFilter2D</function>, and <function
+						moreinfo="refentry">glSeparableFilter2D</function> for lists of allowable formats.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_CONVOLUTION_WIDTH</constant></term>
+				<listitem>
+					<simpara>
+						The current filter image width.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_CONVOLUTION_HEIGHT</constant></term>
+				<listitem>
+					<simpara>
+						The current filter image height.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_MAX_CONVOLUTION_WIDTH</constant></term>
+				<listitem>
+					<simpara>
+						The maximum acceptable filter image width.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_MAX_CONVOLUTION_HEIGHT</constant></term>
+				<listitem>
+					<simpara>
+						The maximum acceptable filter image height.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glGetConvolutionParameter.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not one of the allowable values.
+		</para>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>pname</parameter> is not one of the allowable values.
+		</para>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is
+			<constant>GL_CONVOLUTION_1D</constant> and <parameter>pname</parameter> is <constant>GL_CONVOLUTION_HEIGHT</constant>
+			or <constant>GL_MAX_CONVOLUTION_HEIGHT</constant>.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function
+			moreinfo="refentry">glGetConvolutionParameter</function> is executed between the execution of <function
+			moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetConvolutionParameter.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glGetConvolutionFilter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetSeparableFilter2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glConvolutionParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

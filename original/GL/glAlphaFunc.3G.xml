@@ -1,0 +1,197 @@
+<refentry id="glAlphaFunc.3G">
+	<refmeta id="glAlphaFunc.3G-meta">
+		<refentrytitle>glAlphaFunc</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glAlphaFunc.3G-name">
+		<refname>glAlphaFunc</refname>
+		<refpurpose>specify the alpha test function</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glAlphaFunc.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glAlphaFunc</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>func</parameter></paramdef>
+				<paramdef>GLclampf&nbsp;<parameter>ref</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glAlphaFunc.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the alpha comparison function. Symbolic constants <constant>GL_NEVER</constant>,
+						<constant>GL_LESS</constant>, <constant>GL_EQUAL</constant>, <constant>GL_LEQUAL</constant>,
+						<constant>GL_GREATER</constant>, <constant>GL_NOTEQUAL</constant>, <constant>GL_GEQUAL</constant>, and
+						<constant>GL_ALWAYS</constant> are accepted. The initial value is <constant>GL_ALWAYS</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>ref</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the reference value that incoming alpha values are compared to. This value is clamped to the
+						range <inlineequation>
+							<mml:math>
+								<mml:mfenced open="[" close="]">
+									<mml:mn>0</mml:mn>
+									<mml:mn>1</mml:mn>
+								</mml:mfenced>
+							</mml:math>
+						</inlineequation>, where 0 represents the lowest possible alpha value and 1 the highest possible value. The
+						initial reference value is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glAlphaFunc.3G-description">
+		<title>Description</title>
+		<para>
+			The alpha test discards fragments depending on the outcome of a comparison between an incoming fragment's alpha value
+			and a constant reference value. <function>glAlphaFunc</function> specifies the reference value and the comparison
+			function. The comparison is performed only if alpha testing is enabled. By default, it is not enabled. (See <function
+			moreinfo="refentry">glEnable</function> and <function moreinfo="refentry">glDisable</function> of
+			<constant>GL_ALPHA_TEST</constant>.)
+		</para>
+		<para>
+			<parameter>func</parameter> and <parameter>ref</parameter> specify the conditions under which the pixel is drawn. The
+			incoming alpha value is compared to <parameter>ref</parameter> using the function specified by
+			<parameter>func</parameter>. If the value passes the comparison, the incoming fragment is drawn if it also passes
+			subsequent stencil and depth buffer tests. If the value fails the comparison, no change is made to the frame buffer at
+			that pixel location. The comparison functions are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_NEVER</constant></term>
+				<listitem>
+					<simpara>
+						Never passes.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_LESS</constant></term>
+				<listitem>
+					<simpara>
+						Passes if the incoming alpha value is less than the reference value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_EQUAL</constant></term>
+				<listitem>
+					<simpara>
+						Passes if the incoming alpha value is equal to the reference value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_LEQUAL</constant></term>
+				<listitem>
+					<simpara>
+						Passes if the incoming alpha value is less than or equal to the reference value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_GREATER</constant></term>
+				<listitem>
+					<simpara>
+						Passes if the incoming alpha value is greater than the reference value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_NOTEQUAL</constant></term>
+				<listitem>
+					<simpara>
+						Passes if the incoming alpha value is not equal to the reference value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_GEQUAL</constant></term>
+				<listitem>
+					<simpara>
+						Passes if the incoming alpha value is greater than or equal to the reference value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_ALWAYS</constant></term>
+				<listitem>
+					<simpara>
+						Always passes (initial value).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			<function>glAlphaFunc</function> operates on all pixel write operations, including those resulting from the scan
+			conversion of points, lines, polygons, and bitmaps, and from pixel draw and copy operations.
+			<function>glAlphaFunc</function> does not affect screen clear operations.
+		</para>
+	</refsect1>
+	<refsect1 id="glAlphaFunc.3G-notes">
+		<title>Notes</title>
+		<para>
+			Alpha testing is performed only in RGBA mode.
+		</para>
+	</refsect1>
+	<refsect1 id="glAlphaFunc.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>func</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glAlphaFunc</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glAlphaFunc.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_ALPHA_TEST_FUNC</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_ALPHA_TEST_REF</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glIsEnabled</function> with argument <constant>GL_ALPHA_TEST</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glAlphaFunc.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glBlendFunc</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glClear</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDepthFunc</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEnable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glStencilFunc</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

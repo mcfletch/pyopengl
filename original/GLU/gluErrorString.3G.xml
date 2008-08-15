@@ -1,0 +1,75 @@
+<refentry id="gluErrorString.3G">
+	<refmeta id="gluErrorString.3G-meta">
+		<refentrytitle>gluErrorString</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluErrorString.3G-name">
+		<refname>gluErrorString</refname>
+		<refpurpose>produce an error string from a GL or GLU error code</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluErrorString.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>const&nbsp;GLubyte&nbsp;*<function>gluErrorString</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>error</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluErrorString.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>error</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a GL or GLU error code.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluErrorString.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluErrorString</function> produces an error string from a GL or GLU error code. The string is in ISO Latin 1
+			format. For example, <function>gluErrorString</function>(<constant>GL_OUT_OF_MEMORY</constant>) returns the string
+			<parameter>out of memory</parameter>.
+		</para>
+		<para>
+			The standard GLU error codes are <constant>GLU_INVALID_ENUM</constant>, <constant>GLU_INVALID_VALUE</constant>, and
+			<constant>GLU_OUT_OF_MEMORY</constant>. Certain other GLU functions can return specialized error codes through
+			callbacks. See the <function moreinfo="refentry">glGetError</function> reference page for the list of GL error codes.
+		</para>
+	</refsect1>
+	<refsect1 id="gluErrorString.3G-errors">
+		<title>Errors</title>
+		<para>
+			<parameter role="bold"><constant>NULL</constant></parameter> is returned if <parameter>error</parameter> is not a valid
+			GL or GLU error code.
+		</para>
+	</refsect1>
+	<refsect1 id="gluErrorString.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glGetError</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNurbsCallback</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricCallback</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessCallback</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

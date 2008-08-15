@@ -1,0 +1,601 @@
+<refentry id="glCopyPixels.3G">
+	<refmeta id="glCopyPixels.3G-meta">
+		<refentrytitle>glCopyPixels</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glCopyPixels.3G-name">
+		<refname>glCopyPixels</refname>
+		<refpurpose>copy pixels in the frame buffer</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glCopyPixels.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glCopyPixels</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>x</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>y</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>width</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>height</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>type</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glCopyPixels.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>x</parameter>, <parameter>y</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the window coordinates of the lower left corner of the rectangular region of pixels to be copied.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>width</parameter>, <parameter>height</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the dimensions of the rectangular region of pixels to be copied. Both must be nonnegative.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>type</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies whether color values, depth values, or stencil values are to be copied. Symbolic constants
+						<constant>GL_COLOR</constant>, <constant>GL_DEPTH</constant>, and <constant>GL_STENCIL</constant> are
+						accepted.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glCopyPixels.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glCopyPixels</function> copies a screen-aligned rectangle of pixels from the specified frame buffer location
+			to a region relative to the current raster position. Its operation is well defined only if the entire pixel source
+			region is within the exposed portion of the window. Results of copies from outside the window, or from regions of the
+			window that are not exposed, are hardware dependent and undefined.
+		</para>
+		<para>
+			<parameter>x</parameter> and <parameter>y</parameter> specify the window coordinates of the lower left corner of the
+			rectangular region to be copied. <parameter>width</parameter> and <parameter>height</parameter> specify the dimensions
+			of the rectangular region to be copied. Both <parameter>width</parameter> and <parameter>height</parameter> must not be
+			negative.
+		</para>
+		<para>
+			Several parameters control the processing of the pixel data while it is being copied. These parameters are set with
+			three commands: <function moreinfo="refentry">glPixelTransfer</function>, <function
+			moreinfo="refentry">glPixelMap</function>, and <function moreinfo="refentry">glPixelZoom</function>. This reference
+			page describes the effects on <function>glCopyPixels</function> of most, but not all, of the parameters specified by
+			these three commands.
+		</para>
+		<para>
+			<function>glCopyPixels</function> copies values from each pixel with the lower left-hand corner at <inlineequation>
+				<mml:math>
+					<mml:mfenced>
+						<mml:mrow>
+							<mml:mi>x</mml:mi>
+							<mml:mo>+</mml:mo>
+							<mml:mi>i</mml:mi>
+						</mml:mrow>
+						<mml:mrow>
+							<mml:mi>y</mml:mi>
+							<mml:mo>+</mml:mo>
+							<mml:mi>j</mml:mi>
+						</mml:mrow>
+					</mml:mfenced>
+				</mml:math>
+			</inlineequation> for <inlineequation>
+				<mml:math>
+					<mml:mn>0</mml:mn>
+					<mml:mo>&le;</mml:mo>
+					<mml:mi>i</mml:mi>
+					<mml:mo>&lt;</mml:mo>
+					<mml:mi>width</mml:mi>
+				</mml:math>
+			</inlineequation> and <inlineequation>
+				<mml:math>
+					<mml:mn>0</mml:mn>
+					<mml:mo>&le;</mml:mo>
+					<mml:mi>j</mml:mi>
+					<mml:mo>&lt;</mml:mo>
+					<mml:mi>height</mml:mi>
+				</mml:math>
+			</inlineequation>. This pixel is said to be the <inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation>th pixel in the <inlineequation>
+				<mml:math>
+					<mml:mi>j</mml:mi>
+					<mml:mtext>th</mml:mtext>
+				</mml:math>
+			</inlineequation> row. Pixels are copied in row order from the lowest to the highest row, left to right in each row.
+		</para>
+		<para>
+			<parameter>type</parameter> specifies whether color, depth, or stencil data is to be copied. The details of the
+			transfer for each data type are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_COLOR</constant></term>
+				<listitem>
+					<simpara>
+						Indices or RGBA colors are read from the buffer currently specified as the read source buffer (see
+						<citerefentry>
+							<refentrytitle>glReadBuffer</refentrytitle>
+							<manvolnum>3G</manvolnum>
+						</citerefentry>). If the GL is in color index mode, each index that is read from this buffer is converted
+						to a fixed-point with an unspecified number of bits to the right of the binary point. Each index is then
+						shifted left by <constant>GL_INDEX_SHIFT</constant> bits, and added to
+						<constant>GL_INDEX_OFFSET</constant>. If <constant>GL_INDEX_SHIFT</constant> is negative, the shift is to
+						the right. In either case, zero bits fill otherwise unspecified bit locations in the result. If
+						<constant>GL_MAP_COLOR</constant> is true, the index is replaced with the value that it references in
+						lookup table <constant>GL_PIXEL_MAP_I_TO_I</constant>. Whether the lookup replacement of the index is done
+						or not, the integer part of the index is then ANDed with <inlineequation>
+							<mml:math>
+								<mml:msup>
+									<mml:mn>2</mml:mn>
+									<mml:mi>b</mml:mi>
+								</mml:msup>
+								<mml:mo>-</mml:mo>
+								<mml:mn>1</mml:mn>
+							</mml:math>
+						</inlineequation>, where <inlineequation>
+							<mml:math>
+								<mml:mi>b</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of bits in a color index buffer.
+					</simpara>
+					<simpara>
+						If the GL is in RGBA mode, the red, green, blue, and alpha components of each pixel that is read are
+						converted to an internal floating-point with unspecified precision. The conversion maps the largest
+						representable component value to 1.0, and component value 0 to 0.0. The resulting floating-point color
+						values are then multiplied by <constant>GL_c_SCALE</constant> and added to <constant>GL_c_BIAS</constant>,
+						where <parameter>c</parameter> is RED, GREEN, BLUE, and ALPHA for the respective color components. The
+						results are clamped to the range [0,1]. If <constant>GL_MAP_COLOR</constant> is true, each color component
+						is scaled by the size of lookup table <constant>GL_PIXEL_MAP_c_TO_c</constant>, then replaced by the value
+						that it references in that table. <parameter>c</parameter> is R, G, B, or A.
+					</simpara>
+					<simpara>
+						If the <constant>GL_ARB_imaging</constant> extension is supported, the color values may be additionally
+						processed by color-table lookups, color-matrix transformations, and convolution filters.
+					</simpara>
+					<simpara>
+						The GL then converts the resulting indices or RGBA colors to fragments by attaching the current raster
+						position <parameter>z</parameter> coordinate and texture coordinates to each pixel, then assigning window
+						coordinates <inlineequation>
+							<mml:math>
+								<mml:mfenced>
+									<mml:mrow>
+										<mml:msub>
+											<mml:mi>x</mml:mi>
+											<mml:mi>r</mml:mi>
+										</mml:msub>
+										<mml:mo>+</mml:mo>
+										<mml:mi>i</mml:mi>
+									</mml:mrow>
+									<mml:mrow>
+										<mml:msub>
+											<mml:mi>y</mml:mi>
+											<mml:mi>r</mml:mi>
+										</mml:msub>
+										<mml:mo>+</mml:mo>
+										<mml:mi>j</mml:mi>
+									</mml:mrow>
+								</mml:mfenced>
+							</mml:math>
+						</inlineequation>, where <inlineequation>
+							<mml:math>
+								<mml:mfenced>
+									<mml:msub>
+										<mml:mi>x</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+									<mml:msub>
+										<mml:mi>y</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+								</mml:mfenced>
+							</mml:math>
+						</inlineequation> is the current raster position, and the pixel was the <inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation>th pixel in the <inlineequation>
+							<mml:math>
+								<mml:mi>j</mml:mi>
+							</mml:math>
+						</inlineequation>th row. These pixel fragments are then treated just like the fragments generated by
+						rasterizing points, lines, or polygons. Texture mapping, fog, and all the fragment operations are applied
+						before the fragments are written to the frame buffer.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_DEPTH</constant></term>
+				<listitem>
+					<simpara>
+						Depth values are read from the depth buffer and converted directly to an internal floating-point with
+						unspecified precision. The resulting floating-point depth value is then multiplied by
+						<constant>GL_DEPTH_SCALE</constant> and added to <constant>GL_DEPTH_BIAS</constant>. The result is clamped
+						to the range [0,1].
+					</simpara>
+					<simpara>
+						The GL then converts the resulting depth components to fragments by attaching the current raster position
+						color or color index and texture coordinates to each pixel, then assigning window coordinates
+						<inlineequation>
+							<mml:math>
+								<mml:mfenced>
+									<mml:mrow>
+										<mml:msub>
+											<mml:mi>x</mml:mi>
+											<mml:mi>r</mml:mi>
+										</mml:msub>
+										<mml:mo>+</mml:mo>
+										<mml:mi>i</mml:mi>
+									</mml:mrow>
+									<mml:mrow>
+										<mml:msub>
+											<mml:mi>y</mml:mi>
+											<mml:mi>r</mml:mi>
+										</mml:msub>
+										<mml:mo>+</mml:mo>
+										<mml:mi>j</mml:mi>
+									</mml:mrow>
+								</mml:mfenced>
+							</mml:math>
+						</inlineequation>, where <inlineequation>
+							<mml:math>
+								<mml:mfenced>
+									<mml:msub>
+										<mml:mi>x</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+									<mml:msub>
+										<mml:mi>y</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+								</mml:mfenced>
+							</mml:math>
+						</inlineequation> is the current raster position, and the pixel was the <inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation>th pixel in the <inlineequation>
+							<mml:math>
+								<mml:mi>j</mml:mi>
+							</mml:math>
+						</inlineequation>th row. These pixel fragments are then treated just like the fragments generated by
+						rasterizing points, lines, or polygons. Texture mapping, fog, and all the fragment operations are applied
+						before the fragments are written to the frame buffer.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_STENCIL</constant></term>
+				<listitem>
+					<simpara>
+						Stencil indices are read from the stencil buffer and converted to an internal fixed-point with an
+						unspecified number of bits to the right of the binary point. Each fixed-point index is then shifted left by
+						<constant>GL_INDEX_SHIFT</constant> bits, and added to <constant>GL_INDEX_OFFSET</constant>. If
+						<constant>GL_INDEX_SHIFT</constant> is negative, the shift is to the right. In either case, zero bits fill
+						otherwise unspecified bit locations in the result. If <constant>GL_MAP_STENCIL</constant> is true, the
+						index is replaced with the value that it references in lookup table
+						<constant>GL_PIXEL_MAP_S_TO_S</constant>. Whether the lookup replacement of the index is done or not, the
+						integer part of the index is then ANDed with <inlineequation>
+							<mml:math>
+								<mml:msup>
+									<mml:mn>2</mml:mn>
+									<mml:mi>b</mml:mi>
+								</mml:msup>
+								<mml:mo>-</mml:mo>
+								<mml:mn>1</mml:mn>
+							</mml:math>
+						</inlineequation>, where <inlineequation>
+							<mml:math>
+								<mml:mi>b</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of bits in the stencil buffer. The resulting stencil indices are then
+						written to the stencil buffer such that the index read from the <inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation>th location of the <inlineequation>
+							<mml:math>
+								<mml:mi>j</mml:mi>
+							</mml:math>
+						</inlineequation>th row is written to location <inlineequation>
+							<mml:math>
+								<mml:mfenced>
+									<mml:mrow>
+										<mml:msub>
+											<mml:mi>x</mml:mi>
+											<mml:mi>r</mml:mi>
+										</mml:msub>
+										<mml:mo>+</mml:mo>
+										<mml:mi>i</mml:mi>
+									</mml:mrow>
+									<mml:mrow>
+										<mml:msub>
+											<mml:mi>y</mml:mi>
+											<mml:mi>r</mml:mi>
+										</mml:msub>
+										<mml:mo>+</mml:mo>
+										<mml:mi>j</mml:mi>
+									</mml:mrow>
+								</mml:mfenced>
+							</mml:math>
+						</inlineequation>, where <inlineequation>
+							<mml:math>
+								<mml:mfenced>
+									<mml:msub>
+										<mml:mi>x</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+									<mml:msub>
+										<mml:mi>y</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+								</mml:mfenced>
+							</mml:math>
+						</inlineequation> is the current raster position. Only the pixel ownership test, the scissor test, and the
+						stencil writemask affect these write operations.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			The rasterization described thus far assumes pixel zoom factors of 1.0. If
+		</para>
+		<para>
+			<function moreinfo="refentry">glPixelZoom</function> is used to change the <inlineequation>
+				<mml:math>
+					<mml:mi>x</mml:mi>
+				</mml:math>
+			</inlineequation> and <inlineequation>
+				<mml:math>
+					<mml:mi>y</mml:mi>
+				</mml:math>
+			</inlineequation> pixel zoom factors, pixels are converted to fragments as follows. If <inlineequation>
+				<mml:math>
+					<mml:mfenced>
+						<mml:msub>
+							<mml:mi>x</mml:mi>
+							<mml:mi>r</mml:mi>
+						</mml:msub>
+						<mml:msub>
+							<mml:mi>y</mml:mi>
+							<mml:mi>r</mml:mi>
+						</mml:msub>
+					</mml:mfenced>
+				</mml:math>
+			</inlineequation>) is the current raster position, and a given pixel is in the <inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation>th location in the <inlineequation>
+				<mml:math>
+					<mml:mi>j</mml:mi>
+				</mml:math>
+			</inlineequation>th row of the source pixel rectangle, then fragments are generated for pixels whose centers are in the
+			rectangle with corners at
+		</para>
+		<informalequation>
+			<mml:math>
+				<mml:mtable>
+					<mml:mtr>
+						<mml:mtd>
+							<mml:mfenced>
+								<mml:mrow>
+									<mml:msub>
+										<mml:mi>x</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+									<mml:mo>+</mml:mo>
+									<mml:msub>
+										<mml:mi>zoom</mml:mi>
+										<mml:mi>x</mml:mi>
+									</mml:msub>
+									<mml:mi>i</mml:mi>
+								</mml:mrow>
+								<mml:mrow>
+									<mml:msub>
+										<mml:mi>y</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+									<mml:mo>+</mml:mo>
+									<mml:msub>
+										<mml:mi>zoom</mml:mi>
+										<mml:mi>y</mml:mi>
+									</mml:msub>
+									<mml:mi>j</mml:mi>
+								</mml:mrow>
+							</mml:mfenced>
+						</mml:mtd>
+					</mml:mtr>
+					<mml:mtr>
+						<mml:mtd>
+							<mml:mtext>and</mml:mtext>
+						</mml:mtd>
+					</mml:mtr>
+					<mml:mtr>
+						<mml:mtd>
+							<mml:mfenced>
+								<mml:mrow>
+									<mml:msub>
+										<mml:mi>x</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+									<mml:mo>+</mml:mo>
+									<mml:msub>
+										<mml:mi>zoom</mml:mi>
+										<mml:mi>x</mml:mi>
+									</mml:msub>
+									<mml:mfenced>
+										<mml:mrow>
+											<mml:mi>i</mml:mi>
+											<mml:mo>+</mml:mo>
+											<mml:mn>1</mml:mn>
+										</mml:mrow>
+									</mml:mfenced>
+								</mml:mrow>
+								<mml:mrow>
+									<mml:msub>
+										<mml:mi>y</mml:mi>
+										<mml:mi>r</mml:mi>
+									</mml:msub>
+									<mml:mo>+</mml:mo>
+									<mml:msub>
+										<mml:mi>zoom</mml:mi>
+										<mml:mi>y</mml:mi>
+									</mml:msub>
+									<mml:mfenced>
+										<mml:mrow>
+											<mml:mi>j</mml:mi>
+											<mml:mo>+</mml:mo>
+											<mml:mn>1</mml:mn>
+										</mml:mrow>
+									</mml:mfenced>
+								</mml:mrow>
+							</mml:mfenced>
+						</mml:mtd>
+					</mml:mtr>
+				</mml:mtable>
+			</mml:math>
+		</informalequation>
+		<para>
+			where <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>zoom</mml:mi>
+						<mml:mi>x</mml:mi>
+					</mml:msub>
+				</mml:math>
+			</inlineequation> is the value of <constant>GL_ZOOM_X</constant> and <inlineequation>
+				<mml:math>
+					<mml:msub>
+						<mml:mi>zoom</mml:mi>
+						<mml:mi>y</mml:mi>
+					</mml:msub>
+				</mml:math>
+			</inlineequation> is the value of <constant>GL_ZOOM_Y</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glCopyPixels.3G-examples">
+		<title>Examples</title>
+		<para>
+			To copy the color pixel in the lower left corner of the window to the current raster position, use
+		</para>
+		<programlisting>glCopyPixels(0, 0, 1, 1, GL_COLOR);</programlisting>
+	</refsect1>
+	<refsect1 id="glCopyPixels.3G-notes">
+		<title>Notes</title>
+		<para>
+			Modes specified by <function moreinfo="refentry">glPixelStore</function> have no effect on the operation of
+			<function>glCopyPixels</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glCopyPixels.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>type</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if either <parameter>width</parameter> or
+			<parameter>height</parameter> is negative.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <parameter>type</parameter> is <constant>GL_DEPTH</constant>
+			and there is no depth buffer.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <parameter>type</parameter> is
+			<constant>GL_STENCIL</constant> and there is no stencil buffer.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glCopyPixels</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glCopyPixels.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_CURRENT_RASTER_POSITION</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_CURRENT_RASTER_POSITION_VALID</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glCopyPixels.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glColorTable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glConvolutionFilter1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glConvolutionFilter2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDepthFunc</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawBuffer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawPixels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMatrixMode</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelMap</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelTransfer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelZoom</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glRasterPos</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glReadBuffer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glReadPixels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glSeparableFilter2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glStencilFunc</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

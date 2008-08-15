@@ -1,0 +1,255 @@
+<refentry id="glGetPixelMap.3G">
+	<refmeta id="glGetPixelMap.3G-meta">
+		<refentrytitle>glGetPixelMap</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glGetPixelMap.3G-name">
+		<refname>glGetPixelMapfv</refname>
+		<refname>glGetPixelMapuiv</refname>
+		<refname>glGetPixelMapusv</refname>
+		<refpurpose>return the specified pixel map</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glGetPixelMap.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetPixelMapfv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>map</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;*<parameter>values</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetPixelMapuiv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>map</parameter></paramdef>
+				<paramdef>GLuint&nbsp;*<parameter>values</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetPixelMapusv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>map</parameter></paramdef>
+				<paramdef>GLushort&nbsp;*<parameter>values</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glGetPixelMap.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>map</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the name of the pixel map to return. Accepted values are
+						<constant>GL_PIXEL_MAP_I_TO_I</constant>, <constant>GL_PIXEL_MAP_S_TO_S</constant>,
+						<constant>GL_PIXEL_MAP_I_TO_R</constant>, <constant>GL_PIXEL_MAP_I_TO_G</constant>,
+						<constant>GL_PIXEL_MAP_I_TO_B</constant>, <constant>GL_PIXEL_MAP_I_TO_A</constant>,
+						<constant>GL_PIXEL_MAP_R_TO_R</constant>, <constant>GL_PIXEL_MAP_G_TO_G</constant>,
+						<constant>GL_PIXEL_MAP_B_TO_B</constant>, and <constant>GL_PIXEL_MAP_A_TO_A</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>values</parameter></term>
+				<listitem>
+					<simpara>
+						Returns the pixel map contents.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glGetPixelMap.3G-description">
+		<title>Description</title>
+		<para>
+			See the <function moreinfo="refentry">glPixelMap</function> reference page for a description of the acceptable values
+			for the <parameter>map</parameter> parameter. <function moreinfo="refentry">glGetPixelMap</function> returns in
+			<parameter>values</parameter> the contents of the pixel map specified in <parameter>map</parameter>. Pixel maps are
+			used during the execution of <function moreinfo="refentry">glReadPixels</function>, <function
+			moreinfo="refentry">glDrawPixels</function>, <function moreinfo="refentry">glCopyPixels</function>, <function
+			moreinfo="refentry">glTexImage1D</function>, <function moreinfo="refentry">glTexImage2D</function>, <function
+			moreinfo="refentry">glTexImage3D</function>, <function moreinfo="refentry">glTexSubImage1D</function>, <function
+			moreinfo="refentry">glTexSubImage2D</function>, <function moreinfo="refentry">glTexSubImage3D</function>, <function
+			moreinfo="refentry">glCopyTexImage1D</function>, <function moreinfo="refentry">glCopyTexImage2D</function>, <function
+			moreinfo="refentry">glCopyTexSubImage1D</function>, <function moreinfo="refentry">glCopyTexSubImage2D</function>,
+			<function moreinfo="refentry">glCopyTexSubImage3D</function>, <function moreinfo="refentry">glColorTable</function>,
+			<function moreinfo="refentry">glColorSubTable</function>, <function moreinfo="refentry">glCopyColorTable</function>,
+			<function moreinfo="refentry">glCopyColorSubTable</function>, <function
+			moreinfo="refentry">glConvolutionFilter1D</function>, <function moreinfo="refentry">glConvolutionFilter2D</function>,
+			<function moreinfo="refentry">glSeparableFilter2D</function>, <function moreinfo="refentry">glGetHistogram</function>,
+			<function moreinfo="refentry">glGetMinmax</function>, and <function moreinfo="refentry">glGetTexImage</function> to map
+			color indices, stencil indices, color components, and depth components to other values.
+		</para>
+		<para>
+			Unsigned integer values, if requested, are linearly mapped from the internal fixed or floating-point representation
+			such that 1.0 maps to the largest representable integer value, and 0.0 maps to 0. Return unsigned integer values are
+			undefined if the map value was not in the range [0,1].
+		</para>
+		<para>
+			To determine the required size of <parameter>map</parameter>, call <function moreinfo="refentry">glGet</function> with
+			the appropriate symbolic constant.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetPixelMap.3G-notes">
+		<title>Notes</title>
+		<para>
+			If an error is generated, no change is made to the contents of <parameter>values</parameter>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetPixelMap.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>map</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function moreinfo="refentry">glGetPixelMap</function> is
+			executed between the execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of
+			<function moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetPixelMap.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_I_TO_I_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_S_TO_S_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_I_TO_R_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_I_TO_G_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_I_TO_B_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_I_TO_A_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_R_TO_R_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_G_TO_G_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_B_TO_B_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PIXEL_MAP_A_TO_A_SIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAX_PIXEL_MAP_TABLE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glGetPixelMap.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glColorSubTable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColorTable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glConvolutionFilter1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glConvolutionFilter2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyColorSubTable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyColorTable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyPixels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexSubImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexSubImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexSubImage3D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawPixels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetHistogram</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetMinmax</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexImage</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelMap</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelTransfer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glReadPixels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glSeparableFilter2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><function moreinfo="refentry">glTexImage2D</function> <function
+				moreinfo="refentry">glTexImage2D</function></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage3D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexSubImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexSubImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexSubImage3D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

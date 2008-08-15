@@ -1,0 +1,122 @@
+<refentry id="gle.3GLE">
+	<refmeta id="gle.3GLE-meta">
+		<refentrytitle>gle</refentrytitle>
+		<manvolnum>3GLE</manvolnum>
+	</refmeta>
+	<refnamediv id="gle.3GLE-name">
+		<refname>gle</refname>
+		<refpurpose>an introduction to the GLE Tubing &amp; Extrusions Library</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gle.3GLE-synopsis">
+		<title>Synopsis</title>
+		<programlisting>#include &lt;GL/gle.h&gt;</programlisting>
+	</refsynopsisdiv>
+	<refsect1 id="gle.3GLE-description">
+		<title>Description</title>
+		<para>
+			The GLE Tubing and Extrusion Library is a graphics application programming interface (API). The library consists of a
+			number of &quot;C&quot; language subroutines for drawing tubing and extrusions. The library is distributed in source
+			code form, in a package that includes documentation, a VRML proposal, Makefiles, and full source code and header files.
+			It uses the OpenGL (TM) programming API to perform the actual drawing of the tubing and extrusions.
+		</para>
+		<para>
+			A &quot;sweep&quot; or &quot;extrusion&quot; is a 2D contour (polyline) that is swept or extruded along a 3D path
+			(polyline). For example, sweeping a circle along a straight line will generate a cylinder. Sweeping a circle along a
+			circular path will generate a doughnut (torus).
+		</para>
+		<para>
+			The library also includes a set of utility routines for drawing some of the more common extruded shapes: a
+			polycylinder, a polycone, a generalized torus (circle swept along a helical path), a &quot;helix&quot; (arbitrary
+			contour swept along a helical path) and a &quot;lathe&quot; (arbitrary contour swept along a helical path, with torsion
+			used to keep the contour aligned).
+		</para>
+		<para>
+			The most general extrusion supported by this library allows an arbitrary 2D contour to be swept around an arbitrary 3D
+			path. A set of normal vectors can be specified to go along with the contour; the normal vectors determine the
+			appearance of the contour when lighting is turned on. A set of colors and affine matrices can be specified to go along
+			with the 3D path. The colors are used to color along the path. The affine matrices are used to operate on the contour
+			as it is swept along. If no affine matrices are specified, the contour is extruded using the mathematical concept of
+			&quot;parallel translation&quot; or &quot;Gaussian translation&quot;. That is, the contour is moved (and drawn) along
+			the extrusion path in a &quot;straight&quot; manner. If there are affine matrices, they are applied to the contour at
+			each extrusion segment before the segment is drawn.
+		</para>
+		<para>
+			The affine matrices allow work in a quasi-non-Euclidean space. They essentially allow the contour to be distorted as it
+			is swept along. The allow the contour to be rotated, translated and rescaled as it is drawn. For example, a rescaling
+			will turn a polycylinder into a poly-cone, since the circle that is being extruded is scaled to a different size at
+			each extrusion vertex. A rotation allows the contour to be spun around while it is being extruded, thus for instance
+			allowing drill-bit type shapes to be drawn. A translation allows the appearance of shearing in real space; that is,
+			taking a contour and displacing it, without otherwise bending it. Note that the affines are 2x3 matrices, not 3x4
+			matrices, since they apply to the 2D contour as it is being extruded.
+		</para>
+	</refsect1>
+	<refsect1 id="gle.3GLE-web_site">
+		<title>Web Site</title>
+		<para>
+			<ulink url="http://linas.org/gle/index.html">http://linas.org/gle/index.html</ulink>
+		</para>
+	</refsect1>
+	<refsect1 id="gle.3GLE-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gleExtrusion</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleHelicoid</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleLathe</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glePolyCone</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glePolyCylinder</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleScrew</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleSetJoinStyle</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleSpiral</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleSuperExtrusion</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleTextureMode</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleToroid</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleTwistExtrusion</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleTwistExtrusion</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleSuperExtrusion</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

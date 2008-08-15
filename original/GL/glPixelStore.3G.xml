@@ -1,0 +1,1221 @@
+<refentry id="glPixelStore.3G">
+	<refmeta id="glPixelStore.3G-meta">
+		<refentrytitle>glPixelStore</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glPixelStore.3G-name">
+		<refname>glPixelStoref</refname>
+		<refname>glPixelStorei</refname>
+		<refpurpose>set pixel storage modes</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glPixelStore.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glPixelStoref</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>param</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glPixelStorei</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>param</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glPixelStore.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>pname</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the symbolic name of the parameter to be set. Six values affect the packing of pixel data into
+						memory: <constant>GL_PACK_SWAP_BYTES</constant>, <constant>GL_PACK_LSB_FIRST</constant>,
+						<constant>GL_PACK_ROW_LENGTH</constant>, <constant>GL_PACK_IMAGE_HEIGHT</constant>,
+						<constant>GL_PACK_SKIP_PIXELS</constant>, <constant>GL_PACK_SKIP_ROWS</constant>,
+						<constant>GL_PACK_SKIP_IMAGES</constant>, and <constant>GL_PACK_ALIGNMENT</constant>. Six more affect the
+						unpacking of pixel data <parameter>from</parameter> memory: <constant>GL_UNPACK_SWAP_BYTES</constant>,
+						<constant>GL_UNPACK_LSB_FIRST</constant>, <constant>GL_UNPACK_ROW_LENGTH</constant>,
+						<constant>GL_UNPACK_IMAGE_HEIGHT</constant>, <constant>GL_UNPACK_SKIP_PIXELS</constant>,
+						<constant>GL_UNPACK_SKIP_ROWS</constant>, <constant>GL_UNPACK_SKIP_IMAGES</constant>, and
+						<constant>GL_UNPACK_ALIGNMENT</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>param</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the value that <parameter>pname</parameter> is set to.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glPixelStore.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glPixelStore</function> sets pixel storage modes that affect the operation of subsequent
+			<function moreinfo="refentry">glDrawPixels</function> and <function moreinfo="refentry">glReadPixels</function> as well
+			as the unpacking of polygon stipple patterns (see <citerefentry>
+				<refentrytitle>glPolygonStipple</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>), bitmaps (see <citerefentry>
+				<refentrytitle>glBitmap</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>), texture patterns (see <citerefentry>
+				<refentrytitle>glTexImage1D</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>, <function moreinfo="refentry">glTexImage2D</function>, <function
+			moreinfo="refentry">glTexImage3D</function>, <function moreinfo="refentry">glTexSubImage1D</function>, <function
+			moreinfo="refentry">glTexSubImage2D</function>, <function moreinfo="refentry">glTexSubImage3D</function>).
+			Additionally, if the <constant>GL_ARB_imaging</constant> extension is supported, pixle storage modes affect convlution
+			filters (see <citerefentry>
+				<refentrytitle>glConvolutionFilter1D</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>, <function moreinfo="refentry">glConvolutionFilter2D</function>, and <function
+			moreinfo="refentry">glSeparableFilter2D</function>, color table (see <citerefentry>
+				<refentrytitle>glColorTable</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>, and <function moreinfo="refentry">glColorSubTable</function>, and unpacking histogram (See
+			<citerefentry>
+				<refentrytitle>glHistogram</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>), and minmax (See <function moreinfo="refentry">glMinmax</function>) data.
+		</para>
+		<para>
+			<parameter>pname</parameter> is a symbolic constant indicating the parameter to be set, and
+			<parameter>param</parameter> is the new value. Six of the twelve storage parameters affect how pixel data is returned
+			to client memory. They are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_PACK_SWAP_BYTES</constant></term>
+				<listitem>
+					<simpara>
+						If true, byte ordering for multibyte color components, depth components, color indices, or stencil indices
+						is reversed. That is, if a four-byte component consists of bytes <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>0</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>1</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>2</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>3</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, it is stored in memory as <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>3</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>2</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>1</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>0</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation> if <constant>GL_PACK_SWAP_BYTES</constant> is true.
+						<constant>GL_PACK_SWAP_BYTES</constant> has no effect on the memory order of components within a pixel,
+						only on the order of bytes within components or indices. For example, the three components of a
+						<constant>GL_RGB</constant> pixel are always stored with red first, green second, and blue third,
+						regardless of the value of <constant>GL_PACK_SWAP_BYTES</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_PACK_LSB_FIRST</constant></term>
+				<listitem>
+					<simpara>
+						If true, bits are ordered within a byte from least significant to most significant; otherwise, the first
+						bit in each byte is the most significant one. This parameter is significant for bitmap data only.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_PACK_ROW_LENGTH</constant></term>
+				<listitem>
+					<simpara>
+						If greater than 0, <constant>GL_PACK_ROW_LENGTH</constant> defines the number of pixels in a row. If the
+						first pixel of a row is placed at location <inlineequation>
+							<mml:math>
+								<mml:mi>p</mml:mi>
+							</mml:math>
+						</inlineequation> in memory, then the location of the first pixel of the next row is obtained by skipping
+						<inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>k</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mrow>
+										<mml:mo>{</mml:mo>
+										<mml:mtable>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>n</mml:mi>
+													<mml:mi>l</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mrow>
+														<mml:mfrac>
+															<mml:mi>a</mml:mi>
+															<mml:mi>s</mml:mi>
+														</mml:mfrac>
+														<mml:mrow>
+															<mml:mo>&lceil;</mml:mo>
+															<mml:mfrac>
+																<mml:mrow>
+																	<mml:mi>s</mml:mi>
+																	<mml:mi>n</mml:mi>
+																	<mml:mi>l</mml:mi>
+																</mml:mrow>
+																<mml:mi>a</mml:mi>
+															</mml:mfrac>
+															<mml:mo>&rceil;</mml:mo>
+														</mml:mrow>
+													</mml:mrow>
+												</mml:mtd>
+											</mml:mtr>
+										</mml:mtable>
+										<mml:mtable>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>s</mml:mi>
+													<mml:mo>&GreaterEqual;</mml:mo>
+													<mml:mi>a</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>s</mml:mi>
+													<mml:mo>&lt;</mml:mo>
+													<mml:mi>a</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+										</mml:mtable>
+									</mml:mrow>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices, where <inlineequation>
+							<mml:math>
+								<mml:mi>n</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of components or indices in a pixel, <inlineequation>
+							<mml:math>
+								<mml:mi>l</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of pixels in a row (<constant>GL_PACK_ROW_LENGTH</constant> if it is
+						greater than 0, the <inlineequation>
+							<mml:math>
+								<mml:mi>width</mml:mi>
+							</mml:math>
+						</inlineequation> argument to the pixel routine otherwise), <inlineequation>
+							<mml:math>
+								<mml:mi>a</mml:mi>
+							</mml:math>
+						</inlineequation> is the value of <constant>GL_PACK_ALIGNMENT</constant>, and <inlineequation>
+							<mml:math>
+								<mml:mi>s</mml:mi>
+							</mml:math>
+						</inlineequation> is the size, in bytes, of a single component (if <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>a</mml:mi>
+									<mml:mo>&lt;</mml:mo>
+									<mml:mi>s</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>, then it is as if <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>a</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mi>s</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>). In the case of 1-bit values, the location of the next row is obtained by skipping
+						<inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>k</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mn>8</mml:mn>
+									<mml:mi>a</mml:mi>
+									<mml:mrow>
+										<mml:mo>&lceil;</mml:mo>
+										<mml:mfrac>
+											<mml:mrow>
+												<mml:mi>n</mml:mi>
+												<mml:mi>l</mml:mi>
+											</mml:mrow>
+											<mml:mrow>
+												<mml:mn>8</mml:mn>
+												<mml:mi>a</mml:mi>
+											</mml:mrow>
+										</mml:mfrac>
+										<mml:mo>&rceil;</mml:mo>
+									</mml:mrow>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices.
+					</simpara>
+					<simpara>
+						The word <parameter>component</parameter> in this description refers to the nonindex values red, green,
+						blue, alpha, and depth. Storage <constant>GL_RGB</constant>, for example, has three components per pixel:
+						first red, then green, and finally blue.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_PACK_IMAGE_HEIGHT</constant></term>
+				<listitem>
+					<simpara>
+						If greater than 0, <constant>GL_PACK_IMAGE_HEIGHT</constant> defines the number of pixels in an image
+						three-dimensional texture volume. Where ``image'' is defined by all pixels sharing the same third dimension
+						index. If the first pixel of a row is placed at location <inlineequation>
+							<mml:math>
+								<mml:mi>p</mml:mi>
+							</mml:math>
+						</inlineequation> in memory, then the location of the first pixel of the next row is obtained by skipping
+						<inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>k</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mrow>
+										<mml:mo>{</mml:mo>
+										<mml:mtable>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>n</mml:mi>
+													<mml:mi>l</mml:mi>
+													<mml:mi>h</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mrow>
+														<mml:mfrac>
+															<mml:mi>a</mml:mi>
+															<mml:mi>s</mml:mi>
+														</mml:mfrac>
+														<mml:mrow>
+															<mml:mo>&lceil;</mml:mo>
+															<mml:mfrac>
+																<mml:mrow>
+																	<mml:mi>s</mml:mi>
+																	<mml:mi>n</mml:mi>
+																	<mml:mi>l</mml:mi>
+																	<mml:mi>h</mml:mi>
+																</mml:mrow>
+																<mml:mi>a</mml:mi>
+															</mml:mfrac>
+															<mml:mo>&rceil;</mml:mo>
+														</mml:mrow>
+													</mml:mrow>
+												</mml:mtd>
+											</mml:mtr>
+										</mml:mtable>
+										<mml:mtable>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>s</mml:mi>
+													<mml:mo>&GreaterEqual;</mml:mo>
+													<mml:mi>a</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>s</mml:mi>
+													<mml:mo>&lt;</mml:mo>
+													<mml:mi>a</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+										</mml:mtable>
+									</mml:mrow>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices, where <inlineequation>
+							<mml:math>
+								<mml:mi>n</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of components or indices in a pixel, <inlineequation>
+							<mml:math>
+								<mml:mi>l</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of pixels in a row (<constant>GL_PACK_ROW_LENGTH</constant> if it is
+						greater than 0, the <inlineequation>
+							<mml:math>
+								<mml:mi>width</mml:mi>
+							</mml:math>
+						</inlineequation> argument to <function moreinfo="refentry">glTexImage3d</function> otherwise),
+						<inlineequation>
+							<mml:math>
+								<mml:mi>h</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of rows in a pixel image (<constant>GL_PACK_IMAGE_HEIGHT</constant> if it
+						is greater than 0, the <inlineequation>
+							<mml:math>
+								<mml:mi>height</mml:mi>
+							</mml:math>
+						</inlineequation> arguemnt to the <function moreinfo="refentry">glTexImage3D</function> routine otherwise),
+						<inlineequation>
+							<mml:math>
+								<mml:mi>a</mml:mi>
+							</mml:math>
+						</inlineequation> is the value of <constant>GL_PACK_ALIGNMENT</constant>, and <inlineequation>
+							<mml:math>
+								<mml:mi>s</mml:mi>
+							</mml:math>
+						</inlineequation> is the size, in bytes, of a single component (if <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>a</mml:mi>
+									<mml:mo>&lt;</mml:mo>
+									<mml:mi>s</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>, then it is as if <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>a</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mi>s</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>).
+					</simpara>
+					<simpara>
+						The word <parameter>component</parameter> in this description refers to the nonindex values red, green,
+						blue, alpha, and depth. Storage <constant>GL_RGB</constant>, for example, has three components per pixel:
+						first red, then green, and finally blue.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_PACK_SKIP_PIXELS</constant>, <constant>GL_PACK_SKIP_ROWS</constant>, and
+				<constant>GL_PACK_SKIP_IMAGES</constant></term>
+				<listitem>
+					<simpara>
+						These values are provided as a convenience to the programmer; they provide no functionality that cannot be
+						duplicated simply by incrementing the pointer passed to <function
+						moreinfo="refentry">glReadPixels</function>. Setting <constant>GL_PACK_SKIP_PIXELS</constant> to
+						<inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation> is equivalent to incrementing the pointer by <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>i</mml:mi>
+									<mml:mi>n</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices, where <inlineequation>
+							<mml:math>
+								<mml:mi>n</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of components or indices in each pixel. Setting
+						<constant>GL_PACK_SKIP_ROWS</constant> to <inlineequation>
+							<mml:math>
+								<mml:mi>j</mml:mi>
+							</mml:math>
+						</inlineequation> is equivalent to incrementing the pointer by <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>j</mml:mi>
+									<mml:mi>m</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices, where <inlineequation>
+							<mml:math>
+								<mml:mi>m</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of components or indices per row, as just computed in the
+						<constant>GL_PACK_ROW_LENGTH</constant> section. Setting <constant>GL_PACK_SKIP_IMAGES</constant> to
+						<inlineequation>
+							<mml:math>
+								<mml:mi>k</mml:mi>
+							</mml:math>
+						</inlineequation> is equivalent to incrementing the pointer by <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>k</mml:mi>
+									<mml:mi>p</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>, where <inlineequation>
+							<mml:math>
+								<mml:mi>p</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of components or indices per image, as computed in the
+						<constant>GL_PACK_IMAGE_HEIGHT</constant> section.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_PACK_ALIGNMENT</constant></term>
+				<listitem>
+					<simpara>
+						Specifies the alignment requirements for the start of each pixel row in memory. The allowable values are 1
+						(byte-alignment), 2 (rows aligned to even-numbered bytes), 4 (word-alignment), and 8 (rows start on
+						double-word boundaries).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			The other six of the twelve storage parameters affect how pixel data is read from client memory. These values are
+			significant for <function moreinfo="refentry">glDrawPixels</function>, <function
+			moreinfo="refentry">glTexImage1D</function>, <function moreinfo="refentry">glTexImage2D</function>, <function
+			moreinfo="refentry">glTexImage3D</function>, <function moreinfo="refentry">glTexSubImage1D</function>, <function
+			moreinfo="refentry">glTexSubImage2D</function>, <function moreinfo="refentry">glTexSubImage3D</function>, <function
+			moreinfo="refentry">glBitmap</function>, and <function moreinfo="refentry">glPolygonStipple</function>.
+		</para>
+		<para>
+			Additionally, if the <constant>GL_ARB_imaging</constant> extension is supported, <function
+			moreinfo="refentry">glColorTable</function>, <function moreinfo="refentry">glColorSubTable</function>, <function
+			moreinfo="refentry">glConvolutionFilter1D</function>, <function moreinfo="refentry">glConvolutionFilter2D</function>,
+			and <function moreinfo="refentry">glSeparableFilter2D</function>. They are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_UNPACK_SWAP_BYTES</constant></term>
+				<listitem>
+					<simpara>
+						If true, byte ordering for multibyte color components, depth components, color indices, or stencil indices
+						is reversed. That is, if a four-byte component consists of bytes <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>0</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>1</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>2</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>3</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, it is taken from memory as <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>3</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>2</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>1</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:msub>
+									<mml:mi>b</mml:mi>
+									<mml:mn>0</mml:mn>
+								</mml:msub>
+							</mml:math>
+						</inlineequation> if <constant>GL_UNPACK_SWAP_BYTES</constant> is true.
+						<constant>GL_UNPACK_SWAP_BYTES</constant> has no effect on the memory order of components within a pixel,
+						only on the order of bytes within components or indices. For example, the three components of a
+						<constant>GL_RGB</constant> pixel are always stored with red first, green second, and blue third,
+						regardless of the value of <constant>GL_UNPACK_SWAP_BYTES</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_UNPACK_LSB_FIRST</constant></term>
+				<listitem>
+					<simpara>
+						If true, bits are ordered within a byte from least significant to most significant; otherwise, the first
+						bit in each byte is the most significant one. This is relevant only for bitmap data.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_UNPACK_ROW_LENGTH</constant></term>
+				<listitem>
+					<simpara>
+						If greater than 0, <constant>GL_UNPACK_ROW_LENGTH</constant> defines the number of pixels in a row. If the
+						first pixel of a row is placed at location <inlineequation>
+							<mml:math>
+								<mml:mi>p</mml:mi>
+							</mml:math>
+						</inlineequation> in memory, then the location of the first pixel of the next row is obtained by skipping
+						<inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>k</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mrow>
+										<mml:mo>{</mml:mo>
+										<mml:mtable>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>n</mml:mi>
+													<mml:mi>l</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mrow>
+														<mml:mfrac>
+															<mml:mi>a</mml:mi>
+															<mml:mi>s</mml:mi>
+														</mml:mfrac>
+														<mml:mrow>
+															<mml:mo>&lceil;</mml:mo>
+															<mml:mfrac>
+																<mml:mrow>
+																	<mml:mi>s</mml:mi>
+																	<mml:mi>n</mml:mi>
+																	<mml:mi>l</mml:mi>
+																</mml:mrow>
+																<mml:mi>a</mml:mi>
+															</mml:mfrac>
+															<mml:mo>&rceil;</mml:mo>
+														</mml:mrow>
+													</mml:mrow>
+												</mml:mtd>
+											</mml:mtr>
+										</mml:mtable>
+										<mml:mtable>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>s</mml:mi>
+													<mml:mo>&GreaterEqual;</mml:mo>
+													<mml:mi>a</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>s</mml:mi>
+													<mml:mo>&lt;</mml:mo>
+													<mml:mi>a</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+										</mml:mtable>
+									</mml:mrow>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices, where <inlineequation>
+							<mml:math>
+								<mml:mi>n</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of components or indices in a pixel, <inlineequation>
+							<mml:math>
+								<mml:mi>l</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of pixels in a row (<constant>GL_UNPACK_ROW_LENGTH</constant> if it is
+						greater than 0, the <inlineequation>
+							<mml:math>
+								<mml:mi>width</mml:mi>
+							</mml:math>
+						</inlineequation> argument to the pixel routine otherwise), <inlineequation>
+							<mml:math>
+								<mml:mi>a</mml:mi>
+							</mml:math>
+						</inlineequation> is the value of <constant>GL_UNPACK_ALIGNMENT</constant>, and <inlineequation>
+							<mml:math>
+								<mml:mi>s</mml:mi>
+							</mml:math>
+						</inlineequation> is the size, in bytes, of a single component (if <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>a</mml:mi>
+									<mml:mo>&lt;</mml:mo>
+									<mml:mi>s</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>, then it is as if <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>a</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mi>s</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>). In the case of 1-bit values, the location of the next row is obtained by skipping
+						<inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>k</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mn>8</mml:mn>
+									<mml:mi>a</mml:mi>
+									<mml:mrow>
+										<mml:mo>&lceil;</mml:mo>
+										<mml:mfrac>
+											<mml:mrow>
+												<mml:mi>n</mml:mi>
+												<mml:mi>l</mml:mi>
+											</mml:mrow>
+											<mml:mrow>
+												<mml:mn>8</mml:mn>
+												<mml:mi>a</mml:mi>
+											</mml:mrow>
+										</mml:mfrac>
+										<mml:mo>&rceil;</mml:mo>
+									</mml:mrow>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices.
+					</simpara>
+					<simpara>
+						The word <parameter>component</parameter> in this description refers to the nonindex values red, green,
+						blue, alpha, and depth. Storage <constant>GL_RGB</constant>, for example, has three components per pixel:
+						first red, then green, and finally blue.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_UNPACK_IMAGE_HEIGHT</constant></term>
+				<listitem>
+					<simpara>
+						If greater than 0, <constant>GL_UNPACK_IMAGE_HEIGHT</constant> defines the number of pixels in an image of
+						a three-dimensional texture volume. Where ``image'' is defined by all pixel sharing the same third
+						dimension index. If the first pixel of a row is placed at location <inlineequation>
+							<mml:math>
+								<mml:mi>p</mml:mi>
+							</mml:math>
+						</inlineequation> in memory, then the location of the first pixel of the next row is obtained by skipping
+						<inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>k</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mrow>
+										<mml:mo>{</mml:mo>
+										<mml:mtable>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>n</mml:mi>
+													<mml:mi>l</mml:mi>
+													<mml:mi>h</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mrow>
+														<mml:mfrac>
+															<mml:mi>a</mml:mi>
+															<mml:mi>s</mml:mi>
+														</mml:mfrac>
+														<mml:mrow>
+															<mml:mo>&lceil;</mml:mo>
+															<mml:mfrac>
+																<mml:mrow>
+																	<mml:mi>s</mml:mi>
+																	<mml:mi>n</mml:mi>
+																	<mml:mi>l</mml:mi>
+																	<mml:mi>h</mml:mi>
+																</mml:mrow>
+																<mml:mi>a</mml:mi>
+															</mml:mfrac>
+															<mml:mo>&rceil;</mml:mo>
+														</mml:mrow>
+													</mml:mrow>
+												</mml:mtd>
+											</mml:mtr>
+										</mml:mtable>
+										<mml:mtable>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>s</mml:mi>
+													<mml:mo>&GreaterEqual;</mml:mo>
+													<mml:mi>a</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+											<mml:mtr>
+												<mml:mtd>
+													<mml:mi>s</mml:mi>
+													<mml:mo>&lt;</mml:mo>
+													<mml:mi>a</mml:mi>
+												</mml:mtd>
+											</mml:mtr>
+										</mml:mtable>
+									</mml:mrow>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices, where <inlineequation>
+							<mml:math>
+								<mml:mi>n</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of components or indices in a pixel, <inlineequation>
+							<mml:math>
+								<mml:mi>l</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of pixels in a row (<constant>GL_UNPACK_ROW_LENGTH</constant> if it is
+						greater than 0, the <inlineequation>
+							<mml:math>
+								<mml:mi>width</mml:mi>
+							</mml:math>
+						</inlineequation> argument to <function moreinfo="refentry">glTexImage3D</function> otherwise),
+						<inlineequation>
+							<mml:math>
+								<mml:mi>h</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of rows in an image (<constant>GL_UNPACK_IMAGE_HEIGHT</constant> if it is
+						greater than 0, the <inlineequation>
+							<mml:math>
+								<mml:mi>height</mml:mi>
+							</mml:math>
+						</inlineequation> argument to <function moreinfo="refentry">glTexImage3D</function> otherwise),
+						<inlineequation>
+							<mml:math>
+								<mml:mi>a</mml:mi>
+							</mml:math>
+						</inlineequation> is the value of <constant>GL_UNPACK_ALIGNMENT</constant>, and <inlineequation>
+							<mml:math>
+								<mml:mi>s</mml:mi>
+							</mml:math>
+						</inlineequation> is the size, in bytes, of a single component (if <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>a</mml:mi>
+									<mml:mo>&lt;</mml:mo>
+									<mml:mi>s</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>, then it is as if <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>a</mml:mi>
+									<mml:mo>=</mml:mo>
+									<mml:mi>s</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation>).
+					</simpara>
+					<simpara>
+						The word <parameter>component</parameter> in this description refers to the nonindex values red, green,
+						blue, alpha, and depth. Storage <constant>GL_RGB</constant>, for example, has three components per pixel:
+						first red, then green, and finally blue.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_UNPACK_SKIP_PIXELS</constant> and <constant>GL_UNPACK_SKIP_ROWS</constant></term>
+				<listitem>
+					<simpara>
+						These values are provided as a convenience to the programmer; they provide no functionality that cannot be
+						duplicated by incrementing the pointer passed to <function moreinfo="refentry">glDrawPixels</function>,
+						<function moreinfo="refentry">glTexImage1D</function>, <function
+						moreinfo="refentry">glTexImage2D</function>, <function moreinfo="refentry">glTexSubImage1D</function>,
+						<function moreinfo="refentry">glTexSubImage2D</function>, <function
+						moreinfo="refentry">glBitmap</function>, or <function moreinfo="refentry">glPolygonStipple</function>.
+						Setting <constant>GL_UNPACK_SKIP_PIXELS</constant> to <inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation> is equivalent to incrementing the pointer by <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>i</mml:mi>
+									<mml:mi>n</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices, where <inlineequation>
+							<mml:math>
+								<mml:mi>n</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of components or indices in each pixel. Setting
+						<constant>GL_UNPACK_SKIP_ROWS</constant> to <inlineequation>
+							<mml:math>
+								<mml:mi>j</mml:mi>
+							</mml:math>
+						</inlineequation> is equivalent to incrementing the pointer by <inlineequation>
+							<mml:math>
+								<mml:mrow>
+									<mml:mi>j</mml:mi>
+									<mml:mi>k</mml:mi>
+								</mml:mrow>
+							</mml:math>
+						</inlineequation> components or indices, where <inlineequation>
+							<mml:math>
+								<mml:mi>k</mml:mi>
+							</mml:math>
+						</inlineequation> is the number of components or indices per row, as just computed in the
+						<constant>GL_UNPACK_ROW_LENGTH</constant> section.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_UNPACK_ALIGNMENT</constant></term>
+				<listitem>
+					<simpara>
+						Specifies the alignment requirements for the start of each pixel row in memory. The allowable values are 1
+						(byte-alignment), 2 (rows aligned to even-numbered bytes), 4 (word-alignment), and 8 (rows start on
+						double-word boundaries).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			The following table gives the type, initial value, and range of valid values for each storage parameter that can be set
+			with <function moreinfo="refentry">glPixelStore</function>.
+		</para>
+		<informaltable frame="topbot">
+			<tgroup cols="4">
+				<tbody>
+					<row>
+						<entry><parameter>pname</parameter></entry>
+						<entry align="center"><emphasis role="bold">Type</emphasis></entry>
+						<entry align="center"><emphasis role="bold">Initial Value</emphasis></entry>
+						<entry align="center"><emphasis role="bold">Valid Range</emphasis></entry>
+					</row>
+					<row>
+						<entry><constant>GL_PACK_SWAP_BYTES</constant></entry>
+						<entry align="center">boolean</entry>
+						<entry align="center">false</entry>
+						<entry align="center">true or false</entry>
+					</row>
+					<row>
+						<entry><constant>GL_PACK_LSB_FIRST</constant></entry>
+						<entry align="center">boolean</entry>
+						<entry align="center">false</entry>
+						<entry align="center">true or false</entry>
+					</row>
+					<row>
+						<entry><constant>GL_PACK_ROW_LENGTH</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0,&infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_PACK_IMAGE_HEIGHT</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0, &infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_PACK_SKIP_ROWS</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0,&infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_PACK_SKIP_PIXELS</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0,&infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_PACK_SKIP_IMAGES</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0,&infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_PACK_ALIGNMENT</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">4</entry>
+						<entry align="center">1, 2, 4, or 8</entry>
+					</row>
+					<row>
+						<entry><constant>GL_UNPACK_SWAP_BYTES</constant></entry>
+						<entry align="center">boolean</entry>
+						<entry align="center">false</entry>
+						<entry align="center">true or false</entry>
+					</row>
+					<row>
+						<entry><constant>GL_UNPACK_LSB_FIRST</constant></entry>
+						<entry align="center">boolean</entry>
+						<entry align="center">false</entry>
+						<entry align="center">true or false</entry>
+					</row>
+					<row>
+						<entry><constant>GL_UNPACK_ROW_LENGTH</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0,&infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_UNPACK_IMAGE_HEIGHT</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0,&infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_UNPACK_SKIP_ROWS</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0,&infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_UNPACK_SKIP_PIXELS</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0,&infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_UNPACK_SKIP_IMAGES</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">0</entry>
+						<entry align="center">[0,&infin;)</entry>
+					</row>
+					<row>
+						<entry><constant>GL_UNPACK_ALIGNMENT</constant></entry>
+						<entry align="center">integer</entry>
+						<entry align="center">4</entry>
+						<entry align="center">1, 2, 4, or 8</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</informaltable>
+		<para>
+			<function>glPixelStoref</function> can be used to set any pixel store parameter. If the parameter type is boolean, then
+			if <parameter>param</parameter> is 0, the parameter is false; otherwise it is set to true. If
+			<parameter>pname</parameter> is a integer type parameter, <parameter>param</parameter> is rounded to the nearest
+			integer.
+		</para>
+		<para>
+			Likewise, <function>glPixelStorei</function> can also be used to set any of the pixel store parameters. Boolean
+			parameters are set to false if <parameter>param</parameter> is 0 and true otherwise.
+		</para>
+	</refsect1>
+	<refsect1 id="glPixelStore.3G-notes">
+		<title>Notes</title>
+		<para>
+			The pixel storage modes in effect when <function moreinfo="refentry">glDrawPixels</function>, <function
+			moreinfo="refentry">glReadPixels</function>, <function moreinfo="refentry">glTexImage1D</function>, <function
+			moreinfo="refentry">glTexImage2D</function>, <function moreinfo="refentry">glTexImage3D</function>, <function
+			moreinfo="refentry">glTexSubImage1D</function>, <function moreinfo="refentry">glTexSubImage2D</function>, <function
+			moreinfo="refentry">glTexSubImage3D</function>, <function moreinfo="refentry">glBitmap</function>, or <function
+			moreinfo="refentry">glPolygonStipple</function> is placed in a display list control the interpretation of memory data.
+			Likewise, if the <constant>GL_ARB_imaging</constant> extension is supported, the pixel storage modes in effect when
+			<function moreinfo="refentry">glColorTable</function>, <function moreinfo="refentry">glColorSubTable</function>,
+			<function moreinfo="refentry">glConvolutionFilter1D</function>, <function
+			moreinfo="refentry">glConvolutionFilter2D</function>, of <function moreinfo="refentry">glSeparableFilter2D</function>
+			is placed in a display list control the intrepretation of memory data. The pixel storage modes in effect when a display
+			list is executed are not significant.
+		</para>
+		<para>
+			Pixel storage modes are client state and must be pushed and restored using
+		</para>
+		<para>
+			<function moreinfo="refentry">glPushClientAttrib</function> and <function
+			moreinfo="refentry">glPopClientAttrib</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glPixelStore.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>pname</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if a negative row length, pixel skip, or row skip value is
+			specified, or if alignment is specified as other than 1, 2, 4, or 8.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function moreinfo="refentry">glPixelStore</function> is
+			executed between the execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of
+			<function moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glPixelStore.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PACK_SWAP_BYTES</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PACK_LSB_FIRST</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PACK_ROW_LENGTH</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PACK_IMAGE_HEIGHT</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PACK_SKIP_ROWS</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PACK_SKIP_PIXELS</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PACK_SKIP_IMAGES</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PACK_ALIGNMENT</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_UNPACK_SWAP_BYTES</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_UNPACK_LSB_FIRST</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_UNPACK_ROW_LENGTH</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_UNPACK_IMAGE_HEIGHT</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_UNPACK_SKIP_ROWS</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_UNPACK_SKIP_PIXELS</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_UNPACK_SKIP_IMAGES</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_UNPACK_ALIGNMENT</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glPixelStore.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glBitmap</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColorTable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColorSubTable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glConvolutionFilter1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glConvolutionFilter2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glSeparableFilter2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawPixels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glHistogram</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMinmax</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelMap</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelTransfer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPixelZoom</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPolygonStipple</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPushClientAttrib</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glReadPixels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage3D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexSubImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexSubImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexSubImage3D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

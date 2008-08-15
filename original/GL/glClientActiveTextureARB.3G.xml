@@ -1,0 +1,88 @@
+<refentry id="glClientActiveTextureARB.3G">
+	<refmeta id="glClientActiveTextureARB.3G-meta">
+		<refentrytitle>glClientActiveTextureARB</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glClientActiveTextureARB.3G-name">
+		<refname>glClientActiveTextureARB</refname>
+		<refpurpose>select active texture unit</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glClientActiveTextureARB.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glClientActiveTextureARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>texture</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glClientActiveTextureARB.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>texture</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies which texture unit to make active. The number of texture units is implementation dependent, but
+						must be at least two. <parameter>texture</parameter> must be one of
+						<constant>GL_TEXTURE<emphasis>i</emphasis>_ARB</constant> where
+						0&nbsp;&le;&nbsp;<emphasis>i</emphasis>&nbsp;&lt;&nbsp;<constant>GL_MAX_TEXTURE_UNITS_ARB</constant>, which
+						is an implementation-dependent value. The initial value is <constant>GL_TEXTURE0_ARB</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glClientActiveTextureARB.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glClientActiveTextureARB</function> selects the vertex array client state parameters to be modified by
+			<function moreinfo="refentry">glTexCoordPointer</function>, and enabled or disabled with <function
+			moreinfo="refentry">glEnableClientState</function> or <function moreinfo="refentry">glDisableClientState</function>,
+			respectively, when called with a parameter of <constant>GL_TEXTURE_COORD_ARRAY</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClientActiveTextureARB.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>glClientActiveTextureARB</function> is supported only if <constant>GL_ARB_multitexture</constant> is included
+			in the string returned by <function moreinfo="refentry">glGetString</function> when called with the argument
+			<constant>GL_EXTENSIONS</constant>.
+		</para>
+		<para>
+			<function>glClientActiveTextureARB</function> sets <constant>GL_CLIENT_ACTIVE_TEXTURE_ARB</constant> to the active
+			texture unit.
+		</para>
+	</refsect1>
+	<refsect1 id="glClientActiveTextureARB.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>texture</parameter> is not one of
+			<constant>GL_TEXTURE<emphasis>i</emphasis>_ARB</constant> where
+			0&nbsp;&le;&nbsp;<emphasis>i</emphasis>&nbsp;&lt;&nbsp;<constant>GL_MAX_TEXTURE_UNITS_ARB</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClientActiveTextureARB.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glActiveTextureARB</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEnableClientState</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMultiTexCoordARB</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexCoordPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,116 @@
+<refentry id="gluPwlCurve.3G">
+	<refmeta id="gluPwlCurve.3G-meta">
+		<refentrytitle>gluPwlCurve</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluPwlCurve.3G-name">
+		<refname>gluPwlCurve</refname>
+		<refpurpose>describe a piecewise linear NURBS trimming curve</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluPwlCurve.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluPwlCurve</function></funcdef>
+				<paramdef>GLUnurbs*&nbsp;<parameter>nurb</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>count</parameter></paramdef>
+				<paramdef>GLfloat*&nbsp;<parameter>data</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>stride</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>type</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluPwlCurve.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>nurb</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the NURBS object (created with <function moreinfo="refentry">gluNewNurbsRenderer</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>count</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the number of points on the curve.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>data</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies an array containing the curve points.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>stride</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the offset (a number of single-precision floating-point values) between points on the curve.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>type</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the type of curve. Must be either <constant>GLU_MAP1_TRIM_2</constant> or
+						<constant>GLU_MAP1_TRIM_3</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluPwlCurve.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluPwlCurve</function> describes a piecewise linear trimming curve for a NURBS surface. A piecewise linear
+			curve consists of a list of coordinates of points in the parameter space for the NURBS surface to be trimmed. These
+			points are connected with line segments to form a curve. If the curve is an approximation to a curve that is not
+			piecewise linear, the points should be close enough in parameter space that the resulting path appears curved at the
+			resolution used in the application.
+		</para>
+		<para>
+			If <parameter>type</parameter> is <constant>GLU_MAP1_TRIM_2</constant>, then it describes a curve in two-dimensional
+			(<parameter>u</parameter> and <parameter>v</parameter>) parameter space. If it is <constant>GLU_MAP1_TRIM_3</constant>,
+			then it describes a curve in two-dimensional homogeneous (<parameter>u</parameter>, <parameter>v</parameter>, and
+			<parameter>w</parameter>) parameter space. See the <function moreinfo="refentry">gluBeginTrim</function> reference page
+			for more information about trimming curves.
+		</para>
+	</refsect1>
+	<refsect1 id="gluPwlCurve.3G-notes">
+		<title>Notes</title>
+		<para>
+			To describe a trim curve that closely follows the contours of a NURBS surface, call <function
+			moreinfo="refentry">gluNurbsCurve</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="gluPwlCurve.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluBeginCurve</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluBeginTrim</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNewNurbsRenderer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNurbsCurve</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

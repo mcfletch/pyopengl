@@ -1,0 +1,55 @@
+<refentry id="glutPopWindow.3GLUT">
+	<refmeta id="glutPopWindow.3GLUT-meta">
+		<refentrytitle>glutPopWindow</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutPopWindow.3GLUT-name">
+		<refname>glutPopWindow</refname>
+		<refname>glutPushWindow</refname>
+		<refpurpose>change the stacking order of the current window relative to its siblings.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutPopWindow.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutPopWindow</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutPushWindow</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutPopWindow.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutPopWindow</function> and <function>glutPushWindow</function> work on both top-level windows and
+			subwindows. The effect of pushing and popping windows does not take place immediately. Instead the push or pop is saved
+			for execution upon return to the GLUT event loop. Subsequent push or pop requests on a window replace the previously
+			saved request for that window. The effect of pushing and popping top-level windows is subject to the window system's
+			policy for restacking windows.
+		</para>
+	</refsect1>
+	<refsect1 id="glutPopWindow.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutShowWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutIconifyWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutHideWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

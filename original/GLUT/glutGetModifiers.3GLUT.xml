@@ -1,0 +1,77 @@
+<refentry id="glutGetModifiers.3GLUT">
+	<refmeta id="glutGetModifiers.3GLUT-meta">
+		<refentrytitle>glutGetModifiers</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutGetModifiers.3GLUT-name">
+		<refname>glutGetModifiers</refname>
+		<refpurpose>returns the modifier key state when certain callbacks were generated.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutGetModifiers.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutGetModifiers</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutGetModifiers.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutGetModifiers</function> returns the modifier key state at the time the input event for a keyboard,
+			special, or mouse callback is generated. This routine may only be called while a keyboard, special, or mouse callback
+			is being handled. The window system is permitted to intercept window system defined modifier key strokes or mouse
+			buttons, in which case, no GLUT callback will be generated. This interception will be independent of use of
+			<function>glutGetModifiers</function>.
+		</para>
+		<para>
+			The bitmask components of the returned integer value are:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GLUT_ACTIVE_SHIFT</constant></term>
+				<listitem>
+					<simpara>
+						Set if the Shift modifier or Caps Lock is active.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_ACTIVE_CTRL</constant></term>
+				<listitem>
+					<simpara>
+						Set if the Ctrl modifier is active.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_ACTIVE_ALT</constant></term>
+				<listitem>
+					<simpara>
+						Set if the Alt modifier is active.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutGetModifiers.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSpecialFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMouseFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

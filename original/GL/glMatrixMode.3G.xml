@@ -1,0 +1,113 @@
+<refentry id="glMatrixMode.3G">
+	<refmeta id="glMatrixMode.3G-meta">
+		<refentrytitle>glMatrixMode</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glMatrixMode.3G-name">
+		<refname>glMatrixMode</refname>
+		<refpurpose>specify which matrix is the current matrix</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glMatrixMode.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMatrixMode</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>mode</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glMatrixMode.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>mode</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies which matrix stack is the target for subsequent matrix operations. Three values are accepted:
+						<constant>GL_MODELVIEW</constant>, <constant>GL_PROJECTION</constant>, and <constant>GL_TEXTURE</constant>.
+						The initial value is <constant>GL_MODELVIEW</constant>. Additionally, if the
+						<constant>GL_ARB_imaging</constant> extension is supported, <constant>GL_COLOR</constant> is also accepted.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glMatrixMode.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glMatrixMode</function> sets the current matrix mode. <parameter>mode</parameter> can assume one of four
+			values:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_MODELVIEW</constant></term>
+				<listitem>
+					<simpara>
+						Applies subsequent matrix operations to the modelview matrix stack.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_PROJECTION</constant></term>
+				<listitem>
+					<simpara>
+						Applies subsequent matrix operations to the projection matrix stack.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_TEXTURE</constant></term>
+				<listitem>
+					<simpara>
+						Applies subsequent matrix operations to the texture matrix stack.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_COLOR</constant></term>
+				<listitem>
+					<simpara>
+						Applies subsequent matrix operations to the color matrix stack.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			To find out which matrix stack is currently the target of all matrix operations, call <function
+			moreinfo="refentry">glGet</function> with argument <constant>GL_MATRIX_MODE</constant>. The initial value is
+			<constant>GL_MODELVIEW</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glMatrixMode.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>mode</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glMatrixMode</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glMatrixMode.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MATRIX_MODE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glMatrixMode.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glLoadMatrix</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPushMatrix</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

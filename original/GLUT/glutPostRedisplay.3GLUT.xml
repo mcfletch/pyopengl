@@ -1,0 +1,65 @@
+<refentry id="glutPostRedisplay.3GLUT">
+	<refmeta id="glutPostRedisplay.3GLUT-meta">
+		<refentrytitle>glutPostRedisplay</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutPostRedisplay.3GLUT-name">
+		<refname>glutPostRedisplay</refname>
+		<refname>glutPostWindowRedisplay</refname>
+		<refpurpose>marks the current or specified window as needing to be redisplayed.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutPostRedisplay.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutPostRedisplay</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutPostWindowRedisplay</function></funcdef>
+				<paramdef>int&nbsp;<parameter>win</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutPostRedisplay.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutPostRedisplay</function> marks the normal plane of current window as needing to be redisplayed.
+			<function>glutPostWindowRedisplay</function> works the specified window as needing to be redisplayed. After either
+			call, the next iteration through <function moreinfo="refentry">glutMainLoop</function>, the window's display callback
+			will be called to redisplay the window's normal plane. Multiple calls to <function>glutPostRedisplay</function> before
+			the next display callback opportunity generates only a single redisplay callback.
+			<function>glutPostRedisplay</function> may be called within a window's display or overlay display callback to re-mark
+			that window for redisplay.
+		</para>
+		<para>
+			Logically, normal plane damage notification for a window is treated as a <function>glutPostRedisplay</function> on the
+			damaged window. Unlike damage reported by the window system, <function>glutPostRedisplay</function> will not set to
+			true the normal plane's damaged status (returned by <function
+			moreinfo="refentry">glutLayerGet(GLUT_NORMAL_DAMAGED)</function>.
+		</para>
+		<para>
+			If the window you want to post a redisplay on is not already current (and you do not require it to be immediately made
+			current), using <function>glutPostWindowRedisplay</function> is more efficient that calling <function
+			moreinfo="refentry">glutSetWindow</function> to the desired window and then calling
+			<function>glutPostRedisplay</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutPostRedisplay.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutPostOverlayRedisplay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDisplayFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

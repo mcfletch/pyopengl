@@ -1,0 +1,111 @@
+<refentry id="glClipPlane.3G">
+	<refmeta id="glClipPlane.3G-meta">
+		<refentrytitle>glClipPlane</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glClipPlane.3G-name">
+		<refname>glClipPlane</refname>
+		<refpurpose>specify a plane against which all geometry is clipped</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glClipPlane.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glClipPlane</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>plane</parameter></paramdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>equation</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glClipPlane.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>plane</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies which clipping plane is being positioned. Symbolic names of the form
+						<constant>GL_CLIP_PLANE</constant><emphasis>i</emphasis>, where <emphasis>i</emphasis> is an integer
+						between 0 and <constant>GL_MAX_CLIP_PLANES</constant>&thinsp;-&thinsp;1, are accepted.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>equation</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the address of an array of four double-precision floating-point values. These values are
+						interpreted as a plane equation.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glClipPlane.3G-description">
+		<title>Description</title>
+		<para>
+			Geometry is always clipped against the boundaries of a six-plane frustum in <parameter>x</parameter>,
+			<parameter>y</parameter>, and <parameter>z</parameter>. <function>glClipPlane</function> allows the specification of
+			additional planes, not necessarily perpendicular to the <parameter>x</parameter>, <parameter>y</parameter>, or
+			<parameter>z</parameter> axis, against which all geometry is clipped. To determine the maximum number of additional
+			clipping planes, call <function moreinfo="refentry">glGetIntegerv</function> with argument
+			<constant>GL_MAX_CLIP_PLANES</constant>. All implementations support at least six such clipping planes. Because the
+			resulting clipping region is the intersection of the defined half-spaces, it is always convex.
+		</para>
+		<para>
+			<function>glClipPlane</function> specifies a half-space using a four-component plane equation. When
+			<function>glClipPlane</function> is called, <parameter>equation</parameter> is transformed by the inverse of the
+			modelview matrix and stored in the resulting eye coordinates. Subsequent changes to the modelview matrix have no effect
+			on the stored plane-equation components. If the dot product of the eye coordinates of a vertex with the stored plane
+			equation components is positive or zero, the vertex is <parameter>in</parameter> with respect to that clipping plane.
+			Otherwise, it is <parameter>out</parameter>.
+		</para>
+		<para>
+			To enable and disable clipping planes, call <function moreinfo="refentry">glEnable</function> and <function
+			moreinfo="refentry">glDisable</function> with the argument <constant>GL_CLIP_PLANE</constant><parameter>i</parameter>,
+			where <parameter>i</parameter> is the plane number.
+		</para>
+		<para>
+			All clipping planes are initially defined as (0, 0, 0, 0) in eye coordinates and are disabled.
+		</para>
+	</refsect1>
+	<refsect1 id="glClipPlane.3G-notes">
+		<title>Notes</title>
+		<para>
+			It is always the case that
+			<constant>GL_CLIP_PLANE<emphasis>i</emphasis></constant>&thinsp;=&thinsp;<constant>GL_CLIP_PLANE0</constant>&thinsp;+&thinsp;<emphasis>i</emphasis>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClipPlane.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>plane</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glClipPlane</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glClipPlane.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGetClipPlane</function>
+		</para>
+		<para>
+			<function moreinfo="refentry">glIsEnabled</function> with argument
+			<constant>GL_CLIP_PLANE</constant><parameter>i</parameter>
+		</para>
+	</refsect1>
+	<refsect1 id="glClipPlane.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glEnable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

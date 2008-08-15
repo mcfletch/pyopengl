@@ -1,0 +1,58 @@
+<refentry id="gluDeleteTess.3G">
+	<refmeta id="gluDeleteTess.3G-meta">
+		<refentrytitle>gluDeleteTess</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluDeleteTess.3G-name">
+		<refname>gluDeleteTess</refname>
+		<refpurpose>destroy a tessellation object</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluDeleteTess.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluDeleteTess</function></funcdef>
+				<paramdef>GLUtesselator*&nbsp;<parameter>tess</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluDeleteTess.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>tess</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the tessellation object to destroy.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluDeleteTess.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluDeleteTess</function> destroys the indicated tessellation object (which was created with <function
+			moreinfo="refentry">gluNewTess</function>) and frees any memory that it used.
+		</para>
+	</refsect1>
+	<refsect1 id="gluDeleteTess.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluBeginPolygon</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNewTess</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessCallback</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,183 @@
+<refentry id="glNormalPointer.3G">
+	<refmeta id="glNormalPointer.3G-meta">
+		<refentrytitle>glNormalPointer</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glNormalPointer.3G-name">
+		<refname>glNormalPointer</refname>
+		<refpurpose>define an array of normals</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glNormalPointer.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormalPointer</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>type</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>stride</parameter></paramdef>
+				<paramdef>const&nbsp;GLvoid&nbsp;*<parameter>pointer</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glNormalPointer.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>type</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the data type of each coordinate in the array. Symbolic constants <constant>GL_BYTE</constant>,
+						<constant>GL_SHORT</constant>, <constant>GL_INT</constant>, <constant>GL_FLOAT</constant>, and
+						<constant>GL_DOUBLE</constant> are accepted. The initial value is <constant>GL_FLOAT</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>stride</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the byte offset between consecutive normals. If <parameter>stride</parameter> is 0- the initial
+						value-the normals are understood to be tightly packed in the array. The initial value is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>pointer</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to the first coordinate of the first normal in the array. The initial value is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glNormalPointer.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glNormalPointer</function> specifies the location and data of an array of normals to use when rendering.
+			<parameter>type</parameter> specifies the data type of the normal coordinates and <parameter>stride</parameter> gives
+			the byte stride from one normal to the next, allowing vertexes and attributes to be packed into a single array or
+			stored in separate arrays. (Single-array storage may be more efficient on some implementations; see <citerefentry>
+				<refentrytitle>glInterleavedArrays</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>.) When a normal array is specified, <parameter>type</parameter>, <parameter>stride</parameter>, and
+			<parameter>pointer</parameter> are saved as client-side state.
+		</para>
+		<para>
+			To enable and disable the normal array, call <function moreinfo="refentry">glEnableClientState</function> and <function
+			moreinfo="refentry">glDisableClientState</function> with the argument <constant>GL_NORMAL_ARRAY</constant>. If enabled,
+			the normal array is used when <function moreinfo="refentry">glDrawArrays</function>, <function
+			moreinfo="refentry">glDrawElements</function>, or <function moreinfo="refentry">glArrayElement</function> is called.
+		</para>
+		<para>
+			Use <function moreinfo="refentry">glDrawArrays</function> to construct a sequence of primitives (all of the same type)
+			from prespecified vertex and vertex attribute arrays. Use <function moreinfo="refentry">glArrayElement</function> to
+			specify primitives by indexing vertexes and vertex attributes and <function
+			moreinfo="refentry">glDrawElements</function> to construct a sequence of primitives by indexing vertexes and vertex
+			attributes.
+		</para>
+	</refsect1>
+	<refsect1 id="glNormalPointer.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>glNormalPointer</function> is available only if the GL version is 1.1 or greater.
+		</para>
+		<para>
+			The normal array is initially disabled and isn't accessed when <function moreinfo="refentry">glArrayElement</function>,
+			<function moreinfo="refentry">glDrawElements</function>, or <function moreinfo="refentry">glDrawArrays</function> is
+			called.
+		</para>
+		<para>
+			Execution of <function>glNormalPointer</function> is not allowed between <function
+			moreinfo="refentry">glBegin</function> and the corresponding <function moreinfo="refentry">glEnd</function>, but an
+			error may or may not be generated. If an error is not generated, the operation is undefined.
+		</para>
+		<para>
+			<function>glNormalPointer</function> is typically implemented on the client side.
+		</para>
+		<para>
+			Since the normal array parameters are client-side state, they are not saved or restored by <function
+			moreinfo="refentry">glPushAttrib</function> and <function moreinfo="refentry">glPopAttrib</function>. Use <function
+			moreinfo="refentry">glPushClientAttrib</function> and <function moreinfo="refentry">glPopClientAttrib</function>
+			instead.
+		</para>
+	</refsect1>
+	<refsect1 id="glNormalPointer.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>type</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if <parameter>stride</parameter> is negative.
+		</para>
+	</refsect1>
+	<refsect1 id="glNormalPointer.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glIsEnabled</function> with argument <constant>GL_NORMAL_ARRAY</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_NORMAL_ARRAY_TYPE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_NORMAL_ARRAY_STRIDE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGetPointerv</function> with argument <constant>GL_NORMAL_ARRAY_POINTER</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glNormalPointer.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glArrayElement</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColorPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawArrays</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawElements</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEdgeFlagPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEnable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetPointerv</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIndexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glInterleavedArrays</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPushClientAttrib</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexCoordPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glVertexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

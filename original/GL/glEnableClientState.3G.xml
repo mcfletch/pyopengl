@@ -1,0 +1,222 @@
+<refentry id="glEnableClientState.3G">
+	<refmeta id="glEnableClientState.3G-meta">
+		<refentrytitle>glEnableClientState</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glEnableClientState.3G-name">
+		<refname>glEnableClientState</refname>
+		<refname>glDisableClientState</refname>
+		<refpurpose>enable or disable client-side capability</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glEnableClientState.3G-c_spec-enable">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glEnableClientState</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>array</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glEnableClientState.3G-parameters-enable">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>array</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the capability to enable. Symbolic constants <constant>GL_COLOR_ARRAY</constant>,
+						<constant>GL_EDGE_FLAG_ARRAY</constant>, <constant>GL_INDEX_ARRAY</constant>,
+						<constant>GL_NORMAL_ARRAY</constant>, <constant>GL_TEXTURE_COORD_ARRAY</constant>, and
+						<constant>GL_VERTEX_ARRAY</constant> are accepted.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsynopsisdiv id="glEnableClientState.3G-c_spec-disable">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glDisableClientState</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>array</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glEnableClientState.3G-parameters-disable">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>array</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the capability to disable.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glEnableClientState.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glEnableClientState</function> and <function>glDisableClientState</function> enable or disable individual
+			client-side capabilities. By default, all client-side capabilities are disabled. Both
+			<function>glEnableClientState</function> and <function>glDisableClientState</function> take a single argument,
+			<parameter>array</parameter>, which can assume one of the following values:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_COLOR_ARRAY</constant></term>
+				<listitem>
+					<simpara>
+						If enabled, the color array is enabled for writing and used during rendering when <function
+						moreinfo="refentry">glArrayElement</function>, <function moreinfo="refentry">glDrawArrays</function>,
+						<function moreinfo="refentry">glDrawElement</function>, or <function
+						moreinfo="refentry">glDrawRangeElements</function> is called. See <function
+						moreinfo="refentry">glColorPointer</function>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_EDGE_FLAG_ARRAY</constant></term>
+				<listitem>
+					<simpara>
+						If enabled, the edge flag array is enabled for writing and used during rendering when <function
+						moreinfo="refentry">glArrayElement</function>, <function moreinfo="refentry">glDrawArrays</function>,
+						<function moreinfo="refentry">glDrawElement</function>, or <function
+						moreinfo="refentry">glDrawRangeElements</function> is called. See <function
+						moreinfo="refentry">glEdgeFlagPointer</function>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_INDEX_ARRAY</constant></term>
+				<listitem>
+					<simpara>
+						If enabled, the index array is enabled for writing and used during rendering when <function
+						moreinfo="refentry">glArrayElement</function>, <function moreinfo="refentry">glDrawArrays</function>,
+						<function moreinfo="refentry">glDrawElement</function>, or <function
+						moreinfo="refentry">glDrawRangeElements</function> is called. See <function
+						moreinfo="refentry">glIndexPointer</function>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_NORMAL_ARRAY</constant></term>
+				<listitem>
+					<simpara>
+						If enabled, the normal array is enabled for writing and used during rendering when <function
+						moreinfo="refentry">glArrayElement</function>, <function moreinfo="refentry">glDrawArrays</function>,
+						<function moreinfo="refentry">glDrawElement</function>, or <function
+						moreinfo="refentry">glDrawRangeElements</function> is called. See <function
+						moreinfo="refentry">glNormalPointer</function>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_TEXTURE_COORD_ARRAY</constant></term>
+				<listitem>
+					<simpara>
+						If enabled, the texture coordinate array is enabled for writing and used during rendering when <function
+						moreinfo="refentry">glArrayElement</function>, <function moreinfo="refentry">glDrawArrays</function>,
+						<function moreinfo="refentry">glDrawElement</function>, or <function
+						moreinfo="refentry">glDrawRangeElements</function> is called. See <function
+						moreinfo="refentry">glTexCoordPointer</function>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_VERTEX_ARRAY</constant></term>
+				<listitem>
+					<simpara>
+						If enabled, the vertex array is enabled for writing and used during rendering when <function
+						moreinfo="refentry">glArrayElement</function>, <function moreinfo="refentry">glDrawArrays</function>,
+						<function moreinfo="refentry">glDrawElement</function>, or <function
+						moreinfo="refentry">glDrawRangeElements</function> is called. See <function
+						moreinfo="refentry">glVertexPointer</function>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glEnableClientState.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>glEnableClientState</function> is available only if the GL version is 1.1 or greater.
+		</para>
+		<para>
+			If <constant>GL_ARB_multitexture</constant> is supported, enabling and disabling
+			<constant>GL_TEXTURE_COORD_ARRAY</constant> affects the active client texture unit. The active client texture unit is
+			controlled with <function moreinfo="refentry">glClientActiveTextureARB</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glEnableClientState.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>array</parameter> is not an accepted value.
+		</para>
+		<para>
+			<function>glEnableClientState</function> is not allowed between the execution of <function
+			moreinfo="refentry">glBegin</function> and the corresponding <function moreinfo="refentry">glEnd</function>, but an
+			error may or may not be generated. If no error is generated, the behavior is undefined.
+		</para>
+	</refsect1>
+	<refsect1 id="glEnableClientState.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glArrayElement</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glClientActiveTextureARB</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColorPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawArrays</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawElements</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEdgeFlagPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEnable</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetPointerv</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIndexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glInterleavedArrays</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glNormalPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexCoordPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glVertexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

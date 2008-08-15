@@ -1,0 +1,224 @@
+<refentry id="glDrawRangeElements.3G">
+	<refmeta id="glDrawRangeElements.3G-meta">
+		<refentrytitle>glDrawRangeElements</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glDrawRangeElements.3G-name">
+		<refname>glDrawRangeElements</refname>
+		<refpurpose>render primitives from array data</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glDrawRangeElements.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glDrawRangeElements</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>mode</parameter></paramdef>
+				<paramdef>GLuint&nbsp;<parameter>start</parameter></paramdef>
+				<paramdef>GLuint&nbsp;<parameter>end</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>count</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>type</parameter></paramdef>
+				<paramdef>const&nbsp;GLvoid&nbsp;*<parameter>indices</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glDrawRangeElements.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>mode</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies what kind of primitives to render. Symbolic constants <constant>GL_POINTS</constant>,
+						<constant>GL_LINE_STRIP</constant>, <constant>GL_LINE_LOOP</constant>, <constant>GL_LINES</constant>,
+						<constant>GL_TRIANGLE_STRIP</constant>, <constant>GL_TRIANGLE_FAN</constant>,
+						<constant>GL_TRIANGLES</constant>, <constant>GL_QUAD_STRIP</constant>, <constant>GL_QUADS</constant>, and
+						<constant>GL_POLYGON</constant> are accepted.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>start</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the minimum array index contained in <parameter>indices</parameter>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>end</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the maximum array index contained in <parameter>indices</parameter>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>count</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the number of elements to be rendered.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>type</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the type of the values in <parameter>count</parameter>. Must be one of
+						<constant>GL_UNSIGNED_BYTE</constant>, <constant>GL_UNSIGNED_SHORT</constant>, or
+						<constant>GL_UNSIGNED_INT</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>indices</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to the location where the indices are stored.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glDrawRangeElements.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glDrawRangeElements</function> is a restricted form of <function
+			moreinfo="refentry">glDrawElements</function>. <parameter>mode</parameter>, <parameter>start</parameter>,
+			<parameter>end</parameter>, and <parameter>count</parameter> match the corresponding arguments to <function
+			moreinfo="refentry">glDrawElements</function>, with the additional constraint that all values in the arrays
+			<parameter>count</parameter> must lie between <parameter>start</parameter> and <parameter>end</parameter>, inclusive.
+		</para>
+		<para>
+			Implementations denote recommended maximum amounts of vertex and
+		</para>
+		<para>
+			index data, which may be queried by calling <function moreinfo="refentry">glGet</function> with argument
+			<constant>GL_MAX_ELEMENTS_VERTICES</constant> and <constant>GL_MAX_ELEMENTS_INDICES</constant>. If <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>end</mml:mi>
+						<mml:mo>-</mml:mo>
+						<mml:mi>start</mml:mi>
+						<mml:mo>+</mml:mo>
+						<mml:mn>1</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> is greater than the value of <constant>GL_MAX_ELEMENTS_VERTICES</constant>, or if
+			<parameter>count</parameter> is greater than the value of <constant>GL_MAX_ELEMENTS_INDICES</constant>, then the call
+			may operate at reduced performance. There is no requirement that all vertices in the range
+			[<parameter>start</parameter>,<parameter>end</parameter>] be referenced. However, the implementation may partially
+			process unused vertices, reducing performance from what could be achieved with an optimal index set.
+		</para>
+		<para>
+			When <function>glDrawRangeElements</function> is called, it uses <parameter>start</parameter> sequential elements from
+			an enabled array, starting at <parameter>count</parameter> to construct a sequence of geometric primitives.
+			<parameter>mode</parameter> specifies what kind of primitives are constructed, and how the array elements construct
+			these primitives. If more than one array is enabled, each is used. If <constant>GL_VERTEX_ARRAY</constant> is not
+			enabled, no geometric primitives are constructed.
+		</para>
+		<para>
+			Vertex attributes that are modified by <function>glDrawRangeElements</function> have an unspecified value after
+			<function>glDrawRangeElements</function> returns. For example, if <constant>GL_COLOR_ARRAY</constant> is enabled, the
+			value of the current color is undefined after <function>glDrawRangeElements</function> executes. Attributes that aren't
+			modified maintain their previous values.
+		</para>
+	</refsect1>
+	<refsect1 id="glDrawRangeElements.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>glDrawRangeElements</function> is available only if the GL version is 1.2 or greater.
+		</para>
+		<para>
+			<function>glDrawRangeElements</function> is included in display lists. If <function>glDrawRangeElements</function> is
+			entered into a display list, the necessary array data (determined by the array pointers and enables) is also entered
+			into the display list. Because the array pointers and enables are client-side state, their values affect display lists
+			when the lists are created, not when the lists are executed.
+		</para>
+	</refsect1>
+	<refsect1 id="glDrawRangeElements.3G-errors">
+		<title>Errors</title>
+		<para>
+			It is an error for indices to lie outside the range [<parameter>start</parameter>,<parameter>end</parameter>], but
+			implementations may not check for this situation. Such indices cause implementation-dependent behavior.
+		</para>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>mode</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if <parameter>count</parameter> is negative.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if <parameter>end</parameter> <inlineequation>
+				<mml:math>
+					<mml:mo>&lt;</mml:mo>
+				</mml:math>
+			</inlineequation> <parameter>start</parameter>.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glDrawRangeElements</function> is executed between
+			the execution of <function moreinfo="refentry">glBegin</function> and the corresponding <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glDrawRangeElements.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAX_ELEMENTS_VERTICES</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAX_ELEMENTS_INDICES</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glDrawRangeElements.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glArrayElement</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColorPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawArrays</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawElements</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEdgeFlagPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetPointerv</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIndexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glInterleavedArrays</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glNormalPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexCoordPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glVertexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,112 @@
+<refentry id="glutStrokeWidth.3GLUT">
+	<refmeta id="glutStrokeWidth.3GLUT-meta">
+		<refentrytitle>glutStrokeWidth</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutStrokeWidth.3GLUT-name">
+		<refname>glutStrokeWidthf</refname>
+		<refname>glutStrokeWidth</refname>
+		<refname>glutStrokeLengthf</refname>
+		<refname>glutStrokeLength</refname>
+		<refpurpose>returns the width/length of a stroke character/string.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutStrokeWidth.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>float&nbsp;<function>glutStrokeWidthf</function></funcdef>
+				<paramdef>void&nbsp;*<parameter>font</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>character</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>float&nbsp;<function>glutStrokeLengthf</function></funcdef>
+				<paramdef>void&nbsp;*<parameter>font</parameter></paramdef>
+				<paramdef>const&nbsp;unsigned&nbsp;char&nbsp;*<parameter>string</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+		<para>
+			<parameter role="bold">Deprecated interfaces</parameter>
+		</para>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutStrokeWidth</function></funcdef>
+				<paramdef>void&nbsp;*<parameter>font</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>character</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutStrokeLength</function></funcdef>
+				<paramdef>void&nbsp;*<parameter>font</parameter></paramdef>
+				<paramdef>const&nbsp;unsigned&nbsp;char&nbsp;*<parameter>string</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutStrokeWidth.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>font</parameter></term>
+				<listitem>
+					<simpara>
+						Stroke font to use. For valid values, see the <function>glutStrokeWidth</function> description.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>character</parameter></term>
+				<listitem>
+					<simpara>
+						Character to return width of (not confined to 8 bits).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>string</parameter></term>
+				<listitem>
+					<simpara>
+						Text string (8-bit characters), null terminated.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutStrokeWidth.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutStrokeWidthf</function> returns the width in modeling units of a stroke character in a supported stroke
+			font. While the width of characters in a font may vary (though fixed width fonts do not vary), the maximum height
+			characteristics of a particular font are fixed.
+		</para>
+		<para>
+			<function>glutStrokeLengthf</function> returns the length in modeling units of a string (8-bit characters). This length
+			is equivalent to summing all the widths returned by <function>glutStrokeWidthf</function> for each character in the
+			string.
+		</para>
+	</refsect1>
+	<refsect1 id="glutStrokeWidth.3GLUT-bugs">
+		<title>Bugs</title>
+		<para>
+			The deprecated <function>glutStrokeWidth</function> and <function>glutStrokeLength</function> routines return an
+			integer rather than a float. Newer GLUT programs should use the newer float-returning routine
+			<function>glutStrokeWidthf</function> and <function>glutStrokeLengthf</function>. Note that these newer float routines
+			do not exist in implementations prior to GLUT 3.8. Also, the <function>glutStrokeLength</function> routine summed
+			integerized character widths so it underestimated the length of strings prior to GLUT 3.8, but the implementation of
+			<function>glutStrokeLength</function> in GLUT 3.8 and beyond sums the character widths for the strings in a float
+			(though <function>glutStrokeLength</function> still returns an integer).
+		</para>
+	</refsect1>
+	<refsect1 id="glutStrokeWidth.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutStrokeCharacter</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutBitmapWidth</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

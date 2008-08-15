@@ -1,0 +1,210 @@
+<refentry id="gluCylinder.3G">
+	<refmeta id="gluCylinder.3G-meta">
+		<refentrytitle>gluCylinder</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluCylinder.3G-name">
+		<refname>gluCylinder</refname>
+		<refpurpose>draw a cylinder</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluCylinder.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluCylinder</function></funcdef>
+				<paramdef>GLUquadric*&nbsp;<parameter>quad</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>base</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>top</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>height</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>slices</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>stacks</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluCylinder.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>quad</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the quadrics object (created with <function moreinfo="refentry">gluNewQuadric</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>base</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the radius of the cylinder at <inlineequation>
+							<mml:math>
+								<mml:mi>z</mml:mi>
+								<mml:mo>=</mml:mo>
+								<mml:mn>0</mml:mn>
+							</mml:math>
+						</inlineequation>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>top</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the radius of the cylinder at <inlineequation>
+							<mml:math>
+								<mml:mi>z</mml:mi>
+								<mml:mo>=</mml:mo>
+								<mml:mi>height</mml:mi>
+							</mml:math>
+						</inlineequation>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>height</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the height of the cylinder.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>slices</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the number of subdivisions around the <inlineequation>
+							<mml:math>
+								<mml:mi>z</mml:mi>
+							</mml:math>
+						</inlineequation> axis.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>stacks</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the number of subdivisions along the <inlineequation>
+							<mml:math>
+								<mml:mi>z</mml:mi>
+							</mml:math>
+						</inlineequation> axis.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluCylinder.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluCylinder</function> draws a cylinder oriented along the <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+				</mml:math>
+			</inlineequation> axis. The base of the cylinder is placed at <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+					<mml:mo>=</mml:mo>
+					<mml:mn>0</mml:mn>
+				</mml:math>
+			</inlineequation>, and the top at <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+					<mml:mo>=</mml:mo>
+					<mml:mi>height</mml:mi>
+				</mml:math>
+			</inlineequation>. Like a sphere, a cylinder is subdivided around the <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+				</mml:math>
+			</inlineequation> axis into slices, and along the <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+				</mml:math>
+			</inlineequation> axis into stacks.
+		</para>
+		<para>
+			Note that if <parameter>top</parameter> is set to 0.0, this routine generates a cone.
+		</para>
+		<para>
+			If the orientation is set to <constant>GLU_OUTSIDE</constant> (with <function
+			moreinfo="refentry">gluQuadricOrientation</function>), then any generated normals point away from the <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+				</mml:math>
+			</inlineequation> axis. Otherwise, they point toward the <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+				</mml:math>
+			</inlineequation> axis.
+		</para>
+		<para>
+			If texturing is turned on (with <function moreinfo="refentry">gluQuadricTexture</function>), then texture coordinates
+			are generated so that <parameter>t</parameter> ranges linearly from 0.0 at <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+					<mml:mo>=</mml:mo>
+					<mml:mn>0</mml:mn>
+				</mml:math>
+			</inlineequation> to 1.0 at <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+					<mml:mo>=</mml:mo>
+					<mml:mi>height</mml:mi>
+				</mml:math>
+			</inlineequation>, and <parameter>s</parameter> ranges from 0.0 at the <inlineequation>
+				<mml:math>
+					<mml:mo>+</mml:mo>
+					<mml:mi>y</mml:mi>
+				</mml:math>
+			</inlineequation> axis, to 0.25 at the <inlineequation>
+				<mml:math>
+					<mml:mo>+</mml:mo>
+					<mml:mi>x</mml:mi>
+				</mml:math>
+			</inlineequation> axis, to 0.5 at the <inlineequation>
+				<mml:math>
+					<mml:mo>-</mml:mo>
+					<mml:mi>y</mml:mi>
+				</mml:math>
+			</inlineequation> axis, to 0.75 at the <inlineequation>
+				<mml:math>
+					<mml:mo>-</mml:mo>
+					<mml:mi>x</mml:mi>
+				</mml:math>
+			</inlineequation> axis, and back to 1.0 at the <inlineequation>
+				<mml:math>
+					<mml:mo>+</mml:mo>
+					<mml:mi>y</mml:mi>
+				</mml:math>
+			</inlineequation> axis.
+		</para>
+	</refsect1>
+	<refsect1 id="gluCylinder.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluDisk</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNewQuadric</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluPartialDisk</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricTexture</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluSphere</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

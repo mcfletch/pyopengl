@@ -1,0 +1,140 @@
+<refentry id="glutGameModeGet.3GLUT">
+	<refmeta id="glutGameModeGet.3GLUT-meta">
+		<refentrytitle>glutGameModeGet</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutGameModeGet.3GLUT-name">
+		<refname>glutGameModeGet</refname>
+		<refpurpose>retrieves GLUT game mode information represented by integers.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutGameModeGet.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutGameModeGet</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>info</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutGameModeGet.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>info</parameter></term>
+				<listitem>
+					<simpara>
+						Name of game mode information to retrieve.
+					</simpara>
+					<variablelist>
+						<varlistentry>
+							<term><constant>GLUT_GAME_MODE_ACTIVE</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if GLUT's game mode is active; zero if not active. Game mode is not active initially.
+									Game mode becomes active when <function moreinfo="refentry">glutEnterGameMode</function> is
+									called. Game mode becomes inactive when <function
+									moreinfo="refentry">glutLeaveGameMode</function> is called.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_GAME_MODE_POSSIBLE</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if the game mode string last specified to <function
+									moreinfo="refentry">glutGameModeString</function> is a possible game mode configuration; zero
+									otherwise. Being &quot;possible&quot; does not guarantee that if game mode is entered with
+									<function moreinfo="refentry">glutEnterGameMode</function> that the display settings will
+									actually changed. <constant>GLUT_GAME_MODE_DISPLAY_CHANGED</constant> should be called once
+									game mode is entered to determine if the display mode is actually changed.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_GAME_MODE_WIDTH</constant></term>
+							<listitem>
+								<simpara>
+									Width in pixels of the screen when game mode is activated.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_GAME_MODE_HEIGHT</constant></term>
+							<listitem>
+								<simpara>
+									Height in pixels of the screen when game mode is activated.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_GAME_MODE_PIXEL_DEPTH</constant></term>
+							<listitem>
+								<simpara>
+									Pixel depth of the screen when game mode is activiated.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_GAME_MODE_REFRESH_RATE</constant></term>
+							<listitem>
+								<simpara>
+									Screen refresh rate in cyles per second (hertz) when game mode is activated. Zero is returned
+									if the refresh rate is unknown or cannot be queried.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_GAME_MODE_DISPLAY_CHANGED</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if entering game mode actually changed the display settings. If the game mode string
+									is not possible or the display mode could not be changed for any other reason, zero is
+									returned.
+								</simpara>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutGameModeGet.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutGameModeGet</function> retrieves GLUT game mode information represented by integers. The info parameter
+			determines what type of game mode information to return. Requesting game mode information for an invalid GLUT game mode
+			information name returns negative one.
+		</para>
+	</refsect1>
+	<refsect1 id="glutGameModeGet.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutLayerGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGameModeString</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutEnterGameMode</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutLeaveGameMode</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

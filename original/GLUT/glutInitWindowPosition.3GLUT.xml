@@ -1,0 +1,136 @@
+<refentry id="glutInitWindowPosition.3GLUT">
+	<refmeta id="glutInitWindowPosition.3GLUT-meta">
+		<refentrytitle>glutInitWindowPosition</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutInitWindowPosition.3GLUT-name">
+		<refname>glutInitWindowPosition</refname>
+		<refname>glutInitWindowSize</refname>
+		<refpurpose>set the initial window position and size respectively.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutInitWindowPosition.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutInitWindowSize</function></funcdef>
+				<paramdef>int&nbsp;<parameter>width</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>height</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutInitWindowPosition</function></funcdef>
+				<paramdef>int&nbsp;<parameter>x</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>y</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutInitWindowPosition.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>width</parameter></term>
+				<listitem>
+					<simpara>
+						Width in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>height</parameter></term>
+				<listitem>
+					<simpara>
+						Height in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>x</parameter></term>
+				<listitem>
+					<simpara>
+						Window X location in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>y</parameter></term>
+				<listitem>
+					<simpara>
+						Window Y location in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutInitWindowPosition.3GLUT-description">
+		<title>Description</title>
+		<para>
+			Windows created by <function moreinfo="refentry">glutCreateWindow</function> will be requested to be created with the
+			current initial window position and size.
+		</para>
+		<para>
+			The initial value of the initial window position GLUT state is -1 and -1. If either the X or Y component to the initial
+			window position is negative, the actual window position is left to the window system to determine. The initial value of
+			the initial window size GLUT state is 300 by 300. The initial window size components must be greater than zero.
+		</para>
+		<para>
+			The intent of the initial window position and size values is to provide a suggestion to the window system for a
+			window's initial size and position. The window system is not obligated to use this information. Therefore, GLUT
+			programs should not assume the window was created at the specified size or position. A GLUT program should use the
+			window's reshape callback to determine the true size of the window.
+		</para>
+	</refsect1>
+	<refsect1 id="glutInitWindowPosition.3GLUT-example">
+		<title>Example</title>
+		<para>
+			If you would like your GLUT program to default to starting at a given screen location and at a given size, but you
+			would also like to let the user override these defaults via a command line argument (such as -geometry for X11), call
+			<function>glutInitWindowSize</function> and <function>glutInitWindowPosition</function> <emphasis>before</emphasis>
+			your call to <function moreinfo="refentry">glutInit</function>. For example:
+		</para>
+		<programlisting>int main(int argc, char **argv)
+{
+    glutInitWindowSize(500, 300);
+    glutInitWindowPosition(100, 100);
+    glutInit(&amp;argc, argv);
+    ...
+}</programlisting>
+		<para>
+			However, if you'd like to force your program to start up at a given size, call <function>glutInitWindowSize</function>
+			and <function>glutInitWindowPosition</function> <emphasis>after</emphasis> your call to <function
+			moreinfo="refentry">glutInit</function>. For example:
+		</para>
+		<programlisting>int main(int argc, char **argv)
+{
+    glutInit(&amp;argc, argv);
+    glutInitWindowSize(500, 300);
+    glutInitWindowPosition(100,	100);
+    ...
+}</programlisting>
+	</refsect1>
+	<refsect1 id="glutInitWindowPosition.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutInit</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateSubWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutReshapeFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

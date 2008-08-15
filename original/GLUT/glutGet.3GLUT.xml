@@ -1,0 +1,384 @@
+<refentry id="glutGet.3GLUT">
+	<refmeta id="glutGet.3GLUT-meta">
+		<refentrytitle>glutGet</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutGet.3GLUT-name">
+		<refname>glutGet</refname>
+		<refpurpose>retrieves simple GLUT state represented by integers.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutGet.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutGet</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>state</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutGet.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>state</parameter></term>
+				<listitem>
+					<simpara>
+						Name of state to retrieve.
+					</simpara>
+					<variablelist>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_X</constant></term>
+							<listitem>
+								<simpara>
+									X location in pixels (relative to the screen origin) of the current window.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_Y</constant></term>
+							<listitem>
+								<simpara>
+									Y location in pixels (relative to the screen origin) of the current window.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_WIDTH</constant></term>
+							<listitem>
+								<simpara>
+									Width in pixels of the current window.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_HEIGHT</constant></term>
+							<listitem>
+								<simpara>
+									Height in pixels of the current window.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_BUFFER_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Total number of bits for current layer of current window's color buffer. For an RGBA window,
+									this is the sum of <constant>GLUT_WINDOW_RED_SIZE</constant>,
+									<constant>GLUT_WINDOW_GREEN_SIZE</constant>, <constant>GLUT_WINDOW_BLUE_SIZE</constant>, and
+									<constant>GLUT_WINDOW_ALPHA_SIZE</constant>. For color index windows, this is the size of the
+									color indexes.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_STENCIL_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits in the current layer of current window's stencil buffer.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_DEPTH_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits in the current layer of current window's depth buffer.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_RED_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits of red stored the current layer of current window's color buffer. Zero if the
+									current layer of the current window is color index.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_GREEN_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits of green stored the current layer of current window's color buffer. Zero if the
+									current layer of the current window is color index.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_BLUE_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits of blue stored the current layer of current window's color buffer. Zero if the
+									current layer of the current window is color index.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_ALPHA_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits of alpha stored the current layer of current window's color buffer. Zero if the
+									current layer of the current window is color index.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_ACCUM_RED_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits of red stored in the current layer of current window's accumulation buffer. Zero
+									if the current layer of the current window is color index.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_ACCUM_GREEN_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits of green stored in the current layer of current window's accumulation buffer.
+									Zero if the current layer of the current window is color index.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_ACCUM_BLUE_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits of blue stored in the current layer of current window's accumulation buffer.
+									Zero if the current layer of the current window is color index.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_ACCUM_ALPHA_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Number of bits of alpha stored in the current layer of current window's accumulation buffer.
+									Zero if the current layer of the current window is color index.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_DOUBLEBUFFER</constant></term>
+							<listitem>
+								<simpara>
+									One if the current layer of the current window is double buffered, zero otherwise.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_RGBA</constant></term>
+							<listitem>
+								<simpara>
+									One if the current layer of the current window is RGBA mode, zero otherwise (i.e., color index).
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_PARENT</constant></term>
+							<listitem>
+								<simpara>
+									The window number of the current window's parent; zero if the window is a top-level window.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_NUM_CHILDREN</constant></term>
+							<listitem>
+								<simpara>
+									The number of subwindows the current window has (not counting children of children).
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_COLORMAP_SIZE</constant></term>
+							<listitem>
+								<simpara>
+									Size of current layer of current window's color index colormap; zero for RGBA color model
+									layers.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_NUM_SAMPLES</constant></term>
+							<listitem>
+								<simpara>
+									Number of samples for multisampling for the current layer of the current window.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_STEREO</constant></term>
+							<listitem>
+								<simpara>
+									One if the current layer of the current window is stereo, zero otherwise.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_CURSOR</constant></term>
+							<listitem>
+								<simpara>
+									Current cursor for the current window.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_SCREEN_WIDTH</constant></term>
+							<listitem>
+								<simpara>
+									Width of the screen in pixels. Zero indicates the width is unknown or not available.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_SCREEN_HEIGHT</constant></term>
+							<listitem>
+								<simpara>
+									Height of the screen in pixels. Zero indicates the height is unknown or not available.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_SCREEN_WIDTH_MM</constant></term>
+							<listitem>
+								<simpara>
+									Width of the screen in millimeters. Zero indicates the width is unknown or not available.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_SCREEN_HEIGHT_MM</constant></term>
+							<listitem>
+								<simpara>
+									Height of the screen in millimeters. Zero indicates the height is unknown or not available.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_MENU_NUM_ITEMS</constant></term>
+							<listitem>
+								<simpara>
+									Number of menu items in the current menu.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_DISPLAY_MODE_POSSIBLE</constant></term>
+							<listitem>
+								<simpara>
+									Whether the current display mode is supported or not.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_INIT_DISPLAY_MODE</constant></term>
+							<listitem>
+								<simpara>
+									The initial display mode bit mask.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_INIT_WINDOW_X</constant></term>
+							<listitem>
+								<simpara>
+									The X value of the initial window position.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_INIT_WINDOW_Y</constant></term>
+							<listitem>
+								<simpara>
+									The Y value of the initial window position.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_INIT_WINDOW_WIDTH</constant></term>
+							<listitem>
+								<simpara>
+									The width value of the initial window size.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_INIT_WINDOW_HEIGHT</constant></term>
+							<listitem>
+								<simpara>
+									The height value of the initial window size.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_ELAPSED_TIME</constant></term>
+							<listitem>
+								<simpara>
+									Number of milliseconds since glutInit called (or first call to <function
+									moreinfo="refentry">glutGet(GLUT_ELAPSED_TIME)</function>).
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_WINDOW_FORMAT_ID</constant></term>
+							<listitem>
+								<simpara>
+									The window system dependent format ID for the current layer of the current window. On X11 GLUT
+									implementations, this is the X visual ID. On Win32 GLUT implementations, this is the Win32
+									Pixel Format Descriptor number. This value is returned for debugging, benchmarking, and testing
+									ease.
+								</simpara>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutGet.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutGet</function> retrieves simple GLUT state represented by integers. The state parameter determines what
+			type of state to return. Where appropriate, window capability state is returned for the layer in use. GLUT state names
+			beginning with <constant>GLUT_WINDOW_</constant> return state for the current window. GLUT state names beginning with
+			<constant>GLUT_MENU_</constant> return state for the current menu. Other GLUT state names return global state.
+			Requesting state for an invalid GLUT state name returns negative one.
+		</para>
+	</refsect1>
+	<refsect1 id="glutGet.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutLayerGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGetColor</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGetWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGetMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGetModifiers</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutExtensionSupported</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

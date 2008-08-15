@@ -1,0 +1,303 @@
+<refentry id="glOrtho.3G">
+	<refmeta id="glOrtho.3G-meta">
+		<refentrytitle>glOrtho</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glOrtho.3G-name">
+		<refname>glOrtho</refname>
+		<refpurpose>multiply the current matrix with an orthographic matrix</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glOrtho.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glOrtho</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>left</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>right</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>bottom</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>top</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>zNear</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>zFar</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glOrtho.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>left</parameter>, <parameter>right</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the coordinates for the left and right vertical clipping planes.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>bottom</parameter>, <parameter>top</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the coordinates for the bottom and top horizontal clipping planes.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>zNear</parameter>, <parameter>zFar</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the distances to the nearer and farther depth clipping planes. These values are negative if the
+						plane is to be behind the viewer.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glOrtho.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glOrtho</function> describes a transformation that produces a parallel projection. The current matrix (see
+			<citerefentry>
+				<refentrytitle>glMatrixMode</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>) is multiplied by this matrix and the result replaces the current matrix, as if <function
+			moreinfo="refentry">glMultMatrix</function> were called with the following matrix as its argument: <informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:mo>(</mml:mo>
+						<mml:mtable>
+							<mml:mtr>
+								<mml:mtd columnalign="center">
+									<mml:mfrac>
+										<mml:mn>2</mml:mn>
+										<mml:mrow>
+											<mml:mi>right</mml:mi>
+											<mml:mo>-</mml:mo>
+											<mml:mi>left</mml:mi>
+										</mml:mrow>
+									</mml:mfrac>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:msub>
+										<mml:mi>t</mml:mi>
+										<mml:mi>x</mml:mi>
+									</mml:msub>
+								</mml:mtd>
+							</mml:mtr>
+							<mml:mtr>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mfrac>
+										<mml:mn>2</mml:mn>
+										<mml:mrow>
+											<mml:mi>top</mml:mi>
+											<mml:mo>-</mml:mo>
+											<mml:mi>bottom</mml:mi>
+										</mml:mrow>
+									</mml:mfrac>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:msub>
+										<mml:mi>t</mml:mi>
+										<mml:mi>y</mml:mi>
+									</mml:msub>
+								</mml:mtd>
+							</mml:mtr>
+							<mml:mtr>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mfrac>
+										<mml:mn>-2</mml:mn>
+										<mml:mrow>
+											<mml:mi>zFar</mml:mi>
+											<mml:mo>-</mml:mo>
+											<mml:mi>zNear</mml:mi>
+										</mml:mrow>
+									</mml:mfrac>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:msub>
+										<mml:mi>t</mml:mi>
+										<mml:mi>z</mml:mi>
+									</mml:msub>
+								</mml:mtd>
+							</mml:mtr>
+							<mml:mtr>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>0</mml:mn>
+								</mml:mtd>
+								<mml:mtd columnalign="center">
+									<mml:mn>1</mml:mn>
+								</mml:mtd>
+							</mml:mtr>
+						</mml:mtable>
+						<mml:mo>)</mml:mo>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>
+		</para>
+		<para>
+			where <informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:msub>
+							<mml:mi>t</mml:mi>
+							<mml:mi>x</mml:mi>
+						</mml:msub>
+						<mml:mo>=</mml:mo>
+						<mml:mo>-</mml:mo>
+						<mml:mfrac>
+							<mml:mrow>
+								<mml:mi>right</mml:mi>
+								<mml:mo>+</mml:mo>
+								<mml:mi>left</mml:mi>
+							</mml:mrow>
+							<mml:mrow>
+								<mml:mi>right</mml:mi>
+								<mml:mo>-</mml:mo>
+								<mml:mi>left</mml:mi>
+							</mml:mrow>
+						</mml:mfrac>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>
+		</para>
+		<para>
+			<informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:msub>
+							<mml:mi>t</mml:mi>
+							<mml:mi>y</mml:mi>
+						</mml:msub>
+						<mml:mo>=</mml:mo>
+						<mml:mo>-</mml:mo>
+						<mml:mfrac>
+							<mml:mrow>
+								<mml:mi>top</mml:mi>
+								<mml:mo>+</mml:mo>
+								<mml:mi>bottom</mml:mi>
+							</mml:mrow>
+							<mml:mrow>
+								<mml:mi>top</mml:mi>
+								<mml:mo>-</mml:mo>
+								<mml:mi>bottom</mml:mi>
+							</mml:mrow>
+						</mml:mfrac>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>
+		</para>
+		<para>
+			<informalequation>
+				<mml:math mode="display">
+					<mml:mrow>
+						<mml:msub>
+							<mml:mi>t</mml:mi>
+							<mml:mi>z</mml:mi>
+						</mml:msub>
+						<mml:mo>=</mml:mo>
+						<mml:mo>-</mml:mo>
+						<mml:mfrac>
+							<mml:mrow>
+								<mml:mi>zFar</mml:mi>
+								<mml:mo>+</mml:mo>
+								<mml:mi>zNear</mml:mi>
+							</mml:mrow>
+							<mml:mrow>
+								<mml:mi>zFar</mml:mi>
+								<mml:mo>-</mml:mo>
+								<mml:mi>zNear</mml:mi>
+							</mml:mrow>
+						</mml:mfrac>
+					</mml:mrow>
+				</mml:math>
+			</informalequation>
+		</para>
+		<para>
+			Typically, the matrix mode is <constant>GL_PROJECTION</constant>, and (<parameter>left</parameter>,
+			<parameter>bottom</parameter>, -<parameter>zNear</parameter>) and (<parameter>right</parameter>,
+			<parameter>top</parameter>, -<parameter>zNear</parameter>) specify the points on the near clipping plane that are
+			mapped to the lower left and upper right corners of the window, respectively, assuming that the eye is located at (0,
+			0, 0). -<parameter>zFar</parameter> specifies the location of the far clipping plane. Both <parameter>zNear</parameter>
+			and <parameter>zFar</parameter> can be either positive or negative.
+		</para>
+		<para>
+			Use <function moreinfo="refentry">glPushMatrix</function> and <function moreinfo="refentry">glPopMatrix</function> to
+			save and restore the current matrix stack.
+		</para>
+	</refsect1>
+	<refsect1 id="glOrtho.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glOrtho</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glOrtho.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MATRIX_MODE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_COLOR_MATRIX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MODELVIEW_MATRIX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_PROJECTION_MATRIX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_TEXTURE_MATRIX</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glOrtho.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glFrustum</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMatrixMode</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glMultMatrix</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPushMatrix</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glViewport</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

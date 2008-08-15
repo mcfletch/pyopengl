@@ -1,0 +1,111 @@
+<refentry id="gluBeginPolygon.3G">
+	<refmeta id="gluBeginPolygon.3G-meta">
+		<refentrytitle>gluBeginPolygon</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluBeginPolygon.3G-name">
+		<refname>gluBeginPolygon</refname>
+		<refname>gluEndPolygon</refname>
+		<refpurpose>delimit a polygon description</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluBeginPolygon.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluBeginPolygon</function></funcdef>
+				<paramdef>GLUtesselator*&nbsp;<parameter>tess</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluEndPolygon</function></funcdef>
+				<paramdef>GLUtesselator*&nbsp;<parameter>tess</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluBeginPolygon.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>tess</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the tessellation object (created with <function moreinfo="refentry">gluNewTess</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluBeginPolygon.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluBeginPolygon</function> and <function>gluEndPolygon</function> delimit the definition of a nonconvex
+			polygon. To define such a polygon, first call <function>gluBeginPolygon</function>. Then define the contours of the
+			polygon by calling <function moreinfo="refentry">gluTessVertex</function> for each vertex and <function
+			moreinfo="refentry">gluNextContour</function> to start each new contour. Finally, call
+			<function>gluEndPolygon</function> to signal the end of the definition. See the <function
+			moreinfo="refentry">gluTessVertex</function> and <function moreinfo="refentry">gluNextContour</function> reference
+			pages for more details.
+		</para>
+		<para>
+			Once <function>gluEndPolygon</function> is called, the polygon is tessellated, and the resulting triangles are
+			described through callbacks. See <function moreinfo="refentry">gluTessCallback</function> for descriptions of the
+			callback functions.
+		</para>
+	</refsect1>
+	<refsect1 id="gluBeginPolygon.3G-notes">
+		<title>Notes</title>
+		<para>
+			This command is obsolete and is provided for backward compatibility only. Calls to <function>gluBeginPolygon</function>
+			are mapped to <function moreinfo="refentry">gluTessBeginPolygon</function> followed by <function
+			moreinfo="refentry">gluTessBeginContour</function>. Calls to <function>gluEndPolygon</function> are mapped to <function
+			moreinfo="refentry">gluTessEndContour</function> followed by <function
+			moreinfo="refentry">gluTessEndPolygon</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="gluBeginPolygon.3G-example">
+		<title>Example</title>
+		<para>
+			A quadrilateral with a triangular hole in it can be described like this:
+		</para>
+		<programlisting>gluBeginPolygon(tobj);
+gluTessVertex(tobj, v1, v1);
+gluTessVertex(tobj, v2, v2);
+gluTessVertex(tobj, v3, v3);
+gluTessVertex(tobj, v4, v4);
+gluNextContour(tobj, GLU_INTERIOR);
+gluTessVertex(tobj, v5, v5);
+gluTessVertex(tobj, v6, v6);
+gluTessVertex(tobj, v7, v7);
+gluEndPolygon(tobj);</programlisting>
+	</refsect1>
+	<refsect1 id="gluBeginPolygon.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluNewTess</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNextContour</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessCallback</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessVertex</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessBeginPolygon</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluTessBeginContour</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

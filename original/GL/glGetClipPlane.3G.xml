@@ -1,0 +1,98 @@
+<refentry id="glGetClipPlane.3G">
+	<refmeta id="glGetClipPlane.3G-meta">
+		<refentrytitle>glGetClipPlane</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glGetClipPlane.3G-name">
+		<refname>glGetClipPlane</refname>
+		<refpurpose>return the coefficients of the specified clipping plane</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glGetClipPlane.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glGetClipPlane</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>plane</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;*<parameter>equation</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glGetClipPlane.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>plane</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a clipping plane. The number of clipping planes depends on the implementation, but at least six
+						clipping planes are supported. They are identified by symbolic names of the form
+						<constant>GL_CLIP_PLANE</constant><inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation> where 0 &le; <inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation> &lt; <constant>GL_MAX_CLIP_PLANES</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>equation</parameter></term>
+				<listitem>
+					<simpara>
+						Returns four double-precision values that are the coefficients of the plane equation of
+						<parameter>plane</parameter> in eye coordinates. The initial value is (0, 0, 0, 0).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glGetClipPlane.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glGetClipPlane</function> returns in <parameter>equation</parameter> the four coefficients of the plane
+			equation for <parameter>plane</parameter>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetClipPlane.3G-notes">
+		<title>Notes</title>
+		<para>
+			It is always the case that <constant>GL_CLIP_PLANE</constant><inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation> = <constant>GL_CLIP_PLANE0</constant> + <inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation>.
+		</para>
+		<para>
+			If an error is generated, no change is made to the contents of <parameter>equation</parameter>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetClipPlane.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>plane</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glGetClipPlane</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glGetClipPlane.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glClipPlane</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

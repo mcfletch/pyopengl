@@ -1,0 +1,131 @@
+<refentry id="gluDisk.3G">
+	<refmeta id="gluDisk.3G-meta">
+		<refentrytitle>gluDisk</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluDisk.3G-name">
+		<refname>gluDisk</refname>
+		<refpurpose>draw a disk</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluDisk.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gluDisk</function></funcdef>
+				<paramdef>GLUquadric*&nbsp;<parameter>quad</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>inner</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>outer</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>slices</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>loops</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluDisk.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>quad</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the quadrics object (created with <function moreinfo="refentry">gluNewQuadric</function>).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>inner</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the inner radius of the disk (may be 0).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>outer</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the outer radius of the disk.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>slices</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the number of subdivisions around the <parameter>z</parameter> axis.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>loops</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the number of concentric rings about the origin into which the disk is subdivided.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluDisk.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluDisk</function> renders a disk on the <parameter>z</parameter> = 0 plane. The disk has a radius of
+			<parameter>outer</parameter>, and contains a concentric circular hole with a radius of <parameter>inner</parameter>. If
+			<parameter>inner</parameter> is 0, then no hole is generated. The disk is subdivided around the
+			<parameter>z</parameter> axis into slices (like pizza slices), and also about the <parameter>z</parameter> axis into
+			rings (as specified by <parameter>slices</parameter> and <parameter>loops</parameter>, respectively).
+		</para>
+		<para>
+			With respect to orientation, the +<parameter>z</parameter> side of the disk is considered to be &quot;outside&quot;
+			(see <citerefentry>
+				<refentrytitle>gluQuadricOrientation</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>). This means that if the orientation is set to <constant>GLU_OUTSIDE</constant>, then any normals
+			generated point along the +<parameter>z</parameter> axis. Otherwise, they point along the -<parameter>z</parameter>
+			axis.
+		</para>
+		<para>
+			If texturing has been turned on (with <function moreinfo="refentry">gluQuadricTexture</function>), texture coordinates
+			are generated linearly such that where <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>r</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mi>outer</mml:mi>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, the value at (<parameter>r</parameter>, 0, 0) is (1, 0.5), at (0, <parameter>r</parameter>, 0) it is
+			(0.5, 1), at (-<parameter>r</parameter>, 0, 0) it is (0, 0.5), and at (0, -<parameter>r</parameter>, 0) it is (0.5, 0).
+		</para>
+	</refsect1>
+	<refsect1 id="gluDisk.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gluCylinder</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluNewQuadric</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluPartialDisk</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricOrientation</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluQuadricTexture</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluSphere</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

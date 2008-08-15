@@ -1,0 +1,107 @@
+<refentry id="glColorMask.3G">
+	<refmeta id="glColorMask.3G-meta">
+		<refentrytitle>glColorMask</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glColorMask.3G-name">
+		<refname>glColorMask</refname>
+		<refpurpose>enable and disable writing of frame buffer color components</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glColorMask.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glColorMask</function></funcdef>
+				<paramdef>GLboolean&nbsp;<parameter>red</parameter></paramdef>
+				<paramdef>GLboolean&nbsp;<parameter>green</parameter></paramdef>
+				<paramdef>GLboolean&nbsp;<parameter>blue</parameter></paramdef>
+				<paramdef>GLboolean&nbsp;<parameter>alpha</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glColorMask.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>red</parameter></term>
+				<term><parameter>green</parameter></term>
+				<term><parameter>blue</parameter></term>
+				<term><parameter>alpha</parameter></term>
+				<listitem>
+					<simpara>
+						Specify whether red, green, blue, and alpha can or cannot be written into the frame buffer. The initial
+						values are all <constant>GL_TRUE</constant>, indicating that the color components can be written.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glColorMask.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glColorMask</function> specifies whether the individual color components in the frame buffer can or cannot be
+			written. If <parameter>red</parameter> is <constant>GL_FALSE</constant>, for example, no change is made to the red
+			component of any pixel in any of the color buffers, regardless of the drawing operation attempted.
+		</para>
+		<para>
+			Changes to individual bits of components cannot be controlled. Rather, changes are either enabled or disabled for
+			entire color components.
+		</para>
+	</refsect1>
+	<refsect1 id="glColorMask.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glColorMask</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glColorMask.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_COLOR_WRITEMASK</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_RGBA_MODE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glColorMask.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glClear</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColor</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColorPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDepthMask</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIndex</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIndexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIndexMask</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glStencilMask</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

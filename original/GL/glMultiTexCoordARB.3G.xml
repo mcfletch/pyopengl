@@ -1,0 +1,376 @@
+<refentry id="glMultiTexCoordARB.3G">
+	<refmeta id="glMultiTexCoordARB.3G-meta">
+		<refentrytitle>glMultiTexCoordARB</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glMultiTexCoordARB.3G-name">
+		<refname>glMultiTexCoord1dARB</refname>
+		<refname>glMultiTexCoord1fARB</refname>
+		<refname>glMultiTexCoord1iARB</refname>
+		<refname>glMultiTexCoord1sARB</refname>
+		<refname>glMultiTexCoord2dARB</refname>
+		<refname>glMultiTexCoord2fARB</refname>
+		<refname>glMultiTexCoord2iARB</refname>
+		<refname>glMultiTexCoord2sARB</refname>
+		<refname>glMultiTexCoord3dARB</refname>
+		<refname>glMultiTexCoord3fARB</refname>
+		<refname>glMultiTexCoord3iARB</refname>
+		<refname>glMultiTexCoord3sARB</refname>
+		<refname>glMultiTexCoord4dARB</refname>
+		<refname>glMultiTexCoord4fARB</refname>
+		<refname>glMultiTexCoord4iARB</refname>
+		<refname>glMultiTexCoord4sARB</refname>
+		<refname>glMultiTexCoord1dvARB</refname>
+		<refname>glMultiTexCoord1fvARB</refname>
+		<refname>glMultiTexCoord1ivARB</refname>
+		<refname>glMultiTexCoord1svARB</refname>
+		<refname>glMultiTexCoord2dvARB</refname>
+		<refname>glMultiTexCoord2fvARB</refname>
+		<refname>glMultiTexCoord2ivARB</refname>
+		<refname>glMultiTexCoord2svARB</refname>
+		<refname>glMultiTexCoord3dvARB</refname>
+		<refname>glMultiTexCoord3fvARB</refname>
+		<refname>glMultiTexCoord3ivARB</refname>
+		<refname>glMultiTexCoord3svARB</refname>
+		<refname>glMultiTexCoord4dvARB</refname>
+		<refname>glMultiTexCoord4fvARB</refname>
+		<refname>glMultiTexCoord4ivARB</refname>
+		<refname>glMultiTexCoord4svARB</refname>
+		<refpurpose>set the current texture coordinates</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glMultiTexCoordARB.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord1dARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>s</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord1fARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>s</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord1iARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>s</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord1sARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>s</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord2dARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>t</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord2fARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>t</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord2iARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>t</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord2sARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>t</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord3dARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>r</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord3fARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>r</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord3iARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>r</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord3sARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>r</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord4dARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>r</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>q</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord4fARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>r</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>q</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord4iARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>r</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>q</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord4sARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>s</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>t</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>r</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>q</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glMultiTexCoordARB.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>target</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies texture unit whose coordinates should be modified. The number of texture units is implementation
+						dependent, but must be at least two. Must be one of <constant>GL_TEXTURE</constant><inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation><emphasis role="bold">_ARB</emphasis> where 0 &le; <inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation> &lt; <constant>GL_MAX_TEXTURE_UNITS_ARB</constant>, which is an implementation-dependent
+						value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>s</parameter>, <parameter>t</parameter>, <parameter>r</parameter>, <parameter>q</parameter></term>
+				<listitem>
+					<simpara>
+						Specify <parameter>s</parameter>, <parameter>t</parameter>, <parameter>r</parameter>, and
+						<parameter>q</parameter> texture coordinates for <parameter>target</parameter> texture unit. Not all
+						parameters are present in all forms of the command.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsynopsisdiv id="glMultiTexCoordARB.3G-c_spec-v">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord1dvARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord1fvARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord1ivARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord1svARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord2dvARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord2fvARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord2ivARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord2svARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord3dvARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord3fvARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord3ivARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord3svARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord4dvARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord4fvARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord4ivARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMultiTexCoord4svARB</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glMultiTexCoordARB.3G-parameters-v">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>target</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies texture unit whose coordinates should be modified. The number of texture units is implementation
+						dependent, but must be at least two. Must be one of <constant>GL_TEXTURE</constant><inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation><emphasis role="bold">_ARB</emphasis>, where 0 &le; <inlineequation>
+							<mml:math>
+								<mml:mi>i</mml:mi>
+							</mml:math>
+						</inlineequation> &lt; the implementation-dependent value of <constant>GL_MAX_TEXTURE_UNITS_ARB</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>v</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to an array of one, two, three, or four elements, which in turn specify the
+						<parameter>s</parameter>, <parameter>t</parameter>, <parameter>r</parameter>, and <parameter>q</parameter>
+						texture coordinates.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glMultiTexCoordARB.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glMultiTexCoordARB</function> specifies texture coordinates in one, two, three, or four
+			dimensions. <function moreinfo="refentry">glMultiTexCoord1ARB</function> sets the current texture coordinates to
+			(<parameter>s</parameter>,0,0,1); a call to <function moreinfo="refentry">glMultiTexCoord2ARB</function> sets them to
+			(<parameter>s</parameter>,<parameter>t</parameter>,0,1). Similarly, <function
+			moreinfo="refentry">glMultiTexCoord3ARB</function> specifies the texture coordinates as
+			(<parameter>s</parameter>,<parameter>t</parameter>,<parameter>r</parameter>,1), and <function
+			moreinfo="refentry">glMultiTexCoord4ARB</function> defines all four components explicitly as
+			(<parameter>s</parameter>,<parameter>t</parameter>,<parameter>r</parameter>,<parameter>q</parameter>).
+		</para>
+		<para>
+			The current texture coordinates are part of the data that is associated with each vertex and with the current raster
+			position. Initially, the values for <parameter>s</parameter>, <parameter>t</parameter>, <parameter>r</parameter>,
+			<parameter>q</parameter> are (0,0,0,1).
+		</para>
+	</refsect1>
+	<refsect1 id="glMultiTexCoordARB.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function moreinfo="refentry">glMultiTexCoordARB</function> is only supported if
+			<constant>GL_ARB_multitexture</constant> is included in the string returned by <function
+			moreinfo="refentry">glGetString</function> when called with the argument <constant>GL_EXTENSIONS</constant>.
+		</para>
+		<para>
+			The current texture coordinates can be updated at any time. In particular, <function
+			moreinfo="refentry">glMultiTexCoordARB</function> can be called between a call to <function
+			moreinfo="refentry">glBegin</function> and the corresponding call to <function moreinfo="refentry">glEnd</function>.
+		</para>
+		<para>
+			It is always the case that <constant>GL_TEXTURE</constant><inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation><emphasis role="bold">_ARB</emphasis> = <constant>GL_TEXTURE0_ARB</constant> + <inlineequation>
+				<mml:math>
+					<mml:mi>i</mml:mi>
+				</mml:math>
+			</inlineequation>.
+		</para>
+	</refsect1>
+	<refsect1 id="glMultiTexCoordARB.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_CURRENT_TEXTURE_COORDS</constant> with
+			appropriate texture unit selected.
+		</para>
+	</refsect1>
+	<refsect1 id="glMultiTexCoordARB.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glActiveTextureARB</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glClientActiveTextureARB</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexCoord</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexCoordPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glVertex</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,89 @@
+<refentry id="glutMouseFunc.3GLUT">
+	<refmeta id="glutMouseFunc.3GLUT-meta">
+		<refentrytitle>glutMouseFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutMouseFunc.3GLUT-name">
+		<refname>glutMouseFunc</refname>
+		<refpurpose>sets the mouse callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutMouseFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutMouseFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;button,&nbsp;int&nbsp;state,&nbsp;int&nbsp;x,&nbsp;int&nbsp;y)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutMouseFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new mouse callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutMouseFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutMouseFunc</function> sets the mouse callback for the current window. When a user presses and releases
+			mouse buttons in the window, each press and each release generates a mouse callback. The button parameter is one of
+			<constant>GLUT_LEFT_BUTTON</constant>, <constant>GLUT_MIDDLE_BUTTON</constant>, or
+			<constant>GLUT_RIGHT_BUTTON</constant>. For systems with only two mouse buttons, it may not be possible to generate
+			<constant>GLUT_MIDDLE_BUTTON</constant> callback. For systems with a single mouse button, it may be possible to
+			generate only a <constant>GLUT_LEFT_BUTTON</constant> callback. The state parameter is either
+			<constant>GLUT_UP</constant> or <constant>GLUT_DOWN</constant> indicating whether the callback was due to a release or
+			press respectively. The x and y callback parameters indicate the window relative coordinates when the mouse button
+			state changed. If a <constant>GLUT_DOWN</constant> callback for a specific button is triggered, the program can assume
+			a <constant>GLUT_UP</constant> callback for the same button will be generated (assuming the window still has a mouse
+			callback registered) when the mouse button is released even if the mouse has moved outside the window.
+		</para>
+		<para>
+			If a menu is attached to a button for a window, mouse callbacks will not be generated for that button.
+		</para>
+		<para>
+			During a mouse callback, <function moreinfo="refentry">glutGetModifiers</function> may be called to determine the state
+			of modifier keys when the mouse event generating the callback occurred.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutMouseFunc</function> disables the generation of mouse callbacks.
+		</para>
+	</refsect1>
+	<refsect1 id="glutMouseFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutButtonBoxFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutTabletButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGetModifiers</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

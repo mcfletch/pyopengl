@@ -1,0 +1,165 @@
+<refentry id="glInterleavedArrays.3G">
+	<refmeta id="glInterleavedArrays.3G-meta">
+		<refentrytitle>glInterleavedArrays</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glInterleavedArrays.3G-name">
+		<refname>glInterleavedArrays</refname>
+		<refpurpose>simultaneously specify and enable several interleaved arrays</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glInterleavedArrays.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glInterleavedArrays</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>format</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>stride</parameter></paramdef>
+				<paramdef>const&nbsp;GLvoid&nbsp;*<parameter>pointer</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glInterleavedArrays.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>format</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the type of array to enable. Symbolic constants <constant>GL_V2F</constant>,
+						<constant>GL_V3F</constant>, <constant>GL_C4UB_V2F</constant>, <constant>GL_C4UB_V3F</constant>,
+						<constant>GL_C3F_V3F</constant>, <constant>GL_N3F_V3F</constant>, <constant>GL_C4F_N3F_V3F</constant>,
+						<constant>GL_T2F_V3F</constant>, <constant>GL_T4F_V4F</constant>, <constant>GL_T2F_C4UB_V3F</constant>,
+						<constant>GL_T2F_C3F_V3F</constant>, <constant>GL_T2F_N3F_V3F</constant>,
+						<constant>GL_T2F_C4F_N3F_V3F</constant>, and <constant>GL_T4F_C4F_N3F_V4F</constant> are accepted.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>stride</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the offset in bytes between each aggregate array element.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glInterleavedArrays.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glInterleavedArrays</function> lets you specify and enable individual color, normal, texture and vertex
+			arrays whose elements are part of a larger aggregate array element. For some implementations, this is more efficient
+			than specifying the arrays separately.
+		</para>
+		<para>
+			If <parameter>stride</parameter> is 0, the aggregate elements are stored consecutively. Otherwise,
+			<parameter>stride</parameter> bytes occur between the beginning of one aggregate array element and the beginning of the
+			next aggregate array element.
+		</para>
+		<para>
+			<parameter>format</parameter> serves as a ``key'' describing the extraction of individual arrays from the aggregate
+			array. If <parameter>format</parameter> contains a T, then texture coordinates are extracted from the interleaved
+			array. If C is present, color values are extracted. If N is present, normal coordinates are extracted. Vertex
+			coordinates are always extracted.
+		</para>
+		<para>
+			The digits 2, 3, and 4 denote how many values are extracted. F indicates that values are extracted as floating-point
+			values. Colors may also be extracted as 4 unsigned bytes if 4UB follows the C. If a color is extracted as 4 unsigned
+			bytes, the vertex array element which follows is located at the first possible floating-point aligned address.
+		</para>
+	</refsect1>
+	<refsect1 id="glInterleavedArrays.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>glInterleavedArrays</function> is available only if the GL version is 1.1 or greater.
+		</para>
+		<para>
+			If <function>glInterleavedArrays</function> is called while compiling a display list, it is not compiled into the list,
+			and it is executed immediately.
+		</para>
+		<para>
+			Execution of <function>glInterleavedArrays</function> is not allowed between the execution of <function
+			moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>, but an error may or may not be generated. If no error is generated, the operation
+			is undefined.
+		</para>
+		<para>
+			<function>glInterleavedArrays</function> is typically implemented on the client side.
+		</para>
+		<para>
+			Vertex array parameters are client-side state and are therefore not saved or restored by <function
+			moreinfo="refentry">glPushAttrib</function> and <function moreinfo="refentry">glPopAttrib</function>. Use <function
+			moreinfo="refentry">glPushClientAttrib</function> and <function moreinfo="refentry">glPopClientAttrib</function>
+			instead.
+		</para>
+		<para>
+			When the <constant>GL_ARB_multitexture</constant> extension is supported, <function>glInterleavedArrays</function> only
+			updates the texture coordinate array for the active active texture unit. The texture coordinate state for other client
+			texture units is not update, regardless if they are enabled or not.
+		</para>
+	</refsect1>
+	<refsect1 id="glInterleavedArrays.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>format</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if <parameter>stride</parameter> is negative.
+		</para>
+	</refsect1>
+	<refsect1 id="glInterleavedArrays.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glArrayElement</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glClientActiveTextureARB</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColorPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawArrays</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDrawElements</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEdgeFlagPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glEnableClientState</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIndexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glNormalPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexCoordPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glVertexPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

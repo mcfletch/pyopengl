@@ -1,0 +1,201 @@
+<refentry id="glNormal.3G">
+	<refmeta id="glNormal.3G-meta">
+		<refentrytitle>glNormal</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glNormal.3G-name">
+		<refname>glNormal3b</refname>
+		<refname>glNormal3d</refname>
+		<refname>glNormal3f</refname>
+		<refname>glNormal3i</refname>
+		<refname>glNormal3s</refname>
+		<refname>glNormal3bv</refname>
+		<refname>glNormal3dv</refname>
+		<refname>glNormal3fv</refname>
+		<refname>glNormal3iv</refname>
+		<refname>glNormal3sv</refname>
+		<refpurpose>set the current normal vector</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glNormal.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3b</function></funcdef>
+				<paramdef>GLbyte&nbsp;<parameter>nx</parameter></paramdef>
+				<paramdef>GLbyte&nbsp;<parameter>ny</parameter></paramdef>
+				<paramdef>GLbyte&nbsp;<parameter>nz</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3d</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>nx</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>ny</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>nz</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3f</function></funcdef>
+				<paramdef>GLfloat&nbsp;<parameter>nx</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>ny</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>nz</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3i</function></funcdef>
+				<paramdef>GLint&nbsp;<parameter>nx</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>ny</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>nz</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3s</function></funcdef>
+				<paramdef>GLshort&nbsp;<parameter>nx</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>ny</parameter></paramdef>
+				<paramdef>GLshort&nbsp;<parameter>nz</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glNormal.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>nx</parameter></term>
+				<term><parameter>ny</parameter></term>
+				<term><parameter>nz</parameter></term>
+				<listitem>
+					<simpara>
+						Specify the <inlineequation>
+							<mml:math>
+								<mml:mi>x</mml:mi>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:mi>y</mml:mi>
+							</mml:math>
+						</inlineequation>, and <inlineequation>
+							<mml:math>
+								<mml:mi>z</mml:mi>
+							</mml:math>
+						</inlineequation> coordinates of the new current normal. The initial value of the current normal is the
+						unit vector, (0, 0, 1).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsynopsisdiv id="glNormal.3G-c_spec-v">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3bv</function></funcdef>
+				<paramdef>const&nbsp;GLbyte&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3dv</function></funcdef>
+				<paramdef>const&nbsp;GLdouble&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3fv</function></funcdef>
+				<paramdef>const&nbsp;GLfloat&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3iv</function></funcdef>
+				<paramdef>const&nbsp;GLint&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNormal3sv</function></funcdef>
+				<paramdef>const&nbsp;GLshort&nbsp;*<parameter>v</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glNormal.3G-parameters-v">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>v</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to an array of three elements: the <inlineequation>
+							<mml:math>
+								<mml:mi>x</mml:mi>
+							</mml:math>
+						</inlineequation>, <inlineequation>
+							<mml:math>
+								<mml:mi>y</mml:mi>
+							</mml:math>
+						</inlineequation>, and <inlineequation>
+							<mml:math>
+								<mml:mi>z</mml:mi>
+							</mml:math>
+						</inlineequation> coordinates of the new current normal.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glNormal.3G-description">
+		<title>Description</title>
+		<para>
+			The current normal is set to the given coordinates whenever <function moreinfo="refentry">glNormal</function> is
+			issued. Byte, short, or integer arguments are converted to floating-point with a linear mapping that maps the most
+			positive representable integer value to 1.0, and the most negative representable integer value to -1.0.
+		</para>
+		<para>
+			Normals specified with <function moreinfo="refentry">glNormal</function> need not have unit length. If
+			<constant>GL_NORMALIZE</constant> is enabled, then normals of any length specified with <function
+			moreinfo="refentry">glNormal</function> are normalized after transformation. If <constant>GL_RESCALE_NORMAL</constant>
+			is enabled, normals are scaled by a scaling factor derived from the modelview matrix.
+			<constant>GL_RESCALE_NORMAL</constant> requires that the originally specified normals were of unit length, and that the
+			modelview matrix contain only uniform scales for proper results. To enable and disable normalization, call <function
+			moreinfo="refentry">glEnable</function> and <function moreinfo="refentry">glDisable</function> with either
+			<constant>GL_NORMALIZE</constant> or <constant>GL_RESCALE_NORMAL</constant>. Normalization is initially disabled.
+		</para>
+	</refsect1>
+	<refsect1 id="glNormal.3G-notes">
+		<title>Notes</title>
+		<para>
+			The current normal can be updated at any time. In particular, <function moreinfo="refentry">glNormal</function> can be
+			called between a call to <function moreinfo="refentry">glBegin</function> and the corresponding call to <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glNormal.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_CURRENT_NORMAL</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glIsEnabled</function> with argument <constant>GL_NORMALIZE</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glIsEnabled</function> with argument <constant>GL_RESCALE_NORMAL</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glNormal.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glBegin</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glColor</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIndex</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glNormalPointer</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexCoord</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glVertex</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

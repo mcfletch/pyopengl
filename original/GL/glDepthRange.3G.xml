@@ -1,0 +1,111 @@
+<refentry id="glDepthRange.3G">
+	<refmeta id="glDepthRange.3G-meta">
+		<refentrytitle>glDepthRange</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glDepthRange.3G-name">
+		<refname>glDepthRange</refname>
+		<refpurpose>specify mapping of depth values from normalized device coordinates to window coordinates</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glDepthRange.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glDepthRange</function></funcdef>
+				<paramdef>GLclampd&nbsp;<parameter>zNear</parameter></paramdef>
+				<paramdef>GLclampd&nbsp;<parameter>zFar</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glDepthRange.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>zNear</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the mapping of the near clipping plane to window coordinates. The initial value is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>zFar</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the mapping of the far clipping plane to window coordinates. The initial value is 1.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glDepthRange.3G-description">
+		<title>Description</title>
+		<para>
+			After clipping and division by <parameter>w</parameter>, depth coordinates range from -1 to 1, corresponding to the
+			near and far clipping planes. <function>glDepthRange</function> specifies a linear mapping of the normalized depth
+			coordinates in this range to window depth coordinates. Regardless of the actual depth buffer implementation, window
+			coordinate depth values are treated as though they range from 0 through 1 (like color components). Thus, the values
+			accepted by <function>glDepthRange</function> are both clamped to this range before they are accepted.
+		</para>
+		<para>
+			The setting of (0,1) maps the near plane to 0 and the far plane to 1. With this mapping, the depth buffer range is
+			fully utilized.
+		</para>
+	</refsect1>
+	<refsect1 id="glDepthRange.3G-notes">
+		<title>Notes</title>
+		<para>
+			It is not necessary that <parameter>zNear</parameter> be less than <parameter>zFar</parameter>. Reverse mappings such
+			as <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>zNear</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mn>1</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, and <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mi>zFar</mml:mi>
+						<mml:mo>=</mml:mo>
+						<mml:mn>0</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> are acceptable.
+		</para>
+	</refsect1>
+	<refsect1 id="glDepthRange.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glDepthRange</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glDepthRange.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_DEPTH_RANGE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glDepthRange.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glDepthFunc</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPolygonOffset</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glViewport</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

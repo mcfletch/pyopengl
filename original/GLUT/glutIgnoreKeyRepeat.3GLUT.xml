@@ -1,0 +1,91 @@
+<refentry id="glutIgnoreKeyRepeat.3GLUT">
+	<refmeta id="glutIgnoreKeyRepeat.3GLUT-meta">
+		<refentrytitle>glutIgnoreKeyRepeat</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutIgnoreKeyRepeat.3GLUT-name">
+		<refname>glutIgnoreKeyRepeat</refname>
+		<refpurpose>determines if auto repeat keystrokes are reported to the current window</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutIgnoreKeyRepeat.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutIgnoreKeyRepeat</function></funcdef>
+				<paramdef>int&nbsp;<parameter>ignore</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutIgnoreKeyRepeat.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>ignore</parameter></term>
+				<listitem>
+					<simpara>
+						Non-zero indicates auto repeat keystrokes should not be reported by the keyboard and special callbacks;
+						zero indicates that auto repeat keystrokes will be reported.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutIgnoreKeyRepeat.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutIgnoreKeyRepeat</function> determines if auto repeat keystrokes are reported to the current window. The
+			ignore auto repeat state of a window can be queried with <function
+			moreinfo="refentry">glutDeviceGet(GLUT_DEVICE_IGNORE_KEY_REPEAT)</function>.
+		</para>
+		<para>
+			Ignoring auto repeated keystrokes is generally done in conjunction with using the <function
+			moreinfo="refentry">glutKeyboardUpFunc</function> and <function moreinfo="refentry">glutSpecialUpFunc</function>
+			callbacks to repeat key releases. If you do not ignore auto repeated keystrokes, your GLUT application will experience
+			repeated release/press callbacks. Games using the keyboard will typically want to ignore key repeat.
+		</para>
+	</refsect1>
+	<refsect1 id="glutIgnoreKeyRepeat.3GLUT-glut_implementation_notes_for_x11">
+		<title>Glut Implementation Notes For X11</title>
+		<para>
+			X11 sends KeyPress events repeatedly when the window system's global auto repeat is enabled.
+			<function>glutIgnoreKeyRepeat</function> can prevent these auto repeated keystrokes from being reported as keyboard or
+			special callbacks, but there is still some minimal overhead by the X server to continually stream KeyPress events to
+			the GLUT application. The <function moreinfo="refentry">glutSetKeyRepeat</function> routine can be used to actually
+			disable the global sending of auto repeated KeyPress events. Note that <function
+			moreinfo="refentry">glutSetKeyRepeat</function> affects the global window system auto repeat state so other
+			applications will not auto repeat if you disable auto repeat globally through <function
+			moreinfo="refentry">glutSetKeyRepeat</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutIgnoreKeyRepeat.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSetKeyRepeat</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardUpFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpecialFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpecialUpFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

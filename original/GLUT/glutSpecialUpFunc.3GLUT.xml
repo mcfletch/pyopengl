@@ -1,0 +1,272 @@
+<refentry id="glutSpecialUpFunc.3GLUT">
+	<refmeta id="glutSpecialUpFunc.3GLUT-meta">
+		<refentrytitle>glutSpecialUpFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSpecialUpFunc.3GLUT-name">
+		<refname>glutSpecialUpFunc</refname>
+		<refpurpose>sets the special keyboard up (key release) callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSpecialUpFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSpecialUpFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;key,&nbsp;int&nbsp;x,&nbsp;int&nbsp;y)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSpecialUpFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new special callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSpecialUpFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSpecialUpFunc</function> sets the special keyboard up (key release) callback for the current window. The
+			special keyboard up callback is triggered when keyboard function or directional keys are released. The
+			<parameter>key</parameter> callback parameter is a <constant>GLUT_KEY_*</constant> constant for the special key
+			pressed. The <parameter>x</parameter> and <parameter>y</parameter> callback parameters indicate the mouse in window
+			relative coordinates when the key was pressed. When a new window is created, no special up callback is initially
+			registered and special key releases in the window are ignored. Passing <constant>NULL</constant> to
+			<function>glutSpecialUpFunc</function> disables the generation of special up callbacks.
+		</para>
+		<para>
+			During a special up callback, <function moreinfo="refentry">glutGetModifiers</function> may be called to determine the
+			state of modifier keys when the key release generating the callback occurred.
+		</para>
+		<para>
+			To avoid the reporting of key release/press pairs due to auto repeat, use <function
+			moreinfo="refentry">glutIgnoreKeyRepeat</function> to ignore auto repeated keystrokes.
+		</para>
+		<para>
+			An implementation should do its best to provide ways to generate all the <constant>GLUT_KEY_</constant>* special keys.
+			The available <constant>GLUT_KEY_*</constant> values are:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F1</constant></term>
+				<listitem>
+					<simpara>
+						F1 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F2</constant></term>
+				<listitem>
+					<simpara>
+						F2 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F3</constant></term>
+				<listitem>
+					<simpara>
+						F3 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F4</constant></term>
+				<listitem>
+					<simpara>
+						F4 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F5</constant></term>
+				<listitem>
+					<simpara>
+						F5 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F6</constant></term>
+				<listitem>
+					<simpara>
+						F6 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F7</constant></term>
+				<listitem>
+					<simpara>
+						F7 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F8</constant></term>
+				<listitem>
+					<simpara>
+						F8 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F9</constant></term>
+				<listitem>
+					<simpara>
+						F9 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F10</constant></term>
+				<listitem>
+					<simpara>
+						F10 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F11</constant></term>
+				<listitem>
+					<simpara>
+						F11 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_F12</constant></term>
+				<listitem>
+					<simpara>
+						F12 function key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_LEFT</constant></term>
+				<listitem>
+					<simpara>
+						Left directional key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_UP</constant></term>
+				<listitem>
+					<simpara>
+						Up directional key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_RIGHT</constant></term>
+				<listitem>
+					<simpara>
+						Right directional key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_DOWN</constant></term>
+				<listitem>
+					<simpara>
+						Down directional key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_PAGE_UP</constant></term>
+				<listitem>
+					<simpara>
+						Page up directional key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_PAGE_DOWN</constant></term>
+				<listitem>
+					<simpara>
+						Page down directional key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_HOME</constant></term>
+				<listitem>
+					<simpara>
+						Home directional key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_END</constant></term>
+				<listitem>
+					<simpara>
+						End directional key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GLUT_KEY_INSERT</constant></term>
+				<listitem>
+					<simpara>
+						Inset directional key.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			Note that the escape, backspace, and delete keys are generated as an ASCII character.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSpecialUpFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSpecialFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardUpFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMouseFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutButtonBoxFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutTabletButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGetModifiers</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutIgnoreKeyRepeat</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

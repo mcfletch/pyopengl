@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DocBook MathML Module V1.0//EN" "http://www.oasis-open.org/docbook/xml/mathml/1.0/dbmathml.dtd" [
+<!ENTITY gle.3GLE SYSTEM "gle.3GLE.xml">
+<!ENTITY gleExtrusion.3GLE SYSTEM "gleExtrusion.3GLE.xml">
+<!ENTITY gleHelicoid.3GLE SYSTEM "gleHelicoid.3GLE.xml">
+<!ENTITY gleLathe.3GLE SYSTEM "gleLathe.3GLE.xml">
+<!ENTITY glePolyCone.3GLE SYSTEM "glePolyCone.3GLE.xml">
+<!ENTITY glePolyCylinder.3GLE SYSTEM "glePolyCylinder.3GLE.xml">
+<!ENTITY gleScrew.3GLE SYSTEM "gleScrew.3GLE.xml">
+<!ENTITY gleSetJoinStyle.3GLE SYSTEM "gleSetJoinStyle.3GLE.xml">
+<!ENTITY gleSetNumSides.3GLE SYSTEM "gleSetNumSides.3GLE.xml">
+<!ENTITY gleSpiral.3GLE SYSTEM "gleSpiral.3GLE.xml">
+<!ENTITY gleSuperExtrusion.3GLE SYSTEM "gleSuperExtrusion.3GLE.xml">
+<!ENTITY gleTextureMode.3GLE SYSTEM "gleTextureMode.3GLE.xml">
+<!ENTITY gleToroid.3GLE SYSTEM "gleToroid.3GLE.xml">
+<!ENTITY gleTwistExtrusion.3GLE SYSTEM "gleTwistExtrusion.3GLE.xml">
+
+] >
+<reference>
+&gle.3GLE;
+&gleExtrusion.3GLE;
+&gleHelicoid.3GLE;
+&gleLathe.3GLE;
+&glePolyCone.3GLE;
+&glePolyCylinder.3GLE;
+&gleScrew.3GLE;
+&gleSetJoinStyle.3GLE;
+&gleSetNumSides.3GLE;
+&gleSpiral.3GLE;
+&gleSuperExtrusion.3GLE;
+&gleTextureMode.3GLE;
+&gleToroid.3GLE;
+&gleTwistExtrusion.3GLE;
+</reference>

@@ -1,0 +1,78 @@
+<refentry id="glutVisibilityFunc.3GLUT">
+	<refmeta id="glutVisibilityFunc.3GLUT-meta">
+		<refentrytitle>glutVisibilityFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutVisibilityFunc.3GLUT-name">
+		<refname>glutVisibilityFunc</refname>
+		<refpurpose>sets the visibility callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsect1 id="glutVisibilityFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<para>
+			void glutVisibilityFunc(void (*func)(int state));
+		</para>
+	</refsect1>
+	<refsect1 id="glutVisibilityFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new visibility callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutVisibilityFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutVisibilityFunc</function> sets the visibility callback for the current window. The visibility callback
+			for a window is called when the visibility of a window changes. The <parameter>state</parameter> callback parameter is
+			either <constant>GLUT_NOT_VISIBLE</constant> or <constant>GLUT_VISIBLE</constant> depending on the current visibility
+			of the window. <constant>GLUT_VISIBLE</constant> does not distinguish a window being totally versus partially visible.
+			<constant>GLUT_NOT_VISIBLE</constant> means no part of the window is visible, i.e., until the window's visibility
+			changes, all further rendering to the window is discarded.
+		</para>
+		<para>
+			GLUT considers a window visible if any pixel of the window is visible or any pixel of any descendant window is visible
+			on the screen.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutVisibilityFunc</function> disables the generation of the visibility
+			callback.
+		</para>
+		<para>
+			If the visibility callback for a window is disabled and later re-enabled, the visibility status of the window is
+			undefined; any change in window visibility will be reported, that is if you disable a visibility callback and re-enable
+			the callback, you are guaranteed the next visibility change will be reported.
+		</para>
+		<para>
+			Setting the visibility callback for a window disables the window status callback set for the window (and vice versa).
+			The window status callback is set with <function moreinfo="refentry">glutWindowStatusFunc</function>.
+			<function>glutVisibilityFunc</function> is deprecated in favor of the more informative <function
+			moreinfo="refentry">glutWindowStatusFunc</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutVisibilityFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutPopWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutWindowStatusFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

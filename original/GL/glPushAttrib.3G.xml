@@ -1,0 +1,841 @@
+<refentry id="glPushAttrib.3G">
+	<refmeta id="glPushAttrib.3G-meta">
+		<refentrytitle>glPushAttrib</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glPushAttrib.3G-name">
+		<refname>glPushAttrib</refname>
+		<refname>glPopAttrib</refname>
+		<refpurpose>push and pop the server attribute stack</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glPushAttrib.3G-c_spec-push">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glPushAttrib</function></funcdef>
+				<paramdef>GLbitfield&nbsp;<parameter>mask</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glPushAttrib.3G-parameters-push">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>mask</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a mask that indicates which attributes to save. Values for <parameter>mask</parameter> are listed
+						below.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsynopsisdiv id="glPushAttrib.3G-c_spec-pop">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glPopAttrib</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glPushAttrib.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glPushAttrib</function> takes one argument, a mask that indicates which groups of state variables to save on
+			the attribute stack. Symbolic constants are used to set bits in the mask. <parameter>mask</parameter> is typically
+			constructed by ORing several of these constants together. The special mask <constant>GL_ALL_ATTRIB_BITS</constant> can
+			be used to save all stackable states.
+		</para>
+		<para>
+			The symbolic mask constants and their associated GL state are as follows (the second column lists which attributes are
+			saved):
+		</para>
+		<informaltable frame="topbot">
+			<tgroup cols="2">
+				<tbody>
+					<row>
+						<entry><constant>GL_ACCUM_BUFFER_BIT</constant></entry>
+						<entry>Accumulation buffer clear value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_COLOR_BUFFER_BIT</constant></entry>
+						<entry><constant>GL_ALPHA_TEST</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Alpha test function and reference value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_BLEND</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Blending source and destination functions</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Constant blend color</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Blending equation</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_DITHER</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_DRAW_BUFFER</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_COLOR_LOGIC_OP</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_INDEX_LOGIC_OP</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Logic op function</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Color mode and index mode clear values</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Color mode and index mode writemasks</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_CURRENT_BIT</constant></entry>
+						<entry>Current RGBA color</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Current color index</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Current normal vector</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Current texture coordinates</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Current raster position</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_CURRENT_RASTER_POSITION_VALID</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>RGBA color associated with current raster position</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Color index associated with current raster position</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Texture coordinates associated with current raster position</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_EDGE_FLAG</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_DEPTH_BUFFER_BIT</constant></entry>
+						<entry><constant>GL_DEPTH_TEST</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Depth buffer test function</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Depth buffer clear value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_DEPTH_WRITEMASK</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_ENABLE_BIT</constant></entry>
+						<entry><constant>GL_ALPHA_TEST</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_AUTO_NORMAL</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_BLEND</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Enable bits for the user-definable clipping planes</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_COLOR_MATERIAL</constant></entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_CULL_FACE</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_DEPTH_TEST</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_DITHER</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_FOG</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_LIGHT</constant><parameter>i</parameter> where 0&lt;=
+						<parameter>i</parameter>&lt;<constant>GL_MAX_LIGHTS</constant></entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_LIGHTING</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_LINE_SMOOTH</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_LINE_STIPPLE</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_COLOR_LOGIC_OP</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_INDEX_LOGIC_OP</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_MAP1_</constant><parameter>x</parameter> where <parameter>x</parameter> is a map
+						type</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_MAP2_</constant><parameter>x</parameter> where <parameter>x</parameter> is a map
+						type</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_NORMALIZE</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POINT_SMOOTH</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_OFFSET_LINE</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_OFFSET_FILL</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_OFFSET_POINT</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_SMOOTH</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_STIPPLE</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_SCISSOR_TEST</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_STENCIL_TEST</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_TEXTURE_1D</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_TEXTURE_2D</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_TEXTURE_3D</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Flags <constant>GL_TEXTURE_GEN_</constant><parameter>x</parameter> where <parameter>x</parameter> is
+						S, T, R, or Q</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_EVAL_BIT</constant></entry>
+						<entry><constant>GL_MAP1_</constant><parameter>x</parameter> enable bits, where <parameter>x</parameter> is
+						a map type</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_MAP2_</constant><parameter>x</parameter> enable bits, where <parameter>x</parameter> is
+						a map type</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>1D grid endpoints and divisions</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>2D grid endpoints and divisions</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_AUTO_NORMAL</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_FOG_BIT</constant></entry>
+						<entry><constant>GL_FOG</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Fog color</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Fog density</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Linear fog start</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Linear fog end</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Fog index</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_FOG_MODE</constant> value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_HINT_BIT</constant></entry>
+						<entry><constant>GL_PERSPECTIVE_CORRECTION_HINT</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POINT_SMOOTH_HINT</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_LINE_SMOOTH_HINT</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_SMOOTH_HINT</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_FOG_HINT</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_LIGHTING_BIT</constant></entry>
+						<entry><constant>GL_COLOR_MATERIAL</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_COLOR_MATERIAL_FACE</constant> value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Color material parameters that are tracking the current color</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Ambient scene color</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_LIGHT_MODEL_LOCAL_VIEWER</constant> value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_LIGHT_MODEL_TWO_SIDE</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_LIGHTING</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Enable bit for each light</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Ambient, diffuse, and specular intensity for each light</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Direction, position, exponent, and cutoff angle for each light</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Constant, linear, and quadratic attenuation factors for each light</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Ambient, diffuse, specular, and emissive color for each material</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Ambient, diffuse, and specular color indices for each material</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Specular exponent for each material</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_SHADE_MODEL</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_LINE_BIT</constant></entry>
+						<entry><constant>GL_LINE_SMOOTH</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_LINE_STIPPLE</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Line stipple pattern and repeat counter</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Line width</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_LIST_BIT</constant></entry>
+						<entry><constant>GL_LIST_BASE</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_PIXEL_MODE_BIT</constant></entry>
+						<entry><constant>GL_RED_BIAS</constant> and <constant>GL_RED_SCALE</constant> settings</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_GREEN_BIAS</constant> and <constant>GL_GREEN_SCALE</constant> values</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_BLUE_BIAS</constant> and <constant>GL_BLUE_SCALE</constant></entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_ALPHA_BIAS</constant> and <constant>GL_ALPHA_SCALE</constant></entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_DEPTH_BIAS</constant> and <constant>GL_DEPTH_SCALE</constant></entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_INDEX_OFFSET</constant> and <constant>GL_INDEX_SHIFT</constant> values</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_MAP_COLOR</constant> and <constant>GL_MAP_STENCIL</constant> flags</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_ZOOM_X</constant> and <constant>GL_ZOOM_Y</constant> factors</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_READ_BUFFER</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_POINT_BIT</constant></entry>
+						<entry><constant>GL_POINT_SMOOTH</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Point size</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_POLYGON_BIT</constant></entry>
+						<entry><constant>GL_CULL_FACE</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_CULL_FACE_MODE</constant> value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_FRONT_FACE</constant> indicator</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_MODE</constant> setting</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_SMOOTH</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_STIPPLE</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_OFFSET_FILL</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_OFFSET_LINE</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_OFFSET_POINT</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_OFFSET_FACTOR</constant></entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_POLYGON_OFFSET_UNITS</constant></entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_POLYGON_STIPPLE_BIT</constant></entry>
+						<entry>Polygon stipple image</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_SCISSOR_BIT</constant></entry>
+						<entry><constant>GL_SCISSOR_TEST</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Scissor box</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_STENCIL_BUFFER_BIT</constant></entry>
+						<entry><constant>GL_STENCIL_TEST</constant> enable bit</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Stencil function and reference value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Stencil value mask</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Stencil fail, pass, and depth buffer pass actions</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Stencil buffer clear value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Stencil buffer writemask</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_TEXTURE_BIT</constant></entry>
+						<entry>Enable bits for the four texture coordinates</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Border color for each texture image</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Minification function for each texture image</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Magnification function for each texture image</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Texture coordinates and wrap mode for each texture image</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Color and mode for each texture environment</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Enable bits <constant>GL_TEXTURE_GEN_</constant><parameter>x</parameter>, <parameter>x</parameter>
+						is S, T, R, and Q</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_TEXTURE_GEN_MODE</constant> setting for S, T, R, and Q</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><function moreinfo="refentry">glTexGen</function> plane equations for S, T, R, and Q</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Current texture bindings (for example, <constant>GL_TEXTURE_BINDING_2D</constant>)</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_TRANSFORM_BIT</constant></entry>
+						<entry>Coefficients of the six clipping planes</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Enable bits for the user-definable clipping planes</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_MATRIX_MODE</constant> value</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_NORMALIZE</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry><constant>GL_RESCALE_NORMAL</constant> flag</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry/>
+					</row>
+					<row>
+						<entry><constant>GL_VIEWPORT_BIT</constant></entry>
+						<entry>Depth range (near and far)</entry>
+					</row>
+					<row>
+						<entry/>
+						<entry>Viewport origin and extent</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</informaltable>
+		<para>
+			<function>glPopAttrib</function> restores the values of the state variables saved with the last
+		</para>
+		<para>
+			<function>glPushAttrib</function> command. Those not saved are left unchanged.
+		</para>
+		<para>
+			It is an error to push attributes onto a full stack, or to pop attributes off an empty stack. In either case, the error
+			flag is set and no other change is made to GL state.
+		</para>
+		<para>
+			Initially, the attribute stack is empty.
+		</para>
+	</refsect1>
+	<refsect1 id="glPushAttrib.3G-notes">
+		<title>Notes</title>
+		<para>
+			Not all values for GL state can be saved on the attribute stack. For example, render mode state, and select and
+			feedback state cannot be saved. Client state must be saved with <function
+			moreinfo="refentry">glPushClientAttrib</function>.
+		</para>
+		<para>
+			The depth of the attribute stack depends on the implementation, but it must be at least 16.
+		</para>
+		<para>
+			When the <constant>GL_ARB_multitexture</constant> extension is supported, pushing and popping texture state apples to
+			all supported texture units.
+		</para>
+	</refsect1>
+	<refsect1 id="glPushAttrib.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_STACK_OVERFLOW</constant> is generated if <function>glPushAttrib</function> is called while the attribute
+			stack is full.
+		</para>
+		<para>
+			<constant>GL_STACK_UNDERFLOW</constant> is generated if <function>glPopAttrib</function> is called while the attribute
+			stack is empty.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glPushAttrib</function> or
+			<function>glPopAttrib</function> is executed between the execution of <function moreinfo="refentry">glBegin</function>
+			and the corresponding execution of <function moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glPushAttrib.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_ATTRIB_STACK_DEPTH</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_MAX_ATTRIB_STACK_DEPTH</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glPushAttrib.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glGet</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetClipPlane</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetError</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetLight</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetMap</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetMaterial</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetPixelMap</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetPolygonStipple</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetString</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexEnv</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexGen</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexImage</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexLevelParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glIsEnabled</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPushClientAttrib</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

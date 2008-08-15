@@ -1,0 +1,65 @@
+<refentry id="glutFullScreen.3GLUT">
+	<refmeta id="glutFullScreen.3GLUT-meta">
+		<refentrytitle>glutFullScreen</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutFullScreen.3GLUT-name">
+		<refname>glutFullScreen</refname>
+		<refpurpose>requests that the current window be made full screen.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutFullScreen.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutFullScreen</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutFullScreen.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutFullScreen</function> requests that the current window be made full screen. The exact semantics of what
+			full screen means may vary by window system. The intent is to make the window as large as possible and disable any
+			window decorations or borders added the window system. The window width and height are not guaranteed to be the same as
+			the screen width and height, but that is the intent of making a window full screen.
+		</para>
+		<para>
+			<function>glutFullScreen</function> is defined to work only on top-level windows.
+		</para>
+		<para>
+			The <function>glutFullScreen</function> requests are not processed immediately. The request is executed after returning
+			to the main event loop. This allows multiple <function moreinfo="refentry">glutReshapeWindow</function>, <function
+			moreinfo="refentry">glutPositionWindow</function>, and <function>glutFullScreen</function> requests to the same window
+			to be coalesced.
+		</para>
+		<para>
+			Subsequent <function moreinfo="refentry">glutReshapeWindow</function> and <function
+			moreinfo="refentry">glutPositionWindow</function> requests on the window will disable the full screen status of the
+			window.
+		</para>
+	</refsect1>
+	<refsect1 id="glutFullScreen.3GLUT-x_implementation_notes">
+		<title>X Implementation Notes</title>
+		<para>
+			In the X implementation of GLUT, full screen is implemented by sizing and positioning the window to cover the entire
+			screen and posting the _MOTIF_WM_HINTS property on the window requesting absolutely no decorations. Non-Motif window
+			managers may not respond to _MOTIF_WM_HINTS.
+		</para>
+	</refsect1>
+	<refsect1 id="glutFullScreen.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutReshapeWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutPositionWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,267 @@
+<refentry id="glMaterial.3G">
+	<refmeta id="glMaterial.3G-meta">
+		<refentrytitle>glMaterial</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glMaterial.3G-name">
+		<refname>glMaterialf</refname>
+		<refname>glMateriali</refname>
+		<refname>glMaterialfv</refname>
+		<refname>glMaterialiv</refname>
+		<refpurpose>specify material parameters for the lighting model</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glMaterial.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMaterialf</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>face</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLfloat&nbsp;<parameter>param</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMateriali</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>face</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>param</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glMaterial.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>face</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies which face or faces are being updated. Must be one of <constant>GL_FRONT</constant>,
+						<constant>GL_BACK</constant>, or <constant>GL_FRONT_AND_BACK</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>pname</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the single-valued material parameter of the face or faces that is being updated. Must be
+						<constant>GL_SHININESS</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>param</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the value that parameter <constant>GL_SHININESS</constant> will be set to.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsynopsisdiv id="glMaterial.3G-c_spec-v">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMaterialfv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>face</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>const GLfloat *<parameter>params</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glMaterialiv</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>face</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>pname</parameter></paramdef>
+				<paramdef>const GLint *<parameter>params</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glMaterial.3G-parameters-v">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>face</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies which face or faces are being updated. Must be one of <constant>GL_FRONT</constant>,
+						<constant>GL_BACK</constant>, or <constant>GL_FRONT_AND_BACK</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>pname</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the material parameter of the face or faces that is being updated. Must be one of
+						<constant>GL_AMBIENT</constant>, <constant>GL_DIFFUSE</constant>, <constant>GL_SPECULAR</constant>,
+						<constant>GL_EMISSION</constant>, <constant>GL_SHININESS</constant>,
+						<constant>GL_AMBIENT_AND_DIFFUSE</constant>, or <constant>GL_COLOR_INDEXES</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>params</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to the value or values that <parameter>pname</parameter> will be set to.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glMaterial.3G-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glMaterial</function> assigns values to material parameters. There are two matched sets
+			of material parameters. One, the <parameter>front-facing</parameter> set, is used to shade points, lines, bitmaps, and
+			all polygons (when two-sided lighting is disabled), or just front-facing polygons (when two-sided lighting is enabled).
+			The other set, <parameter>back-facing</parameter>, is used to shade back-facing polygons only when two-sided lighting
+			is enabled. Refer to the <function moreinfo="refentry">glLightModel</function> reference page for details concerning
+			one- and two-sided lighting calculations.
+		</para>
+		<para>
+			<function moreinfo="refentry">glMaterial</function> takes three arguments. The first, <parameter>face</parameter>,
+			specifies whether the <constant>GL_FRONT</constant> materials, the <constant>GL_BACK</constant> materials, or both
+			<constant>GL_FRONT_AND_BACK</constant> materials will be modified. The second, <parameter>pname</parameter>, specifies
+			which of several parameters in one or both sets will be modified. The third, <parameter>params</parameter>, specifies
+			what value or values will be assigned to the specified parameter.
+		</para>
+		<para>
+			Material parameters are used in the lighting equation that is optionally applied to each vertex. The equation is
+			discussed in the <function moreinfo="refentry">glLightModel</function> reference page. The parameters that can be
+			specified using <function moreinfo="refentry">glMaterial</function>, and their interpretations by the lighting
+			equation, are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_AMBIENT</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> contains four integer or floating-point values that specify the ambient RGBA
+						reflectance of the material. Integer values are mapped linearly such that the most positive representable
+						value maps to 1.0, and the most negative representable value maps to -1.0. Floating-point values are mapped
+						directly. Neither integer nor floating-point values are clamped. The initial ambient reflectance for both
+						front- and back-facing materials is (0.2, 0.2, 0.2, 1.0).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_DIFFUSE</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> contains four integer or floating-point values that specify the diffuse RGBA
+						reflectance of the material. Integer values are mapped linearly such that the most positive representable
+						value maps to 1.0, and the most negative representable value maps to -1.0. Floating-point values are mapped
+						directly. Neither integer nor floating-point values are clamped. The initial diffuse reflectance for both
+						front- and back-facing materials is (0.8, 0.8, 0.8, 1.0).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_SPECULAR</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> contains four integer or floating-point values that specify the specular RGBA
+						reflectance of the material. Integer values are mapped linearly such that the most positive representable
+						value maps to 1.0, and the most negative representable value maps to -1.0. Floating-point values are mapped
+						directly. Neither integer nor floating-point values are clamped. The initial specular reflectance for both
+						front- and back-facing materials is (0, 0, 0, 1).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_EMISSION</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> contains four integer or floating-point values that specify the RGBA emitted
+						light intensity of the material. Integer values are mapped linearly such that the most positive
+						representable value maps to 1.0, and the most negative representable value maps to -1.0. Floating-point
+						values are mapped directly. Neither integer nor floating-point values are clamped. The initial emission
+						intensity for both front- and back-facing materials is (0, 0, 0, 1).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_SHININESS</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> is a single integer or floating-point value that specifies the RGBA specular
+						exponent of the material. Integer and floating-point values are mapped directly. Only values in the range
+						[0,128] are accepted. The initial specular exponent for both front- and back-facing materials is 0.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_AMBIENT_AND_DIFFUSE</constant></term>
+				<listitem>
+					<simpara>
+						Equivalent to calling <function moreinfo="refentry">glMaterial</function> twice with the same parameter
+						values, once with <constant>GL_AMBIENT</constant> and once with <constant>GL_DIFFUSE</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_COLOR_INDEXES</constant></term>
+				<listitem>
+					<simpara>
+						<parameter>params</parameter> contains three integer or floating-point values specifying the color indices
+						for ambient, diffuse, and specular lighting. These three values, and <constant>GL_SHININESS</constant>, are
+						the only material values used by the color index mode lighting equation. Refer to the <function
+						moreinfo="refentry">glLightModel</function> reference page for a discussion of color index lighting.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glMaterial.3G-notes">
+		<title>Notes</title>
+		<para>
+			The material parameters can be updated at any time. In particular, <function moreinfo="refentry">glMaterial</function>
+			can be called between a call to <function moreinfo="refentry">glBegin</function> and the corresponding call to
+			<function moreinfo="refentry">glEnd</function>. If only a single material parameter is to be changed per vertex,
+			however, <function moreinfo="refentry">glColorMaterial</function> is preferred over <function
+			moreinfo="refentry">glMaterial</function> (see <citerefentry>
+				<refentrytitle>glColorMaterial</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>).
+		</para>
+		<para>
+			While the ambient, diffuse, specular and emission material parameters all have alpha components, only the diffuse alpha
+			component is used in the lighting computation.
+		</para>
+	</refsect1>
+	<refsect1 id="glMaterial.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if either <parameter>face</parameter> or <parameter>pname</parameter>
+			is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if a specular exponent outside the range [0,128] is specified.
+		</para>
+	</refsect1>
+	<refsect1 id="glMaterial.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glGetMaterial</function>
+		</para>
+	</refsect1>
+	<refsect1 id="glMaterial.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glColorMaterial</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glLight</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glLightModel</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

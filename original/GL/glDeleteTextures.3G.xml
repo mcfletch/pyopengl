@@ -1,0 +1,127 @@
+<refentry id="glDeleteTextures.3G">
+	<refmeta id="glDeleteTextures.3G-meta">
+		<refentrytitle>glDeleteTextures</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glDeleteTextures.3G-name">
+		<refname>glDeleteTextures</refname>
+		<refpurpose>delete named textures</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glDeleteTextures.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glDeleteTextures</function></funcdef>
+				<paramdef>GLsizei&nbsp;<parameter>n</parameter></paramdef>
+				<paramdef>const&nbsp;GLuint&nbsp;*<parameter>textures</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glDeleteTextures.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>n</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the number of textures to be deleted.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>textures</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies an array of textures to be deleted.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glDeleteTextures.3G-description">
+		<title>Description</title>
+		<para>
+			<function>glDeleteTextures</function> deletes <parameter>n</parameter> textures named by the elements of the array
+			<parameter>textures</parameter>. After a texture is deleted, it has no contents or dimensionality, and its name is free
+			for reuse (for example by <function moreinfo="refentry">glGenTextures</function>). If a texture that is currently bound
+			is deleted, the binding reverts to 0 (the default texture).
+		</para>
+		<para>
+			<function>glDeleteTextures</function> silently ignores 0's and names that do not correspond to existing textures.
+		</para>
+	</refsect1>
+	<refsect1 id="glDeleteTextures.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>glDeleteTextures</function> is available only if the GL version is 1.1 or greater.
+		</para>
+	</refsect1>
+	<refsect1 id="glDeleteTextures.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if <parameter>n</parameter> is negative.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glDeleteTextures</function> is executed between the
+			execution of <function moreinfo="refentry">glBegin</function> and the corresponding execution of <function
+			moreinfo="refentry">glEnd</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glDeleteTextures.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glIsTexture</function>
+		</para>
+	</refsect1>
+	<refsect1 id="glDeleteTextures.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glAreTexturesResident</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glBindTexture</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCopyTexImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGenTextures</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGet</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glPrioritizeTextures</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

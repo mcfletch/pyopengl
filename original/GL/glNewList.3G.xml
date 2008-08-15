@@ -1,0 +1,200 @@
+<refentry id="glNewList.3G">
+	<refmeta id="glNewList.3G-meta">
+		<refentrytitle>glNewList</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="glNewList.3G-name">
+		<refname>glNewList</refname>
+		<refname>glEndList</refname>
+		<refpurpose>create or replace a display list</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glNewList.3G-c_spec-new">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glNewList</function></funcdef>
+				<paramdef>GLuint&nbsp;<parameter>list</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>mode</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glNewList.3G-parameters-new">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>list</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the display-list name.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>mode</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the compilation mode, which can be <constant>GL_COMPILE</constant> or
+						<constant>GL_COMPILE_AND_EXECUTE</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsynopsisdiv id="glNewList.3G-c_spec-end">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glEndList</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glNewList.3G-description">
+		<title>Description</title>
+		<para>
+			Display lists are groups of GL commands that have been stored for subsequent execution. Display lists are created with
+			<function>glNewList</function>. All subsequent commands are placed in the display list, in the order issued, until
+			<function>glEndList</function> is called.
+		</para>
+		<para>
+			<function>glNewList</function> has two arguments. The first argument, <parameter>list</parameter>, is a positive
+			integer that becomes the unique name for the display list. Names can be created and reserved with <function
+			moreinfo="refentry">glGenLists</function> and tested for uniqueness with <function
+			moreinfo="refentry">glIsList</function>. The second argument, <parameter>mode</parameter>, is a symbolic constant that
+			can assume one of two values:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><constant>GL_COMPILE</constant></term>
+				<listitem>
+					<simpara>
+						Commands are merely compiled.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>GL_COMPILE_AND_EXECUTE</constant></term>
+				<listitem>
+					<simpara>
+						Commands are executed as they are compiled into the display list.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			Certain commands are not compiled into the display list but are executed immediately, regardless of the display-list
+			mode. These commands are <function moreinfo="refentry">glAreTexturesResident</function>, <function
+			moreinfo="refentry">glColorPointer</function>, <function moreinfo="refentry">glDeleteLists</function>, <function
+			moreinfo="refentry">glDeleteTextures</function>, <function moreinfo="refentry">glDisableClientState</function>,
+			<function moreinfo="refentry">glEdgeFlagPointer</function>, <function
+			moreinfo="refentry">glEnableClientState</function>, <function moreinfo="refentry">glFeedbackBuffer</function>,
+			<function moreinfo="refentry">glFinish</function>, <function moreinfo="refentry">glFlush</function>, <function
+			moreinfo="refentry">glGenLists</function>, <function moreinfo="refentry">glGenTextures</function>, <function
+			moreinfo="refentry">glIndexPointer</function>, <function moreinfo="refentry">glInterleavedArrays</function>, <function
+			moreinfo="refentry">glIsEnabled</function>, <function moreinfo="refentry">glIsList</function>, <function
+			moreinfo="refentry">glIsTexture</function>, <function moreinfo="refentry">glNormalPointer</function>, <function
+			moreinfo="refentry">glPopClientAttrib</function>, <function moreinfo="refentry">glPixelStore</function>, <function
+			moreinfo="refentry">glPushClientAttrib</function>, <function moreinfo="refentry">glReadPixels</function>, <function
+			moreinfo="refentry">glRenderMode</function>, <function moreinfo="refentry">glSelectBuffer</function>, <function
+			moreinfo="refentry">glTexCoordPointer</function>, <function moreinfo="refentry">glVertexPointer</function>, and all of
+			the <function moreinfo="refentry">glGet</function> commands.
+		</para>
+		<para>
+			Similarly, <function moreinfo="refentry">glTexImage1D</function>, <function
+			moreinfo="refentry">glTexImage2D</function>, and <function moreinfo="refentry">glTexImage3D</function> are executed
+			immediately and not compiled into the display list when their first argument is
+			<constant>GL_PROXY_TEXTURE_1D</constant>, <constant>GL_PROXY_TEXTURE_1D</constant>, or
+			<constant>GL_PROXY_TEXTURE_3D</constant>, respectively.
+		</para>
+		<para>
+			When the <constant>GL_ARB_imaging</constant> extension is supported, <function
+			moreinfo="refentry">glHistogram</function> executes immediately when its argument is
+			<constant>GL_PROXY_HISTOGRAM</constant>. Similarly, <function moreinfo="refentry">glColorTable</function> executes
+			immediately when its first argument is <function moreinfo="refentry">glPROXY_COLOR_TABLE</function>, <function
+			moreinfo="refentry">glPROXY_POST_CONVOLUTION_COLOR_TABLE</function>, or <function
+			moreinfo="refentry">glPROXY_POST_COLOR_MATRIX_COLOR_TABLE</function>.
+		</para>
+		<para>
+			When the <constant>GL_ARB_multitexture</constant> extension is supported, <function
+			moreinfo="refentry">glClientActiveTextureARB</function> is not compiled into display lists, but executed immediately.
+		</para>
+		<para>
+			When <function>glEndList</function> is encountered, the display-list definition is completed by associating the list
+			with the unique name <parameter>list</parameter> (specified in the <function>glNewList</function> command). If a
+			display list with name <parameter>list</parameter> already exists, it is replaced only when
+			<function>glEndList</function> is called.
+		</para>
+	</refsect1>
+	<refsect1 id="glNewList.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function moreinfo="refentry">glCallList</function> and <function moreinfo="refentry">glCallLists</function> can be
+			entered into display lists. Commands in the display list or lists executed by <function
+			moreinfo="refentry">glCallList</function> or <function moreinfo="refentry">glCallLists</function> are not included in
+			the display list being created, even if the list creation mode is <constant>GL_COMPILE_AND_EXECUTE</constant>.
+		</para>
+		<para>
+			A display list is just a group of commands and arguments, so errors generated by commands in a display list must be
+			generated when the list is executed. If the list is created in <constant>GL_COMPILE</constant> mode, errors are not
+			generated until the list is executed.
+		</para>
+	</refsect1>
+	<refsect1 id="glNewList.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GL_INVALID_VALUE</constant> is generated if <parameter>list</parameter> is 0.
+		</para>
+		<para>
+			<constant>GL_INVALID_ENUM</constant> is generated if <parameter>mode</parameter> is not an accepted value.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glEndList</function> is called without a preceding
+			<function>glNewList</function>, or if <function>glNewList</function> is called while a display list is being defined.
+		</para>
+		<para>
+			<constant>GL_INVALID_OPERATION</constant> is generated if <function>glNewList</function> or
+			<function>glEndList</function> is executed between the execution of <function moreinfo="refentry">glBegin</function>
+			and the corresponding execution of <function moreinfo="refentry">glEnd</function>.
+		</para>
+		<para>
+			<constant>GL_OUT_OF_MEMORY</constant> is generated if there is insufficient memory to compile the display list. If the
+			GL version is 1.1 or greater, no change is made to the previous contents of the display list, if any, and no other
+			change is made to the GL state. (It is as if no attempt had been made to create the new display list.)
+		</para>
+	</refsect1>
+	<refsect1 id="glNewList.3G-associated_gets">
+		<title>Associated Gets</title>
+		<para>
+			<function moreinfo="refentry">glIsList</function>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_LIST_INDEX</constant>
+		</para>
+		<para>
+			<function moreinfo="refentry">glGet</function> with argument <constant>GL_LIST_MODE</constant>
+		</para>
+	</refsect1>
+	<refsect1 id="glNewList.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glCallList</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glCallLists</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glDeleteLists</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGenLists</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

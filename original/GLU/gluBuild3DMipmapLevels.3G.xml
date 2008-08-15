@@ -1,0 +1,399 @@
+<refentry id="gluBuild3DMipmapLevels.3G">
+	<refmeta id="gluBuild3DMipmapLevels.3G-meta">
+		<refentrytitle>gluBuild3DMipmapLevels</refentrytitle>
+		<manvolnum>3G</manvolnum>
+	</refmeta>
+	<refnamediv id="gluBuild3DMipmapLevels.3G-name">
+		<refname>gluBuild3DMipmapLevels</refname>
+		<refpurpose>builds a subset of three-dimensional mipmap levels</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gluBuild3DMipmapLevels.3G-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>GLint&nbsp;<function>gluBuild3DMipmapLevels</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>target</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>internalFormat</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>width</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>height</parameter></paramdef>
+				<paramdef>GLsizei&nbsp;<parameter>depth</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>format</parameter></paramdef>
+				<paramdef>GLenum&nbsp;<parameter>type</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>level</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>base</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>max</parameter></paramdef>
+				<paramdef>const&nbsp;void&nbsp;*<parameter>data</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gluBuild3DMipmapLevels.3G-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>target</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the target texture. Must be <constant>GL_TEXTURE_3D</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>internalFormat</parameter></term>
+				<listitem>
+					<simpara>
+						Requests the internal storage format of the texture image. Must be 1, 2, 3, 4, or one of the following
+						symbolic constants: <constant>GL_ALPHA</constant>, <constant>GL_ALPHA4</constant>,
+						<constant>GL_ALPHA8</constant>, <constant>GL_ALPHA12</constant>, <constant>GL_ALPHA16</constant>,
+						<constant>GL_LUMINANCE</constant>, <constant>GL_LUMINANCE4</constant>, <constant>GL_LUMINANCE8</constant>,
+						<constant>GL_LUMINANCE12</constant>, <constant>GL_LUMINANCE16</constant>,
+						<constant>GL_LUMINANCE_ALPHA</constant>, <constant>GL_LUMINANCE4_ALPHA4</constant>,
+						<constant>GL_LUMINANCE6_ALPHA2</constant>, <constant>GL_LUMINANCE8_ALPHA8</constant>,
+						<constant>GL_LUMINANCE12_ALPHA4</constant>, <constant>GL_LUMINANCE12_ALPHA12</constant>,
+						<constant>GL_LUMINANCE16_ALPHA16</constant>, <constant>GL_INTENSITY</constant>,
+						<constant>GL_INTENSITY4</constant>, <constant>GL_INTENSITY8</constant>,
+						<constant>GL_INTENSITY12</constant>, <constant>GL_INTENSITY16</constant>, <constant>GL_RGB</constant>,
+						<constant>GL_R3_G3_B2</constant>, <constant>GL_RGB4</constant>, <constant>GL_RGB5</constant>,
+						<constant>GL_RGB8</constant>, <constant>GL_RGB10</constant>, <constant>GL_RGB12</constant>,
+						<constant>GL_RGB16</constant>, <constant>GL_RGBA</constant>, <constant>GL_RGBA2</constant>,
+						<constant>GL_RGBA4</constant>, <constant>GL_RGB5_A1</constant>, <constant>GL_RGBA8</constant>,
+						<constant>GL_RGB10_A2</constant>, <constant>GL_RGBA12</constant>, or <constant>GL_RGBA16</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>width</parameter>, <parameter>height</parameter>, <parameter>depth</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies in pixels the width, height and depth respectively, of the texture image. These should be a power
+						of 2.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>format</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the format of the pixel data. Must be one of <constant>GL_COLOR_INDEX</constant>,
+						<constant>GL_DEPTH_COMPONENT</constant>, <constant>GL_RED</constant>, <constant>GL_GREEN</constant>,
+						<constant>GL_BLUE</constant>, <constant>GL_ALPHA</constant>, <constant>GL_RGB</constant>,
+						<constant>GL_RGBA</constant>, <constant>GL_BGR</constant>, <constant>GL_BGRA</constant>,
+						<constant>GL_LUMINANCE</constant>, or <constant>GL_LUMINANCE_ALPHA</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>type</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the data type for <parameter>data</parameter>. Must be one of
+						<constant>GL_UNSIGNED_BYTE</constant>, <constant>GL_BYTE</constant>, <constant>GL_BITMAP</constant>,
+						<constant>GL_UNSIGNED_SHORT</constant>, <constant>GL_SHORT</constant>,
+						<constant>GL_UNSIGNED_INT</constant>, <constant>GL_INT</constant>, <constant>GL_FLOAT</constant>,
+						<constant>GL_UNSIGNED_BYTE_3_3_2</constant>, <constant>GL_UNSIGNED_BYTE_2_3_3_REV</constant>,
+						<constant>GL_UNSIGNED_SHORT_5_6_5</constant>, <constant>GL_UNSIGNED_SHORT_5_6_5_REV</constant>,
+						<constant>GL_UNSIGNED_SHORT_4_4_4_4</constant>, <constant>GL_UNSIGNED_SHORT_4_4_4_4_REV</constant>,
+						<constant>GL_UNSIGNED_SHORT_5_5_5_1</constant>, <constant>GL_UNSIGNED_SHORT_1_5_5_5_REV</constant>,
+						<constant>GL_UNSIGNED_INT_8_8_8_8</constant>, <constant>GL_UNSIGNED_INT_8_8_8_8_REV</constant>,
+						<constant>GL_UNSIGNED_INT_10_10_10_2</constant>, or <constant>GL_UNSIGNED_INT_2_10_10_10_REV</constant>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>level</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the mipmap level of the image data.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>base</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the minimum mipmap level to pass to <function moreinfo="refentry">glTexImage3D</function>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>max</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies the maximum mipmap level to pass to <function moreinfo="refentry">glTexImage3D</function>.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>data</parameter></term>
+				<listitem>
+					<simpara>
+						Specifies a pointer to the image data in memory.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gluBuild3DMipmapLevels.3G-description">
+		<title>Description</title>
+		<para>
+			<function>gluBuild3DMipmapLevels</function> builds a subset of prefiltered three-dimensional texture maps of decreasing
+			resolutions called a mipmap. This is used for the antialiasing of texture mapped primitives.
+		</para>
+		<para>
+			A return value of zero indicates success, otherwise a GLU error code is returned (see <citerefentry>
+				<refentrytitle>gluErrorString</refentrytitle>
+				<manvolnum>3G</manvolnum>
+			</citerefentry>).
+		</para>
+		<para>
+			A series of mipmap levels from <parameter>base</parameter> to <parameter>max</parameter> is built by decimating
+			<parameter>data</parameter> in half along both dimensions until size <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>1</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> is reached. At each level, each texel in the halved mipmap level is an average of the corresponding
+			eight texels in the larger mipmap level. (If exactly one of the dimensions is 1, four texels are averaged. If exactly
+			two of the dimensions are 1, two texels are averaged.) <function moreinfo="refentry">glTexImage3D</function> is called
+			to load these mipmap levels from <parameter>base</parameter> to <parameter>max</parameter>. If
+			<parameter>max</parameter> is larger than the highest mipmap level for the texture of the specified size, then a GLU
+			error code is returned (see <function moreinfo="refentry">gluErrorString</function>) and nothing is loaded.
+		</para>
+		<para>
+			For example, if <parameter>level</parameter> is 2 and <parameter>width</parameter> is 16, <parameter>height</parameter>
+			is 8 and <parameter>depth</parameter> is 4, the following levels are possible: <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>16</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>8</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>4</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>8</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>4</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>2</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>4</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>2</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>2</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>1</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>. These correspond to levels 2 through 6 respectively. If <parameter>base</parameter> is 3 and
+			<parameter>max</parameter> is 5, then only mipmap levels <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>8</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>4</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>2</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>, <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>4</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>2</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> and <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:mn>2</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+						<mml:mo>&times;</mml:mo>
+						<mml:mn>1</mml:mn>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation> are loaded. However, if <parameter>max</parameter> is 7 then an error is returned and nothing is
+			loaded, since <parameter>max</parameter> is larger than the highest mipmap level which is, in this case, 6.
+		</para>
+		<para>
+			The highest mipmap level can be derived from the formula <inlineequation>
+				<mml:math>
+					<mml:mrow>
+						<mml:msub>
+							<mml:mi>log</mml:mi>
+							<mml:mn>2</mml:mn>
+						</mml:msub>
+						<mml:mo>(</mml:mo>
+						<mml:mi>max</mml:mi>
+						<mml:mo>(</mml:mo>
+						<mml:mi>width</mml:mi>
+						<mml:mi>height</mml:mi>
+						<mml:mi>depth</mml:mi>
+						<mml:mo>)</mml:mo>
+						<mml:msup>
+							<mml:mn>2</mml:mn>
+							<mml:mi>level</mml:mi>
+						</mml:msup>
+						<mml:mo>)</mml:mo>
+					</mml:mrow>
+				</mml:math>
+			</inlineequation>.
+		</para>
+		<para>
+			See the <function moreinfo="refentry">glTexImage1D</function> reference page for a description of the acceptable values
+			for <parameter>format</parameter> parameter. See the <function moreinfo="refentry">glDrawPixels</function> reference
+			page for a description of the acceptable values for <parameter>type</parameter> parameter.
+		</para>
+	</refsect1>
+	<refsect1 id="gluBuild3DMipmapLevels.3G-notes">
+		<title>Notes</title>
+		<para>
+			<function>gluBuild3DMipmapLevels</function> is only available if the GLU version is 1.3 or greater.
+		</para>
+		<para>
+			Formats <constant>GL_BGR</constant>, and <constant>GL_BGRA</constant>, and types
+			<constant>GL_UNSIGNED_BYTE_3_3_2</constant>, <constant>GL_UNSIGNED_BYTE_2_3_3_REV</constant>,
+			<constant>GL_UNSIGNED_SHORT_5_6_5</constant>, <constant>GL_UNSIGNED_SHORT_5_6_5_REV</constant>,
+			<constant>GL_UNSIGNED_SHORT_4_4_4_4</constant>, <constant>GL_UNSIGNED_SHORT_4_4_4_4_REV</constant>,
+			<constant>GL_UNSIGNED_SHORT_5_5_5_1</constant>, <constant>GL_UNSIGNED_SHORT_1_5_5_5_REV</constant>,
+			<constant>GL_UNSIGNED_INT_8_8_8_8</constant>, <constant>GL_UNSIGNED_INT_8_8_8_8_REV</constant>,
+			<constant>GL_UNSIGNED_INT_10_10_10_2</constant>, and <constant>GL_UNSIGNED_INT_2_10_10_10_REV</constant> are only
+			available if the GL version is 1.2 or greater.
+		</para>
+	</refsect1>
+	<refsect1 id="gluBuild3DMipmapLevels.3G-errors">
+		<title>Errors</title>
+		<para>
+			<constant>GLU_INVALID_VALUE</constant> is returned if <parameter>level</parameter> &gt; <parameter>base</parameter>,
+			<parameter>base</parameter> &lt; 0, <parameter>max</parameter> &lt; <parameter>base</parameter> or
+			<parameter>max</parameter> is &gt; the highest mipmap level for <parameter>data</parameter>.
+		</para>
+		<para>
+			<constant>GLU_INVALID_VALUE</constant> is returned if <parameter>width</parameter>, <parameter>height</parameter>, or
+			<parameter>depth</parameter> is &lt; 1.
+		</para>
+		<para>
+			<constant>GLU_INVALID_ENUM</constant> is returned if <parameter>internalFormat</parameter>,
+			<parameter>format</parameter>, or <parameter>type</parameter> is not legal.
+		</para>
+		<para>
+			<constant>GLU_INVALID_OPERATION</constant> is returned if <parameter>type</parameter> is
+			<constant>GL_UNSIGNED_BYTE_3_3_2</constant> or <constant>GL_UNSIGNED_BYTE_2_3_3_REV</constant> and
+			<parameter>format</parameter> is not <constant>GL_RGB</constant>.
+		</para>
+		<para>
+			<constant>GLU_INVALID_OPERATION</constant> is returned if <parameter>type</parameter> is
+			<constant>GL_UNSIGNED_SHORT_5_6_5</constant> or <constant>GL_UNSIGNED_SHORT_5_6_5_REV</constant> and
+			<parameter>format</parameter> is not <constant>GL_RGB</constant>.
+		</para>
+		<para>
+			<constant>GLU_INVALID_OPERATION</constant> is returned if <parameter>type</parameter> is
+			<constant>GL_UNSIGNED_SHORT_4_4_4_4</constant> or <constant>GL_UNSIGNED_SHORT_4_4_4_4_REV</constant> and
+			<parameter>format</parameter> is neither <constant>GL_RGBA</constant> nor <constant>GL_BGRA</constant>.
+		</para>
+		<para>
+			<constant>GLU_INVALID_OPERATION</constant> is returned if <parameter>type</parameter> is
+			<constant>GL_UNSIGNED_SHORT_5_5_5_1</constant> or <constant>GL_UNSIGNED_SHORT_1_5_5_5_REV</constant> and
+			<parameter>format</parameter> is neither <constant>GL_RGBA</constant> nor <constant>GL_BGRA</constant>.
+		</para>
+		<para>
+			<constant>GLU_INVALID_OPERATION</constant> is returned if <parameter>type</parameter> is
+			<constant>GL_UNSIGNED_INT_8_8_8_8</constant> or <constant>GL_UNSIGNED_INT_8_8_8_8_REV</constant> and
+			<parameter>format</parameter> is neither <constant>GL_RGBA</constant> nor <constant>GL_BGRA</constant>.
+		</para>
+		<para>
+			<constant>GLU_INVALID_OPERATION</constant> is returned if <parameter>type</parameter> is
+			<constant>GL_UNSIGNED_INT_10_10_10_2</constant> or <constant>GL_UNSIGNED_INT_2_10_10_10_REV</constant> and
+			<parameter>format</parameter> is neither <constant>GL_RGBA</constant> nor <constant>GL_BGRA</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="gluBuild3DMipmapLevels.3G-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glDrawPixels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage1D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage2D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glTexImage3D</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluBuild1DMipmaps</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluBuild2DMipmaps</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluBuild3DMipmaps</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluErrorString</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexImage</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetTexLevelParameter</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluBuild1DMipmapLevels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gluBuild2DMipmapLevels</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

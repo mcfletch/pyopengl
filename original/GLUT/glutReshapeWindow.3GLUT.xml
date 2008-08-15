@@ -1,0 +1,79 @@
+<refentry id="glutReshapeWindow.3GLUT">
+	<refmeta id="glutReshapeWindow.3GLUT-meta">
+		<refentrytitle>glutReshapeWindow</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutReshapeWindow.3GLUT-name">
+		<refname>glutReshapeWindow</refname>
+		<refpurpose>requests a change to the size of the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutReshapeWindow.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutReshapeWindow</function></funcdef>
+				<paramdef>int&nbsp;<parameter>width</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>height</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutReshapeWindow.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>width</parameter></term>
+				<listitem>
+					<simpara>
+						New width of window in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>height</parameter></term>
+				<listitem>
+					<simpara>
+						New height of window in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutReshapeWindow.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutReshapeWindow</function> requests a change in the size of the current window. The
+			<parameter>width</parameter> and <parameter>height</parameter> parameters are size extents in pixels. The
+			<parameter>width</parameter> and <parameter>height</parameter> must be positive values.
+		</para>
+		<para>
+			The requests by <function>glutReshapeWindow</function> are not processed immediately. The request is executed after
+			returning to the main event loop. This allows multiple <function>glutReshapeWindow</function>, <function
+			moreinfo="refentry">glutPositionWindow</function>, and <function moreinfo="refentry">glutFullScreen</function> requests
+			to the same window to be coalesced.
+		</para>
+		<para>
+			In the case of top-level windows, a <function>glutReshapeWindow</function> call is considered only a request for sizing
+			the window. The window system is free to apply its own policies to top-level window sizing. The intent is that
+			top-level windows should be reshaped according <function>glutReshapeWindow</function>'s parameters. Whether a reshape
+			actually takes effect and, if so, the reshaped dimensions are reported to the program by a reshape callback.
+		</para>
+		<para>
+			<function>glutReshapeWindow</function> disables the full screen status of a window if previously enabled.
+		</para>
+	</refsect1>
+	<refsect1 id="glutReshapeWindow.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutPositionWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutReshapeFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>
