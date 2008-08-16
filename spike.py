@@ -1,7 +1,9 @@
 #! /usr/bin/env python
-import glob, os
+import glob, os, datetime
 #import elementtree.ElementTree as ET
 import lxml.etree as ET
+import kid
+from OpenGL import __version__
 
 DOCBOOK_NS = 'http://docbook.org/ns/docbook'
 MML_NS = "http://www.w3.org/1998/Math/MathML"
@@ -57,6 +59,13 @@ class Reference( object ):
 			print 'Reference to', title, 'in', getattr(section,'title','Unknown')
 		else:
 			raise KeyError( 'Function %s referenced from %s not found'%(key, getattr(section,'title','Unknown') ))
+	def url( self, target ):
+		if isinstance( target, RefSect ):
+			return './%s.html'%(target.title,)
+		elif isinstance( target, RefName ):
+			return '%s#%s'%(self.url(target.section),target.name)
+		raise ValueError( """Don't know how to create url for %r"""%(target,))
+	
 
 
 	def check_crossrefs( self ):
@@ -72,10 +81,14 @@ class RefSect( object ):
 	id = None 
 	title = None
 	purpose = None
+	next_section = None
+	previous_section = None
+
 	def __init__( self ):
 		self.refnames = {}
 		self.varrefs = []
 		self.see_also = []
+		self.discussions = []
 	def process_refentry( self, node ):
 		if not self.id:
 			self.id = node.get( 'id' )
@@ -151,7 +164,9 @@ class RefSect( object ):
 				for entry in section.xpath( './/d:citerefentry',self.query_namespace):
 					title,volume = entry[0].text, entry[1].text
 					self.see_also.append( (title,volume) )
-			processed_sections[ id ] = True 
+			else:
+				self.discussions.append( section )
+			processed_sections[ id ] = True
 
 		#for element in tree.iterdescendants():
 		#	if element.tag in processors:
@@ -165,7 +180,7 @@ def load_file( filename ):
 	data = WRAPPER%(open(filename).read())
 	return ET.XML( data )
 
-if __name__ == "__main__":
+def main():
 	files = []
 	for package in ('GL','GLU','GLE','GLUT'):
 		files.extend(
@@ -187,4 +202,20 @@ if __name__ == "__main__":
 		for varref in r.varrefs:
 			print varref
 	ref.check_crossrefs()
+	# now generate some files...
+	serial = kid.XHTMLSerializer( decl=True )
+	template = kid.Template( 
+		file='templates/index.kid', 
+		ref=ref, 
+		date=datetime.datetime.now().isoformat(),
+		version=__version__,
+	)
+	data = template.serialize( output=serial )
+	open( 'output/index.html', 'w').write( data )
+
+
+
+
+if __name__ == "__main__":
+	main()
 
