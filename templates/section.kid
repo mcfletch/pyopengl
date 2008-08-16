@@ -24,6 +24,9 @@
 	<h2>C Specification</h2>
 	<div py:for="(name,function) in sorted( section.refnames.items())">
 		${signature( function )}
+		<div py:if="function.python" class="python-signature">
+			${ repr(function.python.keys())}
+		</div>
 	</div>
 </div>
 <div class="see-also" py:if="section.see_also">
