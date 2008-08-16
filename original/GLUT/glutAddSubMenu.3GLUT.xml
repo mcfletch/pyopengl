@@ -59,7 +59,7 @@
 					<manvolnum>3GLUT</manvolnum>
 				</citerefentry></member>
 				<member><citerefentry>
-					<refentrytitle>glutRemoveItem</refentrytitle>
+					<refentrytitle>glutRemoveMenuItem</refentrytitle>
 					<manvolnum>3GLUT</manvolnum>
 				</citerefentry></member>
 			</simplelist>

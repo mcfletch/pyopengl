@@ -105,7 +105,7 @@
 					<manvolnum>3GLUT</manvolnum>
 				</citerefentry></member>
 				<member><citerefentry>
-					<refentrytitle>glutUseOverlay</refentrytitle>
+					<refentrytitle>glutShowOverlay</refentrytitle>
 					<manvolnum>3GLUT</manvolnum>
 				</citerefentry></member>
 				<member><citerefentry>

@@ -140,7 +140,7 @@
 					<manvolnum>3G</manvolnum>
 				</citerefentry></member>
 				<member><citerefentry>
-					<refentrytitle>glGetPointer</refentrytitle>
+					<refentrytitle>glGetPointerv</refentrytitle>
 					<manvolnum>3G</manvolnum>
 				</citerefentry></member>
 				<member><citerefentry>

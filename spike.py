@@ -47,8 +47,23 @@ class Reference( object ):
 		self.sections[section.id] = section
 		for function in section.refnames.values():
 			self.functions[ function.name ] = function 
+	def get_crossref( self, title, volume,section=None ):
+		key = '%s.%s'%(title,volume)
+		if self.sections.has_key( key ):
+			return self.sections[key]
+		elif self.functions.has_key( title ):
+			return self.functions[title]
+		elif title.startswith( 'glX') or title.startswith( 'wgl' ):
+			print 'Reference to', title, 'in', getattr(section,'title','Unknown')
+		else:
+			raise KeyError( 'Function %s referenced from %s not found'%(key, getattr(section,'title','Unknown') ))
 
 
+	def check_crossrefs( self ):
+		for section in self.sections.values():
+			for (title,volume) in section.see_also:
+				self.get_crossref( title, volume,section )
+				
 class RefSect( object ):
 	query_namespace = {
 		'd':DOCBOOK_NS,
@@ -60,6 +75,7 @@ class RefSect( object ):
 	def __init__( self ):
 		self.refnames = {}
 		self.varrefs = []
+		self.see_also = []
 	def process_refentry( self, node ):
 		if not self.id:
 			self.id = node.get( 'id' )
@@ -131,6 +147,10 @@ class RefSect( object ):
 			if id.endswith( '-parameters' ):
 				for varlist in section.xpath( './d:variablelist',self.query_namespace):
 					self.process_variablelist( varlist )
+			elif id.endswith( '-see_also' ):
+				for entry in section.xpath( './/d:citerefentry',self.query_namespace):
+					title,volume = entry[0].text, entry[1].text
+					self.see_also.append( (title,volume) )
 			processed_sections[ id ] = True 
 
 		#for element in tree.iterdescendants():
@@ -146,7 +166,11 @@ def load_file( filename ):
 	return ET.XML( data )
 
 if __name__ == "__main__":
-	files = glob.glob( 'original/GL/*.xml' ) + glob.glob( 'original/GLUT/*.xml' ) + glob.glob( 'original/GLE/*.xml' ) 
+	files = []
+	for package in ('GL','GLU','GLE','GLUT'):
+		files.extend(
+			glob.glob( 'original/%s/*.xml'%package ) 
+		)
 	files.sort()
 	ref = Reference()
 	for path in files:
@@ -162,4 +186,5 @@ if __name__ == "__main__":
 			print '\t\t',spec
 		for varref in r.varrefs:
 			print varref
+	ref.check_crossrefs()
 
