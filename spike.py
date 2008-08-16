@@ -16,8 +16,9 @@ WRAPPER = """<?xml version="1.0" encoding="UTF-8"?>
 </book>"""%( DOCBOOK_NS, MML_NS )
 
 class RefName( object ):
-	def __init__( self,name ):
+	def __init__( self,name, section ):
 		self.name = name
+		self.section = section
 	def __repr__( self ):
 		return '%s( %s ) -> %s'%(
 			self.name, 
@@ -28,11 +29,31 @@ class RefName( object ):
 	return_value = None 
 	params = None 
 class VariableRef( object ):
-	def __init__( self ):
-		self.names = {}
-	description = None
+	def __init__( self, names, description ):
+		self.names = names 
+		self.description = description
+	def __repr__( self ):
+		result = []
+		return '\t\t%s -- %s'%( ', '.join(self.names), self.description )
 
 class Reference( object ):
+	"""Overall reference text"""
+	def __init__( self ):
+		self.sections = {}
+		self.functions = {}
+		self.constants = {}
+	def append( self, section ):
+		"""Add the given section to our tables"""
+		self.sections[section.id] = section
+		for function in section.refnames.values():
+			self.functions[ function.name ] = function 
+
+
+class RefSect( object ):
+	query_namespace = {
+		'd':DOCBOOK_NS,
+		'm':MML_NS,
+	}
 	id = None 
 	title = None
 	purpose = None
@@ -50,8 +71,6 @@ class Reference( object ):
 			self.purpose = node.text
 	def process_refname( self, node ):
 		self.refnames[ node.text ] = RefName(node.text.strip())
-	def process_variablelist( self, node ):
-		
 	def process_funcprototype( self, node ):
 		funcdef = node[0]
 		params = node[1:]
@@ -63,25 +82,35 @@ class Reference( object ):
 			typ = param.text 
 			for item in param:
 				paramname = item.text 
+				if item.tail:
+					typ += item.tail
 			try:
 				paramresults.append( (typ,paramname))
 			except NameError, err:
 				pass
-		refname = self.refnames[ funcname ]
+		try:
+			refname = self.refnames[ funcname ]
+		except KeyError, err:
+			err.args += (self.refnames.keys(),)
+			raise
 		refname.return_value = return_value
 		refname.params = paramresults
-	def by_twos( self, it ):
-		iterator = iter( it )
-		try:
-			while True:
-				yield iterator.next(),iterator.next()
-		except StopIteration, err:
-			pass
 	def process_variablelist( self, node ):
 		"""Process a variable list into annotations"""
 		set = []
-		for term,item in self.by_twos(node):
-			
+		for entry in node:
+			terms = []
+			description = ''
+			for item in entry:
+				if item.tag.endswith( 'term' ):
+					value = "".join( [x.text.strip() for x in item.iterdescendants() if x.text] )
+					terms.append(value)
+				else:
+					description = item	
+			set.append( VariableRef(terms,description))
+
+		self.varrefs.extend( set )
+
 	def process( self, tree ):
 		processors = {
 		}
@@ -90,11 +119,25 @@ class Reference( object ):
 				key = '{%s}%s'%(DOCBOOK_NS,function[8:])
 				value = getattr( self, function )
 				processors[key ] = value
-		for element in tree.iterdescendants():
-			if element.tag in processors:
-				processors[element.tag]( element )
-			else:
-				'no processor for', element.tag
+		self.id = tree[0].get('id')
+		self.title = tree[0].xpath( './/d:refmeta/d:refentrytitle', self.query_namespace )[0].text
+		self.refnames = dict([(x.text,RefName(x.text,self)) for x in tree[0].xpath( './/d:refnamediv/d:refname', self.query_namespace )])
+		self.purpose = tree[0].xpath( './/d:refnamediv/d:refpurpose',self.query_namespace)[0].text
+		for func_prototype in tree[0].xpath( './/d:refsynopsisdiv/d:funcsynopsis/d:funcprototype', self.query_namespace ):
+			self.process_funcprototype( func_prototype )
+		processed_sections = {}
+		for section in tree[0].xpath( './/d:refsect1', self.query_namespace):
+			id = section.get( 'id' )
+			if id.endswith( '-parameters' ):
+				for varlist in section.xpath( './d:variablelist',self.query_namespace):
+					self.process_variablelist( varlist )
+			processed_sections[ id ] = True 
+
+		#for element in tree.iterdescendants():
+		#	if element.tag in processors:
+		#		processors[element.tag]( element )
+		#	else:
+		#		'no processor for', element.tag
 		
 
 
@@ -103,12 +146,20 @@ def load_file( filename ):
 	return ET.XML( data )
 
 if __name__ == "__main__":
-	for path in glob.glob( 'original/GL/*.xml' ):
+	files = glob.glob( 'original/GL/*.xml' ) + glob.glob( 'original/GLUT/*.xml' ) + glob.glob( 'original/GLE/*.xml' ) 
+	files.sort()
+	ref = Reference()
+	for path in files:
 		#print 'loading', path
 		tree = load_file( path )
-		r = Reference( )
+		r = RefSect( )
 		r.process( tree )
-		print r.title,r.purpose
+		ref.append( r )
+	
+		print r.id,r.title,r.purpose
 		for name,spec in r.refnames.items():
 			print '\t', name 
 			print '\t\t',spec
+		for varref in r.varrefs:
+			print varref
+

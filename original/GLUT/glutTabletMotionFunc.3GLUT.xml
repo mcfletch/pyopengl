@@ -34,7 +34,7 @@
 		<para>
 			<function>glutTabletMotionFunc</function> sets the tablet motion callback for the current window. The tablet motion
 			callback for a window is called when the window has tablet input focus (normally, when the mouse is in the window) and
-			the user generates tablet motion. The x<parameter> </parameter>and <parameter>y</parameter> callback parameters
+			the user generates tablet motion. The <parameter>x</parameter>and <parameter>y</parameter> callback parameters
 			indicate the absolute position of the tablet "puck" on the tablet. The callback parameters are normalized to be within
 			the range of 0 to 2000 inclusive.
 		</para>

@@ -5,6 +5,7 @@
 	</refmeta>
 	<refnamediv id="glutMenuStatusFunc.3GLUT-name">
 		<refname>glutMenuStatusFunc</refname>
+		<refname>glutMenuStateFunc</refname>
 		<refpurpose>sets the global menu status callback.</refpurpose>
 	</refnamediv>
 	<refsynopsisdiv id="glutMenuStatusFunc.3GLUT-c_spec">
