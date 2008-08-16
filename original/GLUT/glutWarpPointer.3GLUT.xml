@@ -4,7 +4,8 @@
 		<manvolnum>3GLUT</manvolnum>
 	</refmeta>
 	<refnamediv id="glutWarpPointer.3GLUT-name">
-		<refname>glutWarpPointer warps the pointer's location.</refname>
+		<refname>glutWarpPointer</refname>
+		<refpurpose>glutWarpPointer warps the pointer's location.</refpurpose>
 	</refnamediv>
 	<refsynopsisdiv id="glutWarpPointer.3GLUT-c_spec">
 		<title>C Specification</title>
