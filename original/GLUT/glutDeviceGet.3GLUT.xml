@@ -209,7 +209,7 @@
 					<manvolnum>3GLUT</manvolnum>
 				</citerefentry></member>
 				<member><citerefentry>
-					<refentrytitle>glutSpaceballMotion</refentrytitle>
+					<refentrytitle>glutSpaceballMotionFunc</refentrytitle>
 					<manvolnum>3GLUT</manvolnum>
 				</citerefentry></member>
 				<member><citerefentry>

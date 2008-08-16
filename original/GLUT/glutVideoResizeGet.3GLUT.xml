@@ -82,7 +82,7 @@
 					<refentrytitle>glutGet</refentrytitle>
 					<manvolnum>3GLUT</manvolnum>
 				</citerefentry></member>
-				<member><citerefentry>
+				<!--<member><citerefentry>
 					<refentrytitle>glutSetupVideoResizing</refentrytitle>
 					<manvolnum>3GLUT</manvolnum>
 				</citerefentry></member>
@@ -97,7 +97,7 @@
 				<member><citerefentry>
 					<refentrytitle>glutVideoPan</refentrytitle>
 					<manvolnum>3GLUT</manvolnum>
-				</citerefentry></member>
+				</citerefentry></member>-->
 			</simplelist>
 		</para>
 	</refsect1>

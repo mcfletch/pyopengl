@@ -176,7 +176,7 @@
 					<manvolnum>3G</manvolnum>
 				</citerefentry></member>
 				<member><citerefentry>
-					<refentrytitle>glGetSeparableFilter2D</refentrytitle>
+					<refentrytitle>glGetSeparableFilter</refentrytitle>
 					<manvolnum>3G</manvolnum>
 				</citerefentry></member>
 				<member><citerefentry>
