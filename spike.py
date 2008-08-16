@@ -5,6 +5,10 @@ import lxml.etree as ET
 import kid
 from OpenGL import __version__
 
+from OpenGL import GL, GLU, GLUT, GLE
+
+function_sources = [GL,GLU,GLUT,GLE]
+
 DOCBOOK_NS = 'http://docbook.org/ns/docbook'
 MML_NS = "http://www.w3.org/1998/Math/MathML"
 
@@ -21,6 +25,7 @@ class RefName( object ):
 	def __init__( self,name, section ):
 		self.name = name
 		self.section = section
+		self.python = {}
 	def __repr__( self ):
 		return '%s( %s ) -> %s'%(
 			self.name, 
@@ -67,8 +72,16 @@ class Reference( object ):
 			return '%s#%s'%(self.url(target.section),target.name)
 		raise ValueError( """Don't know how to create url for %r"""%(target,))
 	
+	def suffixed_name( self, a,b ):
+		"""Is b a with a suffix?"""
+		if b.startswith( a ):
+			for char in b[len(a):]:
+				if char not in self.suffix_chars:
+					return False 
+			return True 
+		return False
 
-
+	suffix_chars = 'iufs1234'
 	def check_crossrefs( self ):
 		sections = sorted(self.sections.items())
 		for i,(name,section) in enumerate(sections):
@@ -77,6 +90,15 @@ class Reference( object ):
 				section.previous = sections[i-1][1]
 			if i < len(sections)-1:
 				section.next = sections[i+1][1]
+		# this is a very inefficient scan...
+		for name,function in self.functions.items():
+			for source in function_sources:
+				if hasattr( source, function.name ):
+					for name in dir(source):
+						if self.suffixed_name( name, function.name ) or self.suffixed_name( function.name, name ):
+							function.python[name] = getattr( source,name )
+
+
 
 				
 class RefSect( object ):
