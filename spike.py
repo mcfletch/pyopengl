@@ -29,7 +29,7 @@ class RefName( object ):
 		)
 	name = None
 	return_value = None 
-	params = None 
+	params = () 
 class VariableRef( object ):
 	def __init__( self, names, description ):
 		self.names = names 
@@ -57,6 +57,7 @@ class Reference( object ):
 			return self.functions[title]
 		elif title.startswith( 'glX') or title.startswith( 'wgl' ):
 			print 'Reference to', title, 'in', getattr(section,'title','Unknown')
+			return None
 		else:
 			raise KeyError( 'Function %s referenced from %s not found'%(key, getattr(section,'title','Unknown') ))
 	def url( self, target ):
@@ -69,9 +70,14 @@ class Reference( object ):
 
 
 	def check_crossrefs( self ):
-		for section in self.sections.values():
-			for (title,volume) in section.see_also:
-				self.get_crossref( title, volume,section )
+		sections = sorted(self.sections.items())
+		for i,(name,section) in enumerate(sections):
+			list(section.get_crossrefs(self))
+			if i > 0:
+				section.previous = sections[i-1][1]
+			if i < len(sections)-1:
+				section.next = sections[i+1][1]
+
 				
 class RefSect( object ):
 	query_namespace = {
@@ -81,14 +87,20 @@ class RefSect( object ):
 	id = None 
 	title = None
 	purpose = None
-	next_section = None
-	previous_section = None
+	next = None
+	previous = None
 
 	def __init__( self ):
 		self.refnames = {}
 		self.varrefs = []
 		self.see_also = []
 		self.discussions = []
+	def get_crossrefs( self, reference ):
+		"""Retrieve all cross-references from reference"""
+		for (title,volume) in self.see_also:
+			target = reference.get_crossref( title,volume, self )
+			if target is not None:
+				yield target
 	def process_refentry( self, node ):
 		if not self.id:
 			self.id = node.get( 'id' )
@@ -149,7 +161,7 @@ class RefSect( object ):
 				value = getattr( self, function )
 				processors[key ] = value
 		self.id = tree[0].get('id')
-		self.title = tree[0].xpath( './/d:refmeta/d:refentrytitle', self.query_namespace )[0].text
+		self.title = self.name = tree[0].xpath( './/d:refmeta/d:refentrytitle', self.query_namespace )[0].text
 		self.refnames = dict([(x.text,RefName(x.text,self)) for x in tree[0].xpath( './/d:refnamediv/d:refname', self.query_namespace )])
 		self.purpose = tree[0].xpath( './/d:refnamediv/d:refpurpose',self.query_namespace)[0].text
 		for func_prototype in tree[0].xpath( './/d:refsynopsisdiv/d:funcsynopsis/d:funcprototype', self.query_namespace ):
@@ -212,6 +224,19 @@ def main():
 	)
 	data = template.serialize( output=serial )
 	open( 'output/index.html', 'w').write( data )
+
+	for name,section in ref.sections.items():
+		template = kid.Template(
+			file = 'templates/section.kid',
+			ref=ref,
+			section=section,
+			date=datetime.datetime.now().isoformat(),
+			version=__version__,
+		)
+		data = template.serialize( output=serial )
+		open( 'output/%s'%(ref.url(section)), 'w').write( data )
+
+
 
 
 
