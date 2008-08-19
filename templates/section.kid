@@ -88,7 +88,7 @@ approach = approach_set.get( basetag, 'para' )
 <table width="100%"><tbody><tr><td align="left">
 <a id="nav-previous" py:if="section.previous" href="${ref.url(section.previous)}">Previous: ${section.previous.title}</a></td>
 <td align="center">
-<a id="nav-up" href="./index.html">Table of Contents</a>
+<a id="nav-up" href="./index.xhtml">Table of Contents</a>
 </td>
 <td align="right">
 <a id="nav-next" py:if="section.next" href="${ref.url(section.next)}">Next: ${section.next.title}</a>
