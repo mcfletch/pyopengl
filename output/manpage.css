@@ -1,0 +1,38 @@
+a:link			{ color: #113b89 }
+a:active		{ color: #071960 }
+a:visted	{ background-color: #113b89; color: white; }
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	 color: black;
+	background-color: white; 
+}
+h1, h2 { 
+	background-image: url(greypinstripe.png);
+	color: #111144;
+}
+.purpose {
+	margin: 30px;
+	padding: 10px;
+	border: thin lightgrey solid;
+}
+.signature {
+	margin-left: 30px;
+}
+.py-signature {
+	margin-left: 10px;
+	color: darkgreen;
+}
+table {
+	background-color: lightgrey;
+}
+tr {
+	background-color: white;
+}
+th {
+	background-image: url(greypinstripe.png);
+	padding: 5px;
+}
+
+div.simpara, div.para {
+	margin: 5px;
+}
