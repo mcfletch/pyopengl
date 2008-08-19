@@ -78,7 +78,7 @@ class Reference( object ):
 			raise KeyError( 'Function %s referenced from %s not found'%(key, getattr(section,'title','Unknown') ))
 	def url( self, target ):
 		if isinstance( target, RefSect ):
-			return './%s.html'%(target.title,)
+			return './%s.xhtml'%(target.title,)
 		elif isinstance( target, RefName ):
 			return '%s#%s'%(self.url(target.section),target.name)
 		raise ValueError( """Don't know how to create url for %r"""%(target,))
@@ -256,7 +256,7 @@ def main():
 		version=__version__,
 	)
 	data = template.serialize( output=serial )
-	open( 'output/index.html', 'w').write( data )
+	open( 'output/index.xhtml', 'w').write( data )
 
 	for name,section in ref.sections.items():
 		template = kid.Template(
@@ -268,11 +268,6 @@ def main():
 		)
 		data = template.serialize( output=serial )
 		open( 'output/%s'%(ref.url(section)), 'w').write( data )
-
-
-
-
-
 
 if __name__ == "__main__":
 	main()
