@@ -47,23 +47,34 @@ class Reference( object ):
 	"""Overall reference text"""
 	def __init__( self ):
 		self.sections = {}
+		self.section_titles = {}
 		self.functions = {}
 		self.constants = {}
 	def append( self, section ):
 		"""Add the given section to our tables"""
 		self.sections[section.id] = section
+		self.section_titles[section.title]= section
 		for function in section.refnames.values():
 			self.functions[ function.name ] = function 
-	def get_crossref( self, title, volume,section=None ):
+	def get_crossref( self, title, volume=None,section=None ):
 		key = '%s.%s'%(title,volume)
+		if '(' in title:
+			title = title.split('(')[0]
 		if self.sections.has_key( key ):
 			return self.sections[key]
+		elif self.section_titles.has_key( title ):
+			return self.section_titles[ title ]
 		elif self.functions.has_key( title ):
 			return self.functions[title]
 		elif title.startswith( 'glX') or title.startswith( 'wgl' ):
 			print 'Reference to', title, 'in', getattr(section,'title','Unknown')
 			return None
 		else:
+			# try a linear scan for suffixed version...
+			for name in self.functions.keys():
+				if self.suffixed_name( name, title ) or self.suffixed_name( title,name ):
+					return self.functions[name]
+			return None
 			raise KeyError( 'Function %s referenced from %s not found'%(key, getattr(section,'title','Unknown') ))
 	def url( self, target ):
 		if isinstance( target, RefSect ):
@@ -81,7 +92,7 @@ class Reference( object ):
 			return True 
 		return False
 
-	suffix_chars = 'iufs1234'
+	suffix_chars = 'iufs1234v'
 	def check_crossrefs( self ):
 		sections = sorted(self.sections.items())
 		for i,(name,section) in enumerate(sections):
@@ -90,7 +101,7 @@ class Reference( object ):
 				section.previous = sections[i-1][1]
 			if i < len(sections)-1:
 				section.next = sections[i+1][1]
-		# this is a very inefficient scan...
+		# TODO this is a very inefficient scan...
 		for name,function in self.functions.items():
 			for source in function_sources:
 				if hasattr( source, function.name ):
