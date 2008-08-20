@@ -1,4 +1,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://purl.org/kid/ns#">
+<table py:def="nav_table()" width="100%"><tbody><tr><td align="left">
+<a id="nav-previous" py:if="section.previous" href="${ref.url(section.previous)}">Previous: ${section.previous.title}</a></td>
+<td align="center">
+<a id="nav-up" href="./index.xhtml">Table of Contents</a>
+</td>
+<td align="right">
+<a id="nav-next" py:if="section.next" href="${ref.url(section.next)}">Next: ${section.next.title}</a>
+</td>
+</tr></tbody></table>
+
 <div py:def="contents( docbook )" py:strip="">${docbook.text}${[convert(x) for x in docbook]}</div>
 <div py:def="convert( docbook )" py:strip="">
 	<?python
@@ -55,78 +65,82 @@ approach = approach_set.get( basetag, 'para' )
 </div>
 <div py:def="pysignature( function,name=None )" class="py-signature">
 	<?python
-	if name is None:
-		name = function.__name__
-	if hasattr( function, 'pyConverterNames' ):
-		argNames = function.pyConverterNames
+	docstring = getattr( function, '__doc__', None )
+	if hasattr( function, 'restype' ):
+		if hasattr( function, 'pyConverterNames' ):
+			argNames = function.pyConverterNames
+		else:
+			argNames = getattr( function, 'argNames', ()) or ()
+		raw_python = False
+	elif hasattr( function, '__name__'):
+		raw_python = True
 	else:
-		argNames = getattr( function, 'argNames', ()) or ()
+		raw_python = True
 	?>
-	${name}( 
-		
-		<span py:for="(i,name) in enumerate(argNames)" class="parameter"
-		>
-			${name},
-		</span>
-	) <span py:if="function.restype">-&gt; ${function.restype}</span>
+	<span py:strip="" py:if="not raw_python">
+		<span class="py-function">${name}</span>( 
+			
+			<span py:for="(i,name) in enumerate(argNames)" class="parameter"
+			>
+				${name},
+			</span>
+		) <span py:if="function.restype">-&gt; ${function.restype}</span>
+		Wrapped Operation
+	</span>
+	<div class="pure-py-function" py:if="raw_python">${name}() (Pure Python)
+		<pre class="docstring">${docstring}</pre>
+	</div>
 </div>
 <div py:def="csignature( function )" class="c-signature">
 	<a name="${function.name}"/>
-	${function.name}(
-		<span py:for="i,(typ,name) in enumerate(function.params)" class="parameter"
+	<span class="c-function">${function.name}</span>(
+		<span py:for="i,(typ,name) in enumerate(function.params)" class="param-def"
 		>${typ}( 
-			<span class="param-name">${name}</span>
+			<span class="parameter">${name}</span>
 		)<span py:strip="" py:if="i &lt; len(function.params)-1">, </span></span>
 		)-&gt; ${function.return_value}
 </div>
 <head>
-    <title>PyOpenGL ${version} : ${section.title} </title>
+    <title>${section.title} : PyOpenGL ${version} Man Pages</title>
 	<link rel="stylesheet" href="./manpage.css" type="text/css" />
 </head>
 <body>
-
-<table width="100%"><tbody><tr><td align="left">
-<a id="nav-previous" py:if="section.previous" href="${ref.url(section.previous)}">Previous: ${section.previous.title}</a></td>
-<td align="center">
-<a id="nav-up" href="./index.xhtml">Table of Contents</a>
-</td>
-<td align="right">
-<a id="nav-next" py:if="section.next" href="${ref.url(section.next)}">Next: ${section.next.title}</a>
-</td>
-</tr></tbody></table>
-
+${nav_table()}
 <h1>${section.title}</h1>
-<div class="purpose">${ section.purpose }</div>
+<div class="content">
+	<div class="purpose">${ section.purpose }</div>
 
-<div class="signatures">
-	<h2>Signature</h2>
-	<div py:for="(name,function) in sorted( section.refnames.items())" class="signature">
-		${csignature( function )}
-		<div py:for="(name,pyfunc) in sorted(function.python.items())" py:strip="">
-			<div py:if="hasattr(pyfunc,'restype')" py:replace="pysignature(pyfunc,name)"/>
+	<div class="signatures">
+		<h2>Signature</h2>
+		<div py:for="(name,function) in sorted( section.refnames.items())" class="signature">
+			${csignature( function )}
+			<div py:for="(name,pyfunc) in sorted(function.python.items())" py:strip="">
+				<div py:replace="pysignature(pyfunc,name)"/>
+			</div>
+		</div>
+		<div py:if="section.varrefs" py:strip="">
+			<h2>Parameters</h2>
+			<table><tbody>
+				<tr><th align="right">Variables</th><th>Description</th></tr>
+				<tr py:for="varref in section.varrefs" class="varref" valign="top">
+					<th align="right">${", ".join(varref.names)}</th>
+					<td>${convert(varref.description[0])}</td>
+				</tr>
+			</tbody></table>
 		</div>
 	</div>
-	<div py:if="section.varrefs" py:strip="">
-		<h2>Parameters</h2>
-		<table><tbody>
-			<tr><th align="right">Variables</th><th>Description</th></tr>
-			<tr py:for="varref in section.varrefs" class="varref" valign="top">
-				<th align="right">${", ".join(varref.names)}</th>
-				<td>${convert(varref.description[0])}</td>
-			</tr>
-		</tbody></table>
+	<div class="section" py:for="subsect in section.discussions" id="${subsect.get('id')}">
+		${convert(subsect)}
+	</div>
+	<div class="see-also" py:if="section.see_also">
+		<h2>See Also</h2>
+		<span py:for="target in section.get_crossrefs( ref )" py:strip="">
+			<a class="crossref" href="${ref.url(target)}">${target.name}</a>
+		</span>
 	</div>
 </div>
-<div class="section" py:for="subsect in section.discussions" id="${subsect.get('id')}">
-	${convert(subsect)}
-</div>
-<div class="see-also" py:if="section.see_also">
-	<h2>See Also</h2>
-	<span py:for="target in section.get_crossrefs( ref )" py:strip="">
-		<a class="crossref" href="${ref.url(target)}">${target.name}</a>
-	</span>
-</div>
 
+${nav_table()}
 </body>
 </html>
 

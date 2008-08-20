@@ -25,7 +25,7 @@ class RefName( object ):
 	def __init__( self,name, section ):
 		self.name = name
 		self.section = section
-		self.python = {}
+		self.python = {} # name to python function...
 	def __repr__( self ):
 		return '%s( %s ) -> %s'%(
 			self.name, 
@@ -102,12 +102,15 @@ class Reference( object ):
 			if i < len(sections)-1:
 				section.next = sections[i+1][1]
 		# TODO this is a very inefficient scan...
-		for name,function in self.functions.items():
+		for name,function in sorted(self.functions.items()):
 			for source in function_sources:
 				if hasattr( source, function.name ):
-					for name in dir(source):
+					function.python[name] = getattr(source,name)
+					for name in sorted(dir(source)):
 						if self.suffixed_name( name, function.name ) or self.suffixed_name( function.name, name ):
-							function.python[name] = getattr( source,name )
+							if not self.functions.has_key( name ):
+								function.python[name] = getattr( source,name )
+								self.functions[ name ] = function
 
 
 
@@ -202,7 +205,7 @@ class RefSect( object ):
 		processed_sections = {}
 		for section in tree[0].xpath( './/d:refsect1', self.query_namespace):
 			id = section.get( 'id' )
-			if id.endswith( '-parameters' ):
+			if '-parameters' in id:
 				for varlist in section.xpath( './d:variablelist',self.query_namespace):
 					self.process_variablelist( varlist )
 			elif id.endswith( '-see_also' ):
