@@ -67,12 +67,18 @@ approach = approach_set.get( basetag, 'para' )
 	<a name="py-${function.name}"/>
 	<span class="py-function">${function.name}</span>( ${paramlist(function)} )
 	<span py:if="function.return_value">-&gt; ${function.return_value}</span>
+	<pre class="pydoc" py:if="function.docstring" py:content="function.docstring"/>
 </div>
 <span py:def="paramlist( function )" class="parameter-list">
-	<span py:for="i,param in enumerate(function.parameters)" class="param-def"
-		>${param.data_type}( 
+	<span py:for="i,param in enumerate(function.parameters)" class="param-def">
+		<span py:if="param.varargs" py:strip="">*</span>
+		<span py:if="param.varnamed" py:strip="">**</span>
+		<span py:if="param.data_type" py:strip="">${param.data_type}( </span>
 			<span class="parameter">${param.name}</span>
-		)<span py:strip="" py:if="i &lt; len(function.parameters)-1">, </span></span>
+		<span py:if="param.data_type" py:strip="">)</span>
+		<span py:if="param.has_default" py:strip=""> = ${repr(param.default)}</span>
+		<span py:strip="" py:if="i &lt; len(function.parameters)-1">, </span>
+	</span>
 </span>
 <div py:def="csignature( function )" class="c-signature">
 	<a name="c-${function.name}"/>

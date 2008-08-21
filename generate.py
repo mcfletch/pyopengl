@@ -156,8 +156,12 @@ class RefSect( model.RefSect ):
 			description = ''
 			for item in entry:
 				if item.tag.endswith( 'term' ):
-					value = "".join( [x.text.strip() for x in item.iterdescendants() if x.text] )
-					terms.append(value)
+					value = [
+						x.text.strip() 
+						for x in item.iterdescendants() 
+						if (x.text and x.tag.endswith( '}parameter' ))
+					]
+					terms.extend(value)
 				else:
 					description = item	
 			set.append( ParameterReference(terms,description))
@@ -214,5 +218,7 @@ def main():
 		open( 'output/%s'%(ref.url(section)), 'w').write( data )
 
 if __name__ == "__main__":
+	import logging 
+	logging.basicConfig()
 	main()
 

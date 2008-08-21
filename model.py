@@ -1,4 +1,12 @@
 """Modelling objects for the documentation generator"""
+import logging, types, inspect
+log = logging.getLogger( 'directdocs.model' )
+
+class NotDefined( object ):
+	def __nonzero__( self ):
+		return False 
+
+NOT_DEFINED = NotDefined()
 
 class Reference( object ):
 	"""Overall reference text"""
@@ -96,6 +104,7 @@ class RefSect( object ):
 								py_function = getattr( source,name ),
 								alias = name,
 							)
+							self.functions[name] = function
 							if not self.reference.functions.has_key( name ):
 								self.reference.functions[ name ] = function
 
@@ -107,6 +116,9 @@ class Function( object ):
 	with it.
 	"""
 	return_value = None 
+	varargs = varnamed = False 
+	docstring = None
+	NOT_DEFINED = NOT_DEFINED
 	def __init__( self,name, section ):
 		self.name = name
 		self.section = section
@@ -137,15 +149,79 @@ class PyFunction( Function ):
 			self.py_function.__class__,
 		))
 	@property 
+	def docstring( self ):
+		"""Retrieve docstring for pure-python objects"""
+		if hasattr( self.py_function, '__doc__' ):
+			return self.py_function.__doc__ 
+		return None
+	@property 
 	def section( self ):
 		return self.root_function.section 
 	@property 
 	def python( self ):
 		return {}
+	_parameters = None
 	@property 
 	def parameters( self ):
 		"""Calculate (and store) parameter-list for the function"""
-		return []
+		if self._parameters is None:
+			self._parameters = self.get_parameters( self.py_function )
+		return self._parameters
+	def get_parameters( self, target ):
+		names = None
+		if hasattr( target, 'pyConverterNames' ):
+			names = target.pyConverterNames 
+		elif hasattr( target, 'argNames' ):
+			names = target.argNames 
+		elif hasattr( target, 'wrapperFunction' ):
+			# only values *past* the first for lazy-wrapped operations
+			return self.get_parameters( target.wrapperFunction )[1:]
+		elif hasattr( target, 'wrappedOperation' ):
+			return self.get_parameters( target.wrappedOperation )
+		elif isinstance( target, (types.FunctionType,types.MethodType) ):
+			args,varargs,varkw,defaults = inspect.getargspec( 
+				target 
+			)
+			defaults = defaults or ()
+			default_dict = dict([
+				(arg,default)
+				for (arg,default) in zip(args[-len(defaults):],defaults)
+			])
+			parameters = [
+				Parameter( 
+					name, default=default_dict.get( name, NOT_DEFINED ),
+					function = self,
+				)
+				for name in args 
+			]
+			if varargs:
+				parameters.append(
+					Parameter(
+						varargs,
+						function = self, 
+						varargs = True,
+					)
+				)
+			if varkw:
+				parameters.append(
+					Parameter(
+						varkw,
+						function = self, 
+						varnamed = True,
+					)
+				)
+			return parameters
+		else:
+			if hasattr( target, 'argtypes' ) and target.argtypes is None:
+				return []
+			log.warn( """No parameters for type: %r""", target.__class__ )
+			import pdb
+			pdb.set_trace()
+			names = []
+		return [
+			Parameter( name, data_type=None, function = self )
+			for name in names
+		]
 	@property 
 	def return_value( self ):
 		"""Determine (if possible) whether we have a return-value type"""
@@ -155,12 +231,24 @@ class PyFunction( Function ):
 
 class Parameter( object ):
 	"""Description of a parameter to a function"""
-	def __init__( self, name, description=None,data_type=None,function=None ):
+	NOT_DEFINED = NOT_DEFINED
+	def __init__( 
+		self, name, description=None,
+		data_type=None,function=None,
+		default=NOT_DEFINED, 
+		varargs=False, varnamed=False 
+	):
 		"""Initialize with the values for the parameter"""
 		self.function = function 
 		self.data_type = data_type
 		self.name = name 
 		self.description = description
+		self.default = default
+		self.varargs = varargs 
+		self.varnamed = varnamed
+	@property
+	def has_default( self ):
+		return not( self.default is NOT_DEFINED )
 
 class ParameterReference( object ):
 	def __init__( self, names, description ):
