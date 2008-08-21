@@ -64,41 +64,19 @@ approach = approach_set.get( basetag, 'para' )
 	${(docbook.tail or '').strip()}
 </div>
 <div py:def="pysignature( function,name=None )" class="py-signature">
-	<?python
-	docstring = getattr( function, '__doc__', None )
-	if hasattr( function, 'restype' ):
-		if hasattr( function, 'pyConverterNames' ):
-			argNames = function.pyConverterNames
-		else:
-			argNames = getattr( function, 'argNames', ()) or ()
-		raw_python = False
-	elif hasattr( function, '__name__'):
-		raw_python = True
-	else:
-		raw_python = True
-	?>
-	<span py:strip="" py:if="not raw_python">
-		<span class="py-function">${name}</span>( 
-			
-			<span py:for="(i,name) in enumerate(argNames)" class="parameter"
-			>
-				${name},
-			</span>
-		) <span py:if="function.restype">-&gt; ${function.restype}</span>
-		Wrapped Operation
-	</span>
-	<div class="pure-py-function" py:if="raw_python">${name}() (Pure Python)
-		<pre class="docstring">${docstring}</pre>
-	</div>
+	<a name="py-${function.name}"/>
+	<span class="py-function">${function.name}</span>( ${paramlist(function)} )
+	<span py:if="function.return_value">-&gt; ${function.return_value}</span>
 </div>
+<span py:def="paramlist( function )" class="parameter-list">
+	<span py:for="i,param in enumerate(function.parameters)" class="param-def"
+		>${param.data_type}( 
+			<span class="parameter">${param.name}</span>
+		)<span py:strip="" py:if="i &lt; len(function.parameters)-1">, </span></span>
+</span>
 <div py:def="csignature( function )" class="c-signature">
-	<a name="${function.name}"/>
-	<span class="c-function">${function.name}</span>(
-		<span py:for="i,(typ,name) in enumerate(function.params)" class="param-def"
-		>${typ}( 
-			<span class="parameter">${name}</span>
-		)<span py:strip="" py:if="i &lt; len(function.params)-1">, </span></span>
-		)-&gt; ${function.return_value}
+	<a name="c-${function.name}"/>
+	<span class="c-function">${function.name}</span>(${paramlist(function)})-&gt; ${function.return_value}
 </div>
 <head>
     <title>${section.title} : PyOpenGL ${version} ${section.package} Man Pages</title>
