@@ -2,7 +2,7 @@
 <table py:def="nav_table()" width="100%"><tbody><tr><td align="left">
 <a id="nav-previous" py:if="section.previous" href="${ref.url(section.previous)}">Previous: ${section.previous.title}</a></td>
 <td align="center">
-<a id="nav-up" href="./index.xhtml">Table of Contents</a>
+<a id="nav-up" href="./index.xhtml#${section.package}">Table of Contents (${section.package})</a>
 </td>
 <td align="right">
 <a id="nav-next" py:if="section.next" href="${ref.url(section.next)}">Next: ${section.next.title}</a>
@@ -101,7 +101,7 @@ approach = approach_set.get( basetag, 'para' )
 		)-&gt; ${function.return_value}
 </div>
 <head>
-    <title>${section.title} : PyOpenGL ${version} Man Pages</title>
+    <title>${section.title} : PyOpenGL ${version} ${section.package} Man Pages</title>
 	<link rel="stylesheet" href="./manpage.css" type="text/css" />
 </head>
 <body>
@@ -112,7 +112,7 @@ ${nav_table()}
 
 	<div class="signatures">
 		<h2>Signature</h2>
-		<div py:for="(name,function) in sorted( section.refnames.items())" class="signature">
+		<div py:for="(name,function) in sorted( section.functions.items())" class="signature">
 			${csignature( function )}
 			<div py:for="(name,pyfunc) in sorted(function.python.items())" py:strip="">
 				<div py:replace="pysignature(pyfunc,name)"/>

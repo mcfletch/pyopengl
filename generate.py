@@ -7,7 +7,8 @@ from OpenGL import __version__
 
 from OpenGL import GL, GLU, GLUT, GLE
 
-function_sources = [GL,GLU,GLUT,GLE]
+IMPORTED_PACKAGES = [GL,GLU,GLUT,GLE]
+PACKAGES = ['GL','GLU','GLUT','GLE',]
 
 DOCBOOK_NS = 'http://docbook.org/ns/docbook'
 MML_NS = "http://www.w3.org/1998/Math/MathML"
@@ -54,7 +55,7 @@ class Reference( object ):
 		"""Add the given section to our tables"""
 		self.sections[section.id] = section
 		self.section_titles[section.title]= section
-		for function in section.refnames.values():
+		for function in section.functions.values():
 			self.functions[ function.name ] = function 
 	def get_crossref( self, title, volume=None,section=None ):
 		key = '%s.%s'%(title,volume)
@@ -101,20 +102,19 @@ class Reference( object ):
 				section.previous = sections[i-1][1]
 			if i < len(sections)-1:
 				section.next = sections[i+1][1]
-		# TODO this is a very inefficient scan...
-		for name,function in sorted(self.functions.items()):
-			for source in function_sources:
-				if hasattr( source, function.name ):
-					function.python[name] = getattr(source,name)
-					for name in sorted(dir(source)):
-						if self.suffixed_name( name, function.name ) or self.suffixed_name( function.name, name ):
-							if not self.functions.has_key( name ):
-								function.python[name] = getattr( source,name )
-								self.functions[ name ] = function
+			section.find_python_functions()
 
+	def package_names( self ):
+		return PACKAGES
+	def packages( self ):
+		result = []
+		for source in self.package_names():
+			result.append( (source,sorted([
+				(name,section) for name,section in self.section_titles.items()
+				if section.package == source 
+			])))
+		return result
 
-
-				
 class RefSect( object ):
 	query_namespace = {
 		'd':DOCBOOK_NS,
@@ -126,11 +126,16 @@ class RefSect( object ):
 	next = None
 	previous = None
 
-	def __init__( self ):
-		self.refnames = {}
+	def __init__( self, package='GL', reference=None ):
+		self.package = package
+		self.reference = reference
+		self.functions = {}
 		self.varrefs = []
 		self.see_also = []
 		self.discussions = []
+	def get_module( self ):
+		"""Retrieve our module"""
+		return IMPORTED_PACKAGES[ PACKAGES.index( self.package ) ]
 	def get_crossrefs( self, reference ):
 		"""Retrieve all cross-references from reference"""
 		for (title,volume) in self.see_also:
@@ -147,7 +152,7 @@ class RefSect( object ):
 		if not self.purpose:
 			self.purpose = node.text
 	def process_refname( self, node ):
-		self.refnames[ node.text ] = RefName(node.text.strip())
+		self.functions[ node.text ] = RefName(node.text.strip())
 	def process_funcprototype( self, node ):
 		funcdef = node[0]
 		params = node[1:]
@@ -166,9 +171,9 @@ class RefSect( object ):
 			except NameError, err:
 				pass
 		try:
-			refname = self.refnames[ funcname ]
+			refname = self.functions[ funcname ]
 		except KeyError, err:
-			err.args += (self.refnames.keys(),)
+			err.args += (self.functions.keys(),)
 			raise
 		refname.return_value = return_value
 		refname.params = paramresults
@@ -198,7 +203,7 @@ class RefSect( object ):
 				processors[key ] = value
 		self.id = tree[0].get('id')
 		self.title = self.name = tree[0].xpath( './/d:refmeta/d:refentrytitle', self.query_namespace )[0].text
-		self.refnames = dict([(x.text,RefName(x.text,self)) for x in tree[0].xpath( './/d:refnamediv/d:refname', self.query_namespace )])
+		self.functions = dict([(x.text,RefName(x.text,self)) for x in tree[0].xpath( './/d:refnamediv/d:refname', self.query_namespace )])
 		self.purpose = tree[0].xpath( './/d:refnamediv/d:refpurpose',self.query_namespace)[0].text
 		for func_prototype in tree[0].xpath( './/d:refsynopsisdiv/d:funcsynopsis/d:funcprototype', self.query_namespace ):
 			self.process_funcprototype( func_prototype )
@@ -221,30 +226,44 @@ class RefSect( object ):
 		#		processors[element.tag]( element )
 		#	else:
 		#		'no processor for', element.tag
-		
-
+	def find_python_functions( self ):
+		"""Find all of our functions, aliases and the like in our python module"""
+		# TODO this is a very inefficient scan...
+		source = self.get_module()
+		for name,function in sorted(self.functions.items()):
+			if hasattr( source, function.name ):
+				function.python[name] = getattr(source,name)
+				for name in sorted(dir(source)):
+					if (
+						self.reference.suffixed_name( name, function.name ) or 
+						self.reference.suffixed_name( function.name, name )
+					):
+						if not self.functions.has_key( name ):
+							function.python[name] = getattr( source,name )
+							self.functions[ name ] = function
 
 def load_file( filename ):
 	data = WRAPPER%(open(filename).read())
 	return ET.XML( data )
 
+
 def main():
 	files = []
-	for package in ('GL','GLU','GLE','GLUT'):
+	for package in PACKAGES:
 		files.extend(
-			glob.glob( 'original/%s/*.xml'%package ) 
+			[(package,x) for x in glob.glob( 'original/%s/*.xml'%package )]
 		)
 	files.sort()
 	ref = Reference()
-	for path in files:
+	for package,path in files:
 		#print 'loading', path
 		tree = load_file( path )
-		r = RefSect( )
+		r = RefSect( package, ref )
 		r.process( tree )
 		ref.append( r )
 	
 		print r.id,r.title,r.purpose
-		for name,spec in r.refnames.items():
+		for name,spec in r.functions.items():
 			print '\t', name 
 			print '\t\t',spec
 		for varref in r.varrefs:
