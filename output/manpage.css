@@ -54,3 +54,13 @@ span.parameter {
 .c-function {
 	color: darkgrey;
 }
+
+.pydoc {
+	border: solid lightgrey thin;
+	background: lightyellow;
+	color: darkgreen;
+	font-size: smaller;
+	margin-left: 30px;
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
