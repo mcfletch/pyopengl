@@ -67,9 +67,16 @@ class RefSect( object ):
 		self.package = package
 		self.reference = reference
 		self.functions = {}
+		self.py_functions = {}
 		self.varrefs = []
 		self.see_also = []
 		self.discussions = []
+	def has_function( self, name ):
+		"""Ask whether we have this name defined"""
+		return (
+			self.functions.has_key( name ) or 
+			self.py_functions.has_key( name )
+		)
 	def get_module( self ):
 		"""Retrieve our module"""
 		return self.reference.modules()[ 
@@ -98,13 +105,13 @@ class RefSect( object ):
 						self.reference.suffixed_name( name, function.name ) or 
 						self.reference.suffixed_name( function.name, name )
 					):
-						if not self.functions.has_key( name ):
+						if not self.has_function( name ):
 							function.python[name] = PyFunction(
 								root_function = function,
 								py_function = getattr( source,name ),
 								alias = name,
 							)
-							self.functions[name] = function
+							self.py_functions[name] = function
 							if not self.reference.functions.has_key( name ):
 								self.reference.functions[ name ] = function
 
