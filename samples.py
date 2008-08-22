@@ -81,6 +81,11 @@ checkouts = [
 		'PyUIcvs',
 		'pyui',
 	),
+	CVSSource(
+		':pserver:anonymous@pyui2.cvs.sourceforge.net:/cvsroot/pyui2',
+		'pyui2',
+		'pyui2',
+	),
 	SVNSource(
 		'http://pymmlib.svn.sourceforge.net/viewvc/pymmlib/trunk/pymmlib/',
 		dirname = 'pymmlib',
@@ -89,12 +94,17 @@ checkouts = [
 		'http://visionegg.org/svn/trunk/visionegg',
 		dirname = 'visionegg',
 	),
+	SVNSource(
+		'http://svn.gnome.org/svn/gnome-games/trunk/glchess',
+		dirname = 'glchess',
+	),
+	SVNSource(
+		'https://kamaelia.svn.sourceforge.net/svnroot/kamaelia/trunk',
+		dirname = 'kamaelia',
+	),
 	
-	
-	# pymol 
-	# mirra 
-	# python-kamaelia
-	# glchess 
+	# pymol # not pyopengl AFAICS
+	# {LGPL} mirra # no online view of code AFAICS
 	# soccerbots http://soccerbots.googlecode.com/svn/
 	# enough http://enough.googlecode.com/svn/ trunk/
 	# flyback http://flyback.googlecode.com/svn/ trunk/
