@@ -1,10 +1,11 @@
 #! /usr/bin/env python
 """Incredibly stupid little script to tar up the content and upload it"""
+import os
 from directdocs import model
 OUTPUT_DIRECTORY = 'manual-%s'%(model.MAJOR_VERSION,)
 
 def main():
-	tarfile = 'manual-%s.tar'%__version__
+	tarfile = 'manual-%s.tar'%model.MAJOR_VERSION
 	gzfile = tarfile + '.gz'
 	output = OUTPUT_DIRECTORY
 	os.system(
