@@ -10,6 +10,8 @@ from directdocs import model,references
 from OpenGL import __version__
 from OpenGL import GL, GLU, GLUT, GLE
 
+OUTPUT_DIRECTORY = 'manual-%s'%(model.MAJOR_VERSION,)
+
 IMPORTED_PACKAGES = [GL,GLU,GLUT,GLE]
 PACKAGES = ['GL','GLU','GLUT','GLE',]
 
@@ -176,8 +178,19 @@ def load_file( filename ):
 	data = WRAPPER%(open(filename).read())
 	return ET.XML( data )
 
+def init_output( ):
+	if not os.path.isdir( OUTPUT_DIRECTORY ):
+		print 'Creating new manual directory: %s'%(OUTPUT_DIRECTORY )
+		os.mkdir( OUTPUT_DIRECTORY )
+		for file in os.listdir( 'output' ):
+			src = os.path.join( 'output', file )
+			dst = os.path.join( OUTPUT_DIRECTORY, file )
+			os.link( src, dst )
+
 
 def main():
+	init_output()
+	
 	if os.path.isfile( references.CACHE_FILE ):
 		import pickle
 		samples = pickle.loads( open(references.CACHE_FILE).read())
@@ -198,12 +211,6 @@ def main():
 		r.process( tree )
 		ref.append( r )
 		r.get_samples( samples )
-#		print r.id,r.title,r.purpose
-#		for name,spec in r.functions.items():
-#			print '\t', name 
-#			print '\t\t',spec
-#		for varref in r.varrefs:
-#			print varref
 	ref.check_crossrefs()
 	# now generate some files...
 	serial = kid.XHTMLSerializer( decl=True )
@@ -214,7 +221,7 @@ def main():
 		version=__version__,
 	)
 	data = template.serialize( output=serial )
-	open( 'output/index.xhtml', 'w').write( data )
+	open( os.path.join(OUTPUT_DIRECTORY,'index.xhtml'), 'w').write( data )
 
 	for name,section in ref.sections.items():
 		template = kid.Template(
@@ -225,7 +232,9 @@ def main():
 			version=__version__,
 		)
 		data = template.serialize( output=serial )
-		open( 'output/%s'%(ref.url(section)), 'w').write( data )
+		open( 
+			os.path.join( OUTPUT_DIRECTORY,ref.url(section)), 'w'
+		).write( data )
 
 if __name__ == "__main__":
 	import logging 

@@ -2,6 +2,10 @@
 import logging, types, inspect
 log = logging.getLogger( 'directdocs.model' )
 
+from OpenGL import __version__
+MAJOR_VERSION = '.'.join(__version__.split('.')[:2] )
+
+
 class NotDefined( object ):
 	def __nonzero__( self ):
 		return False 
