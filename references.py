@@ -32,12 +32,15 @@ def glProcess( filename, tokenType,tokenString,(sourceRow,sourceCol),(endRow,end
 def generate_tokens_file( filename, filterFunction=glName, processFunction=glProcess ):
 	"""Generate a set of tokens for the given filename"""
 	file = open(filename)
-	generator = tokenize.generate_tokens( file.readline )
-	for (tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText) in generator:
-##		print (tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText)
-		if tokenType == token.NAME and filterFunction and filterFunction(tokenString):
-			if processFunction:
-				processFunction( filename, tokenType, tokenString, (sourceRow,sourceCol),(endRow,endCol),lineText )
+	try:
+		generator = tokenize.generate_tokens( file.readline )
+		for (tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText) in generator:
+	##		print (tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText)
+			if tokenType == token.NAME and filterFunction and filterFunction(tokenString):
+				if processFunction:
+					processFunction( filename, tokenType, tokenString, (sourceRow,sourceCol),(endRow,endCol),lineText )
+	except Exception, err:
+		pass
 
 def generate_tokens_dir( directory, filterFunction=glName, processFunction=glProcess ):
 	"""Generate tokens for all Python files in a directory"""
@@ -50,7 +53,9 @@ def generate_tokens_dir( directory, filterFunction=glName, processFunction=glPro
 		if file in ('.svn','CVS'):
 			continue
 		file = os.path.join(directory,file)
-		if os.path.isdir(file):
+		if os.path.islink( file ):
+			continue
+		elif os.path.isdir(file):
 			generate_tokens_dir( file, filterFunction, processFunction )
 	log.info( """Exiting directory: %s""", directory )
 
@@ -143,10 +148,27 @@ def loadData():
 			projectName='{LGPL} PyUI',
 		),
 		SampleSource(
+			os.path.join( SAMPLES, 'pyui2' ),
+			baseURL = "http://pyui2.cvs.sourceforge.net/pyui2/pyui2/",
+			projectName='{LGPL} PyUI2',
+		),
+		SampleSource(
 			os.path.join( SAMPLES, 'visionegg' ),
 			baseURL ='http://visionegg.org/trac/browser/trunk/visionegg',
 			projectName='{LGPL} VisionEgg',
 			urlTemplate = RAWSVN,
+		),
+		SampleSource(
+			os.path.join( SAMPLES, 'glchess' ),
+			baseURL ='http://svn.gnome.org/viewvc/gnome-games/trunk/glchess',
+			projectName='{GPL} GLChess',
+			urlTemplate = VIEWSVN,
+		),
+		SampleSource(
+			os.path.join( SAMPLES, 'kamaelia' ),
+			baseURL ='http://kamaelia.svn.sourceforge.net/viewvc/kamaelia/trunk/',
+			projectName='{LGPL or GPL or MPL} Kamaelia',
+			urlTemplate = VIEWSVN,
 		),
 		
 	]:
