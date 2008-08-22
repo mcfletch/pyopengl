@@ -1,11 +1,12 @@
 #! /usr/bin/env python
+"""Generates the PyOpenGL reference documentation"""
 import glob, os, datetime
 #import elementtree.ElementTree as ET
 import lxml.etree as ET
 import kid
 
 from directdocs.model import Function, Parameter, ParameterReference
-from directdocs import model
+from directdocs import model,references
 from OpenGL import __version__
 from OpenGL import GL, GLU, GLUT, GLE
 
@@ -101,6 +102,9 @@ class RefSect( model.RefSect ):
 			else:
 				self.discussions.append( section )
 			processed_sections[ id ] = True
+		# global search for referenced constants...
+		for item in tree[0].xpath( './/d:constant', self.query_namespace ):
+			self.constants[ item.text.strip() ] = True
 
 		#for element in tree.iterdescendants():
 		#	if element.tag in processors:
@@ -174,6 +178,12 @@ def load_file( filename ):
 
 
 def main():
+	if os.path.isfile( references.CACHE_FILE ):
+		import pickle
+		samples = pickle.loads( open(references.CACHE_FILE).read())
+	else:
+		log.warn( """Loading references directly, run ./references.py to pre-generate""" )
+		samples = references.loadData()
 	files = []
 	for package in PACKAGES:
 		files.extend(
@@ -187,7 +197,7 @@ def main():
 		r = RefSect( package, ref )
 		r.process( tree )
 		ref.append( r )
-	
+		r.get_samples( samples )
 #		print r.id,r.title,r.purpose
 #		for name,spec in r.functions.items():
 #			print '\t', name 
