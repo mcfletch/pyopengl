@@ -64,3 +64,9 @@ span.parameter {
 	margin-top: 0px;
 	margin-bottom: 5px;
 }
+.sample-key {
+	color: darkgrey;
+}
+.py-sample {
+	margin-left: 30px;
+}

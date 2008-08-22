@@ -71,6 +71,8 @@ class RefSect( object ):
 		self.varrefs = []
 		self.see_also = []
 		self.discussions = []
+		self.samples = []
+		self.constants = {}
 	def has_function( self, name ):
 		"""Ask whether we have this name defined"""
 		return (
@@ -114,6 +116,21 @@ class RefSect( object ):
 							self.py_functions[name] = function
 							if not self.reference.functions.has_key( name ):
 								self.reference.functions[ name ] = function
+	def get_samples( self, sample_set ):
+		"""Populate our sample-set for all of the available samples"""
+		names = (
+			sorted(self.functions.keys()) + 
+			sorted(self.py_functions.keys()) + 
+			sorted(self.constants.keys())
+		)
+		filtered = []
+		filter_set = {}
+		for name in names:
+			if not filter_set.has_key( name ):
+				filtered.append( name )
+		for name in filtered:
+			if sample_set.has_key( name ):
+				self.samples.append( (name,Sample.joined(sample_set[name])))
 
 class Function( object ):
 	"""Function description produced from docs
@@ -265,3 +282,38 @@ class ParameterReference( object ):
 		result = []
 		return '\t\t%s -- %s'%( ', '.join(self.names), self.description )
 
+class Sample( object ):
+	def __init__( 
+		self, url, 
+		projectName, deltaPath,
+		tokenString=None, 
+		sourceRow=None, sourceCol=None,
+		endRow=None,endCol=None,
+		lineText=None,
+	):
+		self.positions = []
+		( 
+			self.url, self.projectName, self.deltaPath,
+			self.tokenString,self.lineText,
+		) = (
+			url, projectName, deltaPath,
+			tokenString, lineText,
+		)
+		if sourceRow:
+			self.positions.append( (sourceRow, sourceCol,endRow,endCol) )
+	@classmethod
+	def joined( cls, instances ):
+		"""Compress same-file references to a single instance"""
+		result = []
+		if instances:
+			set = {}
+			for instance in instances:
+				key = instance.projectName,instance.deltaPath
+				current = set.get( key )
+				if current is None:
+					current = cls( instance.url, instance.projectName, instance.deltaPath, instance.tokenString )
+					set[key] = current 
+					result.append( current )
+				current.positions.extend( instance.positions )
+		return result
+		

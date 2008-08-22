@@ -84,6 +84,17 @@ approach = approach_set.get( basetag, 'para' )
 	<a name="c-${function.name}"/>
 	<span class="c-function">${function.name}</span>(${paramlist(function)})-&gt; ${function.return_value}
 </div>
+<div py:def="format_samples( sample_set )" class="py-samples">
+	<div py:for="(key,samples) in sample_set" py:strip="">
+		<div class="sample-key">${key}</div>
+		<div py:strip="" py:for="sample in samples" py:replace="format_sample( sample )" />
+	</div>
+</div>
+<div py:def="format_sample( sample )" class="py-sample">
+	<span class="sample-project">${sample.projectName}</span>
+	<a href="${sample.url}" title="${sample.lineText}">${sample.deltaPath}</a> 
+	Lines: <span class="sample-lines">${", ".join([str(x[0]) for x in sample.positions[:20]])}<span py:if="len(sample.positions)&gt;20" py:strip="">...</span></span>
+</div>
 <head>
     <title>${section.title} : PyOpenGL ${version} ${section.package} Man Pages</title>
 	<link rel="stylesheet" href="./manpage.css" type="text/css" />
@@ -121,6 +132,13 @@ ${nav_table()}
 		<span py:for="target in section.get_crossrefs( ref )" py:strip="">
 			<a class="crossref" href="${ref.url(target)}">${target.name}</a>
 		</span>
+	</div>
+	<div class="samples-section" py:if="section.samples">
+		<h2>Sample Code References</h2>
+		<p>The following code samples have been found which appear to reference the 
+		functions described here.  Take care that the code may be old, broken or not 
+		even use PyOpenGL.</p>
+		${format_samples( section.samples ) }
 	</div>
 </div>
 
