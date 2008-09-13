@@ -12,12 +12,12 @@
 <div py:def="contents( docbook )" py:strip="">${docbook.text}${[convert(x) for x in docbook]}</div>
 <div py:def="convert( docbook )" py:strip="">
 	<?python
+#print docbook, docbook[:]
 approach = 'para'
 basetag = docbook.tag.split( "}" )[1]
 approach_set = {
 	'citerefentry':'crossref',
 	'constant':'span',
-	'parameter':'span',
 	'informaltable': 'table',
 	'emphasis':'span',
 	'colspec':'',
@@ -29,16 +29,27 @@ approach_set = {
 	'variablelist':'dl',
 	'term':'dt',
 	'listitem':'dd',
+	'ulink':'extref',
+	'parameter': 'paramref',
 }
 approach = approach_set.get( basetag, 'para' )
+#if approach == 'crossref':
+#	import pdb
+#	pdb.set_trace()
 ?>
 	<div py:if="approach=='para'" class="${basetag}">${contents(docbook)}</div>
 	<span py:if="approach=='span'" class="${basetag}">${contents(docbook)}</span>
-	<a class="crossref" py:if="approach=='crossref'" py:strip="not ref.get_crossref(docbook[0].text,docbook[1].text,section=section)"
-		href="${ref.url(ref.get_crossref(docbook[0].text,docbook[1].text,section=section))}"
+	<a class="crossref" py:if="approach=='crossref'" py:strip="not ref.get_crossref(docbook[0].text,section=section)"
+		href="${ref.url(ref.get_crossref(docbook[0].text,section=section))}"
 	>${docbook[0].text}</a>
 	<a class="function" py:if="approach=='function'" py:strip="not ref.get_crossref(docbook.text,section=section)"
 		href="${ref.url(ref.get_crossref(docbook.text,section=section))}"
+	>${docbook.text}</a>
+	<a class="extref" py:if="approach=='extref'"
+		href="${docbook.get('url')}"
+	>${docbook.text}</a>
+	<a class="parameter" py:if="approach=='paramref'"
+		href="#param-${docbook.text}"
 	>${docbook.text}</a>
 	<table py:if="approach=='table'" class="${basetag}"><tbody>
 		<div py:for="component in docbook[0]" py:strip="">
@@ -74,7 +85,7 @@ approach = approach_set.get( basetag, 'para' )
 		<span py:if="param.varargs" py:strip="">*</span>
 		<span py:if="param.varnamed" py:strip="">**</span>
 		<span py:if="param.data_type" py:strip="">${param.data_type}( </span>
-			<span class="parameter">${param.name}</span>
+			<a href="#param-${param.name}" class="parameter">${param.name}</a>
 		<span py:if="param.data_type" py:strip="">)</span>
 		<span py:if="param.has_default" py:strip=""> = ${repr(param.default)}</span>
 		<span py:strip="" py:if="i &lt; len(function.parameters)-1">, </span>
@@ -118,7 +129,10 @@ ${nav_table()}
 			<table><tbody>
 				<tr><th align="right">Variables</th><th>Description</th></tr>
 				<tr py:for="varref in section.varrefs" class="varref" valign="top">
-					<th align="right">${", ".join(varref.names)}</th>
+					<th align="right">
+						<a name="param-${name}" py:for="name in varref.names"/>
+						${", ".join(varref.names)}
+					</th>
 					<td>${convert(varref.description[0])}</td>
 				</tr>
 			</tbody></table>
