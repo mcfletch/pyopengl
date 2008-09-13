@@ -327,3 +327,15 @@ directdocs.e4t
 .reference_cache.pkl
 .samples
 manual-3.0.tar.gz
+.man
+.eric4project
+glchess
+Glinter
+kamaelia
+OpenGLContext
+pybzedit
+pymmlib
+PyOpenGL-Demo
+pyui
+pyui2
+visionegg
