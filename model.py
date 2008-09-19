@@ -124,8 +124,7 @@ class RefSect( object ):
 		"""Populate our sample-set for all of the available samples"""
 		names = (
 			sorted(self.functions.keys()) + 
-			sorted(self.py_functions.keys()) + 
-			sorted(self.constants.keys())
+			sorted(self.py_functions.keys())
 		)
 		filtered = []
 		filter_set = {}
