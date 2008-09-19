@@ -3,17 +3,18 @@
 import glob, os, datetime
 #import elementtree.ElementTree as ET
 import lxml.etree as ET
-import kid
+import kid, logging 
+log = logging.getLogger( 'generate' )
 
 from directdocs.model import Function, Parameter, ParameterReference
 from directdocs import model,references
 from OpenGL import __version__
-from OpenGL import GL, GLU, GLUT, GLE
+from OpenGL import GL, GLU, GLUT, GLE,GLX
 
 OUTPUT_DIRECTORY = 'manual-%s'%(model.MAJOR_VERSION,)
 
-IMPORTED_PACKAGES = [GL,GLU,GLUT,GLE]
-PACKAGES = ['GL','GLU','GLUT','GLE',]
+IMPORTED_PACKAGES = [GL,GLU,GLUT,GLE,GLX]
+PACKAGES = ['GL','GLU','GLUT','GLE','GLX']
 
 DOCBOOK_NS = 'http://docbook.org/ns/docbook'
 MML_NS = "http://www.w3.org/1998/Math/MathML"
@@ -30,6 +31,8 @@ WRAPPER = """<?xml version="1.0" encoding="UTF-8"?>
 class Reference( model.Reference ):
 	"""Reference class with doc-set-specific coding"""
 	def get_crossref( self, title, volume=None,section=None ):
+		if volume is None:
+			volume = '3G'
 		key = '%s.%s'%(title,volume)
 		if '(' in title:
 			title = title.split('(')[0]
@@ -94,7 +97,7 @@ class RefSect( model.RefSect ):
 		processed_sections = {}
 		for section in tree[0].xpath( './/d:refsect1', self.query_namespace):
 			id = section.get( 'id' )
-			if '-parameters' in id:
+			if '-parameters' in id or id == 'parameters':
 				for varlist in section.xpath( './d:variablelist',self.query_namespace):
 					self.process_variablelist( varlist )
 			elif id.endswith( '-see_also' ):
@@ -148,8 +151,10 @@ class RefSect( model.RefSect ):
 		try:
 			function = self.functions[ funcname ]
 		except KeyError, err:
-			err.args += (self.functions.keys(),)
-			raise
+			function = Function(funcname,self)
+			self.functions[ funcname ] = function
+#			err.args += (self.functions.keys(),)
+#			log.warn( """Unable to process function prototype for %r (current keys: %s)""", funcname, self.functions.keys() )
 		function.return_value = return_value
 		function.parameters = paramresults
 		for param in paramresults:
@@ -176,7 +181,19 @@ class RefSect( model.RefSect ):
 
 def load_file( filename ):
 	data = WRAPPER%(open(filename).read())
-	return ET.XML( data )
+	try:
+		return filter_comments( ET.XML( data ) )
+	except Exception, err:
+		log.error( "Failure loading file: %r", filename )
+		raise
+
+def filter_comments( tree ):
+	for element in tree:
+		if isinstance(element.tag, (str,unicode)):
+			filter_comments( element )
+		else:
+			tree.remove( element )
+	return tree
 
 def init_output( ):
 	if not os.path.isdir( OUTPUT_DIRECTORY ):
@@ -206,7 +223,11 @@ def main():
 	ref = Reference()
 	for package,path in files:
 		#print 'loading', path
-		tree = load_file( path )
+		try:
+			tree = load_file( path )
+		except Exception, err:
+			err.args += (path,)
+			raise
 		r = RefSect( package, ref )
 		r.process( tree )
 		ref.append( r )
