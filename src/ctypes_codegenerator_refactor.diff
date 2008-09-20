@@ -1,0 +1,1630 @@
+Index: ctypeslib/xml2py.py
+===================================================================
+--- ctypeslib/xml2py.py	(revision 52681)
++++ ctypeslib/xml2py.py	(working copy)
+@@ -1,6 +1,6 @@
+ import sys, re, os
+ from optparse import OptionParser
+-from ctypeslib.codegen.codegenerator import generate_code
++from ctypeslib.codegen.codegenerator import generate_code, Generator
+ from ctypeslib.codegen import typedesc
+ 
+ ################################################################
+@@ -146,13 +146,7 @@
+ 
+     dlls = [load_library(name) for name in options.dlls]
+ 
+-    for name in options.modules:
+-        mod = __import__(name)
+-        for submodule in name.split(".")[1:]:
+-            mod = getattr(mod, submodule)
+-        for name, item in mod.__dict__.iteritems():
+-            if isinstance(item, type):
+-                known_symbols[name] = mod.__name__
++    known_symbols = Generator.loadKnownSymbols( options.modules )
+ 
+     if options.kind:
+         types = []
+Index: ctypeslib/codegen/codegenerator.py
+===================================================================
+--- ctypeslib/codegen/codegenerator.py	(revision 52681)
++++ ctypeslib/codegen/codegenerator.py	(working copy)
+@@ -4,689 +4,1010 @@
+ import typedesc, sys, os
+ import textwrap
+ import struct, ctypes
++import logging
+ 
++log = logging.getLogger( 'codegenerator' )
++
+ # This should be configurable
+ ASSUME_STRINGS = True
+ 
+ try:
+-    set
++	set
+ except NameError:
+-    from sets import Set as set
++	from sets import Set as set
++def flatten( x ):
++	if isinstance( x, (str,unicode)):
++		yield x
++	elif x in (None,True,False):
++		pass
++	else:
++		for item in x:
++			for child in flatten( item ):
++				yield child
+ 
+ try:
+-    sorted
++	sorted
+ except NameError:
+-    def sorted(seq, cmp):
+-        seq = list(seq)
+-        seq.sort(cmp)
+-        return seq
++	def sorted(seq, cmp):
++		seq = list(seq)
++		seq.sort(cmp)
++		return seq
+ 
+ try:
+-    import cStringIO as StringIO
++	import cStringIO as StringIO
+ except ImportError:
+-    import StringIO
++	import StringIO
+ 
+ 
+ # XXX Should this be in ctypes itself?
+ ctypes_names = {
+-    "unsigned char": "c_ubyte",
+-    "signed char": "c_byte",
+-    "char": "c_char",
++	"unsigned char": "c_ubyte",
++	"signed char": "c_byte",
++	"char": "c_char",
+ 
+-    "wchar_t": "c_wchar",
++	"wchar_t": "c_wchar",
+ 
+-    "short unsigned int": "c_ushort",
+-    "short int": "c_short",
++	"short unsigned int": "c_ushort",
++	"short int": "c_short",
+ 
+-    "long unsigned int": "c_ulong",
+-    "long int": "c_long",
+-    "long signed int": "c_long",
++	"long unsigned int": "c_ulong",
++	"long int": "c_long",
++	"long signed int": "c_long",
+ 
+-    "unsigned int": "c_uint",
+-    "int": "c_int",
++	"unsigned int": "c_uint",
++	"int": "c_int",
+ 
+-    "long long unsigned int": "c_ulonglong",
+-    "long long int": "c_longlong",
++	"long long unsigned int": "c_ulonglong",
++	"long long int": "c_longlong",
+ 
+-    "double": "c_double",
+-    "float": "c_float",
++	"double": "c_double",
++	"float": "c_float",
++		
++	"long double": "c_double", # XXX check for correctness!
++	"complex long double": "c_double", # XXX check for correctness!
++	"complex double": "c_double", # XXX check for correctness!
++	"complex float": "c_float", # XXX check for correctness!
+ 
+-    # Hm...
+-    "void": "None",
++	# Hm...
++	"void": "None",
+ }
+ 
+ ################
+ 
+ def storage(t):
+-    # return the size and alignment of a type
+-    if isinstance(t, typedesc.Typedef):
+-        return storage(t.typ)
+-    elif isinstance(t, typedesc.ArrayType):
+-        s, a = storage(t.typ)
+-        return s * (int(t.max) - int(t.min) + 1), a
+-    return int(t.size), int(t.align)
++	# return the size and alignment of a type
++	if isinstance(t, typedesc.Typedef):
++		return storage(t.typ)
++	elif isinstance(t, typedesc.ArrayType):
++		s, a = storage(t.typ)
++		return s * (int(t.max) - int(t.min) + 1), a
++	return int(t.size), int(t.align)
+ 
+ class PackingError(Exception):
+-    pass
++	pass
+ 
+ def _calc_packing(struct, fields, pack, isStruct):
+-    # Try a certain packing, raise PackingError if field offsets,
+-    # total size ot total alignment is wrong.
+-    if struct.size is None: # incomplete struct
+-        return -1
+-    if struct.name in dont_assert_size:
+-        return None
+-    if struct.bases:
+-        size = struct.bases[0].size
+-        total_align = struct.bases[0].align
+-    else:
+-        size = 0
+-        total_align = 8 # in bits
+-    for i, f in enumerate(fields):
+-        if f.bits: # this code cannot handle bit field sizes.
++	# Try a certain packing, raise PackingError if field offsets,
++	# total size ot total alignment is wrong.
++	if struct.size is None: # incomplete struct
++		return -1
++	if struct.name in dont_assert_size:
++		return None
++	if struct.bases:
++		size = struct.bases[0].size
++		total_align = struct.bases[0].align
++	else:
++		size = 0
++		total_align = 8 # in bits
++	for i, f in enumerate(fields):
++		if f.bits: # this code cannot handle bit field sizes.
+ ##            print "##XXX FIXME"
+-            return -2 # XXX FIXME
+-        s, a = storage(f.typ)
+-        if pack is not None:
+-            a = min(pack, a)
+-        if size % a:
+-            size += a - size % a
+-        if isStruct:
+-            if size != f.offset:
+-                raise PackingError, "field %s offset (%s/%s)" % (f.name, size, f.offset)
+-            size += s
+-        else:
+-            size = max(size, s)
+-        total_align = max(total_align, a)
+-    if total_align != struct.align:
+-        raise PackingError, "total alignment (%s/%s)" % (total_align, struct.align)
+-    a = total_align
+-    if pack is not None:
+-        a = min(pack, a)
+-    if size % a:
+-        size += a - size % a
+-    if size != struct.size:
+-        raise PackingError, "total size (%s/%s)" % (size, struct.size)
++			return -2 # XXX FIXME
++		s, a = storage(f.typ)
++		if pack is not None:
++			a = min(pack, a)
++		if size % a:
++			size += a - size % a
++		if isStruct:
++			if size != f.offset:
++				raise PackingError, "field %s offset (%s/%s)" % (f.name, size, f.offset)
++			size += s
++		else:
++			size = max(size, s)
++		total_align = max(total_align, a)
++	if total_align != struct.align:
++		raise PackingError, "total alignment (%s/%s)" % (total_align, struct.align)
++	a = total_align
++	if pack is not None:
++		a = min(pack, a)
++	if size % a:
++		size += a - size % a
++	if size != struct.size:
++		raise PackingError, "total size (%s/%s)" % (size, struct.size)
+ 
+ def calc_packing(struct, fields):
+-    # try several packings, starting with unspecified packing
+-    isStruct = isinstance(struct, typedesc.Structure)
+-    for pack in [None, 16*8, 8*8, 4*8, 2*8, 1*8]:
+-        try:
+-            _calc_packing(struct, fields, pack, isStruct)
+-        except PackingError, details:
+-            continue
+-        else:
+-            if pack is None:
+-                return None
+-            return pack/8
+-    raise PackingError, "PACKING FAILED: %s" % details
++	# try several packings, starting with unspecified packing
++	isStruct = isinstance(struct, typedesc.Structure)
++	for pack in [None, 16*8, 8*8, 4*8, 2*8, 1*8]:
++		try:
++			_calc_packing(struct, fields, pack, isStruct)
++		except PackingError, details:
++			continue
++		else:
++			if pack is None:
++				return None
++			return pack/8
++	raise PackingError, "PACKING FAILED: %s" % details
+ 
+ def get_real_type(tp):
+-    if type(tp) is typedesc.Typedef:
+-        return get_real_type(tp.typ)
+-    elif isinstance(tp, typedesc.CvQualifiedType):
+-        return get_real_type(tp.typ)
+-    return tp
++	if type(tp) is typedesc.Typedef:
++		return get_real_type(tp.typ)
++	elif isinstance(tp, typedesc.CvQualifiedType):
++		return get_real_type(tp.typ)
++	return tp
+ 
+ # XXX These should be filtered out in gccxmlparser.
+ dont_assert_size = set(
+-    [
+-    "__si_class_type_info_pseudo",
+-    "__class_type_info_pseudo",
+-    ]
+-    )
++	[
++	"__si_class_type_info_pseudo",
++	"__class_type_info_pseudo",
++	]
++	)
+ 
+ ################################################################
+ 
+ class Generator(object):
+-    def __init__(self, output,
+-                 generate_comments=False,
+-                 known_symbols=None,
+-                 searched_dlls=None):
+-        self.output = output
+-        self.stream = StringIO.StringIO()
+-        self.imports = StringIO.StringIO()
+-##        self.stream = self.imports = self.output
+-        self.generate_comments = generate_comments
+-        self.known_symbols = known_symbols or {}
+-        if searched_dlls is None:
+-            self.searched_dlls = []
+-        else:
+-            self.searched_dlls = searched_dlls
++	"""Base ctypes code-generator (wrapper generator) class
++	
++	This is the class used to produce Python code which wraps
++	a (subset of a) given C loadable module.  It processes the
++	typedef objects created by the gccxmlparser module.  Usage
++	looks like this:
++	
++		gen = codegenerator.Generator(
++			outputFileHandle,
++			searched_dlls = [ set of dlls ],
++			emitters = [ OverrideEmittedCode(), ],
++		)
++		items = gen.load_typedefs( xmlFileName )
++		gen.produce( items )
++	
++	Generated code is written to outputFileHandle by the
++	"produce" method.
++	"""
++	def __init__(
++		self, output,
++		 generate_comments=False,
++		 known_symbols=None,
++		 searched_dlls=None,
++		 emitters = None,
++		 module_header = None,
++	):
++		"""Initialise the generator object
++		
++		output -- output file handle
++		generate_comments -- whether to put comments in the file to make
++			it more readily human readable
++		known_symbols -- mapping from symbol (name) to module name, None or False
++			if a module name, generate from module import name statements if
++			the symbol is used, if None, assume that the name is always available,
++			e.g. because you did a from module import * in module_header,
++			if False,  assumed the name is available *and* but still export it from
++			this module.
++		searched_dlls -- loaded ctypes DLL modules to be searched for functions,
++			if we cannot find a function in a DLL we do not generate the wrapper
++			code for that function
++		emitters -- Emitter objects which override the set provided by 
++			defaultEmitters in order to customise operation (emitters are searched
++			in order, with these emitters searched before the default set)
++		module_header -- first piece of text output to the file by the generator,
++			allows for specifying docstrings, custom imports and the like
++		"""
++		self.output = output
++		self.stream = StringIO.StringIO()
++		self.imports = StringIO.StringIO()
++		self.emitters = emitters or [] + self.defaultEmitters()
++		self.generate_comments = generate_comments
++		self.known_symbols = known_symbols or {}
++		self.module_header = module_header
++		if searched_dlls is None:
++			self.searched_dlls = []
++		else:
++			self.searched_dlls = searched_dlls
+ 
+-        self.done = set() # type descriptions that have been generated
+-        self.names = set() # names that have been generated
++		self.done = set() # type descriptions that have been generated
++		self.names = set() # names that have been generated
++	def defaultEmitters( cls ):
++		"""Produce the set of default emitter classes
++		"""
++		defaultSet = []
++		for value in globals().values():
++			try:
++				if isinstance( value, type ) and issubclass( value, Emitter ):
++					defaultSet.append( value() )
++			except TypeError, err:
++				# just in case the isinstance/issubclass call goes nuts...
++				pass
++		return defaultSet
++	defaultEmitters = classmethod( defaultEmitters )
++	
++	EXPORT_SYMBOL = 2**0
++	IMPORT_SYMBOL = 2**1
++	def loadKnownSymbols( 
++		cls, moduleNames, flags = EXPORT_SYMBOL|IMPORT_SYMBOL,
++		doReload=False
++	):
++		"""Load all new-style classes from named modules
++		
++		Suitable for passing to __init__ as known_symbols
++		"""
++		known_symbols = {}
++		for name in moduleNames:
++			mod = __import__(name)
++			for submodule in name.split(".")[1:]:
++				mod = getattr(mod, submodule)
++			if doReload:
++				mod = reload( mod )
++			for name, item in mod.__dict__.iteritems():
++				if cls.importAble( name, item ):
++					log.debug( 'Symbol %s --> %s,%s', name, mod.__name__, flags )
++					known_symbols[name] = ( mod.__name__, flags )
++		return known_symbols
++	loadKnownSymbols = classmethod( loadKnownSymbols )
++	
++	def importAble( cls, name, value ):
++		"""Determine whether this name/object should be imported from known symbols
++		
++		Allows you to have the system import, for instance, constants from another
++		module, not just type definitions.
++		"""
++		return isinstance( value, type )
++	importAble = classmethod( importAble )
++		
+ 
+-    def init_value(self, t, init):
+-        tn = self.type_name(t, False)
+-        value = eval(init)
++	def init_value(self, t, init):
++		tn = self.type_name(t, False)
++		value = eval(init)
+ 
+-        if tn == "c_char":
+-            if isinstance(value, int):
+-                return chr(value)
+-            return value
+-        elif tn == "c_wchar":
+-            if isinstance(value, int):
+-                return unichr(value)
+-            return value
+-        elif tn in ("POINTER(c_wchar)", "WSTRING"):
+-            if isinstance(value, str):
+-                ws = ctypes.sizeof(ctypes.c_wchar)
+-                if ws == 4:
+-                    v = value[:-3]
+-                    value = "".join(map(unichr, struct.unpack("I" * (len(v)/4), v)))
+-                elif ws == 2:
+-                    v = value[:-1]
+-                    value = "".join(map(unichr, struct.unpack("H" * (len(v)/2), v)))
+-                return value
+-            return value
++		if tn == "c_char":
++			if isinstance(value, int):
++				return chr(value)
++			return value
++		elif tn == "c_wchar":
++			if isinstance(value, int):
++				return unichr(value)
++			return value
++		elif tn in ("POINTER(c_wchar)", "WSTRING"):
++			if isinstance(value, str):
++				ws = ctypes.sizeof(ctypes.c_wchar)
++				if ws == 4:
++					v = value[:-3]
++					value = "".join(map(unichr, struct.unpack("I" * (len(v)/4), v)))
++				elif ws == 2:
++					v = value[:-1]
++					value = "".join(map(unichr, struct.unpack("H" * (len(v)/2), v)))
++				return value
++			return value
+ 
+-        return value
++		return value
+ 
+-    def type_name(self, t, generate=True):
+-        # Return a string containing an expression that can be used to
+-        # refer to the type. Assumes the 'from ctypes import *'
+-        # namespace is available.
+-        if isinstance(t, typedesc.Typedef):
+-            return t.name
+-        if isinstance(t, typedesc.PointerType):
+-            if ASSUME_STRINGS:
+-                x = get_real_type(t.typ)
+-                if isinstance(x, typedesc.FundamentalType):
+-                    if x.name == "char":
+-                        self.need_STRING()
+-                        return "STRING"
+-                    elif x.name == "wchar_t":
+-                        self.need_WSTRING()
+-                        return "WSTRING"
++	def type_name(self, t, generate=True):
++		# Return a string containing an expression that can be used to
++		# refer to the type. Assumes the 'from ctypes import *'
++		# namespace is available.
++		if isinstance(t, typedesc.Typedef):
++			return t.name
++		if isinstance(t, typedesc.PointerType):
++			if ASSUME_STRINGS:
++				x = get_real_type(t.typ)
++				if isinstance(x, typedesc.FundamentalType):
++					if x.name == "char":
++						self.need_STRING()
++						return "STRING"
++					elif x.name == "wchar_t":
++						self.need_WSTRING()
++						return "WSTRING"
+ 
+-            result = "POINTER(%s)" % self.type_name(t.typ, generate)
+-            # XXX Better to inspect t.typ!
+-            if result.startswith("POINTER(WINFUNCTYPE"):
+-                return result[len("POINTER("):-1]
+-            if result.startswith("POINTER(CFUNCTYPE"):
+-                return result[len("POINTER("):-1]
+-            elif result == "POINTER(None)":
+-                return "c_void_p"
+-            return result
+-        elif isinstance(t, typedesc.ArrayType):
+-            return "%s * %s" % (self.type_name(t.typ, generate), int(t.max)+1)
+-        elif isinstance(t, typedesc.FunctionType):
+-            args = [self.type_name(x, generate) for x in [t.returns] + list(t.iterArgTypes())]
+-            if "__stdcall__" in t.attributes:
+-                return "WINFUNCTYPE(%s)" % ", ".join(args)
+-            else:
+-                return "CFUNCTYPE(%s)" % ", ".join(args)
+-        elif isinstance(t, typedesc.CvQualifiedType):
+-            # const and volatile are ignored
+-            return "%s" % self.type_name(t.typ, generate)
+-        elif isinstance(t, typedesc.FundamentalType):
+-            return ctypes_names[t.name]
+-        elif isinstance(t, typedesc.Structure):
+-            return t.name
+-        elif isinstance(t, typedesc.Enumeration):
+-            if t.name:
+-                return t.name
+-            return "c_int" # enums are integers
+-        elif isinstance(t, typedesc.Typedef):
+-            return t.name
+-        return t.name
++			result = "POINTER(%s)" % self.type_name(t.typ, generate)
++			# XXX Better to inspect t.typ!
++			if result.startswith("POINTER(WINFUNCTYPE"):
++				return result[len("POINTER("):-1]
++			if result.startswith("POINTER(CFUNCTYPE"):
++				return result[len("POINTER("):-1]
++			elif result == "POINTER(None)":
++				return "c_void_p"
++			return result
++		elif isinstance(t, typedesc.ArrayType):
++			return "%s * %s" % (self.type_name(t.typ, generate), int(t.max)+1)
++		elif isinstance(t, typedesc.FunctionType):
++			args = [self.type_name(x, generate) for x in [t.returns] + list(t.iterArgTypes())]
++			if "__stdcall__" in t.attributes:
++				return "WINFUNCTYPE(%s)" % ", ".join(args)
++			else:
++				return "CFUNCTYPE(%s)" % ", ".join(args)
++		elif isinstance(t, typedesc.CvQualifiedType):
++			# const and volatile are ignored
++			return "%s" % self.type_name(t.typ, generate)
++		elif isinstance(t, typedesc.FundamentalType):
++			return ctypes_names[t.name]
++		elif isinstance(t, typedesc.Structure):
++			return t.name
++		elif isinstance(t, typedesc.Enumeration):
++			if t.name:
++				return t.name
++			return "c_int" # enums are integers
++		elif isinstance(t, typedesc.Typedef):
++			return t.name
++		return t.name
+ 
+-    ################################################################
++	################################################################
+ 
+-    def Alias(self, alias):
+-        if alias.typ is not None: # we can resolve it
+-            self.generate(alias.typ)
+-            if alias.alias in self.names:
+-                print >> self.stream, "%s = %s # alias" % (alias.name, alias.alias)
+-                self.names.add(alias.name)
+-                return
+-        # we cannot resolve it
+-        print >> self.stream, "# %s = %s # alias" % (alias.name, alias.alias)
+-        print "# unresolved alias: %s = %s" % (alias.name, alias.alias)
+-            
+ 
+-    def Macro(self, macro):
+-        # We don't know if we can generate valid, error free Python
+-        # code All we can do is to try to compile the code.  If the
+-        # compile fails, we know it cannot work, so we generate
+-        # commented out code.  If it succeeds, it may fail at runtime.
+-        code = "def %s%s: return %s # macro" % (macro.name, macro.args, macro.body)
+-        try:
+-            compile(code, "<string>", "exec")
+-        except SyntaxError:
+-            print >> self.stream, "#", code
+-        else:
+-            print >> self.stream, code
+-            self.names.add(macro.name)
+ 
+-    def StructureHead(self, head):
+-        for struct in head.struct.bases:
+-            self.generate(struct.get_head())
+-            self.more.add(struct)
+-        if self.generate_comments and head.struct.location:
+-            print >> self.stream, "# %s %s" % head.struct.location
+-        basenames = [self.type_name(b) for b in head.struct.bases]
+-        if basenames:
+-###            method_names = [m.name for m in head.struct.members if type(m) is typedesc.Method]
+-            print >> self.stream, "class %s(%s):" % (head.struct.name, ", ".join(basenames))
+-        else:
+-###            methods = [m for m in head.struct.members if type(m) is typedesc.Method]
+-            if type(head.struct) == typedesc.Structure:
+-                print >> self.stream, "class %s(Structure):" % head.struct.name
+-            elif type(head.struct) == typedesc.Union:
+-                print >> self.stream, "class %s(Union):" % head.struct.name
+-        print >> self.stream, "    pass"
+-        self.names.add(head.struct.name)
++	def find_dllname(self, func):
++		if hasattr(func, "dllname"):
++			return func.dllname
++		name = func.name
++		for dll in self.searched_dlls:
++			try:
++				getattr(dll, name)
++			except AttributeError:
++				pass
++			else:
++				return dll._name
++##        if self.verbose:
++		# warnings.warn, maybe?
++##        print >> sys.stderr, "function %s not found in any dll" % name
++		return None
+ 
+-    _structures = 0
+-    def Structure(self, struct):
+-        self._structures += 1
+-        self.generate(struct.get_head())
+-        self.generate(struct.get_body())
++	_c_libraries = None
++	def need_CLibraries(self):
++		# Create a '_libraries' doctionary in the generated code, if
++		# it not yet exists. Will map library pathnames to loaded libs.
++		if self._c_libraries is None:
++			self._c_libraries = {}
++			print >> self.imports, "_libraries = {}"
+ 
+-    Union = Structure
+-        
+-    _typedefs = 0
+-    def Typedef(self, tp):
+-        self._typedefs += 1
+-        if type(tp.typ) in (typedesc.Structure, typedesc.Union):
+-            self.generate(tp.typ.get_head())
+-            self.more.add(tp.typ)
+-        else:
+-            self.generate(tp.typ)
+-        if 0 and self.type_name(tp.typ) in self.known_symbols:
+-            stream = self.imports
+-        else:
+-            stream = self.stream
+-        if tp.name != self.type_name(tp.typ):
+-            print >> stream, "%s = %s" % \
+-                  (tp.name, self.type_name(tp.typ))
+-        self.names.add(tp.name)
++	_stdcall_libraries = None
++	def need_WinLibraries(self):
++		# Create a '_stdcall_libraries' doctionary in the generated code, if
++		# it not yet exists. Will map library pathnames to loaded libs.
++		if self._stdcall_libraries is None:
++			self._stdcall_libraries = {}
++			print >> self.imports, "_stdcall_libraries = {}"
+ 
+-    _arraytypes = 0
+-    def ArrayType(self, tp):
+-        self._arraytypes += 1
+-        self.generate(get_real_type(tp.typ))
+-        self.generate(tp.typ)
++	def get_sharedlib(self, dllname, cc):
++		if cc == "stdcall":
++			self.need_WinLibraries()
++			if not dllname in self._stdcall_libraries:
++				print >> self.imports, "_stdcall_libraries[%r] = WinDLL(%r)" % (dllname, dllname)
++				self._stdcall_libraries[dllname] = None
++			return "_stdcall_libraries[%r]" % dllname
++		self.need_CLibraries()
++		if not dllname in self._c_libraries:
++			print >> self.imports, "_libraries[%r] = CDLL(%r)" % (dllname, dllname)
++			self._c_libraries[dllname] = None
++		return "_libraries[%r]" % dllname
+ 
+-    _functiontypes = 0
+-    def FunctionType(self, tp):
+-        self._functiontypes += 1
+-        self.generate(tp.returns)
+-        self.generate_all(tp.iterArgTypes())
+-        
+-    _pointertypes = 0
+-    def PointerType(self, tp):
+-        self._pointertypes += 1
+-        if type(tp.typ) is typedesc.PointerType:
+-            self.generate(tp.typ)
+-        elif type(tp.typ) in (typedesc.Union, typedesc.Structure):
+-            self.generate(tp.typ.get_head())
+-            self.more.add(tp.typ)
+-        elif type(tp.typ) is typedesc.Typedef:
+-            self.generate(tp.typ)
+-        else:
+-            self.generate(tp.typ)
++	_STRING_defined = False
++	def need_STRING(self):
++		if self._STRING_defined:
++			return
++		print >> self.imports, "STRING = c_char_p"
++		self._STRING_defined = True
+ 
+-    def CvQualifiedType(self, tp):
+-        self.generate(tp.typ)
++	_WSTRING_defined = False
++	def need_WSTRING(self):
++		if self._WSTRING_defined:
++			return
++		print >> self.imports, "WSTRING = c_wchar_p"
++		self._WSTRING_defined = True
+ 
+-    _variables = 0
+-    def Variable(self, tp):
+-        self._variables += 1
+-        if tp.init is None:
+-            # wtypes.h contains IID_IProcessInitControl, for example
+-            return
+-        try:
+-            value = self.init_value(tp.typ, tp.init)
+-        except (TypeError, ValueError), detail:
+-            print "Could not init", tp.name, tp.init, detail
+-##            raise
+-            return
+-        print >> self.stream, \
+-              "%s = %r # Variable %s" % (tp.name,
+-                                         value,
+-                                         self.type_name(tp.typ, False))
+-        self.names.add(tp.name)
+ 
+-    _enumvalues = 0
+-    def EnumValue(self, tp):
+-        value = int(tp.value)
+-        print >> self.stream, \
+-              "%s = %d" % (tp.name, value)
+-        self.names.add(tp.name)
+-        self._enumvalues += 1
+ 
+-    _enumtypes = 0
+-    def Enumeration(self, tp):
+-        self._enumtypes += 1
+-        print >> self.stream
+-        if tp.name:
+-            print >> self.stream, "# values for enumeration '%s'" % tp.name
+-        else:
+-            print >> self.stream, "# values for unnamed enumeration"
+-        # Some enumerations have the same name for the enum type
+-        # and an enum value.  Excel's XlDisplayShapes is such an example.
+-        # Since we don't have separate namespaces for the type and the values,
+-        # we generate the TYPE last, overwriting the value. XXX
+-        for item in tp.values:
+-            self.generate(item)
+-        if tp.name:
+-            print >> self.stream, "%s = c_int # enum" % tp.name
+-            self.names.add(tp.name)
++	########
+ 
++	def generate(self, item):
++		if item in self.done:
++			return
++		if isinstance(item, typedesc.StructureHead):
++			name = getattr(item.struct, "name", None)
++		else:
++			name = getattr(item, "name", None)
++		if name in self.known_symbols:
++			mod,flags = self.known_symbols[name]
++			if flags & self.IMPORT_SYMBOL:
++				print >> self.imports, "from %s import %s" % (mod, name)
++			if flags & self.EXPORT_SYMBOL:
++				self.names.add(name)
++			self.done.add(item)
++			if isinstance(item, typedesc.Structure):
++				self.done.add(item.get_head())
++				self.done.add(item.get_body())
++			return
++		for emitter in self.emitters:
++			if emitter.match( item ):
++				self.done.add( item )
++				return "\n".join( flatten( emitter.emit( self, item ) ))
++		log.warn( """Unable to find emitter for %r instance""", type(item ))
+ 
+-    def StructureBody(self, body):
+-        fields = []
+-        methods = []
+-        for m in body.struct.members:
+-            if type(m) is typedesc.Field:
+-                fields.append(m)
+-                if type(m.typ) is typedesc.Typedef:
+-                    self.generate(get_real_type(m.typ))
+-                self.generate(m.typ)
+-            elif type(m) is typedesc.Method:
+-                methods.append(m)
+-                self.generate(m.returns)
+-                self.generate_all(m.iterArgTypes())
+-            elif type(m) is typedesc.Constructor:
+-                pass
++	def generate_all(self, items):
++		return "\n".join([ item for item in flatten([
++			self.generate(item)
++			for item in items
++		]) if item])
+ 
+-        if methods:
+-            # XXX we have parsed the COM interface methods but should
+-            # we emit any code for them?
+-            pass
+-        else:
+-            # we don't need _pack_ on Unions (I hope, at least), and not
+-            # on COM interfaces.
+-            try:
+-                pack = calc_packing(body.struct, fields)
+-                if pack is not None:
+-                    print >> self.stream, "%s._pack_ = %s" % (body.struct.name, pack)
+-            except PackingError, details:
+-                # if packing fails, write a warning comment to the output.
+-                import warnings
+-                message = "Structure %s: %s" % (body.struct.name, details)
+-                warnings.warn(message, UserWarning)
+-                print >> self.stream, "# WARNING: %s" % details
++	def cmpitems(a, b):
++		"""Allows for overriding sort-order of typedef instances
++		
++		Used as argument to "sorted" for each iteration of generate_all
++		in the generate_items method.
++		"""
++		a = getattr(a, "location", None)
++		b = getattr(b, "location", None)
++		if a is None: return -1
++		if b is None: return 1
++		return cmp(a[0],b[0]) or cmp(int(a[1]),int(b[1]))
++	cmpitems = staticmethod(cmpitems)
+ 
+-        if body.struct.bases:
+-            assert len(body.struct.bases) == 1
+-            self.generate(body.struct.bases[0].get_body())
+-        # field definition normally span several lines.
+-        # Before we generate them, we need to 'import' everything they need.
+-        # So, call type_name for each field once,
+-        for f in fields:
+-            self.type_name(f.typ)
++	MODULE_HEADER = """from ctypes import *"""
++	def write_module_header( self ):
++		"""Write out module header information to our "imports" stream
++		
++		Note: this should be allowing us to specify a docstring that can 
++		appear at the very top of the module, but the wrapper script is
++		putting it's metadata on the first couple of lines.
++		"""
++		print >> self.imports, self.module_header or ''
++		print >> self.imports, self.MODULE_HEADER
++		
++		
+ 
+-        # unnamed fields get autogenerated names "_0", "_1", "_2", "_3", ...
+-        unnamed_fields = {}
+-        for f in fields:
+-            # _anonymous_ fields are fields of type Structure or Union,
+-            # that have no name.
+-            if not f.name and isinstance(f.typ, (typedesc.Structure, typedesc.Union)):
+-                unnamed_fields[f] = "_%d" % len(unnamed_fields)
+-        if unnamed_fields:
+-            print >> self.stream, "%s._anonymous_ = %r" % \
+-                  (body.struct.name, unnamed_fields.values())
+-        print >> self.stream, "%s._fields_ = [" % body.struct.name
++	def generate_items(self, items):
++		items = set(items)
++		loops = 0
++		while items:
++			loops += 1
++			self.more = set()
++			self.stream.write(
++				self.generate_all(sorted(items, self.cmpitems))
++			)
++			self.stream.write( '\n' )
++			items |= self.more
++			items -= self.done
++		return loops
+ 
+-        if self.generate_comments and body.struct.location:
+-            print >> self.stream, "    # %s %s" % body.struct.location
+-        index = 0
+-        for f in fields:
+-            fieldname = unnamed_fields.get(f, f.name)
+-            if f.bits is None:
+-                print >> self.stream, "    ('%s', %s)," % \
+-                   (fieldname, self.type_name(f.typ))
+-            else:
+-                print >> self.stream, "    ('%s', %s, %s)," % \
+-                      (fieldname, self.type_name(f.typ), f.bits)
+-        print >> self.stream, "]"
+-        # disable size checks because they are not portable across
+-        # platforms:
+-##        # generate assert statements for size and alignment
+-##        if body.struct.size and body.struct.name not in dont_assert_size:
+-##            size = body.struct.size // 8
+-##            print >> self.stream, "assert sizeof(%s) == %s, sizeof(%s)" % \
+-##                  (body.struct.name, size, body.struct.name)
+-##            align = body.struct.align // 8
+-##            print >> self.stream, "assert alignment(%s) == %s, alignment(%s)" % \
+-##                  (body.struct.name, align, body.struct.name)
++	def generate_code(self, items):
++		loops = self.generate_items(items)
++		header = self.imports.getvalue()
++		self.output.write(header)
++		self.output.write("\n\n")
++		self.output.write(self.stream.getvalue())
++		
++		# make the names CVS/SVN friendly (consistent ordering)
++		names = list(self.names)
++		names.sort()
++		# present in a set with entirely consistent formatting
++		
++		#text = "__all__ = [%s]" % ", ".join([repr(str(n)) for n in self.names])
++		#wrapper = textwrap.TextWrapper(break_long_words=False,
++		#							   subsequent_indent="           ")
++		#for line in wrapper.wrap(text):
++		#	print >> self.output, line
++		text = '__all__ = [\n\t%s\n]\n'%(
++			",\n\t".join( [ repr(name) for name in names ]
++			)
++		)
++		print >> self.output, text
+ 
+-    def find_dllname(self, func):
+-        if hasattr(func, "dllname"):
+-            return func.dllname
+-        name = func.name
+-        for dll in self.searched_dlls:
+-            try:
+-                getattr(dll, name)
+-            except AttributeError:
+-                pass
+-            else:
+-                return dll._name
+-##        if self.verbose:
+-        # warnings.warn, maybe?
+-##        print >> sys.stderr, "function %s not found in any dll" % name
+-        return None
++		log.info( """Generation required %s loops""", loops )
++		return loops
+ 
+-    _c_libraries = None
+-    def need_CLibraries(self):
+-        # Create a '_libraries' doctionary in the generated code, if
+-        # it not yet exists. Will map library pathnames to loaded libs.
+-        if self._c_libraries is None:
+-            self._c_libraries = {}
+-            print >> self.imports, "_libraries = {}"
++	def stats_report(self):
++		total = 0
++		result = ['#'*60, '# Symbols defined:','#',]
++		for emitter in self.emitters:
++			total += emitter.count
++			if emitter.count:
++				result.append( '# %s %5d'%(emitter.__class__.__name__.ljust(50), emitter.count))
++		result.append( '#' )
++		result.append( '# Total symbols: %5d'%( total) )
++		result.append( '#'*60 )
++		return "\n".join( result )
+ 
+-    _stdcall_libraries = None
+-    def need_WinLibraries(self):
+-        # Create a '_stdcall_libraries' doctionary in the generated code, if
+-        # it not yet exists. Will map library pathnames to loaded libs.
+-        if self._stdcall_libraries is None:
+-            self._stdcall_libraries = {}
+-            print >> self.imports, "_stdcall_libraries = {}"
++################################################################
+ 
+-    def get_sharedlib(self, dllname, cc):
+-        if cc == "stdcall":
+-            self.need_WinLibraries()
+-            if not dllname in self._stdcall_libraries:
+-                print >> self.imports, "_stdcall_libraries[%r] = WinDLL(%r)" % (dllname, dllname)
+-                self._stdcall_libraries[dllname] = None
+-            return "_stdcall_libraries[%r]" % dllname
+-        self.need_CLibraries()
+-        if not dllname in self._c_libraries:
+-            print >> self.imports, "_libraries[%r] = CDLL(%r)" % (dllname, dllname)
+-            self._c_libraries[dllname] = None
+-        return "_libraries[%r]" % dllname
++	def load_typedefs(
++		self,
++		xmlfile, 
++		expressions=None,symbols=None,
++		types=None
++	):
++		"""Load typedefs from file and filter to produce set to generate
++		
++		xmlfile -- XMLRPC output of the module description (h2xml.py output)
++		outfile -- open file handle to which to write output
++		expressions -- (compiled) regular expressions used to match names
++		symbols -- explicit set of symbols to produce
++		searched_dlls -- set of DLL objects which can be searched for symbols
++		types -- set of type descriptor types used to filter the items to be generated
++		
++		returns filtered list of typedef objects
++		"""
++		items = self.load_file( xmlfile )
++		items = self.filter_items( 
++			items,
++			expressions=expressions,symbols=symbols,
++			types=types
++		)
++		return items
+ 
+-    _STRING_defined = False
+-    def need_STRING(self):
+-        if self._STRING_defined:
+-            return
+-        print >> self.imports, "STRING = c_char_p"
+-        self._STRING_defined = True
++	def produce( self, items, verbose=False ):
++		"""Produce wrappers (modules) for the given items
++		
++		items -- typedefs as returned from load_typedefs
++		verbose -- if true, print summary statistics to stderr
++		
++		returns number of loops required to produce wrappers
++		"""
++		################
++		if verbose:
++			log.setLevel( logging.INFO )
++		self.write_module_header( )
++		loops = self.generate_code(items)
++		log.info( 'Summary:\n%s', self.stats_report( ))
++		return loops
+ 
+-    _WSTRING_defined = False
+-    def need_WSTRING(self):
+-        if self._WSTRING_defined:
+-            return
+-        print >> self.imports, "WSTRING = c_wchar_p"
+-        self._WSTRING_defined = True
+ 
+-    _functiontypes = 0
+-    _notfound_functiontypes = 0
+-    def Function(self, func):
+-        dllname = self.find_dllname(func)
+-        if dllname:
+-            self.generate(func.returns)
+-            self.generate_all(func.iterArgTypes())
+-            args = [self.type_name(a) for a in func.iterArgTypes()]
+-            if "__stdcall__" in func.attributes:
+-                cc = "stdcall"
+-            else:
+-                cc = "cdecl"
++	def load_file( self, xmlfile ):
++		"""Load GCCXML file as a set of typedef instances
++		
++		returns typedef items as used in filter_items
++		"""
++		from gccxmlparser import parse
++		return parse(xmlfile)
++		
++	def filter_items( self, items, expressions=None,symbols=None, types=None ):
++		"""Filter the set of items to produce final set to generate
++		
++		items -- sequence of typedesc instances describing the module
++			we are currently processing
++		expressions -- (compiled) regular expressions used to match names
++		symbols -- explicit set of symbols to produce
++		types -- tuple of type descriptor types used to filter the items to be generated
++			these are applied first, so that only items of the given type are included
++			in any further operations...
++		
++		returns list containing filtered set of type descriptors
++		"""
++		todo = []
++		
++		if types:
++			try:
++				types = tuple(types)
++			except TypeError, err:
++				pass
++			items = [i for i in items if isinstance(i, types)]
++		
++		if symbols:
++			syms = set(symbols)
++			for i in items:
++				if i.name in syms:
++					todo.append(i)
++					syms.remove(i.name)
+ 
+-            libname = self.get_sharedlib(dllname, cc)
++			if syms:
++				log.warn( "Symbols not found: %s", list(syms) )
+ 
+-            argnames = [a or "p%d" % (i+1) for i, a in enumerate(func.iterArgNames())]
++		if expressions:
++			for i in items:
++				for s in expressions:
++					if i.name is None:
++						continue
++					match = s.match(i.name)
++					# we only want complete matches
++					if match and match.group() == i.name:
++						todo.append(i)
++						break
++		if symbols or expressions:
++			items = todo
++		return items
+ 
+-            if self.generate_comments and func.location:
+-                print >> self.stream, "# %s %s" % func.location
+-            print >> self.stream, "%s = %s.%s" % (func.name, libname, func.name)
+-            print >> self.stream, "%s.restype = %s" % (func.name, self.type_name(func.returns))
+-            if self.generate_comments:
+-                print >> self.stream, "# %s(%s)" % (func.name, ", ".join(argnames))
+-            print >> self.stream, "%s.argtypes = [%s]" % (func.name, ", ".join(args))
++def generate_code(
++	xmlfile,outfile,
++	expressions=None,symbols=None,
++	verbose=False,generate_comments=False,
++	known_symbols=None,searched_dlls=None,
++	types=None
++):
++	"""Original API entry point see Generator class for documentation"""
++	gen = Generator(
++		outfile,
++		generate_comments=generate_comments,
++		known_symbols=known_symbols,
++		searched_dlls=searched_dlls,
++	)
++	items = gen.load_typedefs( xmlfile )
++	gen.produce( items, verbose=verbose )
++	return items
++	
++class Emitter( object ):
++	"""Base class for helper objects to emit code for a code types"""
++	targetClass = type(None)
++	count = 0
++	def increment( self ):
++		"""Increment our count"""
++		self.count = self.count + 1
++	def match( self, typedef ):
++		"""Do we match the given typedef (should we process)"""
++		if isinstance( typedef, self.targetClass ):
++			return True
++		return False 
++	def emit( self, generator, definition ):
++		"""Emit code to define this definition in the generator's output file"""
+ 
+-            self.names.add(func.name)
+-            self._functiontypes += 1
+-        else:
+-            self._notfound_functiontypes += 1
++class Alias( Emitter ):
++	"""Emit aliases as x = y assignments if we can resolve them"""
++	TEMPLATE = """%(unresolved)s%(name)s = %(target)s # alias"""
++	targetClass = typedesc.Alias
++	def emit( self, generator, alias ):
++		"""Emit code to define this definition in the generator's output file"""
++		result = []
++		if alias.typ is not None: # we can resolve it
++			result.append( generator.generate(alias.typ) )
++			if alias.alias in generator.names:
++				generator.names.add(alias.name)
++				self.increment()
++				result.append( self.format( alias.name, alias.alias ) )
++				return result
++		# we cannot resolve it
++		log.warn( "Unresolved alias: %s = %s", alias.name, alias.alias)
++		return self.format( alias.name, alias.alias, False )
++	def format( self, name, target, resolved=True ):
++		"""Emit code to make an alias from name to target"""
++		unresolved = ['#',''][ resolved ]
++		return self.TEMPLATE % locals()
+ 
+-    def FundamentalType(self, item):
+-        pass # we should check if this is known somewhere
+-##        name = ctypes_names[item.name]
+-##        if name !=  "None":
+-##            print >> self.stream, "from ctypes import %s" % name
+-##        self.done.add(item)
++class Variable( Emitter ):
++	"""Emit constants/variables x = value assignments"""
++	targetClass = typedesc.Variable
++	TEMPLATE = """%(name)s = %(value)r # Variable %(dataType)s"""
++	def emit(self, generator, tp):
++		if tp.init is None:
++			# wtypes.h contains IID_IProcessInitControl, for example
++			log.info( "Null init on variable %s", tp.name )
++			return
++		try:
++			value = self.getValue( generator, tp )
++		except (SyntaxError, TypeError, ValueError), detail:
++			log.warn( "Could not init variable %s %s: %s", tp.name, tp.init, detail )
++			return
++		generator.names.add(tp.name)
++		log.debug( 'Variable: %s', tp.name )
++		self.increment()
++		return self.format( tp.name, value, generator.type_name(tp.typ, False) )
++	def getValue( self, generator, tp ):
++		"""Get the defined value for the variable/constant"""
++		return generator.init_value(tp.typ, tp.init)
++			
++	def format( self, name, value, dataType ):
++		"""Emit code to define a single variable (constant)"""
++		return self.TEMPLATE % locals()
+ 
+-    ########
++class Macro( Emitter ):
++	"""Emit macros as Python code if compilable as such...
++	
++	Note that this can blow up at run-time if the code is syntactically
++	valid but doesn't run properly.
++	"""
++	targetClass = typedesc.Macro
++	TEMPLATE = "def %s%s: return %s # macro"
++	def emit(self, generator, macro):
++		# We don't know if we can generate valid, error free Python
++		# code All we can do is to try to compile the code.  If the
++		# compile fails, we know it cannot work, so we generate
++		# commented out code.  If it succeeds, it may fail at runtime.
++		code =  self.TEMPLATE % (macro.name, macro.args, macro.body)
++		try:
++			compile(code, "<string>", "exec")
++		except SyntaxError:
++			return "#" + code
++		else:
++			self.increment()
++			generator.names.add(macro.name)
++			return code
+ 
+-    def generate(self, item):
+-        if item in self.done:
+-            return
+-        if isinstance(item, typedesc.StructureHead):
+-            name = getattr(item.struct, "name", None)
+-        else:
+-            name = getattr(item, "name", None)
+-        if name in self.known_symbols:
+-            mod = self.known_symbols[name]
+-            print >> self.imports, "from %s import %s" % (mod, name)
+-            self.done.add(item)
+-            if isinstance(item, typedesc.Structure):
+-                self.done.add(item.get_head())
+-                self.done.add(item.get_body())
+-            return
+-        mth = getattr(self, type(item).__name__)
+-        # to avoid infinite recursion, we have to mark it as done
+-        # before actually generating the code.
+-        self.done.add(item)
+-        mth(item)
++class StructureHead( Emitter ):
++	"""Emit structure definition "heads" as ctypes struct declarations
++	"""
++	TEMPLATE = "class %(className)s(%(basenames)s):\n    pass"
++	targetClass = typedesc.StructureHead
++	def emit(self, generator, head):
++		for struct in head.struct.bases:
++			generator.generate(struct.get_head())
++			generator.more.add(struct)
++		result = []
++		if generator.generate_comments and head.struct.location:
++			result.append( "# %s %s" % head.struct.location )
++		basenames = [generator.type_name(b) for b in head.struct.bases]
++		
++		className = head.struct.name
++		if not basenames:
++			if type(head.struct) == typedesc.Structure:
++				basenames = ['Structure']
++			elif type(head.struct) == typedesc.Union:
++				basenames = ['Union']
++			else:
++				log.warn( """Unable to determine base classes for struct %s""", className )
++				return ""
++		basenames = ",".join( basenames )
++		self.increment()
++		generator.names.add(head.struct.name)
++		return self.TEMPLATE % locals()
+ 
+-    def generate_all(self, items):
+-        for item in items:
+-            self.generate(item)
++class Structure( Emitter ):
++	"""Emit structure definition as head + body
++	"""
++	targetClass = typedesc.Structure, typedesc.Union
++	def emit(self, generator, struct):
++		self.increment()
++		return [
++			generator.generate(struct.get_head()),
++			generator.generate(struct.get_body()),
++		]
+ 
+-    def cmpitems(a, b):
+-	a = getattr(a, "location", None)
+-	b = getattr(b, "location", None)
+-	if a is None: return -1
+-	if b is None: return 1
+-	return cmp(a[0],b[0]) or cmp(int(a[1]),int(b[1]))
+-    cmpitems = staticmethod(cmpitems)
++class Typedef( Emitter ):
++	"""Emit type definition with possible name assignment
++	"""
++	TEMPLATE = "%(name)s = %(target)s"
++	targetClass = typedesc.Typedef
++	def emit(self, generator, tp):
++		self.increment()
++		result = []
++		if type(tp.typ) in (typedesc.Structure, typedesc.Union):
++			result.append( generator.generate(tp.typ.get_head()) )
++			generator.more.add(tp.typ)
++		else:
++			result.append( generator.generate(tp.typ) )
++		generator.names.add(tp.name)
++		if tp.name != generator.type_name(tp.typ):
++			name = tp.name
++			target = generator.type_name(tp.typ)
++			result.append( self.TEMPLATE % locals() )
++		return result
+ 
+-    def generate_items(self, items):
+-        items = set(items)
+-        loops = 0
+-        while items:
+-            loops += 1
+-            self.more = set()
+-            self.generate_all(sorted(items, self.cmpitems))
++class ArrayType( Emitter ):
++	"""Email array data-type definition
++	"""
++	targetClass = typedesc.ArrayType
++	def emit(self, generator, tp):
++		self.increment()
++		return [
++			generator.generate(get_real_type(tp.typ)),
++			generator.generate(tp.typ),
++		]
+ 
+-            items |= self.more
+-            items -= self.done
+-        return loops
++class FunctionType( Emitter ):
++	"""Emit function-signature data-type definition
++	"""
++	targetClass = typedesc.FunctionType
++	def emit(self, generator, tp):
++		self.increment()
++		return [
++			generator.generate(tp.returns),
++			generator.generate_all(tp.iterArgTypes()),
++		]
+ 
+-    def generate_code(self, items):
+-        print >> self.imports, "from ctypes import *"
+-        loops = self.generate_items(items)
++class PointerType( Emitter ):
++	"""Emit pointer data-type definition as sum of its parts"""
++	targetClass = typedesc.PointerType
++	def emit(self, generator, tp):
++		self.increment()
++		if type(tp.typ) is typedesc.PointerType:
++			return generator.generate(tp.typ)
++		elif type(tp.typ) in (typedesc.Union, typedesc.Structure):
++			generator.more.add(tp.typ)
++			return generator.generate(tp.typ.get_head())
++		elif type(tp.typ) is typedesc.Typedef:
++			return generator.generate(tp.typ)
++		else:
++			return generator.generate(tp.typ)
+ 
+-        self.output.write(self.imports.getvalue())
+-        self.output.write("\n\n")
+-        self.output.write(self.stream.getvalue())
++class CvQualifiedType( Emitter ):
++	"""Emit const/varying type definition as the underlying definition"""
++	targetClass = typedesc.CvQualifiedType
++	def emit(self, generator, tp):
++		self.increment()
++		return generator.generate(tp.typ)
+ 
+-        text = "__all__ = [%s]" % ", ".join([repr(str(n)) for n in self.names])
++class EnumValue( Emitter ):
++	"""Emit enumeration value"""
++	targetClass = typedesc.EnumValue
++	TEMPLATE = "%(name)s = %(value)d"
++	def emit(self, generator, tp):
++		self.increment()
++		value = int(tp.value)
++		generator.names.add(tp.name)
++		name = tp.name
++		return self.TEMPLATE % locals()
+ 
+-        wrapper = textwrap.TextWrapper(break_long_words=False,
+-                                       subsequent_indent="           ")
+-        for line in wrapper.wrap(text):
+-            print >> self.output, line
+-        return loops
++class Enumeration( Emitter ):
++	"""Emit an entire enumeration declaration"""
++	targetClass = typedesc.Enumeration
++	def emit(self, generator, tp):
++		self.increment()
++		result = [""]
++		if tp.name:
++			result.append( "# values for enumeration '%s'" % tp.name )
++		else:
++			result.append( "# values for unnamed enumeration" )
++		# Some enumerations have the same name for the enum type
++		# and an enum value.  Excel's XlDisplayShapes is such an example.
++		# Since we don't have separate namespaces for the type and the values,
++		# we generate the TYPE last, overwriting the value. XXX
++		for item in tp.values:
++			result.append( generator.generate(item) )
++		if tp.name:
++			generator.names.add(tp.name)
++			result.append( "%s = c_int # enum" % tp.name )
++		return result
+ 
+-    def print_stats(self, stream):
+-        total = self._structures + self._functiontypes + self._enumtypes + self._typedefs +\
+-                self._pointertypes + self._arraytypes
+-        print >> stream, "###########################"
+-        print >> stream, "# Symbols defined:"
+-        print >> stream, "#"
+-        print >> stream, "# Variables:          %5d" % self._variables
+-        print >> stream, "# Struct/Unions:      %5d" % self._structures
+-        print >> stream, "# Functions:          %5d" % self._functiontypes
+-        print >> stream, "# Enums:              %5d" % self._enumtypes
+-        print >> stream, "# Enum values:        %5d" % self._enumvalues
+-        print >> stream, "# Typedefs:           %5d" % self._typedefs
+-        print >> stream, "# Pointertypes:       %5d" % self._pointertypes
+-        print >> stream, "# Arraytypes:         %5d" % self._arraytypes
+-        print >> stream, "# unknown functions:  %5d" % self._notfound_functiontypes
+-        print >> stream, "#"
+-        print >> stream, "# Total symbols: %5d" % total
+-        print >> stream, "###########################"
++class StructureBody( Emitter ):
++	"""Emit structure's "body" as a series of annotations to the head"""
++	targetClass = typedesc.StructureBody
++	def emit(self, generator, body):
++		self.increment()
++		result = []
++		fields = []
++		methods = []
++		for m in body.struct.members:
++			if type(m) is typedesc.Field:
++				fields.append(m)
++				if type(m.typ) is typedesc.Typedef:
++					result.append( generator.generate(get_real_type(m.typ)) )
++				result.append( generator.generate(m.typ) )
++			elif type(m) is typedesc.Method:
++				methods.append(m)
++				result.append( generator.generate(m.returns) )
++				result.append( generator.generate_all(m.iterArgTypes()) )
++			elif type(m) is typedesc.Constructor:
++				pass
+ 
+-################################################################
++		if methods:
++			# XXX we have parsed the COM interface methods but should
++			# we emit any code for them?
++			pass
++		else:
++			# we don't need _pack_ on Unions (I hope, at least), and not
++			# on COM interfaces.
++			try:
++				pack = calc_packing(body.struct, fields)
++				if pack is not None:
++					result.append( "%s._pack_ = %s" % (body.struct.name, pack) )
++			except PackingError, details:
++				# if packing fails, write a warning comment to the output.
++				message = "Structure %s: %s" % (body.struct.name, details)
++				log.warn(message)
++				result.append( "# WARNING: %s" % details )
+ 
+-def generate_code(xmlfile,
+-                  outfile,
+-                  expressions=None,
+-                  symbols=None,
+-                  verbose=False,
+-                  generate_comments=False,
+-                  known_symbols=None,
+-                  searched_dlls=None,
+-                  types=None):
+-    # expressions is a sequence of compiled regular expressions,
+-    # symbols is a sequence of names
+-    from gccxmlparser import parse
+-    items = parse(xmlfile)
++		if body.struct.bases:
++			assert len(body.struct.bases) == 1
++			result.append( generator.generate(body.struct.bases[0].get_body()) )
++		# field definition normally span several lines.
++		# Before we generate them, we need to 'import' everything they need.
++		# So, call type_name for each field once,
++		for f in fields:
++			generator.type_name(f.typ)
+ 
+-    # filter symbols to generate
+-    todo = []
++		# unnamed fields get autogenerated names "_0", "_1", "_2", "_3", ...
++		unnamed_fields = {}
++		for f in fields:
++			# _anonymous_ fields are fields of type Structure or Union,
++			# that have no name.
++			if not f.name and isinstance(f.typ, (typedesc.Structure, typedesc.Union)):
++				unnamed_fields[f] = "_%d" % len(unnamed_fields)
++		if unnamed_fields:
++			result.append( "%s._anonymous_ = %r" % (body.struct.name, unnamed_fields.values()) )
++		result.append( "%s._fields_ = [" % body.struct.name )
+ 
+-    if types:
+-        items = [i for i in items if isinstance(i, types)]
+-    
+-    if symbols:
+-        syms = set(symbols)
+-        for i in items:
+-            if i.name in syms:
+-                todo.append(i)
+-                syms.remove(i.name)
++		if generator.generate_comments and body.struct.location:
++			result.append( "    # %s %s" % body.struct.location )
++		index = 0
++		for f in fields:
++			fieldname = unnamed_fields.get(f, f.name)
++			if f.bits is None:
++				result.append( "    ('%s', %s)," % (fieldname, generator.type_name(f.typ)) )
++			else:
++				result.append( "    ('%s', %s, %s)," % (fieldname, generator.type_name(f.typ), f.bits) )
++		result.append( "]" )
++		# disable size checks because they are not portable across
++		# platforms:
++##        # generate assert statements for size and alignment
++##        if body.struct.size and body.struct.name not in dont_assert_size:
++##            size = body.struct.size // 8
++##            print >> self.stream, "assert sizeof(%s) == %s, sizeof(%s)" % \
++##                  (body.struct.name, size, body.struct.name)
++##            align = body.struct.align // 8
++##            print >> self.stream, "assert alignment(%s) == %s, alignment(%s)" % \
++##                  (body.struct.name, align, body.struct.name)
++		return result
+ 
+-        if syms:
+-            print "symbols not found", list(syms)
++class Function( Emitter ):
++	"""Emit function definition as a series of statements"""
++	targetClass = typedesc.Function
++	def generateHeader( self, generator, func ):
++		"""Generate the function header definitions (if necessary)"""
++		result = []
++		result.append( generator.generate(func.returns) )
++		result.append( generator.generate_all(func.iterArgTypes()) )
++		return result
++	def libName( self, generator, func ):
++		"""Retrieve the name by which the function's dll is known in the source code"""
++		dllname = generator.find_dllname(func)
++		if dllname:
++			if "__stdcall__" in func.attributes:
++				cc = "stdcall"
++			else:
++				cc = "cdecl"
++			return generator.get_sharedlib(dllname, cc)
++		return None
++	def getArgs( self, generator, func ):
++		"""Retrieve arg type-names for all arguments in function typedef"""
++		return [
++			generator.type_name(a) 
++			for a in func.iterArgTypes()
++		]
++	def getArgNames( self, generator, func ):
++		"""Retrieve names for all arguments in the function typedef"""
++		return tuple( [
++			str(x) or 'p%i'%i 
++			for i,x in enumerate(func.iterArgNames())
++		])
++	def locationComment( self, generator, func ):
++		"""Produce a source-code location comment for the function"""
++		if generator.generate_comments and func.location:
++			location = "# %s %s\n" % func.location
++		else:
++			location = ''
++		return location
++		
++	TEMPLATE = """%(location)s%(name)s = %(libname)s.%(name)s
++%(name)s.restype = %(returnType)s
++%(argNames)s%(name)s.argtypes = %(argTypes)s
++"""
++	def emit(self, generator, func):
++		result = []
++		libname = self.libName( generator, func )
++		if libname:
++			self.increment()
++			result.append( self.generateHeader( generator, func ))
++			args = self.getArgs( generator, func )
++			argTypes  = ",".join( args )
++			argNames = self.getArgNames( generator, func )
++			location = self.locationComment( generator, func )
++			name = func.name
++			returnType = generator.type_name(func.returns)
+ 
+-    if expressions:
+-        for i in items:
+-            for s in expressions:
+-                if i.name is None:
+-                    continue
+-                match = s.match(i.name)
+-                # we only want complete matches
+-                if match and match.group() == i.name:
+-                    todo.append(i)
+-                    break
+-    if symbols or expressions:
+-        items = todo
++			if generator.generate_comments:
++				argNamesComment = ','.join( argNames )
++				argNameComment = '# %(returnType)s %(name)s (%(argNamesComment)s)\n'%locals()
++			else:
++				argNames = ''
++			
++			generator.names.add(func.name)
++			result.append( self.TEMPLATE %locals() )
++			return result
++		elif not func.name.startswith( '__builtin_' ):
++			log.warn( """Could not find DLL name for function: %r""", func.name )
++			return ''
+ 
+-    ################
+-    gen = Generator(outfile,
+-                    generate_comments=generate_comments,
+-                    known_symbols=known_symbols,
+-                    searched_dlls=searched_dlls)
+-
+-    loops = gen.generate_code(items)
+-    if verbose:
+-        gen.print_stats(sys.stderr)
+-        print >> sys.stderr, "needed %d loop(s)" % loops
+-
++class FundamentalType( Emitter ):
++	"""Emit fundamental type by doing nothing"""
++	targetClass = typedesc.FundamentalType
++	def emit(self, generator, item):
++		self.increment()
++		return ""
++##        name = ctypes_names[item.name]
++##        if name !=  "None":
++##            print >> self.stream, "from ctypes import %s" % name
++##        self.done.add(item)

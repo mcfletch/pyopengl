@@ -1,0 +1,243 @@
+"""Implementation of GLU Nurbs structure and callback methods
+
+Same basic pattern as seen with the gluTess* functions, just need to
+add some bookkeeping to the structure class so that we can keep the
+Python function references alive during the calling process.
+"""
+from OpenGL.raw import GLU as simple
+from OpenGL import platform, converters, wrapper
+from OpenGL.GLU import glustruct
+from OpenGL.lazywrapper import lazy
+from OpenGL import arrays
+import ctypes
+import weakref
+from OpenGL.platform import PLATFORM
+
+__all__ = (
+	'GLUnurbs',
+	'gluNewNurbsRenderer',
+	'gluNurbsCallback',
+	'gluNurbsCallbackData',
+	'gluNurbsCallbackDataEXT',
+	'gluNurbsCurve',
+	'gluNurbsSurface',
+	'gluPwlCurve',
+)
+
+# /usr/include/GL/glu.h 242
+class GLUnurbs(glustruct.GLUStruct, simple.GLUnurbs):
+	"""GLU Nurbs structure with oor and callback storage support
+	
+	IMPORTANT NOTE: the texture coordinate callback receives a raw ctypes 
+	data-pointer, as without knowing what type of evaluation is being done 
+	(1D or 2D) we cannot safely determine the size of the array to convert 
+	it.  This is a limitation of the C implementation.  To convert to regular 
+	data-pointer, just call yourNurb.ptrAsArray( ptr, size, arrays.GLfloatArray )
+	with the size of data you expect.
+	"""
+	FUNCTION_TYPE = PLATFORM.functionTypeFor(PLATFORM.GLU)
+	CALLBACK_FUNCTION_REGISTRARS = {
+		# mapping from "which" to a function that should take 3 parameters,
+		# the nurb, the which and the function pointer...
+	}
+	CALLBACK_TYPES = {
+		# mapping from "which" GLU enumeration to a ctypes function type
+		simple.GLU_NURBS_BEGIN: FUNCTION_TYPE( 
+			None, simple.GLenum 
+		),
+		simple.GLU_NURBS_BEGIN_DATA: FUNCTION_TYPE( 
+			None, simple.GLenum, ctypes.POINTER(simple.GLvoid) 
+		),
+		simple.GLU_NURBS_VERTEX: FUNCTION_TYPE( 
+			None, ctypes.POINTER(simple.GLfloat)
+		),
+		simple.GLU_NURBS_VERTEX_DATA: FUNCTION_TYPE( 
+			None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid) 
+		),
+		simple.GLU_NURBS_NORMAL: FUNCTION_TYPE( 
+			None, ctypes.POINTER(simple.GLfloat)
+		),
+		simple.GLU_NURBS_NORMAL_DATA: FUNCTION_TYPE( 
+			None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid) 
+		),
+		simple.GLU_NURBS_COLOR: FUNCTION_TYPE( 
+			None, ctypes.POINTER(simple.GLfloat)
+		),
+		simple.GLU_NURBS_COLOR_DATA: FUNCTION_TYPE( 
+			None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid) 
+		),
+		simple.GLU_NURBS_TEXTURE_COORD: FUNCTION_TYPE( 
+			None, ctypes.POINTER(simple.GLfloat)
+		),
+		simple.GLU_NURBS_TEXTURE_COORD_DATA: FUNCTION_TYPE( 
+			None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid) 
+		),
+		simple.GLU_NURBS_END:FUNCTION_TYPE( 
+			None
+		),
+		simple.GLU_NURBS_END_DATA: FUNCTION_TYPE( 
+			None, ctypes.POINTER(simple.GLvoid) 
+		),
+		simple.GLU_NURBS_ERROR:FUNCTION_TYPE( 
+			None, simple.GLenum, 
+		),
+	}
+	WRAPPER_METHODS = {
+		simple.GLU_NURBS_BEGIN: None,
+		simple.GLU_NURBS_BEGIN_DATA: '_justOOR',
+		simple.GLU_NURBS_VERTEX: '_vec3',
+		simple.GLU_NURBS_VERTEX_DATA: '_vec3',
+		simple.GLU_NURBS_NORMAL: '_vec3',
+		simple.GLU_NURBS_NORMAL_DATA: '_vec3',
+		simple.GLU_NURBS_COLOR: '_vec4',
+		simple.GLU_NURBS_COLOR_DATA: '_vec4',
+		simple.GLU_NURBS_TEXTURE_COORD: '_tex',
+		simple.GLU_NURBS_TEXTURE_COORD_DATA: '_tex',
+		simple.GLU_NURBS_END: None,
+		simple.GLU_NURBS_END_DATA: '_justOOR',
+		simple.GLU_NURBS_ERROR: None,
+	}
+	def _justOOR( self, function ):
+		"""Just do OOR on the last argument..."""
+		def getOOR( *args ):
+			args = args[:-1] + (self.originalObject(args[-1]),)
+			return function( *args )
+		return getOOR
+	def _vec3( self, function, size=3 ):
+		"""Convert first arg to size-element array, do OOR on arg2 if present"""
+		def vec( *args ):
+			vec = self.ptrAsArray(args[0],size,arrays.GLfloatArray)
+			if len(args) > 1:
+				oor = self.originalObject(args[1])
+				return function( vec, oor )
+			else:
+				return function( vec )
+		return vec
+	def _vec4( self, function ):
+		"""Size-4 vector version..."""
+		return self._vec3( function, 4 )
+	def _tex( self, function ):
+		"""Texture coordinate callback 
+		
+		NOTE: there is no way for *us* to tell what size the array is, you will 
+		get back a raw data-point, not an array, as you do for all other callback 
+		types!!!
+		"""
+		def oor( *args ):
+			if len(args) > 1:
+				oor = self.originalObject(args[1])
+				return function( args[0], oor )
+			else:
+				return function( args[0] )
+		return oor
+
+# XXX yes, this is a side-effect...
+simple.gluNewNurbsRenderer.restype = ctypes.POINTER( GLUnurbs )
+
+def _callbackWithType( funcType ):
+	"""Get gluNurbsCallback function with set last arg-type"""
+	result =  platform.copyBaseFunction(
+		simple.gluNurbsCallback
+	)
+	result.argtypes = [ctypes.POINTER(GLUnurbs), simple.GLenum, funcType]
+	assert result.argtypes[-1] == funcType
+	return result
+
+for (c,funcType) in GLUnurbs.CALLBACK_TYPES.items():
+	cb = _callbackWithType( funcType )
+	GLUnurbs.CALLBACK_FUNCTION_REGISTRARS[ c ] = cb
+	assert funcType == GLUnurbs.CALLBACK_TYPES[c]
+	assert cb.argtypes[-1] == funcType
+del c,cb, funcType
+
+def gluNurbsCallback( nurb, which, CallBackFunc ):
+	"""Dispatch to the nurb's addCallback operation"""
+	return nurb.addCallback( which, CallBackFunc )
+
+@lazy( simple.gluNewNurbsRenderer )
+def gluNewNurbsRenderer( baseFunction ):
+	"""Return a new nurbs renderer for the system (dereferences pointer)"""
+	newSet = baseFunction()
+	new = newSet[0]
+	#new.__class__ = GLUnurbs # yes, I know, ick
+	return new
+
+@lazy( simple.gluNurbsCallbackData )
+def gluNurbsCallbackData( baseFunction, nurb, userData ):
+	"""Note the Python object for use as userData by the nurb"""
+	return baseFunction( 
+		nurb, nurb.noteObject( userData ) 
+	)
+
+@lazy( simple.gluNurbsCallbackDataEXT )
+def gluNurbsCallbackDataEXT( baseFunction,nurb, userData ):
+	"""Note the Python object for use as userData by the nurb"""
+	return baseFunction( 
+		nurb, nurb.noteObject( userData ) 
+	)
+
+@lazy( simple.gluNurbsCurve )
+def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
+	"""Pythonic version of gluNurbsCurve
+	
+	Calculates knotCount, stride, and order automatically
+	"""
+	knots = arrays.GLfloatArray.asArray( knots )
+	knotCount = arrays.GLfloatArray.arraySize( knots )
+	control = arrays.GLfloatArray.asArray( control )
+	length,step = arrays.GLfloatArray.dimensions( control )
+	order = knotCount - length
+	return baseFunction(
+		nurb, knotCount, knots, step, control, order, type,
+	)
+
+@lazy( simple.gluNurbsSurface )
+def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
+	"""Pythonic version of gluNurbsSurface
+	
+	Calculates knotCount, stride, and order automatically
+	"""
+	sKnots = arrays.GLfloatArray.asArray( sKnots )
+	sKnotCount = arrays.GLfloatArray.arraySize( sKnots )
+	tKnots = arrays.GLfloatArray.asArray( tKnots )
+	tKnotCount = arrays.GLfloatArray.arraySize( tKnots )
+	control = arrays.GLfloatArray.asArray( control )
+
+	length,width,step = arrays.GLfloatArray.dimensions( control )
+	sOrder = sKnotCount - length 
+	tOrder = tKnotCount - width 
+	sStride = width*step
+	tStride = step
+	
+	assert (sKnotCount-sOrder)*(tKnotCount-tOrder) == length*width, (
+		nurb, sKnotCount, sKnots, tKnotCount, tKnots,
+		sStride, tStride, control,
+		sOrder,tOrder,
+		type
+	)
+
+	result = baseFunction(
+		nurb, sKnotCount, sKnots, tKnotCount, tKnots,
+		sStride, tStride, control,
+		sOrder,tOrder,
+		type
+	)
+	return result
+
+@lazy( simple.gluPwlCurve )
+def gluPwlCurve( baseFunction, nurb, data, type ):
+	"""gluPwlCurve -- piece-wise linear curve within GLU context
+	
+	data -- the data-array 
+	type -- determines number of elements/data-point
+	"""
+	data = arrays.GLfloatArray.asArray( data )
+	if type == simple.GLU_MAP1_TRIM_2:
+		divisor = 2
+	elif type == simple.GLU_MAP_TRIM_3:
+		divisor = 3
+	else:
+		raise ValueError( """Unrecognised type constant: %s"""%(type))
+	size = arrays.GLfloatArray.arraySize( data )
+	size = int(size/divisor)
+	return baseFunction( nurb, size, data, divisor, type )

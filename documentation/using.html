@@ -1,0 +1,891 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>Using OpenGL in Python</title><link rel="stylesheet" type="text/css" href="style/tutorial.css">
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  <meta name="author" content="Mike C. Fletcher"></head>
+
+<body>
+
+
+
+
+
+
+
+<h1>Using&nbsp;OpenGL in Python<br>
+
+
+
+
+
+
+
+</h1>
+
+
+
+
+
+
+
+<p class="introduction">This document describes how to get started
+using OpenGL from Python, particularly using the&nbsp;PyOpenGL 3.x
+package from pyopengl.sourceforge.net. &nbsp;This document assumes
+familiarity some familiarity with Python, OpenGL and Numpy (Numeric
+Python).</p>
+
+
+
+
+
+<h2>Installing the Package</h2>
+
+
+
+
+
+
+
+<p>The PyOpenGL package uses the "SetupTools" package, which is a new,
+common mechanism for distributing and installing Python packages.
+&nbsp;It is quite likely that Python developers will already have
+setuptools installed on their system. &nbsp;If you do not have it
+installed, download and run <a href="http://peak.telecommunity.com/dist/ez_setup.py">ez_setup.py</a>. &nbsp;If you want to install
+your Python egg files in a non-standard location be sure to setup your
+.pydistutils.cfg to support this before installing the packages.</p>
+
+
+<p class="technical">Note that you will want to uninstall any PyOpenGL
+2.x or OpenGL-3.0.0a4 installation before attempting to install. The
+3.0.0a4 release used the undecorated name in a misguided attempt to
+make things "simpler". &nbsp;The 3.0.0a5 and beyond packages use the
+same name as all previous PyOpenGL packages, "PyOpenGL".</p>
+
+
+
+
+<p>Once you have setuptools installed (many Python developers already
+will have it), simply issue the command:</p>
+
+
+
+
+
+<pre>easy_install PyOpenGL</pre>
+
+
+
+
+
+<p>To have setuptools lookup the current version of the PyOpenGL package,
+download and install it. &nbsp;If
+setuptools fails to install the package, you may need to update your
+setuptools. &nbsp;Or you can try a direct download of the package with
+this command in the directory where you downloaded the package:</p>
+
+
+
+
+<pre>easy_install -f . PyOpenGL</pre>
+
+
+
+
+<p>If you do not have administrative
+permissions on your machine, you can create a .pydistutils.cfg file in
+your home directory to tell setuptools where to install new .egg files.</p>
+
+
+<p>To update your install to the latest release of PyOpenGL:</p>
+
+
+<pre>easy_install -U PyOpenGL<br></pre>
+
+
+<p>Which will search for the latest registered version of the package and install that on your system.</p>
+
+
+<p class="technical">If you use setuptools to package your application,
+you should declare a dependency on "PyOpenGL" to pull in the latest
+PyOpenGL 3.x release.</p>
+
+
+
+
+
+<p>As of 3.0.0a3&nbsp;PyOpenGL&nbsp;is dependant on the setuptools
+package.&nbsp; You cannot run without the setuptools support, as it is
+used to provide the plugin mechanism used by array data-type plugin
+mechanism. &nbsp;You will probably want to install <a href="http://numpy.scipy.org/">numpy</a> as well. &nbsp;<a href="http://starship.python.net/crew/theller/ctypes/">ctypes</a> is a dependency&nbsp;for Python 2.4 and Python 2.3 but included with Python 2.5.</p>
+<h3>Win32 Dependencies</h3>
+<p>PyOpenGL is a wrapper around OpenGL, GLU, GLUT (including
+Free/OpenGLUT) and GLE. Most Linux and OS-X systems will have these
+available or be able to install them automatically as packages.
+&nbsp;On Win32 we need to do a bit more work:</p>
+<ul>
+  <li>Download the <a href="http://www.xmission.com/%7Enate/glut.html">GLUT for Win32</a> package, copy&nbsp;glut32.dll to your WINDOWS/system32 directory</li>
+  <li>Download the compiled <a title="Download the zip package" href="http://www.vrplumber.com/gle32.zip">GLE for Win32</a> package, copy gle32.dll to your WINDOWS/system32 directory</li>
+</ul>
+<p><a href="http://pyopengl.cvs.sourceforge.net/*checkout*/pyopengl/OpenGL-ctypes/src/win32deps.py">This script</a>
+automates the process. &nbsp;Note that you will be agreeing to be bound
+by the license agreements of the GLUT and GLE libraries on running the
+script.</p>
+<h3>Bleeding Edge Development</h3>
+
+
+
+
+
+<p>If you are working in an area that's currently under active
+development you may prefer to&nbsp;use the CVS version of the PyOpenGL
+package. &nbsp;OpenGL-ctypes (the code-name for the 3.0.0 version of
+PyOpenGL) is developed and
+maintained within the PyOpenGL CVS repository.&nbsp; To check out
+the current version of OpenGL-ctypes:</p>
+
+
+
+
+
+
+
+<pre>cvs -z3 -d:pserver:anonymous@pyopengl.cvs.sourceforge.net:/cvsroot/pyopengl co -P OpenGL-ctypes<br></pre>
+
+
+
+
+
+
+
+<p>You can install the checkout to your path for further development as
+follows (from the OpenGL-ctypes checkout directory):<br>
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+<pre>./setupegg.py develop --install-dir=~/YOUR-WORKING-DIRECTORY-ON-PYTHONPATH-HERE<br></pre>
+
+
+
+
+
+<p>When you make a change, run <code>cvs
+diff</code> on the OpenGL-ctypes
+directory to produce a patch file and <a href="mailto:mcfletch@vrplumber.com">send it to me</a>
+as an attachment.&nbsp; I prefer "context" diffs (<code>cvs
+diff -c</code>) for contributed
+code, as it makes it easier to see where the code fits in.&nbsp;
+That said, I'm happy to get code in any readily integrated format.</p>
+
+
+
+
+
+
+
+<h2>Accessing OpenGL Functionality</h2>
+
+
+
+
+
+<p>The OpenGL library is a singleton instance for each process that is
+shared by all in-process code that uses OpenGL commands. &nbsp;Normally
+you will want to use OpenGL from within a GUI framework, such as
+wxPython, PyGame, Tkinter, PyGTK or PyQt. &nbsp;For stand-alone 3D
+programs, you may want to use the simple, but often quite
+effective,GLUT library, a wrapper for which is included in the&nbsp;PyOpenGL
+package. </p>
+
+
+
+
+
+<p>Your GUI package will generally have a way to define an OpenGL
+"window" and set that window "active". &nbsp;Once the window is active,
+PyOpenGL commands will render into the window (as will any commands in
+the process issued from another language, such as a C extension).
+&nbsp;Normally this is handled by registering a handler for "events"
+from the GUI for such things are requests to display, resize, deal with
+mouse movements and the like.</p>
+
+
+
+
+
+<p>To get access to basic OpenGL functionality, you should import the
+OpenGL.GL and OpenGL.GLU packages. &nbsp;This is normally done with
+global imports [XXX show multi-version-install usage as well]:</p>
+
+
+
+
+
+<pre>from OpenGL.GL import *<br>from OpenGL.GLU import *<br></pre>
+
+
+
+
+
+<p>If you want to access functions in an extension module, you can load the extensions via a similar import:</p>
+
+
+
+
+
+<pre>from OpenGL.GL.ARB.shader_objects import *<br>from OpenGL.GL.ARB.fragment_shader import *<br>from OpenGL.GL.ARB.vertex_shader import *</pre>
+
+
+
+
+
+<p>It's a good idea to use the initialisation functions in the
+extension modules to check that the extension is available on the
+current machine before using any of the functions in the extension
+(note: calling the init functions was a requirement in PyOpenGL 2.x).
+&nbsp;For example:</p>
+
+
+
+
+
+<pre>if not glInitShaderObjectsARB():<br>	raise RuntimeError( <br>		"""ARB Shader Objects extension is required """<br>		"""but not supported on this machine!""" <br>	)<br></pre>
+
+
+
+
+
+<p>or more reasonably, to trigger the use of fallback code for the missing functionality from the extension.</p>
+
+
+
+
+
+<h3>API Changes from C-level OpenGL</h3>
+
+
+
+
+
+<p>Generally speaking,&nbsp;PyOpenGL 3.x tries to be compatible with the
+PyOpenGL 2.x series, which tried to provide a "Pythonic" interface to
+OpenGL. &nbsp;This includes providing support for implying various
+arguments, such as the dimensions of arrays from array's declaration of
+their dimensions. &nbsp;The online <a href="http://pyopengl.sourceforge.net/ctypes/pydoc/OpenGL.html">pydoc documentation</a>provides
+the most accurate (because it is auto-generated), though
+somewhat confusing, reference to the API as provided by PyOpenGL.
+&nbsp;We will be revising that documentation to be more friendly as
+work progresses.</p>
+
+
+
+
+
+<p class="technical">If you are updating from PyOpenGL 2.x, see the&nbsp;<a href="#upgrading">Upgrading</a> section below.</p>
+
+
+
+
+
+<h3>Error Handling</h3>
+
+
+
+
+
+
+
+<p>As with previous versions of
+PyOpenGL,&nbsp;PyOpenGL 3.x tries to follow Python's</p>
+
+
+
+
+
+
+
+<p class="introduction">Errors
+should never pass silently. </p>
+
+
+
+
+
+
+
+<p>philosophy, rather than
+OpenGL's philosophy of always requiring explicit checks for error
+conditions.&nbsp;&nbsp;PyOpenGL functions run the function <code>OpenGL.error.glCheckError</code>
+after each function call.&nbsp; This function is glBegin/glEnd
+aware, that is, the glBegin and glEnd functions enable and disable the
+checking of errors (because error checking doesn't work between those
+calls).</p>
+
+
+
+
+
+<p class="technical">If you call C-level glBegin/glEnd the error
+checking may become confused. &nbsp;You should explicitly disable error
+checking (described below) in such a case.</p>
+
+
+
+
+
+
+
+<p>You can override the error-handler, either to provide your own
+custom functionality, or to disable checking entirely. &nbsp;Error
+checking can be entirely disabled by the following code (before
+importing anything from the OpenGL namespace, i.e. as the first thing
+your top-level script does):</p>
+<pre>import OpenGL<br>OpenGL.ERROR_CHECKING = False</pre>
+<p>This should <strong>only</strong> be done by applications, never by
+libraries, as disabling error checking entirely makes it much harder to
+debug a PyOpenGL application.</p>
+<p>You can also customise the error-checking functionality rather than disabling it, for
+instance, if you will always have a valid context, you could register
+the raw glGetError function as the error checker to avoid the overhead
+of the context-validity checks:</p>
+
+
+
+
+
+
+
+<pre>from OpenGL import error<br>error.ErrorChecker.registerChecker( myAlternateFunction )</pre>
+
+
+
+
+
+
+
+<p>OpenGL-ctypes has a set of
+errors defined in the <a href="pydoc/OpenGL.error.html"><code>OpenGL.error</code></a>
+module.&nbsp; It can also raise standard Python exceptions, such as
+ValueError or TypeError.&nbsp; Finally, it can raise ctypes errors
+when argument conversion fails. (XXX that's sub-optimal, it has
+implementation details poking out to user code).<br>
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+<p>Wrapper objects catch OpenGL
+errors and annotate the error with extra information to make it easier
+to debug failures during the wrapping process.</p>
+
+
+
+
+
+<h3>Tkinter (Legacy GUI) Togl
+Support</h3>
+
+
+
+
+
+
+
+<p>We have included the Python
+wrapper for the Tk Togl widget in the OpenGL-ctypes package.&nbsp;
+We do not, however, currently include the Togl widget itself.&nbsp;
+If you would like to use Togl in your package, please use your system's
+package manager to install the Togl package (or compile from
+source).&nbsp; You may have to recompile Python with Tk support as
+well.</p>
+
+
+
+
+
+
+
+<h2><a name="Performance"></a>Performance Tips for Python + OpenGL</h2>
+
+
+
+
+
+<p>Python is (currently) a fairly slow language due to the incredible
+generality of it's execution model. &nbsp;This means that certain
+approaches to coding OpenGL that would work well in a language such a C
+or C++ will be painfully slow in Python. &nbsp;The key idea to remember
+is that, as much as possible, you want to push the work of iteration
+and repetition into the OpenGL implementation (which is implemented in
+C and/or Hardware).</p>
+
+
+
+
+
+<p>There are two major approaches taken to accomplishing this:</p>
+
+
+
+
+
+<ul>
+
+
+
+
+
+  <li>Use array-based geometry</li>
+
+
+
+
+
+  <li>Use display-lists</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+<p>Array based geometry uses OpenGL 1.1 features (supported almost
+everywhere) that allow for passing large arrays of data to be processed
+with a single call. &nbsp;Using numpy (or Numeric) arrays, you can
+readily pass your data into those functions without any need for
+Python-level iteration. &nbsp;This is the more flexible of the two
+approaches, as it allows for readily mutating the data being rendered
+without heavy recompilation costs and allows for special effects such
+as translucency. &nbsp;For static geometry, however, the display-list
+approach may be faster.</p>
+
+
+
+
+
+<p>Display-list geometry normally uses slower individual-element
+rendering functions to render a piece of geometry in a special OpenGL
+mode which records the commands used to do the rendering. &nbsp;In
+future rendering passes the geometry can be rendered with a single
+call. &nbsp;You can create trees of display lists (where a root display
+list calls dozens of other display-lists) or call multiple display
+lists at once from an array.</p>
+
+
+
+
+
+<h3>Avoiding Array-data Copying</h3>
+
+
+
+
+
+<p>One of the biggest slowdowns you will see in array-based PyOpenGL code is where you are passing:</p>
+
+
+
+
+
+<ul>
+
+
+
+
+
+  <li> a compatible but inexactly matching array data-type</li>
+
+
+
+
+
+  <li>a non-contiguous array (one which is not stored as a simple data-pointer)</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+<p>In these cases PyOpenGL implementation&nbsp;will cause an extra copy
+of the data-set every time it is passed into any function. &nbsp;That
+copying, though done at the C level, can cause a signficant unnecessary
+overhead.</p>
+
+
+
+
+
+<p class="technical">The copying is done by default to prevent new
+OpenGL coders from being confronted by mystifying errors about
+differences between "floats" and "double floats". &nbsp;It also makes
+PyOpenGL 3.x compatible with the PyOpenGL 2.x series.</p>
+
+
+
+
+
+<p>PyOpenGL 3.x provides a flag that allows you to raise Errors
+in&nbsp;situations where numpy data-arrays are being copied. &nbsp;You
+can use these error messages to optimise your application data-paths to
+eliminate the copying.To enable the checking do the following before any other OpenGL imports: </p>
+
+
+
+
+
+<pre>import OpenGL<br>OpenGL.ERROR_ON_COPY = True<br></pre>
+
+
+
+
+
+<p>This will raise errors of the type:</p>
+
+
+
+
+
+<pre>OpenGL.error.CopyError<br></pre>
+
+
+
+
+
+<p>With a description of the condition and why the copy was to be done.</p>
+
+
+
+
+
+<h3>Context-specific Data</h3>
+
+
+
+
+
+
+
+<p>Because of the way OpenGL and
+ctypes handle, for instance, pointers, to array data, it is often
+necessary to ensure that a Python data-structure is retained (i.e. not
+garbage collected).&nbsp; This is done by storing the data in an
+array of data-values that are indexed by a context-specific
+key.&nbsp; The functions to provide this functionality are provided
+by the <a href="pydoc/OpenGL.contextdata.html"><code>OpenGL.contextdata</code></a>
+module.</p>
+
+
+
+
+
+
+
+<p class="technical">The
+key that is used to index the storage array is provided by the platform
+module's <code>GetCurrentContext()</code>
+function.&nbsp; The current context is used if the context argument
+is passed in as <code>None</code>.<br>
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+<p>If you are creating and destroying rendering contexts, you need to
+be aware of the Context-specific storage. &nbsp;If you do not
+explicitly clean up the storage, you will produce a memory leak of all
+of the objects passed in as array data-sources and the like. &nbsp;You
+can either explicitly set the values to None (the standard OpenGL
+approach), or use code like the following:</p>
+
+
+
+
+
+<pre>from OpenGL import contextdata<br>def cleanupCallback( context=None ):<br>	"""Create a cleanup callback to clear context-specific storage for the current context"""<br>	def callback( context = contextdata.getContext( context ) ):<br>		"""Clean up the context, assumes that the context will *not* render again!"""<br>		contextdata.cleanupContext( context )<br>	return callback</pre>
+
+
+
+
+
+<p>registering the callback to be called after the context is destroyed.</p>
+
+
+
+
+
+<p class="technical">It is very important that you call the cleanup
+operation after the context is destroyed, as any attempt to render the
+context after the cleanup call will almost certainly result in
+memory-access errors and potentially core dumps!</p>
+
+
+
+
+
+<h2>Get Involved</h2>
+
+
+
+
+
+<p>PyOpenGL is an Open Source project, and PyOpenGL 3.x is written in
+Python to allow Python coders to enhance the package. &nbsp;If you see
+something that's wrong, or something that you'd like to fix, let people
+know, or fix it and send a patch. &nbsp;We have <a href="development.html">documentation</a> for those who are interested in contributing that should help you get started hacking on the code-base.</p>
+
+
+
+
+
+<h2><a name="upgrading"></a>Upgrading</h2>
+
+
+
+
+
+<p>PyOpenGL 3.x tries to be API-compatible with PyOpenGL 2.x as much as
+possible, but there are some differences that need to be considered
+when porting code:</p>
+
+
+
+
+
+<ul>
+
+
+
+
+
+  <li>setuptools required</li><ul><li>You *must* run
+setuptools installation in order to register the egg entry points, if
+you do not you will have *no* data formats supported and nothing will
+work at all</li></ul><li>numpy versus Numeric</li>
+
+
+
+
+
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+    <li>PyOpenGL 2.x used (only) the older "Numeric" module.
+&nbsp;PyOpenGL 3.x can use Numeric (with an optional C extension), but
+uses numpy by default.</li>
+
+
+
+
+
+  
+  
+  
+  
+  
+  </ul><li>strings deprecated as array return-types for all save image data</li><ul><li>PyOpenGL
+2.x would normally return your GL_UNSIGNED_BYTE data as strings.
+&nbsp;We continue to support this for image operations (glGetTexImage,
+glReadPixels), but we provide a way to turn off the behaviour and
+receive your configured Numpy/Ctypes return data-type for your
+image-data queries (OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING)</li></ul>
+
+
+
+
+
+  <li>different error types</li>
+
+
+
+
+
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+    <li>In a number of locations PyOpenGL 3.x will raise a different
+error type than PyOpenGL 2.x [XXX document which cases, at minimum
+every ctypes-level error is new (and should be eliminated, likely)]</li>
+
+
+
+
+
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+  <li>no "contiguous" function</li>
+
+
+
+
+
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+    <li>This function was provided to allow users to force a Numeric
+array to be a contiguous data-structure. &nbsp;Given that PyOpenGL 3.x
+is polyglot with regard to Numeric modules, it does not provide the
+function any more. &nbsp;See the vrml.array <a href="http://pyopengl.cvs.sourceforge.net/pyopengl/vrml/arrays.py?view=markup">module</a>'s contiguous function for an example of how to write your own such function.</li>
+
+
+
+
+
+  
+  
+  
+  
+  
+  </ul><li>Togl support is deprecated/unsupported</li><ul><li>Togl can be installed from the resurrected Togl project on SourceForge. &nbsp;We continue to distribute the wrapper.</li></ul><li>Performance decrease</li><ul><li>The new architecture, while far more flexible than PyOpenGL 2.x is far slower than the C-coded version 2.x.</li><li>Getting
+around this is pretty much "more of the same", i.e. use display lists
+and arrays (preferably Vertex-buffer objects) religously (See <a href="#performance">Performance Tips</a> above)</li></ul>
+
+
+
+
+
+  <li>[XXX there's more, I'm sure]</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+<p class="footer">&nbsp;
+<a href="http://pyopengl.sourceforge.net/"><img alt="PyOpenGL" src="images/pyopengl_icon.jpg" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>A
+SourceForge Open-Source project: <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1" style="border: 0px solid ; width: 88px; height: 31px;" alt="SourceForge" align="middle"></a></p>
+
+
+
+
+
+
+
+</body></html>

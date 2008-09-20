@@ -1,0 +1,4332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>Contributing to OpenGL-ctypes</title>
+  <link rel="stylesheet" type="text/css" href="style/tutorial.css">
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta name="author" content="Mike C. Fletcher">
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+
+
+<h1>Contributing
+to OpenGL-ctypes<br>
+
+
+
+
+
+
+
+
+
+
+
+</h1>
+
+
+
+
+
+
+
+
+
+
+
+<p class="introduction">This
+document describes how to get started with
+contributing to the OpenGL-ctypes project, the project which is creating the&nbsp;PyOpenGL 3.0.0 release.&nbsp; It outlines the
+basic
+architecture of the system and how to begin work on the system for a
+new developer.&nbsp; It assumes familiarity with Python, Numpy and
+ctypes.<br>
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<h2>The History of OpenGL-ctypes<br>
+
+
+
+
+
+
+
+
+
+
+
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+<p>OpenGL-ctypes is a
+re-implementation of the OpenGL bindings
+for Python.&nbsp; Historically there were two other mainline
+implementations of OpenGL for Python.</p>
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>PyOpenGL up to 1.x was
+written as a C extension using the raw
+Python C API.&nbsp; It was characterised by a very intuitive
+"Pythonic"
+API that just seemed to do what you expected it to do (in most cases)
+because the authors had actually sat down and written the code for
+every function.&nbsp; Maintenance and extension was extremely hard,
+and
+support for extensions was minimal or non-existant.&nbsp; This is
+the
+code base originally created by David Ascher et. al.&nbsp; This
+code
+base has been entirely superceded by PyOpenGL 2.x.<br>
+
+
+
+
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>PyOpenGL 2.x was written as
+a set of SWIG typemaps (a.k.a.
+PyOpenGLSWIG.&nbsp; The code was basically a huge set of nested
+macro
+expansions, SWIG pattern matching rules and a heavily hacked distutils
+script that semi-automatically turned OpenGL headers into usable C
+extensions.&nbsp; PyOpenGL 2.x had far greater support for
+extensions
+and far better coverage than the 1.x series, but it was extremely
+difficult to modify or debug the system.&nbsp; It was also
+notoriously
+difficult to compile/install.&nbsp; This is the codebase created by
+Tarn Weisner Burton.<br>
+
+
+
+
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<p>OpenGL-ctypes is intended to
+become the 3.x release of "PyOpenGL",
+that is, it will eventually replace the 2.x stream as the "standard"
+PyOpenGL.&nbsp; However, to get there, it needs developer
+attention.&nbsp; In particular, it needs some porting work for new
+architectures, testing and debugging on all architectures, and lots of
+work on extension development.&nbsp; If you are interested in the
+rationale for OpenGL-ctypes, see <a href="http://blog.vrplumber.com/989">this posting</a>,
+which outlines
+why the reimplementation is being undertaken.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h2>Getting the Code</h2>
+
+
+
+
+
+
+
+
+
+
+
+<p>OpenGL-ctypes is developed and
+maintained within the PyOpenGL CVS repository.&nbsp; To check out
+the current version of OpenGL-ctypes:</p>
+
+
+
+
+
+
+
+
+
+
+
+<pre>cvs -z3 -d:pserver:anonymous@pyopengl.cvs.sourceforge.net:/cvsroot/pyopengl co -P OpenGL-ctypes<br></pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>You can install the checkout to your path for further development as
+follows (from the OpenGL-ctypes checkout directory):<br>
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<pre>./setup.py develop --install-dir=~/YOUR-WORKING-DIRECTORY-ON-PYTHONPATH-HERE<br></pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>As of 3.0.0a3 OpenGL-ctypes is dependant on the <a href="http://peak.telecommunity.com/DevCenter/setuptools">setuptools</a>
+package.&nbsp; You cannot run without the setuptools support, as it is
+used to provide the plugin mechanism used by array data-type plugin
+mechanism. &nbsp;You likely already have setuptools installed, but if not, download the <a href="http://peak.telecommunity.com/dist/ez_setup.py">ez_setup.py</a> script and run it to install the package. &nbsp;You will probably want to install <a href="http://numpy.scipy.org/">numpy</a> as well, and in case you missed it, <a href="http://starship.python.net/crew/theller/ctypes/">ctypes</a>
+is a dependency (for Python 2.4 and below), it is declared in the
+setuptools dependencies for version 3.0.0a5 and above so that it should
+automatically be installed for you when you "develop" your PyOpenGL
+working directory.<br>
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>When you make a change, run <code>cvs
+diff</code> on the OpenGL-ctypes
+directory to produce a patch file and upload it to the <a href="https://sourceforge.net/tracker/?group_id=5988&amp;atid=305988">PyOpenGL Patch Tracker</a> as an attachment.&nbsp; I prefer "context" diffs (<code>cvs
+diff -c</code>) for contributed
+code, as it makes it easier to see where the code fits in.&nbsp;
+That said, I'm happy to get code in any readily integrated format. &nbsp;We discuss PyOpenGL development on the <a href="https://lists.sourceforge.net/lists/listinfo/pyopengl-devel">PyOpenGL-dev mailing list</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h2>The Architecture of
+OpenGL-ctypes</h2>
+
+
+
+
+
+
+
+
+
+
+
+<p>Here are the loose design goals
+of OpenGL-ctypes:</p>
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>Access to the all of
+OpenGL's functionality</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Allow access to OpenGL 1.x
+and 2.x functionality</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Access to modern extensions</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>Backward compatability with
+PyOpenGL code</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Not a fanatic requirement,
+but I want 90%+ of code to run
+without changes and 99% to run with only minor changes such as one
+would expect from a major release of a large package</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Insulate the PyOpenGL
+developer from the implementation (ctypes) so that code can continue to
+work across multiple implementations</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>Ease of development</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>The whole point of this is
+to make it possible for more people
+to work on the system</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>Play nicely with others</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Alternate Python
+implementations (PyPy, IronPython)</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>GUI libraries</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Numeric libraries</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Threading behaviour</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Multimedia libraries</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>Flexibility and robustness</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Graceful degradation in
+the face of missing functionality</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Ease of debugging</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Informative error reports</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>Ease of installation</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Portability (note, we are
+limited to ctypes ported platforms,
+but that should grow faster than we grow, given that ctypes is now part
+of Python)<br>
+
+
+
+
+
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Simplicity of installation
+process (no hacked up distutils!)</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Use of eggs and easy_install</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Ability to plug in support for new data-types and the like</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Platform Abstraction</h3>
+
+
+
+
+
+
+
+
+
+
+
+<p class="introduction">OpenGL-ctypes
+is exposing "platform" (Operating
+System and Hardware) functionality to the Python environment.&nbsp;
+Differences among the various platforms are abstracted such that
+porting OpenGL-ctypes to a new platform is largely a matter of
+implementing a small module in the "platform" sub-package.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Each platform gets their own <code>OpenGL.platform.baseplatform.BasePlatform</code> subclass.&nbsp; <a href="pydoc/OpenGL.platform.baseplatform.html"><code>OpenGL.platform.baseplatform.BasePlatform</code></a> classes provide:</p>
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>ctypes library objects for
+GL, GLU, GLUT and possibly GLE. How we
+find these libraries, the names of the libraries, flags needed for
+loading and the like tends to be system specific</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>definition of the ctypes <code>FunctionType</code>
+used for
+calling functions in the libraries, i.e. what calling convention to use
+for calling the functions.&nbsp; On Windows, for instance, we have to
+use windows, rather than C calling conventions.<br>
+
+
+
+
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>functions <code>GetCurrentContext()</code>
+and <code>CurrentContextIsValid()</code>
+to allow code to retrieve and/or test whether we have a current
+context.&nbsp; This is used to implement context-specific
+data-storage.&nbsp; These are normally exposed by the platform's
+OpenGL
+implementation<br>
+
+
+
+
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>function <code>getExtensionProcedure(
+name )</code> to retrieve
+an OpenGL extension function by name</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>function <code>getGLUTFontPointer(
+constant )</code> to retrieve
+a <code>void *</code>
+to a GLUT font, different platforms use very
+different conventions for these values</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>flags <code>HAS_DYNAMIC_EXT</code>
+and <code>EXT_DEFINES_PROTO</code>
+which tell OpenGL-ctypes whether the platform has the ability to load
+dynamic extensions and whether it uses prototype definitions</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>function safeGetError() to retrieve OpenGL's error state if doing
+so would be safe (i.e. we have a valid context or the platform can
+handle having a call to glGetError when there is no valid context)</li>
+  <li>functions/methods
+to create/retrieve function pointers from libraries (createBaseFunction
+and createExtensionFunction), which insulate us from changes in
+ctypes as well as giving us a convenient
+place to add functionality to any function.
+    <pre><code>def createBaseFunction( <br>&nbsp;&nbsp;&nbsp; functionName, dll=OpenGL, <br>&nbsp;&nbsp;&nbsp; resultType=ctypes.c_int, argTypes=(),<br>&nbsp;&nbsp;&nbsp; doc = None, argNames = (),<br>):</code><br></pre>
+
+
+
+
+
+
+
+
+
+
+
+    <p>and</p>
+
+
+
+
+
+
+
+
+
+
+
+    <pre><code>def createExtensionFunction( <br>	functionName, dll=OpenGL,<br>	resultType=ctypes.c_int, <br>	argTypes=(),<br>	doc = None, argNames = (),<br>):</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<p>New platform implementations are registered in&nbsp;<code>setup.py</code>
+using pkgtools entry points. &nbsp;We use the sys.platform and os.name
+(in that order of preference) to decide which entry point to load.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Autogenerated Wrappers</h3>
+
+
+
+
+
+
+
+
+
+
+
+<p>There are two major wrapper generator systems available for use with
+ctypes. &nbsp;Originally OpenGL-ctypes used the ctypes generator module
+(based on GCC-XML) to produce its wrappers. &nbsp;We are switching to
+using the <code>pyglet/tools/wraptypes</code> module. &nbsp;Extension
+modules are currently created via a regex-based generator, eventually
+we'll switch to using wraptypes for that work as well.</p>
+<h4>wraptypes Generator (new method)</h4>
+<p>The
+primary value of wraptypes is that it is easy to install and configure,
+and allows for parsing headers which are not "native" to the platform
+on which they are being run. &nbsp;The wrapper generator (<code>gengl.py</code>) is not as advanced/finished as the <code>openglgenerator.py</code>
+module, but it can generate the platform-specific module quite nicely,
+and the underlying code is under active development with a focus on
+GL-related operations.</p>
+<p>To run this generator, simple check out pyglet's svn repository and add the tools/wraptypes package to your <code>PYTHONPATH</code>, then run the <code>src/gengl.py</code> module in PyOpenGL's source tree.</p>
+<h4>ctypes Wrapper Generator (old method)</h4>
+<p>ctypes includes a mechanism
+based on GCC-XML which will autogenerate
+wrappers for many C libraries. OpenGL-ctypes uses an
+extended&nbsp;version of this autogenerator (in the src subdirectory of
+the CVS
+repository, see <code>generateraw.py</code> and <code>openglgenerator.py</code>) to produce the C-style "raw" API for the core libraries. &nbsp;These are the modules in the <code>OpenGL.raw</code> packages. &nbsp;If you wish to use ctypes directly with a C-style API it is possible to directly import and use these modules.</p>
+
+
+
+
+<p>The generator also produces "annotations" modules in each of the
+raw.* packages. &nbsp;These contain calls which wrap the base functions
+in size-of-array-aware wrappers. &nbsp;The constants from the module
+are also split into a separate module for easier reading (this module
+is then imported into the main module).</p>
+
+
+
+
+<p>Much of the API for the core libraries can be
+used
+as-is from the <code>raw</code> packages, so the main package modules
+normally import all symbols from their <code>raw.XXX</code>
+and <code>raw.XXX.annotations</code> module
+before importing from modules providing customised functionality.</p>
+
+
+
+
+
+
+
+
+<h5>Making your own Auto-generated Wrappers</h5>
+
+
+
+
+
+
+
+
+<p>If you want to create new core modules (see below for OpenGL
+extension modules), you can use the ctypes_codegen module from ctypes
+svn. &nbsp;This module is dependant&nbsp;on having a very up-to-date
+(i.e. not yet officially released) gccxml. &nbsp;Windows users can
+download this gccxml from the ctypes SourceForge download page where it
+was released with the <a href="http://sourceforge.net/project/showfiles.php?group_id=71702&amp;package_id=71318&amp;release_id=313813">0.9.6 ctypes</a>
+release (note that the release requires the Visual C runtime from VC6,
+which is not included in the download and may not be present on your
+machine if you have not installed a VC6-compiled product).</p>
+
+
+
+
+
+
+
+
+<p>You can check out the ctypeslib project from the Python svn tree like so:</p>
+
+
+
+
+
+
+
+
+<pre>svn co http://svn.python.org/projects/ctypes/trunk ctypes<br>cd ctypes/ctypeslib<br>python setup.py install</pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>To create a new PyOpenGL sub-package, such as one to support your
+platform-native GLX work-alike (e.g. WGL or AGL), you first create an
+XML description of your library. &nbsp;Here's an example:</p>
+
+
+
+
+
+
+
+
+<pre>python ~/site-packages/ctypes_codegen/h2xml.py /usr/include/GL/glx.h -o glx.xml -c</pre>
+
+
+
+
+
+
+
+
+<p>which produces an XML file in your local directory (here glx.xml). &nbsp;The <code>-c</code>
+flag tells GCC-XML to attempt to include preprocessor definitions in
+the XML file, which is normally desirable for GL-related systems, as
+they tend to have a lot of constants defined in preprocessor directives.</p>
+
+
+
+
+
+
+
+
+<p>Once we have the XML file, we need to turn it into Python source files. &nbsp;The <code>src/generateraw.py</code>
+script in the OpenGL-ctypes source distribution is an example of how to
+create new wrappers.&nbsp; Keep in mind that the output here is only
+going to include those
+functions which are defined on your system (particularly, in the
+DLL/.so that you specify with the <code>-l</code> flag). &nbsp;That means that locally unavailable functions may not show up in the resulting files.</p>
+
+
+
+
+
+
+
+
+<p class="technical">Autogeneration has gone through many revisions
+over the course of the project. &nbsp;The newest version requires a
+heavily restructured version of the ctypes codegenerator module to work.</p>
+
+
+
+
+<h4>OpenGL Extension Generation</h4>
+
+
+
+
+
+
+
+
+<p>Unlike the core modules,
+extension modules are auto-generated using
+a low-level hack that downloads the OpenGL extension registry's current
+header file and parses the file with regexes, matching the two
+definitions so that it can generate a single <code>createExtensionFunction</code>
+call that has all of the data-type and naming information for that
+function.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="technical">The
+OpenGL extension definitions in the <code>glext.h</code>
+header are split into two parts, a macro which retrieves the pointer to
+the function, and the function itself.&nbsp; One of the definitions
+provides the parameter list, the other provides the
+properly-capitalised name.&nbsp; We need both to use the function.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="technical">A consequence of this approach is that
+OpenGL-ctypes can remain up-to-date for OpenGL extensions.&nbsp;
+Producing the raw versions of all new extensions is normally just a
+single command away.<br>
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>glGet() output arrays are handled specially by the
+auto-generation.&nbsp; It produces calls which register constants
+against array sizes so that the glGet* family of calls can return the
+correctly-sized array for a given constant.&nbsp; It does this by
+combining information from the specification documents and the size
+specifications stored in the glgetsizes.csv document in the source
+directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>The autogeneration process also attempts to copy the "Overview"
+section of the specification for each module into the docstring of the
+module, so that users and coders can readily identify the purpose of
+the module.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>The extension modules are
+written as a single file, with the code
+for the auto-generated material placed above a comment line which
+tells you not to edit above it.</p>
+
+
+
+
+
+
+
+
+
+
+
+<pre>### DO NOT EDIT above the line "END AUTOGENERATED SECTION" below!<br>...<br>### END AUTOGENERATED SECTION</pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>Customisations of the extension
+are done after the auto-generated
+section.&nbsp; This (single file approach) is done mostly to reduce
+the
+number of files in the project and to make it easier to hack on a
+single extension.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="technical">It is
+expected and encouraged that users will hack
+on an extension module they care about to make it more Pythonic and
+then contribute the changes back to the project.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>If you remove the autogenerated
+comment then further autogeneration
+passes will not process the module, keep in mind, however, that
+improvements to the extension autogeneration will likely occur over
+time.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Converters and Wrappers</h3>
+
+
+
+
+
+
+
+
+
+
+
+<p>When a method cannot use the
+autogenerated ctypes wrapper as-is, we
+normally fall back to the <code><a href="pydoc/OpenGL.wrapper.html">OpenGL.wrapper</a>.Wrapper</code>
+class,
+and the converters defined in the <a href="pydoc/OpenGL.converters.html"><code>OpenGL.converters</code></a>
+module.&nbsp; The Wrapper class provides a set of argument
+transformation stages which allow for composing most functions from a
+common set of simple operations.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="technical">This
+approach will seem familiar to those who have
+looked at the source code generated by systems such as SWIG.&nbsp;
+There you define a set of matching rules which include snippets of code
+which are composed into the C function being compiled.&nbsp;
+Instead of
+rule-based matching, we use explicit specification.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>In some cases it's just easier
+to code up a custom wrapper function
+that uses raw ctypes.&nbsp; We can do so without a problem simply
+by
+including the code in the namespace with the appropriate name.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h4>Wrapper Objects</h4>
+
+
+
+
+
+
+
+
+
+
+
+<p>The stages in the Wrapper call
+are as follows:</p>
+
+
+
+
+
+
+
+
+
+
+
+<ol>
+
+
+
+
+
+
+
+
+
+
+
+  <li>pyConverters -- accept (or
+suppress) incoming Python arguments</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Used to convert a Python
+argument to a type which is compatible
+with the expected data-type</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Can be used to eliminate
+an argument from the argument list by
+passing no function, this is useful when we want to imply an argument
+from the structure of another argument, for instance</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>cConverters -- pull
+C-compatible argument out of the Python
+argument list</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Looks at the whole set of
+Python argument and produces a 1:1
+argument list of Python objects for the ctypes call</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>cResolvers -- take the
+C-compatible Python objects and turn them
+into the low-level data-type required by the ctypes call</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>ctypes call, (with error
+checking, errors are annotated with the
+arguments used during the call)</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>storeValues -- called to
+store a C-compatible Python object, for
+instance to prevent garbage collection of an array that is in-use</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>returnValues -- determines
+what result is required from the
+wrapped function</li>
+
+
+
+
+
+
+
+
+
+
+
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+<p>Of particular interest is the method <code>wrapper.Wrapper.setOutput</code>
+which allows you to generate output arrays for a function using a
+passed-in size tuple, dictionary or function to determine the
+appropriate size for the
+array.&nbsp; See the <a href="pydoc/OpenGL.GL.glget.html"><code>OpenGL.GL.glget</code></a>
+module for examples of usage.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h4>Converters</h4>
+
+
+
+
+
+
+
+
+
+
+
+<p>The <a href="pydoc/OpenGL.converters.html"><code>OpenGL.converters</code></a>
+module provides a number of conversion "functions" for use with the
+wrapper module's Wrapper objects.&nbsp; The idea of these converter
+functions is to produce readily re-used code that describes a common
+idiom in wrapping a function.&nbsp; The core libraries and
+extensions then use these idioms to simplify the wrapping of their
+functions.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Array Handling</h3>
+
+
+
+
+
+
+
+
+
+
+
+<p class="introduction">While
+you can do a great deal of work with OpenGL without array operations,
+Python's OpenGL interfaces are all fastest when you use array (or
+display-list) techniques to push as much of your rendering work into
+the platform implementation as possible.&nbsp; As such, the natural
+handling of arrays is often a key issue for OpenGL programmers.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Perhaps the most complex
+mechanisms in OpenGL-ctypes are those which implement the array-based
+operations which allow for using low-level blocks of formatted data to
+communicate with the OpenGL implementation.&nbsp; OpenGL-ctypes
+preferred basic array implementation is the (new) numpy
+reimplementation of the original Numeric Python.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>The array handling
+functionality provided within OpenGL-ctypes is localised to the <a href="pydoc/OpenGL.arrays.html"><code>OpenGL.arrays</code></a>
+sub-package.&nbsp; Within the package, there are two major classes,
+one (the <a href="pydoc/OpenGL.arrays.formathandler.html"><code>FormatHandler</code></a>)
+which implements an interface to a way of storing data in Python, and
+another (the <a href="pydoc/OpenGL.arrays.__init__.html"><code>ArrayDatatype</code></a>)
+which models an OpenGL array format.&nbsp; The <code>ArrayDatatype</code>
+classes use <code>FormatHandler</code>s
+to manipulate array-compatible objects for use in the system.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h4>ArrayDatatypes</h4>
+
+
+
+
+
+
+
+
+
+
+
+<p>ArrayDatatype classes provide <a href="pydoc/OpenGL.arrays.__init__.html#ArrayDatatype">an
+API</a> composed primarily of
+classmethods (that is, methods which are called directly on the class,
+rather than requiring an instance of the class).&nbsp; The
+classmethods are used throughout OpenGL-ctypes to provide
+array-format-specific handling of Python arguments.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Currently we have the following
+array types defined:</p>
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>ArrayDatatype</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Used for generic array
+operations</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLclampdArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLclampfArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Clamped floating-point
+types</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLfloatArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLdoubleArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Un-clamped floating-point
+types</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLbyteArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLcharArray (GLcharARBArray) <br>
+
+
+
+
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLubyteArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Character arrays</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLshortArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLintArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLsizeiArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  <li>GLenumArray</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Integer array types<br>
+
+
+
+
+
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<p>When you are coding new
+OpenGL-ctypes modules, you should always use the ArrayDatatype
+interfaces.&nbsp; These interfaces allow us to code generic
+operations such that they dispatch to the appropriate format handlers.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h4>Format Handlers<br>
+
+
+
+
+
+
+
+
+
+
+
+</h4>
+
+
+
+
+
+
+
+
+
+
+
+<p>Each format handler is
+responsible for implementing an API that ArrayDatatypes can use to work
+with the Python data-format.&nbsp; Data-formats can support a
+subset of the API, they only need to support those aspects of the
+data-format which make sense.&nbsp; For instance, a write-only
+array data-type (such as a Python string) doesn't need to implement the
+<code>zeros</code> method.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>At the moment we have the
+following Format Handlers:</p>
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="pydoc/OpenGL.arrays.nones.html"><code>nones.NoneHandler</code></a></li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Supports passing the None
+object as an array data-pointer, quite limited in its functionality</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Implemented in Python</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>registered as: 'nones'</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="pydoc/OpenGL.arrays.numpymodule.html"><code>numpymodule.NumpyHandler</code></a>,
+(<a href="pydoc/OpenGL.arrays.numarrays.html"><code>numarrays.NumarrayHandler</code></a>,&nbsp;<a href="pydoc/OpenGL.arrays.numeric.html"><code>numeric.NumericHandler)</code></a><br>
+
+
+
+
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Full data-format handlers
+for the three Numeric Python implementations</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>numpy module is
+implemented in Python using a stable API</li>
+
+    <li>Numeric module is implemented in Python using a bit of a hack</li>
+
+    <li>Numarray currently requires a C extension and, at the
+moment, is not built by default</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>registered as: 'numpy' and 'numeric' ('numarray')</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="pydoc/OpenGL.arrays.numbers.html"><code>numbers.NumberHandler</code></a></li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Supports passing single
+Python integers/floats in as array data-types</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Does not currently support
+use for output arguments (since Numeric arrays are currently used for
+single-value output arrays)</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Implemented in Python</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>registered as: 'numbers'</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="pydoc/OpenGL.arrays.strings.html"><code>strings.StringHandler</code></a></li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Supports using Python
+strings as data-sources, no output support</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Implemented in Python (with a bit of a hack in _strings.py)<br>
+
+
+
+
+
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>registered as: 'strings'</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="pydoc/OpenGL.arrays.ctypesarrays.html">ctypesarrays.CtypesArrayHandler</a>,
+    <a href="pydoc/OpenGL.arrays.ctypespointers.html">ctypespointers.CtypesPointerHandler</a></li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Full data-format handler for ctypes arrays, input-only for
+pointers</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Implemented in Python</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>registered as: 'ctypesarrays','ctypespointers'</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+  <li>lists.ListHandler</li>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+    <li>Backup supports for using Python lists/tuples as data-sources if there is no numpy module available</li>
+
+
+
+
+
+
+
+    <li>registered as 'lists'</li>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Registering new FormatHandlers</h5>
+
+
+
+
+
+
+
+
+
+
+
+<p>OpenGL-ctypes uses the simplistic OpenGL.plugins module which allows
+you to register a plugin instance which defines a class which is to be
+loaded to handle a given data format.</p>
+<pre>from OpenGL.plugins import FormatHandler<br>FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', ['numpy.ndarray'] )</pre>
+<p>The first parameter is just a name used to refer to the plugin.
+&nbsp;The second is the actual class to load. &nbsp;If there is not
+third parameter, then the plugin will automatically load. &nbsp;If
+there is a value, then the value is a&nbsp;list of module.classname
+values which will be matched against incoming array-parameter values.</p>
+<p>OpenGL-ctypes delays resolving the FormatHandler set until the last
+possible moment (i.e. the first call is made which requires a
+FormatHandler).&nbsp; Any time before this you can use code like this
+to declare your application's preference for the handler to be used for
+creating output argument (this handler must define a <code>zeros(...)</code>
+method):</p>
+
+
+
+
+
+
+
+
+
+
+
+<pre>from OpenGL.arrays import formathandler<br>formathandler.FormatHandler.chooseOutput( 'ctypesarrays' )</pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>Where the strings passed are those under which the handler was
+registered (see previous section).</p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="technical">There are currently no C-level extension modules
+in OpenGL-ctypes.&nbsp; However, we have (disabled) implementations for
+a few format handlers which are C extensions.&nbsp; It should be
+possible to rewrite each of these as pure Python code using ctypes
+eventually.&nbsp; They were written as C extensions simply because
+I had the code handy and I didn't want to have to re-specify the
+structures for every release of Python or numpy.&nbsp; The _strings.py
+module is an example of a how such a rewrite could be done.&nbsp; It
+does a test at
+run-time to determine the offset required to get a data-pointer from a
+Python string.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Image Handling</h3>
+
+
+
+
+
+
+
+
+
+
+
+<p>Most of the complexity of Image
+handling is taken care of by the Array Handling functionality, as most
+image data-types are simply arrays of data in a given format.&nbsp;
+Beyond that, it is necessary to set various OpenGL parameters so that
+the data-format assumptions of most Python users (e.g. tightly packed
+image data) will be met.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>The <a href="pydoc/OpenGL.images.html"><code>OpenGL.images</code></a>
+module has the basic functions and data-tables which allow for
+processing image data (both input and output).&nbsp; Eventually we
+will add APIs to support registering new image-types, but for now we
+have to directly modify the data-tables to register a new data-type.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>The <a href="pydoc/OpenGL.GL.images.html"><code>OpenGL.GL.images</code></a>
+module has implementations of the core OpenGL image-manipulation
+functions which use the OpenGL.images module.&nbsp; It can serve as
+an example of how to use the image handling mechanisms.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Error Handling</h3>
+
+
+
+
+
+
+
+
+
+
+
+<p>As with previous versions of
+PyOpenGL, OpenGL-ctypes tries to follow Python's</p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="introduction">Errors
+should never pass silently. </p>
+
+
+
+
+
+
+
+
+
+
+
+<p>philosophy, rather than
+OpenGL's philosophy of always requiring explicit checks for error
+conditions.&nbsp; OpenGL-ctypes functions run the function <code>OpenGL.error.glCheckError</code>
+after each function call.&nbsp; This function is glBegin/glEnd
+aware, that is, the glBegin and glEnd functions enable and disable the
+checking of errors (because error checking doesn't work between those
+calls).</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>You can override the error-handler, either to provide your own
+custom functionality, or to disable checking entirely.&nbsp; For
+instance, if you will always have a valid context, you could register
+the raw glGetError function as the error checker to avoid the overhead
+of the context-validity checks:</p>
+
+
+
+
+
+
+
+
+
+
+
+<pre>from OpenGL import error<br>error.ErrorChecker.registerChecker( myAlternateFunction )</pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>OpenGL-ctypes has a set of
+errors defined in the <a href="pydoc/OpenGL.error.html"><code>OpenGL.error</code></a>
+module.&nbsp; It can also raise standard Python exceptions, such as
+ValueError or TypeError.&nbsp; Finally, it can raise ctypes errors
+when argument conversion fails. (XXX that's sub-optimal, it has
+implementation details poking out to user code).<br>
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Wrapper objects catch OpenGL
+errors and annotate the error with extra information to make it easier
+to debug failures during the wrapping process.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Context-specific Data</h3>
+
+
+
+
+
+
+
+
+
+
+
+<p>Because of the way OpenGL and
+ctypes handle, for instance, pointers, to array data, it is often
+necessary to ensure that a Python data-structure is retained (i.e. not
+garbage collected).&nbsp; This is done by storing the data in an
+array of data-values that are indexed by a context-specific
+key.&nbsp; The functions to provide this functionality are provided
+by the <a href="pydoc/OpenGL.contextdata.html"><code>OpenGL.contextdata</code></a>
+module.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="technical">The
+key that is used to index the storage array is provided by the platform
+module's <code>GetCurrentContext()</code>
+function.&nbsp; The current context is used if the context argument
+is passed in as <code>None</code>.<br>
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>You can store a new value for
+the current context with a call to:</p>
+
+
+
+
+
+
+
+
+
+
+
+<pre>def setValue( constant, value, context=None, weak=False ):<br>	"""Set a stored value for the given context"""</pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>You can retrieve the current
+value (which will return None if there is no currently set value) with
+a call to:</p>
+
+
+
+
+
+
+
+
+
+
+
+<pre>def getValue( constant, context = None ):<br>	"""Get a stored value for the given constant"""</pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>Lastly, you can delete any
+currently set value with:</p>
+
+
+
+
+
+
+
+
+
+
+
+<pre>def delValue( constant, context=None ):<br>	"""Delete the specified value for the given context"""</pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>which will return a boolean
+telling you whether an existing value was found.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="technical">Keep
+in mind that you must either explicitly clear out each stored value or
+explicitly clear out the stored data with a call to <code>OpenGL.contextdata.cleanupContext</code>
+when you destroy a rendering context.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Extensions</h3>
+
+
+
+
+
+
+
+
+
+
+
+<p>The OpenGL extension mechanism
+is quite well developed, with most new functionality appearing as an
+extension before it migrates into the OpenGL core.&nbsp; There are
+hundreds of registered extensions to OpenGL, with a large fraction of
+the extensions simply introducing new constants or a few new simple
+functions.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>A few of the largest
+extensions, such as the <a href="pydoc/OpenGL.GL.ARB.shader_objects_new.html"><code>GL.ARB.shader_object</code></a>
+or <a href="pydoc/OpenGL.GL.ARB.vertex_buffer_object.html"><code>GL.ARB.vertex_buffer_object</code></a>
+extensions are more involved in their effects on the system.&nbsp;
+These extensions require considerable custom code beyond that generated
+by the auto-generation system.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Tkinter (Legacy GUI) Togl
+Support</h3>
+
+
+
+
+
+
+
+
+
+
+
+<p>We have included the Python
+wrapper for the Tk Togl widget in the OpenGL-ctypes package.&nbsp;
+We do not, however, currently include the Togl widget itself.&nbsp;
+If you would like to use Togl in your package, please use your system's
+package manager to install the Togl package (or compile from
+source).&nbsp; You may have to recompile Python with Tk support as
+well.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="technical">Historically,
+Togl support was one of the most complex and error-prone aspects of the
+PyOpenGL installation procedure.&nbsp; Although there are lots of
+scripts which use Togl from PyOpenGL, we just don't have the personel
+to maintain it as part of the PyOpenGL project.&nbsp; It would
+likely be best if we could simple include a redistributable Togl
+package alongside the OpenGL-ctypes package.</p>
+
+
+
+
+
+
+
+
+
+
+
+<h2>Todo</h2>
+
+
+
+
+
+
+
+
+
+
+
+<p>OpenGL-ctypes is still far from finished.&nbsp; Here is a (partial)
+list of tasks still needing to be completed, I'll add more here as I
+discover it:</p>
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+  <li>Extension development support<br>
+
+
+
+
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>We need more elegant and stable APIs for implementing
+OpenGL
+extensions, particularly ones that have far-reaching consequences, that
+is extensions which affect other extensions or core functionality</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>Major extensions needing lots of love<br>
+
+
+
+
+
+
+
+
+
+
+
+  </li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>ARB vertex buffer object</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>ARB imaging</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>ARB vertex/fragment shaders, shader objects (though they appear to be basically functional)</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>Wrapping of OpenGL 1.4, 1.5 and 2.0 support</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Mostly just mechanical stuff wrapping array-handling code, doing image-transfer operations or the like</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <li>Documentation</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Need docstring cleanup and critique</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Re-integrate with the OpenGL, GLU and GLUT documentation set (from
+PyOpenGL)</li>
+
+
+
+
+
+
+
+
+
+
+
+    <li>User-oriented documentation</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+  <li>Testing</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ul>
+
+
+
+
+
+
+
+
+
+
+
+    <li>Need to test with lots of PyOpenGL code to either eliminate or
+document incompatibilities</li>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p class="footer">&nbsp;
+<a href="http://pyopengl.sourceforge.net/"><img alt="PyOpenGL" src="images/pyopengl_icon.jpg" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>A
+SourceForge Open-Source project: <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1" style="border: 0px solid ; width: 88px; height: 31px;" alt="SourceForge" align="middle"></a></p>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
