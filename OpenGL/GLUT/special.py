@@ -146,15 +146,15 @@ class GLUTTimerCallback( GLUTCallback ):
 			try:
 				function( value )
 			finally:
-				try:
-					callbacks.remove( deregister )
-				except ValueError, err:
-					pass 
-				else:
-					if not callbacks:
-						contextdata.delValue( self.CONTEXT_DATA_KEY )
+				for item in callbacks:
+					if item.function is deregister:
+						callbacks.remove( item )
+						item.function = None
+						break
+				if not callbacks:
+					contextdata.delValue( self.CONTEXT_DATA_KEY )
 		cCallback = self.callbackType( deregister )
-		#cCallback.function = deregister
+		cCallback.function = deregister
 		callbacks.append( cCallback )
 		self.wrappedOperation( milliseconds, cCallback, value )
 		return cCallback
