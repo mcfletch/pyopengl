@@ -49,18 +49,37 @@ class SVNSource( CVSSource ):
 	@property 
 	def update_command( self ):
 		return 'svn up'
-	
+
+class BZRSource( CVSSource ):
+	@property
+	def checkout_command( self ):
+		assert self.root 
+		assert self.dirname
+		return 'bzr checkout --lightweight %s %s'%(
+			self.root, self.dirname,
+		)
+	@property 
+	def update_command( self ):
+		return 'bzr update'
 
 
 
 checkouts = [
-	CVSSource(
-		':pserver:anonymous@pyopengl.cvs.sourceforge.net:/cvsroot/pyopengl',
+#	CVSSource(
+#		':pserver:anonymous@pyopengl.cvs.sourceforge.net:/cvsroot/pyopengl',
+#		'OpenGLContext',
+#	),
+	BZRSource(
+		'lp:~mcfletch/openglcontext/trunk',
 		'OpenGLContext',
 	),
-	CVSSource(
-		':pserver:anonymous@pyopengl.cvs.sourceforge.net:/cvsroot/pyopengl',
-		'Demo/PyOpenGL-Demo',
+#	CVSSource(
+#		':pserver:anonymous@pyopengl.cvs.sourceforge.net:/cvsroot/pyopengl',
+#		'Demo/PyOpenGL-Demo',
+#		'PyOpenGL-Demo',
+#	),
+	BZRSource(
+		'lp:~mcfletch/pyopengl-demo/trunk',
 		'PyOpenGL-Demo',
 	),
 	
@@ -123,5 +142,6 @@ checkouts = [
 if __name__ == "__main__":
 	os.chdir( '.samples' )
 	for checkout in checkouts:
+		print 'Project:', checkout.dirname
 		checkout.update()
 	
