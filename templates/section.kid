@@ -155,7 +155,13 @@ ${nav_table()}
 		${format_samples( section.samples ) }
 	</div>
 </div>
-
+<div class="copyright-notice">
+	<h2>Copyright Notices</h2>
+	<div py:if="section.package in ('GL','GLU')">
+		This documentation is based on documentation licensed under the 
+		<a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+	</div>
+</div>
 ${nav_table()}
 </body>
 </html>
