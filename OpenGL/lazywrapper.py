@@ -1,26 +1,3 @@
-#class LazyWrapper( object ):
-#	"""Object which holds a lazy-loading function and a wrapper object
-#	
-#	Applies the wrapper to the baseFunction when the baseFunction is 
-#	defined, otherwise just calls the base function.
-#	"""
-#	def __init__( self, baseFunction, wrapperFunction ):
-#		"""Initialize the lazy wrapper 
-#		
-#		baseFunction -- the base platform function object 
-#		wrapperFunction -- the wrapper function, must take 
-#			the baseFunction as its first argument, then the arguments
-#			for the Pythonic API for the function
-#		"""
-#		self.baseFunction = baseFunction
-#		self.wrapperFunction = wrapperFunction
-#	def __call__( self, *args, **named ):
-#		if self.baseFunction:
-#			return self.wrapperFunction( self.baseFunction, *args, **named )
-#		else:
-#			return self.baseFunction( *args, **named )
-#	def __nonzero__( self ):
-#		return bool( self.baseFunction )
 
 def lazy( baseFunction ):
 	"""Produce a lazy-binding decorator that uses baseFunction
