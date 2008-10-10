@@ -58,7 +58,18 @@ def ontimer( *args ):
 	glutTimerFunc( 1000, ontimer, 24 )
 
 def idle():
-	if time.time()-start < 10:
+	delta = time.time()-start
+	if delta < 10:
+		global size 
+		x,y = size 
+		if delta < 5:
+			change = +1
+		else:
+			change = -1
+		x = x-change
+		y = y+change
+		glutReshapeWindow( x, y )
+		size = (x,y)
 		glutSetWindow(window)
 		glutPostRedisplay()
 	else:
