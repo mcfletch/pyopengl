@@ -77,6 +77,7 @@ class NumpyHandler( formathandler.FormatHandler ):
 	"""
 	HANDLED_TYPES = (numpy.ndarray, list, tuple )
 	dataPointer = dataPointer
+	isOutput = True
 	def from_param( self, instance ):
 		return ctypes.c_void_p( self.dataPointer( instance ))
 	ERROR_ON_COPY = OpenGL.ERROR_ON_COPY

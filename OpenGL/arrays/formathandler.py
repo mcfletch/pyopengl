@@ -19,6 +19,7 @@ class FormatHandler( object ):
 	typeConstant = None
 	HANDLED_TYPES = ()
 	preferredOutput = None
+	isOutput = False
 	GENERIC_OUTPUT_PREFERENCES = ['numpy','numeric','ctypesarrays']
 	ALL_OUTPUT_HANDLERS = []
 	def loadAll( cls ):
@@ -54,7 +55,7 @@ class FormatHandler( object ):
 				handler = plugin_class()
 				handler.register( handler.HANDLED_TYPES )
 				cls.HANDLER_REGISTRY[ entrypoint.name ] = handler
-				if hasattr( handler, 'zeros' ):
+				if handler.isOutput:
 					cls.ALL_OUTPUT_HANDLERS.append( handler )
 			entrypoint.loaded = True
 	@classmethod

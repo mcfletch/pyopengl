@@ -13,6 +13,7 @@ del c
 
 class CtypesParameterHandler( formathandler.FormatHandler ):
 	"""Ctypes Paramater-type-specific data-type handler for OpenGL"""
+	isOutput = True
 	HANDLED_TYPES = (ParamaterType, _ctypes._SimpleCData)
 	def from_param( cls, value ):
 		if isinstance( value, ParamaterType ):

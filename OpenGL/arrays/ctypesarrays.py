@@ -15,6 +15,7 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
 	from_param = staticmethod( ctypes.byref )
 	dataPointer = staticmethod( ctypes.addressof )
 	HANDLED_TYPES = (_ctypes.Array, )
+	isOutput = True
 	def voidDataPointer( cls, value ):
 		"""Given value in a known data-pointer type, return void_p for pointer"""
 		return ctypes.byref( value )

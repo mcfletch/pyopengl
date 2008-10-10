@@ -25,6 +25,7 @@ class NumarrayHandler( formathandler.FormatHandler ):
 	from_param = staticmethod( dataPointer )
 	dataPointer = staticmethod( dataPointer )
 	HANDLED_TYPES = (numarray.ArrayType, )
+	isOutput = True
 
 	def voidDataPointer( cls, value ):
 		"""Given value in a known data-pointer type, return void_p for pointer"""

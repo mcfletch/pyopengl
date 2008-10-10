@@ -24,6 +24,7 @@ from OpenGL.arrays import formathandler
 class NumericHandler( formathandler.FormatHandler ):
 	"""Numeric-specific data-type handler for OpenGL"""
 	HANDLED_TYPES = (Numeric.ArrayType, )
+	isOutput = True
 	from_param = staticmethod( dataPointer )
 	dataPointer = staticmethod( dataPointer )
 	def voidDataPointer( cls, value ):
