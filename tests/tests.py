@@ -185,8 +185,8 @@ class Test( unittest.TestCase ):
 		except Exception, err:
 			assert err.err == 1281, ("""Expected invalid value (1281)""", err.err)
 			assert err.baseOperation, err.baseOperation
-			assert err.pyArgs == [GL_INVALID_VALUE, GL_BYTE, 0, None], err.pyArgs
-			assert err.cArgs == [GL_INVALID_VALUE, GL_BYTE, 0, None], err.cArgs
+			assert err.pyArgs == (GL_INVALID_VALUE, GL_BYTE, 0, None), err.pyArgs
+			assert err.cArgs == (GL_INVALID_VALUE, GL_BYTE, 0, None), err.cArgs
 		else:
 			raise RuntimeError( """No error on invalid glColorPointer""" )
 		try:

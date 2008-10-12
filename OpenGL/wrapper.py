@@ -290,51 +290,75 @@ class Wrapper( object ):
 		storeValues = getattr( self, 'storeValues', None )
 		returnValues = getattr( self, 'returnValues', None )
 		if pyConverters:
+			pyConverters_mapped = [
+				(i,converter,(converter is None))
+				for (i,converter) in enumerate( pyConverters )
+			]
+			pyConverters_length = len(pyConverters)
+			def calculate_pyArgs( args ):
+				if pyConverters_length != len(args):
+					raise ValueError(
+						"""%s requires %r arguments (%s), received %s: %r"""%(
+							wrappedOperation.__name__,
+							pyConverters_length,
+							", ".join( self.pyConverterNames ),
+							len(args),
+							args
+						)
+					)
+				for index,converter,isNone in pyConverters_mapped:
+					if isNone:
+						yield args[index]
+					else:
+						try:
+							yield converter(args[index], self, args)
+						except Exception, err:
+							if hasattr( err, 'args' ):
+								err.args += ( converter, )
+							raise
+		if cConverters:
+			cConverters_mapped = [
+				(i,converter,callable(converter))
+				for (i,converter) in enumerate( cConverters )
+			]
+			def calculate_cArgs( pyArgs ):
+				for index,converter,canCall in cConverters_mapped:
+					if canCall:
+						try:
+							yield converter( pyArgs, index, self )
+						except Exception, err:
+							if hasattr( err, 'args' ):
+								err.args += (
+									"""Failure in cConverter %r"""%(converter),
+									pyArgs, index, self,
+								)
+							raise
+					else:
+						yield converter
+		if cResolvers:
+			cResolvers_mapped = list(enumerate(cResolvers))
+			def calculate_cArguments( cArgs ):
+				for i,converter in cResolvers_mapped:
+					if converter is None:
+						yield cArgs[i]
+					else:
+						try:
+							yield converter( cArgs[i] )
+						except Exception, err:
+							err.args += (converter,)
+							raise
+		
+		if pyConverters:
 			if cConverters:
+				# create a map of index,converter, callable 
 				if cResolvers:
 					if storeValues:
 						if returnValues:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all possible operations"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
-								cArgs = []
-								for (index,converter) in enumerate( cConverters ):
-									# move enumerate out...
-									if not callable(converter):
-										cArgs.append( converter )
-									else:
-										try:
-											cArgs.append(
-												converter( pyArgs, index, self )
-											)
-										except Exception, err:
-											if hasattr( err, 'args' ):
-												err.args += (
-													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
-												)
-											raise
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								pyArgs = tuple( calculate_pyArgs( args ))
+								cArgs = tuple(calculate_cArgs( pyArgs ))
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -361,45 +385,9 @@ class Wrapper( object ):
 						else:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
-								cArgs = []
-								for (index,converter) in enumerate( cConverters ):
-									# move enumerate out...
-									if not callable(converter):
-										cArgs.append( converter )
-									else:
-										try:
-											cArgs.append(
-												converter( pyArgs, index, self )
-											)
-										except Exception, err:
-											if hasattr( err, 'args' ):
-												err.args += (
-													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
-												)
-											raise
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								pyArgs = tuple( calculate_pyArgs( args ))
+								cArgs = tuple(calculate_cArgs( pyArgs ))
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -422,49 +410,9 @@ class Wrapper( object ):
 						if returnValues:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save storeValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
-								cArgs = []
-								for (index,converter) in enumerate( cConverters ):
-									# move enumerate out...
-									if not callable(converter):
-										cArgs.append( converter )
-									else:
-										try:
-											cArgs.append(
-												converter( pyArgs, index, self )
-											)
-										except Exception, err:
-											if hasattr( err, 'args' ):
-												err.args += (
-													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
-												)
-											raise
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										try:
-											cArguments.append( converter( value ) )
-										except Exception, err:
-											err.args += (converter,)
-											raise
+								pyArgs = tuple( calculate_pyArgs( args ))
+								cArgs = tuple(calculate_cArgs( pyArgs ))
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -484,45 +432,9 @@ class Wrapper( object ):
 						else:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues and storeValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
-								cArgs = []
-								for (index,converter) in enumerate( cConverters ):
-									# move enumerate out...
-									if not callable(converter):
-										cArgs.append( converter )
-									else:
-										try:
-											cArgs.append(
-												converter( pyArgs, index, self )
-											)
-										except Exception, err:
-											if hasattr( err, 'args' ):
-												err.args += (
-													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
-												)
-											raise
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								pyArgs = tuple( calculate_pyArgs( args ))
+								cArgs = tuple(calculate_cArgs( pyArgs ))
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -540,39 +452,8 @@ class Wrapper( object ):
 						if returnValues:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all possible operations"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
-								cArgs = []
-								for (index,converter) in enumerate( cConverters ):
-									# move enumerate out...
-									if not callable(converter):
-										cArgs.append( converter )
-									else:
-										try:
-											cArgs.append(
-												converter( pyArgs, index, self )
-											)
-										except Exception, err:
-											if hasattr( err, 'args' ):
-												err.args += (
-													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
-												)
-											raise
+								pyArgs = tuple( calculate_pyArgs( args ))
+								cArgs = tuple(calculate_cArgs( pyArgs ))
 								cArguments = cArgs
 								try:
 									result = self.wrappedOperation( *cArguments )
@@ -600,39 +481,8 @@ class Wrapper( object ):
 						else:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
-								cArgs = []
-								for (index,converter) in enumerate( cConverters ):
-									# move enumerate out...
-									if not callable(converter):
-										cArgs.append( converter )
-									else:
-										try:
-											cArgs.append(
-												converter( pyArgs, index, self )
-											)
-										except Exception, err:
-											if hasattr( err, 'args' ):
-												err.args += (
-													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
-												)
-											raise
+								pyArgs = tuple( calculate_pyArgs( args ))
+								cArgs = tuple(calculate_cArgs( pyArgs ))
 								cArguments = cArgs
 								try:
 									result = self.wrappedOperation( *cArguments )
@@ -656,39 +506,8 @@ class Wrapper( object ):
 						if returnValues:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save storeValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
-								cArgs = []
-								for (index,converter) in enumerate( cConverters ):
-									# move enumerate out...
-									if not callable(converter):
-										cArgs.append( converter )
-									else:
-										try:
-											cArgs.append(
-												converter( pyArgs, index, self )
-											)
-										except Exception, err:
-											if hasattr( err, 'args' ):
-												err.args += (
-													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
-												)
-											raise
+								pyArgs = tuple( calculate_pyArgs( args ))
+								cArgs = tuple(calculate_cArgs( pyArgs ))
 								cArguments = cArgs
 								try:
 									result = self.wrappedOperation( *cArguments )
@@ -709,39 +528,8 @@ class Wrapper( object ):
 						else:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues and storeValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
-								cArgs = []
-								for (index,converter) in enumerate( cConverters ):
-									# move enumerate out...
-									if not callable(converter):
-										cArgs.append( converter )
-									else:
-										try:
-											cArgs.append(
-												converter( pyArgs, index, self )
-											)
-										except Exception, err:
-											if hasattr( err, 'args' ):
-												err.args += (
-													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
-												)
-											raise
+								pyArgs = tuple( calculate_pyArgs( args ))
+								cArgs = tuple(calculate_cArgs( pyArgs ))
 								cArguments = cArgs
 								try:
 									result = self.wrappedOperation( *cArguments )
@@ -761,29 +549,9 @@ class Wrapper( object ):
 						if returnValues:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all possible operations"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
+								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = pyArgs
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -810,29 +578,9 @@ class Wrapper( object ):
 						else:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
+								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = pyArgs
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -855,29 +603,9 @@ class Wrapper( object ):
 						if returnValues:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save storeValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
+								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = pyArgs
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -897,29 +625,9 @@ class Wrapper( object ):
 						else:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues and storeValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
+								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = pyArgs
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -937,22 +645,7 @@ class Wrapper( object ):
 						if returnValues:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all possible operations"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
+								pyArgs = tuple( calculate_pyArgs( args ))
 								cArguments = pyArgs
 								try:
 									result = self.wrappedOperation( *cArguments )
@@ -980,22 +673,7 @@ class Wrapper( object ):
 						else:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
+								pyArgs = tuple( calculate_pyArgs( args ))
 								cArguments = pyArgs
 								try:
 									result = self.wrappedOperation( *cArguments )
@@ -1019,22 +697,7 @@ class Wrapper( object ):
 						if returnValues:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save storeValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
+								pyArgs = tuple( calculate_pyArgs( args ))
 								cArguments = pyArgs
 								try:
 									result = self.wrappedOperation( *cArguments )
@@ -1055,22 +718,7 @@ class Wrapper( object ):
 						else:
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues and storeValues"""
-								if len(pyConverters) != len(args):
-									raise ValueError(
-										"""%s requires %r arguments (%s), received %s: %r"""%(
-											wrappedOperation.__name__,
-											len(pyConverters),
-											", ".join( self.pyConverterNames ),
-											len(args),
-											args
-										)
-									)
-								pyArgs = []
-								for (converter,arg) in zip(pyConverters,args):
-									if converter is None:
-										pyArgs.append( arg )
-									else:
-										pyArgs.append( converter(arg, self, args) )
+								pyArgs = tuple( calculate_pyArgs( args ))
 								cArguments = pyArgs
 								try:
 									result = self.wrappedOperation( *cArguments )
@@ -1109,12 +757,7 @@ class Wrapper( object ):
 													pyArgs, index, self,
 												)
 											raise
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -1159,12 +802,7 @@ class Wrapper( object ):
 													pyArgs, index, self,
 												)
 											raise
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -1205,12 +843,7 @@ class Wrapper( object ):
 													pyArgs, index, self,
 												)
 											raise
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -1248,12 +881,7 @@ class Wrapper( object ):
 													pyArgs, index, self,
 												)
 											raise
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -1433,12 +1061,7 @@ class Wrapper( object ):
 							def wrapperCall( self, *args ):
 								"""Wrapper with all possible operations"""
 								cArgs = args
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -1466,12 +1089,7 @@ class Wrapper( object ):
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues"""
 								cArgs = args
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -1495,12 +1113,7 @@ class Wrapper( object ):
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save storeValues"""
 								cArgs = args
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
@@ -1521,12 +1134,7 @@ class Wrapper( object ):
 							def wrapperCall( self, *args ):
 								"""Wrapper with all save returnValues and storeValues"""
 								cArgs = args
-								cArguments = []
-								for (converter, value) in zip( cResolvers, cArgs ):
-									if converter is None:
-										cArguments.append( value )
-									else:
-										cArguments.append( converter( value ) )
+								cArguments = tuple(calculate_cArguments( cArgs ))
 								try:
 									result = self.wrappedOperation( *cArguments )
 								except ctypes.ArgumentError, err:
