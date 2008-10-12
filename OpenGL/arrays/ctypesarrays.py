@@ -72,9 +72,12 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
 		return value
 	def unitSize( self, value, typeCode=None ):
 		"""Determine unit size of an array (if possible)"""
-		for dim in self.dims( value ):
-			pass 
-		return dim
+		if not hasattr( value.__class__, '__min_dimension__' ):
+			for dim in self.dims( value ):
+				pass 
+			setattr( value.__class__, '__min_dimension__', dim )
+			return dim
+		return value.__class__.__min_dimension__
 	def dimensions( self, value, typeCode=None ):
 		"""Determine dimensions of the passed array value (if possible)"""
 		return tuple( self.dims(value) )
