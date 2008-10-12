@@ -186,7 +186,7 @@ if OpenGL.ERROR_CHECKING:
 				should call onBegin and onEnd appropriately.
 			"""
 			err = self._currentChecker()
-			if err is not None and err != 0: # GL_NO_ERROR's guaranteed value
+			if err: # GL_NO_ERROR's guaranteed value is 0
 				raise GLError(
 					err,
 					result,
