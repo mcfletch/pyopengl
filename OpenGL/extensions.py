@@ -66,5 +66,11 @@ class _Alternate( object ):
 			)
 		)
 def alternate( name, *functions ):
-	"""Construct a callable that functions as the first implementation found of given set of alternatives"""
+	"""Construct a callable that functions as the first implementation found of given set of alternatives
+	
+	if name is a function then its name will be used....
+	"""
+	if not isinstance( name, (str,unicode)):
+		functions = (name,)+functions
+		name = name.__name__
 	return type( name, (_Alternate,), {} )( name, *functions )
