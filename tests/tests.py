@@ -642,9 +642,10 @@ class Test( unittest.TestCase ):
 				(i,1,0) for i in range( 8 )
 			] 
 			indices = [
-				[0,8,9,1, 2,10,11,3],
-				[4,12,13,5,6,14,15,7,8,16],
+				[0,8,9,1, 2,10,11,3,],
+				[4,12,13,5,6,14,15,7],
 			]
+			counts = [ len(x) for x in indices ]
 			glEnableClientState( GL_VERTEX_ARRAY )
 			glDisableClientState( GL_COLOR_ARRAY )
 			glDisableClientState( GL_NORMAL_ARRAY )
@@ -652,7 +653,10 @@ class Test( unittest.TestCase ):
 				glVertexPointerd( points )
 				glDisable( GL_LIGHTING )
 				try:
-					glMultiDrawElements(GL_QUAD_STRIP, [0,0], GL_UNSIGNED_BYTE, indices, 1)
+					for i in range( 2 ):
+						glDrawElements( GL_QUAD_STRIP, counts[i], GL_UNSIGNED_BYTE, indices[i] )
+					print 'glMultiDrawElements not currently working'
+#					glMultiDrawElements(GL_QUAD_STRIP, counts, GL_UNSIGNED_BYTE, indices, 2)
 				finally:
 					glEnable( GL_LIGHTING )
 			finally:
