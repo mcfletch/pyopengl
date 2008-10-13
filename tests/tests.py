@@ -10,8 +10,14 @@ from OpenGL import constants, error
 from OpenGL.GLU import *
 from OpenGL.arrays import arraydatatype
 import OpenGL
+from OpenGL.extensions import alternate
 import ctypes
 from OpenGL.GL.EXT.framebuffer_object import *
+from OpenGL.GL.EXT.multi_draw_arrays import *
+
+glMultiDrawElements = alternate( 
+	glMultiDrawElementsEXT, glMultiDrawElements, 
+)
 
 
 class Test( unittest.TestCase ):
@@ -372,8 +378,11 @@ class Test( unittest.TestCase ):
 		import numpy
 		a = numpy.arange( 0,1.2, .1, 'd' ).reshape( (-1,3 ))
 		glEnableClientState(GL_VERTEX_ARRAY)
-		glColorPointerf( a )
-		glColorPointerd( a )
+		try:
+			glColorPointerf( a )
+			glColorPointerd( a )
+		finally:
+			glDisableClientState( GL_VERTEX_ARRAY )
 	def test_constantPickle( self ):
 		"""Test that our constants can be pickled/unpickled properly"""
 		import pickle, cPickle
@@ -536,19 +545,22 @@ class Test( unittest.TestCase ):
 		glNormal3f( 0,0,1 )
 		glColor3f( 1,1,1 )
 		glEnableClientState(GL_VERTEX_ARRAY)
-		for x in range( 1, 255, 10 ):
-			d.bind()
-			try:
-				glVertexPointerd( d )
-				glDrawElements( GL_LINE_LOOP, len(indices), GL_UNSIGNED_INT, indices )
-			finally:
-				d.unbind()
-			lastPoint = [[1.5,(1/255.) * float(x),0]]
-			d[-2:-1] = lastPoint
-			glFlush()
-			pygame.display.flip()
-			glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT )
-			time.sleep( 0.001 )
+		try:
+			for x in range( 1, 255, 10 ):
+				d.bind()
+				try:
+					glVertexPointerd( d )
+					glDrawElements( GL_LINE_LOOP, len(indices), GL_UNSIGNED_INT, indices )
+				finally:
+					d.unbind()
+				lastPoint = [[1.5,(1/255.) * float(x),0]]
+				d[-2:-1] = lastPoint
+				glFlush()
+				pygame.display.flip()
+				glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT )
+				time.sleep( 0.001 )
+		finally:
+			glDisableClientState( GL_VERTEX_ARRAY )
 	def test_fbo( self ):
 		"""Test that we support framebuffer objects
 		
@@ -621,6 +633,32 @@ class Test( unittest.TestCase ):
 		if glBlendColor:
 			glBlendColor( .3, .4, 1.0, .3 )
 			print 'OpenGL 1.2 support'
+	def test_glmultidraw( self ):
+		"""Test that glMultiDrawElements works, if supported on the hardware"""
+		if glMultiDrawElements:
+			points = [
+				(i,0,0) for i in range( 8 )
+			] + [
+				(i,1,0) for i in range( 8 )
+			] 
+			indices = [
+				[0,8,9,1, 2,10,11,3],
+				[4,12,13,5,6,14,15,7,8,16],
+			]
+			glEnableClientState( GL_VERTEX_ARRAY )
+			glDisableClientState( GL_COLOR_ARRAY )
+			glDisableClientState( GL_NORMAL_ARRAY )
+			try:
+				glVertexPointerd( points )
+				glDisable( GL_LIGHTING )
+				try:
+					glMultiDrawElements(GL_QUAD_STRIP, [0,0], GL_UNSIGNED_BYTE, indices, 1)
+				finally:
+					glEnable( GL_LIGHTING )
+			finally:
+				glDisableClientState( GL_VERTEX_ARRAY )
+		else:
+			print 'No multi_draw_arrays support'
 		
 if __name__ == "__main__":
 	import logging 
