@@ -1,10 +1,18 @@
 #! /usr/bin/env python
 """OpenGL-ctypes setup script (setuptools-based)
 """
-from setuptools import setup, find_packages
+from distutils.core import setup
 import sys, os
 sys.path.insert(0, '.' )
 import metadata
+
+def is_package( path ):
+	return os.path.isfile( os.path.join( path, '__init__.py' ))
+def find_packages( root ):
+	"""Find all packages under this directory"""
+	for path, directories, files in os.walk( root ):
+		if is_package( path ):
+			yield path.replace( '/','.' )
 
 requirements = []
 if sys.hexversion < 0x2050000:
@@ -13,16 +21,8 @@ if sys.hexversion < 0x2050000:
 if __name__ == "__main__":
 	setup(
 		name = "PyOpenGL",
-		packages = find_packages(),
-		
+		packages = list( find_packages('OpenGL') ),
 		description = 'Standard OpenGL bindings for Python',
-		include_package_data = True,
-		exclude_package_data = {
-			'': [ '*.odp' ],
-		},
-		zip_safe = False,
-		
-		install_requires = requirements,
 		options = {
 			'sdist': {
 				'formats': ['gztar','zip'],
