@@ -14,6 +14,7 @@ import OpenGL
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_COMPILE_STATUS_ARB as GL_OBJECT_COMPILE_STATUS
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_LINK_STATUS_ARB as GL_OBJECT_LINK_STATUS
 from OpenGL.GL.ARB.shader_objects import glGetInfoLogARB as glGetInfoLog
+from OpenGL.lazywrapper import lazy
 
 from OpenGL import converters, error
 GL_INFO_LOG_LENGTH = constant.Constant( 'GL_INFO_LOG_LENGTH', 0x8B84 )
@@ -58,6 +59,26 @@ for size in (1,2,3,4):
 		del format, arrayType
 	del size
 
+@lazy( glGetShaderiv )
+def glGetShaderiv( baseOperation, shader, pname ):
+	"""Retrieve the integer parameter for the given shader"""
+	status = arrays.GLintArray.zeros( (1,))
+	status[0] = 1 
+	baseOperation(
+		shader, pname, status
+	)
+	return status[0]
+@lazy( glGetProgramiv )
+def glGetProgramiv( baseOperation, program, pname, params=None ):
+	"""Will automatically allocate params if not provided"""
+	if params is None:
+		params = arrays.GLintArray.zeros( (1,))
+		baseOperation( program, pname, params )
+		return params[0]
+	else:
+		baseOperation( program,pname, params )
+		return params
+
 def _afterCheck( key ):
 	"""Generate an error-checking function for compilation operations"""
 	if key == GL_OBJECT_COMPILE_STATUS:
@@ -94,8 +115,32 @@ if OpenGL.ERROR_CHECKING:
 ##if glValidateProgram and OpenGL.ERROR_CHECKING:
 ##	glValidateProgram.errcheck = _afterCheck( GL_OBJECT_VALIDATE_STATUS )
 
-base_glGetShaderSource = glGetShaderSource
-def glGetShaderSource( obj ):
+@lazy( glGetShaderInfoLog )
+def glGetShaderInfoLog( baseOperation, obj ):
+	"""Retrieve the shader's error messages as a Python string
+	
+	returns string which is '' if no message
+	"""
+	length = int(glGetObjectParameteriv(obj, GL_INFO_LOG_LENGTH))
+	if length > 0:
+		log = ctypes.create_string_buffer(length)
+		baseOperation(obj, length, None, log)
+		return log.value.strip('\000') # null-termination
+	return ''
+
+@lazy( glGetAttachedShaders )
+def glGetAttachedShaders( baseOperation, obj ):
+	"""Retrieve the attached objects as an array of GLhandle instances"""
+	length= glGetProgramiv( obj, GL_ATTACHED_SHADERS )
+	if length > 0:
+		storage = arrays.GLuintArray.zeros( (length,))
+		baseOperation( obj, length, None, storage )
+		return storage
+	return arrays.GLuintArray.zeros( (0,))
+
+
+@lazy( glGetShaderSource )
+def glGetShaderSource( baseOperation, obj ):
 	"""Retrieve the program/shader's source code as a Python string
 	
 	returns string which is '' if no source code
@@ -103,21 +148,31 @@ def glGetShaderSource( obj ):
 	length = int(glGetObjectParameteriv(obj, GL_OBJECT_SHADER_SOURCE_LENGTH))
 	if length > 0:
 		source = ctypes.create_string_buffer(length)
-		base_glGetShaderSource(obj, length, None, source)
+		baseOperation(obj, length, None, source)
 		return source.value.strip('\000') # null-termination
 	return ''
-glGetShaderSource.wrappedOperation = base_glGetShaderSource
 
-base_glGetActiveUniform = glGetActiveUniform
-def glGetActiveUniform(program, index):
+@lazy( glGetActiveUniform )
+def glGetActiveUniform(baseOperation,program, index):
 	"""Retrieve the name, size and type of the uniform of the index in the program"""
 	max_index = int(glGetObjectParameteriv( program, GL_OBJECT_ACTIVE_UNIFORMS ))
 	length = int(glGetObjectParameteriv( program, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH))
-	if index < max_index and index >= 0 and length > 0:
-		name = ctypes.create_string_buffer(length)
-		size = arrays.GLintArray.zeros( (1,))
-		gl_type = arrays.GLuintArray.zeros( (1,))
-		base_glGetActiveUniform(program, index, length, None, size, gl_type, name)
-		return name.value, size[0], gl_type[0]
+	if index < max_index and index >= 0:
+		if length > 0:
+			name = ctypes.create_string_buffer(length)
+			size = arrays.GLintArray.zeros( (1,))
+			gl_type = arrays.GLuintArray.zeros( (1,))
+			baseOperation(program, index, length, None, size, gl_type, name)
+			return name.value[:int(size[0])], size[0], gl_type[0]
+		raise ValueError( """No currently specified uniform names""" )
 	raise IndexError, 'Index %s out of range 0 to %i' % (index, max_index - 1, )
-glGetActiveUniform.wrappedOperation = base_glGetActiveUniform
+
+@lazy( glGetUniformLocation )
+def glGetUniformLocation( baseOperation, program, name ):
+	"""Check that name is a string with a null byte at the end of it"""
+	if not name:
+		raise ValueError( """Non-null name required""" )
+	elif name[-1] != '\000':
+		name = name + '\000'
+	return baseOperation( program, name )
+
