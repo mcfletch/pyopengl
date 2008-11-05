@@ -653,10 +653,9 @@ class Test( unittest.TestCase ):
 				glVertexPointerd( points )
 				glDisable( GL_LIGHTING )
 				try:
-					for i in range( 2 ):
-						glDrawElements( GL_QUAD_STRIP, counts[i], GL_UNSIGNED_BYTE, indices[i] )
-					print 'glMultiDrawElements not currently working'
-#					glMultiDrawElements(GL_QUAD_STRIP, counts, GL_UNSIGNED_BYTE, indices, 2)
+#					for i in range( 2 ):
+#						glDrawElements( GL_QUAD_STRIP, counts[i], GL_UNSIGNED_BYTE, indices[i] )
+					glMultiDrawElements(GL_QUAD_STRIP, counts, GL_UNSIGNED_BYTE, indices, 2)
 				finally:
 					glEnable( GL_LIGHTING )
 			finally:
