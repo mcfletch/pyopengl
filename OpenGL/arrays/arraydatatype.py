@@ -16,7 +16,7 @@ class ArrayDatatype( object ):
 	typeConstant = None
 	def getHandler( cls, value ):
 		"""Retrieve a handler for the given value, raise error on lookup failure"""
-		typ = type( value )
+		typ = value.__class__
 		try:
 			handler = cls.TYPE_REGISTRY.get( typ )
 		except AttributeError, err:

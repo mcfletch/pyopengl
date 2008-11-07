@@ -171,6 +171,26 @@ class VBO( object ):
 	def unbind( self ):
 		"""Unbind the buffer (make normal array operations active)"""
 		self.implementation.glBindBuffer( self.resolve(self.target),0 )
+	
+	def __add__( self, other ):
+		"""Add an integer to this VBO (offset)"""
+		if hasattr( other, 'offset' ):
+			other = other.offset 
+		assert isinstance( other, int ), """Only know how to add integer offsets"""
+		return VBOOffset( self, other )
+
+class VBOOffset( object ):
+	def __init__( self, vbo, offset ):
+		self.vbo = vbo 
+		self.offset = offset 
+	def __getattr__( self, key ):
+		if key != 'vbo':
+			return getattr( self.vbo, key )
+		raise AttributeError( 'No %r key in VBOOffset'%(key,))
+	def __add__( self, other ):
+		if hasattr( other, 'offset' ):
+			other = other.offset 
+		return VBOOffset( self.vbo, self.offset + other )
 
 def deleter( buffers, key, implementation ):
 	"""Produce a deleter callback to delete the given buffer"""
@@ -216,6 +236,19 @@ class VBOHandler( FormatHandler ):
 		"""Determine dimensions of the passed array value (if possible)"""
 		return ArrayDatatype.dimensions( value.data )
 
+class VBOOffsetHandler( VBOHandler ):
+	def dataPointer( self, instance ):
+		"""Retrieve data-pointer from the instance's data
+		
+		Is always NULL, to indicate use of the bound pointer
+		"""
+		return instance.offset
+	def from_param( self, instance ):
+		return ctypes.c_void_p( instance.offset )
+
 HANDLER = VBOHandler()
 HANDLER.loadAll() # otherwise just the VBO would get loaded :)
 HANDLER.register( [ VBO ] )
+
+HANDLER = VBOOffsetHandler()
+HANDLER.register( [ VBOOffset ] )

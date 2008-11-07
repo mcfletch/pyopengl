@@ -32,13 +32,6 @@ if hasattr( testArray, 'ctypes' ):
 			except AttributeError, err:
 				instance = self.asArray( instance )
 				return instance.ctypes.data
-#	def voidDataPointer( self, instance ):
-#		"""Get a void data pointer for the instance"""
-#		try:
-#			return instance.ctypes.data_as( ctypes.c_void_p )
-#		except AttributeError, err:
-#			instance = self.asArray( instance )
-#			return instance.ctypes.data_as( ctypes.c_void_p )
 elif hasattr(testArray,'__array_data__'):
 	def dataPointer( self, instance ):
 		"""Convert given instance to a data-pointer value (integer)"""

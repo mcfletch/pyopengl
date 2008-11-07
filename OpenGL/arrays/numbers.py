@@ -20,7 +20,7 @@ class NumberHandler( formathandler.FormatHandler ):
 	)
 	def from_param( self, value ):
 		"""If it's a ctypes value, pass on, otherwise do asArray"""
-		if not isinstance( value, TARGET_TYPE_TUPLE ):
+		if not value.__class__ in TARGET_TYPES:
 			return self.asArray( value )
 		return ctypes.byref(value)
 	dataPointer = from_param
@@ -32,10 +32,10 @@ class NumberHandler( formathandler.FormatHandler ):
 		raise NotImplemented( """Number data-type not allowed as an output array format""" )
 	def arrayToGLType( self, value ):
 		"""Given a value, guess OpenGL type of the corresponding pointer"""
-		if isinstance( value, TARGET_TYPE_TUPLE ):
-			return TARGET_TYPES[ type(value) ]
+		if value.__class__ in TARGET_TYPES:
+			return TARGET_TYPES[ value.__class__ ]
 		else:
-			guess = DEFAULT_TYPES.get( type(value))
+			guess = DEFAULT_TYPES.get( value.__class__ )
 			if guess is not None:
 				return guess[1]
 			raise TypeError( """Can't guess array data-type for %r types"""%(type(value)))
@@ -44,7 +44,7 @@ class NumberHandler( formathandler.FormatHandler ):
 		return 1
 	def asArray( self, value, typeCode=None ):
 		"""Convert given value to an array value of given typeCode"""
-		if isinstance( value, TARGET_TYPE_TUPLE ):
+		if value.__class__ in TARGET_TYPES:
 			return value
 		targetType = CONSTANT_TO_TYPE.get( typeCode )
 		if targetType is not None:
@@ -86,4 +86,6 @@ BYTE_SIZES = dict([
 	( c, ctypes.sizeof( getattr( constants, n) ) )
 	for (n,c) in constants.ARRAY_TYPE_TO_CONSTANT
 ])
+
 del n,c
+
