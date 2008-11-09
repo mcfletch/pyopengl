@@ -121,7 +121,19 @@ def glGetShaderInfoLog( baseOperation, obj ):
 	
 	returns string which is '' if no message
 	"""
-	length = int(glGetObjectParameteriv(obj, GL_INFO_LOG_LENGTH))
+	length = int(glGetShaderiv(obj, GL_INFO_LOG_LENGTH))
+	if length > 0:
+		log = ctypes.create_string_buffer(length)
+		baseOperation(obj, length, None, log)
+		return log.value.strip('\000') # null-termination
+	return ''
+@lazy( glGetProgramInfoLog )
+def glGetProgramInfoLog( baseOperation, obj ):
+	"""Retrieve the shader program's error messages as a Python string
+	
+	returns string which is '' if no message
+	"""
+	length = int(glGetProgramiv(obj, GL_INFO_LOG_LENGTH))
 	if length > 0:
 		log = ctypes.create_string_buffer(length)
 		baseOperation(obj, length, None, log)
@@ -145,7 +157,7 @@ def glGetShaderSource( baseOperation, obj ):
 	
 	returns string which is '' if no source code
 	"""
-	length = int(glGetObjectParameteriv(obj, GL_OBJECT_SHADER_SOURCE_LENGTH))
+	length = int(glGetShaderiv(obj, GL_OBJECT_SHADER_SOURCE_LENGTH))
 	if length > 0:
 		source = ctypes.create_string_buffer(length)
 		baseOperation(obj, length, None, source)
@@ -155,8 +167,8 @@ def glGetShaderSource( baseOperation, obj ):
 @lazy( glGetActiveUniform )
 def glGetActiveUniform(baseOperation,program, index):
 	"""Retrieve the name, size and type of the uniform of the index in the program"""
-	max_index = int(glGetObjectParameteriv( program, GL_OBJECT_ACTIVE_UNIFORMS ))
-	length = int(glGetObjectParameteriv( program, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH))
+	max_index = int(glGetShaderiv( program, GL_OBJECT_ACTIVE_UNIFORMS ))
+	length = int(glGetShaderiv( program, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH))
 	if index < max_index and index >= 0:
 		if length > 0:
 			name = ctypes.create_string_buffer(length)
