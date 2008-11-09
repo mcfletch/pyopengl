@@ -136,6 +136,8 @@ class VBO( object ):
 		"""Create the internal buffer(s)"""
 		assert not self.buffers, """Already created the buffer"""
 		self.buffers = [ long(self.implementation.glGenBuffers(1)) ]
+		self.target = self.resolve( self.target )
+		self.usage = self.resolve( self.usage )
 		self._DELETERS_[ id(self) ] = weakref.ref( self, deleter( self.buffers, id(self), self.implementation ))
 		return self.buffers
 	def copy_data( self ):
@@ -146,12 +148,12 @@ class VBO( object ):
 				while self._copy_segments:
 					start,size,data  = self._copy_segments.pop(0)
 					dataptr = ArrayDatatype.voidDataPointer( data )
-					self.implementation.glBufferSubData(self.resolve(self.target), start, size, dataptr)
+					self.implementation.glBufferSubData(self.target, start, size, dataptr)
 		else:
 			self.implementation.glBufferData(
-				self.resolve(self.target), 
+				self.target, 
 				self.data,
-				self.resolve(self.usage)
+				self.usage,
 			)
 			self.copied = True
 	def delete( self ):
@@ -166,11 +168,11 @@ class VBO( object ):
 		"""Bind this buffer for use in vertex calls"""
 		if not self.buffers:
 			buffers = self.create_buffers()
-		self.implementation.glBindBuffer( self.resolve(self.target), self.buffers[0])
+		self.implementation.glBindBuffer( self.target, self.buffers[0])
 		self.copy_data()
 	def unbind( self ):
 		"""Unbind the buffer (make normal array operations active)"""
-		self.implementation.glBindBuffer( self.resolve(self.target),0 )
+		self.implementation.glBindBuffer( self.target,0 )
 	
 	def __add__( self, other ):
 		"""Add an integer to this VBO (offset)"""
