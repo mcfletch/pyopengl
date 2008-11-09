@@ -61,3 +61,23 @@ def glGetBufferPointerv( baseOperation, target, pname, params=None ):
 		return data
 	else:
 		return baseOperation( target, pname, params )
+
+for func in ('glGenQueries','glDeleteQueries'):
+	globals()[func] = wrapper.wrapper( 
+		globals()[func],
+	).setPyConverter('n').setCConverter(
+		'n', arrays.AsArrayTypedSize( 'ids', arrays.GLuintArray ),
+	).setCConverter(
+		'ids', arrays.asArrayType(arrays.GLuintArray),
+	).setReturnValues(
+		wrapper.returnPyArgument( 'ids' )
+	)
+
+for func in (
+	'glGetQueryiv','glGetQueryObjectiv','glGetQueryObjectuiv',
+):
+	globals()[func] = wrapper.wrapper(globals()[func]).setOutput(
+		"params", (1,)
+	)
+del func, glget
+
