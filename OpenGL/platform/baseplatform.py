@@ -189,7 +189,7 @@ class BasePlatform( object ):
 			original.__name__, original.DLL, 
 			resultType=original.restype, argTypes=original.argtypes,
 			doc = original.__doc__, argNames = original.argNames,
-			extension = original.argNames,
+			extension = original.extension,
 		)
 	def nullFunction( 
 		self,
