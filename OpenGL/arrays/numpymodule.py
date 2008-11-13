@@ -134,10 +134,17 @@ class NumpyHandler( formathandler.FormatHandler ):
 		down rendering.
 		"""
 		typeCode = GL_TYPE_TO_ARRAY_MAPPING.get( typeCode )
-		if isinstance( source, numpy.ndarray):
-			if source.flags.contiguous and (typeCode is None or typeCode==source.dtype.char):
+		try:
+			contiguous = source.flags.contiguous
+		except AttributeError, err:
+			if typeCode:
+				return numpy.ascontiguousarray( source, typeCode )
+			else:
+				return numpy.ascontiguousarray( source )
+		else:
+			if contiguous and (typeCode is None or typeCode==source.dtype.char):
 				return source
-			elif (source.flags.contiguous and self.ERROR_ON_COPY):
+			elif (contiguous and self.ERROR_ON_COPY):
 				from OpenGL import error
 				raise error.CopyError(
 					"""Array of type %r passed, required array of type %r""",
@@ -158,10 +165,6 @@ class NumpyHandler( formathandler.FormatHandler ):
 				if typeCode is None:
 					typeCode = source.dtype.char
 				return numpy.ascontiguousarray( source.astype( typeCode ), typeCode )
-		elif typeCode:
-			return numpy.ascontiguousarray( source, typeCode )
-		else:
-			return numpy.ascontiguousarray( source )
 	def unitSize( self, value, typeCode=None ):
 		"""Determine unit size of an array (if possible)"""
 		return value.shape[-1]
