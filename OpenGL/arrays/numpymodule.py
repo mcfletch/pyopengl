@@ -18,28 +18,31 @@ try:
 except ImportError, err:
 	# numpy's array interface has changed over time :(
 	testArray = numpy.array( [1,2,3,4],'i' )
-	if hasattr( testArray, 'ctypes' ):
-		if hasattr( testArray.ctypes.data, 'value' ):
-			def dataPointer( self, instance ):
-				"""Use newer numpy's proper ctypes interface"""
-				try:
-					return instance.ctypes.data.value
-				except AttributeError, err:
-					instance = self.asArray( instance )
-					return instance.ctypes.data.value
-		else:
-			def dataPointer( self, instance ):
-				"""Use newer numpy's proper ctypes interface"""
-				try:
-					return instance.ctypes.data
-				except AttributeError, err:
-					instance = self.asArray( instance )
-					return instance.ctypes.data
-	elif hasattr(testArray,'__array_data__'):
+	# Numpy's "ctypes" interface actually creates a new ctypes object 
+	# in python for every access of the .ctypes attribute... which can take 
+	# ridiculously large periods when you multiply it by millions of iterations
+#	if hasattr( testArray, 'ctypes' ):
+#		if hasattr( testArray.ctypes.data, 'value' ):
+#			def dataPointer( self, instance ):
+#				"""Use newer numpy's proper ctypes interface"""
+#				try:
+#					return instance.ctypes.data.value
+#				except AttributeError, err:
+#					instance = self.asArray( instance )
+#					return instance.ctypes.data.value
+#		else:
+#			def dataPointer( self, instance ):
+#				"""Use newer numpy's proper ctypes interface"""
+#				try:
+#					return instance.ctypes.data
+#				except AttributeError, err:
+#					instance = self.asArray( instance )
+#					return instance.ctypes.data
+	if hasattr(testArray,'__array_interface__'):
 		def dataPointer( self, instance ):
 			"""Convert given instance to a data-pointer value (integer)"""
 			try:
-				return long(instance.__array_data__[0],0)
+				return long(instance.__array_interface__['data'][0])
 			except AttributeError, err:
 				instance = self.asArray( instance )
 				try:
@@ -50,7 +53,7 @@ except ImportError, err:
 		def dataPointer( self, instance ):
 			"""Convert given instance to a data-pointer value (integer)"""
 			try:
-				return long(instance.__array_interface__['data'][0])
+				return long(instance.__array_data__[0],0)
 			except AttributeError, err:
 				instance = self.asArray( instance )
 				try:
