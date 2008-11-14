@@ -15,33 +15,14 @@ class ArrayDatatype( object ):
 	"""
 	typeConstant = None
 	def getHandler( cls, value ):
-		"""Retrieve a handler for the given value, raise error on lookup failure"""
-		typ = value.__class__
-		try:
-			handler = cls.TYPE_REGISTRY.get( typ )
-		except AttributeError, err:
-			formathandler.FormatHandler.loadAll()
-			cls.TYPE_REGISTRY = formathandler.FormatHandler.TYPE_REGISTRY
-			handler = cls.TYPE_REGISTRY.get( typ )
-			if handler is None: 
-				handler = plugins.FormatHandler.match( typ )
-		if handler is None:
-			if hasattr( typ, '__mro__' ):
-				for base in typ.__mro__:
-					handler = cls.TYPE_REGISTRY.get( base )
-					if handler is None:
-						handler = plugins.FormatHandler.match( base )
-					if handler:
-						handler = cls.TYPE_REGISTRY[ base ]
-						handler.registerEquivalent( typ, base )
-						cls.TYPE_REGISTRY[ typ ] = handler 
-						return handler
-			raise TypeError(
-				"""No array-type handler for type %r (value: %s) registered"""%(
-					typ, repr(value)[:50]
-				)
-			)
-		return handler
+		"""Retrieve FormatHandler for given value 
+		
+		This method is replaced by the FormatHandler registry
+		once the registry is initialized...
+		"""
+		formathandler.FormatHandler.loadAll()
+		cls.getHandler = formathandler.FormatHandler.TYPE_REGISTRY
+		return cls.getHandler( value )
 	getHandler = classmethod( getHandler )
 	def from_param( cls, value ):
 		"""Given a value in a known data-pointer type, convert to a ctypes pointer"""

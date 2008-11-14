@@ -9,6 +9,7 @@ try:
 	from OpenGL_accelerate.wrapper import (
 		Wrapper as cWrapper,
 		CArgCalculator,
+		PyArgCalculator,
 	)
 	print 'Accelerators loaded'
 except ImportError, err:
@@ -299,32 +300,37 @@ class Wrapper( object ):
 		storeValues = getattr( self, 'storeValues', None )
 		returnValues = getattr( self, 'returnValues', None )
 		if pyConverters:
-			pyConverters_mapped = [
-				(i,converter,(converter is None))
-				for (i,converter) in enumerate( pyConverters )
-			]
-			pyConverters_length = len(pyConverters)
-			def calculate_pyArgs( args ):
-				if pyConverters_length != len(args):
-					raise ValueError(
-						"""%s requires %r arguments (%s), received %s: %r"""%(
-							wrappedOperation.__name__,
-							pyConverters_length,
-							", ".join( self.pyConverterNames ),
-							len(args),
-							args
+			if cWrapper:
+				calculate_pyArgs = PyArgCalculator(
+					self,pyConverters,
+				)
+			else:
+				pyConverters_mapped = [
+					(i,converter,(converter is None))
+					for (i,converter) in enumerate( pyConverters )
+				]
+				pyConverters_length = len(pyConverters)
+				def calculate_pyArgs( args ):
+					if pyConverters_length != len(args):
+						raise ValueError(
+							"""%s requires %r arguments (%s), received %s: %r"""%(
+								wrappedOperation.__name__,
+								pyConverters_length,
+								", ".join( self.pyConverterNames ),
+								len(args),
+								args
+							)
 						)
-					)
-				for index,converter,isNone in pyConverters_mapped:
-					if isNone:
-						yield args[index]
-					else:
-						try:
-							yield converter(args[index], self, args)
-						except Exception, err:
-							if hasattr( err, 'args' ):
-								err.args += ( converter, )
-							raise
+					for index,converter,isNone in pyConverters_mapped:
+						if isNone:
+							yield args[index]
+						else:
+							try:
+								yield converter(args[index], self, args)
+							except Exception, err:
+								if hasattr( err, 'args' ):
+									err.args += ( converter, )
+								raise
 		else:
 			calculate_pyArgs = None
 		if cConverters:

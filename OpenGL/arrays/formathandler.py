@@ -5,6 +5,34 @@ Data-type handlers are specified using OpenGL.plugins module
 import ctypes
 from OpenGL import plugins
 
+try:
+	raise ImportError( "C Registry doesn't current work :(" )
+	from OpenGL_accelerate.wrapper import HandlerRegistry
+except ImportError, err:
+	class HandlerRegistry( dict ):
+		def __init__( self, match ):
+			self.match = match 
+		def __call__( self, value ):
+			typ = value.__class__
+			handler = self.get( typ )
+			if handler is None:
+				if hasattr( typ, '__mro__' ):
+					for base in typ.__mro__:
+						handler = self.get( base )
+						if handler is None:
+							handler = self.match( base )
+						if handler:
+							handler = self[ base ]
+							handler.registerEquivalent( typ, base )
+							self[ typ ] = handler 
+							return handler
+				raise TypeError(
+					"""No array-type handler for type %r (value: %s) registered"""%(
+						typ, repr(value)[:50]
+					)
+				)
+			return handler
+
 class FormatHandler( object ):
 	"""Abstract class describing the handler interface
 	
@@ -12,7 +40,7 @@ class FormatHandler( object ):
 	which allow it to manipulate (and create) instances of the data-type 
 	it represents.
 	"""
-	TYPE_REGISTRY = {}
+	TYPE_REGISTRY = HandlerRegistry(plugins.FormatHandler.match)
 	LAZY_TYPE_REGISTRY = {}  # more registrations
 	HANDLER_REGISTRY = {}
 	baseType = None
