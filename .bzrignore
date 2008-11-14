@@ -1,3 +1,8 @@
 tests/mmap-test-data.dat
 .eric4project
 MANIFEST
+OpenGL-ctypes.e4p
+OpenGL-ctypes.e4q
+OpenGL-ctypes.e4s
+OpenGL-ctypes.e4t
+build

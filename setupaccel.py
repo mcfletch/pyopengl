@@ -2,6 +2,14 @@
 """Builds accelleration functions for PyOpenGL
 """
 from distutils.core import setup,Extension
+try:
+	from Cython.Distutils import build_ext
+except ImportError, err:
+	have_cython = False 
+else:
+	have_cython = True
+
+
 import sys, os
 sys.path.insert(0, '.' )
 
@@ -15,6 +23,15 @@ def find_packages( root ):
 
 extensions = [
 ]
+
+if have_cython:
+	extensions.append(
+		Extension( 
+			"OpenGL_accelerate.wrapper",[
+				os.path.join( 'src','wrapper.pyx' ),
+			],
+		)
+	)
 
 try:
 	import numpy
@@ -84,7 +101,10 @@ for slow points in PyOpenGL 3.x
 		'platforms': ['Win32','Linux','OS-X','Posix'],
 	}
 	### Now the actual set up call
-
+	if have_cython:
+		extraArguments['cmdclass'] = {
+			'build_ext': build_ext,
+		}
 	setup (
 		name = "PyOpenGL-accelerate",
 		version = "1.0.0",

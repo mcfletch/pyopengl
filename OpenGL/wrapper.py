@@ -5,6 +5,15 @@ glGetError = platform.OpenGL.glGetError
 from OpenGL import converters
 from OpenGL.converters import DefaultCConverter
 from OpenGL.converters import returnCArgument,returnPyArgument
+try:
+	from OpenGL_accelerate.wrapper import (
+		Wrapper as cWrapper,
+		CArgCalculator,
+	)
+	print 'Accelerators loaded'
+except ImportError, err:
+	cWrapper = None 
+	print 'No Accelerators', err
 NULL = object()
 
 def asList( o ):
@@ -316,25 +325,32 @@ class Wrapper( object ):
 							if hasattr( err, 'args' ):
 								err.args += ( converter, )
 							raise
+		else:
+			calculate_pyArgs = None
 		if cConverters:
-			cConverters_mapped = [
-				(i,converter,callable(converter))
-				for (i,converter) in enumerate( cConverters )
-			]
-			def calculate_cArgs( pyArgs ):
-				for index,converter,canCall in cConverters_mapped:
-					if canCall:
-						try:
-							yield converter( pyArgs, index, self )
-						except Exception, err:
-							if hasattr( err, 'args' ):
-								err.args += (
-									"""Failure in cConverter %r"""%(converter),
-									pyArgs, index, self,
-								)
-							raise
-					else:
-						yield converter
+			if cWrapper:
+				calculate_cArgs = CArgCalculator( self, cConverters )
+			else:
+				cConverters_mapped = [
+					(i,converter,callable(converter))
+					for (i,converter) in enumerate( cConverters )
+				]
+				def calculate_cArgs( pyArgs ):
+					for index,converter,canCall in cConverters_mapped:
+						if canCall:
+							try:
+								yield converter( pyArgs, index, self )
+							except Exception, err:
+								if hasattr( err, 'args' ):
+									err.args += (
+										"""Failure in cConverter %r"""%(converter),
+										pyArgs, index, self,
+									)
+								raise
+						else:
+							yield converter
+		else:
+			calculate_cArgs = None
 		if cResolvers:
 			cResolvers_mapped = list(enumerate(cResolvers))
 			def calculate_cArguments( cArgs ):
@@ -347,7 +363,17 @@ class Wrapper( object ):
 						except Exception, err:
 							err.args += (converter,)
 							raise
-		
+		else:
+			calculate_cArguments = None
+		if cWrapper:
+			return staticmethod(cWrapper(
+				wrappedOperation,
+				calculate_pyArgs=calculate_pyArgs, 
+				calculate_cArgs=calculate_cArgs,
+				calculate_cArguments=calculate_cArguments, 
+				storeValues=storeValues, 
+				returnValues=returnValues,
+			))
 		if pyConverters:
 			if cConverters:
 				# create a map of index,converter, callable 
