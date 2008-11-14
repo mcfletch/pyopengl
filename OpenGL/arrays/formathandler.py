@@ -6,7 +6,6 @@ import ctypes
 from OpenGL import plugins
 
 try:
-	raise ImportError( "C Registry doesn't current work :(" )
 	from OpenGL_accelerate.wrapper import HandlerRegistry
 except ImportError, err:
 	class HandlerRegistry( dict ):

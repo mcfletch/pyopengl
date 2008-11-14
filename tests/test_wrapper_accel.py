@@ -3,6 +3,7 @@
 import unittest
 from OpenGL import wrapper
 from OpenGL_accelerate.wrapper import Wrapper
+from OpenGL.arrays import arraydatatype
 
 def reflect( *args ):
 	return args
@@ -37,7 +38,18 @@ class TestWrapper( unittest.TestCase ):
 		w = Wrapper( reflect, calculate_cArguments=calc_c_args )
 		result = w( )
 		assert result == (1,2), result 
-	
+
+class TestRegistry( unittest.TestCase ):
+	def test_int( self ):
+		import numpy,ctypes
+		from OpenGL.arrays import numbers,numpymodule,ctypesparameters
+		for value,expected in [
+			(1,numbers.NumberHandler),
+			(numpy.arange(0,1), numpymodule.NumpyHandler),
+			(ctypes.c_int(0), numbers.NumberHandler),
+		]:
+			handler = arraydatatype.ArrayDatatype.getHandler( value )
+			assert isinstance( handler, expected ), (value,handler,expected)
 
 if __name__ == "__main__":
 	unittest.main()

@@ -154,7 +154,6 @@ cdef class HandlerRegistry:
 	def __setitem__( self,key,value ):
 		self.registry[key] = value
 	def __call__( self, value ):
-		cdef type typ,base
 		typ = value.__class__
 		handler = self.registry.get( typ )
 		if handler is None:
