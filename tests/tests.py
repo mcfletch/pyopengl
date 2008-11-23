@@ -20,7 +20,7 @@ glMultiDrawElements = alternate(
 )
 
 
-class Test( unittest.TestCase ):
+class Tests( unittest.TestCase ):
 	evaluator_ctrlpoints = [[[ -1.5, -1.5, 4.0], [-0.5, -1.5, 2.0], [0.5, -1.5,
 		-1.0], [1.5, -1.5, 2.0]], [[-1.5, -0.5, 1.0], [-0.5, -0.5, 3.0], [0.5, -0.5,
 		0.0], [1.5, -0.5, -1.0]], [[-1.5, 0.5, 4.0], [-0.5, 0.5, 0.0], [0.5, 0.5,
@@ -64,6 +64,10 @@ class Test( unittest.TestCase ):
 		dp[1] = 1
 		assert dp[1] == 1
 		assert d[1] == 1
+	def test_ctypes_array( self ):
+		color = (GLfloat * 3)( 0,1,0 )
+		glColor3fv( color )
+		
 	def test_evaluator( self ):
 		"""Test whether the evaluator functions work"""
 		glDisable(GL_CULL_FACE)
