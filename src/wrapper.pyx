@@ -118,11 +118,13 @@ cdef class PyArgCalculator:
 	"""C-coded version of the py-arg calculator pattern"""
 	cdef list mapping
 	cdef int length
+	cdef object wrapper
 	def __init__( 
 		self,
 		wrapper,
 		pyConverters
 	):
+		self.wrapper = wrapper
 		self.mapping = [
 			PyArgCalculatorElement(self,i,converter)
 			for (i,converter) in enumerate( pyConverters )
