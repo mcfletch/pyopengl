@@ -62,8 +62,6 @@ class FormatHandler( object ):
 		}
 		"""
 		for entrypoint in plugins.FormatHandler.all():
-#			if not entrypoint.check:
-#				# load automatically...
 			cls.loadPlugin( entrypoint )
 	@classmethod
 	def loadPlugin( cls, entrypoint ):
@@ -74,10 +72,11 @@ class FormatHandler( object ):
 			except ImportError, err:
 				from OpenGL import logs
 				log = logs.getLog( 'OpenGL.formathandler' )
-				log.info(
+				log.warn(
 					'Unable to load registered array format handler %s:\n%s', 
 					entrypoint.name, log.getException( err )
 				)
+				print log.getException( err )
 			else:
 				handler = plugin_class()
 				handler.register( handler.HANDLED_TYPES )
@@ -98,10 +97,15 @@ class FormatHandler( object ):
 				return cls.TYPE_REGISTRY[ type ]
 			raise KeyError( """Unable to find data-format handler for %s"""%( type,))
 	loadAll = classmethod( loadAll )
+	@classmethod
 	def chooseOutput( cls, preferred=None ):
+		"""Initialize and setup our output type"""
+		cls.loadAll()
+		cls.chooseOutput = cls.chooseOutput_final
+		return cls.chooseOutput( preferred )
+	@classmethod
+	def chooseOutput_final( cls, preferred=None ):
 		"""Choose our output-capable plugin"""
-		if not cls.TYPE_REGISTRY:
-			cls.loadAll()
 		if preferred is not None:
 			cls.preferredOutput = preferred
 		handler = None
@@ -121,7 +125,6 @@ class FormatHandler( object ):
 			)
 		handler.registerReturn()
 		return handler
-	chooseOutput = classmethod( chooseOutput )
 	
 	def register( self, types=None ):
 		"""Register this class as handler for given set of types"""
