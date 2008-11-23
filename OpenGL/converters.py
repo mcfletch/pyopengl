@@ -103,40 +103,40 @@ class ReturnValues( Converter ):
 		))
 
 # Now the concrete classes...
-class CallFuncPyConverter( PyConverter ):
-	"""PyConverter that takes a callable and calls it on incoming"""
-	def __init__( self, function ):
-		"""Store the function"""
-		self.function = function 
-	def __call__( self, incoming, function, argument ):
-		"""Call our function on incoming"""
-		return self.function( incoming )
-class DefaultCConverter( CConverter ):
-	"""NULL or Default CConverter, returns same-named Python argument
-	
-	Used primarily to allow for specifying a converter that explicitly
-	says "use the default behaviour".  This is *not* a finalise-ing
-	converter, it is passed in the index explicitly and just retrieves
-	that index from pyArgs when called.  
-	
-	Raises informative errors if the index cannot be resolved in pyArgs
-	"""
-	def __init__( self, index ):
-		"""Just store index for future access"""
-		self.index = index 
-	def __call__( self, pyArgs, index, wrapper ):
-		"""Return pyArgs[self.index] or raise a ValueError"""
-		try:
-			return pyArgs[ self.index ]
-		except IndexError, err:
-			raise ValueError(
-				"""%s expected parameter %r at index %r (%s), but pyArgs only length %s"""%(
-				self.wrappedOperation.__name__,
-				argName, 
-				pyIndex, 
-				", ".join( self.pyConverterNames ),
-				len(pyArgs )
-			))
+try:
+	from OpenGL_accelerate.wrapper import CallFuncPyConverter, DefaultCConverter
+except ImportError, err:
+	class CallFuncPyConverter( PyConverter ):
+		"""PyConverter that takes a callable and calls it on incoming"""
+		def __init__( self, function ):
+			"""Store the function"""
+			self.function = function 
+		def __call__( self, incoming, function, argument ):
+			"""Call our function on incoming"""
+			return self.function( incoming )
+	class DefaultCConverter( CConverter ):
+		"""NULL or Default CConverter, returns same-named Python argument
+		
+		Used primarily to allow for specifying a converter that explicitly
+		says "use the default behaviour".  This is *not* a finalise-ing
+		converter, it is passed in the index explicitly and just retrieves
+		that index from pyArgs when called.  
+		
+		Raises informative errors if the index cannot be resolved in pyArgs
+		"""
+		def __init__( self, index ):
+			"""Just store index for future access"""
+			self.index = index 
+		def __call__( self, pyArgs, index, wrapper ):
+			"""Return pyArgs[self.index] or raise a ValueError"""
+			try:
+				return pyArgs[ self.index ]
+			except IndexError, err:
+				raise ValueError(
+					"""Expected parameter index %r, but pyArgs only length %s"""%(
+					self.index,
+					len(pyArgs )
+				))
 
 class returnCArgument( ReturnValues ):
 	"""ReturnValues returning the named cArgs value"""
