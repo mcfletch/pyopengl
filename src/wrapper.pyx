@@ -173,3 +173,28 @@ cdef class HandlerRegistry:
 				)
 			)
 		return handler
+
+cdef class CallFuncPyConverter:
+	"""PyConverter that takes a callable and calls it on incoming"""
+	cdef object function
+	def __init__( self, function ):
+		"""Store the function"""
+		self.function = function 
+	def __call__( self, incoming, function, argument ):
+		"""Call our function on incoming"""
+		return self.function( incoming )
+cdef class DefaultCConverter:
+	cdef int index
+	def __init__( self, index ):
+		"""Just store index for future access"""
+		self.index = index 
+	def __call__( self, pyArgs, index, wrapper ):
+		"""Return pyArgs[self.index] or raise a ValueError"""
+		try:
+			return pyArgs[ self.index ]
+		except IndexError, err:
+			raise ValueError(
+				"""Expected parameter index %r, but pyArgs only length %s"""%(
+				self.index,
+				len(pyArgs )
+			))
