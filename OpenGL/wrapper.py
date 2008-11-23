@@ -10,6 +10,7 @@ try:
 		Wrapper as cWrapper,
 		CArgCalculator,
 		PyArgCalculator,
+		CArgumentCalculator,
 	)
 	print 'Accelerators loaded'
 except ImportError, err:
@@ -358,17 +359,20 @@ class Wrapper( object ):
 		else:
 			calculate_cArgs = None
 		if cResolvers:
-			cResolvers_mapped = list(enumerate(cResolvers))
-			def calculate_cArguments( cArgs ):
-				for i,converter in cResolvers_mapped:
-					if converter is None:
-						yield cArgs[i]
-					else:
-						try:
-							yield converter( cArgs[i] )
-						except Exception, err:
-							err.args += (converter,)
-							raise
+			if cWrapper:
+				calculate_cArguments = CArgumentCalculator( cResolvers )
+			else:
+				cResolvers_mapped = list(enumerate(cResolvers))
+				def calculate_cArguments( cArgs ):
+					for i,converter in cResolvers_mapped:
+						if converter is None:
+							yield cArgs[i]
+						else:
+							try:
+								yield converter( cArgs[i] )
+							except Exception, err:
+								err.args += (converter,)
+								raise
 		else:
 			calculate_cArguments = None
 		if cWrapper:

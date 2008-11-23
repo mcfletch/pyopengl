@@ -145,6 +145,34 @@ cdef class PyArgCalculator:
 			for calc in self.mapping
 		]
 
+cdef class CArgumentCalculator:
+	cdef list cResolvers
+	def __init__( self, cResolvers ):
+		self.cResolvers = cResolvers
+	def __call__( self, cArgs ):
+		cdef int i
+		cdef int resolver_length
+		cdef object converter
+		resolver_length = len(self.cResolvers )
+		if len(cArgs) != resolver_length:
+			raise TypeError(
+				"""Expected %s C arguments for resolution, got %s"""%(
+					resolver_length,len(cArgs)
+				)
+			)
+		result = []
+		for i in range( resolver_length ):
+			converter = self.cResolvers[i]
+			if converter is None:
+				result.append( cArgs[i] )
+			else:
+				try:
+					result.append( converter( cArgs[i] ))
+				except Exception, err:
+					err.args += (converter,)
+					raise
+		return result
+
 cdef class HandlerRegistry:
 	cdef dict registry
 	cdef object match
