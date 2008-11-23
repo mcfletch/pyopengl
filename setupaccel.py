@@ -24,14 +24,13 @@ def find_packages( root ):
 extensions = [
 ]
 
-if have_cython:
-	extensions.append(
-		Extension( 
-			"OpenGL_accelerate.wrapper",[
-				os.path.join( 'src','wrapper.pyx' ),
-			],
-		)
-	)
+extensions.append(
+    Extension( 
+        "OpenGL_accelerate.wrapper",[
+            os.path.join( 'src',['wrapper.c','wrapper.pyx'][bool(have_cython)] ),
+        ],
+    )
+)
 
 try:
 	import numpy
