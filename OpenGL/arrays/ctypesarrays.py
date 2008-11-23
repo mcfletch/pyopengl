@@ -44,12 +44,14 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
 		)
 	def arraySize( self, value, typeCode = None ):
 		"""Given a data-value, calculate dimensions for the array"""
-		dims = 1
-		for base in self.types( value ):
-			length = getattr( base, '_length_', None)
-			if length is not None:
+		try:
+			return value.__class__.__component_count__
+		except AttributeError, err:
+			dims = 1
+			for length in self.dims( value ):
 				dims *= length
-		return dims 
+			value.__class__.__component_count__ = dims
+			return dims 
 	def arrayByteCount( self, value, typeCode = None ):
 		"""Given a data-value, calculate number of bytes required to represent"""
 		return ctypes.sizeof( value )
@@ -63,21 +65,28 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
 				dimObject = None 
 	def dims( self, value ):
 		"""Produce iterable of all dimensions"""
-		for base in self.types( value ):
-			length = getattr( base, '_length_', None)
-			if length is not None:
-				yield length
+		try:
+			return value.__class__.__dimensions__
+		except AttributeError, err:
+			dimensions = []
+			for base in self.types( value ):
+				length = getattr( base, '_length_', None)
+				if length is not None:
+					dimensions.append( length )
+			dimensions = tuple( dimensions )
+			value.__class__.__dimensions__  = dimensions
+			return dimensions
 	def asArray( self, value, typeCode=None ):
 		"""Convert given value to an array value of given typeCode"""
 		return value
 	def unitSize( self, value, typeCode=None ):
 		"""Determine unit size of an array (if possible)"""
-		if not hasattr( value.__class__, '__min_dimension__' ):
-			for dim in self.dims( value ):
-				pass 
-			setattr( value.__class__, '__min_dimension__', dim )
+		try:
+			return value.__class__.__min_dimension__
+		except AttributeError, err:
+			dim = self.dims( value )[-1]
+			value.__class__.__min_dimension__ = dim
 			return dim
-		return value.__class__.__min_dimension__
 	def dimensions( self, value, typeCode=None ):
 		"""Determine dimensions of the passed array value (if possible)"""
 		return tuple( self.dims(value) )
