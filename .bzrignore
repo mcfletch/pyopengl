@@ -6,3 +6,6 @@ OpenGL-ctypes.e4q
 OpenGL-ctypes.e4s
 OpenGL-ctypes.e4t
 build
+dist
+callgrind.out*
+*.~1~
