@@ -68,6 +68,10 @@ def idle():
 			change = -1
 		x = x-change
 		y = y+change
+		if x < 1:
+			x = 1
+		if y < 1:
+			y = 1
 		glutReshapeWindow( x, y )
 		size = (x,y)
 		glutSetWindow(window)

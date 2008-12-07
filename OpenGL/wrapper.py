@@ -12,10 +12,8 @@ try:
 		PyArgCalculator,
 		CArgumentCalculator,
 	)
-	print 'Accelerators loaded'
 except ImportError, err:
 	cWrapper = None 
-	print 'No Accelerators', err
 NULL = object()
 
 def asList( o ):
