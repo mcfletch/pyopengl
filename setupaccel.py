@@ -91,7 +91,7 @@ if __name__ == "__main__":
 			"""Topic :: Multimedia :: Graphics :: 3D Rendering""",
 			"""Intended Audience :: Developers""",
 		],
-		'keywords': 'PyOpenGL,accelerate,fields',
+		'keywords': 'PyOpenGL,accelerate',
 		'long_description' : """Acceleration code for PyOpenGL
 
 This set of C extensions provides acceleration of common operations
@@ -106,12 +106,13 @@ for slow points in PyOpenGL 3.x
 		}
 	setup (
 		name = "PyOpenGL-accelerate",
-		version = "1.0.0",
+		version = "1.0.0b1",
 		description = "Acceleration code for PyOpenGL",
 		author = "Mike C. Fletcher",
 		author_email = "mcfletch@vrplumber.com",
 		url = "http://pyopengl.sourceforge.net",
-		license = "BSD-style, see license.txt for details",
+		download_url = "http://sourceforge.net/project/showfiles.php?group_id=5988",
+		license = 'BSD',
 		packages = list(find_packages( 'OpenGL_accelerate')),
 		# non python files of examples      
 		ext_modules=extensions,
