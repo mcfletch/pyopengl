@@ -184,7 +184,10 @@ cdef class HandlerRegistry:
 	def __setitem__( self,key,value ):
 		self.registry[key] = value
 	def __call__( self, value ):
-		typ = value.__class__
+		try:
+			typ = value.__class__
+		except AttributeError, err:
+			typ = type(value)
 		handler = self.registry.get( typ )
 		if handler is None:
 			if hasattr( typ, '__mro__' ):
