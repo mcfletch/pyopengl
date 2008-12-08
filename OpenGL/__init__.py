@@ -61,6 +61,10 @@ with these sets of flags.
 		
 		Default: False
 	
+	WARN_ON_FORMAT_UNAVAILABLE -- If True, generates
+		logging-module warn-level events when a FormatHandler
+		plugin is not loadable (with traceback).
+	
 	FULL_LOGGING -- If True, then wrap functions with 
 		logging operations which reports each call along with its 
 		arguments to  the OpenGL.calltrace logger at the INFO 
@@ -94,8 +98,9 @@ from OpenGL.version import __version__
 ERROR_CHECKING = True
 ERROR_LOGGING = False
 ERROR_ON_COPY = False
+WARN_ON_FORMAT_UNAVAILABLE = False
 
-FULL_LOGGING = False
+FULL_LOGGING = False 
 ALLOW_NUMPY_SCALARS = False
 UNSIGNED_BYTE_IMAGES_AS_STRING = True
 
@@ -108,11 +113,11 @@ PlatformPlugin( 'darwin', 'OpenGL.platform.darwin.DarwinPlatform' )
 
 FormatHandler( 'none', 'OpenGL.arrays.nones.NoneHandler' )
 FormatHandler( 'str', 'OpenGL.arrays.strings.StringHandler' )
-FormatHandler( 'list', 'OpenGL.arrays.lists.ListHandler' )
+FormatHandler( 'list', 'OpenGL.arrays.lists.ListHandler', ['__builtin__.list','__builtin__.tuple'] )
 FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler' )
 FormatHandler( 'ctypesarray', 'OpenGL.arrays.ctypesarrays.CtypesArrayHandler' )
 FormatHandler( 'ctypesparameter', 'OpenGL.arrays.ctypesparameters.CtypesParameterHandler' )
 FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandler' )
 FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', ['numpy.ndarray'] )
 #FormatHandler( 'numarray', 'OpenGL.arrays.numarrays.NumarrayHandler' )
-#FormatHandler( 'numeric', 'OpenGL.arrays.numeric.NumericHandler', )
+FormatHandler( 'numeric', 'OpenGL.arrays.numeric.NumericHandler', )
