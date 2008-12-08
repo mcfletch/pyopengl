@@ -6,6 +6,7 @@ import ctypes
 from OpenGL import plugins
 
 try:
+#	raise ImportError( 'Testing without wrapper' )
 	from OpenGL_accelerate.wrapper import HandlerRegistry
 except ImportError, err:
 	class HandlerRegistry( dict ):
@@ -20,8 +21,10 @@ except ImportError, err:
 						handler = self.get( base )
 						if handler is None:
 							handler = self.match( base )
+							if handler:
+								handler = handler.load()
 						if handler:
-							handler = self[ base ]
+							self[ base ] = handler
 							handler.registerEquivalent( typ, base )
 							self[ typ ] = handler 
 							return handler
@@ -70,13 +73,16 @@ class FormatHandler( object ):
 			try:
 				plugin_class = entrypoint.load()
 			except ImportError, err:
-				from OpenGL import logs
+				from OpenGL import logs,WARN_ON_FORMAT_UNAVAILABLE
 				log = logs.getLog( 'OpenGL.formathandler' )
-				log.warn(
+				if WARN_ON_FORMAT_UNAVAILABLE:
+					logFunc = log.warn
+				else:
+					logFunc = log.info 
+				logFunc(
 					'Unable to load registered array format handler %s:\n%s', 
 					entrypoint.name, log.getException( err )
 				)
-				print log.getException( err )
 			else:
 				handler = plugin_class()
 				handler.register( handler.HANDLED_TYPES )
