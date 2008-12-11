@@ -22,7 +22,9 @@ from OpenGL.arrays import formathandler
 
 class NumarrayHandler( formathandler.FormatHandler ):
 	"""Numarray-specific data-type handler for OpenGL"""
-	from_param = staticmethod( dataPointer )
+	@classmethod
+	def from_param( cls, value, typeCode=None ):
+		return dataPointer( value )
 	dataPointer = staticmethod( dataPointer )
 	HANDLED_TYPES = (numarray.ArrayType, )
 	isOutput = True

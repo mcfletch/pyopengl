@@ -14,14 +14,9 @@ class CtypesPointerHandler( formathandler.FormatHandler ):
 	them for output of data, but they can be used for certain
 	types of input...
 	"""
-	from_param = staticmethod( ctypes.byref )
-	def from_param( cls, value ):
+	@classmethod
+	def from_param( cls, value, typeCode=None  ):
 		return value
-	from_param = classmethod( from_param )
-##		if isinstance( value, ctypes._Pointer ):
-##			return value 
-##		else:
-##			return ctypes.byref( value )
 	dataPointer = staticmethod( ctypes.addressof )
 	HANDLED_TYPES = (ctypes._Pointer, )
 	def voidDataPointer( cls, value ):

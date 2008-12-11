@@ -8,7 +8,9 @@ import ctypes
 class StringHandler( formathandler.FormatHandler ):
 	"""String-specific data-type handler for OpenGL"""
 	HANDLED_TYPES = (str, )
-	from_param = staticmethod( dataPointer )
+	@classmethod
+	def from_param( cls, value, typeCode=None ):
+		return dataPointer( value )
 	dataPointer = staticmethod( dataPointer )
 	def zeros( self, dims, typeCode=None ):
 		"""Currently don't allow strings as output types!"""

@@ -26,7 +26,7 @@ class ArrayDatatype( object ):
 	getHandler = classmethod( getHandler )
 	def from_param( cls, value ):
 		"""Given a value in a known data-pointer type, convert to a ctypes pointer"""
-		return cls.getHandler(value).from_param( value )
+		return cls.getHandler(value).from_param( value, cls.typeConstant )
 	from_param = classmethod( logs.logOnFail( from_param, log ) )
 	def dataPointer( cls, value ):
 		"""Given a value in a known data-pointer type, return long for pointer"""
@@ -34,7 +34,7 @@ class ArrayDatatype( object ):
 			return cls.getHandler(value).dataPointer( value )
 		except Exception, err:
 			log.warn(
-				"""Failure in from_param for %s instance %s""", type(value), value,
+				"""Failure in dataPointer for %s instance %s""", type(value), value,
 			)
 			raise
 	dataPointer = classmethod( logs.logOnFail( dataPointer, log ) )

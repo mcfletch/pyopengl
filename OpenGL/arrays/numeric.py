@@ -25,7 +25,9 @@ class NumericHandler( formathandler.FormatHandler ):
 	"""Numeric-specific data-type handler for OpenGL"""
 	HANDLED_TYPES = (Numeric.ArrayType, )
 	isOutput = True
-	from_param = staticmethod( dataPointer )
+	@classmethod
+	def from_param( cls, value, typeCode=None ):
+		return dataPointer( value )
 	dataPointer = staticmethod( dataPointer )
 	def voidDataPointer( cls, value ):
 		"""Given value in a known data-pointer type, return void_p for pointer"""

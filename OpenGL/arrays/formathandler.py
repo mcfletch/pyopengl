@@ -144,7 +144,7 @@ class FormatHandler( object ):
 	def registerEquivalent( self, typ, base ):
 		"""Register a sub-class for handling as the base-type"""
 		
-	def from_param( self, value ):
+	def from_param( self, value, typeCode=None  ):
 		"""Convert to a ctypes pointer value"""
 	def dataPointer( self, value ):
 		"""return long for pointer value"""

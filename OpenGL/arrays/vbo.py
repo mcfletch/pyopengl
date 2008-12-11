@@ -216,7 +216,7 @@ class VBOHandler( FormatHandler ):
 		Is always NULL, to indicate use of the bound pointer
 		"""
 		return 0
-	def from_param( self, instance ):
+	def from_param( self, instance, typeCode=None ):
 		return ctypes.c_void_p( 0 )
 	def zeros( self, dims, typeCode ):
 		"""Not implemented"""
@@ -245,7 +245,7 @@ class VBOOffsetHandler( VBOHandler ):
 		Is always NULL, to indicate use of the bound pointer
 		"""
 		return instance.offset
-	def from_param( self, instance ):
+	def from_param( self, instance, typeCode=None ):
 		return ctypes.c_void_p( instance.offset )
 
 HANDLER = VBOHandler()

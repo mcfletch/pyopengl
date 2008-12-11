@@ -12,7 +12,9 @@ import operator
 
 class CtypesArrayHandler( formathandler.FormatHandler ):
 	"""Ctypes Array-type-specific data-type handler for OpenGL"""
-	from_param = staticmethod( ctypes.byref )
+	@classmethod
+	def from_param( cls, value, typeCode=None ):
+		return ctypes.byref( value )
 	dataPointer = staticmethod( ctypes.addressof )
 	HANDLED_TYPES = (_ctypes.Array, )
 	isOutput = True

@@ -14,6 +14,7 @@ import OpenGL
 import ctypes
 
 try:
+	raise ImportError( 'Testing without wrapper' )
 	from OpenGL_accelerate.numpy_accel import dataPointer
 except ImportError, err:
 	# numpy's array interface has changed over time :(
@@ -74,11 +75,19 @@ class NumpyHandler( formathandler.FormatHandler ):
 			if we have to copy an array object in order to produce
 			a contiguous array of the correct type.
 	"""
-	HANDLED_TYPES = (numpy.ndarray, list, tuple )
+	HANDLED_TYPES = (numpy.ndarray,)# list, tuple )
 	dataPointer = dataPointer
 	isOutput = True
-	def from_param( self, instance ):
-		return ctypes.c_void_p( self.dataPointer( instance ))
+	def from_param( self, instance, typeCode=None ):
+		try:
+			pointer = self.dataPointer( instance )
+		except TypeError, err:
+			array = self.asArray( instance, typeCode )
+			pp = self.dataPointer( array )
+			pp._temporary_array_ = (array,)
+			return pp
+		else:
+			return ctypes.c_void_p( pointer )
 	ERROR_ON_COPY = OpenGL.ERROR_ON_COPY
 	def zeros( self, dims, typeCode ):
 		"""Return Numpy array of zeros in given size"""

@@ -19,6 +19,11 @@ static PyObject * dataPointer( PyObject * self, PyObject * args ) {
 	if (array==Py_None) {
 		dataPointer = NULL;
 	} else {
+		if (!PyArray_Check(array)){
+			// raise TypeError...
+			PyErr_SetString( PyExc_TypeError, "Require a numpy/Numeric array" );
+			return NULL;
+		}
 		/* XXX do a check here for array type! */
 		dataPointer = ((PyArrayObject *) array)->data;
 	}

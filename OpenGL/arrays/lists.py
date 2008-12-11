@@ -11,13 +11,13 @@ import ctypes, _ctypes
 
 from OpenGL import constants, constant
 from OpenGL.arrays import formathandler
-try:
-	from OpenGL.arrays import numpymodule
-except ImportError, err:
-	# we are required...
-	HANDLED_TYPES = (list,tuple)
-else:
-	HANDLED_TYPES = ()
+#try:
+#	from OpenGL.arrays import numpymodule
+#except ImportError, err:
+#	# we are required...
+HANDLED_TYPES = (list,tuple)
+#else:
+#	HANDLED_TYPES = ()
 import operator
 
 class ListHandler( formathandler.FormatHandler ):
@@ -34,7 +34,14 @@ class ListHandler( formathandler.FormatHandler ):
 		arrays, not Python lists, this is done for convenience in coding
 		the implementation, mostly.
 	"""
-	from_param = staticmethod( ctypes.byref )
+	def from_param( self, instance, typeCode=None ):
+		try:
+			return ctypes.byref( instance )
+		except TypeError, err:
+			array = self.asArray( instance, typeCode )
+			pp = ctypes.c_void_p( ctypes.addressof( array ) )
+			pp._temporary_array_ = (array,)
+			return pp
 	dataPointer = staticmethod( ctypes.addressof )
 	HANDLED_TYPES = HANDLED_TYPES 
 	isOutput = True

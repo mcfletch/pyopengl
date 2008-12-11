@@ -6,7 +6,7 @@ from OpenGL.arrays import formathandler
 class NoneHandler( formathandler.FormatHandler ):
 	"""Numpy-specific data-type handler for OpenGL"""
 	HANDLED_TYPES = (type(None), )
-	def from_param( self, value ):
+	def from_param( self, value, typeCode=None  ):
 		"""Convert to a ctypes pointer value"""
 		return None
 	def dataPointer( self, value ):

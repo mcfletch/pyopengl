@@ -18,10 +18,10 @@ class NumberHandler( formathandler.FormatHandler ):
 		constants.GLclampf,
 		constants.GLclampd,
 	)
-	def from_param( self, value ):
+	def from_param( self, value, typeCode=None  ):
 		"""If it's a ctypes value, pass on, otherwise do asArray"""
 		if not value.__class__ in TARGET_TYPES:
-			return self.asArray( value )
+			return self.asArray( value, typeCode=typeCode )
 		return ctypes.byref(value)
 	dataPointer = from_param
 	def zeros( self, dims, typeCode=None ):

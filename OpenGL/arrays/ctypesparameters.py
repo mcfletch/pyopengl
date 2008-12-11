@@ -15,7 +15,7 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
 	"""Ctypes Paramater-type-specific data-type handler for OpenGL"""
 	isOutput = True
 	HANDLED_TYPES = (ParamaterType, _ctypes._SimpleCData)
-	def from_param( cls, value ):
+	def from_param( cls, value, typeCode=None ):
 		if isinstance( value, ParamaterType ):
 			return value 
 		else:

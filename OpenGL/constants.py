@@ -20,7 +20,7 @@ def _defineType( name, baseType, convertFunc = long ):
 	import OpenGL 
 	if OpenGL.ALLOW_NUMPY_SCALARS:
 		original = baseType.from_param
-		def from_param( x ):
+		def from_param( x, typeCode=None ):
 			try:
 				return original( x )
 			except TypeError, err:
