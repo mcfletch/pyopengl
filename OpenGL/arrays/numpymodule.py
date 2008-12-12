@@ -183,7 +183,8 @@ class NumpyHandler( formathandler.FormatHandler ):
 		return value.shape
 try:
 	from OpenGL_accelerate.numpy_formathandler import FromParam
-	from_param = staticmethod( FromParam( NumpyHandler.dataPointer, NumpyHandler.asArray ) )
+	from_param = FromParam( NumpyHandler.dataPointer, NumpyHandler.asArray )
+	raise ImportError( """Currently some diff between the Cython and python version causes core dumps""" )
 except ImportError, err:
 	@classmethod
 	def from_param( cls, instance, typeCode=None ):
