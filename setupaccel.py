@@ -24,13 +24,18 @@ def find_packages( root ):
 extensions = [
 ]
 
-extensions.append(
+extensions.extend([
     Extension( 
         "OpenGL_accelerate.wrapper",[
             os.path.join( 'src',['wrapper.c','wrapper.pyx'][bool(have_cython)] ),
         ],
+    ),
+    Extension( 
+        "OpenGL_accelerate.numpy_formathandler",[
+            os.path.join( 'src',['numpy_formathandler.c','numpy_formathandler.pyx'][bool(have_cython)] ),
+        ],
     )
-)
+])
 
 try:
 	import numpy

@@ -14,7 +14,6 @@ import OpenGL
 import ctypes
 
 try:
-	raise ImportError( 'Testing without wrapper' )
 	from OpenGL_accelerate.numpy_accel import dataPointer
 except ImportError, err:
 	# numpy's array interface has changed over time :(
@@ -24,44 +23,45 @@ except ImportError, err:
 	# ridiculously large periods when you multiply it by millions of iterations
 #	if hasattr( testArray, 'ctypes' ):
 #		if hasattr( testArray.ctypes.data, 'value' ):
-#			def dataPointer( self, instance ):
+#			def dataPointer( cls, instance ):
 #				"""Use newer numpy's proper ctypes interface"""
 #				try:
 #					return instance.ctypes.data.value
 #				except AttributeError, err:
-#					instance = self.asArray( instance )
+#					instance = cls.asArray( instance )
 #					return instance.ctypes.data.value
 #		else:
-#			def dataPointer( self, instance ):
+#			def dataPointer( cls, instance ):
 #				"""Use newer numpy's proper ctypes interface"""
 #				try:
 #					return instance.ctypes.data
 #				except AttributeError, err:
-#					instance = self.asArray( instance )
+#					instance = cls.asArray( instance )
 #					return instance.ctypes.data
 	if hasattr(testArray,'__array_interface__'):
-		def dataPointer( self, instance ):
+		def dataPointer( cls, instance ):
 			"""Convert given instance to a data-pointer value (integer)"""
 			try:
 				return long(instance.__array_interface__['data'][0])
 			except AttributeError, err:
-				instance = self.asArray( instance )
+				instance = cls.asArray( instance )
 				try:
 					return long(instance.__array_interface__['data'][0])
 				except AttributeError, err:
 					return long(instance.__array_data__[0],0)
 	else:
-		def dataPointer( self, instance ):
+		def dataPointer( cls, instance ):
 			"""Convert given instance to a data-pointer value (integer)"""
 			try:
 				return long(instance.__array_data__[0],0)
 			except AttributeError, err:
-				instance = self.asArray( instance )
+				instance = cls.asArray( instance )
 				try:
 					return long(instance.__array_interface__['data'][0])
 				except AttributeError, err:
 					return long(instance.__array_data__[0],0)
 	del testArray
+	dataPointer = classmethod( dataPointer )
 
 from OpenGL import constants, constant
 from OpenGL.arrays import formathandler
@@ -78,21 +78,13 @@ class NumpyHandler( formathandler.FormatHandler ):
 	HANDLED_TYPES = (numpy.ndarray,)# list, tuple )
 	dataPointer = dataPointer
 	isOutput = True
-	def from_param( self, instance, typeCode=None ):
-		try:
-			pointer = self.dataPointer( instance )
-		except TypeError, err:
-			array = self.asArray( instance, typeCode )
-			pp = self.dataPointer( array )
-			pp._temporary_array_ = (array,)
-			return pp
-		else:
-			return ctypes.c_void_p( pointer )
 	ERROR_ON_COPY = OpenGL.ERROR_ON_COPY
-	def zeros( self, dims, typeCode ):
+	@classmethod
+	def zeros( cls, dims, typeCode ):
 		"""Return Numpy array of zeros in given size"""
 		return numpy.zeros( dims, GL_TYPE_TO_ARRAY_MAPPING.get(typeCode) or typeCode )
-	def arrayToGLType( self, value ):
+	@classmethod
+	def arrayToGLType( cls, value ):
 		"""Given a value, guess OpenGL type of the corresponding pointer"""
 		typeCode = value.dtype.char
 		constant = ARRAY_TO_GL_TYPE_MAPPING.get( typeCode )
@@ -103,34 +95,38 @@ class NumpyHandler( formathandler.FormatHandler ):
 				)
 			)
 		return constant
-	def arraySize( self, value, typeCode = None ):
+	@classmethod
+	def arraySize( cls, value, typeCode = None ):
 		"""Given a data-value, calculate dimensions for the array"""
 		try:
 			dimValue = value.shape
 		except AttributeError, err:
 			# XXX it's a list or a tuple, how do we determine dimensions there???
 			# for now we'll just punt and convert to an array first...
-			value = self.asArray( value, typeCode )
+			value = cls.asArray( value, typeCode )
 			dimValue = value.shape 
 		dims = 1
 		for dim in dimValue:
 			dims *= dim 
 		return dims 
-	def arrayByteCount( self, value, typeCode = None ):
+	@classmethod
+	def arrayByteCount( cls, value, typeCode = None ):
 		"""Given a data-value, calculate number of bytes required to represent"""
 		try:
-			return self.arraySize( value, typeCode ) * value.itemsize
+			return cls.arraySize( value, typeCode ) * value.itemsize
 		except AttributeError, err:
-			value = self.asArray( value, typeCode )
-			return self.arraySize( value, typeCode ) * value.itemsize
-	def asArray( self, value, typeCode=None ):
+			value = cls.asArray( value, typeCode )
+			return cls.arraySize( value, typeCode ) * value.itemsize
+	@classmethod
+	def asArray( cls, value, typeCode=None ):
 		"""Convert given value to an array value of given typeCode"""
 		if value is None:
 			return value
 		else:
-			return self.contiguous( value, typeCode )
+			return cls.contiguous( value, typeCode )
 
-	def contiguous( self, source, typeCode=None ):
+	@classmethod
+	def contiguous( cls, source, typeCode=None ):
 		"""Get contiguous array from source
 		
 		source -- numpy Python array (or compatible object)
@@ -156,7 +152,7 @@ class NumpyHandler( formathandler.FormatHandler ):
 		else:
 			if contiguous and (typeCode is None or typeCode==source.dtype.char):
 				return source
-			elif (contiguous and self.ERROR_ON_COPY):
+			elif (contiguous and cls.ERROR_ON_COPY):
 				from OpenGL import error
 				raise error.CopyError(
 					"""Array of type %r passed, required array of type %r""",
@@ -168,7 +164,7 @@ class NumpyHandler( formathandler.FormatHandler ):
 				# XXX Guard against wacky conversion types like uint to float, where
 				# we really don't want to have the C-level conversion occur.
 				# XXX ascontiguousarray is apparently now available in numpy!
-				if self.ERROR_ON_COPY:
+				if cls.ERROR_ON_COPY:
 					from OpenGL import error
 					raise error.CopyError(
 						"""Non-contiguous array passed""",
@@ -177,12 +173,30 @@ class NumpyHandler( formathandler.FormatHandler ):
 				if typeCode is None:
 					typeCode = source.dtype.char
 				return numpy.ascontiguousarray( source.astype( typeCode ), typeCode )
-	def unitSize( self, value, typeCode=None ):
+	@classmethod
+	def unitSize( cls, value, typeCode=None ):
 		"""Determine unit size of an array (if possible)"""
 		return value.shape[-1]
-	def dimensions( self, value, typeCode=None ):
+	@classmethod
+	def dimensions( cls, value, typeCode=None ):
 		"""Determine dimensions of the passed array value (if possible)"""
 		return value.shape
+try:
+	from OpenGL_accelerate.numpy_formathandler import FromParam
+	from_param = staticmethod( FromParam( NumpyHandler.dataPointer, NumpyHandler.asArray ) )
+except ImportError, err:
+	@classmethod
+	def from_param( cls, instance, typeCode=None ):
+		try:
+			pointer = cls.dataPointer( instance )
+		except TypeError, err:
+			array = cls.asArray( instance, typeCode )
+			pp = cls.dataPointer( array )
+			pp._temporary_array_ = (array,)
+			return pp
+		else:
+			return ctypes.c_void_p( pointer )
+NumpyHandler.from_param = from_param
 
 try:
 	numpy.array( [1], 's' )

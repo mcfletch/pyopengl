@@ -26,7 +26,11 @@ class ArrayDatatype( object ):
 	getHandler = classmethod( getHandler )
 	def from_param( cls, value ):
 		"""Given a value in a known data-pointer type, convert to a ctypes pointer"""
-		return cls.getHandler(value).from_param( value, cls.typeConstant )
+		try:
+			return cls.getHandler(value).from_param( value, cls.typeConstant )
+		except Exception, err:
+			import pdb
+			pdb.set_trace()
 	from_param = classmethod( logs.logOnFail( from_param, log ) )
 	def dataPointer( cls, value ):
 		"""Given a value in a known data-pointer type, return long for pointer"""
