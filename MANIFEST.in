@@ -2,5 +2,6 @@ global-exclude *.odt *.odp .cvsignore *.diff
 exclude src/*.h src/*.xml src/*.zip src/*.pdf src/*.zip src/*.txt
 include src/win32deps.py src/toglinstall/get_togl.py src/*.py 
 include src/*.pyx
+include src/*.c
 include tests/*.py tests/*.png
 include metadata.py
