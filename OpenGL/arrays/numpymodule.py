@@ -182,9 +182,10 @@ class NumpyHandler( formathandler.FormatHandler ):
 		"""Determine dimensions of the passed array value (if possible)"""
 		return value.shape
 try:
+	raise ImportError( 'As of Jan 3, 2009, the FromParam module is causing a weird deallocation failure when the ctypes pointer object tries to clean up the numpy array object (sigh)' )
 	from OpenGL_accelerate.numpy_formathandler import FromParam
 	from_param = FromParam( NumpyHandler.dataPointer, NumpyHandler.asArray )
-	raise ImportError( """Currently some diff between the Cython and python version causes core dumps""" )
+	#raise ImportError( """Currently some diff between the Cython and python version causes core dumps""" )
 except ImportError, err:
 	@classmethod
 	def from_param( cls, instance, typeCode=None ):
