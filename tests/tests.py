@@ -202,7 +202,7 @@ class Tests( unittest.TestCase ):
 		try:
 			glBitmap(-1,-1,0,0,0,0,"")
 		except Exception, err:
-			assert err.err == 1281, ("""Expected invalid value (1281)""", err.err)
+			assert err.err in (1281,1282), ("""Expected invalid value (1281) or invalid operation (1282)""", err.err)
 		else:
 			raise RuntimeError( """No error on invalid glBitmap""" )
 	def test_quadrics( self ):
@@ -557,7 +557,7 @@ class Tests( unittest.TestCase ):
 					glDrawElements( GL_LINE_LOOP, len(indices), GL_UNSIGNED_INT, indices )
 				finally:
 					d.unbind()
-				lastPoint = [[1.5,(1/255.) * float(x),0]]
+				lastPoint = numpy.array( [[1.5,(1/255.) * float(x),0]] )
 				d[-2:-1] = lastPoint
 				glFlush()
 				pygame.display.flip()
