@@ -14,6 +14,7 @@ from OpenGL.extensions import alternate
 import ctypes
 from OpenGL.GL.EXT.framebuffer_object import *
 from OpenGL.GL.EXT.multi_draw_arrays import *
+from OpenGL.GL.ARB.imaging import *
 
 glMultiDrawElements = alternate( 
 	glMultiDrawElementsEXT, glMultiDrawElements, 
@@ -666,6 +667,23 @@ class Tests( unittest.TestCase ):
 				glDisableClientState( GL_VERTEX_ARRAY )
 		else:
 			print 'No multi_draw_arrays support'
+	def test_glDrawBuffers_list( self ):
+		"""Test that glDrawBuffers with list argument doesn't crash"""
+		args = [
+		   GL_COLOR_ATTACHMENT0_EXT,
+		   GL_COLOR_ATTACHMENT1_EXT,
+		]
+		try:
+			glDrawBuffers( 2, args )
+		except GLError, err:
+			assert err.err == 1282, err
+	def test_enable_histogram( self ):
+		if glInitImagingARB():
+			glHistogram(GL_HISTOGRAM, 256, GL_LUMINANCE, GL_FALSE)
+			glEnable( GL_HISTOGRAM )
+			glDisable( GL_HISTOGRAM )
+		else:
+			print 'No ARB imaging extension'
 		
 if __name__ == "__main__":
 	import logging 
