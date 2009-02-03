@@ -43,7 +43,7 @@ class DarwinPlatform( baseplatform.BasePlatform ):
 	# the same assumption GLUT does...
 	GLUT = ctypesloader.loadLibrary(
 		ctypes.cdll,
-		'glut', 
+		'GLUT', 
 		mode=ctypes.RTLD_GLOBAL 
 	)
 
