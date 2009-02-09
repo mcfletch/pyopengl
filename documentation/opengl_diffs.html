@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>PyOpenGL for OpenGL Programmers</title>
+  <link rel="stylesheet" type="text/css" href="tutorial.css">
+  <meta name="author" content="Mike C. Fletcher">
+</head>
+<body>
+<h1>PyOpenGL for OpenGL Programmers<br>
+</h1>
+<p class="introduction">This document describes those features of
+PyOpenGL which are likely to be unfamiliar to OpenGL programmers.&nbsp;
+It also explains various features of PyOpenGL which are not covered in
+general OpenGL documentation.<br>
+</p>
+<p class="introduction"></p>
+<h2>Method Signatures vs. C OpenGL<br>
+</h2>
+<p>Most of the functions which appear in PyOpenGL 2 are identical in
+calling method and functionality to that of the appropriate C
+specification.&nbsp; There are a few exceptions because of the
+differences between C and Python. Most of these exceptions are due to
+the difference between C and Python in the way that they access
+arrays.&nbsp; For example, a C function like this:</p>
+<pre>void foo(int count, const int *args);</pre>
+<p>will have the Python binding:</p>
+<pre>foo(args) -&gt; None</pre>
+<p>Also C functions which write array data to a function argument like:</p>
+<pre>void bar(int args[4]);</pre>
+<p>will have the Python binding:</p>
+<pre>bar() -&gt; args[]</pre>
+<p>The following sections will document changes other than simple
+changes like the above examples.<br>
+</p>
+<h2>Errors raise Exceptions</h2>
+<p>PyOpenGL always uses "strict" OpenGL operation, which is closer to
+the operation of Python itself, i.e. errors are raised as exceptions,
+rather than silently being passed back to the user. glGetError is not
+available as it would never return anything save GL_NO_ERROR.</p>
+<p>To convert code which uses glGetError, you will want to search for
+each instance of glGetError and introduce the appropriate exception
+handling mechanisms. The exceptions raised are:<br>
+</p>
+<ul>
+  <li>GL.GLerror by all modules except WGL</li>
+  <li>GLU.GLUerror by some GLU functions. Note that GLU can also throw
+GL.GLerror</li>
+  <li>WindowsError/SystemError by WGL</li>
+</ul>
+<p>GL.GLerror is a subclass of EnvironmentError and has a errno and msg
+like EnvironmentError. In the case of multiple errors the errno
+attribute will be set to a tuple of error numbers and msg will be a
+concatenation of the error messages for each error.</p>
+<h2>Array Handling Routines<br>
+</h2>
+<p>Each call which sets an array pointer, such as glVertexPointer, will
+have many variants. First there will a function which is identical that
+of the specification. For the pointer argument one should pass a string.
+Also note that the stride values are used.</p>
+<p>Next there will a set of functions named:</p>
+<pre>glXPointer{ub|b|us|s|ui|i|f|d}</pre>
+<p>These will usually take as a single argument a multidimensional
+array of values. The type argument is controlled by the suffix of the
+function (ub is unsigned byte, b is byte, f is float, d is double etc.)
+Most other arguments are derived from the dimensions of the array.</p>
+<p>So for glColorPointer we have:</p>
+<pre>glColorPointer(size, type, stride, pointer) -&gt; None<br>glColorPointerub(pointer[][]) -&gt; None<br>glColorPointerb(pointer[][]) -&gt; None<br>glColorPointerus(pointer[][]) -&gt; None<br>glColorPointers(pointer[][]) -&gt; None<br>glColorPointerui(pointer[][]) -&gt; None<br>glColorPointeri(pointer[][]) -&gt; None<br>glColorPointerf(pointer[][]) -&gt; None<br>glColorPointerd(pointer[][]) -&gt; None</pre>
+<p>This same decoration strategy is used for other array functions
+besides glXPointer.</p>
+<p>For instance, glDrawElements has the Python binding:</p>
+<pre>glDrawElements(mode, count, type, indices) -&gt; None</pre>
+<p>where indices is expected to be a string.&nbsp; There are also the
+decorated bindings:</p>
+<pre>glDrawElementsub(mode, indices[]) -&gt; None<br>glDrawElementsus(mode, indices[]) -&gt; None<br>glDrawElementsui(mode, indices[]) -&gt; None</pre>
+<p>where "indices" is now a single dimensional array.</p>
+<p>When calling a glColorPointer, glVertexPointer, etc. Python needs to
+allocate memory to store the values that OpenGL needs. This memory is
+reference counted and takes into account function calls like
+glPushClientAttrib and glPopClientAttrib. To force this memory to be
+released one just need to make a call glColorPointerub(None).</p>
+<p>Currently glPushClientAttrib will always set the
+GL_CLIENT_VERTEX_ARRAY_BIT flag as glPopClientAttrib has no way of
+knowing that flag was set and the state of the flag is needed to know
+whether or not to decrement the pointer locks on the allocated memory.</p>
+<p>This may change in the future. That said, surrounding array use
+glPushClientAttrib/glPopClientAttrib is a good way to force the release
+of any allocated memory, but make sure that all calls to glXPointer,
+etc. are within the ClientAttrib block if you chose to use this scheme.</p>
+<p class="technical">Note that since all the memory allocation is
+automatic there is no need for glGetPointerv function, so it is excluded.</p>
+<p class="technical">Note that the function glInterleavedArrays is also
+present, but it does not have the variants that the others do (i.e., no
+glInterleavedArraysf)</p>
+<p><strong>Warning</strong> if you write an extension module which makes
+calls to the pointer functions and expects to interact with PyOpenGL
+safely it should push the client state (from within the extension)
+before and after array use.<br>
+</p>
+<h2>Image Routines</h2>
+<p>glDrawPixels and the other image/texturing functions have much the
+same decoration scheme as the array functions. For glDrawPixels there is
+the standard function which expects a string as the pixel data:<br>
+</p>
+<pre>glDrawPixels(width, height, format, type, pixels) -&gt; None</pre>
+<p>This function will respect the parameters set by glPixelStore{i|f}.</p>
+<p>There is also a collection of variants which take a multidimensional
+array as the data source and set glPixelStore{i|f} automatically. For
+example:<br>
+</p>
+<pre>glDrawPixelsub(format, pixels) -&gt; None</pre>
+<p>Notice that width and height are inferred from the pixel data and
+the type is GLubyte.<br>
+</p>
+<h2>Selection and Feedback Buffers<br>
+</h2>
+<p>Normally in OpenGL to use a selection buffer one would do the
+following:</p>
+<pre>GLuint buffer[SIZE];<br>glSelectBuffer(SIZE, buffer);<br>glRenderMode(GL_SELECT);<br>/* draw some stuff */<br>GLint count = glRenderMode(GL_RENDER);<br>/* parse the selection buffer */</pre>
+<p></p>
+<p>In Python this accomplished like this:</p>
+<pre>glSelectBuffer(SIZE) # allocate a selection buffer of SIZE elements<br>glRenderMode(GL_SELECT)<br># draw some stuff<br>buffer = glRenderMode(GL_RENDER)<br>for hit_record in buffer:<br>&nbsp;&nbsp;&nbsp; min_depth, max_depth, names = hit_record<br>&nbsp;&nbsp;&nbsp; # do something with the record</pre>
+<p>Feedback buffers are used in the same way except that each item in
+the buffer is tuple (token, value), where value is either a passthrough
+token or a list of vertices.<br>
+</p>
+<p class="technical">Note that if glRenderMode returns a buffer then it
+also <strong>resets OpenGL's pointer</strong> for the corresponding
+buffer. This means that the buffer returned by glRenderMode is
+independent of future calls to glRenderMode, i.e. it will not be
+overwritten by any such future calls. This makes the returned buffer
+somewhat thread-safe. It also means that <strong>every call to
+glRenderMode(GL_SELECT | GL_FEEDBACK)</strong> needs to <strong>preceded
+by a call to glSelectBuffer or glFeedbackBuffer</strong> first, i.e. the
+following code <strong>will not work</strong>:</p>
+<pre>### THIS DOESN'T WORK!!!<br>glSelectBuffer(SIZE) # allocate a selection buffer of SIZE elements<br>glRenderMode(GL_SELECT)<br># draw some stuff<br>buffer = glRenderMode(GL_RENDER)<br># do another selection<br>glRenderMode(GL_SELECT)<br># draw some stuff<br>buffer = glRenderMode(GL_RENDER)</pre>
+<p class="technical">Instead one must do:<br>
+</p>
+<pre>glSelectBuffer(SIZE) # allocate a selection buffer of SIZE elements<br>glRenderMode(GL_SELECT)<br># draw some stuff<br>buffer = glRenderMode(GL_RENDER)<br># do another selection<br>glSelectBuffer(SIZE) allocate a new selection buffer<br>glRenderMode(GL_SELECT)<br># draw some stuff<br>buffer = glRenderMode(GL_RENDER)</pre>
+<h2>Extensions and Conditional Functionality<br>
+</h2>
+<p>PyOpenGL includes support for many GL, GLU and WGL extensions. These
+extensions are implemented as sub-modules of the GL, GLU or WGL package.
+For example, the GL_ARB_multitexture extension would be implemented in
+the module GL.ARB.multitexture. <br>
+</p>
+<p>For every extension that PyOpenGL supports the corresponding module
+will exist regardless of whether or not that extension is implemented by
+the user's OpenGL library. A placeholder module will also exist even if
+the extension defines no new tokens or functions. If the extension is
+not supported by the current context than any attempt to use that
+extension will throw a GLerror exception with a code of
+GL_INVALID_OPERATION.</p>
+<p>Each OpenGL implementation has its' own method for linking to OpenGL
+extensions.&nbsp; These methods vary from dynamic linking to static
+linking and even some dynamic/static combinations.&nbsp; Regardless of
+which case applies to a specific implementation of OpenGL, one still
+needs to verify that a particular extension is supported before
+attempting to use any functions or tokens that it declares.&nbsp; This
+is usually done by calling glGetString(GL_EXTENSIONS) and looking for
+extension name in the returned string.</p>
+<p>Extensions are potentially context dependent, which means that an
+extension supported by one OpenGL context may not be supported by
+another.&nbsp; This means that verification that extension is supported
+and loading of the extension procedure addresses (if the OpenGL
+extension mechanism is dynamic) needs to be done for each context that
+intends to use a particular extension.&nbsp; PyOpenGL simplifies this
+somewhat by providing a single initialization function for each
+extension which does the following:</p>
+<ol>
+  <li>verify the extension is supported by the current context</li>
+  <li>load all procedure addresses for extension if needed</li>
+  <li>return a boolean indicating success of the previous steps</li>
+</ol>
+<p>The naming scheme of the this initialization is designed to be
+consistent with the naming scheme used with OpenGL extensions. For
+instance, here is a function which takes an extension name and returns
+the initialization function name:</p>
+<pre>def init_name(extension_name):<br>&nbsp;&nbsp;&nbsp; parts = string.split(extension_name, '_')<br>&nbsp;&nbsp;&nbsp; return string.join([string.lower(parts[0]), 'Init'] +<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; map(string.capitalize, parts[2:]) +<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [parts[1]], '')<br>&gt;&gt;&gt; init_name('GL_ARB_multitexture')<br>'glInitMultitextureARB'<br>&gt;&gt;&gt; init_name('GLU_SGI_filter4_parameters')<br>'gluInitFilter4ParametersSGI'</pre>
+<p>As an example of extension usage, here is a GLUT program that needs
+the GL_ARB_multitexture extension:</p>
+<pre>from OpenGL.GLUT import *<br>from OpenGL.GL.ARB.multitexture import *<br>import sys<br><br># initialize GLUT<br>argv = glutInit(sys.argv)<br><br># create a window, needs to be done before glInitMultitextureARB<br>glutCreateWindow('foo')<br><br># see if GL_ARB_multitexture is supported<br>if not glInitMultitextureARB():<br>&nbsp;&nbsp;&nbsp; # it's not supported...panic!<br>&nbsp;&nbsp;&nbsp; print "Help, I'm lost without GL_ARB_multitexture!"<br>&nbsp;&nbsp;&nbsp; sys.exit(1)<br># do something with it...</pre>
+<p>It is important to note that the initialization function for an
+extension must be called by each context that intends to use that
+extension.&nbsp; Failure to do so will result in a GL.GLerror with a
+code of GL_INVALID_OPERATION even if the extension is actually supported
+by that context.<br>
+</p>
+<h3>Core Module Versions<br>
+</h3>
+<p>For many modules PyOpenGL is designed to support multiple versions
+of the API exposed by that particular module. For instance, the GLU
+module supports GLU API versions 1.0, 1.1, 1.2 and 1.3. In many cases
+different versions of an API have different functions and constants.</p>
+<p>There are several ways for Python code to determine at runtime which
+API is exposed.</p>
+<p>All PyOpenGL modules have an attribute named __api_version__ which
+is set to an integer which defines the current version. Usually this a
+combination of the major version number in the high word and the minor
+in the low word. So GLU has __api_version__ = 0x100 | 0x101 | 0x102 |
+0x103</p>
+<p>Currently the only exception to this is the GLUT module which only
+uses the low word to store the Xlib implementation number (see your GLUT
+header for information about this.)</p>
+<p>Often times a C header which defines an API has some macro or macros
+which define the version number. PyOpenGL includes the same macros as
+module attributes to make porting C code easier. For the GLU module
+these macros are GLU_VERSION_1_1, GLU_VERSION_1_2, and GLU_VERSION_1_3.
+So if your Python code needs GLU 1.2 to run then you could test for this
+at runtime by doing the following:</p>
+<pre>from OpenGL.GLU import *<br>try:<br>&nbsp;&nbsp;&nbsp; GLU_VERSION_1_2<br>except:<br>&nbsp;&nbsp;&nbsp; print "Help! I'm lost without GLU 1.2!"<br>&nbsp;&nbsp;&nbsp; sys.exit(1)</pre>
+<h2>Function Aliases</h2>
+<p>PyOpenGL has historically provided a number of aliases for
+functions.&nbsp; For backwards compatibility, these aliases continue to
+be provided:<br>
+</p>
+<ul>
+  <li>glGetBooleanv aliases</li>
+  <ul>
+    <li>glGetBoolean</li>
+  </ul>
+  <li>glGetDoublev aliases</li>
+  <ul>
+    <li>glGetDouble</li>
+  </ul>
+  <li>glGetIntegerv aliases</li>
+  <ul>
+    <li>glGetInteger</li>
+  </ul>
+  <li>glColord aliases</li>
+  <ul>
+    <li>glColor</li>
+  </ul>
+  <ul>
+    <li>glColor3</li>
+  </ul>
+  <ul>
+    <li>glColor4</li>
+  </ul>
+  <li>glEvalCoordd aliases</li>
+  <ul>
+    <li>glEvalCoord</li>
+  </ul>
+  <ul>
+    <li>glEvalCoord1</li>
+  </ul>
+  <ul>
+    <li>glEvalCoord2</li>
+  </ul>
+  <li>glFogfv aliases</li>
+  <ul>
+    <li>glFog</li>
+  </ul>
+  <li>glIndexd aliases</li>
+  <ul>
+    <li>glIndex</li>
+  </ul>
+  <li>glLightfv aliases</li>
+  <ul>
+    <li>glLight</li>
+  </ul>
+  <li>glLightModelfv aliases</li>
+  <ul>
+    <li>glLightModel</li>
+  </ul>
+  <li>glMaterialfv aliases</li>
+  <ul>
+    <li>glMaterial</li>
+  </ul>
+  <li>glNormald aliases</li>
+  <ul>
+    <li>glNormal</li>
+  </ul>
+  <ul>
+    <li>glNormal3</li>
+  </ul>
+  <ul>
+    <li>glNormal4</li>
+  </ul>
+  <li>glRasterPosd aliases</li>
+  <ul>
+    <li>glRasterPos</li>
+  </ul>
+  <ul>
+    <li>glRasterPos2</li>
+  </ul>
+  <ul>
+    <li>glRasterPos3</li>
+    <li>glRasterPos4</li>
+  </ul>
+  <li>glRotated aliases</li>
+  <ul>
+    <li>glRotate</li>
+  </ul>
+  <li>glScaled aliases</li>
+  <ul>
+    <li>glScale</li>
+  </ul>
+  <li>glTexCoordd aliases</li>
+  <ul>
+    <li>glTexCoord</li>
+    <li>glTexCoord1</li>
+    <li>glTexCoord2</li>
+    <li>glTexCoord3</li>
+    <li>glTexCoord4</li>
+  </ul>
+  <li>glTexGendv aliases</li>
+  <ul>
+    <li>glTexGen</li>
+  </ul>
+  <li>glTexParameterfv aliases</li>
+  <ul>
+    <li>glTexParameter</li>
+  </ul>
+  <li>glTranslated aliases</li>
+  <ul>
+    <li>glTranslate</li>
+  </ul>
+  <li>glVertexd aliases</li>
+  <ul>
+    <li>glVertex</li>
+  </ul>
+</ul>
+<p></p>
+<p></p>
+<p class="footer"><a href="index.html"><img
+ src="../images/doc_logo_icon.gif" title="" alt="Documentation"
+ style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>&nbsp;<a
+ href="http://pyopengl.sourceforge.net/"><img align="middle" title=""
+ alt="PyOpenGL" src="file:///S:/PyOpenGLWebSite/images/icon2.jpg"
+ style="border: 0px solid ; width: 32px; height: 32px;"></a> A
+SourceForge Open-Source project: <a href="http://sourceforge.net"><img
+ src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1"
+ style="border: 0px solid ; width: 88px; height: 31px;"
+ alt="SourceForge" title="" align="middle"></a></p>
+</body>
+</html>

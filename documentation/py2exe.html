@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Py2exe with PyOpenGL and OpenGLContext</title>
+  <link rel="stylesheet" type="text/css" href="tutorial.css">
+  <meta name="author" content="Mike C. Fletcher">
+</head>
+<body>
+<h1>Py2exe with PyOpenGL and OpenGLContext<br>
+</h1>
+<p class="introduction"><a
+ href="http://starship.python.net/crew/theller/py2exe/">py2exe</a> is a
+<a href="http://www.python.org/sigs/distutils-sig/">distutils</a>
+extension that allows you to build "stand-alone" executable versions of
+your applications for Win32 systems. &nbsp;Because of the structure of
+the OpenGL package, it's necessary to take a few extra steps to get a
+functional py2exe-generated application when using PyOpenGL.
+OpenGLContext uses a common pattern of "lazy imports" for certain
+classes, so those require a simple flag.</p>
+<h2>Summary</h2>
+<p style="color: red;" class="introduction" align="left">The
+information on this page is apparently out-of-date.&nbsp; It was
+written for earlier versions of py2exe that weren't able to deal with
+PyOpenGL's funky import hooks.&nbsp; Reports are that there is now
+nothing special required to use PyOpenGL 2.0.2 in py2exe'd applications.<br>
+</p>
+<p align="left">The OpenGL package uses a number of import tricks to
+make it convenient to use the packages in the normal case.
+&nbsp;However, these import tricks (specifically the use of
+__init__.pyd
+or __init__.so files) are not compatible with the py2exe import hooks
+(which get confused as to which &nbsp;__init__.pyd is intended).
+&nbsp;To get around this limitation, you can <strong>exclude the
+entire OpenGL package</strong> during py2exe building, then <strong>copy
+the package as a directory</strong> into your distribution target
+directory. </p>
+<p>The OpenGLContext <strong>testingcontext</strong> package (if used)
+doesn't directly import the various testing context modules, so if you
+use it, you'll need to <strong>import those modules explicitly</strong>.</p>
+<h2>PyOpenGL Details</h2>
+<p>Use the --excludes=OpenGL flag to py2exe, like so:<br>
+</p>
+<pre><code>setup.py py2exe --excludes=OpenGL</code></pre>
+<p> this prevents the OpenGL package, or any sub-module from being
+included. &nbsp;This avoids the conflicts with the various __init__.*
+files.</p>
+<p>Import Tkinter directly in your script if you use OpenGL.Tk (many
+scripts don't explicitly import Tkinter, they just use the environment
+from OpenGL.Tk, which will be excluded by the step above, so Tkinter
+won't get packaged up).&nbsp; Alternately use:<br>
+</p>
+<pre><code>setup.py py2exe </code><code>--includes=Tkinter ...</code></pre>
+<p>flag for py2exe&nbsp;</p>
+<p>Copy (a subset of) the OpenGL package into your distribution
+directory</p>
+<ul>
+  <li>The subset can exclude the scripts, demo and doc
+directories.&nbsp;</li>
+  <li> For considerable space savings if you're not using an extension,
+you can exclude that extension's directory from OpenGL/GL/ (about 8MB
+savings on disk for systems with inefficient support for small files
+and no used extensions)</li>
+  <ul>
+    <li>e.g. if you're not using any of the SGI OpenGL extensions, you
+can exclude the OpenGL/GL/SGI directory. If you're not using any OpenGL
+extensions at all (common for new users), you can exclude all of the
+directories under OpenGL/GL. Similarly, if you're not using any WGL
+extensions, you can exclude all of the directories under OpenGL/WGL.<br>
+    </li>
+  </ul>
+  <li> If you don't want TOGL support, you can exclude the OpenGL/Tk <br>
+  </li>
+  <li> If you don't want WGL support at all, you can exclude OpenGL/WGL
+too (same for GLU, GLUT, etceteras)</li>
+  <li>If you prefer, you can exclude any two of *.py, *.pyc and/or
+*.pyo files<br>
+  </li>
+  <li>If you don't care about space, just include the whole OpenGL
+package</li>
+</ul>
+<p>You can download a sample archive with 3 of the PyOpenGL demos
+configured for py2exe use, including one fully py2exe-packaged demo.</p>
+<h2>OpenGLContext Details</h2>
+<p>For OpenGLContext (beyond the OpenGL requirements above), you need
+to explicitly import/include the specific Context sub-class you want to
+use in your application. &nbsp;For most real-world applications, this
+will already be done (since you normally only use a single context type
+for a given application), but testing or trivial scripts will often be
+using the testingcontext module to allow the user to specify the
+context to be used. &nbsp;This is the same type of inclusion you would
+do for PIL or any other late/lazy/plug-in binding system.<br>
+<br>
+For example:</p>
+<pre><code>setup.py py2exe --excludes=OpenGL --includes=OpenGLContext.wxtestingcontext</code></pre>
+<p> to include just the wxPython testing context for use by your script.<br>
+</p>
+<p></p>
+<p class="footer"><a href="index.html"><img
+ src="../images/doc_logo_icon.gif" title="" alt="Documentation"
+ style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>&nbsp;<a
+ href="http://pyopengl.sourceforge.net/"><img title="" alt="PyOpenGL"
+ src="file:///S:/PyOpenGLWebSite/images/icon2.jpg"
+ style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>
+<a href="http://pyopengl.sourceforge.net/context/"><img
+ src="../images/context_logo_icon.png" title="" alt="OpenGLContext"
+ style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>
+A SourceForge Open-Source project: <a href="http://sourceforge.net"><img
+ src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1"
+ style="border: 0px solid ; width: 88px; height: 31px;"
+ alt="SourceForge" title="" align="middle"></a></p>
+</body>
+</html>
