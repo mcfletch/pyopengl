@@ -3,13 +3,17 @@
 We keep rewriting functions as the main entry points change,
 so let's just localise the changes here...
 """
-import ctypes, logging
+import ctypes, logging, os
 log = logging.getLogger( 'OpenGL.ctypes' )
 log.setLevel( logging.DEBUG )
 ctypes_version = [
 	int(x) for x in ctypes.__version__.split('.')
 ]
 from ctypes import util
+import OpenGL
+
+DLL_DIRECTORY = os.path.join( os.path.dirname( OpenGL.__file__ ), 'DLLS' )
+
 
 
 def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
@@ -34,6 +38,8 @@ def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
 			fullName = util.find_library( name )
 			if fullName is not None:
 				name = fullName
+			elif os.path.isfile( os.path.join( DLL_DIRECTORY, name + '.dll' )):
+				name = os.path.join( DLL_DIRECTORY, name + '.dll' )
 		except Exception, err:
 			log.info( '''Failed on util.find_library( %r ): %s''', name, err )
 			# Should the call fail, we just try to load the base filename...

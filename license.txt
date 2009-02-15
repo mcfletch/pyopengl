@@ -124,3 +124,30 @@ Pyglet License (BSD Style):
 	ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 	POSSIBILITY OF SUCH DAMAGE.
 
+OpenGL-ctypes may include source code from the GLE (GL Tubing and Extrusion) library, which is 
+licensed under the license declared in OpenGL/DLLS/gle_COPYING.src if GLE is included in this 
+distribution.  Copyright notice follows:
+
+    This software is owned by International Business Machines Corporation
+    ("IBM"), or its subsidiaries or IBM's suppliers, and is copyrighted and
+    licensed, not sold.  IBM retains title to the software, and grants you a
+    nonexclusive license for the software.
+
+OpenGL-ctypes may include source code from the GLUT (GL Utility Toolkit) library, which is licensed 
+under the following license/copyright notice (available in OpenGL/DLLS/glut_README.txt if GLUT is 
+included in this distribution:
+
+    The OpenGL Utility Toolkit distribution for Win32 (Windows NT &
+    Windows 95) contains source code modified from the original source
+    code for GLUT version 3.3 which was developed by Mark J. Kilgard.  The
+    original source code for GLUT is Copyright 1997 by Mark J. Kilgard.
+    GLUT for Win32 is Copyright 1997 by Nate Robins and is not in the
+    public domain, but it is freely distributable without licensing fees.
+    It is provided without guarantee or warrantee expressed or implied.
+    It was ported with the permission of Mark J. Kilgard by Nate Robins.
+
+    THIS SOURCE CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+    EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+    OR MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+    OpenGL (R) is a registered trademark of Silicon Graphics, Inc.
