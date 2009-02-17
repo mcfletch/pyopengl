@@ -1,9 +1,16 @@
 #! /usr/bin/env python
 import unittest, pygame, pygame.display, time, traceback
+
 try:
+	raise ImportError( )
 	from numpy import *
 except ImportError, err:
-	from Numeric import *
+	try:
+		raise ImportError( )
+		from Numeric import *
+	except ImportError, err:
+		array = None
+
 pygame.display.init()
 from OpenGL.GL import *
 from OpenGL import constants, error
@@ -113,76 +120,77 @@ class Tests( unittest.TestCase ):
 			4, 4, GL_MAP2_VERTEX_3
 		)
 		GLU.gluEndSurface(theNurb)
-	def test_nurbs_raw_arrays( self ):
-		"""Test nurbs rendering using raw API calls with arrays"""
-		from OpenGL.raw import GLU 
-		import numpy
-		knots = numpy.array( ( 0,0,0,0,1,1,1,1 ), 'f' )
-		ctlpoints = numpy.array( [[[-3., -3., -3.],
-			[-3., -1., -3.],
-			[-3.,  1., -3.],
-			[-3.,  3., -3.]],
+	if array:
+		def test_nurbs_raw_arrays( self ):
+			"""Test nurbs rendering using raw API calls with arrays"""
+			from OpenGL.raw import GLU 
+			import numpy
+			knots = numpy.array( ( 0,0,0,0,1,1,1,1 ), 'f' )
+			ctlpoints = numpy.array( [[[-3., -3., -3.],
+				[-3., -1., -3.],
+				[-3.,  1., -3.],
+				[-3.,  3., -3.]],
 
-		[[-1., -3., -3.],
-			[-1., -1.,  3.],
-			[-1.,  1.,  3.],
-			[-1.,  3., -3.]],
+			[[-1., -3., -3.],
+				[-1., -1.,  3.],
+				[-1.,  1.,  3.],
+				[-1.,  3., -3.]],
 
-		[[ 1., -3., -3.],
-			[ 1., -1.,  3.],
-			[ 1.,  1.,  3.],
-			[ 1.,  3., -3.]],
+			[[ 1., -3., -3.],
+				[ 1., -1.,  3.],
+				[ 1.,  1.,  3.],
+				[ 1.,  3., -3.]],
 
-		[[ 3., -3., -3.],
-			[ 3., -1., -3.],
-			[ 3.,  1., -3.],
-			[ 3.,  3., -3.]]], 'f' )
-		theNurb = GLU.gluNewNurbsRenderer()
-		GLU.gluBeginSurface(theNurb)
-		GLU.gluNurbsSurface(
-			theNurb, 
-			8, knots, 8, knots,
-			4 * 3, 3, ctlpoints ,
-			4, 4, GL_MAP2_VERTEX_3
-		)
-		GLU.gluEndSurface(theNurb)
-	def test_nurbs( self ):
-		"""Test nurbs rendering"""
-		from OpenGL.raw import GLU 
-		def buildControlPoints( ):
-			ctlpoints = zeros( (4,4,3), 'd')
-			for u in range( 4 ):
-				for v in range( 4):
-					ctlpoints[u][v][0] = 2.0*(u - 1.5)
-					ctlpoints[u][v][1] = 2.0*(v - 1.5);
-					if (u == 1 or u ==2) and (v == 1 or v == 2):
-						ctlpoints[u][v][2] = 3.0;
-					else:
-						ctlpoints[u][v][2] = -3.0;
-			return ctlpoints
-		controlPoints = buildControlPoints()
-		theNurb = GLU.gluNewNurbsRenderer()[0]
-		#theNurb = gluNewNurbsRenderer();
-		gluNurbsProperty(theNurb, GLU_SAMPLING_TOLERANCE, 25.0);
-		gluNurbsProperty(theNurb, GLU_DISPLAY_MODE, GLU_FILL);
-		knots= array ([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0], "d")
-		glPushMatrix();
-		try:
-			glRotatef(330.0, 1.,0.,0.);
-			glScalef (0.5, 0.5, 0.5);
-
-			gluBeginSurface(theNurb);
+			[[ 3., -3., -3.],
+				[ 3., -1., -3.],
+				[ 3.,  1., -3.],
+				[ 3.,  3., -3.]]], 'f' )
+			theNurb = GLU.gluNewNurbsRenderer()
+			GLU.gluBeginSurface(theNurb)
+			GLU.gluNurbsSurface(
+				theNurb, 
+				8, knots, 8, knots,
+				4 * 3, 3, ctlpoints ,
+				4, 4, GL_MAP2_VERTEX_3
+			)
+			GLU.gluEndSurface(theNurb)
+		def test_nurbs( self ):
+			"""Test nurbs rendering"""
+			from OpenGL.raw import GLU 
+			def buildControlPoints( ):
+				ctlpoints = zeros( (4,4,3), 'd')
+				for u in range( 4 ):
+					for v in range( 4):
+						ctlpoints[u][v][0] = 2.0*(u - 1.5)
+						ctlpoints[u][v][1] = 2.0*(v - 1.5);
+						if (u == 1 or u ==2) and (v == 1 or v == 2):
+							ctlpoints[u][v][2] = 3.0;
+						else:
+							ctlpoints[u][v][2] = -3.0;
+				return ctlpoints
+			controlPoints = buildControlPoints()
+			theNurb = GLU.gluNewNurbsRenderer()[0]
+			#theNurb = gluNewNurbsRenderer();
+			gluNurbsProperty(theNurb, GLU_SAMPLING_TOLERANCE, 25.0);
+			gluNurbsProperty(theNurb, GLU_DISPLAY_MODE, GLU_FILL);
+			knots= array ([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0], "d")
+			glPushMatrix();
 			try:
-				gluNurbsSurface(
-					theNurb,
-					knots, knots,
-					controlPoints,
-					GL_MAP2_VERTEX_3
-				);
+				glRotatef(330.0, 1.,0.,0.);
+				glScalef (0.5, 0.5, 0.5);
+
+				gluBeginSurface(theNurb);
+				try:
+					gluNurbsSurface(
+						theNurb,
+						knots, knots,
+						controlPoints,
+						GL_MAP2_VERTEX_3
+					);
+				finally:
+					gluEndSurface(theNurb);
 			finally:
-				gluEndSurface(theNurb);
-		finally:
-			glPopMatrix();
+				glPopMatrix();
 	def test_errors( self ):
 		"""Test for error catching/checking"""
 		try:
@@ -378,16 +386,17 @@ class Tests( unittest.TestCase ):
 					)
 			finally:
 				glEnd()
-	def test_numpyConversion( self ):
-		"""Test that we can run a numpy conversion from double to float for glColorArray"""
-		import numpy
-		a = numpy.arange( 0,1.2, .1, 'd' ).reshape( (-1,3 ))
-		glEnableClientState(GL_VERTEX_ARRAY)
-		try:
-			glColorPointerf( a )
-			glColorPointerd( a )
-		finally:
-			glDisableClientState( GL_VERTEX_ARRAY )
+	if array:
+		def test_numpyConversion( self ):
+			"""Test that we can run a numpy conversion from double to float for glColorArray"""
+			import numpy
+			a = numpy.arange( 0,1.2, .1, 'd' ).reshape( (-1,3 ))
+			glEnableClientState(GL_VERTEX_ARRAY)
+			try:
+				glColorPointerf( a )
+				glColorPointerd( a )
+			finally:
+				glDisableClientState( GL_VERTEX_ARRAY )
 	def test_constantPickle( self ):
 		"""Test that our constants can be pickled/unpickled properly"""
 		import pickle, cPickle
@@ -479,22 +488,23 @@ class Tests( unittest.TestCase ):
 			"""Test ALLOW_NUMPY_SCALARS to allow numpy scalars to be passed in"""
 			textures = glGenTextures(2)
 			glBindTexture( GL_TEXTURE_2D, textures[0] )
-	def test_arrayTranspose( self ):
-		import numpy
-		m = glGetFloatv( GL_MODELVIEW_MATRIX )
-		glMatrixMode( GL_MODELVIEW )
-		glLoadIdentity()
+	if array:
+		def test_arrayTranspose( self ):
+			import numpy
+			m = glGetFloatv( GL_MODELVIEW_MATRIX )
+			glMatrixMode( GL_MODELVIEW )
+			glLoadIdentity()
 
-		t = eye(4)
-		t[3,0] = 20.0
+			t = eye(4)
+			t[3,0] = 20.0
 
-		# the following glMultMatrixf call ignored this transpose
-		t = t.T
+			# the following glMultMatrixf call ignored this transpose
+			t = t.T
 
-		glMultMatrixf( t )
+			glMultMatrixf( t )
 
-		m = glGetFloatv( GL_MODELVIEW_MATRIX )
-		assert numpy.allclose( m[-1], [0,0,0,1] ), m
+			m = glGetFloatv( GL_MODELVIEW_MATRIX )
+			assert numpy.allclose( m[-1], [0,0,0,1] ), m
 	def test_glreadpixelsf( self ):
 		"""Issue #1979002 crash due to mis-calculation of resulting array size"""
 		width,height = self.width, self.height
@@ -508,64 +518,66 @@ class Tests( unittest.TestCase ):
 		readback_image1 = glReadPixels(0,0,width,height,GL_RGB, GL_BYTE)
 		assert not isinstance( readback_image1, str ), type(readback_image2)
 	
-	def test_mmap_data( self ):
-		"""Test that we can use mmap data array
-		
-		If we had a reasonable lib that dumped raw image data to a shared-mem file
-		we might be able to use this for movie display :) 
-		"""
-		fh = open( 'mmap-test-data.dat', 'w+' )
-		fh.write( '\000'*(32*32*3+1))
-		fh.flush()
-		fh.close()
-		# using numpy.memmap here...
-		data = memmap( 'mmap-test-data.dat' )
-		for i in range( 0,255,2 ):
-			glDrawPixels( 32,32, GL_RGB, GL_UNSIGNED_BYTE, data, )
-			glFlush()
-			pygame.display.flip()
-			data[::2] = i
-			time.sleep( 0.001 )
-	
-	def test_vbo( self ):
-		"""Test utility vbo wrapper"""
-		import numpy
-		from OpenGL.arrays import vbo
-		assert vbo.get_implementation()
-		dt = arraydatatype.GLdoubleArray
-		array = numpy.array( [
-			[0,0,0],
-			[0,1,0],
-			[1,.5,0],
-			[1,0,0],
-			[1.5,.5,0],
-			[1.5,0,0],
-		], dtype='d')
-		indices = numpy.array(
-			range(len(array)),
-			'i',
-		)
-		d = vbo.VBO(array)
-		glDisable( GL_CULL_FACE )
-		glNormal3f( 0,0,1 )
-		glColor3f( 1,1,1 )
-		glEnableClientState(GL_VERTEX_ARRAY)
-		try:
-			for x in range( 1, 255, 10 ):
-				d.bind()
-				try:
-					glVertexPointerd( d )
-					glDrawElements( GL_LINE_LOOP, len(indices), GL_UNSIGNED_INT, indices )
-				finally:
-					d.unbind()
-				lastPoint = numpy.array( [[1.5,(1/255.) * float(x),0]] )
-				d[-2:-1] = lastPoint
+	if array:
+		def test_mmap_data( self ):
+			"""Test that we can use mmap data array
+			
+			If we had a reasonable lib that dumped raw image data to a shared-mem file
+			we might be able to use this for movie display :) 
+			"""
+			fh = open( 'mmap-test-data.dat', 'w+' )
+			fh.write( '\000'*(32*32*3+1))
+			fh.flush()
+			fh.close()
+			# using numpy.memmap here...
+			data = memmap( 'mmap-test-data.dat' )
+			for i in range( 0,255,2 ):
+				glDrawPixels( 32,32, GL_RGB, GL_UNSIGNED_BYTE, data, )
 				glFlush()
 				pygame.display.flip()
-				glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT )
+				data[::2] = i
 				time.sleep( 0.001 )
-		finally:
-			glDisableClientState( GL_VERTEX_ARRAY )
+	
+	if array:
+		def test_vbo( self ):
+			"""Test utility vbo wrapper"""
+			import numpy
+			from OpenGL.arrays import vbo
+			assert vbo.get_implementation()
+			dt = arraydatatype.GLdoubleArray
+			array = numpy.array( [
+				[0,0,0],
+				[0,1,0],
+				[1,.5,0],
+				[1,0,0],
+				[1.5,.5,0],
+				[1.5,0,0],
+			], dtype='d')
+			indices = numpy.array(
+				range(len(array)),
+				'i',
+			)
+			d = vbo.VBO(array)
+			glDisable( GL_CULL_FACE )
+			glNormal3f( 0,0,1 )
+			glColor3f( 1,1,1 )
+			glEnableClientState(GL_VERTEX_ARRAY)
+			try:
+				for x in range( 1, 255, 10 ):
+					d.bind()
+					try:
+						glVertexPointerd( d )
+						glDrawElements( GL_LINE_LOOP, len(indices), GL_UNSIGNED_INT, indices )
+					finally:
+						d.unbind()
+					lastPoint = numpy.array( [[1.5,(1/255.) * float(x),0]] )
+					d[-2:-1] = lastPoint
+					glFlush()
+					pygame.display.flip()
+					glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT )
+					time.sleep( 0.001 )
+			finally:
+				glDisableClientState( GL_VERTEX_ARRAY )
 	def test_fbo( self ):
 		"""Test that we support framebuffer objects
 		
