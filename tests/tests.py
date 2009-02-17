@@ -688,7 +688,41 @@ class Tests( unittest.TestCase ):
 		try:
 			glDrawBuffers( 2, args )
 		except GLError, err:
-			assert err.err == 1282, err
+			assert err.err == GL_INVALID_OPERATION, err
+	def test_glDrawBuffers_list_valid( self ):
+		"""Test that glDrawBuffers with list argument where value is set"""
+		fbo = glGenFramebuffersEXT(1)
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo)
+		try:
+			img1,img2 = glGenTextures(2)
+			for img in img1,img2:
+				glBindTexture( GL_TEXTURE_2D, img )
+				glTexImage2D(
+					GL_TEXTURE_2D, 0, GL_RGB8,  
+					300, 300, 0, GL_RGB, 
+					GL_INT, 
+					None # no data transferred
+				) 
+			
+
+			glFramebufferTexture2DEXT(
+				GL_FRAMEBUFFER_EXT, 
+				GL_COLOR_ATTACHMENT0_EXT, 
+				GL_TEXTURE_2D, img1, 0
+			)
+			glFramebufferTexture2DEXT(
+				GL_FRAMEBUFFER_EXT, 
+				GL_COLOR_ATTACHMENT1_EXT, 
+				GL_TEXTURE_2D, img2, 0
+			)
+			drawingBuffers = [
+				GL_COLOR_ATTACHMENT0_EXT, 
+				GL_COLOR_ATTACHMENT1_EXT,
+			]
+			glDrawBuffers(2, drawingBuffers )
+		finally:
+			glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, 0 )
+		
 	def test_enable_histogram( self ):
 		if glInitImagingARB():
 			glHistogram(GL_HISTOGRAM, 256, GL_LUMINANCE, GL_FALSE)
