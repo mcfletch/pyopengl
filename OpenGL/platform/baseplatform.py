@@ -91,7 +91,7 @@ class BasePlatform( object ):
 						pointer
 					)
 				else:
-					AttributeError( """Extension %r available, but no pointer for function %r"""%(extension,functionName))
+					raise AttributeError( """Extension %r available, but no pointer for function %r"""%(extension,functionName))
 			else:
 				raise AttributeError( """No extension %r"""%(extension,))
 		else:
