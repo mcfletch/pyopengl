@@ -651,7 +651,7 @@ class Tests( unittest.TestCase ):
 			glBlendColor( .3, .4, 1.0, .3 )
 			print 'OpenGL 1.2 support'
 	def test_glmultidraw( self ):
-		"""Test that glMultiDrawElements works, if supported on the hardware"""
+		"""Test that glMultiDrawElements works, uses glDrawElements"""
 		if glMultiDrawElements:
 			points = [
 				(i,0,0) for i in range( 8 )
@@ -670,8 +670,6 @@ class Tests( unittest.TestCase ):
 				glVertexPointerd( points )
 				glDisable( GL_LIGHTING )
 				try:
-#					for i in range( 2 ):
-#						glDrawElements( GL_QUAD_STRIP, counts[i], GL_UNSIGNED_BYTE, indices[i] )
 					glMultiDrawElements(GL_QUAD_STRIP, counts, GL_UNSIGNED_BYTE, indices, 2)
 				finally:
 					glEnable( GL_LIGHTING )
