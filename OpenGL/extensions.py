@@ -50,12 +50,14 @@ class _Alternate( object ):
 	def __nonzero__( self ):
 		for alternate in self._alternatives:
 			if alternate:
+				self.__class__.implementation = alternate
 				return True 
 		return False
 	def __call__( self, *args, **named ):
 		"""Call, doing a late lookup and bind to find an implementation"""
 		for alternate in self._alternatives:
 			if alternate:
+				self.__class__.implementation = alternate
 				self.__class__.__call__ = alternate.__call__
 				return self( *args, **named )
 		from OpenGL import error
