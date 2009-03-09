@@ -16,7 +16,8 @@ from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_LINK_STATUS_ARB as GL_OBJ
 from OpenGL.GL.ARB.shader_objects import glGetInfoLogARB as glGetInfoLog
 from OpenGL.lazywrapper import lazy
 
-from OpenGL import converters, error
+from OpenGL import converters, error, contextdata
+from OpenGL.arrays.arraydatatype import ArrayDatatype
 GL_INFO_LOG_LENGTH = constant.Constant( 'GL_INFO_LOG_LENGTH', 0x8B84 )
 
 glShaderSource = platform.createBaseFunction( 
@@ -187,4 +188,46 @@ def glGetUniformLocation( baseOperation, program, name ):
 	elif name[-1] != '\000':
 		name = name + '\000'
 	return baseOperation( program, name )
+@lazy( glGetAttribLocation )
+def glGetAttribLocation( baseOperation, program, name ):
+	"""Check that name is a string with a null byte at the end of it"""
+	if not name:
+		raise ValueError( """Non-null name required""" )
+	elif name[-1] != '\000':
+		name = name + '\000'
+	return baseOperation( program, name )
 
+@lazy( glVertexAttribPointer )
+def glVertexAttribPointer( 
+	baseOperation, index, size, type,
+	normalized, stride, pointer,
+):
+	"""Set an attribute pointer for a given shader (index)
+	
+	index -- the index of the generic vertex to bind, see 
+		glGetAttribLocation for retrieval of the value,
+		note that index is a global variable, not per-shader
+	size -- number of basic elements per record, 1,2,3, or 4
+	type -- enum constant for data-type 
+	normalized -- whether to perform int to float 
+		normalization on integer-type values
+	stride -- stride in machine units (bytes) between 
+		consecutive records, normally used to create 
+		"interleaved" arrays 
+	pointer -- data-pointer which provides the data-values,
+		normally a vertex-buffer-object or offset into the 
+		same.
+	
+	This implementation stores a copy of the data-pointer 
+	in the contextdata structure in order to prevent null-
+	reference errors in the renderer.
+	"""
+	array = ArrayDatatype.asArray( pointer )
+	key = ('vertex-attrib',index)
+	contextdata.setValue( key, array )
+	return baseOperation(
+		index, size, type,
+		normalized, stride, 
+		ArrayDatatype.voidDataPointer( array ) 
+	)
+	
