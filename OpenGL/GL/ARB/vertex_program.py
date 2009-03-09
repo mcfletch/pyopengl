@@ -14,7 +14,6 @@ from OpenGL.lazywrapper import lazy
 
 from OpenGL import converters, error, contextdata
 from OpenGL.arrays.arraydatatype import ArrayDatatype
-
 # Note: sizes here are == the only documented sizes I could find,
 # may need a lookup table some day...
 glGetProgramivARB = wrapper.wrapper(glGetProgramivARB).setOutput(
@@ -55,15 +54,6 @@ glGetVertexAttribdvARB = wrapper.wrapper(glGetVertexAttribdvARB).setOutput(
 ##	pointer = arrays.GLdoubleArray.voidDataPointer( output )
 ##	_base_glGetVertexAttribPointervARB( index, pname, pointer )
 ##	return output
-
-@lazy( glGetAttribLocationARB )
-def glGetAttribLocationARB( baseOperation, program, name ):
-	"""Check that name is a string with a null byte at the end of it"""
-	if not name:
-		raise ValueError( """Non-null name required""" )
-	elif name[-1] != '\000':
-		name = name + '\000'
-	return baseOperation( program, name )
 
 @lazy( glVertexAttribPointerARB )
 def glVertexAttribPointerARB( 
