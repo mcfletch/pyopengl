@@ -50,7 +50,7 @@ for size in (1,2,3,4):
 		name = 'glUniform%(size)s%(format)svARB'%globals()
 		globals()[name] = arrays.setInputArraySizeType(
 			globals()[name],
-			size,
+			None, # don't want to enforce size...
 			arrayType, 
 			'value',
 		)
