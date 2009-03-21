@@ -79,36 +79,40 @@ class RefSect( model.RefSect ):
                 value = getattr( self, function )
                 processors[key ] = value
         self.id = tree[0].get('id')
-        self.title = self.name = tree[0].xpath( './/d:refmeta/d:refentrytitle', self.query_namespace )[0].text
+        self.title = self.name = tree[0].xpath( 
+            './/d:refmeta/d:refentrytitle', 
+            namespaces=self.query_namespace 
+        )[0].text
         self.functions = dict([
             (x.text,Function(x.text,self))
             for x in tree[0].xpath( 
-                './/d:refnamediv/d:refname', self.query_namespace 
+                './/d:refnamediv/d:refname', 
+                namespaces=self.query_namespace 
             )
         ])
         self.purpose = tree[0].xpath( 
-            './/d:refnamediv/d:refpurpose',self.query_namespace
+            './/d:refnamediv/d:refpurpose',namespaces=self.query_namespace
         )[0].text
         for func_prototype in tree[0].xpath(
             './/d:refsynopsisdiv/d:funcsynopsis/d:funcprototype',
-            self.query_namespace 
+            namespaces=self.query_namespace 
         ):
             self.process_funcprototype( func_prototype )
         processed_sections = {}
-        for section in tree[0].xpath( './/d:refsect1', self.query_namespace):
+        for section in tree[0].xpath( './/d:refsect1', namespaces=self.query_namespace):
             id = section.get( 'id' )
             if '-parameters' in id or id == 'parameters':
-                for varlist in section.xpath( './d:variablelist',self.query_namespace):
+                for varlist in section.xpath( './d:variablelist',namespaces=self.query_namespace):
                     self.process_variablelist( varlist )
             elif id.endswith( '-see_also' ):
-                for entry in section.xpath( './/d:citerefentry',self.query_namespace):
+                for entry in section.xpath( './/d:citerefentry',namespaces=self.query_namespace):
                     title,volume = entry[0].text, entry[1].text
                     self.see_also.append( (title,volume) )
             else:
                 self.discussions.append( section )
             processed_sections[ id ] = True
         # global search for referenced constants...
-        for item in tree[0].xpath( './/d:constant', self.query_namespace ):
+        for item in tree[0].xpath( './/d:constant', namespaces=self.query_namespace ):
             self.constants[ item.text.strip() ] = True
 
         #for element in tree.iterdescendants():
