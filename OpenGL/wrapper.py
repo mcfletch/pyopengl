@@ -61,6 +61,7 @@ class Wrapper( object ):
 		'cResolvers',
 		'storeValues',
 		'returnValues',
+		'_finalCall',
 	)
 	def __init__( self, wrappedOperation ):
 		"""Initialise the wrapper, storing wrappedOperation"""
@@ -281,8 +282,15 @@ class Wrapper( object ):
 		if not callFunction:
 			raise RuntimeError( """Missing finalised call type for %s"""%( self, ))
 		else:
-			self.__class__.__call__ = callFunction
-		return self
+			#self.__class__.finalize = lambda *args: callFunction
+			#self.__call__ = callFunction
+			#self.__class__.__call__ = callFunction
+			#self.__class__.set_call( callFunction )
+			#self.__class__.__dict__[ '__call__' ] = callFunction
+			#print 'setting class call', callFunction
+			self._finalCall = callFunction
+			return callFunction
+		#return self
 	def finaliseCall( self ):
 		"""Produce specialised versions of call for finalised wrapper object
 		
@@ -374,21 +382,21 @@ class Wrapper( object ):
 		else:
 			calculate_cArguments = None
 		if cWrapper:
-			return staticmethod(cWrapper(
+			return cWrapper(
 				wrappedOperation,
 				calculate_pyArgs=calculate_pyArgs, 
 				calculate_cArgs=calculate_cArgs,
 				calculate_cArguments=calculate_cArguments, 
 				storeValues=storeValues, 
 				returnValues=returnValues,
-			))
+			)
 		if pyConverters:
 			if cConverters:
 				# create a map of index,converter, callable 
 				if cResolvers:
 					if storeValues:
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all possible operations"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = tuple(calculate_cArgs( pyArgs ))
@@ -417,7 +425,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = tuple(calculate_cArgs( pyArgs ))
@@ -442,7 +450,7 @@ class Wrapper( object ):
 							return wrapperCall
 					else: # null storeValues
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save storeValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = tuple(calculate_cArgs( pyArgs ))
@@ -464,7 +472,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues and storeValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = tuple(calculate_cArgs( pyArgs ))
@@ -484,7 +492,7 @@ class Wrapper( object ):
 					# null cResolvers
 					if storeValues:
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all possible operations"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = tuple(calculate_cArgs( pyArgs ))
@@ -513,7 +521,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = tuple(calculate_cArgs( pyArgs ))
@@ -538,7 +546,7 @@ class Wrapper( object ):
 							return wrapperCall
 					else: # null storeValues
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save storeValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = tuple(calculate_cArgs( pyArgs ))
@@ -560,7 +568,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues and storeValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = tuple(calculate_cArgs( pyArgs ))
@@ -581,7 +589,7 @@ class Wrapper( object ):
 				if cResolvers:
 					if storeValues:
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all possible operations"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = pyArgs
@@ -610,7 +618,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = pyArgs
@@ -635,7 +643,7 @@ class Wrapper( object ):
 							return wrapperCall
 					else: # null storeValues
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save storeValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = pyArgs
@@ -657,7 +665,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues and storeValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArgs = pyArgs
@@ -677,7 +685,7 @@ class Wrapper( object ):
 					# null cResolvers
 					if storeValues:
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all possible operations"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArguments = pyArgs
@@ -705,7 +713,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArguments = pyArgs
@@ -729,7 +737,7 @@ class Wrapper( object ):
 							return wrapperCall
 					else: # null storeValues
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save storeValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArguments = pyArgs
@@ -750,7 +758,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues and storeValues"""
 								pyArgs = tuple( calculate_pyArgs( args ))
 								cArguments = pyArgs
@@ -771,7 +779,7 @@ class Wrapper( object ):
 				if cResolvers:
 					if storeValues:
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all possible operations"""
 								pyArgs = args 
 								cArgs = []
@@ -788,7 +796,7 @@ class Wrapper( object ):
 											if hasattr( err, 'args' ):
 												err.args += (
 													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
+													pyArgs, index,
 												)
 											raise
 								cArguments = tuple(calculate_cArguments( cArgs ))
@@ -816,7 +824,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues"""
 								pyArgs = args 
 								cArgs = []
@@ -833,7 +841,7 @@ class Wrapper( object ):
 											if hasattr( err, 'args' ):
 												err.args += (
 													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
+													pyArgs, index,
 												)
 											raise
 								cArguments = tuple(calculate_cArguments( cArgs ))
@@ -857,7 +865,7 @@ class Wrapper( object ):
 							return wrapperCall
 					else: # null storeValues
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save storeValues"""
 								pyArgs = args 
 								cArgs = []
@@ -874,7 +882,7 @@ class Wrapper( object ):
 											if hasattr( err, 'args' ):
 												err.args += (
 													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
+													pyArgs, index,
 												)
 											raise
 								cArguments = tuple(calculate_cArguments( cArgs ))
@@ -895,7 +903,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues and storeValues"""
 								pyArgs = args 
 								cArgs = []
@@ -912,7 +920,7 @@ class Wrapper( object ):
 											if hasattr( err, 'args' ):
 												err.args += (
 													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
+													pyArgs, index,
 												)
 											raise
 								cArguments = tuple(calculate_cArguments( cArgs ))
@@ -931,7 +939,7 @@ class Wrapper( object ):
 					# null cResolvers
 					if storeValues:
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all possible operations"""
 								pyArgs = args 
 								cArgs = []
@@ -948,7 +956,7 @@ class Wrapper( object ):
 											if hasattr( err, 'args' ):
 												err.args += (
 													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
+													pyArgs, index,
 												)
 											raise
 								cArguments = cArgs
@@ -976,7 +984,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues"""
 								pyArgs = args 
 								cArgs = []
@@ -993,7 +1001,7 @@ class Wrapper( object ):
 											if hasattr( err, 'args' ):
 												err.args += (
 													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
+													pyArgs, index,
 												)
 											raise
 								cArguments = cArgs
@@ -1017,7 +1025,7 @@ class Wrapper( object ):
 							return wrapperCall
 					else: # null storeValues
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save storeValues"""
 								pyArgs = args 
 								cArgs = []
@@ -1034,7 +1042,7 @@ class Wrapper( object ):
 											if hasattr( err, 'args' ):
 												err.args += (
 													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
+													pyArgs, index,
 												)
 											raise
 								cArguments = cArgs
@@ -1055,7 +1063,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues and storeValues"""
 								pyArgs = args 
 								cArgs = []
@@ -1072,7 +1080,7 @@ class Wrapper( object ):
 											if hasattr( err, 'args' ):
 												err.args += (
 													"""Failure in cConverter %r"""%(converter),
-													pyArgs, index, self,
+													pyArgs, index,
 												)
 											raise
 								cArguments = cArgs
@@ -1092,7 +1100,7 @@ class Wrapper( object ):
 				if cResolvers:
 					if storeValues:
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all possible operations"""
 								cArgs = args
 								cArguments = tuple(calculate_cArguments( cArgs ))
@@ -1120,7 +1128,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues"""
 								cArgs = args
 								cArguments = tuple(calculate_cArguments( cArgs ))
@@ -1144,7 +1152,7 @@ class Wrapper( object ):
 							return wrapperCall
 					else: # null storeValues
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save storeValues"""
 								cArgs = args
 								cArguments = tuple(calculate_cArguments( cArgs ))
@@ -1165,7 +1173,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues and storeValues"""
 								cArgs = args
 								cArguments = tuple(calculate_cArguments( cArgs ))
@@ -1184,7 +1192,7 @@ class Wrapper( object ):
 					# null cResolvers
 					if storeValues:
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all possible operations"""
 								cArguments = args
 								try:
@@ -1211,7 +1219,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues"""
 								cArguments = args
 								try:
@@ -1234,7 +1242,7 @@ class Wrapper( object ):
 							return wrapperCall
 					else: # null storeValues
 						if returnValues:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save storeValues"""
 								cArguments = args
 								try:
@@ -1254,7 +1262,7 @@ class Wrapper( object ):
 								)
 							return wrapperCall
 						else:
-							def wrapperCall( self, *args ):
+							def wrapperCall( *args ):
 								"""Wrapper with all save returnValues and storeValues"""
 								cArguments = args
 								try:
@@ -1270,7 +1278,10 @@ class Wrapper( object ):
 							return wrapperCall
 	def __call__( self, *args, **named ):
 		"""Finalise the wrapper before calling it"""
-		return self.finalise()( *args, **named )
+		try:
+			return self._finalCall( *args, **named )
+		except AttributeError, err:
+			return self.finalise()( *args, **named )
 
 	def _unspecialised__call__( self, *args ):
 		"""Expand arguments, call the function, store values and check errors"""
