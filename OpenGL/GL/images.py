@@ -524,6 +524,8 @@ glTexImage1D = setDimensionsAsInts(
 
 def typedImageFunction( suffix, arrayConstant,  baseFunction ):
 	"""Produce a typed version of the given image function"""
+	functionName = baseFunction.__name__
+	functionName = '%(functionName)s%(suffix)s'%locals()
 	if baseFunction:
 		arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ arrayConstant ]
 		function = setDimensionsAsInts(
@@ -533,11 +535,9 @@ def typedImageFunction( suffix, arrayConstant,  baseFunction ):
 				typeName = arrayConstant,
 			)
 		)
-		functionName = baseFunction.__name__
-		functionName = '%(functionName)s%(suffix)s'%locals()
 		return functionName, function
 	else:
-		return baseFunction.__name__, baseFunction
+		return functionName, baseFunction
 
 def _setDataSize( baseFunction, argument='imageSize' ):
 	"""Set the data-size value to come from the data field"""

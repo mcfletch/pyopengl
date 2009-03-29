@@ -92,6 +92,11 @@ with these sets of flags.
 	UNSIGNED_BYTE_IMAGES_AS_STRING -- if True, we will return
 		GL_UNSIGNED_BYTE image-data as strings, istead of arrays
 		for glReadPixels and glGetTexImage
+	
+	FORWARD_COMPATIBLE_ONLY -- only include OpenGL 3.1 compatible 
+		entry points.  Note that this will generally break most 
+		PyOpenGL code that hasn't been explicitly made "legacy free"
+		via a significant rewrite.
 """
 from OpenGL.version import __version__
 
@@ -99,6 +104,7 @@ ERROR_CHECKING = True
 ERROR_LOGGING = False
 ERROR_ON_COPY = False
 WARN_ON_FORMAT_UNAVAILABLE = False
+FORWARD_COMPATIBLE_ONLY = False
 
 FULL_LOGGING = False 
 ALLOW_NUMPY_SCALARS = False

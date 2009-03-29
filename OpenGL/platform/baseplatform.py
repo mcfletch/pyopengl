@@ -6,6 +6,10 @@ import sys
 import OpenGL as top_level_module
 from OpenGL import logs
 
+if top_level_module.FORWARD_COMPATIBLE_ONLY:
+	from OpenGL.platform import entrypoint31
+	
+
 class BasePlatform( object ):
 	"""Base class for per-platform implementations
 	
@@ -127,6 +131,16 @@ class BasePlatform( object ):
 		"""
 		from OpenGL import wrapper
 		try:
+			if top_level_module.FORWARD_COMPATIBLE_ONLY:
+				if entrypoint31.deprecated( functionName ):
+					return self.nullFunction(
+						functionName, dll=dll,
+						resultType=resultType, 
+						argTypes=argTypes,
+						doc = doc, argNames = argNames,
+						extension = extension,
+						deprecated = True,
+					)
 			return self.constructFunction(
 				functionName, dll, 
 				resultType=resultType, argTypes=argTypes,
@@ -198,9 +212,14 @@ class BasePlatform( object ):
 		argTypes=(),
 		doc = None, argNames = (),
 		extension = None,
+		deprecated = False,
 	):
 		"""Construct a "null" function pointer"""
-		cls = type( functionName, (_NullFunctionPointer,), {
+		if deprecated:
+			base = _DeprecatedFunctionPointer
+		else:
+			base = _NullFunctionPointer
+		cls = type( functionName, (base,), {
 			'__doc__': doc,
 		} )
 		return cls(
@@ -280,3 +299,12 @@ class _NullFunctionPointer( object ):
 					self.__name__, self.__name__,
 				)
 			)
+
+class _DeprecatedFunctionPointer( _NullFunctionPointer ):
+	def __call__( self, *args, **named ):
+		from OpenGL import error
+		raise error.NullFunctionError(
+			"""Attempt to call a deprecated function %s while OpenGL in FORWARD_COMPATIBLE_ONLY mode.  Set OpenGL.FORWARD_COMPATIBLE_ONLY to True to use legacy entry points"""%(
+				self.__name__,
+			)
+		)
