@@ -131,7 +131,7 @@ class BasePlatform( object ):
 		"""
 		from OpenGL import wrapper
 		try:
-			if top_level_module.FORWARD_COMPATIBLE_ONLY:
+			if top_level_module.FORWARD_COMPATIBLE_ONLY and dll is self.GL:
 				if entrypoint31.deprecated( functionName ):
 					return self.nullFunction(
 						functionName, dll=dll,
