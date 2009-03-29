@@ -4,12 +4,14 @@ from OpenGL.arrays._strings import dataPointer
 from OpenGL import constants
 from OpenGL.arrays import formathandler
 import ctypes
-psas = ctypes.pythonapi.PyString_AsString
-psas.restype = ctypes.c_char_p
 
-#def dataPointer( value ):
-#	return psas( ctypes.py_object(value) )
-#dataPointer = 
+psas = ctypes.pythonapi.PyString_AsString
+# it's a c_char_p, but if we use that then the code will 
+# attempt to use null-terminated versus arbitrarily sized
+psas.restype = ctypes.c_uint
+
+def dataPointer( value ):
+	return psas( ctypes.py_object(value) )
 
 class StringHandler( formathandler.FormatHandler ):
 	"""String-specific data-type handler for OpenGL"""
