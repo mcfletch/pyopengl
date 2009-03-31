@@ -59,10 +59,15 @@ GLbitfield = _defineType( 'GLbitfield', ctypes.c_uint )
 GLclampd = _defineType( 'GLclampd', ctypes.c_double, float )
 GLclampf = _defineType( 'GLclampf', ctypes.c_float, float )
 
+GLuint64 = GLuint64EXT = ctypes.c_uint64
+GLint64 = GLint64EXT = ctypes.c_int64
+
 # ptrdiff_t, actually...
 GLsizeiptrARB = GLsizeiptr = GLsizei
 GLintptrARB = GLintptr = GLint
 size_t = ctypes.c_ulong
+
+void = None
 
 GLhalfNV = GLhalfARB = ctypes.c_ushort
 

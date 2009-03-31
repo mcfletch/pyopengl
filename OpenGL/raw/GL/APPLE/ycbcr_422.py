@@ -28,7 +28,7 @@ Overview (from the spec)
 	in memory; Cb, Y0, Cr, Y1. The luminance components have a range of [16,
 	235], while the chroma value has a range of [16, 240]. This is consistent
 	with the CCIR601 spec. This format is fairly prevalent on both Mac and Win32
-	platforms. The equivalent Microsoft fourCC is OUYVYÕ.  This format is
+	platforms. The equivalent Microsoft fourCC is OUYVYO.  This format is
 	supported with the UNSIGNED_SHORT_8_8_REV_APPLE type for pixel storage
 	operations.
 	
