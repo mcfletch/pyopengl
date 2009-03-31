@@ -74,18 +74,18 @@ glTransformFeedbackVaryingsEXT = platform.createExtensionFunction(
 	'glTransformFeedbackVaryingsEXT', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLintArray, constants.GLenum,),
-	doc = 'glTransformFeedbackVaryingsEXT( GLuint(program), GLsizei(count), GLintArray(locations), GLenum(bufferMode) ) -> None',
-	argNames = ('program', 'count', 'locations', 'bufferMode',),
+	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER(arrays.GLcharArray), constants.GLenum,),
+	doc = 'glTransformFeedbackVaryingsEXT( GLuint(program), GLsizei(count), POINTER(arrays.GLcharArray)(varyings), GLenum(bufferMode) ) -> None',
+	argNames = ('program', 'count', 'varyings', 'bufferMode',),
 )
 
 glGetTransformFeedbackVaryingEXT = platform.createExtensionFunction( 
 	'glGetTransformFeedbackVaryingEXT', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLuint, constants.GLuint, arrays.GLintArray,),
-	doc = 'glGetTransformFeedbackVaryingEXT( GLuint(program), GLuint(index), GLintArray(location) ) -> None',
-	argNames = ('program', 'index', 'location',),
+	argTypes=(constants.GLuint, constants.GLuint, constants.GLsizei, arrays.GLsizeiArray, arrays.GLsizeiArray, arrays.GLuintArray, arrays.GLcharArray,),
+	doc = 'glGetTransformFeedbackVaryingEXT( GLuint(program), GLuint(index), GLsizei(bufSize), GLsizeiArray(length), GLsizeiArray(size), GLuintArray(type), GLcharArray(name) ) -> None',
+	argNames = ('program', 'index', 'bufSize', 'length', 'size', 'type', 'name',),
 )
 
 

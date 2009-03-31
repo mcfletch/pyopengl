@@ -19,9 +19,9 @@ GL_MAP_UNSYNCHRONIZED_BIT = constant.Constant( 'GL_MAP_UNSYNCHRONIZED_BIT', 0x20
 glMapBufferRange = platform.createExtensionFunction( 
 	'glMapBufferRange', dll=platform.GL,
 	extension=EXTENSION_NAME,
-	resultType=None, 
+	resultType=ctypes.c_void_p, 
 	argTypes=(constants.GLenum, constants.GLintptr, constants.GLsizeiptr, constants.GLbitfield,),
-	doc = 'glMapBufferRange( GLenum(target), GLintptr(offset), GLsizeiptr(length), GLbitfield(access) ) -> None',
+	doc = 'glMapBufferRange( GLenum(target), GLintptr(offset), GLsizeiptr(length), GLbitfield(access) ) -> ctypes.c_void_p',
 	argNames = ('target', 'offset', 'length', 'access',),
 )
 

@@ -10,7 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_instanced_arrays'
-
+GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ARB = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ARB', 0x88FE )
 glVertexAttribDivisor = platform.createExtensionFunction( 
 	'glVertexAttribDivisor', dll=platform.GL,
 	extension=EXTENSION_NAME,

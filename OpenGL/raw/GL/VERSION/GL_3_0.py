@@ -203,18 +203,18 @@ glTransformFeedbackVaryings = platform.createExtensionFunction(
 	'glTransformFeedbackVaryings', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLintArray, constants.GLenum,),
-	doc = 'glTransformFeedbackVaryings( GLuint(program), GLsizei(count), GLintArray(locations), GLenum(bufferMode) ) -> None',
-	argNames = ('program', 'count', 'locations', 'bufferMode',),
+	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER(arrays.GLcharArray), constants.GLenum,),
+	doc = 'glTransformFeedbackVaryings( GLuint(program), GLsizei(count), POINTER(arrays.GLcharArray)(varyings), GLenum(bufferMode) ) -> None',
+	argNames = ('program', 'count', 'varyings', 'bufferMode',),
 )
 
 glGetTransformFeedbackVarying = platform.createExtensionFunction( 
 	'glGetTransformFeedbackVarying', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLuint, constants.GLuint, arrays.GLintArray,),
-	doc = 'glGetTransformFeedbackVarying( GLuint(program), GLuint(index), GLintArray(location) ) -> None',
-	argNames = ('program', 'index', 'location',),
+	argTypes=(constants.GLuint, constants.GLuint, constants.GLsizei, arrays.GLsizeiArray, arrays.GLsizeiArray, arrays.GLuintArray, arrays.GLcharArray,),
+	doc = 'glGetTransformFeedbackVarying( GLuint(program), GLuint(index), GLsizei(bufSize), GLsizeiArray(length), GLsizeiArray(size), GLuintArray(type), GLcharArray(name) ) -> None',
+	argNames = ('program', 'index', 'bufSize', 'length', 'size', 'type', 'name',),
 )
 
 glClampColor = platform.createExtensionFunction( 
@@ -590,36 +590,36 @@ glClearBufferiv = platform.createExtensionFunction(
 	'glClearBufferiv', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLenum, arrays.GLintArray,),
-	doc = 'glClearBufferiv( GLenum(buffer), GLintArray(value) ) -> None',
-	argNames = ('buffer', 'value',),
+	argTypes=(constants.GLenum, constants.GLint, arrays.GLintArray,),
+	doc = 'glClearBufferiv( GLenum(buffer), GLint(drawbuffer), GLintArray(value) ) -> None',
+	argNames = ('buffer', 'drawbuffer', 'value',),
 )
 
 glClearBufferuiv = platform.createExtensionFunction( 
 	'glClearBufferuiv', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLenum, arrays.GLuintArray,),
-	doc = 'glClearBufferuiv( GLenum(buffer), GLuintArray(value) ) -> None',
-	argNames = ('buffer', 'value',),
+	argTypes=(constants.GLenum, constants.GLint, arrays.GLuintArray,),
+	doc = 'glClearBufferuiv( GLenum(buffer), GLint(drawbuffer), GLuintArray(value) ) -> None',
+	argNames = ('buffer', 'drawbuffer', 'value',),
 )
 
 glClearBufferfv = platform.createExtensionFunction( 
 	'glClearBufferfv', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLenum, arrays.GLfloatArray,),
-	doc = 'glClearBufferfv( GLenum(buffer), GLfloatArray(value) ) -> None',
-	argNames = ('buffer', 'value',),
+	argTypes=(constants.GLenum, constants.GLint, arrays.GLfloatArray,),
+	doc = 'glClearBufferfv( GLenum(buffer), GLint(drawbuffer), GLfloatArray(value) ) -> None',
+	argNames = ('buffer', 'drawbuffer', 'value',),
 )
 
 glClearBufferfi = platform.createExtensionFunction( 
 	'glClearBufferfi', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLenum, constants.GLfloat, constants.GLint,),
-	doc = 'glClearBufferfi( GLenum(buffer), GLfloat(depth), GLint(stencil) ) -> None',
-	argNames = ('buffer', 'depth', 'stencil',),
+	argTypes=(constants.GLenum, constants.GLint, constants.GLfloat, constants.GLint,),
+	doc = 'glClearBufferfi( GLenum(buffer), GLint(drawbuffer), GLfloat(depth), GLint(stencil) ) -> None',
+	argNames = ('buffer', 'drawbuffer', 'depth', 'stencil',),
 )
 
 glGetStringi = platform.createExtensionFunction( 
