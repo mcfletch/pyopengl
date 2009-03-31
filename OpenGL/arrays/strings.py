@@ -1,6 +1,6 @@
 """String-array-handling code for PyOpenGL
 """
-from OpenGL.arrays._strings import dataPointer
+#from OpenGL.arrays._strings import dataPointer as old
 from OpenGL import constants
 from OpenGL.arrays import formathandler
 import ctypes
@@ -8,18 +8,20 @@ import ctypes
 psas = ctypes.pythonapi.PyString_AsString
 # it's a c_char_p, but if we use that then the code will 
 # attempt to use null-terminated versus arbitrarily sized
-psas.restype = ctypes.c_uint
+psas.restype = ctypes.c_size_t
+#psas.restype = ctypes.c_char_p
 
-def dataPointer( value ):
-	return psas( ctypes.py_object(value) )
+def dataPointer( value, typeCode=None ):
+	new = psas( ctypes.py_object(value) )
+	return new
 
 class StringHandler( formathandler.FormatHandler ):
 	"""String-specific data-type handler for OpenGL"""
 	HANDLED_TYPES = (str, )
-	@classmethod
-	def from_param( cls, value, typeCode=None ):
-		return dataPointer( value )
-	dataPointer = staticmethod( dataPointer )
+#	@classmethod
+#	def from_param( cls, value, typeCode=None ):
+#		return dataPointer( value )
+	dataPointer = from_param = staticmethod( dataPointer )
 	def zeros( self, dims, typeCode=None ):
 		"""Currently don't allow strings as output types!"""
 		raise NotImplemented( """Don't currently support strings as output arrays""" )
