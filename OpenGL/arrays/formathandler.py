@@ -13,7 +13,13 @@ except ImportError, err:
 		def __init__( self, match ):
 			self.match = match 
 		def __call__( self, value ):
-			typ = value.__class__
+			try:
+				typ = value.__class__
+			except AttributeError, err:
+				# Bug report that at least one type of array can 
+				# be passed in without __class__ available, likely 
+				# on an older Python or with old Numeric.
+				typ = type(value)
 			handler = self.get( typ )
 			if handler is None:
 				if hasattr( typ, '__mro__' ):
