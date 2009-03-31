@@ -67,6 +67,7 @@ class RefSect( object ):
     purpose = None
     next = None
     previous = None
+    deprecated = False
     def __init__( self, package='GL', reference=None ):
         self.package = package
         self.reference = reference
@@ -77,6 +78,9 @@ class RefSect( object ):
         self.discussions = []
         self.samples = []
         self.constants = {}
+    def set_deprecation( self, value ):
+        """Set our deprecated flag"""
+        self.deprecated = value 
     def has_function( self, name ):
         """Ask whether we have this name defined"""
         return (
@@ -145,12 +149,18 @@ class Function( object ):
     return_value = None 
     varargs = varnamed = False 
     docstring = None
+    deprecated = False
     NOT_DEFINED = NOT_DEFINED
     def __init__( self,name, section ):
         self.name = name
         self.section = section
         self.python = {} # name to python function...
         self.parameters = []
+        if section.package == 'GL':
+            from OpenGL.platform import entrypoint31
+            self.deprecated = entrypoint31.deprecated( self.name )
+            if self.deprecated:
+                self.section.set_deprecation( True )
     def __repr__( self ):
         return '%s( %s ) -> %s'%(
             self.name, 

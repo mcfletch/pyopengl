@@ -185,8 +185,9 @@ class RefSect( model.RefSect ):
 
 def load_file( filename ):
     data = WRAPPER%(open(filename).read())
+    parser = ET.ETCompatXMLParser(resolve_entities=False)
     try:
-        return filter_comments( ET.XML( data ) )
+        return filter_comments( ET.XML( data, parser ) )
     except Exception, err:
         log.error( "Failure loading file: %r", filename )
         raise
