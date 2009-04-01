@@ -62,7 +62,7 @@ def generate_tokens_dir( directory, filterFunction=glName, processFunction=glPro
 VIEWCVS =  '%(baseURL)s/%(deltaPath)s?rev=HEAD&content-type=text/vnd.viewcvs-markup'
 RAWSVN = '%(baseURL)s/%(deltaPath)s'
 VIEWSVN = '%(baseURL)s/%(deltaPath)s?view=markup'
-LOGGERHEAD = '%(baseURL)s/annotate/head:%(deltaPath)s'
+LOGGERHEAD = '%(baseURL)s/annotate/head:/%(deltaPath)s'
 
 
 class SampleSource( object ):
@@ -120,6 +120,7 @@ def loadData():
             },
             #baseURL = 'http://pyopengl.cvs.sourceforge.net/pyopengl/OpenGLContext',
             baseURL = 'http://bazaar.launchpad.net/~mcfletch/openglcontext/trunk',
+                       
             projectName = 'OpenGLContext',
             urlTemplate = LOGGERHEAD,
         ),
