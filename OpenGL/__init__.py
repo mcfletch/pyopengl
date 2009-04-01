@@ -113,7 +113,7 @@ UNSIGNED_BYTE_IMAGES_AS_STRING = True
 # Declarations of plugins provided by PyOpenGL itself
 from OpenGL.plugins import PlatformPlugin, FormatHandler
 PlatformPlugin( 'nt', 'OpenGL.platform.win32.Win32Platform' )
-PlatformPlugin( 'posix ', 'OpenGL.platform.glx.GLXPlatform' )
+PlatformPlugin( 'posix', 'OpenGL.platform.glx.GLXPlatform' )
 PlatformPlugin( 'linux2', 'OpenGL.platform.glx.GLXPlatform' )
 PlatformPlugin( 'darwin', 'OpenGL.platform.darwin.DarwinPlatform' )
 

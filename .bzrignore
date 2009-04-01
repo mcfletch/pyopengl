@@ -9,3 +9,4 @@ build
 dist
 callgrind.out*
 *.~1~
+documentation/pydoc/*.html
