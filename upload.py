@@ -14,7 +14,7 @@ def main():
 	os.system(
 		'gzip %(tarfile)s'%locals()
 	)
-	target = 'mcfletch@shell.sf.net:/home/groups/p/py/pyopengl/htdocs/documentation'
+	target = 'mcfletch,pyopengl@web.sourceforge.net:/home/groups/p/py/pyopengl/htdocs/documentation'
 	os.system( 
 		'scp %(gzfile)s %(target)s'%locals()
 	)
