@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
+<html><head>
 
 
   
@@ -12,15 +11,13 @@
   
   
   
-  <title>Installing (and Building) PyOpenGL</title>
-  <link rel="stylesheet" type="text/css" href="tutorial.css">
+  
+  <title>Installing (and Building) PyOpenGL</title><link rel="stylesheet" type="text/css" href="tutorial.css">
 
 
   
   
-  <meta name="author" content="Mike C. Fletcher">
-</head>
-
+  <meta name="author" content="Mike C. Fletcher"></head>
 
 <body>
 
@@ -29,8 +26,7 @@
 
 
 <p class="introduction">This document describes the process of
-installing <span style="font-weight: bold;">PyOpenGL 3.x</span>.
-&nbsp;Most users should be able to download setuptools .egg files using the easy_install script (the "Standard Install" below).</p>
+installing <span style="font-weight: bold;">PyOpenGL 3.x</span>. &nbsp;PyOpenGL 3.x final releases use standard Python distutils.</p>
 
 
 
@@ -44,14 +40,8 @@ everything you need to get ready for running PyOpenGL:</p>
 
 <ul>
 
-  <li><a href="http://www.python.org/">Python</a> 2.4+</li>
-  <li><a href="http://starship.python.net/crew/theller/ctypes/">ctypes</a> (standard with Python 2.5 and above)</li>
-  <li><a href="http://peak.telecommunity.com/DevCenter/setuptools">SetupTools</a> (<a href="http://peak.telecommunity.com/dist/ez_setup.py">ez_setup</a>)</li>
-  <ul>
-    <li>Used to register and lookup data-format plugins (core to PyOpenGL)</li>
-  </ul>
-
-  <li>OpenGL 1.1 and GLU (available pre-installed on most modern
+  <li><a href="http://www.python.org/">Python</a> 2.x series, 2.4+</li>
+  <li><a href="http://starship.python.net/crew/theller/ctypes/">ctypes</a> (standard with Python 2.5 and above)</li><li>OpenGL 1.1 and GLU (available pre-installed on most modern
 machines)</li>
 
   
@@ -99,7 +89,7 @@ happens.</li>
 
     <li>Available as an rpm/deb/ebuild for most modern Linux machines</li>
 
-    <li>Available as a <a href="http://www.xmission.com/%7Enate/glut.html">Win32 binary package</a></li>
+    <li>Available as a <a href="http://www.xmission.com/%7Enate/glut.html">Win32 binary package</a></li><ul><li>The Win32 package of PyOpenGL includes a copy of GLUT for 32-bit Win32</li></ul>
 
   
   </ul>
@@ -121,7 +111,7 @@ scenes)</li>
   <li><a href="http://www.linas.org/gle">GLE</a></li>
   <ul>
     <li>The GL Extrusion library, available on most Linux distributions</li>
-    <li><a href="http://downloads.sourceforge.net/pyopengl/gle32.zip">Precompiled Win32 version</a> is downloadable from the project file area (gle32.zip)</li>
+    <li><a href="http://downloads.sourceforge.net/pyopengl/gle32.zip">Precompiled Win32 version</a> is downloadable from the project file area (gle32.zip)</li><ul><li>The Win32 package of PyOpenGL includes a copy of GLE compiled as a DLL for 32-bit Win32</li></ul>
   </ul>
   <li><a href="http://togl.sourceforge.net/">Togl</a> v1.5+</li>
   <ul>
@@ -130,10 +120,14 @@ scenes)</li>
   </ul>
 
 </ul>
-<p class="technical">Note that Togl support is pretty much deprecated,
+<p class="technical">Note that Togl support is deprecated,
 it's there for legacy code (once you compile Togl), but you should
-likely choose a GUI library that has OpenGL support built-in for any
-new development.</p>
+choose a GUI library that has OpenGL support built-in for any
+new development. &nbsp;Togl support has been dropped due to the
+complexity of compilation and the headache of maintenance. &nbsp;There
+are projects which attempt to provide Togl support, feel free to
+install those into your Python's Tk installation if you need Togl under
+Python.</p>
 
 <p>OpenGLContext dependencies beyond PyOpenGL:</p>
 
@@ -224,367 +218,41 @@ demonstration module.</li>
 
 <h2>Standard Install (setuptools/egg based)</h2>
 
-<p>The PyOpenGL package uses the "SetupTools" package, which is a common mechanism for distributing and installing Python packages.
-&nbsp;It is quite likely that Python developers will already have
-setuptools installed on their system. &nbsp;If you do not have it
-installed, download and run <a href="http://peak.telecommunity.com/dist/ez_setup.py">ez_setup.py</a>. &nbsp;If you want to install
+<p>PyOpenGL uses standard distutils. &nbsp;You can download the source packages and install like so:</p><pre>tar -zxvf PyOpenGL-3.0.0.tar.gz<br>cd PyOpenGL-3.0.0<br>python setup.py install</pre><p>If
+you prefer to use easy_install, for instance within a virtualenv
+container, you will need to install setuptools (e.g. by running <a href="http://peak.telecommunity.com/dist/ez_setup.py">ez_setup.py</a>), then run:</p><pre>easy_install PyOpenGL</pre><p>To update your install to the latest release of PyOpenGL with an easy_install based install:</p>
+
+
+
+<pre>easy_install -U PyOpenGL<br></pre><p>If you want to install
 your Python egg files in a non-standard location be sure to setup your
 .pydistutils.cfg to support this before installing the packages.</p>
 
 
 
-<p class="technical">Note that you may want to uninstall any PyOpenGL
-2.x or OpenGL-3.0.0a4 installation before attempting to install. The
-3.0.0a4 release used the undecorated name in a misguided attempt to
-make things "simpler". &nbsp;The 3.0.0a5 and beyond packages use the
-same name as all previous PyOpenGL packages, "PyOpenGL".</p>
-
-
-
-
-
-<p>Once you have setuptools installed (many Python developers already
-will have it), simply issue the command:</p>
-
-
-
-
-
-
-<pre>easy_install PyOpenGL</pre>
-
-
-
-
-
-
-<p>To have setuptools lookup the current version of the PyOpenGL package,
-download and install it. &nbsp;If
-setuptools fails to install the package, you may need to update your
-setuptools. &nbsp;Or you can try a direct download of the package with
-this command in the directory where you downloaded the package:</p>
-
-
-
-
-
-<pre>easy_install -f . PyOpenGL</pre>
-
-
-
-
-
-<p>If you do not have administrative
-permissions on your machine, you can create a .pydistutils.cfg file in
-your home directory to tell setuptools where to install new .egg files.</p>
-
-
-
-<p>To update your install to the latest release of PyOpenGL:</p>
-
-
-
-<pre>easy_install -U PyOpenGL<br></pre>
-
-
-
-<p>Which will search for the latest registered version of the package and install that on your system.</p>
-
-
-
-<p class="technical">If you use setuptools to package your application,
+<p class="technical">You may want to uninstall any previous version of PyOpenGL before installing a new version, as there may be conflicts.</p><p class="technical">If you use setuptools to package your application,
 you should declare a dependency on "PyOpenGL" to pull in the latest
-PyOpenGL 3.x release.</p>
-
-
-
-
-
-
-<p>As of 3.0.0a3&nbsp;PyOpenGL&nbsp;is dependant on the setuptools
-package.&nbsp; You cannot run without the setuptools support, as it is
-used to provide the plugin mechanism used by array data-type plugin
-mechanism. &nbsp;You will probably want to install <a href="http://numpy.scipy.org/">numpy</a> as well. &nbsp;<a href="http://starship.python.net/crew/theller/ctypes/">ctypes</a> is a dependency&nbsp;for Python 2.4 and Python 2.3 but included with Python 2.5.</p>
-
-<h2>Source Install</h2>
-
-<p>If (for whatever reason) you would like to install from the source
-distribution you can do so. &nbsp;To accomplish the install you will
-need setuptools installed (see standard installation above). &nbsp;When
-that is in place, download and unpack the .tar.gz or .zip file and run
-the following command:</p>
-
-<pre>python setup.py install<br></pre>
-
-<h2>CVS Install</h2>
-
-<p>If you are working in an area that's currently under active
-development you may prefer to&nbsp;use the CVS version of the PyOpenGL
-package. &nbsp;OpenGL-ctypes (the code-name for the 3.0.0 version of
-PyOpenGL) is developed and
-maintained within the PyOpenGL CVS repository.&nbsp; To check out
-the current version of OpenGL-ctypes:</p>
-
-
-
-
-
-
-
-
-<pre>cvs -z3 -d:pserver:anonymous@pyopengl.cvs.sourceforge.net:/cvsroot/pyopengl co -P OpenGL-ctypes<br></pre>
-
-
-
-
-
-
-
-
-<p>You can install the checkout to your path for further development as
-follows (from the OpenGL-ctypes checkout directory):<br>
-
-
-
-
-
-
-
-
-</p>
-
-
-
-
-
-
-
-
-<pre>./setupegg.py develop --install-dir=~/YOUR-WORKING-DIRECTORY-ON-PYTHONPATH-HERE<br></pre>
-
-
-
-
-
-
-<p>When you make a change, run <code>cvs
-diff</code> on the OpenGL-ctypes
-directory to produce a patch file and upload it to the <a href="http://sourceforge.net/tracker/?group_id=5988&amp;atid=305988">SourceForge patch tracker</a>. I prefer "context" diffs (<code>cvs
-diff -c</code>) for contributed
-code, as it makes it easier to see where the code fits in.&nbsp;
-That said, I'm happy to get code in any readily integrated format.</p>
-
-<h3>Building Documentation</h3>
-
-
-<p>Building the documentation-set from source uses Java-based DocBook
-processing scripts, so it can take quite a bit of work to set up
-properly. &nbsp;Most developers will never need to do this, but future
-administrators (such as myself) will likely want some instructions.
-&nbsp;Here's the steps.<br>
-
-
-</p>
-
-
-<ul>
-
-
-  <li>Install Java<br>
-
-
-  </li>
-
-
-  <li>Install the <a href="http://saxon.sourceforge.net/">Saxon</a>
-Java XSLT processor</li>
-
-
-  
-  
-  <ul>
-
-
-    <li>Add Saxon install root directory (where saxon.jar is) to the
-system environment as SAXON_HOME<br>
-
-
-    </li>
-
-
-  
-  
-  </ul>
-
-
-  <li>Install the <a href="http://docbook.sourceforge.net/projects/xsl/">DocBook-XSL</a>
-package</li>
-
-
-  
-  
-  <ul>
-
-
-    <li>Unpack
-as PyOpenGL2\doc\docbook-xsl within the source-tree (this will require
-renaming the directory from something like 'docbook-xsl-1.59.1' to
-'docbook-xsl')<br>
-
-
-    </li>
-
-
-    <li>Add PyOpenGL2\doc\docbook-xsl to the shell environment as
-DOCBOOK_XSL_HOME (note that you still must use the doc\docbook-xsl
-directory even with the variable set)<br>
-
-
-    </li>
-
-
-  
-  
-  </ul>
-
-
-  <li>Install Sun's <a href="http://wwws.sun.com/software/xml/developers/resolver/">Resolver</a>
-package</li>
-
-
-  
-  
-  <ul>
-
-
-    <li>Add the resolver root directory (where the file resolver.jar
-is) to the system environment as RESOLVER_HOME</li>
-
-
-  
-  
-  </ul>
-
-
-  <li>Download the <a href="http://www.oasis-open.org/committees/docbook/xml/4.2/index.shtml">Oasis
-XML Docbook</a> catalog and DTD (optional, but speeds up processing
-considerably)<br>
-
-
-  </li>
-
-
-  
-  
-  <ul>
-
-
-    <li>Expand into the PyOpenGL2\doc\docbook directory<br>
-
-
-    </li>
-
-
-    <li>Create a file named CatalogManager.properties in
-PyOpenGL2\doc\docbook with these contents (where catalog.xml is the
-filename of the Oasis XML catalog).&nbsp; Note that the
-PyOpenGL2\doc\docbook directory is added to the classpath to make this
-file available to the resolver.&nbsp; Note also that the
-relative-catalogs value seems to be somewhat fickle, you may want to
-try "false" if saxon is complaining about missing entity files:</li>
-
-
-  
-  
-  </ul>
-
-
-</ul>
-
-
-<pre>catalogs=catalog.xml<br>relative-catalogs=true<br>static-catalog=yes<br>verbosity=1<br></pre>
-
-
-<ul>
-
-
-  
-  
-  <ul>
-
-
-    <li>Install the MathML DTD in PyOpenGL2\doc\docbook\mathml\<br>
-
-
-    </li>
-
-
-    <li>Add these declarations to the PyOpenGL2\doc\docbook\catalog.xml
-file (the last lets the 4.1.2 documents use the 4.2 DTD), the others
-make the various parts of the mathml dtd available:</li>
-
-
-  
-  
-  </ul>
-
-
-</ul>
-
-
-<pre>&lt;public publicId="-//W3C//DTD MathML 2.0//EN"<br>		uri="mathml/mathml2.dtd"/&gt;<br>&lt;public publicId="-//W3C//ENTITIES MathML 2.0 Qualified Names 1.0//EN"<br>		uri="mathml/mathml2-qname-1.mod"/&gt;<br>&lt;public publicId="-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"<br>		uri="mathml/xhtml-math11-f.dtd"/&gt;<br>&lt;public publicId="-//OASIS//DTD DocBook XML V4.1.2//EN"<br>        uri="docbookx.dtd"/&gt;<br></pre>
-
-
-<ul>
-
-
-  <li>Install David Carlisle's MathML <a href="http://www.w3.org/Math/XSL/">XSL stylesheets</a> into
-PyOpenGL2\doc\xsl\mathml\</li>
-
-
-  
-  
-  <ul>
-
-
-    <li>ctop.xsl,mathml.xsl,pmathml.xsl,pmathmlcss.xsl<br>
-
-
-    </li>
-
-
-  
-  
-  </ul>
-
-
-  <li>(For HTML Help) Add the directory with the hhc.exe file from the
-html help workshop to your path.</li>
-
-
-</ul>
-
-
-<p class="technical">Note that the HTML-help feature is not likely to
-work with the new javascript+CSS formatting provided by the MathML
-stylesheets above.&nbsp; Expect the results to be either unreadable or
-simply fail to be generated.<br>
-
-
-</p>
-
-
-<ul>
-
-
-  <li>Run setup.py build_doc --formats=html,htmlhelp (warning, this
-will take a <strong>very</strong> long time to complete (figure an
-hour or so at least))</li>
-
-
-</ul>
-
-<h2>Building Older Releases</h2>
+PyOpenGL 3.x release.</p><p class="technical">Various
+PyOpenGL 3.0.0 alphas and betas were dependent on setuptools.
+&nbsp;This is no longer the case, as setuptools plugin mechanism was
+causing conflicts with platform packaging tools (py2exe, pyinstaller).</p><h2>BZR Install</h2>
+
+<p>If you would like to contribute to PyOpenGL development or just need
+to ride the bleeding edge, you will likely want to work with a
+source-code checkout. &nbsp;You will need the&nbsp;<a href="http://bazaar-vcs.org/">Bazaar</a> (bzr) tool to work with the repository:</p><pre>bzr branch lp:pyopengl OpenGL-ctypes</pre><p>You
+will need to put the "OpenGL" directory inside the OpenGL-ctypes
+directory created above on your PYTHONPATH for instance via a symlink
+or a .pth file.</p><p>To contribute your changes back, either publish
+your branch publicly (for instance on LaunchPad) or create a "merge
+directive" to send to pyopengl-devel@lists.sourceforge.net:</p><pre>bzr send -o my-changes.diff<br></pre><p>Note that you'll need to subscribe to <a href="https://lists.sourceforge.net/lists/listinfo/pyopengl-devel">pyopengl-devel</a> to post changes to it. &nbsp;If you prefer you can send them to <a href="mailto:mcfletch@vrplumber.com">Mike Fletcher</a> instead.</p><h3>Building Documentation</h3>
+
+
+<p>The documentation build system is completely rewritten for PyOpenGL
+3.x and is far easier to use and faster than the old Java-based docbook
+processor.</p><pre>bzr branch lp:~mcfletch/pyopengl/directdocs<br>cd directdocs<br>./samples.py<br>./references.py<br>./generate.py<br>./upload.py</pre><p>The
+last command will not work unless you happen to be me. You need the
+lxml.etree and kid packages installed to run the generator (also bzr,
+svn, cvs, etceteras).</p><h2>Building Older Releases</h2>
 
 <p>If you would like to build the 2.x release of PyOpenGL, you can view the <a href="installation-v2.html">original installation documentation</a>.</p>
 
@@ -593,5 +261,4 @@ A
 SourceForge Open-Source project: <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1" style="border: 0px solid ; width: 88px; height: 31px;" alt="SourceForge" title="" align="middle"></a></p>
 
 
-</body>
-</html>
+</body></html>

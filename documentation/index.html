@@ -106,7 +106,7 @@ documentation page</a>.</p>
       
       
       
-      <p>These documents tend to be focus on the particular APIs and
+      <p>These documents tend to focus on the particular APIs and
 details of operation for PyOpenGL (or OpenGL in general).</p>
 
 
@@ -125,9 +125,16 @@ binary or source distributions</li>
         <li><a href="opengl_diffs.html">PyOpenGL for OpenGL Programmers</a>
 -- quick introduction to various features of PyOpenGL not normally found
 in OpenGL programming texts (e.g. strict exception handling, function
-aliases, array/pointer method with Numeric)</li><li><a href="deprecations.html">OpenGL 3.1 Deprecations</a> -- description of the deprecations that OpenGL 3.1 will impose</li><li><a href="manual-3.0/index.xhtml">PyOpenGL 3.0 Reference</a> -- automatically
+aliases, array/pointer methods with Numpy)</li><li><a href="deprecations.html">OpenGL 3.1 Deprecations</a>
+-- description of the deprecations that OpenGL 3.1 will impose.
+&nbsp;If you have any PyOpenGL code that can't be described solely as
+using Buffers, Textures and Shaders you probably need to read this.</li><li><a href="manual-3.0/index.xhtml">PyOpenGL 3.0 Reference</a>
+-- automatically
 generated versions of the OpenGL programming reference with
-Python-specific call-signature annotations for PyOpenGL 3.0 series</li><ul><li><a href="manual-3.0/index.xhtml#GL">GL Reference</a></li><li><a href="manual-3.0/index.xhtml#GLU">GLU Reference</a></li><li><a href="manual-3.0/index.xhtml#GLUT">GLUT Reference</a></li><li><a href="manual-3.0/index.xhtml#GLE">GLE Reference</a></li></ul>
+Python-specific call-signature annotations for PyOpenGL 3.0 series.
+&nbsp;These are the OpenGL man-pages with PyOpenGL-specific
+annotations. &nbsp;The man pages also contain links to real-world
+PyOpenGL source-code which uses the described entry points.</li><ul><li><a href="manual-3.0/index.xhtml#GL">GL Reference</a></li><li><a href="manual-3.0/index.xhtml#GLU">GLU Reference</a></li><li><a href="manual-3.0/index.xhtml#GLUT">GLUT Reference</a></li><li><a href="manual-3.0/index.xhtml#GLE">GLE Reference</a></li></ul>
 
 
 
@@ -145,7 +152,7 @@ Python-specific call-signature annotations for PyOpenGL 2.x series</li><li>OpenG
         
         </ul>
 
-        <li><a href="file:///S:/PyOpenGLWebSite/documentation/py2exe.html">Using
+        <li><a href="py2exe.html">Using
 py2exe</a> with PyOpenGL and OpenGLContext -- building stand-alone
 executables for Win32 systems (note, not currently working with 3.x!)</li>
 
@@ -173,8 +180,7 @@ Handbook</a> -- Image handling library for Python </li>
 
 
 
-        <li><a href="http://www.pfdubois.com/numpy/html2/numpy.html">Numeric
-Python Handbook</a> -- multi-dimensional array library for Python</li>
+        <li><a href="http://www.scipy.org/Documentation">Numpy Documentation</a> -- documentation for the multi-dimensional array-handling extension</li>
 
 
 
@@ -197,8 +203,7 @@ Python Handbook</a> -- multi-dimensional array library for Python</li>
 
 
 
-      <th style="vertical-align: top;">OpenGL Programming Guide (Red
-Book)</th>
+      <th style="vertical-align: top;">Books</th>
 
 
 
@@ -206,7 +211,11 @@ Book)</th>
       
       
       
-      <p>Older versions of the official OpenGL Programming Guide, a.k.a
+      <p>There
+are a large number of very good books on OpenGL available. &nbsp;Many
+of these books cover "legacy" OpenGL, rather than the
+shader/buffer/texture model of OpenGL 3.0. &nbsp;Still, they provide a
+good grounding that allows you to learn the basics of OpenGL.</p><h4>OpenGL Programming Guide: (The Red Book)</h4><p>Older versions of the official OpenGL Programming Guide, a.k.a
 "The Red Book" are available online in <a href="http://www.google.ca/search?q=OpenGL+Programming+Guide">various
 places</a> (version 2.0 covers OpenGL 1.1). &nbsp;If you are serious about
 learning OpenGL, the newer versions of the Red Book, (v3.0) is likely on
@@ -222,7 +231,7 @@ the shelves of your local bookstore, and is quite readable.<br>
       
       
       <p>You'll find versions of some of the Red Book tutorial code for
-Python included in the OpenGL/Demo/redbook directory of the PyOpenGL
+Python included in the PyOpenGL-Demo/redbook directory of the PyOpenGL-Demo
 distribution. &nbsp;These versions are very close to the original source
 code. &nbsp;The OpenGLContext tests directory also has four of the
 tutorials converted, "alpha", "alpha3D", "surface" and "trim".<br>
@@ -237,7 +246,19 @@ tutorials converted, "alpha", "alpha3D", "surface" and "trim".<br>
       
       
       <p> Addison-Wesley Pub Co; ISBN: 0201604582 ; 3rd edition (August
-6, 1999)</p>
+6, 1999)</p><h4>OpenGL Shading Language: (The Orange Book)</h4><p>This
+book serves as a good introduction to shaders. &nbsp;The shaders
+described cover the gamut from the simplest 1-line shaders through code
+to emulate legacy operation to non-realistic shading to caustics and
+the like. &nbsp;You will generally have to adapt any code you take from
+here to work with your real-world scenes, but the book offers a strong
+grounding.</p><p>Addison-Wesley Pub Co: ISBN: 978-0-321-33489-3; 2nd edition</p><h4>OpenGL Super-Bible</h4><p>This
+book is an all-round introduction, working up from OpenGL 1.0 era
+operations all the way to OpenGL 2.x era behaviours. &nbsp;Coverage of
+newer features tends to be somewhat sketchy, but coverage of older
+features is extensive. &nbsp;It is notable mainly for being somewhat
+up-to-date and having exhaustive coverage of what it covers. &nbsp;The
+book also makes a great anchor for your average supertanker.</p><p>Sams Pub: ISBN 0-672-32601-9; 3rd edition</p>
 
 
 
@@ -262,10 +283,14 @@ tutorials converted, "alpha", "alpha3D", "surface" and "trim".<br>
       
       
       <p>When people think of an "OpenGL tutorial", many will
-immediately think of the NeHe tutorials by Jeff Molofee, available at <a href="http://nehe.gamedev.net/">http://nehe.gamedev.net/</a> these
+immediately think of the NeHe tutorials by Jeff Molofee, available at <a href="http://nehe.gamedev.net/">http://nehe.gamedev.net/</a>
+these
 tutorials range from the very simple (create an OpenGL window) through
 the advanced (particle systems, loading scenes from various formats,
-displaying video textures, text, morphing, multi-texturing).</p>
+displaying video textures, text, morphing, multi-texturing). &nbsp;The
+older tutorials tend to be legacy-mode operations, so you should keep
+in mind that they are describing old ways of working as you learn with
+them.</p>
 
 
 
