@@ -50,8 +50,7 @@ changes like the above examples.<br>
 <h2>Errors raise Exceptions</h2>
 <p>PyOpenGL generally uses "strict" OpenGL operation, which is closer to
 the operation of Python itself, i.e. errors are raised as exceptions,
-rather than silently being passed back to the user. glGetError is not
-available as it would never return anything save GL_NO_ERROR.</p><p>You
+rather than requiring the user to check return values and/or call glCheckError manually.</p><p>You
 can disable PyOpenGL's error checking by setting a module-level flag in
 the OpenGL package before importing any of the sub-modules, like so:</p><pre>import OpenGL<br>OpenGL.ERROR_CHECKING = False<br>from OpenGL.GL import *<br>from OpenGL.GLU import *<br>...</pre>
 <p>This will tend to cause a huge speed increase in your code, as the

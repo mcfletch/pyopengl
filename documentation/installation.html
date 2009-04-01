@@ -216,7 +216,7 @@ demonstration module.</li>
 </ul>
 
 
-<h2>Standard Install (setuptools/egg based)</h2>
+<h2>Standard Install (distutils (or setuptools))</h2>
 
 <p>PyOpenGL uses standard distutils. &nbsp;You can download the source packages and install like so:</p><pre>tar -zxvf PyOpenGL-3.0.0.tar.gz<br>cd PyOpenGL-3.0.0<br>python setup.py install</pre><p>If
 you prefer to use easy_install, for instance within a virtualenv
@@ -235,7 +235,7 @@ you should declare a dependency on "PyOpenGL" to pull in the latest
 PyOpenGL 3.x release.</p><p class="technical">Various
 PyOpenGL 3.0.0 alphas were dependent on setuptools. &nbsp;This is no
 longer the case, as setuptools plugin mechanism was causing conflicts
-with platform packaging tools (py2exe, pyinstaller).</p><h2>BZR Install</h2>
+with platform packaging tools (py2exe, pyinstaller).</p><h2>BZR (Developer) Install</h2>
 
 <p>If you would like to contribute to PyOpenGL development or just need
 to ride the bleeding edge, you will likely want to work with a
