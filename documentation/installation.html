@@ -233,9 +233,9 @@ your Python egg files in a non-standard location be sure to setup your
 <p class="technical">You may want to uninstall any previous version of PyOpenGL before installing a new version, as there may be conflicts.</p><p class="technical">If you use setuptools to package your application,
 you should declare a dependency on "PyOpenGL" to pull in the latest
 PyOpenGL 3.x release.</p><p class="technical">Various
-PyOpenGL 3.0.0 alphas and betas were dependent on setuptools.
-&nbsp;This is no longer the case, as setuptools plugin mechanism was
-causing conflicts with platform packaging tools (py2exe, pyinstaller).</p><h2>BZR Install</h2>
+PyOpenGL 3.0.0 alphas were dependent on setuptools. &nbsp;This is no
+longer the case, as setuptools plugin mechanism was causing conflicts
+with platform packaging tools (py2exe, pyinstaller).</p><h2>BZR Install</h2>
 
 <p>If you would like to contribute to PyOpenGL development or just need
 to ride the bleeding edge, you will likely want to work with a
@@ -248,11 +248,11 @@ directive" to send to pyopengl-devel@lists.sourceforge.net:</p><pre>bzr send -o 
 
 
 <p>The documentation build system is completely rewritten for PyOpenGL
-3.x and is far easier to use and faster than the old Java-based docbook
-processor.</p><pre>bzr branch lp:~mcfletch/pyopengl/directdocs<br>cd directdocs<br>./samples.py<br>./references.py<br>./generate.py<br>./upload.py</pre><p>The
+3.x and is far easier to use and faster &nbsp;(at least a couple of
+orders of magnitude) than the old Java-based docbook processor.</p><pre>bzr branch lp:~mcfletch/pyopengl/directdocs<br>cd directdocs<br>./samples.py<br>./references.py<br>./generate.py<br>./upload.py</pre><p>The
 last command will not work unless you happen to be me. You need the
 lxml.etree and kid packages installed to run the generator (also bzr,
-svn, cvs, etceteras).</p><h2>Building Older Releases</h2>
+svn, PyOpenGL, cvs, etceteras).</p><h2>Building Older Releases</h2>
 
 <p>If you would like to build the 2.x release of PyOpenGL, you can view the <a href="installation-v2.html">original installation documentation</a>.</p>
 
