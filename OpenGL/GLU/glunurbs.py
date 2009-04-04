@@ -8,10 +8,11 @@ from OpenGL.raw import GLU as simple
 from OpenGL import platform, converters, wrapper
 from OpenGL.GLU import glustruct
 from OpenGL.lazywrapper import lazy
-from OpenGL import arrays
+from OpenGL import arrays, error
 import ctypes
 import weakref
 from OpenGL.platform import PLATFORM
+import OpenGL
 
 __all__ = (
 	'GLUnurbs',
@@ -169,6 +170,31 @@ def gluNurbsCallbackData( baseFunction, nurb, userData ):
 		nurb, nurb.noteObject( userData ) 
 	)
 
+MAX_ORDER = 8
+def checkOrder( order,knotCount,name ):
+	"""Check that order is valid..."""
+	if order < 1:
+		raise error.GLUError( 
+			"""%s should be 1 or more, is %s"""%( name,order,) 
+		)
+	elif order > MAX_ORDER:
+		raise error.GLUError( 
+			"""%s should be %s or less, is %s"""%( name, MAX_ORDER, order) 
+		)
+	elif knotCount < (2*order):
+		raise error.GLUError( 
+			"""Knotcount must be at least 2x %s is %s should be at least %s"""%( name, knotCount, 2*order) 
+		)
+def checkKnots( knots, name ):
+	"""Check that knots are in ascending order"""
+	if knots:
+		knot = knots[0]
+		for next in knots[1:]:
+			if next < knot:
+				raise error.GLUError(
+					"""%s has decreasing knot %s after %s"""%( name, next, knot )
+				)
+
 @lazy( simple.gluNurbsCallbackDataEXT )
 def gluNurbsCallbackDataEXT( baseFunction,nurb, userData ):
 	"""Note the Python object for use as userData by the nurb"""
@@ -185,8 +211,14 @@ def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
 	knots = arrays.GLfloatArray.asArray( knots )
 	knotCount = arrays.GLfloatArray.arraySize( knots )
 	control = arrays.GLfloatArray.asArray( control )
-	length,step = arrays.GLfloatArray.dimensions( control )
+	try:
+		length,step = arrays.GLfloatArray.dimensions( control )
+	except ValueError, err:
+		raise error.GLUError( """Need a 2-dimensional control array""" )
 	order = knotCount - length
+	if OpenGL.ERROR_CHECKING:
+		checkOrder( order, knotCount, 'order of NURBS curve')
+		checkKnots( knots, 'knots of NURBS curve')
 	return baseFunction(
 		nurb, knotCount, knots, step, control, order, type,
 	)
@@ -203,18 +235,27 @@ def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
 	tKnotCount = arrays.GLfloatArray.arraySize( tKnots )
 	control = arrays.GLfloatArray.asArray( control )
 
-	length,width,step = arrays.GLfloatArray.dimensions( control )
+	try:
+		length,width,step = arrays.GLfloatArray.dimensions( control )
+	except ValueError, err:
+		raise error.GLUError( """Need a 3-dimensional control array""" )
 	sOrder = sKnotCount - length 
 	tOrder = tKnotCount - width 
 	sStride = width*step
 	tStride = step
-	
-	assert (sKnotCount-sOrder)*(tKnotCount-tOrder) == length*width, (
-		nurb, sKnotCount, sKnots, tKnotCount, tKnots,
-		sStride, tStride, control,
-		sOrder,tOrder,
-		type
-	)
+	if OpenGL.ERROR_CHECKING:
+		checkOrder( sOrder, sKnotCount, 'sOrder of NURBS surface')
+		checkOrder( tOrder, tKnotCount, 'tOrder of NURBS surface')
+		checkKnots( sKnots, 'sKnots of NURBS surface')
+		checkKnots( tKnots, 'tKnots of NURBS surface')
+	if not (sKnotCount-sOrder)*(tKnotCount-tOrder) == length*width:
+		raise error.GLUError(
+			"""Invalid NURB structure""",
+			nurb, sKnotCount, sKnots, tKnotCount, tKnots,
+			sStride, tStride, control,
+			sOrder,tOrder,
+			type
+		)
 
 	result = baseFunction(
 		nurb, sKnotCount, sKnots, tKnotCount, tKnots,
