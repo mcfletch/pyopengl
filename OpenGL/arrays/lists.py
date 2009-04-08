@@ -11,23 +11,17 @@ import ctypes, _ctypes
 
 from OpenGL import constants, constant, error, ERROR_ON_COPY
 from OpenGL.arrays import formathandler
-#try:
-#	from OpenGL.arrays import numpymodule
-#except ImportError, err:
-#	# we are required...
 HANDLED_TYPES = (list,tuple)
-#else:
-#	HANDLED_TYPES = ()
 import operator
 
 def err_on_copy( func ):
+	"""Decorator which raises informative error if we try to copy while ERROR_ON_COPY"""
 	if not ERROR_ON_COPY:
 		return func 
 	else:
-		def raiseErrorOnCopy( value, *args, **named ):
+		def raiseErrorOnCopy( self,  value, *args, **named ):
 			raise error.CopyError(
-				"""%s passed, cannot copy with ERROR_ON_COPY set""",
-				value.__class__.__name__,
+				"""%s passed, cannot copy with ERROR_ON_COPY set, please use an array type which has native data-pointer support (e.g. numpy or ctypes arrays)"""%( value.__class__.__name__, )
 			)
 		raiseErrorOnCopy.__name__ = func.__name__
 		return raiseErrorOnCopy
