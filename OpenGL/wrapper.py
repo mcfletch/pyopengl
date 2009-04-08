@@ -1,10 +1,11 @@
 """The wrapping code for providing natural ctypes-based OpenGL interface"""
-import ctypes
-from OpenGL import platform, error
+import ctypes, logging
+from OpenGL import platform, error, STORE_POINTERS, ERROR_ON_COPY
 glGetError = platform.OpenGL.glGetError
 from OpenGL import converters
 from OpenGL.converters import DefaultCConverter
 from OpenGL.converters import returnCArgument,returnPyArgument
+log = logging.getLogger( 'OpenGL.wrapper' )
 try:
 	from OpenGL_accelerate.wrapper import (
 		Wrapper as cWrapper,
@@ -15,6 +16,11 @@ try:
 except ImportError, err:
 	cWrapper = None 
 NULL = object()
+
+if not STORE_POINTERS:
+	if not ERROR_ON_COPY:
+		log.error( """You've specified (not STORE_POINTERS) yet ERROR_ON_COPY is False, this would cause segfaults, so (not STORE_POINTERS) is being ignored""" )
+		STORE_POINTERS = True 
 
 def asList( o ):
 	"""Convert to a list if not already one"""
@@ -237,7 +243,7 @@ class Wrapper( object ):
 		return self
 	def setStoreValues( self, function=NULL ):
 		"""Set the storage-of-arguments function for the whole wrapper"""
-		if function is NULL:
+		if function is NULL or ERROR_ON_COPY and not STORE_POINTERS:
 			try:
 				del self.storeValues
 			except Exception, err:

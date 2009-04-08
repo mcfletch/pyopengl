@@ -45,21 +45,55 @@ with these sets of flags.
 		Default: False
 		
 	ERROR_ON_COPY -- if set to a True value before 
-		importing the numpy array-support module, will 
+		importing the numpy/lists support modules, will 
 		cause array operations to raise 
-		OpenGL.error.CopyError if an array operation 
-		would cause a data-copy in order to match
-		data-types.
+		OpenGL.error.CopyError if the operation 
+		would cause a data-copy in order to make the 
+		passed data-type match the target data-type.
+		
+		This effectively disables all list/tuple array 
+		support, as they are inherently copy-based.
 		
 		This feature allows for optimisation of your 
 		application.  It should only be enabled during 
 		testing stages to prevent raising errors on 
 		recoverable conditions at run-time.  
 		
-		Note that this feature only works with Numpy 
-		arrays at the moment.
+		Note: this feature does not currently work with 
+			numarray or Numeric arrays.
 		
 		Default: False
+	
+	STORE_POINTERS -- if set to True, PyOpenGL array operations 
+		will attempt to store references to pointers which are 
+		being passed in order to prevent memory-access failures 
+		if the pointed-to-object goes out of scope.  This 
+		behaviour is primarily intended to allow temporary arrays 
+		to be created without causing memory errors, thus it is 
+		trading off performance for safety.
+		
+		To use this flag effectively, you will want to first set 
+		ERROR_ON_COPY to True and eliminate all cases where you 
+		are copying arrays.  Copied arrays *will* segfault your 
+		application deep within the GL if you disable this feature!
+		
+		Once you have eliminated all copying of arrays in your 
+		application, you will further need to be sure that all 
+		arrays which are passed to the GL are stored for at least 
+		the time period for which they are active in the GL.  That 
+		is, you must be sure that your array objects live at least 
+		until they are no longer bound in the GL.  This is something 
+		you need to confirm by thinking about your application's 
+		structure.
+		
+		When you are sure your arrays won't cause seg-faults, you 
+		can set STORE_POINTERS=False in your application and enjoy 
+		a (slight) speed up.
+		
+		Note: this flag is *only* observed when ERROR_ON_COPY == True,
+			as a safety measure to prevent pointless segfaults
+		
+		Default: True
 	
 	WARN_ON_FORMAT_UNAVAILABLE -- If True, generates
 		logging-module warn-level events when a FormatHandler
@@ -103,6 +137,7 @@ from OpenGL.version import __version__
 ERROR_CHECKING = True
 ERROR_LOGGING = False
 ERROR_ON_COPY = False
+STORE_POINTERS = True
 WARN_ON_FORMAT_UNAVAILABLE = False
 FORWARD_COMPATIBLE_ONLY = False
 
