@@ -18,10 +18,10 @@ def dataPointer( value, typeCode=None ):
 class StringHandler( formathandler.FormatHandler ):
 	"""String-specific data-type handler for OpenGL"""
 	HANDLED_TYPES = (str, )
-#	@classmethod
-#	def from_param( cls, value, typeCode=None ):
-#		return dataPointer( value )
-	dataPointer = from_param = staticmethod( dataPointer )
+	@classmethod
+	def from_param( cls, value, typeCode=None ):
+		return ctypes.c_void_p( dataPointer( value ) )
+	dataPointer = staticmethod( dataPointer )
 	def zeros( self, dims, typeCode=None ):
 		"""Currently don't allow strings as output types!"""
 		raise NotImplemented( """Don't currently support strings as output arrays""" )
