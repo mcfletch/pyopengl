@@ -187,7 +187,7 @@ def checkOrder( order,knotCount,name ):
 		)
 def checkKnots( knots, name ):
 	"""Check that knots are in ascending order"""
-	if knots:
+	if len(knots):
 		knot = knots[0]
 		for next in knots[1:]:
 			if next < knot:
