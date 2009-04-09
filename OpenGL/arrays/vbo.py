@@ -3,6 +3,7 @@ from OpenGL import GL
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.GL.ARB import vertex_buffer_object
+import ctypes
 
 
 import weakref
