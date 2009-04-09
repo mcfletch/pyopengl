@@ -70,6 +70,13 @@ class BasePlatform( object ):
 		"""Wrap function with logging operations if appropriate"""
 		return logs.logOnFail( func, logs.getLog( 'OpenGL.errors' ))
 	
+	def finalArgType( self, typ ):
+		"""Retrieve a final type for arg-type"""
+		if typ == ctypes.POINTER( None ):
+			from OpenGL.arrays import ArrayDatatype
+			return ArrayDatatype
+		else:
+			return typ
 	def constructFunction( 
 		self,
 		functionName, dll, 
@@ -83,6 +90,7 @@ class BasePlatform( object ):
 		"""
 		if extension and not self.checkExtension( extension ):
 			raise AttributeError( """Extension not available""" )
+		argTypes = [ self.finalArgType( t ) for t in argTypes ]
 		if extension and not self.EXTENSIONS_USE_BASE_FUNCTIONS:
 			# what about the VERSION values???
 			if self.checkExtension( extension ):
