@@ -179,7 +179,7 @@ class VBO( object ):
 		"""Add an integer to this VBO (offset)"""
 		if hasattr( other, 'offset' ):
 			other = other.offset 
-		assert isinstance( other, int ), """Only know how to add integer offsets"""
+		assert isinstance( other, (int,long) ), """Only know how to add integer/long offsets"""
 		return VBOOffset( self, other )
 
 class VBOOffset( object ):
