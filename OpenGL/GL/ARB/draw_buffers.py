@@ -17,8 +17,6 @@ glDrawBuffersARB = wrapper.wrapper(
 	'n', arrays.AsArrayTypedSize( 'bufs', arrays.GLenumArray ),
 ).setPyConverter(
 	'bufs', arrays.AsArrayTyped( 'bufs', arrays.GLenumArray ),
-).setCResolver( 
-	'bufs', arrays.GLenumArray.dataPointer,
 ).setReturnValues(
 	wrapper.returnPyArgument( 'bufs' )
 )

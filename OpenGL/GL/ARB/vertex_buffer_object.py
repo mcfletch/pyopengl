@@ -29,9 +29,7 @@ def _sizeOfArrayInput( pyArgs, index, wrapper ):
 
 glBufferDataARB = wrapper.wrapper( glBufferDataARB ).setPyConverter(
 	'data', arrays.asVoidArray(),
-).setPyConverter( 'size' ).setCResolver( 
-	'data', arrays.ArrayDatatype.voidDataPointer ,
-).setCConverter(
+).setPyConverter( 'size' ).setCConverter(
 	'size', _sizeOfArrayInput,
 ).setReturnValues( 
 	wrapper.returnPyArgument( 'data' ) 
@@ -39,9 +37,7 @@ glBufferDataARB = wrapper.wrapper( glBufferDataARB ).setPyConverter(
 
 glBufferSubDataARB = wrapper.wrapper( glBufferSubDataARB ).setPyConverter(
 	'data', arrays.asVoidArray(),
-).setPyConverter( 'size' ).setCResolver( 
-	'data', arrays.ArrayDatatype.voidDataPointer ,
-).setCConverter(
+).setPyConverter( 'size' ).setCConverter(
 	'size', _sizeOfArrayInput,
 ).setReturnValues( 
 	wrapper.returnPyArgument( 'data' ) 

@@ -406,8 +406,9 @@ class ImageInputConverter( object ):
 			import pdb
 			pdb.set_trace()
 		return arrayType.asArray( arg )
-	def cResolver( self, array ):
-		return ctypes.c_void_p( arrays.ArrayDatatype.dataPointer( array ) )
+#	def cResolver( self, array ):
+#		return array
+#		return ctypes.c_void_p( arrays.ArrayDatatype.dataPointer( array ) )
 	
 class TypedImageInputConverter( ImageInputConverter ):
 	def __init__( self, rank, pixelsName, arrayType, typeName=None ):
@@ -491,9 +492,9 @@ def setImageInput(
 	baseOperation.setPyConverter(
 		pixelName, converter,
 	)
-	baseOperation.setCResolver(
-		pixelName, converter.cResolver
-	)
+#	baseOperation.setCResolver(
+#		pixelName, converter.cResolver
+#	)
 	return baseOperation
 
 glDrawPixels = setDimensionsAsInts(

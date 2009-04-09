@@ -14,8 +14,6 @@ from OpenGL.GL.VERSION.GL_1_2_images import *
 
 glDrawRangeElements = wrapper.wrapper( simple.glDrawRangeElements ).setPyConverter(
 	'indices', arrays.AsArrayOfType( 'indices', 'type' ),
-).setCResolver(
-	'indices', arrays.ArrayDatatype.voidDataPointer ,
 ).setReturnValues(
 	wrapper.returnPyArgument( 'indices' )
 )

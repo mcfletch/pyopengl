@@ -17,7 +17,7 @@ def glVertexPointerd( array ):
 	storedPointers[ GL_VERTEX_ARRAY ] = arg4
 	return arg4
 """
-from OpenGL import platform, arrays, error, wrapper, contextdata, converters, constant
+from OpenGL import platform, arrays, error, wrapper, contextdata, converters, constant, ERROR_ON_COPY
 from OpenGL.raw import GL as simple
 from OpenGL.raw.GL import annotations
 import ctypes
@@ -107,10 +107,8 @@ def wrapPointerFunction( name, baseFunction, glType, arrayType,startArgs, defaul
 	if arrayType:
 		arrayModuleType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ glType ]
 		function.setPyConverter( 'pointer', arrays.asArrayType(arrayModuleType) )
-		function.setCResolver( 'pointer', arrayModuleType.voidDataPointer )
 	else:
 		function.setPyConverter( 'pointer', arrays.AsArrayOfType('pointer','type') )
-		function.setCResolver( 'pointer', arrays.ArrayDatatype.voidDataPointer )
 	function.setCConverter( 'pointer', converters.getPyArgsName( 'pointer' ) )
 	if 'size' in function.argNames:
 		function.setPyConverter( 'size' )
@@ -136,8 +134,6 @@ del name, function
 
 glVertexPointer = wrapper.wrapper( simple.glVertexPointer ).setPyConverter(
 	'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setCResolver( 
-	'pointer', arrays.ArrayDatatype.voidDataPointer ,
 ).setStoreValues( 
 	arrays.storePointerType( 'pointer', simple.GL_VERTEX_ARRAY_POINTER ) 
 ).setReturnValues( 
@@ -145,8 +141,6 @@ glVertexPointer = wrapper.wrapper( simple.glVertexPointer ).setPyConverter(
 )
 glTexCoordPointer = wrapper.wrapper( simple.glTexCoordPointer ).setPyConverter(
 	'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setCResolver( 
-	'pointer', arrays.ArrayDatatype.voidDataPointer ,
 ).setStoreValues( 
 	arrays.storePointerType( 'pointer', simple.GL_TEXTURE_COORD_ARRAY_POINTER ) 
 ).setReturnValues( 
@@ -154,8 +148,6 @@ glTexCoordPointer = wrapper.wrapper( simple.glTexCoordPointer ).setPyConverter(
 )
 glNormalPointer = wrapper.wrapper( simple.glNormalPointer ).setPyConverter(
 	'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setCResolver( 
-	'pointer', arrays.ArrayDatatype.voidDataPointer ,
 ).setStoreValues( 
 	arrays.storePointerType( 'pointer', simple.GL_NORMAL_ARRAY_POINTER ) 
 ).setReturnValues( 
@@ -163,8 +155,6 @@ glNormalPointer = wrapper.wrapper( simple.glNormalPointer ).setPyConverter(
 )
 glIndexPointer = wrapper.wrapper( simple.glIndexPointer ).setPyConverter(
 	'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setCResolver( 
-	'pointer', arrays.ArrayDatatype.voidDataPointer ,
 ).setStoreValues( 
 	arrays.storePointerType( 'pointer', simple.GL_INDEX_ARRAY_POINTER ) 
 ).setReturnValues( 
@@ -173,8 +163,6 @@ glIndexPointer = wrapper.wrapper( simple.glIndexPointer ).setPyConverter(
 glEdgeFlagPointer = wrapper.wrapper( simple.glEdgeFlagPointer ).setPyConverter(
 	# XXX type is wrong!
 	'pointer', arrays.AsArrayTyped( 'pointer', arrays.GLushortArray ),
-).setCResolver( 
-	'pointer', arrays.ArrayDatatype.voidDataPointer ,
 ).setStoreValues( 
 	arrays.storePointerType( 'pointer', simple.GL_EDGE_FLAG_ARRAY_POINTER ) 
 ).setReturnValues( 
@@ -182,16 +170,12 @@ glEdgeFlagPointer = wrapper.wrapper( simple.glEdgeFlagPointer ).setPyConverter(
 )
 glColorPointer = wrapper.wrapper( simple.glColorPointer ).setPyConverter(
 	'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setCResolver( 
-	'pointer', arrays.ArrayDatatype.voidDataPointer ,
 ).setStoreValues( 
 	arrays.storePointerType( 'pointer', simple.GL_COLOR_ARRAY_POINTER ) 
 ).setReturnValues( 
 	wrapper.returnPyArgument( 'pointer' ) 
 )
-glInterleavedArrays = wrapper.wrapper( simple.glInterleavedArrays ).setCResolver( 
-	'pointer', arrays.ArrayDatatype.voidDataPointer ,
-).setStoreValues( 
+glInterleavedArrays = wrapper.wrapper( simple.glInterleavedArrays ).setStoreValues( 
 	arrays.storePointerType( 'pointer', GL_INTERLEAVED_ARRAY_POINTER ) 
 ).setReturnValues( 
 	wrapper.returnPyArgument( 'pointer' )
@@ -200,8 +184,6 @@ glInterleavedArrays = wrapper.wrapper( simple.glInterleavedArrays ).setCResolver
 
 glDrawElements = wrapper.wrapper( simple.glDrawElements ).setPyConverter(
 	'indices', arrays.AsArrayOfType( 'indices', 'type' ),
-).setCResolver( 
-	'indices', arrays.ArrayDatatype.voidDataPointer ,
 ).setReturnValues( 
 	wrapper.returnPyArgument( 'indices' ) 
 )
@@ -216,8 +198,6 @@ def glDrawElementsTyped( type, suffix ):
 		'count', arrays.AsArrayTypedSize( 'indices', arrayType ),
 	).setPyConverter(
 		'indices', arrays.AsArrayTyped( 'indices', arrayType ),
-	).setCResolver( 
-		'indices', arrayType.voidDataPointer ,
 	).setReturnValues(
 		wrapper.returnPyArgument( 'indices' )
 	)

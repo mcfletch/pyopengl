@@ -13,8 +13,6 @@ from OpenGL.raw.GL.EXT.draw_range_elements import *
 
 glDrawRangeElementsEXT = wrapper.wrapper( glDrawRangeElementsEXT ).setPyConverter(
 	'indices', arrays.AsArrayOfType( 'indices', 'type' ),
-).setCResolver( 
-	'indices', arrays.ArrayDatatype.voidDataPointer ,
 ).setReturnValues( 
 	wrapper.returnPyArgument( 'indices' ) 
 )
