@@ -9,6 +9,14 @@ import operator
 
 c = ctypes.c_float(0)
 ParamaterType = ctypes.byref(c).__class__
+DIRECT_RETURN_TYPES = (
+	ParamaterType,
+	# these pointer types are implemented as _SimpleCData
+	# despite being pointers...
+	ctypes.c_void_p,
+	ctypes.c_char_p,
+	ctypes.c_wchar_p,
+)
 del c
 
 class CtypesParameterHandler( formathandler.FormatHandler ):
@@ -16,7 +24,7 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
 	isOutput = True
 	HANDLED_TYPES = (ParamaterType, _ctypes._SimpleCData)
 	def from_param( cls, value, typeCode=None ):
-		if isinstance( value, ParamaterType ):
+		if isinstance( value, DIRECT_RETURN_TYPES ):
 			return value 
 		else:
 			return ctypes.byref( value )
