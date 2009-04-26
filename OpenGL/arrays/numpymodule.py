@@ -12,6 +12,7 @@ except ImportError, err:
 import operator
 import OpenGL
 import ctypes
+c_void_p = ctypes.c_void_p
 
 try:
 	from OpenGL_accelerate.numpy_accel import dataPointer
@@ -98,25 +99,20 @@ class NumpyHandler( formathandler.FormatHandler ):
 	@classmethod
 	def arraySize( cls, value, typeCode = None ):
 		"""Given a data-value, calculate dimensions for the array"""
-		try:
-			dimValue = value.shape
-		except AttributeError, err:
-			# XXX it's a list or a tuple, how do we determine dimensions there???
-			# for now we'll just punt and convert to an array first...
-			value = cls.asArray( value, typeCode )
-			dimValue = value.shape 
-		dims = 1
-		for dim in dimValue:
-			dims *= dim 
-		return dims 
+		return value.size
 	@classmethod
 	def arrayByteCount( cls, value, typeCode = None ):
 		"""Given a data-value, calculate number of bytes required to represent"""
 		try:
-			return cls.arraySize( value, typeCode ) * value.itemsize
+			return value.nbytes
 		except AttributeError, err:
+			if cls.ERROR_ON_COPY:
+				raise error.CopyError(
+					"""Non-numpy array passed to numpy arrayByteCount: %s""",
+					type(value),
+				)
 			value = cls.asArray( value, typeCode )
-			return cls.arraySize( value, typeCode ) * value.itemsize
+			return value.nbytes
 	@classmethod
 	def asArray( cls, value, typeCode=None ):
 		"""Convert given value to an array value of given typeCode"""
@@ -197,7 +193,7 @@ except ImportError, err:
 			pp._temporary_array_ = (array,)
 			return pp
 		else:
-			return ctypes.c_void_p( pointer )
+			return c_void_p( pointer )
 NumpyHandler.from_param = from_param
 
 try:
