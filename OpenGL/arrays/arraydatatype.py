@@ -21,16 +21,12 @@ class ArrayDatatype( object ):
 		once the registry is initialized...
 		"""
 		formathandler.FormatHandler.loadAll()
-		cls.getHandler = formathandler.FormatHandler.TYPE_REGISTRY
+		ArrayDatatype.getHandler = formathandler.FormatHandler.TYPE_REGISTRY
 		return cls.getHandler( value )
 	getHandler = classmethod( getHandler )
 	def from_param( cls, value ):
 		"""Given a value in a known data-pointer type, convert to a ctypes pointer"""
-		try:
-			return cls.getHandler(value).from_param( value, cls.typeConstant )
-		except Exception, err:
-			import pdb
-			pdb.set_trace()
+		return cls.getHandler(value).from_param( value, cls.typeConstant )
 	from_param = classmethod( logs.logOnFail( from_param, log ) )
 	def dataPointer( cls, value ):
 		"""Given a value in a known data-pointer type, return long for pointer"""
@@ -55,7 +51,11 @@ class ArrayDatatype( object ):
 		return cls.getHandler(value).asArray( value, typeCode or cls.typeConstant )
 	asArray = classmethod( logs.logOnFail( asArray, log ) )
 	def arrayToGLType( cls, value ):
-		"""Given a data-value, guess the OpenGL type of the corresponding pointer"""
+		"""Given a data-value, guess the OpenGL type of the corresponding pointer
+		
+		Note: this is not currently used in PyOpenGL and may be removed 
+		eventually.
+		"""
 		return cls.getHandler(value).arrayToGLType( value )
 	arrayToGLType = classmethod( logs.logOnFail( arrayToGLType, log ) )
 	def arraySize( cls, value, typeCode = None ):
