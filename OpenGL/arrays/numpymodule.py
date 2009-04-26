@@ -146,9 +146,9 @@ class NumpyHandler( formathandler.FormatHandler ):
 			contiguous = source.flags.contiguous
 		except AttributeError, err:
 			if typeCode:
-				return numpy.ascontiguousarray( source, typeCode )
+				return numpy.array( source, typeCode )
 			else:
-				return numpy.ascontiguousarray( source )
+				return numpy.array( source )
 		else:
 			if contiguous and (typeCode is None or typeCode==source.dtype.char):
 				return source
@@ -172,7 +172,7 @@ class NumpyHandler( formathandler.FormatHandler ):
 					)
 				if typeCode is None:
 					typeCode = source.dtype.char
-				return numpy.ascontiguousarray( source.astype( typeCode ), typeCode )
+				return numpy.array( source, typeCode )
 	@classmethod
 	def unitSize( cls, value, typeCode=None ):
 		"""Determine unit size of an array (if possible)"""
