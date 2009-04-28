@@ -48,6 +48,9 @@ cdef class NumpyHandler:
 		else:
 			typecode = np.dtype( typeCode )
 		return self.contiguous( instance, typecode )
+	def unitSize( self, np.ndarray instance, typeCode=None ):
+		"""Retrieve last dimension of the array"""
+		return instance.shape[instance.ndim-1]
 
 	cdef contiguous( self, np.ndarray instance, np.dtype dtype ):
 		"""Ensure that this instance is a contiguous array"""
@@ -65,9 +68,11 @@ cdef class NumpyHandler:
 			# okay, so just return...
 			return instance 
 		else:
-			# just convert regardless...
+			# "convert" regardless (will return same instance if already contiguous)
 			return PyArray_FromArray( 
 				instance, dtype, NPY_CARRAY
 			)
 
+# Cython numpy tutorial neglects to mention this AFAICS
+# get segfaults without it
 import_array()

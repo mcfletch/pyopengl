@@ -39,4 +39,7 @@ class TestAccelNumpy( unittest.TestCase ):
 			self.eoc_handler.asArray,
 				a2
 		)
+	def test_unitSize( self ):
+		p = self.handler.unitSize( self.array )
+		assert p == 3, p
 	
