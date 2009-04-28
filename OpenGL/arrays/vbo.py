@@ -211,6 +211,7 @@ def deleter( buffers, key, implementation ):
 
 class VBOHandler( FormatHandler ):
 	"""Handles VBO instances passed in as array data"""
+	vp0 = ctypes.c_void_p( 0 )
 	def dataPointer( self, instance ):
 		"""Retrieve data-pointer from the instance's data
 		
@@ -218,7 +219,7 @@ class VBOHandler( FormatHandler ):
 		"""
 		return 0
 	def from_param( self, instance, typeCode=None ):
-		return ctypes.c_void_p( 0 )
+		return self.vp0
 	def zeros( self, dims, typeCode ):
 		"""Not implemented"""
 		raise NotImplemented( """Don't have VBO output support yet""" )
