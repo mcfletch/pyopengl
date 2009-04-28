@@ -1,6 +1,10 @@
 import ctypes
 from OpenGL import error
 
+cdef extern from "Python.h":
+	cdef object PyObject_Type( object )
+	cdef object PyDict_GetItem( object, object )
+
 cdef class Wrapper:
 	"""C-coded most-generic form of the wrapper's core function"""
 	cdef public object calculate_pyArgs, calculate_cArgs, calculate_cArguments, wrappedOperation, storeValues,returnValues
@@ -184,16 +188,21 @@ cdef class HandlerRegistry:
 	def __setitem__( self,key,value ):
 		self.registry[key] = value
 	def __call__( self, value ):
+		return self.c_lookup( value )
+	
+	cdef object c_lookup( self, object value ):
+		"""C-level lookup of handler for given value"""
+		cdef object typ, handler,base
 		try:
 			typ = value.__class__
 		except AttributeError, err:
-			typ = type(value)
+			typ = PyObject_Type(value)
 		handler = self.registry.get( typ )
-		if handler is None:
+		if not handler:
 			if hasattr( typ, '__mro__' ):
 				for base in typ.__mro__:
 					handler = self.registry.get( base )
-					if handler is None:
+					if not handler:
 						handler = self.match( base )
 					if handler:
 						handler = self.registry[ base ]
