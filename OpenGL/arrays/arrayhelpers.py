@@ -16,18 +16,6 @@ else:
 		"""No converter required"""
 		return None
 
-def typedPointer( typ, ctyp ):
-	"""Create a CResolver to get argument as a pointer to the ctypes type ctyp
-	
-	i.e. typedPointer( arrays.UIntArray, ctypes.c_uint )
-	"""
-	import ctypes
-	ctyp = ctypes.POINTER( ctyp )
-	def typedPointerConverter(  value ):
-		"""Get the arg as an array of the appropriate type"""
-		return ctypes.cast( typ.dataPointer(value), ctyp)
-	return typedPointerConverter
-
 def asArrayTypeSize( typ, size ):
 	"""Create PyConverter function to get array as type and check size
 	
