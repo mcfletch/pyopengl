@@ -6,6 +6,10 @@ import traceback, weakref
 from OpenGL.error import CopyError
 from OpenGL.arrays import formathandler
 import OpenGL
+
+cdef extern from "Python.h":
+	cdef void Py_INCREF( object )
+
 cdef extern from "numpy/arrayobject.h":
 	cdef np.ndarray PyArray_FromArray( np.ndarray, np.dtype, int )
 	cdef np.ndarray PyArray_FromAny( object, np.dtype, int, int, int, object )
@@ -66,9 +70,10 @@ cdef class NumpyHandler:
 	def zeros( self, object dims, object typeCode ):
 		"""Create an array initialized to zeros"""
 		cdef np.ndarray c_dims = PyArray_ContiguousFromAny( 
-			dims, np.NPY_ULONG, 0,1 
+			dims, np.NPY_ULONG, 1,1 
 		)
 		typecode = self.typeCodeToDtype( typeCode )
+		Py_INCREF( typecode )
 		return PyArray_Zeros( c_dims.shape[0], <np.Py_intptr_t>c_dims.data, typecode, 0 )
 	def arraySize( self, np.ndarray instance, object typeCode=None ):
 		"""Retrieve array size reference"""
@@ -125,6 +130,7 @@ cdef class NumpyHandler:
 			return instance 
 		else:
 			# "convert" regardless (will return same instance if already contiguous)
+			Py_INCREF( <object> dtype )
 			return PyArray_FromArray( 
 				instance, dtype, NPY_CARRAY
 			)
