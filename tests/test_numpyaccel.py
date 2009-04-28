@@ -58,3 +58,7 @@ class TestAccelNumpy( unittest.TestCase ):
 		assert z.shape == (2,3,4)
 		assert z.dtype == numpy.float32
 	
+	def test_downconvert( self ):
+		p = self.handler.asArray( numpy.array( [1,2,3],'d'), constants.GL_FLOAT )
+		assert p.dtype == numpy.float32
+		

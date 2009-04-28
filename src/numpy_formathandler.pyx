@@ -14,6 +14,7 @@ cdef extern from "numpy/arrayobject.h":
 	cdef np.ndarray PyArray_FromArray( np.ndarray, np.dtype, int )
 	cdef np.ndarray PyArray_ContiguousFromAny( object op, int, int, int max_depth)
 	int NPY_CARRAY
+	int NPY_FORCECAST
 	int PyArray_ISCARRAY( np.ndarray instance )
 	cdef np.ndarray PyArray_Zeros(int nd, np.Py_intptr_t dims, dtype, int fortran)
 	cdef void import_array()
@@ -128,7 +129,7 @@ cdef class NumpyHandler:
 			# "convert" regardless (will return same instance if already contiguous)
 			Py_INCREF( <object> dtype )
 			return PyArray_FromArray( 
-				instance, dtype, NPY_CARRAY
+				instance, dtype, NPY_CARRAY|NPY_FORCECAST
 			)
 
 # Cython numpy tutorial neglects to mention this AFAICS
