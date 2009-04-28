@@ -10,6 +10,7 @@ try:
 	from OpenGL_accelerate.wrapper import HandlerRegistry
 except ImportError, err:
 	class HandlerRegistry( dict ):
+		c_api = False
 		def __init__( self, match ):
 			self.match = match 
 		def __call__( self, value ):
@@ -143,7 +144,7 @@ class FormatHandler( object ):
 		if not isinstance( types, (list,tuple)):
 			types = [ types ]
 		for type in types:
-			self.TYPE_REGISTRY[ type ] = self
+			FormatHandler.TYPE_REGISTRY[ type ] = self
 	def registerReturn( self ):
 		"""Register this handler as the default return-type handler"""
 		FormatHandler.RETURN_HANDLER = self
