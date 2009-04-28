@@ -62,8 +62,13 @@ cdef class NumpyHandler:
 
 	def from_param( self, np.ndarray instance, object typeCode = None ):
 		"""simple function-based from_param"""
-		pointer = long(<long> dataPointerC( instance ))
-		return c_void_p(  pointer )
+		if PyArray_ISCARRAY( instance ):
+			return <long> (instance.data)
+		raise CopyError(
+			"""from_param received a non-contiguous array! %s"""%(
+				instance,
+			)
+		)
 	def dataPointer( self, np.ndarray instance ):
 		"""Retrieve data-pointer directly"""
 		return <unsigned long> instance.data 
@@ -92,6 +97,7 @@ cdef class NumpyHandler:
 			)
 		return constant
 	def asArray( self, np.ndarray instance, object typeCode = None ):
+		"""Retrieve the given value as a (contiguous) array of type typeCode"""
 		cdef np.dtype typecode
 		try:
 			typecode = self.typeCodeToDtype( typeCode )
