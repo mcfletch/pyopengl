@@ -12,21 +12,11 @@ cdef extern from "Python.h":
 
 cdef extern from "numpy/arrayobject.h":
 	cdef np.ndarray PyArray_FromArray( np.ndarray, np.dtype, int )
-	cdef np.ndarray PyArray_FromAny( object, np.dtype, int, int, int, object )
 	cdef np.ndarray PyArray_ContiguousFromAny( object op, int, int, int max_depth)
 	int NPY_CARRAY
-	int NPY_CONTIGUOUS
-	int NPY_C_CONTIGUOUS
-#	int PyArray_CHKFLAGS( np.ndarray instance, int flags )
 	int PyArray_ISCARRAY( np.ndarray instance )
 	cdef np.ndarray PyArray_Zeros(int nd, np.Py_intptr_t dims, dtype, int fortran)
 	cdef void import_array()
-
-cdef char* dataPointerC( np.ndarray value ):
-	"""Retrieve data-pointer from the ndarray"""
-	cdef char* p
-	p = value.data
-	return p
 
 cdef class NumpyHandler:
 	cdef public int ERROR_ON_COPY
@@ -122,7 +112,7 @@ cdef class NumpyHandler:
 	cdef contiguous( self, np.ndarray instance, np.dtype dtype ):
 		"""Ensure that this instance is a contiguous array"""
 		if self.ERROR_ON_COPY:
-			if not np.PyArray_CHKFLAGS( instance, NPY_CARRAY ):
+			if not PyArray_ISCARRAY( instance ):
 				raise CopyError(
 					"""Non-contiguous array passed""",
 					instance,
