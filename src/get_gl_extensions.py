@@ -129,7 +129,10 @@ class Function( Helper ):
 				return 'ctypes.c_void_p'
 			elif self.CTYPE_TO_ARRAY_TYPE.has_key( new ):
 				return 'arrays.%s'%(self.CTYPE_TO_ARRAY_TYPE[new])
-			elif new == 'constants.GLcharARB':
+			elif new in ( 'arrays.GLcharArray','arrays.GLcharARBArray'):
+				# can't have a pointer to these...
+				return 'ctypes.POINTER( ctypes.POINTER( constants.GLchar ))'
+			elif new in ( 'constants.GLcharARB',):
 				return 'ctypes.POINTER( ctypes.c_char_p )'
 			else:
 				log.warn( 'Unconverted pointer type in %s: %r', self.name, new )
