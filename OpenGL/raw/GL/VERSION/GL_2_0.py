@@ -403,8 +403,8 @@ glShaderSource = platform.createExtensionFunction(
 	'glShaderSource', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER(arrays.GLcharArray), arrays.GLintArray,),
-	doc = 'glShaderSource( GLuint(shader), GLsizei(count), POINTER(arrays.GLcharArray)(string), GLintArray(length) ) -> None',
+	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER( ctypes.POINTER( constants.GLchar )), arrays.GLintArray,),
+	doc = 'glShaderSource( GLuint(shader), GLsizei(count), POINTER( ctypes.POINTER( constants.GLchar ))(string), GLintArray(length) ) -> None',
 	argNames = ('shader', 'count', 'string', 'length',),
 )
 

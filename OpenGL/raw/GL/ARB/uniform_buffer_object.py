@@ -47,8 +47,8 @@ glGetUniformIndices = platform.createExtensionFunction(
 	'glGetUniformIndices', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER(arrays.GLcharArray), arrays.GLuintArray,),
-	doc = 'glGetUniformIndices( GLuint(program), GLsizei(uniformCount), POINTER(arrays.GLcharArray)(uniformNames), GLuintArray(uniformIndices) ) -> None',
+	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER( ctypes.POINTER( constants.GLchar )), arrays.GLuintArray,),
+	doc = 'glGetUniformIndices( GLuint(program), GLsizei(uniformCount), POINTER( ctypes.POINTER( constants.GLchar ))(uniformNames), GLuintArray(uniformIndices) ) -> None',
 	argNames = ('program', 'uniformCount', 'uniformNames', 'uniformIndices',),
 )
 
