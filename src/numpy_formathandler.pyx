@@ -38,19 +38,13 @@ cdef class NumpyHandler:
 		self.ERROR_ON_COPY = ERROR_ON_COPY
 		self.array_to_gl_constant = a_to_gl
 		self.gl_constant_to_array = gl_to_a
-		
 	def register( self, types=None ):
 		"""Register this class as handler for given set of types"""
-		if not isinstance( types, (list,tuple)):
-			types = [ types ]
-		for type in types:
-			formathandler.FormatHandler.TYPE_REGISTRY[ type ] = self
+		formathandler.FormatHandler.TYPE_REGISTRY.register( self, types )
 	def registerReturn( self ):
 		"""Register this handler as the default return-type handler"""
-		formathandler.FormatHandler.RETURN_HANDLER = self
-	def registerEquivalent( self, typ, base ):
-		"""Register a sub-class for handling as the base-type"""
-
+		formathandler.FormatHandler.TYPE_REGISTRY.registerReturn( self )
+		
 	def from_param( self, np.ndarray instance, object typeCode = None ):
 		"""simple function-based from_param"""
 		if PyArray_ISCARRAY( instance ):
