@@ -24,22 +24,26 @@ def find_packages( root ):
 extensions = [
 ]
 
+def cython_extension( name, include_dirs = (), ):
+	"""Create a cython extension object"""
+	filenames = '%(name)s.c'%locals(), '%(name)s.pyx'%locals()
+	filename = filenames[bool(have_cython)]
+	return Extension( 
+		"OpenGL_accelerate.%(name)s"%locals(),
+		[
+			os.path.join( 
+				'src',
+				filename
+			),
+		],
+		include_dirs = ['src']+ list(include_dirs)
+	)
+
+
 extensions.extend([
-    Extension( 
-        "OpenGL_accelerate.wrapper",[
-            os.path.join( 'src',['wrapper.c','wrapper.pyx'][bool(have_cython)] ),
-        ],
-    ),
-    Extension( 
-        "OpenGL_accelerate.numpy_formathandler",[
-            os.path.join( 'src',['numpy_formathandler.c','numpy_formathandler.pyx'][bool(have_cython)] ),
-        ],
-    ),
-    Extension( 
-        "OpenGL_accelerate.arraydatatype",[
-            os.path.join( 'src',['arraydatatype.c','arraydatatype.pyx'][bool(have_cython)] ),
-        ],
-    ),
+	cython_extension( 'wrapper' ),
+	cython_extension( 'arraydatatype' ),
+	cython_extension( 'errorchecker' ),
 ])
 
 try:
@@ -61,17 +65,10 @@ else:
 				'include',
 			),
 		]
-	definitions = [
-		('USE_NUMPY', True ),
-	]
-	extensions.extend( [
-		Extension("OpenGL_accelerate.numpy_accel", [
-				os.path.join( 'src', "_arrays.c")
-			],
-			include_dirs = includeDirectories,
-			define_macros = definitions,
-		),
-	])
+	extensions.append( cython_extension( 
+		'numpy_formathandler', includeDirectories 
+	) )
+	
 try:
 	import Numeric
 except ImportError, err:

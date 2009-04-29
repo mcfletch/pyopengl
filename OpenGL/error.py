@@ -152,74 +152,65 @@ class GLUTError( Error ):
 
 
 if OpenGL.ERROR_CHECKING:
-	
-	class _ErrorChecker( object ):
-		"""Global error-checking object
+	try:
+		from OpenGL_accelerate.errorchecker import _ErrorChecker
+	except ImportError, err:
+		print 'using python error checker', err
+		class _ErrorChecker( object ):
+			"""Global error-checking object
+			
+			Attributes:
+				_registeredChecker -- the checking function enabled when 
+					not doing onBegin/onEnd processing
+				safeGetError -- platform safeGetError function as callable method
+				_currentChecker -- currently active checking function
+			"""
+			_currentChecker = _registeredChecker = safeGetError = staticmethod( 
+				platform.safeGetError 
+			)
+			def glCheckError( 
+				self,
+				result,
+				baseOperation=None,
+				cArguments=None,
+				*args
+			):
+				"""Base GL Error checker compatible with new ctypes errcheck protocol
+				
+				This function will raise a GLError with just the calling information
+				available at the C-calling level, i.e. the error code, cArguments,
+				baseOperation and result.  Higher-level code is responsible for any 
+				extra annotations.
+				
+				Note:
+					glCheckError relies on glBegin/glEnd interactions to 
+					prevent glGetError being called during a glBegin/glEnd 
+					sequence.  If you are calling glBegin/glEnd in C you 
+					should call onBegin and onEnd appropriately.
+				"""
+				err = self._currentChecker()
+				if err: # GL_NO_ERROR's guaranteed value is 0
+					raise GLError(
+						err,
+						result,
+						cArguments = cArguments,
+						baseOperation = baseOperation,
+					)
+				return result
+			def nullGetError( self ):
+				"""Used as error-checker when inside begin/end set"""
+				return None
+			def onBegin( self ):
+				"""Called by glBegin to record the fact that glGetError won't work"""
+				self._currentChecker = self.nullGetError
+			def onEnd( self ):
+				"""Called by glEnd to record the fact that glGetError will work"""
+				self._currentChecker = self._registeredChecker
 		
-		Attributes:
-			_registeredChecker -- the checking function enabled when 
-				not doing onBegin/onEnd processing
-			safeGetError -- platform safeGetError function as callable method
-			_currentChecker -- currently active checking function
-		"""
-		_currentChecker = _registeredChecker = safeGetError = staticmethod( 
-			platform.safeGetError 
-		)
-		def glCheckError( 
-			self,
-			result,
-			baseOperation=None,
-			cArguments=None,
-			*args
-		):
-			"""Base GL Error checker compatible with new ctypes errcheck protocol
-			
-			This function will raise a GLError with just the calling information
-			available at the C-calling level, i.e. the error code, cArguments,
-			baseOperation and result.  Higher-level code is responsible for any 
-			extra annotations.
-			
-			Note:
-				glCheckError relies on glBegin/glEnd interactions to 
-				prevent glGetError being called during a glBegin/glEnd 
-				sequence.  If you are calling glBegin/glEnd in C you 
-				should call onBegin and onEnd appropriately.
-			"""
-			err = self._currentChecker()
-			if err: # GL_NO_ERROR's guaranteed value is 0
-				raise GLError(
-					err,
-					result,
-					cArguments = cArguments,
-					baseOperation = baseOperation,
-				)
-			return result
-		def nullGetError( self ):
-			"""Used as error-checker when inside begin/end set"""
-			return None
-		def currentChecker( self ):
-			"""Return the current error-checking function"""
-			return self._currentChecker
-		def registerChecker( self, checker=None ):
-			"""Explicitly register an error checker
-			
-			This allows you to, for instance, disable error checking 
-			entirely.  onBegin and onEnd will switch between 
-			nullGetError and the value registered here.  If checker 
-			is None then the default 
-			"""
-			if checker is None:
-				checker = self.safeGetError
-			self._registeredChecker = checker
-			return checker
-		def onBegin( self, target=None ):
-			"""Called by glBegin to record the fact that glGetError won't work"""
-			self._currentChecker = self.nullGetError
-		def onEnd( self, target=None ):
-			"""Called by glEnd to record the fact that glGetError will work"""
-			self._currentChecker = self._registeredChecker
-	
-	ErrorChecker = _ErrorChecker()
+		ErrorChecker = _ErrorChecker()
+		
+	else:
+		ErrorChecker = _ErrorChecker( platform )
 	
 	glCheckError = ErrorChecker.glCheckError
 	onBegin = ErrorChecker.onBegin
