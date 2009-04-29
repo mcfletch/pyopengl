@@ -179,42 +179,6 @@ cdef class CArgumentCalculator:
 					raise
 		return result
 
-cdef class HandlerRegistry:
-	cdef dict registry
-	cdef object match
-	def __init__( self, plugin_match ):
-		self.registry = {}
-		self.match = plugin_match
-	def __setitem__( self,key,value ):
-		self.registry[key] = value
-	def __call__( self, value ):
-		return self.c_lookup( value )
-	
-	cdef object c_lookup( self, object value ):
-		"""C-level lookup of handler for given value"""
-		cdef object typ, handler,base
-		try:
-			typ = value.__class__
-		except AttributeError, err:
-			typ = PyObject_Type(value)
-		handler = self.registry.get( typ )
-		if not handler:
-			if hasattr( typ, '__mro__' ):
-				for base in typ.__mro__:
-					handler = self.registry.get( base )
-					if not handler:
-						handler = self.match( base )
-					if handler:
-						handler = self.registry[ base ]
-						handler.registerEquivalent( typ, base )
-						self.registry[ typ ] = handler 
-						return handler
-			raise TypeError(
-				"""No array-type handler for type %r (value: %s) registered"""%(
-					typ, repr(value)[:50]
-				)
-			)
-		return handler
 
 cdef class CallFuncPyConverter:
 	"""PyConverter that takes a callable and calls it on incoming"""
@@ -240,3 +204,24 @@ cdef class DefaultCConverter:
 				self.index,
 				len(pyArgs )
 			))
+
+cdef class getPyArgsName:
+	"""CConverter returning named Python argument
+	
+	Intended for use in cConverters, the function returned 
+	retrieves the named pyArg and returns it when called.
+	"""
+	cdef public unsigned int index
+	cdef public str name
+	def __init__( self, str name ):
+		self.name = name
+		self.index = -1
+	def finalise( self, wrapper ):
+		self.index = wrapper.pyArgIndex( self.name )
+	def __call__( self, tuple pyArgs, int index, object baseOperation ):
+		"""Return pyArgs[ self.index ]"""
+		if self.index == -1:
+			self.finalize()
+			if self.index == -1:
+				raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
+		return pyArgs[ self.index ]
