@@ -104,7 +104,9 @@ class ReturnValues( Converter ):
 
 # Now the concrete classes...
 try:
-	from OpenGL_accelerate.wrapper import CallFuncPyConverter, DefaultCConverter
+	from OpenGL_accelerate.wrapper import (
+		CallFuncPyConverter, DefaultCConverter#, getPyArgsName,
+	)
 except ImportError, err:
 	class CallFuncPyConverter( PyConverter ):
 		"""PyConverter that takes a callable and calls it on incoming"""
@@ -137,6 +139,21 @@ except ImportError, err:
 					self.index,
 					len(pyArgs )
 				))
+class getPyArgsName( CConverter ):
+	"""CConverter returning named Python argument
+	
+	Intended for use in cConverters, the function returned 
+	retrieves the named pyArg and returns it when called.
+	"""
+	argNames = ('name',)
+	indexLookups = [ ('index','name', 'pyArgIndex' ), ]
+	__slots__ = ( 'index', 'name')
+	def __call__( self, pyArgs, index, baseOperation ):
+		"""Return pyArgs[ self.index ]"""
+		try:
+			return pyArgs[ self.index ]
+		except AttributeError, err:
+			raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
 
 class returnCArgument( ReturnValues ):
 	"""ReturnValues returning the named cArgs value"""
@@ -156,82 +173,68 @@ class returnPyArgument( ReturnValues ):
 		"""Retrieve pyArgs[ self.index ]"""
 		return pyArgs[self.index]
 
-
-class getPyArgsName( CConverter ):
-	"""CConverter returning named Python argument
-	
-	Intended for use in cConverters, the function returned 
-	retrieves the named pyArg and returns it when called.
-	"""
-	argNames = ('name',)
-	indexLookups = [ ('index','name', 'pyArgIndex' ), ]
-	__slots__ = ( 'index', 'name')
-	def __call__( self, pyArgs, index, baseOperation ):
-		"""Return pyArgs[ self.index ]"""
-		try:
-			return pyArgs[ self.index ]
-		except AttributeError, err:
-			raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
-
-class Output( CConverter ):
-	"""CConverter generating static-size typed output arrays
-	
-	Produces an output array of given type (arrayType) and 
-	size using self.lookup() to determine the size of the 
-	array to be produced, where the lookup function is passed 
-	as an initialisation argument.
-	
-	Provides also:
-	
-		oldStyleReturn( ... ) for use in the default case of
-			PyOpenGL compatability mode, where result arrays of
-			size (1,) are returned as scalar values.
-	"""
-	argNames = ('name','size','arrayType' )
-	indexLookups = [ ('outIndex','name', 'cArgIndex' ), ]
-	__slots__ = ('index','size','arrayType')
-	def __call__( self, pyArgs, index, baseOperation ):
-		"""Return pyArgs[ self.index ]"""
-		return self.arrayType.zeros( self.getSize(pyArgs) )
-	def getSize( self, pyArgs ):
-		"""Retrieve the array size for this argument"""
-		return self.size
-	def oldStyleReturn( self, result, baseOperation, pyArgs, cArgs ):
-		"""Retrieve cArgs[ self.index ]"""
-		result = cArgs[ self.outIndex ]
-		thisSize = self.getSize(pyArgs)
-		if thisSize == (1,):
-			try:
-				return result[0]
-			except TypeError, err:
+try:
+	from OpenGL_accelerate.arraydatatype import Output,SizedOutput
+except ImportError, err:
+	class Output( CConverter ):
+		"""CConverter generating static-size typed output arrays
+		
+		Produces an output array of given type (arrayType) and 
+		size using self.lookup() to determine the size of the 
+		array to be produced, where the lookup function is passed 
+		as an initialisation argument.
+		
+		Provides also:
+		
+			oldStyleReturn( ... ) for use in the default case of
+				PyOpenGL compatability mode, where result arrays of
+				size (1,) are returned as scalar values.
+		"""
+		argNames = ('name','size','arrayType' )
+		indexLookups = [ ('outIndex','name', 'cArgIndex' ), ]
+		__slots__ = ('index','size','arrayType')
+		def __call__( self, pyArgs, index, baseOperation ):
+			"""Return pyArgs[ self.index ]"""
+			return self.arrayType.zeros( self.getSize(pyArgs) )
+		def getSize( self, pyArgs ):
+			"""Retrieve the array size for this argument"""
+			return self.size
+		def oldStyleReturn( self, result, baseOperation, pyArgs, cArgs ):
+			"""Retrieve cArgs[ self.index ]"""
+			result = cArgs[ self.outIndex ]
+			thisSize = self.getSize(pyArgs)
+			if thisSize == (1,):
+				try:
+					return result[0]
+				except TypeError, err:
+					return result
+			else:
 				return result
-		else:
-			return result
 
-class SizedOutput( Output ):
-	"""Output generating dynamically-sized typed output arrays
-	
-	Takes an extra parameter "specifier", which is the name of
-	a Python argument to be passed to the lookup function in order
-	to determine the appropriate size for the output array.
-	"""
-	argNames = ('name','specifier','lookup','arrayType' )
-	indexLookups = [ 
-		('outIndex','name', 'cArgIndex' ),
-		('index','specifier', 'pyArgIndex' ), 
-	]
-	__slots__ = ('index','specifier','lookup','arrayType')
-	def getSize( self, pyArgs ):
-		"""Retrieve the array size for this argument"""
-		try:
-			specifier = pyArgs[ self.index ]
-		except AttributeError, err:
-			raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
-		else:
+	class SizedOutput( Output ):
+		"""Output generating dynamically-sized typed output arrays
+		
+		Takes an extra parameter "specifier", which is the name of
+		a Python argument to be passed to the lookup function in order
+		to determine the appropriate size for the output array.
+		"""
+		argNames = ('name','specifier','lookup','arrayType' )
+		indexLookups = [ 
+			('outIndex','name', 'cArgIndex' ),
+			('index','specifier', 'pyArgIndex' ), 
+		]
+		__slots__ = ('index','specifier','lookup','arrayType')
+		def getSize( self, pyArgs ):
+			"""Retrieve the array size for this argument"""
 			try:
-				return self.lookup( specifier )
-			except KeyError, err:
-				raise KeyError( """Unknown specifier %s"""%( specifier ))
+				specifier = pyArgs[ self.index ]
+			except AttributeError, err:
+				raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
+			else:
+				try:
+					return self.lookup( specifier )
+				except KeyError, err:
+					raise KeyError( """Unknown specifier %s"""%( specifier ))
 
 class StringLengths( CConverter ):
 	"""CConverter for processing array-of-pointers-to-strings data-type
