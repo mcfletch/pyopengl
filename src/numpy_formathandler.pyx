@@ -48,7 +48,7 @@ cdef class NumpyHandler:
 	def from_param( self, np.ndarray instance, object typeCode = None ):
 		"""simple function-based from_param"""
 		if PyArray_ISCARRAY( instance ):
-			return <long> (instance.data)
+			return c_void_p(<unsigned long> (instance.data))
 		raise CopyError(
 			"""from_param received a non-contiguous array! %s"""%(
 				instance,
