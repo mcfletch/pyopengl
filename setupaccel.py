@@ -34,7 +34,12 @@ extensions.extend([
         "OpenGL_accelerate.numpy_formathandler",[
             os.path.join( 'src',['numpy_formathandler.c','numpy_formathandler.pyx'][bool(have_cython)] ),
         ],
-    )
+    ),
+    Extension( 
+        "OpenGL_accelerate.arraydatatype",[
+            os.path.join( 'src',['arraydatatype.c','arraydatatype.pyx'][bool(have_cython)] ),
+        ],
+    ),
 ])
 
 try:
