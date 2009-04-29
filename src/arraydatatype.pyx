@@ -263,3 +263,94 @@ cdef class SizedOutput( Output ):
 				return self.lookup( specifier )
 			except KeyError, err:
 				raise KeyError( """Unknown specifier %s"""%( specifier ))
+
+cdef class AsArrayOfType:
+	"""Given arrayName and typeName coerce arrayName to array of type typeName
+	
+	TODO: It should be possible to drop this if ERROR_ON_COPY,
+	as array inputs always have to be the final objects in that 
+	case.
+	"""
+	cdef public str arrayName
+	cdef public str typeName
+	
+	cdef int arrayIndex
+	cdef int typeIndex
+	cdef public ArrayDatatype arrayType
+	
+	def __init__( self, str arrayName='pointer', str typeName='type' ):
+		self.arrayName = arrayName
+		self.typeName = typeName 
+		from OpenGL.arrays.arraydatatype import ArrayDatatype
+		self.arrayType = ArrayDatatype
+	def finalise( self, wrapper ):
+		self.arrayIndex = wrapper.pyArgIndex( self.arrayName )
+		self.typeIndex = wrapper.pyArgIndex( self.typeName )
+	def __call__( self, object arg, object wrappedOperation, tuple args):
+		"""Get the arg as an array of the appropriate type"""
+		return self.arrayType.asArray( arg, args[ self.typeIndex ] )
+
+cdef class AsArrayTyped:
+	"""Given arrayName and arrayType, convert arrayName to array of type
+	
+	TODO: It should be possible to drop this if ERROR_ON_COPY,
+	as array inputs always have to be the final objects in that 
+	case.
+	"""
+	cdef public str arrayName
+	
+	cdef int arrayIndex
+	cdef public ArrayDatatype arrayType
+	def __init__( self, arrayName='pointer', arrayType=None ):
+		self.arrayName = arrayName # not actually used...
+		if arrayType is None:
+			from OpenGL.arrays.arraydatatype import ArrayDatatype
+			arrayType = ArrayDatatype
+		self.arrayType = arrayType
+	def finalise( self, wrapper ):
+		"""Finalize the wrapper (nothing to do here)"""
+	def __call__( self, object arg, object wrappedOperation, tuple args):
+		"""Get the arg as an array of the appropriate type"""
+		return self.arrayType.asArray( arg )
+
+cdef class AsArrayTypedSizeChecked( AsArrayTyped ):
+	"""Size-checking version of AsArrayTyped"""
+	cdef int size 
+	def __init__( self, arrayType=None, size=None ):
+		super(AsArrayTypedSizeChecked,self).__init__( 'pointer', arrayType )
+		self.size = size
+	def __call__( self, object arg, object wrappedOperation, tuple args):
+		"""Get the arg as an array of the appropriate type"""
+		cdef int actualSize
+		result = super(AsArrayTypedSizeChecked,self).__call__( arg, wrappedOperation, args )
+		actualSize = self.arrayType.arraySize( result )
+		if actualSize != self.size:
+			raise ValueError(
+				"""Expected %r item array, got %r item array"""%(
+					self.size,
+					actualSize,
+				),
+				arg,
+			)
+		return result
+	
+cdef class AsArrayTypedSize:
+	"""Given arrayName and arrayType, determine size of arrayName
+	"""
+	cdef public str arrayName
+	
+	cdef int arrayIndex
+	cdef public ArrayDatatype arrayType
+	
+	def __init__( self, arrayName='pointer', arrayType=None ):
+		self.arrayName = arrayName
+		if arrayType is None:
+			from OpenGL.arrays.arraydatatype import ArrayDatatype
+			arrayType = ArrayDatatype
+		self.arrayType = arrayType
+	def finalise( self, wrapper ):
+		self.arrayIndex = wrapper.pyArgIndex( self.arrayName )
+	def __call__( self, tuple pyArgs, int index, object wrappedOperation ):
+		"""Get the arg as an array of the appropriate type"""
+		return self.arrayType.arraySize( pyArgs[self.arrayIndex ] )
+

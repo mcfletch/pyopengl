@@ -105,7 +105,7 @@ class ReturnValues( Converter ):
 # Now the concrete classes...
 try:
 	from OpenGL_accelerate.wrapper import (
-		CallFuncPyConverter, DefaultCConverter#, getPyArgsName,
+		CallFuncPyConverter, DefaultCConverter, getPyArgsName,
 	)
 except ImportError, err:
 	class CallFuncPyConverter( PyConverter ):
@@ -139,42 +139,26 @@ except ImportError, err:
 					self.index,
 					len(pyArgs )
 				))
-class getPyArgsName( CConverter ):
-	"""CConverter returning named Python argument
-	
-	Intended for use in cConverters, the function returned 
-	retrieves the named pyArg and returns it when called.
-	"""
-	argNames = ('name',)
-	indexLookups = [ ('index','name', 'pyArgIndex' ), ]
-	__slots__ = ( 'index', 'name')
-	def __call__( self, pyArgs, index, baseOperation ):
-		"""Return pyArgs[ self.index ]"""
-		try:
-			return pyArgs[ self.index ]
-		except AttributeError, err:
-			raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
-
-class returnCArgument( ReturnValues ):
-	"""ReturnValues returning the named cArgs value"""
-	argNames = ('name',)
-	indexLookups = [ ('index','name', 'cArgIndex' ), ]
-	__slots__ = ( 'index', 'name' )
-	def __call__( self, result, baseOperation, pyArgs, cArgs ):
-		"""Retrieve cArgs[ self.index ]"""
-		return cArgs[self.index]
-	
-class returnPyArgument( ReturnValues ):
-	"""ReturnValues returning the named pyArgs value"""
-	argNames = ('name',)
-	indexLookups = [ ('index','name', 'pyArgIndex' ), ]
-	__slots__ = ( 'index', 'name' )
-	def __call__( self, result, baseOperation, pyArgs, cArgs ):
-		"""Retrieve pyArgs[ self.index ]"""
-		return pyArgs[self.index]
+	class getPyArgsName( CConverter ):
+		"""CConverter returning named Python argument
+		
+		Intended for use in cConverters, the function returned 
+		retrieves the named pyArg and returns it when called.
+		"""
+		argNames = ('name',)
+		indexLookups = [ ('index','name', 'pyArgIndex' ), ]
+		__slots__ = ( 'index', 'name')
+		def __call__( self, pyArgs, index, baseOperation ):
+			"""Return pyArgs[ self.index ]"""
+			try:
+				return pyArgs[ self.index ]
+			except AttributeError, err:
+				raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
 
 try:
-	from OpenGL_accelerate.arraydatatype import Output,SizedOutput
+	from OpenGL_accelerate.arraydatatype import (
+		Output,SizedOutput
+	)
 except ImportError, err:
 	class Output( CConverter ):
 		"""CConverter generating static-size typed output arrays
@@ -235,6 +219,28 @@ except ImportError, err:
 					return self.lookup( specifier )
 				except KeyError, err:
 					raise KeyError( """Unknown specifier %s"""%( specifier ))
+try:
+	from OpenGL_accelerate.wrapper import (
+		returnCArgument, returnPyArgument,
+	)
+except ImportError, err:
+	class returnCArgument( ReturnValues ):
+		"""ReturnValues returning the named cArgs value"""
+		argNames = ('name',)
+		indexLookups = [ ('index','name', 'cArgIndex' ), ]
+		__slots__ = ( 'index', 'name' )
+		def __call__( self, result, baseOperation, pyArgs, cArgs ):
+			"""Retrieve cArgs[ self.index ]"""
+			return cArgs[self.index]
+		
+	class returnPyArgument( ReturnValues ):
+		"""ReturnValues returning the named pyArgs value"""
+		argNames = ('name',)
+		indexLookups = [ ('index','name', 'pyArgIndex' ), ]
+		__slots__ = ( 'index', 'name' )
+		def __call__( self, result, baseOperation, pyArgs, cArgs ):
+			"""Retrieve pyArgs[ self.index ]"""
+			return pyArgs[self.index]
 
 class StringLengths( CConverter ):
 	"""CConverter for processing array-of-pointers-to-strings data-type
