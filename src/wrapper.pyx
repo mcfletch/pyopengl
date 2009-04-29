@@ -72,8 +72,10 @@ cdef class CArgCalculatorElement:
 		self.index = index 
 		self.converter = converter
 		self.callable = callable( converter )
-	def __call__( self, pyArgs ):
+	def __call__( self, tuple pyArgs ):
 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
+		return self.c_call( pyArgs )
+	cdef object c_call( self, tuple pyArgs ):
 		if self.callable:
 			return self.converter( pyArgs, self.index, self.wrapper )
 		return self.converter
@@ -90,9 +92,9 @@ cdef class CArgCalculator:
 			CArgCalculatorElement(self,i,converter)
 			for (i,converter) in enumerate( cConverters )
 		]
-	def __call__( self, pyArgs ):
+	def __call__( self, tuple pyArgs ):
 		return [
-			calc( pyArgs )
+			(<CArgCalculatorElement> calc).c_call( pyArgs )
 			for calc in self.mapping
 		]
 
@@ -105,8 +107,10 @@ cdef class PyArgCalculatorElement:
 		self.wrapper = wrapper 
 		self.index = index 
 		self.converter = converter
-	def __call__( self, args ):
+	def __call__( self, tuple args ):
 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
+		return self.c_call( args )
+	cdef c_call( self, tuple args ):
 		if self.converter is None:
 			return args[self.index]
 		try:
@@ -147,7 +151,7 @@ cdef class PyArgCalculator:
 				)
 			)
 		return [
-			calc( args )
+			(<PyArgCalculatorElement> calc).c_call( args )
 			for calc in self.mapping
 		]
 
@@ -166,14 +170,14 @@ cdef class CArgumentCalculator:
 					resolver_length,len(cArgs)
 				)
 			)
-		result = []
+		result = [None]*resolver_length
 		for i in range( resolver_length ):
 			converter = self.cResolvers[i]
 			if converter is None:
-				result.append( cArgs[i] )
+				result[i] = cArgs[i]
 			else:
 				try:
-					result.append( converter( cArgs[i] ))
+					result[i] = converter( cArgs[i] )
 				except Exception, err:
 					err.args += (converter,)
 					raise
@@ -194,7 +198,7 @@ cdef class DefaultCConverter:
 	def __init__( self, index ):
 		"""Just store index for future access"""
 		self.index = index 
-	def __call__( self, pyArgs, index, wrapper ):
+	def __call__( self, tuple pyArgs, int index, object wrapper ):
 		"""Return pyArgs[self.index] or raise a ValueError"""
 		try:
 			return pyArgs[ self.index ]
@@ -215,13 +219,41 @@ cdef class getPyArgsName:
 	cdef public str name
 	def __init__( self, str name ):
 		self.name = name
-		self.index = -1
 	def finalise( self, wrapper ):
 		self.index = wrapper.pyArgIndex( self.name )
 	def __call__( self, tuple pyArgs, int index, object baseOperation ):
 		"""Return pyArgs[ self.index ]"""
-		if self.index == -1:
-			self.finalize()
-			if self.index == -1:
-				raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
 		return pyArgs[ self.index ]
+
+cdef class returnPyArgument:
+	"""ReturnValues returning the named pyArgs value"""
+	cdef public unsigned int index
+	cdef public str name
+	def __init__( self, str name ):
+		self.name = name 
+	def finalise( self, wrapper ):
+		self.index = wrapper.pyArgIndex( self.name )
+	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+		"""Retrieve pyArgs[ self.index ]"""
+		return pyArgs[self.index]
+cdef class returnPyArgumentIndex:
+	cdef public unsigned int index
+	def __init__( self, int index ):
+		self.index = index
+	def finalise( self, wrapper ):
+		"""No finalisation required"""
+	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+		"""Retrieve pyArgs[ self.index ]"""
+		return pyArgs[self.index]
+	
+cdef class returnCArgument:
+	"""ReturnValues returning the named pyArgs value"""
+	cdef public unsigned int index
+	cdef public str name
+	def __init__( self, str name ):
+		self.name = name 
+	def finalise( self, wrapper ):
+		self.index = wrapper.cArgIndex( self.name )
+	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+		"""Retrieve cArgs[ self.index ]"""
+		return cArgs[self.index]
