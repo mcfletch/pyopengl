@@ -3,6 +3,7 @@ from OpenGL import GL
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.GL.ARB import vertex_buffer_object
+from OpenGL import constants
 import ctypes
 
 
@@ -200,7 +201,10 @@ def deleter( buffers, key, implementation ):
 	def doBufferDeletion( *args, **named ):
 		for buffer in buffers:
 			try:
-				implementation.glDeleteBuffers(1, buffer)
+				# Note that to avoid ERROR_ON_COPY issues 
+				# we have to pass an array-compatible type here...
+				buf = constants.GLuint( buffer )
+				implementation.glDeleteBuffers(1, buf)
 			except AttributeError, err:
 				pass
 		try:
