@@ -44,6 +44,8 @@ cdef class HandlerRegistry:
 					if handler:
 						handler = self.registry[ base ]
 						self.registry[ typ ] = handler 
+						if hasattr( handler, 'registerEquivalent' ):
+							handler.registerEquivalent( typ, base )
 						return handler
 			raise TypeError(
 				"""No array-type handler for type %r (value: %s) registered"""%(
@@ -187,7 +189,7 @@ cdef class ArrayDatatype:
 
 # Now some array helper functions...
 
-class Output:
+cdef class Output:
 	"""CConverter generating static-size typed output arrays
 	
 	Produces an output array of given type (arrayType) and 
@@ -203,7 +205,6 @@ class Output:
 	"""
 	cdef str name 
 	cdef tuple size
-	cdef int doOldStyle
 	cdef ArrayDatatype arrayType
 	cdef int outIndex
 	def __init__( self, str name, tuple size, ArrayDatatype arrayType ):
@@ -219,11 +220,11 @@ class Output:
 	
 	def __call__( self, tuple pyArgs, int index, object baseOperation ):
 		"""Return pyArgs[ self.index ]"""
-		return self.arrayType.c_zeros( self.c_getSize(pyArgs) )
+		return self.arrayType.c_zeros( self.c_getSize(pyArgs), self.arrayType.typeConstant )
 	
 	def oldStyleReturn( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
 		"""Retrieve cArgs[ self.index ]"""
-		object result = cArgs[ self.outIndex ]
+		result = cArgs[ self.outIndex ]
 		cdef tuple thisSize = self.c_getSize(pyArgs)
 		if thisSize == (1,):
 			try:
@@ -233,10 +234,32 @@ class Output:
 		else:
 			return result
 
-class SizedOutput( Output ):
-	def __init__( self, str name, tuple size, ArrayDatatype arrayType ):
-		self.name = name 
-		self.size = size 
-		self.arrayType = arrayType
+cdef class SizedOutput( Output ):
+	"""Output class that looks up output size via a callable function
 	
-	'name','specifier','lookup','arrayType'
+	specifier -- Python argument name used to lookup the data-size 
+	lookup -- function taking argument in specifier to determine size 
+	"""
+	cdef str specifier
+	cdef object lookup
+	cdef int index 
+	
+	def __init__( self, str name, str specifier, object lookup, ArrayDatatype arrayType ):
+		super( SizedOutput,self).__init__( name, None, arrayType )
+		self.specifier = specifier
+		self.lookup = lookup
+		self.arrayType = arrayType
+	def finalise( self, wrapper ):
+		super( SizedOutput,self).finalise( wrapper )
+		self.index = wrapper.pyArgIndex( self.specifier )
+	cdef c_getSize( self, tuple pyArgs ):
+		"""Retrieve the array size for this argument"""
+		try:
+			specifier = pyArgs[ self.index ]
+		except AttributeError, err:
+			raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
+		else:
+			try:
+				return self.lookup( specifier )
+			except KeyError, err:
+				raise KeyError( """Unknown specifier %s"""%( specifier ))
