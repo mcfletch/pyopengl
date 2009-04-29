@@ -20,9 +20,11 @@ class NumberHandler( formathandler.FormatHandler ):
 	)
 	def from_param( self, value, typeCode=None  ):
 		"""If it's a ctypes value, pass on, otherwise do asArray"""
-		if not value.__class__ in TARGET_TYPES:
-			return self.asArray( value, typeCode=typeCode )
-		return ctypes.byref(value)
+		try:
+			return ctypes.byref(value)
+		except TypeError, err:
+			err.args += (' If you have ERROR_ON_COPY enabled, remember to pass in an array to array-requiring functions.', )
+			raise
 	dataPointer = from_param
 	def zeros( self, dims, typeCode=None ):
 		"""Currently don't allow Number as output types!"""
@@ -44,6 +46,7 @@ class NumberHandler( formathandler.FormatHandler ):
 		return 1
 	def asArray( self, value, typeCode=None ):
 		"""Convert given value to an array value of given typeCode"""
+		
 		if value.__class__ in TARGET_TYPES:
 			return value
 		targetType = CONSTANT_TO_TYPE.get( typeCode )
