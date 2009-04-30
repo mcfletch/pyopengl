@@ -104,7 +104,7 @@ cdef class NumpyHandler:
 			return np.dtype( typeCode )
 		else:
 			return self.gl_constant_to_array[ typeCode ]
-	cdef contiguous( self, np.ndarray instance, np.dtype dtype ):
+	cdef np.ndarray contiguous( self, np.ndarray instance, np.dtype dtype ):
 		"""Ensure that this instance is a contiguous array"""
 		if self.ERROR_ON_COPY:
 			if not PyArray_ISCARRAY( instance ):
@@ -121,10 +121,14 @@ cdef class NumpyHandler:
 			return instance 
 		else:
 			# "convert" regardless (will return same instance if already contiguous)
-			Py_INCREF( <object> dtype )
-			return PyArray_FromArray( 
-				instance, dtype, NPY_CARRAY|NPY_FORCECAST
-			)
+			if not PyArray_ISCARRAY( instance ):
+				# TODO: make sure there's no way to segfault here 
+				Py_INCREF( <object> dtype )
+				return PyArray_FromArray( 
+					instance, dtype, NPY_CARRAY|NPY_FORCECAST
+				)
+			else:
+				return instance
 
 # Cython numpy tutorial neglects to mention this AFAICS
 # get segfaults without it
