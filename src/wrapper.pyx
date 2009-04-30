@@ -4,64 +4,7 @@ from OpenGL import error
 cdef extern from "Python.h":
 	cdef object PyObject_Type( object )
 	cdef object PyDict_GetItem( object, object )
-
-cdef class Wrapper:
-	"""C-coded most-generic form of the wrapper's core function"""
-	cdef public object calculate_pyArgs, calculate_cArgs, calculate_cArguments, wrappedOperation, storeValues,returnValues
-	def __init__( 
-		self, wrappedOperation,
-		calculate_pyArgs=None, calculate_cArgs=None,
-		calculate_cArguments=None, 
-		storeValues=None, returnValues=None,
-	):
-		self.calculate_pyArgs = calculate_pyArgs
-		self.calculate_cArgs = calculate_cArgs
-		self.calculate_cArguments = calculate_cArguments
-		self.wrappedOperation = wrappedOperation
-		self.storeValues = storeValues
-		self.returnValues = returnValues
 	
-	def __call__( self, *args ):
-		cdef tuple pyArgs, cArgs, cArguments
-		if self.calculate_pyArgs is not None:
-			pyArgs = tuple(self.calculate_pyArgs( args ))
-		else:
-			pyArgs = args 
-		if self.calculate_cArgs is not None:
-			cArgs = tuple(self.calculate_cArgs( pyArgs ))
-		else:
-			cArgs = pyArgs
-		if self.calculate_cArguments is not None:
-			cArguments = tuple(self.calculate_cArguments( cArgs ))
-		else:
-			cArguments = cArgs
-		try:
-			result = self.wrappedOperation( *cArguments )
-		except (ctypes.ArgumentError,TypeError,AttributeError), err:
-			err.args = err.args + (cArguments,)
-			raise err
-		except error.GLError, err:
-			err.cArgs = cArgs 
-			err.pyArgs = pyArgs
-			raise err
-		# handle storage of persistent argument values...
-		if self.storeValues:
-			self.storeValues(
-				result,
-				self,
-				pyArgs,
-				cArgs,
-			)
-		if self.returnValues:
-			return self.returnValues(
-				result,
-				self,
-				pyArgs,
-				cArgs,
-			)
-		else:
-			return result
-
 cdef class CArgCalculatorElement:
 	cdef object wrapper
 	cdef long index 
@@ -93,10 +36,13 @@ cdef class CArgCalculator:
 			for (i,converter) in enumerate( cConverters )
 		]
 	def __call__( self, tuple pyArgs ):
+		return self.c_call( pyArgs )
+	cdef list c_call( self, tuple pyArgs ):
 		return [
 			(<CArgCalculatorElement> calc).c_call( pyArgs )
 			for calc in self.mapping
 		]
+		
 
 cdef class PyArgCalculatorElement:
 	cdef object wrapper
@@ -108,9 +54,9 @@ cdef class PyArgCalculatorElement:
 		self.index = index 
 		self.converter = converter
 	def __call__( self, tuple args ):
-		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
+		"""If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
 		return self.c_call( args )
-	cdef c_call( self, tuple args ):
+	cdef object c_call( self, tuple args ):
 		if self.converter is None:
 			return args[self.index]
 		try:
@@ -139,7 +85,9 @@ cdef class PyArgCalculator:
 		]
 		self.length = len(pyConverters)
 		
-	def __call__( self, args ):
+	def __call__( self, tuple args ):
+		return self.c_call( args )
+	cdef list c_call( self, tuple args ):
 		if self.length != len(args):
 			raise ValueError(
 				"""%s requires %r arguments (%s), received %s: %r"""%(
@@ -157,21 +105,24 @@ cdef class PyArgCalculator:
 
 cdef class CArgumentCalculator:
 	cdef list cResolvers
+	cdef int resolver_length
 	def __init__( self, cResolvers ):
 		self.cResolvers = cResolvers
-	def __call__( self, cArgs ):
+		self.resolver_length = len(self.cResolvers)
+	def __call__( self, tuple cArgs ):
+		return self.c_call( cArgs )
+	cdef list c_call( self, tuple cArgs ):
 		cdef int i
 		cdef int resolver_length
 		cdef object converter
-		resolver_length = len(self.cResolvers )
-		if len(cArgs) != resolver_length:
+		if len(cArgs) != self.resolver_length:
 			raise TypeError(
 				"""Expected %s C arguments for resolution, got %s"""%(
-					resolver_length,len(cArgs)
+					self.resolver_length,len(cArgs)
 				)
 			)
-		result = [None]*resolver_length
-		for i in range( resolver_length ):
+		result = [None]*self.resolver_length
+		for i in range( self.resolver_length ):
 			converter = self.cResolvers[i]
 			if converter is None:
 				result[i] = cArgs[i]
@@ -182,7 +133,6 @@ cdef class CArgumentCalculator:
 					err.args += (converter,)
 					raise
 		return result
-
 
 cdef class CallFuncPyConverter:
 	"""PyConverter that takes a callable and calls it on incoming"""
@@ -208,6 +158,89 @@ cdef class DefaultCConverter:
 				self.index,
 				len(pyArgs )
 			))
+
+cdef class Wrapper:
+	"""C-coded most-generic form of the wrapper's core function
+	
+	Applies a series of wrapper stages to the core function in order 
+	to expand and/or convert parameters into formats which are compatible
+	with the underlying (ctypes) library.  Requires the use of the 
+	Calculator objects defined later in this module in order to provide 
+	efficient operations.
+	"""
+	cdef CArgCalculator calculate_cArgs
+	cdef CArgumentCalculator calculate_cArguments
+	cdef PyArgCalculator calculate_pyArgs
+	
+	cdef public object wrappedOperation, storeValues,returnValues
+	cdef int doPyargs, doCargs, doCarguments, doStoreValues, doReturnValues
+	def __init__( 
+		self, wrappedOperation,
+		calculate_pyArgs=None, calculate_cArgs=None,
+		calculate_cArguments=None, 
+		storeValues=None, returnValues=None,
+	):
+		if calculate_pyArgs is not None:
+			self.calculate_pyArgs = calculate_pyArgs
+			self.doPyargs = True
+		else:
+			self.doPyargs = False
+		if calculate_cArgs is not None:
+			self.calculate_cArgs = calculate_cArgs
+			self.doCargs = True 
+		else:
+			self.doCargs = False
+		if calculate_cArguments is not None:
+			self.calculate_cArguments = calculate_cArguments
+			self.doCarguments = True
+		else:
+			self.doCarguments = False
+		self.wrappedOperation = wrappedOperation
+		self.storeValues = storeValues
+		self.returnValues = returnValues
+	
+	def __call__( self, *args ):
+		cdef tuple pyArgs, cArgs, cArguments
+		if self.doPyargs:
+			pyArgs = tuple(self.calculate_pyArgs.c_call( args ))
+		else:
+			pyArgs = args 
+		if self.doCargs:
+			cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))
+		else:
+			cArgs = pyArgs
+		if self.doCarguments:
+			cArguments = tuple(self.calculate_cArguments( cArgs ))
+		else:
+			cArguments = cArgs
+		try:
+			result = self.wrappedOperation( *cArguments )
+		except (ctypes.ArgumentError,TypeError,AttributeError), err:
+			err.args = err.args + (cArguments,)
+			raise err
+		except error.GLError, err:
+			err.cArgs = cArgs 
+			err.pyArgs = pyArgs
+			raise err
+		# handle storage of persistent argument values...
+		if self.storeValues is not None:
+			self.storeValues(
+				result,
+				self,
+				pyArgs,
+				cArgs,
+			)
+		if self.returnValues is not None:
+			return self.returnValues(
+				result,
+				self,
+				pyArgs,
+				cArgs,
+			)
+		else:
+			return result
+
+
 
 cdef class getPyArgsName:
 	"""CConverter returning named Python argument
