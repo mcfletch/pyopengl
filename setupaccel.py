@@ -44,6 +44,7 @@ extensions.extend([
 	cython_extension( 'wrapper' ),
 	cython_extension( 'arraydatatype' ),
 	cython_extension( 'errorchecker' ),
+	cython_extension( 'vbo' ),
 ])
 
 try:
