@@ -67,7 +67,7 @@ except ImportError, err:
 		@classmethod
 		def zeros( cls, dims, typeCode ):
 			"""Return Numpy array of zeros in given size"""
-			return numpy.zeros( dims, GL_TYPE_TO_ARRAY_MAPPING.get(typeCode) or typeCode )
+			return numpy.zeros( dims, GL_TYPE_TO_ARRAY_MAPPING[typeCode])
 		@classmethod
 		def arrayToGLType( cls, value ):
 			"""Given a value, guess OpenGL type of the corresponding pointer"""
@@ -122,7 +122,7 @@ except ImportError, err:
 			Although this doesn't raise an error, it does tend to slow
 			down rendering.
 			"""
-			typeCode = GL_TYPE_TO_ARRAY_MAPPING.get( typeCode )
+			typeCode = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
 			try:
 				contiguous = source.flags.contiguous
 			except AttributeError, err:
@@ -181,24 +181,27 @@ except TypeError, err:
 	SHORT_TYPE = 'h'
 	USHORT_TYPE = 'H'
 
+def lookupDtype( char ):
+	return numpy.zeros( (1,), dtype=char ).dtype
+
 ARRAY_TO_GL_TYPE_MAPPING = {
-	numpy.dtype('d'): constants.GL_DOUBLE,
-	numpy.dtype('f'): constants.GL_FLOAT,
-	numpy.dtype('i'): constants.GL_INT,
-	numpy.dtype(SHORT_TYPE): constants.GL_SHORT,
-	numpy.dtype(USHORT_TYPE): constants.GL_UNSIGNED_SHORT,
-	numpy.dtype('B'): constants.GL_UNSIGNED_BYTE,
-	numpy.dtype('c'): constants.GL_UNSIGNED_BYTE,
-	numpy.dtype('b'): constants.GL_BYTE,
-	numpy.dtype('I'): constants.GL_UNSIGNED_INT,
+	lookupDtype('d'): constants.GL_DOUBLE,
+	lookupDtype('f'): constants.GL_FLOAT,
+	lookupDtype('i'): constants.GL_INT,
+	lookupDtype(SHORT_TYPE): constants.GL_SHORT,
+	lookupDtype(USHORT_TYPE): constants.GL_UNSIGNED_SHORT,
+	lookupDtype('B'): constants.GL_UNSIGNED_BYTE,
+	lookupDtype('c'): constants.GL_UNSIGNED_BYTE,
+	lookupDtype('b'): constants.GL_BYTE,
+	lookupDtype('I'): constants.GL_UNSIGNED_INT,
 }
 GL_TYPE_TO_ARRAY_MAPPING = {
-	constants.GL_DOUBLE: numpy.dtype('d'),
-	constants.GL_FLOAT:numpy.dtype('f'),
-	constants.GL_INT: numpy.dtype('i'),
-	constants.GL_BYTE: numpy.dtype('b'),
-	constants.GL_SHORT: numpy.dtype(SHORT_TYPE),
-	constants.GL_UNSIGNED_INT: numpy.dtype('I'),
-	constants.GL_UNSIGNED_BYTE: numpy.dtype('B'),
-	constants.GL_UNSIGNED_SHORT: numpy.dtype(USHORT_TYPE),
+	constants.GL_DOUBLE: lookupDtype('d'),
+	constants.GL_FLOAT:lookupDtype('f'),
+	constants.GL_INT: lookupDtype('i'),
+	constants.GL_BYTE: lookupDtype('b'),
+	constants.GL_SHORT: lookupDtype(SHORT_TYPE),
+	constants.GL_UNSIGNED_INT: lookupDtype('I'),
+	constants.GL_UNSIGNED_BYTE: lookupDtype('B'),
+	constants.GL_UNSIGNED_SHORT: lookupDtype(USHORT_TYPE),
 }
