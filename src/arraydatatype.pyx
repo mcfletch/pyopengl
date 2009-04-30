@@ -41,8 +41,9 @@ cdef class HandlerRegistry:
 					handler = self.registry.get( base )
 					if not handler:
 						handler = self.match( base )
+						if handler:
+							handler = handler.load()
 					if handler:
-						handler = self.registry[ base ]
 						self.registry[ typ ] = handler 
 						if hasattr( handler, 'registerEquivalent' ):
 							handler.registerEquivalent( typ, base )
