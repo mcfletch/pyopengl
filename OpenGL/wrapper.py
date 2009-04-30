@@ -701,7 +701,7 @@ class Wrapper( object ):
 									err.args = err.args + (cArguments,)
 									raise err
 								except error.GLError, err:
-									err.cArgs = cArgs 
+									err.cArgs = cArguments
 									err.pyArgs = pyArgs
 									raise err
 								# handle storage of persistent argument values...
@@ -709,13 +709,13 @@ class Wrapper( object ):
 									result,
 									self,
 									pyArgs,
-									cArgs,
+									cArguments,
 								)
 								return returnValues(
 									result,
 									self,
 									pyArgs,
-									cArgs,
+									cArguments,
 								)
 							return wrapperCall
 						else:
@@ -729,7 +729,7 @@ class Wrapper( object ):
 									err.args = err.args + (cArguments,)
 									raise err
 								except error.GLError, err:
-									err.cArgs = cArgs 
+									err.cArgs = cArguments
 									err.pyArgs = pyArgs
 									raise err
 								# handle storage of persistent argument values...
@@ -737,7 +737,7 @@ class Wrapper( object ):
 									result,
 									self,
 									pyArgs,
-									cArgs,
+									cArguments,
 								)
 								return result 
 							return wrapperCall
@@ -753,14 +753,14 @@ class Wrapper( object ):
 									err.args = err.args + (cArguments,)
 									raise err
 								except error.GLError, err:
-									err.cArgs = cArgs 
+									err.cArgs = cArguments
 									err.pyArgs = pyArgs
 									raise err
 								return returnValues(
 									result,
 									self,
 									pyArgs,
-									cArgs,
+									cArguments,
 								)
 							return wrapperCall
 						else:
@@ -774,7 +774,7 @@ class Wrapper( object ):
 									err.args = err.args + (cArguments,)
 									raise err
 								except error.GLError, err:
-									err.cArgs = cArgs 
+									err.cArgs = cArguments
 									err.pyArgs = pyArgs
 									raise err
 								return result 
