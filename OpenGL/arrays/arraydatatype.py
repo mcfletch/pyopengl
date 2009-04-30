@@ -33,8 +33,9 @@ except ImportError, err:
 						handler = self.get( base )
 						if not handler:
 							handler = self.match( base )
+							if handler:
+								handler = handler.load()
 						if handler:
-							handler = self[ base ]
 							self[ typ ] = handler 
 							if hasattr( handler, 'registerEquivalent' ):
 								handler.registerEquivalent( typ, base )
@@ -230,6 +231,7 @@ except ImportError, err:
 		"""Array datatype for GLenum types"""
 		baseType = constants.GLsizei
 		typeConstant = constants.GL_INT
+	formathandler.FormatHandler.loadAll()
 else:
 	# Cython-coded array handler
 	log.info( 'Using accelerated ArrayDatatype' )
