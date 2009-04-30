@@ -141,8 +141,10 @@ cdef class ArrayDatatype:
 		)
 	def asArray( self, value, typeCode=None ):
 		"""Given a value, convert to preferred array representation"""
+		if typeCode is None:
+			typeCode = self.typeConstant
 		return self.handler.c_lookup( value ).asArray( 
-			value, typeCode or self.typeConstant 
+			value, typeCode
 		)
 	def arrayToGLType( self, value ):
 		"""Given a data-value, guess the OpenGL type of the corresponding pointer
