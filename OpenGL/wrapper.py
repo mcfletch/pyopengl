@@ -1264,7 +1264,7 @@ class Wrapper( object ):
 									result,
 									self,
 									args,
-									cArgs,
+									cArguments,
 								)
 							return wrapperCall
 						else:
