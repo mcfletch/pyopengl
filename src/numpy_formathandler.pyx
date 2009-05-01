@@ -61,16 +61,23 @@ cdef class NumpyHandler(FormatHandler):
 		return <unsigned long> (<np.ndarray>self.c_check_array( instance )).data 
 	cdef c_zeros( self, object dims, object typeCode ):
 		"""Create an array initialized to zeros"""
-		cdef np.ndarray c_dims = PyArray_ContiguousFromAny( 
-			dims, np.NPY_ULONG, 1,1 
-		)
+		cdef np.ndarray c_dims
+		try:
+			c_dims = PyArray_ContiguousFromAny( 
+				dims, np.NPY_ULONG, 1,1 
+			)
+		except (ValueError,TypeError), err:
+			dims = (int(dims),)
+			c_dims = PyArray_ContiguousFromAny( 
+				dims, np.NPY_ULONG, 1,1 
+			)
 		cdef np.dtype typecode = self.typeCodeToDtype( typeCode )
 		Py_INCREF( typecode )
 		return PyArray_Zeros( c_dims.shape[0], <np.Py_intptr_t>c_dims.data, typecode, 0 )
 	cdef c_arraySize( self, object instance, object typeCode ):
 		"""Retrieve array size reference"""
 		return (<np.ndarray>self.c_check_array( instance )).size
-	cdef c_arrayByteCount( self, object instance, typeCode ):
+	cdef c_arrayByteCount( self, object instance ):
 		"""Given a data-value, calculate number of bytes required to represent"""
 		return instance.nbytes
 	cdef c_arrayToGLType( self, object instance ):
@@ -96,7 +103,7 @@ cdef class NumpyHandler(FormatHandler):
 	cdef c_unitSize( self, object instance, typeCode ):
 		"""Retrieve last dimension of the array"""
 		return instance.shape[instance.ndim-1]
-	cdef c_dimensions( self, object instance, typeCode ):
+	cdef c_dimensions( self, object instance ):
 		"""Retrieve full set of dimensions for the array as tuple"""
 		return instance.shape
 

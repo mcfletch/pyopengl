@@ -66,11 +66,18 @@ def get_implementation( *args ):
 	return IMPLEMENTATION
 
 try:
-	from OpenGL_accelerate.vbo import (
-		VBO,VBOOffset,VBOHandler,VBOOffsetHandler,
-	)
+	import OpenGL_accelerate
+	try:
+		from OpenGL_accelerate.vbo import (
+			VBO,VBOOffset,VBOHandler,VBOOffsetHandler,
+		)
+	except ImportError, err:
+		import logging
+		logging.getLogger( 'OpenGL_accelerate' ).warn(
+			"Unable to load VBO accelerator from OpenGL_accelerate"
+		)
+		raise
 except ImportError, err:
-
 
 	class VBO( object ):
 		"""Instances can be passed into array-handling routines
@@ -243,6 +250,8 @@ except ImportError, err:
 		def arrayToGLType( self, value ):
 			"""Given a value, guess OpenGL type of the corresponding pointer"""
 			return ArrayDatatype.arrayToGLType( value.data )
+		def arrayByteCount( self, value ):
+			return ArrayDatatype.arrayByteCount( value.data )
 		def arraySize( self, value, typeCode = None ):
 			"""Given a data-value, calculate dimensions for the array"""
 			return ArrayDatatype.arraySize( value.data )

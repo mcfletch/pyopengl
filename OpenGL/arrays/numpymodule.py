@@ -18,7 +18,15 @@ from OpenGL import constants, constant
 from OpenGL.arrays import formathandler
 
 try:
-	from OpenGL_accelerate.numpy_formathandler import NumpyHandler
+	import OpenGL_accelerate
+	try:
+		from OpenGL_accelerate.numpy_formathandler import NumpyHandler
+	except ImportError, err:
+		import logging
+		logging.getLogger( 'OpenGL_accelerate' ).warn(
+			"Unable to load numpy_formathandler accelerator from OpenGL_accelerate"
+		)
+		raise
 except ImportError, err:
 	# numpy's array interface has changed over time :(
 	testArray = numpy.array( [1,2,3,4],'i' )

@@ -46,6 +46,7 @@ extensions.extend([
 	cython_extension( 'arraydatatype' ),
 	cython_extension( 'errorchecker' ),
 	cython_extension( 'vbo' ),
+	cython_extension( 'nones_formathandler' ),
 ])
 
 try:

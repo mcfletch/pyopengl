@@ -9,7 +9,15 @@ log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
 
 
 try:
-	from OpenGL_accelerate.arraydatatype import ArrayDatatype as ADT
+	import OpenGL_accelerate
+	try:
+		from OpenGL_accelerate.arraydatatype import ArrayDatatype as ADT
+	except ImportError, err:
+		import logging
+		logging.getLogger( 'OpenGL_accelerate' ).warn(
+			"Unable to load ArrayDatatype accelerator from OpenGL_accelerate"
+		)
+		raise
 except ImportError, err:
 	# Python-coded version
 	log.warn( 'Using unaccelerated ArrayDatatype: %s', err )
@@ -98,6 +106,7 @@ except ImportError, err:
 		handler = GLOBAL_REGISTRY
 		getHandler = GLOBAL_REGISTRY.__call__
 		returnHandler = GLOBAL_REGISTRY.get_output_handler
+		isAccelerated = False
 		@classmethod
 		def getRegistry( cls ):
 			"""Get our handler registry"""

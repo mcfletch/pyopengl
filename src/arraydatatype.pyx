@@ -4,13 +4,14 @@ from OpenGL import constants, plugins
 from OpenGL import logs
 log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
 from OpenGL_accelerate.wrapper cimport cArgConverter, pyArgConverter, returnConverter
+from OpenGL_accelerate.formathandler cimport FormatHandler
 
 cdef extern from "Python.h":
 	cdef object PyObject_Type( object )
 	cdef object PyDict_GetItem( object, object )
 
-
 cdef class HandlerRegistry:
+	"""C-coded registry of format handlers for array data-formats"""
 	cdef dict registry
 	cdef object match
 	cdef object output_handler
@@ -104,6 +105,7 @@ cdef class ArrayDatatype:
 	cdef HandlerRegistry handler 
 	cdef public object typeConstant
 	cdef public object baseType
+	isAccelerated = True
 	def __init__( self, typeConstant=None, baseType=None ):
 		"""Initialize, grabbing our handler registry"""
 		self.typeConstant = typeConstant
@@ -123,14 +125,24 @@ cdef class ArrayDatatype:
 	
 	def from_param( self, object value ):
 		"""Given a value in a known data-pointer type, convert to a ctypes pointer"""
-		return self.handler.c_lookup( value ).from_param( value, self.typeConstant )
+		handler = self.handler.c_lookup( value )
+		if isinstance( handler, FormatHandler ):
+			return (<FormatHandler>handler).c_from_param( 
+				value, self.typeConstant 
+			)
+		return handler.from_param( value, self.typeConstant )
 	
 	def dataPointer( self, value ):
 		"""Given a value in a known data-pointer type, return long for pointer"""
-		return self.handler.c_lookup( value ).dataPointer( value )
+		handler = self.handler.c_lookup( value )
+		if isinstance( handler, FormatHandler ):
+			return (<FormatHandler>handler).c_dataPointer( 
+				value
+			)
+		return handler.dataPointer( value )
 	def voidDataPointer( self, value ):
 		"""Given value in a known data-pointer type, return void_p for pointer"""
-		return ctypes.c_void_p( self.handler.c_lookup( value ).dataPointer( value ))
+		return ctypes.c_void_p( self.dataPointer( value ))
 	def typedPointer( self, value ):
 		"""Return a pointer-to-base-type pointer for given value"""
 		return ctypes.cast( 
@@ -141,7 +153,12 @@ cdef class ArrayDatatype:
 		"""Given a value, convert to preferred array representation"""
 		if typeCode is None:
 			typeCode = self.typeConstant
-		return self.handler.c_lookup( value ).asArray( 
+		handler = self.handler.c_lookup( value )
+		if isinstance( handler, FormatHandler ):
+			return (<FormatHandler>handler).c_asArray( 
+				value, typeCode 
+			)
+		return handler.asArray( 
 			value, typeCode
 		)
 	def arrayToGLType( self, value ):
@@ -153,16 +170,30 @@ cdef class ArrayDatatype:
 		return self.handler.c_lookup( value ).arrayToGLType( value )
 	def arraySize( self, value, typeCode = None ):
 		"""Given a data-value, calculate dimensions for the array (number-of-units)"""
-		return self.handler.c_lookup( value ).arraySize( 
-			value, typeCode or self.typeConstant 
+		if typeCode is None:
+			typeCode = self.typeConstant
+		handler = self.handler.c_lookup( value )
+		if isinstance( handler, FormatHandler ):
+			return (<FormatHandler>handler).c_arraySize( 
+				value, typeCode 
+			)
+		return handler.arraySize( 
+			value, typeCode
 		)
 	def unitSize( self, value, typeCode=None ):
 		"""Determine unit size of an array (if possible)
 		
 		Uses our local type if defined, otherwise asks the handler to guess...
 		"""
-		return self.handler.c_lookup( value ).unitSize( 
-			value, typeCode or self.typeConstant 
+		if typeCode is None:
+			typeCode = self.typeConstant
+		handler = self.handler.c_lookup( value )
+		if isinstance( handler, FormatHandler ):
+			return (<FormatHandler>handler).c_unitSize( 
+				value, typeCode 
+			)
+		return handler.unitSize( 
+			value, typeCode
 		)
 	def returnHandler( self ):
 		"""Get the default return-handler"""
@@ -172,21 +203,42 @@ cdef class ArrayDatatype:
 		return self.c_zeros( dims, typeCode )
 	cdef c_zeros( self, dims, typeCode ):
 		"""C-level function to create empty array"""
-		return self.handler.c_get_output_handler().zeros( 
-			dims, typeCode or self.typeConstant 
+		if typeCode is None:
+			typeCode = self.typeConstant
+		handler = self.handler.c_get_output_handler( )
+		if isinstance( handler, FormatHandler ):
+			return (<FormatHandler>handler).c_zeros( 
+				dims, typeCode 
+			)
+		return handler.zeros( 
+			dims, typeCode
 		)
 		
 		
 	def dimensions( self, value ):
 		"""Given a data-value, get the dimensions (assumes full structure info)"""
-		return self.handler.c_lookup( value ).dimensions( value )
+		if typeCode is None:
+			typeCode = self.typeConstant
+		handler = self.handler.c_lookup( value )
+		if isinstance( handler, FormatHandler ):
+			return (<FormatHandler>handler).c_dimensions( 
+				value
+			)
+		return handler.dimensions( value )
 	
 	def arrayByteCount( self, value ):
 		"""Given a data-value, try to determine number of bytes it's final form occupies
 		
 		For most data-types this is arraySize() * atomic-unit-size
 		"""
-		return self.handler.c_lookup( value ).arrayByteCount( value )
+		if typeCode is None:
+			typeCode = self.typeConstant
+		handler = self.handler.c_lookup( value )
+		if isinstance( handler, FormatHandler ):
+			return (<FormatHandler>handler).c_arrayByteCount( 
+				value
+			)
+		return handler.arrayByteCount( value )
 
 # Now some array helper functions...
 
@@ -215,7 +267,7 @@ cdef class Output(cArgConverter):
 	def finalise( self, wrapper ):
 		self.outIndex = wrapper.cArgIndex( self.name )
 		
-	cdef c_getSize( self, tuple pyArgs ):
+	cdef tuple c_getSize( self, tuple pyArgs ):
 		"""Retrieve the array size for this argument"""
 		return self.size
 	
@@ -254,7 +306,7 @@ cdef class SizedOutput( Output ):
 	def finalise( self, wrapper ):
 		super( SizedOutput,self).finalise( wrapper )
 		self.index = wrapper.pyArgIndex( self.specifier )
-	cdef c_getSize( self, tuple pyArgs ):
+	cdef tuple c_getSize( self, tuple pyArgs ):
 		"""Retrieve the array size for this argument"""
 		try:
 			specifier = pyArgs[ self.index ]
@@ -262,7 +314,10 @@ cdef class SizedOutput( Output ):
 			raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
 		else:
 			try:
-				return self.lookup( specifier )
+				result =  self.lookup( specifier )
+				if not isinstance( result, tuple ):
+					result = (result,)
+				return result
 			except KeyError, err:
 				raise KeyError( """Unknown specifier %s"""%( specifier ))
 

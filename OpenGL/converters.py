@@ -103,10 +103,25 @@ class ReturnValues( Converter ):
 		))
 
 # Now the concrete classes...
+
 try:
-	from OpenGL_accelerate.wrapper import (
-		CallFuncPyConverter, DefaultCConverter, getPyArgsName,
-	)
+	import OpenGL_accelerate
+	try:
+		from OpenGL_accelerate.wrapper import (
+			CallFuncPyConverter, DefaultCConverter, getPyArgsName,
+		)
+		from OpenGL_accelerate.arraydatatype import (
+			Output,SizedOutput
+		)
+		from OpenGL_accelerate.wrapper import (
+			returnCArgument, returnPyArgument,
+		)
+	except ImportError, err:
+		import logging
+		logging.getLogger( 'OpenGL_accelerate' ).warn(
+			"Unable to load converters accelerators (wrapper, arraydatatype) from OpenGL_accelerate"
+		)
+		raise
 except ImportError, err:
 	class CallFuncPyConverter( PyConverter ):
 		"""PyConverter that takes a callable and calls it on incoming"""
@@ -155,11 +170,6 @@ except ImportError, err:
 			except AttributeError, err:
 				raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
 
-try:
-	from OpenGL_accelerate.arraydatatype import (
-		Output,SizedOutput
-	)
-except ImportError, err:
 	class Output( CConverter ):
 		"""CConverter generating static-size typed output arrays
 		
@@ -219,11 +229,6 @@ except ImportError, err:
 					return self.lookup( specifier )
 				except KeyError, err:
 					raise KeyError( """Unknown specifier %s"""%( specifier ))
-try:
-	from OpenGL_accelerate.wrapper import (
-		returnCArgument, returnPyArgument,
-	)
-except ImportError, err:
 	class returnCArgument( ReturnValues ):
 		"""ReturnValues returning the named cArgs value"""
 		argNames = ('name',)

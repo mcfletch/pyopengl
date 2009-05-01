@@ -1,6 +1,6 @@
 """Cython-coded VBO implementation"""
 import ctypes, weakref
-from OpenGL.arrays import formathandler
+from OpenGL_accelerate.formathandler cimport FormatHandler
 
 class _Holder:
 	pass
@@ -196,7 +196,7 @@ cdef class VBOOffset:
 			other = other.offset 
 		return VBOOffset( self.vbo, self.offset + other )
 
-cdef class VBOHandler:
+cdef class VBOHandler(FormatHandler):
 	"""Handles VBO instances passed in as array data"""
 	cdef object vp0 
 	cdef object arrayType # import and use explicit reference...
@@ -205,76 +205,59 @@ cdef class VBOHandler:
 		self.vp0 = ctypes.c_void_p( 0 )
 		from OpenGL.arrays.arraydatatype import ArrayDatatype
 		self.arrayType = ArrayDatatype
-	def dataPointer( self, VBO instance ):
-		"""Retrieve data-pointer from the instance's data
-		
-		Is always NULL, to indicate use of the bound pointer
-		"""
+	cdef object c_dataPointer( self, object instance ):
+		"""Retrieve data-pointer directly"""
 		return 0
-	def from_param( self, VBO instance, object typeCode=None ):
+	cdef c_from_param( self, object instance, object typeCode ):
+		"""simple function-based from_param"""
 		return self.vp0
-	def zeros( self, dims, typeCode ):
-		"""Not implemented"""
-		raise NotImplemented( """Don't have VBO output support yet""" )
-	ones = zeros 
-	def asArray( self, VBO value, typeCode=None ):
-		"""Given a value, convert to array representation"""
-		return value
-	def arrayToGLType( self, value ):
+	cdef c_asArray( self, object instance, object typeCode ):
+		"""Retrieve the given value as a (contiguous) array of type typeCode"""
+		return instance
+	cdef c_arrayByteCount( self, object instance ):
+		"""Given a data-value, calculate number of bytes required to represent"""
+		return self.arrayType.arrayByteCount( (<VBO>instance).data )
+	cdef c_arrayToGLType( self, object instance ):
 		"""Given a value, guess OpenGL type of the corresponding pointer"""
-		return self.arrayType.arrayToGLType( value.data )
-	def arraySize( self, value, typeCode = None ):
-		"""Given a data-value, calculate dimensions for the array"""
-		return self.arrayType.arraySize( value.data )
-	def unitSize( self, value, typeCode=None ):
-		"""Determine unit size of an array (if possible)"""
-		return self.arrayType.unitSize( value.data )
-	def dimensions( self, value, typeCode=None ):
-		"""Determine dimensions of the passed array value (if possible)"""
-		return self.arrayType.dimensions( value.data )
-	def register( self, types=None ):
-		"""Register this class as handler for given set of types"""
-		formathandler.FormatHandler.TYPE_REGISTRY.register( self, types )
-	def registerReturn( self ):
-		"""Register this handler as the default return-type handler"""
-		formathandler.FormatHandler.TYPE_REGISTRY.registerReturn( self )
+		return self.arrayType.arrayToGLType( (<VBO>instance).data )
+	cdef c_arraySize( self, object instance, object typeCode ):
+		"""Retrieve array size reference"""
+		return self.arrayType.arraySize( (<VBO>instance).data )
+	cdef c_unitSize( self, object instance, typeCode ):
+		"""Retrieve last dimension of the array"""
+		return self.arrayType.unitSize( (<VBO>instance).data )
+	cdef c_dimensions( self, object instance ):
+		"""Retrieve full set of dimensions for the array as tuple"""
+		return self.arrayType.dimensions( (<VBO>instance).data )
 
-cdef class VBOOffsetHandler:
+cdef class VBOOffsetHandler(FormatHandler):
 	cdef object arrayType # import and use explicit reference...
 	isOutput = False
 	def __init__( self ):
 		from OpenGL.arrays.arraydatatype import ArrayDatatype
 		self.arrayType = ArrayDatatype
-	def dataPointer( self, VBOOffset instance ):
-		"""Retrieve data-pointer from the instance's data
+	cdef object c_dataPointer( self, object instance ):
+		"""Retrieve data-pointer directly"""
+		return (<VBOOffset>instance).offset
+	cdef c_from_param( self, object instance, object typeCode ):
+		"""simple function-based from_param"""
+		return ctypes.c_void_p( (<VBOOffset>instance).offset )
+	cdef c_asArray( self, object instance, object typeCode ):
+		"""Retrieve the given value as a (contiguous) array of type typeCode"""
+		return instance
 		
-		Is always NULL, to indicate use of the bound pointer
-		"""
-		return instance.offset
-	def from_param( self, VBOOffset instance, object typeCode=None ):
-		return ctypes.c_void_p( instance.offset )
-	def zeros( self, dims, typeCode ):
-		"""Not implemented"""
-		raise NotImplemented( """Don't have VBO output support yet""" )
-	ones = zeros 
-	def asArray( self, VBOOffset value, typeCode=None ):
-		"""Given a value, convert to array representation"""
-		return value
-	def arrayToGLType( self, VBOOffset value ):
+	cdef c_arrayByteCount( self, object instance ):
+		"""Given a data-value, calculate number of bytes required to represent"""
+		return self.arrayType.arrayByteCount( (<VBOOffset>instance).vbo.data )
+	cdef c_arrayToGLType( self, object instance ):
 		"""Given a value, guess OpenGL type of the corresponding pointer"""
-		return self.arrayType.arrayToGLType( value.vbo.data )
-	def arraySize( self, VBOOffset value, typeCode = None ):
-		"""Given a data-value, calculate dimensions for the array"""
-		return self.arrayType.arraySize( value.vbo.data )
-	def unitSize( self, VBOOffset value, typeCode=None ):
-		"""Determine unit size of an array (if possible)"""
-		return self.arrayType.unitSize( value.vbo.data )
-	def dimensions( self, value, typeCode=None ):
-		"""Determine dimensions of the passed array value (if possible)"""
-		return self.arrayType.dimensions( value.vbo.data )
-	def register( self, types=None ):
-		"""Register this class as handler for given set of types"""
-		formathandler.FormatHandler.TYPE_REGISTRY.register( self, types )
-	def registerReturn( self ):
-		"""Register this handler as the default return-type handler"""
-		formathandler.FormatHandler.TYPE_REGISTRY.registerReturn( self )
+		return self.arrayType.arrayToGLType( (<VBOOffset>instance).vbo.data )
+	cdef c_arraySize( self, object instance, object typeCode ):
+		"""Retrieve array size reference"""
+		return self.arrayType.arraySize( (<VBOOffset>instance).vbo.data )
+	cdef c_unitSize( self, object instance, typeCode ):
+		"""Retrieve last dimension of the array"""
+		return self.arrayType.unitSize( (<VBOOffset>instance).vbo.data )
+	cdef c_dimensions( self, object instance ):
+		"""Retrieve full set of dimensions for the array as tuple"""
+		return self.arrayType.dimensions( (<VBOOffset>instance).vbo.data )
