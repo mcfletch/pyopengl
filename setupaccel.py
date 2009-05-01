@@ -42,6 +42,7 @@ def cython_extension( name, include_dirs = (), ):
 
 extensions.extend([
 	cython_extension( 'wrapper' ),
+	cython_extension( 'formathandler' ),
 	cython_extension( 'arraydatatype' ),
 	cython_extension( 'errorchecker' ),
 	cython_extension( 'vbo' ),

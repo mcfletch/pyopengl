@@ -231,7 +231,6 @@ except ImportError, err:
 		"""Array datatype for GLenum types"""
 		baseType = constants.GLsizei
 		typeConstant = constants.GL_INT
-	formathandler.FormatHandler.loadAll()
 else:
 	# Cython-coded array handler
 	log.info( 'Using accelerated ArrayDatatype' )

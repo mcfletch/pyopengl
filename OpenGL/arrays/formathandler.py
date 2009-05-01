@@ -12,7 +12,6 @@ class FormatHandler( object ):
 	which allow it to manipulate (and create) instances of the data-type 
 	it represents.
 	"""
-	TYPE_REGISTRY = None # HandlerRegistry(plugins.FormatHandler.match)
 	LAZY_TYPE_REGISTRY = {}  # more registrations
 	HANDLER_REGISTRY = {}
 	baseType = None
@@ -34,13 +33,13 @@ class FormatHandler( object ):
 			],
 		}
 		"""
-		assert FormatHandler.TYPE_REGISTRY is not None
 		for entrypoint in plugins.FormatHandler.all():
 			cls.loadPlugin( entrypoint )
 	@classmethod
 	def loadPlugin( cls, entrypoint ):
 		"""Load a single entry-point via plugins module"""
 		if not entrypoint.loaded:
+			from OpenGL.arrays.arraydatatype import ArrayDatatype
 			try:
 				plugin_class = entrypoint.load()
 			except ImportError, err:
@@ -57,29 +56,32 @@ class FormatHandler( object ):
 			else:
 				handler = plugin_class()
 				handler.register( handler.HANDLED_TYPES )
-				cls.TYPE_REGISTRY[ entrypoint.name ] = handler 
+				ArrayDatatype.getRegistry()[ entrypoint.name ] = handler
 			entrypoint.loaded = True
 	@classmethod
 	def typeLookup( cls, type ):
 		"""Lookup handler by data-type"""
+		registry = ArrayDatatype.getRegistry()
 		try:
-			return FormatHandler.TYPE_REGISTRY[ type ]
+			return registry[ type ]
 		except KeyError, err:
 			key = '%s.%s'%(type.__module__,type.__name__)
 			plugin = cls.LAZY_TYPE_REGISTRY.get( key )
 			if plugin:
 				cls.loadPlugin( plugin )
-				return cls.TYPE_REGISTRY[ type ]
+				return registry[ type ]
 			raise KeyError( """Unable to find data-format handler for %s"""%( type,))
 	loadAll = classmethod( loadAll )
 
 
 	def register( self, types=None ):
 		"""Register this class as handler for given set of types"""
-		FormatHandler.TYPE_REGISTRY.register( self, types )
+		from OpenGL.arrays.arraydatatype import ArrayDatatype
+		ArrayDatatype.getRegistry().register( self, types )
 	def registerReturn( self ):
 		"""Register this handler as the default return-type handler"""
-		FormatHandler.TYPE_REGISTRY.registerReturn( self )
+		from OpenGL.arrays.arraydatatype import ArrayDatatype
+		ArrayDatatype.getRegistry().registerReturn( self )
 
 	def from_param( self, value, typeCode=None  ):
 		"""Convert to a ctypes pointer value"""

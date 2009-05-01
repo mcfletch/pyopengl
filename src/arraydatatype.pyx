@@ -109,9 +109,6 @@ cdef class ArrayDatatype:
 		self.typeConstant = typeConstant
 		self.baseType = baseType
 		self.handler = GLOBAL_REGISTRY
-		from OpenGL.arrays import formathandler
-		formathandler.FormatHandler.TYPE_REGISTRY = self.handler
-		formathandler.FormatHandler.loadAll( )
 	
 	def getRegistry( self ):
 		"""Get our handler registry"""
