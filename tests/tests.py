@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 import unittest, pygame, pygame.display, time, traceback
+import logging 
+logging.basicConfig()
 
 try:
 	raise ImportError( )
@@ -756,8 +758,6 @@ class Tests( unittest.TestCase ):
 		)
 		
 if __name__ == "__main__":
-	import logging 
-	logging.basicConfig()
 	unittest.main()
 	pygame.display.quit()
 	pygame.quit()
