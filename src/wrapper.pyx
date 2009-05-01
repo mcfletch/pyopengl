@@ -4,22 +4,40 @@ from OpenGL import error
 cdef extern from "Python.h":
 	cdef object PyObject_Type( object )
 	cdef object PyDict_GetItem( object, object )
+
+cdef class cArgConverter:
+	"""C-level API definition for cConverter objects"""
+	def __call__( self, tuple pyArgs, int index, object wrapper ):
+		"""Return pyArgs[self.index] or raise a ValueError"""
+		return self.c_call( pyArgs, index, wrapper )
+	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+		return None
 	
 cdef class CArgCalculatorElement:
 	cdef object wrapper
 	cdef long index 
+	cdef int doCAPI
 	cdef int callable
 	cdef object converter 
+	cdef cArgConverter c_converter
 	def __init__( self, wrapper, index, converter ):
 		self.wrapper = wrapper 
-		self.index = index 
-		self.converter = converter
-		self.callable = callable( converter )
+		self.index = index
+		if isinstance( converter, cArgConverter ):
+			self.c_converter = converter 
+			self.doCAPI = True
+			self.callable = True
+		else:
+			self.converter = converter
+			self.doCAPI = False
+			self.callable = callable( converter )
 	def __call__( self, tuple pyArgs ):
 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
 		return self.c_call( pyArgs )
 	cdef object c_call( self, tuple pyArgs ):
-		if self.callable:
+		if self.doCAPI:
+			return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+		elif self.callable:
 			return self.converter( pyArgs, self.index, self.wrapper )
 		return self.converter
 
@@ -143,13 +161,12 @@ cdef class CallFuncPyConverter:
 	def __call__( self, incoming, function, argument ):
 		"""Call our function on incoming"""
 		return self.function( incoming )
-cdef class DefaultCConverter:
+cdef class DefaultCConverter(cArgConverter):
 	cdef int index
 	def __init__( self, index ):
 		"""Just store index for future access"""
 		self.index = index 
-	def __call__( self, tuple pyArgs, int index, object wrapper ):
-		"""Return pyArgs[self.index] or raise a ValueError"""
+	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
 		try:
 			return pyArgs[ self.index ]
 		except IndexError, err:
@@ -241,8 +258,7 @@ cdef class Wrapper:
 			return result
 
 
-
-cdef class getPyArgsName:
+cdef class getPyArgsName(cArgConverter):
 	"""CConverter returning named Python argument
 	
 	Intended for use in cConverters, the function returned 
@@ -254,8 +270,7 @@ cdef class getPyArgsName:
 		self.name = name
 	def finalise( self, wrapper ):
 		self.index = wrapper.pyArgIndex( self.name )
-	def __call__( self, tuple pyArgs, int index, object baseOperation ):
-		"""Return pyArgs[ self.index ]"""
+	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
 		return pyArgs[ self.index ]
 
 cdef class returnPyArgument:
