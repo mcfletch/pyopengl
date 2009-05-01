@@ -9,7 +9,7 @@ class TestAccelNumpy( unittest.TestCase ):
 		self.eoc_handler = npf.NumpyHandler( True )
 	def test_from_param( self ):
 		p = self.handler.from_param( self.array )
-		assert isinstance( p, (int,long) )
+		assert isinstance( p, ctypes.c_void_p )
 	def test_dataPointer( self ):
 		p = self.handler.dataPointer( self.array )
 		assert isinstance( p, (int,long))

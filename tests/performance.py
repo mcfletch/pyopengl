@@ -4,8 +4,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from OpenGL.arrays import vbo
-from lsprofcalltree import KCacheGrind
-import cProfile, time
+import cProfile, time, os
 PROFILER = cProfile.Profile()
 
 import numpy
@@ -15,12 +14,14 @@ def dump( ):
 		new = base 
 		count = 0
 		while os.path.isfile( new ):
-			new = '%s-%s'%( base, count )
+			new = '%s-%s%s'%( 
+				os.path.splitext(base)[0], 
+				count,
+				os.path.splitext(base)[1] 
+			)
 			count += 1
 		return new
-	KCacheGrind( PROFILER ).output( open(
-		newfile( 'callgrind.out' ), 'wb'
-	))
+	PROFILER.dump_stats( newfile( 'performance.profile' ) )
 
 
 def init_vbo( size = 1000000 ):
@@ -63,7 +64,7 @@ def init():
 def display( ):
 	init()
 	repeat = range(100)
-	for count in [(2**i) for i in range(8,22)]:
+	for count in [(2**i) for i in range(8,19)]:
 		v = init_vbo( count )
 		def x( ):
 			t1 = time.time()
