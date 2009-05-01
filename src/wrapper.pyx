@@ -11,7 +11,7 @@ cdef class cArgConverter:
 		"""Return pyArgs[self.index] or raise a ValueError"""
 		return self.c_call( pyArgs, index, wrapper )
 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
-		return None
+		"""Implementation of the converter"""
 	
 cdef class CArgCalculatorElement:
 	cdef object wrapper
