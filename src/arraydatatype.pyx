@@ -3,7 +3,7 @@ import OpenGL
 from OpenGL import constants, plugins
 from OpenGL import logs
 log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
-from OpenGL_accelerate.wrapper cimport cArgConverter
+from OpenGL_accelerate.wrapper cimport cArgConverter, pyArgConverter, returnConverter
 
 cdef extern from "Python.h":
 	cdef object PyObject_Type( object )
@@ -193,7 +193,7 @@ cdef class ArrayDatatype:
 
 # Now some array helper functions...
 
-cdef class Output:
+cdef class Output(cArgConverter):
 	"""CConverter generating static-size typed output arrays
 	
 	Produces an output array of given type (arrayType) and 
@@ -222,12 +222,13 @@ cdef class Output:
 		"""Retrieve the array size for this argument"""
 		return self.size
 	
-	def __call__( self, tuple pyArgs, int index, object baseOperation ):
+	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
 		"""Return pyArgs[ self.index ]"""
 		return self.arrayType.c_zeros( self.c_getSize(pyArgs), self.arrayType.typeConstant )
 	
 	def oldStyleReturn( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
 		"""Retrieve cArgs[ self.index ]"""
+		#TODO: make this a c_api-bearing value, not a Python function call
 		result = cArgs[ self.outIndex ]
 		cdef tuple thisSize = self.c_getSize(pyArgs)
 		if thisSize == (1,):
@@ -268,7 +269,7 @@ cdef class SizedOutput( Output ):
 			except KeyError, err:
 				raise KeyError( """Unknown specifier %s"""%( specifier ))
 
-cdef class AsArrayOfType:
+cdef class AsArrayOfType(pyArgConverter):
 	"""Given arrayName and typeName coerce arrayName to array of type typeName
 	
 	TODO: It should be possible to drop this if ERROR_ON_COPY,
@@ -290,11 +291,11 @@ cdef class AsArrayOfType:
 	def finalise( self, wrapper ):
 		self.arrayIndex = wrapper.pyArgIndex( self.arrayName )
 		self.typeIndex = wrapper.pyArgIndex( self.typeName )
-	def __call__( self, object arg, object wrappedOperation, tuple args):
+	cdef object c_call( self, object incoming, object function, tuple arguments ):
 		"""Get the arg as an array of the appropriate type"""
-		return self.arrayType.asArray( arg, args[ self.typeIndex ] )
+		return self.arrayType.asArray( incoming, arguments[ self.typeIndex ] )
 
-cdef class AsArrayTyped:
+cdef class AsArrayTyped(pyArgConverter):
 	"""Given arrayName and arrayType, convert arrayName to array of type
 	
 	TODO: It should be possible to drop this if ERROR_ON_COPY,
@@ -302,7 +303,6 @@ cdef class AsArrayTyped:
 	case.
 	"""
 	cdef public str arrayName
-	
 	cdef int arrayIndex
 	cdef public ArrayDatatype arrayType
 	def __init__( self, arrayName='pointer', arrayType=None ):
@@ -313,9 +313,9 @@ cdef class AsArrayTyped:
 		self.arrayType = arrayType
 	def finalise( self, wrapper ):
 		"""Finalize the wrapper (nothing to do here)"""
-	def __call__( self, object arg, object wrappedOperation, tuple args):
+	cdef object c_call( self, object incoming, object function, tuple arguments ):
 		"""Get the arg as an array of the appropriate type"""
-		return self.arrayType.asArray( arg )
+		return self.arrayType.asArray( incoming )
 
 cdef class AsArrayTypedSizeChecked( AsArrayTyped ):
 	"""Size-checking version of AsArrayTyped"""
@@ -323,10 +323,10 @@ cdef class AsArrayTypedSizeChecked( AsArrayTyped ):
 	def __init__( self, arrayType=None, size=None ):
 		super(AsArrayTypedSizeChecked,self).__init__( 'pointer', arrayType )
 		self.size = size
-	def __call__( self, object arg, object wrappedOperation, tuple args):
+	cdef object c_call( self, object incoming, object function, tuple arguments ):
 		"""Get the arg as an array of the appropriate type"""
 		cdef int actualSize
-		result = super(AsArrayTypedSizeChecked,self).__call__( arg, wrappedOperation, args )
+		result = self.arrayType.asArray( incoming )
 		actualSize = self.arrayType.arraySize( result )
 		if actualSize != self.size:
 			raise ValueError(
@@ -334,7 +334,7 @@ cdef class AsArrayTypedSizeChecked( AsArrayTyped ):
 					self.size,
 					actualSize,
 				),
-				arg,
+				incoming,
 			)
 		return result
 	

@@ -4,8 +4,6 @@ import numpy as np
 cimport numpy as np
 import traceback, weakref
 from OpenGL.error import CopyError
-from OpenGL.arrays import formathandler
-import OpenGL
 
 cdef extern from "Python.h":
 	cdef void Py_INCREF( object )
@@ -28,6 +26,7 @@ cdef class NumpyHandler:
 	
 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):
 		if ERROR_ON_COPY is None:
+			import OpenGL
 			ERROR_ON_COPY = OpenGL.ERROR_ON_COPY
 		if a_to_gl is None:
 			from OpenGL.arrays.numpymodule import ARRAY_TO_GL_TYPE_MAPPING
@@ -40,9 +39,11 @@ cdef class NumpyHandler:
 		self.gl_constant_to_array = gl_to_a
 	def register( self, types=None ):
 		"""Register this class as handler for given set of types"""
+		from OpenGL.arrays import formathandler
 		formathandler.FormatHandler.TYPE_REGISTRY.register( self, types )
 	def registerReturn( self ):
 		"""Register this handler as the default return-type handler"""
+		from OpenGL.arrays import formathandler
 		formathandler.FormatHandler.TYPE_REGISTRY.registerReturn( self )
 		
 	def from_param( self, np.ndarray instance, object typeCode = None ):
@@ -84,10 +85,10 @@ cdef class NumpyHandler:
 	def asArray( self, np.ndarray instance, object typeCode = None ):
 		"""Retrieve the given value as a (contiguous) array of type typeCode"""
 		cdef np.dtype typecode
-		try:
+		if typeCode is None:
+			typecode = instance.dtype 
+		else:
 			typecode = self.typeCodeToDtype( typeCode )
-		except KeyError, err:
-			typecode = instance.dtype
 		return self.contiguous( instance, typecode )
 	def unitSize( self, np.ndarray instance, typeCode=None ):
 		"""Retrieve last dimension of the array"""
@@ -121,7 +122,7 @@ cdef class NumpyHandler:
 			return instance 
 		else:
 			# "convert" regardless (will return same instance if already contiguous)
-			if not PyArray_ISCARRAY( instance ):
+			if not PyArray_ISCARRAY( instance ) or instance.dtype != dtype:
 				# TODO: make sure there's no way to segfault here 
 				Py_INCREF( <object> dtype )
 				return PyArray_FromArray( 

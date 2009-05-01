@@ -12,6 +12,28 @@ cdef class cArgConverter:
 		return self.c_call( pyArgs, index, wrapper )
 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
 		"""Implementation of the converter"""
+cdef class pyArgConverter:
+	"""C-level API definition for pyArg converter objects"""
+	def __call__( self, object incoming, object function, tuple arguments ):
+		"""Call our function on incoming"""
+		return self.c_call( incoming, function, arguments )
+	cdef object c_call( self, object incoming, object function, tuple arguments ):
+		"""Implementation would do something here"""
+cdef class cArgumentConverter:
+	"""C-level API definition for cArgument convert objects"""
+	def __call__( self, object element  ):
+		"""Call our function on incoming"""
+		return self.c_call( element )
+	cdef object c_call( self, object incoming ):
+		"""Implementation would do something here"""
+cdef class returnConverter:
+	"""C-level API definition for cArgument convert objects"""
+	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+		"""Call our function on incoming"""
+		return self.c_call( result, baseOperation, pyArgs, cArgs )
+	cdef object c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+		"""Implementation would do something here"""
+	
 	
 cdef class CArgCalculatorElement:
 	cdef object wrapper
@@ -65,22 +87,33 @@ cdef class CArgCalculator:
 cdef class PyArgCalculatorElement:
 	cdef object wrapper
 	cdef long index 
-	cdef int callable
+	cdef int doCAPI
 	cdef object converter 
+	cdef pyArgConverter c_converter
 	def __init__( self, wrapper, index, converter ):
 		self.wrapper = wrapper 
 		self.index = index 
-		self.converter = converter
+		if isinstance( converter, pyArgConverter ):
+			self.doCAPI = True 
+			self.c_converter = converter
+		else:
+			self.doCAPI = False 
+			self.converter = converter 
 	def __call__( self, tuple args ):
 		"""If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
 		return self.c_call( args )
 	cdef object c_call( self, tuple args ):
-		if self.converter is None:
-			return args[self.index]
 		try:
-			return self.converter( 
-				args[self.index], self.wrapper, args 
-			)
+			if self.doCAPI:
+				return self.c_converter.c_call(
+					args[self.index], self.wrapper, args,
+				)
+			else:
+				if self.converter is None:
+					return args[self.index]
+				return self.converter( 
+					args[self.index], self.wrapper, args 
+				)
 		except Exception, err:
 			if hasattr( err, 'args' ):
 				err.args += ( self.converter, )
@@ -144,6 +177,14 @@ cdef class CArgumentCalculator:
 			converter = self.cResolvers[i]
 			if converter is None:
 				result[i] = cArgs[i]
+			elif isinstance( converter, cArgumentConverter ):
+				# TODO: should pre-calculate this, isinstance is a very 
+				# heavy operation.
+				try:
+					result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
+				except Exception, err:
+					err.args += (converter,)
+					raise
 			else:
 				try:
 					result[i] = converter( cArgs[i] )
@@ -152,13 +193,13 @@ cdef class CArgumentCalculator:
 					raise
 		return result
 
-cdef class CallFuncPyConverter:
+cdef class CallFuncPyConverter( pyArgConverter ):
 	"""PyConverter that takes a callable and calls it on incoming"""
 	cdef object function
 	def __init__( self, function ):
 		"""Store the function"""
 		self.function = function 
-	def __call__( self, incoming, function, argument ):
+	cdef object c_call( self, object incoming, object function, tuple arguments ):
 		"""Call our function on incoming"""
 		return self.function( incoming )
 cdef class DefaultCConverter(cArgConverter):
@@ -191,6 +232,8 @@ cdef class Wrapper:
 	
 	cdef public object wrappedOperation, storeValues,returnValues
 	cdef int doPyargs, doCargs, doCarguments, doStoreValues, doReturnValues
+	cdef returnConverter c_returnValues
+	cdef int doCReturnAPI
 	def __init__( 
 		self, wrappedOperation,
 		calculate_pyArgs=None, calculate_cArgs=None,
@@ -198,23 +241,38 @@ cdef class Wrapper:
 		storeValues=None, returnValues=None,
 	):
 		if calculate_pyArgs is not None:
+			if not isinstance( calculate_pyArgs, PyArgCalculator ):
+				calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
 			self.calculate_pyArgs = calculate_pyArgs
 			self.doPyargs = True
 		else:
 			self.doPyargs = False
 		if calculate_cArgs is not None:
+			if not isinstance( calculate_cArgs, CArgCalculator ):
+				calculate_cArgs = CArgCalculator( self, calculate_cArgs )
 			self.calculate_cArgs = calculate_cArgs
 			self.doCargs = True 
 		else:
 			self.doCargs = False
 		if calculate_cArguments is not None:
+			if not isinstance( calculate_cArguments, CArgumentCalculator ):
+				calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
 			self.calculate_cArguments = calculate_cArguments
 			self.doCarguments = True
 		else:
 			self.doCarguments = False
 		self.wrappedOperation = wrappedOperation
 		self.storeValues = storeValues
-		self.returnValues = returnValues
+		if isinstance( returnValues, returnConverter ):
+			self.doCReturnAPI = True 
+			self.doReturnValues = True
+			self.c_returnValues = returnValues
+		elif returnValues is None:
+			self.doReturnValues = False
+		else:
+			self.doCReturnAPI = False 
+			self.doReturnValues = True 
+			self.returnValues = returnValues
 	
 	def __call__( self, *args ):
 		cdef tuple pyArgs, cArgs, cArguments
@@ -247,13 +305,18 @@ cdef class Wrapper:
 				pyArgs,
 				cArgs,
 			)
-		if self.returnValues is not None:
-			return self.returnValues(
-				result,
-				self,
-				pyArgs,
-				cArgs,
-			)
+		if self.doReturnValues:
+			if self.doCReturnAPI:
+				return self.c_returnValues.c_call(
+					result, self, pyArgs, cArgs,
+				)
+			else:
+				return self.returnValues(
+					result,
+					self,
+					pyArgs,
+					cArgs,
+				)
 		else:
 			return result
 
@@ -273,7 +336,7 @@ cdef class getPyArgsName(cArgConverter):
 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
 		return pyArgs[ self.index ]
 
-cdef class returnPyArgument:
+cdef class returnPyArgument(returnConverter):
 	"""ReturnValues returning the named pyArgs value"""
 	cdef public unsigned int index
 	cdef public str name
@@ -281,20 +344,19 @@ cdef class returnPyArgument:
 		self.name = name 
 	def finalise( self, wrapper ):
 		self.index = wrapper.pyArgIndex( self.name )
-	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
 		"""Retrieve pyArgs[ self.index ]"""
 		return pyArgs[self.index]
-cdef class returnPyArgumentIndex:
+cdef class returnPyArgumentIndex(returnConverter):
 	cdef public unsigned int index
 	def __init__( self, int index ):
 		self.index = index
 	def finalise( self, wrapper ):
 		"""No finalisation required"""
-	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
 		"""Retrieve pyArgs[ self.index ]"""
 		return pyArgs[self.index]
-	
-cdef class returnCArgument:
+cdef class returnCArgument(returnConverter):
 	"""ReturnValues returning the named pyArgs value"""
 	cdef public unsigned int index
 	cdef public str name
@@ -302,6 +364,6 @@ cdef class returnCArgument:
 		self.name = name 
 	def finalise( self, wrapper ):
 		self.index = wrapper.cArgIndex( self.name )
-	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
 		"""Retrieve cArgs[ self.index ]"""
 		return cArgs[self.index]
