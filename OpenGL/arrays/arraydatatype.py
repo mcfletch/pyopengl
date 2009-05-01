@@ -12,7 +12,7 @@ try:
 	from OpenGL_accelerate.arraydatatype import ArrayDatatype as ADT
 except ImportError, err:
 	# Python-coded version
-	log.info( 'Using unaccelerated ArrayDatatype' )
+	log.warn( 'Using unaccelerated ArrayDatatype: %s', err )
 	class HandlerRegistry( dict ):
 		GENERIC_OUTPUT_PREFERENCES = ['numpy','numeric','ctypesarrays']
 		def __init__( self, plugin_match ):

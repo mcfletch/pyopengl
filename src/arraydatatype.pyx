@@ -3,6 +3,7 @@ import OpenGL
 from OpenGL import constants, plugins
 from OpenGL import logs
 log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
+from OpenGL_accelerate.wrapper cimport cArgConverter
 
 cdef extern from "Python.h":
 	cdef object PyObject_Type( object )
@@ -337,11 +338,10 @@ cdef class AsArrayTypedSizeChecked( AsArrayTyped ):
 			)
 		return result
 	
-cdef class AsArrayTypedSize:
+cdef class AsArrayTypedSize(cArgConverter):
 	"""Given arrayName and arrayType, determine size of arrayName
 	"""
 	cdef public str arrayName
-	
 	cdef int arrayIndex
 	cdef public ArrayDatatype arrayType
 	
@@ -353,7 +353,6 @@ cdef class AsArrayTypedSize:
 		self.arrayType = arrayType
 	def finalise( self, wrapper ):
 		self.arrayIndex = wrapper.pyArgIndex( self.arrayName )
-	def __call__( self, tuple pyArgs, int index, object wrappedOperation ):
-		"""Get the arg as an array of the appropriate type"""
+	cdef c_call( self, tuple pyArgs, int index, object wrappedOperation ):
 		return self.arrayType.arraySize( pyArgs[self.arrayIndex ] )
 
