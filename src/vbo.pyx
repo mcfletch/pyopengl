@@ -6,26 +6,37 @@ cdef extern from "Python.h":
 	cdef void Py_XINCREF( object )
 	cdef void Py_XDECREF( object )
 
-class _Holder:
-	pass
-
 cdef class VBO:
 	"""Instances can be passed into array-handling routines
 	
 	You can check for whether VBOs are supported by accessing the implementation
 	attribute of the VBO, which will raise a RuntimeError if there is no available 
 	implementation.
+	
+	Attributes:
+	
+		int copied -- whether we are copied to back-end yet 
+		int created -- whether we've created a buffer yet 
+		unsigned int buffer -- our buffer once created 
+		object data -- our data-holding array-compatible object 
+		target -- our resolved GL constant target 
+		target_spec -- our (unresolved) GL constant specifier 
+		usage -- our resolved GL constant usage 
+		usage_spec -- our (unresolved) GL constant usage specifier 
+		_copy_segments -- slices of data to copy to back-end 
+		_I_ -- our implementation object 
+		arrayType -- our reference to arraydatatype.ArrayDatatype
 	"""
-	cdef object __weakref__
+	cdef object __weakref__ # allow weak-referencing for cleanups...
 	cdef public int copied
 	cdef public int created
-	cdef public unsigned int buffer 
-	cdef public object data 
+	cdef public unsigned int buffer
+	cdef public object data
 	cdef public object target
 	cdef public object usage
 	cdef public int resolved 
-	cdef public object target_spec
-	cdef public object usage_spec
+	cdef public object target_spec # possible string definition
+	cdef public object usage_spec # possible string definition
 	cdef public list _copy_segments
 	cdef public object _I_
 	cdef public object arrayType
@@ -34,6 +45,32 @@ cdef class VBO:
 		self, data, usage='GL_DYNAMIC_DRAW', 
 		target='GL_ARRAY_BUFFER',
 	):
+		"""Initialize the VBO 
+		
+		data -- array-compatible data format object 
+		
+		usage -- string/GLenum constant specifying streaming usage 
+			for the VBO, normal values:
+			
+				GL_STREAM_DRAW -- updated every frame from client to card
+				GL_STREAM_COPY -- read and written from card each frame 
+				
+				GL_STATIC_DRAW -- just written from client (once)
+				GL_STATIC_READ -- just read from client 
+				GL_STATIC_COPY -- read and written from client (once)
+				
+				GL_DYNAMIC_DRAW -- updated from client every once in a while 
+				GL_DYNAMIC_COPY -- read and written from client every once in a while
+				GL_DYNAMIC_READ -- read from the client every once in a while 
+		
+		target -- string/GLenum constant specifying the role for the buffer 
+			normal values:
+			
+				GL_ARRAY_BUFFER -- vertex attribute values 
+				GL_ELEMENT_ARRAY_BUFFER -- vertex index values 
+				GL_PIXEL_PACK_BUFFER/GL_PIXEL_UNPACK_BUFFER -- client-side 
+					image source/sink for image-manipulation operations.
+		"""
 		self.c_set_array( data )
 		self.data = data 
 		self.resolved = self.created = self.copied = False 
@@ -51,6 +88,7 @@ cdef class VBO:
 		"""Retrieve our implementation reference"""
 		return self.get_implementation()
 	cdef get_implementation( self ):
+		"""C-level implementation retrieval"""
 		if self._I_ is None:
 			from OpenGL.arrays.vbo import get_implementation
 			self._I_ = get_implementation()
@@ -67,6 +105,7 @@ cdef class VBO:
 		"""Update our entire array with new data"""
 		return self.c_set_array( data )
 	cdef c_set_array( self, data ):
+		"""Set our array pointer with incref/decref support"""
 		Py_XDECREF( self.data )
 		Py_XINCREF( data )
 		self.data = data 
@@ -195,6 +234,13 @@ cdef class VBO:
 	
 
 cdef class VBOOffset:
+	"""Offset into a VBO instance
+	
+	This is just a convenience object that lets you say 
+	vbo + integer and have the value passed as the correct 
+	data-type instead of being interpreted as a pointer to 
+	an integer-array of the offset.
+	"""
 	cdef public VBO vbo 
 	cdef public unsigned int offset
 	def __cinit__( self, VBO vbo, unsigned int offset ):
