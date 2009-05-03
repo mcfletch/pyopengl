@@ -2,6 +2,10 @@
 import ctypes, weakref
 from OpenGL_accelerate.formathandler cimport FormatHandler
 
+cdef extern from "Python.h":
+	cdef void Py_INCREF( object )
+	cdef void Py_DECREF( object )
+
 class _Holder:
 	pass
 
@@ -12,6 +16,7 @@ cdef class VBO:
 	attribute of the VBO, which will raise a RuntimeError if there is no available 
 	implementation.
 	"""
+	cdef object __weakref__
 	cdef public int copied
 	cdef public int created
 	cdef public unsigned int buffer 
@@ -19,14 +24,12 @@ cdef class VBO:
 	cdef public object target
 	cdef public object usage
 	cdef public int resolved 
-	cdef public object balast 
 	cdef public object target_spec
 	cdef public object usage_spec
 	cdef public list _copy_segments
 	cdef public object _I_
 	cdef public object arrayType
 	_no_cache_ = True # do not cache in context data arrays
-	
 	def __init__( 
 		self, data, usage='GL_DYNAMIC_DRAW', 
 		target='GL_ARRAY_BUFFER',
@@ -35,7 +38,6 @@ cdef class VBO:
 		self.resolved = self.created = self.copied = False 
 		self.usage_spec = usage 
 		self.target_spec = target 
-		self.balast = _Holder()
 		self._copy_segments = []
 		self._I_ = None
 		from OpenGL.arrays.arraydatatype import ArrayDatatype
@@ -132,7 +134,7 @@ cdef class VBO:
 		self.created = True
 		self.get_implementation()._DELETERS_[ id(self) ] = weakref.ref( 
 			# Cython instances can't have weakrefs, sigh...
-			self.balast, 
+			self, 
 			self.get_implementation().deleter( [self.buffer], id(self) )
 		)
 		return self.buffer
@@ -179,14 +181,22 @@ cdef class VBO:
 			other = other.offset 
 		assert isinstance( other, (int,long) ), """Only know how to add integer/long offsets"""
 		return VBOOffset( self, other )
+	cdef int check_live( self ):
+		if self.data is None:
+			raise RuntimeError( """Attempting to use a deleted VBO""" )
 	
 
 cdef class VBOOffset:
 	cdef public VBO vbo 
 	cdef public unsigned int offset
-	def __init__( self, VBO vbo, unsigned int offset ):
+	def __cinit__( self, VBO vbo, unsigned int offset ):
 		self.vbo = vbo 
+		Py_INCREF( vbo )
 		self.offset = offset 
+	def __dealloc__( self ):
+		Py_DECREF( self.vbo )
+		self.vbo = None
+		
 	def __getattr__( self, key ):
 		if key != 'vbo':
 			return getattr( self.vbo, key )
@@ -195,6 +205,11 @@ cdef class VBOOffset:
 		if hasattr( other, 'offset' ):
 			other = other.offset 
 		return VBOOffset( self.vbo, self.offset + other )
+	cdef int check_live( self ):
+		if self.vbo is not None:
+			return self.vbo.check_live()
+		else:
+			raise RuntimeError( """Attempting to use offset into deleted VBO""" )
 
 cdef class VBOHandler(FormatHandler):
 	"""Handles VBO instances passed in as array data"""
@@ -207,27 +222,35 @@ cdef class VBOHandler(FormatHandler):
 		self.arrayType = ArrayDatatype
 	cdef object c_dataPointer( self, object instance ):
 		"""Retrieve data-pointer directly"""
+		(<VBO>instance).check_live()
 		return 0
 	cdef c_from_param( self, object instance, object typeCode ):
 		"""simple function-based from_param"""
+		(<VBO>instance).check_live()
 		return self.vp0
 	cdef c_asArray( self, object instance, object typeCode ):
 		"""Retrieve the given value as a (contiguous) array of type typeCode"""
+		(<VBO>instance).check_live()
 		return instance
 	cdef c_arrayByteCount( self, object instance ):
 		"""Given a data-value, calculate number of bytes required to represent"""
+		(<VBO>instance).check_live()
 		return self.arrayType.arrayByteCount( (<VBO>instance).data )
 	cdef c_arrayToGLType( self, object instance ):
 		"""Given a value, guess OpenGL type of the corresponding pointer"""
+		(<VBO>instance).check_live()
 		return self.arrayType.arrayToGLType( (<VBO>instance).data )
 	cdef c_arraySize( self, object instance, object typeCode ):
 		"""Retrieve array size reference"""
+		(<VBO>instance).check_live()
 		return self.arrayType.arraySize( (<VBO>instance).data )
 	cdef c_unitSize( self, object instance, typeCode ):
 		"""Retrieve last dimension of the array"""
+		(<VBO>instance).check_live()
 		return self.arrayType.unitSize( (<VBO>instance).data )
 	cdef c_dimensions( self, object instance ):
 		"""Retrieve full set of dimensions for the array as tuple"""
+		(<VBO>instance).check_live()
 		return self.arrayType.dimensions( (<VBO>instance).data )
 
 cdef class VBOOffsetHandler(FormatHandler):
@@ -236,28 +259,37 @@ cdef class VBOOffsetHandler(FormatHandler):
 	def __init__( self ):
 		from OpenGL.arrays.arraydatatype import ArrayDatatype
 		self.arrayType = ArrayDatatype
+	
 	cdef object c_dataPointer( self, object instance ):
 		"""Retrieve data-pointer directly"""
+		(<VBOOffset>instance).check_live()
 		return (<VBOOffset>instance).offset
 	cdef c_from_param( self, object instance, object typeCode ):
 		"""simple function-based from_param"""
+		(<VBOOffset>instance).check_live()
 		return ctypes.c_void_p( (<VBOOffset>instance).offset )
 	cdef c_asArray( self, object instance, object typeCode ):
 		"""Retrieve the given value as a (contiguous) array of type typeCode"""
+		(<VBOOffset>instance).check_live()
 		return instance
 		
 	cdef c_arrayByteCount( self, object instance ):
 		"""Given a data-value, calculate number of bytes required to represent"""
+		(<VBOOffset>instance).check_live()
 		return self.arrayType.arrayByteCount( (<VBOOffset>instance).vbo.data )
 	cdef c_arrayToGLType( self, object instance ):
 		"""Given a value, guess OpenGL type of the corresponding pointer"""
+		(<VBOOffset>instance).check_live()
 		return self.arrayType.arrayToGLType( (<VBOOffset>instance).vbo.data )
 	cdef c_arraySize( self, object instance, object typeCode ):
 		"""Retrieve array size reference"""
+		(<VBOOffset>instance).check_live()
 		return self.arrayType.arraySize( (<VBOOffset>instance).vbo.data )
 	cdef c_unitSize( self, object instance, typeCode ):
 		"""Retrieve last dimension of the array"""
+		(<VBOOffset>instance).check_live()
 		return self.arrayType.unitSize( (<VBOOffset>instance).vbo.data )
 	cdef c_dimensions( self, object instance ):
 		"""Retrieve full set of dimensions for the array as tuple"""
+		(<VBOOffset>instance).check_live()
 		return self.arrayType.dimensions( (<VBOOffset>instance).vbo.data )
