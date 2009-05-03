@@ -3,8 +3,8 @@ import ctypes, weakref
 from OpenGL_accelerate.formathandler cimport FormatHandler
 
 cdef extern from "Python.h":
-	cdef void Py_INCREF( object )
-	cdef void Py_DECREF( object )
+	cdef void Py_XINCREF( object )
+	cdef void Py_XDECREF( object )
 
 class _Holder:
 	pass
@@ -34,6 +34,7 @@ cdef class VBO:
 		self, data, usage='GL_DYNAMIC_DRAW', 
 		target='GL_ARRAY_BUFFER',
 	):
+		self.c_set_array( data )
 		self.data = data 
 		self.resolved = self.created = self.copied = False 
 		self.usage_spec = usage 
@@ -42,6 +43,9 @@ cdef class VBO:
 		self._I_ = None
 		from OpenGL.arrays.arraydatatype import ArrayDatatype
 		self.arrayType = ArrayDatatype
+	def __dealloc__( self ):
+		"""Deallocate our references"""
+		Py_XDECREF( self.data )
 	@property 
 	def implementation( self ):
 		"""Retrieve our implementation reference"""
@@ -61,6 +65,10 @@ cdef class VBO:
 		return value
 	def set_array( self, data ):
 		"""Update our entire array with new data"""
+		return self.c_set_array( data )
+	cdef c_set_array( self, data ):
+		Py_XDECREF( self.data )
+		Py_XINCREF( data )
 		self.data = data 
 		self.copied = False
 	def __setitem__( self, slice, array):
@@ -191,10 +199,10 @@ cdef class VBOOffset:
 	cdef public unsigned int offset
 	def __cinit__( self, VBO vbo, unsigned int offset ):
 		self.vbo = vbo 
-		Py_INCREF( vbo )
+		Py_XINCREF( vbo )
 		self.offset = offset 
 	def __dealloc__( self ):
-		Py_DECREF( self.vbo )
+		Py_XDECREF( self.vbo )
 		self.vbo = None
 		
 	def __getattr__( self, key ):
