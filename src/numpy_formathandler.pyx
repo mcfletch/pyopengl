@@ -16,7 +16,7 @@ cdef extern from "numpy/arrayobject.h":
 	int NPY_CARRAY
 	int NPY_FORCECAST
 	int PyArray_ISCARRAY( np.ndarray instance )
-	cdef np.ndarray PyArray_Zeros(int nd, np.Py_intptr_t dims, dtype, int fortran)
+	cdef np.ndarray PyArray_Zeros(int nd, np.Py_intptr_t* dims, np.dtype, int fortran)
 	cdef void import_array()
 
 cdef class NumpyHandler(FormatHandler):
@@ -73,7 +73,7 @@ cdef class NumpyHandler(FormatHandler):
 			)
 		cdef np.dtype typecode = self.typeCodeToDtype( typeCode )
 		Py_INCREF( typecode )
-		return PyArray_Zeros( c_dims.shape[0], <np.Py_intptr_t>c_dims.data, typecode, 0 )
+		return PyArray_Zeros( c_dims.shape[0], <np.Py_intptr_t *>c_dims.data, typecode, 0 )
 	cdef c_arraySize( self, object instance, object typeCode ):
 		"""Retrieve array size reference"""
 		return (<np.ndarray>self.c_check_array( instance )).size
