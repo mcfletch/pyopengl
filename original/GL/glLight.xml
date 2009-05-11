@@ -271,8 +271,8 @@
                         Neither integer nor floating-point values are clamped.
                     </para>
                     <para>
-                        The spot direction is transformed by the inverse of the modelview matrix when
-                        <function>glLight</function> is called (just as if it were a normal),
+                        The spot direction is transformed by the upper 3x3 of the modelview matrix when
+                        <function>glLight</function> is called,
                         and it is stored in eye coordinates.
                         It is significant only when <constant>GL_SPOT_CUTOFF</constant> is not 180,
                         which it is initially.

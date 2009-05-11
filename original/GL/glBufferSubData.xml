@@ -98,7 +98,7 @@
         <para>
             Clients must align data elements consistent with the requirements of the client
             platform, with an additional base-level requirement that an offset within a buffer to
-            a datum comprising <inlineequation><mml:math><mml:mi mathvariant="italic">N</mml:mi> be a 
+            a datum comprising <inlineequation><mml:math><mml:mi mathvariant="italic">N</mml:mi> bytes be a 
             multiple of <mml:mi mathvariant="italic">N</mml:mi></mml:math></inlineequation>.
         </para>
     </refsect1>
