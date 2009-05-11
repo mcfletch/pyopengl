@@ -121,7 +121,18 @@ checkouts = [
 		'https://kamaelia.svn.sourceforge.net/svnroot/kamaelia/trunk',
 		dirname = 'kamaelia',
 	),
-	
+	SVNSource(
+		'http://pyggel.googlecode.com/svn/trunk',
+		dirname = 'pyggel',
+	),
+	SVNSource(
+		'http://pygl2d.googlecode.com/svn/trunk',
+		dirname = 'pygl2d',
+	),
+	BZRSource(
+		'lp:~bebraw/scocca/devel',
+		dirname = 'scocca',
+	),
 	# pymol # not pyopengl AFAICS
 	# {LGPL} mirra # no online view of code AFAICS
 	# soccerbots http://soccerbots.googlecode.com/svn/
