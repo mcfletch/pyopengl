@@ -18,7 +18,7 @@
         <funcsynopsis>
             <funcprototype>
                 <funcdef>void <function>glFogCoordd</function></funcdef>
-                <paramdef>GLfloat <parameter>coord</parameter></paramdef>
+                <paramdef>GLdouble <parameter>coord</parameter></paramdef>
             </funcprototype>
         </funcsynopsis>
         <funcsynopsis>
@@ -44,7 +44,7 @@
         <funcsynopsis>
             <funcprototype>
                 <funcdef>void <function>glFogCoorddv</function></funcdef>
-                <paramdef>GLfloat * <parameter>coord</parameter></paramdef>
+                <paramdef>GLdouble * <parameter>coord</parameter></paramdef>
             </funcprototype>
         </funcsynopsis>
         <funcsynopsis>
