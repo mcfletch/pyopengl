@@ -76,3 +76,6 @@ span.parameter {
 .deprecation-description {
     margin-left: 30px;
 }
+.programlisting {
+	white-space: pre;
+}
