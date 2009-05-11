@@ -60,7 +60,7 @@ class BasePlatform( object ):
 		else:
 			return self.DEFAULT_FUNCTION_TYPE
 	
-	def errorChecking( self, func ):
+	def errorChecking( self, func, dll ):
 		"""Add error checking to the function if appropriate"""
 		from OpenGL import error
 		if top_level_module.ERROR_CHECKING:
@@ -120,7 +120,7 @@ class BasePlatform( object ):
 		func.__name__ = functionName
 		func.DLL = dll
 		func.extension = extension
-		func = self.wrapLogging( self.errorChecking( func ))
+		func = self.wrapLogging( self.errorChecking( func, dll ))
 		return func
 
 	def createBaseFunction( 
@@ -262,10 +262,7 @@ class _NullFunctionPointer( object ):
 		self.DLL = dll
 		self.argNames = argNames
 		self.argtypes = argTypes
-		if top_level_module.ERROR_CHECKING:
-			self.errcheck = error.glCheckError
-		else:
-			self.errcheck = None
+		self.errcheck = None
 		self.restype = resultType
 		self.extension = extension
 		self.doc = doc
