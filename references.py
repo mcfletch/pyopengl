@@ -63,7 +63,7 @@ VIEWCVS =  '%(baseURL)s/%(deltaPath)s?rev=HEAD&content-type=text/vnd.viewcvs-mar
 RAWSVN = '%(baseURL)s/%(deltaPath)s'
 VIEWSVN = '%(baseURL)s/%(deltaPath)s?view=markup'
 LOGGERHEAD = '%(baseURL)s/annotate/head:/%(deltaPath)s'
-
+GOOGLECODE = '%(baseURL)s/source/browse/trunk/%(deltaPath)s'
 
 class SampleSource( object ):
     """A source from which samples may be generated"""
@@ -170,6 +170,24 @@ def loadData():
             baseURL ='http://svn.gnome.org/viewvc/gnome-games/trunk/glchess',
             projectName='{GPL} GLChess',
             urlTemplate = VIEWSVN,
+        ),
+        SampleSource(
+            os.path.join( SAMPLES, 'pyggel' ),
+            baseURL ='http://code.google.com/p/pyggel',
+            projectName='{LGPL} Pyggel',
+            urlTemplate = GOOGLECODE,
+        ),
+        SampleSource(
+            os.path.join( SAMPLES, 'pygl2d' ),
+            baseURL ='http://code.google.com/p/pygl2d',
+            projectName='{LGPL} pygl2d',
+            urlTemplate = GOOGLECODE,
+        ),
+        SampleSource(
+            os.path.join(SAMPLES,'scocca'),
+            baseURL = 'http://bazaar.launchpad.net/~bebraw/scocca/devel',
+            projectName='{GPL} Scocca',
+            urlTemplate = LOGGERHEAD,
         ),
         SampleSource(
             os.path.join( SAMPLES, 'kamaelia' ),
