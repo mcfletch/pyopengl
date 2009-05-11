@@ -48,9 +48,9 @@ def display():
 size = (250,250)
 
 def reshape( *args ):
-	print 'reshape', args
 	global size 
 	size = args
+	glViewport( *( (0,0)+args) )
 	display()
 
 def ontimer( *args ):
