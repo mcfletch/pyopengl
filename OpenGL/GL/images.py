@@ -127,10 +127,12 @@ images.RANK_PACKINGS.update( {
 	4: [
 		(simple.glPixelStorei,simple.GL_PACK_SKIP_VOLUMES_SGIS, 0),
 		(simple.glPixelStorei,simple.GL_PACK_IMAGE_DEPTH_SGIS, 0),
+		(simple.glPixelStorei,simple.GL_PACK_ALIGNMENT, 1),
 	],
 	3: [
 		(simple.glPixelStorei,simple.GL_PACK_SKIP_IMAGES, 0),
 		(simple.glPixelStorei,simple.GL_PACK_IMAGE_HEIGHT, 0),
+		(simple.glPixelStorei,simple.GL_PACK_ALIGNMENT, 1),
 	],
 	2: [
 		(simple.glPixelStorei,simple.GL_PACK_ROW_LENGTH, 0),
@@ -139,6 +141,7 @@ images.RANK_PACKINGS.update( {
 	],
 	1: [
 		(simple.glPixelStorei,simple.GL_PACK_SKIP_PIXELS, 0),
+		(simple.glPixelStorei,simple.GL_PACK_ALIGNMENT, 1),
 	],
 } )
 
