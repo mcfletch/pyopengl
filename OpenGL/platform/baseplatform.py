@@ -64,7 +64,11 @@ class BasePlatform( object ):
 		"""Add error checking to the function if appropriate"""
 		from OpenGL import error
 		if top_level_module.ERROR_CHECKING:
-			func.errcheck = error.glCheckError
+			if dll not in (self.GLUT,):
+				#GLUT spec says error-checking is basically undefined...
+				# there *may* be GL errors on GLUT calls that e.g. render 
+				# geometry, but that's all basically "maybe" stuff...
+				func.errcheck = error.glCheckError
 		return func
 	def wrapLogging( self, func ):
 		"""Wrap function with logging operations if appropriate"""
