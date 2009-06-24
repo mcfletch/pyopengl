@@ -82,7 +82,7 @@ def idle():
 		import sys
 		sys.exit( 0 )
 
-def testFunction( name ):
+def printFunction( name ):
 	def onevent( *args ):
 		print '%s -> %s'%(name, ", ".join( [str(a) for a in args ]))
 	return onevent
@@ -100,16 +100,16 @@ if __name__ == "__main__":
 	print 'window', repr(window)
 	glutDisplayFunc(display)
 	glutReshapeFunc(reshape)
-	glutMouseFunc(testFunction( 'Mouse' ))
-	glutEntryFunc(testFunction( 'Entry' ))
-	glutKeyboardFunc( testFunction( 'Keyboard' ))
-	glutKeyboardUpFunc( testFunction( 'KeyboardUp' ))
-	glutMotionFunc( testFunction( 'Motion' ))
-	glutPassiveMotionFunc( testFunction( 'PassiveMotion' ))
-	glutVisibilityFunc( testFunction( 'Visibility' ))
-	glutWindowStatusFunc( testFunction( 'WindowStatus' ))
-	glutSpecialFunc( testFunction( 'Special' ))
-	glutSpecialUpFunc( testFunction( 'SpecialUp' ))
+	glutMouseFunc(printFunction( 'Mouse' ))
+	glutEntryFunc(printFunction( 'Entry' ))
+	glutKeyboardFunc( printFunction( 'Keyboard' ))
+	glutKeyboardUpFunc( printFunction( 'KeyboardUp' ))
+	glutMotionFunc( printFunction( 'Motion' ))
+	glutPassiveMotionFunc( printFunction( 'PassiveMotion' ))
+	glutVisibilityFunc( printFunction( 'Visibility' ))
+	glutWindowStatusFunc( printFunction( 'WindowStatus' ))
+	glutSpecialFunc( printFunction( 'Special' ))
+	glutSpecialUpFunc( printFunction( 'SpecialUp' ))
 	glutTimerFunc( 1000, ontimer, 23 )
 	
 	glutIdleFunc( idle )
