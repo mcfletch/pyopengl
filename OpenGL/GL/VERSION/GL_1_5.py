@@ -58,16 +58,26 @@ def glGetBufferPointerv( baseOperation, target, pname, params=None ):
 	else:
 		return baseOperation( target, pname, params )
 
-for func in ('glGenQueries','glDeleteQueries'):
-	globals()[func] = wrapper.wrapper( 
-		globals()[func],
-	).setPyConverter('n').setCConverter(
-		'n', arrays.AsArrayTypedSize( 'ids', arrays.GLuintArray ),
-	).setCConverter(
-		'ids', arrays.asArrayType(arrays.GLuintArray),
-	).setReturnValues(
-		wrapper.returnPyArgument( 'ids' )
-	)
+@lazy( glDeleteQueries )
+def glDeleteQueries( baseOperation, n, ids=None ):
+	if ids is None:
+		ids = arrays.GLuintArray.asArray( ids )
+		n = arrays.GLuintArray.arraySize( ids )
+	else:
+		ids = arrays.GLuintArray.asArray( ids )
+	return baseOperation( n,ids )
+@lazy( glGenQueries )
+def glGenQueries( baseOperation, n, ids=None ):
+	"""Generate n queries, if ids is None, is allocated
+	
+	returns array of ids
+	"""
+	if ids is None:
+		ids = arrays.GLuintArray.zeros( (n,))
+	else:
+		ids = arrays.GLuintArray.asArray( ids )
+	baseOperation( n, ids )
+	return ids
 
 for func in (
 	'glGetQueryiv','glGetQueryObjectiv','glGetQueryObjectuiv',
