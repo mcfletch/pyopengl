@@ -18,7 +18,6 @@
   
   
   <meta name="author" content="Mike C. Fletcher"></head>
-
 <body>
 
 
@@ -27,8 +26,11 @@
 
 <p class="introduction">This document describes the OpenGL 3.x (and
 above) deprecation model and attempts to provide advice on how to
-migrate your (PyOpenGL) code to be OpenGL 3.1 compatible or write code
-which is "legacy free" or "forward compatible".</p>
+migrate your (PyOpenGL) code to be OpenGL 3.1&nbsp;"legacy free" or "forward compatible".</p><p class="introduction">Note,
+however, that most vendors have committed to providing
+legacy-compatible drivers for all of their products, so it is unlikely
+that you need to rewrite old code, though you should consider using
+legacy-free operations for new code.</p>
 
 
 
@@ -46,26 +48,28 @@ implement the "Longs Peak" proposal in OpenGL 3.0, instead introducing
 just a set of deprecations which includes almost all of the original
 OpenGL API, including most entry points that OpenGL users have seen as
 "characterizing" the API such as those related to individual vertices
-and display-list behaviour. &nbsp;For OpenGL 3.0, these APIs are still
-available, but the intent is that with OpenGL 3.1 the APIs will no
-longer be available at all.</p><p>The deprecated APIs are often
+and display-list behaviour. &nbsp;With OpenGL 3.1+ these APIs will only be available upon loading of the legacy extension.</p><p>The
+deprecated APIs are often
 referred to as "legacy" APIs, while "forward compatible" or "legacy
 free" is used to describe those APIs which are part of the OpenGL 3.1
-subset. &nbsp;During the OpenGL 3.0 to 3.1 period you will likely need
-to convert your PyOpenGL code to use forward compatible APIs while
-still providing "legacy" support using the deprecated APIs.</p><p>Currently
-(March, 2009) almost all PyOpenGL code uses the "legacy" APIs, as such
-if you have a PyOpenGL code-base you will likely need to do some work
-to rewrite your code using forward compatible entry points.</p><p>For more background, you may wish to view the <a href="http://us.pycon.org/2009/conference/schedule/event/94/">PyCon 2009 presentation</a> on the topic.</p><h2>Changes Required</h2><p>The biggest changes you will likely need to accomplish in order to be OpenGL 3.1 ready:</p><ul><li>If
+subset. &nbsp;You should not be using legacy APIs in new code, but as
+noted above, the major vendors have committed to supporting the legacy
+APIs for the foreseeable future.</p><p>For more background, you may wish to view the <a href="http://us.pycon.org/2009/conference/schedule/event/94/">PyCon 2009 presentation</a> on the topic (note, however, that this was before the vendors committed to supporting the legacy API).</p><h2>Changes Required</h2><p>The biggest changes you will likely need to accomplish in order to be legacy free:</p><ul><li>If
 you have any per-vertex rendering code, you will need to convert it to
 array-based rendering. &nbsp;You can safely do this for all current
 video cards, as array-based rendering has been standard since OpenGL 1.1</li><ul><li>Once
 you have done this, it is a trivial change to begin using Vertex Buffer
 Objects (VBOs), which usage is required by OpenGL 3.1 and provides a
-significant performance win for most non-streaming array usage.</li></ul><li>If you use display lists, you will need to stop using them and convert to array-based geometry</li><li>If you are using the individual quad anti-pattern for fonts/sprites, you will need to recode, likely as arrays/shaders</li><li>You
-will need to calculate your own transformation matrices. &nbsp;We may
+significant performance win for most non-streaming array usage.</li><li>The
+actual change to arrays will normally slow down display-list-based
+code, but when then converted to VBO usage the performance will
+normally be better than display-list performance</li></ul><li>If you use display lists, you will need to stop using them and convert to array-based geometry</li><li>If you are using the individual quad anti-pattern for fonts/sprites, you will need to recode, likely as arrays/shaders</li><ul><li>This is the pattern where you push a matrix, transform, draw a quad, pop the matrix (repeating for each quad)</li><li>Use a buffer, a per-vertex set of offsets (and a shader to apply textures to them if you can)</li><li>Use
+a "texture atlas" to pack your textures into a single OpenGL texture
+and use up to maximum-textures enabled on the back-end so that you can
+maximize the number of textures being drawn per-call</li></ul><li>You
+will need to calculate your own transformation matrices.</li><ul><li>We may
 wind up providing a C extension to make this more efficient for
-PyOpenGL code.</li><li>You will need to begin using shaders, and eventually convert to only using shaders (rather than legacy OpenGL shading/texturing)</li></ul><h2>Tools</h2>
+PyOpenGL code.</li></ul><li>You will need to begin using shaders, and eventually convert to only using shaders (rather than legacy OpenGL shading/texturing)</li></ul><h2>Tools</h2>
 
 <p>PyOpenGL includes a flag OpenGL.FORWARD_COMPATIBLE_ONLY, which this
 flag is set to True before importing OpenGL.GL then the OpenGL.GL entry
@@ -75,8 +79,7 @@ would normally only set the flag once you've finished what you believe
 to be your whole conversion, to check that you've cleaned up all of the
 entry points.</p><p class="technical">Note that this flag does not attempt to disable GLU, GLUT, GLE or GLX
 functions which are deprecated, as we don't currently know which of
-those entry points will be deprecated and which will be re-implemented
-as OpenGL 3.1-compatible code.</p><p class="footer"><a href="index.html"><img src="../images/doc_logo_icon.gif" title="" alt="Documentation" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>&nbsp;<a href="http://pyopengl.sourceforge.net/"><img alt="PyOpenGL" src="../images/icon2.jpg" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>
+those entry points will be deprecated and which will be re-implemented.</p><p class="footer"><a href="index.html"><img src="../images/doc_logo_icon.gif" title="" alt="Documentation" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>&nbsp;<a href="http://pyopengl.sourceforge.net/"><img alt="PyOpenGL" src="../images/icon2.jpg" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>
 A
 SourceForge Open-Source project: <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1" style="border: 0px solid ; width: 88px; height: 31px;" alt="SourceForge" title="" align="middle"></a></p>
 
