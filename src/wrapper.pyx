@@ -57,10 +57,14 @@ cdef class CArgCalculatorElement:
 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
 		return self.c_call( pyArgs )
 	cdef object c_call( self, tuple pyArgs ):
-		if self.doCAPI:
-			return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
-		elif self.callable:
-			return self.converter( pyArgs, self.index, self.wrapper )
+		try:
+			if self.doCAPI:
+				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+			elif self.callable:
+				return self.converter.__call__( pyArgs, self.index, self.wrapper )
+		except Exception, err:
+			err.args += ( self.index, self.wrapper )
+			raise
 		return self.converter
 
 cdef class CArgCalculator:
@@ -72,7 +76,7 @@ cdef class CArgCalculator:
 		cConverters
 	):
 		self.mapping = [
-			CArgCalculatorElement(self,i,converter)
+			CArgCalculatorElement(wrapper,i,converter)
 			for (i,converter) in enumerate( cConverters )
 		]
 	def __call__( self, tuple pyArgs ):

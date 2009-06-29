@@ -8,4 +8,3 @@ try:
 	HAVE_FREEGLUT = False
 except ImportError, err:
 	HAVE_FREEGLUT = True
-

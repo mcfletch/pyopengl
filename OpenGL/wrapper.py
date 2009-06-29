@@ -7,12 +7,21 @@ from OpenGL.converters import DefaultCConverter
 from OpenGL.converters import returnCArgument,returnPyArgument
 log = logging.getLogger( 'OpenGL.wrapper' )
 try:
-	from OpenGL_accelerate.wrapper import (
-		Wrapper as cWrapper,
-		CArgCalculator,
-		PyArgCalculator,
-		CArgumentCalculator,
-	)
+	import OpenGL_accelerate
+	needed_version = (3,0,1)
+	if OpenGL_accelerate.__version_tuple__ <  needed_version:
+		log.warn( """Incompatible version of OpenGL_accelerate found, need at least %s found %s""", needed_version, OpenGL_accelerate.__version_tuple__)
+		raise ImportError( """Old version of OpenGL_accelerate""" )
+	try:
+		from OpenGL_accelerate.wrapper import (
+			Wrapper as cWrapper,
+			CArgCalculator,
+			PyArgCalculator,
+			CArgumentCalculator,
+		)
+	except ImportError, err:
+		log.error( """OpenGL_accelerate seems to be installed, but unable to import expected wrapper entry points!""" )
+		raise 
 except ImportError, err:
 	cWrapper = None 
 NULL = object()
