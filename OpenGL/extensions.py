@@ -3,6 +3,8 @@
 This module provides the tools required to check whether
 an extension is available
 """
+import logging 
+log = logging.getLogger( 'OpenGL.extensions' )
 VERSION_PREFIX = 'GL_VERSION_GL_'
 CURRENT_GL_VERSION = ''
 AVAILABLE_GL_EXTENSIONS = []
@@ -16,6 +18,7 @@ def hasGLExtension( specifier ):
 		from OpenGL.GL import glGetString, GL_VERSION
 		if not CURRENT_GL_VERSION:
 			new = glGetString( GL_VERSION )
+			log.info( 'OpenGL Version: %s', new )
 			if new:
 				CURRENT_GL_VERSION = [
 					int(x) for x in new.split(' ',1)[0].split( '.' )
@@ -31,7 +34,13 @@ def hasGLExtension( specifier ):
 		from OpenGL.GL import glGetString, GL_EXTENSIONS
 		if not AVAILABLE_GL_EXTENSIONS:
 			AVAILABLE_GL_EXTENSIONS[:] = glGetString( GL_EXTENSIONS ).split()
-		return specifier in AVAILABLE_GL_EXTENSIONS
+		result = specifier in AVAILABLE_GL_EXTENSIONS
+		log.info( 
+			'GL Extension %s %s', 
+			specifier,
+			['unavailable','available'][bool(result)] 
+		)
+		return result 
 
 def hasGLUExtension( specifier ):
 	"""Given a string specifier, check for extension being available"""
@@ -50,6 +59,11 @@ class _Alternate( object ):
 	def __nonzero__( self ):
 		for alternate in self._alternatives:
 			if alternate:
+				log.info(
+					"""Chose alternate: %s from %s""",
+					alternate.__name__,
+					", ".join([x.__name__ for x in self._alternatives])
+				)
 				self.__class__.implementation = alternate
 				return True 
 		return False
@@ -57,6 +71,11 @@ class _Alternate( object ):
 		"""Call, doing a late lookup and bind to find an implementation"""
 		for alternate in self._alternatives:
 			if alternate:
+				log.info(
+					"""Chose alternate: %s from %s""",
+					alternate.__name__,
+					", ".join([x.__name__ for x in self._alternatives])
+				)
 				self.__class__.implementation = alternate
 				self.__class__.__call__ = alternate.__call__
 				return self( *args, **named )
