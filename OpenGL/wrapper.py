@@ -1,6 +1,6 @@
 """The wrapping code for providing natural ctypes-based OpenGL interface"""
 import ctypes, logging
-from OpenGL import platform, error, STORE_POINTERS, ERROR_ON_COPY
+from OpenGL import platform, error, STORE_POINTERS, ERROR_ON_COPY, SIZE_1_ARRAY_UNPACK
 glGetError = platform.OpenGL.glGetError
 from OpenGL import converters
 from OpenGL.converters import DefaultCConverter
@@ -119,7 +119,7 @@ class Wrapper( object ):
 			))
 	def setOutput( 
 		self, outArg, size=(1,), pnameArg=None, 
-		arrayType=None, oldStyleReturn=True,
+		arrayType=None, oldStyleReturn=SIZE_1_ARRAY_UNPACK,
 	):
 		"""Set the given argName to be an output array
 		

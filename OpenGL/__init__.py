@@ -131,6 +131,11 @@ with these sets of flags.
 		entry points.  Note that this will generally break most 
 		PyOpenGL code that hasn't been explicitly made "legacy free"
 		via a significant rewrite.
+	
+	SIZE_1_ARRAY_UNPACK -- if True, unpack size-1 arrays to be 
+		scalar values, as done in PyOpenGL 1.5 -> 3.0.0, that is,
+		if a glGenList( 1 ) is done, return a uint rather than 
+		an array of uints.
 """
 from OpenGL.version import __version__
 
@@ -141,6 +146,7 @@ ARRAY_SIZE_CHECKING = True
 STORE_POINTERS = True
 WARN_ON_FORMAT_UNAVAILABLE = False
 FORWARD_COMPATIBLE_ONLY = False
+SIZE_1_ARRAY_UNPACK = True
 
 FULL_LOGGING = False 
 ALLOW_NUMPY_SCALARS = False
