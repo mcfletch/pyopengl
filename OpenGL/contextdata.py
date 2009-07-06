@@ -9,6 +9,14 @@ to the library's representation of the GL context to
 call the cleanup function.  That means some per-GUI 
 library code in OpenGL (or the library), but it gives 
 us very natural operations within OpenGL.
+
+Note: you can entirely disable use of this module by 
+setting:
+
+	OpenGL.ERROR_ON_COPY = True 
+	OpenGL.STORE_POINTERS = False 
+		
+before importing OpenGL functionality.
 """
 from OpenGL import platform
 storedPointers = {
