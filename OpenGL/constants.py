@@ -1,4 +1,8 @@
-"""OpenGL-wide constant types (not OpenGL.GL-specific"""
+"""OpenGL-wide constant types (not OpenGL.GL-specific)
+
+These are basically the fundamental data-types that OpenGL 
+uses (note, doesn't include the OpenGL-ES types!)
+"""
 import ctypes
 from OpenGL.constant import Constant
 
