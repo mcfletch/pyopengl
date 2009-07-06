@@ -37,6 +37,7 @@ if __name__ == "__main__":
 		'OpenGL',
 		'ctypes',
 		'__builtin__',
+		'OpenGL_accelerate',
 	]	
 	pydoc2.PackageDocumentationGenerator(
 		baseModules = modules,
