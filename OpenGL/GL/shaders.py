@@ -1,4 +1,10 @@
-"""Convenience module providing common shader entry points with alternate implementations"""
+"""Convenience module providing common shader entry points
+
+The point of this module is to allow client code to use
+OpenGL 2.x style names to reference shader-related operations
+even if the local hardware only supports ARB extension-based 
+shader rendering.
+"""
 import logging 
 logging.basicConfig()
 log = logging.getLogger( 'OpenGL.GL.shaders' )
@@ -11,6 +17,7 @@ __all__ = [
 	'glDeleteShader',
 	'glGetProgramInfoLog',
 	'glGetShaderInfoLog',
+	# automatically added stuff here...
 ]
 
 def _alt( base, name ):
