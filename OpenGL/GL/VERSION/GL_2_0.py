@@ -58,7 +58,7 @@ for size in (1,2,3,4):
 			'value',
 		)
 		del format, arrayType
-	del size
+	del size,name
 
 @lazy( glGetShaderiv )
 def glGetShaderiv( baseOperation, shader, pname ):
