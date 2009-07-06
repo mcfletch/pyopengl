@@ -1,6 +1,16 @@
+"""Simplistic wrapper decorator for Python-coded wrappers"""
 
 def lazy( baseFunction ):
 	"""Produce a lazy-binding decorator that uses baseFunction
+	
+	Allows simple implementation of wrappers where the 
+	whole of the wrapper can be summed up as do 1 thing 
+	then call base function with the cleaned up result.
+	
+	Passes baseFunction in as the first argument of the 
+	wrapped function, all other parameters are passed 
+	unchanged.  The wrapper class created has __nonzero__ 
+	and similar common wrapper entry points defined.
 	"""
 	def wrap( wrapper ):
 		"""Wrap wrapper with baseFunction"""
@@ -11,8 +21,14 @@ def lazy( baseFunction ):
 				return baseFunction( *args, **named )
 		def __nonzero__( self ):
 			return bool( baseFunction )
+		def __repr__( self ):
+			return '%s( %r )'%(
+				'OpenGL.lazywrapper.lazy',
+				baseFunction.__name__,
+			)
 		_with_wrapper = type( wrapper.__name__, (object,), {
 			'__call__': __call__,
+			'__repr__': __repr__,
 			'__doc__': wrapper.__doc__,
 			'__nonzero__': __nonzero__,
 			'restype': getattr(wrapper, 'restype',getattr(baseFunction,'restype',None)),
