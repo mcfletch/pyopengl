@@ -144,9 +144,11 @@ class ListHandler( formathandler.FormatHandler ):
 				return result
 		else:
 			return arrayType( value )
+	@err_on_copy
 	def unitSize( self, value, typeCode=None ):
 		"""Determine unit size of an array (if possible)"""
 		return tuple(self.dims(value))[-1]
+	@err_on_copy
 	def dimensions( self, value, typeCode=None ):
 		"""Determine dimensions of the passed array value (if possible)"""
 		return tuple( self.dims(value) )
