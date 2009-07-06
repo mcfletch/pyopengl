@@ -1,3 +1,4 @@
+"""Cython-coded implementation of wrapper module"""
 import ctypes
 from OpenGL import error
 
@@ -206,6 +207,12 @@ cdef class CallFuncPyConverter( pyArgConverter ):
 	cdef object c_call( self, object incoming, object function, tuple arguments ):
 		"""Call our function on incoming"""
 		return self.function( incoming )
+	def __repr__( self ):
+		"""Have a useful representation"""
+		return '%s( %r )'%(
+			self.__class__.__name__,
+			self.function,
+		)
 cdef class DefaultCConverter(cArgConverter):
 	cdef int index
 	def __init__( self, index ):
@@ -220,6 +227,11 @@ cdef class DefaultCConverter(cArgConverter):
 				self.index,
 				len(pyArgs )
 			))
+	def __repr__( self ):
+		return """%s( %r )"""%(
+			self.__class__.__name__,
+			self.index,
+		)
 
 cdef class Wrapper:
 	"""C-coded most-generic form of the wrapper's core function
@@ -339,6 +351,11 @@ cdef class getPyArgsName(cArgConverter):
 		self.index = wrapper.pyArgIndex( self.name )
 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
 		return pyArgs[ self.index ]
+	def __repr__( self ):
+		return """%s( %r )"""%(
+			self.__class__.__name__,
+			self.name,
+		)
 
 cdef class returnPyArgument(returnConverter):
 	"""ReturnValues returning the named pyArgs value"""
@@ -351,6 +368,11 @@ cdef class returnPyArgument(returnConverter):
 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
 		"""Retrieve pyArgs[ self.index ]"""
 		return pyArgs[self.index]
+	def __repr__( self ):
+		return """%s( %r )"""%(
+			self.__class__.__name__,
+			self.name,
+		)
 cdef class returnPyArgumentIndex(returnConverter):
 	cdef public unsigned int index
 	def __init__( self, int index ):
@@ -360,6 +382,11 @@ cdef class returnPyArgumentIndex(returnConverter):
 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
 		"""Retrieve pyArgs[ self.index ]"""
 		return pyArgs[self.index]
+	def __repr__( self ):
+		return """%s( %r )"""%(
+			self.__class__.__name__,
+			self.index,
+		)
 cdef class returnCArgument(returnConverter):
 	"""ReturnValues returning the named pyArgs value"""
 	cdef public unsigned int index
@@ -371,3 +398,9 @@ cdef class returnCArgument(returnConverter):
 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
 		"""Retrieve cArgs[ self.index ]"""
 		return cArgs[self.index]
+	def __repr__( self ):
+		return """%s( %r )"""%(
+			self.__class__.__name__,
+			self.name,
+		)
+	

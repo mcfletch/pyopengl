@@ -1,3 +1,4 @@
+"""Cython-coded Array-handling accelerator module"""
 import ctypes
 import OpenGL
 from OpenGL import constants, plugins

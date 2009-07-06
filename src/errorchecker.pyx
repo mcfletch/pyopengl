@@ -1,3 +1,5 @@
+"""Cython-coded GL-error-check module"""
+
 cdef class _ErrorChecker:
 	"""Global error-checking object
 	

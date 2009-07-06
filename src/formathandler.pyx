@@ -1,3 +1,5 @@
+"""Cython-coded base FormatHandler implementation"""
+
 cdef class FormatHandler:
 	"""PyOpenGL "Format" plugin implementation
 	
