@@ -1,4 +1,4 @@
-"""Fix silly lack-of-API problems in logging module
+"""Fix missing-API problems in logging module (circa Python 2.3)
 
 Adds constants to the log objects.
 Adds getException(err) to log objects to retrieve 
@@ -13,16 +13,26 @@ import traceback, logging
 getLog = logging.getLogger
 from OpenGL import ERROR_LOGGING, FULL_LOGGING
 
+if not hasattr( traceback, 'format_exc' ):
+	# Python 2.3 and below... do we care any more?
+	def format_exc( limit ):
+		file = StringIO()
+		try:
+			traceback.print_exc( limit=10, file = file )
+			exception = file.getvalue()
+		finally:
+			file.close()
+		return exception
+else:
+	format_exc = traceback.format_exc
+
 def getException(error):
 	"""Get formatted traceback from exception"""
-	exception = str(error)
-	file = StringIO()
 	try:
-		traceback.print_exc( limit=10, file = file )
-		exception = file.getvalue()
-	finally:
-		file.close()
-	return exception
+		return format_exc( limit=10 )
+	except Exception, err:
+		return str( error )
+
 logging.Logger.getException = staticmethod( getException )
 logging.Logger.err = logging.Logger.error
 logging.Logger.DEBUG = logging.DEBUG 
