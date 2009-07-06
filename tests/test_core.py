@@ -756,6 +756,15 @@ class Tests( unittest.TestCase ):
 				[],
 				GL_MAP1_VERTEX_3,
 		)
+	def test_get_version( self ):
+		from OpenGL.extensions import getGLVersion
+		version = getGLVersion()
+		if version >= [2,0]:
+			assert glShaderSource
+			assert glUniform1f
+		else:
+			assert not glShaderSource
+			assert not glUniform1f
 		
 if __name__ == "__main__":
 	unittest.main()

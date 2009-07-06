@@ -6,30 +6,42 @@ an extension is available
 import logging 
 log = logging.getLogger( 'OpenGL.extensions' )
 VERSION_PREFIX = 'GL_VERSION_GL_'
-CURRENT_GL_VERSION = ''
+CURRENT_GL_VERSION = None
 AVAILABLE_GL_EXTENSIONS = []
 AVAILABLE_GLU_EXTENSIONS = []
 
+def getGLVersion( ):
+	"""Retrieve 2-int declaration of major/minor GL version
+	
+	returns [int(major),int(minor)] or False if not loaded
+	"""
+	global CURRENT_GL_VERSION
+	if not CURRENT_GL_VERSION:
+		from OpenGL.GL import glGetString, GL_VERSION
+		new = glGetString( GL_VERSION )
+		log.info( 'OpenGL Version: %s', new )
+		if new:
+			CURRENT_GL_VERSION = [
+				int(x) for x in new.split(' ',1)[0].split( '.' )
+			]
+		else:
+			return False # not yet loaded/supported
+	return CURRENT_GL_VERSION
+	
+
 def hasGLExtension( specifier ):
 	"""Given a string specifier, check for extension being available"""
-	global AVAILABLE_GL_EXTENSIONS, CURRENT_GL_VERSION
+	global AVAILABLE_GL_EXTENSIONS
 	specifier = specifier.replace('.','_')
 	if specifier.startswith( VERSION_PREFIX ):
-		from OpenGL.GL import glGetString, GL_VERSION
-		if not CURRENT_GL_VERSION:
-			new = glGetString( GL_VERSION )
-			log.info( 'OpenGL Version: %s', new )
-			if new:
-				CURRENT_GL_VERSION = [
-					int(x) for x in new.split(' ',1)[0].split( '.' )
-				]
-			else:
-				return False # not yet loaded/supported
 		specifier = [
 			int(x) 
 			for x in specifier[ len(VERSION_PREFIX):].split('_')
 		]
-		return specifier <= CURRENT_GL_VERSION
+		version = getGLVersion()
+		if not version:
+			return version
+		return specifier <= version
 	else:
 		from OpenGL.GL import glGetString, GL_EXTENSIONS
 		if not AVAILABLE_GL_EXTENSIONS:
