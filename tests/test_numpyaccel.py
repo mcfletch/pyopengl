@@ -1,6 +1,6 @@
 import unittest, numpy, ctypes
 from OpenGL_accelerate import numpy_formathandler as npf
-from OpenGL import error, constants
+from OpenGL import error, constants, ERROR_ON_COPY
 
 class TestAccelNumpy( unittest.TestCase ):
 	def setUp( self ):
@@ -27,13 +27,21 @@ class TestAccelNumpy( unittest.TestCase ):
 	def test_asArray( self ):
 		p = self.handler.asArray( self.array )
 		assert p is self.array 
-	def test_asArrayConvert( self ):
-		p = self.handler.asArray( self.array, constants.GL_DOUBLE )
-		assert p is not self.array 
-		assert p.dtype == numpy.float64
-		p = self.handler.asArray( self.array, 'd' )
-		assert p is not self.array 
-		assert p.dtype == numpy.float64
+	if ERROR_ON_COPY:
+		def test_asArrayConvert( self ):
+			self.failUnlessRaises(
+				error.CopyError,
+				self.handler.asArray,
+					self.array, constants.GL_DOUBLE 
+			)
+	else:
+		def test_asArrayConvert( self ):
+			p = self.handler.asArray( self.array, constants.GL_DOUBLE )
+			assert p is not self.array 
+			assert p.dtype == numpy.float64
+			p = self.handler.asArray( self.array, 'd' )
+			assert p is not self.array 
+			assert p.dtype == numpy.float64
 	def test_asArrayCopy( self ):
 		a2 = self.array[:,0]
 		assert not a2.flags.contiguous 

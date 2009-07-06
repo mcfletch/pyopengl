@@ -77,19 +77,23 @@ class Tests( unittest.TestCase ):
 	def test_ctypes_array( self ):
 		color = (GLfloat * 3)( 0,1,0 )
 		glColor3fv( color )
-		
-	def test_evaluator( self ):
-		"""Test whether the evaluator functions work"""
-		glDisable(GL_CULL_FACE)
-		glEnable(GL_MAP2_VERTEX_3)
-		glEnable(GL_DEPTH_TEST)
-		glEnable(GL_NORMALIZE)
-		glMap2f(GL_MAP2_VERTEX_3, 0, 1, 0, 1, self.evaluator_ctrlpoints)
-		glMapGrid2f(20, 0.0, 1.0, 20, 0.0, 1.0)
-		glShadeModel(GL_FLAT)
-		glEvalMesh2(GL_FILL, 0, 20, 0, 20)
-		glTranslatef( 0,0.001, 0 )
-		glEvalMesh2(GL_POINT, 0, 20, 0, 20)
+	if (not OpenGL.ERROR_ON_COPY) or array:	
+		def test_evaluator( self ):
+			"""Test whether the evaluator functions work"""
+			glDisable(GL_CULL_FACE)
+			glEnable(GL_MAP2_VERTEX_3)
+			glEnable(GL_DEPTH_TEST)
+			glEnable(GL_NORMALIZE)
+			if array:
+				ctrl_points = array( self.evaluator_ctrlpoints,'f')
+			else:
+				ctrl_points = self.evaluator_ctrlpoints
+			glMap2f(GL_MAP2_VERTEX_3, 0, 1, 0, 1, ctrl_points)
+			glMapGrid2f(20, 0.0, 1.0, 20, 0.0, 1.0)
+			glShadeModel(GL_FLAT)
+			glEvalMesh2(GL_FILL, 0, 20, 0, 20)
+			glTranslatef( 0,0.001, 0 )
+			glEvalMesh2(GL_POINT, 0, 20, 0, 20)
 	def test_nurbs_raw( self ):
 		"""Test nurbs rendering using raw API calls"""
 		from OpenGL.raw import GLU 
@@ -221,161 +225,17 @@ class Tests( unittest.TestCase ):
 		quad = gluNewQuadric()
 		glColor3f( 1,0, 0 )
 		gluSphere( quad, 1.0, 16, 16 )
-	def test_simple( self ):
-		"""Test for simple vertex-based drawing"""
-		glDisable( GL_LIGHTING )
-		glBegin( GL_TRIANGLES )
-		try:
-			try:
-				glVertex3f( 0.,1.,0. )
-			except Exception, err:
-				traceback.print_exc()
-			glVertex3fv( [-1,0,0] )
-			glVertex3dv( [1,0,0] )
-			try:
-				glVertex3dv( [1,0] )
-			except ValueError, err:
-				#Got expected value error (good)
-				pass
-			else:
-				raise RuntimeError(
-					"""Should have raised a value error on passing 2-element array to 3-element function!""",
-				)
-		finally:
-			glEnd()
-		a = glGenTextures( 1 )
-		assert a
-		b = glGenTextures( 2 )
-		assert len(b) == 2
-	def test_arbwindowpos( self ):
-		"""Test the ARB window_pos extension will load if available"""
-		from OpenGL.GL.ARB.window_pos import glWindowPos2dARB
-		if glWindowPos2dARB:
-			glWindowPos2dARB( 0.0, 3.0 )
-	def test_getstring( self ):
-		assert glGetString( GL_EXTENSIONS )
-	def test_pointers( self ):
-		"""Test that basic pointer functions work"""
-		vertex = constants.GLdouble * 3
-		vArray =  vertex * 2
-		glVertexPointerd( [[2,3,4,5],[2,3,4,5]] )
-		glVertexPointeri( ([2,3,4,5],[2,3,4,5]) )
-		glVertexPointers( [[2,3,4,5],[2,3,4,5]] )
-		glVertexPointerd( vArray( vertex(2,3,4),vertex(2,3,4) ) )
-		myVector = vArray( vertex(2,3,4),vertex(2,3,4) )
-		glVertexPointer(
-			3,
-			GL_DOUBLE,
-			0,
-			ctypes.cast( myVector, ctypes.POINTER(constants.GLdouble)) 
-		)
-		
-		repr(glVertexPointerb( [[2,3],[4,5]] ))
-		glVertexPointerf( [[2,3],[4,5]] )
-		assert arrays.ArrayDatatype.dataPointer( None ) == None
-		glVertexPointerf( None )
-		
-		glNormalPointerd( [[2,3,4],[2,3,4]] )
-		glNormalPointerd( None )
-	
-		glTexCoordPointerd( [[2,3,4],[2,3,4]] )
-		glTexCoordPointerd( None )
-	
-		glColorPointerd( [[2,3,4],[2,3,4]] )
-		glColorPointerd( None )
-	
-		glEdgeFlagPointerb( [0,1,0,0,1,0] )
-		glEdgeFlagPointerb( None )
-	
-		glIndexPointerd( [0,1,0,0,1,0] )
-		glIndexPointerd( None )
-		
-		glColor4fv( [0,0,0,1] )
-		
-		# string data-types...
-		import struct
-		s = struct.pack( '>iiii', 2,3,4,5 ) * 2
-		result = glVertexPointer( 4,GL_INT,0,s )
-	TESS_TEST_SHAPE = [
-			[191,   0],
-			[ 191, 1480],
-			[ 191, 1480],
-			[ 401, 1480],
-			[ 401, 1480],
-			[401,   856],
-			[401,   856],
-			[1105,  856],
-			[1105,  856],
-			[1105, 1480],
-			[1105, 1480],
-			[1315, 1480],
-			[1315, 1480],
-			[1315,    0],
-			[1315,    0],
-			[1105,    0],
-			[1105,    0],
-			[1105,  699],
-			[1105,  699],
-			[401,   699],
-			[401,   699],
-			[401,     0],
-			[401,     0],
-			[191,     0],
-			[191,     0],
-			[191,     0],
-		]
-	def test_tess(self ):
-		"""Test that tessellation works"""
-		glDisable( GL_LIGHTING )
-		glColor3f( 1,1,1 )
-		glNormal3f( 0,0,1 )
-		def begin( *args ):
-			return glBegin( *args )
-		def vertex( *args ):
-			return glVertex3dv( *args )
-		def end( *args ):
-			return glEnd( *args )
-		def combine( coords, vertex_data, weight):
-			return coords
-		tobj = gluNewTess()
-		gluTessCallback(tobj, GLU_TESS_BEGIN, begin);
-		gluTessCallback(tobj, GLU_TESS_VERTEX, vertex); 
-		gluTessCallback(tobj, GLU_TESS_END, end); 
-		gluTessCallback(tobj, GLU_TESS_COMBINE, combine); 
-		gluTessBeginPolygon(tobj, None); 
-		gluTessBeginContour(tobj);
-		for (x,y) in self.TESS_TEST_SHAPE:
-			vert = (x,y,0.0)
-			gluTessVertex(tobj, vert, vert);
-		gluTessEndContour(tobj); 
-		gluTessEndPolygon(tobj);
-	def test_texture( self ):
-		"""Test texture (requires OpenGLContext and PIL)"""
-		try:
-			from OpenGLContext import texture
-			import Image 
-			from OpenGL.GLUT import glutSolidTeapot
-		except ImportError, err:
-			pass
-		else:
-			glEnable( GL_TEXTURE_2D )
-			ourTexture = texture.Texture(
-				Image.open( 'yingyang.png' )
-			)
-			ourTexture()
-			
-			glEnable( GL_LIGHTING )
-			glEnable( GL_LIGHT0 )
+	if not OpenGL.ERROR_ON_COPY:
+		def test_simple( self ):
+			"""Test for simple vertex-based drawing"""
+			glDisable( GL_LIGHTING )
 			glBegin( GL_TRIANGLES )
 			try:
 				try:
-					glTexCoord2f( .5, 1 )
 					glVertex3f( 0.,1.,0. )
 				except Exception, err:
 					traceback.print_exc()
-				glTexCoord2f( 0, 0 )
 				glVertex3fv( [-1,0,0] )
-				glTexCoord2f( 1, 0 )
 				glVertex3dv( [1,0,0] )
 				try:
 					glVertex3dv( [1,0] )
@@ -388,6 +248,152 @@ class Tests( unittest.TestCase ):
 					)
 			finally:
 				glEnd()
+			a = glGenTextures( 1 )
+			assert a
+			b = glGenTextures( 2 )
+			assert len(b) == 2
+	def test_arbwindowpos( self ):
+		"""Test the ARB window_pos extension will load if available"""
+		from OpenGL.GL.ARB.window_pos import glWindowPos2dARB
+		if glWindowPos2dARB:
+			glWindowPos2dARB( 0.0, 3.0 )
+	def test_getstring( self ):
+		assert glGetString( GL_EXTENSIONS )
+	if not OpenGL.ERROR_ON_COPY:
+		def test_pointers( self ):
+			"""Test that basic pointer functions work"""
+			vertex = constants.GLdouble * 3
+			vArray =  vertex * 2
+			glVertexPointerd( [[2,3,4,5],[2,3,4,5]] )
+			glVertexPointeri( ([2,3,4,5],[2,3,4,5]) )
+			glVertexPointers( [[2,3,4,5],[2,3,4,5]] )
+			glVertexPointerd( vArray( vertex(2,3,4),vertex(2,3,4) ) )
+			myVector = vArray( vertex(2,3,4),vertex(2,3,4) )
+			glVertexPointer(
+				3,
+				GL_DOUBLE,
+				0,
+				ctypes.cast( myVector, ctypes.POINTER(constants.GLdouble)) 
+			)
+			
+			repr(glVertexPointerb( [[2,3],[4,5]] ))
+			glVertexPointerf( [[2,3],[4,5]] )
+			assert arrays.ArrayDatatype.dataPointer( None ) == None
+			glVertexPointerf( None )
+			
+			glNormalPointerd( [[2,3,4],[2,3,4]] )
+			glNormalPointerd( None )
+		
+			glTexCoordPointerd( [[2,3,4],[2,3,4]] )
+			glTexCoordPointerd( None )
+		
+			glColorPointerd( [[2,3,4],[2,3,4]] )
+			glColorPointerd( None )
+		
+			glEdgeFlagPointerb( [0,1,0,0,1,0] )
+			glEdgeFlagPointerb( None )
+		
+			glIndexPointerd( [0,1,0,0,1,0] )
+			glIndexPointerd( None )
+			
+			glColor4fv( [0,0,0,1] )
+			
+			# string data-types...
+			import struct
+			s = struct.pack( '>iiii', 2,3,4,5 ) * 2
+			result = glVertexPointer( 4,GL_INT,0,s )
+		TESS_TEST_SHAPE = [
+				[191,   0],
+				[ 191, 1480],
+				[ 191, 1480],
+				[ 401, 1480],
+				[ 401, 1480],
+				[401,   856],
+				[401,   856],
+				[1105,  856],
+				[1105,  856],
+				[1105, 1480],
+				[1105, 1480],
+				[1315, 1480],
+				[1315, 1480],
+				[1315,    0],
+				[1315,    0],
+				[1105,    0],
+				[1105,    0],
+				[1105,  699],
+				[1105,  699],
+				[401,   699],
+				[401,   699],
+				[401,     0],
+				[401,     0],
+				[191,     0],
+				[191,     0],
+				[191,     0],
+			]
+		def test_tess(self ):
+			"""Test that tessellation works"""
+			glDisable( GL_LIGHTING )
+			glColor3f( 1,1,1 )
+			glNormal3f( 0,0,1 )
+			def begin( *args ):
+				return glBegin( *args )
+			def vertex( *args ):
+				return glVertex3dv( *args )
+			def end( *args ):
+				return glEnd( *args )
+			def combine( coords, vertex_data, weight):
+				return coords
+			tobj = gluNewTess()
+			gluTessCallback(tobj, GLU_TESS_BEGIN, begin);
+			gluTessCallback(tobj, GLU_TESS_VERTEX, vertex); 
+			gluTessCallback(tobj, GLU_TESS_END, end); 
+			gluTessCallback(tobj, GLU_TESS_COMBINE, combine); 
+			gluTessBeginPolygon(tobj, None); 
+			gluTessBeginContour(tobj);
+			for (x,y) in self.TESS_TEST_SHAPE:
+				vert = (x,y,0.0)
+				gluTessVertex(tobj, vert, vert);
+			gluTessEndContour(tobj); 
+			gluTessEndPolygon(tobj);
+		def test_texture( self ):
+			"""Test texture (requires OpenGLContext and PIL)"""
+			try:
+				from OpenGLContext import texture
+				import Image 
+				from OpenGL.GLUT import glutSolidTeapot
+			except ImportError, err:
+				pass
+			else:
+				glEnable( GL_TEXTURE_2D )
+				ourTexture = texture.Texture(
+					Image.open( 'yingyang.png' )
+				)
+				ourTexture()
+				
+				glEnable( GL_LIGHTING )
+				glEnable( GL_LIGHT0 )
+				glBegin( GL_TRIANGLES )
+				try:
+					try:
+						glTexCoord2f( .5, 1 )
+						glVertex3f( 0.,1.,0. )
+					except Exception, err:
+						traceback.print_exc()
+					glTexCoord2f( 0, 0 )
+					glVertex3fv( [-1,0,0] )
+					glTexCoord2f( 1, 0 )
+					glVertex3dv( [1,0,0] )
+					try:
+						glVertex3dv( [1,0] )
+					except ValueError, err:
+						#Got expected value error (good)
+						pass
+					else:
+						raise RuntimeError(
+							"""Should have raised a value error on passing 2-element array to 3-element function!""",
+						)
+				finally:
+					glEnd()
 	if array:
 		def test_numpyConversion( self ):
 			"""Test that we can run a numpy conversion from double to float for glColorArray"""
@@ -407,47 +413,48 @@ class Tests( unittest.TestCase ):
 			assert v == GL_VERTEX_ARRAY, (v,GL_VERTEX_ARRAY)
 			assert v.name == GL_VERTEX_ARRAY.name, v.name 
 	
-	def test_copyNonContiguous( self ):
-		"""Test that a non-contiguous (transposed) array gets applied as a copy"""
-		glMatrixMode(GL_MODELVIEW)
-		glPushMatrix( )
-		try:
-			import numpy
-			transf = numpy.identity(4, dtype=numpy.float32)
-			# some arbitrary transformation...
-			transf[0,3] = 2.5
-			transf[2,3] = -80
-			
-			# what do we get with the un-transposed version...
+	if not OpenGL.ERROR_ON_COPY:
+		def test_copyNonContiguous( self ):
+			"""Test that a non-contiguous (transposed) array gets applied as a copy"""
 			glMatrixMode(GL_MODELVIEW)
-			glLoadIdentity()
-			glMultMatrixf(transf)
-			untransposed = glGetFloatv(GL_MODELVIEW_MATRIX)
-			# now transposed...
+			glPushMatrix( )
+			try:
+				import numpy
+				transf = numpy.identity(4, dtype=numpy.float32)
+				# some arbitrary transformation...
+				transf[0,3] = 2.5
+				transf[2,3] = -80
+				
+				# what do we get with the un-transposed version...
+				glMatrixMode(GL_MODELVIEW)
+				glLoadIdentity()
+				glMultMatrixf(transf)
+				untransposed = glGetFloatv(GL_MODELVIEW_MATRIX)
+				# now transposed...
 
-			# with a copy it works...
-			t2 = transf.transpose().copy()
-			# This doesn't work:
-			glLoadIdentity()
-			glMultMatrixf(t2)
-			# This does work:
-			#glMultMatrixf(transf.transpose().copy())
-			transposed = glGetFloatv(GL_MODELVIEW_MATRIX)
+				# with a copy it works...
+				t2 = transf.transpose().copy()
+				# This doesn't work:
+				glLoadIdentity()
+				glMultMatrixf(t2)
+				# This does work:
+				#glMultMatrixf(transf.transpose().copy())
+				transposed = glGetFloatv(GL_MODELVIEW_MATRIX)
 
-			assert not numpy.allclose( transposed, untransposed ), (transposed, untransposed)
-			
-			t2 = transf.transpose()
-			# This doesn't work:
-			glLoadIdentity()
-			glMultMatrixf(t2)
-			# This does work:
-			#glMultMatrixf(transf.transpose().copy())
-			transposed = glGetFloatv(GL_MODELVIEW_MATRIX)
-			
-			assert not numpy.allclose( transposed, untransposed ), (transposed, untransposed)
-		finally:
-			glMatrixMode(GL_MODELVIEW)
-			glPopMatrix()
+				assert not numpy.allclose( transposed, untransposed ), (transposed, untransposed)
+				
+				t2 = transf.transpose()
+				# This doesn't work:
+				glLoadIdentity()
+				glMultMatrixf(t2)
+				# This does work:
+				#glMultMatrixf(transf.transpose().copy())
+				transposed = glGetFloatv(GL_MODELVIEW_MATRIX)
+				
+				assert not numpy.allclose( transposed, untransposed ), (transposed, untransposed)
+			finally:
+				glMatrixMode(GL_MODELVIEW)
+				glPopMatrix()
 	def test_nullTexture( self ):
 		"""Test that we can create null textures"""
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 512, 512, 0, GL_RGB, GL_INT, None)
@@ -472,9 +479,10 @@ class Tests( unittest.TestCase ):
 		import numpy
 		textures = glGenTextures(2)
 		residents = []
+		data = numpy.array( self.someData,'i' )
 		for texture in textures:
 			glBindTexture( GL_TEXTURE_2D,int(texture) )
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 1, 1, 0, GL_RGB, GL_INT, self.someData)
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 1, 1, 0, GL_RGB, GL_INT, data)
 			residents.append(
 				glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_RESIDENT )
 			)
@@ -626,8 +634,8 @@ class Tests( unittest.TestCase ):
 			glNormal3f( 0,0,1 )
 			glBegin( GL_QUADS )
 			for v in [[0,0,0],[0,1,0],[1,1,0],[1,0,0]]:
-				glColor3fv( v )
-				glVertex3dv( v )
+				glColor3f( *v )
+				glVertex3d( *v )
 			glEnd()
 		finally:
 			glPopAttrib(); # restore viewport
@@ -644,47 +652,49 @@ class Tests( unittest.TestCase ):
 		glBegin( GL_QUADS )
 		try:
 			for v in [[0,0,0],[0,1,0],[1,1,0],[1,0,0]]:
-				glTexCoord2fv( v[:2] )
-				glVertex3dv( v )
+				glTexCoord2f( *v[:2] )
+				glVertex3d( *v )
 		finally:
 			glEnd()
 	def test_gl_1_2_support( self ):
 		if glBlendColor:
 			glBlendColor( .3, .4, 1.0, .3 )
 			print 'OpenGL 1.2 support'
-	def test_glmultidraw( self ):
-		"""Test that glMultiDrawElements works, uses glDrawElements"""
-		if glMultiDrawElements:
-			points = [
-				(i,0,0) for i in range( 8 )
-			] + [
-				(i,1,0) for i in range( 8 )
-			] 
-			indices = [
-				[0,8,9,1, 2,10,11,3,],
-				[4,12,13,5,6,14,15,7],
-			]
-			counts = [ len(x) for x in indices ]
-			glEnableClientState( GL_VERTEX_ARRAY )
-			glDisableClientState( GL_COLOR_ARRAY )
-			glDisableClientState( GL_NORMAL_ARRAY )
-			try:
-				glVertexPointerd( points )
-				glDisable( GL_LIGHTING )
+	if array:
+		def test_glmultidraw( self ):
+			"""Test that glMultiDrawElements works, uses glDrawElements"""
+			if glMultiDrawElements:
+				points = array([
+					(i,0,0) for i in range( 8 )
+				] + [
+					(i,1,0) for i in range( 8 )
+				], 'd')
+				indices = array([
+					[0,8,9,1, 2,10,11,3,],
+					[4,12,13,5,6,14,15,7],
+				],'B')
+				counts = [ len(x) for x in indices ]
+				glEnableClientState( GL_VERTEX_ARRAY )
+				glDisableClientState( GL_COLOR_ARRAY )
+				glDisableClientState( GL_NORMAL_ARRAY )
 				try:
-					glMultiDrawElements(GL_QUAD_STRIP, counts, GL_UNSIGNED_BYTE, indices, 2)
+					glVertexPointerd( points )
+					glDisable( GL_LIGHTING )
+					try:
+						glMultiDrawElements(GL_QUAD_STRIP, counts, GL_UNSIGNED_BYTE, indices, 2)
+					finally:
+						glEnable( GL_LIGHTING )
 				finally:
-					glEnable( GL_LIGHTING )
-			finally:
-				glDisableClientState( GL_VERTEX_ARRAY )
-		else:
-			print 'No multi_draw_arrays support'
+					glDisableClientState( GL_VERTEX_ARRAY )
+			else:
+				print 'No multi_draw_arrays support'
 	def test_glDrawBuffers_list( self ):
 		"""Test that glDrawBuffers with list argument doesn't crash"""
-		args = [
-		   GL_COLOR_ATTACHMENT0_EXT,
-		   GL_COLOR_ATTACHMENT1_EXT,
-		]
+		a_type = constants.GLenum*2
+		args = a_type(
+			GL_COLOR_ATTACHMENT0_EXT,
+			GL_COLOR_ATTACHMENT1_EXT,
+		)
 		try:
 			glDrawBuffers( 2, args )
 		except GLError, err:
@@ -715,10 +725,11 @@ class Tests( unittest.TestCase ):
 				GL_COLOR_ATTACHMENT1_EXT, 
 				GL_TEXTURE_2D, img2, 0
 			)
-			drawingBuffers = [
+			a_type = constants.GLenum*2
+			drawingBuffers = a_type(
 				GL_COLOR_ATTACHMENT0_EXT, 
 				GL_COLOR_ATTACHMENT1_EXT,
-			]
+			)
 			glDrawBuffers(2, drawingBuffers )
 		finally:
 			glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, 0 )
@@ -730,32 +741,32 @@ class Tests( unittest.TestCase ):
 			glDisable( GL_HISTOGRAM )
 		else:
 			print 'No ARB imaging extension'
-	
-	def test_gluNurbsCurve( self ):
-		"""Test that gluNurbsCurve raises error on invalid arguments"""
-		nurb = gluNewNurbsRenderer()
-		gluBeginCurve( nurb )
-		self.failUnlessRaises( error.GLUerror,
-			gluNurbsCurve,
-				nurb, 
-				[0, 1.0],
-				[[0,0,0],[1,0,0],[1,1,0]],
-				GL_MAP1_VERTEX_3,
-		)
-		self.failUnlessRaises( error.GLUerror,
-			gluNurbsCurve,
-				nurb, 
-				[],
-				[[0,0,0],[1,0,0],[1,1,0]],
-				GL_MAP1_VERTEX_3,
-		)
-		self.failUnlessRaises( error.GLUerror,
-			gluNurbsCurve,
-				nurb, 
-				[],
-				[],
-				GL_MAP1_VERTEX_3,
-		)
+	if not OpenGL.ERROR_ON_COPY:
+		def test_gluNurbsCurve( self ):
+			"""Test that gluNurbsCurve raises error on invalid arguments"""
+			nurb = gluNewNurbsRenderer()
+			gluBeginCurve( nurb )
+			self.failUnlessRaises( error.GLUerror,
+				gluNurbsCurve,
+					nurb, 
+					[0, 1.0],
+					[[0,0,0],[1,0,0],[1,1,0]],
+					GL_MAP1_VERTEX_3,
+			)
+			self.failUnlessRaises( error.GLUerror,
+				gluNurbsCurve,
+					nurb, 
+					[],
+					[[0,0,0],[1,0,0],[1,1,0]],
+					GL_MAP1_VERTEX_3,
+			)
+			self.failUnlessRaises( error.GLUerror,
+				gluNurbsCurve,
+					nurb, 
+					[],
+					[],
+					GL_MAP1_VERTEX_3,
+			)
 	def test_get_version( self ):
 		from OpenGL.extensions import getGLVersion
 		version = getGLVersion()
