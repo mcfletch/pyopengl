@@ -39,9 +39,9 @@ __all__ = [
 ]
 
 glRasterPosDispatch = {
-	2: simple.glRasterPos2dv,
-	3: simple.glRasterPos3dv,
-	4: simple.glRasterPos4dv,
+	2: simple.glRasterPos2d,
+	3: simple.glRasterPos3d,
+	4: simple.glRasterPos4d,
 }
 
 if OpenGL.ERROR_CHECKING:
@@ -118,8 +118,7 @@ def glRasterPos( *args ):
 	if len(args) == 1:
 		# v form...
 		args = args[0]
-	value = GLdoubleArray.asArray( args, constants.GL_DOUBLE )
-	return glRasterPosDispatch[ len(args) ]( value )
+	return glRasterPosDispatch[ len(args) ]( *args )
 
 glVertexDispatch = {
 	2: simple.glVertex2dv,
@@ -175,7 +174,7 @@ def glGenTextures( baseFunction, count, textures=None ):
 	"""
 	if count <= 0:
 		raise ValueError( """Can't generate 0 or fewer textures""" )
-	elif count == 1:
+	elif count == 1 and OpenGL.SIZE_1_ARRAY_UNPACK:
 		# this traditionally returned a single int/long, so we'll continue to
 		# do so, even though it would be easier not to bother.
 		textures = simple.GLuint( 0 )
@@ -230,7 +229,7 @@ def glColor( *args ):
 
 # Rectagle coordinates,
 glRectfv = arrays.setInputArraySizeType(
-		arrays.setInputArraySizeType(
+	arrays.setInputArraySizeType(
 		simple.glRectfv,
 		2,
 		arrays.GLfloatArray,
