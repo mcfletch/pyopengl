@@ -69,6 +69,8 @@ class _Alternate( object ):
 		self.__name__ = name
 		self._alternatives = alternates
 	def __nonzero__( self ):
+		if self.__class__.implementation:
+			return True
 		for alternate in self._alternatives:
 			if alternate:
 				log.info(
