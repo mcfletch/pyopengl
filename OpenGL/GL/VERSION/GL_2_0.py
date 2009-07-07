@@ -20,12 +20,13 @@ from OpenGL import converters, error, contextdata
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 GL_INFO_LOG_LENGTH = constant.Constant( 'GL_INFO_LOG_LENGTH', 0x8B84 )
 
-glShaderSource = platform.createBaseFunction( 
+glShaderSource = platform.createExtensionFunction( 
 	'glShaderSource', dll=platform.GL,
 	resultType=None, 
 	argTypes=(constants.GLhandle, constants.GLsizei, ctypes.POINTER(ctypes.c_char_p), arrays.GLintArray,),
 	doc = 'glShaderSource( GLhandle(shaderObj), str( string) ) -> None',
 	argNames = ('shaderObj', 'count', 'string', 'length',),
+	extension = EXTENSION_NAME,
 )
 conv = converters.StringLengths( name='string' )
 glShaderSource = wrapper.wrapper(
