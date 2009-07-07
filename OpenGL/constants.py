@@ -42,7 +42,13 @@ GLboolean = _defineType( 'GLboolean', ctypes.c_ubyte, bool )
 GLenum = _defineType( 'GLenum', ctypes.c_uint )
 
 GLfloat = _defineType( 'GLfloat', ctypes.c_float, float )
+GLfloat_2 = GLfloat * 2
+GLfloat_3 = GLfloat * 3
+GLfloat_4 = GLfloat * 4
 GLdouble = _defineType( 'GLdouble', ctypes.c_double, float )
+GLdouble_2 = GLdouble * 2
+GLdouble_3 = GLdouble * 3
+GLdouble_4 = GLdouble * 4
 
 GLbyte = ctypes.c_byte
 GLshort = _defineType( 'GLshort', ctypes.c_short, int )
@@ -52,6 +58,7 @@ GLuint = _defineType( 'GLuint', ctypes.c_uint )
 GLsizei = _defineType( 'GLsizei', ctypes.c_int, int )
 
 GLubyte = ctypes.c_ubyte
+GLubyte_3 = GLubyte * 3
 GLushort = _defineType( 'GLushort', ctypes.c_ushort, int )
 GLhandleARB = _defineType( 'GLhandleARB', ctypes.c_uint )
 GLhandle = _defineType( 'GLhandle', ctypes.c_uint )
