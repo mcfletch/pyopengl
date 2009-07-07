@@ -154,20 +154,55 @@ class storePointerType( object ):
 		contextdata.setValue( self.constant, pyArgs[self.pointerIndex] )
 
 
-def setInputArraySizeType( baseOperation, size, type, argName=0 ):
-	"""Decorate function with vector-handling code for a single argument
+if not OpenGL.ERROR_ON_COPY:
+	def setInputArraySizeType( baseOperation, size, type, argName=0 ):
+		"""Decorate function with vector-handling code for a single argument
+		
+		if OpenGL.ERROR_ON_COPY is False, then we return the 
+		named argument, converting to the passed array type,
+		optionally checking that the array matches size.
+		
+		if OpenGL.ERROR_ON_COPY is True, then we will dramatically 
+		simplify this function, only wrapping if size is True, i.e.
+		only wrapping if we intend to do a size check on the array.
+		"""
+		function = wrapper.wrapper( baseOperation )
+		if not hasattr( function, 'returnValues' ):
+			if isinstance( argName, (str,unicode)):
+				function.setReturnValues( converters.returnPyArgument(argName) )
+			else:
+				raise TypeError( 
+					"""Argname should be a string/unicode: %s"""%(type(argName))
+				)
+		if size is not None:
+			function.setPyConverter( argName, asArrayTypeSize(type, size) )
+		else:
+			function.setPyConverter( argName, asArrayType(type) )
+		function.setCConverter( argName, converters.getPyArgsName( argName ) )
+		return function
+else:
+	def setInputArraySizeType( baseOperation, size, type, argName=0 ):
+		"""Decorate function with vector-handling code for a single argument
+		
+		if OpenGL.ERROR_ON_COPY is False, then we return the 
+		named argument, converting to the passed array type,
+		optionally checking that the array matches size.
+		
+		if OpenGL.ERROR_ON_COPY is True, then we will dramatically 
+		simplify this function, only wrapping if size is True, i.e.
+		only wrapping if we intend to do a size check on the array.
+		"""
+		if size is not None:
+			function = wrapper.wrapper( baseOperation )
+			# return value is always the source array...
+			function.setPyConverter( argName, asArrayTypeSize(type, size) )
+			function.setCConverter( argName, 
+				converters.getPyArgsName( argName ) 
+			)
+		else:
+			function = baseOperation
+		return function
 	
-	This assumes *no* argument expansion, i.e. a 1:1 correspondence...
-	"""
-	function = wrapper.wrapper( baseOperation )
-	if not hasattr( function, 'returnValues' ):
-		function.setReturnValues( returnPointer )
-	if size is not None:
-		function.setPyConverter( argName, asArrayTypeSize(type, size) )
-	else:
-		function.setPyConverter( argName, asArrayType(type) )
-	function.setCConverter( argName, converters.getPyArgsName( argName ) )
-	return function
 
 def arraySizeOfFirstType( typ, default ):
 	unitSize = typ.unitSize
