@@ -1,6 +1,11 @@
+NOTE:
+
+	THIS SOFTWARE IS NOT FAULT TOLERANT AND SHOULD NOT BE USED IN ANY
+	SITUATION ENDANGERING HUMAN LIFE OR PROPERTY.
+	
 OpenGL-ctypes License
 
-	Copyright (c) 2005-2007, Michael C. Fletcher and Contributors
+	Copyright (c) 2005-2009, Michael C. Fletcher and Contributors
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
@@ -18,9 +23,6 @@ OpenGL-ctypes License
 		The name of Michael C. Fletcher, or the name of any Contributor,
 		may not be used to endorse or promote products derived from this 
 		software without specific prior written permission.
-	
-	THIS SOFTWARE IS NOT FAULT TOLERANT AND SHOULD NOT BE USED IN ANY
-	SITUATION ENDANGERING HUMAN LIFE OR PROPERTY.
 	
 	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 	``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
