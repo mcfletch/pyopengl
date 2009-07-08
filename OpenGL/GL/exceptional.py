@@ -121,17 +121,16 @@ def glRasterPos( *args ):
 	return glRasterPosDispatch[ len(args) ]( *args )
 
 glVertexDispatch = {
-	2: simple.glVertex2dv,
-	3: simple.glVertex3dv,
-	4: simple.glVertex4dv,
+	2: simple.glVertex2d,
+	3: simple.glVertex3d,
+	4: simple.glVertex4d,
 }
 def glVertex( *args ):
 	"""Choose glVertexX based on number of args"""
 	if len(args) == 1:
 		# v form...
 		args = args[0]
-	value = GLdoubleArray.asArray( args, constants.GL_DOUBLE )
-	return glVertexDispatch[ len(args) ]( value )
+	return glVertexDispatch[ len(args) ]( *args )
 
 @lazy( simple.glCallLists )
 def glCallLists( baseFunction, lists ):
