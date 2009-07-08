@@ -213,7 +213,7 @@ def glSelectBuffer( size, buffer = None ):
 	"""Create a selection buffer of the given size
 	"""
 	if buffer is None:
-		buffer = arrays.GLintArray.zeros( (size,) )
+		buffer = arrays.GLuintArray.zeros( (size,) )
 	simple.glSelectBuffer( size, buffer )
 	contextdata.setValue( simple.GL_SELECTION_BUFFER_POINTER, buffer )
 	return buffer
