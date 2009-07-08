@@ -31,45 +31,45 @@ log = logs.getLog( 'OpenGL.GLUT.special' )
 
 if os.name == "nt":
 	log.info( """Using NT-specific GLUT calls with exit callbacks""" )
+	_exitfunctype = FUNCTION_TYPE( None, ctypes.c_int )
 	__glutInitWithExit = platform.createBaseFunction(
 		'__glutInitWithExit', dll=platform.GLUT, resultType=None,
-		argTypes=[ctypes.POINTER(ctypes.c_int),ctypes.POINTER(ctypes.c_char_p),ctypes.c_void_p],
+		argTypes=[ctypes.POINTER(ctypes.c_int),ctypes.POINTER(ctypes.c_char_p),_exitfunctype],
 		doc='glutInit( POINTER(c_int)(pargc), POINTER(STRING)(argv) ) -> None',
 		argNames=('pargc', 'argv'),
 	)
 	__glutCreateWindowWithExit = platform.createBaseFunction(
 		'__glutCreateWindowWithExit', dll=platform.GLUT, resultType=ctypes.c_int,
-		argTypes=[ctypes.c_char_p, ctypes.c_void_p],
+		argTypes=[ctypes.c_char_p,_exitfunctype],
 		doc='glutCreateWindow( STRING(title) ) -> c_int',
 		argNames=('title',),
 	)
 	__glutCreateMenuWithExit = platform.createBaseFunction( 
 		'__glutCreateMenuWithExit', dll=platform.GLUT, resultType=ctypes.c_int, 
-		argTypes=[FUNCTION_TYPE(None, ctypes.c_int), ctypes.c_void_p],
+		argTypes=[FUNCTION_TYPE(None, ctypes.c_int),_exitfunctype],
 		doc='glutCreateMenu( FUNCTION_TYPE(None, c_int)(callback) ) -> c_int', 
 		argNames=('callback',),
 	)
 	import sys
-	_exitfunc = FUNCTION_TYPE( None, ctypes.c_int )(sys.exit)
-	_exitfunc_p = ctypes.pointer( _exitfunc )
+	_exitfunc = _exitfunctype(sys.exit)
 	
 	def _base_glutInit(pargc, argv):
 		"""Overrides base glut init with exit-function-aware version"""
-		return __glutInitWithExit(pargc, argv, _exitfunc_p)
+		return __glutInitWithExit(pargc, argv, _exitfunc)
 	def glutCreateWindow(title):
 		"""Create window with given title
 		
 		This is the Win32-specific version that handles
 		registration of an exit-function handler 
 		"""
-		return __glutCreateWindowWithExit(title, _exitfunc_p)
+		return __glutCreateWindowWithExit(title, _exitfunc)
 	def glutCreateMenu(callback):
 		"""Create menu with given callback 
 		
 		This is the Win32-specific version that handles 
 		registration of an exit-function callback.
 		"""
-		return __glutCreateMenuWithExit(callback, _exitfunc_p)
+		return __glutCreateMenuWithExit(callback, _exitfunc)
 else:
 	_base_glutInit = getattr(GLUT, 'glutInit', None)
 ##_base_glutDisplayFunc = GLUT.glutDisplayFunc
