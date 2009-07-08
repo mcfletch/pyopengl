@@ -18,7 +18,6 @@ from OpenGL import constants, constant, error
 from OpenGL.arrays import formathandler
 
 try:
-	raise ImportError
 	import OpenGL_accelerate
 	try:
 		from OpenGL_accelerate.numpy_formathandler import NumpyHandler
