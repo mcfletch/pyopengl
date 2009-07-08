@@ -14,10 +14,11 @@ import operator
 import OpenGL
 import ctypes
 c_void_p = ctypes.c_void_p
-from OpenGL import constants, constant
+from OpenGL import constants, constant, error
 from OpenGL.arrays import formathandler
 
 try:
+	raise ImportError
 	import OpenGL_accelerate
 	try:
 		from OpenGL_accelerate.numpy_formathandler import NumpyHandler
@@ -180,6 +181,11 @@ except ImportError, err:
 				pp._temporary_array_ = (array,)
 				return pp
 			else:
+				if typeCode and instance.dtype != GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]:
+					raise error.CopyError(
+						"""Array of type %r passed, required array of type %r""",
+						instance.dtype.char, typeCode,
+					)					
 				return c_void_p( pointer )
 
 try:

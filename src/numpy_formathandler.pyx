@@ -49,13 +49,22 @@ cdef class NumpyHandler(FormatHandler):
 	cdef c_from_param( self, object instance, object typeCode ):
 		"""simple function-based from_param"""
 		cdef np.ndarray working = self.c_check_array( instance )
-		if PyArray_ISCARRAY( instance ):
-			return c_void_p(<unsigned long> (working.data))
-		raise CopyError(
-			"""from_param received a non-contiguous array! %s"""%(
-				working,
+		cdef np.dtype targetType
+		if typeCode:
+			targetType = <np.dtype>(self.gl_constant_to_array[ typeCode ])
+			if instance.dtype != targetType:
+				raise CopyError(
+					"""Array of type %r passed, required array of type %r""",
+					instance.dtype.char, targetType.char,
+				)					
+		if not PyArray_ISCARRAY( instance ):
+			raise CopyError(
+				"""from_param received a non-contiguous array! %s"""%(
+					working,
+				)
 			)
-		)
+		return c_void_p(<unsigned long> (working.data))
+	
 	cdef c_dataPointer( self, object instance ):
 		"""Retrieve data-pointer directly"""
 		return <unsigned long> (<np.ndarray>self.c_check_array( instance )).data 
