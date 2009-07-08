@@ -51,24 +51,25 @@ if os.name == "nt":
 	)
 	import sys
 	_exitfunc = FUNCTION_TYPE( None, ctypes.c_int )(sys.exit)
+	_exitfunc_p = ctypes.pointer( _exitfunc )
 	
 	def _base_glutInit(pargc, argv):
 		"""Overrides base glut init with exit-function-aware version"""
-		return __glutInitWithExit(pargc, argv, _exitfunc)
+		return __glutInitWithExit(pargc, argv, _exitfunc_p)
 	def glutCreateWindow(title):
 		"""Create window with given title
 		
 		This is the Win32-specific version that handles
 		registration of an exit-function handler 
 		"""
-		return __glutCreateWindowWithExit(title, _exitfunc)
+		return __glutCreateWindowWithExit(title, _exitfunc_p)
 	def glutCreateMenu(callback):
 		"""Create menu with given callback 
 		
 		This is the Win32-specific version that handles 
 		registration of an exit-function callback.
 		"""
-		return __glutCreateMenuWithExit(callback, _exitfunc)
+		return __glutCreateMenuWithExit(callback, _exitfunc_p)
 else:
 	_base_glutInit = getattr(GLUT, 'glutInit', None)
 ##_base_glutDisplayFunc = GLUT.glutDisplayFunc
