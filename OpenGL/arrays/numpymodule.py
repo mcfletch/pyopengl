@@ -10,24 +10,24 @@ try:
 except ImportError, err:
 	raise ImportError( """No numpy module present: %s"""%(err))
 
-import operator
+import operator,logging
 import OpenGL
 import ctypes
 c_void_p = ctypes.c_void_p
 from OpenGL import constants, constant, error
 from OpenGL.arrays import formathandler
+log = logging.getLogger( 'OpenGL.arrays.numpymodule' )
 
-try:
-	import OpenGL_accelerate
+from OpenGL import acceleratesupport
+NumpyHandler = None
+if acceleratesupport.ACCELERATE_AVAILABLE:
 	try:
 		from OpenGL_accelerate.numpy_formathandler import NumpyHandler
 	except ImportError, err:
-		import logging
-		logging.getLogger( 'OpenGL_accelerate' ).warn(
+		log.warn(
 			"Unable to load numpy_formathandler accelerator from OpenGL_accelerate"
 		)
-		raise
-except ImportError, err:
+if NumpyHandler is None:
 	# numpy's array interface has changed over time :(
 	testArray = numpy.array( [1,2,3,4],'i' )
 	# Numpy's "ctypes" interface actually creates a new ctypes object 

@@ -7,18 +7,16 @@ from OpenGL import logs
 log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
 
 
-
-try:
-	import OpenGL_accelerate
+from OpenGL import acceleratesupport
+ADT = None
+if acceleratesupport.ACCELERATE_AVAILABLE:
 	try:
 		from OpenGL_accelerate.arraydatatype import ArrayDatatype as ADT
 	except ImportError, err:
-		import logging
-		logging.getLogger( 'OpenGL_accelerate' ).warn(
+		log.warn(
 			"Unable to load ArrayDatatype accelerator from OpenGL_accelerate"
 		)
-		raise
-except ImportError, err:
+if ADT is None:
 	# Python-coded version
 	log.warn( 'Using unaccelerated ArrayDatatype: %s', err )
 	class HandlerRegistry( dict ):

@@ -99,6 +99,8 @@ with these sets of flags.
 		logging-module warn-level events when a FormatHandler
 		plugin is not loadable (with traceback).
 	
+		Default: False
+	
 	FULL_LOGGING -- If True, then wrap functions with 
 		logging operations which reports each call along with its 
 		arguments to  the OpenGL.calltrace logger at the INFO 
@@ -126,16 +128,28 @@ with these sets of flags.
 	UNSIGNED_BYTE_IMAGES_AS_STRING -- if True, we will return
 		GL_UNSIGNED_BYTE image-data as strings, istead of arrays
 		for glReadPixels and glGetTexImage
+
+		Default: True
 	
 	FORWARD_COMPATIBLE_ONLY -- only include OpenGL 3.1 compatible 
 		entry points.  Note that this will generally break most 
 		PyOpenGL code that hasn't been explicitly made "legacy free"
 		via a significant rewrite.
 	
+		Default: False
+		
 	SIZE_1_ARRAY_UNPACK -- if True, unpack size-1 arrays to be 
 		scalar values, as done in PyOpenGL 1.5 -> 3.0.0, that is,
 		if a glGenList( 1 ) is done, return a uint rather than 
 		an array of uints.
+
+		Default: True
+	
+	USE_ACCELERATE -- if True, attempt to use the OpenGL_accelerate
+		package to provide Cython-coded accelerators for core wrapping
+		operations.
+		
+		Default: True
 """
 from OpenGL.version import __version__
 
@@ -147,6 +161,7 @@ STORE_POINTERS = True
 WARN_ON_FORMAT_UNAVAILABLE = False
 FORWARD_COMPATIBLE_ONLY = False
 SIZE_1_ARRAY_UNPACK = True
+USE_ACCELERATE = True
 
 FULL_LOGGING = False 
 ALLOW_NUMPY_SCALARS = False

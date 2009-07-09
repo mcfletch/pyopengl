@@ -6,9 +6,11 @@ GL functions that deal with OpenGL array data-types.
 import OpenGL
 from OpenGL import contextdata, error, wrapper, constants, converters
 from OpenGL.arrays import arraydatatype
-
-try:
-	import OpenGL_accelerate
+import logging
+log = logging.getLogger( 'OpenGL.arrays.arrayhelpers' )
+from OpenGL import acceleratesupport
+AsArrayTypedSizeChecked = None
+if acceleratesupport.ACCELERATE_AVAILABLE:
 	try:
 		from OpenGL_accelerate.arraydatatype import AsArrayTypedSizeChecked
 		from OpenGL_accelerate.wrapper import returnPyArgumentIndex
@@ -16,13 +18,10 @@ try:
 			AsArrayOfType,AsArrayTyped,AsArrayTypedSize
 		)
 	except ImportError, err:
-		import logging
-		logging.getLogger( 'OpenGL_accelerate' ).warn(
+		log.warn(
 			"Unable to load arrayhelpers accelerator from OpenGL_accelerate"
 		)
-		raise
-except ImportError, err:
-	AsArrayTypedSizeChecked = None
+if AsArrayTypedSizeChecked is None:
 	def returnPointer( result,baseOperation,pyArgs,cArgs, ):
 		"""Return the converted object as result of function
 		

@@ -4,7 +4,8 @@ from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.GL.ARB import vertex_buffer_object
 from OpenGL import constants
-import ctypes
+import ctypes,logging
+log = logging.getLogger( 'OpenGL.arrays.vbo' )
 
 
 import weakref
@@ -65,20 +66,18 @@ def get_implementation( *args ):
 		IMPLEMENTATION = Implementation()
 	return IMPLEMENTATION
 
-try:
-	import OpenGL_accelerate
+from OpenGL import acceleratesupport
+VBO = None
+if acceleratesupport.ACCELERATE_AVAILABLE:
 	try:
 		from OpenGL_accelerate.vbo import (
 			VBO,VBOOffset,VBOHandler,VBOOffsetHandler,
 		)
 	except ImportError, err:
-		import logging
-		logging.getLogger( 'OpenGL_accelerate' ).warn(
+		log.warn(
 			"Unable to load VBO accelerator from OpenGL_accelerate"
 		)
-		raise
-except ImportError, err:
-
+if VBO is None:
 	class VBO( object ):
 		"""Instances can be passed into array-handling routines
 		

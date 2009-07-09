@@ -1,5 +1,6 @@
 """Implementations for common converter types"""
-import ctypes
+import ctypes,logging
+log = logging.getLogger( 'OpenGL.converters' )
 
 class Converter( object ):
 	"""Base class for Converter types
@@ -103,9 +104,9 @@ class ReturnValues( Converter ):
 		))
 
 # Now the concrete classes...
-
-try:
-	import OpenGL_accelerate
+from OpenGL import acceleratesupport
+CallFuncPyConverter = None
+if acceleratesupport.ACCELERATE_AVAILABLE:
 	try:
 		from OpenGL_accelerate.wrapper import (
 			CallFuncPyConverter, DefaultCConverter, getPyArgsName,
@@ -117,12 +118,10 @@ try:
 			returnCArgument, returnPyArgument,
 		)
 	except ImportError, err:
-		import logging
-		logging.getLogger( 'OpenGL_accelerate' ).warn(
+		log.warn(
 			"Unable to load converters accelerators (wrapper, arraydatatype) from OpenGL_accelerate"
 		)
-		raise
-except ImportError, err:
+if CallFuncPyConverter is None:
 	class CallFuncPyConverter( PyConverter ):
 		"""PyConverter that takes a callable and calls it on incoming"""
 		def __init__( self, function ):

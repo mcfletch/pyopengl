@@ -1,18 +1,19 @@
 """Passing of None as an array data-type
 """
 REGISTRY_NAME = 'nones'
+import logging
+log = logging.getLogger( 'OpenGL.arrays.nones' )
 
-try:
-	import OpenGL_accelerate
+from OpenGL import acceleratesupport
+NoneHandler = None
+if acceleratesupport.ACCELERATE_AVAILABLE:
 	try:
 		from OpenGL_accelerate.nones_formathandler import NoneHandler
 	except ImportError, err:
-		import logging
-		logging.getLogger( 'OpenGL_accelerate' ).warn(
+		log.warn(
 			"Unable to load nones_formathandler accelerator from OpenGL_accelerate"
 		)
-		raise
-except ImportError, err:
+if NoneHandler is None:
 	from OpenGL.arrays import formathandler
 	class NoneHandler( formathandler.FormatHandler ):
 		"""Numpy-specific data-type handler for OpenGL"""

@@ -7,7 +7,8 @@ ErrorChecker is an _ErrorChecker instance that allows you
 to register a new error-checking function for use 
 throughout the system.
 """
-import OpenGL
+import OpenGL, logging
+log = logging.getLogger( 'OpenGL.error' )
 from OpenGL import platform
 __all__ = (
 	"Error",'GLError','GLUError','GLUTError','glCheckError',
@@ -152,10 +153,14 @@ class GLUTError( Error ):
 
 
 if OpenGL.ERROR_CHECKING:
-	try:
-		from OpenGL_accelerate.errorchecker import _ErrorChecker
-	except ImportError, err:
-		print 'using python error checker', err
+	from OpenGL import acceleratesupport
+	_ErrorChecker = None
+	if acceleratesupport.ACCELERATE_AVAILABLE:
+		try:
+			from OpenGL_accelerate.errorchecker import _ErrorChecker
+		except ImportError, err:
+			log.warn( """OpenGL_accelerate seems to be installed, but unable to import error checking entry point!""" )
+	if _ErrorChecker is None:
 		class _ErrorChecker( object ):
 			"""Global error-checking object
 			
