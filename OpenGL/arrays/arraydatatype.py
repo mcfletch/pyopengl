@@ -18,7 +18,6 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
 		)
 if ADT is None:
 	# Python-coded version
-	log.warn( 'Using unaccelerated ArrayDatatype: %s', err )
 	class HandlerRegistry( dict ):
 		GENERIC_OUTPUT_PREFERENCES = ['numpy','numeric','ctypesarrays']
 		def __init__( self, plugin_match ):
