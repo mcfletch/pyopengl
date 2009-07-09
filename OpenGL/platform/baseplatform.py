@@ -76,7 +76,7 @@ class BasePlatform( object ):
 	
 	def finalArgType( self, typ ):
 		"""Retrieve a final type for arg-type"""
-		if typ == ctypes.POINTER( None ):
+		if typ == ctypes.POINTER( None ) and not getattr( typ, 'final',False):
 			from OpenGL.arrays import ArrayDatatype
 			return ArrayDatatype
 		else:

@@ -61,7 +61,11 @@ DWORD = c_ulong 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:56
 FLOAT = c_float 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:57
 COLORREF = DWORD 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:58
 LPCOLORREF = POINTER(DWORD) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:58
+
 HANDLE = POINTER(None) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:60
+# TODO: figure out how to make the handle not appear as a void_p within the code...
+HANDLE.final = True
+
 HGLRC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:62
 HDC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:63
 PROC = CFUNCTYPE(INT_PTR) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:65
@@ -127,7 +131,6 @@ wglShareLists = platform.createBaseFunction(
 	doc='wglShareLists( HGLRC(None), HGLRC(None) ) -> BOOL', 
 	argNames=['None', 'None'],
 )
-
 wglUseFontBitmapsA = platform.createBaseFunction(
 	'wglUseFontBitmapsA', dll=platform.GL, resultType=BOOL, 
 	argTypes=[HDC, DWORD, DWORD, DWORD],
