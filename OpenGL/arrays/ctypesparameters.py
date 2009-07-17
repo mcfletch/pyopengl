@@ -30,7 +30,7 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
 			return ctypes.byref( value )
 	from_param = voidDataPointer = classmethod( from_param )
 	def dataPointer( cls, value ):
-		if isinstance( value, ParamaterType ):
+		if isinstance( value, DIRECT_RETURN_TYPES ):
 			return value 
 		else:
 			return ctypes.addressof( value )
@@ -95,6 +95,8 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
 				yield length
 	def asArray( self, value, typeCode=None ):
 		"""Convert given value to an array value of given typeCode"""
+		if isinstance( value, DIRECT_RETURN_TYPES ):
+			return value 
 		if isinstance( value, ParamaterType ):
 			value = value._obj
 		return ctypes.byref( value )
