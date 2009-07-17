@@ -403,11 +403,7 @@ class ImageInputConverter( object ):
 		images.setupDefaultTransferMode()
 		images.rankPacking( self.rank )
 		type = pyArgs[ self.typeIndex ]
-		try:
-			arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE[ type ] ]
-		except TypeError, err:
-			import pdb
-			pdb.set_trace()
+		arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE[ type ] ]
 		return arrayType.asArray( arg )
 #	def cResolver( self, array ):
 #		return array
