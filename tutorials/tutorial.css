@@ -1,0 +1,15 @@
+/* OpenGLContext shader tutorial stylesheet */
+
+.commentary {
+	background-color: #f0f0f0;
+}
+.commentary div {
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+
+.code-sample {
+	color: #000030;
+	background-color: #f0f0c0;
+	white-space: pre;
+}
