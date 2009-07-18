@@ -50,6 +50,11 @@ if os.name == "nt":
 		doc='glutCreateMenu( FUNCTION_TYPE(None, c_int)(callback) ) -> c_int', 
 		argNames=('callback',),
 	)
+else:
+	# Linux, OSX, etceteras
+	__glutInitWithExit = None
+if __glutInitWithExit:
+	# Normal platforms + Win32 w/ FreeGLUT (SF#2813722)
 	import sys
 	_exitfunc = _exitfunctype(sys.exit)
 	
