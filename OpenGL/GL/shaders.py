@@ -4,6 +4,9 @@ The point of this module is to allow client code to use
 OpenGL 2.x style names to reference shader-related operations
 even if the local hardware only supports ARB extension-based 
 shader rendering.
+
+There are also two utility methods compileProgram and compileShader
+which make it easy to create demos which are shader-using.
 """
 import logging 
 logging.basicConfig()
@@ -17,6 +20,10 @@ __all__ = [
 	'glDeleteShader',
 	'glGetProgramInfoLog',
 	'glGetShaderInfoLog',
+	'compileProgram',
+	'compileShader',
+	'GL_VALIDATE_STATUS',
+	'GL_LINK_STATUS',
 	# automatically added stuff here...
 ]
 
@@ -27,7 +34,7 @@ def _alt( base, name ):
 			globals()[base] = alternate( getattr(GL,base),getattr(module,name))
 			__all__.append( base )
 		else:
-			globals()[base] = base
+			globals()[base] = root
 			__all__.append( base )
 		return True 
 	return False
@@ -46,7 +53,6 @@ for module in shader_objects,fragment_shader,vertex_shader,vertex_program:
 			log.debug( '''Found no alternate for: %s.%s''',
 				module.__name__,name,
 			)
-	
 
 glAttachShader = alternate( GL.glAttachShader,shader_objects.glAttachObjectARB )
 glDetachShader = alternate( GL.glDetachShader,shader_objects.glDetachObjectARB )
@@ -55,3 +61,70 @@ glGetAttachedShaders = alternate( GL.glGetAttachedShaders, shader_objects.glGetA
 
 glGetProgramInfoLog = alternate( GL.glGetProgramInfoLog, shader_objects.glGetInfoLogARB )
 glGetShaderInfoLog = alternate( GL.glGetShaderInfoLog, shader_objects.glGetInfoLogARB )
+
+GL_VALIDATE_STATUS = GL.GL_VALIDATE_STATUS
+GL_LINK_STATUS = GL.GL_LINK_STATUS
+GL_FALSE = GL.GL_FALSE
+
+def compileProgram(*shaders):
+	"""Create a new program, attach shaders and validate
+	
+	shaders -- arbitrary number of shaders to attach to the 
+		generated program.
+	
+	This convenience function is *not* standard OpenGL,
+	but it does wind up being fairly useful for demos 
+	and the like.
+	
+	Usage:
+	
+		shader = compileProgram( 
+			compileShader( source, GL_VERTEX_SHADER ),
+			compileShader( source2, GL_FRAGMENT_SHADER ),
+		)
+		glUseProgram( shader )
+	
+	Note:
+		If (and only if) validation of the linked program 
+		*passes* then the passed-in shader objects will be 
+		deleted from the GL.
+	
+	returns GLuint shader program reference
+	"""
+	program = glCreateProgram()
+	for shader in shaders:
+		glAttachShader(program, shader)
+	glLinkProgram(program)
+	# Validation has to occur *after* linking
+	glValidateProgram( program )
+	validation = glGetProgramiv( program, GL_VALIDATE_STATUS )
+	if validation == GL_FALSE:
+		raise RuntimeError(
+			"""Validation failure (%s): %s"""%(
+			validation,
+			glGetProgramInfoLog( program ),
+		))
+	link_status = glGetProgramiv( program, GL_LINK_STATUS )
+	if link_status == GL_FALSE:
+		raise RuntimeError(
+			"""Link failure (%s): %s"""%(
+			link_status,
+			glGetProgramInfoLog( program ),
+		))
+	for shader in shaders:
+		glDeleteShader(shader)
+	return program
+def compileShader( source, shaderType ):
+	"""Compile shader source of given type
+	
+	source -- GLSL source-code for the shader
+	shaderType -- GLenum GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc,
+	
+	returns GLuint compiled shader
+	"""
+	if isinstance( source, (str,unicode)):
+		source = [ source ]
+	shader = glCreateShader(shaderType)
+	glShaderSource( shader, source )
+	glCompileShader( shader )
+	return shader
