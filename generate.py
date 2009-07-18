@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """Generates the PyOpenGL reference documentation"""
-import glob, os, datetime
+import glob, os, datetime, subprocess
 #import elementtree.ElementTree as ET
 import lxml.etree as ET
 import kid, logging 
@@ -27,6 +27,17 @@ WRAPPER = """<?xml version="1.0" encoding="UTF-8"?>
     xmlns:mml="%s">
 %%s
 </book>"""%( DOCBOOK_NS, MML_NS )
+
+IMPLEMENTATION_MODULES = [
+    # modules which contain external API entry points...
+    ('error','GL-specific error classes'),
+    ('extensions','Utility code for accessing OpenGL extensions, including the "alternate" mechanism'),
+    ('plugins','Trivial plugin mechanism, used to register new data-types'),
+    ('arrays.vbo','Convenience module providing a Vertex Buffer Object abstraction layer'),
+    ('GL.shaders','Convenience module providing a GLSL Shader abstraction layer (alternate declarations)'),
+    #'Tk','GLX',
+]   
+
 
 class Reference( model.Reference ):
     """Reference class with doc-set-specific coding"""
@@ -245,6 +256,7 @@ def main():
         ref=ref, 
         date=datetime.datetime.now().isoformat(),
         version=__version__,
+        implementation_module_names = IMPLEMENTATION_MODULES,
     )
     data = template.serialize( output=serial )
     open( os.path.join(OUTPUT_DIRECTORY,'index.xhtml'), 'w').write( data )

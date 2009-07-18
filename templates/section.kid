@@ -118,10 +118,11 @@ ${nav_table()}
     <div class="deprecation-warning" py:if="section.deprecated">
         <h2>Deprecation Notice</h2>
         <div class="deprecation-description">
-            Note that this function has been marked deprecated in the OpenGL 3.0 specification, 
-            and it will likely be removed in OpenGL 3.1.  As such you should not be using this 
-            function in new code and should be looking to remove it from any current code.
-            For more information on OpenGL 3.x deprecations, see the <a href="http://pyopengl.sourceforge.net/documentation/deprecations.html">deprecations page</a>.
+            Note that this function has been marked deprecated in the OpenGL 3.0 specification.
+            You should not be using this function in new code, though it will likely be supported
+	    by most implementations via the GL_ARB_compatibility extension.
+            For more information on OpenGL 3.x deprecations, see the 
+	    <a href="http://pyopengl.sourceforge.net/documentation/deprecations.html">deprecations page</a>.
         </div>
     </div>
     <div class="signatures">
