@@ -62,7 +62,10 @@ glGetAttachedShaders = alternate( GL.glGetAttachedShaders, shader_objects.glGetA
 glGetProgramInfoLog = alternate( GL.glGetProgramInfoLog, shader_objects.glGetInfoLogARB )
 glGetShaderInfoLog = alternate( GL.glGetShaderInfoLog, shader_objects.glGetInfoLogARB )
 
+glGetShaderiv = alternate( GL.glGetShaderiv, shader_objects.glGetObjectParameterivARB )
+
 GL_VALIDATE_STATUS = GL.GL_VALIDATE_STATUS
+GL_COMPILE_STATUS = GL.GL_COMPILE_STATUS
 GL_LINK_STATUS = GL.GL_LINK_STATUS
 GL_FALSE = GL.GL_FALSE
 
@@ -127,4 +130,12 @@ def compileShader( source, shaderType ):
 	shader = glCreateShader(shaderType)
 	glShaderSource( shader, source )
 	glCompileShader( shader )
+	result = glGetShaderiv( shader, GL_COMPILE_STATUS )
+	if not(result):
+		raise RuntimeError(
+			"""Shader compile failure (%s): %s"""%(
+				result,
+				glGetShaderInfoLog( shader ),
+			)
+		)
 	return shader
