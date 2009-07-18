@@ -9,17 +9,24 @@ from OpenGL import platform, arrays
 from OpenGL.constants import *
 from OpenGL import constant
 FUNCTION_TYPE = platform.PLATFORM.functionTypeFor( platform.GLUT )
+from OpenGL.GLUT import special
 
 import ctypes
 c_int = ctypes.c_int 
 c_char_p = ctypes.c_char_p
 c_ubyte = ctypes.c_ubyte
 c_void_p = ctypes.c_void_p
-from OpenGL.GLUT import special
+
+GLUT_DEBUG = constant.Constant( 'GLUT_DEBUG', 0x0001 )
+GLUT_FORWARD_COMPATIBLE = constant.Constant( 'GLUT_FORWARD_COMPATIBLE',  0x0002)
 
 GLUT_ACTION_EXIT = constant.Constant( 'GLUT_ACTION_EXIT', 0 )
 GLUT_ACTION_GLUTMAINLOOP_RETURNS = constant.Constant( 'GLUT_ACTION_GLUTMAINLOOP_RETURNS', 1 )
 GLUT_ACTION_CONTINUE_EXECUTION = constant.Constant( 'GLUT_ACTION_CONTINUE_EXECUTION', 2 )
+
+GLUT_INIT_MAJOR_VERSION = constant.Constant( 'GLUT_INIT_MAJOR_VERSION', 0x0200 )
+GLUT_INIT_MINOR_VERSION = constant.Constant( 'GLUT_INIT_MINOR_VERSION', 0x0201 )
+GLUT_INIT_FLAGS = constant.Constant( 'GLUT_INIT_FLAGS', 0x0202 )
 
 GLUT_CREATE_NEW_CONTEXT = constant.Constant( 'GLUT_CREATE_NEW_CONTEXT', 0 )
 GLUT_USE_CURRENT_CONTEXT = constant.Constant( 'GLUT_USE_CURRENT_CONTEXT', 1 )
