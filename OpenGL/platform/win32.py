@@ -8,10 +8,20 @@ class Win32Platform( baseplatform.BasePlatform ):
 	GLUT_GUARD_CALLBACKS = True
 	GL = OpenGL = ctypesloader.loadLibrary( ctypes.windll, 'opengl32', mode = ctypes.RTLD_GLOBAL )
 	GLU = ctypesloader.loadLibrary( ctypes.windll, 'glu32', mode = ctypes.RTLD_GLOBAL )
-	try:
-		GLUT = ctypesloader.loadLibrary( ctypes.windll, 'glut32', mode = ctypes.RTLD_GLOBAL )
-	except WindowsError, err:
-		GLUT = None
+	
+	GLUT = None 
+	for possible in ('glut32','freeglut32','freeglut'):
+		# load first-up of the possible names...
+		try:
+			GLUT = ctypesloader.loadLibrary( 
+				ctypes.windll, possible, mode = ctypes.RTLD_GLOBAL 
+			)
+		except WindowsError, err:
+			GLUT = None
+		else:
+			break
+	del possible 
+	
 	GLE = None
 	for libName in ('gle32','opengle32'):
 		try:
