@@ -3,8 +3,8 @@ from OpenGL.raw.GLUT import *
 
 from OpenGL.GLUT.special import *
 from OpenGL.GLUT.fonts import *
-try:
-	from OpenGL.GLUT.freeglut import *
-	HAVE_FREEGLUT = False
-except ImportError, err:
-	HAVE_FREEGLUT = True
+from OpenGL.GLUT.freeglut import *
+if glutLeaveMainLoop:
+	HAVE_FREEGLUT = True 
+else:
+	HAVE_FREEGLUT = False 
