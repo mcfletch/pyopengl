@@ -77,7 +77,8 @@ def compileProgram(*shaders):
 	
 	This convenience function is *not* standard OpenGL,
 	but it does wind up being fairly useful for demos 
-	and the like.
+	and the like.  You may wish to copy it to your code 
+	base to guard against PyOpenGL changes.
 	
 	Usage:
 	
@@ -93,6 +94,7 @@ def compileProgram(*shaders):
 		deleted from the GL.
 	
 	returns GLuint shader program reference
+	raises RuntimeError when a link/validation failure occurs
 	"""
 	program = glCreateProgram()
 	for shader in shaders:
@@ -123,7 +125,8 @@ def compileShader( source, shaderType ):
 	source -- GLSL source-code for the shader
 	shaderType -- GLenum GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc,
 	
-	returns GLuint compiled shader
+	returns GLuint compiled shader reference
+	raises RuntimeError when a compilation failure occurs
 	"""
 	if isinstance( source, (str,unicode)):
 		source = [ source ]
@@ -132,6 +135,8 @@ def compileShader( source, shaderType ):
 	glCompileShader( shader )
 	result = glGetShaderiv( shader, GL_COMPILE_STATUS )
 	if not(result):
+		# TODO: this will be wrong if the user has 
+		# disabled traditional unpacking array support.
 		raise RuntimeError(
 			"""Shader compile failure (%s): %s"""%(
 				result,
