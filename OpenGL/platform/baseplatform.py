@@ -8,7 +8,25 @@ from OpenGL import logs
 
 if top_level_module.FORWARD_COMPATIBLE_ONLY:
 	from OpenGL.platform import entrypoint31
-	
+
+class _CheckContext( object ):
+	def __init__( self, func, ccisvalid ):
+		self.func = func 
+		self.ccisvalid = ccisvalid
+	def __setattr__( self, key, value ):
+		if key not in ('func','ccisvalid'):
+			return setattr( self.func, key, value )
+		else:
+			self.__dict__[key] = value 
+	def __getattr__( self, key ):
+		if key != 'func':
+			return getattr(self.func, key )
+		raise AttributeError( key )
+	def __call__( self, *args, **named ):
+		if not self.ccisvalid():
+			from OpenGL import error
+			raise error.NoContext( self.func, args, named )
+		return self.func( *args, **named )
 
 class BasePlatform( object ):
 	"""Base class for per-platform implementations
@@ -70,6 +88,11 @@ class BasePlatform( object ):
 				# geometry, but that's all basically "maybe" stuff...
 				func.errcheck = error.glCheckError
 		return func
+	def wrapContextCheck( self, func, dll ):
+		"""Wrap function with context-checking if appropriate"""
+		if top_level_module.CONTEXT_CHECKING and dll is not self.GLUT:
+			return _CheckContext( func, self.CurrentContextIsValid )
+		return func 
 	def wrapLogging( self, func ):
 		"""Wrap function with logging operations if appropriate"""
 		return logs.logOnFail( func, logs.getLog( 'OpenGL.errors' ))
@@ -124,7 +147,12 @@ class BasePlatform( object ):
 		func.__name__ = functionName
 		func.DLL = dll
 		func.extension = extension
-		func = self.wrapLogging( self.errorChecking( func, dll ))
+		func = self.wrapLogging( 
+			self.wrapContextCheck(
+				self.errorChecking( func, dll ),
+				dll,
+			)
+		)
 		return func
 
 	def createBaseFunction( 

@@ -14,7 +14,16 @@ except ImportError, err:
 		array = None
 
 pygame.display.init()
+import OpenGL 
+OpenGL.CONTEXT_CHECKING = True
 from OpenGL.GL import *
+try:
+	glGetError()
+except error.NoContext, err:
+	# good, should have got this error 
+	pass
+else:
+	raise RuntimeError( """Did not catch invalid context!""" )
 from OpenGL import constants, error
 from OpenGL.GLU import *
 from OpenGL.arrays import arraydatatype

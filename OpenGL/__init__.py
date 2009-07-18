@@ -64,6 +64,18 @@ with these sets of flags.
 		
 		Default: False
 	
+	CONTEXT_CHECKING -- if set to True, PyOpenGL will wrap 
+		*every* GL and GLU call with a check to see if there 
+		is a valid context.  If there is no valid context 
+		then will throw OpenGL.errors.NoContext.  This is an 
+		*extremely* slow check and is not enabled by default,
+		intended to be enabled in order to track down (wrong)
+		code that uses GL/GLU entry points before the context 
+		has been initialized (something later Linux GLs are 
+		very picky about).
+		
+		Default: False
+	
 	STORE_POINTERS -- if set to True, PyOpenGL array operations 
 		will attempt to store references to pointers which are 
 		being passed in order to prevent memory-access failures 
@@ -162,6 +174,7 @@ WARN_ON_FORMAT_UNAVAILABLE = False
 FORWARD_COMPATIBLE_ONLY = False
 SIZE_1_ARRAY_UNPACK = True
 USE_ACCELERATE = True
+CONTEXT_CHECKING = False
 
 FULL_LOGGING = False 
 ALLOW_NUMPY_SCALARS = False
