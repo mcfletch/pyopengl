@@ -122,6 +122,7 @@ images.TYPE_TO_ARRAYTYPE.update( {
 	simple.GL_INT : simple.GL_INT,
 	simple.GL_FLOAT : simple.GL_FLOAT,
 	simple.GL_DOUBLE : simple.GL_DOUBLE,
+	simple.GL_BITMAP : simple.GL_UNSIGNED_BYTE,
 } )
 images.TIGHT_PACK_FORMATS.update({
 	simple.GL_UNSIGNED_BYTE_3_3_2 : 3,
@@ -136,6 +137,7 @@ images.TIGHT_PACK_FORMATS.update({
 	simple.GL_UNSIGNED_INT_8_8_8_8_REV : 4,
 	simple.GL_UNSIGNED_INT_10_10_10_2 : 4,
 	simple.GL_UNSIGNED_INT_2_10_10_10_REV : 4,
+	simple.GL_BITMAP: 8, # single bits, 8 of them...
 })
 
 images.RANK_PACKINGS.update( {
