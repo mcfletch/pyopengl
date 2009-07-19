@@ -34,7 +34,7 @@ IMPLEMENTATION_MODULES = [
     ('extensions','Utility code for accessing OpenGL extensions, including the "alternate" mechanism'),
     ('plugins','Trivial plugin mechanism, used to register new data-types'),
     ('arrays.vbo','Convenience module providing a Vertex Buffer Object abstraction layer'),
-    ('GL.shaders','Convenience module providing a GLSL Shader abstraction layer (alternate declarations)'),
+    ('GL.shaders','Convenience module providing a GLSL Shader abstraction layer (alternate declarations, convenience functions)'),
     #'Tk','GLX',
 ]   
 
