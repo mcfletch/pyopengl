@@ -28,13 +28,11 @@ class NoContext( Error ):
 class CopyError( Error ):
 	"""Raised to indicate that operation requires data-copying
 	
-	Currently only supported by the numpy array formathandler,
 	if you set:
-
-		OpenGL.arrays.numpymodule.NumpyHandler.ERROR_ON_COPY = True 
+		OpenGL.ERROR_ON_COPY = True 
 	
-	this error will be raised when the Numpy handler is passed
-	a numpy array that requires copying to be passed to ctypes.
+	before importing OpenGL.GL, this error will be raised when 
+	a passed argument would require a copy to be made.
 	"""
 
 class NullFunctionError( Error ):

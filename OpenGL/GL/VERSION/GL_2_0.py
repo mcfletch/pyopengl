@@ -232,3 +232,12 @@ def glVertexAttribPointer(
 		ArrayDatatype.voidDataPointer( array ) 
 	)
 	
+glDrawBuffers = wrapper.wrapper( 
+	glDrawBuffers,
+).setPyConverter('n').setCConverter(
+	'n', arrays.AsArrayTypedSize( 'bufs', arrays.GLenumArray ),
+).setPyConverter(
+	'bufs', arrays.AsArrayTyped( 'bufs', arrays.GLenumArray ),
+).setReturnValues(
+	wrapper.returnPyArgument( 'bufs' )
+)
