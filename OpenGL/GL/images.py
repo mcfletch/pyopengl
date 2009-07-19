@@ -268,21 +268,25 @@ for suffix,type in [
 	('ui',simple.GL_UNSIGNED_INT),
 	('us',simple.GL_UNSIGNED_SHORT),
 ]:
-	def glReadPixels( x,y,width,height,format,type=type ):
+	def glReadPixels( x,y,width,height,format,type=type, array=None ):
 		"""Read specified pixels from the current display buffer
 		
 		This typed version returns data in your specified default 
-		array data-type format
+		array data-type format, or in the passed array, which will 
+		be converted to the array-type required by the format.
 		"""
 		x,y,width,height = asInt(x),asInt(y),asInt(width),asInt(height)
-		array = images.SetupPixelRead( format, (width,height), type )
 		arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
-		imageData = arrayType.dataPointer(array)
+		if array is None:
+			array = images.SetupPixelRead( format, (width,height), type )
+		else:
+			array = arrayType.asArray( array )
+		imageData = arrayType.voidDataPointer( array )
 		simple.glReadPixels( 
 			x,y,
 			width, height,
 			format,type, 
-			ctypes.c_void_p( imageData )
+			imageData
 		)
 		return array
 	globals()["glReadPixels%s"%(suffix,)] = glReadPixels
@@ -318,13 +322,14 @@ for suffix,type in [
 ##	"%s = glGetTexImage"%(suffix)
 	del suffix,type
 # Now the real glReadPixels...
-def glReadPixels( x,y,width,height,format,type, outputType=str ):
+def glReadPixels( x,y,width,height,format,type, array=None, outputType=str ):
 	"""Read specified pixels from the current display buffer
 	
 	x,y,width,height -- location and dimensions of the image to read 
 		from the buffer
 	format -- pixel format for the resulting data
 	type -- data-format for the resulting data
+	array -- optional array/offset into which to store the value
 	outputType -- default (str) provides string output of the 
 		results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True 
 		and type == GL_UNSIGNED_BYTE.  Any other value will cause 
@@ -334,13 +339,17 @@ def glReadPixels( x,y,width,height,format,type, outputType=str ):
 	format, type and outputType
 	"""
 	x,y,width,height = asInt(x),asInt(y),asInt(width),asInt(height)
-	array = images.SetupPixelRead( format, (width,height), type )
+	
 	arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
-	imageData = arrayType.dataPointer(array)
+	if array is None:
+		array = images.SetupPixelRead( format, (width,height), type )
+	else:
+		array = arrayType.asArray( array )
+	imageData = arrayType.voidDataPointer( array )
 	simple.glReadPixels( 
 		x,y,width,height,
 		format,type, 
-		ctypes.c_void_p( imageData ) 
+		imageData
 	)
 	if outputType is str:
 		return images.returnFormat( array, type )

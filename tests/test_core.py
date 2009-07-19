@@ -536,6 +536,12 @@ class Tests( unittest.TestCase ):
 		assert not isinstance( readback_image1, str ), type(readback_image2)
 	
 	if array:
+		def test_glreadpixels_warray( self ):
+			"""SF#1311265 allow passing in the array object"""
+			width,height = self.width, self.height
+			data = zeros( (width,height,3), 'B' )
+			image1 = glReadPixelsub(0,0,width,height,GL_RGB,array=data)
+			
 		def test_mmap_data( self ):
 			"""Test that we can use mmap data array
 			
