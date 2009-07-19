@@ -85,8 +85,13 @@ def createTargetArray( format, dims, type ):
 	
 	If storage type requires > 1 unit per format pixel, then dims will be
 	extended by 1, so in the common case of RGB and GL_UNSIGNED_BYTE you 
-	will wind up with an array of dims + (3,) dimensions.  See COMPONENT_COUNTS
-	for table which controls which formats produce larger dimensions.
+	will wind up with an array of dims + (3,) dimensions.  See
+	COMPONENT_COUNTS for table which controls which formats produce
+	larger dimensions.  The secondary table TIGHT_PACK_FORMATS overrides 
+	this case, so that image formats registered as TIGHT_PACK_FORMATS
+	only ever return a dims-shaped value.  TIGHT_PACK_FORMATS will raise 
+	ValueErrors if they are used with a format that does not have the same 
+	number of components as they define.
 	
 	Note that the base storage type must provide a zeros method.  The zeros
 	method relies on their being a registered default array-implementation for 
@@ -97,9 +102,19 @@ def createTargetArray( format, dims, type ):
 	# a single pixel of format, that's the dimension of the resulting array
 	componentCount = formatToComponentCount( format )
 	if componentCount > 1:
-		# requires multiple elements to store a single pixel (common)
-		# e.g. byte array (typeBits = 8) with RGB (24) or RGBA (32)
-		dims += (componentCount, )
+		if type not in TIGHT_PACK_FORMATS:
+			# requires multiple elements to store a single pixel (common)
+			# e.g. byte array (typeBits = 8) with RGB (24) or RGBA (32)
+			dims += (componentCount, )
+		elif TIGHT_PACK_FORMATS[ type ] < componentCount:
+			raise ValueError(
+				"""Image type: %s supports %s components, but format %s requires %s components"""%(
+					type,
+					TIGHT_PACK_FORMATS[ type ],
+					format,
+					componentCount,
+				)
+			)
 	arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ TYPE_TO_ARRAYTYPE.get(type,type) ]
 	return arrayType.zeros( dims )
 
@@ -133,6 +148,8 @@ TYPE_TO_BITS = {
 }
 TYPE_TO_ARRAYTYPE = { 
 	# GL-image-storage-type-constant: GL-datatype (constant)
+}
+TIGHT_PACK_FORMATS = {
 }
 RANK_PACKINGS = {
 	# rank (integer): list of (function,**arg) to setup for that rank

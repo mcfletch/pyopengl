@@ -123,6 +123,21 @@ images.TYPE_TO_ARRAYTYPE.update( {
 	simple.GL_FLOAT : simple.GL_FLOAT,
 	simple.GL_DOUBLE : simple.GL_DOUBLE,
 } )
+images.TIGHT_PACK_FORMATS.update({
+	simple.GL_UNSIGNED_BYTE_3_3_2 : 3,
+	simple.GL_UNSIGNED_BYTE_2_3_3_REV : 3,
+	simple.GL_UNSIGNED_SHORT_4_4_4_4 : 4,
+	simple.GL_UNSIGNED_SHORT_4_4_4_4_REV : 4,
+	simple.GL_UNSIGNED_SHORT_5_5_5_1 : 4,
+	simple.GL_UNSIGNED_SHORT_1_5_5_5_REV : 4,
+	simple.GL_UNSIGNED_SHORT_5_6_5 : 3,
+	simple.GL_UNSIGNED_SHORT_5_6_5_REV : 3,
+	simple.GL_UNSIGNED_INT_8_8_8_8 : 4,
+	simple.GL_UNSIGNED_INT_8_8_8_8_REV : 4,
+	simple.GL_UNSIGNED_INT_10_10_10_2 : 4,
+	simple.GL_UNSIGNED_INT_2_10_10_10_REV : 4,
+})
+
 images.RANK_PACKINGS.update( {
 	4: [
 		(simple.glPixelStorei,simple.GL_PACK_SKIP_VOLUMES_SGIS, 0),
