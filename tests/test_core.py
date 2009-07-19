@@ -4,11 +4,9 @@ import logging
 logging.basicConfig()
 
 try:
-	raise ImportError( )
 	from numpy import *
 except ImportError, err:
 	try:
-		raise ImportError( )
 		from Numeric import *
 	except ImportError, err:
 		array = None
@@ -785,6 +783,59 @@ class Tests( unittest.TestCase ):
 		else:
 			assert not glShaderSource
 			assert not glUniform1f
+	
+	def test_tess_collection( self ):
+		"""SF#2354596 tessellation combine results collected"""
+		def tessvertex(vertex_data, polygon_data):
+			polygon_data.append(vertex_data)
+
+		def tesscombine(coords, vertex_data, weight):
+			return (True,coords)	# generated vertices marked as True
+
+		def tessedge(flag):
+			pass	# dummy
+		collected=[]	# collect triangle vertices
+
+		# set up tessellator in CSG intersection mode
+		tess=gluNewTess()
+		gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ABS_GEQ_TWO)
+		gluTessCallback(tess, GLU_TESS_VERTEX_DATA,  tessvertex)
+		gluTessCallback(tess, GLU_TESS_COMBINE,      tesscombine)
+		gluTessCallback(tess, GLU_TESS_EDGE_FLAG,    tessedge)	# no strips
+
+		gluTessBeginPolygon(tess, collected)
+
+		# First square
+		gluTessBeginContour(tess)
+		gluTessVertex(tess, [-1,0,-1], (False,[-1,0,-1]))
+		gluTessVertex(tess, [ 1,0,-1], (False,[ 1,0,-1]))
+		gluTessVertex(tess, [ 1,0, 1], (False,[ 1,0, 1]))
+		gluTessVertex(tess, [-1,0, 1], (False,[-1,0, 1]))
+		gluTessEndContour(tess)
+
+		# Second square, intersects with first
+		gluTessBeginContour(tess)
+		gluTessVertex(tess, [0.5,0,-0.5], (False,[0.5,0,-0.5]))
+		gluTessVertex(tess, [1.5,0,-0.5], (False,[1.5,0,-0.5]))
+		gluTessVertex(tess, [1.5,0, 0.5], (False,[1.5,0, 0.5]))
+		gluTessVertex(tess, [0.5,0, 0.5], (False,[0.5,0, 0.5]))
+		gluTessEndContour(tess)
+
+		gluTessEndPolygon(tess)
+
+		# Show collected triangle vertices :-
+		# Original input vertices are marked as False.
+		# Vertices generated in combine callback are marked as True.
+		assert collected
+	
+	def test_get_boolean_bitmap( self ):
+		# should not raise error
+		value = glGetBoolean(GL_TEXTURE_2D)
+	if array:
+		def test_draw_bitmap_pixels( self ):
+			"""SF#2152623 Drawing pixels as bitmaps (bits)"""
+			pixels = array([0,0,0,0,0,0,0,0],'B')
+			glDrawPixels( 8,8, GL_COLOR_INDEX, GL_BITMAP, pixels )
 		
 if __name__ == "__main__":
 	unittest.main()
