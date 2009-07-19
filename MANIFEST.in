@@ -6,3 +6,4 @@ include src/*.c
 include tests/*.py tests/*.png
 include metadata.py
 include OpenGL/DLLS/*
+include license.txt
