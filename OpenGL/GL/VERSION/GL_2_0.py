@@ -17,7 +17,7 @@ from OpenGL.GL.ARB.shader_objects import glGetInfoLogARB as glGetInfoLog
 from OpenGL.lazywrapper import lazy
 
 from OpenGL import converters, error, contextdata
-from OpenGL.arrays.arraydatatype import ArrayDatatype
+from OpenGL.arrays.arraydatatype import ArrayDatatype, GLenumArray
 GL_INFO_LOG_LENGTH = constant.Constant( 'GL_INFO_LOG_LENGTH', 0x8B84 )
 
 glShaderSource = platform.createExtensionFunction( 
@@ -231,13 +231,18 @@ def glVertexAttribPointer(
 		normalized, stride, 
 		ArrayDatatype.voidDataPointer( array ) 
 	)
+
+@lazy( glDrawBuffers )
+def glDrawBuffers( baseOperation, n=None, bufs=None ):
+	"""glDrawBuffers( bufs ) -> bufs 
 	
-glDrawBuffers = wrapper.wrapper( 
-	glDrawBuffers,
-).setPyConverter('n').setCConverter(
-	'n', arrays.AsArrayTypedSize( 'bufs', arrays.GLenumArray ),
-).setPyConverter(
-	'bufs', arrays.AsArrayTyped( 'bufs', arrays.GLenumArray ),
-).setReturnValues(
-	wrapper.returnPyArgument( 'bufs' )
-)
+	Wrapper will calculate n from dims of bufs if only 
+	one argument is provided...
+	"""
+	if bufs is None:
+		bufs = n
+		n = None
+	bufs = arrays.GLenumArray.asArray( bufs )
+	if n is None:
+		n = arrays.GLenumArray.arraySize( bufs )
+	return baseOperation( n,bufs )
