@@ -1,7 +1,22 @@
 /* OpenGLContext shader tutorial stylesheet */
 
+body {
+	background-color: black;
+	color: white;
+	font-family: arial, helvetica;
+}
+
+h1 {
+	font-size: 110%;
+	padding: .25em;
+	margin: 0;
+}
+
 .commentary {
-	background-color: #f0f0f0;
+	background-color: #003000;
+	margin: 2em;
+	padding: 1em;
+	border: thin blue solid;
 }
 .commentary div {
 	margin-top: .5em;
@@ -9,7 +24,19 @@
 }
 
 .code-sample {
-	color: #000030;
-	background-color: #f0f0c0;
+	color: black;
+	background-color: white;
 	white-space: pre;
+	margin-left: 3em;
+	margin-right: 3em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+
+a {
+	text-decoration: none;
+	color: cyan;
+}
+.metadata {
+	font-size: 50%;
 }
