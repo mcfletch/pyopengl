@@ -38,5 +38,10 @@ a {
 	color: cyan;
 }
 .metadata {
+	margin-top: 2em;
 	font-size: 50%;
+}
+
+img {
+	float: right;
 }
