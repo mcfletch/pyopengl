@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>Shader-based Rendering: Varying Values</title>
+    <link href="./tutorial.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<table width="100%"><thead>
+	<tr>
+		<td width="8em;"></td><th align="center"><a href="index.html">OpenGLContext Python tutorials</a></th><td width="8em;"></td>
+	</tr>
+	<tr>
+	<td><a href="shader_1.xhtml">Previous</a></td>
+	<td align="center">Shader-based Rendering: Varying Values</td>
+	<td align="right"><a href="index.html">Index</a></td>
+	</tr>
+</thead></table>
+	<div class="code-sample">#! /usr/bin/env python
+</div>
+	<div class="commentary">
+	<h1 class="title">Shader-based Rendering: Varying Values</h1>
+	<div class="paragraph">
+	<img src="shader_2.py-screen-0001.png" alt="Screenshot" class="" />
+</div>
+	<div class="paragraph">This tutorial builds on the previous tutorial by:</div>
+	<ul class="">
+	<li class="">using varying values to communicate between 	vertex and fragment shaders </li>
+	<li class="">catching compilation errors in your shaders </li>
+	<li class="">packing both vertex and colour values into a single VBO </li>
+	<li class="">enabling vertex arrays with strides</li>
+	<li class="">enabling color arrays (legacy approach)</li>
+</ul>
+	<div class="paragraph">Our imports for this tutorial look pretty much the same as 
+for the last tutorial, so we can ignore them.  If you don't
+recognize something, go back to the previous tutorial's 
+introduction.
+</div>
+</div>
+	<div class="code-sample">from OpenGLContext import testingcontext
+BaseContext, MainFunction = testingcontext.getInteractive()
+from OpenGL.GL import *
+from OpenGL.arrays import vbo
+from OpenGLContext.arrays import *
+from OpenGL.GL.shaders import *
+class TestContext( BaseContext ):
+	"""This shader just passes gl_Color from an input array to 
+	the fragment shader, which interpolates the values across the 
+	face (via a "varying" data type).
+	"""
+	def OnInit( self ):
+		"""Initialize the context once we have a valid OpenGL environ"""
+</div>
+	<div class="commentary">
+	<h1 class="title">Aside: Compilation Errors</h1>
+	<div class="paragraph">As we get more and more complex shaders, you are inevitably
+going to run into situations where your shaders have compilation 
+errors and need to be debugged.  The PyOpenGL convenience 
+wrappers for shaders will raise a RuntimeError instance when/if 
+shader compilation fails.  The second argument to the RuntimeError
+will be the source-code that was being compiled when the failure 
+occurred.  Normally the Python traceback of this error will be 
+sufficient to help you track down the problem (with the appropriate
+references, of course).</div>
+</div>
+	<div class="code-sample">		try:
+			compileShader( """ void main() { """, GL_VERTEX_SHADER )
+		except RuntimeError, err:
+			print 'Example of shader compile error', err 
+		else:
+			raise RuntimeError( """Didn't catch compilation error!""" )
+</div>
+	<div class="commentary">
+	<h1 class="title">Varying Values</h1>
+	<div class="paragraph">In our previous tutorial, we calculated the colour of each 
+fragment as a constant colour (green).  Now we are going to 
+make each vertex a different colour and allow the GL to 
+interpolate between those colours.</div>
+	<div class="paragraph">We are going to use the legacy OpenGL colour for our vertices,
+that is, the colour that would normally be provided to the 
+legacy (fixed-function) pipeline.  This value shows up as the 
+built-in vec4 "gl_Color".  Within the vertex shader, each call 
+of the vertex shader will have gl_Color assigned.</div>
+	<div class="paragraph">To communicate the colour for each vertex to the fragment 
+shader, we need to define a "varying" variable.  A varying 
+variable is interpolated across the triangle for each fragment,
+taking the perspectivally correct blended value for the vertices
+which make up each corner of the triangle.  Thus if we were to 
+define one vertex as being black and another as white, the
+fragments generated for the area between them would fade from 
+black to white (via grey).</div>
+	<div class="paragraph">You will note that we define the varying value *outside* the main 
+function.  The varying value can be loosely thought of as being 
+declared a "global" so that it can be seen in both shaders.  
+However, the varying value is is being processed by intermediate
+clipping and interpolation processes.
+</div>
+</div>
+	<div class="code-sample">		vertex = compileShader(
+			"""
+			varying vec4 vertex_color;
+			void main() {
+				gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+				vertex_color = gl_Color;
+			}""",GL_VERTEX_SHADER)
+</div>
+	<div class="commentary">
+	<div class="paragraph">Our fragment shader, again, declares the vertex_color
+		varying value.  Since we would like the final fragment 
+		colour to be the interpolated colour between our vertices,
+		we can simply assign vertex_color to gl_FragColor.</div>
+</div>
+	<div class="code-sample">		fragment = compileShader("""
+			varying vec4 vertex_color;
+			void main() {
+				gl_FragColor = vertex_color;
+			}""",GL_FRAGMENT_SHADER)
+		self.shader = compileProgram(vertex,fragment)
+</div>
+	<div class="commentary">
+	<div class="paragraph">Our geometry now has two components for every vertex,
+		the first is the vertex position, which is the same set of 
+		values as we saw in our previous tutorial.  The first three 
+		floats in each vertex (row) are the position.   The last 
+		three values represent the colours of each vertex.  Thus 
+		the triangle (the first three vertices) will blend from 
+		red to yellow to cyan.</div>
+	<div class="paragraph">As noted in the previous tutorial, this "packed" format 
+tends to be more efficient on modern hardware than having 
+separate data-arrays for each type of data.
+</div>
+</div>
+	<div class="code-sample">		self.vbo = vbo.VBO(
+			array( [
+				[  0, 1, 0,  0,1,0 ],
+				[ -1,-1, 0,  1,1,0 ],
+				[  1,-1, 0,  0,1,1 ],
+				[  2,-1, 0,  1,0,0 ],
+				[  4,-1, 0,  0,1,0 ],
+				[  4, 1, 0,  0,0,1 ],
+				[  2,-1, 0,  1,0,0 ],
+				[  4, 1, 0,  0,0,1 ],
+				[  2, 1, 0,  0,1,1 ],
+			],'f')
+		)
+	def Render( self, mode):
+		"""Render the geometry for the scene."""
+		BaseContext.Render( self, mode )
+</div>
+	<div class="commentary">
+	<div class="paragraph">As before, we need to enable the use of our compiled shaders
+		and make our VBO active so that array-specification routines 
+		will use the VBO as the source for our geometric data.</div>
+</div>
+	<div class="code-sample">		glUseProgram(self.shader)
+		try:
+			self.vbo.bind()
+			try:
+</div>
+	<div class="commentary">
+	<div class="paragraph">Since we want to provide both position and colour 
+				arrays to the shader, we need to enable two different 
+				arrays.  These two built-in arrays map to the built-in
+				gl_Vertex and gl_Color "attribute" variables we are
+				using in our vertex shader.</div>
+	<div class="paragraph">These "enables" tell OpenGL that for each vertex we 
+render, we would like to read one record from the 
+enabled arrays.  If we were to do this without specifying 
+the arrays, OpenGL would likely seg-fault our program
+as it tried to access NULL memory locations.
+</div>
+</div>
+	<div class="code-sample">				glEnableClientState(GL_VERTEX_ARRAY);
+				glEnableClientState(GL_COLOR_ARRAY);
+</div>
+	<div class="commentary">
+	<div class="paragraph">We are using the "full" form of the array-definition
+				calls here, as we want to be able to specify "strides" 
+				across the data-arrays.  The arguments to the pointer
+				definition calls are:</div>
+	<ul class="">
+	<li class="">size -- number of values in each record </li>
+	<li class="">type -- constant defining the type of value for 	each item in the record </li>
+	<li class="">stride -- number of bytes between the start of 	each consecutive record, in our case we have 	6 32-bit floating-point values in each record,	for a total of 4*6 == 24 bytes between records.</li>
+	<li class="">pointer -- reference to the data we wish to use 	for this array </li>
+</ul>
+	<div class="paragraph">The vertex pointer is passed a reference to our VBO,
+which tells OpenGL to read from the currently-bound VBO.
+Under the covers, the VBO wrapper is simply passing a 
+NULL pointer to the GL.
+</div>
+</div>
+	<div class="code-sample">				glVertexPointer(3, GL_FLOAT, 24, self.vbo )
+</div>
+	<div class="commentary">
+	<div class="paragraph">The colour pointer also wants to read data from the 
+				VBO, but it needs to begin reading each record from a 
+				point which is 3 floating-point values (the width of the 
+				position information) after where the position pointer 
+				gets its value.</div>
+	<div class="paragraph">Since the definition of the array includes the step
+between elements, we ask OpenGL to begin calculating the
+addresses from which to read the colour information at 
+the beginning of the current VBO + 12 bytes.  Under the 
+covers, the VBO wrapper is simply passing a void pointer 
+to the address 12 to the GL.
+</div>
+</div>
+	<div class="code-sample">				glColorPointer(3, GL_FLOAT, 24, self.vbo+12 )
+</div>
+	<div class="commentary">
+	<div class="paragraph">We now trigger our drawing operation and cleanup 
+				in the same way as we have seen before.</div>
+</div>
+	<div class="code-sample">				glDrawArrays(GL_TRIANGLES, 0, 9)
+			finally:
+				self.vbo.unbind()
+		finally:
+			glUseProgram( 0 )
+if __name__ == "__main__":
+	MainFunction ( TestContext)
+</div>
+	<div class="commentary">
+	<div class="paragraph">
+Terms:</div>
+	<ul class="">
+	<li class="">interpolate -- create new data-values by blending other values </li>
+</ul>
+</div>
+<table width="100%"><thead>
+	<tr>
+		<td width="8em;"></td><th align="center"><a href="index.html">OpenGLContext Python tutorials</a></th><td width="8em;"></td>
+	</tr>
+	<tr>
+	<td><a href="shader_1.xhtml">Previous</a></td>
+	<td align="center">Shader-based Rendering: Varying Values</td>
+	<td align="right"><a href="index.html">Index</a></td>
+	</tr>
+</thead></table>
+<div class="metadata">This document was generated by <code>bzr branch http://bazaar.launchpad.net/%7Emcfletch/pyopengl/directdocs/</code> on 2009-07-20T00:35:03.817371 from shader_2.py</div>
+</body>
+</html>
