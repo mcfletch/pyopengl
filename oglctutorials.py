@@ -14,24 +14,51 @@ markup_re = re.compile(
 	r"""\[(?P<url>[^ ]+)[ ]+(?P<link_text>[^]]+)\]"""
 )
 image_extensions = [ '.png','.jpg','.bmp','.tif' ]
-OUTPUT_DIRECTORY='tutorials'
 
-def generate( tutorial, prev=None, next=None ):
-	serial = kid.XHTMLSerializer( decl=True )
+import OpenGLContext
+test_dir = os.path.join(
+	os.path.dirname( OpenGLContext.__file__ ),
+	'..',
+	'tests',
+)
+
+OUTPUT_DIRECTORY=os.path.join(
+	os.path.dirname( OpenGLContext.__file__ ),
+	'..',
+	'docs',
+	'tutorials',
+)
+if not os.path.isdir( OUTPUT_DIRECTORY ):
+	os.makedirs( OUTPUT_DIRECTORY )
+
+serial = kid.XHTMLSerializer( decl=True )
+
+def generate_index( paths ):
+	"""Generate index file for given paths"""
+	next = paths[0].children[0]
+	prev = paths[-1].children[-1]
+	
+	template = kid.Template( 
+		file='templates/tutorialindex.kid', 
+		paths=paths,
+		next = next,
+		prev = prev,
+		date=datetime.datetime.now().isoformat(),
+	)
+	data = template.serialize( output=serial )
+	html_file = os.path.join( OUTPUT_DIRECTORY, 'index.xhtml' )
+	print 'writing', html_file
+	open( html_file, 'w').write( data )
+	
+
+def generate( tutorial, prev=None, next=None, path=None ):
 	template = kid.Template( 
 		file='templates/tutorial.kid', 
 		tutorial = tutorial,
 		date=datetime.datetime.now().isoformat(),
+		path = path,
 		prev=prev,
 		next=next,
-		Code = Code,
-		Commentary = Commentary,
-		Block = Block,
-		Grouping = Grouping,
-		Title = Title,
-		Tutorial = Tutorial,
-		UL = UL,
-		LI = LI,
 	)
 	data = template.serialize( output=serial )
 	print 'writing', tutorial.html_file
@@ -91,7 +118,20 @@ class Block( object ):
 class Grouping( Block ):
 	def __init__( self,*args,**named ):
 		super( Grouping, self ).__init__(*args,**named)
-		self.children = []
+		if self.children is None:
+			self.children = []
+
+class TutorialPath( Grouping ):
+	"""Path through a series of tutorials"""
+	def generate_children( self ):
+		first = self.children
+		for i in range( len(first)):
+			next = prev = None
+			if i > 0:
+				prev = first[i-1]
+			if i < len(first)-1:
+				next = first[i+1]
+			generate( first[i], next=next,prev=prev, path=self )
 
 class Tutorial( Grouping ):
 	html_tag = 'body'
@@ -195,25 +235,30 @@ def parse_file( filename ):
 	return tutorial
 
 if __name__ == "__main__":
-	import OpenGLContext
-	dir = os.path.join(
-		os.path.dirname( OpenGLContext.__file__ ),
-		'..',
-		'tests',
+	shaders = TutorialPath( 
+		"Introduction to Shaders",
+		children =[
+			parse_file( os.path.join( test_dir,name ))
+			for name in [
+				'shader_1.py',
+				'shader_2.py',
+				'shader_3.py',
+				'shader_4.py',
+			]
+		] 
 	)
-	first = [
-		'shader_1.py',
-		'shader_2.py',
-		'shader_3.py',
-	]
-	first = [
-		parse_file( os.path.join( dir,name ))
-		for name in first 
-	]
-	for i in range( len(first)):
-		next = prev = None
-		if i > 0:
-			prev = first[i-1]
-		if i < len(first)-1:
-			next = first[i+1]
-		generate( first[i], next=next,prev=prev )
+	nehe = TutorialPath( 
+		"NeHe Translations",
+		children =[
+			parse_file( os.path.join( test_dir,name ))
+			for name in [
+				'nehe1.py',
+				'nehe2.py',
+			]
+		] 
+	)
+	paths = [shaders,nehe]
+	generate_index( paths = paths )
+	for path in paths:
+		path.generate_children()
+		
