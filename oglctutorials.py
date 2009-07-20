@@ -201,12 +201,15 @@ if __name__ == "__main__":
 		'..',
 		'tests',
 	)
-	first = ['shader_1.py','shader_2.py']
+	first = [
+		'shader_1.py',
+		'shader_2.py',
+		'shader_3.py',
+	]
 	first = [
 		parse_file( os.path.join( dir,name ))
 		for name in first 
 	]
-	assert len(first) == 2
 	for i in range( len(first)):
 		next = prev = None
 		if i > 0:
