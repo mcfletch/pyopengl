@@ -254,6 +254,7 @@ if __name__ == "__main__":
 			for name in [
 				'nehe1.py',
 				'nehe2.py',
+				'nehe3.py',
 			]
 		] 
 	)
