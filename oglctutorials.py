@@ -13,18 +13,17 @@ empty_line_matcher = re.compile(r"""[ \t]*\n""",re.MULTILINE|re.I|re.DOTALL)
 markup_re = re.compile(
 	r"""\[(?P<url>[^ ]+)[ ]+(?P<link_text>[^]]+)\]"""
 )
+image_extensions = [ '.png','.jpg','.bmp','.tif' ]
+OUTPUT_DIRECTORY='tutorials'
 
-def generate( filename, OUTPUT_DIRECTORY='tutorials' ):
-	base = os.path.basename( filename )
-	root = os.path.splitext( base )[0]
-	html_file = os.path.join( OUTPUT_DIRECTORY, '%s.xhtml'%(root) )
-	tutorial = parse_file( filename )
-	
+def generate( tutorial, prev=None, next=None ):
 	serial = kid.XHTMLSerializer( decl=True )
 	template = kid.Template( 
 		file='templates/tutorial.kid', 
 		tutorial = tutorial,
 		date=datetime.datetime.now().isoformat(),
+		prev=prev,
+		next=next,
 		Code = Code,
 		Commentary = Commentary,
 		Block = Block,
@@ -35,7 +34,8 @@ def generate( filename, OUTPUT_DIRECTORY='tutorials' ):
 		LI = LI,
 	)
 	data = template.serialize( output=serial )
-	open( html_file, 'w').write( data )
+	print 'writing', tutorial.html_file
+	open( tutorial.html_file, 'w').write( data )
 
 
 class Block( object ):
@@ -68,9 +68,14 @@ class Block( object ):
 					children[-1].tail += text[offset:match.start()]
 			offset = match.end()
 			if match.group( 'url' ):
-				children.append( Anchor( 
+				url = match.group( 'url' )
+				cls = Anchor
+				for suffix in image_extensions:
+					if url.endswith( suffix ):
+						cls = Image
+				children.append( cls( 
 					match.group( 'link_text' ),
-					match.group( 'url' ),
+					url,
 				))
 			else:
 				raise RuntimeError( "Unknown markup: %s", text )
@@ -100,6 +105,14 @@ class Tutorial( Grouping ):
 					if isinstance( child, Title ):
 						return child.text 
 		return "No title found"
+	def set_file( self, filename ):
+		base = os.path.basename( filename )
+		self.filename = base
+		root = os.path.splitext( base )[0]
+		self.html_file = os.path.join( 
+			OUTPUT_DIRECTORY, '%s.xhtml'%(root) 
+		)
+		self.relative_link = '%s.xhtml'%( root, )
 
 class Title( Block ):
 	html_tag = 'h1'
@@ -136,6 +149,8 @@ class Code( Block ):
 	"""Used for machine-executable code"""
 	html_tag = 'div'
 	html_class = 'code-sample'
+	def markup( self, text ):
+		return text, None
 class Paragraph( Block ):
 	"""Generic paragraph in commentary"""
 	html_tag = 'div'
@@ -154,22 +169,48 @@ class Anchor( Block ):
 		super( Anchor, self ).__init__( text )
 		self.url = url 
 
+class Image( Anchor ):
+	html_tag = 'img'
+	
+
 def parse_file( filename ):
 	text = open( filename ).read()
 	tutorial = Tutorial()
-	tutorial.filename = os.path.basename( filename  )
+	tutorial.set_file( filename )
 	offset = 0
 	for match in text_re.finditer( text ):
 		py_text = text[ offset: match.start()]
 		empty_match = empty_line_matcher.match( py_text )
 		if empty_match:
 			py_text = py_text[empty_match.end():]
-		if py_text:
+		if py_text.strip():
 			tutorial.children.append( Code( py_text ) )
-		tutorial.children.append( Commentary( match.group('commentary') ) )
+		if match.group( 'commentary' ).strip():
+			tutorial.children.append( 
+				Commentary( match.group('commentary') ) 
+			)
 		offset = match.end()
-	tutorial.children.append( Code( text[ offset:] ) )
+	if text[offset:].strip():
+		tutorial.children.append( Code( text[ offset:] ) )
 	return tutorial
 
 if __name__ == "__main__":
-	generate(  os.path.expanduser(sys.argv[1]) )
+	import OpenGLContext
+	dir = os.path.join(
+		os.path.dirname( OpenGLContext.__file__ ),
+		'..',
+		'tests',
+	)
+	first = ['shader_1.py','shader_2.py']
+	first = [
+		parse_file( os.path.join( dir,name ))
+		for name in first 
+	]
+	assert len(first) == 2
+	for i in range( len(first)):
+		next = prev = None
+		if i > 0:
+			prev = first[i-1]
+		if i < len(first)-1:
+			next = first[i+1]
+		generate( first[i], next=next,prev=prev )
