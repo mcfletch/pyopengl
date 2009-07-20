@@ -13,13 +13,12 @@ else:
 import sys, os
 sys.path.insert(0, '.' )
 
-def is_package( path ):
-	return os.path.isfile( os.path.join( path, '__init__.py' ))
-def find_packages( root ):
-	"""Find all packages under this directory"""
-	for path, directories, files in os.walk( root ):
-		if is_package( path ):
-			yield path.replace( '/','.' )
+version = None
+# get version from __init__.py
+for line in open( '__init__.py' ):
+	if line.startswith( '__version__' ):
+		version = eval(line.split( '=' )[1].strip())
+assert version, """Couldn't determine version string!"""
 
 extensions = [
 ]
@@ -101,7 +100,7 @@ if __name__ == "__main__":
 			"""Topic :: Multimedia :: Graphics :: 3D Rendering""",
 			"""Intended Audience :: Developers""",
 		],
-		'keywords': 'PyOpenGL,accelerate',
+		'keywords': 'PyOpenGL,accelerate,Cython',
 		'long_description' : """Acceleration code for PyOpenGL
 
 This set of C extensions provides acceleration of common operations
@@ -116,15 +115,17 @@ for slow points in PyOpenGL 3.x
 		}
 	setup (
 		name = "PyOpenGL-accelerate",
-		version = "1.0.0b1",
+		version = version,
 		description = "Acceleration code for PyOpenGL",
 		author = "Mike C. Fletcher",
 		author_email = "mcfletch@vrplumber.com",
 		url = "http://pyopengl.sourceforge.net",
 		download_url = "http://sourceforge.net/project/showfiles.php?group_id=5988",
 		license = 'BSD',
-		packages = list(find_packages( 'OpenGL_accelerate')),
-		# non python files of examples      
+		packages = ['OpenGL_accelerate'],
+		package_dir = {
+			'OpenGL_accelerate':'.',
+		},
 		ext_modules=extensions,
 		**extraArguments
 	)
