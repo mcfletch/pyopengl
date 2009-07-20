@@ -1,12 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://purl.org/kid/ns#">
 <table width="100%" py:def="navtable()"><thead>
 	<tr>
-		<td width="8em;"/><th align="center"><a href="index.html">OpenGLContext Python tutorials</a></th><td width="8em;"/>
+		<td width="8em;"/><th align="center"><a href="index.xhtml">OpenGLContext Python tutorials</a></th><td width="8em;"/>
 	</tr>
 	<tr>
-	<td><a py:if="prev" href="${prev.relative_link}">Previous</a><a py:if="not prev" href="index.html">Index</a></td>
-	<td align="center">${tutorial.title}</td>
-	<td align="right"><a py:if="next" href="${next.relative_link}">Next</a><a py:if="not next" href="index.html">Index</a></td>
+	<td><a py:if="prev" href="${prev.relative_link}">Previous</a><a py:if="not prev" href="index.xhtml">Index</a></td>
+	<td align="center">${path.text}: ${tutorial.title}</td>
+	<td align="right"><a py:if="next" href="${next.relative_link}">Next</a><a py:if="not next" href="index.xhtml">Index</a></td>
 	</tr>
 </thead></table>
 
@@ -22,7 +22,7 @@
 	${node.tail}
 </div>
 <head>
-    <title>${tutorial.title}</title>
+    <title>${path.text}: ${tutorial.title}</title>
     <link rel="stylesheet" href="./tutorial.css" type="text/css" />
 </head>
 <body>
