@@ -138,9 +138,10 @@ def compileShader( source, shaderType ):
 		# TODO: this will be wrong if the user has 
 		# disabled traditional unpacking array support.
 		raise RuntimeError(
-			"""Shader compile failure (%s): %s"""%(
+			"""Shader compile failure (%s): %s\n%s"""%(
 				result,
 				glGetShaderInfoLog( shader ),
+				source,
 			)
 		)
 	return shader
