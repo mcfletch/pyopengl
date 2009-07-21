@@ -23,7 +23,7 @@ cdef class NumpyHandler(FormatHandler):
 	cdef public dict array_to_gl_constant
 	cdef public dict gl_constant_to_array
 	isOutput = True
-	HANDLED_TYPES = (np.ndarray,)
+	HANDLED_TYPES = (np.ndarray,np.number)
 	
 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):
 		if ERROR_ON_COPY is None:

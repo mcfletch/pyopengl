@@ -68,7 +68,7 @@ if NumpyHandler is None:
 				if we have to copy an array object in order to produce
 				a contiguous array of the correct type.
 		"""
-		HANDLED_TYPES = (numpy.ndarray,)# list, tuple )
+		HANDLED_TYPES = (numpy.ndarray,numpy.number)# list, tuple )
 		dataPointer = dataPointer
 		isOutput = True
 		ERROR_ON_COPY = OpenGL.ERROR_ON_COPY
