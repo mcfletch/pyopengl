@@ -19,20 +19,36 @@ GL_DOUBLE = Constant( 'GL_DOUBLE', 0x140a )
 GL_CHAR = str
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
 
+ctypes_version = [int(i) for i in ctypes.__version__.split('.')[:3]]
+
 # Basic OpenGL data-types as ctypes declarations...
 def _defineType( name, baseType, convertFunc = long ):
-	import OpenGL 
-	if OpenGL.ALLOW_NUMPY_SCALARS:
+	import OpenGL
+	do_wrapping = (
+		OpenGL.ALLOW_NUMPY_SCALARS or # explicitly require
+		(( # or we are using Python 2.5.x ctypes which doesn't support uint type numpy scalars
+			ctypes_version < [1,1,0]
+			and baseType in (ctypes.c_uint,ctypes.c_uint64,ctypes.c_ulong,ctypes.c_ushort)
+		) or
+		( # or we are using Python 2.5.x (x < 2) ctypes which doesn't support any numpy int scalars
+			ctypes_version < [1,0,2]
+			and baseType in (ctypes.c_int,ctypes.c_int64,ctypes.c_long,ctypes.c_short)
+		))
+	)
+	if do_wrapping:
 		original = baseType.from_param
-		def from_param( x, typeCode=None ):
-			try:
-				return original( x )
-			except TypeError, err:
+		if not getattr( original, 'from_param_numpy_scalar', False ):
+			def from_param( x, typeCode=None ):
 				try:
-					return original( convertFunc(x) )
-				except TypeError, err2:
-					raise err
-		setattr( baseType, 'from_param', staticmethod( from_param ) )
+					return original( x )
+				except TypeError, err:
+					try:
+						return original( convertFunc(x) )
+					except TypeError, err2:
+						raise err
+			from_param = staticmethod( from_param )
+			setattr( baseType, 'from_param', from_param )
+			baseType.from_param_numpy_scalar = True
 		return baseType
 	else:
 		return baseType
@@ -53,25 +69,25 @@ GLdouble_4 = GLdouble * 4
 GLbyte = ctypes.c_byte
 GLshort = _defineType( 'GLshort', ctypes.c_short, int )
 GLint = _defineType( 'GLint', ctypes.c_int, int )
-GLuint = _defineType( 'GLuint', ctypes.c_uint )
+GLuint = _defineType( 'GLuint', ctypes.c_uint, long )
 
 GLsizei = _defineType( 'GLsizei', ctypes.c_int, int )
 
 GLubyte = ctypes.c_ubyte
 GLubyte_3 = GLubyte * 3
 GLushort = _defineType( 'GLushort', ctypes.c_ushort, int )
-GLhandleARB = _defineType( 'GLhandleARB', ctypes.c_uint )
-GLhandle = _defineType( 'GLhandle', ctypes.c_uint )
+GLhandleARB = _defineType( 'GLhandleARB', ctypes.c_uint, long )
+GLhandle = _defineType( 'GLhandle', ctypes.c_uint, long )
 
 GLchar = GLcharARB = ctypes.c_char
 
-GLbitfield = _defineType( 'GLbitfield', ctypes.c_uint )
+GLbitfield = _defineType( 'GLbitfield', ctypes.c_uint, long )
 
 GLclampd = _defineType( 'GLclampd', ctypes.c_double, float )
 GLclampf = _defineType( 'GLclampf', ctypes.c_float, float )
 
-GLuint64 = GLuint64EXT = ctypes.c_uint64
-GLint64 = GLint64EXT = ctypes.c_int64
+GLuint64 = GLuint64EXT = _defineType('GLuint64', ctypes.c_uint64, long )
+GLint64 = GLint64EXT = _defineType('GLint64', ctypes.c_int64, long )
 
 # ptrdiff_t, actually...
 GLsizeiptrARB = GLsizeiptr = GLsizei
