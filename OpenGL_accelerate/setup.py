@@ -123,6 +123,11 @@ for slow points in PyOpenGL 3.x
 		download_url = "http://sourceforge.net/project/showfiles.php?group_id=5988",
 		license = 'BSD',
 		packages = ['OpenGL_accelerate'],
+		options = {
+			'sdist': {
+				'formats': ['gztar','zip'],
+			},
+		},
 		package_dir = {
 			'OpenGL_accelerate':'.',
 		},
