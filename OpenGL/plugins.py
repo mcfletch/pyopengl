@@ -38,9 +38,11 @@ class PlatformPlugin( Plugin ):
 		
 		key -- (sys.platform,os.name) key to load 
 		"""
-		for plugin in cls.registry:
-			if plugin.name in key:
-				return plugin
+		for possible in key:
+			# prefer sys.platform, *then* os.name
+			for plugin in cls.registry:
+				if plugin.name == possible:
+					return plugin
 		raise KeyError( """No platform plugin registered for %s"""%(key,))
 
 class FormatHandler( Plugin ):
