@@ -13,5 +13,5 @@ try:
 	else:
 		raise ImportError( """Acceleration disabled""" )
 except ImportError, err:
-	log.info( """No OpenGL_accelerate module found""" )
+	log.info( """No OpenGL_accelerate module loaded: %s""", err )
 	ACCELERATE_AVAILABLE = False
