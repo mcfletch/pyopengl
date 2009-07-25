@@ -206,8 +206,8 @@ cdef class VBO:
 		if self.created:
 			self.created = False
 			try:
-				self.get_implementation().glDeleteBuffers(1, [self.buffer])
-			except AttributeError, err:
+				self.get_implementation().glDeleteBuffers(1, ctypes.c_uint32( self.buffer))
+			except (AttributeError, error.NullFunctionError), err:
 				pass
 			try:
 				self.get_implementation()._DELETERS_.pop( id(self))
