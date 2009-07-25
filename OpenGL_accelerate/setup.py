@@ -35,7 +35,7 @@ def cython_extension( name, include_dirs = (), ):
 				filename
 			),
 		],
-		include_dirs = ['.','src']+ list(include_dirs)
+		include_dirs = ['..','src']+ list(include_dirs)
 	)
 
 
