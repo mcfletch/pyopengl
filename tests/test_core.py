@@ -601,6 +601,9 @@ class Tests( unittest.TestCase ):
 					time.sleep( 0.001 )
 			finally:
 				glDisableClientState( GL_VERTEX_ARRAY )
+			# bug report from Dan Helfman, delete shouldn't cause 
+			# errors if called explicitly
+			d.delete()
 	def test_fbo( self ):
 		"""Test that we support framebuffer objects
 		

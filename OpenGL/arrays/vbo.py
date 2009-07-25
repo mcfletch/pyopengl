@@ -3,7 +3,7 @@ from OpenGL import GL
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.GL.ARB import vertex_buffer_object
-from OpenGL import constants
+from OpenGL import constants, error
 import ctypes,logging
 log = logging.getLogger( 'OpenGL.arrays.vbo' )
 
@@ -42,14 +42,19 @@ class Implementation( object ):
 	def deleter( self, buffers, key):
 		"""Produce a deleter callback to delete the given buffer"""
 		def doBufferDeletion( *args, **named ):
-			for buffer in buffers:
+			while buffers:
 				try:
-					# Note that to avoid ERROR_ON_COPY issues 
-					# we have to pass an array-compatible type here...
-					buf = constants.GLuint( buffer )
-					self.glDeleteBuffers(1, buf)
-				except AttributeError, err:
-					pass
+					buffer = buffers.pop()
+				except IndexError, err:
+					break
+				else:
+					try:
+						# Note that to avoid ERROR_ON_COPY issues 
+						# we have to pass an array-compatible type here...
+						buf = constants.GLuint( buffer )
+						self.glDeleteBuffers(1, buf)
+					except (AttributeError, error.NullFunctionError), err:
+						pass
 			try:
 				self._DELETERS_.pop( key )
 			except KeyError, err:
@@ -195,7 +200,7 @@ if VBO is None:
 				while self.buffers:
 					try:
 						self.implementation.glDeleteBuffers(1, self.buffers.pop(0))
-					except AttributeError, err:
+					except (AttributeError,error.NullFunctionError), err:
 						pass
 		def bind( self ):
 			"""Bind this buffer for use in vertex calls"""
