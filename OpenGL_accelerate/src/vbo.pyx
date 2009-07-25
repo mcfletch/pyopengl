@@ -1,6 +1,7 @@
 """Cython-coded VBO implementation"""
 import ctypes, weakref
 from OpenGL_accelerate.formathandler cimport FormatHandler
+from OpenGL import error
 
 cdef extern from "Python.h":
 	cdef void Py_XINCREF( object )
