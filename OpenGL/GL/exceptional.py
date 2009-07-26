@@ -133,25 +133,27 @@ def glVertex( *args ):
 	return glVertexDispatch[ len(args) ]( *args )
 
 @lazy( simple.glCallLists )
-def glCallLists( baseFunction, lists ):
+def glCallLists( baseFunction, lists, *args ):
 	"""glCallLists( str( lists ) or lists[] ) -> None 
 	
 	Restricted version of glCallLists, takes a string or a GLuint compatible
 	array data-type and passes into the base function.
 	"""
-	if isinstance( lists, str ):
-		return baseFunction(
-			len(lists),
-			constants.GL_UNSIGNED_BYTE,
-			ctypes.c_void_p(arrays.GLubyteArray.dataPointer( lists )),
+	if not len(args):
+		if isinstance( lists, str ):
+			return baseFunction(
+				len(lists),
+				constants.GL_UNSIGNED_BYTE,
+				ctypes.c_void_p(arrays.GLubyteArray.dataPointer( lists )),
+			)
+		ptr = arrays.GLuintArray.asArray( lists )
+		size = arrays.GLuintArray.arraySize( ptr )
+		return baseFunction( 
+			size, 
+			constants.GL_UNSIGNED_INT, 
+			ctypes.c_void_p( arrays.GLuintArray.dataPointer(ptr))
 		)
-	ptr = arrays.GLuintArray.asArray( lists )
-	size = arrays.GLuintArray.arraySize( ptr )
-	return baseFunction( 
-		size, 
-		constants.GL_UNSIGNED_INT, 
-		ctypes.c_void_p( arrays.GLuintArray.dataPointer(ptr))
-	)
+	return baseFunction( lists, *args )
 
 def glTexParameter( target, pname, parameter ):
 	"""Set a texture parameter, choose underlying call based on pname and parameter"""
