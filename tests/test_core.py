@@ -869,6 +869,35 @@ class Tests( unittest.TestCase ):
 		glPopName()
 		glPopName()
 		glRenderMode( GL_RENDER )
+	def test_glCallLists_twice2( self ):
+		glMatrixMode(GL_PROJECTION)
+		glLoadIdentity()
+		gluPerspective(40.0, 1.0, 1.0, 10.0)
+		glTranslatef (0, 0, -3)
+		first = glGenLists( 2 )
+		second = first+1
+
+		glMatrixMode (GL_MODELVIEW)
+		glLoadIdentity ()
+		glNewList(first, GL_COMPILE_AND_EXECUTE)
+		glInitNames ()
+		glCallLists([second]) # replace with gCallList(2)
+		#glCallList(second)
+		glEndList ()
+
+		glNewList(second, GL_COMPILE)
+		glPushName (1)
+		glBegin (GL_POINTS)
+		glVertex3f (0, 0, 0)
+		glEnd ()
+		glPopName ()
+		glEndList ()
+
+		glSelectBuffer (100)
+		glRenderMode (GL_SELECT)
+		glCallList(1)
+		records = glRenderMode (GL_RENDER), 
+		assert records == ([],), records
 		
 if __name__ == "__main__":
 	unittest.main()
