@@ -845,6 +845,30 @@ class Tests( unittest.TestCase ):
 			"""SF#2152623 Drawing pixels as bitmaps (bits)"""
 			pixels = array([0,0,0,0,0,0,0,0],'B')
 			glDrawPixels( 8,8, GL_COLOR_INDEX, GL_BITMAP, pixels )
+	
+	def test_glCallLists_twice( self ):
+		"""SF#2829309 report that glCallLists doubles operation"""
+		l = glGenLists(1)
+		try:
+			glEnd()
+		except error.GLerror, err:
+			pass
+		glSelectBuffer( 23 )
+		glRenderMode( GL_SELECT )
+		glNewList( l, GL_COMPILE )
+		glPushName( 222 )
+		glEndList()
+		depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
+		assert depth == (0,), depth # shouldn't have added in compile mode 
+		glCallLists( [l] )
+		depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
+		assert depth == (1,), depth # should have a single record
+		glCallLists( [l] )
+		depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
+		assert depth == (2,), depth # should have a second (identical) record
+		glPopName()
+		glPopName()
+		glRenderMode( GL_RENDER )
 		
 if __name__ == "__main__":
 	unittest.main()
