@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-import unittest, pygame, pygame.display, time, traceback
+import unittest, pygame, pygame.display, time, traceback, os, sys
 import logging 
 logging.basicConfig()
 
@@ -66,6 +66,7 @@ class Tests( unittest.TestCase ):
 		)
 		glClearColor( 0,0,.25, 0 )
 		glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT )
+	
 	def tearDown( self ):
 		glFlush()
 		pygame.display.flip()
@@ -873,12 +874,12 @@ class Tests( unittest.TestCase ):
 		glMatrixMode(GL_PROJECTION)
 		glLoadIdentity()
 		gluPerspective(40.0, 1.0, 1.0, 10.0)
+		glMatrixMode (GL_MODELVIEW)
+		glLoadIdentity ()
 		glTranslatef (0, 0, -3)
 		first = glGenLists( 2 )
 		second = first+1
 
-		glMatrixMode (GL_MODELVIEW)
-		glLoadIdentity ()
 		glNewList(first, GL_COMPILE_AND_EXECUTE)
 		glInitNames ()
 		glCallLists([second]) # replace with gCallList(2)
