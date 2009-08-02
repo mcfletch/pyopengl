@@ -891,15 +891,18 @@ class Tests( unittest.TestCase ):
 		glBegin (GL_POINTS)
 		glVertex3f (0, 0, 0)
 		glEnd ()
-		glPopName ()
+		#glPopName ()
 		glEndList ()
 
 		glSelectBuffer (100)
 		glRenderMode (GL_SELECT)
 		glCallList(1)
+		depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
+		assert depth == (1,), depth # should have a single record
+		glPopName()
 		records = glRenderMode (GL_RENDER)
-		# reporter 
-		assert records == [], records
+		# reporter says sees two records, Linux sees none, Win32 sees 1 :(
+		assert len(records) == 1, records
 		
 if __name__ == "__main__":
 	unittest.main()
