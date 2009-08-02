@@ -10,13 +10,13 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_2_0'
+GL_BLEND_EQUATION_RGB = constant.Constant( 'GL_BLEND_EQUATION_RGB', 0x8009 )
 GL_VERTEX_ATTRIB_ARRAY_ENABLED = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_ENABLED', 0x8622 )
 GL_VERTEX_ATTRIB_ARRAY_SIZE = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_SIZE', 0x8623 )
 GL_VERTEX_ATTRIB_ARRAY_STRIDE = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_STRIDE', 0x8624 )
 GL_VERTEX_ATTRIB_ARRAY_TYPE = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_TYPE', 0x8625 )
 GL_CURRENT_VERTEX_ATTRIB = constant.Constant( 'GL_CURRENT_VERTEX_ATTRIB', 0x8626 )
 GL_VERTEX_PROGRAM_POINT_SIZE = constant.Constant( 'GL_VERTEX_PROGRAM_POINT_SIZE', 0x8642 )
-GL_VERTEX_PROGRAM_TWO_SIDE = constant.Constant( 'GL_VERTEX_PROGRAM_TWO_SIDE', 0x8643 )
 GL_VERTEX_ATTRIB_ARRAY_POINTER = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_POINTER', 0x8645 )
 GL_STENCIL_BACK_FUNC = constant.Constant( 'GL_STENCIL_BACK_FUNC', 0x8800 )
 GL_STENCIL_BACK_FAIL = constant.Constant( 'GL_STENCIL_BACK_FAIL', 0x8801 )
@@ -40,11 +40,8 @@ GL_DRAW_BUFFER13 = constant.Constant( 'GL_DRAW_BUFFER13', 0x8832 )
 GL_DRAW_BUFFER14 = constant.Constant( 'GL_DRAW_BUFFER14', 0x8833 )
 GL_DRAW_BUFFER15 = constant.Constant( 'GL_DRAW_BUFFER15', 0x8834 )
 GL_BLEND_EQUATION_ALPHA = constant.Constant( 'GL_BLEND_EQUATION_ALPHA', 0x883D )
-GL_POINT_SPRITE = constant.Constant( 'GL_POINT_SPRITE', 0x8861 )
-GL_COORD_REPLACE = constant.Constant( 'GL_COORD_REPLACE', 0x8862 )
 GL_MAX_VERTEX_ATTRIBS = constant.Constant( 'GL_MAX_VERTEX_ATTRIBS', 0x8869 )
 GL_VERTEX_ATTRIB_ARRAY_NORMALIZED = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_NORMALIZED', 0x886A )
-GL_MAX_TEXTURE_COORDS = constant.Constant( 'GL_MAX_TEXTURE_COORDS', 0x8871 )
 GL_MAX_TEXTURE_IMAGE_UNITS = constant.Constant( 'GL_MAX_TEXTURE_IMAGE_UNITS', 0x8872 )
 GL_FRAGMENT_SHADER = constant.Constant( 'GL_FRAGMENT_SHADER', 0x8B30 )
 GL_VERTEX_SHADER = constant.Constant( 'GL_VERTEX_SHADER', 0x8B31 )
@@ -929,4 +926,5 @@ glVertexAttribPointer = platform.createExtensionFunction(
 	doc = 'glVertexAttribPointer( GLuint(index), GLint(size), GLenum(type), GLboolean(normalized), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('index', 'size', 'type', 'normalized', 'stride', 'pointer',),
 )
-
+# import legacy entry points to allow checking for bool(entryPoint)
+from OpenGL.raw.GL.VERSION.GL_2_0_DEPRECATED import *

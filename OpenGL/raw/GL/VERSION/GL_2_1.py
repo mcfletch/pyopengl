@@ -10,7 +10,6 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_2_1'
-GL_CURRENT_RASTER_SECONDARY_COLOR = constant.Constant( 'GL_CURRENT_RASTER_SECONDARY_COLOR', 0x845F )
 GL_PIXEL_PACK_BUFFER = constant.Constant( 'GL_PIXEL_PACK_BUFFER', 0x88EB )
 GL_PIXEL_UNPACK_BUFFER = constant.Constant( 'GL_PIXEL_UNPACK_BUFFER', 0x88EC )
 GL_PIXEL_PACK_BUFFER_BINDING = constant.Constant( 'GL_PIXEL_PACK_BUFFER_BINDING', 0x88ED )
@@ -25,14 +24,8 @@ GL_SRGB = constant.Constant( 'GL_SRGB', 0x8C40 )
 GL_SRGB8 = constant.Constant( 'GL_SRGB8', 0x8C41 )
 GL_SRGB_ALPHA = constant.Constant( 'GL_SRGB_ALPHA', 0x8C42 )
 GL_SRGB8_ALPHA8 = constant.Constant( 'GL_SRGB8_ALPHA8', 0x8C43 )
-GL_SLUMINANCE_ALPHA = constant.Constant( 'GL_SLUMINANCE_ALPHA', 0x8C44 )
-GL_SLUMINANCE8_ALPHA8 = constant.Constant( 'GL_SLUMINANCE8_ALPHA8', 0x8C45 )
-GL_SLUMINANCE = constant.Constant( 'GL_SLUMINANCE', 0x8C46 )
-GL_SLUMINANCE8 = constant.Constant( 'GL_SLUMINANCE8', 0x8C47 )
 GL_COMPRESSED_SRGB = constant.Constant( 'GL_COMPRESSED_SRGB', 0x8C48 )
 GL_COMPRESSED_SRGB_ALPHA = constant.Constant( 'GL_COMPRESSED_SRGB_ALPHA', 0x8C49 )
-GL_COMPRESSED_SLUMINANCE = constant.Constant( 'GL_COMPRESSED_SLUMINANCE', 0x8C4A )
-GL_COMPRESSED_SLUMINANCE_ALPHA = constant.Constant( 'GL_COMPRESSED_SLUMINANCE_ALPHA', 0x8C4B )
 glUniformMatrix2x3fv = platform.createExtensionFunction( 
 	'glUniformMatrix2x3fv', dll=platform.GL,
 	extension=EXTENSION_NAME,
@@ -86,4 +79,5 @@ glUniformMatrix4x3fv = platform.createExtensionFunction(
 	doc = 'glUniformMatrix4x3fv( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
 )
-
+# import legacy entry points to allow checking for bool(entryPoint)
+from OpenGL.raw.GL.VERSION.GL_2_1_DEPRECATED import *

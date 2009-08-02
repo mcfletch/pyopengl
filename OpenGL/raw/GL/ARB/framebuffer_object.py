@@ -22,12 +22,17 @@ GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE = constant.Constant( 'GL_FRAMEBUFFER_ATTA
 GL_FRAMEBUFFER_DEFAULT = constant.Constant( 'GL_FRAMEBUFFER_DEFAULT', 0x8218 )
 GL_FRAMEBUFFER_UNDEFINED = constant.Constant( 'GL_FRAMEBUFFER_UNDEFINED', 0x8219 )
 GL_DEPTH_STENCIL_ATTACHMENT = constant.Constant( 'GL_DEPTH_STENCIL_ATTACHMENT', 0x821A )
-GL_INDEX = constant.Constant( 'GL_INDEX', 0x8222 )
 GL_MAX_RENDERBUFFER_SIZE = constant.Constant( 'GL_MAX_RENDERBUFFER_SIZE', 0x84E8 )
 GL_DEPTH_STENCIL = constant.Constant( 'GL_DEPTH_STENCIL', 0x84F9 )
 GL_UNSIGNED_INT_24_8 = constant.Constant( 'GL_UNSIGNED_INT_24_8', 0x84FA )
 GL_DEPTH24_STENCIL8 = constant.Constant( 'GL_DEPTH24_STENCIL8', 0x88F0 )
 GL_TEXTURE_STENCIL_SIZE = constant.Constant( 'GL_TEXTURE_STENCIL_SIZE', 0x88F1 )
+GL_TEXTURE_RED_TYPE = constant.Constant( 'GL_TEXTURE_RED_TYPE', 0x8C10 )
+GL_TEXTURE_GREEN_TYPE = constant.Constant( 'GL_TEXTURE_GREEN_TYPE', 0x8C11 )
+GL_TEXTURE_BLUE_TYPE = constant.Constant( 'GL_TEXTURE_BLUE_TYPE', 0x8C12 )
+GL_TEXTURE_ALPHA_TYPE = constant.Constant( 'GL_TEXTURE_ALPHA_TYPE', 0x8C13 )
+GL_TEXTURE_DEPTH_TYPE = constant.Constant( 'GL_TEXTURE_DEPTH_TYPE', 0x8C16 )
+GL_UNSIGNED_NORMALIZED = constant.Constant( 'GL_UNSIGNED_NORMALIZED', 0x8C17 )
 GL_FRAMEBUFFER_BINDING = constant.Constant( 'GL_FRAMEBUFFER_BINDING', 0x8CA6 )
 GL_RENDERBUFFER_BINDING = constant.Constant( 'GL_RENDERBUFFER_BINDING', 0x8CA7 )
 GL_READ_FRAMEBUFFER = constant.Constant( 'GL_READ_FRAMEBUFFER', 0x8CA8 )
@@ -260,7 +265,8 @@ glFramebufferTextureLayer = platform.createExtensionFunction(
 	doc = 'glFramebufferTextureLayer( GLenum(target), GLenum(attachment), GLuint(texture), GLint(level), GLint(layer) ) -> None',
 	argNames = ('target', 'attachment', 'texture', 'level', 'layer',),
 )
-
+# import legacy entry points to allow checking for bool(entryPoint)
+from OpenGL.raw.GL.ARB.framebuffer_object_DEPRECATED import *
 
 def glInitFramebufferObjectARB():
 	'''Return boolean indicating whether this extension is available'''

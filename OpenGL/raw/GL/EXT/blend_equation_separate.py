@@ -25,6 +25,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_blend_equation_separate'
+GL_BLEND_EQUATION_RGB_EXT = constant.Constant( 'GL_BLEND_EQUATION_RGB_EXT', 0x8009 )
 GL_BLEND_EQUATION_ALPHA_EXT = constant.Constant( 'GL_BLEND_EQUATION_ALPHA_EXT', 0x883D )
 glget.addGLGetConstant( GL_BLEND_EQUATION_ALPHA_EXT, (1,) )
 glBlendEquationSeparateEXT = platform.createExtensionFunction( 

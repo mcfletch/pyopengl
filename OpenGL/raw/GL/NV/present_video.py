@@ -70,15 +70,6 @@ glGetVideoui64vNV = platform.createExtensionFunction(
 	argNames = ('video_slot', 'pname', 'params',),
 )
 
-glVideoParameterivNV = platform.createExtensionFunction( 
-	'glVideoParameterivNV', dll=platform.GL,
-	extension=EXTENSION_NAME,
-	resultType=None, 
-	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
-	doc = 'glVideoParameterivNV( GLuint(video_slot), GLenum(pname), GLintArray(params) ) -> None',
-	argNames = ('video_slot', 'pname', 'params',),
-)
-
 
 def glInitPresentVideoNV():
 	'''Return boolean indicating whether this extension is available'''
