@@ -847,30 +847,9 @@ class Tests( unittest.TestCase ):
 			pixels = array([0,0,0,0,0,0,0,0],'B')
 			glDrawPixels( 8,8, GL_COLOR_INDEX, GL_BITMAP, pixels )
 	
-	def test_glCallLists_twice( self ):
-		"""SF#2829309 report that glCallLists doubles operation"""
-		l = glGenLists(1)
-		try:
-			glEnd()
-		except error.GLerror, err:
-			pass
-		glSelectBuffer( 23 )
-		glRenderMode( GL_SELECT )
-		glNewList( l, GL_COMPILE )
-		glPushName( 222 )
-		glEndList()
-		depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
-		assert depth == (0,), depth # shouldn't have added in compile mode 
-		glCallLists( [l] )
-		depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
-		assert depth == (1,), depth # should have a single record
-		glCallLists( [l] )
-		depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
-		assert depth == (2,), depth # should have a second (identical) record
-		glPopName()
-		glPopName()
-		glRenderMode( GL_RENDER )
 	def test_glCallLists_twice2( self ):
+		"""SF#2829309 report that glCallLists doubles operation"""
+		glRenderMode (GL_RENDER)
 		glMatrixMode(GL_PROJECTION)
 		glLoadIdentity()
 		gluPerspective(40.0, 1.0, 1.0, 10.0)
@@ -891,15 +870,21 @@ class Tests( unittest.TestCase ):
 		glBegin (GL_POINTS)
 		glVertex3f (0, 0, 0)
 		glEnd ()
-		glPopName ()
 		glEndList ()
+		glCallList( second )
+		glPopName()
+		depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
+		assert depth == (0,), depth # have popped, but even then, were' not in the mode...
 
 		glSelectBuffer (100)
 		glRenderMode (GL_SELECT)
 		glCallList(1)
+		depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
+		assert depth == (1,), depth # should have a single record
+		glPopName()
 		records = glRenderMode (GL_RENDER)
-		# reporter 
-		assert records == [], records
+		# reporter says sees two records, Linux sees none, Win32 sees 1 :(
+		assert len(records) == 1, records
 		
 if __name__ == "__main__":
 	unittest.main()
