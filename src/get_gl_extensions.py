@@ -225,7 +225,7 @@ from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = %(constantModule)r
 %(constants)s
-%(declarations)s
+%(declarations)s%(deprecated)s
 """
 
 INIT_TEMPLATE = """
@@ -288,6 +288,8 @@ class Module( Helper ):
 		
 		self.findFunctions()
 		self.constantModule = '%(prefix)s_%(owner)s_%(rawModule)s'%self
+		if self.rawModule.endswith( '_DEPRECATED' ):
+			self.constantModule = self.constantModule[:-len('_DEPRECATED')]
 		specification = self.getSpecification()
 		self.overview = ''
 		if self.header.includeOverviews:
@@ -509,6 +511,14 @@ class Module( Helper ):
 				fh.close()
 				return True
 		return False
+	
+	def deprecated( self ):
+		"""Produce import line for deprecated functions if appropriate"""
+		name = self.name + '_DEPRECATED'
+		if self.header.registry.get( name ):
+			return '''# import legacy entry points to allow checking for bool(entryPoint)
+from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s_DEPRECATED import *'''%self
+		return ''
 
 class VersionModule( Module ):
 	"""Module representing an OpenGL version's extension to the spec"""
@@ -619,6 +629,8 @@ class Header( object ):
 		items = self.getRegistry().items()
 		items.sort()
 		for name, segments in items:
+			if name in ('APIENTRY','APIENTRYP','GLAPI'):
+				continue
 			if not name.startswith( 'GL_VERSION' ):
 				yield Module( name, segments, header=self )
 			else:
