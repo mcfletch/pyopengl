@@ -897,8 +897,9 @@ class Tests( unittest.TestCase ):
 		glSelectBuffer (100)
 		glRenderMode (GL_SELECT)
 		glCallList(1)
-		records = glRenderMode (GL_RENDER), 
-		assert records == ([],), records
+		records = glRenderMode (GL_RENDER)
+		# reporter 
+		assert records == [], records
 		
 if __name__ == "__main__":
 	unittest.main()
