@@ -15,6 +15,7 @@ from OpenGL.GL.VERSION.GL_1_5 import *
 from OpenGL.GL.VERSION.GL_2_0 import *
 from OpenGL.GL.VERSION.GL_2_1 import *
 from OpenGL.GL.VERSION.GL_3_0 import *
+from OpenGL.GL.VERSION.GL_3_1 import *
 
 GLerror = GLError
 
