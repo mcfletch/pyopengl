@@ -244,6 +244,8 @@ if __name__ == "__main__":
 				'shader_2.py',
 				'shader_3.py',
 				'shader_4.py',
+				'shader_5.py',
+				'shader_6.py',
 			]
 		] 
 	)
@@ -255,6 +257,14 @@ if __name__ == "__main__":
 				'nehe1.py',
 				'nehe2.py',
 				'nehe3.py',
+				'nehe4.py',
+				'nehe5.py',
+				'nehe6.py',
+				'nehe7.py',
+				'nehe8.py',
+				'nehe6_timer.py',
+				'nehe6_multi.py',
+				'glprint.py',
 			]
 		] 
 	)
