@@ -1,4 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://purl.org/kid/ns#">
+<div py:def="path_children(path)" py:for="tutorial in path.children">
+	<a href="${tutorial.relative_link}">${ tutorial.title }</a>
+</div>
 <table width="100%" py:def="navtable()"><thead>
 	<tr>
 		<td width="8em;"/><th align="center"><a href="../">OpenGLContext Documentation</a></th><td width="8em;"/>
@@ -17,9 +20,7 @@
 ${navtable()}
 <div py:for="path in paths" class="path">
 	<h1>${path.text}</h1>
-	<div py:for="tutorial in path.children">
-		<a href="${tutorial.relative_link}">${ tutorial.title }</a>
-	</div>
+	${path_children( path )}
 </div>
 ${navtable()}
 
