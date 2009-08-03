@@ -43,7 +43,8 @@ def generate_index( paths ):
 		paths=paths,
 		next = next,
 		prev = prev,
-		date=datetime.datetime.now().isoformat(),
+		date=datetime.datetime.now().strftime( '%Y-%m-%d' ),
+		version = OpenGLContext.__version__,
 	)
 	data = template.serialize( output=serial )
 	html_file = os.path.join( OUTPUT_DIRECTORY, 'index.xhtml' )
