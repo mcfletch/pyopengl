@@ -10,7 +10,7 @@ metadata = dict(
 	author_email = 'mcfletch@vrplumber.com',
 	url = 'http://pyopengl.sourceforge.net',
 	license = 'BSD',
-	download_url = "https://sourceforge.net/project/showfiles.php?group_id=5988&package_id=6035",
+	download_url = "https://sourceforge.net/projects/pyopengl/files/PyOpenGL/",
 	keywords = 'Graphics,3D,OpenGL,GLU,GLUT,GLE,GLX,EXT,ARB,Mesa,ctypes',
 	classifiers = [
 		"""License :: OSI Approved :: BSD License""",
