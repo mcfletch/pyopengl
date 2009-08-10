@@ -36,6 +36,8 @@
 <body>
 ${navtable()}
 ${children(tutorial)}
+<div class="source-reference">This code-walkthrough tutorial is generated from the ${tutorial.filename} script in the 
+OpenGLContext source distribution.</div>
 ${navtable(bottom=True)}
 </body>
 </html>

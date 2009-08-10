@@ -247,6 +247,22 @@ if __name__ == "__main__":
 				'shader_4.py',
 				'shader_5.py',
 				'shader_6.py',
+				'shader_7.py',
+				'shader_8.py',
+				'shader_9.py',
+				'shader_10.py',
+			]
+		] 
+	)
+	nurbs = TutorialPath( 
+		"Scenegraph Nodes",
+		children =[
+			parse_file( os.path.join( test_dir,name ))
+			for name in [
+				'lightobject.py',
+				'molehill.py',
+				'nurbsobject.py',
+				'particles_simple.py',
 			]
 		] 
 	)
@@ -269,7 +285,7 @@ if __name__ == "__main__":
 			]
 		] 
 	)
-	paths = [shaders,nehe]
+	paths = [shaders,nurbs,nehe]
 	generate_index( paths = paths )
 	for path in paths:
 		path.generate_children()
