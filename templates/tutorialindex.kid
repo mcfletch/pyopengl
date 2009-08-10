@@ -8,7 +8,7 @@
 	</tr>
 	<tr>
 	<td><a py:if="prev" href="${prev.relative_link}">Previous</a><a py:if="not prev" href="index.xhtml">Index</a></td>
-	<td align="center">Paths</td>
+	<td align="center">Tutorial Paths</td>
 	<td align="right"><a py:if="next" href="${next.relative_link}">Next</a><a py:if="not next" href="index.xhtml">Index</a></td>
 	</tr>
 	<tr class="meta-links" py:if="bottom">
@@ -26,9 +26,53 @@
 </head>
 <body>
 ${navtable()}
-<div py:for="path in paths" class="path">
+<div class="path">
+	<?python 
+	path = paths[0]
+	?>
+	<h1 class="path-name">Introduction to Shaders</h1>
+	<div class="path-body">
+		<div class="introduction">This is a low-level introductory tutorial path.  It is intended for those 
+		who have either never done 3D graphics with OpenGL, or who have only done "legacy"
+		OpenGL rendering (i.e. you learned OpenGL before about 2007).  It introduces the low-level 
+		rendering mechanisms required to write your own 3D renderers from scratch using the 
+		standard, modern VBO and Shader-based rendering model.
+		</div>
+		${path_children( path )}
+	</div>
+</div>
+<div class="path">
+	<?python 
+	path = paths[1]
+	?>
 	<h1 class="path-name">${path.text}</h1>
-	${path_children( path )}
+	<div class="path-body">
+		<div class="introduction">This is a high-level introductory tutorial path.  It is intended to 
+		introduce the OpenGLContext/VRML97 scenegraph engine.  It demonstrates more involved 
+		rendering tasks, but with far less detail than the Introduction to Shaders tutorial.  It does not 
+		attempt to describe how the effects are achieved, just how to achieve them.
+		</div>
+		${path_children( path )}
+	</div>
+</div>
+<div class="path">
+	<?python 
+	path = paths[2]
+	?>
+	<h1 class="path-name">${path.text}</h1>
+	<div class="path-body">
+		<div class="introduction">These tutorials are translations of the famous "NeHe" series of tutorials.
+		These are low-level introductory tutorials which generally use the legacy OpenGL API.  The linked 
+		original tutorials are very gentle and thorough.
+		</div>
+		${path_children( path )}
+	</div>
+</div>
+<div py:for="path in paths[3:]" class="path">
+	<h1 class="path-name">${path.text}</h1>
+	<div class="path-body">
+		${path_children( path )}
+	</div>
 </div>
 <div class="metadata">This document was generated from OpenGLContext ${version} on ${date}</div>
 <!-- by bzr branch http://bazaar.launchpad.net/%7Emcfletch/pyopengl/directdocs/ -->
