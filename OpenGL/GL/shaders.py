@@ -69,6 +69,15 @@ GL_COMPILE_STATUS = GL.GL_COMPILE_STATUS
 GL_LINK_STATUS = GL.GL_LINK_STATUS
 GL_FALSE = GL.GL_FALSE
 
+class ShaderProgram( int ):
+	"""Integer sub-class with context-manager operation"""
+	def __enter__( self ):
+		"""Start use of the program"""
+		glUseProgram( self )
+	def __exit__( self, typ, val, tb ):
+		"""Stop use of the program"""
+		glUseProgram( 0 )
+
 def compileProgram(*shaders):
 	"""Create a new program, attach shaders and validate
 	
@@ -118,7 +127,7 @@ def compileProgram(*shaders):
 		))
 	for shader in shaders:
 		glDeleteShader(shader)
-	return program
+	return ShaderProgram( program )
 def compileShader( source, shaderType ):
 	"""Compile shader source of given type
 	
