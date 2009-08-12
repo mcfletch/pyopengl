@@ -218,6 +218,12 @@ if VBO is None:
 				other = other.offset 
 			assert isinstance( other, (int,long) ), """Only know how to add integer/long offsets"""
 			return VBOOffset( self, other )
+		
+		__enter__ = bind
+		def __exit__( self, exc_type=None, exc_val=None, exc_tb=None ):
+			"""Context manager exit"""
+			self.unbind()
+			return False # do not supress exceptions...
 
 	class VBOOffset( object ):
 		def __init__( self, vbo, offset ):

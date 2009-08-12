@@ -233,6 +233,12 @@ cdef class VBO:
 		if self.data is None:
 			raise RuntimeError( """Attempting to use a deleted VBO""" )
 	
+	__enter__ = bind
+	def __exit__( self, exc_type=None, exc_val=None, exc_tb=None ):
+		"""Context manager exit"""
+		self.unbind()
+		return False # do not supress exceptions...
+
 
 cdef class VBOOffset:
 	"""Offset into a VBO instance
