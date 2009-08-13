@@ -20,6 +20,8 @@ __all__ = [
 	'glDeleteShader',
 	'glGetProgramInfoLog',
 	'glGetShaderInfoLog',
+	'glGetProgramiv',
+	'glGetShaderiv',
 	'compileProgram',
 	'compileShader',
 	'GL_VALIDATE_STATUS',
