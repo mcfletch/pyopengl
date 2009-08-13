@@ -31,14 +31,17 @@ def _alt( base, name ):
 	if hasattr( GL, base ):
 		root = getattr( GL, base )
 		if callable(root):
-			globals()[base] = alternate( getattr(GL,base),getattr(module,name))
+			globals()[base] = alternate( 
+				getattr(GL,base),
+				getattr(module,name)
+			)
 			__all__.append( base )
 		else:
 			globals()[base] = root
 			__all__.append( base )
 		return True 
 	return False
-
+_excludes = ['glGetProgramiv']
 for module in shader_objects,fragment_shader,vertex_shader,vertex_program:
 	for name in dir(module):
 		found = None
@@ -46,9 +49,10 @@ for module in shader_objects,fragment_shader,vertex_shader,vertex_program:
 			if name.endswith( suffix ):
 				found = False 
 				base = name[:-(len(suffix))]
-				if _alt( base, name ):
-					found = True
-					break 
+				if base not in _excludes:
+					if _alt( base, name ):
+						found = True
+						break 
 		if found is False:
 			log.debug( '''Found no alternate for: %s.%s''',
 				module.__name__,name,
@@ -63,6 +67,7 @@ glGetProgramInfoLog = alternate( GL.glGetProgramInfoLog, shader_objects.glGetInf
 glGetShaderInfoLog = alternate( GL.glGetShaderInfoLog, shader_objects.glGetInfoLogARB )
 
 glGetShaderiv = alternate( GL.glGetShaderiv, shader_objects.glGetObjectParameterivARB )
+glGetProgramiv = alternate( GL.glGetProgramiv, shader_objects.glGetObjectParameterivARB )
 
 GL_VALIDATE_STATUS = GL.GL_VALIDATE_STATUS
 GL_COMPILE_STATUS = GL.GL_COMPILE_STATUS
