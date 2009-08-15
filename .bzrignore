@@ -10,3 +10,13 @@ documentation/pydoc/*.html
 src/glext.h
 OpenGL/GL/*/*.txt
 OpenGL/Tk/togl*
+arraydatatype.so
+errorchecker.so
+formathandler.so
+nones_formathandler.so
+numeric_accel.so
+numpy_accel.so
+numpy_formathandler.so
+vbo.so
+wrapper.so
+wrapper.pyd
