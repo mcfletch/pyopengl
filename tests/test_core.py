@@ -718,6 +718,7 @@ class Tests( unittest.TestCase ):
 			assert err.err == GL_INVALID_OPERATION, err
 	def test_glDrawBuffers_list_valid( self ):
 		"""Test that glDrawBuffers with list argument where value is set"""
+		previous = glGetIntegerv( GL_READ_BUFFER )
 		fbo = glGenFramebuffersEXT(1)
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo)
 		try:
@@ -748,8 +749,13 @@ class Tests( unittest.TestCase ):
 				GL_COLOR_ATTACHMENT1_EXT,
 			)
 			glDrawBuffers(2, drawingBuffers )
+			glReadBuffer( GL_COLOR_ATTACHMENT1_EXT )
+			pixels = glReadPixels( 0,0, 10,10, GL_RGB, GL_UNSIGNED_BYTE )
+			assert len(pixels) == 300, len(pixels)
 		finally:
 			glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, 0 )
+		
+		glReadBuffer( previous )
 		
 	def test_enable_histogram( self ):
 		if glInitImagingARB():
