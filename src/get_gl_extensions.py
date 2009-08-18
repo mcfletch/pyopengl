@@ -258,6 +258,8 @@ class Module( Helper ):
 	
 	def __init__( self, name, segments, header ):
 		log.info( 'name: %r', name )
+		if not name.startswith( 'GL_' ):
+			name = 'GL_'+name
 		self.name = name
 		self.segments = segments
 		self.header = header
