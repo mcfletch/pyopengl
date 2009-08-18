@@ -17,6 +17,8 @@ GL_CLIP_DISTANCE2 = constant.Constant( 'GL_CLIP_DISTANCE2', 0x3002 )
 GL_CLIP_DISTANCE3 = constant.Constant( 'GL_CLIP_DISTANCE3', 0x3003 )
 GL_CLIP_DISTANCE4 = constant.Constant( 'GL_CLIP_DISTANCE4', 0x3004 )
 GL_CLIP_DISTANCE5 = constant.Constant( 'GL_CLIP_DISTANCE5', 0x3005 )
+GL_CLIP_DISTANCE6 = constant.Constant( 'GL_CLIP_DISTANCE6', 0x3006 )
+GL_CLIP_DISTANCE7 = constant.Constant( 'GL_CLIP_DISTANCE7', 0x3007 )
 GL_MAX_CLIP_DISTANCES = constant.Constant( 'GL_MAX_CLIP_DISTANCES', 0xD32 )
 GL_MAJOR_VERSION = constant.Constant( 'GL_MAJOR_VERSION', 0x821B )
 GL_MINOR_VERSION = constant.Constant( 'GL_MINOR_VERSION', 0x821C )
@@ -107,6 +109,9 @@ GL_QUERY_WAIT = constant.Constant( 'GL_QUERY_WAIT', 0x8E13 )
 GL_QUERY_NO_WAIT = constant.Constant( 'GL_QUERY_NO_WAIT', 0x8E14 )
 GL_QUERY_BY_REGION_WAIT = constant.Constant( 'GL_QUERY_BY_REGION_WAIT', 0x8E15 )
 GL_QUERY_BY_REGION_NO_WAIT = constant.Constant( 'GL_QUERY_BY_REGION_NO_WAIT', 0x8E16 )
+GL_BUFFER_ACCESS_FLAGS = constant.Constant( 'GL_BUFFER_ACCESS_FLAGS', 0x911F )
+GL_BUFFER_MAP_LENGTH = constant.Constant( 'GL_BUFFER_MAP_LENGTH', 0x9120 )
+GL_BUFFER_MAP_OFFSET = constant.Constant( 'GL_BUFFER_MAP_OFFSET', 0x9121 )
 glColorMaski = platform.createExtensionFunction( 
 	'glColorMaski', dll=platform.GL,
 	extension=EXTENSION_NAME,
@@ -267,6 +272,186 @@ glGetVertexAttribIuiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetVertexAttribIuiv( GLuint(index), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('index', 'pname', 'params',),
+)
+
+glVertexAttribI1i = platform.createExtensionFunction( 
+	'glVertexAttribI1i', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, constants.GLint,),
+	doc = 'glVertexAttribI1i( GLuint(index), GLint(x) ) -> None',
+	argNames = ('index', 'x',),
+)
+
+glVertexAttribI2i = platform.createExtensionFunction( 
+	'glVertexAttribI2i', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, constants.GLint, constants.GLint,),
+	doc = 'glVertexAttribI2i( GLuint(index), GLint(x), GLint(y) ) -> None',
+	argNames = ('index', 'x', 'y',),
+)
+
+glVertexAttribI3i = platform.createExtensionFunction( 
+	'glVertexAttribI3i', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, constants.GLint, constants.GLint, constants.GLint,),
+	doc = 'glVertexAttribI3i( GLuint(index), GLint(x), GLint(y), GLint(z) ) -> None',
+	argNames = ('index', 'x', 'y', 'z',),
+)
+
+glVertexAttribI4i = platform.createExtensionFunction( 
+	'glVertexAttribI4i', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
+	doc = 'glVertexAttribI4i( GLuint(index), GLint(x), GLint(y), GLint(z), GLint(w) ) -> None',
+	argNames = ('index', 'x', 'y', 'z', 'w',),
+)
+
+glVertexAttribI1ui = platform.createExtensionFunction( 
+	'glVertexAttribI1ui', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, constants.GLuint,),
+	doc = 'glVertexAttribI1ui( GLuint(index), GLuint(x) ) -> None',
+	argNames = ('index', 'x',),
+)
+
+glVertexAttribI2ui = platform.createExtensionFunction( 
+	'glVertexAttribI2ui', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint,),
+	doc = 'glVertexAttribI2ui( GLuint(index), GLuint(x), GLuint(y) ) -> None',
+	argNames = ('index', 'x', 'y',),
+)
+
+glVertexAttribI3ui = platform.createExtensionFunction( 
+	'glVertexAttribI3ui', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
+	doc = 'glVertexAttribI3ui( GLuint(index), GLuint(x), GLuint(y), GLuint(z) ) -> None',
+	argNames = ('index', 'x', 'y', 'z',),
+)
+
+glVertexAttribI4ui = platform.createExtensionFunction( 
+	'glVertexAttribI4ui', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
+	doc = 'glVertexAttribI4ui( GLuint(index), GLuint(x), GLuint(y), GLuint(z), GLuint(w) ) -> None',
+	argNames = ('index', 'x', 'y', 'z', 'w',),
+)
+
+glVertexAttribI1iv = platform.createExtensionFunction( 
+	'glVertexAttribI1iv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLintArray,),
+	doc = 'glVertexAttribI1iv( GLuint(index), GLintArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI2iv = platform.createExtensionFunction( 
+	'glVertexAttribI2iv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLintArray,),
+	doc = 'glVertexAttribI2iv( GLuint(index), GLintArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI3iv = platform.createExtensionFunction( 
+	'glVertexAttribI3iv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLintArray,),
+	doc = 'glVertexAttribI3iv( GLuint(index), GLintArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI4iv = platform.createExtensionFunction( 
+	'glVertexAttribI4iv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLintArray,),
+	doc = 'glVertexAttribI4iv( GLuint(index), GLintArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI1uiv = platform.createExtensionFunction( 
+	'glVertexAttribI1uiv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLuintArray,),
+	doc = 'glVertexAttribI1uiv( GLuint(index), GLuintArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI2uiv = platform.createExtensionFunction( 
+	'glVertexAttribI2uiv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLuintArray,),
+	doc = 'glVertexAttribI2uiv( GLuint(index), GLuintArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI3uiv = platform.createExtensionFunction( 
+	'glVertexAttribI3uiv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLuintArray,),
+	doc = 'glVertexAttribI3uiv( GLuint(index), GLuintArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI4uiv = platform.createExtensionFunction( 
+	'glVertexAttribI4uiv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLuintArray,),
+	doc = 'glVertexAttribI4uiv( GLuint(index), GLuintArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI4bv = platform.createExtensionFunction( 
+	'glVertexAttribI4bv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLbyteArray,),
+	doc = 'glVertexAttribI4bv( GLuint(index), GLbyteArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI4sv = platform.createExtensionFunction( 
+	'glVertexAttribI4sv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLshortArray,),
+	doc = 'glVertexAttribI4sv( GLuint(index), GLshortArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI4ubv = platform.createExtensionFunction( 
+	'glVertexAttribI4ubv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLubyteArray,),
+	doc = 'glVertexAttribI4ubv( GLuint(index), GLubyteArray(v) ) -> None',
+	argNames = ('index', 'v',),
+)
+
+glVertexAttribI4usv = platform.createExtensionFunction( 
+	'glVertexAttribI4usv', dll=platform.GL,
+	extension=EXTENSION_NAME,
+	resultType=None, 
+	argTypes=(constants.GLuint, arrays.GLushortArray,),
+	doc = 'glVertexAttribI4usv( GLuint(index), GLushortArray(v) ) -> None',
+	argNames = ('index', 'v',),
 )
 
 glGetUniformuiv = platform.createExtensionFunction( 

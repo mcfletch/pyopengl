@@ -93,9 +93,9 @@ glTransformFeedbackVaryingsNV = platform.createExtensionFunction(
 	'glTransformFeedbackVaryingsNV', dll=platform.GL,
 	extension=EXTENSION_NAME,
 	resultType=None, 
-	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLintArray, constants.GLenum,),
-	doc = 'glTransformFeedbackVaryingsNV( GLuint(program), GLsizei(count), GLintArray(locations), GLenum(bufferMode) ) -> None',
-	argNames = ('program', 'count', 'locations', 'bufferMode',),
+	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER( ctypes.POINTER( constants.GLchar )), constants.GLenum,),
+	doc = 'glTransformFeedbackVaryingsNV( GLuint(program), GLsizei(count), POINTER( ctypes.POINTER( constants.GLchar ))(varyings), GLenum(bufferMode) ) -> None',
+	argNames = ('program', 'count', 'varyings', 'bufferMode',),
 )
 
 glActiveVaryingNV = platform.createExtensionFunction( 
