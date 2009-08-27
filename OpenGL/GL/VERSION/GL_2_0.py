@@ -13,6 +13,7 @@ from OpenGL.raw.GL.VERSION.GL_2_0 import *
 import OpenGL
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_COMPILE_STATUS_ARB as GL_OBJECT_COMPILE_STATUS
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_LINK_STATUS_ARB as GL_OBJECT_LINK_STATUS
+from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_ACTIVE_UNIFORMS_ARB as GL_OBJECT_ACTIVE_UNIFORMS
 from OpenGL.GL.ARB.shader_objects import glGetInfoLogARB as glGetInfoLog
 from OpenGL.lazywrapper import lazy
 
