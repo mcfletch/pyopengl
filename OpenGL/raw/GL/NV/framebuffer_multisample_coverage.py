@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_framebuffer_multisample_coverage'
+_DEPRECATED = False
 GL_RENDERBUFFER_COVERAGE_SAMPLES_NV = constant.Constant( 'GL_RENDERBUFFER_COVERAGE_SAMPLES_NV', 0x8CAB )
 GL_RENDERBUFFER_COLOR_SAMPLES_NV = constant.Constant( 'GL_RENDERBUFFER_COLOR_SAMPLES_NV', 0x8E10 )
 GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV = constant.Constant( 'GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV', 0x8E11 )
@@ -21,6 +22,7 @@ glRenderbufferStorageMultisampleCoverageNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, constants.GLsizei,),
 	doc = 'glRenderbufferStorageMultisampleCoverageNV( GLenum(target), GLsizei(coverageSamples), GLsizei(colorSamples), GLenum(internalformat), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('target', 'coverageSamples', 'colorSamples', 'internalformat', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 

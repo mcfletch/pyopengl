@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_direct_state_access'
+_DEPRECATED = False
 GL_PROGRAM_MATRIX_EXT = constant.Constant( 'GL_PROGRAM_MATRIX_EXT', 0x8E2D )
 GL_TRANSPOSE_PROGRAM_MATRIX_EXT = constant.Constant( 'GL_TRANSPOSE_PROGRAM_MATRIX_EXT', 0x8E2E )
 GL_PROGRAM_MATRIX_STACK_DEPTH_EXT = constant.Constant( 'GL_PROGRAM_MATRIX_STACK_DEPTH_EXT', 0x8E2F )
@@ -20,6 +21,7 @@ glClientAttribDefaultEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLbitfield,),
 	doc = 'glClientAttribDefaultEXT( GLbitfield(mask) ) -> None',
 	argNames = ('mask',),
+	deprecated = _DEPRECATED,
 )
 
 glPushClientAttribDefaultEXT = platform.createExtensionFunction( 
@@ -29,6 +31,7 @@ glPushClientAttribDefaultEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLbitfield,),
 	doc = 'glPushClientAttribDefaultEXT( GLbitfield(mask) ) -> None',
 	argNames = ('mask',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixLoadfEXT = platform.createExtensionFunction( 
@@ -38,6 +41,7 @@ glMatrixLoadfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMatrixLoadfEXT( GLenum(mode), GLfloatArray(m) ) -> None',
 	argNames = ('mode', 'm',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixLoaddEXT = platform.createExtensionFunction( 
@@ -47,6 +51,7 @@ glMatrixLoaddEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glMatrixLoaddEXT( GLenum(mode), GLdoubleArray(m) ) -> None',
 	argNames = ('mode', 'm',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixMultfEXT = platform.createExtensionFunction( 
@@ -56,6 +61,7 @@ glMatrixMultfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMatrixMultfEXT( GLenum(mode), GLfloatArray(m) ) -> None',
 	argNames = ('mode', 'm',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixMultdEXT = platform.createExtensionFunction( 
@@ -65,6 +71,7 @@ glMatrixMultdEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glMatrixMultdEXT( GLenum(mode), GLdoubleArray(m) ) -> None',
 	argNames = ('mode', 'm',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixLoadIdentityEXT = platform.createExtensionFunction( 
@@ -74,6 +81,7 @@ glMatrixLoadIdentityEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glMatrixLoadIdentityEXT( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixRotatefEXT = platform.createExtensionFunction( 
@@ -83,6 +91,7 @@ glMatrixRotatefEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glMatrixRotatefEXT( GLenum(mode), GLfloat(angle), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('mode', 'angle', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixRotatedEXT = platform.createExtensionFunction( 
@@ -92,6 +101,7 @@ glMatrixRotatedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glMatrixRotatedEXT( GLenum(mode), GLdouble(angle), GLdouble(x), GLdouble(y), GLdouble(z) ) -> None',
 	argNames = ('mode', 'angle', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixScalefEXT = platform.createExtensionFunction( 
@@ -101,6 +111,7 @@ glMatrixScalefEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glMatrixScalefEXT( GLenum(mode), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('mode', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixScaledEXT = platform.createExtensionFunction( 
@@ -110,6 +121,7 @@ glMatrixScaledEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glMatrixScaledEXT( GLenum(mode), GLdouble(x), GLdouble(y), GLdouble(z) ) -> None',
 	argNames = ('mode', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixTranslatefEXT = platform.createExtensionFunction( 
@@ -119,6 +131,7 @@ glMatrixTranslatefEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glMatrixTranslatefEXT( GLenum(mode), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('mode', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixTranslatedEXT = platform.createExtensionFunction( 
@@ -128,6 +141,7 @@ glMatrixTranslatedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glMatrixTranslatedEXT( GLenum(mode), GLdouble(x), GLdouble(y), GLdouble(z) ) -> None',
 	argNames = ('mode', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixFrustumEXT = platform.createExtensionFunction( 
@@ -137,6 +151,7 @@ glMatrixFrustumEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glMatrixFrustumEXT( GLenum(mode), GLdouble(left), GLdouble(right), GLdouble(bottom), GLdouble(top), GLdouble(zNear), GLdouble(zFar) ) -> None',
 	argNames = ('mode', 'left', 'right', 'bottom', 'top', 'zNear', 'zFar',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixOrthoEXT = platform.createExtensionFunction( 
@@ -146,6 +161,7 @@ glMatrixOrthoEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glMatrixOrthoEXT( GLenum(mode), GLdouble(left), GLdouble(right), GLdouble(bottom), GLdouble(top), GLdouble(zNear), GLdouble(zFar) ) -> None',
 	argNames = ('mode', 'left', 'right', 'bottom', 'top', 'zNear', 'zFar',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixPopEXT = platform.createExtensionFunction( 
@@ -155,6 +171,7 @@ glMatrixPopEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glMatrixPopEXT( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixPushEXT = platform.createExtensionFunction( 
@@ -164,6 +181,7 @@ glMatrixPushEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glMatrixPushEXT( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixLoadTransposefEXT = platform.createExtensionFunction( 
@@ -173,6 +191,7 @@ glMatrixLoadTransposefEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMatrixLoadTransposefEXT( GLenum(mode), GLfloatArray(m) ) -> None',
 	argNames = ('mode', 'm',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixLoadTransposedEXT = platform.createExtensionFunction( 
@@ -182,6 +201,7 @@ glMatrixLoadTransposedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glMatrixLoadTransposedEXT( GLenum(mode), GLdoubleArray(m) ) -> None',
 	argNames = ('mode', 'm',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixMultTransposefEXT = platform.createExtensionFunction( 
@@ -191,6 +211,7 @@ glMatrixMultTransposefEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMatrixMultTransposefEXT( GLenum(mode), GLfloatArray(m) ) -> None',
 	argNames = ('mode', 'm',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixMultTransposedEXT = platform.createExtensionFunction( 
@@ -200,6 +221,7 @@ glMatrixMultTransposedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glMatrixMultTransposedEXT( GLenum(mode), GLdoubleArray(m) ) -> None',
 	argNames = ('mode', 'm',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureParameterfEXT = platform.createExtensionFunction( 
@@ -209,6 +231,7 @@ glTextureParameterfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, constants.GLfloat,),
 	doc = 'glTextureParameterfEXT( GLuint(texture), GLenum(target), GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureParameterfvEXT = platform.createExtensionFunction( 
@@ -218,6 +241,7 @@ glTextureParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glTextureParameterfvEXT( GLuint(texture), GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureParameteriEXT = platform.createExtensionFunction( 
@@ -227,6 +251,7 @@ glTextureParameteriEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glTextureParameteriEXT( GLuint(texture), GLenum(target), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureParameterivEXT = platform.createExtensionFunction( 
@@ -236,6 +261,7 @@ glTextureParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glTextureParameterivEXT( GLuint(texture), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureImage1DEXT = platform.createExtensionFunction( 
@@ -245,6 +271,7 @@ glTextureImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTextureImage1DEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLint(border), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texture', 'target', 'level', 'internalformat', 'width', 'border', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureImage2DEXT = platform.createExtensionFunction( 
@@ -254,6 +281,7 @@ glTextureImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTextureImage2DEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLint(border), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texture', 'target', 'level', 'internalformat', 'width', 'height', 'border', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureSubImage1DEXT = platform.createExtensionFunction( 
@@ -263,6 +291,7 @@ glTextureSubImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTextureSubImage1DEXT( GLuint(texture), GLenum(target), GLint(level), GLint(xoffset), GLsizei(width), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texture', 'target', 'level', 'xoffset', 'width', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureSubImage2DEXT = platform.createExtensionFunction( 
@@ -272,6 +301,7 @@ glTextureSubImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTextureSubImage2DEXT( GLuint(texture), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLsizei(width), GLsizei(height), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texture', 'target', 'level', 'xoffset', 'yoffset', 'width', 'height', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyTextureImage1DEXT = platform.createExtensionFunction( 
@@ -281,6 +311,7 @@ glCopyTextureImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLint,),
 	doc = 'glCopyTextureImage1DEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(internalformat), GLint(x), GLint(y), GLsizei(width), GLint(border) ) -> None',
 	argNames = ('texture', 'target', 'level', 'internalformat', 'x', 'y', 'width', 'border',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyTextureImage2DEXT = platform.createExtensionFunction( 
@@ -290,6 +321,7 @@ glCopyTextureImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLint,),
 	doc = 'glCopyTextureImage2DEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(internalformat), GLint(x), GLint(y), GLsizei(width), GLsizei(height), GLint(border) ) -> None',
 	argNames = ('texture', 'target', 'level', 'internalformat', 'x', 'y', 'width', 'height', 'border',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyTextureSubImage1DEXT = platform.createExtensionFunction( 
@@ -299,6 +331,7 @@ glCopyTextureSubImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei,),
 	doc = 'glCopyTextureSubImage1DEXT( GLuint(texture), GLenum(target), GLint(level), GLint(xoffset), GLint(x), GLint(y), GLsizei(width) ) -> None',
 	argNames = ('texture', 'target', 'level', 'xoffset', 'x', 'y', 'width',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyTextureSubImage2DEXT = platform.createExtensionFunction( 
@@ -308,6 +341,7 @@ glCopyTextureSubImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei,),
 	doc = 'glCopyTextureSubImage2DEXT( GLuint(texture), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(x), GLint(y), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('texture', 'target', 'level', 'xoffset', 'yoffset', 'x', 'y', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTextureImageEXT = platform.createExtensionFunction( 
@@ -317,6 +351,7 @@ glGetTextureImageEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glGetTextureImageEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texture', 'target', 'level', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTextureParameterfvEXT = platform.createExtensionFunction( 
@@ -326,6 +361,7 @@ glGetTextureParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetTextureParameterfvEXT( GLuint(texture), GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTextureParameterivEXT = platform.createExtensionFunction( 
@@ -335,6 +371,7 @@ glGetTextureParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetTextureParameterivEXT( GLuint(texture), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTextureLevelParameterfvEXT = platform.createExtensionFunction( 
@@ -344,6 +381,7 @@ glGetTextureLevelParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetTextureLevelParameterfvEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texture', 'target', 'level', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTextureLevelParameterivEXT = platform.createExtensionFunction( 
@@ -353,6 +391,7 @@ glGetTextureLevelParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetTextureLevelParameterivEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texture', 'target', 'level', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureImage3DEXT = platform.createExtensionFunction( 
@@ -362,6 +401,7 @@ glTextureImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTextureImage3DEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLsizei(depth), GLint(border), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texture', 'target', 'level', 'internalformat', 'width', 'height', 'depth', 'border', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureSubImage3DEXT = platform.createExtensionFunction( 
@@ -371,6 +411,7 @@ glTextureSubImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTextureSubImage3DEXT( GLuint(texture), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texture', 'target', 'level', 'xoffset', 'yoffset', 'zoffset', 'width', 'height', 'depth', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyTextureSubImage3DEXT = platform.createExtensionFunction( 
@@ -380,6 +421,7 @@ glCopyTextureSubImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei,),
 	doc = 'glCopyTextureSubImage3DEXT( GLuint(texture), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLint(x), GLint(y), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('texture', 'target', 'level', 'xoffset', 'yoffset', 'zoffset', 'x', 'y', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexParameterfEXT = platform.createExtensionFunction( 
@@ -389,6 +431,7 @@ glMultiTexParameterfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLfloat,),
 	doc = 'glMultiTexParameterfEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexParameterfvEXT = platform.createExtensionFunction( 
@@ -398,6 +441,7 @@ glMultiTexParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMultiTexParameterfvEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexParameteriEXT = platform.createExtensionFunction( 
@@ -407,6 +451,7 @@ glMultiTexParameteriEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glMultiTexParameteriEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexParameterivEXT = platform.createExtensionFunction( 
@@ -416,6 +461,7 @@ glMultiTexParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glMultiTexParameterivEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexImage1DEXT = platform.createExtensionFunction( 
@@ -425,6 +471,7 @@ glMultiTexImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glMultiTexImage1DEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLint(border), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'internalformat', 'width', 'border', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexImage2DEXT = platform.createExtensionFunction( 
@@ -434,6 +481,7 @@ glMultiTexImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glMultiTexImage2DEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLint(border), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'internalformat', 'width', 'height', 'border', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexSubImage1DEXT = platform.createExtensionFunction( 
@@ -443,6 +491,7 @@ glMultiTexSubImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glMultiTexSubImage1DEXT( GLenum(texunit), GLenum(target), GLint(level), GLint(xoffset), GLsizei(width), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'xoffset', 'width', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexSubImage2DEXT = platform.createExtensionFunction( 
@@ -452,6 +501,7 @@ glMultiTexSubImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glMultiTexSubImage2DEXT( GLenum(texunit), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLsizei(width), GLsizei(height), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'xoffset', 'yoffset', 'width', 'height', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyMultiTexImage1DEXT = platform.createExtensionFunction( 
@@ -461,6 +511,7 @@ glCopyMultiTexImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLint,),
 	doc = 'glCopyMultiTexImage1DEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(internalformat), GLint(x), GLint(y), GLsizei(width), GLint(border) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'internalformat', 'x', 'y', 'width', 'border',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyMultiTexImage2DEXT = platform.createExtensionFunction( 
@@ -470,6 +521,7 @@ glCopyMultiTexImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLint,),
 	doc = 'glCopyMultiTexImage2DEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(internalformat), GLint(x), GLint(y), GLsizei(width), GLsizei(height), GLint(border) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'internalformat', 'x', 'y', 'width', 'height', 'border',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyMultiTexSubImage1DEXT = platform.createExtensionFunction( 
@@ -479,6 +531,7 @@ glCopyMultiTexSubImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei,),
 	doc = 'glCopyMultiTexSubImage1DEXT( GLenum(texunit), GLenum(target), GLint(level), GLint(xoffset), GLint(x), GLint(y), GLsizei(width) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'xoffset', 'x', 'y', 'width',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyMultiTexSubImage2DEXT = platform.createExtensionFunction( 
@@ -488,6 +541,7 @@ glCopyMultiTexSubImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei,),
 	doc = 'glCopyMultiTexSubImage2DEXT( GLenum(texunit), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(x), GLint(y), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'xoffset', 'yoffset', 'x', 'y', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexImageEXT = platform.createExtensionFunction( 
@@ -497,6 +551,7 @@ glGetMultiTexImageEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glGetMultiTexImageEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexParameterfvEXT = platform.createExtensionFunction( 
@@ -506,6 +561,7 @@ glGetMultiTexParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetMultiTexParameterfvEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexParameterivEXT = platform.createExtensionFunction( 
@@ -515,6 +571,7 @@ glGetMultiTexParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetMultiTexParameterivEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexLevelParameterfvEXT = platform.createExtensionFunction( 
@@ -524,6 +581,7 @@ glGetMultiTexLevelParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetMultiTexLevelParameterfvEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexLevelParameterivEXT = platform.createExtensionFunction( 
@@ -533,6 +591,7 @@ glGetMultiTexLevelParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetMultiTexLevelParameterivEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexImage3DEXT = platform.createExtensionFunction( 
@@ -542,6 +601,7 @@ glMultiTexImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glMultiTexImage3DEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLsizei(depth), GLint(border), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'internalformat', 'width', 'height', 'depth', 'border', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexSubImage3DEXT = platform.createExtensionFunction( 
@@ -551,6 +611,7 @@ glMultiTexSubImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glMultiTexSubImage3DEXT( GLenum(texunit), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'xoffset', 'yoffset', 'zoffset', 'width', 'height', 'depth', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyMultiTexSubImage3DEXT = platform.createExtensionFunction( 
@@ -560,6 +621,7 @@ glCopyMultiTexSubImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei,),
 	doc = 'glCopyMultiTexSubImage3DEXT( GLenum(texunit), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLint(x), GLint(y), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'xoffset', 'yoffset', 'zoffset', 'x', 'y', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 glBindMultiTextureEXT = platform.createExtensionFunction( 
@@ -569,6 +631,7 @@ glBindMultiTextureEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glBindMultiTextureEXT( GLenum(texunit), GLenum(target), GLuint(texture) ) -> None',
 	argNames = ('texunit', 'target', 'texture',),
+	deprecated = _DEPRECATED,
 )
 
 glEnableClientStateIndexedEXT = platform.createExtensionFunction( 
@@ -578,6 +641,7 @@ glEnableClientStateIndexedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glEnableClientStateIndexedEXT( GLenum(array), GLuint(index) ) -> None',
 	argNames = ('array', 'index',),
+	deprecated = _DEPRECATED,
 )
 
 glDisableClientStateIndexedEXT = platform.createExtensionFunction( 
@@ -587,6 +651,7 @@ glDisableClientStateIndexedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glDisableClientStateIndexedEXT( GLenum(array), GLuint(index) ) -> None',
 	argNames = ('array', 'index',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoordPointerEXT = platform.createExtensionFunction( 
@@ -596,6 +661,7 @@ glMultiTexCoordPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glMultiTexCoordPointerEXT( GLenum(texunit), GLint(size), GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('texunit', 'size', 'type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexEnvfEXT = platform.createExtensionFunction( 
@@ -605,6 +671,7 @@ glMultiTexEnvfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLfloat,),
 	doc = 'glMultiTexEnvfEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexEnvfvEXT = platform.createExtensionFunction( 
@@ -614,6 +681,7 @@ glMultiTexEnvfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMultiTexEnvfvEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexEnviEXT = platform.createExtensionFunction( 
@@ -623,6 +691,7 @@ glMultiTexEnviEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glMultiTexEnviEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexEnvivEXT = platform.createExtensionFunction( 
@@ -632,6 +701,7 @@ glMultiTexEnvivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glMultiTexEnvivEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexGendEXT = platform.createExtensionFunction( 
@@ -641,6 +711,7 @@ glMultiTexGendEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLdouble,),
 	doc = 'glMultiTexGendEXT( GLenum(texunit), GLenum(coord), GLenum(pname), GLdouble(param) ) -> None',
 	argNames = ('texunit', 'coord', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexGendvEXT = platform.createExtensionFunction( 
@@ -650,6 +721,7 @@ glMultiTexGendvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glMultiTexGendvEXT( GLenum(texunit), GLenum(coord), GLenum(pname), GLdoubleArray(params) ) -> None',
 	argNames = ('texunit', 'coord', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexGenfEXT = platform.createExtensionFunction( 
@@ -659,6 +731,7 @@ glMultiTexGenfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLfloat,),
 	doc = 'glMultiTexGenfEXT( GLenum(texunit), GLenum(coord), GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('texunit', 'coord', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexGenfvEXT = platform.createExtensionFunction( 
@@ -668,6 +741,7 @@ glMultiTexGenfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMultiTexGenfvEXT( GLenum(texunit), GLenum(coord), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texunit', 'coord', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexGeniEXT = platform.createExtensionFunction( 
@@ -677,6 +751,7 @@ glMultiTexGeniEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glMultiTexGeniEXT( GLenum(texunit), GLenum(coord), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('texunit', 'coord', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexGenivEXT = platform.createExtensionFunction( 
@@ -686,6 +761,7 @@ glMultiTexGenivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glMultiTexGenivEXT( GLenum(texunit), GLenum(coord), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texunit', 'coord', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexEnvfvEXT = platform.createExtensionFunction( 
@@ -695,6 +771,7 @@ glGetMultiTexEnvfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetMultiTexEnvfvEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexEnvivEXT = platform.createExtensionFunction( 
@@ -704,6 +781,7 @@ glGetMultiTexEnvivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetMultiTexEnvivEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexGendvEXT = platform.createExtensionFunction( 
@@ -713,6 +791,7 @@ glGetMultiTexGendvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glGetMultiTexGendvEXT( GLenum(texunit), GLenum(coord), GLenum(pname), GLdoubleArray(params) ) -> None',
 	argNames = ('texunit', 'coord', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexGenfvEXT = platform.createExtensionFunction( 
@@ -722,6 +801,7 @@ glGetMultiTexGenfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetMultiTexGenfvEXT( GLenum(texunit), GLenum(coord), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('texunit', 'coord', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexGenivEXT = platform.createExtensionFunction( 
@@ -731,6 +811,7 @@ glGetMultiTexGenivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetMultiTexGenivEXT( GLenum(texunit), GLenum(coord), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texunit', 'coord', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFloatIndexedvEXT = platform.createExtensionFunction( 
@@ -740,6 +821,7 @@ glGetFloatIndexedvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glGetFloatIndexedvEXT( GLenum(target), GLuint(index), GLfloatArray(data) ) -> None',
 	argNames = ('target', 'index', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetDoubleIndexedvEXT = platform.createExtensionFunction( 
@@ -749,6 +831,7 @@ glGetDoubleIndexedvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glGetDoubleIndexedvEXT( GLenum(target), GLuint(index), GLdoubleArray(data) ) -> None',
 	argNames = ('target', 'index', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetPointerIndexedvEXT = platform.createExtensionFunction( 
@@ -758,6 +841,7 @@ glGetPointerIndexedvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glGetPointerIndexedvEXT( GLenum(target), GLuint(index), POINTER(ctypes.c_void_p)(data) ) -> None',
 	argNames = ('target', 'index', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTextureImage3DEXT = platform.createExtensionFunction( 
@@ -767,6 +851,7 @@ glCompressedTextureImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTextureImage3DEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLsizei(depth), GLint(border), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texture', 'target', 'level', 'internalformat', 'width', 'height', 'depth', 'border', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTextureImage2DEXT = platform.createExtensionFunction( 
@@ -776,6 +861,7 @@ glCompressedTextureImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTextureImage2DEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLint(border), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texture', 'target', 'level', 'internalformat', 'width', 'height', 'border', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTextureImage1DEXT = platform.createExtensionFunction( 
@@ -785,6 +871,7 @@ glCompressedTextureImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTextureImage1DEXT( GLuint(texture), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLint(border), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texture', 'target', 'level', 'internalformat', 'width', 'border', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTextureSubImage3DEXT = platform.createExtensionFunction( 
@@ -794,6 +881,7 @@ glCompressedTextureSubImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTextureSubImage3DEXT( GLuint(texture), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texture', 'target', 'level', 'xoffset', 'yoffset', 'zoffset', 'width', 'height', 'depth', 'format', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTextureSubImage2DEXT = platform.createExtensionFunction( 
@@ -803,6 +891,7 @@ glCompressedTextureSubImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTextureSubImage2DEXT( GLuint(texture), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLsizei(width), GLsizei(height), GLenum(format), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texture', 'target', 'level', 'xoffset', 'yoffset', 'width', 'height', 'format', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTextureSubImage1DEXT = platform.createExtensionFunction( 
@@ -812,6 +901,7 @@ glCompressedTextureSubImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTextureSubImage1DEXT( GLuint(texture), GLenum(target), GLint(level), GLint(xoffset), GLsizei(width), GLenum(format), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texture', 'target', 'level', 'xoffset', 'width', 'format', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glGetCompressedTextureImageEXT = platform.createExtensionFunction( 
@@ -821,6 +911,7 @@ glGetCompressedTextureImageEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint, ctypes.c_void_p,),
 	doc = 'glGetCompressedTextureImageEXT( GLuint(texture), GLenum(target), GLint(lod), c_void_p(img) ) -> None',
 	argNames = ('texture', 'target', 'lod', 'img',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedMultiTexImage3DEXT = platform.createExtensionFunction( 
@@ -830,6 +921,7 @@ glCompressedMultiTexImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedMultiTexImage3DEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLsizei(depth), GLint(border), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'internalformat', 'width', 'height', 'depth', 'border', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedMultiTexImage2DEXT = platform.createExtensionFunction( 
@@ -839,6 +931,7 @@ glCompressedMultiTexImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedMultiTexImage2DEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLint(border), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'internalformat', 'width', 'height', 'border', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedMultiTexImage1DEXT = platform.createExtensionFunction( 
@@ -848,6 +941,7 @@ glCompressedMultiTexImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedMultiTexImage1DEXT( GLenum(texunit), GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLint(border), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'internalformat', 'width', 'border', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedMultiTexSubImage3DEXT = platform.createExtensionFunction( 
@@ -857,6 +951,7 @@ glCompressedMultiTexSubImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedMultiTexSubImage3DEXT( GLenum(texunit), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'xoffset', 'yoffset', 'zoffset', 'width', 'height', 'depth', 'format', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedMultiTexSubImage2DEXT = platform.createExtensionFunction( 
@@ -866,6 +961,7 @@ glCompressedMultiTexSubImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedMultiTexSubImage2DEXT( GLenum(texunit), GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLsizei(width), GLsizei(height), GLenum(format), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'xoffset', 'yoffset', 'width', 'height', 'format', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedMultiTexSubImage1DEXT = platform.createExtensionFunction( 
@@ -875,6 +971,7 @@ glCompressedMultiTexSubImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedMultiTexSubImage1DEXT( GLenum(texunit), GLenum(target), GLint(level), GLint(xoffset), GLsizei(width), GLenum(format), GLsizei(imageSize), c_void_p(bits) ) -> None',
 	argNames = ('texunit', 'target', 'level', 'xoffset', 'width', 'format', 'imageSize', 'bits',),
+	deprecated = _DEPRECATED,
 )
 
 glGetCompressedMultiTexImageEXT = platform.createExtensionFunction( 
@@ -884,6 +981,7 @@ glGetCompressedMultiTexImageEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, ctypes.c_void_p,),
 	doc = 'glGetCompressedMultiTexImageEXT( GLenum(texunit), GLenum(target), GLint(lod), c_void_p(img) ) -> None',
 	argNames = ('texunit', 'target', 'lod', 'img',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramStringEXT = platform.createExtensionFunction( 
@@ -893,6 +991,7 @@ glNamedProgramStringEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glNamedProgramStringEXT( GLuint(program), GLenum(target), GLenum(format), GLsizei(len), c_void_p(string) ) -> None',
 	argNames = ('program', 'target', 'format', 'len', 'string',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParameter4dEXT = platform.createExtensionFunction( 
@@ -902,6 +1001,7 @@ glNamedProgramLocalParameter4dEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glNamedProgramLocalParameter4dEXT( GLuint(program), GLenum(target), GLuint(index), GLdouble(x), GLdouble(y), GLdouble(z), GLdouble(w) ) -> None',
 	argNames = ('program', 'target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParameter4dvEXT = platform.createExtensionFunction( 
@@ -911,6 +1011,7 @@ glNamedProgramLocalParameter4dvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glNamedProgramLocalParameter4dvEXT( GLuint(program), GLenum(target), GLuint(index), GLdoubleArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParameter4fEXT = platform.createExtensionFunction( 
@@ -920,6 +1021,7 @@ glNamedProgramLocalParameter4fEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glNamedProgramLocalParameter4fEXT( GLuint(program), GLenum(target), GLuint(index), GLfloat(x), GLfloat(y), GLfloat(z), GLfloat(w) ) -> None',
 	argNames = ('program', 'target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParameter4fvEXT = platform.createExtensionFunction( 
@@ -929,6 +1031,7 @@ glNamedProgramLocalParameter4fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glNamedProgramLocalParameter4fvEXT( GLuint(program), GLenum(target), GLuint(index), GLfloatArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedProgramLocalParameterdvEXT = platform.createExtensionFunction( 
@@ -938,6 +1041,7 @@ glGetNamedProgramLocalParameterdvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glGetNamedProgramLocalParameterdvEXT( GLuint(program), GLenum(target), GLuint(index), GLdoubleArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedProgramLocalParameterfvEXT = platform.createExtensionFunction( 
@@ -947,6 +1051,7 @@ glGetNamedProgramLocalParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glGetNamedProgramLocalParameterfvEXT( GLuint(program), GLenum(target), GLuint(index), GLfloatArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedProgramivEXT = platform.createExtensionFunction( 
@@ -956,6 +1061,7 @@ glGetNamedProgramivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetNamedProgramivEXT( GLuint(program), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('program', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedProgramStringEXT = platform.createExtensionFunction( 
@@ -965,6 +1071,7 @@ glGetNamedProgramStringEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glGetNamedProgramStringEXT( GLuint(program), GLenum(target), GLenum(pname), c_void_p(string) ) -> None',
 	argNames = ('program', 'target', 'pname', 'string',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParameters4fvEXT = platform.createExtensionFunction( 
@@ -974,6 +1081,7 @@ glNamedProgramLocalParameters4fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glNamedProgramLocalParameters4fvEXT( GLuint(program), GLenum(target), GLuint(index), GLsizei(count), GLfloatArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParameterI4iEXT = platform.createExtensionFunction( 
@@ -983,6 +1091,7 @@ glNamedProgramLocalParameterI4iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glNamedProgramLocalParameterI4iEXT( GLuint(program), GLenum(target), GLuint(index), GLint(x), GLint(y), GLint(z), GLint(w) ) -> None',
 	argNames = ('program', 'target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParameterI4ivEXT = platform.createExtensionFunction( 
@@ -992,6 +1101,7 @@ glNamedProgramLocalParameterI4ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, arrays.GLintArray,),
 	doc = 'glNamedProgramLocalParameterI4ivEXT( GLuint(program), GLenum(target), GLuint(index), GLintArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParametersI4ivEXT = platform.createExtensionFunction( 
@@ -1001,6 +1111,7 @@ glNamedProgramLocalParametersI4ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glNamedProgramLocalParametersI4ivEXT( GLuint(program), GLenum(target), GLuint(index), GLsizei(count), GLintArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParameterI4uiEXT = platform.createExtensionFunction( 
@@ -1010,6 +1121,7 @@ glNamedProgramLocalParameterI4uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glNamedProgramLocalParameterI4uiEXT( GLuint(program), GLenum(target), GLuint(index), GLuint(x), GLuint(y), GLuint(z), GLuint(w) ) -> None',
 	argNames = ('program', 'target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParameterI4uivEXT = platform.createExtensionFunction( 
@@ -1019,6 +1131,7 @@ glNamedProgramLocalParameterI4uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, arrays.GLuintArray,),
 	doc = 'glNamedProgramLocalParameterI4uivEXT( GLuint(program), GLenum(target), GLuint(index), GLuintArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedProgramLocalParametersI4uivEXT = platform.createExtensionFunction( 
@@ -1028,6 +1141,7 @@ glNamedProgramLocalParametersI4uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glNamedProgramLocalParametersI4uivEXT( GLuint(program), GLenum(target), GLuint(index), GLsizei(count), GLuintArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedProgramLocalParameterIivEXT = platform.createExtensionFunction( 
@@ -1037,6 +1151,7 @@ glGetNamedProgramLocalParameterIivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, arrays.GLintArray,),
 	doc = 'glGetNamedProgramLocalParameterIivEXT( GLuint(program), GLenum(target), GLuint(index), GLintArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedProgramLocalParameterIuivEXT = platform.createExtensionFunction( 
@@ -1046,6 +1161,7 @@ glGetNamedProgramLocalParameterIuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, arrays.GLuintArray,),
 	doc = 'glGetNamedProgramLocalParameterIuivEXT( GLuint(program), GLenum(target), GLuint(index), GLuintArray(params) ) -> None',
 	argNames = ('program', 'target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureParameterIivEXT = platform.createExtensionFunction( 
@@ -1055,6 +1171,7 @@ glTextureParameterIivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glTextureParameterIivEXT( GLuint(texture), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureParameterIuivEXT = platform.createExtensionFunction( 
@@ -1064,6 +1181,7 @@ glTextureParameterIuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glTextureParameterIuivEXT( GLuint(texture), GLenum(target), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTextureParameterIivEXT = platform.createExtensionFunction( 
@@ -1073,6 +1191,7 @@ glGetTextureParameterIivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetTextureParameterIivEXT( GLuint(texture), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTextureParameterIuivEXT = platform.createExtensionFunction( 
@@ -1082,6 +1201,7 @@ glGetTextureParameterIuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetTextureParameterIuivEXT( GLuint(texture), GLenum(target), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('texture', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexParameterIivEXT = platform.createExtensionFunction( 
@@ -1091,6 +1211,7 @@ glMultiTexParameterIivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glMultiTexParameterIivEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexParameterIuivEXT = platform.createExtensionFunction( 
@@ -1100,6 +1221,7 @@ glMultiTexParameterIuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glMultiTexParameterIuivEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexParameterIivEXT = platform.createExtensionFunction( 
@@ -1109,6 +1231,7 @@ glGetMultiTexParameterIivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetMultiTexParameterIivEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultiTexParameterIuivEXT = platform.createExtensionFunction( 
@@ -1118,6 +1241,7 @@ glGetMultiTexParameterIuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetMultiTexParameterIuivEXT( GLenum(texunit), GLenum(target), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('texunit', 'target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform1fEXT = platform.createExtensionFunction( 
@@ -1127,6 +1251,7 @@ glProgramUniform1fEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLfloat,),
 	doc = 'glProgramUniform1fEXT( GLuint(program), GLint(location), GLfloat(v0) ) -> None',
 	argNames = ('program', 'location', 'v0',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform2fEXT = platform.createExtensionFunction( 
@@ -1136,6 +1261,7 @@ glProgramUniform2fEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLfloat, constants.GLfloat,),
 	doc = 'glProgramUniform2fEXT( GLuint(program), GLint(location), GLfloat(v0), GLfloat(v1) ) -> None',
 	argNames = ('program', 'location', 'v0', 'v1',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform3fEXT = platform.createExtensionFunction( 
@@ -1145,6 +1271,7 @@ glProgramUniform3fEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glProgramUniform3fEXT( GLuint(program), GLint(location), GLfloat(v0), GLfloat(v1), GLfloat(v2) ) -> None',
 	argNames = ('program', 'location', 'v0', 'v1', 'v2',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform4fEXT = platform.createExtensionFunction( 
@@ -1154,6 +1281,7 @@ glProgramUniform4fEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glProgramUniform4fEXT( GLuint(program), GLint(location), GLfloat(v0), GLfloat(v1), GLfloat(v2), GLfloat(v3) ) -> None',
 	argNames = ('program', 'location', 'v0', 'v1', 'v2', 'v3',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform1iEXT = platform.createExtensionFunction( 
@@ -1163,6 +1291,7 @@ glProgramUniform1iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint,),
 	doc = 'glProgramUniform1iEXT( GLuint(program), GLint(location), GLint(v0) ) -> None',
 	argNames = ('program', 'location', 'v0',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform2iEXT = platform.createExtensionFunction( 
@@ -1172,6 +1301,7 @@ glProgramUniform2iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glProgramUniform2iEXT( GLuint(program), GLint(location), GLint(v0), GLint(v1) ) -> None',
 	argNames = ('program', 'location', 'v0', 'v1',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform3iEXT = platform.createExtensionFunction( 
@@ -1181,6 +1311,7 @@ glProgramUniform3iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glProgramUniform3iEXT( GLuint(program), GLint(location), GLint(v0), GLint(v1), GLint(v2) ) -> None',
 	argNames = ('program', 'location', 'v0', 'v1', 'v2',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform4iEXT = platform.createExtensionFunction( 
@@ -1190,6 +1321,7 @@ glProgramUniform4iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glProgramUniform4iEXT( GLuint(program), GLint(location), GLint(v0), GLint(v1), GLint(v2), GLint(v3) ) -> None',
 	argNames = ('program', 'location', 'v0', 'v1', 'v2', 'v3',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform1fvEXT = platform.createExtensionFunction( 
@@ -1199,6 +1331,7 @@ glProgramUniform1fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glProgramUniform1fvEXT( GLuint(program), GLint(location), GLsizei(count), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform2fvEXT = platform.createExtensionFunction( 
@@ -1208,6 +1341,7 @@ glProgramUniform2fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glProgramUniform2fvEXT( GLuint(program), GLint(location), GLsizei(count), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform3fvEXT = platform.createExtensionFunction( 
@@ -1217,6 +1351,7 @@ glProgramUniform3fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glProgramUniform3fvEXT( GLuint(program), GLint(location), GLsizei(count), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform4fvEXT = platform.createExtensionFunction( 
@@ -1226,6 +1361,7 @@ glProgramUniform4fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glProgramUniform4fvEXT( GLuint(program), GLint(location), GLsizei(count), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform1ivEXT = platform.createExtensionFunction( 
@@ -1235,6 +1371,7 @@ glProgramUniform1ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glProgramUniform1ivEXT( GLuint(program), GLint(location), GLsizei(count), GLintArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform2ivEXT = platform.createExtensionFunction( 
@@ -1244,6 +1381,7 @@ glProgramUniform2ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glProgramUniform2ivEXT( GLuint(program), GLint(location), GLsizei(count), GLintArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform3ivEXT = platform.createExtensionFunction( 
@@ -1253,6 +1391,7 @@ glProgramUniform3ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glProgramUniform3ivEXT( GLuint(program), GLint(location), GLsizei(count), GLintArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform4ivEXT = platform.createExtensionFunction( 
@@ -1262,6 +1401,7 @@ glProgramUniform4ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glProgramUniform4ivEXT( GLuint(program), GLint(location), GLsizei(count), GLintArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniformMatrix2fvEXT = platform.createExtensionFunction( 
@@ -1271,6 +1411,7 @@ glProgramUniformMatrix2fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glProgramUniformMatrix2fvEXT( GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniformMatrix3fvEXT = platform.createExtensionFunction( 
@@ -1280,6 +1421,7 @@ glProgramUniformMatrix3fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glProgramUniformMatrix3fvEXT( GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniformMatrix4fvEXT = platform.createExtensionFunction( 
@@ -1289,6 +1431,7 @@ glProgramUniformMatrix4fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glProgramUniformMatrix4fvEXT( GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniformMatrix2x3fvEXT = platform.createExtensionFunction( 
@@ -1298,6 +1441,7 @@ glProgramUniformMatrix2x3fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glProgramUniformMatrix2x3fvEXT( GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniformMatrix3x2fvEXT = platform.createExtensionFunction( 
@@ -1307,6 +1451,7 @@ glProgramUniformMatrix3x2fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glProgramUniformMatrix3x2fvEXT( GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniformMatrix2x4fvEXT = platform.createExtensionFunction( 
@@ -1316,6 +1461,7 @@ glProgramUniformMatrix2x4fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glProgramUniformMatrix2x4fvEXT( GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniformMatrix4x2fvEXT = platform.createExtensionFunction( 
@@ -1325,6 +1471,7 @@ glProgramUniformMatrix4x2fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glProgramUniformMatrix4x2fvEXT( GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniformMatrix3x4fvEXT = platform.createExtensionFunction( 
@@ -1334,6 +1481,7 @@ glProgramUniformMatrix3x4fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glProgramUniformMatrix3x4fvEXT( GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniformMatrix4x3fvEXT = platform.createExtensionFunction( 
@@ -1343,6 +1491,7 @@ glProgramUniformMatrix4x3fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glProgramUniformMatrix4x3fvEXT( GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform1uiEXT = platform.createExtensionFunction( 
@@ -1352,6 +1501,7 @@ glProgramUniform1uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLuint,),
 	doc = 'glProgramUniform1uiEXT( GLuint(program), GLint(location), GLuint(v0) ) -> None',
 	argNames = ('program', 'location', 'v0',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform2uiEXT = platform.createExtensionFunction( 
@@ -1361,6 +1511,7 @@ glProgramUniform2uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLuint, constants.GLuint,),
 	doc = 'glProgramUniform2uiEXT( GLuint(program), GLint(location), GLuint(v0), GLuint(v1) ) -> None',
 	argNames = ('program', 'location', 'v0', 'v1',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform3uiEXT = platform.createExtensionFunction( 
@@ -1370,6 +1521,7 @@ glProgramUniform3uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glProgramUniform3uiEXT( GLuint(program), GLint(location), GLuint(v0), GLuint(v1), GLuint(v2) ) -> None',
 	argNames = ('program', 'location', 'v0', 'v1', 'v2',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform4uiEXT = platform.createExtensionFunction( 
@@ -1379,6 +1531,7 @@ glProgramUniform4uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glProgramUniform4uiEXT( GLuint(program), GLint(location), GLuint(v0), GLuint(v1), GLuint(v2), GLuint(v3) ) -> None',
 	argNames = ('program', 'location', 'v0', 'v1', 'v2', 'v3',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform1uivEXT = platform.createExtensionFunction( 
@@ -1388,6 +1541,7 @@ glProgramUniform1uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glProgramUniform1uivEXT( GLuint(program), GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform2uivEXT = platform.createExtensionFunction( 
@@ -1397,6 +1551,7 @@ glProgramUniform2uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glProgramUniform2uivEXT( GLuint(program), GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform3uivEXT = platform.createExtensionFunction( 
@@ -1406,6 +1561,7 @@ glProgramUniform3uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glProgramUniform3uivEXT( GLuint(program), GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramUniform4uivEXT = platform.createExtensionFunction( 
@@ -1415,6 +1571,7 @@ glProgramUniform4uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glProgramUniform4uivEXT( GLuint(program), GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('program', 'location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedBufferDataEXT = platform.createExtensionFunction( 
@@ -1424,6 +1581,7 @@ glNamedBufferDataEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizeiptr, ctypes.c_void_p, constants.GLenum,),
 	doc = 'glNamedBufferDataEXT( GLuint(buffer), GLsizeiptr(size), c_void_p(data), GLenum(usage) ) -> None',
 	argNames = ('buffer', 'size', 'data', 'usage',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedBufferSubDataEXT = platform.createExtensionFunction( 
@@ -1433,6 +1591,7 @@ glNamedBufferSubDataEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLintptr, constants.GLsizeiptr, ctypes.c_void_p,),
 	doc = 'glNamedBufferSubDataEXT( GLuint(buffer), GLintptr(offset), GLsizeiptr(size), c_void_p(data) ) -> None',
 	argNames = ('buffer', 'offset', 'size', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glMapNamedBufferEXT = platform.createExtensionFunction( 
@@ -1442,6 +1601,7 @@ glMapNamedBufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glMapNamedBufferEXT( GLuint(buffer), GLenum(access) ) -> ctypes.c_void_p',
 	argNames = ('buffer', 'access',),
+	deprecated = _DEPRECATED,
 )
 
 glUnmapNamedBufferEXT = platform.createExtensionFunction( 
@@ -1451,6 +1611,7 @@ glUnmapNamedBufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glUnmapNamedBufferEXT( GLuint(buffer) ) -> constants.GLboolean',
 	argNames = ('buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedBufferParameterivEXT = platform.createExtensionFunction( 
@@ -1460,6 +1621,7 @@ glGetNamedBufferParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetNamedBufferParameterivEXT( GLuint(buffer), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('buffer', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedBufferPointervEXT = platform.createExtensionFunction( 
@@ -1469,6 +1631,7 @@ glGetNamedBufferPointervEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glGetNamedBufferPointervEXT( GLuint(buffer), GLenum(pname), POINTER(ctypes.c_void_p)(params) ) -> None',
 	argNames = ('buffer', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedBufferSubDataEXT = platform.createExtensionFunction( 
@@ -1478,6 +1641,7 @@ glGetNamedBufferSubDataEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLintptr, constants.GLsizeiptr, ctypes.c_void_p,),
 	doc = 'glGetNamedBufferSubDataEXT( GLuint(buffer), GLintptr(offset), GLsizeiptr(size), c_void_p(data) ) -> None',
 	argNames = ('buffer', 'offset', 'size', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureBufferEXT = platform.createExtensionFunction( 
@@ -1487,6 +1651,7 @@ glTextureBufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glTextureBufferEXT( GLuint(texture), GLenum(target), GLenum(internalformat), GLuint(buffer) ) -> None',
 	argNames = ('texture', 'target', 'internalformat', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexBufferEXT = platform.createExtensionFunction( 
@@ -1496,6 +1661,7 @@ glMultiTexBufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glMultiTexBufferEXT( GLenum(texunit), GLenum(target), GLenum(internalformat), GLuint(buffer) ) -> None',
 	argNames = ('texunit', 'target', 'internalformat', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedRenderbufferStorageEXT = platform.createExtensionFunction( 
@@ -1505,6 +1671,7 @@ glNamedRenderbufferStorageEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLsizei, constants.GLsizei,),
 	doc = 'glNamedRenderbufferStorageEXT( GLuint(renderbuffer), GLenum(internalformat), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('renderbuffer', 'internalformat', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedRenderbufferParameterivEXT = platform.createExtensionFunction( 
@@ -1514,6 +1681,7 @@ glGetNamedRenderbufferParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetNamedRenderbufferParameterivEXT( GLuint(renderbuffer), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('renderbuffer', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glCheckNamedFramebufferStatusEXT = platform.createExtensionFunction( 
@@ -1523,6 +1691,7 @@ glCheckNamedFramebufferStatusEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glCheckNamedFramebufferStatusEXT( GLuint(framebuffer), GLenum(target) ) -> constants.GLenum',
 	argNames = ('framebuffer', 'target',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedFramebufferTexture1DEXT = platform.createExtensionFunction( 
@@ -1532,6 +1701,7 @@ glNamedFramebufferTexture1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint,),
 	doc = 'glNamedFramebufferTexture1DEXT( GLuint(framebuffer), GLenum(attachment), GLenum(textarget), GLuint(texture), GLint(level) ) -> None',
 	argNames = ('framebuffer', 'attachment', 'textarget', 'texture', 'level',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedFramebufferTexture2DEXT = platform.createExtensionFunction( 
@@ -1541,6 +1711,7 @@ glNamedFramebufferTexture2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint,),
 	doc = 'glNamedFramebufferTexture2DEXT( GLuint(framebuffer), GLenum(attachment), GLenum(textarget), GLuint(texture), GLint(level) ) -> None',
 	argNames = ('framebuffer', 'attachment', 'textarget', 'texture', 'level',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedFramebufferTexture3DEXT = platform.createExtensionFunction( 
@@ -1550,6 +1721,7 @@ glNamedFramebufferTexture3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint, constants.GLint,),
 	doc = 'glNamedFramebufferTexture3DEXT( GLuint(framebuffer), GLenum(attachment), GLenum(textarget), GLuint(texture), GLint(level), GLint(zoffset) ) -> None',
 	argNames = ('framebuffer', 'attachment', 'textarget', 'texture', 'level', 'zoffset',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedFramebufferRenderbufferEXT = platform.createExtensionFunction( 
@@ -1559,6 +1731,7 @@ glNamedFramebufferRenderbufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glNamedFramebufferRenderbufferEXT( GLuint(framebuffer), GLenum(attachment), GLenum(renderbuffertarget), GLuint(renderbuffer) ) -> None',
 	argNames = ('framebuffer', 'attachment', 'renderbuffertarget', 'renderbuffer',),
+	deprecated = _DEPRECATED,
 )
 
 glGetNamedFramebufferAttachmentParameterivEXT = platform.createExtensionFunction( 
@@ -1568,6 +1741,7 @@ glGetNamedFramebufferAttachmentParameterivEXT = platform.createExtensionFunction
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetNamedFramebufferAttachmentParameterivEXT( GLuint(framebuffer), GLenum(attachment), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('framebuffer', 'attachment', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGenerateTextureMipmapEXT = platform.createExtensionFunction( 
@@ -1577,6 +1751,7 @@ glGenerateTextureMipmapEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glGenerateTextureMipmapEXT( GLuint(texture), GLenum(target) ) -> None',
 	argNames = ('texture', 'target',),
+	deprecated = _DEPRECATED,
 )
 
 glGenerateMultiTexMipmapEXT = platform.createExtensionFunction( 
@@ -1586,6 +1761,7 @@ glGenerateMultiTexMipmapEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glGenerateMultiTexMipmapEXT( GLenum(texunit), GLenum(target) ) -> None',
 	argNames = ('texunit', 'target',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferDrawBufferEXT = platform.createExtensionFunction( 
@@ -1595,6 +1771,7 @@ glFramebufferDrawBufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glFramebufferDrawBufferEXT( GLuint(framebuffer), GLenum(mode) ) -> None',
 	argNames = ('framebuffer', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferDrawBuffersEXT = platform.createExtensionFunction( 
@@ -1604,6 +1781,7 @@ glFramebufferDrawBuffersEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glFramebufferDrawBuffersEXT( GLuint(framebuffer), GLsizei(n), GLuintArray(bufs) ) -> None',
 	argNames = ('framebuffer', 'n', 'bufs',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferReadBufferEXT = platform.createExtensionFunction( 
@@ -1613,6 +1791,7 @@ glFramebufferReadBufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glFramebufferReadBufferEXT( GLuint(framebuffer), GLenum(mode) ) -> None',
 	argNames = ('framebuffer', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFramebufferParameterivEXT = platform.createExtensionFunction( 
@@ -1622,6 +1801,7 @@ glGetFramebufferParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetFramebufferParameterivEXT( GLuint(framebuffer), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('framebuffer', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedRenderbufferStorageMultisampleEXT = platform.createExtensionFunction( 
@@ -1631,6 +1811,7 @@ glNamedRenderbufferStorageMultisampleEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, constants.GLenum, constants.GLsizei, constants.GLsizei,),
 	doc = 'glNamedRenderbufferStorageMultisampleEXT( GLuint(renderbuffer), GLsizei(samples), GLenum(internalformat), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('renderbuffer', 'samples', 'internalformat', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedRenderbufferStorageMultisampleCoverageEXT = platform.createExtensionFunction( 
@@ -1640,6 +1821,7 @@ glNamedRenderbufferStorageMultisampleCoverageEXT = platform.createExtensionFunct
 	argTypes=(constants.GLuint, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, constants.GLsizei,),
 	doc = 'glNamedRenderbufferStorageMultisampleCoverageEXT( GLuint(renderbuffer), GLsizei(coverageSamples), GLsizei(colorSamples), GLenum(internalformat), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('renderbuffer', 'coverageSamples', 'colorSamples', 'internalformat', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedFramebufferTextureEXT = platform.createExtensionFunction( 
@@ -1649,6 +1831,7 @@ glNamedFramebufferTextureEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLint,),
 	doc = 'glNamedFramebufferTextureEXT( GLuint(framebuffer), GLenum(attachment), GLuint(texture), GLint(level) ) -> None',
 	argNames = ('framebuffer', 'attachment', 'texture', 'level',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedFramebufferTextureLayerEXT = platform.createExtensionFunction( 
@@ -1658,6 +1841,7 @@ glNamedFramebufferTextureLayerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLint, constants.GLint,),
 	doc = 'glNamedFramebufferTextureLayerEXT( GLuint(framebuffer), GLenum(attachment), GLuint(texture), GLint(level), GLint(layer) ) -> None',
 	argNames = ('framebuffer', 'attachment', 'texture', 'level', 'layer',),
+	deprecated = _DEPRECATED,
 )
 
 glNamedFramebufferTextureFaceEXT = platform.createExtensionFunction( 
@@ -1667,6 +1851,7 @@ glNamedFramebufferTextureFaceEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, constants.GLint, constants.GLenum,),
 	doc = 'glNamedFramebufferTextureFaceEXT( GLuint(framebuffer), GLenum(attachment), GLuint(texture), GLint(level), GLenum(face) ) -> None',
 	argNames = ('framebuffer', 'attachment', 'texture', 'level', 'face',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureRenderbufferEXT = platform.createExtensionFunction( 
@@ -1676,6 +1861,7 @@ glTextureRenderbufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint,),
 	doc = 'glTextureRenderbufferEXT( GLuint(texture), GLenum(target), GLuint(renderbuffer) ) -> None',
 	argNames = ('texture', 'target', 'renderbuffer',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexRenderbufferEXT = platform.createExtensionFunction( 
@@ -1685,6 +1871,7 @@ glMultiTexRenderbufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glMultiTexRenderbufferEXT( GLenum(texunit), GLenum(target), GLuint(renderbuffer) ) -> None',
 	argNames = ('texunit', 'target', 'renderbuffer',),
+	deprecated = _DEPRECATED,
 )
 
 

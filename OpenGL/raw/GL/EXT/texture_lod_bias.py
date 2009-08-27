@@ -28,6 +28,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_lod_bias'
+_DEPRECATED = False
 GL_MAX_TEXTURE_LOD_BIAS_EXT = constant.Constant( 'GL_MAX_TEXTURE_LOD_BIAS_EXT', 0x84FD )
 glget.addGLGetConstant( GL_MAX_TEXTURE_LOD_BIAS_EXT, (1,) )
 GL_TEXTURE_FILTER_CONTROL_EXT = constant.Constant( 'GL_TEXTURE_FILTER_CONTROL_EXT', 0x8500 )

@@ -41,6 +41,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_depth_clamp'
+_DEPRECATED = False
 GL_DEPTH_CLAMP_NV = constant.Constant( 'GL_DEPTH_CLAMP_NV', 0x864F )
 glget.addGLGetConstant( GL_DEPTH_CLAMP_NV, (1,) )
 

@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_igloo_interface'
+_DEPRECATED = False
 
 glIglooInterfaceSGIX = platform.createExtensionFunction( 
 	'glIglooInterfaceSGIX', dll=platform.GL,
@@ -18,6 +19,7 @@ glIglooInterfaceSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, ctypes.c_void_p,),
 	doc = 'glIglooInterfaceSGIX( GLenum(pname), c_void_p(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

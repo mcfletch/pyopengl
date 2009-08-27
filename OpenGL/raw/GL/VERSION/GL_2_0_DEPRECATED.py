@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_2_0'
+_DEPRECATED = True
 GL_VERTEX_PROGRAM_TWO_SIDE = constant.Constant( 'GL_VERTEX_PROGRAM_TWO_SIDE', 0x8643 )
 GL_POINT_SPRITE = constant.Constant( 'GL_POINT_SPRITE', 0x8861 )
 GL_COORD_REPLACE = constant.Constant( 'GL_COORD_REPLACE', 0x8862 )

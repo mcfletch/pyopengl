@@ -28,6 +28,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_envmap_bumpmap'
+_DEPRECATED = False
 GL_BUMP_ROT_MATRIX_ATI = constant.Constant( 'GL_BUMP_ROT_MATRIX_ATI', 0x8775 )
 GL_BUMP_ROT_MATRIX_SIZE_ATI = constant.Constant( 'GL_BUMP_ROT_MATRIX_SIZE_ATI', 0x8776 )
 GL_BUMP_NUM_TEX_UNITS_ATI = constant.Constant( 'GL_BUMP_NUM_TEX_UNITS_ATI', 0x8777 )
@@ -43,6 +44,7 @@ glTexBumpParameterivATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glTexBumpParameterivATI( GLenum(pname), GLintArray(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glTexBumpParameterfvATI = platform.createExtensionFunction( 
@@ -52,6 +54,7 @@ glTexBumpParameterfvATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glTexBumpParameterfvATI( GLenum(pname), GLfloatArray(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTexBumpParameterivATI = platform.createExtensionFunction( 
@@ -61,6 +64,7 @@ glGetTexBumpParameterivATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetTexBumpParameterivATI( GLenum(pname), GLintArray(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTexBumpParameterfvATI = platform.createExtensionFunction( 
@@ -70,6 +74,7 @@ glGetTexBumpParameterfvATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetTexBumpParameterfvATI( GLenum(pname), GLfloatArray(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 

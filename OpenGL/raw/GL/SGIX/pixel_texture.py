@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_pixel_texture'
+_DEPRECATED = False
 GL_PIXEL_TEX_GEN_SGIX = constant.Constant( 'GL_PIXEL_TEX_GEN_SGIX', 0x8139 )
 GL_PIXEL_TEX_GEN_MODE_SGIX = constant.Constant( 'GL_PIXEL_TEX_GEN_MODE_SGIX', 0x832B )
 glPixelTexGenSGIX = platform.createExtensionFunction( 
@@ -19,6 +20,7 @@ glPixelTexGenSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glPixelTexGenSGIX( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 

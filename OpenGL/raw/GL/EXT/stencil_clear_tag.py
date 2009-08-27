@@ -71,6 +71,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_stencil_clear_tag'
+_DEPRECATED = False
 GL_STENCIL_TAG_BITS_EXT = constant.Constant( 'GL_STENCIL_TAG_BITS_EXT', 0x88F2 )
 GL_STENCIL_CLEAR_TAG_VALUE_EXT = constant.Constant( 'GL_STENCIL_CLEAR_TAG_VALUE_EXT', 0x88F3 )
 glStencilClearTagEXT = platform.createExtensionFunction( 
@@ -80,6 +81,7 @@ glStencilClearTagEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, constants.GLuint,),
 	doc = 'glStencilClearTagEXT( GLsizei(stencilTagBits), GLuint(stencilClearTag) ) -> None',
 	argNames = ('stencilTagBits', 'stencilClearTag',),
+	deprecated = _DEPRECATED,
 )
 
 

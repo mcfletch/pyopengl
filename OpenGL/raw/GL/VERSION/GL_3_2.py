@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_3_2'
+_DEPRECATED = False
 GL_CONTEXT_CORE_PROFILE_BIT = constant.Constant( 'GL_CONTEXT_CORE_PROFILE_BIT', 0x1 )
 GL_CONTEXT_COMPATIBILITY_PROFILE_BIT = constant.Constant( 'GL_CONTEXT_COMPATIBILITY_PROFILE_BIT', 0x2 )
 GL_LINES_ADJACENCY = constant.Constant( 'GL_LINES_ADJACENCY', 0xA )
@@ -39,6 +40,7 @@ glGetInteger64i_v = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, ctypes.POINTER(constants.GLint64),),
 	doc = 'glGetInteger64i_v( GLenum(target), GLuint(index), POINTER(constants.GLint64)(data) ) -> None',
 	argNames = ('target', 'index', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetBufferParameteri64v = platform.createExtensionFunction( 
@@ -48,6 +50,7 @@ glGetBufferParameteri64v = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, ctypes.POINTER(constants.GLint64),),
 	doc = 'glGetBufferParameteri64v( GLenum(target), GLenum(pname), POINTER(constants.GLint64)(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramParameteri = platform.createExtensionFunction( 
@@ -57,6 +60,7 @@ glProgramParameteri = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint,),
 	doc = 'glProgramParameteri( GLuint(program), GLenum(pname), GLint(value) ) -> None',
 	argNames = ('program', 'pname', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTexture = platform.createExtensionFunction( 
@@ -66,6 +70,7 @@ glFramebufferTexture = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint,),
 	doc = 'glFramebufferTexture( GLenum(target), GLenum(attachment), GLuint(texture), GLint(level) ) -> None',
 	argNames = ('target', 'attachment', 'texture', 'level',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTextureFace = platform.createExtensionFunction( 
@@ -75,5 +80,6 @@ glFramebufferTextureFace = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint, constants.GLenum,),
 	doc = 'glFramebufferTextureFace( GLenum(target), GLenum(attachment), GLuint(texture), GLint(level), GLenum(face) ) -> None',
 	argNames = ('target', 'attachment', 'texture', 'level', 'face',),
+	deprecated = _DEPRECATED,
 )
 

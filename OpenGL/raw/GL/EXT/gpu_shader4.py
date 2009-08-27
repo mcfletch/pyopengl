@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_gpu_shader4'
+_DEPRECATED = False
 GL_SAMPLER_1D_ARRAY_EXT = constant.Constant( 'GL_SAMPLER_1D_ARRAY_EXT', 0x8DC0 )
 GL_SAMPLER_2D_ARRAY_EXT = constant.Constant( 'GL_SAMPLER_2D_ARRAY_EXT', 0x8DC1 )
 GL_SAMPLER_BUFFER_EXT = constant.Constant( 'GL_SAMPLER_BUFFER_EXT', 0x8DC2 )
@@ -42,6 +43,7 @@ glGetUniformuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, arrays.GLuintArray,),
 	doc = 'glGetUniformuivEXT( GLuint(program), GLint(location), GLuintArray(params) ) -> None',
 	argNames = ('program', 'location', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glBindFragDataLocationEXT = platform.createExtensionFunction( 
@@ -51,6 +53,7 @@ glBindFragDataLocationEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, arrays.GLcharArray,),
 	doc = 'glBindFragDataLocationEXT( GLuint(program), GLuint(color), GLcharArray(name) ) -> None',
 	argNames = ('program', 'color', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFragDataLocationEXT = platform.createExtensionFunction( 
@@ -60,6 +63,7 @@ glGetFragDataLocationEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLcharArray,),
 	doc = 'glGetFragDataLocationEXT( GLuint(program), GLcharArray(name) ) -> constants.GLint',
 	argNames = ('program', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform1uiEXT = platform.createExtensionFunction( 
@@ -69,6 +73,7 @@ glUniform1uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLuint,),
 	doc = 'glUniform1uiEXT( GLint(location), GLuint(v0) ) -> None',
 	argNames = ('location', 'v0',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform2uiEXT = platform.createExtensionFunction( 
@@ -78,6 +83,7 @@ glUniform2uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLuint, constants.GLuint,),
 	doc = 'glUniform2uiEXT( GLint(location), GLuint(v0), GLuint(v1) ) -> None',
 	argNames = ('location', 'v0', 'v1',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform3uiEXT = platform.createExtensionFunction( 
@@ -87,6 +93,7 @@ glUniform3uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glUniform3uiEXT( GLint(location), GLuint(v0), GLuint(v1), GLuint(v2) ) -> None',
 	argNames = ('location', 'v0', 'v1', 'v2',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform4uiEXT = platform.createExtensionFunction( 
@@ -96,6 +103,7 @@ glUniform4uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glUniform4uiEXT( GLint(location), GLuint(v0), GLuint(v1), GLuint(v2), GLuint(v3) ) -> None',
 	argNames = ('location', 'v0', 'v1', 'v2', 'v3',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform1uivEXT = platform.createExtensionFunction( 
@@ -105,6 +113,7 @@ glUniform1uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glUniform1uivEXT( GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform2uivEXT = platform.createExtensionFunction( 
@@ -114,6 +123,7 @@ glUniform2uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glUniform2uivEXT( GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform3uivEXT = platform.createExtensionFunction( 
@@ -123,6 +133,7 @@ glUniform3uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glUniform3uivEXT( GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform4uivEXT = platform.createExtensionFunction( 
@@ -132,6 +143,7 @@ glUniform4uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glUniform4uivEXT( GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 

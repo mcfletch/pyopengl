@@ -21,6 +21,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_depth_texture'
+_DEPRECATED = False
 GL_DEPTH_COMPONENT16_SGIX = constant.Constant( 'GL_DEPTH_COMPONENT16_SGIX', 0x81A5 )
 GL_DEPTH_COMPONENT24_SGIX = constant.Constant( 'GL_DEPTH_COMPONENT24_SGIX', 0x81A6 )
 GL_DEPTH_COMPONENT32_SGIX = constant.Constant( 'GL_DEPTH_COMPONENT32_SGIX', 0x81A7 )

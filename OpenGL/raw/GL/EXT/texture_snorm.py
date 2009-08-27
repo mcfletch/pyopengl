@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_snorm'
+_DEPRECATED = False
 GL_ALPHA_SNORM = constant.Constant( 'GL_ALPHA_SNORM', 0x9010 )
 GL_LUMINANCE_SNORM = constant.Constant( 'GL_LUMINANCE_SNORM', 0x9011 )
 GL_LUMINANCE_ALPHA_SNORM = constant.Constant( 'GL_LUMINANCE_ALPHA_SNORM', 0x9012 )

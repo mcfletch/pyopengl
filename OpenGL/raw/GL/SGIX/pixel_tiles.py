@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_pixel_tiles'
+_DEPRECATED = False
 GL_PIXEL_TILE_BEST_ALIGNMENT_SGIX = constant.Constant( 'GL_PIXEL_TILE_BEST_ALIGNMENT_SGIX', 0x813E )
 GL_PIXEL_TILE_CACHE_INCREMENT_SGIX = constant.Constant( 'GL_PIXEL_TILE_CACHE_INCREMENT_SGIX', 0x813F )
 GL_PIXEL_TILE_WIDTH_SGIX = constant.Constant( 'GL_PIXEL_TILE_WIDTH_SGIX', 0x8140 )

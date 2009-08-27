@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_swizzle'
+_DEPRECATED = False
 GL_TEXTURE_SWIZZLE_R_EXT = constant.Constant( 'GL_TEXTURE_SWIZZLE_R_EXT', 0x8E42 )
 GL_TEXTURE_SWIZZLE_G_EXT = constant.Constant( 'GL_TEXTURE_SWIZZLE_G_EXT', 0x8E43 )
 GL_TEXTURE_SWIZZLE_B_EXT = constant.Constant( 'GL_TEXTURE_SWIZZLE_B_EXT', 0x8E44 )

@@ -22,6 +22,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_texture_expand_normal'
+_DEPRECATED = False
 GL_TEXTURE_UNSIGNED_REMAP_MODE_NV = constant.Constant( 'GL_TEXTURE_UNSIGNED_REMAP_MODE_NV', 0x888F )
 
 

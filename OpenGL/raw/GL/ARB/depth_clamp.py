@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_depth_clamp'
+_DEPRECATED = False
 GL_DEPTH_CLAMP = constant.Constant( 'GL_DEPTH_CLAMP', 0x864F )
 
 

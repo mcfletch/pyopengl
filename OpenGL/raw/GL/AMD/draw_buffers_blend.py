@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_AMD_draw_buffers_blend'
+_DEPRECATED = False
 
 glBlendFuncIndexedAMD = platform.createExtensionFunction( 
 	'glBlendFuncIndexedAMD', dll=platform.GL,
@@ -18,6 +19,7 @@ glBlendFuncIndexedAMD = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum,),
 	doc = 'glBlendFuncIndexedAMD( GLuint(buf), GLenum(src), GLenum(dst) ) -> None',
 	argNames = ('buf', 'src', 'dst',),
+	deprecated = _DEPRECATED,
 )
 
 glBlendFuncSeparateIndexedAMD = platform.createExtensionFunction( 
@@ -27,6 +29,7 @@ glBlendFuncSeparateIndexedAMD = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glBlendFuncSeparateIndexedAMD( GLuint(buf), GLenum(srcRGB), GLenum(dstRGB), GLenum(srcAlpha), GLenum(dstAlpha) ) -> None',
 	argNames = ('buf', 'srcRGB', 'dstRGB', 'srcAlpha', 'dstAlpha',),
+	deprecated = _DEPRECATED,
 )
 
 glBlendEquationIndexedAMD = platform.createExtensionFunction( 
@@ -36,6 +39,7 @@ glBlendEquationIndexedAMD = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glBlendEquationIndexedAMD( GLuint(buf), GLenum(mode) ) -> None',
 	argNames = ('buf', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 glBlendEquationSeparateIndexedAMD = platform.createExtensionFunction( 
@@ -45,6 +49,7 @@ glBlendEquationSeparateIndexedAMD = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLenum,),
 	doc = 'glBlendEquationSeparateIndexedAMD( GLuint(buf), GLenum(modeRGB), GLenum(modeAlpha) ) -> None',
 	argNames = ('buf', 'modeRGB', 'modeAlpha',),
+	deprecated = _DEPRECATED,
 )
 
 

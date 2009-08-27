@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_draw_range_elements'
+_DEPRECATED = False
 GL_MAX_ELEMENTS_VERTICES_EXT = constant.Constant( 'GL_MAX_ELEMENTS_VERTICES_EXT', 0x80E8 )
 GL_MAX_ELEMENTS_INDICES_EXT = constant.Constant( 'GL_MAX_ELEMENTS_INDICES_EXT', 0x80E9 )
 glDrawRangeElementsEXT = platform.createExtensionFunction( 
@@ -19,6 +20,7 @@ glDrawRangeElementsEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLsizei, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glDrawRangeElementsEXT( GLenum(mode), GLuint(start), GLuint(end), GLsizei(count), GLenum(type), c_void_p(indices) ) -> None',
 	argNames = ('mode', 'start', 'end', 'count', 'type', 'indices',),
+	deprecated = _DEPRECATED,
 )
 
 

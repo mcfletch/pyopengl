@@ -22,6 +22,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_shadow_ambient'
+_DEPRECATED = False
 GL_TEXTURE_COMPARE_FAIL_VALUE_ARB = constant.Constant( 'GL_TEXTURE_COMPARE_FAIL_VALUE_ARB', 0x80BF )
 
 

@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_parameter_buffer_object'
+_DEPRECATED = False
 GL_MAX_PROGRAM_PARAMETER_BUFFER_BINDINGS_NV = constant.Constant( 'GL_MAX_PROGRAM_PARAMETER_BUFFER_BINDINGS_NV', 0x8DA0 )
 GL_MAX_PROGRAM_PARAMETER_BUFFER_SIZE_NV = constant.Constant( 'GL_MAX_PROGRAM_PARAMETER_BUFFER_SIZE_NV', 0x8DA1 )
 GL_VERTEX_PROGRAM_PARAMETER_BUFFER_NV = constant.Constant( 'GL_VERTEX_PROGRAM_PARAMETER_BUFFER_NV', 0x8DA2 )
@@ -22,6 +23,7 @@ glProgramBufferParametersfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glProgramBufferParametersfvNV( GLenum(target), GLuint(buffer), GLuint(index), GLsizei(count), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'buffer', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramBufferParametersIivNV = platform.createExtensionFunction( 
@@ -31,6 +33,7 @@ glProgramBufferParametersIivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glProgramBufferParametersIivNV( GLenum(target), GLuint(buffer), GLuint(index), GLsizei(count), GLintArray(params) ) -> None',
 	argNames = ('target', 'buffer', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramBufferParametersIuivNV = platform.createExtensionFunction( 
@@ -40,6 +43,7 @@ glProgramBufferParametersIuivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glProgramBufferParametersIuivNV( GLenum(target), GLuint(buffer), GLuint(index), GLsizei(count), GLuintArray(params) ) -> None',
 	argNames = ('target', 'buffer', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

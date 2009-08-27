@@ -33,6 +33,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGI_color_matrix'
+_DEPRECATED = False
 GL_COLOR_MATRIX_SGI = constant.Constant( 'GL_COLOR_MATRIX_SGI', 0x80B1 )
 glget.addGLGetConstant( GL_COLOR_MATRIX_SGI, (4,4) )
 GL_COLOR_MATRIX_STACK_DEPTH_SGI = constant.Constant( 'GL_COLOR_MATRIX_STACK_DEPTH_SGI', 0x80B2 )

@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_histogram'
+_DEPRECATED = False
 GL_HISTOGRAM_EXT = constant.Constant( 'GL_HISTOGRAM_EXT', 0x8024 )
 glget.addGLGetConstant( GL_HISTOGRAM_EXT, (1,) )
 GL_PROXY_HISTOGRAM_EXT = constant.Constant( 'GL_PROXY_HISTOGRAM_EXT', 0x8025 )
@@ -42,6 +43,7 @@ glGetHistogramEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLboolean, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glGetHistogramEXT( GLenum(target), GLboolean(reset), GLenum(format), GLenum(type), c_void_p(values) ) -> None',
 	argNames = ('target', 'reset', 'format', 'type', 'values',),
+	deprecated = _DEPRECATED,
 )
 
 glGetHistogramParameterfvEXT = platform.createExtensionFunction( 
@@ -51,6 +53,7 @@ glGetHistogramParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetHistogramParameterfvEXT( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetHistogramParameterivEXT = platform.createExtensionFunction( 
@@ -60,6 +63,7 @@ glGetHistogramParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetHistogramParameterivEXT( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMinmaxEXT = platform.createExtensionFunction( 
@@ -69,6 +73,7 @@ glGetMinmaxEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLboolean, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glGetMinmaxEXT( GLenum(target), GLboolean(reset), GLenum(format), GLenum(type), c_void_p(values) ) -> None',
 	argNames = ('target', 'reset', 'format', 'type', 'values',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMinmaxParameterfvEXT = platform.createExtensionFunction( 
@@ -78,6 +83,7 @@ glGetMinmaxParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetMinmaxParameterfvEXT( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMinmaxParameterivEXT = platform.createExtensionFunction( 
@@ -87,6 +93,7 @@ glGetMinmaxParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetMinmaxParameterivEXT( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glHistogramEXT = platform.createExtensionFunction( 
@@ -96,6 +103,7 @@ glHistogramEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLenum, constants.GLboolean,),
 	doc = 'glHistogramEXT( GLenum(target), GLsizei(width), GLenum(internalformat), GLboolean(sink) ) -> None',
 	argNames = ('target', 'width', 'internalformat', 'sink',),
+	deprecated = _DEPRECATED,
 )
 
 glMinmaxEXT = platform.createExtensionFunction( 
@@ -105,6 +113,7 @@ glMinmaxEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLboolean,),
 	doc = 'glMinmaxEXT( GLenum(target), GLenum(internalformat), GLboolean(sink) ) -> None',
 	argNames = ('target', 'internalformat', 'sink',),
+	deprecated = _DEPRECATED,
 )
 
 glResetHistogramEXT = platform.createExtensionFunction( 
@@ -114,6 +123,7 @@ glResetHistogramEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glResetHistogramEXT( GLenum(target) ) -> None',
 	argNames = ('target',),
+	deprecated = _DEPRECATED,
 )
 
 glResetMinmaxEXT = platform.createExtensionFunction( 
@@ -123,6 +133,7 @@ glResetMinmaxEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glResetMinmaxEXT( GLenum(target) ) -> None',
 	argNames = ('target',),
+	deprecated = _DEPRECATED,
 )
 
 

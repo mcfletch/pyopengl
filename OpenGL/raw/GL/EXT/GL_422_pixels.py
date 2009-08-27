@@ -28,6 +28,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_GL_422_pixels'
+_DEPRECATED = False
 GL_422_EXT = constant.Constant( 'GL_422_EXT', 0x80CC )
 GL_422_REV_EXT = constant.Constant( 'GL_422_REV_EXT', 0x80CD )
 GL_422_AVERAGE_EXT = constant.Constant( 'GL_422_AVERAGE_EXT', 0x80CE )

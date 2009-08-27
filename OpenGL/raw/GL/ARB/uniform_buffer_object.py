@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_uniform_buffer_object'
+_DEPRECATED = False
 GL_UNIFORM_BUFFER = constant.Constant( 'GL_UNIFORM_BUFFER', 0x8A11 )
 GL_UNIFORM_BUFFER_BINDING = constant.Constant( 'GL_UNIFORM_BUFFER_BINDING', 0x8A28 )
 GL_UNIFORM_BUFFER_START = constant.Constant( 'GL_UNIFORM_BUFFER_START', 0x8A29 )
@@ -50,6 +51,7 @@ glGetUniformIndices = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER( ctypes.POINTER( constants.GLchar )), arrays.GLuintArray,),
 	doc = 'glGetUniformIndices( GLuint(program), GLsizei(uniformCount), POINTER( ctypes.POINTER( constants.GLchar ))(uniformNames), GLuintArray(uniformIndices) ) -> None',
 	argNames = ('program', 'uniformCount', 'uniformNames', 'uniformIndices',),
+	deprecated = _DEPRECATED,
 )
 
 glGetActiveUniformsiv = platform.createExtensionFunction( 
@@ -59,6 +61,7 @@ glGetActiveUniformsiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLuintArray, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetActiveUniformsiv( GLuint(program), GLsizei(uniformCount), GLuintArray(uniformIndices), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('program', 'uniformCount', 'uniformIndices', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetActiveUniformName = platform.createExtensionFunction( 
@@ -68,6 +71,7 @@ glGetActiveUniformName = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLsizei, arrays.GLsizeiArray, arrays.GLcharArray,),
 	doc = 'glGetActiveUniformName( GLuint(program), GLuint(uniformIndex), GLsizei(bufSize), GLsizeiArray(length), GLcharArray(uniformName) ) -> None',
 	argNames = ('program', 'uniformIndex', 'bufSize', 'length', 'uniformName',),
+	deprecated = _DEPRECATED,
 )
 
 glGetUniformBlockIndex = platform.createExtensionFunction( 
@@ -77,6 +81,7 @@ glGetUniformBlockIndex = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLcharArray,),
 	doc = 'glGetUniformBlockIndex( GLuint(program), GLcharArray(uniformBlockName) ) -> constants.GLuint',
 	argNames = ('program', 'uniformBlockName',),
+	deprecated = _DEPRECATED,
 )
 
 glGetActiveUniformBlockiv = platform.createExtensionFunction( 
@@ -86,6 +91,7 @@ glGetActiveUniformBlockiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetActiveUniformBlockiv( GLuint(program), GLuint(uniformBlockIndex), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('program', 'uniformBlockIndex', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetActiveUniformBlockName = platform.createExtensionFunction( 
@@ -95,6 +101,7 @@ glGetActiveUniformBlockName = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLsizei, arrays.GLsizeiArray, arrays.GLcharArray,),
 	doc = 'glGetActiveUniformBlockName( GLuint(program), GLuint(uniformBlockIndex), GLsizei(bufSize), GLsizeiArray(length), GLcharArray(uniformBlockName) ) -> None',
 	argNames = ('program', 'uniformBlockIndex', 'bufSize', 'length', 'uniformBlockName',),
+	deprecated = _DEPRECATED,
 )
 
 glUniformBlockBinding = platform.createExtensionFunction( 
@@ -104,6 +111,7 @@ glUniformBlockBinding = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glUniformBlockBinding( GLuint(program), GLuint(uniformBlockIndex), GLuint(uniformBlockBinding) ) -> None',
 	argNames = ('program', 'uniformBlockIndex', 'uniformBlockBinding',),
+	deprecated = _DEPRECATED,
 )
 
 

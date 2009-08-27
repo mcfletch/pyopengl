@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_point_parameters'
+_DEPRECATED = False
 GL_POINT_SIZE_MIN_SGIS = constant.Constant( 'GL_POINT_SIZE_MIN_SGIS', 0x8126 )
 GL_POINT_SIZE_MAX_SGIS = constant.Constant( 'GL_POINT_SIZE_MAX_SGIS', 0x8127 )
 GL_POINT_FADE_THRESHOLD_SIZE_SGIS = constant.Constant( 'GL_POINT_FADE_THRESHOLD_SIZE_SGIS', 0x8128 )
@@ -21,6 +22,7 @@ glPointParameterfSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat,),
 	doc = 'glPointParameterfSGIS( GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPointParameterfvSGIS = platform.createExtensionFunction( 
@@ -30,6 +32,7 @@ glPointParameterfvSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glPointParameterfvSGIS( GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -24,6 +24,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_depth_texture'
+_DEPRECATED = False
 GL_DEPTH_COMPONENT16_ARB = constant.Constant( 'GL_DEPTH_COMPONENT16_ARB', 0x81A5 )
 GL_DEPTH_COMPONENT24_ARB = constant.Constant( 'GL_DEPTH_COMPONENT24_ARB', 0x81A6 )
 GL_DEPTH_COMPONENT32_ARB = constant.Constant( 'GL_DEPTH_COMPONENT32_ARB', 0x81A7 )

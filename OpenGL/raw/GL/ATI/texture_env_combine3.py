@@ -31,6 +31,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_texture_env_combine3'
+_DEPRECATED = False
 GL_MODULATE_ADD_ATI = constant.Constant( 'GL_MODULATE_ADD_ATI', 0x8744 )
 GL_MODULATE_SIGNED_ADD_ATI = constant.Constant( 'GL_MODULATE_SIGNED_ADD_ATI', 0x8745 )
 GL_MODULATE_SUBTRACT_ATI = constant.Constant( 'GL_MODULATE_SUBTRACT_ATI', 0x8746 )

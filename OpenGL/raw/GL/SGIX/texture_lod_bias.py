@@ -30,6 +30,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_texture_lod_bias'
+_DEPRECATED = False
 GL_TEXTURE_LOD_BIAS_S_SGIX = constant.Constant( 'GL_TEXTURE_LOD_BIAS_S_SGIX', 0x818E )
 GL_TEXTURE_LOD_BIAS_T_SGIX = constant.Constant( 'GL_TEXTURE_LOD_BIAS_T_SGIX', 0x818F )
 GL_TEXTURE_LOD_BIAS_R_SGIX = constant.Constant( 'GL_TEXTURE_LOD_BIAS_R_SGIX', 0x8190 )

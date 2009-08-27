@@ -18,6 +18,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_multi_draw_arrays'
+_DEPRECATED = False
 
 glMultiDrawArraysEXT = platform.createExtensionFunction( 
 	'glMultiDrawArraysEXT', dll=platform.GL,
@@ -26,6 +27,7 @@ glMultiDrawArraysEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray, arrays.GLsizeiArray, constants.GLsizei,),
 	doc = 'glMultiDrawArraysEXT( GLenum(mode), GLintArray(first), GLsizeiArray(count), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'first', 'count', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiDrawElementsEXT = platform.createExtensionFunction( 
@@ -35,6 +37,7 @@ glMultiDrawElementsEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLsizeiArray, constants.GLenum, ctypes.POINTER(ctypes.c_void_p), constants.GLsizei,),
 	doc = 'glMultiDrawElementsEXT( GLenum(mode), GLsizeiArray(count), GLenum(type), POINTER(ctypes.c_void_p)(indices), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'count', 'type', 'indices', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 

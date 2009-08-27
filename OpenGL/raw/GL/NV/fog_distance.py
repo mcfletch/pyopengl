@@ -43,6 +43,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_fog_distance'
+_DEPRECATED = False
 GL_FOG_DISTANCE_MODE_NV = constant.Constant( 'GL_FOG_DISTANCE_MODE_NV', 0x855A )
 glget.addGLGetConstant( GL_FOG_DISTANCE_MODE_NV, (1,) )
 GL_EYE_RADIAL_NV = constant.Constant( 'GL_EYE_RADIAL_NV', 0x855B )

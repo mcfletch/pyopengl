@@ -51,6 +51,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_filter_anisotropic'
+_DEPRECATED = False
 GL_TEXTURE_MAX_ANISOTROPY_EXT = constant.Constant( 'GL_TEXTURE_MAX_ANISOTROPY_EXT', 0x84FE )
 GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = constant.Constant( 'GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT', 0x84FF )
 glget.addGLGetConstant( GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, (1,) )

@@ -28,6 +28,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_MESA_window_pos'
+_DEPRECATED = False
 
 glWindowPos2dMESA = platform.createExtensionFunction( 
 	'glWindowPos2dMESA', dll=platform.GL,
@@ -36,6 +37,7 @@ glWindowPos2dMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble,),
 	doc = 'glWindowPos2dMESA( GLdouble(x), GLdouble(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2dvMESA = platform.createExtensionFunction( 
@@ -45,6 +47,7 @@ glWindowPos2dvMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glWindowPos2dvMESA( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2fMESA = platform.createExtensionFunction( 
@@ -54,6 +57,7 @@ glWindowPos2fMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat,),
 	doc = 'glWindowPos2fMESA( GLfloat(x), GLfloat(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2fvMESA = platform.createExtensionFunction( 
@@ -63,6 +67,7 @@ glWindowPos2fvMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glWindowPos2fvMESA( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2iMESA = platform.createExtensionFunction( 
@@ -72,6 +77,7 @@ glWindowPos2iMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint,),
 	doc = 'glWindowPos2iMESA( GLint(x), GLint(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2ivMESA = platform.createExtensionFunction( 
@@ -81,6 +87,7 @@ glWindowPos2ivMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glWindowPos2ivMESA( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2sMESA = platform.createExtensionFunction( 
@@ -90,6 +97,7 @@ glWindowPos2sMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort,),
 	doc = 'glWindowPos2sMESA( GLshort(x), GLshort(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2svMESA = platform.createExtensionFunction( 
@@ -99,6 +107,7 @@ glWindowPos2svMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glWindowPos2svMESA( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3dMESA = platform.createExtensionFunction( 
@@ -108,6 +117,7 @@ glWindowPos3dMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glWindowPos3dMESA( GLdouble(x), GLdouble(y), GLdouble(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3dvMESA = platform.createExtensionFunction( 
@@ -117,6 +127,7 @@ glWindowPos3dvMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glWindowPos3dvMESA( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3fMESA = platform.createExtensionFunction( 
@@ -126,6 +137,7 @@ glWindowPos3fMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glWindowPos3fMESA( GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3fvMESA = platform.createExtensionFunction( 
@@ -135,6 +147,7 @@ glWindowPos3fvMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glWindowPos3fvMESA( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3iMESA = platform.createExtensionFunction( 
@@ -144,6 +157,7 @@ glWindowPos3iMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glWindowPos3iMESA( GLint(x), GLint(y), GLint(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3ivMESA = platform.createExtensionFunction( 
@@ -153,6 +167,7 @@ glWindowPos3ivMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glWindowPos3ivMESA( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3sMESA = platform.createExtensionFunction( 
@@ -162,6 +177,7 @@ glWindowPos3sMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glWindowPos3sMESA( GLshort(x), GLshort(y), GLshort(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3svMESA = platform.createExtensionFunction( 
@@ -171,6 +187,7 @@ glWindowPos3svMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glWindowPos3svMESA( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos4dMESA = platform.createExtensionFunction( 
@@ -180,6 +197,7 @@ glWindowPos4dMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glWindowPos4dMESA( GLdouble(x), GLdouble(y), GLdouble(z), GLdouble(w) ) -> None',
 	argNames = ('x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos4dvMESA = platform.createExtensionFunction( 
@@ -189,6 +207,7 @@ glWindowPos4dvMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glWindowPos4dvMESA( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos4fMESA = platform.createExtensionFunction( 
@@ -198,6 +217,7 @@ glWindowPos4fMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glWindowPos4fMESA( GLfloat(x), GLfloat(y), GLfloat(z), GLfloat(w) ) -> None',
 	argNames = ('x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos4fvMESA = platform.createExtensionFunction( 
@@ -207,6 +227,7 @@ glWindowPos4fvMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glWindowPos4fvMESA( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos4iMESA = platform.createExtensionFunction( 
@@ -216,6 +237,7 @@ glWindowPos4iMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glWindowPos4iMESA( GLint(x), GLint(y), GLint(z), GLint(w) ) -> None',
 	argNames = ('x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos4ivMESA = platform.createExtensionFunction( 
@@ -225,6 +247,7 @@ glWindowPos4ivMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glWindowPos4ivMESA( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos4sMESA = platform.createExtensionFunction( 
@@ -234,6 +257,7 @@ glWindowPos4sMESA = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glWindowPos4sMESA( GLshort(x), GLshort(y), GLshort(z), GLshort(w) ) -> None',
 	argNames = ('x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos4svMESA = platform.createExtensionFunction( 
@@ -243,6 +267,7 @@ glWindowPos4svMESA = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glWindowPos4svMESA( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 

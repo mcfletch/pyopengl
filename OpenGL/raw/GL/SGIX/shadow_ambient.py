@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_shadow_ambient'
+_DEPRECATED = False
 GL_SHADOW_AMBIENT_SGIX = constant.Constant( 'GL_SHADOW_AMBIENT_SGIX', 0x80BF )
 
 

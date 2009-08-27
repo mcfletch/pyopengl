@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_instanced_arrays'
+_DEPRECATED = False
 GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ARB = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ARB', 0x88FE )
 glVertexAttribDivisorARB = platform.createExtensionFunction( 
 	'glVertexAttribDivisorARB', dll=platform.GL,
@@ -18,6 +19,7 @@ glVertexAttribDivisorARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint,),
 	doc = 'glVertexAttribDivisorARB( GLuint(index), GLuint(divisor) ) -> None',
 	argNames = ('index', 'divisor',),
+	deprecated = _DEPRECATED,
 )
 
 

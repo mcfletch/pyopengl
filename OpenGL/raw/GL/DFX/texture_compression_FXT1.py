@@ -29,6 +29,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_DFX_texture_compression_FXT1'
+_DEPRECATED = False
 GL_COMPRESSED_RGB_FXT1_3DFX = constant.Constant( 'GL_COMPRESSED_RGB_FXT1_3DFX', 0x86B0 )
 GL_COMPRESSED_RGBA_FXT1_3DFX = constant.Constant( 'GL_COMPRESSED_RGBA_FXT1_3DFX', 0x86B1 )
 

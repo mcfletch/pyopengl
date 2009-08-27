@@ -14,6 +14,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_INTEL_parallel_arrays'
+_DEPRECATED = False
 GL_PARALLEL_ARRAYS_INTEL = constant.Constant( 'GL_PARALLEL_ARRAYS_INTEL', 0x83F4 )
 glget.addGLGetConstant( GL_PARALLEL_ARRAYS_INTEL, (1,) )
 GL_VERTEX_ARRAY_PARALLEL_POINTERS_INTEL = constant.Constant( 'GL_VERTEX_ARRAY_PARALLEL_POINTERS_INTEL', 0x83F5 )
@@ -27,6 +28,7 @@ glVertexPointervINTEL = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glVertexPointervINTEL( GLint(size), GLenum(type), POINTER(ctypes.c_void_p)(pointer) ) -> None',
 	argNames = ('size', 'type', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glNormalPointervINTEL = platform.createExtensionFunction( 
@@ -36,6 +38,7 @@ glNormalPointervINTEL = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glNormalPointervINTEL( GLenum(type), POINTER(ctypes.c_void_p)(pointer) ) -> None',
 	argNames = ('type', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glColorPointervINTEL = platform.createExtensionFunction( 
@@ -45,6 +48,7 @@ glColorPointervINTEL = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glColorPointervINTEL( GLint(size), GLenum(type), POINTER(ctypes.c_void_p)(pointer) ) -> None',
 	argNames = ('size', 'type', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoordPointervINTEL = platform.createExtensionFunction( 
@@ -54,6 +58,7 @@ glTexCoordPointervINTEL = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glTexCoordPointervINTEL( GLint(size), GLenum(type), POINTER(ctypes.c_void_p)(pointer) ) -> None',
 	argNames = ('size', 'type', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 

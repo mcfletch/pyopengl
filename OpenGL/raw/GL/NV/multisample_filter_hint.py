@@ -25,6 +25,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_multisample_filter_hint'
+_DEPRECATED = False
 GL_MULTISAMPLE_FILTER_HINT_NV = constant.Constant( 'GL_MULTISAMPLE_FILTER_HINT_NV', 0x8534 )
 glget.addGLGetConstant( GL_MULTISAMPLE_FILTER_HINT_NV, (1,) )
 

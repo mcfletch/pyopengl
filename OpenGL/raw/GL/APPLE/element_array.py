@@ -29,6 +29,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_element_array'
+_DEPRECATED = False
 GL_ELEMENT_ARRAY_APPLE = constant.Constant( 'GL_ELEMENT_ARRAY_APPLE', 0x8768 )
 GL_ELEMENT_ARRAY_TYPE_APPLE = constant.Constant( 'GL_ELEMENT_ARRAY_TYPE_APPLE', 0x8769 )
 glget.addGLGetConstant( GL_ELEMENT_ARRAY_TYPE_APPLE, (1,) )
@@ -40,6 +41,7 @@ glElementPointerAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, ctypes.c_void_p,),
 	doc = 'glElementPointerAPPLE( GLenum(type), c_void_p(pointer) ) -> None',
 	argNames = ('type', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawElementArrayAPPLE = platform.createExtensionFunction( 
@@ -49,6 +51,7 @@ glDrawElementArrayAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLsizei,),
 	doc = 'glDrawElementArrayAPPLE( GLenum(mode), GLint(first), GLsizei(count) ) -> None',
 	argNames = ('mode', 'first', 'count',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawRangeElementArrayAPPLE = platform.createExtensionFunction( 
@@ -58,6 +61,7 @@ glDrawRangeElementArrayAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLint, constants.GLsizei,),
 	doc = 'glDrawRangeElementArrayAPPLE( GLenum(mode), GLuint(start), GLuint(end), GLint(first), GLsizei(count) ) -> None',
 	argNames = ('mode', 'start', 'end', 'first', 'count',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiDrawElementArrayAPPLE = platform.createExtensionFunction( 
@@ -67,6 +71,7 @@ glMultiDrawElementArrayAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray, arrays.GLsizeiArray, constants.GLsizei,),
 	doc = 'glMultiDrawElementArrayAPPLE( GLenum(mode), GLintArray(first), GLsizeiArray(count), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'first', 'count', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiDrawRangeElementArrayAPPLE = platform.createExtensionFunction( 
@@ -76,6 +81,7 @@ glMultiDrawRangeElementArrayAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, arrays.GLintArray, arrays.GLsizeiArray, constants.GLsizei,),
 	doc = 'glMultiDrawRangeElementArrayAPPLE( GLenum(mode), GLuint(start), GLuint(end), GLintArray(first), GLsizeiArray(count), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'start', 'end', 'first', 'count', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 

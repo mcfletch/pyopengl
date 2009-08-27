@@ -21,6 +21,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_IBM_rasterpos_clip'
+_DEPRECATED = False
 GL_RASTER_POSITION_UNCLIPPED_IBM = constant.Constant( 'GL_RASTER_POSITION_UNCLIPPED_IBM', 0x19262 )
 glget.addGLGetConstant( GL_RASTER_POSITION_UNCLIPPED_IBM, (1,) )
 

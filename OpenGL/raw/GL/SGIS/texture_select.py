@@ -31,6 +31,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_texture_select'
+_DEPRECATED = False
 GL_DUAL_ALPHA4_SGIS = constant.Constant( 'GL_DUAL_ALPHA4_SGIS', 0x8110 )
 GL_DUAL_ALPHA8_SGIS = constant.Constant( 'GL_DUAL_ALPHA8_SGIS', 0x8111 )
 GL_DUAL_ALPHA12_SGIS = constant.Constant( 'GL_DUAL_ALPHA12_SGIS', 0x8112 )

@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_map_buffer_range'
+_DEPRECATED = False
 GL_MAP_READ_BIT = constant.Constant( 'GL_MAP_READ_BIT', 0x1 )
 GL_MAP_WRITE_BIT = constant.Constant( 'GL_MAP_WRITE_BIT', 0x2 )
 GL_MAP_INVALIDATE_RANGE_BIT = constant.Constant( 'GL_MAP_INVALIDATE_RANGE_BIT', 0x4 )
@@ -23,6 +24,7 @@ glMapBufferRange = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLintptr, constants.GLsizeiptr, constants.GLbitfield,),
 	doc = 'glMapBufferRange( GLenum(target), GLintptr(offset), GLsizeiptr(length), GLbitfield(access) ) -> ctypes.c_void_p',
 	argNames = ('target', 'offset', 'length', 'access',),
+	deprecated = _DEPRECATED,
 )
 
 glFlushMappedBufferRange = platform.createExtensionFunction( 
@@ -32,6 +34,7 @@ glFlushMappedBufferRange = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLintptr, constants.GLsizeiptr,),
 	doc = 'glFlushMappedBufferRange( GLenum(target), GLintptr(offset), GLsizeiptr(length) ) -> None',
 	argNames = ('target', 'offset', 'length',),
+	deprecated = _DEPRECATED,
 )
 
 

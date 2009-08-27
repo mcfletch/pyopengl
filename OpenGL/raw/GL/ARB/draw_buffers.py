@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_draw_buffers'
+_DEPRECATED = False
 GL_MAX_DRAW_BUFFERS_ARB = constant.Constant( 'GL_MAX_DRAW_BUFFERS_ARB', 0x8824 )
 glget.addGLGetConstant( GL_MAX_DRAW_BUFFERS_ARB, (1,) )
 GL_DRAW_BUFFER0_ARB = constant.Constant( 'GL_DRAW_BUFFER0_ARB', 0x8825 )
@@ -42,6 +43,7 @@ glDrawBuffersARB = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDrawBuffersARB( GLsizei(n), GLuintArray(bufs) ) -> None',
 	argNames = ('n', 'bufs',),
+	deprecated = _DEPRECATED,
 )
 
 

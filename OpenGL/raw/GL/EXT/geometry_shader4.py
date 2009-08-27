@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_geometry_shader4'
+_DEPRECATED = False
 GL_GEOMETRY_SHADER_EXT = constant.Constant( 'GL_GEOMETRY_SHADER_EXT', 0x8DD9 )
 GL_MAX_GEOMETRY_VARYING_COMPONENTS_EXT = constant.Constant( 'GL_MAX_GEOMETRY_VARYING_COMPONENTS_EXT', 0x8DDD )
 GL_MAX_VERTEX_VARYING_COMPONENTS_EXT = constant.Constant( 'GL_MAX_VERTEX_VARYING_COMPONENTS_EXT', 0x8DDE )
@@ -24,6 +25,7 @@ glProgramParameteriEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint,),
 	doc = 'glProgramParameteriEXT( GLuint(program), GLenum(pname), GLint(value) ) -> None',
 	argNames = ('program', 'pname', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 

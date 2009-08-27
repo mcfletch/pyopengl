@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_OES_read_format'
+_DEPRECATED = False
 GL_IMPLEMENTATION_COLOR_READ_TYPE_OES = constant.Constant( 'GL_IMPLEMENTATION_COLOR_READ_TYPE_OES', 0x8B9A )
 GL_IMPLEMENTATION_COLOR_READ_FORMAT_OES = constant.Constant( 'GL_IMPLEMENTATION_COLOR_READ_FORMAT_OES', 0x8B9B )
 

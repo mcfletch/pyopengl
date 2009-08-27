@@ -39,6 +39,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_specular_vector'
+_DEPRECATED = False
 GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE = constant.Constant( 'GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE', 0x85B0 )
 
 

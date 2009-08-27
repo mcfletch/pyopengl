@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_texture_add_env'
+_DEPRECATED = False
 GL_TEXTURE_ENV_BIAS_SGIX = constant.Constant( 'GL_TEXTURE_ENV_BIAS_SGIX', 0x80BE )
 
 

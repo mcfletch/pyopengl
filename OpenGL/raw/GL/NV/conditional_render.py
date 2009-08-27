@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_conditional_render'
+_DEPRECATED = False
 GL_QUERY_WAIT_NV = constant.Constant( 'GL_QUERY_WAIT_NV', 0x8E13 )
 GL_QUERY_NO_WAIT_NV = constant.Constant( 'GL_QUERY_NO_WAIT_NV', 0x8E14 )
 GL_QUERY_BY_REGION_WAIT_NV = constant.Constant( 'GL_QUERY_BY_REGION_WAIT_NV', 0x8E15 )
@@ -21,6 +22,7 @@ glBeginConditionalRenderNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glBeginConditionalRenderNV( GLuint(id), GLenum(mode) ) -> None',
 	argNames = ('id', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 glEndConditionalRenderNV = platform.createExtensionFunction( 
@@ -30,6 +32,7 @@ glEndConditionalRenderNV = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glEndConditionalRenderNV(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 

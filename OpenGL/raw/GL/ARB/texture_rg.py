@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_rg'
+_DEPRECATED = False
 GL_RG = constant.Constant( 'GL_RG', 0x8227 )
 GL_RG_INTEGER = constant.Constant( 'GL_RG_INTEGER', 0x8228 )
 GL_R8 = constant.Constant( 'GL_R8', 0x8229 )

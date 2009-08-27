@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_pixel_transform'
+_DEPRECATED = False
 GL_PIXEL_TRANSFORM_2D_EXT = constant.Constant( 'GL_PIXEL_TRANSFORM_2D_EXT', 0x8330 )
 GL_PIXEL_MAG_FILTER_EXT = constant.Constant( 'GL_PIXEL_MAG_FILTER_EXT', 0x8331 )
 GL_PIXEL_MIN_FILTER_EXT = constant.Constant( 'GL_PIXEL_MIN_FILTER_EXT', 0x8332 )
@@ -36,6 +37,7 @@ glPixelTransformParameteriEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glPixelTransformParameteriEXT( GLenum(target), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPixelTransformParameterfEXT = platform.createExtensionFunction( 
@@ -45,6 +47,7 @@ glPixelTransformParameterfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLfloat,),
 	doc = 'glPixelTransformParameterfEXT( GLenum(target), GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPixelTransformParameterivEXT = platform.createExtensionFunction( 
@@ -54,6 +57,7 @@ glPixelTransformParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glPixelTransformParameterivEXT( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glPixelTransformParameterfvEXT = platform.createExtensionFunction( 
@@ -63,6 +67,7 @@ glPixelTransformParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glPixelTransformParameterfvEXT( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

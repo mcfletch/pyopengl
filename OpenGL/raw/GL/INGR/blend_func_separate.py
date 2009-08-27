@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_INGR_blend_func_separate'
+_DEPRECATED = False
 
 glBlendFuncSeparateINGR = platform.createExtensionFunction( 
 	'glBlendFuncSeparateINGR', dll=platform.GL,
@@ -18,6 +19,7 @@ glBlendFuncSeparateINGR = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glBlendFuncSeparateINGR( GLenum(sfactorRGB), GLenum(dfactorRGB), GLenum(sfactorAlpha), GLenum(dfactorAlpha) ) -> None',
 	argNames = ('sfactorRGB', 'dfactorRGB', 'sfactorAlpha', 'dfactorAlpha',),
+	deprecated = _DEPRECATED,
 )
 
 

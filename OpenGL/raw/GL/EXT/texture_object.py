@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_object'
+_DEPRECATED = False
 GL_TEXTURE_PRIORITY_EXT = constant.Constant( 'GL_TEXTURE_PRIORITY_EXT', 0x8066 )
 GL_TEXTURE_RESIDENT_EXT = constant.Constant( 'GL_TEXTURE_RESIDENT_EXT', 0x8067 )
 GL_TEXTURE_1D_BINDING_EXT = constant.Constant( 'GL_TEXTURE_1D_BINDING_EXT', 0x8068 )
@@ -32,6 +33,7 @@ glAreTexturesResidentEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray, ctypes.POINTER(constants.GLboolean),),
 	doc = 'glAreTexturesResidentEXT( GLsizei(n), GLuintArray(textures), POINTER(constants.GLboolean)(residences) ) -> constants.GLboolean',
 	argNames = ('n', 'textures', 'residences',),
+	deprecated = _DEPRECATED,
 )
 
 glBindTextureEXT = platform.createExtensionFunction( 
@@ -41,6 +43,7 @@ glBindTextureEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glBindTextureEXT( GLenum(target), GLuint(texture) ) -> None',
 	argNames = ('target', 'texture',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteTexturesEXT = platform.createExtensionFunction( 
@@ -50,6 +53,7 @@ glDeleteTexturesEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteTexturesEXT( GLsizei(n), GLuintArray(textures) ) -> None',
 	argNames = ('n', 'textures',),
+	deprecated = _DEPRECATED,
 )
 
 glGenTexturesEXT = platform.createExtensionFunction( 
@@ -59,6 +63,7 @@ glGenTexturesEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenTexturesEXT( GLsizei(n), GLuintArray(textures) ) -> None',
 	argNames = ('n', 'textures',),
+	deprecated = _DEPRECATED,
 )
 
 glIsTextureEXT = platform.createExtensionFunction( 
@@ -68,6 +73,7 @@ glIsTextureEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsTextureEXT( GLuint(texture) ) -> constants.GLboolean',
 	argNames = ('texture',),
+	deprecated = _DEPRECATED,
 )
 
 glPrioritizeTexturesEXT = platform.createExtensionFunction( 
@@ -77,6 +83,7 @@ glPrioritizeTexturesEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray, arrays.GLclampfArray,),
 	doc = 'glPrioritizeTexturesEXT( GLsizei(n), GLuintArray(textures), GLclampfArray(priorities) ) -> None',
 	argNames = ('n', 'textures', 'priorities',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_geometry_shader4'
+_DEPRECATED = False
 GL_LINES_ADJACENCY_ARB = constant.Constant( 'GL_LINES_ADJACENCY_ARB', 0xA )
 GL_LINE_STRIP_ADJACENCY_ARB = constant.Constant( 'GL_LINE_STRIP_ADJACENCY_ARB', 0xB )
 GL_TRIANGLES_ADJACENCY_ARB = constant.Constant( 'GL_TRIANGLES_ADJACENCY_ARB', 0xC )
@@ -35,6 +36,7 @@ glProgramParameteriARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint,),
 	doc = 'glProgramParameteriARB( GLuint(program), GLenum(pname), GLint(value) ) -> None',
 	argNames = ('program', 'pname', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTextureARB = platform.createExtensionFunction( 
@@ -44,6 +46,7 @@ glFramebufferTextureARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint,),
 	doc = 'glFramebufferTextureARB( GLenum(target), GLenum(attachment), GLuint(texture), GLint(level) ) -> None',
 	argNames = ('target', 'attachment', 'texture', 'level',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTextureLayerARB = platform.createExtensionFunction( 
@@ -53,6 +56,7 @@ glFramebufferTextureLayerARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint, constants.GLint,),
 	doc = 'glFramebufferTextureLayerARB( GLenum(target), GLenum(attachment), GLuint(texture), GLint(level), GLint(layer) ) -> None',
 	argNames = ('target', 'attachment', 'texture', 'level', 'layer',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTextureFaceARB = platform.createExtensionFunction( 
@@ -62,6 +66,7 @@ glFramebufferTextureFaceARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint, constants.GLenum,),
 	doc = 'glFramebufferTextureFaceARB( GLenum(target), GLenum(attachment), GLuint(texture), GLint(level), GLenum(face) ) -> None',
 	argNames = ('target', 'attachment', 'texture', 'level', 'face',),
+	deprecated = _DEPRECATED,
 )
 
 

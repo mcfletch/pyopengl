@@ -68,6 +68,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_vertex_buffer_object'
+_DEPRECATED = False
 GL_BUFFER_SIZE_ARB = constant.Constant( 'GL_BUFFER_SIZE_ARB', 0x8764 )
 GL_BUFFER_USAGE_ARB = constant.Constant( 'GL_BUFFER_USAGE_ARB', 0x8765 )
 GL_ARRAY_BUFFER_ARB = constant.Constant( 'GL_ARRAY_BUFFER_ARB', 0x8892 )
@@ -117,6 +118,7 @@ glBindBufferARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glBindBufferARB( GLenum(target), GLuint(buffer) ) -> None',
 	argNames = ('target', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteBuffersARB = platform.createExtensionFunction( 
@@ -126,6 +128,7 @@ glDeleteBuffersARB = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteBuffersARB( GLsizei(n), GLuintArray(buffers) ) -> None',
 	argNames = ('n', 'buffers',),
+	deprecated = _DEPRECATED,
 )
 
 glGenBuffersARB = platform.createExtensionFunction( 
@@ -135,6 +138,7 @@ glGenBuffersARB = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenBuffersARB( GLsizei(n), GLuintArray(buffers) ) -> None',
 	argNames = ('n', 'buffers',),
+	deprecated = _DEPRECATED,
 )
 
 glIsBufferARB = platform.createExtensionFunction( 
@@ -144,6 +148,7 @@ glIsBufferARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsBufferARB( GLuint(buffer) ) -> constants.GLboolean',
 	argNames = ('buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glBufferDataARB = platform.createExtensionFunction( 
@@ -153,6 +158,7 @@ glBufferDataARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizeiptrARB, ctypes.c_void_p, constants.GLenum,),
 	doc = 'glBufferDataARB( GLenum(target), GLsizeiptrARB(size), c_void_p(data), GLenum(usage) ) -> None',
 	argNames = ('target', 'size', 'data', 'usage',),
+	deprecated = _DEPRECATED,
 )
 
 glBufferSubDataARB = platform.createExtensionFunction( 
@@ -162,6 +168,7 @@ glBufferSubDataARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLintptrARB, constants.GLsizeiptrARB, ctypes.c_void_p,),
 	doc = 'glBufferSubDataARB( GLenum(target), GLintptrARB(offset), GLsizeiptrARB(size), c_void_p(data) ) -> None',
 	argNames = ('target', 'offset', 'size', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetBufferSubDataARB = platform.createExtensionFunction( 
@@ -171,6 +178,7 @@ glGetBufferSubDataARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLintptrARB, constants.GLsizeiptrARB, ctypes.c_void_p,),
 	doc = 'glGetBufferSubDataARB( GLenum(target), GLintptrARB(offset), GLsizeiptrARB(size), c_void_p(data) ) -> None',
 	argNames = ('target', 'offset', 'size', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glMapBufferARB = platform.createExtensionFunction( 
@@ -180,6 +188,7 @@ glMapBufferARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glMapBufferARB( GLenum(target), GLenum(access) ) -> ctypes.c_void_p',
 	argNames = ('target', 'access',),
+	deprecated = _DEPRECATED,
 )
 
 glUnmapBufferARB = platform.createExtensionFunction( 
@@ -189,6 +198,7 @@ glUnmapBufferARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glUnmapBufferARB( GLenum(target) ) -> constants.GLboolean',
 	argNames = ('target',),
+	deprecated = _DEPRECATED,
 )
 
 glGetBufferParameterivARB = platform.createExtensionFunction( 
@@ -198,6 +208,7 @@ glGetBufferParameterivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetBufferParameterivARB( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetBufferPointervARB = platform.createExtensionFunction( 
@@ -207,6 +218,7 @@ glGetBufferPointervARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glGetBufferPointervARB( GLenum(target), GLenum(pname), POINTER(ctypes.c_void_p)(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

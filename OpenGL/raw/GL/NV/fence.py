@@ -40,6 +40,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_fence'
+_DEPRECATED = False
 GL_ALL_COMPLETED_NV = constant.Constant( 'GL_ALL_COMPLETED_NV', 0x84F2 )
 GL_FENCE_STATUS_NV = constant.Constant( 'GL_FENCE_STATUS_NV', 0x84F3 )
 GL_FENCE_CONDITION_NV = constant.Constant( 'GL_FENCE_CONDITION_NV', 0x84F4 )
@@ -50,6 +51,7 @@ glDeleteFencesNV = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteFencesNV( GLsizei(n), GLuintArray(fences) ) -> None',
 	argNames = ('n', 'fences',),
+	deprecated = _DEPRECATED,
 )
 
 glGenFencesNV = platform.createExtensionFunction( 
@@ -59,6 +61,7 @@ glGenFencesNV = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenFencesNV( GLsizei(n), GLuintArray(fences) ) -> None',
 	argNames = ('n', 'fences',),
+	deprecated = _DEPRECATED,
 )
 
 glIsFenceNV = platform.createExtensionFunction( 
@@ -68,6 +71,7 @@ glIsFenceNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsFenceNV( GLuint(fence) ) -> constants.GLboolean',
 	argNames = ('fence',),
+	deprecated = _DEPRECATED,
 )
 
 glTestFenceNV = platform.createExtensionFunction( 
@@ -77,6 +81,7 @@ glTestFenceNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glTestFenceNV( GLuint(fence) ) -> constants.GLboolean',
 	argNames = ('fence',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFenceivNV = platform.createExtensionFunction( 
@@ -86,6 +91,7 @@ glGetFenceivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetFenceivNV( GLuint(fence), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('fence', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glFinishFenceNV = platform.createExtensionFunction( 
@@ -95,6 +101,7 @@ glFinishFenceNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glFinishFenceNV( GLuint(fence) ) -> None',
 	argNames = ('fence',),
+	deprecated = _DEPRECATED,
 )
 
 glSetFenceNV = platform.createExtensionFunction( 
@@ -104,6 +111,7 @@ glSetFenceNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glSetFenceNV( GLuint(fence), GLenum(condition) ) -> None',
 	argNames = ('fence', 'condition',),
+	deprecated = _DEPRECATED,
 )
 
 

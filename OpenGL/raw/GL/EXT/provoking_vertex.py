@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_provoking_vertex'
+_DEPRECATED = False
 GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT = constant.Constant( 'GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT', 0x8E4C )
 GL_FIRST_VERTEX_CONVENTION_EXT = constant.Constant( 'GL_FIRST_VERTEX_CONVENTION_EXT', 0x8E4D )
 GL_LAST_VERTEX_CONVENTION_EXT = constant.Constant( 'GL_LAST_VERTEX_CONVENTION_EXT', 0x8E4E )
@@ -21,6 +22,7 @@ glProvokingVertexEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glProvokingVertexEXT( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 

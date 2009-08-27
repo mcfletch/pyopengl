@@ -16,6 +16,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_HP_texture_lighting'
+_DEPRECATED = False
 GL_TEXTURE_LIGHTING_MODE_HP = constant.Constant( 'GL_TEXTURE_LIGHTING_MODE_HP', 0x8167 )
 GL_TEXTURE_POST_SPECULAR_HP = constant.Constant( 'GL_TEXTURE_POST_SPECULAR_HP', 0x8168 )
 GL_TEXTURE_PRE_SPECULAR_HP = constant.Constant( 'GL_TEXTURE_PRE_SPECULAR_HP', 0x8169 )

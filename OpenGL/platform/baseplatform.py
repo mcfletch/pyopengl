@@ -6,9 +6,6 @@ import sys
 import OpenGL as top_level_module
 from OpenGL import logs
 
-if top_level_module.FORWARD_COMPATIBLE_ONLY:
-	from OpenGL.platform import entrypoint31
-
 class _CheckContext( object ):
 	def __init__( self, func, ccisvalid ):
 		self.func = func 
@@ -110,6 +107,7 @@ class BasePlatform( object ):
 		resultType=ctypes.c_int, argTypes=(),
 		doc = None, argNames = (),
 		extension = None,
+		deprecated = False,
 	):
 		"""Core operation to create a new base ctypes function
 		
@@ -161,6 +159,7 @@ class BasePlatform( object ):
 		resultType=ctypes.c_int, argTypes=(),
 		doc = None, argNames = (),
 		extension = None,
+		deprecated = False,
 	):
 		"""Create a base function for given name
 		
@@ -172,14 +171,14 @@ class BasePlatform( object ):
 		from OpenGL import wrapper
 		try:
 			if top_level_module.FORWARD_COMPATIBLE_ONLY and dll is self.GL:
-				if entrypoint31.deprecated( functionName ):
+				if deprecated:
 					return self.nullFunction(
 						functionName, dll=dll,
 						resultType=resultType, 
 						argTypes=argTypes,
 						doc = doc, argNames = argNames,
 						extension = extension,
-						deprecated = True,
+						deprecated = deprecated,
 					)
 			return self.constructFunction(
 				functionName, dll, 

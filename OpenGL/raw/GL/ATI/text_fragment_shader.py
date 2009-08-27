@@ -71,6 +71,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_text_fragment_shader'
+_DEPRECATED = False
 GL_TEXT_FRAGMENT_SHADER_ATI = constant.Constant( 'GL_TEXT_FRAGMENT_SHADER_ATI', 0x8200 )
 glget.addGLGetConstant( GL_TEXT_FRAGMENT_SHADER_ATI, (1,) )
 

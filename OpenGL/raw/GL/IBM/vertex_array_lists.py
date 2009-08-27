@@ -51,6 +51,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_IBM_vertex_array_lists'
+_DEPRECATED = False
 
 glColorPointerListIBM = platform.createExtensionFunction( 
 	'glColorPointerListIBM', dll=platform.GL,
@@ -59,6 +60,7 @@ glColorPointerListIBM = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLint, ctypes.POINTER(ctypes.c_void_p), constants.GLint,),
 	doc = 'glColorPointerListIBM( GLint(size), GLenum(type), GLint(stride), POINTER(ctypes.c_void_p)(pointer), GLint(ptrstride) ) -> None',
 	argNames = ('size', 'type', 'stride', 'pointer', 'ptrstride',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColorPointerListIBM = platform.createExtensionFunction( 
@@ -68,6 +70,7 @@ glSecondaryColorPointerListIBM = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLint, ctypes.POINTER(ctypes.c_void_p), constants.GLint,),
 	doc = 'glSecondaryColorPointerListIBM( GLint(size), GLenum(type), GLint(stride), POINTER(ctypes.c_void_p)(pointer), GLint(ptrstride) ) -> None',
 	argNames = ('size', 'type', 'stride', 'pointer', 'ptrstride',),
+	deprecated = _DEPRECATED,
 )
 
 glEdgeFlagPointerListIBM = platform.createExtensionFunction( 
@@ -77,6 +80,7 @@ glEdgeFlagPointerListIBM = platform.createExtensionFunction(
 	argTypes=(constants.GLint, ctypes.POINTER(ctypes.POINTER(constants.GLboolean)), constants.GLint,),
 	doc = 'glEdgeFlagPointerListIBM( GLint(stride), POINTER(ctypes.POINTER(constants.GLboolean))(pointer), GLint(ptrstride) ) -> None',
 	argNames = ('stride', 'pointer', 'ptrstride',),
+	deprecated = _DEPRECATED,
 )
 
 glFogCoordPointerListIBM = platform.createExtensionFunction( 
@@ -86,6 +90,7 @@ glFogCoordPointerListIBM = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, ctypes.POINTER(ctypes.c_void_p), constants.GLint,),
 	doc = 'glFogCoordPointerListIBM( GLenum(type), GLint(stride), POINTER(ctypes.c_void_p)(pointer), GLint(ptrstride) ) -> None',
 	argNames = ('type', 'stride', 'pointer', 'ptrstride',),
+	deprecated = _DEPRECATED,
 )
 
 glIndexPointerListIBM = platform.createExtensionFunction( 
@@ -95,6 +100,7 @@ glIndexPointerListIBM = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, ctypes.POINTER(ctypes.c_void_p), constants.GLint,),
 	doc = 'glIndexPointerListIBM( GLenum(type), GLint(stride), POINTER(ctypes.c_void_p)(pointer), GLint(ptrstride) ) -> None',
 	argNames = ('type', 'stride', 'pointer', 'ptrstride',),
+	deprecated = _DEPRECATED,
 )
 
 glNormalPointerListIBM = platform.createExtensionFunction( 
@@ -104,6 +110,7 @@ glNormalPointerListIBM = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, ctypes.POINTER(ctypes.c_void_p), constants.GLint,),
 	doc = 'glNormalPointerListIBM( GLenum(type), GLint(stride), POINTER(ctypes.c_void_p)(pointer), GLint(ptrstride) ) -> None',
 	argNames = ('type', 'stride', 'pointer', 'ptrstride',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoordPointerListIBM = platform.createExtensionFunction( 
@@ -113,6 +120,7 @@ glTexCoordPointerListIBM = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLint, ctypes.POINTER(ctypes.c_void_p), constants.GLint,),
 	doc = 'glTexCoordPointerListIBM( GLint(size), GLenum(type), GLint(stride), POINTER(ctypes.c_void_p)(pointer), GLint(ptrstride) ) -> None',
 	argNames = ('size', 'type', 'stride', 'pointer', 'ptrstride',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexPointerListIBM = platform.createExtensionFunction( 
@@ -122,6 +130,7 @@ glVertexPointerListIBM = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLint, ctypes.POINTER(ctypes.c_void_p), constants.GLint,),
 	doc = 'glVertexPointerListIBM( GLint(size), GLenum(type), GLint(stride), POINTER(ctypes.c_void_p)(pointer), GLint(ptrstride) ) -> None',
 	argNames = ('size', 'type', 'stride', 'pointer', 'ptrstride',),
+	deprecated = _DEPRECATED,
 )
 
 

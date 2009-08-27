@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_async_histogram'
+_DEPRECATED = False
 GL_ASYNC_HISTOGRAM_SGIX = constant.Constant( 'GL_ASYNC_HISTOGRAM_SGIX', 0x832C )
 glget.addGLGetConstant( GL_ASYNC_HISTOGRAM_SGIX, (1,) )
 GL_MAX_ASYNC_HISTOGRAM_SGIX = constant.Constant( 'GL_MAX_ASYNC_HISTOGRAM_SGIX', 0x832D )

@@ -25,6 +25,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_OML_interlace'
+_DEPRECATED = False
 GL_INTERLACE_OML = constant.Constant( 'GL_INTERLACE_OML', 0x8980 )
 glget.addGLGetConstant( GL_INTERLACE_OML, (1,) )
 GL_INTERLACE_READ_OML = constant.Constant( 'GL_INTERLACE_READ_OML', 0x8981 )

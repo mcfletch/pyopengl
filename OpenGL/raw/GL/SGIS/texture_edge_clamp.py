@@ -31,6 +31,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_texture_edge_clamp'
+_DEPRECATED = False
 GL_CLAMP_TO_EDGE_SGIS = constant.Constant( 'GL_CLAMP_TO_EDGE_SGIS', 0x812F )
 
 

@@ -30,6 +30,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_stencil_wrap'
+_DEPRECATED = False
 GL_INCR_WRAP_EXT = constant.Constant( 'GL_INCR_WRAP_EXT', 0x8507 )
 GL_DECR_WRAP_EXT = constant.Constant( 'GL_DECR_WRAP_EXT', 0x8508 )
 

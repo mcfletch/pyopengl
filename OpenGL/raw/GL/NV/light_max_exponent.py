@@ -24,6 +24,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_light_max_exponent'
+_DEPRECATED = False
 GL_MAX_SHININESS_NV = constant.Constant( 'GL_MAX_SHININESS_NV', 0x8504 )
 glget.addGLGetConstant( GL_MAX_SHININESS_NV, (1,) )
 GL_MAX_SPOT_EXPONENT_NV = constant.Constant( 'GL_MAX_SPOT_EXPONENT_NV', 0x8505 )

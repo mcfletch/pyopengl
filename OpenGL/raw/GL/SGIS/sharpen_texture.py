@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_sharpen_texture'
+_DEPRECATED = False
 GL_LINEAR_SHARPEN_SGIS = constant.Constant( 'GL_LINEAR_SHARPEN_SGIS', 0x80AD )
 GL_LINEAR_SHARPEN_ALPHA_SGIS = constant.Constant( 'GL_LINEAR_SHARPEN_ALPHA_SGIS', 0x80AE )
 GL_LINEAR_SHARPEN_COLOR_SGIS = constant.Constant( 'GL_LINEAR_SHARPEN_COLOR_SGIS', 0x80AF )
@@ -28,6 +29,7 @@ glSharpenTexFuncSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glSharpenTexFuncSGIS( GLenum(target), GLsizei(n), GLfloatArray(points) ) -> None',
 	argNames = ('target', 'n', 'points',),
+	deprecated = _DEPRECATED,
 )
 
 glGetSharpenTexFuncSGIS = platform.createExtensionFunction( 
@@ -37,6 +39,7 @@ glGetSharpenTexFuncSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetSharpenTexFuncSGIS( GLenum(target), GLfloatArray(points) ) -> None',
 	argNames = ('target', 'points',),
+	deprecated = _DEPRECATED,
 )
 
 

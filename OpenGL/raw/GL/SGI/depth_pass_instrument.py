@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGI_depth_pass_instrument'
+_DEPRECATED = False
 GL_DEPTH_PASS_INSTRUMENT_SGIX = constant.Constant( 'GL_DEPTH_PASS_INSTRUMENT_SGIX', 0x8310 )
 GL_DEPTH_PASS_INSTRUMENT_COUNTERS_SGIX = constant.Constant( 'GL_DEPTH_PASS_INSTRUMENT_COUNTERS_SGIX', 0x8311 )
 GL_DEPTH_PASS_INSTRUMENT_MAX_SGIX = constant.Constant( 'GL_DEPTH_PASS_INSTRUMENT_MAX_SGIX', 0x8312 )

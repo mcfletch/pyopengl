@@ -15,6 +15,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_PGI_vertex_hints'
+_DEPRECATED = False
 GL_VERTEX_DATA_HINT_PGI = constant.Constant( 'GL_VERTEX_DATA_HINT_PGI', 0x1A22A )
 GL_VERTEX_CONSISTENT_HINT_PGI = constant.Constant( 'GL_VERTEX_CONSISTENT_HINT_PGI', 0x1A22B )
 GL_MATERIAL_SIDE_HINT_PGI = constant.Constant( 'GL_MATERIAL_SIDE_HINT_PGI', 0x1A22C )

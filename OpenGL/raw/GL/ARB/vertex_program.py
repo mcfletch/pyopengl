@@ -59,6 +59,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_vertex_program'
+_DEPRECATED = False
 GL_COLOR_SUM_ARB = constant.Constant( 'GL_COLOR_SUM_ARB', 0x8458 )
 glget.addGLGetConstant( GL_COLOR_SUM_ARB, (1,) )
 GL_VERTEX_PROGRAM_ARB = constant.Constant( 'GL_VERTEX_PROGRAM_ARB', 0x8620 )
@@ -156,6 +157,7 @@ glVertexAttrib1dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLdouble,),
 	doc = 'glVertexAttrib1dARB( GLuint(index), GLdouble(x) ) -> None',
 	argNames = ('index', 'x',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib1dvARB = platform.createExtensionFunction( 
@@ -165,6 +167,7 @@ glVertexAttrib1dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glVertexAttrib1dvARB( GLuint(index), GLdoubleArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib1fARB = platform.createExtensionFunction( 
@@ -174,6 +177,7 @@ glVertexAttrib1fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLfloat,),
 	doc = 'glVertexAttrib1fARB( GLuint(index), GLfloat(x) ) -> None',
 	argNames = ('index', 'x',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib1fvARB = platform.createExtensionFunction( 
@@ -183,6 +187,7 @@ glVertexAttrib1fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glVertexAttrib1fvARB( GLuint(index), GLfloatArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib1sARB = platform.createExtensionFunction( 
@@ -192,6 +197,7 @@ glVertexAttrib1sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLshort,),
 	doc = 'glVertexAttrib1sARB( GLuint(index), GLshort(x) ) -> None',
 	argNames = ('index', 'x',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib1svARB = platform.createExtensionFunction( 
@@ -201,6 +207,7 @@ glVertexAttrib1svARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLshortArray,),
 	doc = 'glVertexAttrib1svARB( GLuint(index), GLshortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib2dARB = platform.createExtensionFunction( 
@@ -210,6 +217,7 @@ glVertexAttrib2dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLdouble, constants.GLdouble,),
 	doc = 'glVertexAttrib2dARB( GLuint(index), GLdouble(x), GLdouble(y) ) -> None',
 	argNames = ('index', 'x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib2dvARB = platform.createExtensionFunction( 
@@ -219,6 +227,7 @@ glVertexAttrib2dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glVertexAttrib2dvARB( GLuint(index), GLdoubleArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib2fARB = platform.createExtensionFunction( 
@@ -228,6 +237,7 @@ glVertexAttrib2fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat,),
 	doc = 'glVertexAttrib2fARB( GLuint(index), GLfloat(x), GLfloat(y) ) -> None',
 	argNames = ('index', 'x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib2fvARB = platform.createExtensionFunction( 
@@ -237,6 +247,7 @@ glVertexAttrib2fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glVertexAttrib2fvARB( GLuint(index), GLfloatArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib2sARB = platform.createExtensionFunction( 
@@ -246,6 +257,7 @@ glVertexAttrib2sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLshort, constants.GLshort,),
 	doc = 'glVertexAttrib2sARB( GLuint(index), GLshort(x), GLshort(y) ) -> None',
 	argNames = ('index', 'x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib2svARB = platform.createExtensionFunction( 
@@ -255,6 +267,7 @@ glVertexAttrib2svARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLshortArray,),
 	doc = 'glVertexAttrib2svARB( GLuint(index), GLshortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib3dARB = platform.createExtensionFunction( 
@@ -264,6 +277,7 @@ glVertexAttrib3dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glVertexAttrib3dARB( GLuint(index), GLdouble(x), GLdouble(y), GLdouble(z) ) -> None',
 	argNames = ('index', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib3dvARB = platform.createExtensionFunction( 
@@ -273,6 +287,7 @@ glVertexAttrib3dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glVertexAttrib3dvARB( GLuint(index), GLdoubleArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib3fARB = platform.createExtensionFunction( 
@@ -282,6 +297,7 @@ glVertexAttrib3fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glVertexAttrib3fARB( GLuint(index), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('index', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib3fvARB = platform.createExtensionFunction( 
@@ -291,6 +307,7 @@ glVertexAttrib3fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glVertexAttrib3fvARB( GLuint(index), GLfloatArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib3sARB = platform.createExtensionFunction( 
@@ -300,6 +317,7 @@ glVertexAttrib3sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glVertexAttrib3sARB( GLuint(index), GLshort(x), GLshort(y), GLshort(z) ) -> None',
 	argNames = ('index', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib3svARB = platform.createExtensionFunction( 
@@ -309,6 +327,7 @@ glVertexAttrib3svARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLshortArray,),
 	doc = 'glVertexAttrib3svARB( GLuint(index), GLshortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4NbvARB = platform.createExtensionFunction( 
@@ -318,6 +337,7 @@ glVertexAttrib4NbvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLbyteArray,),
 	doc = 'glVertexAttrib4NbvARB( GLuint(index), GLbyteArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4NivARB = platform.createExtensionFunction( 
@@ -327,6 +347,7 @@ glVertexAttrib4NivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttrib4NivARB( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4NsvARB = platform.createExtensionFunction( 
@@ -336,6 +357,7 @@ glVertexAttrib4NsvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLshortArray,),
 	doc = 'glVertexAttrib4NsvARB( GLuint(index), GLshortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4NubARB = platform.createExtensionFunction( 
@@ -345,6 +367,7 @@ glVertexAttrib4NubARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLubyte, constants.GLubyte, constants.GLubyte, constants.GLubyte,),
 	doc = 'glVertexAttrib4NubARB( GLuint(index), GLubyte(x), GLubyte(y), GLubyte(z), GLubyte(w) ) -> None',
 	argNames = ('index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4NubvARB = platform.createExtensionFunction( 
@@ -354,6 +377,7 @@ glVertexAttrib4NubvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLubyteArray,),
 	doc = 'glVertexAttrib4NubvARB( GLuint(index), GLubyteArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4NuivARB = platform.createExtensionFunction( 
@@ -363,6 +387,7 @@ glVertexAttrib4NuivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttrib4NuivARB( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4NusvARB = platform.createExtensionFunction( 
@@ -372,6 +397,7 @@ glVertexAttrib4NusvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLushortArray,),
 	doc = 'glVertexAttrib4NusvARB( GLuint(index), GLushortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4bvARB = platform.createExtensionFunction( 
@@ -381,6 +407,7 @@ glVertexAttrib4bvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLbyteArray,),
 	doc = 'glVertexAttrib4bvARB( GLuint(index), GLbyteArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4dARB = platform.createExtensionFunction( 
@@ -390,6 +417,7 @@ glVertexAttrib4dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glVertexAttrib4dARB( GLuint(index), GLdouble(x), GLdouble(y), GLdouble(z), GLdouble(w) ) -> None',
 	argNames = ('index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4dvARB = platform.createExtensionFunction( 
@@ -399,6 +427,7 @@ glVertexAttrib4dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glVertexAttrib4dvARB( GLuint(index), GLdoubleArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4fARB = platform.createExtensionFunction( 
@@ -408,6 +437,7 @@ glVertexAttrib4fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glVertexAttrib4fARB( GLuint(index), GLfloat(x), GLfloat(y), GLfloat(z), GLfloat(w) ) -> None',
 	argNames = ('index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4fvARB = platform.createExtensionFunction( 
@@ -417,6 +447,7 @@ glVertexAttrib4fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glVertexAttrib4fvARB( GLuint(index), GLfloatArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4ivARB = platform.createExtensionFunction( 
@@ -426,6 +457,7 @@ glVertexAttrib4ivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttrib4ivARB( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4sARB = platform.createExtensionFunction( 
@@ -435,6 +467,7 @@ glVertexAttrib4sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLshort, constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glVertexAttrib4sARB( GLuint(index), GLshort(x), GLshort(y), GLshort(z), GLshort(w) ) -> None',
 	argNames = ('index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4svARB = platform.createExtensionFunction( 
@@ -444,6 +477,7 @@ glVertexAttrib4svARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLshortArray,),
 	doc = 'glVertexAttrib4svARB( GLuint(index), GLshortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4ubvARB = platform.createExtensionFunction( 
@@ -453,6 +487,7 @@ glVertexAttrib4ubvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLubyteArray,),
 	doc = 'glVertexAttrib4ubvARB( GLuint(index), GLubyteArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4uivARB = platform.createExtensionFunction( 
@@ -462,6 +497,7 @@ glVertexAttrib4uivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttrib4uivARB( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttrib4usvARB = platform.createExtensionFunction( 
@@ -471,6 +507,7 @@ glVertexAttrib4usvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLushortArray,),
 	doc = 'glVertexAttrib4usvARB( GLuint(index), GLushortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribPointerARB = platform.createExtensionFunction( 
@@ -480,6 +517,7 @@ glVertexAttribPointerARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLenum, constants.GLboolean, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glVertexAttribPointerARB( GLuint(index), GLint(size), GLenum(type), GLboolean(normalized), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('index', 'size', 'type', 'normalized', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glEnableVertexAttribArrayARB = platform.createExtensionFunction( 
@@ -489,6 +527,7 @@ glEnableVertexAttribArrayARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glEnableVertexAttribArrayARB( GLuint(index) ) -> None',
 	argNames = ('index',),
+	deprecated = _DEPRECATED,
 )
 
 glDisableVertexAttribArrayARB = platform.createExtensionFunction( 
@@ -498,6 +537,7 @@ glDisableVertexAttribArrayARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glDisableVertexAttribArrayARB( GLuint(index) ) -> None',
 	argNames = ('index',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramStringARB = platform.createExtensionFunction( 
@@ -507,6 +547,7 @@ glProgramStringARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glProgramStringARB( GLenum(target), GLenum(format), GLsizei(len), c_void_p(string) ) -> None',
 	argNames = ('target', 'format', 'len', 'string',),
+	deprecated = _DEPRECATED,
 )
 
 glBindProgramARB = platform.createExtensionFunction( 
@@ -516,6 +557,7 @@ glBindProgramARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glBindProgramARB( GLenum(target), GLuint(program) ) -> None',
 	argNames = ('target', 'program',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteProgramsARB = platform.createExtensionFunction( 
@@ -525,6 +567,7 @@ glDeleteProgramsARB = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteProgramsARB( GLsizei(n), GLuintArray(programs) ) -> None',
 	argNames = ('n', 'programs',),
+	deprecated = _DEPRECATED,
 )
 
 glGenProgramsARB = platform.createExtensionFunction( 
@@ -534,6 +577,7 @@ glGenProgramsARB = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenProgramsARB( GLsizei(n), GLuintArray(programs) ) -> None',
 	argNames = ('n', 'programs',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParameter4dARB = platform.createExtensionFunction( 
@@ -543,6 +587,7 @@ glProgramEnvParameter4dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glProgramEnvParameter4dARB( GLenum(target), GLuint(index), GLdouble(x), GLdouble(y), GLdouble(z), GLdouble(w) ) -> None',
 	argNames = ('target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParameter4dvARB = platform.createExtensionFunction( 
@@ -552,6 +597,7 @@ glProgramEnvParameter4dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glProgramEnvParameter4dvARB( GLenum(target), GLuint(index), GLdoubleArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParameter4fARB = platform.createExtensionFunction( 
@@ -561,6 +607,7 @@ glProgramEnvParameter4fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glProgramEnvParameter4fARB( GLenum(target), GLuint(index), GLfloat(x), GLfloat(y), GLfloat(z), GLfloat(w) ) -> None',
 	argNames = ('target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParameter4fvARB = platform.createExtensionFunction( 
@@ -570,6 +617,7 @@ glProgramEnvParameter4fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glProgramEnvParameter4fvARB( GLenum(target), GLuint(index), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParameter4dARB = platform.createExtensionFunction( 
@@ -579,6 +627,7 @@ glProgramLocalParameter4dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glProgramLocalParameter4dARB( GLenum(target), GLuint(index), GLdouble(x), GLdouble(y), GLdouble(z), GLdouble(w) ) -> None',
 	argNames = ('target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParameter4dvARB = platform.createExtensionFunction( 
@@ -588,6 +637,7 @@ glProgramLocalParameter4dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glProgramLocalParameter4dvARB( GLenum(target), GLuint(index), GLdoubleArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParameter4fARB = platform.createExtensionFunction( 
@@ -597,6 +647,7 @@ glProgramLocalParameter4fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glProgramLocalParameter4fARB( GLenum(target), GLuint(index), GLfloat(x), GLfloat(y), GLfloat(z), GLfloat(w) ) -> None',
 	argNames = ('target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParameter4fvARB = platform.createExtensionFunction( 
@@ -606,6 +657,7 @@ glProgramLocalParameter4fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glProgramLocalParameter4fvARB( GLenum(target), GLuint(index), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramEnvParameterdvARB = platform.createExtensionFunction( 
@@ -615,6 +667,7 @@ glGetProgramEnvParameterdvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glGetProgramEnvParameterdvARB( GLenum(target), GLuint(index), GLdoubleArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramEnvParameterfvARB = platform.createExtensionFunction( 
@@ -624,6 +677,7 @@ glGetProgramEnvParameterfvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glGetProgramEnvParameterfvARB( GLenum(target), GLuint(index), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramLocalParameterdvARB = platform.createExtensionFunction( 
@@ -633,6 +687,7 @@ glGetProgramLocalParameterdvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glGetProgramLocalParameterdvARB( GLenum(target), GLuint(index), GLdoubleArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramLocalParameterfvARB = platform.createExtensionFunction( 
@@ -642,6 +697,7 @@ glGetProgramLocalParameterfvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glGetProgramLocalParameterfvARB( GLenum(target), GLuint(index), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramivARB = platform.createExtensionFunction( 
@@ -651,6 +707,7 @@ glGetProgramivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetProgramivARB( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramStringARB = platform.createExtensionFunction( 
@@ -660,6 +717,7 @@ glGetProgramStringARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glGetProgramStringARB( GLenum(target), GLenum(pname), c_void_p(string) ) -> None',
 	argNames = ('target', 'pname', 'string',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVertexAttribdvARB = platform.createExtensionFunction( 
@@ -669,6 +727,7 @@ glGetVertexAttribdvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glGetVertexAttribdvARB( GLuint(index), GLenum(pname), GLdoubleArray(params) ) -> None',
 	argNames = ('index', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVertexAttribfvARB = platform.createExtensionFunction( 
@@ -678,6 +737,7 @@ glGetVertexAttribfvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetVertexAttribfvARB( GLuint(index), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('index', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVertexAttribivARB = platform.createExtensionFunction( 
@@ -687,6 +747,7 @@ glGetVertexAttribivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetVertexAttribivARB( GLuint(index), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('index', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVertexAttribPointervARB = platform.createExtensionFunction( 
@@ -696,6 +757,7 @@ glGetVertexAttribPointervARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glGetVertexAttribPointervARB( GLuint(index), GLenum(pname), POINTER(ctypes.c_void_p)(pointer) ) -> None',
 	argNames = ('index', 'pname', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glIsProgramARB = platform.createExtensionFunction( 
@@ -705,6 +767,7 @@ glIsProgramARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsProgramARB( GLuint(program) ) -> constants.GLboolean',
 	argNames = ('program',),
+	deprecated = _DEPRECATED,
 )
 
 

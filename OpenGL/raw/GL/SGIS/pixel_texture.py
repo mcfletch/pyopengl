@@ -55,6 +55,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_pixel_texture'
+_DEPRECATED = False
 GL_PIXEL_TEXTURE_SGIS = constant.Constant( 'GL_PIXEL_TEXTURE_SGIS', 0x8353 )
 GL_PIXEL_FRAGMENT_RGB_SOURCE_SGIS = constant.Constant( 'GL_PIXEL_FRAGMENT_RGB_SOURCE_SGIS', 0x8354 )
 GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS = constant.Constant( 'GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS', 0x8355 )
@@ -66,6 +67,7 @@ glPixelTexGenParameteriSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glPixelTexGenParameteriSGIS( GLenum(pname), GLint(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPixelTexGenParameterivSGIS = platform.createExtensionFunction( 
@@ -75,6 +77,7 @@ glPixelTexGenParameterivSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glPixelTexGenParameterivSGIS( GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glPixelTexGenParameterfSGIS = platform.createExtensionFunction( 
@@ -84,6 +87,7 @@ glPixelTexGenParameterfSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat,),
 	doc = 'glPixelTexGenParameterfSGIS( GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPixelTexGenParameterfvSGIS = platform.createExtensionFunction( 
@@ -93,6 +97,7 @@ glPixelTexGenParameterfvSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glPixelTexGenParameterfvSGIS( GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetPixelTexGenParameterivSGIS = platform.createExtensionFunction( 
@@ -102,6 +107,7 @@ glGetPixelTexGenParameterivSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetPixelTexGenParameterivSGIS( GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetPixelTexGenParameterfvSGIS = platform.createExtensionFunction( 
@@ -111,6 +117,7 @@ glGetPixelTexGenParameterfvSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetPixelTexGenParameterfvSGIS( GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

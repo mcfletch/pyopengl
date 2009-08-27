@@ -68,6 +68,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_compression'
+_DEPRECATED = False
 GL_COMPRESSED_ALPHA_ARB = constant.Constant( 'GL_COMPRESSED_ALPHA_ARB', 0x84E9 )
 GL_COMPRESSED_LUMINANCE_ARB = constant.Constant( 'GL_COMPRESSED_LUMINANCE_ARB', 0x84EA )
 GL_COMPRESSED_LUMINANCE_ALPHA_ARB = constant.Constant( 'GL_COMPRESSED_LUMINANCE_ALPHA_ARB', 0x84EB )
@@ -89,6 +90,7 @@ glCompressedTexImage3DARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexImage3DARB( GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLsizei(depth), GLint(border), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'internalformat', 'width', 'height', 'depth', 'border', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexImage2DARB = platform.createExtensionFunction( 
@@ -98,6 +100,7 @@ glCompressedTexImage2DARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexImage2DARB( GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLint(border), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'internalformat', 'width', 'height', 'border', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexImage1DARB = platform.createExtensionFunction( 
@@ -107,6 +110,7 @@ glCompressedTexImage1DARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexImage1DARB( GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLint(border), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'internalformat', 'width', 'border', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexSubImage3DARB = platform.createExtensionFunction( 
@@ -116,6 +120,7 @@ glCompressedTexSubImage3DARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexSubImage3DARB( GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'yoffset', 'zoffset', 'width', 'height', 'depth', 'format', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexSubImage2DARB = platform.createExtensionFunction( 
@@ -125,6 +130,7 @@ glCompressedTexSubImage2DARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexSubImage2DARB( GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLsizei(width), GLsizei(height), GLenum(format), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'yoffset', 'width', 'height', 'format', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexSubImage1DARB = platform.createExtensionFunction( 
@@ -134,6 +140,7 @@ glCompressedTexSubImage1DARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexSubImage1DARB( GLenum(target), GLint(level), GLint(xoffset), GLsizei(width), GLenum(format), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'width', 'format', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetCompressedTexImageARB = platform.createExtensionFunction( 
@@ -143,6 +150,7 @@ glGetCompressedTexImageARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, ctypes.c_void_p,),
 	doc = 'glGetCompressedTexImageARB( GLenum(target), GLint(level), c_void_p(img) ) -> None',
 	argNames = ('target', 'level', 'img',),
+	deprecated = _DEPRECATED,
 )
 
 

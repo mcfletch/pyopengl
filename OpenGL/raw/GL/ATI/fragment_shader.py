@@ -31,6 +31,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_fragment_shader'
+_DEPRECATED = False
 GL_FRAGMENT_SHADER_ATI = constant.Constant( 'GL_FRAGMENT_SHADER_ATI', 0x8920 )
 glget.addGLGetConstant( GL_FRAGMENT_SHADER_ATI, (1,) )
 GL_REG_0_ATI = constant.Constant( 'GL_REG_0_ATI', 0x8921 )
@@ -143,6 +144,7 @@ glGenFragmentShadersATI = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glGenFragmentShadersATI( GLuint(range) ) -> constants.GLuint',
 	argNames = ('range',),
+	deprecated = _DEPRECATED,
 )
 
 glBindFragmentShaderATI = platform.createExtensionFunction( 
@@ -152,6 +154,7 @@ glBindFragmentShaderATI = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glBindFragmentShaderATI( GLuint(id) ) -> None',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteFragmentShaderATI = platform.createExtensionFunction( 
@@ -161,6 +164,7 @@ glDeleteFragmentShaderATI = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glDeleteFragmentShaderATI( GLuint(id) ) -> None',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glBeginFragmentShaderATI = platform.createExtensionFunction( 
@@ -170,6 +174,7 @@ glBeginFragmentShaderATI = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glBeginFragmentShaderATI(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glEndFragmentShaderATI = platform.createExtensionFunction( 
@@ -179,6 +184,7 @@ glEndFragmentShaderATI = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glEndFragmentShaderATI(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glPassTexCoordATI = platform.createExtensionFunction( 
@@ -188,6 +194,7 @@ glPassTexCoordATI = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLenum,),
 	doc = 'glPassTexCoordATI( GLuint(dst), GLuint(coord), GLenum(swizzle) ) -> None',
 	argNames = ('dst', 'coord', 'swizzle',),
+	deprecated = _DEPRECATED,
 )
 
 glSampleMapATI = platform.createExtensionFunction( 
@@ -197,6 +204,7 @@ glSampleMapATI = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLenum,),
 	doc = 'glSampleMapATI( GLuint(dst), GLuint(interp), GLenum(swizzle) ) -> None',
 	argNames = ('dst', 'interp', 'swizzle',),
+	deprecated = _DEPRECATED,
 )
 
 glColorFragmentOp1ATI = platform.createExtensionFunction( 
@@ -206,6 +214,7 @@ glColorFragmentOp1ATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glColorFragmentOp1ATI( GLenum(op), GLuint(dst), GLuint(dstMask), GLuint(dstMod), GLuint(arg1), GLuint(arg1Rep), GLuint(arg1Mod) ) -> None',
 	argNames = ('op', 'dst', 'dstMask', 'dstMod', 'arg1', 'arg1Rep', 'arg1Mod',),
+	deprecated = _DEPRECATED,
 )
 
 glColorFragmentOp2ATI = platform.createExtensionFunction( 
@@ -215,6 +224,7 @@ glColorFragmentOp2ATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glColorFragmentOp2ATI( GLenum(op), GLuint(dst), GLuint(dstMask), GLuint(dstMod), GLuint(arg1), GLuint(arg1Rep), GLuint(arg1Mod), GLuint(arg2), GLuint(arg2Rep), GLuint(arg2Mod) ) -> None',
 	argNames = ('op', 'dst', 'dstMask', 'dstMod', 'arg1', 'arg1Rep', 'arg1Mod', 'arg2', 'arg2Rep', 'arg2Mod',),
+	deprecated = _DEPRECATED,
 )
 
 glColorFragmentOp3ATI = platform.createExtensionFunction( 
@@ -224,6 +234,7 @@ glColorFragmentOp3ATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glColorFragmentOp3ATI( GLenum(op), GLuint(dst), GLuint(dstMask), GLuint(dstMod), GLuint(arg1), GLuint(arg1Rep), GLuint(arg1Mod), GLuint(arg2), GLuint(arg2Rep), GLuint(arg2Mod), GLuint(arg3), GLuint(arg3Rep), GLuint(arg3Mod) ) -> None',
 	argNames = ('op', 'dst', 'dstMask', 'dstMod', 'arg1', 'arg1Rep', 'arg1Mod', 'arg2', 'arg2Rep', 'arg2Mod', 'arg3', 'arg3Rep', 'arg3Mod',),
+	deprecated = _DEPRECATED,
 )
 
 glAlphaFragmentOp1ATI = platform.createExtensionFunction( 
@@ -233,6 +244,7 @@ glAlphaFragmentOp1ATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glAlphaFragmentOp1ATI( GLenum(op), GLuint(dst), GLuint(dstMod), GLuint(arg1), GLuint(arg1Rep), GLuint(arg1Mod) ) -> None',
 	argNames = ('op', 'dst', 'dstMod', 'arg1', 'arg1Rep', 'arg1Mod',),
+	deprecated = _DEPRECATED,
 )
 
 glAlphaFragmentOp2ATI = platform.createExtensionFunction( 
@@ -242,6 +254,7 @@ glAlphaFragmentOp2ATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glAlphaFragmentOp2ATI( GLenum(op), GLuint(dst), GLuint(dstMod), GLuint(arg1), GLuint(arg1Rep), GLuint(arg1Mod), GLuint(arg2), GLuint(arg2Rep), GLuint(arg2Mod) ) -> None',
 	argNames = ('op', 'dst', 'dstMod', 'arg1', 'arg1Rep', 'arg1Mod', 'arg2', 'arg2Rep', 'arg2Mod',),
+	deprecated = _DEPRECATED,
 )
 
 glAlphaFragmentOp3ATI = platform.createExtensionFunction( 
@@ -251,6 +264,7 @@ glAlphaFragmentOp3ATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glAlphaFragmentOp3ATI( GLenum(op), GLuint(dst), GLuint(dstMod), GLuint(arg1), GLuint(arg1Rep), GLuint(arg1Mod), GLuint(arg2), GLuint(arg2Rep), GLuint(arg2Mod), GLuint(arg3), GLuint(arg3Rep), GLuint(arg3Mod) ) -> None',
 	argNames = ('op', 'dst', 'dstMod', 'arg1', 'arg1Rep', 'arg1Mod', 'arg2', 'arg2Rep', 'arg2Mod', 'arg3', 'arg3Rep', 'arg3Mod',),
+	deprecated = _DEPRECATED,
 )
 
 glSetFragmentShaderConstantATI = platform.createExtensionFunction( 
@@ -260,6 +274,7 @@ glSetFragmentShaderConstantATI = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glSetFragmentShaderConstantATI( GLuint(dst), GLfloatArray(value) ) -> None',
 	argNames = ('dst', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 

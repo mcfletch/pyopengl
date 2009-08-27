@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_3_0'
+_DEPRECATED = False
 GL_COMPARE_REF_TO_TEXTURE = constant.Constant( 'GL_COMPARE_REF_TO_TEXTURE', 0x884E )
 GL_CLIP_DISTANCE0 = constant.Constant( 'GL_CLIP_DISTANCE0', 0x3000 )
 GL_CLIP_DISTANCE1 = constant.Constant( 'GL_CLIP_DISTANCE1', 0x3001 )
@@ -119,6 +120,7 @@ glColorMaski = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLboolean, constants.GLboolean, constants.GLboolean, constants.GLboolean,),
 	doc = 'glColorMaski( GLuint(index), GLboolean(r), GLboolean(g), GLboolean(b), GLboolean(a) ) -> None',
 	argNames = ('index', 'r', 'g', 'b', 'a',),
+	deprecated = _DEPRECATED,
 )
 
 glGetBooleani_v = platform.createExtensionFunction( 
@@ -128,6 +130,7 @@ glGetBooleani_v = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, ctypes.POINTER(constants.GLboolean),),
 	doc = 'glGetBooleani_v( GLenum(target), GLuint(index), POINTER(constants.GLboolean)(data) ) -> None',
 	argNames = ('target', 'index', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetIntegeri_v = platform.createExtensionFunction( 
@@ -137,6 +140,7 @@ glGetIntegeri_v = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLintArray,),
 	doc = 'glGetIntegeri_v( GLenum(target), GLuint(index), GLintArray(data) ) -> None',
 	argNames = ('target', 'index', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glEnablei = platform.createExtensionFunction( 
@@ -146,6 +150,7 @@ glEnablei = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glEnablei( GLenum(target), GLuint(index) ) -> None',
 	argNames = ('target', 'index',),
+	deprecated = _DEPRECATED,
 )
 
 glDisablei = platform.createExtensionFunction( 
@@ -155,6 +160,7 @@ glDisablei = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glDisablei( GLenum(target), GLuint(index) ) -> None',
 	argNames = ('target', 'index',),
+	deprecated = _DEPRECATED,
 )
 
 glIsEnabledi = platform.createExtensionFunction( 
@@ -164,6 +170,7 @@ glIsEnabledi = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glIsEnabledi( GLenum(target), GLuint(index) ) -> constants.GLboolean',
 	argNames = ('target', 'index',),
+	deprecated = _DEPRECATED,
 )
 
 glBeginTransformFeedback = platform.createExtensionFunction( 
@@ -173,6 +180,7 @@ glBeginTransformFeedback = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glBeginTransformFeedback( GLenum(primitiveMode) ) -> None',
 	argNames = ('primitiveMode',),
+	deprecated = _DEPRECATED,
 )
 
 glEndTransformFeedback = platform.createExtensionFunction( 
@@ -182,6 +190,7 @@ glEndTransformFeedback = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glEndTransformFeedback(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glBindBufferRange = platform.createExtensionFunction( 
@@ -191,6 +200,7 @@ glBindBufferRange = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLintptr, constants.GLsizeiptr,),
 	doc = 'glBindBufferRange( GLenum(target), GLuint(index), GLuint(buffer), GLintptr(offset), GLsizeiptr(size) ) -> None',
 	argNames = ('target', 'index', 'buffer', 'offset', 'size',),
+	deprecated = _DEPRECATED,
 )
 
 glBindBufferBase = platform.createExtensionFunction( 
@@ -200,6 +210,7 @@ glBindBufferBase = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint,),
 	doc = 'glBindBufferBase( GLenum(target), GLuint(index), GLuint(buffer) ) -> None',
 	argNames = ('target', 'index', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glTransformFeedbackVaryings = platform.createExtensionFunction( 
@@ -209,6 +220,7 @@ glTransformFeedbackVaryings = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER( ctypes.POINTER( constants.GLchar )), constants.GLenum,),
 	doc = 'glTransformFeedbackVaryings( GLuint(program), GLsizei(count), POINTER( ctypes.POINTER( constants.GLchar ))(varyings), GLenum(bufferMode) ) -> None',
 	argNames = ('program', 'count', 'varyings', 'bufferMode',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTransformFeedbackVarying = platform.createExtensionFunction( 
@@ -218,6 +230,7 @@ glGetTransformFeedbackVarying = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLsizei, arrays.GLsizeiArray, arrays.GLsizeiArray, arrays.GLuintArray, arrays.GLcharArray,),
 	doc = 'glGetTransformFeedbackVarying( GLuint(program), GLuint(index), GLsizei(bufSize), GLsizeiArray(length), GLsizeiArray(size), GLuintArray(type), GLcharArray(name) ) -> None',
 	argNames = ('program', 'index', 'bufSize', 'length', 'size', 'type', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glClampColor = platform.createExtensionFunction( 
@@ -227,6 +240,7 @@ glClampColor = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glClampColor( GLenum(target), GLenum(clamp) ) -> None',
 	argNames = ('target', 'clamp',),
+	deprecated = _DEPRECATED,
 )
 
 glBeginConditionalRender = platform.createExtensionFunction( 
@@ -236,6 +250,7 @@ glBeginConditionalRender = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glBeginConditionalRender( GLuint(id), GLenum(mode) ) -> None',
 	argNames = ('id', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 glEndConditionalRender = platform.createExtensionFunction( 
@@ -245,6 +260,7 @@ glEndConditionalRender = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glEndConditionalRender(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribIPointer = platform.createExtensionFunction( 
@@ -254,6 +270,7 @@ glVertexAttribIPointer = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glVertexAttribIPointer( GLuint(index), GLint(size), GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('index', 'size', 'type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVertexAttribIiv = platform.createExtensionFunction( 
@@ -263,6 +280,7 @@ glGetVertexAttribIiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetVertexAttribIiv( GLuint(index), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('index', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVertexAttribIuiv = platform.createExtensionFunction( 
@@ -272,6 +290,7 @@ glGetVertexAttribIuiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetVertexAttribIuiv( GLuint(index), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('index', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI1i = platform.createExtensionFunction( 
@@ -281,6 +300,7 @@ glVertexAttribI1i = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint,),
 	doc = 'glVertexAttribI1i( GLuint(index), GLint(x) ) -> None',
 	argNames = ('index', 'x',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI2i = platform.createExtensionFunction( 
@@ -290,6 +310,7 @@ glVertexAttribI2i = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint,),
 	doc = 'glVertexAttribI2i( GLuint(index), GLint(x), GLint(y) ) -> None',
 	argNames = ('index', 'x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI3i = platform.createExtensionFunction( 
@@ -299,6 +320,7 @@ glVertexAttribI3i = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glVertexAttribI3i( GLuint(index), GLint(x), GLint(y), GLint(z) ) -> None',
 	argNames = ('index', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4i = platform.createExtensionFunction( 
@@ -308,6 +330,7 @@ glVertexAttribI4i = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glVertexAttribI4i( GLuint(index), GLint(x), GLint(y), GLint(z), GLint(w) ) -> None',
 	argNames = ('index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI1ui = platform.createExtensionFunction( 
@@ -317,6 +340,7 @@ glVertexAttribI1ui = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint,),
 	doc = 'glVertexAttribI1ui( GLuint(index), GLuint(x) ) -> None',
 	argNames = ('index', 'x',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI2ui = platform.createExtensionFunction( 
@@ -326,6 +350,7 @@ glVertexAttribI2ui = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glVertexAttribI2ui( GLuint(index), GLuint(x), GLuint(y) ) -> None',
 	argNames = ('index', 'x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI3ui = platform.createExtensionFunction( 
@@ -335,6 +360,7 @@ glVertexAttribI3ui = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glVertexAttribI3ui( GLuint(index), GLuint(x), GLuint(y), GLuint(z) ) -> None',
 	argNames = ('index', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4ui = platform.createExtensionFunction( 
@@ -344,6 +370,7 @@ glVertexAttribI4ui = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glVertexAttribI4ui( GLuint(index), GLuint(x), GLuint(y), GLuint(z), GLuint(w) ) -> None',
 	argNames = ('index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI1iv = platform.createExtensionFunction( 
@@ -353,6 +380,7 @@ glVertexAttribI1iv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttribI1iv( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI2iv = platform.createExtensionFunction( 
@@ -362,6 +390,7 @@ glVertexAttribI2iv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttribI2iv( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI3iv = platform.createExtensionFunction( 
@@ -371,6 +400,7 @@ glVertexAttribI3iv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttribI3iv( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4iv = platform.createExtensionFunction( 
@@ -380,6 +410,7 @@ glVertexAttribI4iv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttribI4iv( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI1uiv = platform.createExtensionFunction( 
@@ -389,6 +420,7 @@ glVertexAttribI1uiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttribI1uiv( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI2uiv = platform.createExtensionFunction( 
@@ -398,6 +430,7 @@ glVertexAttribI2uiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttribI2uiv( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI3uiv = platform.createExtensionFunction( 
@@ -407,6 +440,7 @@ glVertexAttribI3uiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttribI3uiv( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4uiv = platform.createExtensionFunction( 
@@ -416,6 +450,7 @@ glVertexAttribI4uiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttribI4uiv( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4bv = platform.createExtensionFunction( 
@@ -425,6 +460,7 @@ glVertexAttribI4bv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLbyteArray,),
 	doc = 'glVertexAttribI4bv( GLuint(index), GLbyteArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4sv = platform.createExtensionFunction( 
@@ -434,6 +470,7 @@ glVertexAttribI4sv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLshortArray,),
 	doc = 'glVertexAttribI4sv( GLuint(index), GLshortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4ubv = platform.createExtensionFunction( 
@@ -443,6 +480,7 @@ glVertexAttribI4ubv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLubyteArray,),
 	doc = 'glVertexAttribI4ubv( GLuint(index), GLubyteArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4usv = platform.createExtensionFunction( 
@@ -452,6 +490,7 @@ glVertexAttribI4usv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLushortArray,),
 	doc = 'glVertexAttribI4usv( GLuint(index), GLushortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glGetUniformuiv = platform.createExtensionFunction( 
@@ -461,6 +500,7 @@ glGetUniformuiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, arrays.GLuintArray,),
 	doc = 'glGetUniformuiv( GLuint(program), GLint(location), GLuintArray(params) ) -> None',
 	argNames = ('program', 'location', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glBindFragDataLocation = platform.createExtensionFunction( 
@@ -470,6 +510,7 @@ glBindFragDataLocation = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, arrays.GLcharArray,),
 	doc = 'glBindFragDataLocation( GLuint(program), GLuint(color), GLcharArray(name) ) -> None',
 	argNames = ('program', 'color', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFragDataLocation = platform.createExtensionFunction( 
@@ -479,6 +520,7 @@ glGetFragDataLocation = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLcharArray,),
 	doc = 'glGetFragDataLocation( GLuint(program), GLcharArray(name) ) -> constants.GLint',
 	argNames = ('program', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform1ui = platform.createExtensionFunction( 
@@ -488,6 +530,7 @@ glUniform1ui = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLuint,),
 	doc = 'glUniform1ui( GLint(location), GLuint(v0) ) -> None',
 	argNames = ('location', 'v0',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform2ui = platform.createExtensionFunction( 
@@ -497,6 +540,7 @@ glUniform2ui = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLuint, constants.GLuint,),
 	doc = 'glUniform2ui( GLint(location), GLuint(v0), GLuint(v1) ) -> None',
 	argNames = ('location', 'v0', 'v1',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform3ui = platform.createExtensionFunction( 
@@ -506,6 +550,7 @@ glUniform3ui = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glUniform3ui( GLint(location), GLuint(v0), GLuint(v1), GLuint(v2) ) -> None',
 	argNames = ('location', 'v0', 'v1', 'v2',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform4ui = platform.createExtensionFunction( 
@@ -515,6 +560,7 @@ glUniform4ui = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glUniform4ui( GLint(location), GLuint(v0), GLuint(v1), GLuint(v2), GLuint(v3) ) -> None',
 	argNames = ('location', 'v0', 'v1', 'v2', 'v3',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform1uiv = platform.createExtensionFunction( 
@@ -524,6 +570,7 @@ glUniform1uiv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glUniform1uiv( GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform2uiv = platform.createExtensionFunction( 
@@ -533,6 +580,7 @@ glUniform2uiv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glUniform2uiv( GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform3uiv = platform.createExtensionFunction( 
@@ -542,6 +590,7 @@ glUniform3uiv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glUniform3uiv( GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform4uiv = platform.createExtensionFunction( 
@@ -551,6 +600,7 @@ glUniform4uiv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glUniform4uiv( GLint(location), GLsizei(count), GLuintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glTexParameterIiv = platform.createExtensionFunction( 
@@ -560,6 +610,7 @@ glTexParameterIiv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glTexParameterIiv( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glTexParameterIuiv = platform.createExtensionFunction( 
@@ -569,6 +620,7 @@ glTexParameterIuiv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glTexParameterIuiv( GLenum(target), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTexParameterIiv = platform.createExtensionFunction( 
@@ -578,6 +630,7 @@ glGetTexParameterIiv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetTexParameterIiv( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTexParameterIuiv = platform.createExtensionFunction( 
@@ -587,6 +640,7 @@ glGetTexParameterIuiv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetTexParameterIuiv( GLenum(target), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glClearBufferiv = platform.createExtensionFunction( 
@@ -596,6 +650,7 @@ glClearBufferiv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, arrays.GLintArray,),
 	doc = 'glClearBufferiv( GLenum(buffer), GLint(drawbuffer), GLintArray(value) ) -> None',
 	argNames = ('buffer', 'drawbuffer', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glClearBufferuiv = platform.createExtensionFunction( 
@@ -605,6 +660,7 @@ glClearBufferuiv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, arrays.GLuintArray,),
 	doc = 'glClearBufferuiv( GLenum(buffer), GLint(drawbuffer), GLuintArray(value) ) -> None',
 	argNames = ('buffer', 'drawbuffer', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glClearBufferfv = platform.createExtensionFunction( 
@@ -614,6 +670,7 @@ glClearBufferfv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, arrays.GLfloatArray,),
 	doc = 'glClearBufferfv( GLenum(buffer), GLint(drawbuffer), GLfloatArray(value) ) -> None',
 	argNames = ('buffer', 'drawbuffer', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glClearBufferfi = platform.createExtensionFunction( 
@@ -623,6 +680,7 @@ glClearBufferfi = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLfloat, constants.GLint,),
 	doc = 'glClearBufferfi( GLenum(buffer), GLint(drawbuffer), GLfloat(depth), GLint(stencil) ) -> None',
 	argNames = ('buffer', 'drawbuffer', 'depth', 'stencil',),
+	deprecated = _DEPRECATED,
 )
 
 glGetStringi = platform.createExtensionFunction( 
@@ -632,6 +690,7 @@ glGetStringi = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glGetStringi( GLenum(name), GLuint(index) ) -> arrays.GLubyteArray',
 	argNames = ('name', 'index',),
+	deprecated = _DEPRECATED,
 )
 # import legacy entry points to allow checking for bool(entryPoint)
 from OpenGL.raw.GL.VERSION.GL_3_0_DEPRECATED import *

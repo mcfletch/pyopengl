@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_multitexture'
+_DEPRECATED = False
 GL_TEXTURE0_ARB = constant.Constant( 'GL_TEXTURE0_ARB', 0x84C0 )
 GL_TEXTURE1_ARB = constant.Constant( 'GL_TEXTURE1_ARB', 0x84C1 )
 GL_TEXTURE2_ARB = constant.Constant( 'GL_TEXTURE2_ARB', 0x84C2 )
@@ -52,6 +53,7 @@ glActiveTextureARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glActiveTextureARB( GLenum(texture) ) -> None',
 	argNames = ('texture',),
+	deprecated = _DEPRECATED,
 )
 
 glClientActiveTextureARB = platform.createExtensionFunction( 
@@ -61,6 +63,7 @@ glClientActiveTextureARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glClientActiveTextureARB( GLenum(texture) ) -> None',
 	argNames = ('texture',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord1dARB = platform.createExtensionFunction( 
@@ -70,6 +73,7 @@ glMultiTexCoord1dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLdouble,),
 	doc = 'glMultiTexCoord1dARB( GLenum(target), GLdouble(s) ) -> None',
 	argNames = ('target', 's',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord1dvARB = platform.createExtensionFunction( 
@@ -79,6 +83,7 @@ glMultiTexCoord1dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glMultiTexCoord1dvARB( GLenum(target), GLdoubleArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord1fARB = platform.createExtensionFunction( 
@@ -88,6 +93,7 @@ glMultiTexCoord1fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat,),
 	doc = 'glMultiTexCoord1fARB( GLenum(target), GLfloat(s) ) -> None',
 	argNames = ('target', 's',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord1fvARB = platform.createExtensionFunction( 
@@ -97,6 +103,7 @@ glMultiTexCoord1fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMultiTexCoord1fvARB( GLenum(target), GLfloatArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord1iARB = platform.createExtensionFunction( 
@@ -106,6 +113,7 @@ glMultiTexCoord1iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glMultiTexCoord1iARB( GLenum(target), GLint(s) ) -> None',
 	argNames = ('target', 's',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord1ivARB = platform.createExtensionFunction( 
@@ -115,6 +123,7 @@ glMultiTexCoord1ivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glMultiTexCoord1ivARB( GLenum(target), GLintArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord1sARB = platform.createExtensionFunction( 
@@ -124,6 +133,7 @@ glMultiTexCoord1sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLshort,),
 	doc = 'glMultiTexCoord1sARB( GLenum(target), GLshort(s) ) -> None',
 	argNames = ('target', 's',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord1svARB = platform.createExtensionFunction( 
@@ -133,6 +143,7 @@ glMultiTexCoord1svARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLshortArray,),
 	doc = 'glMultiTexCoord1svARB( GLenum(target), GLshortArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord2dARB = platform.createExtensionFunction( 
@@ -142,6 +153,7 @@ glMultiTexCoord2dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLdouble, constants.GLdouble,),
 	doc = 'glMultiTexCoord2dARB( GLenum(target), GLdouble(s), GLdouble(t) ) -> None',
 	argNames = ('target', 's', 't',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord2dvARB = platform.createExtensionFunction( 
@@ -151,6 +163,7 @@ glMultiTexCoord2dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glMultiTexCoord2dvARB( GLenum(target), GLdoubleArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord2fARB = platform.createExtensionFunction( 
@@ -160,6 +173,7 @@ glMultiTexCoord2fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat, constants.GLfloat,),
 	doc = 'glMultiTexCoord2fARB( GLenum(target), GLfloat(s), GLfloat(t) ) -> None',
 	argNames = ('target', 's', 't',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord2fvARB = platform.createExtensionFunction( 
@@ -169,6 +183,7 @@ glMultiTexCoord2fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMultiTexCoord2fvARB( GLenum(target), GLfloatArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord2iARB = platform.createExtensionFunction( 
@@ -178,6 +193,7 @@ glMultiTexCoord2iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint,),
 	doc = 'glMultiTexCoord2iARB( GLenum(target), GLint(s), GLint(t) ) -> None',
 	argNames = ('target', 's', 't',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord2ivARB = platform.createExtensionFunction( 
@@ -187,6 +203,7 @@ glMultiTexCoord2ivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glMultiTexCoord2ivARB( GLenum(target), GLintArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord2sARB = platform.createExtensionFunction( 
@@ -196,6 +213,7 @@ glMultiTexCoord2sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLshort, constants.GLshort,),
 	doc = 'glMultiTexCoord2sARB( GLenum(target), GLshort(s), GLshort(t) ) -> None',
 	argNames = ('target', 's', 't',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord2svARB = platform.createExtensionFunction( 
@@ -205,6 +223,7 @@ glMultiTexCoord2svARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLshortArray,),
 	doc = 'glMultiTexCoord2svARB( GLenum(target), GLshortArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord3dARB = platform.createExtensionFunction( 
@@ -214,6 +233,7 @@ glMultiTexCoord3dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glMultiTexCoord3dARB( GLenum(target), GLdouble(s), GLdouble(t), GLdouble(r) ) -> None',
 	argNames = ('target', 's', 't', 'r',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord3dvARB = platform.createExtensionFunction( 
@@ -223,6 +243,7 @@ glMultiTexCoord3dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glMultiTexCoord3dvARB( GLenum(target), GLdoubleArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord3fARB = platform.createExtensionFunction( 
@@ -232,6 +253,7 @@ glMultiTexCoord3fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glMultiTexCoord3fARB( GLenum(target), GLfloat(s), GLfloat(t), GLfloat(r) ) -> None',
 	argNames = ('target', 's', 't', 'r',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord3fvARB = platform.createExtensionFunction( 
@@ -241,6 +263,7 @@ glMultiTexCoord3fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMultiTexCoord3fvARB( GLenum(target), GLfloatArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord3iARB = platform.createExtensionFunction( 
@@ -250,6 +273,7 @@ glMultiTexCoord3iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glMultiTexCoord3iARB( GLenum(target), GLint(s), GLint(t), GLint(r) ) -> None',
 	argNames = ('target', 's', 't', 'r',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord3ivARB = platform.createExtensionFunction( 
@@ -259,6 +283,7 @@ glMultiTexCoord3ivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glMultiTexCoord3ivARB( GLenum(target), GLintArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord3sARB = platform.createExtensionFunction( 
@@ -268,6 +293,7 @@ glMultiTexCoord3sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glMultiTexCoord3sARB( GLenum(target), GLshort(s), GLshort(t), GLshort(r) ) -> None',
 	argNames = ('target', 's', 't', 'r',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord3svARB = platform.createExtensionFunction( 
@@ -277,6 +303,7 @@ glMultiTexCoord3svARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLshortArray,),
 	doc = 'glMultiTexCoord3svARB( GLenum(target), GLshortArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord4dARB = platform.createExtensionFunction( 
@@ -286,6 +313,7 @@ glMultiTexCoord4dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glMultiTexCoord4dARB( GLenum(target), GLdouble(s), GLdouble(t), GLdouble(r), GLdouble(q) ) -> None',
 	argNames = ('target', 's', 't', 'r', 'q',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord4dvARB = platform.createExtensionFunction( 
@@ -295,6 +323,7 @@ glMultiTexCoord4dvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glMultiTexCoord4dvARB( GLenum(target), GLdoubleArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord4fARB = platform.createExtensionFunction( 
@@ -304,6 +333,7 @@ glMultiTexCoord4fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glMultiTexCoord4fARB( GLenum(target), GLfloat(s), GLfloat(t), GLfloat(r), GLfloat(q) ) -> None',
 	argNames = ('target', 's', 't', 'r', 'q',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord4fvARB = platform.createExtensionFunction( 
@@ -313,6 +343,7 @@ glMultiTexCoord4fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMultiTexCoord4fvARB( GLenum(target), GLfloatArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord4iARB = platform.createExtensionFunction( 
@@ -322,6 +353,7 @@ glMultiTexCoord4iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glMultiTexCoord4iARB( GLenum(target), GLint(s), GLint(t), GLint(r), GLint(q) ) -> None',
 	argNames = ('target', 's', 't', 'r', 'q',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord4ivARB = platform.createExtensionFunction( 
@@ -331,6 +363,7 @@ glMultiTexCoord4ivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glMultiTexCoord4ivARB( GLenum(target), GLintArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord4sARB = platform.createExtensionFunction( 
@@ -340,6 +373,7 @@ glMultiTexCoord4sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLshort, constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glMultiTexCoord4sARB( GLenum(target), GLshort(s), GLshort(t), GLshort(r), GLshort(q) ) -> None',
 	argNames = ('target', 's', 't', 'r', 'q',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiTexCoord4svARB = platform.createExtensionFunction( 
@@ -349,6 +383,7 @@ glMultiTexCoord4svARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLshortArray,),
 	doc = 'glMultiTexCoord4svARB( GLenum(target), GLshortArray(v) ) -> None',
 	argNames = ('target', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 

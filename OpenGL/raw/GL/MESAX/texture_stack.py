@@ -53,6 +53,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_MESAX_texture_stack'
+_DEPRECATED = False
 GL_TEXTURE_1D_STACK_MESAX = constant.Constant( 'GL_TEXTURE_1D_STACK_MESAX', 0x8759 )
 GL_TEXTURE_2D_STACK_MESAX = constant.Constant( 'GL_TEXTURE_2D_STACK_MESAX', 0x875A )
 GL_PROXY_TEXTURE_1D_STACK_MESAX = constant.Constant( 'GL_PROXY_TEXTURE_1D_STACK_MESAX', 0x875B )

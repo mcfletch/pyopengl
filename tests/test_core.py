@@ -14,6 +14,7 @@ except ImportError, err:
 pygame.display.init()
 import OpenGL 
 OpenGL.CONTEXT_CHECKING = True
+OpenGL.FORWARD_COMPATIBLE_ONLY = True
 from OpenGL.GL import *
 try:
 	glGetError()

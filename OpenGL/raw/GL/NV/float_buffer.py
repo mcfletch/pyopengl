@@ -77,6 +77,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_float_buffer'
+_DEPRECATED = False
 GL_FLOAT_R_NV = constant.Constant( 'GL_FLOAT_R_NV', 0x8880 )
 GL_FLOAT_RG_NV = constant.Constant( 'GL_FLOAT_RG_NV', 0x8881 )
 GL_FLOAT_RGB_NV = constant.Constant( 'GL_FLOAT_RGB_NV', 0x8882 )

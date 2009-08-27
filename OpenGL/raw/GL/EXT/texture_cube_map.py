@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_cube_map'
+_DEPRECATED = False
 GL_NORMAL_MAP_EXT = constant.Constant( 'GL_NORMAL_MAP_EXT', 0x8511 )
 GL_REFLECTION_MAP_EXT = constant.Constant( 'GL_REFLECTION_MAP_EXT', 0x8512 )
 GL_TEXTURE_CUBE_MAP_EXT = constant.Constant( 'GL_TEXTURE_CUBE_MAP_EXT', 0x8513 )

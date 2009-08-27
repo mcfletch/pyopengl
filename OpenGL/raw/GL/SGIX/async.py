@@ -54,6 +54,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_async'
+_DEPRECATED = False
 GL_ASYNC_MARKER_SGIX = constant.Constant( 'GL_ASYNC_MARKER_SGIX', 0x8329 )
 glget.addGLGetConstant( GL_ASYNC_MARKER_SGIX, (1,) )
 glAsyncMarkerSGIX = platform.createExtensionFunction( 
@@ -63,6 +64,7 @@ glAsyncMarkerSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glAsyncMarkerSGIX( GLuint(marker) ) -> None',
 	argNames = ('marker',),
+	deprecated = _DEPRECATED,
 )
 
 glFinishAsyncSGIX = platform.createExtensionFunction( 
@@ -72,6 +74,7 @@ glFinishAsyncSGIX = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray,),
 	doc = 'glFinishAsyncSGIX( GLuintArray(markerp) ) -> constants.GLint',
 	argNames = ('markerp',),
+	deprecated = _DEPRECATED,
 )
 
 glPollAsyncSGIX = platform.createExtensionFunction( 
@@ -81,6 +84,7 @@ glPollAsyncSGIX = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray,),
 	doc = 'glPollAsyncSGIX( GLuintArray(markerp) ) -> constants.GLint',
 	argNames = ('markerp',),
+	deprecated = _DEPRECATED,
 )
 
 glGenAsyncMarkersSGIX = platform.createExtensionFunction( 
@@ -90,6 +94,7 @@ glGenAsyncMarkersSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei,),
 	doc = 'glGenAsyncMarkersSGIX( GLsizei(range) ) -> constants.GLuint',
 	argNames = ('range',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteAsyncMarkersSGIX = platform.createExtensionFunction( 
@@ -99,6 +104,7 @@ glDeleteAsyncMarkersSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei,),
 	doc = 'glDeleteAsyncMarkersSGIX( GLuint(marker), GLsizei(range) ) -> None',
 	argNames = ('marker', 'range',),
+	deprecated = _DEPRECATED,
 )
 
 glIsAsyncMarkerSGIX = platform.createExtensionFunction( 
@@ -108,6 +114,7 @@ glIsAsyncMarkerSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsAsyncMarkerSGIX( GLuint(marker) ) -> constants.GLboolean',
 	argNames = ('marker',),
+	deprecated = _DEPRECATED,
 )
 
 

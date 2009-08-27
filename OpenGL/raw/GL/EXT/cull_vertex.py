@@ -24,6 +24,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_cull_vertex'
+_DEPRECATED = False
 GL_CULL_VERTEX_EXT = constant.Constant( 'GL_CULL_VERTEX_EXT', 0x81AA )
 GL_CULL_VERTEX_EYE_POSITION_EXT = constant.Constant( 'GL_CULL_VERTEX_EYE_POSITION_EXT', 0x81AB )
 GL_CULL_VERTEX_OBJECT_POSITION_EXT = constant.Constant( 'GL_CULL_VERTEX_OBJECT_POSITION_EXT', 0x81AC )
@@ -34,6 +35,7 @@ glCullParameterdvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLdoubleArray,),
 	doc = 'glCullParameterdvEXT( GLenum(pname), GLdoubleArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glCullParameterfvEXT = platform.createExtensionFunction( 
@@ -43,6 +45,7 @@ glCullParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glCullParameterfvEXT( GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

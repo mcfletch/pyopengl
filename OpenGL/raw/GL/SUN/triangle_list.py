@@ -50,6 +50,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SUN_triangle_list'
+_DEPRECATED = False
 GL_RESTART_SUN = constant.Constant( 'GL_RESTART_SUN', 0x1 )
 GL_REPLACE_MIDDLE_SUN = constant.Constant( 'GL_REPLACE_MIDDLE_SUN', 0x2 )
 GL_REPLACE_OLDEST_SUN = constant.Constant( 'GL_REPLACE_OLDEST_SUN', 0x3 )
@@ -77,6 +78,7 @@ glReplacementCodeuiSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glReplacementCodeuiSUN( GLuint(code) ) -> None',
 	argNames = ('code',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeusSUN = platform.createExtensionFunction( 
@@ -86,6 +88,7 @@ glReplacementCodeusSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLushort,),
 	doc = 'glReplacementCodeusSUN( GLushort(code) ) -> None',
 	argNames = ('code',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeubSUN = platform.createExtensionFunction( 
@@ -95,6 +98,7 @@ glReplacementCodeubSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLubyte,),
 	doc = 'glReplacementCodeubSUN( GLubyte(code) ) -> None',
 	argNames = ('code',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuivSUN = platform.createExtensionFunction( 
@@ -104,6 +108,7 @@ glReplacementCodeuivSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray,),
 	doc = 'glReplacementCodeuivSUN( GLuintArray(code) ) -> None',
 	argNames = ('code',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeusvSUN = platform.createExtensionFunction( 
@@ -113,6 +118,7 @@ glReplacementCodeusvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLushortArray,),
 	doc = 'glReplacementCodeusvSUN( GLushortArray(code) ) -> None',
 	argNames = ('code',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeubvSUN = platform.createExtensionFunction( 
@@ -122,6 +128,7 @@ glReplacementCodeubvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLubyteArray,),
 	doc = 'glReplacementCodeubvSUN( GLubyteArray(code) ) -> None',
 	argNames = ('code',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodePointerSUN = platform.createExtensionFunction( 
@@ -131,6 +138,7 @@ glReplacementCodePointerSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glReplacementCodePointerSUN( GLenum(type), GLsizei(stride), POINTER(ctypes.c_void_p)(pointer) ) -> None',
 	argNames = ('type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 

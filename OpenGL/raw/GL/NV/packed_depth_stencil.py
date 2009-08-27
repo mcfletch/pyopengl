@@ -75,6 +75,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_packed_depth_stencil'
+_DEPRECATED = False
 GL_DEPTH_STENCIL_NV = constant.Constant( 'GL_DEPTH_STENCIL_NV', 0x84F9 )
 GL_UNSIGNED_INT_24_8_NV = constant.Constant( 'GL_UNSIGNED_INT_24_8_NV', 0x84FA )
 

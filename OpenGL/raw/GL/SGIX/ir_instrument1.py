@@ -13,6 +13,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_ir_instrument1'
+_DEPRECATED = False
 GL_IR_INSTRUMENT1_SGIX = constant.Constant( 'GL_IR_INSTRUMENT1_SGIX', 0x817F )
 
 

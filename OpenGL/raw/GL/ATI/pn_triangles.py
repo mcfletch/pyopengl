@@ -25,6 +25,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_pn_triangles'
+_DEPRECATED = False
 GL_PN_TRIANGLES_ATI = constant.Constant( 'GL_PN_TRIANGLES_ATI', 0x87F0 )
 GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATI = constant.Constant( 'GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATI', 0x87F1 )
 glget.addGLGetConstant( GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATI, (1,) )
@@ -45,6 +46,7 @@ glPNTrianglesiATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glPNTrianglesiATI( GLenum(pname), GLint(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPNTrianglesfATI = platform.createExtensionFunction( 
@@ -54,6 +56,7 @@ glPNTrianglesfATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat,),
 	doc = 'glPNTrianglesfATI( GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 

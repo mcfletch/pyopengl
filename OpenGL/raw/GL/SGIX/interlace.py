@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_interlace'
+_DEPRECATED = False
 GL_INTERLACE_SGIX = constant.Constant( 'GL_INTERLACE_SGIX', 0x8094 )
 glget.addGLGetConstant( GL_INTERLACE_SGIX, (1,) )
 

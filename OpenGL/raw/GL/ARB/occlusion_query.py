@@ -71,6 +71,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_occlusion_query'
+_DEPRECATED = False
 GL_QUERY_COUNTER_BITS_ARB = constant.Constant( 'GL_QUERY_COUNTER_BITS_ARB', 0x8864 )
 GL_CURRENT_QUERY_ARB = constant.Constant( 'GL_CURRENT_QUERY_ARB', 0x8865 )
 GL_QUERY_RESULT_ARB = constant.Constant( 'GL_QUERY_RESULT_ARB', 0x8866 )
@@ -83,6 +84,7 @@ glGenQueriesARB = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenQueriesARB( GLsizei(n), GLuintArray(ids) ) -> None',
 	argNames = ('n', 'ids',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteQueriesARB = platform.createExtensionFunction( 
@@ -92,6 +94,7 @@ glDeleteQueriesARB = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteQueriesARB( GLsizei(n), GLuintArray(ids) ) -> None',
 	argNames = ('n', 'ids',),
+	deprecated = _DEPRECATED,
 )
 
 glIsQueryARB = platform.createExtensionFunction( 
@@ -101,6 +104,7 @@ glIsQueryARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsQueryARB( GLuint(id) ) -> constants.GLboolean',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glBeginQueryARB = platform.createExtensionFunction( 
@@ -110,6 +114,7 @@ glBeginQueryARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glBeginQueryARB( GLenum(target), GLuint(id) ) -> None',
 	argNames = ('target', 'id',),
+	deprecated = _DEPRECATED,
 )
 
 glEndQueryARB = platform.createExtensionFunction( 
@@ -119,6 +124,7 @@ glEndQueryARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glEndQueryARB( GLenum(target) ) -> None',
 	argNames = ('target',),
+	deprecated = _DEPRECATED,
 )
 
 glGetQueryivARB = platform.createExtensionFunction( 
@@ -128,6 +134,7 @@ glGetQueryivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetQueryivARB( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetQueryObjectivARB = platform.createExtensionFunction( 
@@ -137,6 +144,7 @@ glGetQueryObjectivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetQueryObjectivARB( GLuint(id), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('id', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetQueryObjectuivARB = platform.createExtensionFunction( 
@@ -146,6 +154,7 @@ glGetQueryObjectuivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetQueryObjectuivARB( GLuint(id), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('id', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -68,6 +68,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_evaluators'
+_DEPRECATED = False
 GL_EVAL_2D_NV = constant.Constant( 'GL_EVAL_2D_NV', 0x86C0 )
 GL_EVAL_TRIANGULAR_2D_NV = constant.Constant( 'GL_EVAL_TRIANGULAR_2D_NV', 0x86C1 )
 GL_MAP_TESSELLATION_NV = constant.Constant( 'GL_MAP_TESSELLATION_NV', 0x86C2 )
@@ -118,6 +119,7 @@ glMapControlPointsNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLint, constants.GLboolean, ctypes.c_void_p,),
 	doc = 'glMapControlPointsNV( GLenum(target), GLuint(index), GLenum(type), GLsizei(ustride), GLsizei(vstride), GLint(uorder), GLint(vorder), GLboolean(packed), c_void_p(points) ) -> None',
 	argNames = ('target', 'index', 'type', 'ustride', 'vstride', 'uorder', 'vorder', 'packed', 'points',),
+	deprecated = _DEPRECATED,
 )
 
 glMapParameterivNV = platform.createExtensionFunction( 
@@ -127,6 +129,7 @@ glMapParameterivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glMapParameterivNV( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glMapParameterfvNV = platform.createExtensionFunction( 
@@ -136,6 +139,7 @@ glMapParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glMapParameterfvNV( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMapControlPointsNV = platform.createExtensionFunction( 
@@ -145,6 +149,7 @@ glGetMapControlPointsNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLboolean, ctypes.c_void_p,),
 	doc = 'glGetMapControlPointsNV( GLenum(target), GLuint(index), GLenum(type), GLsizei(ustride), GLsizei(vstride), GLboolean(packed), c_void_p(points) ) -> None',
 	argNames = ('target', 'index', 'type', 'ustride', 'vstride', 'packed', 'points',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMapParameterivNV = platform.createExtensionFunction( 
@@ -154,6 +159,7 @@ glGetMapParameterivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetMapParameterivNV( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMapParameterfvNV = platform.createExtensionFunction( 
@@ -163,6 +169,7 @@ glGetMapParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetMapParameterfvNV( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMapAttribParameterivNV = platform.createExtensionFunction( 
@@ -172,6 +179,7 @@ glGetMapAttribParameterivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetMapAttribParameterivNV( GLenum(target), GLuint(index), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'index', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMapAttribParameterfvNV = platform.createExtensionFunction( 
@@ -181,6 +189,7 @@ glGetMapAttribParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetMapAttribParameterfvNV( GLenum(target), GLuint(index), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'index', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glEvalMapsNV = platform.createExtensionFunction( 
@@ -190,6 +199,7 @@ glEvalMapsNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glEvalMapsNV( GLenum(target), GLenum(mode) ) -> None',
 	argNames = ('target', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 

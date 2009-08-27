@@ -46,6 +46,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_instruments'
+_DEPRECATED = False
 GL_INSTRUMENT_BUFFER_POINTER_SGIX = constant.Constant( 'GL_INSTRUMENT_BUFFER_POINTER_SGIX', 0x8180 )
 GL_INSTRUMENT_MEASUREMENTS_SGIX = constant.Constant( 'GL_INSTRUMENT_MEASUREMENTS_SGIX', 0x8181 )
 glGetInstrumentsSGIX = platform.createExtensionFunction( 
@@ -55,6 +56,7 @@ glGetInstrumentsSGIX = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glGetInstrumentsSGIX(  ) -> constants.GLint',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glInstrumentsBufferSGIX = platform.createExtensionFunction( 
@@ -64,6 +66,7 @@ glInstrumentsBufferSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLintArray,),
 	doc = 'glInstrumentsBufferSGIX( GLsizei(size), GLintArray(buffer) ) -> None',
 	argNames = ('size', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glPollInstrumentsSGIX = platform.createExtensionFunction( 
@@ -73,6 +76,7 @@ glPollInstrumentsSGIX = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glPollInstrumentsSGIX( GLintArray(marker_p) ) -> constants.GLint',
 	argNames = ('marker_p',),
+	deprecated = _DEPRECATED,
 )
 
 glReadInstrumentsSGIX = platform.createExtensionFunction( 
@@ -82,6 +86,7 @@ glReadInstrumentsSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLint,),
 	doc = 'glReadInstrumentsSGIX( GLint(marker) ) -> None',
 	argNames = ('marker',),
+	deprecated = _DEPRECATED,
 )
 
 glStartInstrumentsSGIX = platform.createExtensionFunction( 
@@ -91,6 +96,7 @@ glStartInstrumentsSGIX = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glStartInstrumentsSGIX(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glStopInstrumentsSGIX = platform.createExtensionFunction( 
@@ -100,6 +106,7 @@ glStopInstrumentsSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLint,),
 	doc = 'glStopInstrumentsSGIX( GLint(marker) ) -> None',
 	argNames = ('marker',),
+	deprecated = _DEPRECATED,
 )
 
 

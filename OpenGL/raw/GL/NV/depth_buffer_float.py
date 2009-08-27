@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_depth_buffer_float'
+_DEPRECATED = False
 GL_DEPTH_COMPONENT32F_NV = constant.Constant( 'GL_DEPTH_COMPONENT32F_NV', 0x8DAB )
 GL_DEPTH32F_STENCIL8_NV = constant.Constant( 'GL_DEPTH32F_STENCIL8_NV', 0x8DAC )
 GL_FLOAT_32_UNSIGNED_INT_24_8_REV_NV = constant.Constant( 'GL_FLOAT_32_UNSIGNED_INT_24_8_REV_NV', 0x8DAD )
@@ -21,6 +22,7 @@ glDepthRangedNV = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble,),
 	doc = 'glDepthRangedNV( GLdouble(zNear), GLdouble(zFar) ) -> None',
 	argNames = ('zNear', 'zFar',),
+	deprecated = _DEPRECATED,
 )
 
 glClearDepthdNV = platform.createExtensionFunction( 
@@ -30,6 +32,7 @@ glClearDepthdNV = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble,),
 	doc = 'glClearDepthdNV( GLdouble(depth) ) -> None',
 	argNames = ('depth',),
+	deprecated = _DEPRECATED,
 )
 
 glDepthBoundsdNV = platform.createExtensionFunction( 
@@ -39,6 +42,7 @@ glDepthBoundsdNV = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble,),
 	doc = 'glDepthBoundsdNV( GLdouble(zmin), GLdouble(zmax) ) -> None',
 	argNames = ('zmin', 'zmax',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -24,6 +24,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_blend_square'
+_DEPRECATED = False
 
 
 

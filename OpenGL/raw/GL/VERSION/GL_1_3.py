@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_1_3'
+_DEPRECATED = False
 GL_TEXTURE0 = constant.Constant( 'GL_TEXTURE0', 0x84C0 )
 GL_TEXTURE1 = constant.Constant( 'GL_TEXTURE1', 0x84C1 )
 GL_TEXTURE2 = constant.Constant( 'GL_TEXTURE2', 0x84C2 )
@@ -76,6 +77,7 @@ glActiveTexture = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glActiveTexture( GLenum(texture) ) -> None',
 	argNames = ('texture',),
+	deprecated = _DEPRECATED,
 )
 
 glSampleCoverage = platform.createExtensionFunction( 
@@ -85,6 +87,7 @@ glSampleCoverage = platform.createExtensionFunction(
 	argTypes=(constants.GLclampf, constants.GLboolean,),
 	doc = 'glSampleCoverage( GLclampf(value), GLboolean(invert) ) -> None',
 	argNames = ('value', 'invert',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexImage3D = platform.createExtensionFunction( 
@@ -94,6 +97,7 @@ glCompressedTexImage3D = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexImage3D( GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLsizei(depth), GLint(border), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'internalformat', 'width', 'height', 'depth', 'border', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexImage2D = platform.createExtensionFunction( 
@@ -103,6 +107,7 @@ glCompressedTexImage2D = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexImage2D( GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLint(border), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'internalformat', 'width', 'height', 'border', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexImage1D = platform.createExtensionFunction( 
@@ -112,6 +117,7 @@ glCompressedTexImage1D = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLint, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexImage1D( GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLint(border), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'internalformat', 'width', 'border', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexSubImage3D = platform.createExtensionFunction( 
@@ -121,6 +127,7 @@ glCompressedTexSubImage3D = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexSubImage3D( GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'yoffset', 'zoffset', 'width', 'height', 'depth', 'format', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexSubImage2D = platform.createExtensionFunction( 
@@ -130,6 +137,7 @@ glCompressedTexSubImage2D = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexSubImage2D( GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLsizei(width), GLsizei(height), GLenum(format), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'yoffset', 'width', 'height', 'format', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glCompressedTexSubImage1D = platform.createExtensionFunction( 
@@ -139,6 +147,7 @@ glCompressedTexSubImage1D = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glCompressedTexSubImage1D( GLenum(target), GLint(level), GLint(xoffset), GLsizei(width), GLenum(format), GLsizei(imageSize), c_void_p(data) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'width', 'format', 'imageSize', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetCompressedTexImage = platform.createExtensionFunction( 
@@ -148,6 +157,7 @@ glGetCompressedTexImage = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, ctypes.c_void_p,),
 	doc = 'glGetCompressedTexImage( GLenum(target), GLint(level), c_void_p(img) ) -> None',
 	argNames = ('target', 'level', 'img',),
+	deprecated = _DEPRECATED,
 )
 # import legacy entry points to allow checking for bool(entryPoint)
 from OpenGL.raw.GL.VERSION.GL_1_3_DEPRECATED import *

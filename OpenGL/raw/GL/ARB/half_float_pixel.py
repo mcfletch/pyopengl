@@ -27,6 +27,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_half_float_pixel'
+_DEPRECATED = False
 GL_HALF_FLOAT_ARB = constant.Constant( 'GL_HALF_FLOAT_ARB', 0x140B )
 
 

@@ -26,6 +26,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_WIN_phong_shading'
+_DEPRECATED = False
 GL_PHONG_WIN = constant.Constant( 'GL_PHONG_WIN', 0x80EA )
 GL_PHONG_HINT_WIN = constant.Constant( 'GL_PHONG_HINT_WIN', 0x80EB )
 

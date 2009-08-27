@@ -33,6 +33,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_env_combine'
+_DEPRECATED = False
 GL_COMBINE_EXT = constant.Constant( 'GL_COMBINE_EXT', 0x8570 )
 GL_COMBINE_RGB_EXT = constant.Constant( 'GL_COMBINE_RGB_EXT', 0x8571 )
 GL_COMBINE_ALPHA_EXT = constant.Constant( 'GL_COMBINE_ALPHA_EXT', 0x8572 )

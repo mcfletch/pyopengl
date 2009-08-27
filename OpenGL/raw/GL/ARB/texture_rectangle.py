@@ -42,6 +42,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_rectangle'
+_DEPRECATED = False
 GL_TEXTURE_RECTANGLE_ARB = constant.Constant( 'GL_TEXTURE_RECTANGLE_ARB', 0x84F5 )
 GL_TEXTURE_BINDING_RECTANGLE_ARB = constant.Constant( 'GL_TEXTURE_BINDING_RECTANGLE_ARB', 0x84F6 )
 GL_PROXY_TEXTURE_RECTANGLE_ARB = constant.Constant( 'GL_PROXY_TEXTURE_RECTANGLE_ARB', 0x84F7 )

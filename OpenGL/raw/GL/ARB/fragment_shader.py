@@ -24,6 +24,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_fragment_shader'
+_DEPRECATED = False
 GL_FRAGMENT_SHADER_ARB = constant.Constant( 'GL_FRAGMENT_SHADER_ARB', 0x8B30 )
 GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB = constant.Constant( 'GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB', 0x8B49 )
 glget.addGLGetConstant( GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB, (1,) )

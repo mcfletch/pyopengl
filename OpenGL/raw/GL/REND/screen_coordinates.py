@@ -57,6 +57,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_REND_screen_coordinates'
+_DEPRECATED = False
 GL_SCREEN_COORDINATES_REND = constant.Constant( 'GL_SCREEN_COORDINATES_REND', 0x8490 )
 GL_INVERTED_SCREEN_W_REND = constant.Constant( 'GL_INVERTED_SCREEN_W_REND', 0x8491 )
 

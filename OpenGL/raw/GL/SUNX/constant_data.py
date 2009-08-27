@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SUNX_constant_data'
+_DEPRECATED = False
 GL_UNPACK_CONSTANT_DATA_SUNX = constant.Constant( 'GL_UNPACK_CONSTANT_DATA_SUNX', 0x81D5 )
 GL_TEXTURE_CONSTANT_DATA_SUNX = constant.Constant( 'GL_TEXTURE_CONSTANT_DATA_SUNX', 0x81D6 )
 glFinishTextureSUNX = platform.createExtensionFunction( 
@@ -28,6 +29,7 @@ glFinishTextureSUNX = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glFinishTextureSUNX(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 

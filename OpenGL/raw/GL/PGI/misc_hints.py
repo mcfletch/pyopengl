@@ -15,6 +15,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_PGI_misc_hints'
+_DEPRECATED = False
 GL_PREFER_DOUBLEBUFFER_HINT_PGI = constant.Constant( 'GL_PREFER_DOUBLEBUFFER_HINT_PGI', 0x1A1F8 )
 GL_CONSERVE_MEMORY_HINT_PGI = constant.Constant( 'GL_CONSERVE_MEMORY_HINT_PGI', 0x1A1FD )
 GL_RECLAIM_MEMORY_HINT_PGI = constant.Constant( 'GL_RECLAIM_MEMORY_HINT_PGI', 0x1A1FE )
@@ -42,6 +43,7 @@ glHintPGI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glHintPGI( GLenum(target), GLint(mode) ) -> None',
 	argNames = ('target', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 

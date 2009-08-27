@@ -26,6 +26,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_sRGB'
+_DEPRECATED = False
 GL_SRGB_EXT = constant.Constant( 'GL_SRGB_EXT', 0x8C40 )
 GL_SRGB8_EXT = constant.Constant( 'GL_SRGB8_EXT', 0x8C41 )
 GL_SRGB_ALPHA_EXT = constant.Constant( 'GL_SRGB_ALPHA_EXT', 0x8C42 )

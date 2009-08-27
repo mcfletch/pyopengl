@@ -18,6 +18,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_shadow'
+_DEPRECATED = False
 GL_TEXTURE_COMPARE_SGIX = constant.Constant( 'GL_TEXTURE_COMPARE_SGIX', 0x819A )
 GL_TEXTURE_COMPARE_OPERATOR_SGIX = constant.Constant( 'GL_TEXTURE_COMPARE_OPERATOR_SGIX', 0x819B )
 GL_TEXTURE_LEQUAL_R_SGIX = constant.Constant( 'GL_TEXTURE_LEQUAL_R_SGIX', 0x819C )

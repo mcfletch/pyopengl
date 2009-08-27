@@ -27,6 +27,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_fog_offset'
+_DEPRECATED = False
 GL_FOG_OFFSET_SGIX = constant.Constant( 'GL_FOG_OFFSET_SGIX', 0x8198 )
 GL_FOG_OFFSET_VALUE_SGIX = constant.Constant( 'GL_FOG_OFFSET_VALUE_SGIX', 0x8199 )
 

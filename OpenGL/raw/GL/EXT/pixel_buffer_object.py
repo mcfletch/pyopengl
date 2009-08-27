@@ -61,6 +61,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_pixel_buffer_object'
+_DEPRECATED = False
 GL_PIXEL_PACK_BUFFER_EXT = constant.Constant( 'GL_PIXEL_PACK_BUFFER_EXT', 0x88EB )
 GL_PIXEL_UNPACK_BUFFER_EXT = constant.Constant( 'GL_PIXEL_UNPACK_BUFFER_EXT', 0x88EC )
 GL_PIXEL_PACK_BUFFER_BINDING_EXT = constant.Constant( 'GL_PIXEL_PACK_BUFFER_BINDING_EXT', 0x88ED )

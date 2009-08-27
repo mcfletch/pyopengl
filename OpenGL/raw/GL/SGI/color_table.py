@@ -26,6 +26,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGI_color_table'
+_DEPRECATED = False
 GL_COLOR_TABLE_SGI = constant.Constant( 'GL_COLOR_TABLE_SGI', 0x80D0 )
 glget.addGLGetConstant( GL_COLOR_TABLE_SGI, (1,) )
 GL_POST_CONVOLUTION_COLOR_TABLE_SGI = constant.Constant( 'GL_POST_CONVOLUTION_COLOR_TABLE_SGI', 0x80D1 )
@@ -52,6 +53,7 @@ glColorTableSGI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glColorTableSGI( GLenum(target), GLenum(internalformat), GLsizei(width), GLenum(format), GLenum(type), c_void_p(table) ) -> None',
 	argNames = ('target', 'internalformat', 'width', 'format', 'type', 'table',),
+	deprecated = _DEPRECATED,
 )
 
 glColorTableParameterfvSGI = platform.createExtensionFunction( 
@@ -61,6 +63,7 @@ glColorTableParameterfvSGI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glColorTableParameterfvSGI( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glColorTableParameterivSGI = platform.createExtensionFunction( 
@@ -70,6 +73,7 @@ glColorTableParameterivSGI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glColorTableParameterivSGI( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyColorTableSGI = platform.createExtensionFunction( 
@@ -79,6 +83,7 @@ glCopyColorTableSGI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei,),
 	doc = 'glCopyColorTableSGI( GLenum(target), GLenum(internalformat), GLint(x), GLint(y), GLsizei(width) ) -> None',
 	argNames = ('target', 'internalformat', 'x', 'y', 'width',),
+	deprecated = _DEPRECATED,
 )
 
 glGetColorTableSGI = platform.createExtensionFunction( 
@@ -88,6 +93,7 @@ glGetColorTableSGI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glGetColorTableSGI( GLenum(target), GLenum(format), GLenum(type), c_void_p(table) ) -> None',
 	argNames = ('target', 'format', 'type', 'table',),
+	deprecated = _DEPRECATED,
 )
 
 glGetColorTableParameterfvSGI = platform.createExtensionFunction( 
@@ -97,6 +103,7 @@ glGetColorTableParameterfvSGI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetColorTableParameterfvSGI( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetColorTableParameterivSGI = platform.createExtensionFunction( 
@@ -106,6 +113,7 @@ glGetColorTableParameterivSGI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetColorTableParameterivSGI( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

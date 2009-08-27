@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_impact_pixel_texture'
+_DEPRECATED = False
 GL_PIXEL_TEX_GEN_Q_CEILING_SGIX = constant.Constant( 'GL_PIXEL_TEX_GEN_Q_CEILING_SGIX', 0x8184 )
 GL_PIXEL_TEX_GEN_Q_ROUND_SGIX = constant.Constant( 'GL_PIXEL_TEX_GEN_Q_ROUND_SGIX', 0x8185 )
 GL_PIXEL_TEX_GEN_Q_FLOOR_SGIX = constant.Constant( 'GL_PIXEL_TEX_GEN_Q_FLOOR_SGIX', 0x8186 )

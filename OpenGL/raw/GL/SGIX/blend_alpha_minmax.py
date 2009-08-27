@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_blend_alpha_minmax'
+_DEPRECATED = False
 GL_ALPHA_MIN_SGIX = constant.Constant( 'GL_ALPHA_MIN_SGIX', 0x8320 )
 GL_ALPHA_MAX_SGIX = constant.Constant( 'GL_ALPHA_MAX_SGIX', 0x8321 )
 

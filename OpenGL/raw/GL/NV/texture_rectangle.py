@@ -40,6 +40,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_texture_rectangle'
+_DEPRECATED = False
 GL_TEXTURE_RECTANGLE_NV = constant.Constant( 'GL_TEXTURE_RECTANGLE_NV', 0x84F5 )
 glget.addGLGetConstant( GL_TEXTURE_RECTANGLE_NV, (1,) )
 GL_TEXTURE_BINDING_RECTANGLE_NV = constant.Constant( 'GL_TEXTURE_BINDING_RECTANGLE_NV', 0x84F6 )

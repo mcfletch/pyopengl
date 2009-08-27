@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_aux_depth_stencil'
+_DEPRECATED = False
 GL_AUX_DEPTH_STENCIL_APPLE = constant.Constant( 'GL_AUX_DEPTH_STENCIL_APPLE', 0x8A14 )
 
 

@@ -30,6 +30,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_transform_hint'
+_DEPRECATED = False
 GL_TRANSFORM_HINT_APPLE = constant.Constant( 'GL_TRANSFORM_HINT_APPLE', 0x85B1 )
 
 

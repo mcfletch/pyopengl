@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_texture_range'
+_DEPRECATED = False
 GL_TEXTURE_RANGE_LENGTH_APPLE = constant.Constant( 'GL_TEXTURE_RANGE_LENGTH_APPLE', 0x85B7 )
 GL_TEXTURE_RANGE_POINTER_APPLE = constant.Constant( 'GL_TEXTURE_RANGE_POINTER_APPLE', 0x85B8 )
 GL_TEXTURE_STORAGE_HINT_APPLE = constant.Constant( 'GL_TEXTURE_STORAGE_HINT_APPLE', 0x85BC )
@@ -21,6 +22,7 @@ glTextureRangeAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glTextureRangeAPPLE( GLenum(target), GLsizei(length), c_void_p(pointer) ) -> None',
 	argNames = ('target', 'length', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTexParameterPointervAPPLE = platform.createExtensionFunction( 
@@ -30,6 +32,7 @@ glGetTexParameterPointervAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glGetTexParameterPointervAPPLE( GLenum(target), GLenum(pname), POINTER(ctypes.c_void_p)(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

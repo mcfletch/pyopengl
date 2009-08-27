@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_sync'
+_DEPRECATED = False
 GL_MAX_SERVER_WAIT_TIMEOUT = constant.Constant( 'GL_MAX_SERVER_WAIT_TIMEOUT', 0x9111 )
 GL_OBJECT_TYPE = constant.Constant( 'GL_OBJECT_TYPE', 0x9112 )
 GL_SYNC_CONDITION = constant.Constant( 'GL_SYNC_CONDITION', 0x9113 )
@@ -32,6 +33,7 @@ glFenceSync = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLbitfield,),
 	doc = 'glFenceSync( GLenum(condition), GLbitfield(flags) ) -> constants.GLsync',
 	argNames = ('condition', 'flags',),
+	deprecated = _DEPRECATED,
 )
 
 glIsSync = platform.createExtensionFunction( 
@@ -41,6 +43,7 @@ glIsSync = platform.createExtensionFunction(
 	argTypes=(constants.GLsync,),
 	doc = 'glIsSync( GLsync(sync) ) -> constants.GLboolean',
 	argNames = ('sync',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteSync = platform.createExtensionFunction( 
@@ -50,6 +53,7 @@ glDeleteSync = platform.createExtensionFunction(
 	argTypes=(constants.GLsync,),
 	doc = 'glDeleteSync( GLsync(sync) ) -> None',
 	argNames = ('sync',),
+	deprecated = _DEPRECATED,
 )
 
 glClientWaitSync = platform.createExtensionFunction( 
@@ -59,6 +63,7 @@ glClientWaitSync = platform.createExtensionFunction(
 	argTypes=(constants.GLsync, constants.GLbitfield, constants.GLuint64,),
 	doc = 'glClientWaitSync( GLsync(sync), GLbitfield(flags), GLuint64(timeout) ) -> constants.GLenum',
 	argNames = ('sync', 'flags', 'timeout',),
+	deprecated = _DEPRECATED,
 )
 
 glWaitSync = platform.createExtensionFunction( 
@@ -68,6 +73,7 @@ glWaitSync = platform.createExtensionFunction(
 	argTypes=(constants.GLsync, constants.GLbitfield, constants.GLuint64,),
 	doc = 'glWaitSync( GLsync(sync), GLbitfield(flags), GLuint64(timeout) ) -> None',
 	argNames = ('sync', 'flags', 'timeout',),
+	deprecated = _DEPRECATED,
 )
 
 glGetInteger64v = platform.createExtensionFunction( 
@@ -77,6 +83,7 @@ glGetInteger64v = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, ctypes.POINTER(constants.GLint64),),
 	doc = 'glGetInteger64v( GLenum(pname), POINTER(constants.GLint64)(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetSynciv = platform.createExtensionFunction( 
@@ -86,6 +93,7 @@ glGetSynciv = platform.createExtensionFunction(
 	argTypes=(constants.GLsync, constants.GLenum, constants.GLsizei, arrays.GLsizeiArray, arrays.GLintArray,),
 	doc = 'glGetSynciv( GLsync(sync), GLenum(pname), GLsizei(bufSize), GLsizeiArray(length), GLintArray(values) ) -> None',
 	argNames = ('sync', 'pname', 'bufSize', 'length', 'values',),
+	deprecated = _DEPRECATED,
 )
 
 

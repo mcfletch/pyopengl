@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_3_0'
+_DEPRECATED = True
 GL_CLAMP_VERTEX_COLOR = constant.Constant( 'GL_CLAMP_VERTEX_COLOR', 0x891A )
 GL_CLAMP_FRAGMENT_COLOR = constant.Constant( 'GL_CLAMP_FRAGMENT_COLOR', 0x891B )
 GL_ALPHA_INTEGER = constant.Constant( 'GL_ALPHA_INTEGER', 0x8D97 )

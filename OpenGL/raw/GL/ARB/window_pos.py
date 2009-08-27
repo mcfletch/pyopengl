@@ -30,6 +30,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_window_pos'
+_DEPRECATED = False
 
 glWindowPos2dARB = platform.createExtensionFunction( 
 	'glWindowPos2dARB', dll=platform.GL,
@@ -38,6 +39,7 @@ glWindowPos2dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble,),
 	doc = 'glWindowPos2dARB( GLdouble(x), GLdouble(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2dvARB = platform.createExtensionFunction( 
@@ -47,6 +49,7 @@ glWindowPos2dvARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glWindowPos2dvARB( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2fARB = platform.createExtensionFunction( 
@@ -56,6 +59,7 @@ glWindowPos2fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat,),
 	doc = 'glWindowPos2fARB( GLfloat(x), GLfloat(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2fvARB = platform.createExtensionFunction( 
@@ -65,6 +69,7 @@ glWindowPos2fvARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glWindowPos2fvARB( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2iARB = platform.createExtensionFunction( 
@@ -74,6 +79,7 @@ glWindowPos2iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint,),
 	doc = 'glWindowPos2iARB( GLint(x), GLint(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2ivARB = platform.createExtensionFunction( 
@@ -83,6 +89,7 @@ glWindowPos2ivARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glWindowPos2ivARB( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2sARB = platform.createExtensionFunction( 
@@ -92,6 +99,7 @@ glWindowPos2sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort,),
 	doc = 'glWindowPos2sARB( GLshort(x), GLshort(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2svARB = platform.createExtensionFunction( 
@@ -101,6 +109,7 @@ glWindowPos2svARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glWindowPos2svARB( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3dARB = platform.createExtensionFunction( 
@@ -110,6 +119,7 @@ glWindowPos3dARB = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glWindowPos3dARB( GLdouble(x), GLdouble(y), GLdouble(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3dvARB = platform.createExtensionFunction( 
@@ -119,6 +129,7 @@ glWindowPos3dvARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glWindowPos3dvARB( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3fARB = platform.createExtensionFunction( 
@@ -128,6 +139,7 @@ glWindowPos3fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glWindowPos3fARB( GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3fvARB = platform.createExtensionFunction( 
@@ -137,6 +149,7 @@ glWindowPos3fvARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glWindowPos3fvARB( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3iARB = platform.createExtensionFunction( 
@@ -146,6 +159,7 @@ glWindowPos3iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glWindowPos3iARB( GLint(x), GLint(y), GLint(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3ivARB = platform.createExtensionFunction( 
@@ -155,6 +169,7 @@ glWindowPos3ivARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glWindowPos3ivARB( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3sARB = platform.createExtensionFunction( 
@@ -164,6 +179,7 @@ glWindowPos3sARB = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glWindowPos3sARB( GLshort(x), GLshort(y), GLshort(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3svARB = platform.createExtensionFunction( 
@@ -173,6 +189,7 @@ glWindowPos3svARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glWindowPos3svARB( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 

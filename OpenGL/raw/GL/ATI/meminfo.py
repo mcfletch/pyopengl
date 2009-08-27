@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_meminfo'
+_DEPRECATED = False
 GL_VBO_FREE_MEMORY_ATI = constant.Constant( 'GL_VBO_FREE_MEMORY_ATI', 0x87FB )
 GL_TEXTURE_FREE_MEMORY_ATI = constant.Constant( 'GL_TEXTURE_FREE_MEMORY_ATI', 0x87FC )
 GL_RENDERBUFFER_FREE_MEMORY_ATI = constant.Constant( 'GL_RENDERBUFFER_FREE_MEMORY_ATI', 0x87FD )

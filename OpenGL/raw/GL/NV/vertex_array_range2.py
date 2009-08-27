@@ -23,6 +23,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_vertex_array_range2'
+_DEPRECATED = False
 GL_VERTEX_ARRAY_RANGE_WITHOUT_FLUSH_NV = constant.Constant( 'GL_VERTEX_ARRAY_RANGE_WITHOUT_FLUSH_NV', 0x8533 )
 
 

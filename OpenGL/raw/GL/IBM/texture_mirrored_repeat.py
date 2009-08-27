@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_IBM_texture_mirrored_repeat'
+_DEPRECATED = False
 GL_MIRRORED_REPEAT_IBM = constant.Constant( 'GL_MIRRORED_REPEAT_IBM', 0x8370 )
 
 

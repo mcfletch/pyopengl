@@ -29,6 +29,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_vertex_weighting'
+_DEPRECATED = False
 GL_MODELVIEW1_STACK_DEPTH_EXT = constant.Constant( 'GL_MODELVIEW1_STACK_DEPTH_EXT', 0x8502 )
 glget.addGLGetConstant( GL_MODELVIEW1_STACK_DEPTH_EXT, (1,) )
 GL_MODELVIEW1_MATRIX_EXT = constant.Constant( 'GL_MODELVIEW1_MATRIX_EXT', 0x8506 )
@@ -52,6 +53,7 @@ glVertexWeightfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat,),
 	doc = 'glVertexWeightfEXT( GLfloat(weight) ) -> None',
 	argNames = ('weight',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexWeightfvEXT = platform.createExtensionFunction( 
@@ -61,6 +63,7 @@ glVertexWeightfvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glVertexWeightfvEXT( GLfloatArray(weight) ) -> None',
 	argNames = ('weight',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexWeightPointerEXT = platform.createExtensionFunction( 
@@ -70,6 +73,7 @@ glVertexWeightPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glVertexWeightPointerEXT( GLsizei(size), GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('size', 'type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 

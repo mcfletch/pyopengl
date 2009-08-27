@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_3_1'
+_DEPRECATED = False
 GL_SAMPLER_2D_RECT = constant.Constant( 'GL_SAMPLER_2D_RECT', 0x8B63 )
 GL_SAMPLER_2D_RECT_SHADOW = constant.Constant( 'GL_SAMPLER_2D_RECT_SHADOW', 0x8B64 )
 GL_SAMPLER_BUFFER = constant.Constant( 'GL_SAMPLER_BUFFER', 0x8DC2 )
@@ -48,6 +49,7 @@ glDrawArraysInstanced = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLsizei, constants.GLsizei,),
 	doc = 'glDrawArraysInstanced( GLenum(mode), GLint(first), GLsizei(count), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'first', 'count', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawElementsInstanced = platform.createExtensionFunction( 
@@ -57,6 +59,7 @@ glDrawElementsInstanced = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLenum, ctypes.c_void_p, constants.GLsizei,),
 	doc = 'glDrawElementsInstanced( GLenum(mode), GLsizei(count), GLenum(type), c_void_p(indices), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'count', 'type', 'indices', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 glTexBuffer = platform.createExtensionFunction( 
@@ -66,6 +69,7 @@ glTexBuffer = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glTexBuffer( GLenum(target), GLenum(internalformat), GLuint(buffer) ) -> None',
 	argNames = ('target', 'internalformat', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glPrimitiveRestartIndex = platform.createExtensionFunction( 
@@ -75,5 +79,6 @@ glPrimitiveRestartIndex = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glPrimitiveRestartIndex( GLuint(index) ) -> None',
 	argNames = ('index',),
+	deprecated = _DEPRECATED,
 )
 

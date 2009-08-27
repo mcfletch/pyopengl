@@ -59,6 +59,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_sprite'
+_DEPRECATED = False
 GL_SPRITE_SGIX = constant.Constant( 'GL_SPRITE_SGIX', 0x8148 )
 GL_SPRITE_MODE_SGIX = constant.Constant( 'GL_SPRITE_MODE_SGIX', 0x8149 )
 GL_SPRITE_AXIS_SGIX = constant.Constant( 'GL_SPRITE_AXIS_SGIX', 0x814A )
@@ -73,6 +74,7 @@ glSpriteParameterfSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat,),
 	doc = 'glSpriteParameterfSGIX( GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glSpriteParameterfvSGIX = platform.createExtensionFunction( 
@@ -82,6 +84,7 @@ glSpriteParameterfvSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glSpriteParameterfvSGIX( GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glSpriteParameteriSGIX = platform.createExtensionFunction( 
@@ -91,6 +94,7 @@ glSpriteParameteriSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glSpriteParameteriSGIX( GLenum(pname), GLint(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glSpriteParameterivSGIX = platform.createExtensionFunction( 
@@ -100,6 +104,7 @@ glSpriteParameterivSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glSpriteParameterivSGIX( GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -26,6 +26,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_element_array'
+_DEPRECATED = False
 GL_ELEMENT_ARRAY_ATI = constant.Constant( 'GL_ELEMENT_ARRAY_ATI', 0x8768 )
 GL_ELEMENT_ARRAY_TYPE_ATI = constant.Constant( 'GL_ELEMENT_ARRAY_TYPE_ATI', 0x8769 )
 glget.addGLGetConstant( GL_ELEMENT_ARRAY_TYPE_ATI, (1,) )
@@ -37,6 +38,7 @@ glElementPointerATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, ctypes.c_void_p,),
 	doc = 'glElementPointerATI( GLenum(type), c_void_p(pointer) ) -> None',
 	argNames = ('type', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawElementArrayATI = platform.createExtensionFunction( 
@@ -46,6 +48,7 @@ glDrawElementArrayATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei,),
 	doc = 'glDrawElementArrayATI( GLenum(mode), GLsizei(count) ) -> None',
 	argNames = ('mode', 'count',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawRangeElementArrayATI = platform.createExtensionFunction( 
@@ -55,6 +58,7 @@ glDrawRangeElementArrayATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLsizei,),
 	doc = 'glDrawRangeElementArrayATI( GLenum(mode), GLuint(start), GLuint(end), GLsizei(count) ) -> None',
 	argNames = ('mode', 'start', 'end', 'count',),
+	deprecated = _DEPRECATED,
 )
 
 

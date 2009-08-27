@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_provoking_vertex'
+_DEPRECATED = False
 GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION = constant.Constant( 'GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION', 0x8E4C )
 GL_FIRST_VERTEX_CONVENTION = constant.Constant( 'GL_FIRST_VERTEX_CONVENTION', 0x8E4D )
 GL_LAST_VERTEX_CONVENTION = constant.Constant( 'GL_LAST_VERTEX_CONVENTION', 0x8E4E )
@@ -21,6 +22,7 @@ glProvokingVertex = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glProvokingVertex( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 

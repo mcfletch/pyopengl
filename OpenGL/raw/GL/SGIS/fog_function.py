@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_fog_function'
+_DEPRECATED = False
 GL_FOG_FUNC_SGIS = constant.Constant( 'GL_FOG_FUNC_SGIS', 0x812A )
 GL_FOG_FUNC_POINTS_SGIS = constant.Constant( 'GL_FOG_FUNC_POINTS_SGIS', 0x812B )
 GL_MAX_FOG_FUNC_POINTS_SGIS = constant.Constant( 'GL_MAX_FOG_FUNC_POINTS_SGIS', 0x812C )
@@ -30,6 +31,7 @@ glFogFuncSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glFogFuncSGIS( GLsizei(n), GLfloatArray(points) ) -> None',
 	argNames = ('n', 'points',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFogFuncSGIS = platform.createExtensionFunction( 
@@ -39,6 +41,7 @@ glGetFogFuncSGIS = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glGetFogFuncSGIS( GLfloatArray(points) ) -> None',
 	argNames = ('points',),
+	deprecated = _DEPRECATED,
 )
 
 

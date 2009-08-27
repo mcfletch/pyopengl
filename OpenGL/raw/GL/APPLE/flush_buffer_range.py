@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_flush_buffer_range'
+_DEPRECATED = False
 GL_BUFFER_SERIALIZED_MODIFY_APPLE = constant.Constant( 'GL_BUFFER_SERIALIZED_MODIFY_APPLE', 0x8A12 )
 GL_BUFFER_FLUSHING_UNMAP_APPLE = constant.Constant( 'GL_BUFFER_FLUSHING_UNMAP_APPLE', 0x8A13 )
 glBufferParameteriAPPLE = platform.createExtensionFunction( 
@@ -19,6 +20,7 @@ glBufferParameteriAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glBufferParameteriAPPLE( GLenum(target), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glFlushMappedBufferRangeAPPLE = platform.createExtensionFunction( 
@@ -28,6 +30,7 @@ glFlushMappedBufferRangeAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLintptr, constants.GLsizeiptr,),
 	doc = 'glFlushMappedBufferRangeAPPLE( GLenum(target), GLintptr(offset), GLsizeiptr(size) ) -> None',
 	argNames = ('target', 'offset', 'size',),
+	deprecated = _DEPRECATED,
 )
 
 

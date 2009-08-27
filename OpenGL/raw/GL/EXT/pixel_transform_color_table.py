@@ -15,6 +15,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_pixel_transform_color_table'
+_DEPRECATED = False
 
 
 

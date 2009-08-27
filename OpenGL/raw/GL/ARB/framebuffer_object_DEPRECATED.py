@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_framebuffer_object'
+_DEPRECATED = True
 GL_INDEX = constant.Constant( 'GL_INDEX', 0x8222 )
 GL_TEXTURE_LUMINANCE_TYPE = constant.Constant( 'GL_TEXTURE_LUMINANCE_TYPE', 0x8C14 )
 GL_TEXTURE_INTENSITY_TYPE = constant.Constant( 'GL_TEXTURE_INTENSITY_TYPE', 0x8C15 )

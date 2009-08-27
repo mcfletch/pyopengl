@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_1_5'
+_DEPRECATED = False
 GL_BUFFER_SIZE = constant.Constant( 'GL_BUFFER_SIZE', 0x8764 )
 GL_BUFFER_USAGE = constant.Constant( 'GL_BUFFER_USAGE', 0x8765 )
 GL_QUERY_COUNTER_BITS = constant.Constant( 'GL_QUERY_COUNTER_BITS', 0x8864 )
@@ -44,6 +45,7 @@ glGenQueries = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenQueries( GLsizei(n), GLuintArray(ids) ) -> None',
 	argNames = ('n', 'ids',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteQueries = platform.createExtensionFunction( 
@@ -53,6 +55,7 @@ glDeleteQueries = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteQueries( GLsizei(n), GLuintArray(ids) ) -> None',
 	argNames = ('n', 'ids',),
+	deprecated = _DEPRECATED,
 )
 
 glIsQuery = platform.createExtensionFunction( 
@@ -62,6 +65,7 @@ glIsQuery = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsQuery( GLuint(id) ) -> constants.GLboolean',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glBeginQuery = platform.createExtensionFunction( 
@@ -71,6 +75,7 @@ glBeginQuery = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glBeginQuery( GLenum(target), GLuint(id) ) -> None',
 	argNames = ('target', 'id',),
+	deprecated = _DEPRECATED,
 )
 
 glEndQuery = platform.createExtensionFunction( 
@@ -80,6 +85,7 @@ glEndQuery = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glEndQuery( GLenum(target) ) -> None',
 	argNames = ('target',),
+	deprecated = _DEPRECATED,
 )
 
 glGetQueryiv = platform.createExtensionFunction( 
@@ -89,6 +95,7 @@ glGetQueryiv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetQueryiv( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetQueryObjectiv = platform.createExtensionFunction( 
@@ -98,6 +105,7 @@ glGetQueryObjectiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetQueryObjectiv( GLuint(id), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('id', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetQueryObjectuiv = platform.createExtensionFunction( 
@@ -107,6 +115,7 @@ glGetQueryObjectuiv = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetQueryObjectuiv( GLuint(id), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('id', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glBindBuffer = platform.createExtensionFunction( 
@@ -116,6 +125,7 @@ glBindBuffer = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glBindBuffer( GLenum(target), GLuint(buffer) ) -> None',
 	argNames = ('target', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteBuffers = platform.createExtensionFunction( 
@@ -125,6 +135,7 @@ glDeleteBuffers = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteBuffers( GLsizei(n), GLuintArray(buffers) ) -> None',
 	argNames = ('n', 'buffers',),
+	deprecated = _DEPRECATED,
 )
 
 glGenBuffers = platform.createExtensionFunction( 
@@ -134,6 +145,7 @@ glGenBuffers = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenBuffers( GLsizei(n), GLuintArray(buffers) ) -> None',
 	argNames = ('n', 'buffers',),
+	deprecated = _DEPRECATED,
 )
 
 glIsBuffer = platform.createExtensionFunction( 
@@ -143,6 +155,7 @@ glIsBuffer = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsBuffer( GLuint(buffer) ) -> constants.GLboolean',
 	argNames = ('buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glBufferData = platform.createExtensionFunction( 
@@ -152,6 +165,7 @@ glBufferData = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizeiptr, ctypes.c_void_p, constants.GLenum,),
 	doc = 'glBufferData( GLenum(target), GLsizeiptr(size), c_void_p(data), GLenum(usage) ) -> None',
 	argNames = ('target', 'size', 'data', 'usage',),
+	deprecated = _DEPRECATED,
 )
 
 glBufferSubData = platform.createExtensionFunction( 
@@ -161,6 +175,7 @@ glBufferSubData = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLintptr, constants.GLsizeiptr, ctypes.c_void_p,),
 	doc = 'glBufferSubData( GLenum(target), GLintptr(offset), GLsizeiptr(size), c_void_p(data) ) -> None',
 	argNames = ('target', 'offset', 'size', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetBufferSubData = platform.createExtensionFunction( 
@@ -170,6 +185,7 @@ glGetBufferSubData = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLintptr, constants.GLsizeiptr, ctypes.c_void_p,),
 	doc = 'glGetBufferSubData( GLenum(target), GLintptr(offset), GLsizeiptr(size), c_void_p(data) ) -> None',
 	argNames = ('target', 'offset', 'size', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glMapBuffer = platform.createExtensionFunction( 
@@ -179,6 +195,7 @@ glMapBuffer = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glMapBuffer( GLenum(target), GLenum(access) ) -> ctypes.c_void_p',
 	argNames = ('target', 'access',),
+	deprecated = _DEPRECATED,
 )
 
 glUnmapBuffer = platform.createExtensionFunction( 
@@ -188,6 +205,7 @@ glUnmapBuffer = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glUnmapBuffer( GLenum(target) ) -> constants.GLboolean',
 	argNames = ('target',),
+	deprecated = _DEPRECATED,
 )
 
 glGetBufferParameteriv = platform.createExtensionFunction( 
@@ -197,6 +215,7 @@ glGetBufferParameteriv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetBufferParameteriv( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetBufferPointerv = platform.createExtensionFunction( 
@@ -206,6 +225,7 @@ glGetBufferPointerv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glGetBufferPointerv( GLenum(target), GLenum(pname), POINTER(ctypes.c_void_p)(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 # import legacy entry points to allow checking for bool(entryPoint)
 from OpenGL.raw.GL.VERSION.GL_1_5_DEPRECATED import *

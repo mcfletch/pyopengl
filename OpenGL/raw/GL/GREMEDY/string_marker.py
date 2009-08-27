@@ -38,6 +38,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_GREMEDY_string_marker'
+_DEPRECATED = False
 
 glStringMarkerGREMEDY = platform.createExtensionFunction( 
 	'glStringMarkerGREMEDY', dll=platform.GL,
@@ -46,6 +47,7 @@ glStringMarkerGREMEDY = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glStringMarkerGREMEDY( GLsizei(len), c_void_p(string) ) -> None',
 	argNames = ('len', 'string',),
+	deprecated = _DEPRECATED,
 )
 
 

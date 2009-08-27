@@ -42,6 +42,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_color_buffer_float'
+_DEPRECATED = False
 GL_RGBA_FLOAT_MODE_ARB = constant.Constant( 'GL_RGBA_FLOAT_MODE_ARB', 0x8820 )
 glget.addGLGetConstant( GL_RGBA_FLOAT_MODE_ARB, (1,) )
 GL_CLAMP_VERTEX_COLOR_ARB = constant.Constant( 'GL_CLAMP_VERTEX_COLOR_ARB', 0x891A )
@@ -58,6 +59,7 @@ glClampColorARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glClampColorARB( GLenum(target), GLenum(clamp) ) -> None',
 	argNames = ('target', 'clamp',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_framebuffer_blit'
+_DEPRECATED = False
 GL_READ_FRAMEBUFFER_EXT = constant.Constant( 'GL_READ_FRAMEBUFFER_EXT', 0x8CA8 )
 GL_DRAW_FRAMEBUFFER_EXT = constant.Constant( 'GL_DRAW_FRAMEBUFFER_EXT', 0x8CA9 )
 GL_READ_FRAMEBUFFER_BINDING_EXT = constant.Constant( 'GL_READ_FRAMEBUFFER_BINDING_EXT', 0x8CAA )
@@ -29,6 +30,7 @@ glBlitFramebufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLbitfield, constants.GLenum,),
 	doc = 'glBlitFramebufferEXT( GLint(srcX0), GLint(srcY0), GLint(srcX1), GLint(srcY1), GLint(dstX0), GLint(dstY0), GLint(dstX1), GLint(dstY1), GLbitfield(mask), GLenum(filter) ) -> None',
 	argNames = ('srcX0', 'srcY0', 'srcX1', 'srcY1', 'dstX0', 'dstY0', 'dstX1', 'dstY1', 'mask', 'filter',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_buffer_object'
+_DEPRECATED = False
 GL_TEXTURE_BUFFER_ARB = constant.Constant( 'GL_TEXTURE_BUFFER_ARB', 0x8C2A )
 GL_MAX_TEXTURE_BUFFER_SIZE_ARB = constant.Constant( 'GL_MAX_TEXTURE_BUFFER_SIZE_ARB', 0x8C2B )
 GL_TEXTURE_BINDING_BUFFER_ARB = constant.Constant( 'GL_TEXTURE_BINDING_BUFFER_ARB', 0x8C2C )
@@ -22,6 +23,7 @@ glTexBufferARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glTexBufferARB( GLenum(target), GLenum(internalformat), GLuint(buffer) ) -> None',
 	argNames = ('target', 'internalformat', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 

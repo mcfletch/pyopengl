@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_INGR_interlace_read'
+_DEPRECATED = False
 GL_INTERLACE_READ_INGR = constant.Constant( 'GL_INTERLACE_READ_INGR', 0x8568 )
 glget.addGLGetConstant( GL_INTERLACE_READ_INGR, (1,) )
 

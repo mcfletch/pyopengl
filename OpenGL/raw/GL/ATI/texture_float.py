@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_texture_float'
+_DEPRECATED = False
 GL_RGBA_FLOAT32_ATI = constant.Constant( 'GL_RGBA_FLOAT32_ATI', 0x8814 )
 GL_RGB_FLOAT32_ATI = constant.Constant( 'GL_RGB_FLOAT32_ATI', 0x8815 )
 GL_ALPHA_FLOAT32_ATI = constant.Constant( 'GL_ALPHA_FLOAT32_ATI', 0x8816 )

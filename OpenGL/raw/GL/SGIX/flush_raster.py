@@ -25,6 +25,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_flush_raster'
+_DEPRECATED = False
 
 glFlushRasterSGIX = platform.createExtensionFunction( 
 	'glFlushRasterSGIX', dll=platform.GL,
@@ -33,6 +34,7 @@ glFlushRasterSGIX = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glFlushRasterSGIX(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 

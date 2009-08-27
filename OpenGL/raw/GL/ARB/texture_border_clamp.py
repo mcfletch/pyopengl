@@ -25,6 +25,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_border_clamp'
+_DEPRECATED = False
 GL_CLAMP_TO_BORDER_ARB = constant.Constant( 'GL_CLAMP_TO_BORDER_ARB', 0x812D )
 
 

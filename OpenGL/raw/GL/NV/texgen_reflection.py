@@ -22,6 +22,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_texgen_reflection'
+_DEPRECATED = False
 GL_NORMAL_MAP_NV = constant.Constant( 'GL_NORMAL_MAP_NV', 0x8511 )
 GL_REFLECTION_MAP_NV = constant.Constant( 'GL_REFLECTION_MAP_NV', 0x8512 )
 

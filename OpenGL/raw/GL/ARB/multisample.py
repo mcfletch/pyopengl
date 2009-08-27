@@ -38,6 +38,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_multisample'
+_DEPRECATED = False
 GL_MULTISAMPLE_ARB = constant.Constant( 'GL_MULTISAMPLE_ARB', 0x809D )
 glget.addGLGetConstant( GL_MULTISAMPLE_ARB, (1,) )
 GL_SAMPLE_ALPHA_TO_COVERAGE_ARB = constant.Constant( 'GL_SAMPLE_ALPHA_TO_COVERAGE_ARB', 0x809E )
@@ -62,6 +63,7 @@ glSampleCoverageARB = platform.createExtensionFunction(
 	argTypes=(constants.GLclampf, constants.GLboolean,),
 	doc = 'glSampleCoverageARB( GLclampf(value), GLboolean(invert) ) -> None',
 	argNames = ('value', 'invert',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -23,6 +23,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_texture_mirror_once'
+_DEPRECATED = False
 GL_MIRROR_CLAMP_ATI = constant.Constant( 'GL_MIRROR_CLAMP_ATI', 0x8742 )
 GL_MIRROR_CLAMP_TO_EDGE_ATI = constant.Constant( 'GL_MIRROR_CLAMP_TO_EDGE_ATI', 0x8743 )
 

@@ -24,6 +24,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_vertex_shader'
+_DEPRECATED = False
 GL_VERTEX_SHADER_ARB = constant.Constant( 'GL_VERTEX_SHADER_ARB', 0x8B31 )
 GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB = constant.Constant( 'GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB', 0x8B4A )
 glget.addGLGetConstant( GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB, (1,) )
@@ -42,6 +43,7 @@ glBindAttribLocationARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLuint, arrays.GLcharARBArray,),
 	doc = 'glBindAttribLocationARB( GLhandleARB(programObj), GLuint(index), GLcharARBArray(name) ) -> None',
 	argNames = ('programObj', 'index', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glGetActiveAttribARB = platform.createExtensionFunction( 
@@ -51,6 +53,7 @@ glGetActiveAttribARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLuint, constants.GLsizei, arrays.GLsizeiArray, arrays.GLintArray, arrays.GLuintArray, arrays.GLcharARBArray,),
 	doc = 'glGetActiveAttribARB( GLhandleARB(programObj), GLuint(index), GLsizei(maxLength), GLsizeiArray(length), GLintArray(size), GLuintArray(type), GLcharARBArray(name) ) -> None',
 	argNames = ('programObj', 'index', 'maxLength', 'length', 'size', 'type', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glGetAttribLocationARB = platform.createExtensionFunction( 
@@ -60,6 +63,7 @@ glGetAttribLocationARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, arrays.GLcharARBArray,),
 	doc = 'glGetAttribLocationARB( GLhandleARB(programObj), GLcharARBArray(name) ) -> constants.GLint',
 	argNames = ('programObj', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 

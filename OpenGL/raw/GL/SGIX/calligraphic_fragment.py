@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_calligraphic_fragment'
+_DEPRECATED = False
 GL_CALLIGRAPHIC_FRAGMENT_SGIX = constant.Constant( 'GL_CALLIGRAPHIC_FRAGMENT_SGIX', 0x8183 )
 
 

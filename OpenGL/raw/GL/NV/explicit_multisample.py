@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_explicit_multisample'
+_DEPRECATED = False
 GL_SAMPLE_POSITION_NV = constant.Constant( 'GL_SAMPLE_POSITION_NV', 0x8E50 )
 GL_SAMPLE_MASK_NV = constant.Constant( 'GL_SAMPLE_MASK_NV', 0x8E51 )
 GL_SAMPLE_MASK_VALUE_NV = constant.Constant( 'GL_SAMPLE_MASK_VALUE_NV', 0x8E52 )
@@ -27,6 +28,7 @@ glGetMultisamplefvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glGetMultisamplefvNV( GLenum(pname), GLuint(index), GLfloatArray(val) ) -> None',
 	argNames = ('pname', 'index', 'val',),
+	deprecated = _DEPRECATED,
 )
 
 glSampleMaskIndexedNV = platform.createExtensionFunction( 
@@ -36,6 +38,7 @@ glSampleMaskIndexedNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLbitfield,),
 	doc = 'glSampleMaskIndexedNV( GLuint(index), GLbitfield(mask) ) -> None',
 	argNames = ('index', 'mask',),
+	deprecated = _DEPRECATED,
 )
 
 glTexRenderbufferNV = platform.createExtensionFunction( 
@@ -45,6 +48,7 @@ glTexRenderbufferNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glTexRenderbufferNV( GLenum(target), GLuint(renderbuffer) ) -> None',
 	argNames = ('target', 'renderbuffer',),
+	deprecated = _DEPRECATED,
 )
 
 

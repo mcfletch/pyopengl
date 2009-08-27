@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_multisample'
+_DEPRECATED = False
 GL_SAMPLE_POSITION = constant.Constant( 'GL_SAMPLE_POSITION', 0x8E50 )
 GL_SAMPLE_MASK = constant.Constant( 'GL_SAMPLE_MASK', 0x8E51 )
 GL_SAMPLE_MASK_VALUE = constant.Constant( 'GL_SAMPLE_MASK_VALUE', 0x8E52 )
@@ -38,6 +39,7 @@ glTexImage2DMultisample = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLboolean,),
 	doc = 'glTexImage2DMultisample( GLenum(target), GLsizei(samples), GLint(internalformat), GLsizei(width), GLsizei(height), GLboolean(fixedsamplelocations) ) -> None',
 	argNames = ('target', 'samples', 'internalformat', 'width', 'height', 'fixedsamplelocations',),
+	deprecated = _DEPRECATED,
 )
 
 glTexImage3DMultisample = platform.createExtensionFunction( 
@@ -47,6 +49,7 @@ glTexImage3DMultisample = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLboolean,),
 	doc = 'glTexImage3DMultisample( GLenum(target), GLsizei(samples), GLint(internalformat), GLsizei(width), GLsizei(height), GLsizei(depth), GLboolean(fixedsamplelocations) ) -> None',
 	argNames = ('target', 'samples', 'internalformat', 'width', 'height', 'depth', 'fixedsamplelocations',),
+	deprecated = _DEPRECATED,
 )
 
 glGetMultisamplefv = platform.createExtensionFunction( 
@@ -56,6 +59,7 @@ glGetMultisamplefv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glGetMultisamplefv( GLenum(pname), GLuint(index), GLfloatArray(val) ) -> None',
 	argNames = ('pname', 'index', 'val',),
+	deprecated = _DEPRECATED,
 )
 
 glSampleMaski = platform.createExtensionFunction( 
@@ -65,6 +69,7 @@ glSampleMaski = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLbitfield,),
 	doc = 'glSampleMaski( GLuint(index), GLbitfield(mask) ) -> None',
 	argNames = ('index', 'mask',),
+	deprecated = _DEPRECATED,
 )
 
 

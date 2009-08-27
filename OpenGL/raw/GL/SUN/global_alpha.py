@@ -36,6 +36,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SUN_global_alpha'
+_DEPRECATED = False
 GL_GLOBAL_ALPHA_SUN = constant.Constant( 'GL_GLOBAL_ALPHA_SUN', 0x81D9 )
 GL_GLOBAL_ALPHA_FACTOR_SUN = constant.Constant( 'GL_GLOBAL_ALPHA_FACTOR_SUN', 0x81DA )
 glget.addGLGetConstant( GL_GLOBAL_ALPHA_FACTOR_SUN, (1,) )
@@ -46,6 +47,7 @@ glGlobalAlphaFactorbSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLbyte,),
 	doc = 'glGlobalAlphaFactorbSUN( GLbyte(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 glGlobalAlphaFactorsSUN = platform.createExtensionFunction( 
@@ -55,6 +57,7 @@ glGlobalAlphaFactorsSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLshort,),
 	doc = 'glGlobalAlphaFactorsSUN( GLshort(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 glGlobalAlphaFactoriSUN = platform.createExtensionFunction( 
@@ -64,6 +67,7 @@ glGlobalAlphaFactoriSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLint,),
 	doc = 'glGlobalAlphaFactoriSUN( GLint(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 glGlobalAlphaFactorfSUN = platform.createExtensionFunction( 
@@ -73,6 +77,7 @@ glGlobalAlphaFactorfSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat,),
 	doc = 'glGlobalAlphaFactorfSUN( GLfloat(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 glGlobalAlphaFactordSUN = platform.createExtensionFunction( 
@@ -82,6 +87,7 @@ glGlobalAlphaFactordSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble,),
 	doc = 'glGlobalAlphaFactordSUN( GLdouble(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 glGlobalAlphaFactorubSUN = platform.createExtensionFunction( 
@@ -91,6 +97,7 @@ glGlobalAlphaFactorubSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLubyte,),
 	doc = 'glGlobalAlphaFactorubSUN( GLubyte(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 glGlobalAlphaFactorusSUN = platform.createExtensionFunction( 
@@ -100,6 +107,7 @@ glGlobalAlphaFactorusSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLushort,),
 	doc = 'glGlobalAlphaFactorusSUN( GLushort(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 glGlobalAlphaFactoruiSUN = platform.createExtensionFunction( 
@@ -109,6 +117,7 @@ glGlobalAlphaFactoruiSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glGlobalAlphaFactoruiSUN( GLuint(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 

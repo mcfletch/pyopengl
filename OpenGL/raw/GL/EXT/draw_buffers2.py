@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_draw_buffers2'
+_DEPRECATED = False
 
 glColorMaskIndexedEXT = platform.createExtensionFunction( 
 	'glColorMaskIndexedEXT', dll=platform.GL,
@@ -18,6 +19,7 @@ glColorMaskIndexedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLboolean, constants.GLboolean, constants.GLboolean, constants.GLboolean,),
 	doc = 'glColorMaskIndexedEXT( GLuint(index), GLboolean(r), GLboolean(g), GLboolean(b), GLboolean(a) ) -> None',
 	argNames = ('index', 'r', 'g', 'b', 'a',),
+	deprecated = _DEPRECATED,
 )
 
 glGetBooleanIndexedvEXT = platform.createExtensionFunction( 
@@ -27,6 +29,7 @@ glGetBooleanIndexedvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, ctypes.POINTER(constants.GLboolean),),
 	doc = 'glGetBooleanIndexedvEXT( GLenum(target), GLuint(index), POINTER(constants.GLboolean)(data) ) -> None',
 	argNames = ('target', 'index', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetIntegerIndexedvEXT = platform.createExtensionFunction( 
@@ -36,6 +39,7 @@ glGetIntegerIndexedvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLintArray,),
 	doc = 'glGetIntegerIndexedvEXT( GLenum(target), GLuint(index), GLintArray(data) ) -> None',
 	argNames = ('target', 'index', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glEnableIndexedEXT = platform.createExtensionFunction( 
@@ -45,6 +49,7 @@ glEnableIndexedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glEnableIndexedEXT( GLenum(target), GLuint(index) ) -> None',
 	argNames = ('target', 'index',),
+	deprecated = _DEPRECATED,
 )
 
 glDisableIndexedEXT = platform.createExtensionFunction( 
@@ -54,6 +59,7 @@ glDisableIndexedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glDisableIndexedEXT( GLenum(target), GLuint(index) ) -> None',
 	argNames = ('target', 'index',),
+	deprecated = _DEPRECATED,
 )
 
 glIsEnabledIndexedEXT = platform.createExtensionFunction( 
@@ -63,6 +69,7 @@ glIsEnabledIndexedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glIsEnabledIndexedEXT( GLenum(target), GLuint(index) ) -> constants.GLboolean',
 	argNames = ('target', 'index',),
+	deprecated = _DEPRECATED,
 )
 
 

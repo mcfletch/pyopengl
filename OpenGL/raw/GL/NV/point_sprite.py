@@ -35,6 +35,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_point_sprite'
+_DEPRECATED = False
 GL_POINT_SPRITE_NV = constant.Constant( 'GL_POINT_SPRITE_NV', 0x8861 )
 glget.addGLGetConstant( GL_POINT_SPRITE_NV, (1,) )
 GL_COORD_REPLACE_NV = constant.Constant( 'GL_COORD_REPLACE_NV', 0x8862 )
@@ -47,6 +48,7 @@ glPointParameteriNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glPointParameteriNV( GLenum(pname), GLint(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPointParameterivNV = platform.createExtensionFunction( 
@@ -56,6 +58,7 @@ glPointParameterivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glPointParameterivNV( GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

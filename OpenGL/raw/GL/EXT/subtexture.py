@@ -22,6 +22,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_subtexture'
+_DEPRECATED = False
 
 glTexSubImage1DEXT = platform.createExtensionFunction( 
 	'glTexSubImage1DEXT', dll=platform.GL,
@@ -30,6 +31,7 @@ glTexSubImage1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTexSubImage1DEXT( GLenum(target), GLint(level), GLint(xoffset), GLsizei(width), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'width', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glTexSubImage2DEXT = platform.createExtensionFunction( 
@@ -39,6 +41,7 @@ glTexSubImage2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTexSubImage2DEXT( GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLsizei(width), GLsizei(height), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'yoffset', 'width', 'height', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -22,6 +22,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_convolution'
+_DEPRECATED = False
 GL_CONVOLUTION_1D_EXT = constant.Constant( 'GL_CONVOLUTION_1D_EXT', 0x8010 )
 glget.addGLGetConstant( GL_CONVOLUTION_1D_EXT, (1,) )
 GL_CONVOLUTION_2D_EXT = constant.Constant( 'GL_CONVOLUTION_2D_EXT', 0x8011 )
@@ -60,6 +61,7 @@ glConvolutionFilter1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glConvolutionFilter1DEXT( GLenum(target), GLenum(internalformat), GLsizei(width), GLenum(format), GLenum(type), c_void_p(image) ) -> None',
 	argNames = ('target', 'internalformat', 'width', 'format', 'type', 'image',),
+	deprecated = _DEPRECATED,
 )
 
 glConvolutionFilter2DEXT = platform.createExtensionFunction( 
@@ -69,6 +71,7 @@ glConvolutionFilter2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glConvolutionFilter2DEXT( GLenum(target), GLenum(internalformat), GLsizei(width), GLsizei(height), GLenum(format), GLenum(type), c_void_p(image) ) -> None',
 	argNames = ('target', 'internalformat', 'width', 'height', 'format', 'type', 'image',),
+	deprecated = _DEPRECATED,
 )
 
 glConvolutionParameterfEXT = platform.createExtensionFunction( 
@@ -78,6 +81,7 @@ glConvolutionParameterfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLfloat,),
 	doc = 'glConvolutionParameterfEXT( GLenum(target), GLenum(pname), GLfloat(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glConvolutionParameterfvEXT = platform.createExtensionFunction( 
@@ -87,6 +91,7 @@ glConvolutionParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glConvolutionParameterfvEXT( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glConvolutionParameteriEXT = platform.createExtensionFunction( 
@@ -96,6 +101,7 @@ glConvolutionParameteriEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glConvolutionParameteriEXT( GLenum(target), GLenum(pname), GLint(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glConvolutionParameterivEXT = platform.createExtensionFunction( 
@@ -105,6 +111,7 @@ glConvolutionParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glConvolutionParameterivEXT( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyConvolutionFilter1DEXT = platform.createExtensionFunction( 
@@ -114,6 +121,7 @@ glCopyConvolutionFilter1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei,),
 	doc = 'glCopyConvolutionFilter1DEXT( GLenum(target), GLenum(internalformat), GLint(x), GLint(y), GLsizei(width) ) -> None',
 	argNames = ('target', 'internalformat', 'x', 'y', 'width',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyConvolutionFilter2DEXT = platform.createExtensionFunction( 
@@ -123,6 +131,7 @@ glCopyConvolutionFilter2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei,),
 	doc = 'glCopyConvolutionFilter2DEXT( GLenum(target), GLenum(internalformat), GLint(x), GLint(y), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('target', 'internalformat', 'x', 'y', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 glGetConvolutionFilterEXT = platform.createExtensionFunction( 
@@ -132,6 +141,7 @@ glGetConvolutionFilterEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glGetConvolutionFilterEXT( GLenum(target), GLenum(format), GLenum(type), c_void_p(image) ) -> None',
 	argNames = ('target', 'format', 'type', 'image',),
+	deprecated = _DEPRECATED,
 )
 
 glGetConvolutionParameterfvEXT = platform.createExtensionFunction( 
@@ -141,6 +151,7 @@ glGetConvolutionParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetConvolutionParameterfvEXT( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetConvolutionParameterivEXT = platform.createExtensionFunction( 
@@ -150,6 +161,7 @@ glGetConvolutionParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetConvolutionParameterivEXT( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetSeparableFilterEXT = platform.createExtensionFunction( 
@@ -159,6 +171,7 @@ glGetSeparableFilterEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p,),
 	doc = 'glGetSeparableFilterEXT( GLenum(target), GLenum(format), GLenum(type), c_void_p(row), c_void_p(column), c_void_p(span) ) -> None',
 	argNames = ('target', 'format', 'type', 'row', 'column', 'span',),
+	deprecated = _DEPRECATED,
 )
 
 glSeparableFilter2DEXT = platform.createExtensionFunction( 
@@ -168,6 +181,7 @@ glSeparableFilter2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p, ctypes.c_void_p,),
 	doc = 'glSeparableFilter2DEXT( GLenum(target), GLenum(internalformat), GLsizei(width), GLsizei(height), GLenum(format), GLenum(type), c_void_p(row), c_void_p(column) ) -> None',
 	argNames = ('target', 'internalformat', 'width', 'height', 'format', 'type', 'row', 'column',),
+	deprecated = _DEPRECATED,
 )
 
 

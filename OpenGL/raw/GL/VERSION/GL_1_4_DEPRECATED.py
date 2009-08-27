@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_1_4'
+_DEPRECATED = True
 GL_POINT_SIZE_MIN = constant.Constant( 'GL_POINT_SIZE_MIN', 0x8126 )
 GL_POINT_SIZE_MAX = constant.Constant( 'GL_POINT_SIZE_MAX', 0x8127 )
 GL_POINT_DISTANCE_ATTENUATION = constant.Constant( 'GL_POINT_DISTANCE_ATTENUATION', 0x8129 )
@@ -40,6 +41,7 @@ glFogCoordf = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat,),
 	doc = 'glFogCoordf( GLfloat(coord) ) -> None',
 	argNames = ('coord',),
+	deprecated = _DEPRECATED,
 )
 
 glFogCoordfv = platform.createExtensionFunction( 
@@ -49,6 +51,7 @@ glFogCoordfv = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glFogCoordfv( GLfloatArray(coord) ) -> None',
 	argNames = ('coord',),
+	deprecated = _DEPRECATED,
 )
 
 glFogCoordd = platform.createExtensionFunction( 
@@ -58,6 +61,7 @@ glFogCoordd = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble,),
 	doc = 'glFogCoordd( GLdouble(coord) ) -> None',
 	argNames = ('coord',),
+	deprecated = _DEPRECATED,
 )
 
 glFogCoorddv = platform.createExtensionFunction( 
@@ -67,6 +71,7 @@ glFogCoorddv = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glFogCoorddv( GLdoubleArray(coord) ) -> None',
 	argNames = ('coord',),
+	deprecated = _DEPRECATED,
 )
 
 glFogCoordPointer = platform.createExtensionFunction( 
@@ -76,6 +81,7 @@ glFogCoordPointer = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glFogCoordPointer( GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3b = platform.createExtensionFunction( 
@@ -85,6 +91,7 @@ glSecondaryColor3b = platform.createExtensionFunction(
 	argTypes=(constants.GLbyte, constants.GLbyte, constants.GLbyte,),
 	doc = 'glSecondaryColor3b( GLbyte(red), GLbyte(green), GLbyte(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3bv = platform.createExtensionFunction( 
@@ -94,6 +101,7 @@ glSecondaryColor3bv = platform.createExtensionFunction(
 	argTypes=(arrays.GLbyteArray,),
 	doc = 'glSecondaryColor3bv( GLbyteArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3d = platform.createExtensionFunction( 
@@ -103,6 +111,7 @@ glSecondaryColor3d = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glSecondaryColor3d( GLdouble(red), GLdouble(green), GLdouble(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3dv = platform.createExtensionFunction( 
@@ -112,6 +121,7 @@ glSecondaryColor3dv = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glSecondaryColor3dv( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3f = platform.createExtensionFunction( 
@@ -121,6 +131,7 @@ glSecondaryColor3f = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glSecondaryColor3f( GLfloat(red), GLfloat(green), GLfloat(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3fv = platform.createExtensionFunction( 
@@ -130,6 +141,7 @@ glSecondaryColor3fv = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glSecondaryColor3fv( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3i = platform.createExtensionFunction( 
@@ -139,6 +151,7 @@ glSecondaryColor3i = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glSecondaryColor3i( GLint(red), GLint(green), GLint(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3iv = platform.createExtensionFunction( 
@@ -148,6 +161,7 @@ glSecondaryColor3iv = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glSecondaryColor3iv( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3s = platform.createExtensionFunction( 
@@ -157,6 +171,7 @@ glSecondaryColor3s = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glSecondaryColor3s( GLshort(red), GLshort(green), GLshort(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3sv = platform.createExtensionFunction( 
@@ -166,6 +181,7 @@ glSecondaryColor3sv = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glSecondaryColor3sv( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3ub = platform.createExtensionFunction( 
@@ -175,6 +191,7 @@ glSecondaryColor3ub = platform.createExtensionFunction(
 	argTypes=(constants.GLubyte, constants.GLubyte, constants.GLubyte,),
 	doc = 'glSecondaryColor3ub( GLubyte(red), GLubyte(green), GLubyte(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3ubv = platform.createExtensionFunction( 
@@ -184,6 +201,7 @@ glSecondaryColor3ubv = platform.createExtensionFunction(
 	argTypes=(arrays.GLubyteArray,),
 	doc = 'glSecondaryColor3ubv( GLubyteArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3ui = platform.createExtensionFunction( 
@@ -193,6 +211,7 @@ glSecondaryColor3ui = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glSecondaryColor3ui( GLuint(red), GLuint(green), GLuint(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3uiv = platform.createExtensionFunction( 
@@ -202,6 +221,7 @@ glSecondaryColor3uiv = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray,),
 	doc = 'glSecondaryColor3uiv( GLuintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3us = platform.createExtensionFunction( 
@@ -211,6 +231,7 @@ glSecondaryColor3us = platform.createExtensionFunction(
 	argTypes=(constants.GLushort, constants.GLushort, constants.GLushort,),
 	doc = 'glSecondaryColor3us( GLushort(red), GLushort(green), GLushort(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3usv = platform.createExtensionFunction( 
@@ -220,6 +241,7 @@ glSecondaryColor3usv = platform.createExtensionFunction(
 	argTypes=(arrays.GLushortArray,),
 	doc = 'glSecondaryColor3usv( GLushortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColorPointer = platform.createExtensionFunction( 
@@ -229,6 +251,7 @@ glSecondaryColorPointer = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glSecondaryColorPointer( GLint(size), GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('size', 'type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2d = platform.createExtensionFunction( 
@@ -238,6 +261,7 @@ glWindowPos2d = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble,),
 	doc = 'glWindowPos2d( GLdouble(x), GLdouble(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2dv = platform.createExtensionFunction( 
@@ -247,6 +271,7 @@ glWindowPos2dv = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glWindowPos2dv( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2f = platform.createExtensionFunction( 
@@ -256,6 +281,7 @@ glWindowPos2f = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat,),
 	doc = 'glWindowPos2f( GLfloat(x), GLfloat(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2fv = platform.createExtensionFunction( 
@@ -265,6 +291,7 @@ glWindowPos2fv = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glWindowPos2fv( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2i = platform.createExtensionFunction( 
@@ -274,6 +301,7 @@ glWindowPos2i = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint,),
 	doc = 'glWindowPos2i( GLint(x), GLint(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2iv = platform.createExtensionFunction( 
@@ -283,6 +311,7 @@ glWindowPos2iv = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glWindowPos2iv( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2s = platform.createExtensionFunction( 
@@ -292,6 +321,7 @@ glWindowPos2s = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort,),
 	doc = 'glWindowPos2s( GLshort(x), GLshort(y) ) -> None',
 	argNames = ('x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos2sv = platform.createExtensionFunction( 
@@ -301,6 +331,7 @@ glWindowPos2sv = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glWindowPos2sv( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3d = platform.createExtensionFunction( 
@@ -310,6 +341,7 @@ glWindowPos3d = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glWindowPos3d( GLdouble(x), GLdouble(y), GLdouble(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3dv = platform.createExtensionFunction( 
@@ -319,6 +351,7 @@ glWindowPos3dv = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glWindowPos3dv( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3f = platform.createExtensionFunction( 
@@ -328,6 +361,7 @@ glWindowPos3f = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glWindowPos3f( GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3fv = platform.createExtensionFunction( 
@@ -337,6 +371,7 @@ glWindowPos3fv = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glWindowPos3fv( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3i = platform.createExtensionFunction( 
@@ -346,6 +381,7 @@ glWindowPos3i = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glWindowPos3i( GLint(x), GLint(y), GLint(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3iv = platform.createExtensionFunction( 
@@ -355,6 +391,7 @@ glWindowPos3iv = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glWindowPos3iv( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3s = platform.createExtensionFunction( 
@@ -364,6 +401,7 @@ glWindowPos3s = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glWindowPos3s( GLshort(x), GLshort(y), GLshort(z) ) -> None',
 	argNames = ('x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glWindowPos3sv = platform.createExtensionFunction( 
@@ -373,5 +411,6 @@ glWindowPos3sv = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glWindowPos3sv( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 

@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_integer'
+_DEPRECATED = False
 GL_RGBA32UI_EXT = constant.Constant( 'GL_RGBA32UI_EXT', 0x8D70 )
 GL_RGB32UI_EXT = constant.Constant( 'GL_RGB32UI_EXT', 0x8D71 )
 GL_ALPHA32UI_EXT = constant.Constant( 'GL_ALPHA32UI_EXT', 0x8D72 )
@@ -64,6 +65,7 @@ glTexParameterIivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glTexParameterIivEXT( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glTexParameterIuivEXT = platform.createExtensionFunction( 
@@ -73,6 +75,7 @@ glTexParameterIuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glTexParameterIuivEXT( GLenum(target), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTexParameterIivEXT = platform.createExtensionFunction( 
@@ -82,6 +85,7 @@ glGetTexParameterIivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetTexParameterIivEXT( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTexParameterIuivEXT = platform.createExtensionFunction( 
@@ -91,6 +95,7 @@ glGetTexParameterIuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetTexParameterIuivEXT( GLenum(target), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glClearColorIiEXT = platform.createExtensionFunction( 
@@ -100,6 +105,7 @@ glClearColorIiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glClearColorIiEXT( GLint(red), GLint(green), GLint(blue), GLint(alpha) ) -> None',
 	argNames = ('red', 'green', 'blue', 'alpha',),
+	deprecated = _DEPRECATED,
 )
 
 glClearColorIuiEXT = platform.createExtensionFunction( 
@@ -109,6 +115,7 @@ glClearColorIuiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glClearColorIuiEXT( GLuint(red), GLuint(green), GLuint(blue), GLuint(alpha) ) -> None',
 	argNames = ('red', 'green', 'blue', 'alpha',),
+	deprecated = _DEPRECATED,
 )
 
 

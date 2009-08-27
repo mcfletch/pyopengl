@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_sample_shading'
+_DEPRECATED = False
 GL_SAMPLE_SHADING = constant.Constant( 'GL_SAMPLE_SHADING', 0x8C36 )
 GL_MIN_SAMPLE_SHADING_VALUE = constant.Constant( 'GL_MIN_SAMPLE_SHADING_VALUE', 0x8C37 )
 glMinSampleShading = platform.createExtensionFunction( 
@@ -19,6 +20,7 @@ glMinSampleShading = platform.createExtensionFunction(
 	argTypes=(constants.GLclampf,),
 	doc = 'glMinSampleShading( GLclampf(value) ) -> None',
 	argNames = ('value',),
+	deprecated = _DEPRECATED,
 )
 
 

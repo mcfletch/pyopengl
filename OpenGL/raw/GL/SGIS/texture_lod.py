@@ -34,6 +34,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_texture_lod'
+_DEPRECATED = False
 GL_TEXTURE_MIN_LOD_SGIS = constant.Constant( 'GL_TEXTURE_MIN_LOD_SGIS', 0x813A )
 GL_TEXTURE_MAX_LOD_SGIS = constant.Constant( 'GL_TEXTURE_MAX_LOD_SGIS', 0x813B )
 GL_TEXTURE_BASE_LEVEL_SGIS = constant.Constant( 'GL_TEXTURE_BASE_LEVEL_SGIS', 0x813C )

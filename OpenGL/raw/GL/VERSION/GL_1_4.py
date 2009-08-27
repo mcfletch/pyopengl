@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_1_4'
+_DEPRECATED = False
 GL_BLEND_DST_RGB = constant.Constant( 'GL_BLEND_DST_RGB', 0x80C8 )
 GL_BLEND_SRC_RGB = constant.Constant( 'GL_BLEND_SRC_RGB', 0x80C9 )
 GL_BLEND_DST_ALPHA = constant.Constant( 'GL_BLEND_DST_ALPHA', 0x80CA )
@@ -33,6 +34,7 @@ glBlendFuncSeparate = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glBlendFuncSeparate( GLenum(sfactorRGB), GLenum(dfactorRGB), GLenum(sfactorAlpha), GLenum(dfactorAlpha) ) -> None',
 	argNames = ('sfactorRGB', 'dfactorRGB', 'sfactorAlpha', 'dfactorAlpha',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiDrawArrays = platform.createExtensionFunction( 
@@ -42,6 +44,7 @@ glMultiDrawArrays = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray, arrays.GLsizeiArray, constants.GLsizei,),
 	doc = 'glMultiDrawArrays( GLenum(mode), GLintArray(first), GLsizeiArray(count), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'first', 'count', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiDrawElements = platform.createExtensionFunction( 
@@ -51,6 +54,7 @@ glMultiDrawElements = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLsizeiArray, constants.GLenum, ctypes.POINTER(ctypes.c_void_p), constants.GLsizei,),
 	doc = 'glMultiDrawElements( GLenum(mode), GLsizeiArray(count), GLenum(type), POINTER(ctypes.c_void_p)(indices), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'count', 'type', 'indices', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 glPointParameterf = platform.createExtensionFunction( 
@@ -60,6 +64,7 @@ glPointParameterf = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat,),
 	doc = 'glPointParameterf( GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPointParameterfv = platform.createExtensionFunction( 
@@ -69,6 +74,7 @@ glPointParameterfv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glPointParameterfv( GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glPointParameteri = platform.createExtensionFunction( 
@@ -78,6 +84,7 @@ glPointParameteri = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glPointParameteri( GLenum(pname), GLint(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPointParameteriv = platform.createExtensionFunction( 
@@ -87,6 +94,7 @@ glPointParameteriv = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glPointParameteriv( GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 # import legacy entry points to allow checking for bool(entryPoint)
 from OpenGL.raw.GL.VERSION.GL_1_4_DEPRECATED import *

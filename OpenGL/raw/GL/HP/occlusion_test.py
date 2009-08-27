@@ -13,6 +13,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_HP_occlusion_test'
+_DEPRECATED = False
 GL_OCCLUSION_TEST_HP = constant.Constant( 'GL_OCCLUSION_TEST_HP', 0x8165 )
 glget.addGLGetConstant( GL_OCCLUSION_TEST_HP, (1,) )
 GL_OCCLUSION_TEST_RESULT_HP = constant.Constant( 'GL_OCCLUSION_TEST_RESULT_HP', 0x8166 )

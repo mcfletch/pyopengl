@@ -21,6 +21,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_shadow'
+_DEPRECATED = False
 GL_TEXTURE_COMPARE_MODE_ARB = constant.Constant( 'GL_TEXTURE_COMPARE_MODE_ARB', 0x884C )
 GL_TEXTURE_COMPARE_FUNC_ARB = constant.Constant( 'GL_TEXTURE_COMPARE_FUNC_ARB', 0x884D )
 GL_COMPARE_R_TO_TEXTURE_ARB = constant.Constant( 'GL_COMPARE_R_TO_TEXTURE_ARB', 0x884E )

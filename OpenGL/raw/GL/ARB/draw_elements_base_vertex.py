@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_draw_elements_base_vertex'
+_DEPRECATED = False
 
 glDrawElementsBaseVertex = platform.createExtensionFunction( 
 	'glDrawElementsBaseVertex', dll=platform.GL,
@@ -18,6 +19,7 @@ glDrawElementsBaseVertex = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLenum, ctypes.c_void_p, constants.GLint,),
 	doc = 'glDrawElementsBaseVertex( GLenum(mode), GLsizei(count), GLenum(type), c_void_p(indices), GLint(basevertex) ) -> None',
 	argNames = ('mode', 'count', 'type', 'indices', 'basevertex',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawRangeElementsBaseVertex = platform.createExtensionFunction( 
@@ -27,6 +29,7 @@ glDrawRangeElementsBaseVertex = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLsizei, constants.GLenum, ctypes.c_void_p, constants.GLint,),
 	doc = 'glDrawRangeElementsBaseVertex( GLenum(mode), GLuint(start), GLuint(end), GLsizei(count), GLenum(type), c_void_p(indices), GLint(basevertex) ) -> None',
 	argNames = ('mode', 'start', 'end', 'count', 'type', 'indices', 'basevertex',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawElementsInstancedBaseVertex = platform.createExtensionFunction( 
@@ -36,6 +39,7 @@ glDrawElementsInstancedBaseVertex = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLenum, ctypes.c_void_p, constants.GLsizei, constants.GLint,),
 	doc = 'glDrawElementsInstancedBaseVertex( GLenum(mode), GLsizei(count), GLenum(type), c_void_p(indices), GLsizei(primcount), GLint(basevertex) ) -> None',
 	argNames = ('mode', 'count', 'type', 'indices', 'primcount', 'basevertex',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiDrawElementsBaseVertex = platform.createExtensionFunction( 
@@ -45,6 +49,7 @@ glMultiDrawElementsBaseVertex = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLsizeiArray, constants.GLenum, ctypes.POINTER(ctypes.c_void_p), constants.GLsizei, arrays.GLintArray,),
 	doc = 'glMultiDrawElementsBaseVertex( GLenum(mode), GLsizeiArray(count), GLenum(type), POINTER(ctypes.c_void_p)(indices), GLsizei(primcount), GLintArray(basevertex) ) -> None',
 	argNames = ('mode', 'count', 'type', 'indices', 'primcount', 'basevertex',),
+	deprecated = _DEPRECATED,
 )
 
 

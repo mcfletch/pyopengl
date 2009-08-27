@@ -45,6 +45,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_shader_objects'
+_DEPRECATED = False
 GL_PROGRAM_OBJECT_ARB = constant.Constant( 'GL_PROGRAM_OBJECT_ARB', 0x8B40 )
 GL_SHADER_OBJECT_ARB = constant.Constant( 'GL_SHADER_OBJECT_ARB', 0x8B48 )
 GL_OBJECT_TYPE_ARB = constant.Constant( 'GL_OBJECT_TYPE_ARB', 0x8B4E )
@@ -86,6 +87,7 @@ glDeleteObjectARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB,),
 	doc = 'glDeleteObjectARB( GLhandleARB(obj) ) -> None',
 	argNames = ('obj',),
+	deprecated = _DEPRECATED,
 )
 
 glGetHandleARB = platform.createExtensionFunction( 
@@ -95,6 +97,7 @@ glGetHandleARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glGetHandleARB( GLenum(pname) ) -> constants.GLhandleARB',
 	argNames = ('pname',),
+	deprecated = _DEPRECATED,
 )
 
 glDetachObjectARB = platform.createExtensionFunction( 
@@ -104,6 +107,7 @@ glDetachObjectARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLhandleARB,),
 	doc = 'glDetachObjectARB( GLhandleARB(containerObj), GLhandleARB(attachedObj) ) -> None',
 	argNames = ('containerObj', 'attachedObj',),
+	deprecated = _DEPRECATED,
 )
 
 glCreateShaderObjectARB = platform.createExtensionFunction( 
@@ -113,6 +117,7 @@ glCreateShaderObjectARB = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glCreateShaderObjectARB( GLenum(shaderType) ) -> constants.GLhandleARB',
 	argNames = ('shaderType',),
+	deprecated = _DEPRECATED,
 )
 
 glShaderSourceARB = platform.createExtensionFunction( 
@@ -122,6 +127,7 @@ glShaderSourceARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLsizei, ctypes.POINTER( ctypes.POINTER( constants.GLchar )), arrays.GLintArray,),
 	doc = 'glShaderSourceARB( GLhandleARB(shaderObj), GLsizei(count), POINTER( ctypes.POINTER( constants.GLchar ))(string), GLintArray(length) ) -> None',
 	argNames = ('shaderObj', 'count', 'string', 'length',),
+	deprecated = _DEPRECATED,
 )
 
 glCompileShaderARB = platform.createExtensionFunction( 
@@ -131,6 +137,7 @@ glCompileShaderARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB,),
 	doc = 'glCompileShaderARB( GLhandleARB(shaderObj) ) -> None',
 	argNames = ('shaderObj',),
+	deprecated = _DEPRECATED,
 )
 
 glCreateProgramObjectARB = platform.createExtensionFunction( 
@@ -140,6 +147,7 @@ glCreateProgramObjectARB = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glCreateProgramObjectARB(  ) -> constants.GLhandleARB',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glAttachObjectARB = platform.createExtensionFunction( 
@@ -149,6 +157,7 @@ glAttachObjectARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLhandleARB,),
 	doc = 'glAttachObjectARB( GLhandleARB(containerObj), GLhandleARB(obj) ) -> None',
 	argNames = ('containerObj', 'obj',),
+	deprecated = _DEPRECATED,
 )
 
 glLinkProgramARB = platform.createExtensionFunction( 
@@ -158,6 +167,7 @@ glLinkProgramARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB,),
 	doc = 'glLinkProgramARB( GLhandleARB(programObj) ) -> None',
 	argNames = ('programObj',),
+	deprecated = _DEPRECATED,
 )
 
 glUseProgramObjectARB = platform.createExtensionFunction( 
@@ -167,6 +177,7 @@ glUseProgramObjectARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB,),
 	doc = 'glUseProgramObjectARB( GLhandleARB(programObj) ) -> None',
 	argNames = ('programObj',),
+	deprecated = _DEPRECATED,
 )
 
 glValidateProgramARB = platform.createExtensionFunction( 
@@ -176,6 +187,7 @@ glValidateProgramARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB,),
 	doc = 'glValidateProgramARB( GLhandleARB(programObj) ) -> None',
 	argNames = ('programObj',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform1fARB = platform.createExtensionFunction( 
@@ -185,6 +197,7 @@ glUniform1fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLfloat,),
 	doc = 'glUniform1fARB( GLint(location), GLfloat(v0) ) -> None',
 	argNames = ('location', 'v0',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform2fARB = platform.createExtensionFunction( 
@@ -194,6 +207,7 @@ glUniform2fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLfloat, constants.GLfloat,),
 	doc = 'glUniform2fARB( GLint(location), GLfloat(v0), GLfloat(v1) ) -> None',
 	argNames = ('location', 'v0', 'v1',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform3fARB = platform.createExtensionFunction( 
@@ -203,6 +217,7 @@ glUniform3fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glUniform3fARB( GLint(location), GLfloat(v0), GLfloat(v1), GLfloat(v2) ) -> None',
 	argNames = ('location', 'v0', 'v1', 'v2',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform4fARB = platform.createExtensionFunction( 
@@ -212,6 +227,7 @@ glUniform4fARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glUniform4fARB( GLint(location), GLfloat(v0), GLfloat(v1), GLfloat(v2), GLfloat(v3) ) -> None',
 	argNames = ('location', 'v0', 'v1', 'v2', 'v3',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform1iARB = platform.createExtensionFunction( 
@@ -221,6 +237,7 @@ glUniform1iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint,),
 	doc = 'glUniform1iARB( GLint(location), GLint(v0) ) -> None',
 	argNames = ('location', 'v0',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform2iARB = platform.createExtensionFunction( 
@@ -230,6 +247,7 @@ glUniform2iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glUniform2iARB( GLint(location), GLint(v0), GLint(v1) ) -> None',
 	argNames = ('location', 'v0', 'v1',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform3iARB = platform.createExtensionFunction( 
@@ -239,6 +257,7 @@ glUniform3iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glUniform3iARB( GLint(location), GLint(v0), GLint(v1), GLint(v2) ) -> None',
 	argNames = ('location', 'v0', 'v1', 'v2',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform4iARB = platform.createExtensionFunction( 
@@ -248,6 +267,7 @@ glUniform4iARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glUniform4iARB( GLint(location), GLint(v0), GLint(v1), GLint(v2), GLint(v3) ) -> None',
 	argNames = ('location', 'v0', 'v1', 'v2', 'v3',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform1fvARB = platform.createExtensionFunction( 
@@ -257,6 +277,7 @@ glUniform1fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glUniform1fvARB( GLint(location), GLsizei(count), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform2fvARB = platform.createExtensionFunction( 
@@ -266,6 +287,7 @@ glUniform2fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glUniform2fvARB( GLint(location), GLsizei(count), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform3fvARB = platform.createExtensionFunction( 
@@ -275,6 +297,7 @@ glUniform3fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glUniform3fvARB( GLint(location), GLsizei(count), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform4fvARB = platform.createExtensionFunction( 
@@ -284,6 +307,7 @@ glUniform4fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glUniform4fvARB( GLint(location), GLsizei(count), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform1ivARB = platform.createExtensionFunction( 
@@ -293,6 +317,7 @@ glUniform1ivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glUniform1ivARB( GLint(location), GLsizei(count), GLintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform2ivARB = platform.createExtensionFunction( 
@@ -302,6 +327,7 @@ glUniform2ivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glUniform2ivARB( GLint(location), GLsizei(count), GLintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform3ivARB = platform.createExtensionFunction( 
@@ -311,6 +337,7 @@ glUniform3ivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glUniform3ivARB( GLint(location), GLsizei(count), GLintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniform4ivARB = platform.createExtensionFunction( 
@@ -320,6 +347,7 @@ glUniform4ivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glUniform4ivARB( GLint(location), GLsizei(count), GLintArray(value) ) -> None',
 	argNames = ('location', 'count', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniformMatrix2fvARB = platform.createExtensionFunction( 
@@ -329,6 +357,7 @@ glUniformMatrix2fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glUniformMatrix2fvARB( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniformMatrix3fvARB = platform.createExtensionFunction( 
@@ -338,6 +367,7 @@ glUniformMatrix3fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glUniformMatrix3fvARB( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniformMatrix4fvARB = platform.createExtensionFunction( 
@@ -347,6 +377,7 @@ glUniformMatrix4fvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glUniformMatrix4fvARB( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glGetObjectParameterfvARB = platform.createExtensionFunction( 
@@ -356,6 +387,7 @@ glGetObjectParameterfvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetObjectParameterfvARB( GLhandleARB(obj), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('obj', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetObjectParameterivARB = platform.createExtensionFunction( 
@@ -365,6 +397,7 @@ glGetObjectParameterivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetObjectParameterivARB( GLhandleARB(obj), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('obj', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetInfoLogARB = platform.createExtensionFunction( 
@@ -374,6 +407,7 @@ glGetInfoLogARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLsizei, arrays.GLsizeiArray, arrays.GLcharARBArray,),
 	doc = 'glGetInfoLogARB( GLhandleARB(obj), GLsizei(maxLength), GLsizeiArray(length), GLcharARBArray(infoLog) ) -> None',
 	argNames = ('obj', 'maxLength', 'length', 'infoLog',),
+	deprecated = _DEPRECATED,
 )
 
 glGetAttachedObjectsARB = platform.createExtensionFunction( 
@@ -383,6 +417,7 @@ glGetAttachedObjectsARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLsizei, arrays.GLsizeiArray, arrays.GLuintArray,),
 	doc = 'glGetAttachedObjectsARB( GLhandleARB(containerObj), GLsizei(maxCount), GLsizeiArray(count), GLuintArray(obj) ) -> None',
 	argNames = ('containerObj', 'maxCount', 'count', 'obj',),
+	deprecated = _DEPRECATED,
 )
 
 glGetUniformLocationARB = platform.createExtensionFunction( 
@@ -392,6 +427,7 @@ glGetUniformLocationARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, arrays.GLcharARBArray,),
 	doc = 'glGetUniformLocationARB( GLhandleARB(programObj), GLcharARBArray(name) ) -> constants.GLint',
 	argNames = ('programObj', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glGetActiveUniformARB = platform.createExtensionFunction( 
@@ -401,6 +437,7 @@ glGetActiveUniformARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLuint, constants.GLsizei, arrays.GLsizeiArray, arrays.GLintArray, arrays.GLuintArray, arrays.GLcharARBArray,),
 	doc = 'glGetActiveUniformARB( GLhandleARB(programObj), GLuint(index), GLsizei(maxLength), GLsizeiArray(length), GLintArray(size), GLuintArray(type), GLcharARBArray(name) ) -> None',
 	argNames = ('programObj', 'index', 'maxLength', 'length', 'size', 'type', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glGetUniformfvARB = platform.createExtensionFunction( 
@@ -410,6 +447,7 @@ glGetUniformfvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLint, arrays.GLfloatArray,),
 	doc = 'glGetUniformfvARB( GLhandleARB(programObj), GLint(location), GLfloatArray(params) ) -> None',
 	argNames = ('programObj', 'location', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetUniformivARB = platform.createExtensionFunction( 
@@ -419,6 +457,7 @@ glGetUniformivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLint, arrays.GLintArray,),
 	doc = 'glGetUniformivARB( GLhandleARB(programObj), GLint(location), GLintArray(params) ) -> None',
 	argNames = ('programObj', 'location', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetShaderSourceARB = platform.createExtensionFunction( 
@@ -428,6 +467,7 @@ glGetShaderSourceARB = platform.createExtensionFunction(
 	argTypes=(constants.GLhandleARB, constants.GLsizei, arrays.GLsizeiArray, arrays.GLcharARBArray,),
 	doc = 'glGetShaderSourceARB( GLhandleARB(obj), GLsizei(maxLength), GLsizeiArray(length), GLcharARBArray(source) ) -> None',
 	argNames = ('obj', 'maxLength', 'length', 'source',),
+	deprecated = _DEPRECATED,
 )
 
 

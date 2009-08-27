@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_float_pixels'
+_DEPRECATED = False
 GL_HALF_APPLE = constant.Constant( 'GL_HALF_APPLE', 0x140B )
 GL_RGBA_FLOAT32_APPLE = constant.Constant( 'GL_RGBA_FLOAT32_APPLE', 0x8814 )
 GL_RGB_FLOAT32_APPLE = constant.Constant( 'GL_RGB_FLOAT32_APPLE', 0x8815 )

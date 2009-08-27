@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_perturb_normal'
+_DEPRECATED = False
 GL_PERTURB_EXT = constant.Constant( 'GL_PERTURB_EXT', 0x85AE )
 GL_TEXTURE_NORMAL_EXT = constant.Constant( 'GL_TEXTURE_NORMAL_EXT', 0x85AF )
 glTextureNormalEXT = platform.createExtensionFunction( 
@@ -26,6 +27,7 @@ glTextureNormalEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glTextureNormalEXT( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 

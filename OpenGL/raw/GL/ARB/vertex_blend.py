@@ -29,6 +29,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_vertex_blend'
+_DEPRECATED = False
 GL_MAX_VERTEX_UNITS_ARB = constant.Constant( 'GL_MAX_VERTEX_UNITS_ARB', 0x86A4 )
 glget.addGLGetConstant( GL_MAX_VERTEX_UNITS_ARB, (1,) )
 GL_ACTIVE_VERTEX_UNITS_ARB = constant.Constant( 'GL_ACTIVE_VERTEX_UNITS_ARB', 0x86A5 )
@@ -86,6 +87,7 @@ glWeightbvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLbyteArray,),
 	doc = 'glWeightbvARB( GLint(size), GLbyteArray(weights) ) -> None',
 	argNames = ('size', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 glWeightsvARB = platform.createExtensionFunction( 
@@ -95,6 +97,7 @@ glWeightsvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLshortArray,),
 	doc = 'glWeightsvARB( GLint(size), GLshortArray(weights) ) -> None',
 	argNames = ('size', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 glWeightivARB = platform.createExtensionFunction( 
@@ -104,6 +107,7 @@ glWeightivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLintArray,),
 	doc = 'glWeightivARB( GLint(size), GLintArray(weights) ) -> None',
 	argNames = ('size', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 glWeightfvARB = platform.createExtensionFunction( 
@@ -113,6 +117,7 @@ glWeightfvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLfloatArray,),
 	doc = 'glWeightfvARB( GLint(size), GLfloatArray(weights) ) -> None',
 	argNames = ('size', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 glWeightdvARB = platform.createExtensionFunction( 
@@ -122,6 +127,7 @@ glWeightdvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLdoubleArray,),
 	doc = 'glWeightdvARB( GLint(size), GLdoubleArray(weights) ) -> None',
 	argNames = ('size', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 glWeightubvARB = platform.createExtensionFunction( 
@@ -131,6 +137,7 @@ glWeightubvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLubyteArray,),
 	doc = 'glWeightubvARB( GLint(size), GLubyteArray(weights) ) -> None',
 	argNames = ('size', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 glWeightusvARB = platform.createExtensionFunction( 
@@ -140,6 +147,7 @@ glWeightusvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLushortArray,),
 	doc = 'glWeightusvARB( GLint(size), GLushortArray(weights) ) -> None',
 	argNames = ('size', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 glWeightuivARB = platform.createExtensionFunction( 
@@ -149,6 +157,7 @@ glWeightuivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLuintArray,),
 	doc = 'glWeightuivARB( GLint(size), GLuintArray(weights) ) -> None',
 	argNames = ('size', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 glWeightPointerARB = platform.createExtensionFunction( 
@@ -158,6 +167,7 @@ glWeightPointerARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glWeightPointerARB( GLint(size), GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('size', 'type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexBlendARB = platform.createExtensionFunction( 
@@ -167,6 +177,7 @@ glVertexBlendARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint,),
 	doc = 'glVertexBlendARB( GLint(count) ) -> None',
 	argNames = ('count',),
+	deprecated = _DEPRECATED,
 )
 
 

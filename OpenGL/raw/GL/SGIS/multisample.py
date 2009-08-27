@@ -38,6 +38,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_multisample'
+_DEPRECATED = False
 GL_MULTISAMPLE_SGIS = constant.Constant( 'GL_MULTISAMPLE_SGIS', 0x809D )
 glget.addGLGetConstant( GL_MULTISAMPLE_SGIS, (1,) )
 GL_SAMPLE_ALPHA_TO_MASK_SGIS = constant.Constant( 'GL_SAMPLE_ALPHA_TO_MASK_SGIS', 0x809E )
@@ -70,6 +71,7 @@ glSampleMaskSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLclampf, constants.GLboolean,),
 	doc = 'glSampleMaskSGIS( GLclampf(value), GLboolean(invert) ) -> None',
 	argNames = ('value', 'invert',),
+	deprecated = _DEPRECATED,
 )
 
 glSamplePatternSGIS = platform.createExtensionFunction( 
@@ -79,6 +81,7 @@ glSamplePatternSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glSamplePatternSGIS( GLenum(pattern) ) -> None',
 	argNames = ('pattern',),
+	deprecated = _DEPRECATED,
 )
 
 

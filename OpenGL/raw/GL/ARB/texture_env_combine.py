@@ -32,6 +32,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_env_combine'
+_DEPRECATED = False
 GL_COMBINE_ARB = constant.Constant( 'GL_COMBINE_ARB', 0x8570 )
 GL_COMBINE_RGB_ARB = constant.Constant( 'GL_COMBINE_RGB_ARB', 0x8571 )
 GL_COMBINE_ALPHA_ARB = constant.Constant( 'GL_COMBINE_ALPHA_ARB', 0x8572 )

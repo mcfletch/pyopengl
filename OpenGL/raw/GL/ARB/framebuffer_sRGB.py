@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_framebuffer_sRGB'
+_DEPRECATED = False
 GL_FRAMEBUFFER_SRGB = constant.Constant( 'GL_FRAMEBUFFER_SRGB', 0x8DB9 )
 
 

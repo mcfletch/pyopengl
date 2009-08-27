@@ -24,6 +24,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_MESA_pack_invert'
+_DEPRECATED = False
 GL_PACK_INVERT_MESA = constant.Constant( 'GL_PACK_INVERT_MESA', 0x8758 )
 glget.addGLGetConstant( GL_PACK_INVERT_MESA, (1,) )
 

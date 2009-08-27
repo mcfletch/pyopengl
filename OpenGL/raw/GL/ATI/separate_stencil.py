@@ -16,6 +16,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_separate_stencil'
+_DEPRECATED = False
 GL_STENCIL_BACK_FUNC_ATI = constant.Constant( 'GL_STENCIL_BACK_FUNC_ATI', 0x8800 )
 GL_STENCIL_BACK_FAIL_ATI = constant.Constant( 'GL_STENCIL_BACK_FAIL_ATI', 0x8801 )
 GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI = constant.Constant( 'GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI', 0x8802 )
@@ -27,6 +28,7 @@ glStencilOpSeparateATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glStencilOpSeparateATI( GLenum(face), GLenum(sfail), GLenum(dpfail), GLenum(dppass) ) -> None',
 	argNames = ('face', 'sfail', 'dpfail', 'dppass',),
+	deprecated = _DEPRECATED,
 )
 
 glStencilFuncSeparateATI = platform.createExtensionFunction( 
@@ -36,6 +38,7 @@ glStencilFuncSeparateATI = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint, constants.GLuint,),
 	doc = 'glStencilFuncSeparateATI( GLenum(frontfunc), GLenum(backfunc), GLint(ref), GLuint(mask) ) -> None',
 	argNames = ('frontfunc', 'backfunc', 'ref', 'mask',),
+	deprecated = _DEPRECATED,
 )
 
 

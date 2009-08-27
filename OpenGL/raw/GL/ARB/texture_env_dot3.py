@@ -21,6 +21,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_env_dot3'
+_DEPRECATED = False
 GL_DOT3_RGB_ARB = constant.Constant( 'GL_DOT3_RGB_ARB', 0x86AE )
 GL_DOT3_RGBA_ARB = constant.Constant( 'GL_DOT3_RGBA_ARB', 0x86AF )
 

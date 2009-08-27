@@ -42,6 +42,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_separate_specular_color'
+_DEPRECATED = False
 GL_LIGHT_MODEL_COLOR_CONTROL_EXT = constant.Constant( 'GL_LIGHT_MODEL_COLOR_CONTROL_EXT', 0x81F8 )
 glget.addGLGetConstant( GL_LIGHT_MODEL_COLOR_CONTROL_EXT, (1,) )
 GL_SINGLE_COLOR_EXT = constant.Constant( 'GL_SINGLE_COLOR_EXT', 0x81F9 )

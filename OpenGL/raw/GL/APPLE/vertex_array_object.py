@@ -33,6 +33,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_vertex_array_object'
+_DEPRECATED = False
 GL_VERTEX_ARRAY_BINDING_APPLE = constant.Constant( 'GL_VERTEX_ARRAY_BINDING_APPLE', 0x85B5 )
 glBindVertexArrayAPPLE = platform.createExtensionFunction( 
 	'glBindVertexArrayAPPLE', dll=platform.GL,
@@ -41,6 +42,7 @@ glBindVertexArrayAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glBindVertexArrayAPPLE( GLuint(array) ) -> None',
 	argNames = ('array',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteVertexArraysAPPLE = platform.createExtensionFunction( 
@@ -50,6 +52,7 @@ glDeleteVertexArraysAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteVertexArraysAPPLE( GLsizei(n), GLuintArray(arrays) ) -> None',
 	argNames = ('n', 'arrays',),
+	deprecated = _DEPRECATED,
 )
 
 glGenVertexArraysAPPLE = platform.createExtensionFunction( 
@@ -59,6 +62,7 @@ glGenVertexArraysAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenVertexArraysAPPLE( GLsizei(n), GLuintArray(arrays) ) -> None',
 	argNames = ('n', 'arrays',),
+	deprecated = _DEPRECATED,
 )
 
 glIsVertexArrayAPPLE = platform.createExtensionFunction( 
@@ -68,6 +72,7 @@ glIsVertexArrayAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsVertexArrayAPPLE( GLuint(array) ) -> constants.GLboolean',
 	argNames = ('array',),
+	deprecated = _DEPRECATED,
 )
 
 

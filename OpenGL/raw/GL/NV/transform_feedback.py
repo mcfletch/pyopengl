@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_transform_feedback'
+_DEPRECATED = False
 GL_BACK_PRIMARY_COLOR_NV = constant.Constant( 'GL_BACK_PRIMARY_COLOR_NV', 0x8C77 )
 GL_BACK_SECONDARY_COLOR_NV = constant.Constant( 'GL_BACK_SECONDARY_COLOR_NV', 0x8C78 )
 GL_TEXTURE_COORD_NV = constant.Constant( 'GL_TEXTURE_COORD_NV', 0x8C79 )
@@ -42,6 +43,7 @@ glBeginTransformFeedbackNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glBeginTransformFeedbackNV( GLenum(primitiveMode) ) -> None',
 	argNames = ('primitiveMode',),
+	deprecated = _DEPRECATED,
 )
 
 glEndTransformFeedbackNV = platform.createExtensionFunction( 
@@ -51,6 +53,7 @@ glEndTransformFeedbackNV = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glEndTransformFeedbackNV(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glTransformFeedbackAttribsNV = platform.createExtensionFunction( 
@@ -60,6 +63,7 @@ glTransformFeedbackAttribsNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray, constants.GLenum,),
 	doc = 'glTransformFeedbackAttribsNV( GLuint(count), GLintArray(attribs), GLenum(bufferMode) ) -> None',
 	argNames = ('count', 'attribs', 'bufferMode',),
+	deprecated = _DEPRECATED,
 )
 
 glBindBufferRangeNV = platform.createExtensionFunction( 
@@ -69,6 +73,7 @@ glBindBufferRangeNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLintptr, constants.GLsizeiptr,),
 	doc = 'glBindBufferRangeNV( GLenum(target), GLuint(index), GLuint(buffer), GLintptr(offset), GLsizeiptr(size) ) -> None',
 	argNames = ('target', 'index', 'buffer', 'offset', 'size',),
+	deprecated = _DEPRECATED,
 )
 
 glBindBufferOffsetNV = platform.createExtensionFunction( 
@@ -78,6 +83,7 @@ glBindBufferOffsetNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLintptr,),
 	doc = 'glBindBufferOffsetNV( GLenum(target), GLuint(index), GLuint(buffer), GLintptr(offset) ) -> None',
 	argNames = ('target', 'index', 'buffer', 'offset',),
+	deprecated = _DEPRECATED,
 )
 
 glBindBufferBaseNV = platform.createExtensionFunction( 
@@ -87,6 +93,7 @@ glBindBufferBaseNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint,),
 	doc = 'glBindBufferBaseNV( GLenum(target), GLuint(index), GLuint(buffer) ) -> None',
 	argNames = ('target', 'index', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glTransformFeedbackVaryingsNV = platform.createExtensionFunction( 
@@ -96,6 +103,7 @@ glTransformFeedbackVaryingsNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, ctypes.POINTER( ctypes.POINTER( constants.GLchar )), constants.GLenum,),
 	doc = 'glTransformFeedbackVaryingsNV( GLuint(program), GLsizei(count), POINTER( ctypes.POINTER( constants.GLchar ))(varyings), GLenum(bufferMode) ) -> None',
 	argNames = ('program', 'count', 'varyings', 'bufferMode',),
+	deprecated = _DEPRECATED,
 )
 
 glActiveVaryingNV = platform.createExtensionFunction( 
@@ -105,6 +113,7 @@ glActiveVaryingNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLcharArray,),
 	doc = 'glActiveVaryingNV( GLuint(program), GLcharArray(name) ) -> None',
 	argNames = ('program', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVaryingLocationNV = platform.createExtensionFunction( 
@@ -114,6 +123,7 @@ glGetVaryingLocationNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLcharArray,),
 	doc = 'glGetVaryingLocationNV( GLuint(program), GLcharArray(name) ) -> constants.GLint',
 	argNames = ('program', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glGetActiveVaryingNV = platform.createExtensionFunction( 
@@ -123,6 +133,7 @@ glGetActiveVaryingNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLsizei, arrays.GLsizeiArray, arrays.GLsizeiArray, arrays.GLuintArray, arrays.GLcharArray,),
 	doc = 'glGetActiveVaryingNV( GLuint(program), GLuint(index), GLsizei(bufSize), GLsizeiArray(length), GLsizeiArray(size), GLuintArray(type), GLcharArray(name) ) -> None',
 	argNames = ('program', 'index', 'bufSize', 'length', 'size', 'type', 'name',),
+	deprecated = _DEPRECATED,
 )
 
 glGetTransformFeedbackVaryingNV = platform.createExtensionFunction( 
@@ -132,6 +143,7 @@ glGetTransformFeedbackVaryingNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, arrays.GLintArray,),
 	doc = 'glGetTransformFeedbackVaryingNV( GLuint(program), GLuint(index), GLintArray(location) ) -> None',
 	argNames = ('program', 'index', 'location',),
+	deprecated = _DEPRECATED,
 )
 
 

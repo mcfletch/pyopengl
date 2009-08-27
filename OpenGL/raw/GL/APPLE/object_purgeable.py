@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_object_purgeable'
+_DEPRECATED = False
 GL_BUFFER_OBJECT_APPLE = constant.Constant( 'GL_BUFFER_OBJECT_APPLE', 0x85B3 )
 GL_RELEASED_APPLE = constant.Constant( 'GL_RELEASED_APPLE', 0x8A19 )
 GL_VOLATILE_APPLE = constant.Constant( 'GL_VOLATILE_APPLE', 0x8A1A )
@@ -23,6 +24,7 @@ glObjectPurgeableAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLenum,),
 	doc = 'glObjectPurgeableAPPLE( GLenum(objectType), GLuint(name), GLenum(option) ) -> constants.GLenum',
 	argNames = ('objectType', 'name', 'option',),
+	deprecated = _DEPRECATED,
 )
 
 glObjectUnpurgeableAPPLE = platform.createExtensionFunction( 
@@ -32,6 +34,7 @@ glObjectUnpurgeableAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLenum,),
 	doc = 'glObjectUnpurgeableAPPLE( GLenum(objectType), GLuint(name), GLenum(option) ) -> constants.GLenum',
 	argNames = ('objectType', 'name', 'option',),
+	deprecated = _DEPRECATED,
 )
 
 glGetObjectParameterivAPPLE = platform.createExtensionFunction( 
@@ -41,6 +44,7 @@ glGetObjectParameterivAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetObjectParameterivAPPLE( GLenum(objectType), GLuint(name), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('objectType', 'name', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

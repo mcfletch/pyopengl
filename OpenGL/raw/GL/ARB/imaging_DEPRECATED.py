@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_imaging'
+_DEPRECATED = True
 GL_CONVOLUTION_1D = constant.Constant( 'GL_CONVOLUTION_1D', 0x8010 )
 GL_CONVOLUTION_2D = constant.Constant( 'GL_CONVOLUTION_2D', 0x8011 )
 GL_SEPARABLE_2D = constant.Constant( 'GL_SEPARABLE_2D', 0x8012 )

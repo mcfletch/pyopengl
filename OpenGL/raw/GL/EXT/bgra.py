@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_bgra'
+_DEPRECATED = False
 GL_BGR_EXT = constant.Constant( 'GL_BGR_EXT', 0x80E0 )
 GL_BGRA_EXT = constant.Constant( 'GL_BGRA_EXT', 0x80E1 )
 

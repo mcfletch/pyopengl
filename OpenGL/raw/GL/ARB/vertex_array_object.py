@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_vertex_array_object'
+_DEPRECATED = False
 GL_VERTEX_ARRAY_BINDING = constant.Constant( 'GL_VERTEX_ARRAY_BINDING', 0x85B5 )
 glBindVertexArray = platform.createExtensionFunction( 
 	'glBindVertexArray', dll=platform.GL,
@@ -18,6 +19,7 @@ glBindVertexArray = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glBindVertexArray( GLuint(array) ) -> None',
 	argNames = ('array',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteVertexArrays = platform.createExtensionFunction( 
@@ -27,6 +29,7 @@ glDeleteVertexArrays = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteVertexArrays( GLsizei(n), GLuintArray(arrays) ) -> None',
 	argNames = ('n', 'arrays',),
+	deprecated = _DEPRECATED,
 )
 
 glGenVertexArrays = platform.createExtensionFunction( 
@@ -36,6 +39,7 @@ glGenVertexArrays = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenVertexArrays( GLsizei(n), GLuintArray(arrays) ) -> None',
 	argNames = ('n', 'arrays',),
+	deprecated = _DEPRECATED,
 )
 
 glIsVertexArray = platform.createExtensionFunction( 
@@ -45,6 +49,7 @@ glIsVertexArray = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsVertexArray( GLuint(array) ) -> constants.GLboolean',
 	argNames = ('array',),
+	deprecated = _DEPRECATED,
 )
 
 

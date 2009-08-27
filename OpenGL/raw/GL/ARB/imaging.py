@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_imaging'
+_DEPRECATED = False
 GL_CONSTANT_COLOR = constant.Constant( 'GL_CONSTANT_COLOR', 0x8001 )
 GL_ONE_MINUS_CONSTANT_COLOR = constant.Constant( 'GL_ONE_MINUS_CONSTANT_COLOR', 0x8002 )
 GL_CONSTANT_ALPHA = constant.Constant( 'GL_CONSTANT_ALPHA', 0x8003 )

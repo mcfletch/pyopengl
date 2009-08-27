@@ -45,6 +45,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_copy_depth_to_color'
+_DEPRECATED = False
 GL_DEPTH_STENCIL_TO_RGBA_NV = constant.Constant( 'GL_DEPTH_STENCIL_TO_RGBA_NV', 0x886E )
 GL_DEPTH_STENCIL_TO_BGRA_NV = constant.Constant( 'GL_DEPTH_STENCIL_TO_BGRA_NV', 0x886F )
 

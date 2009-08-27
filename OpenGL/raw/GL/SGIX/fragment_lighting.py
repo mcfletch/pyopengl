@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_fragment_lighting'
+_DEPRECATED = False
 GL_FRAGMENT_LIGHTING_SGIX = constant.Constant( 'GL_FRAGMENT_LIGHTING_SGIX', 0x8400 )
 GL_FRAGMENT_COLOR_MATERIAL_SGIX = constant.Constant( 'GL_FRAGMENT_COLOR_MATERIAL_SGIX', 0x8401 )
 GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX = constant.Constant( 'GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX', 0x8402 )
@@ -37,6 +38,7 @@ glFragmentColorMaterialSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glFragmentColorMaterialSGIX( GLenum(face), GLenum(mode) ) -> None',
 	argNames = ('face', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentLightfSGIX = platform.createExtensionFunction( 
@@ -46,6 +48,7 @@ glFragmentLightfSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLfloat,),
 	doc = 'glFragmentLightfSGIX( GLenum(light), GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('light', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentLightfvSGIX = platform.createExtensionFunction( 
@@ -55,6 +58,7 @@ glFragmentLightfvSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glFragmentLightfvSGIX( GLenum(light), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('light', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentLightiSGIX = platform.createExtensionFunction( 
@@ -64,6 +68,7 @@ glFragmentLightiSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glFragmentLightiSGIX( GLenum(light), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('light', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentLightivSGIX = platform.createExtensionFunction( 
@@ -73,6 +78,7 @@ glFragmentLightivSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glFragmentLightivSGIX( GLenum(light), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('light', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentLightModelfSGIX = platform.createExtensionFunction( 
@@ -82,6 +88,7 @@ glFragmentLightModelfSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat,),
 	doc = 'glFragmentLightModelfSGIX( GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentLightModelfvSGIX = platform.createExtensionFunction( 
@@ -91,6 +98,7 @@ glFragmentLightModelfvSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glFragmentLightModelfvSGIX( GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentLightModeliSGIX = platform.createExtensionFunction( 
@@ -100,6 +108,7 @@ glFragmentLightModeliSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glFragmentLightModeliSGIX( GLenum(pname), GLint(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentLightModelivSGIX = platform.createExtensionFunction( 
@@ -109,6 +118,7 @@ glFragmentLightModelivSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glFragmentLightModelivSGIX( GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentMaterialfSGIX = platform.createExtensionFunction( 
@@ -118,6 +128,7 @@ glFragmentMaterialfSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLfloat,),
 	doc = 'glFragmentMaterialfSGIX( GLenum(face), GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('face', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentMaterialfvSGIX = platform.createExtensionFunction( 
@@ -127,6 +138,7 @@ glFragmentMaterialfvSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glFragmentMaterialfvSGIX( GLenum(face), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('face', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentMaterialiSGIX = platform.createExtensionFunction( 
@@ -136,6 +148,7 @@ glFragmentMaterialiSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glFragmentMaterialiSGIX( GLenum(face), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('face', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glFragmentMaterialivSGIX = platform.createExtensionFunction( 
@@ -145,6 +158,7 @@ glFragmentMaterialivSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glFragmentMaterialivSGIX( GLenum(face), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('face', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFragmentLightfvSGIX = platform.createExtensionFunction( 
@@ -154,6 +168,7 @@ glGetFragmentLightfvSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetFragmentLightfvSGIX( GLenum(light), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('light', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFragmentLightivSGIX = platform.createExtensionFunction( 
@@ -163,6 +178,7 @@ glGetFragmentLightivSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetFragmentLightivSGIX( GLenum(light), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('light', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFragmentMaterialfvSGIX = platform.createExtensionFunction( 
@@ -172,6 +188,7 @@ glGetFragmentMaterialfvSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetFragmentMaterialfvSGIX( GLenum(face), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('face', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFragmentMaterialivSGIX = platform.createExtensionFunction( 
@@ -181,6 +198,7 @@ glGetFragmentMaterialivSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetFragmentMaterialivSGIX( GLenum(face), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('face', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glLightEnviSGIX = platform.createExtensionFunction( 
@@ -190,6 +208,7 @@ glLightEnviSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glLightEnviSGIX( GLenum(pname), GLint(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 

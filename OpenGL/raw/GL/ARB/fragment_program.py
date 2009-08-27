@@ -61,6 +61,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_fragment_program'
+_DEPRECATED = False
 GL_FRAGMENT_PROGRAM_ARB = constant.Constant( 'GL_FRAGMENT_PROGRAM_ARB', 0x8804 )
 glget.addGLGetConstant( GL_FRAGMENT_PROGRAM_ARB, (1,) )
 GL_PROGRAM_ALU_INSTRUCTIONS_ARB = constant.Constant( 'GL_PROGRAM_ALU_INSTRUCTIONS_ARB', 0x8805 )

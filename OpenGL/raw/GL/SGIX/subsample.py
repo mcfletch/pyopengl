@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_subsample'
+_DEPRECATED = False
 GL_PACK_SUBSAMPLE_RATE_SGIX = constant.Constant( 'GL_PACK_SUBSAMPLE_RATE_SGIX', 0x85A0 )
 GL_UNPACK_SUBSAMPLE_RATE_SGIX = constant.Constant( 'GL_UNPACK_SUBSAMPLE_RATE_SGIX', 0x85A1 )
 GL_PIXEL_SUBSAMPLE_4444_SGIX = constant.Constant( 'GL_PIXEL_SUBSAMPLE_4444_SGIX', 0x85A2 )

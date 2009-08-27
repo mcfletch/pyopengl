@@ -30,6 +30,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_texture_env_combine4'
+_DEPRECATED = False
 GL_COMBINE4_NV = constant.Constant( 'GL_COMBINE4_NV', 0x8503 )
 GL_SOURCE3_RGB_NV = constant.Constant( 'GL_SOURCE3_RGB_NV', 0x8583 )
 GL_SOURCE3_ALPHA_NV = constant.Constant( 'GL_SOURCE3_ALPHA_NV', 0x858B )

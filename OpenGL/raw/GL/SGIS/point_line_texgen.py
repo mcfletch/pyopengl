@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_point_line_texgen'
+_DEPRECATED = False
 GL_EYE_DISTANCE_TO_POINT_SGIS = constant.Constant( 'GL_EYE_DISTANCE_TO_POINT_SGIS', 0x81F0 )
 GL_OBJECT_DISTANCE_TO_POINT_SGIS = constant.Constant( 'GL_OBJECT_DISTANCE_TO_POINT_SGIS', 0x81F1 )
 GL_EYE_DISTANCE_TO_LINE_SGIS = constant.Constant( 'GL_EYE_DISTANCE_TO_LINE_SGIS', 0x81F2 )

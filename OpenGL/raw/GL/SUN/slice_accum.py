@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SUN_slice_accum'
+_DEPRECATED = False
 GL_SLICE_ACCUM_SUN = constant.Constant( 'GL_SLICE_ACCUM_SUN', 0x85CC )
 
 

@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_shared_texture_palette'
+_DEPRECATED = False
 GL_SHARED_TEXTURE_PALETTE_EXT = constant.Constant( 'GL_SHARED_TEXTURE_PALETTE_EXT', 0x81FB )
 
 

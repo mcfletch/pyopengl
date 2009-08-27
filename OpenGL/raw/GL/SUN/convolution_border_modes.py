@@ -15,6 +15,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SUN_convolution_border_modes'
+_DEPRECATED = False
 GL_WRAP_BORDER_SUN = constant.Constant( 'GL_WRAP_BORDER_SUN', 0x81D4 )
 
 

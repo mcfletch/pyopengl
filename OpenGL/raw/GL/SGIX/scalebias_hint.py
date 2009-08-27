@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_scalebias_hint'
+_DEPRECATED = False
 GL_SCALEBIAS_HINT_SGIX = constant.Constant( 'GL_SCALEBIAS_HINT_SGIX', 0x8322 )
 
 

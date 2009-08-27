@@ -21,6 +21,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_mirrored_repeat'
+_DEPRECATED = False
 GL_MIRRORED_REPEAT_ARB = constant.Constant( 'GL_MIRRORED_REPEAT_ARB', 0x8370 )
 
 

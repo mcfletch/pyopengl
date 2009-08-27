@@ -61,6 +61,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_point_parameters'
+_DEPRECATED = False
 GL_POINT_SIZE_MIN_EXT = constant.Constant( 'GL_POINT_SIZE_MIN_EXT', 0x8126 )
 GL_POINT_SIZE_MAX_EXT = constant.Constant( 'GL_POINT_SIZE_MAX_EXT', 0x8127 )
 GL_POINT_FADE_THRESHOLD_SIZE_EXT = constant.Constant( 'GL_POINT_FADE_THRESHOLD_SIZE_EXT', 0x8128 )
@@ -72,6 +73,7 @@ glPointParameterfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat,),
 	doc = 'glPointParameterfEXT( GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glPointParameterfvEXT = platform.createExtensionFunction( 
@@ -81,6 +83,7 @@ glPointParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glPointParameterfvEXT( GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

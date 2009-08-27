@@ -27,6 +27,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_cmyka'
+_DEPRECATED = False
 GL_CMYK_EXT = constant.Constant( 'GL_CMYK_EXT', 0x800C )
 GL_CMYKA_EXT = constant.Constant( 'GL_CMYKA_EXT', 0x800D )
 GL_PACK_CMYK_HINT_EXT = constant.Constant( 'GL_PACK_CMYK_HINT_EXT', 0x800E )

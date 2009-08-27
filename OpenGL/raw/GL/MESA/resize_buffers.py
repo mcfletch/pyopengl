@@ -28,6 +28,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_MESA_resize_buffers'
+_DEPRECATED = False
 
 glResizeBuffersMESA = platform.createExtensionFunction( 
 	'glResizeBuffersMESA', dll=platform.GL,
@@ -36,6 +37,7 @@ glResizeBuffersMESA = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glResizeBuffersMESA(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 

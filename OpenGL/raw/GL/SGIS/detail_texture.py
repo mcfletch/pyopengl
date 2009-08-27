@@ -25,6 +25,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_detail_texture'
+_DEPRECATED = False
 GL_DETAIL_TEXTURE_2D_SGIS = constant.Constant( 'GL_DETAIL_TEXTURE_2D_SGIS', 0x8095 )
 GL_DETAIL_TEXTURE_2D_BINDING_SGIS = constant.Constant( 'GL_DETAIL_TEXTURE_2D_BINDING_SGIS', 0x8096 )
 GL_LINEAR_DETAIL_SGIS = constant.Constant( 'GL_LINEAR_DETAIL_SGIS', 0x8097 )
@@ -40,6 +41,7 @@ glDetailTexFuncSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glDetailTexFuncSGIS( GLenum(target), GLsizei(n), GLfloatArray(points) ) -> None',
 	argNames = ('target', 'n', 'points',),
+	deprecated = _DEPRECATED,
 )
 
 glGetDetailTexFuncSGIS = platform.createExtensionFunction( 
@@ -49,6 +51,7 @@ glGetDetailTexFuncSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetDetailTexFuncSGIS( GLenum(target), GLfloatArray(points) ) -> None',
 	argNames = ('target', 'points',),
+	deprecated = _DEPRECATED,
 )
 
 

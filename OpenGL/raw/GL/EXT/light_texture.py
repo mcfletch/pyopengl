@@ -31,6 +31,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_light_texture'
+_DEPRECATED = False
 GL_FRAGMENT_MATERIAL_EXT = constant.Constant( 'GL_FRAGMENT_MATERIAL_EXT', 0x8349 )
 GL_FRAGMENT_NORMAL_EXT = constant.Constant( 'GL_FRAGMENT_NORMAL_EXT', 0x834A )
 GL_FRAGMENT_COLOR_EXT = constant.Constant( 'GL_FRAGMENT_COLOR_EXT', 0x834C )
@@ -47,6 +48,7 @@ glApplyTextureEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glApplyTextureEXT( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureLightEXT = platform.createExtensionFunction( 
@@ -56,6 +58,7 @@ glTextureLightEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glTextureLightEXT( GLenum(pname) ) -> None',
 	argNames = ('pname',),
+	deprecated = _DEPRECATED,
 )
 
 glTextureMaterialEXT = platform.createExtensionFunction( 
@@ -65,6 +68,7 @@ glTextureMaterialEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glTextureMaterialEXT( GLenum(face), GLenum(mode) ) -> None',
 	argNames = ('face', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 

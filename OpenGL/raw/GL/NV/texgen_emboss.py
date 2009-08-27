@@ -30,6 +30,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_texgen_emboss'
+_DEPRECATED = False
 GL_EMBOSS_LIGHT_NV = constant.Constant( 'GL_EMBOSS_LIGHT_NV', 0x855D )
 GL_EMBOSS_CONSTANT_NV = constant.Constant( 'GL_EMBOSS_CONSTANT_NV', 0x855E )
 GL_EMBOSS_MAP_NV = constant.Constant( 'GL_EMBOSS_MAP_NV', 0x855F )

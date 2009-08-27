@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_draw_buffers'
+_DEPRECATED = False
 GL_MAX_DRAW_BUFFERS_ATI = constant.Constant( 'GL_MAX_DRAW_BUFFERS_ATI', 0x8824 )
 glget.addGLGetConstant( GL_MAX_DRAW_BUFFERS_ATI, (1,) )
 GL_DRAW_BUFFER0_ATI = constant.Constant( 'GL_DRAW_BUFFER0_ATI', 0x8825 )
@@ -42,6 +43,7 @@ glDrawBuffersATI = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDrawBuffersATI( GLsizei(n), GLuintArray(bufs) ) -> None',
 	argNames = ('n', 'bufs',),
+	deprecated = _DEPRECATED,
 )
 
 

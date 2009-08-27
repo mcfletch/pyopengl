@@ -30,6 +30,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_resample'
+_DEPRECATED = False
 GL_PACK_RESAMPLE_SGIX = constant.Constant( 'GL_PACK_RESAMPLE_SGIX', 0x842C )
 glget.addGLGetConstant( GL_PACK_RESAMPLE_SGIX, (1,) )
 GL_UNPACK_RESAMPLE_SGIX = constant.Constant( 'GL_UNPACK_RESAMPLE_SGIX', 0x842D )

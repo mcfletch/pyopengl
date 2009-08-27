@@ -24,6 +24,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_polygon_offset'
+_DEPRECATED = False
 GL_POLYGON_OFFSET_EXT = constant.Constant( 'GL_POLYGON_OFFSET_EXT', 0x8037 )
 glget.addGLGetConstant( GL_POLYGON_OFFSET_EXT, (1,) )
 GL_POLYGON_OFFSET_FACTOR_EXT = constant.Constant( 'GL_POLYGON_OFFSET_FACTOR_EXT', 0x8038 )
@@ -37,6 +38,7 @@ glPolygonOffsetEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat,),
 	doc = 'glPolygonOffsetEXT( GLfloat(factor), GLfloat(bias) ) -> None',
 	argNames = ('factor', 'bias',),
+	deprecated = _DEPRECATED,
 )
 
 

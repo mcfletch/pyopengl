@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_float'
+_DEPRECATED = False
 GL_TEXTURE_RED_TYPE_ARB = constant.Constant( 'GL_TEXTURE_RED_TYPE_ARB', 0x8C10 )
 GL_TEXTURE_GREEN_TYPE_ARB = constant.Constant( 'GL_TEXTURE_GREEN_TYPE_ARB', 0x8C11 )
 GL_TEXTURE_BLUE_TYPE_ARB = constant.Constant( 'GL_TEXTURE_BLUE_TYPE_ARB', 0x8C12 )

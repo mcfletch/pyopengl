@@ -16,6 +16,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_index_array_formats'
+_DEPRECATED = False
 GL_IUI_V2F_EXT = constant.Constant( 'GL_IUI_V2F_EXT', 0x81AD )
 GL_IUI_V3F_EXT = constant.Constant( 'GL_IUI_V3F_EXT', 0x81AE )
 GL_IUI_N3F_V2F_EXT = constant.Constant( 'GL_IUI_N3F_V2F_EXT', 0x81AF )

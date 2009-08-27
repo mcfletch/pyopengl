@@ -22,6 +22,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_blend_minmax'
+_DEPRECATED = False
 GL_FUNC_ADD_EXT = constant.Constant( 'GL_FUNC_ADD_EXT', 0x8006 )
 GL_MIN_EXT = constant.Constant( 'GL_MIN_EXT', 0x8007 )
 GL_MAX_EXT = constant.Constant( 'GL_MAX_EXT', 0x8008 )
@@ -34,6 +35,7 @@ glBlendEquationEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glBlendEquationEXT( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 

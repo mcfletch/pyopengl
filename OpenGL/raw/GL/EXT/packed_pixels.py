@@ -21,6 +21,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_packed_pixels'
+_DEPRECATED = False
 GL_UNSIGNED_BYTE_3_3_2_EXT = constant.Constant( 'GL_UNSIGNED_BYTE_3_3_2_EXT', 0x8032 )
 GL_UNSIGNED_SHORT_4_4_4_4_EXT = constant.Constant( 'GL_UNSIGNED_SHORT_4_4_4_4_EXT', 0x8033 )
 GL_UNSIGNED_SHORT_5_5_5_1_EXT = constant.Constant( 'GL_UNSIGNED_SHORT_5_5_5_1_EXT', 0x8034 )

@@ -91,6 +91,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_framebuffer_object'
+_DEPRECATED = False
 GL_INVALID_FRAMEBUFFER_OPERATION_EXT = constant.Constant( 'GL_INVALID_FRAMEBUFFER_OPERATION_EXT', 0x506 )
 GL_MAX_RENDERBUFFER_SIZE_EXT = constant.Constant( 'GL_MAX_RENDERBUFFER_SIZE_EXT', 0x84E8 )
 glget.addGLGetConstant( GL_MAX_RENDERBUFFER_SIZE_EXT, (1,) )
@@ -153,6 +154,7 @@ glIsRenderbufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsRenderbufferEXT( GLuint(renderbuffer) ) -> constants.GLboolean',
 	argNames = ('renderbuffer',),
+	deprecated = _DEPRECATED,
 )
 
 glBindRenderbufferEXT = platform.createExtensionFunction( 
@@ -162,6 +164,7 @@ glBindRenderbufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glBindRenderbufferEXT( GLenum(target), GLuint(renderbuffer) ) -> None',
 	argNames = ('target', 'renderbuffer',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteRenderbuffersEXT = platform.createExtensionFunction( 
@@ -171,6 +174,7 @@ glDeleteRenderbuffersEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteRenderbuffersEXT( GLsizei(n), GLuintArray(renderbuffers) ) -> None',
 	argNames = ('n', 'renderbuffers',),
+	deprecated = _DEPRECATED,
 )
 
 glGenRenderbuffersEXT = platform.createExtensionFunction( 
@@ -180,6 +184,7 @@ glGenRenderbuffersEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenRenderbuffersEXT( GLsizei(n), GLuintArray(renderbuffers) ) -> None',
 	argNames = ('n', 'renderbuffers',),
+	deprecated = _DEPRECATED,
 )
 
 glRenderbufferStorageEXT = platform.createExtensionFunction( 
@@ -189,6 +194,7 @@ glRenderbufferStorageEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLsizei, constants.GLsizei,),
 	doc = 'glRenderbufferStorageEXT( GLenum(target), GLenum(internalformat), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('target', 'internalformat', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 glGetRenderbufferParameterivEXT = platform.createExtensionFunction( 
@@ -198,6 +204,7 @@ glGetRenderbufferParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetRenderbufferParameterivEXT( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glIsFramebufferEXT = platform.createExtensionFunction( 
@@ -207,6 +214,7 @@ glIsFramebufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsFramebufferEXT( GLuint(framebuffer) ) -> constants.GLboolean',
 	argNames = ('framebuffer',),
+	deprecated = _DEPRECATED,
 )
 
 glBindFramebufferEXT = platform.createExtensionFunction( 
@@ -216,6 +224,7 @@ glBindFramebufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glBindFramebufferEXT( GLenum(target), GLuint(framebuffer) ) -> None',
 	argNames = ('target', 'framebuffer',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteFramebuffersEXT = platform.createExtensionFunction( 
@@ -225,6 +234,7 @@ glDeleteFramebuffersEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteFramebuffersEXT( GLsizei(n), GLuintArray(framebuffers) ) -> None',
 	argNames = ('n', 'framebuffers',),
+	deprecated = _DEPRECATED,
 )
 
 glGenFramebuffersEXT = platform.createExtensionFunction( 
@@ -234,6 +244,7 @@ glGenFramebuffersEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenFramebuffersEXT( GLsizei(n), GLuintArray(framebuffers) ) -> None',
 	argNames = ('n', 'framebuffers',),
+	deprecated = _DEPRECATED,
 )
 
 glCheckFramebufferStatusEXT = platform.createExtensionFunction( 
@@ -243,6 +254,7 @@ glCheckFramebufferStatusEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glCheckFramebufferStatusEXT( GLenum(target) ) -> constants.GLenum',
 	argNames = ('target',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTexture1DEXT = platform.createExtensionFunction( 
@@ -252,6 +264,7 @@ glFramebufferTexture1DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint,),
 	doc = 'glFramebufferTexture1DEXT( GLenum(target), GLenum(attachment), GLenum(textarget), GLuint(texture), GLint(level) ) -> None',
 	argNames = ('target', 'attachment', 'textarget', 'texture', 'level',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTexture2DEXT = platform.createExtensionFunction( 
@@ -261,6 +274,7 @@ glFramebufferTexture2DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint,),
 	doc = 'glFramebufferTexture2DEXT( GLenum(target), GLenum(attachment), GLenum(textarget), GLuint(texture), GLint(level) ) -> None',
 	argNames = ('target', 'attachment', 'textarget', 'texture', 'level',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTexture3DEXT = platform.createExtensionFunction( 
@@ -270,6 +284,7 @@ glFramebufferTexture3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint, constants.GLint,),
 	doc = 'glFramebufferTexture3DEXT( GLenum(target), GLenum(attachment), GLenum(textarget), GLuint(texture), GLint(level), GLint(zoffset) ) -> None',
 	argNames = ('target', 'attachment', 'textarget', 'texture', 'level', 'zoffset',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferRenderbufferEXT = platform.createExtensionFunction( 
@@ -279,6 +294,7 @@ glFramebufferRenderbufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glFramebufferRenderbufferEXT( GLenum(target), GLenum(attachment), GLenum(renderbuffertarget), GLuint(renderbuffer) ) -> None',
 	argNames = ('target', 'attachment', 'renderbuffertarget', 'renderbuffer',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFramebufferAttachmentParameterivEXT = platform.createExtensionFunction( 
@@ -288,6 +304,7 @@ glGetFramebufferAttachmentParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetFramebufferAttachmentParameterivEXT( GLenum(target), GLenum(attachment), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'attachment', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGenerateMipmapEXT = platform.createExtensionFunction( 
@@ -297,6 +314,7 @@ glGenerateMipmapEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glGenerateMipmapEXT( GLenum(target) ) -> None',
 	argNames = ('target',),
+	deprecated = _DEPRECATED,
 )
 
 

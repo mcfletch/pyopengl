@@ -85,6 +85,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_vertex_array_range'
+_DEPRECATED = False
 GL_VERTEX_ARRAY_RANGE_NV = constant.Constant( 'GL_VERTEX_ARRAY_RANGE_NV', 0x851D )
 GL_VERTEX_ARRAY_RANGE_LENGTH_NV = constant.Constant( 'GL_VERTEX_ARRAY_RANGE_LENGTH_NV', 0x851E )
 glget.addGLGetConstant( GL_VERTEX_ARRAY_RANGE_LENGTH_NV, (1,) )
@@ -100,6 +101,7 @@ glFlushVertexArrayRangeNV = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glFlushVertexArrayRangeNV(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glVertexArrayRangeNV = platform.createExtensionFunction( 
@@ -109,6 +111,7 @@ glVertexArrayRangeNV = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glVertexArrayRangeNV( GLsizei(length), c_void_p(pointer) ) -> None',
 	argNames = ('length', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 

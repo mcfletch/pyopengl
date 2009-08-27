@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_2_1'
+_DEPRECATED = True
 GL_CURRENT_RASTER_SECONDARY_COLOR = constant.Constant( 'GL_CURRENT_RASTER_SECONDARY_COLOR', 0x845F )
 GL_SLUMINANCE_ALPHA = constant.Constant( 'GL_SLUMINANCE_ALPHA', 0x8C44 )
 GL_SLUMINANCE8_ALPHA8 = constant.Constant( 'GL_SLUMINANCE8_ALPHA8', 0x8C45 )

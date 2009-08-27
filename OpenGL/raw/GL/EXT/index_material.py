@@ -22,6 +22,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_index_material'
+_DEPRECATED = False
 GL_INDEX_MATERIAL_EXT = constant.Constant( 'GL_INDEX_MATERIAL_EXT', 0x81B8 )
 GL_INDEX_MATERIAL_PARAMETER_EXT = constant.Constant( 'GL_INDEX_MATERIAL_PARAMETER_EXT', 0x81B9 )
 GL_INDEX_MATERIAL_FACE_EXT = constant.Constant( 'GL_INDEX_MATERIAL_FACE_EXT', 0x81BA )
@@ -32,6 +33,7 @@ glIndexMaterialEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glIndexMaterialEXT( GLenum(face), GLenum(mode) ) -> None',
 	argNames = ('face', 'mode',),
+	deprecated = _DEPRECATED,
 )
 
 

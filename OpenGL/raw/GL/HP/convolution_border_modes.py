@@ -15,6 +15,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_HP_convolution_border_modes'
+_DEPRECATED = False
 GL_IGNORE_BORDER_HP = constant.Constant( 'GL_IGNORE_BORDER_HP', 0x8150 )
 GL_CONSTANT_BORDER_HP = constant.Constant( 'GL_CONSTANT_BORDER_HP', 0x8151 )
 GL_REPLICATE_BORDER_HP = constant.Constant( 'GL_REPLICATE_BORDER_HP', 0x8153 )

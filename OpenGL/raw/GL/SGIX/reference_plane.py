@@ -34,6 +34,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_reference_plane'
+_DEPRECATED = False
 GL_REFERENCE_PLANE_SGIX = constant.Constant( 'GL_REFERENCE_PLANE_SGIX', 0x817D )
 GL_REFERENCE_PLANE_EQUATION_SGIX = constant.Constant( 'GL_REFERENCE_PLANE_EQUATION_SGIX', 0x817E )
 glReferencePlaneSGIX = platform.createExtensionFunction( 
@@ -43,6 +44,7 @@ glReferencePlaneSGIX = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glReferencePlaneSGIX( GLdoubleArray(equation) ) -> None',
 	argNames = ('equation',),
+	deprecated = _DEPRECATED,
 )
 
 

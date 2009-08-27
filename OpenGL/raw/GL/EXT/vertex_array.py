@@ -25,6 +25,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_vertex_array'
+_DEPRECATED = False
 GL_VERTEX_ARRAY_EXT = constant.Constant( 'GL_VERTEX_ARRAY_EXT', 0x8074 )
 GL_NORMAL_ARRAY_EXT = constant.Constant( 'GL_NORMAL_ARRAY_EXT', 0x8075 )
 GL_COLOR_ARRAY_EXT = constant.Constant( 'GL_COLOR_ARRAY_EXT', 0x8076 )
@@ -84,6 +85,7 @@ glArrayElementEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint,),
 	doc = 'glArrayElementEXT( GLint(i) ) -> None',
 	argNames = ('i',),
+	deprecated = _DEPRECATED,
 )
 
 glColorPointerEXT = platform.createExtensionFunction( 
@@ -93,6 +95,7 @@ glColorPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glColorPointerEXT( GLint(size), GLenum(type), GLsizei(stride), GLsizei(count), c_void_p(pointer) ) -> None',
 	argNames = ('size', 'type', 'stride', 'count', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawArraysEXT = platform.createExtensionFunction( 
@@ -102,6 +105,7 @@ glDrawArraysEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLsizei,),
 	doc = 'glDrawArraysEXT( GLenum(mode), GLint(first), GLsizei(count) ) -> None',
 	argNames = ('mode', 'first', 'count',),
+	deprecated = _DEPRECATED,
 )
 
 glEdgeFlagPointerEXT = platform.createExtensionFunction( 
@@ -111,6 +115,7 @@ glEdgeFlagPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, constants.GLsizei, ctypes.POINTER(constants.GLboolean),),
 	doc = 'glEdgeFlagPointerEXT( GLsizei(stride), GLsizei(count), POINTER(constants.GLboolean)(pointer) ) -> None',
 	argNames = ('stride', 'count', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glGetPointervEXT = platform.createExtensionFunction( 
@@ -120,6 +125,7 @@ glGetPointervEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glGetPointervEXT( GLenum(pname), POINTER(ctypes.c_void_p)(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glIndexPointerEXT = platform.createExtensionFunction( 
@@ -129,6 +135,7 @@ glIndexPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glIndexPointerEXT( GLenum(type), GLsizei(stride), GLsizei(count), c_void_p(pointer) ) -> None',
 	argNames = ('type', 'stride', 'count', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glNormalPointerEXT = platform.createExtensionFunction( 
@@ -138,6 +145,7 @@ glNormalPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glNormalPointerEXT( GLenum(type), GLsizei(stride), GLsizei(count), c_void_p(pointer) ) -> None',
 	argNames = ('type', 'stride', 'count', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoordPointerEXT = platform.createExtensionFunction( 
@@ -147,6 +155,7 @@ glTexCoordPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glTexCoordPointerEXT( GLint(size), GLenum(type), GLsizei(stride), GLsizei(count), c_void_p(pointer) ) -> None',
 	argNames = ('size', 'type', 'stride', 'count', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexPointerEXT = platform.createExtensionFunction( 
@@ -156,6 +165,7 @@ glVertexPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glVertexPointerEXT( GLint(size), GLenum(type), GLsizei(stride), GLsizei(count), c_void_p(pointer) ) -> None',
 	argNames = ('size', 'type', 'stride', 'count', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 

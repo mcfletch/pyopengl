@@ -66,6 +66,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_occlusion_query'
+_DEPRECATED = False
 GL_PIXEL_COUNTER_BITS_NV = constant.Constant( 'GL_PIXEL_COUNTER_BITS_NV', 0x8864 )
 glget.addGLGetConstant( GL_PIXEL_COUNTER_BITS_NV, (1,) )
 GL_CURRENT_OCCLUSION_QUERY_ID_NV = constant.Constant( 'GL_CURRENT_OCCLUSION_QUERY_ID_NV', 0x8865 )
@@ -79,6 +80,7 @@ glGenOcclusionQueriesNV = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenOcclusionQueriesNV( GLsizei(n), GLuintArray(ids) ) -> None',
 	argNames = ('n', 'ids',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteOcclusionQueriesNV = platform.createExtensionFunction( 
@@ -88,6 +90,7 @@ glDeleteOcclusionQueriesNV = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteOcclusionQueriesNV( GLsizei(n), GLuintArray(ids) ) -> None',
 	argNames = ('n', 'ids',),
+	deprecated = _DEPRECATED,
 )
 
 glIsOcclusionQueryNV = platform.createExtensionFunction( 
@@ -97,6 +100,7 @@ glIsOcclusionQueryNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsOcclusionQueryNV( GLuint(id) ) -> constants.GLboolean',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glBeginOcclusionQueryNV = platform.createExtensionFunction( 
@@ -106,6 +110,7 @@ glBeginOcclusionQueryNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glBeginOcclusionQueryNV( GLuint(id) ) -> None',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glEndOcclusionQueryNV = platform.createExtensionFunction( 
@@ -115,6 +120,7 @@ glEndOcclusionQueryNV = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glEndOcclusionQueryNV(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glGetOcclusionQueryivNV = platform.createExtensionFunction( 
@@ -124,6 +130,7 @@ glGetOcclusionQueryivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetOcclusionQueryivNV( GLuint(id), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('id', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetOcclusionQueryuivNV = platform.createExtensionFunction( 
@@ -133,6 +140,7 @@ glGetOcclusionQueryuivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetOcclusionQueryuivNV( GLuint(id), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('id', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

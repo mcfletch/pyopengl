@@ -49,6 +49,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_ycbcr_422'
+_DEPRECATED = False
 GL_YCBCR_422_APPLE = constant.Constant( 'GL_YCBCR_422_APPLE', 0x85B9 )
 GL_UNSIGNED_SHORT_8_8_APPLE = constant.Constant( 'GL_UNSIGNED_SHORT_8_8_APPLE', 0x85BA )
 GL_UNSIGNED_SHORT_8_8_REV_APPLE = constant.Constant( 'GL_UNSIGNED_SHORT_8_8_REV_APPLE', 0x85BB )

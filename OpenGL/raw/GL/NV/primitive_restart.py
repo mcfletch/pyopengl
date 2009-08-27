@@ -36,6 +36,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_primitive_restart'
+_DEPRECATED = False
 GL_PRIMITIVE_RESTART_NV = constant.Constant( 'GL_PRIMITIVE_RESTART_NV', 0x8558 )
 glget.addGLGetConstant( GL_PRIMITIVE_RESTART_NV, (1,) )
 GL_PRIMITIVE_RESTART_INDEX_NV = constant.Constant( 'GL_PRIMITIVE_RESTART_INDEX_NV', 0x8559 )
@@ -47,6 +48,7 @@ glPrimitiveRestartNV = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glPrimitiveRestartNV(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glPrimitiveRestartIndexNV = platform.createExtensionFunction( 
@@ -56,6 +58,7 @@ glPrimitiveRestartIndexNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glPrimitiveRestartIndexNV( GLuint(index) ) -> None',
 	argNames = ('index',),
+	deprecated = _DEPRECATED,
 )
 
 

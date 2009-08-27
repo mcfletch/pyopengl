@@ -26,6 +26,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_vertex_preclip'
+_DEPRECATED = False
 GL_VERTEX_PRECLIP_SGIX = constant.Constant( 'GL_VERTEX_PRECLIP_SGIX', 0x83EE )
 GL_VERTEX_PRECLIP_HINT_SGIX = constant.Constant( 'GL_VERTEX_PRECLIP_HINT_SGIX', 0x83EF )
 

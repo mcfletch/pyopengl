@@ -29,6 +29,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_matrix_palette'
+_DEPRECATED = False
 GL_MATRIX_PALETTE_ARB = constant.Constant( 'GL_MATRIX_PALETTE_ARB', 0x8840 )
 GL_MAX_MATRIX_PALETTE_STACK_DEPTH_ARB = constant.Constant( 'GL_MAX_MATRIX_PALETTE_STACK_DEPTH_ARB', 0x8841 )
 GL_MAX_PALETTE_MATRICES_ARB = constant.Constant( 'GL_MAX_PALETTE_MATRICES_ARB', 0x8842 )
@@ -49,6 +50,7 @@ glCurrentPaletteMatrixARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint,),
 	doc = 'glCurrentPaletteMatrixARB( GLint(index) ) -> None',
 	argNames = ('index',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixIndexubvARB = platform.createExtensionFunction( 
@@ -58,6 +60,7 @@ glMatrixIndexubvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLubyteArray,),
 	doc = 'glMatrixIndexubvARB( GLint(size), GLubyteArray(indices) ) -> None',
 	argNames = ('size', 'indices',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixIndexusvARB = platform.createExtensionFunction( 
@@ -67,6 +70,7 @@ glMatrixIndexusvARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLushortArray,),
 	doc = 'glMatrixIndexusvARB( GLint(size), GLushortArray(indices) ) -> None',
 	argNames = ('size', 'indices',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixIndexuivARB = platform.createExtensionFunction( 
@@ -76,6 +80,7 @@ glMatrixIndexuivARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, arrays.GLuintArray,),
 	doc = 'glMatrixIndexuivARB( GLint(size), GLuintArray(indices) ) -> None',
 	argNames = ('size', 'indices',),
+	deprecated = _DEPRECATED,
 )
 
 glMatrixIndexPointerARB = platform.createExtensionFunction( 
@@ -85,6 +90,7 @@ glMatrixIndexPointerARB = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glMatrixIndexPointerARB( GLint(size), GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('size', 'type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 

@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_env_crossbar'
+_DEPRECATED = False
 
 
 

@@ -15,6 +15,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_S3_s3tc'
+_DEPRECATED = False
 GL_RGB_S3TC = constant.Constant( 'GL_RGB_S3TC', 0x83A0 )
 GL_RGB4_S3TC = constant.Constant( 'GL_RGB4_S3TC', 0x83A1 )
 GL_RGBA_S3TC = constant.Constant( 'GL_RGBA_S3TC', 0x83A2 )

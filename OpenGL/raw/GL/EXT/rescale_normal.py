@@ -21,6 +21,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_rescale_normal'
+_DEPRECATED = False
 GL_RESCALE_NORMAL_EXT = constant.Constant( 'GL_RESCALE_NORMAL_EXT', 0x803A )
 
 

@@ -32,6 +32,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_texture_shader2'
+_DEPRECATED = False
 GL_DOT_PRODUCT_TEXTURE_3D_NV = constant.Constant( 'GL_DOT_PRODUCT_TEXTURE_3D_NV', 0x86EF )
 
 

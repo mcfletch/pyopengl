@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_multisample'
+_DEPRECATED = False
 GL_MULTISAMPLE_EXT = constant.Constant( 'GL_MULTISAMPLE_EXT', 0x809D )
 GL_SAMPLE_ALPHA_TO_MASK_EXT = constant.Constant( 'GL_SAMPLE_ALPHA_TO_MASK_EXT', 0x809E )
 GL_SAMPLE_ALPHA_TO_ONE_EXT = constant.Constant( 'GL_SAMPLE_ALPHA_TO_ONE_EXT', 0x809F )
@@ -34,6 +35,7 @@ glSampleMaskEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLclampf, constants.GLboolean,),
 	doc = 'glSampleMaskEXT( GLclampf(value), GLboolean(invert) ) -> None',
 	argNames = ('value', 'invert',),
+	deprecated = _DEPRECATED,
 )
 
 glSamplePatternEXT = platform.createExtensionFunction( 
@@ -43,6 +45,7 @@ glSamplePatternEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glSamplePatternEXT( GLenum(pattern) ) -> None',
 	argNames = ('pattern',),
+	deprecated = _DEPRECATED,
 )
 
 

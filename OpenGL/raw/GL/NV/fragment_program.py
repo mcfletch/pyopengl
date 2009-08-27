@@ -61,6 +61,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_fragment_program'
+_DEPRECATED = False
 GL_MAX_FRAGMENT_PROGRAM_LOCAL_PARAMETERS_NV = constant.Constant( 'GL_MAX_FRAGMENT_PROGRAM_LOCAL_PARAMETERS_NV', 0x8868 )
 glget.addGLGetConstant( GL_MAX_FRAGMENT_PROGRAM_LOCAL_PARAMETERS_NV, (1,) )
 GL_FRAGMENT_PROGRAM_NV = constant.Constant( 'GL_FRAGMENT_PROGRAM_NV', 0x8870 )
@@ -79,6 +80,7 @@ glProgramNamedParameter4fNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLubyteArray, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glProgramNamedParameter4fNV( GLuint(id), GLsizei(len), GLubyteArray(name), GLfloat(x), GLfloat(y), GLfloat(z), GLfloat(w) ) -> None',
 	argNames = ('id', 'len', 'name', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramNamedParameter4dNV = platform.createExtensionFunction( 
@@ -88,6 +90,7 @@ glProgramNamedParameter4dNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLubyteArray, constants.GLdouble, constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glProgramNamedParameter4dNV( GLuint(id), GLsizei(len), GLubyteArray(name), GLdouble(x), GLdouble(y), GLdouble(z), GLdouble(w) ) -> None',
 	argNames = ('id', 'len', 'name', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramNamedParameter4fvNV = platform.createExtensionFunction( 
@@ -97,6 +100,7 @@ glProgramNamedParameter4fvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLubyteArray, arrays.GLfloatArray,),
 	doc = 'glProgramNamedParameter4fvNV( GLuint(id), GLsizei(len), GLubyteArray(name), GLfloatArray(v) ) -> None',
 	argNames = ('id', 'len', 'name', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramNamedParameter4dvNV = platform.createExtensionFunction( 
@@ -106,6 +110,7 @@ glProgramNamedParameter4dvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLubyteArray, arrays.GLdoubleArray,),
 	doc = 'glProgramNamedParameter4dvNV( GLuint(id), GLsizei(len), GLubyteArray(name), GLdoubleArray(v) ) -> None',
 	argNames = ('id', 'len', 'name', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramNamedParameterfvNV = platform.createExtensionFunction( 
@@ -115,6 +120,7 @@ glGetProgramNamedParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLubyteArray, arrays.GLfloatArray,),
 	doc = 'glGetProgramNamedParameterfvNV( GLuint(id), GLsizei(len), GLubyteArray(name), GLfloatArray(params) ) -> None',
 	argNames = ('id', 'len', 'name', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramNamedParameterdvNV = platform.createExtensionFunction( 
@@ -124,6 +130,7 @@ glGetProgramNamedParameterdvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLsizei, arrays.GLubyteArray, arrays.GLdoubleArray,),
 	doc = 'glGetProgramNamedParameterdvNV( GLuint(id), GLsizei(len), GLubyteArray(name), GLdoubleArray(params) ) -> None',
 	argNames = ('id', 'len', 'name', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

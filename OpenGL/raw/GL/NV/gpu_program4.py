@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_gpu_program4'
+_DEPRECATED = False
 GL_MIN_PROGRAM_TEXEL_OFFSET_NV = constant.Constant( 'GL_MIN_PROGRAM_TEXEL_OFFSET_NV', 0x8904 )
 GL_MAX_PROGRAM_TEXEL_OFFSET_NV = constant.Constant( 'GL_MAX_PROGRAM_TEXEL_OFFSET_NV', 0x8905 )
 GL_PROGRAM_ATTRIB_COMPONENTS_NV = constant.Constant( 'GL_PROGRAM_ATTRIB_COMPONENTS_NV', 0x8906 )
@@ -25,6 +26,7 @@ glProgramLocalParameterI4iNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glProgramLocalParameterI4iNV( GLenum(target), GLuint(index), GLint(x), GLint(y), GLint(z), GLint(w) ) -> None',
 	argNames = ('target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParameterI4ivNV = platform.createExtensionFunction( 
@@ -34,6 +36,7 @@ glProgramLocalParameterI4ivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLintArray,),
 	doc = 'glProgramLocalParameterI4ivNV( GLenum(target), GLuint(index), GLintArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParametersI4ivNV = platform.createExtensionFunction( 
@@ -43,6 +46,7 @@ glProgramLocalParametersI4ivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glProgramLocalParametersI4ivNV( GLenum(target), GLuint(index), GLsizei(count), GLintArray(params) ) -> None',
 	argNames = ('target', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParameterI4uiNV = platform.createExtensionFunction( 
@@ -52,6 +56,7 @@ glProgramLocalParameterI4uiNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glProgramLocalParameterI4uiNV( GLenum(target), GLuint(index), GLuint(x), GLuint(y), GLuint(z), GLuint(w) ) -> None',
 	argNames = ('target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParameterI4uivNV = platform.createExtensionFunction( 
@@ -61,6 +66,7 @@ glProgramLocalParameterI4uivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLuintArray,),
 	doc = 'glProgramLocalParameterI4uivNV( GLenum(target), GLuint(index), GLuintArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParametersI4uivNV = platform.createExtensionFunction( 
@@ -70,6 +76,7 @@ glProgramLocalParametersI4uivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glProgramLocalParametersI4uivNV( GLenum(target), GLuint(index), GLsizei(count), GLuintArray(params) ) -> None',
 	argNames = ('target', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParameterI4iNV = platform.createExtensionFunction( 
@@ -79,6 +86,7 @@ glProgramEnvParameterI4iNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glProgramEnvParameterI4iNV( GLenum(target), GLuint(index), GLint(x), GLint(y), GLint(z), GLint(w) ) -> None',
 	argNames = ('target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParameterI4ivNV = platform.createExtensionFunction( 
@@ -88,6 +96,7 @@ glProgramEnvParameterI4ivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLintArray,),
 	doc = 'glProgramEnvParameterI4ivNV( GLenum(target), GLuint(index), GLintArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParametersI4ivNV = platform.createExtensionFunction( 
@@ -97,6 +106,7 @@ glProgramEnvParametersI4ivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLsizei, arrays.GLintArray,),
 	doc = 'glProgramEnvParametersI4ivNV( GLenum(target), GLuint(index), GLsizei(count), GLintArray(params) ) -> None',
 	argNames = ('target', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParameterI4uiNV = platform.createExtensionFunction( 
@@ -106,6 +116,7 @@ glProgramEnvParameterI4uiNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glProgramEnvParameterI4uiNV( GLenum(target), GLuint(index), GLuint(x), GLuint(y), GLuint(z), GLuint(w) ) -> None',
 	argNames = ('target', 'index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParameterI4uivNV = platform.createExtensionFunction( 
@@ -115,6 +126,7 @@ glProgramEnvParameterI4uivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLuintArray,),
 	doc = 'glProgramEnvParameterI4uivNV( GLenum(target), GLuint(index), GLuintArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramEnvParametersI4uivNV = platform.createExtensionFunction( 
@@ -124,6 +136,7 @@ glProgramEnvParametersI4uivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glProgramEnvParametersI4uivNV( GLenum(target), GLuint(index), GLsizei(count), GLuintArray(params) ) -> None',
 	argNames = ('target', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramLocalParameterIivNV = platform.createExtensionFunction( 
@@ -133,6 +146,7 @@ glGetProgramLocalParameterIivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLintArray,),
 	doc = 'glGetProgramLocalParameterIivNV( GLenum(target), GLuint(index), GLintArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramLocalParameterIuivNV = platform.createExtensionFunction( 
@@ -142,6 +156,7 @@ glGetProgramLocalParameterIuivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLuintArray,),
 	doc = 'glGetProgramLocalParameterIuivNV( GLenum(target), GLuint(index), GLuintArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramEnvParameterIivNV = platform.createExtensionFunction( 
@@ -151,6 +166,7 @@ glGetProgramEnvParameterIivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLintArray,),
 	doc = 'glGetProgramEnvParameterIivNV( GLenum(target), GLuint(index), GLintArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetProgramEnvParameterIuivNV = platform.createExtensionFunction( 
@@ -160,6 +176,7 @@ glGetProgramEnvParameterIuivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, arrays.GLuintArray,),
 	doc = 'glGetProgramEnvParameterIuivNV( GLenum(target), GLuint(index), GLuintArray(params) ) -> None',
 	argNames = ('target', 'index', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

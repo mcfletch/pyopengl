@@ -23,6 +23,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_texture_color_mask'
+_DEPRECATED = False
 GL_TEXTURE_COLOR_WRITEMASK_SGIS = constant.Constant( 'GL_TEXTURE_COLOR_WRITEMASK_SGIS', 0x81EF )
 glTextureColorMaskSGIS = platform.createExtensionFunction( 
 	'glTextureColorMaskSGIS', dll=platform.GL,
@@ -31,6 +32,7 @@ glTextureColorMaskSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLboolean, constants.GLboolean, constants.GLboolean, constants.GLboolean,),
 	doc = 'glTextureColorMaskSGIS( GLboolean(red), GLboolean(green), GLboolean(blue), GLboolean(alpha) ) -> None',
 	argNames = ('red', 'green', 'blue', 'alpha',),
+	deprecated = _DEPRECATED,
 )
 
 

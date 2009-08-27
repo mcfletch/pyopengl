@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_blend_color'
+_DEPRECATED = False
 GL_CONSTANT_COLOR_EXT = constant.Constant( 'GL_CONSTANT_COLOR_EXT', 0x8001 )
 GL_ONE_MINUS_CONSTANT_COLOR_EXT = constant.Constant( 'GL_ONE_MINUS_CONSTANT_COLOR_EXT', 0x8002 )
 GL_CONSTANT_ALPHA_EXT = constant.Constant( 'GL_CONSTANT_ALPHA_EXT', 0x8003 )
@@ -30,6 +31,7 @@ glBlendColorEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLclampf, constants.GLclampf, constants.GLclampf, constants.GLclampf,),
 	doc = 'glBlendColorEXT( GLclampf(red), GLclampf(green), GLclampf(blue), GLclampf(alpha) ) -> None',
 	argNames = ('red', 'green', 'blue', 'alpha',),
+	deprecated = _DEPRECATED,
 )
 
 

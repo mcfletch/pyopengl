@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_AMD_vertex_shader_tesselator'
+_DEPRECATED = False
 GL_SAMPLER_BUFFER_AMD = constant.Constant( 'GL_SAMPLER_BUFFER_AMD', 0x9001 )
 GL_INT_SAMPLER_BUFFER_AMD = constant.Constant( 'GL_INT_SAMPLER_BUFFER_AMD', 0x9002 )
 GL_UNSIGNED_INT_SAMPLER_BUFFER_AMD = constant.Constant( 'GL_UNSIGNED_INT_SAMPLER_BUFFER_AMD', 0x9003 )
@@ -24,6 +25,7 @@ glTessellationFactorAMD = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat,),
 	doc = 'glTessellationFactorAMD( GLfloat(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 glTessellationModeAMD = platform.createExtensionFunction( 
@@ -33,6 +35,7 @@ glTessellationModeAMD = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glTessellationModeAMD( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 

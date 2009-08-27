@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_vertex_shader'
+_DEPRECATED = False
 GL_VERTEX_SHADER_EXT = constant.Constant( 'GL_VERTEX_SHADER_EXT', 0x8780 )
 glget.addGLGetConstant( GL_VERTEX_SHADER_EXT, (1,) )
 GL_VERTEX_SHADER_BINDING_EXT = constant.Constant( 'GL_VERTEX_SHADER_BINDING_EXT', 0x8781 )
@@ -138,6 +139,7 @@ glBeginVertexShaderEXT = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glBeginVertexShaderEXT(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glEndVertexShaderEXT = platform.createExtensionFunction( 
@@ -147,6 +149,7 @@ glEndVertexShaderEXT = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glEndVertexShaderEXT(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glBindVertexShaderEXT = platform.createExtensionFunction( 
@@ -156,6 +159,7 @@ glBindVertexShaderEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glBindVertexShaderEXT( GLuint(id) ) -> None',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glGenVertexShadersEXT = platform.createExtensionFunction( 
@@ -165,6 +169,7 @@ glGenVertexShadersEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glGenVertexShadersEXT( GLuint(range) ) -> constants.GLuint',
 	argNames = ('range',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteVertexShaderEXT = platform.createExtensionFunction( 
@@ -174,6 +179,7 @@ glDeleteVertexShaderEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glDeleteVertexShaderEXT( GLuint(id) ) -> None',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glShaderOp1EXT = platform.createExtensionFunction( 
@@ -183,6 +189,7 @@ glShaderOp1EXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint,),
 	doc = 'glShaderOp1EXT( GLenum(op), GLuint(res), GLuint(arg1) ) -> None',
 	argNames = ('op', 'res', 'arg1',),
+	deprecated = _DEPRECATED,
 )
 
 glShaderOp2EXT = platform.createExtensionFunction( 
@@ -192,6 +199,7 @@ glShaderOp2EXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glShaderOp2EXT( GLenum(op), GLuint(res), GLuint(arg1), GLuint(arg2) ) -> None',
 	argNames = ('op', 'res', 'arg1', 'arg2',),
+	deprecated = _DEPRECATED,
 )
 
 glShaderOp3EXT = platform.createExtensionFunction( 
@@ -201,6 +209,7 @@ glShaderOp3EXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glShaderOp3EXT( GLenum(op), GLuint(res), GLuint(arg1), GLuint(arg2), GLuint(arg3) ) -> None',
 	argNames = ('op', 'res', 'arg1', 'arg2', 'arg3',),
+	deprecated = _DEPRECATED,
 )
 
 glSwizzleEXT = platform.createExtensionFunction( 
@@ -210,6 +219,7 @@ glSwizzleEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glSwizzleEXT( GLuint(res), GLuint(in), GLenum(outX), GLenum(outY), GLenum(outZ), GLenum(outW) ) -> None',
 	argNames = ('res', 'in', 'outX', 'outY', 'outZ', 'outW',),
+	deprecated = _DEPRECATED,
 )
 
 glWriteMaskEXT = platform.createExtensionFunction( 
@@ -219,6 +229,7 @@ glWriteMaskEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glWriteMaskEXT( GLuint(res), GLuint(in), GLenum(outX), GLenum(outY), GLenum(outZ), GLenum(outW) ) -> None',
 	argNames = ('res', 'in', 'outX', 'outY', 'outZ', 'outW',),
+	deprecated = _DEPRECATED,
 )
 
 glInsertComponentEXT = platform.createExtensionFunction( 
@@ -228,6 +239,7 @@ glInsertComponentEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glInsertComponentEXT( GLuint(res), GLuint(src), GLuint(num) ) -> None',
 	argNames = ('res', 'src', 'num',),
+	deprecated = _DEPRECATED,
 )
 
 glExtractComponentEXT = platform.createExtensionFunction( 
@@ -237,6 +249,7 @@ glExtractComponentEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glExtractComponentEXT( GLuint(res), GLuint(src), GLuint(num) ) -> None',
 	argNames = ('res', 'src', 'num',),
+	deprecated = _DEPRECATED,
 )
 
 glGenSymbolsEXT = platform.createExtensionFunction( 
@@ -246,6 +259,7 @@ glGenSymbolsEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glGenSymbolsEXT( GLenum(datatype), GLenum(storagetype), GLenum(range), GLuint(components) ) -> constants.GLuint',
 	argNames = ('datatype', 'storagetype', 'range', 'components',),
+	deprecated = _DEPRECATED,
 )
 
 glSetInvariantEXT = platform.createExtensionFunction( 
@@ -255,6 +269,7 @@ glSetInvariantEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glSetInvariantEXT( GLuint(id), GLenum(type), c_void_p(addr) ) -> None',
 	argNames = ('id', 'type', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glSetLocalConstantEXT = platform.createExtensionFunction( 
@@ -264,6 +279,7 @@ glSetLocalConstantEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glSetLocalConstantEXT( GLuint(id), GLenum(type), c_void_p(addr) ) -> None',
 	argNames = ('id', 'type', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glVariantbvEXT = platform.createExtensionFunction( 
@@ -273,6 +289,7 @@ glVariantbvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLbyteArray,),
 	doc = 'glVariantbvEXT( GLuint(id), GLbyteArray(addr) ) -> None',
 	argNames = ('id', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glVariantsvEXT = platform.createExtensionFunction( 
@@ -282,6 +299,7 @@ glVariantsvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLshortArray,),
 	doc = 'glVariantsvEXT( GLuint(id), GLshortArray(addr) ) -> None',
 	argNames = ('id', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glVariantivEXT = platform.createExtensionFunction( 
@@ -291,6 +309,7 @@ glVariantivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVariantivEXT( GLuint(id), GLintArray(addr) ) -> None',
 	argNames = ('id', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glVariantfvEXT = platform.createExtensionFunction( 
@@ -300,6 +319,7 @@ glVariantfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLfloatArray,),
 	doc = 'glVariantfvEXT( GLuint(id), GLfloatArray(addr) ) -> None',
 	argNames = ('id', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glVariantdvEXT = platform.createExtensionFunction( 
@@ -309,6 +329,7 @@ glVariantdvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLdoubleArray,),
 	doc = 'glVariantdvEXT( GLuint(id), GLdoubleArray(addr) ) -> None',
 	argNames = ('id', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glVariantubvEXT = platform.createExtensionFunction( 
@@ -318,6 +339,7 @@ glVariantubvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLubyteArray,),
 	doc = 'glVariantubvEXT( GLuint(id), GLubyteArray(addr) ) -> None',
 	argNames = ('id', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glVariantusvEXT = platform.createExtensionFunction( 
@@ -327,6 +349,7 @@ glVariantusvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLushortArray,),
 	doc = 'glVariantusvEXT( GLuint(id), GLushortArray(addr) ) -> None',
 	argNames = ('id', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glVariantuivEXT = platform.createExtensionFunction( 
@@ -336,6 +359,7 @@ glVariantuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVariantuivEXT( GLuint(id), GLuintArray(addr) ) -> None',
 	argNames = ('id', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glVariantPointerEXT = platform.createExtensionFunction( 
@@ -345,6 +369,7 @@ glVariantPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLuint, ctypes.c_void_p,),
 	doc = 'glVariantPointerEXT( GLuint(id), GLenum(type), GLuint(stride), c_void_p(addr) ) -> None',
 	argNames = ('id', 'type', 'stride', 'addr',),
+	deprecated = _DEPRECATED,
 )
 
 glEnableVariantClientStateEXT = platform.createExtensionFunction( 
@@ -354,6 +379,7 @@ glEnableVariantClientStateEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glEnableVariantClientStateEXT( GLuint(id) ) -> None',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glDisableVariantClientStateEXT = platform.createExtensionFunction( 
@@ -363,6 +389,7 @@ glDisableVariantClientStateEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glDisableVariantClientStateEXT( GLuint(id) ) -> None',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glBindLightParameterEXT = platform.createExtensionFunction( 
@@ -372,6 +399,7 @@ glBindLightParameterEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glBindLightParameterEXT( GLenum(light), GLenum(value) ) -> constants.GLuint',
 	argNames = ('light', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glBindMaterialParameterEXT = platform.createExtensionFunction( 
@@ -381,6 +409,7 @@ glBindMaterialParameterEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glBindMaterialParameterEXT( GLenum(face), GLenum(value) ) -> constants.GLuint',
 	argNames = ('face', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glBindTexGenParameterEXT = platform.createExtensionFunction( 
@@ -390,6 +419,7 @@ glBindTexGenParameterEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glBindTexGenParameterEXT( GLenum(unit), GLenum(coord), GLenum(value) ) -> constants.GLuint',
 	argNames = ('unit', 'coord', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glBindTextureUnitParameterEXT = platform.createExtensionFunction( 
@@ -399,6 +429,7 @@ glBindTextureUnitParameterEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum,),
 	doc = 'glBindTextureUnitParameterEXT( GLenum(unit), GLenum(value) ) -> constants.GLuint',
 	argNames = ('unit', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glBindParameterEXT = platform.createExtensionFunction( 
@@ -408,6 +439,7 @@ glBindParameterEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glBindParameterEXT( GLenum(value) ) -> constants.GLuint',
 	argNames = ('value',),
+	deprecated = _DEPRECATED,
 )
 
 glIsVariantEnabledEXT = platform.createExtensionFunction( 
@@ -417,6 +449,7 @@ glIsVariantEnabledEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum,),
 	doc = 'glIsVariantEnabledEXT( GLuint(id), GLenum(cap) ) -> constants.GLboolean',
 	argNames = ('id', 'cap',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVariantBooleanvEXT = platform.createExtensionFunction( 
@@ -426,6 +459,7 @@ glGetVariantBooleanvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.POINTER(constants.GLboolean),),
 	doc = 'glGetVariantBooleanvEXT( GLuint(id), GLenum(value), POINTER(constants.GLboolean)(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVariantIntegervEXT = platform.createExtensionFunction( 
@@ -435,6 +469,7 @@ glGetVariantIntegervEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetVariantIntegervEXT( GLuint(id), GLenum(value), GLintArray(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVariantFloatvEXT = platform.createExtensionFunction( 
@@ -444,6 +479,7 @@ glGetVariantFloatvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetVariantFloatvEXT( GLuint(id), GLenum(value), GLfloatArray(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVariantPointervEXT = platform.createExtensionFunction( 
@@ -453,6 +489,7 @@ glGetVariantPointervEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.POINTER(ctypes.c_void_p),),
 	doc = 'glGetVariantPointervEXT( GLuint(id), GLenum(value), POINTER(ctypes.c_void_p)(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetInvariantBooleanvEXT = platform.createExtensionFunction( 
@@ -462,6 +499,7 @@ glGetInvariantBooleanvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.POINTER(constants.GLboolean),),
 	doc = 'glGetInvariantBooleanvEXT( GLuint(id), GLenum(value), POINTER(constants.GLboolean)(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetInvariantIntegervEXT = platform.createExtensionFunction( 
@@ -471,6 +509,7 @@ glGetInvariantIntegervEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetInvariantIntegervEXT( GLuint(id), GLenum(value), GLintArray(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetInvariantFloatvEXT = platform.createExtensionFunction( 
@@ -480,6 +519,7 @@ glGetInvariantFloatvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetInvariantFloatvEXT( GLuint(id), GLenum(value), GLfloatArray(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetLocalConstantBooleanvEXT = platform.createExtensionFunction( 
@@ -489,6 +529,7 @@ glGetLocalConstantBooleanvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.POINTER(constants.GLboolean),),
 	doc = 'glGetLocalConstantBooleanvEXT( GLuint(id), GLenum(value), POINTER(constants.GLboolean)(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetLocalConstantIntegervEXT = platform.createExtensionFunction( 
@@ -498,6 +539,7 @@ glGetLocalConstantIntegervEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetLocalConstantIntegervEXT( GLuint(id), GLenum(value), GLintArray(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetLocalConstantFloatvEXT = platform.createExtensionFunction( 
@@ -507,6 +549,7 @@ glGetLocalConstantFloatvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetLocalConstantFloatvEXT( GLuint(id), GLenum(value), GLfloatArray(data) ) -> None',
 	argNames = ('id', 'value', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 

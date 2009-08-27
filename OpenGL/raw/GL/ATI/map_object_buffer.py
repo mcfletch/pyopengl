@@ -18,6 +18,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ATI_map_object_buffer'
+_DEPRECATED = False
 
 glMapObjectBufferATI = platform.createExtensionFunction( 
 	'glMapObjectBufferATI', dll=platform.GL,
@@ -26,6 +27,7 @@ glMapObjectBufferATI = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glMapObjectBufferATI( GLuint(buffer) ) -> ctypes.c_void_p',
 	argNames = ('buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glUnmapObjectBufferATI = platform.createExtensionFunction( 
@@ -35,6 +37,7 @@ glUnmapObjectBufferATI = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glUnmapObjectBufferATI( GLuint(buffer) ) -> None',
 	argNames = ('buffer',),
+	deprecated = _DEPRECATED,
 )
 
 

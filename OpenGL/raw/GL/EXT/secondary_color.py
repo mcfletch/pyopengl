@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_secondary_color'
+_DEPRECATED = False
 GL_COLOR_SUM_EXT = constant.Constant( 'GL_COLOR_SUM_EXT', 0x8458 )
 glget.addGLGetConstant( GL_COLOR_SUM_EXT, (1,) )
 GL_CURRENT_SECONDARY_COLOR_EXT = constant.Constant( 'GL_CURRENT_SECONDARY_COLOR_EXT', 0x8459 )
@@ -36,6 +37,7 @@ glSecondaryColor3bEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLbyte, constants.GLbyte, constants.GLbyte,),
 	doc = 'glSecondaryColor3bEXT( GLbyte(red), GLbyte(green), GLbyte(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3bvEXT = platform.createExtensionFunction( 
@@ -45,6 +47,7 @@ glSecondaryColor3bvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLbyteArray,),
 	doc = 'glSecondaryColor3bvEXT( GLbyteArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3dEXT = platform.createExtensionFunction( 
@@ -54,6 +57,7 @@ glSecondaryColor3dEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glSecondaryColor3dEXT( GLdouble(red), GLdouble(green), GLdouble(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3dvEXT = platform.createExtensionFunction( 
@@ -63,6 +67,7 @@ glSecondaryColor3dvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glSecondaryColor3dvEXT( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3fEXT = platform.createExtensionFunction( 
@@ -72,6 +77,7 @@ glSecondaryColor3fEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glSecondaryColor3fEXT( GLfloat(red), GLfloat(green), GLfloat(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3fvEXT = platform.createExtensionFunction( 
@@ -81,6 +87,7 @@ glSecondaryColor3fvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glSecondaryColor3fvEXT( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3iEXT = platform.createExtensionFunction( 
@@ -90,6 +97,7 @@ glSecondaryColor3iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glSecondaryColor3iEXT( GLint(red), GLint(green), GLint(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3ivEXT = platform.createExtensionFunction( 
@@ -99,6 +107,7 @@ glSecondaryColor3ivEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glSecondaryColor3ivEXT( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3sEXT = platform.createExtensionFunction( 
@@ -108,6 +117,7 @@ glSecondaryColor3sEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glSecondaryColor3sEXT( GLshort(red), GLshort(green), GLshort(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3svEXT = platform.createExtensionFunction( 
@@ -117,6 +127,7 @@ glSecondaryColor3svEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glSecondaryColor3svEXT( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3ubEXT = platform.createExtensionFunction( 
@@ -126,6 +137,7 @@ glSecondaryColor3ubEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLubyte, constants.GLubyte, constants.GLubyte,),
 	doc = 'glSecondaryColor3ubEXT( GLubyte(red), GLubyte(green), GLubyte(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3ubvEXT = platform.createExtensionFunction( 
@@ -135,6 +147,7 @@ glSecondaryColor3ubvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLubyteArray,),
 	doc = 'glSecondaryColor3ubvEXT( GLubyteArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3uiEXT = platform.createExtensionFunction( 
@@ -144,6 +157,7 @@ glSecondaryColor3uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glSecondaryColor3uiEXT( GLuint(red), GLuint(green), GLuint(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3uivEXT = platform.createExtensionFunction( 
@@ -153,6 +167,7 @@ glSecondaryColor3uivEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray,),
 	doc = 'glSecondaryColor3uivEXT( GLuintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3usEXT = platform.createExtensionFunction( 
@@ -162,6 +177,7 @@ glSecondaryColor3usEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLushort, constants.GLushort, constants.GLushort,),
 	doc = 'glSecondaryColor3usEXT( GLushort(red), GLushort(green), GLushort(blue) ) -> None',
 	argNames = ('red', 'green', 'blue',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColor3usvEXT = platform.createExtensionFunction( 
@@ -171,6 +187,7 @@ glSecondaryColor3usvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLushortArray,),
 	doc = 'glSecondaryColor3usvEXT( GLushortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glSecondaryColorPointerEXT = platform.createExtensionFunction( 
@@ -180,6 +197,7 @@ glSecondaryColorPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glSecondaryColorPointerEXT( GLint(size), GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('size', 'type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 

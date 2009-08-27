@@ -83,6 +83,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_framebuffer_multisample'
+_DEPRECATED = False
 GL_RENDERBUFFER_SAMPLES_EXT = constant.Constant( 'GL_RENDERBUFFER_SAMPLES_EXT', 0x8CAB )
 GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT = constant.Constant( 'GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT', 0x8D56 )
 GL_MAX_SAMPLES_EXT = constant.Constant( 'GL_MAX_SAMPLES_EXT', 0x8D57 )
@@ -93,6 +94,7 @@ glRenderbufferStorageMultisampleEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLenum, constants.GLsizei, constants.GLsizei,),
 	doc = 'glRenderbufferStorageMultisampleEXT( GLenum(target), GLsizei(samples), GLenum(internalformat), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('target', 'samples', 'internalformat', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 
 

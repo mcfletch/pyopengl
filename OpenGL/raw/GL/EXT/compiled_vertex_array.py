@@ -28,6 +28,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_compiled_vertex_array'
+_DEPRECATED = False
 GL_ARRAY_ELEMENT_LOCK_FIRST_EXT = constant.Constant( 'GL_ARRAY_ELEMENT_LOCK_FIRST_EXT', 0x81A8 )
 GL_ARRAY_ELEMENT_LOCK_COUNT_EXT = constant.Constant( 'GL_ARRAY_ELEMENT_LOCK_COUNT_EXT', 0x81A9 )
 glLockArraysEXT = platform.createExtensionFunction( 
@@ -37,6 +38,7 @@ glLockArraysEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei,),
 	doc = 'glLockArraysEXT( GLint(first), GLsizei(count) ) -> None',
 	argNames = ('first', 'count',),
+	deprecated = _DEPRECATED,
 )
 
 glUnlockArraysEXT = platform.createExtensionFunction( 
@@ -46,6 +48,7 @@ glUnlockArraysEXT = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glUnlockArraysEXT(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 

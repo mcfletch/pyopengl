@@ -37,6 +37,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_OML_subsample'
+_DEPRECATED = False
 GL_FORMAT_SUBSAMPLE_24_24_OML = constant.Constant( 'GL_FORMAT_SUBSAMPLE_24_24_OML', 0x8982 )
 GL_FORMAT_SUBSAMPLE_244_244_OML = constant.Constant( 'GL_FORMAT_SUBSAMPLE_244_244_OML', 0x8983 )
 

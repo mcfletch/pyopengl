@@ -18,6 +18,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_clipmap'
+_DEPRECATED = False
 GL_LINEAR_CLIPMAP_LINEAR_SGIX = constant.Constant( 'GL_LINEAR_CLIPMAP_LINEAR_SGIX', 0x8170 )
 GL_TEXTURE_CLIPMAP_CENTER_SGIX = constant.Constant( 'GL_TEXTURE_CLIPMAP_CENTER_SGIX', 0x8171 )
 GL_TEXTURE_CLIPMAP_FRAME_SGIX = constant.Constant( 'GL_TEXTURE_CLIPMAP_FRAME_SGIX', 0x8172 )

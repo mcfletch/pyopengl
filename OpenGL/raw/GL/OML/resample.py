@@ -29,6 +29,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_OML_resample'
+_DEPRECATED = False
 GL_PACK_RESAMPLE_OML = constant.Constant( 'GL_PACK_RESAMPLE_OML', 0x8984 )
 glget.addGLGetConstant( GL_PACK_RESAMPLE_OML, (1,) )
 GL_UNPACK_RESAMPLE_OML = constant.Constant( 'GL_UNPACK_RESAMPLE_OML', 0x8985 )

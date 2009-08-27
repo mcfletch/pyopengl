@@ -20,6 +20,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture3D'
+_DEPRECATED = False
 GL_PACK_SKIP_IMAGES_EXT = constant.Constant( 'GL_PACK_SKIP_IMAGES_EXT', 0x806B )
 glget.addGLGetConstant( GL_PACK_SKIP_IMAGES_EXT, (1,) )
 GL_PACK_IMAGE_HEIGHT_EXT = constant.Constant( 'GL_PACK_IMAGE_HEIGHT_EXT', 0x806C )
@@ -42,6 +43,7 @@ glTexImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLenum, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTexImage3DEXT( GLenum(target), GLint(level), GLenum(internalformat), GLsizei(width), GLsizei(height), GLsizei(depth), GLint(border), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('target', 'level', 'internalformat', 'width', 'height', 'depth', 'border', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glTexSubImage3DEXT = platform.createExtensionFunction( 
@@ -51,6 +53,7 @@ glTexSubImage3DEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTexSubImage3DEXT( GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'yoffset', 'zoffset', 'width', 'height', 'depth', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 

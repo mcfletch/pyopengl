@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_gpu_program_parameters'
+_DEPRECATED = False
 
 glProgramEnvParameters4fvEXT = platform.createExtensionFunction( 
 	'glProgramEnvParameters4fvEXT', dll=platform.GL,
@@ -18,6 +19,7 @@ glProgramEnvParameters4fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glProgramEnvParameters4fvEXT( GLenum(target), GLuint(index), GLsizei(count), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glProgramLocalParameters4fvEXT = platform.createExtensionFunction( 
@@ -27,6 +29,7 @@ glProgramLocalParameters4fvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glProgramLocalParameters4fvEXT( GLenum(target), GLuint(index), GLsizei(count), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'index', 'count', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

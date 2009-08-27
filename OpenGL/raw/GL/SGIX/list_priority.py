@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_list_priority'
+_DEPRECATED = False
 GL_LIST_PRIORITY_SGIX = constant.Constant( 'GL_LIST_PRIORITY_SGIX', 0x8182 )
 glGetListParameterfvSGIX = platform.createExtensionFunction( 
 	'glGetListParameterfvSGIX', dll=platform.GL,
@@ -25,6 +26,7 @@ glGetListParameterfvSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetListParameterfvSGIX( GLuint(list), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('list', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetListParameterivSGIX = platform.createExtensionFunction( 
@@ -34,6 +36,7 @@ glGetListParameterivSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetListParameterivSGIX( GLuint(list), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('list', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glListParameterfSGIX = platform.createExtensionFunction( 
@@ -43,6 +46,7 @@ glListParameterfSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLfloat,),
 	doc = 'glListParameterfSGIX( GLuint(list), GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('list', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glListParameterfvSGIX = platform.createExtensionFunction( 
@@ -52,6 +56,7 @@ glListParameterfvSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glListParameterfvSGIX( GLuint(list), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('list', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glListParameteriSGIX = platform.createExtensionFunction( 
@@ -61,6 +66,7 @@ glListParameteriSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, constants.GLint,),
 	doc = 'glListParameteriSGIX( GLuint(list), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('list', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glListParameterivSGIX = platform.createExtensionFunction( 
@@ -70,6 +76,7 @@ glListParameterivSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glListParameterivSGIX( GLuint(list), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('list', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

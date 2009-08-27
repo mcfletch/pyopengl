@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_bindable_uniform'
+_DEPRECATED = False
 GL_MAX_VERTEX_BINDABLE_UNIFORMS_EXT = constant.Constant( 'GL_MAX_VERTEX_BINDABLE_UNIFORMS_EXT', 0x8DE2 )
 GL_MAX_FRAGMENT_BINDABLE_UNIFORMS_EXT = constant.Constant( 'GL_MAX_FRAGMENT_BINDABLE_UNIFORMS_EXT', 0x8DE3 )
 GL_MAX_GEOMETRY_BINDABLE_UNIFORMS_EXT = constant.Constant( 'GL_MAX_GEOMETRY_BINDABLE_UNIFORMS_EXT', 0x8DE4 )
@@ -23,6 +24,7 @@ glUniformBufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLuint,),
 	doc = 'glUniformBufferEXT( GLuint(program), GLint(location), GLuint(buffer) ) -> None',
 	argNames = ('program', 'location', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 glGetUniformBufferSizeEXT = platform.createExtensionFunction( 
@@ -32,6 +34,7 @@ glGetUniformBufferSizeEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint,),
 	doc = 'glGetUniformBufferSizeEXT( GLuint(program), GLint(location) ) -> constants.GLint',
 	argNames = ('program', 'location',),
+	deprecated = _DEPRECATED,
 )
 
 glGetUniformOffsetEXT = platform.createExtensionFunction( 
@@ -41,6 +44,7 @@ glGetUniformOffsetEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint,),
 	doc = 'glGetUniformOffsetEXT( GLuint(program), GLint(location) ) -> constants.GLintptr',
 	argNames = ('program', 'location',),
+	deprecated = _DEPRECATED,
 )
 
 

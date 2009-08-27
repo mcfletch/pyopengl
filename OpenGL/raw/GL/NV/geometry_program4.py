@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_geometry_program4'
+_DEPRECATED = False
 GL_LINES_ADJACENCY_EXT = constant.Constant( 'GL_LINES_ADJACENCY_EXT', 0xA )
 GL_LINE_STRIP_ADJACENCY_EXT = constant.Constant( 'GL_LINE_STRIP_ADJACENCY_EXT', 0xB )
 GL_TRIANGLES_ADJACENCY_EXT = constant.Constant( 'GL_TRIANGLES_ADJACENCY_EXT', 0xC )
@@ -33,6 +34,7 @@ glProgramVertexLimitNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glProgramVertexLimitNV( GLenum(target), GLint(limit) ) -> None',
 	argNames = ('target', 'limit',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTextureEXT = platform.createExtensionFunction( 
@@ -42,6 +44,7 @@ glFramebufferTextureEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint,),
 	doc = 'glFramebufferTextureEXT( GLenum(target), GLenum(attachment), GLuint(texture), GLint(level) ) -> None',
 	argNames = ('target', 'attachment', 'texture', 'level',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTextureLayerEXT = platform.createExtensionFunction( 
@@ -51,6 +54,7 @@ glFramebufferTextureLayerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint, constants.GLint,),
 	doc = 'glFramebufferTextureLayerEXT( GLenum(target), GLenum(attachment), GLuint(texture), GLint(level), GLint(layer) ) -> None',
 	argNames = ('target', 'attachment', 'texture', 'level', 'layer',),
+	deprecated = _DEPRECATED,
 )
 
 glFramebufferTextureFaceEXT = platform.createExtensionFunction( 
@@ -60,6 +64,7 @@ glFramebufferTextureFaceEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint, constants.GLint, constants.GLenum,),
 	doc = 'glFramebufferTextureFaceEXT( GLenum(target), GLenum(attachment), GLuint(texture), GLint(level), GLenum(face) ) -> None',
 	argNames = ('target', 'attachment', 'texture', 'level', 'face',),
+	deprecated = _DEPRECATED,
 )
 
 

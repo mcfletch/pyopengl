@@ -18,6 +18,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_texture_compression_vtc'
+_DEPRECATED = False
 
 
 

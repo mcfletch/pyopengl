@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_2_1'
+_DEPRECATED = False
 GL_PIXEL_PACK_BUFFER = constant.Constant( 'GL_PIXEL_PACK_BUFFER', 0x88EB )
 GL_PIXEL_UNPACK_BUFFER = constant.Constant( 'GL_PIXEL_UNPACK_BUFFER', 0x88EC )
 GL_PIXEL_PACK_BUFFER_BINDING = constant.Constant( 'GL_PIXEL_PACK_BUFFER_BINDING', 0x88ED )
@@ -33,6 +34,7 @@ glUniformMatrix2x3fv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glUniformMatrix2x3fv( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniformMatrix3x2fv = platform.createExtensionFunction( 
@@ -42,6 +44,7 @@ glUniformMatrix3x2fv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glUniformMatrix3x2fv( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniformMatrix2x4fv = platform.createExtensionFunction( 
@@ -51,6 +54,7 @@ glUniformMatrix2x4fv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glUniformMatrix2x4fv( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniformMatrix4x2fv = platform.createExtensionFunction( 
@@ -60,6 +64,7 @@ glUniformMatrix4x2fv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glUniformMatrix4x2fv( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniformMatrix3x4fv = platform.createExtensionFunction( 
@@ -69,6 +74,7 @@ glUniformMatrix3x4fv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glUniformMatrix3x4fv( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 
 glUniformMatrix4x3fv = platform.createExtensionFunction( 
@@ -78,6 +84,7 @@ glUniformMatrix4x3fv = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLsizei, constants.GLboolean, arrays.GLfloatArray,),
 	doc = 'glUniformMatrix4x3fv( GLint(location), GLsizei(count), GLboolean(transpose), GLfloatArray(value) ) -> None',
 	argNames = ('location', 'count', 'transpose', 'value',),
+	deprecated = _DEPRECATED,
 )
 # import legacy entry points to allow checking for bool(entryPoint)
 from OpenGL.raw.GL.VERSION.GL_2_1_DEPRECATED import *

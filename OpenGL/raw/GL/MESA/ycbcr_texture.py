@@ -26,6 +26,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_MESA_ycbcr_texture'
+_DEPRECATED = False
 GL_UNSIGNED_SHORT_8_8_MESA = constant.Constant( 'GL_UNSIGNED_SHORT_8_8_MESA', 0x85BA )
 GL_UNSIGNED_SHORT_8_8_REV_MESA = constant.Constant( 'GL_UNSIGNED_SHORT_8_8_REV_MESA', 0x85BB )
 GL_YCBCR_MESA = constant.Constant( 'GL_YCBCR_MESA', 0x8757 )

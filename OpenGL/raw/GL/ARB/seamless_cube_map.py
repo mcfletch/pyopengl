@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_seamless_cube_map'
+_DEPRECATED = False
 GL_TEXTURE_CUBE_MAP_SEAMLESS = constant.Constant( 'GL_TEXTURE_CUBE_MAP_SEAMLESS', 0x884F )
 
 

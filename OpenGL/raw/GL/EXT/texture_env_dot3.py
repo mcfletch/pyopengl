@@ -28,6 +28,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_env_dot3'
+_DEPRECATED = False
 GL_DOT3_RGB_EXT = constant.Constant( 'GL_DOT3_RGB_EXT', 0x8740 )
 GL_DOT3_RGBA_EXT = constant.Constant( 'GL_DOT3_RGBA_EXT', 0x8741 )
 

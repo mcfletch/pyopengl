@@ -39,6 +39,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_register_combiners2'
+_DEPRECATED = False
 GL_PER_STAGE_CONSTANTS_NV = constant.Constant( 'GL_PER_STAGE_CONSTANTS_NV', 0x8535 )
 glget.addGLGetConstant( GL_PER_STAGE_CONSTANTS_NV, (1,) )
 glCombinerStageParameterfvNV = platform.createExtensionFunction( 
@@ -48,6 +49,7 @@ glCombinerStageParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glCombinerStageParameterfvNV( GLenum(stage), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('stage', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetCombinerStageParameterfvNV = platform.createExtensionFunction( 
@@ -57,6 +59,7 @@ glGetCombinerStageParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetCombinerStageParameterfvNV( GLenum(stage), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('stage', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

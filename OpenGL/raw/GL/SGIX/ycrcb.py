@@ -36,6 +36,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_ycrcb'
+_DEPRECATED = False
 GL_YCRCB_422_SGIX = constant.Constant( 'GL_YCRCB_422_SGIX', 0x81BB )
 GL_YCRCB_444_SGIX = constant.Constant( 'GL_YCRCB_444_SGIX', 0x81BC )
 

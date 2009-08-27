@@ -37,6 +37,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture'
+_DEPRECATED = False
 GL_ALPHA4_EXT = constant.Constant( 'GL_ALPHA4_EXT', 0x803B )
 GL_ALPHA8_EXT = constant.Constant( 'GL_ALPHA8_EXT', 0x803C )
 GL_ALPHA12_EXT = constant.Constant( 'GL_ALPHA12_EXT', 0x803D )

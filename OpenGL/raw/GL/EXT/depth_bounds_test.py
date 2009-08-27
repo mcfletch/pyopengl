@@ -54,6 +54,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_depth_bounds_test'
+_DEPRECATED = False
 GL_DEPTH_BOUNDS_TEST_EXT = constant.Constant( 'GL_DEPTH_BOUNDS_TEST_EXT', 0x8890 )
 glget.addGLGetConstant( GL_DEPTH_BOUNDS_TEST_EXT, (1,) )
 GL_DEPTH_BOUNDS_EXT = constant.Constant( 'GL_DEPTH_BOUNDS_EXT', 0x8891 )
@@ -65,6 +66,7 @@ glDepthBoundsEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLclampd, constants.GLclampd,),
 	doc = 'glDepthBoundsEXT( GLclampd(zmin), GLclampd(zmax) ) -> None',
 	argNames = ('zmin', 'zmax',),
+	deprecated = _DEPRECATED,
 )
 
 

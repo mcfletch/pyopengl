@@ -18,6 +18,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_blend_subtract'
+_DEPRECATED = False
 GL_FUNC_SUBTRACT_EXT = constant.Constant( 'GL_FUNC_SUBTRACT_EXT', 0x800A )
 GL_FUNC_REVERSE_SUBTRACT_EXT = constant.Constant( 'GL_FUNC_REVERSE_SUBTRACT_EXT', 0x800B )
 

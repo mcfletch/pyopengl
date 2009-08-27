@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_array'
+_DEPRECATED = False
 GL_TEXTURE_1D_ARRAY_EXT = constant.Constant( 'GL_TEXTURE_1D_ARRAY_EXT', 0x8C18 )
 GL_PROXY_TEXTURE_1D_ARRAY_EXT = constant.Constant( 'GL_PROXY_TEXTURE_1D_ARRAY_EXT', 0x8C19 )
 GL_TEXTURE_2D_ARRAY_EXT = constant.Constant( 'GL_TEXTURE_2D_ARRAY_EXT', 0x8C1A )

@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_FfdMask'
+_DEPRECATED = False
 GL_TEXTURE_DEFORMATION_BIT_SGIX = constant.Constant( 'GL_TEXTURE_DEFORMATION_BIT_SGIX', 0x1 )
 GL_GEOMETRY_DEFORMATION_BIT_SGIX = constant.Constant( 'GL_GEOMETRY_DEFORMATION_BIT_SGIX', 0x2 )
 

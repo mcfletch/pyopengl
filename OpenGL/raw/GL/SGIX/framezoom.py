@@ -34,6 +34,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_framezoom'
+_DEPRECATED = False
 GL_FRAMEZOOM_SGIX = constant.Constant( 'GL_FRAMEZOOM_SGIX', 0x818B )
 GL_FRAMEZOOM_FACTOR_SGIX = constant.Constant( 'GL_FRAMEZOOM_FACTOR_SGIX', 0x818C )
 GL_MAX_FRAMEZOOM_FACTOR_SGIX = constant.Constant( 'GL_MAX_FRAMEZOOM_FACTOR_SGIX', 0x818D )
@@ -44,6 +45,7 @@ glFrameZoomSGIX = platform.createExtensionFunction(
 	argTypes=(constants.GLint,),
 	doc = 'glFrameZoomSGIX( GLint(factor) ) -> None',
 	argNames = ('factor',),
+	deprecated = _DEPRECATED,
 )
 
 

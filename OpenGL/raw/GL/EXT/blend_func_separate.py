@@ -18,6 +18,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_blend_func_separate'
+_DEPRECATED = False
 GL_BLEND_DST_RGB_EXT = constant.Constant( 'GL_BLEND_DST_RGB_EXT', 0x80C8 )
 glget.addGLGetConstant( GL_BLEND_DST_RGB_EXT, (1,) )
 GL_BLEND_SRC_RGB_EXT = constant.Constant( 'GL_BLEND_SRC_RGB_EXT', 0x80C9 )
@@ -33,6 +34,7 @@ glBlendFuncSeparateEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glBlendFuncSeparateEXT( GLenum(sfactorRGB), GLenum(dfactorRGB), GLenum(sfactorAlpha), GLenum(dfactorAlpha) ) -> None',
 	argNames = ('sfactorRGB', 'dfactorRGB', 'sfactorAlpha', 'dfactorAlpha',),
+	deprecated = _DEPRECATED,
 )
 
 

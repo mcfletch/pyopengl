@@ -16,6 +16,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_DFX_tbuffer'
+_DEPRECATED = False
 
 glTbufferMask3DFX = platform.createExtensionFunction( 
 	'glTbufferMask3DFX', dll=platform.GL,
@@ -24,6 +25,7 @@ glTbufferMask3DFX = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glTbufferMask3DFX( GLuint(mask) ) -> None',
 	argNames = ('mask',),
+	deprecated = _DEPRECATED,
 )
 
 

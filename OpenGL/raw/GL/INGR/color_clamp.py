@@ -18,6 +18,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_INGR_color_clamp'
+_DEPRECATED = False
 GL_RED_MIN_CLAMP_INGR = constant.Constant( 'GL_RED_MIN_CLAMP_INGR', 0x8560 )
 glget.addGLGetConstant( GL_RED_MIN_CLAMP_INGR, (1,) )
 GL_GREEN_MIN_CLAMP_INGR = constant.Constant( 'GL_GREEN_MIN_CLAMP_INGR', 0x8561 )

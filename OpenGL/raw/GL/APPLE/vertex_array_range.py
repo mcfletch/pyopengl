@@ -114,6 +114,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_vertex_array_range'
+_DEPRECATED = False
 GL_VERTEX_ARRAY_RANGE_APPLE = constant.Constant( 'GL_VERTEX_ARRAY_RANGE_APPLE', 0x851D )
 GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE = constant.Constant( 'GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE', 0x851E )
 glget.addGLGetConstant( GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE, (1,) )
@@ -128,6 +129,7 @@ glVertexArrayRangeAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glVertexArrayRangeAPPLE( GLsizei(length), c_void_p(pointer) ) -> None',
 	argNames = ('length', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glFlushVertexArrayRangeAPPLE = platform.createExtensionFunction( 
@@ -137,6 +139,7 @@ glFlushVertexArrayRangeAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glFlushVertexArrayRangeAPPLE( GLsizei(length), c_void_p(pointer) ) -> None',
 	argNames = ('length', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexArrayParameteriAPPLE = platform.createExtensionFunction( 
@@ -146,6 +149,7 @@ glVertexArrayParameteriAPPLE = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glVertexArrayParameteriAPPLE( GLenum(pname), GLint(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 

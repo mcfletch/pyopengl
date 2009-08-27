@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_stencil_two_side'
+_DEPRECATED = False
 GL_STENCIL_TEST_TWO_SIDE_EXT = constant.Constant( 'GL_STENCIL_TEST_TWO_SIDE_EXT', 0x8910 )
 glget.addGLGetConstant( GL_STENCIL_TEST_TWO_SIDE_EXT, (1,) )
 GL_ACTIVE_STENCIL_FACE_EXT = constant.Constant( 'GL_ACTIVE_STENCIL_FACE_EXT', 0x8911 )
@@ -30,6 +31,7 @@ glActiveStencilFaceEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glActiveStencilFaceEXT( GLenum(face) ) -> None',
 	argNames = ('face',),
+	deprecated = _DEPRECATED,
 )
 
 

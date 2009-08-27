@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_shared_exponent'
+_DEPRECATED = False
 GL_RGB9_E5_EXT = constant.Constant( 'GL_RGB9_E5_EXT', 0x8C3D )
 GL_UNSIGNED_INT_5_9_9_9_REV_EXT = constant.Constant( 'GL_UNSIGNED_INT_5_9_9_9_REV_EXT', 0x8C3E )
 GL_TEXTURE_SHARED_SIZE_EXT = constant.Constant( 'GL_TEXTURE_SHARED_SIZE_EXT', 0x8C3F )

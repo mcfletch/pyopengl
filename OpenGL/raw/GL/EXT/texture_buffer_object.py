@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_texture_buffer_object'
+_DEPRECATED = False
 GL_TEXTURE_BUFFER_EXT = constant.Constant( 'GL_TEXTURE_BUFFER_EXT', 0x8C2A )
 GL_MAX_TEXTURE_BUFFER_SIZE_EXT = constant.Constant( 'GL_MAX_TEXTURE_BUFFER_SIZE_EXT', 0x8C2B )
 GL_TEXTURE_BINDING_BUFFER_EXT = constant.Constant( 'GL_TEXTURE_BINDING_BUFFER_EXT', 0x8C2C )
@@ -22,6 +23,7 @@ glTexBufferEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLuint,),
 	doc = 'glTexBufferEXT( GLenum(target), GLenum(internalformat), GLuint(buffer) ) -> None',
 	argNames = ('target', 'internalformat', 'buffer',),
+	deprecated = _DEPRECATED,
 )
 
 

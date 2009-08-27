@@ -44,6 +44,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_fragment_program2'
+_DEPRECATED = False
 GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV = constant.Constant( 'GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV', 0x88F4 )
 GL_MAX_PROGRAM_CALL_DEPTH_NV = constant.Constant( 'GL_MAX_PROGRAM_CALL_DEPTH_NV', 0x88F5 )
 GL_MAX_PROGRAM_IF_DEPTH_NV = constant.Constant( 'GL_MAX_PROGRAM_IF_DEPTH_NV', 0x88F6 )

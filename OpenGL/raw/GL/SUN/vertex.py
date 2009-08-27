@@ -16,6 +16,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SUN_vertex'
+_DEPRECATED = False
 
 glColor4ubVertex2fSUN = platform.createExtensionFunction( 
 	'glColor4ubVertex2fSUN', dll=platform.GL,
@@ -24,6 +25,7 @@ glColor4ubVertex2fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLubyte, constants.GLubyte, constants.GLubyte, constants.GLubyte, constants.GLfloat, constants.GLfloat,),
 	doc = 'glColor4ubVertex2fSUN( GLubyte(r), GLubyte(g), GLubyte(b), GLubyte(a), GLfloat(x), GLfloat(y) ) -> None',
 	argNames = ('r', 'g', 'b', 'a', 'x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glColor4ubVertex2fvSUN = platform.createExtensionFunction( 
@@ -33,6 +35,7 @@ glColor4ubVertex2fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLubyteArray, arrays.GLfloatArray,),
 	doc = 'glColor4ubVertex2fvSUN( GLubyteArray(c), GLfloatArray(v) ) -> None',
 	argNames = ('c', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glColor4ubVertex3fSUN = platform.createExtensionFunction( 
@@ -42,6 +45,7 @@ glColor4ubVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLubyte, constants.GLubyte, constants.GLubyte, constants.GLubyte, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glColor4ubVertex3fSUN( GLubyte(r), GLubyte(g), GLubyte(b), GLubyte(a), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('r', 'g', 'b', 'a', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glColor4ubVertex3fvSUN = platform.createExtensionFunction( 
@@ -51,6 +55,7 @@ glColor4ubVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLubyteArray, arrays.GLfloatArray,),
 	doc = 'glColor4ubVertex3fvSUN( GLubyteArray(c), GLfloatArray(v) ) -> None',
 	argNames = ('c', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glColor3fVertex3fSUN = platform.createExtensionFunction( 
@@ -60,6 +65,7 @@ glColor3fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glColor3fVertex3fSUN( GLfloat(r), GLfloat(g), GLfloat(b), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('r', 'g', 'b', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glColor3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -69,6 +75,7 @@ glColor3fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glColor3fVertex3fvSUN( GLfloatArray(c), GLfloatArray(v) ) -> None',
 	argNames = ('c', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glNormal3fVertex3fSUN = platform.createExtensionFunction( 
@@ -78,6 +85,7 @@ glNormal3fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glNormal3fVertex3fSUN( GLfloat(nx), GLfloat(ny), GLfloat(nz), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('nx', 'ny', 'nz', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glNormal3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -87,6 +95,7 @@ glNormal3fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glNormal3fVertex3fvSUN( GLfloatArray(n), GLfloatArray(v) ) -> None',
 	argNames = ('n', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glColor4fNormal3fVertex3fSUN = platform.createExtensionFunction( 
@@ -96,6 +105,7 @@ glColor4fNormal3fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glColor4fNormal3fVertex3fSUN( GLfloat(r), GLfloat(g), GLfloat(b), GLfloat(a), GLfloat(nx), GLfloat(ny), GLfloat(nz), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('r', 'g', 'b', 'a', 'nx', 'ny', 'nz', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glColor4fNormal3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -105,6 +115,7 @@ glColor4fNormal3fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glColor4fNormal3fVertex3fvSUN( GLfloatArray(c), GLfloatArray(n), GLfloatArray(v) ) -> None',
 	argNames = ('c', 'n', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fVertex3fSUN = platform.createExtensionFunction( 
@@ -114,6 +125,7 @@ glTexCoord2fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glTexCoord2fVertex3fSUN( GLfloat(s), GLfloat(t), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('s', 't', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fVertex3fvSUN = platform.createExtensionFunction( 
@@ -123,6 +135,7 @@ glTexCoord2fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glTexCoord2fVertex3fvSUN( GLfloatArray(tc), GLfloatArray(v) ) -> None',
 	argNames = ('tc', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord4fVertex4fSUN = platform.createExtensionFunction( 
@@ -132,6 +145,7 @@ glTexCoord4fVertex4fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glTexCoord4fVertex4fSUN( GLfloat(s), GLfloat(t), GLfloat(p), GLfloat(q), GLfloat(x), GLfloat(y), GLfloat(z), GLfloat(w) ) -> None',
 	argNames = ('s', 't', 'p', 'q', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord4fVertex4fvSUN = platform.createExtensionFunction( 
@@ -141,6 +155,7 @@ glTexCoord4fVertex4fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glTexCoord4fVertex4fvSUN( GLfloatArray(tc), GLfloatArray(v) ) -> None',
 	argNames = ('tc', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fColor4ubVertex3fSUN = platform.createExtensionFunction( 
@@ -150,6 +165,7 @@ glTexCoord2fColor4ubVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLubyte, constants.GLubyte, constants.GLubyte, constants.GLubyte, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glTexCoord2fColor4ubVertex3fSUN( GLfloat(s), GLfloat(t), GLubyte(r), GLubyte(g), GLubyte(b), GLubyte(a), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('s', 't', 'r', 'g', 'b', 'a', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fColor4ubVertex3fvSUN = platform.createExtensionFunction( 
@@ -159,6 +175,7 @@ glTexCoord2fColor4ubVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLubyteArray, arrays.GLfloatArray,),
 	doc = 'glTexCoord2fColor4ubVertex3fvSUN( GLfloatArray(tc), GLubyteArray(c), GLfloatArray(v) ) -> None',
 	argNames = ('tc', 'c', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fColor3fVertex3fSUN = platform.createExtensionFunction( 
@@ -168,6 +185,7 @@ glTexCoord2fColor3fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glTexCoord2fColor3fVertex3fSUN( GLfloat(s), GLfloat(t), GLfloat(r), GLfloat(g), GLfloat(b), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('s', 't', 'r', 'g', 'b', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fColor3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -177,6 +195,7 @@ glTexCoord2fColor3fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glTexCoord2fColor3fVertex3fvSUN( GLfloatArray(tc), GLfloatArray(c), GLfloatArray(v) ) -> None',
 	argNames = ('tc', 'c', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fNormal3fVertex3fSUN = platform.createExtensionFunction( 
@@ -186,6 +205,7 @@ glTexCoord2fNormal3fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glTexCoord2fNormal3fVertex3fSUN( GLfloat(s), GLfloat(t), GLfloat(nx), GLfloat(ny), GLfloat(nz), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('s', 't', 'nx', 'ny', 'nz', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fNormal3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -195,6 +215,7 @@ glTexCoord2fNormal3fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glTexCoord2fNormal3fVertex3fvSUN( GLfloatArray(tc), GLfloatArray(n), GLfloatArray(v) ) -> None',
 	argNames = ('tc', 'n', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fColor4fNormal3fVertex3fSUN = platform.createExtensionFunction( 
@@ -204,6 +225,7 @@ glTexCoord2fColor4fNormal3fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glTexCoord2fColor4fNormal3fVertex3fSUN( GLfloat(s), GLfloat(t), GLfloat(r), GLfloat(g), GLfloat(b), GLfloat(a), GLfloat(nx), GLfloat(ny), GLfloat(nz), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('s', 't', 'r', 'g', 'b', 'a', 'nx', 'ny', 'nz', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord2fColor4fNormal3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -213,6 +235,7 @@ glTexCoord2fColor4fNormal3fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glTexCoord2fColor4fNormal3fVertex3fvSUN( GLfloatArray(tc), GLfloatArray(c), GLfloatArray(n), GLfloatArray(v) ) -> None',
 	argNames = ('tc', 'c', 'n', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord4fColor4fNormal3fVertex4fSUN = platform.createExtensionFunction( 
@@ -222,6 +245,7 @@ glTexCoord4fColor4fNormal3fVertex4fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glTexCoord4fColor4fNormal3fVertex4fSUN( GLfloat(s), GLfloat(t), GLfloat(p), GLfloat(q), GLfloat(r), GLfloat(g), GLfloat(b), GLfloat(a), GLfloat(nx), GLfloat(ny), GLfloat(nz), GLfloat(x), GLfloat(y), GLfloat(z), GLfloat(w) ) -> None',
 	argNames = ('s', 't', 'p', 'q', 'r', 'g', 'b', 'a', 'nx', 'ny', 'nz', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glTexCoord4fColor4fNormal3fVertex4fvSUN = platform.createExtensionFunction( 
@@ -231,6 +255,7 @@ glTexCoord4fColor4fNormal3fVertex4fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glTexCoord4fColor4fNormal3fVertex4fvSUN( GLfloatArray(tc), GLfloatArray(c), GLfloatArray(n), GLfloatArray(v) ) -> None',
 	argNames = ('tc', 'c', 'n', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiVertex3fSUN = platform.createExtensionFunction( 
@@ -240,6 +265,7 @@ glReplacementCodeuiVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glReplacementCodeuiVertex3fSUN( GLuint(rc), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('rc', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiVertex3fvSUN = platform.createExtensionFunction( 
@@ -249,6 +275,7 @@ glReplacementCodeuiVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray, arrays.GLfloatArray,),
 	doc = 'glReplacementCodeuiVertex3fvSUN( GLuintArray(rc), GLfloatArray(v) ) -> None',
 	argNames = ('rc', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiColor4ubVertex3fSUN = platform.createExtensionFunction( 
@@ -258,6 +285,7 @@ glReplacementCodeuiColor4ubVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLubyte, constants.GLubyte, constants.GLubyte, constants.GLubyte, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glReplacementCodeuiColor4ubVertex3fSUN( GLuint(rc), GLubyte(r), GLubyte(g), GLubyte(b), GLubyte(a), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('rc', 'r', 'g', 'b', 'a', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiColor4ubVertex3fvSUN = platform.createExtensionFunction( 
@@ -267,6 +295,7 @@ glReplacementCodeuiColor4ubVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray, arrays.GLubyteArray, arrays.GLfloatArray,),
 	doc = 'glReplacementCodeuiColor4ubVertex3fvSUN( GLuintArray(rc), GLubyteArray(c), GLfloatArray(v) ) -> None',
 	argNames = ('rc', 'c', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiColor3fVertex3fSUN = platform.createExtensionFunction( 
@@ -276,6 +305,7 @@ glReplacementCodeuiColor3fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glReplacementCodeuiColor3fVertex3fSUN( GLuint(rc), GLfloat(r), GLfloat(g), GLfloat(b), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('rc', 'r', 'g', 'b', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiColor3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -285,6 +315,7 @@ glReplacementCodeuiColor3fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glReplacementCodeuiColor3fVertex3fvSUN( GLuintArray(rc), GLfloatArray(c), GLfloatArray(v) ) -> None',
 	argNames = ('rc', 'c', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiNormal3fVertex3fSUN = platform.createExtensionFunction( 
@@ -294,6 +325,7 @@ glReplacementCodeuiNormal3fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glReplacementCodeuiNormal3fVertex3fSUN( GLuint(rc), GLfloat(nx), GLfloat(ny), GLfloat(nz), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('rc', 'nx', 'ny', 'nz', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiNormal3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -303,6 +335,7 @@ glReplacementCodeuiNormal3fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glReplacementCodeuiNormal3fVertex3fvSUN( GLuintArray(rc), GLfloatArray(n), GLfloatArray(v) ) -> None',
 	argNames = ('rc', 'n', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiColor4fNormal3fVertex3fSUN = platform.createExtensionFunction( 
@@ -312,6 +345,7 @@ glReplacementCodeuiColor4fNormal3fVertex3fSUN = platform.createExtensionFunction
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glReplacementCodeuiColor4fNormal3fVertex3fSUN( GLuint(rc), GLfloat(r), GLfloat(g), GLfloat(b), GLfloat(a), GLfloat(nx), GLfloat(ny), GLfloat(nz), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('rc', 'r', 'g', 'b', 'a', 'nx', 'ny', 'nz', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiColor4fNormal3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -321,6 +355,7 @@ glReplacementCodeuiColor4fNormal3fVertex3fvSUN = platform.createExtensionFunctio
 	argTypes=(arrays.GLuintArray, arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glReplacementCodeuiColor4fNormal3fVertex3fvSUN( GLuintArray(rc), GLfloatArray(c), GLfloatArray(n), GLfloatArray(v) ) -> None',
 	argNames = ('rc', 'c', 'n', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiTexCoord2fVertex3fSUN = platform.createExtensionFunction( 
@@ -330,6 +365,7 @@ glReplacementCodeuiTexCoord2fVertex3fSUN = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glReplacementCodeuiTexCoord2fVertex3fSUN( GLuint(rc), GLfloat(s), GLfloat(t), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('rc', 's', 't', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiTexCoord2fVertex3fvSUN = platform.createExtensionFunction( 
@@ -339,6 +375,7 @@ glReplacementCodeuiTexCoord2fVertex3fvSUN = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glReplacementCodeuiTexCoord2fVertex3fvSUN( GLuintArray(rc), GLfloatArray(tc), GLfloatArray(v) ) -> None',
 	argNames = ('rc', 'tc', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN = platform.createExtensionFunction( 
@@ -348,6 +385,7 @@ glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN = platform.createExtensionFunct
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN( GLuint(rc), GLfloat(s), GLfloat(t), GLfloat(nx), GLfloat(ny), GLfloat(nz), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('rc', 's', 't', 'nx', 'ny', 'nz', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -357,6 +395,7 @@ glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN = platform.createExtensionFunc
 	argTypes=(arrays.GLuintArray, arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN( GLuintArray(rc), GLfloatArray(tc), GLfloatArray(n), GLfloatArray(v) ) -> None',
 	argNames = ('rc', 'tc', 'n', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN = platform.createExtensionFunction( 
@@ -366,6 +405,7 @@ glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN = platform.createExtensi
 	argTypes=(constants.GLuint, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN( GLuint(rc), GLfloat(s), GLfloat(t), GLfloat(r), GLfloat(g), GLfloat(b), GLfloat(a), GLfloat(nx), GLfloat(ny), GLfloat(nz), GLfloat(x), GLfloat(y), GLfloat(z) ) -> None',
 	argNames = ('rc', 's', 't', 'r', 'g', 'b', 'a', 'nx', 'ny', 'nz', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN = platform.createExtensionFunction( 
@@ -375,6 +415,7 @@ glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN = platform.createExtens
 	argTypes=(arrays.GLuintArray, arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray, arrays.GLfloatArray,),
 	doc = 'glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN( GLuintArray(rc), GLfloatArray(tc), GLfloatArray(c), GLfloatArray(n), GLfloatArray(v) ) -> None',
 	argNames = ('rc', 'tc', 'c', 'n', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 

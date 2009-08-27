@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_GREMEDY_frame_terminator'
+_DEPRECATED = False
 
 glFrameTerminatorGREMEDY = platform.createExtensionFunction( 
 	'glFrameTerminatorGREMEDY', dll=platform.GL,
@@ -18,6 +19,7 @@ glFrameTerminatorGREMEDY = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glFrameTerminatorGREMEDY(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 

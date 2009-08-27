@@ -79,6 +79,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_register_combiners'
+_DEPRECATED = False
 GL_REGISTER_COMBINERS_NV = constant.Constant( 'GL_REGISTER_COMBINERS_NV', 0x8522 )
 glget.addGLGetConstant( GL_REGISTER_COMBINERS_NV, (1,) )
 GL_VARIABLE_A_NV = constant.Constant( 'GL_VARIABLE_A_NV', 0x8523 )
@@ -141,6 +142,7 @@ glCombinerParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glCombinerParameterfvNV( GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glCombinerParameterfNV = platform.createExtensionFunction( 
@@ -150,6 +152,7 @@ glCombinerParameterfNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLfloat,),
 	doc = 'glCombinerParameterfNV( GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glCombinerParameterivNV = platform.createExtensionFunction( 
@@ -159,6 +162,7 @@ glCombinerParameterivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, arrays.GLintArray,),
 	doc = 'glCombinerParameterivNV( GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glCombinerParameteriNV = platform.createExtensionFunction( 
@@ -168,6 +172,7 @@ glCombinerParameteriNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint,),
 	doc = 'glCombinerParameteriNV( GLenum(pname), GLint(param) ) -> None',
 	argNames = ('pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glCombinerInputNV = platform.createExtensionFunction( 
@@ -177,6 +182,7 @@ glCombinerInputNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glCombinerInputNV( GLenum(stage), GLenum(portion), GLenum(variable), GLenum(input), GLenum(mapping), GLenum(componentUsage) ) -> None',
 	argNames = ('stage', 'portion', 'variable', 'input', 'mapping', 'componentUsage',),
+	deprecated = _DEPRECATED,
 )
 
 glCombinerOutputNV = platform.createExtensionFunction( 
@@ -186,6 +192,7 @@ glCombinerOutputNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum, constants.GLboolean, constants.GLboolean, constants.GLboolean,),
 	doc = 'glCombinerOutputNV( GLenum(stage), GLenum(portion), GLenum(abOutput), GLenum(cdOutput), GLenum(sumOutput), GLenum(scale), GLenum(bias), GLboolean(abDotProduct), GLboolean(cdDotProduct), GLboolean(muxSum) ) -> None',
 	argNames = ('stage', 'portion', 'abOutput', 'cdOutput', 'sumOutput', 'scale', 'bias', 'abDotProduct', 'cdDotProduct', 'muxSum',),
+	deprecated = _DEPRECATED,
 )
 
 glFinalCombinerInputNV = platform.createExtensionFunction( 
@@ -195,6 +202,7 @@ glFinalCombinerInputNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum,),
 	doc = 'glFinalCombinerInputNV( GLenum(variable), GLenum(input), GLenum(mapping), GLenum(componentUsage) ) -> None',
 	argNames = ('variable', 'input', 'mapping', 'componentUsage',),
+	deprecated = _DEPRECATED,
 )
 
 glGetCombinerInputParameterfvNV = platform.createExtensionFunction( 
@@ -204,6 +212,7 @@ glGetCombinerInputParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetCombinerInputParameterfvNV( GLenum(stage), GLenum(portion), GLenum(variable), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('stage', 'portion', 'variable', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetCombinerInputParameterivNV = platform.createExtensionFunction( 
@@ -213,6 +222,7 @@ glGetCombinerInputParameterivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetCombinerInputParameterivNV( GLenum(stage), GLenum(portion), GLenum(variable), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('stage', 'portion', 'variable', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetCombinerOutputParameterfvNV = platform.createExtensionFunction( 
@@ -222,6 +232,7 @@ glGetCombinerOutputParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetCombinerOutputParameterfvNV( GLenum(stage), GLenum(portion), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('stage', 'portion', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetCombinerOutputParameterivNV = platform.createExtensionFunction( 
@@ -231,6 +242,7 @@ glGetCombinerOutputParameterivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetCombinerOutputParameterivNV( GLenum(stage), GLenum(portion), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('stage', 'portion', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFinalCombinerInputParameterfvNV = platform.createExtensionFunction( 
@@ -240,6 +252,7 @@ glGetFinalCombinerInputParameterfvNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetFinalCombinerInputParameterfvNV( GLenum(variable), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('variable', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetFinalCombinerInputParameterivNV = platform.createExtensionFunction( 
@@ -249,6 +262,7 @@ glGetFinalCombinerInputParameterivNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetFinalCombinerInputParameterivNV( GLenum(variable), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('variable', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

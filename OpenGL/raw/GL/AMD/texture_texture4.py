@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_AMD_texture_texture4'
+_DEPRECATED = False
 
 
 

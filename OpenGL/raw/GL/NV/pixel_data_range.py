@@ -69,6 +69,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_pixel_data_range'
+_DEPRECATED = False
 GL_WRITE_PIXEL_DATA_RANGE_NV = constant.Constant( 'GL_WRITE_PIXEL_DATA_RANGE_NV', 0x8878 )
 GL_READ_PIXEL_DATA_RANGE_NV = constant.Constant( 'GL_READ_PIXEL_DATA_RANGE_NV', 0x8879 )
 GL_WRITE_PIXEL_DATA_RANGE_LENGTH_NV = constant.Constant( 'GL_WRITE_PIXEL_DATA_RANGE_LENGTH_NV', 0x887A )
@@ -84,6 +85,7 @@ glPixelDataRangeNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glPixelDataRangeNV( GLenum(target), GLsizei(length), c_void_p(pointer) ) -> None',
 	argNames = ('target', 'length', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glFlushPixelDataRangeNV = platform.createExtensionFunction( 
@@ -93,6 +95,7 @@ glFlushPixelDataRangeNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glFlushPixelDataRangeNV( GLenum(target) ) -> None',
 	argNames = ('target',),
+	deprecated = _DEPRECATED,
 )
 
 

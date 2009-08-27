@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_IBM_cull_vertex'
+_DEPRECATED = False
 
 
 

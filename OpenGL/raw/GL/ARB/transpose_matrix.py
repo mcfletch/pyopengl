@@ -24,6 +24,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_transpose_matrix'
+_DEPRECATED = False
 GL_TRANSPOSE_MODELVIEW_MATRIX_ARB = constant.Constant( 'GL_TRANSPOSE_MODELVIEW_MATRIX_ARB', 0x84E3 )
 glget.addGLGetConstant( GL_TRANSPOSE_MODELVIEW_MATRIX_ARB, (4,4) )
 GL_TRANSPOSE_PROJECTION_MATRIX_ARB = constant.Constant( 'GL_TRANSPOSE_PROJECTION_MATRIX_ARB', 0x84E4 )
@@ -39,6 +40,7 @@ glLoadTransposeMatrixfARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glLoadTransposeMatrixfARB( GLfloatArray(m) ) -> None',
 	argNames = ('m',),
+	deprecated = _DEPRECATED,
 )
 
 glLoadTransposeMatrixdARB = platform.createExtensionFunction( 
@@ -48,6 +50,7 @@ glLoadTransposeMatrixdARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glLoadTransposeMatrixdARB( GLdoubleArray(m) ) -> None',
 	argNames = ('m',),
+	deprecated = _DEPRECATED,
 )
 
 glMultTransposeMatrixfARB = platform.createExtensionFunction( 
@@ -57,6 +60,7 @@ glMultTransposeMatrixfARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glMultTransposeMatrixfARB( GLfloatArray(m) ) -> None',
 	argNames = ('m',),
+	deprecated = _DEPRECATED,
 )
 
 glMultTransposeMatrixdARB = platform.createExtensionFunction( 
@@ -66,6 +70,7 @@ glMultTransposeMatrixdARB = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glMultTransposeMatrixdARB( GLdoubleArray(m) ) -> None',
 	argNames = ('m',),
+	deprecated = _DEPRECATED,
 )
 
 

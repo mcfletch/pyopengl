@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_1_2'
+_DEPRECATED = False
 GL_UNSIGNED_BYTE_3_3_2 = constant.Constant( 'GL_UNSIGNED_BYTE_3_3_2', 0x8032 )
 GL_UNSIGNED_SHORT_4_4_4_4 = constant.Constant( 'GL_UNSIGNED_SHORT_4_4_4_4', 0x8033 )
 GL_UNSIGNED_SHORT_5_5_5_1 = constant.Constant( 'GL_UNSIGNED_SHORT_5_5_5_1', 0x8034 )
@@ -53,6 +54,7 @@ glBlendColor = platform.createExtensionFunction(
 	argTypes=(constants.GLclampf, constants.GLclampf, constants.GLclampf, constants.GLclampf,),
 	doc = 'glBlendColor( GLclampf(red), GLclampf(green), GLclampf(blue), GLclampf(alpha) ) -> None',
 	argNames = ('red', 'green', 'blue', 'alpha',),
+	deprecated = _DEPRECATED,
 )
 
 glBlendEquation = platform.createExtensionFunction( 
@@ -62,6 +64,7 @@ glBlendEquation = platform.createExtensionFunction(
 	argTypes=(constants.GLenum,),
 	doc = 'glBlendEquation( GLenum(mode) ) -> None',
 	argNames = ('mode',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawRangeElements = platform.createExtensionFunction( 
@@ -71,6 +74,7 @@ glDrawRangeElements = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint, constants.GLuint, constants.GLsizei, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glDrawRangeElements( GLenum(mode), GLuint(start), GLuint(end), GLsizei(count), GLenum(type), c_void_p(indices) ) -> None',
 	argNames = ('mode', 'start', 'end', 'count', 'type', 'indices',),
+	deprecated = _DEPRECATED,
 )
 
 glTexImage3D = platform.createExtensionFunction( 
@@ -80,6 +84,7 @@ glTexImage3D = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLint, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTexImage3D( GLenum(target), GLint(level), GLint(internalformat), GLsizei(width), GLsizei(height), GLsizei(depth), GLint(border), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('target', 'level', 'internalformat', 'width', 'height', 'depth', 'border', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glTexSubImage3D = platform.createExtensionFunction( 
@@ -89,6 +94,7 @@ glTexSubImage3D = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glTexSubImage3D( GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLenum(type), c_void_p(pixels) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'yoffset', 'zoffset', 'width', 'height', 'depth', 'format', 'type', 'pixels',),
+	deprecated = _DEPRECATED,
 )
 
 glCopyTexSubImage3D = platform.createExtensionFunction( 
@@ -98,6 +104,7 @@ glCopyTexSubImage3D = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLint, constants.GLsizei, constants.GLsizei,),
 	doc = 'glCopyTexSubImage3D( GLenum(target), GLint(level), GLint(xoffset), GLint(yoffset), GLint(zoffset), GLint(x), GLint(y), GLsizei(width), GLsizei(height) ) -> None',
 	argNames = ('target', 'level', 'xoffset', 'yoffset', 'zoffset', 'x', 'y', 'width', 'height',),
+	deprecated = _DEPRECATED,
 )
 # import legacy entry points to allow checking for bool(entryPoint)
 from OpenGL.raw.GL.VERSION.GL_1_2_DEPRECATED import *

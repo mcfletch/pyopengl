@@ -37,6 +37,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_WIN_specular_fog'
+_DEPRECATED = False
 GL_FOG_SPECULAR_TEXTURE_WIN = constant.Constant( 'GL_FOG_SPECULAR_TEXTURE_WIN', 0x80EC )
 
 

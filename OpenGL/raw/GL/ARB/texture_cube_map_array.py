@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_texture_cube_map_array'
+_DEPRECATED = False
 GL_TEXTURE_CUBE_MAP_ARRAY = constant.Constant( 'GL_TEXTURE_CUBE_MAP_ARRAY', 0x9009 )
 GL_TEXTURE_BINDING_CUBE_MAP_ARRAY = constant.Constant( 'GL_TEXTURE_BINDING_CUBE_MAP_ARRAY', 0x900A )
 GL_PROXY_TEXTURE_CUBE_MAP_ARRAY = constant.Constant( 'GL_PROXY_TEXTURE_CUBE_MAP_ARRAY', 0x900B )

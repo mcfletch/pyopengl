@@ -17,6 +17,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_coordinate_frame'
+_DEPRECATED = False
 GL_TANGENT_ARRAY_EXT = constant.Constant( 'GL_TANGENT_ARRAY_EXT', 0x8439 )
 GL_BINORMAL_ARRAY_EXT = constant.Constant( 'GL_BINORMAL_ARRAY_EXT', 0x843A )
 GL_CURRENT_TANGENT_EXT = constant.Constant( 'GL_CURRENT_TANGENT_EXT', 0x843B )
@@ -44,6 +45,7 @@ glTangent3bEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLbyte, constants.GLbyte, constants.GLbyte,),
 	doc = 'glTangent3bEXT( GLbyte(tx), GLbyte(ty), GLbyte(tz) ) -> None',
 	argNames = ('tx', 'ty', 'tz',),
+	deprecated = _DEPRECATED,
 )
 
 glTangent3bvEXT = platform.createExtensionFunction( 
@@ -53,6 +55,7 @@ glTangent3bvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLbyteArray,),
 	doc = 'glTangent3bvEXT( GLbyteArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glTangent3dEXT = platform.createExtensionFunction( 
@@ -62,6 +65,7 @@ glTangent3dEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glTangent3dEXT( GLdouble(tx), GLdouble(ty), GLdouble(tz) ) -> None',
 	argNames = ('tx', 'ty', 'tz',),
+	deprecated = _DEPRECATED,
 )
 
 glTangent3dvEXT = platform.createExtensionFunction( 
@@ -71,6 +75,7 @@ glTangent3dvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glTangent3dvEXT( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glTangent3fEXT = platform.createExtensionFunction( 
@@ -80,6 +85,7 @@ glTangent3fEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glTangent3fEXT( GLfloat(tx), GLfloat(ty), GLfloat(tz) ) -> None',
 	argNames = ('tx', 'ty', 'tz',),
+	deprecated = _DEPRECATED,
 )
 
 glTangent3fvEXT = platform.createExtensionFunction( 
@@ -89,6 +95,7 @@ glTangent3fvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glTangent3fvEXT( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glTangent3iEXT = platform.createExtensionFunction( 
@@ -98,6 +105,7 @@ glTangent3iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glTangent3iEXT( GLint(tx), GLint(ty), GLint(tz) ) -> None',
 	argNames = ('tx', 'ty', 'tz',),
+	deprecated = _DEPRECATED,
 )
 
 glTangent3ivEXT = platform.createExtensionFunction( 
@@ -107,6 +115,7 @@ glTangent3ivEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glTangent3ivEXT( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glTangent3sEXT = platform.createExtensionFunction( 
@@ -116,6 +125,7 @@ glTangent3sEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glTangent3sEXT( GLshort(tx), GLshort(ty), GLshort(tz) ) -> None',
 	argNames = ('tx', 'ty', 'tz',),
+	deprecated = _DEPRECATED,
 )
 
 glTangent3svEXT = platform.createExtensionFunction( 
@@ -125,6 +135,7 @@ glTangent3svEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glTangent3svEXT( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3bEXT = platform.createExtensionFunction( 
@@ -134,6 +145,7 @@ glBinormal3bEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLbyte, constants.GLbyte, constants.GLbyte,),
 	doc = 'glBinormal3bEXT( GLbyte(bx), GLbyte(by), GLbyte(bz) ) -> None',
 	argNames = ('bx', 'by', 'bz',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3bvEXT = platform.createExtensionFunction( 
@@ -143,6 +155,7 @@ glBinormal3bvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLbyteArray,),
 	doc = 'glBinormal3bvEXT( GLbyteArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3dEXT = platform.createExtensionFunction( 
@@ -152,6 +165,7 @@ glBinormal3dEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble, constants.GLdouble, constants.GLdouble,),
 	doc = 'glBinormal3dEXT( GLdouble(bx), GLdouble(by), GLdouble(bz) ) -> None',
 	argNames = ('bx', 'by', 'bz',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3dvEXT = platform.createExtensionFunction( 
@@ -161,6 +175,7 @@ glBinormal3dvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glBinormal3dvEXT( GLdoubleArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3fEXT = platform.createExtensionFunction( 
@@ -170,6 +185,7 @@ glBinormal3fEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat, constants.GLfloat, constants.GLfloat,),
 	doc = 'glBinormal3fEXT( GLfloat(bx), GLfloat(by), GLfloat(bz) ) -> None',
 	argNames = ('bx', 'by', 'bz',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3fvEXT = platform.createExtensionFunction( 
@@ -179,6 +195,7 @@ glBinormal3fvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glBinormal3fvEXT( GLfloatArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3iEXT = platform.createExtensionFunction( 
@@ -188,6 +205,7 @@ glBinormal3iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glBinormal3iEXT( GLint(bx), GLint(by), GLint(bz) ) -> None',
 	argNames = ('bx', 'by', 'bz',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3ivEXT = platform.createExtensionFunction( 
@@ -197,6 +215,7 @@ glBinormal3ivEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLintArray,),
 	doc = 'glBinormal3ivEXT( GLintArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3sEXT = platform.createExtensionFunction( 
@@ -206,6 +225,7 @@ glBinormal3sEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLshort, constants.GLshort, constants.GLshort,),
 	doc = 'glBinormal3sEXT( GLshort(bx), GLshort(by), GLshort(bz) ) -> None',
 	argNames = ('bx', 'by', 'bz',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormal3svEXT = platform.createExtensionFunction( 
@@ -215,6 +235,7 @@ glBinormal3svEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLshortArray,),
 	doc = 'glBinormal3svEXT( GLshortArray(v) ) -> None',
 	argNames = ('v',),
+	deprecated = _DEPRECATED,
 )
 
 glTangentPointerEXT = platform.createExtensionFunction( 
@@ -224,6 +245,7 @@ glTangentPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glTangentPointerEXT( GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glBinormalPointerEXT = platform.createExtensionFunction( 
@@ -233,6 +255,7 @@ glBinormalPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glBinormalPointerEXT( GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 

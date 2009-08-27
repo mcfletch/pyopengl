@@ -51,6 +51,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_paletted_texture'
+_DEPRECATED = False
 GL_COLOR_INDEX1_EXT = constant.Constant( 'GL_COLOR_INDEX1_EXT', 0x80E2 )
 GL_COLOR_INDEX2_EXT = constant.Constant( 'GL_COLOR_INDEX2_EXT', 0x80E3 )
 GL_COLOR_INDEX4_EXT = constant.Constant( 'GL_COLOR_INDEX4_EXT', 0x80E4 )
@@ -65,6 +66,7 @@ glColorTableEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLsizei, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glColorTableEXT( GLenum(target), GLenum(internalFormat), GLsizei(width), GLenum(format), GLenum(type), c_void_p(table) ) -> None',
 	argNames = ('target', 'internalFormat', 'width', 'format', 'type', 'table',),
+	deprecated = _DEPRECATED,
 )
 
 glGetColorTableEXT = platform.createExtensionFunction( 
@@ -74,6 +76,7 @@ glGetColorTableEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLenum, ctypes.c_void_p,),
 	doc = 'glGetColorTableEXT( GLenum(target), GLenum(format), GLenum(type), c_void_p(data) ) -> None',
 	argNames = ('target', 'format', 'type', 'data',),
+	deprecated = _DEPRECATED,
 )
 
 glGetColorTableParameterivEXT = platform.createExtensionFunction( 
@@ -83,6 +86,7 @@ glGetColorTableParameterivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetColorTableParameterivEXT( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetColorTableParameterfvEXT = platform.createExtensionFunction( 
@@ -92,6 +96,7 @@ glGetColorTableParameterfvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetColorTableParameterfvEXT( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

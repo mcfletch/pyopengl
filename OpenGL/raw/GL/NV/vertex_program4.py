@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_vertex_program4'
+_DEPRECATED = False
 GL_VERTEX_ATTRIB_ARRAY_INTEGER_NV = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_INTEGER_NV', 0x88FD )
 glVertexAttribI1iEXT = platform.createExtensionFunction( 
 	'glVertexAttribI1iEXT', dll=platform.GL,
@@ -18,6 +19,7 @@ glVertexAttribI1iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint,),
 	doc = 'glVertexAttribI1iEXT( GLuint(index), GLint(x) ) -> None',
 	argNames = ('index', 'x',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI2iEXT = platform.createExtensionFunction( 
@@ -27,6 +29,7 @@ glVertexAttribI2iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint,),
 	doc = 'glVertexAttribI2iEXT( GLuint(index), GLint(x), GLint(y) ) -> None',
 	argNames = ('index', 'x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI3iEXT = platform.createExtensionFunction( 
@@ -36,6 +39,7 @@ glVertexAttribI3iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glVertexAttribI3iEXT( GLuint(index), GLint(x), GLint(y), GLint(z) ) -> None',
 	argNames = ('index', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4iEXT = platform.createExtensionFunction( 
@@ -45,6 +49,7 @@ glVertexAttribI4iEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLint, constants.GLint, constants.GLint,),
 	doc = 'glVertexAttribI4iEXT( GLuint(index), GLint(x), GLint(y), GLint(z), GLint(w) ) -> None',
 	argNames = ('index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI1uiEXT = platform.createExtensionFunction( 
@@ -54,6 +59,7 @@ glVertexAttribI1uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint,),
 	doc = 'glVertexAttribI1uiEXT( GLuint(index), GLuint(x) ) -> None',
 	argNames = ('index', 'x',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI2uiEXT = platform.createExtensionFunction( 
@@ -63,6 +69,7 @@ glVertexAttribI2uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glVertexAttribI2uiEXT( GLuint(index), GLuint(x), GLuint(y) ) -> None',
 	argNames = ('index', 'x', 'y',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI3uiEXT = platform.createExtensionFunction( 
@@ -72,6 +79,7 @@ glVertexAttribI3uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glVertexAttribI3uiEXT( GLuint(index), GLuint(x), GLuint(y), GLuint(z) ) -> None',
 	argNames = ('index', 'x', 'y', 'z',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4uiEXT = platform.createExtensionFunction( 
@@ -81,6 +89,7 @@ glVertexAttribI4uiEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint, constants.GLuint,),
 	doc = 'glVertexAttribI4uiEXT( GLuint(index), GLuint(x), GLuint(y), GLuint(z), GLuint(w) ) -> None',
 	argNames = ('index', 'x', 'y', 'z', 'w',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI1ivEXT = platform.createExtensionFunction( 
@@ -90,6 +99,7 @@ glVertexAttribI1ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttribI1ivEXT( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI2ivEXT = platform.createExtensionFunction( 
@@ -99,6 +109,7 @@ glVertexAttribI2ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttribI2ivEXT( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI3ivEXT = platform.createExtensionFunction( 
@@ -108,6 +119,7 @@ glVertexAttribI3ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttribI3ivEXT( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4ivEXT = platform.createExtensionFunction( 
@@ -117,6 +129,7 @@ glVertexAttribI4ivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLintArray,),
 	doc = 'glVertexAttribI4ivEXT( GLuint(index), GLintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI1uivEXT = platform.createExtensionFunction( 
@@ -126,6 +139,7 @@ glVertexAttribI1uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttribI1uivEXT( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI2uivEXT = platform.createExtensionFunction( 
@@ -135,6 +149,7 @@ glVertexAttribI2uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttribI2uivEXT( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI3uivEXT = platform.createExtensionFunction( 
@@ -144,6 +159,7 @@ glVertexAttribI3uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttribI3uivEXT( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4uivEXT = platform.createExtensionFunction( 
@@ -153,6 +169,7 @@ glVertexAttribI4uivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLuintArray,),
 	doc = 'glVertexAttribI4uivEXT( GLuint(index), GLuintArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4bvEXT = platform.createExtensionFunction( 
@@ -162,6 +179,7 @@ glVertexAttribI4bvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLbyteArray,),
 	doc = 'glVertexAttribI4bvEXT( GLuint(index), GLbyteArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4svEXT = platform.createExtensionFunction( 
@@ -171,6 +189,7 @@ glVertexAttribI4svEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLshortArray,),
 	doc = 'glVertexAttribI4svEXT( GLuint(index), GLshortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4ubvEXT = platform.createExtensionFunction( 
@@ -180,6 +199,7 @@ glVertexAttribI4ubvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLubyteArray,),
 	doc = 'glVertexAttribI4ubvEXT( GLuint(index), GLubyteArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribI4usvEXT = platform.createExtensionFunction( 
@@ -189,6 +209,7 @@ glVertexAttribI4usvEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, arrays.GLushortArray,),
 	doc = 'glVertexAttribI4usvEXT( GLuint(index), GLushortArray(v) ) -> None',
 	argNames = ('index', 'v',),
+	deprecated = _DEPRECATED,
 )
 
 glVertexAttribIPointerEXT = platform.createExtensionFunction( 
@@ -198,6 +219,7 @@ glVertexAttribIPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLint, constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glVertexAttribIPointerEXT( GLuint(index), GLint(size), GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('index', 'size', 'type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVertexAttribIivEXT = platform.createExtensionFunction( 
@@ -207,6 +229,7 @@ glGetVertexAttribIivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetVertexAttribIivEXT( GLuint(index), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('index', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetVertexAttribIuivEXT = platform.createExtensionFunction( 
@@ -216,6 +239,7 @@ glGetVertexAttribIuivEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, arrays.GLuintArray,),
 	doc = 'glGetVertexAttribIuivEXT( GLuint(index), GLenum(pname), GLuintArray(params) ) -> None',
 	argNames = ('index', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

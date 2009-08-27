@@ -175,6 +175,7 @@ class Function( Helper ):
 	argTypes=%(argTypes)s,
 	doc = %(doc)r,
 	argNames = %(argNames)s,
+	deprecated = _DEPRECATED,
 )
 """
 	CTYPE_TO_ARRAY_TYPE = {
@@ -224,6 +225,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = %(constantModule)r
+_DEPRECATED = %(deprecatedFlag)r
 %(constants)s
 %(declarations)s%(deprecated)s
 """
@@ -292,6 +294,9 @@ class Module( Helper ):
 		self.constantModule = '%(prefix)s_%(owner)s_%(rawModule)s'%self
 		if self.rawModule.endswith( '_DEPRECATED' ):
 			self.constantModule = self.constantModule[:-len('_DEPRECATED')]
+			self.deprecatedFlag = True 
+		else:
+			self.deprecatedFlag = False
 		specification = self.getSpecification()
 		self.overview = ''
 		if self.header.includeOverviews:

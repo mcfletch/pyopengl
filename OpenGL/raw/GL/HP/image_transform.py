@@ -21,6 +21,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_HP_image_transform'
+_DEPRECATED = False
 GL_IMAGE_SCALE_X_HP = constant.Constant( 'GL_IMAGE_SCALE_X_HP', 0x8155 )
 GL_IMAGE_SCALE_Y_HP = constant.Constant( 'GL_IMAGE_SCALE_Y_HP', 0x8156 )
 GL_IMAGE_TRANSLATE_X_HP = constant.Constant( 'GL_IMAGE_TRANSLATE_X_HP', 0x8157 )
@@ -43,6 +44,7 @@ glImageTransformParameteriHP = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLint,),
 	doc = 'glImageTransformParameteriHP( GLenum(target), GLenum(pname), GLint(param) ) -> None',
 	argNames = ('target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glImageTransformParameterfHP = platform.createExtensionFunction( 
@@ -52,6 +54,7 @@ glImageTransformParameterfHP = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLfloat,),
 	doc = 'glImageTransformParameterfHP( GLenum(target), GLenum(pname), GLfloat(param) ) -> None',
 	argNames = ('target', 'pname', 'param',),
+	deprecated = _DEPRECATED,
 )
 
 glImageTransformParameterivHP = platform.createExtensionFunction( 
@@ -61,6 +64,7 @@ glImageTransformParameterivHP = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glImageTransformParameterivHP( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glImageTransformParameterfvHP = platform.createExtensionFunction( 
@@ -70,6 +74,7 @@ glImageTransformParameterfvHP = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glImageTransformParameterfvHP( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetImageTransformParameterivHP = platform.createExtensionFunction( 
@@ -79,6 +84,7 @@ glGetImageTransformParameterivHP = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLintArray,),
 	doc = 'glGetImageTransformParameterivHP( GLenum(target), GLenum(pname), GLintArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetImageTransformParameterfvHP = platform.createExtensionFunction( 
@@ -88,6 +94,7 @@ glGetImageTransformParameterfvHP = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetImageTransformParameterfvHP( GLenum(target), GLenum(pname), GLfloatArray(params) ) -> None',
 	argNames = ('target', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

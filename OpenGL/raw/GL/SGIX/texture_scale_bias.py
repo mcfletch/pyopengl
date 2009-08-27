@@ -25,6 +25,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_texture_scale_bias'
+_DEPRECATED = False
 GL_POST_TEXTURE_FILTER_BIAS_SGIX = constant.Constant( 'GL_POST_TEXTURE_FILTER_BIAS_SGIX', 0x8179 )
 GL_POST_TEXTURE_FILTER_SCALE_SGIX = constant.Constant( 'GL_POST_TEXTURE_FILTER_SCALE_SGIX', 0x817A )
 GL_POST_TEXTURE_FILTER_BIAS_RANGE_SGIX = constant.Constant( 'GL_POST_TEXTURE_FILTER_BIAS_RANGE_SGIX', 0x817B )

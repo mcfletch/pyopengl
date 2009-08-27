@@ -23,6 +23,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_IBM_multimode_draw_arrays'
+_DEPRECATED = False
 
 glMultiModeDrawArraysIBM = platform.createExtensionFunction( 
 	'glMultiModeDrawArraysIBM', dll=platform.GL,
@@ -31,6 +32,7 @@ glMultiModeDrawArraysIBM = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray, arrays.GLintArray, arrays.GLsizeiArray, constants.GLsizei, constants.GLint,),
 	doc = 'glMultiModeDrawArraysIBM( GLuintArray(mode), GLintArray(first), GLsizeiArray(count), GLsizei(primcount), GLint(modestride) ) -> None',
 	argNames = ('mode', 'first', 'count', 'primcount', 'modestride',),
+	deprecated = _DEPRECATED,
 )
 
 glMultiModeDrawElementsIBM = platform.createExtensionFunction( 
@@ -40,6 +42,7 @@ glMultiModeDrawElementsIBM = platform.createExtensionFunction(
 	argTypes=(arrays.GLuintArray, arrays.GLsizeiArray, constants.GLenum, ctypes.POINTER(ctypes.c_void_p), constants.GLsizei, constants.GLint,),
 	doc = 'glMultiModeDrawElementsIBM( GLuintArray(mode), GLsizeiArray(count), GLenum(type), POINTER(ctypes.c_void_p)(indices), GLsizei(primcount), GLint(modestride) ) -> None',
 	argNames = ('mode', 'count', 'type', 'indices', 'primcount', 'modestride',),
+	deprecated = _DEPRECATED,
 )
 
 

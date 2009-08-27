@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIS_texture_filter4'
+_DEPRECATED = False
 GL_FILTER4_SGIS = constant.Constant( 'GL_FILTER4_SGIS', 0x8146 )
 GL_TEXTURE_FILTER4_SIZE_SGIS = constant.Constant( 'GL_TEXTURE_FILTER4_SIZE_SGIS', 0x8147 )
 glGetTexFilterFuncSGIS = platform.createExtensionFunction( 
@@ -28,6 +29,7 @@ glGetTexFilterFuncSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, arrays.GLfloatArray,),
 	doc = 'glGetTexFilterFuncSGIS( GLenum(target), GLenum(filter), GLfloatArray(weights) ) -> None',
 	argNames = ('target', 'filter', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 glTexFilterFuncSGIS = platform.createExtensionFunction( 
@@ -37,6 +39,7 @@ glTexFilterFuncSGIS = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLsizei, arrays.GLfloatArray,),
 	doc = 'glTexFilterFuncSGIS( GLenum(target), GLenum(filter), GLsizei(n), GLfloatArray(weights) ) -> None',
 	argNames = ('target', 'filter', 'n', 'weights',),
+	deprecated = _DEPRECATED,
 )
 
 

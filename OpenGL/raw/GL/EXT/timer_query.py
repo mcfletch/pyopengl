@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_timer_query'
+_DEPRECATED = False
 GL_TIME_ELAPSED_EXT = constant.Constant( 'GL_TIME_ELAPSED_EXT', 0x88BF )
 glGetQueryObjecti64vEXT = platform.createExtensionFunction( 
 	'glGetQueryObjecti64vEXT', dll=platform.GL,
@@ -18,6 +19,7 @@ glGetQueryObjecti64vEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.POINTER(constants.GLint64EXT),),
 	doc = 'glGetQueryObjecti64vEXT( GLuint(id), GLenum(pname), POINTER(constants.GLint64EXT)(params) ) -> None',
 	argNames = ('id', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 glGetQueryObjectui64vEXT = platform.createExtensionFunction( 
@@ -27,6 +29,7 @@ glGetQueryObjectui64vEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLuint, constants.GLenum, ctypes.POINTER(constants.GLuint64EXT),),
 	doc = 'glGetQueryObjectui64vEXT( GLuint(id), GLenum(pname), POINTER(constants.GLuint64EXT)(params) ) -> None',
 	argNames = ('id', 'pname', 'params',),
+	deprecated = _DEPRECATED,
 )
 
 

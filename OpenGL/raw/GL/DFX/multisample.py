@@ -52,6 +52,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_DFX_multisample'
+_DEPRECATED = False
 GL_MULTISAMPLE_3DFX = constant.Constant( 'GL_MULTISAMPLE_3DFX', 0x86B2 )
 glget.addGLGetConstant( GL_MULTISAMPLE_3DFX, (1,) )
 GL_SAMPLE_BUFFERS_3DFX = constant.Constant( 'GL_SAMPLE_BUFFERS_3DFX', 0x86B3 )

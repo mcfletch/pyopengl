@@ -94,6 +94,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_client_storage'
+_DEPRECATED = False
 GL_UNPACK_CLIENT_STORAGE_APPLE = constant.Constant( 'GL_UNPACK_CLIENT_STORAGE_APPLE', 0x85B2 )
 
 

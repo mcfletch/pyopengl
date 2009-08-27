@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_ARB_copy_buffer'
+_DEPRECATED = False
 GL_COPY_READ_BUFFER = constant.Constant( 'GL_COPY_READ_BUFFER', 0x8F36 )
 GL_COPY_WRITE_BUFFER = constant.Constant( 'GL_COPY_WRITE_BUFFER', 0x8F37 )
 glCopyBufferSubData = platform.createExtensionFunction( 
@@ -19,6 +20,7 @@ glCopyBufferSubData = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLenum, constants.GLintptr, constants.GLintptr, constants.GLsizeiptr,),
 	doc = 'glCopyBufferSubData( GLenum(readTarget), GLenum(writeTarget), GLintptr(readOffset), GLintptr(writeOffset), GLsizeiptr(size) ) -> None',
 	argNames = ('readTarget', 'writeTarget', 'readOffset', 'writeOffset', 'size',),
+	deprecated = _DEPRECATED,
 )
 
 

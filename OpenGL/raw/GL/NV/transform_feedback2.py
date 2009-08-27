@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_NV_transform_feedback2'
+_DEPRECATED = False
 GL_TRANSFORM_FEEDBACK_NV = constant.Constant( 'GL_TRANSFORM_FEEDBACK_NV', 0x8E22 )
 GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV = constant.Constant( 'GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV', 0x8E23 )
 GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV = constant.Constant( 'GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV', 0x8E24 )
@@ -21,6 +22,7 @@ glBindTransformFeedbackNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glBindTransformFeedbackNV( GLenum(target), GLuint(id) ) -> None',
 	argNames = ('target', 'id',),
+	deprecated = _DEPRECATED,
 )
 
 glDeleteTransformFeedbacksNV = platform.createExtensionFunction( 
@@ -30,6 +32,7 @@ glDeleteTransformFeedbacksNV = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glDeleteTransformFeedbacksNV( GLsizei(n), GLuintArray(ids) ) -> None',
 	argNames = ('n', 'ids',),
+	deprecated = _DEPRECATED,
 )
 
 glGenTransformFeedbacksNV = platform.createExtensionFunction( 
@@ -39,6 +42,7 @@ glGenTransformFeedbacksNV = platform.createExtensionFunction(
 	argTypes=(constants.GLsizei, arrays.GLuintArray,),
 	doc = 'glGenTransformFeedbacksNV( GLsizei(n), GLuintArray(ids) ) -> None',
 	argNames = ('n', 'ids',),
+	deprecated = _DEPRECATED,
 )
 
 glIsTransformFeedbackNV = platform.createExtensionFunction( 
@@ -48,6 +52,7 @@ glIsTransformFeedbackNV = platform.createExtensionFunction(
 	argTypes=(constants.GLuint,),
 	doc = 'glIsTransformFeedbackNV( GLuint(id) ) -> constants.GLboolean',
 	argNames = ('id',),
+	deprecated = _DEPRECATED,
 )
 
 glPauseTransformFeedbackNV = platform.createExtensionFunction( 
@@ -57,6 +62,7 @@ glPauseTransformFeedbackNV = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glPauseTransformFeedbackNV(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glResumeTransformFeedbackNV = platform.createExtensionFunction( 
@@ -66,6 +72,7 @@ glResumeTransformFeedbackNV = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glResumeTransformFeedbackNV(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 glDrawTransformFeedbackNV = platform.createExtensionFunction( 
@@ -75,6 +82,7 @@ glDrawTransformFeedbackNV = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLuint,),
 	doc = 'glDrawTransformFeedbackNV( GLenum(mode), GLuint(id) ) -> None',
 	argNames = ('mode', 'id',),
+	deprecated = _DEPRECATED,
 )
 
 

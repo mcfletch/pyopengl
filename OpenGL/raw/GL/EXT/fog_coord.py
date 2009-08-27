@@ -16,6 +16,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_fog_coord'
+_DEPRECATED = False
 GL_FOG_COORDINATE_SOURCE_EXT = constant.Constant( 'GL_FOG_COORDINATE_SOURCE_EXT', 0x8450 )
 GL_FOG_COORDINATE_EXT = constant.Constant( 'GL_FOG_COORDINATE_EXT', 0x8451 )
 GL_FRAGMENT_DEPTH_EXT = constant.Constant( 'GL_FRAGMENT_DEPTH_EXT', 0x8452 )
@@ -34,6 +35,7 @@ glFogCoordfEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLfloat,),
 	doc = 'glFogCoordfEXT( GLfloat(coord) ) -> None',
 	argNames = ('coord',),
+	deprecated = _DEPRECATED,
 )
 
 glFogCoordfvEXT = platform.createExtensionFunction( 
@@ -43,6 +45,7 @@ glFogCoordfvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLfloatArray,),
 	doc = 'glFogCoordfvEXT( GLfloatArray(coord) ) -> None',
 	argNames = ('coord',),
+	deprecated = _DEPRECATED,
 )
 
 glFogCoorddEXT = platform.createExtensionFunction( 
@@ -52,6 +55,7 @@ glFogCoorddEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLdouble,),
 	doc = 'glFogCoorddEXT( GLdouble(coord) ) -> None',
 	argNames = ('coord',),
+	deprecated = _DEPRECATED,
 )
 
 glFogCoorddvEXT = platform.createExtensionFunction( 
@@ -61,6 +65,7 @@ glFogCoorddvEXT = platform.createExtensionFunction(
 	argTypes=(arrays.GLdoubleArray,),
 	doc = 'glFogCoorddvEXT( GLdoubleArray(coord) ) -> None',
 	argNames = ('coord',),
+	deprecated = _DEPRECATED,
 )
 
 glFogCoordPointerEXT = platform.createExtensionFunction( 
@@ -70,6 +75,7 @@ glFogCoordPointerEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, ctypes.c_void_p,),
 	doc = 'glFogCoordPointerEXT( GLenum(type), GLsizei(stride), c_void_p(pointer) ) -> None',
 	argNames = ('type', 'stride', 'pointer',),
+	deprecated = _DEPRECATED,
 )
 
 

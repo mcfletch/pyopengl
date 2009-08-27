@@ -22,6 +22,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_async_pixel'
+_DEPRECATED = False
 GL_ASYNC_TEX_IMAGE_SGIX = constant.Constant( 'GL_ASYNC_TEX_IMAGE_SGIX', 0x835C )
 glget.addGLGetConstant( GL_ASYNC_TEX_IMAGE_SGIX, (1,) )
 GL_ASYNC_DRAW_PIXELS_SGIX = constant.Constant( 'GL_ASYNC_DRAW_PIXELS_SGIX', 0x835D )

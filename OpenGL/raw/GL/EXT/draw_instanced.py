@@ -10,6 +10,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_EXT_draw_instanced'
+_DEPRECATED = False
 
 glDrawArraysInstancedEXT = platform.createExtensionFunction( 
 	'glDrawArraysInstancedEXT', dll=platform.GL,
@@ -18,6 +19,7 @@ glDrawArraysInstancedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLint, constants.GLsizei, constants.GLsizei,),
 	doc = 'glDrawArraysInstancedEXT( GLenum(mode), GLint(start), GLsizei(count), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'start', 'count', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 glDrawElementsInstancedEXT = platform.createExtensionFunction( 
@@ -27,6 +29,7 @@ glDrawElementsInstancedEXT = platform.createExtensionFunction(
 	argTypes=(constants.GLenum, constants.GLsizei, constants.GLenum, ctypes.c_void_p, constants.GLsizei,),
 	doc = 'glDrawElementsInstancedEXT( GLenum(mode), GLsizei(count), GLenum(type), c_void_p(indices), GLsizei(primcount) ) -> None',
 	argNames = ('mode', 'count', 'type', 'indices', 'primcount',),
+	deprecated = _DEPRECATED,
 )
 
 

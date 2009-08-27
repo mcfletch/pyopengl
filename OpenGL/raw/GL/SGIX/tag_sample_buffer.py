@@ -19,6 +19,7 @@ from OpenGL import extensions
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_SGIX_tag_sample_buffer'
+_DEPRECATED = False
 
 glTagSampleBufferSGIX = platform.createExtensionFunction( 
 	'glTagSampleBufferSGIX', dll=platform.GL,
@@ -27,6 +28,7 @@ glTagSampleBufferSGIX = platform.createExtensionFunction(
 	argTypes=(),
 	doc = 'glTagSampleBufferSGIX(  ) -> None',
 	argNames = (),
+	deprecated = _DEPRECATED,
 )
 
 
