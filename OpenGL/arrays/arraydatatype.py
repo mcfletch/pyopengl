@@ -124,7 +124,11 @@ if ADT is None:
 		dataPointer = classmethod( logs.logOnFail( dataPointer, log ) )
 		def voidDataPointer( cls, value ):
 			"""Given value in a known data-pointer type, return void_p for pointer"""
-			return ctypes.c_void_p( cls.dataPointer( value ))
+			pointer = cls.dataPointer( value )
+			try:
+				return ctypes.c_void_p(pointer)
+			except TypeError, err:
+				return pointer
 		voidDataPointer = classmethod( logs.logOnFail( voidDataPointer, log ) )
 		def typedPointer( cls, value ):
 			"""Return a pointer-to-base-type pointer for given value"""

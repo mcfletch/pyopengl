@@ -143,7 +143,11 @@ cdef class ArrayDatatype:
 		return handler.dataPointer( value )
 	def voidDataPointer( self, value ):
 		"""Given value in a known data-pointer type, return void_p for pointer"""
-		return ctypes.c_void_p( self.dataPointer( value ))
+		pointer = self.dataPointer( value )
+		try:
+			return ctypes.c_void_p(pointer)
+		except TypeError, err:
+			return pointer
 	def typedPointer( self, value ):
 		"""Return a pointer-to-base-type pointer for given value"""
 		return ctypes.cast( 
