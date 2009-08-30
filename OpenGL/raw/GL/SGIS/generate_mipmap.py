@@ -1,11 +1,11 @@
 '''OpenGL extension SGIS.generate_mipmap
 
 Overview (from the spec)
-	
-	This extension defines a mechanism by which OpenGL can derive the
-	entire set of mipmap arrays when provided with only the base level
-	array.  Automatic mipmap generation is particularly useful when
-	texture images are being provided as a video stream.
+    
+    This extension defines a mechanism by which OpenGL can derive the
+    entire set of mipmap arrays when provided with only the base level
+    array.  Automatic mipmap generation is particularly useful when
+    texture images are being provided as a video stream.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIS/generate_mipmap.txt

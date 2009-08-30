@@ -1,15 +1,15 @@
 '''OpenGL extension EXT.rescale_normal
 
 Overview (from the spec)
-	
-	When normal rescaling is enabled a new operation is added to the
-	transformation of the normal vector into eye coordinates.  The normal vector 
-	is rescaled after it is multiplied by the inverse modelview matrix and 
-	before it is normalized.  
-	
-	The rescale factor is chosen so that in many cases normal vectors with unit
-	length in object coordinates will not need to be normalized as they
-	are transformed into eye coordinates.
+    
+    When normal rescaling is enabled a new operation is added to the
+    transformation of the normal vector into eye coordinates.  The normal vector 
+    is rescaled after it is multiplied by the inverse modelview matrix and 
+    before it is normalized.  
+    
+    The rescale factor is chosen so that in many cases normal vectors with unit
+    length in object coordinates will not need to be normalized as they
+    are transformed into eye coordinates.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/rescale_normal.txt

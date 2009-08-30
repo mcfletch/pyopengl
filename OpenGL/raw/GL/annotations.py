@@ -13,1094 +13,1093 @@ GLvoid = GLconstants.GLvoid
 
 
 glAreTexturesResident = arrays.setInputArraySizeType(
-	raw.glAreTexturesResident,
-	None, # XXX Could not determine size of argument textures for glAreTexturesResident arrays.GLuintArray
-	arrays.GLuintArray, 
-	'textures',
+    raw.glAreTexturesResident,
+    None, # XXX Could not determine size of argument textures for glAreTexturesResident arrays.GLuintArray
+    arrays.GLuintArray, 
+    'textures',
 )
 
 glBitmap = arrays.setInputArraySizeType(
-	raw.glBitmap,
-	None, # XXX Could not determine size of argument bitmap for glBitmap arrays.GLubyteArray
-	arrays.GLubyteArray, 
-	'bitmap',
+    raw.glBitmap,
+    None, # XXX Could not determine size of argument bitmap for glBitmap arrays.GLubyteArray
+    arrays.GLubyteArray, 
+    'bitmap',
 )
 
 glClipPlane = arrays.setInputArraySizeType(
-	raw.glClipPlane,
-	None, # XXX Could not determine size of argument equation for glClipPlane arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'equation',
+    raw.glClipPlane,
+    None, # XXX Could not determine size of argument equation for glClipPlane arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'equation',
 )
 
 glColor3bv = arrays.setInputArraySizeType(
-	raw.glColor3bv,
-	3,
-	arrays.GLbyteArray,
-	'v',
+    raw.glColor3bv,
+    3,
+    arrays.GLbyteArray,
+    'v',
 )
 
 glColor3dv = arrays.setInputArraySizeType(
-	raw.glColor3dv,
-	3,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glColor3dv,
+    3,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glColor3fv = arrays.setInputArraySizeType(
-	raw.glColor3fv,
-	3,
-	arrays.GLfloatArray,
-	'v',
+    raw.glColor3fv,
+    3,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glColor3iv = arrays.setInputArraySizeType(
-	raw.glColor3iv,
-	3,
-	arrays.GLintArray,
-	'v',
+    raw.glColor3iv,
+    3,
+    arrays.GLintArray,
+    'v',
 )
 
 glColor3sv = arrays.setInputArraySizeType(
-	raw.glColor3sv,
-	3,
-	arrays.GLshortArray,
-	'v',
+    raw.glColor3sv,
+    3,
+    arrays.GLshortArray,
+    'v',
 )
 
 glColor3ubv = arrays.setInputArraySizeType(
-	raw.glColor3ubv,
-	3,
-	arrays.GLubyteArray,
-	'v',
+    raw.glColor3ubv,
+    3,
+    arrays.GLubyteArray,
+    'v',
 )
 
 glColor3uiv = arrays.setInputArraySizeType(
-	raw.glColor3uiv,
-	3,
-	arrays.GLuintArray,
-	'v',
+    raw.glColor3uiv,
+    3,
+    arrays.GLuintArray,
+    'v',
 )
 
 glColor3usv = arrays.setInputArraySizeType(
-	raw.glColor3usv,
-	3,
-	arrays.GLushortArray,
-	'v',
+    raw.glColor3usv,
+    3,
+    arrays.GLushortArray,
+    'v',
 )
 
 glColor4bv = arrays.setInputArraySizeType(
-	raw.glColor4bv,
-	4,
-	arrays.GLbyteArray,
-	'v',
+    raw.glColor4bv,
+    4,
+    arrays.GLbyteArray,
+    'v',
 )
 
 glColor4dv = arrays.setInputArraySizeType(
-	raw.glColor4dv,
-	4,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glColor4dv,
+    4,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glColor4fv = arrays.setInputArraySizeType(
-	raw.glColor4fv,
-	4,
-	arrays.GLfloatArray,
-	'v',
+    raw.glColor4fv,
+    4,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glColor4iv = arrays.setInputArraySizeType(
-	raw.glColor4iv,
-	4,
-	arrays.GLintArray,
-	'v',
+    raw.glColor4iv,
+    4,
+    arrays.GLintArray,
+    'v',
 )
 
 glColor4sv = arrays.setInputArraySizeType(
-	raw.glColor4sv,
-	4,
-	arrays.GLshortArray,
-	'v',
+    raw.glColor4sv,
+    4,
+    arrays.GLshortArray,
+    'v',
 )
 
 glColor4ubv = arrays.setInputArraySizeType(
-	raw.glColor4ubv,
-	4,
-	arrays.GLubyteArray,
-	'v',
+    raw.glColor4ubv,
+    4,
+    arrays.GLubyteArray,
+    'v',
 )
 
 glColor4uiv = arrays.setInputArraySizeType(
-	raw.glColor4uiv,
-	4,
-	arrays.GLuintArray,
-	'v',
+    raw.glColor4uiv,
+    4,
+    arrays.GLuintArray,
+    'v',
 )
 
 glColor4usv = arrays.setInputArraySizeType(
-	raw.glColor4usv,
-	4,
-	arrays.GLushortArray,
-	'v',
+    raw.glColor4usv,
+    4,
+    arrays.GLushortArray,
+    'v',
 )
 
 glDeleteTextures = arrays.setInputArraySizeType(
-	raw.glDeleteTextures,
-	None, # XXX Could not determine size of argument textures for glDeleteTextures arrays.GLuintArray
-	arrays.GLuintArray, 
-	'textures',
+    raw.glDeleteTextures,
+    None, # XXX Could not determine size of argument textures for glDeleteTextures arrays.GLuintArray
+    arrays.GLuintArray, 
+    'textures',
 )
 
 glEvalCoord1dv = arrays.setInputArraySizeType(
-	raw.glEvalCoord1dv,
-	1,
-	arrays.GLdoubleArray,
-	'u',
+    raw.glEvalCoord1dv,
+    1,
+    arrays.GLdoubleArray,
+    'u',
 )
 
 glEvalCoord1fv = arrays.setInputArraySizeType(
-	raw.glEvalCoord1fv,
-	1,
-	arrays.GLfloatArray,
-	'u',
+    raw.glEvalCoord1fv,
+    1,
+    arrays.GLfloatArray,
+    'u',
 )
 
 glEvalCoord2dv = arrays.setInputArraySizeType(
-	raw.glEvalCoord2dv,
-	2,
-	arrays.GLdoubleArray,
-	'u',
+    raw.glEvalCoord2dv,
+    2,
+    arrays.GLdoubleArray,
+    'u',
 )
 
 glEvalCoord2fv = arrays.setInputArraySizeType(
-	raw.glEvalCoord2fv,
-	2,
-	arrays.GLfloatArray,
-	'u',
+    raw.glEvalCoord2fv,
+    2,
+    arrays.GLfloatArray,
+    'u',
 )
 
 glFeedbackBuffer = arrays.setInputArraySizeType(
-	raw.glFeedbackBuffer,
-	None, # XXX Could not determine size of argument buffer for glFeedbackBuffer arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'buffer',
+    raw.glFeedbackBuffer,
+    None, # XXX Could not determine size of argument buffer for glFeedbackBuffer arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'buffer',
 )
 
 glFogfv = arrays.setInputArraySizeType(
-	raw.glFogfv,
-	None, # XXX Could not determine size of argument params for glFogfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glFogfv,
+    None, # XXX Could not determine size of argument params for glFogfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glFogiv = arrays.setInputArraySizeType(
-	raw.glFogiv,
-	None, # XXX Could not determine size of argument params for glFogiv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glFogiv,
+    None, # XXX Could not determine size of argument params for glFogiv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glGenTextures = arrays.setInputArraySizeType(
-	raw.glGenTextures,
-	None, # XXX Could not determine size of argument textures for glGenTextures arrays.GLuintArray
-	arrays.GLuintArray, 
-	'textures',
+    raw.glGenTextures,
+    None, # XXX Could not determine size of argument textures for glGenTextures arrays.GLuintArray
+    arrays.GLuintArray, 
+    'textures',
 )
 
 glGetClipPlane = arrays.setInputArraySizeType(
-	raw.glGetClipPlane,
-	None, # XXX Could not determine size of argument equation for glGetClipPlane arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'equation',
+    raw.glGetClipPlane,
+    None, # XXX Could not determine size of argument equation for glGetClipPlane arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'equation',
 )
 
 glGetDoublev = arrays.setInputArraySizeType(
-	raw.glGetDoublev,
-	None, # XXX Could not determine size of argument params for glGetDoublev arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'params',
+    raw.glGetDoublev,
+    None, # XXX Could not determine size of argument params for glGetDoublev arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'params',
 )
 
 glGetFloatv = arrays.setInputArraySizeType(
-	raw.glGetFloatv,
-	None, # XXX Could not determine size of argument params for glGetFloatv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glGetFloatv,
+    None, # XXX Could not determine size of argument params for glGetFloatv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glGetIntegerv = arrays.setInputArraySizeType(
-	raw.glGetIntegerv,
-	None, # XXX Could not determine size of argument params for glGetIntegerv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glGetIntegerv,
+    None, # XXX Could not determine size of argument params for glGetIntegerv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glGetLightfv = arrays.setInputArraySizeType(
-	raw.glGetLightfv,
-	None, # XXX Could not determine size of argument params for glGetLightfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glGetLightfv,
+    None, # XXX Could not determine size of argument params for glGetLightfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glGetLightiv = arrays.setInputArraySizeType(
-	raw.glGetLightiv,
-	None, # XXX Could not determine size of argument params for glGetLightiv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glGetLightiv,
+    None, # XXX Could not determine size of argument params for glGetLightiv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glGetMapdv = arrays.setInputArraySizeType(
-	raw.glGetMapdv,
-	None, # XXX Could not determine size of argument v for glGetMapdv arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'v',
+    raw.glGetMapdv,
+    None, # XXX Could not determine size of argument v for glGetMapdv arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'v',
 )
 
 glGetMapfv = arrays.setInputArraySizeType(
-	raw.glGetMapfv,
-	None, # XXX Could not determine size of argument v for glGetMapfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'v',
+    raw.glGetMapfv,
+    None, # XXX Could not determine size of argument v for glGetMapfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'v',
 )
 
 glGetMapiv = arrays.setInputArraySizeType(
-	raw.glGetMapiv,
-	None, # XXX Could not determine size of argument v for glGetMapiv arrays.GLintArray
-	arrays.GLintArray, 
-	'v',
+    raw.glGetMapiv,
+    None, # XXX Could not determine size of argument v for glGetMapiv arrays.GLintArray
+    arrays.GLintArray, 
+    'v',
 )
 
 glGetMaterialfv = arrays.setInputArraySizeType(
-	raw.glGetMaterialfv,
-	None, # XXX Could not determine size of argument params for glGetMaterialfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glGetMaterialfv,
+    None, # XXX Could not determine size of argument params for glGetMaterialfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glGetMaterialiv = arrays.setInputArraySizeType(
-	raw.glGetMaterialiv,
-	None, # XXX Could not determine size of argument params for glGetMaterialiv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glGetMaterialiv,
+    None, # XXX Could not determine size of argument params for glGetMaterialiv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glGetPixelMapfv = arrays.setInputArraySizeType(
-	raw.glGetPixelMapfv,
-	None, # XXX Could not determine size of argument values for glGetPixelMapfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'values',
+    raw.glGetPixelMapfv,
+    None, # XXX Could not determine size of argument values for glGetPixelMapfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'values',
 )
 
 glGetPixelMapuiv = arrays.setInputArraySizeType(
-	raw.glGetPixelMapuiv,
-	None, # XXX Could not determine size of argument values for glGetPixelMapuiv arrays.GLuintArray
-	arrays.GLuintArray, 
-	'values',
+    raw.glGetPixelMapuiv,
+    None, # XXX Could not determine size of argument values for glGetPixelMapuiv arrays.GLuintArray
+    arrays.GLuintArray, 
+    'values',
 )
 
 glGetPixelMapusv = arrays.setInputArraySizeType(
-	raw.glGetPixelMapusv,
-	None, # XXX Could not determine size of argument values for glGetPixelMapusv arrays.GLushortArray
-	arrays.GLushortArray, 
-	'values',
+    raw.glGetPixelMapusv,
+    None, # XXX Could not determine size of argument values for glGetPixelMapusv arrays.GLushortArray
+    arrays.GLushortArray, 
+    'values',
 )
 
 glGetPolygonStipple = arrays.setInputArraySizeType(
-	raw.glGetPolygonStipple,
-	None, # XXX Could not determine size of argument mask for glGetPolygonStipple arrays.GLubyteArray
-	arrays.GLubyteArray, 
-	'mask',
+    raw.glGetPolygonStipple,
+    None, # XXX Could not determine size of argument mask for glGetPolygonStipple arrays.GLubyteArray
+    arrays.GLubyteArray, 
+    'mask',
 )
 
 glGetTexEnvfv = arrays.setInputArraySizeType(
-	raw.glGetTexEnvfv,
-	None, # XXX Could not determine size of argument params for glGetTexEnvfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glGetTexEnvfv,
+    None, # XXX Could not determine size of argument params for glGetTexEnvfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glGetTexEnviv = arrays.setInputArraySizeType(
-	raw.glGetTexEnviv,
-	None, # XXX Could not determine size of argument params for glGetTexEnviv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glGetTexEnviv,
+    None, # XXX Could not determine size of argument params for glGetTexEnviv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glGetTexGendv = arrays.setInputArraySizeType(
-	raw.glGetTexGendv,
-	None, # XXX Could not determine size of argument params for glGetTexGendv arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'params',
+    raw.glGetTexGendv,
+    None, # XXX Could not determine size of argument params for glGetTexGendv arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'params',
 )
 
 glGetTexGenfv = arrays.setInputArraySizeType(
-	raw.glGetTexGenfv,
-	None, # XXX Could not determine size of argument params for glGetTexGenfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glGetTexGenfv,
+    None, # XXX Could not determine size of argument params for glGetTexGenfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glGetTexGeniv = arrays.setInputArraySizeType(
-	raw.glGetTexGeniv,
-	None, # XXX Could not determine size of argument params for glGetTexGeniv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glGetTexGeniv,
+    None, # XXX Could not determine size of argument params for glGetTexGeniv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glGetTexLevelParameterfv = arrays.setInputArraySizeType(
-	raw.glGetTexLevelParameterfv,
-	None, # XXX Could not determine size of argument params for glGetTexLevelParameterfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glGetTexLevelParameterfv,
+    None, # XXX Could not determine size of argument params for glGetTexLevelParameterfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glGetTexLevelParameteriv = arrays.setInputArraySizeType(
-	raw.glGetTexLevelParameteriv,
-	None, # XXX Could not determine size of argument params for glGetTexLevelParameteriv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glGetTexLevelParameteriv,
+    None, # XXX Could not determine size of argument params for glGetTexLevelParameteriv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glGetTexParameterfv = arrays.setInputArraySizeType(
-	raw.glGetTexParameterfv,
-	None, # XXX Could not determine size of argument params for glGetTexParameterfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glGetTexParameterfv,
+    None, # XXX Could not determine size of argument params for glGetTexParameterfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glGetTexParameteriv = arrays.setInputArraySizeType(
-	raw.glGetTexParameteriv,
-	None, # XXX Could not determine size of argument params for glGetTexParameteriv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glGetTexParameteriv,
+    None, # XXX Could not determine size of argument params for glGetTexParameteriv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glIndexdv = arrays.setInputArraySizeType(
-	raw.glIndexdv,
-	None, # XXX Could not determine size of argument c for glIndexdv arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'c',
+    raw.glIndexdv,
+    None, # XXX Could not determine size of argument c for glIndexdv arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'c',
 )
 
 glIndexfv = arrays.setInputArraySizeType(
-	raw.glIndexfv,
-	None, # XXX Could not determine size of argument c for glIndexfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'c',
+    raw.glIndexfv,
+    None, # XXX Could not determine size of argument c for glIndexfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'c',
 )
 
 glIndexiv = arrays.setInputArraySizeType(
-	raw.glIndexiv,
-	None, # XXX Could not determine size of argument c for glIndexiv arrays.GLintArray
-	arrays.GLintArray, 
-	'c',
+    raw.glIndexiv,
+    None, # XXX Could not determine size of argument c for glIndexiv arrays.GLintArray
+    arrays.GLintArray, 
+    'c',
 )
 
 glIndexsv = arrays.setInputArraySizeType(
-	raw.glIndexsv,
-	None, # XXX Could not determine size of argument c for glIndexsv arrays.GLshortArray
-	arrays.GLshortArray, 
-	'c',
+    raw.glIndexsv,
+    None, # XXX Could not determine size of argument c for glIndexsv arrays.GLshortArray
+    arrays.GLshortArray, 
+    'c',
 )
 
 glIndexubv = arrays.setInputArraySizeType(
-	raw.glIndexubv,
-	None, # XXX Could not determine size of argument c for glIndexubv arrays.GLubyteArray
-	arrays.GLubyteArray, 
-	'c',
+    raw.glIndexubv,
+    None, # XXX Could not determine size of argument c for glIndexubv arrays.GLubyteArray
+    arrays.GLubyteArray, 
+    'c',
 )
 
 glLightModelfv = arrays.setInputArraySizeType(
-	raw.glLightModelfv,
-	None, # XXX Could not determine size of argument params for glLightModelfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glLightModelfv,
+    None, # XXX Could not determine size of argument params for glLightModelfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glLightModeliv = arrays.setInputArraySizeType(
-	raw.glLightModeliv,
-	None, # XXX Could not determine size of argument params for glLightModeliv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glLightModeliv,
+    None, # XXX Could not determine size of argument params for glLightModeliv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glLightfv = arrays.setInputArraySizeType(
-	raw.glLightfv,
-	None, # XXX Could not determine size of argument params for glLightfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glLightfv,
+    None, # XXX Could not determine size of argument params for glLightfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glLightiv = arrays.setInputArraySizeType(
-	raw.glLightiv,
-	None, # XXX Could not determine size of argument params for glLightiv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glLightiv,
+    None, # XXX Could not determine size of argument params for glLightiv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glLoadMatrixd = arrays.setInputArraySizeType(
-	raw.glLoadMatrixd,
-	16,
-	arrays.GLdoubleArray,
-	'm',
+    raw.glLoadMatrixd,
+    16,
+    arrays.GLdoubleArray,
+    'm',
 )
 
 glLoadMatrixf = arrays.setInputArraySizeType(
-	raw.glLoadMatrixf,
-	16,
-	arrays.GLfloatArray,
-	'm',
+    raw.glLoadMatrixf,
+    16,
+    arrays.GLfloatArray,
+    'm',
 )
 
 glMap1d = arrays.setInputArraySizeType(
-	raw.glMap1d,
-	None, # XXX Could not determine size of argument points for glMap1d arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'points',
+    raw.glMap1d,
+    None, # XXX Could not determine size of argument points for glMap1d arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'points',
 )
 
 glMap1f = arrays.setInputArraySizeType(
-	raw.glMap1f,
-	None, # XXX Could not determine size of argument points for glMap1f arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'points',
+    raw.glMap1f,
+    None, # XXX Could not determine size of argument points for glMap1f arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'points',
 )
 
 glMap2d = arrays.setInputArraySizeType(
-	raw.glMap2d,
-	None, # XXX Could not determine size of argument points for glMap2d arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'points',
+    raw.glMap2d,
+    None, # XXX Could not determine size of argument points for glMap2d arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'points',
 )
 
 glMap2f = arrays.setInputArraySizeType(
-	raw.glMap2f,
-	None, # XXX Could not determine size of argument points for glMap2f arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'points',
+    raw.glMap2f,
+    None, # XXX Could not determine size of argument points for glMap2f arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'points',
 )
 
 glMaterialfv = arrays.setInputArraySizeType(
-	raw.glMaterialfv,
-	None, # XXX Could not determine size of argument params for glMaterialfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glMaterialfv,
+    None, # XXX Could not determine size of argument params for glMaterialfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glMaterialiv = arrays.setInputArraySizeType(
-	raw.glMaterialiv,
-	None, # XXX Could not determine size of argument params for glMaterialiv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glMaterialiv,
+    None, # XXX Could not determine size of argument params for glMaterialiv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glMultMatrixd = arrays.setInputArraySizeType(
-	raw.glMultMatrixd,
-	16,
-	arrays.GLdoubleArray,
-	'm',
+    raw.glMultMatrixd,
+    16,
+    arrays.GLdoubleArray,
+    'm',
 )
 
 glMultMatrixf = arrays.setInputArraySizeType(
-	raw.glMultMatrixf,
-	16,
-	arrays.GLfloatArray,
-	'm',
+    raw.glMultMatrixf,
+    16,
+    arrays.GLfloatArray,
+    'm',
 )
 
 glNormal3bv = arrays.setInputArraySizeType(
-	raw.glNormal3bv,
-	3,
-	arrays.GLbyteArray,
-	'v',
+    raw.glNormal3bv,
+    3,
+    arrays.GLbyteArray,
+    'v',
 )
 
 glNormal3dv = arrays.setInputArraySizeType(
-	raw.glNormal3dv,
-	3,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glNormal3dv,
+    3,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glNormal3fv = arrays.setInputArraySizeType(
-	raw.glNormal3fv,
-	3,
-	arrays.GLfloatArray,
-	'v',
+    raw.glNormal3fv,
+    3,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glNormal3iv = arrays.setInputArraySizeType(
-	raw.glNormal3iv,
-	3,
-	arrays.GLintArray,
-	'v',
+    raw.glNormal3iv,
+    3,
+    arrays.GLintArray,
+    'v',
 )
 
 glNormal3sv = arrays.setInputArraySizeType(
-	raw.glNormal3sv,
-	3,
-	arrays.GLshortArray,
-	'v',
+    raw.glNormal3sv,
+    3,
+    arrays.GLshortArray,
+    'v',
 )
 
 glPixelMapfv = arrays.setInputArraySizeType(
-	raw.glPixelMapfv,
-	None, # XXX Could not determine size of argument values for glPixelMapfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'values',
+    raw.glPixelMapfv,
+    None, # XXX Could not determine size of argument values for glPixelMapfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'values',
 )
 
 glPixelMapuiv = arrays.setInputArraySizeType(
-	raw.glPixelMapuiv,
-	None, # XXX Could not determine size of argument values for glPixelMapuiv arrays.GLuintArray
-	arrays.GLuintArray, 
-	'values',
+    raw.glPixelMapuiv,
+    None, # XXX Could not determine size of argument values for glPixelMapuiv arrays.GLuintArray
+    arrays.GLuintArray, 
+    'values',
 )
 
 glPixelMapusv = arrays.setInputArraySizeType(
-	raw.glPixelMapusv,
-	None, # XXX Could not determine size of argument values for glPixelMapusv arrays.GLushortArray
-	arrays.GLushortArray, 
-	'values',
+    raw.glPixelMapusv,
+    None, # XXX Could not determine size of argument values for glPixelMapusv arrays.GLushortArray
+    arrays.GLushortArray, 
+    'values',
 )
 
 glPolygonStipple = arrays.setInputArraySizeType(
-	raw.glPolygonStipple,
-	None, # XXX Could not determine size of argument mask for glPolygonStipple arrays.GLubyteArray
-	arrays.GLubyteArray, 
-	'mask',
+    raw.glPolygonStipple,
+    None, # XXX Could not determine size of argument mask for glPolygonStipple arrays.GLubyteArray
+    arrays.GLubyteArray, 
+    'mask',
 )
 
 glPrioritizeTextures = arrays.setInputArraySizeType(
-	arrays.setInputArraySizeType(
-		raw.glPrioritizeTextures,
-		None, # XXX Could not determine size of argument textures for glPrioritizeTextures arrays.GLuintArray
-		arrays.GLuintArray, 
-		'textures',
-	),
-	None, # XXX Could not determine size of argument priorities for glPrioritizeTextures arrays.GLclampfArray
-	arrays.GLclampfArray, 
-	'priorities',
+    arrays.setInputArraySizeType(
+        raw.glPrioritizeTextures,
+        None, # XXX Could not determine size of argument textures for glPrioritizeTextures arrays.GLuintArray
+        arrays.GLuintArray, 
+        'textures',
+    ),
+    None, # XXX Could not determine size of argument priorities for glPrioritizeTextures arrays.GLclampfArray
+    arrays.GLclampfArray, 
+    'priorities',
 )
 
 glRasterPos2dv = arrays.setInputArraySizeType(
-	raw.glRasterPos2dv,
-	2,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glRasterPos2dv,
+    2,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glRasterPos2fv = arrays.setInputArraySizeType(
-	raw.glRasterPos2fv,
-	2,
-	arrays.GLfloatArray,
-	'v',
+    raw.glRasterPos2fv,
+    2,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glRasterPos2iv = arrays.setInputArraySizeType(
-	raw.glRasterPos2iv,
-	2,
-	arrays.GLintArray,
-	'v',
+    raw.glRasterPos2iv,
+    2,
+    arrays.GLintArray,
+    'v',
 )
 
 glRasterPos2sv = arrays.setInputArraySizeType(
-	raw.glRasterPos2sv,
-	2,
-	arrays.GLshortArray,
-	'v',
+    raw.glRasterPos2sv,
+    2,
+    arrays.GLshortArray,
+    'v',
 )
 
 glRasterPos3dv = arrays.setInputArraySizeType(
-	raw.glRasterPos3dv,
-	3,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glRasterPos3dv,
+    3,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glRasterPos3fv = arrays.setInputArraySizeType(
-	raw.glRasterPos3fv,
-	3,
-	arrays.GLfloatArray,
-	'v',
+    raw.glRasterPos3fv,
+    3,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glRasterPos3iv = arrays.setInputArraySizeType(
-	raw.glRasterPos3iv,
-	3,
-	arrays.GLintArray,
-	'v',
+    raw.glRasterPos3iv,
+    3,
+    arrays.GLintArray,
+    'v',
 )
 
 glRasterPos3sv = arrays.setInputArraySizeType(
-	raw.glRasterPos3sv,
-	3,
-	arrays.GLshortArray,
-	'v',
+    raw.glRasterPos3sv,
+    3,
+    arrays.GLshortArray,
+    'v',
 )
 
 glRasterPos4dv = arrays.setInputArraySizeType(
-	raw.glRasterPos4dv,
-	4,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glRasterPos4dv,
+    4,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glRasterPos4fv = arrays.setInputArraySizeType(
-	raw.glRasterPos4fv,
-	4,
-	arrays.GLfloatArray,
-	'v',
+    raw.glRasterPos4fv,
+    4,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glRasterPos4iv = arrays.setInputArraySizeType(
-	raw.glRasterPos4iv,
-	4,
-	arrays.GLintArray,
-	'v',
+    raw.glRasterPos4iv,
+    4,
+    arrays.GLintArray,
+    'v',
 )
 
 glRasterPos4sv = arrays.setInputArraySizeType(
-	raw.glRasterPos4sv,
-	4,
-	arrays.GLshortArray,
-	'v',
+    raw.glRasterPos4sv,
+    4,
+    arrays.GLshortArray,
+    'v',
 )
 
 glRectdv = arrays.setInputArraySizeType(
-	arrays.setInputArraySizeType(
-		raw.glRectdv,
-		None, # XXX Could not determine size of argument v1 for glRectdv arrays.GLdoubleArray
-		arrays.GLdoubleArray, 
-		'v1',
-	),
-	None, # XXX Could not determine size of argument v2 for glRectdv arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'v2',
+    arrays.setInputArraySizeType(
+        raw.glRectdv,
+        None, # XXX Could not determine size of argument v1 for glRectdv arrays.GLdoubleArray
+        arrays.GLdoubleArray, 
+        'v1',
+    ),
+    None, # XXX Could not determine size of argument v2 for glRectdv arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'v2',
 )
 
 glRectfv = arrays.setInputArraySizeType(
-	arrays.setInputArraySizeType(
-		raw.glRectfv,
-		None, # XXX Could not determine size of argument v1 for glRectfv arrays.GLfloatArray
-		arrays.GLfloatArray, 
-		'v1',
-	),
-	None, # XXX Could not determine size of argument v2 for glRectfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'v2',
+    arrays.setInputArraySizeType(
+        raw.glRectfv,
+        None, # XXX Could not determine size of argument v1 for glRectfv arrays.GLfloatArray
+        arrays.GLfloatArray, 
+        'v1',
+    ),
+    None, # XXX Could not determine size of argument v2 for glRectfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'v2',
 )
 
 glRectiv = arrays.setInputArraySizeType(
-	arrays.setInputArraySizeType(
-		raw.glRectiv,
-		None, # XXX Could not determine size of argument v1 for glRectiv arrays.GLintArray
-		arrays.GLintArray, 
-		'v1',
-	),
-	None, # XXX Could not determine size of argument v2 for glRectiv arrays.GLintArray
-	arrays.GLintArray, 
-	'v2',
+    arrays.setInputArraySizeType(
+        raw.glRectiv,
+        None, # XXX Could not determine size of argument v1 for glRectiv arrays.GLintArray
+        arrays.GLintArray, 
+        'v1',
+    ),
+    None, # XXX Could not determine size of argument v2 for glRectiv arrays.GLintArray
+    arrays.GLintArray, 
+    'v2',
 )
 
 glRectsv = arrays.setInputArraySizeType(
-	arrays.setInputArraySizeType(
-		raw.glRectsv,
-		None, # XXX Could not determine size of argument v1 for glRectsv arrays.GLshortArray
-		arrays.GLshortArray, 
-		'v1',
-	),
-	None, # XXX Could not determine size of argument v2 for glRectsv arrays.GLshortArray
-	arrays.GLshortArray, 
-	'v2',
+    arrays.setInputArraySizeType(
+        raw.glRectsv,
+        None, # XXX Could not determine size of argument v1 for glRectsv arrays.GLshortArray
+        arrays.GLshortArray, 
+        'v1',
+    ),
+    None, # XXX Could not determine size of argument v2 for glRectsv arrays.GLshortArray
+    arrays.GLshortArray, 
+    'v2',
 )
 
 glSelectBuffer = arrays.setInputArraySizeType(
-	raw.glSelectBuffer,
-	None, # XXX Could not determine size of argument buffer for glSelectBuffer arrays.GLuintArray
-	arrays.GLuintArray, 
-	'buffer',
+    raw.glSelectBuffer,
+    None, # XXX Could not determine size of argument buffer for glSelectBuffer arrays.GLuintArray
+    arrays.GLuintArray, 
+    'buffer',
 )
 
 glTexCoord1dv = arrays.setInputArraySizeType(
-	raw.glTexCoord1dv,
-	1,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glTexCoord1dv,
+    1,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glTexCoord1fv = arrays.setInputArraySizeType(
-	raw.glTexCoord1fv,
-	1,
-	arrays.GLfloatArray,
-	'v',
+    raw.glTexCoord1fv,
+    1,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glTexCoord1iv = arrays.setInputArraySizeType(
-	raw.glTexCoord1iv,
-	1,
-	arrays.GLintArray,
-	'v',
+    raw.glTexCoord1iv,
+    1,
+    arrays.GLintArray,
+    'v',
 )
 
 glTexCoord1sv = arrays.setInputArraySizeType(
-	raw.glTexCoord1sv,
-	1,
-	arrays.GLshortArray,
-	'v',
+    raw.glTexCoord1sv,
+    1,
+    arrays.GLshortArray,
+    'v',
 )
 
 glTexCoord2dv = arrays.setInputArraySizeType(
-	raw.glTexCoord2dv,
-	2,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glTexCoord2dv,
+    2,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glTexCoord2fv = arrays.setInputArraySizeType(
-	raw.glTexCoord2fv,
-	2,
-	arrays.GLfloatArray,
-	'v',
+    raw.glTexCoord2fv,
+    2,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glTexCoord2iv = arrays.setInputArraySizeType(
-	raw.glTexCoord2iv,
-	2,
-	arrays.GLintArray,
-	'v',
+    raw.glTexCoord2iv,
+    2,
+    arrays.GLintArray,
+    'v',
 )
 
 glTexCoord2sv = arrays.setInputArraySizeType(
-	raw.glTexCoord2sv,
-	2,
-	arrays.GLshortArray,
-	'v',
+    raw.glTexCoord2sv,
+    2,
+    arrays.GLshortArray,
+    'v',
 )
 
 glTexCoord3dv = arrays.setInputArraySizeType(
-	raw.glTexCoord3dv,
-	3,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glTexCoord3dv,
+    3,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glTexCoord3fv = arrays.setInputArraySizeType(
-	raw.glTexCoord3fv,
-	3,
-	arrays.GLfloatArray,
-	'v',
+    raw.glTexCoord3fv,
+    3,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glTexCoord3iv = arrays.setInputArraySizeType(
-	raw.glTexCoord3iv,
-	3,
-	arrays.GLintArray,
-	'v',
+    raw.glTexCoord3iv,
+    3,
+    arrays.GLintArray,
+    'v',
 )
 
 glTexCoord3sv = arrays.setInputArraySizeType(
-	raw.glTexCoord3sv,
-	3,
-	arrays.GLshortArray,
-	'v',
+    raw.glTexCoord3sv,
+    3,
+    arrays.GLshortArray,
+    'v',
 )
 
 glTexCoord4dv = arrays.setInputArraySizeType(
-	raw.glTexCoord4dv,
-	4,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glTexCoord4dv,
+    4,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glTexCoord4fv = arrays.setInputArraySizeType(
-	raw.glTexCoord4fv,
-	4,
-	arrays.GLfloatArray,
-	'v',
+    raw.glTexCoord4fv,
+    4,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glTexCoord4iv = arrays.setInputArraySizeType(
-	raw.glTexCoord4iv,
-	4,
-	arrays.GLintArray,
-	'v',
+    raw.glTexCoord4iv,
+    4,
+    arrays.GLintArray,
+    'v',
 )
 
 glTexCoord4sv = arrays.setInputArraySizeType(
-	raw.glTexCoord4sv,
-	4,
-	arrays.GLshortArray,
-	'v',
+    raw.glTexCoord4sv,
+    4,
+    arrays.GLshortArray,
+    'v',
 )
 
 glTexEnvfv = arrays.setInputArraySizeType(
-	raw.glTexEnvfv,
-	None, # XXX Could not determine size of argument params for glTexEnvfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glTexEnvfv,
+    None, # XXX Could not determine size of argument params for glTexEnvfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glTexEnviv = arrays.setInputArraySizeType(
-	raw.glTexEnviv,
-	None, # XXX Could not determine size of argument params for glTexEnviv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glTexEnviv,
+    None, # XXX Could not determine size of argument params for glTexEnviv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glTexGendv = arrays.setInputArraySizeType(
-	raw.glTexGendv,
-	None, # XXX Could not determine size of argument params for glTexGendv arrays.GLdoubleArray
-	arrays.GLdoubleArray, 
-	'params',
+    raw.glTexGendv,
+    None, # XXX Could not determine size of argument params for glTexGendv arrays.GLdoubleArray
+    arrays.GLdoubleArray, 
+    'params',
 )
 
 glTexGenfv = arrays.setInputArraySizeType(
-	raw.glTexGenfv,
-	None, # XXX Could not determine size of argument params for glTexGenfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glTexGenfv,
+    None, # XXX Could not determine size of argument params for glTexGenfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glTexGeniv = arrays.setInputArraySizeType(
-	raw.glTexGeniv,
-	None, # XXX Could not determine size of argument params for glTexGeniv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glTexGeniv,
+    None, # XXX Could not determine size of argument params for glTexGeniv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glTexParameterfv = arrays.setInputArraySizeType(
-	raw.glTexParameterfv,
-	None, # XXX Could not determine size of argument params for glTexParameterfv arrays.GLfloatArray
-	arrays.GLfloatArray, 
-	'params',
+    raw.glTexParameterfv,
+    None, # XXX Could not determine size of argument params for glTexParameterfv arrays.GLfloatArray
+    arrays.GLfloatArray, 
+    'params',
 )
 
 glTexParameteriv = arrays.setInputArraySizeType(
-	raw.glTexParameteriv,
-	None, # XXX Could not determine size of argument params for glTexParameteriv arrays.GLintArray
-	arrays.GLintArray, 
-	'params',
+    raw.glTexParameteriv,
+    None, # XXX Could not determine size of argument params for glTexParameteriv arrays.GLintArray
+    arrays.GLintArray, 
+    'params',
 )
 
 glVertex2dv = arrays.setInputArraySizeType(
-	raw.glVertex2dv,
-	2,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glVertex2dv,
+    2,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glVertex2fv = arrays.setInputArraySizeType(
-	raw.glVertex2fv,
-	2,
-	arrays.GLfloatArray,
-	'v',
+    raw.glVertex2fv,
+    2,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glVertex2iv = arrays.setInputArraySizeType(
-	raw.glVertex2iv,
-	2,
-	arrays.GLintArray,
-	'v',
+    raw.glVertex2iv,
+    2,
+    arrays.GLintArray,
+    'v',
 )
 
 glVertex2sv = arrays.setInputArraySizeType(
-	raw.glVertex2sv,
-	2,
-	arrays.GLshortArray,
-	'v',
+    raw.glVertex2sv,
+    2,
+    arrays.GLshortArray,
+    'v',
 )
 
 glVertex3dv = arrays.setInputArraySizeType(
-	raw.glVertex3dv,
-	3,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glVertex3dv,
+    3,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glVertex3fv = arrays.setInputArraySizeType(
-	raw.glVertex3fv,
-	3,
-	arrays.GLfloatArray,
-	'v',
+    raw.glVertex3fv,
+    3,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glVertex3iv = arrays.setInputArraySizeType(
-	raw.glVertex3iv,
-	3,
-	arrays.GLintArray,
-	'v',
+    raw.glVertex3iv,
+    3,
+    arrays.GLintArray,
+    'v',
 )
 
 glVertex3sv = arrays.setInputArraySizeType(
-	raw.glVertex3sv,
-	3,
-	arrays.GLshortArray,
-	'v',
+    raw.glVertex3sv,
+    3,
+    arrays.GLshortArray,
+    'v',
 )
 
 glVertex4dv = arrays.setInputArraySizeType(
-	raw.glVertex4dv,
-	4,
-	arrays.GLdoubleArray,
-	'v',
+    raw.glVertex4dv,
+    4,
+    arrays.GLdoubleArray,
+    'v',
 )
 
 glVertex4fv = arrays.setInputArraySizeType(
-	raw.glVertex4fv,
-	4,
-	arrays.GLfloatArray,
-	'v',
+    raw.glVertex4fv,
+    4,
+    arrays.GLfloatArray,
+    'v',
 )
 
 glVertex4iv = arrays.setInputArraySizeType(
-	raw.glVertex4iv,
-	4,
-	arrays.GLintArray,
-	'v',
+    raw.glVertex4iv,
+    4,
+    arrays.GLintArray,
+    'v',
 )
 
 glVertex4sv = arrays.setInputArraySizeType(
-	raw.glVertex4sv,
-	4,
-	arrays.GLshortArray,
-	'v',
+    raw.glVertex4sv,
+    4,
+    arrays.GLshortArray,
+    'v',
 )
 
 __all__ = [
-	'glAreTexturesResident',
-	'glBitmap',
-	'glClipPlane',
-	'glColor3bv',
-	'glColor3dv',
-	'glColor3fv',
-	'glColor3iv',
-	'glColor3sv',
-	'glColor3ubv',
-	'glColor3uiv',
-	'glColor3usv',
-	'glColor4bv',
-	'glColor4dv',
-	'glColor4fv',
-	'glColor4iv',
-	'glColor4sv',
-	'glColor4ubv',
-	'glColor4uiv',
-	'glColor4usv',
-	'glDeleteTextures',
-	'glEvalCoord1dv',
-	'glEvalCoord1fv',
-	'glEvalCoord2dv',
-	'glEvalCoord2fv',
-	'glFeedbackBuffer',
-	'glFogfv',
-	'glFogiv',
-	'glGenTextures',
-	'glGetClipPlane',
-	'glGetDoublev',
-	'glGetFloatv',
-	'glGetIntegerv',
-	'glGetLightfv',
-	'glGetLightiv',
-	'glGetMapdv',
-	'glGetMapfv',
-	'glGetMapiv',
-	'glGetMaterialfv',
-	'glGetMaterialiv',
-	'glGetPixelMapfv',
-	'glGetPixelMapuiv',
-	'glGetPixelMapusv',
-	'glGetPolygonStipple',
-	'glGetTexEnvfv',
-	'glGetTexEnviv',
-	'glGetTexGendv',
-	'glGetTexGenfv',
-	'glGetTexGeniv',
-	'glGetTexLevelParameterfv',
-	'glGetTexLevelParameteriv',
-	'glGetTexParameterfv',
-	'glGetTexParameteriv',
-	'glIndexdv',
-	'glIndexfv',
-	'glIndexiv',
-	'glIndexsv',
-	'glIndexubv',
-	'glLightModelfv',
-	'glLightModeliv',
-	'glLightfv',
-	'glLightiv',
-	'glLoadMatrixd',
-	'glLoadMatrixf',
-	'glMap1d',
-	'glMap1f',
-	'glMap2d',
-	'glMap2f',
-	'glMaterialfv',
-	'glMaterialiv',
-	'glMultMatrixd',
-	'glMultMatrixf',
-	'glNormal3bv',
-	'glNormal3dv',
-	'glNormal3fv',
-	'glNormal3iv',
-	'glNormal3sv',
-	'glPixelMapfv',
-	'glPixelMapuiv',
-	'glPixelMapusv',
-	'glPolygonStipple',
-	'glPrioritizeTextures',
-	'glRasterPos2dv',
-	'glRasterPos2fv',
-	'glRasterPos2iv',
-	'glRasterPos2sv',
-	'glRasterPos3dv',
-	'glRasterPos3fv',
-	'glRasterPos3iv',
-	'glRasterPos3sv',
-	'glRasterPos4dv',
-	'glRasterPos4fv',
-	'glRasterPos4iv',
-	'glRasterPos4sv',
-	'glRectdv',
-	'glRectfv',
-	'glRectiv',
-	'glRectsv',
-	'glSelectBuffer',
-	'glTexCoord1dv',
-	'glTexCoord1fv',
-	'glTexCoord1iv',
-	'glTexCoord1sv',
-	'glTexCoord2dv',
-	'glTexCoord2fv',
-	'glTexCoord2iv',
-	'glTexCoord2sv',
-	'glTexCoord3dv',
-	'glTexCoord3fv',
-	'glTexCoord3iv',
-	'glTexCoord3sv',
-	'glTexCoord4dv',
-	'glTexCoord4fv',
-	'glTexCoord4iv',
-	'glTexCoord4sv',
-	'glTexEnvfv',
-	'glTexEnviv',
-	'glTexGendv',
-	'glTexGenfv',
-	'glTexGeniv',
-	'glTexParameterfv',
-	'glTexParameteriv',
-	'glVertex2dv',
-	'glVertex2fv',
-	'glVertex2iv',
-	'glVertex2sv',
-	'glVertex3dv',
-	'glVertex3fv',
-	'glVertex3iv',
-	'glVertex3sv',
-	'glVertex4dv',
-	'glVertex4fv',
-	'glVertex4iv',
-	'glVertex4sv'
+    'glAreTexturesResident',
+    'glBitmap',
+    'glClipPlane',
+    'glColor3bv',
+    'glColor3dv',
+    'glColor3fv',
+    'glColor3iv',
+    'glColor3sv',
+    'glColor3ubv',
+    'glColor3uiv',
+    'glColor3usv',
+    'glColor4bv',
+    'glColor4dv',
+    'glColor4fv',
+    'glColor4iv',
+    'glColor4sv',
+    'glColor4ubv',
+    'glColor4uiv',
+    'glColor4usv',
+    'glDeleteTextures',
+    'glEvalCoord1dv',
+    'glEvalCoord1fv',
+    'glEvalCoord2dv',
+    'glEvalCoord2fv',
+    'glFeedbackBuffer',
+    'glFogfv',
+    'glFogiv',
+    'glGenTextures',
+    'glGetClipPlane',
+    'glGetDoublev',
+    'glGetFloatv',
+    'glGetIntegerv',
+    'glGetLightfv',
+    'glGetLightiv',
+    'glGetMapdv',
+    'glGetMapfv',
+    'glGetMapiv',
+    'glGetMaterialfv',
+    'glGetMaterialiv',
+    'glGetPixelMapfv',
+    'glGetPixelMapuiv',
+    'glGetPixelMapusv',
+    'glGetPolygonStipple',
+    'glGetTexEnvfv',
+    'glGetTexEnviv',
+    'glGetTexGendv',
+    'glGetTexGenfv',
+    'glGetTexGeniv',
+    'glGetTexLevelParameterfv',
+    'glGetTexLevelParameteriv',
+    'glGetTexParameterfv',
+    'glGetTexParameteriv',
+    'glIndexdv',
+    'glIndexfv',
+    'glIndexiv',
+    'glIndexsv',
+    'glIndexubv',
+    'glLightModelfv',
+    'glLightModeliv',
+    'glLightfv',
+    'glLightiv',
+    'glLoadMatrixd',
+    'glLoadMatrixf',
+    'glMap1d',
+    'glMap1f',
+    'glMap2d',
+    'glMap2f',
+    'glMaterialfv',
+    'glMaterialiv',
+    'glMultMatrixd',
+    'glMultMatrixf',
+    'glNormal3bv',
+    'glNormal3dv',
+    'glNormal3fv',
+    'glNormal3iv',
+    'glNormal3sv',
+    'glPixelMapfv',
+    'glPixelMapuiv',
+    'glPixelMapusv',
+    'glPolygonStipple',
+    'glPrioritizeTextures',
+    'glRasterPos2dv',
+    'glRasterPos2fv',
+    'glRasterPos2iv',
+    'glRasterPos2sv',
+    'glRasterPos3dv',
+    'glRasterPos3fv',
+    'glRasterPos3iv',
+    'glRasterPos3sv',
+    'glRasterPos4dv',
+    'glRasterPos4fv',
+    'glRasterPos4iv',
+    'glRasterPos4sv',
+    'glRectdv',
+    'glRectfv',
+    'glRectiv',
+    'glRectsv',
+    'glSelectBuffer',
+    'glTexCoord1dv',
+    'glTexCoord1fv',
+    'glTexCoord1iv',
+    'glTexCoord1sv',
+    'glTexCoord2dv',
+    'glTexCoord2fv',
+    'glTexCoord2iv',
+    'glTexCoord2sv',
+    'glTexCoord3dv',
+    'glTexCoord3fv',
+    'glTexCoord3iv',
+    'glTexCoord3sv',
+    'glTexCoord4dv',
+    'glTexCoord4fv',
+    'glTexCoord4iv',
+    'glTexCoord4sv',
+    'glTexEnvfv',
+    'glTexEnviv',
+    'glTexGendv',
+    'glTexGenfv',
+    'glTexGeniv',
+    'glTexParameterfv',
+    'glTexParameteriv',
+    'glVertex2dv',
+    'glVertex2fv',
+    'glVertex2iv',
+    'glVertex2sv',
+    'glVertex3dv',
+    'glVertex3fv',
+    'glVertex3iv',
+    'glVertex3sv',
+    'glVertex4dv',
+    'glVertex4fv',
+    'glVertex4iv',
+    'glVertex4sv'
 ]
-

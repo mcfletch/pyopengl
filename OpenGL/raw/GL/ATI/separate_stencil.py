@@ -1,10 +1,10 @@
 '''OpenGL extension ATI.separate_stencil
 
 Overview (from the spec)
-	
-	This extension provides the ability to modify the stencil buffer
-	differently based on the facing direction of the primitive that
-	generated the fragment.
+    
+    This extension provides the ability to modify the stencil buffer
+    differently based on the facing direction of the primitive that
+    generated the fragment.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ATI/separate_stencil.txt

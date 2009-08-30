@@ -17,22 +17,22 @@ from OpenGL.arrays.arraydatatype import ArrayDatatype
 # Note: sizes here are == the only documented sizes I could find,
 # may need a lookup table some day...
 glGetProgramivARB = wrapper.wrapper(glGetProgramivARB).setOutput(
-	'params', (1,),
+    'params', (1,),
 )
 glGetProgramEnvParameterdvARB = wrapper.wrapper(glGetProgramEnvParameterdvARB).setOutput(
-	'params',(4,),
+    'params',(4,),
 )
 glGetProgramEnvParameterfvARB = wrapper.wrapper(glGetProgramEnvParameterfvARB).setOutput(
-	'params',(4,),
+    'params',(4,),
 )
 glGetProgramLocalParameterdvARB = wrapper.wrapper(glGetProgramLocalParameterdvARB).setOutput(
-	'params',(4,),
+    'params',(4,),
 )
 glGetProgramLocalParameterfvARB = wrapper.wrapper(glGetProgramLocalParameterfvARB).setOutput(
-	'params',(4,),
+    'params',(4,),
 )
 glGetVertexAttribdvARB = wrapper.wrapper(glGetVertexAttribdvARB).setOutput(
-	'params',(1,),
+    'params',(1,),
 )
 
 ##glGetVertexAttribPointervARB = wrapper.wrapper(glGetVertexAttribPointervARB).setOutput(
@@ -57,34 +57,34 @@ glGetVertexAttribdvARB = wrapper.wrapper(glGetVertexAttribdvARB).setOutput(
 
 @lazy( glVertexAttribPointerARB )
 def glVertexAttribPointerARB( 
-	baseOperation, index, size, type,
-	normalized, stride, pointer,
+    baseOperation, index, size, type,
+    normalized, stride, pointer,
 ):
-	"""Set an attribute pointer for a given shader (index)
-	
-	index -- the index of the generic vertex to bind, see 
-		glGetAttribLocation for retrieval of the value,
-		note that index is a global variable, not per-shader
-	size -- number of basic elements per record, 1,2,3, or 4
-	type -- enum constant for data-type 
-	normalized -- whether to perform int to float 
-		normalization on integer-type values
-	stride -- stride in machine units (bytes) between 
-		consecutive records, normally used to create 
-		"interleaved" arrays 
-	pointer -- data-pointer which provides the data-values,
-		normally a vertex-buffer-object or offset into the 
-		same.
-	
-	This implementation stores a copy of the data-pointer 
-	in the contextdata structure in order to prevent null-
-	reference errors in the renderer.
-	"""
-	array = ArrayDatatype.asArray( pointer )
-	key = ('vertex-attrib',index)
-	contextdata.setValue( key, array )
-	return baseOperation(
-		index, size, type,
-		normalized, stride, 
-		ArrayDatatype.voidDataPointer( array ) 
-	)
+    """Set an attribute pointer for a given shader (index)
+    
+    index -- the index of the generic vertex to bind, see 
+        glGetAttribLocation for retrieval of the value,
+        note that index is a global variable, not per-shader
+    size -- number of basic elements per record, 1,2,3, or 4
+    type -- enum constant for data-type 
+    normalized -- whether to perform int to float 
+        normalization on integer-type values
+    stride -- stride in machine units (bytes) between 
+        consecutive records, normally used to create 
+        "interleaved" arrays 
+    pointer -- data-pointer which provides the data-values,
+        normally a vertex-buffer-object or offset into the 
+        same.
+    
+    This implementation stores a copy of the data-pointer 
+    in the contextdata structure in order to prevent null-
+    reference errors in the renderer.
+    """
+    array = ArrayDatatype.asArray( pointer )
+    key = ('vertex-attrib',index)
+    contextdata.setValue( key, array )
+    return baseOperation(
+        index, size, type,
+        normalized, stride, 
+        ArrayDatatype.voidDataPointer( array ) 
+    )

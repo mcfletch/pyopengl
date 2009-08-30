@@ -1,22 +1,22 @@
 '''OpenGL extension EXT.texture_env_dot3
 
 Overview (from the spec)
-	
-	Adds new operation to the texture combiner operations.
-	
-	    DOT3_RGB_EXT                    Arg0 <dotprod> Arg1
-	    DOT3_RGBA_EXT                   Arg0 <dotprod> Arg1
-	
-	where Arg0, Arg1 are derived from
-	
-	    PRIMARY_COLOR_EXT       primary color of incoming fragment
-	    TEXTURE                 texture color of corresponding texture unit
-	    CONSTANT_EXT            texture environment constant color
-	    PREVIOUS_EXT            result of previous texture environment; on
-	                            texture unit 0, this maps to PRIMARY_COLOR_EXT
-	
-	This operaion can only be performed if SOURCE0_RGB_EXT,
-	SOURCE1_RGB_EXT are defined.
+    
+    Adds new operation to the texture combiner operations.
+    
+        DOT3_RGB_EXT                    Arg0 <dotprod> Arg1
+        DOT3_RGBA_EXT                   Arg0 <dotprod> Arg1
+    
+    where Arg0, Arg1 are derived from
+    
+        PRIMARY_COLOR_EXT       primary color of incoming fragment
+        TEXTURE                 texture color of corresponding texture unit
+        CONSTANT_EXT            texture environment constant color
+        PREVIOUS_EXT            result of previous texture environment; on
+                                texture unit 0, this maps to PRIMARY_COLOR_EXT
+    
+    This operaion can only be performed if SOURCE0_RGB_EXT,
+    SOURCE1_RGB_EXT are defined.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/texture_env_dot3.txt

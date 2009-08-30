@@ -1,11 +1,11 @@
 '''OpenGL extension SUN.slice_accum
 
 Overview (from the spec)
-	
-	
-	This extension defines a new accumulation operation which enables the accumulation
-	buffer to be used for alpha compositing. This enables higher precision alpha
-	blending than what can be accomplished using the blend operation.
+    
+    
+    This extension defines a new accumulation operation which enables the accumulation
+    buffer to be used for alpha compositing. This enables higher precision alpha
+    blending than what can be accomplished using the blend operation.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SUN/slice_accum.txt

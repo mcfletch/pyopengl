@@ -10,11 +10,11 @@ be generated on a GLX platform (e.g. Linux), WGL should generate anywhere
 as I'm using Alex's hacked/derived wgl.h as the source for it.
 
 TODO:
-	This wrapper is missing a lot of the operations from the original 
-	openglgenerator module.  It's only appropriate for generating the 
-	platform-specific modules (GLX, WGL, AGL).  Eventually should port 
-	the code from the openglgenerator module to support creating the 
-	extensions and core GL modules.
+    This wrapper is missing a lot of the operations from the original 
+    openglgenerator module.  It's only appropriate for generating the 
+    platform-specific modules (GLX, WGL, AGL).  Eventually should port 
+    the code from the openglgenerator module to support creating the 
+    extensions and core GL modules.
 '''
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
@@ -60,16 +60,16 @@ import re
 # monkey-patching the tool to support argument names...
 from wraptypes import ctypesparser
 class CtypesFunction( ctypesparser.CtypesFunction ):
-	def __init__(self, restype, parameters):
-		if parameters and parameters[-1] == '...':
-			 parameters = parameters[:-1]		
-		self.argnames = [ self.argname(p.declarator) for p in parameters ]
-		super( CtypesFunction, self ).__init__( restype, parameters )
-	def argname( self, parameter ):
-		if not getattr( parameter, 'pointer', None ):
-			return parameter
-		else:
-			return self.argname( parameter.pointer )
+    def __init__(self, restype, parameters):
+        if parameters and parameters[-1] == '...':
+             parameters = parameters[:-1]		
+        self.argnames = [ self.argname(p.declarator) for p in parameters ]
+        super( CtypesFunction, self ).__init__( restype, parameters )
+    def argname( self, parameter ):
+        if not getattr( parameter, 'pointer', None ):
+            return parameter
+        else:
+            return self.argname( parameter.pointer )
 ctypesparser.CtypesFunction = CtypesFunction
 
 from wraptypes import wrap
@@ -94,194 +94,194 @@ _cache = {}
 
 
 def load_cache():
-	global _cache
-	if os.path.exists(CACHE_FILE):
-		try:
-			_cache = marshal.load(open(CACHE_FILE, 'rb')) or {}
-		except:
-			pass
-	_cache = {}
+    global _cache
+    if os.path.exists(CACHE_FILE):
+        try:
+            _cache = marshal.load(open(CACHE_FILE, 'rb')) or {}
+        except:
+            pass
+    _cache = {}
 
 def save_cache():
-	try:
-		marshal.dump(_cache, open(CACHE_FILE, 'wb'))
-	except:
-		pass
+    try:
+        marshal.dump(_cache, open(CACHE_FILE, 'wb'))
+    except:
+        pass
 
 def read_url(url):
-	if url in _cache:
-		return _cache[url]
-	if os.path.exists(url):
-		data = open(url).read()
-	else:
-		data = urllib2.urlopen(url).read()
-	_cache[url] = data
-	save_cache()
-	return data
+    if url in _cache:
+        return _cache[url]
+    if os.path.exists(url):
+        data = open(url).read()
+    else:
+        data = urllib2.urlopen(url).read()
+    _cache[url] = data
+    save_cache()
+    return data
 
 class GLWrapper(wrap.CtypesWrapper):
-	requires = None
-	requires_prefix = None
+    requires = None
+    requires_prefix = None
 
-	def __init__(self, header, match_re):
-		self.header = header
-		self.match_re = match_re
-		super(GLWrapper, self).__init__()
-	def handle_declaration(self, declaration, filename, lineno):
-		"""Overridden solely to pass in the argument names"""
-		t = wrap.get_ctypes_type(declaration.type, declaration.declarator)
-		declarator = declaration.declarator
-		if declarator is None:
-			# XXX TEMPORARY while struct with no typedef not filled in
-			return
-		while declarator.pointer:
-			declarator = declarator.pointer
-		name = declarator.identifier
-		if declaration.storage == 'typedef':
-			self.handle_ctypes_type_definition(
-				name, wrap.remove_function_pointer(t), filename, lineno)
-		elif type(t) == CtypesFunction:
-			# this is the line we override
-			self.handle_ctypes_function(
-				name, t.restype, t.argtypes, filename, lineno, t.argnames)
-		elif declaration.storage != 'static':
-			self.handle_ctypes_variable(name, t, filename, lineno)
+    def __init__(self, header, match_re):
+        self.header = header
+        self.match_re = match_re
+        super(GLWrapper, self).__init__()
+    def handle_declaration(self, declaration, filename, lineno):
+        """Overridden solely to pass in the argument names"""
+        t = wrap.get_ctypes_type(declaration.type, declaration.declarator)
+        declarator = declaration.declarator
+        if declarator is None:
+            # XXX TEMPORARY while struct with no typedef not filled in
+            return
+        while declarator.pointer:
+            declarator = declarator.pointer
+        name = declarator.identifier
+        if declaration.storage == 'typedef':
+            self.handle_ctypes_type_definition(
+                name, wrap.remove_function_pointer(t), filename, lineno)
+        elif type(t) == CtypesFunction:
+            # this is the line we override
+            self.handle_ctypes_function(
+                name, t.restype, t.argtypes, filename, lineno, t.argnames)
+        elif declaration.storage != 'static':
+            self.handle_ctypes_variable(name, t, filename, lineno)
 
-	def print_preamble(self):
-		import time
-		print >> self.file, textwrap.dedent("""
-			# This content is generated by %(script)s.
-			# Wrapper for %(header)s
-			from OpenGL import platform, constant
-			from ctypes import *
-			c_void = None
-		""" % {
-			'header': self.header,
-			'date': time.ctime(),
-			'script': __file__,
-		}).lstrip()
+    def print_preamble(self):
+        import time
+        print >> self.file, textwrap.dedent("""
+            # This content is generated by %(script)s.
+            # Wrapper for %(header)s
+            from OpenGL import platform, constant
+            from ctypes import *
+            c_void = None
+        """ % {
+            'header': self.header,
+            'date': time.ctime(),
+            'script': __file__,
+        }).lstrip()
 
-	def libFromRequires( self, requires  ):
-		return 'platform.GL'
+    def libFromRequires( self, requires  ):
+        return 'platform.GL'
 
-	def handle_ctypes_function(self, name, restype, argtypes, filename, lineno, argnames):
-		if self.does_emit(name, filename):
-			self.emit_type(restype)
-			for a in argtypes:
-				self.emit_type(a)
+    def handle_ctypes_function(self, name, restype, argtypes, filename, lineno, argnames):
+        if self.does_emit(name, filename):
+            self.emit_type(restype)
+            for a in argtypes:
+                self.emit_type(a)
 
-			self.all_names.append(name)
-			#print >> self.file, '# %s:%d' % (filename, lineno)
-			print >> self.file, '''%(name)s = platform.createBaseFunction(
-	%(name)r, dll=%(libname)s, resultType=%(returnType)s, 
-	argTypes=[%(argTypes)s],
-	doc=%(documentation)r, 
-	argNames=%(argNames)r,
+            self.all_names.append(name)
+            #print >> self.file, '# %s:%d' % (filename, lineno)
+            print >> self.file, '''%(name)s = platform.createBaseFunction(
+    %(name)r, dll=%(libname)s, resultType=%(returnType)s, 
+    argTypes=[%(argTypes)s],
+    doc=%(documentation)r, 
+    argNames=%(argNames)r,
 )'''%dict(
-	name = name,
-	libname = self.libFromRequires( self.requires  ),
-	returnType = restype,
-	argTypes = ', '.join([str(a) for a in argtypes]),
-	documentation = self.documentation(
-		name, argnames, argtypes, restype
-	),
-	argNames = [str(x) for x in argnames],
+    name = name,
+    libname = self.libFromRequires( self.requires  ),
+    returnType = restype,
+    argTypes = ', '.join([str(a) for a in argtypes]),
+    documentation = self.documentation(
+        name, argnames, argtypes, restype
+    ),
+    argNames = [str(x) for x in argnames],
 )
-			print >> self.file
-	def documentation( self, name, argnames, args, returntype ):
-		"""Customisation point for documenting a given function"""
-		return str("%s( %s ) -> %s"%(
-			name,
-			", ".join(
-				[ '%s(%s)'%( typ, name) for (typ,name) in zip(args,argnames) ]
-			),
-			returntype,
-		))
+            print >> self.file
+    def documentation( self, name, argnames, args, returntype ):
+        """Customisation point for documenting a given function"""
+        return str("%s( %s ) -> %s"%(
+            name,
+            ", ".join(
+                [ '%s(%s)'%( typ, name) for (typ,name) in zip(args,argnames) ]
+            ),
+            returntype,
+        ))
 
-	def handle_ifndef(self, name, filename, lineno):
-		if (
-			self.requires_prefix and 
-			name[:len(self.requires_prefix)] == self.requires_prefix
-		):
-			self.requires = name[len(self.requires_prefix):]
-			print >> self.file, '# %s (%s:%d)'  % \
-				(self.requires, filename, lineno)
-	def handle_ctypes_constant(self, name, value, filename, lineno):
-		if self.does_emit( name, filename ):
-			print >> self.file, '%(name)s = constant.Constant( %(name)r, %(value)r )'%locals()
-			self.all_names.append(name)
-	def does_emit(self, symbol, filename):
-		base = super( GLWrapper, self ).does_emit( symbol, filename )
-		if base:
-			if self.match_re:
-				if self.match_re.match( symbol ):
-					return True 
-				else:
-					return False 
-		return base
+    def handle_ifndef(self, name, filename, lineno):
+        if (
+            self.requires_prefix and 
+            name[:len(self.requires_prefix)] == self.requires_prefix
+        ):
+            self.requires = name[len(self.requires_prefix):]
+            print >> self.file, '# %s (%s:%d)'  % \
+                (self.requires, filename, lineno)
+    def handle_ctypes_constant(self, name, value, filename, lineno):
+        if self.does_emit( name, filename ):
+            print >> self.file, '%(name)s = constant.Constant( %(name)r, %(value)r )'%locals()
+            self.all_names.append(name)
+    def does_emit(self, symbol, filename):
+        base = super( GLWrapper, self ).does_emit( symbol, filename )
+        if base:
+            if self.match_re:
+                if self.match_re.match( symbol ):
+                    return True 
+                else:
+                    return False 
+        return base
 
 def progress(msg):
-	print >> sys.stderr, msg
+    print >> sys.stderr, msg
 
 marker_begin = '# BEGIN GENERATED CONTENT (do not edit below this line)\n'
 marker_end = '# END GENERATED CONTENT (do not edit above this line)\n'
 
 class ModuleWrapper(object):
-	def __init__(
-		self, header, filename,
-		prologue='', requires_prefix=None, system_header=None,
-		match_re=None,
-	):
-		self.header = header
-		self.filename = filename
-		self.prologue = prologue
-		self.requires_prefix = requires_prefix
-		self.system_header = system_header
-		self.match_re = match_re
+    def __init__(
+        self, header, filename,
+        prologue='', requires_prefix=None, system_header=None,
+        match_re=None,
+    ):
+        self.header = header
+        self.filename = filename
+        self.prologue = prologue
+        self.requires_prefix = requires_prefix
+        self.system_header = system_header
+        self.match_re = match_re
 
-	def wrap(self, dir):
-		progress('Updating %s...' % self.filename)
-		source = read_url(self.header) 
-		filename = os.path.join(dir, self.filename)
+    def wrap(self, dir):
+        progress('Updating %s...' % self.filename)
+        source = read_url(self.header) 
+        filename = os.path.join(dir, self.filename)
 
-		prologue = []
-		epilogue = []
-		state = 'prologue'
-		try:
-			for line in open(filename):
-				if state == 'prologue':
-					prologue.append(line)
-					if line == marker_begin:
-						state = 'generated'
-				elif state == 'generated':
-					if line == marker_end:
-						state = 'epilogue'
-						epilogue.append(line)
-				elif state == 'epilogue':
-					epilogue.append(line)
-		except IOError:
-			prologue = [marker_begin]
-			epilogue = [marker_end]
-			state = 'epilogue'
-		if state != 'epilogue':
-			raise Exception('File exists, but generated markers are corrupt '
-							'or missing')
+        prologue = []
+        epilogue = []
+        state = 'prologue'
+        try:
+            for line in open(filename):
+                if state == 'prologue':
+                    prologue.append(line)
+                    if line == marker_begin:
+                        state = 'generated'
+                elif state == 'generated':
+                    if line == marker_end:
+                        state = 'epilogue'
+                        epilogue.append(line)
+                elif state == 'epilogue':
+                    epilogue.append(line)
+        except IOError:
+            prologue = [marker_begin]
+            epilogue = [marker_end]
+            state = 'epilogue'
+        if state != 'epilogue':
+            raise Exception('File exists, but generated markers are corrupt '
+                            'or missing')
 
-		outfile = open(filename, 'w')
-		print >> outfile, ''.join(prologue)
-		wrapper = GLWrapper(self.header, self.match_re)
-		if self.system_header:
-			wrapper.preprocessor_parser.system_headers[self.system_header] = \
-				source
-		header_name = self.system_header or self.header
-		wrapper.requires_prefix = self.requires_prefix
-		wrapper.begin_output(outfile, 
-							 library=None,
-							 emit_filenames=(header_name,))
-		source = self.prologue + source
-		wrapper.wrap(header_name, source)
-		wrapper.end_output()
-		print >> outfile, ''.join(epilogue)
+        outfile = open(filename, 'w')
+        print >> outfile, ''.join(prologue)
+        wrapper = GLWrapper(self.header, self.match_re)
+        if self.system_header:
+            wrapper.preprocessor_parser.system_headers[self.system_header] = \
+                source
+        header_name = self.system_header or self.header
+        wrapper.requires_prefix = self.requires_prefix
+        wrapper.begin_output(outfile, 
+                             library=None,
+                             emit_filenames=(header_name,))
+        source = self.prologue + source
+        wrapper.wrap(header_name, source)
+        wrapper.end_output()
+        print >> outfile, ''.join(epilogue)
 
 modules = {
 #	'gl':  
@@ -296,64 +296,63 @@ modules = {
 #		ModuleWrapper(GLEXT_NV_H, 'glext_nv.py',
 #			requires_prefix='GL_', system_header='GL/glext.h',
 #			prologue='#define GL_GLEXT_PROTOTYPES\n#include <GL/gl.h>\n'),
-	'glx': 
-		ModuleWrapper(GLX_H, '_GLX.py', 
-			requires_prefix='GLX_',
-			match_re = re.compile( 'glX|GLX' ),
-		),
-	'glx_arb': 
-		ModuleWrapper(GLXEXT_ABI_H, '_GLX_ARB.py', requires_prefix='GLX_',
-			system_header='GL/glxext.h',
-			prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
-			match_re = re.compile( 'glX|GLX_' ),
-		),
-	'glx_nv': 
-		ModuleWrapper(GLXEXT_NV_H, '_GLX_NV.py', requires_prefix='GLX_',
-			system_header='GL/glxext.h',
-			prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
-			match_re = re.compile( 'glX|GLX_' ),
-		),
-	'agl':
-		ModuleWrapper(AGL_H, 'AGL.py'),
-	'wgl':
-		ModuleWrapper(WGL_H, '_WGL.py'),
-	'wgl_arb':
-		ModuleWrapper(WGLEXT_ABI_H, '_WGL_ARB.py', requires_prefix='WGL_',
-			prologue='#define WGL_WGLEXT_PROTOTYPES\n'\
-					 '#include "%s"\n' % WGL_H.encode('string_escape')),
-	'wgl_nv':
-		ModuleWrapper(WGLEXT_NV_H, '_WGL_NV.py', requires_prefix='WGL_',
-			prologue='#define WGL_WGLEXT_PROTOTYPES\n'\
-					 '#include "%s"\n' % WGL_H.encode('string_escape')),
+    'glx': 
+        ModuleWrapper(GLX_H, '_GLX.py', 
+            requires_prefix='GLX_',
+            match_re = re.compile( 'glX|GLX' ),
+        ),
+    'glx_arb': 
+        ModuleWrapper(GLXEXT_ABI_H, '_GLX_ARB.py', requires_prefix='GLX_',
+            system_header='GL/glxext.h',
+            prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
+            match_re = re.compile( 'glX|GLX_' ),
+        ),
+    'glx_nv': 
+        ModuleWrapper(GLXEXT_NV_H, '_GLX_NV.py', requires_prefix='GLX_',
+            system_header='GL/glxext.h',
+            prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
+            match_re = re.compile( 'glX|GLX_' ),
+        ),
+    'agl':
+        ModuleWrapper(AGL_H, 'AGL.py'),
+    'wgl':
+        ModuleWrapper(WGL_H, '_WGL.py'),
+    'wgl_arb':
+        ModuleWrapper(WGLEXT_ABI_H, '_WGL_ARB.py', requires_prefix='WGL_',
+            prologue='#define WGL_WGLEXT_PROTOTYPES\n'\
+                     '#include "%s"\n' % WGL_H.encode('string_escape')),
+    'wgl_nv':
+        ModuleWrapper(WGLEXT_NV_H, '_WGL_NV.py', requires_prefix='WGL_',
+            prologue='#define WGL_WGLEXT_PROTOTYPES\n'\
+                     '#include "%s"\n' % WGL_H.encode('string_escape')),
 }
 
 
 if __name__ == '__main__':
-	op = optparse.OptionParser()
-	op.add_option('-D', '--dir', dest='dir',
-				  help='output directory')
-	op.add_option('-r', '--refresh-cache', dest='refresh_cache',
-				  help='clear cache first', action='store_true')
-	options, args = op.parse_args()
+    op = optparse.OptionParser()
+    op.add_option('-D', '--dir', dest='dir',
+                  help='output directory')
+    op.add_option('-r', '--refresh-cache', dest='refresh_cache',
+                  help='clear cache first', action='store_true')
+    options, args = op.parse_args()
 
-	if not options.refresh_cache:
-		load_cache()
-	else:
-		save_cache()
+    if not options.refresh_cache:
+        load_cache()
+    else:
+        save_cache()
 
-	if not args:
-		print >> sys.stderr, 'Specify module(s) to generate:'
-		print >> sys.stderr, '  %s' % ' '.join(modules.keys())
+    if not args:
+        print >> sys.stderr, 'Specify module(s) to generate:'
+        print >> sys.stderr, '  %s' % ' '.join(modules.keys())
 
-	if not options.dir:
-		options.dir = os.path.join(script_dir, os.path.pardir, 'OpenGL', 'raw')
-	if not os.path.exists(options.dir):
-		os.makedirs(options.dir)
+    if not options.dir:
+        options.dir = os.path.join(script_dir, os.path.pardir, 'OpenGL', 'raw')
+    if not os.path.exists(options.dir):
+        os.makedirs(options.dir)
 
-	for arg in args:
-		if arg not in modules:
-			print >> sys.stderr, "Don't know how to make '%s'" % arg
-			continue
+    for arg in args:
+        if arg not in modules:
+            print >> sys.stderr, "Don't know how to make '%s'" % arg
+            continue
 
-		modules[arg].wrap(options.dir)
-
+        modules[arg].wrap(options.dir)

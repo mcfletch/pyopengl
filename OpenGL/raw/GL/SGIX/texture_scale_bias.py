@@ -1,19 +1,19 @@
 '''OpenGL extension SGIX.texture_scale_bias
 
 Overview (from the spec)
-	
-	This extension adds scale, bias, and clamp to [0, 1] operations to the 
-	texture pipeline.
-	These operations are applied to the filtered result of a texture lookup,
-	before that result is used in the texture environment equations and
-	before the texture color lookup table of SGI_texture_color_table, 
-	if that extension exists.
-	These operations are distinct from the scale, bias, and clamp operations
-	that appear in the SGI_color_table extension, which are used to
-	define a color lookup table.
-	
-	Scale and bias operations on texels can be used to better utilize the
-	color resolution of a particular texture internal format (see EXT_texture).
+    
+    This extension adds scale, bias, and clamp to [0, 1] operations to the 
+    texture pipeline.
+    These operations are applied to the filtered result of a texture lookup,
+    before that result is used in the texture environment equations and
+    before the texture color lookup table of SGI_texture_color_table, 
+    if that extension exists.
+    These operations are distinct from the scale, bias, and clamp operations
+    that appear in the SGI_color_table extension, which are used to
+    define a color lookup table.
+    
+    Scale and bias operations on texels can be used to better utilize the
+    color resolution of a particular texture internal format (see EXT_texture).
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/texture_scale_bias.txt

@@ -70,86 +70,86 @@ HGLRC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:62
 HDC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:63
 PROC = CFUNCTYPE(INT_PTR) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:65
 wglCopyContext = platform.createBaseFunction(
-	'wglCopyContext', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HGLRC, HGLRC, UINT],
-	doc='wglCopyContext( HGLRC(None), HGLRC(None), UINT(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None'],
+    'wglCopyContext', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HGLRC, HGLRC, UINT],
+    doc='wglCopyContext( HGLRC(None), HGLRC(None), UINT(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None'],
 )
 
 wglCreateContext = platform.createBaseFunction(
-	'wglCreateContext', dll=platform.GL, resultType=HGLRC, 
-	argTypes=[HDC],
-	doc='wglCreateContext( HDC(None) ) -> HGLRC', 
-	argNames=['None'],
+    'wglCreateContext', dll=platform.GL, resultType=HGLRC, 
+    argTypes=[HDC],
+    doc='wglCreateContext( HDC(None) ) -> HGLRC', 
+    argNames=['None'],
 )
 
 wglCreateLayerContext = platform.createBaseFunction(
-	'wglCreateLayerContext', dll=platform.GL, resultType=HGLRC, 
-	argTypes=[HDC, c_int],
-	doc='wglCreateLayerContext( HDC(None), c_int(None) ) -> HGLRC', 
-	argNames=['None', 'None'],
+    'wglCreateLayerContext', dll=platform.GL, resultType=HGLRC, 
+    argTypes=[HDC, c_int],
+    doc='wglCreateLayerContext( HDC(None), c_int(None) ) -> HGLRC', 
+    argNames=['None', 'None'],
 )
 
 wglDeleteContext = platform.createBaseFunction(
-	'wglDeleteContext', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HGLRC],
-	doc='wglDeleteContext( HGLRC(None) ) -> BOOL', 
-	argNames=['None'],
+    'wglDeleteContext', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HGLRC],
+    doc='wglDeleteContext( HGLRC(None) ) -> BOOL', 
+    argNames=['None'],
 )
 
 wglGetCurrentContext = platform.createBaseFunction(
-	'wglGetCurrentContext', dll=platform.GL, resultType=HGLRC, 
-	argTypes=[],
-	doc='wglGetCurrentContext(  ) -> HGLRC', 
-	argNames=[],
+    'wglGetCurrentContext', dll=platform.GL, resultType=HGLRC, 
+    argTypes=[],
+    doc='wglGetCurrentContext(  ) -> HGLRC', 
+    argNames=[],
 )
 
 wglGetCurrentDC = platform.createBaseFunction(
-	'wglGetCurrentDC', dll=platform.GL, resultType=HDC, 
-	argTypes=[],
-	doc='wglGetCurrentDC(  ) -> HDC', 
-	argNames=[],
+    'wglGetCurrentDC', dll=platform.GL, resultType=HDC, 
+    argTypes=[],
+    doc='wglGetCurrentDC(  ) -> HDC', 
+    argNames=[],
 )
 
 wglGetProcAddress = platform.createBaseFunction(
-	'wglGetProcAddress', dll=platform.GL, resultType=PROC, 
-	argTypes=[LPCSTR],
-	doc='wglGetProcAddress( LPCSTR(None) ) -> PROC', 
-	argNames=['None'],
+    'wglGetProcAddress', dll=platform.GL, resultType=PROC, 
+    argTypes=[LPCSTR],
+    doc='wglGetProcAddress( LPCSTR(None) ) -> PROC', 
+    argNames=['None'],
 )
 
 wglMakeCurrent = platform.createBaseFunction(
-	'wglMakeCurrent', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, HGLRC],
-	doc='wglMakeCurrent( HDC(None), HGLRC(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglMakeCurrent', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, HGLRC],
+    doc='wglMakeCurrent( HDC(None), HGLRC(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 
 wglShareLists = platform.createBaseFunction(
-	'wglShareLists', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HGLRC, HGLRC],
-	doc='wglShareLists( HGLRC(None), HGLRC(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglShareLists', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HGLRC, HGLRC],
+    doc='wglShareLists( HGLRC(None), HGLRC(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 wglUseFontBitmapsA = platform.createBaseFunction(
-	'wglUseFontBitmapsA', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, DWORD, DWORD, DWORD],
-	doc='wglUseFontBitmapsA( HDC(None), DWORD(None), DWORD(None), DWORD(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None'],
+    'wglUseFontBitmapsA', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, DWORD, DWORD, DWORD],
+    doc='wglUseFontBitmapsA( HDC(None), DWORD(None), DWORD(None), DWORD(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None'],
 )
 
 wglUseFontBitmapsW = platform.createBaseFunction(
-	'wglUseFontBitmapsW', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, DWORD, DWORD, DWORD],
-	doc='wglUseFontBitmapsW( HDC(None), DWORD(None), DWORD(None), DWORD(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None'],
+    'wglUseFontBitmapsW', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, DWORD, DWORD, DWORD],
+    doc='wglUseFontBitmapsW( HDC(None), DWORD(None), DWORD(None), DWORD(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None'],
 )
 
 SwapBuffers = platform.createBaseFunction(
-	'SwapBuffers', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC],
-	doc='SwapBuffers( HDC(None) ) -> BOOL', 
-	argNames=['None'],
+    'SwapBuffers', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC],
+    doc='SwapBuffers( HDC(None) ) -> BOOL', 
+    argNames=['None'],
 )
 
 class struct__POINTFLOAT(Structure):
@@ -186,17 +186,17 @@ LPGLYPHMETRICSFLOAT = POINTER(struct__GLYPHMETRICSFLOAT) 	# /home/mcfletch/pyliv
 WGL_FONT_LINES = constant.Constant( 'WGL_FONT_LINES', 0 )
 WGL_FONT_POLYGONS = constant.Constant( 'WGL_FONT_POLYGONS', 1 )
 wglUseFontOutlinesA = platform.createBaseFunction(
-	'wglUseFontOutlinesA', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, DWORD, DWORD, DWORD, FLOAT, FLOAT, c_int, LPGLYPHMETRICSFLOAT],
-	doc='wglUseFontOutlinesA( HDC(None), DWORD(None), DWORD(None), DWORD(None), FLOAT(None), FLOAT(None), c_int(None), LPGLYPHMETRICSFLOAT(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', 'None', 'None', 'None', 'None'],
+    'wglUseFontOutlinesA', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, DWORD, DWORD, DWORD, FLOAT, FLOAT, c_int, LPGLYPHMETRICSFLOAT],
+    doc='wglUseFontOutlinesA( HDC(None), DWORD(None), DWORD(None), DWORD(None), FLOAT(None), FLOAT(None), c_int(None), LPGLYPHMETRICSFLOAT(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', 'None', 'None', 'None', 'None'],
 )
 
 wglUseFontOutlinesW = platform.createBaseFunction(
-	'wglUseFontOutlinesW', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, DWORD, DWORD, DWORD, FLOAT, FLOAT, c_int, LPGLYPHMETRICSFLOAT],
-	doc='wglUseFontOutlinesW( HDC(None), DWORD(None), DWORD(None), DWORD(None), FLOAT(None), FLOAT(None), c_int(None), LPGLYPHMETRICSFLOAT(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', 'None', 'None', 'None', 'None'],
+    'wglUseFontOutlinesW', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, DWORD, DWORD, DWORD, FLOAT, FLOAT, c_int, LPGLYPHMETRICSFLOAT],
+    doc='wglUseFontOutlinesW( HDC(None), DWORD(None), DWORD(None), DWORD(None), FLOAT(None), FLOAT(None), c_int(None), LPGLYPHMETRICSFLOAT(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', 'None', 'None', 'None', 'None'],
 )
 
 class struct_tagLAYERPLANEDESCRIPTOR(Structure):
@@ -300,38 +300,38 @@ WGL_SWAP_UNDERLAY13 = constant.Constant( 'WGL_SWAP_UNDERLAY13', 268435456 )
 WGL_SWAP_UNDERLAY14 = constant.Constant( 'WGL_SWAP_UNDERLAY14', 536870912 )
 WGL_SWAP_UNDERLAY15 = constant.Constant( 'WGL_SWAP_UNDERLAY15', 1073741824 )
 wglDescribeLayerPlane = platform.createBaseFunction(
-	'wglDescribeLayerPlane', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, c_int, UINT, LPLAYERPLANEDESCRIPTOR],
-	doc='wglDescribeLayerPlane( HDC(None), c_int(None), c_int(None), UINT(None), LPLAYERPLANEDESCRIPTOR(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', 'None'],
+    'wglDescribeLayerPlane', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, c_int, UINT, LPLAYERPLANEDESCRIPTOR],
+    doc='wglDescribeLayerPlane( HDC(None), c_int(None), c_int(None), UINT(None), LPLAYERPLANEDESCRIPTOR(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', 'None'],
 )
 
 wglSetLayerPaletteEntries = platform.createBaseFunction(
-	'wglSetLayerPaletteEntries', dll=platform.GL, resultType=c_int, 
-	argTypes=[HDC, c_int, c_int, c_int, POINTER(COLORREF)],
-	doc='wglSetLayerPaletteEntries( HDC(None), c_int(None), c_int(None), c_int(None), POINTER(COLORREF)() ) -> c_int', 
-	argNames=['None', 'None', 'None', 'None', ''],
+    'wglSetLayerPaletteEntries', dll=platform.GL, resultType=c_int, 
+    argTypes=[HDC, c_int, c_int, c_int, POINTER(COLORREF)],
+    doc='wglSetLayerPaletteEntries( HDC(None), c_int(None), c_int(None), c_int(None), POINTER(COLORREF)() ) -> c_int', 
+    argNames=['None', 'None', 'None', 'None', ''],
 )
 
 wglGetLayerPaletteEntries = platform.createBaseFunction(
-	'wglGetLayerPaletteEntries', dll=platform.GL, resultType=c_int, 
-	argTypes=[HDC, c_int, c_int, c_int, POINTER(COLORREF)],
-	doc='wglGetLayerPaletteEntries( HDC(None), c_int(None), c_int(None), c_int(None), POINTER(COLORREF)() ) -> c_int', 
-	argNames=['None', 'None', 'None', 'None', ''],
+    'wglGetLayerPaletteEntries', dll=platform.GL, resultType=c_int, 
+    argTypes=[HDC, c_int, c_int, c_int, POINTER(COLORREF)],
+    doc='wglGetLayerPaletteEntries( HDC(None), c_int(None), c_int(None), c_int(None), POINTER(COLORREF)() ) -> c_int', 
+    argNames=['None', 'None', 'None', 'None', ''],
 )
 
 wglRealizeLayerPalette = platform.createBaseFunction(
-	'wglRealizeLayerPalette', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, BOOL],
-	doc='wglRealizeLayerPalette( HDC(None), c_int(None), BOOL(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None'],
+    'wglRealizeLayerPalette', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, BOOL],
+    doc='wglRealizeLayerPalette( HDC(None), c_int(None), BOOL(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None'],
 )
 
 wglSwapLayerBuffers = platform.createBaseFunction(
-	'wglSwapLayerBuffers', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, UINT],
-	doc='wglSwapLayerBuffers( HDC(None), UINT(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglSwapLayerBuffers', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, UINT],
+    doc='wglSwapLayerBuffers( HDC(None), UINT(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 
 class struct__WGLSWAP(Structure):
@@ -349,10 +349,10 @@ PWGLSWAP = POINTER(struct__WGLSWAP) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/w
 LPWGLSWAP = POINTER(struct__WGLSWAP) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:190
 WGL_SWAPMULTIPLE_MAX = constant.Constant( 'WGL_SWAPMULTIPLE_MAX', 16 )
 wglSwapMultipleBuffers = platform.createBaseFunction(
-	'wglSwapMultipleBuffers', dll=platform.GL, resultType=DWORD, 
-	argTypes=[UINT, POINTER(WGLSWAP)],
-	doc='wglSwapMultipleBuffers( UINT(None), POINTER(WGLSWAP)() ) -> DWORD', 
-	argNames=['None', ''],
+    'wglSwapMultipleBuffers', dll=platform.GL, resultType=DWORD, 
+    argTypes=[UINT, POINTER(WGLSWAP)],
+    doc='wglSwapMultipleBuffers( UINT(None), POINTER(WGLSWAP)() ) -> DWORD', 
+    argNames=['None', ''],
 )
 
 class struct_tagRECT(Structure):
@@ -408,5 +408,4 @@ __all__ = ['CONST', 'GLenum', 'GLboolean', 'GLbitfield', 'GLbyte', 'GLshort',
 'LPWGLSWAP', 'WGL_SWAPMULTIPLE_MAX', 'wglSwapMultipleBuffers', 'RECT',
 'PRECT', 'NPRECT', 'LPRECT']
 # END GENERATED CONTENT (do not edit above this line)
-
 

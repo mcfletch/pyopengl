@@ -413,4 +413,3 @@ doc='glWindowPos3sv(GLshortArray(v)) -> None',
 argNames=('v',),
 deprecated=_DEPRECATED,
 )
-

@@ -25,9 +25,9 @@ glGenRenderbuffers = wrapper.wrapper(glGenRenderbuffers).setOutput(
 
 @lazy( glDeleteFramebuffers )
 def glDeleteFramebuffers( baseOperation, n, framebuffers=None ):
-	"""glDeleteFramebuffers( framebuffers ) -> None 
-	"""
-	if framebuffers is None:
-		framebuffers = arrays.GLuintArray.asArray( n )
-		n = arrays.GLuintArray.arraySize( framebuffers )
-	return baseOperation( n, framebuffers )
+    """glDeleteFramebuffers( framebuffers ) -> None 
+    """
+    if framebuffers is None:
+        framebuffers = arrays.GLuintArray.asArray( n )
+        n = arrays.GLuintArray.arraySize( framebuffers )
+    return baseOperation( n, framebuffers )

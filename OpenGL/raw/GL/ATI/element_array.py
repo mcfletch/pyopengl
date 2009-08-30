@@ -1,20 +1,20 @@
 '''OpenGL extension ATI.element_array
 
 Overview (from the spec)
-	
-	This extension provides a mechanism for an application to create
-	an array of index data for use in specifying geometric primitives.
-	
-	This extension is most useful when used in conjunction with the
-	ATI_vertex_array_object extension. ATI_vertex_array_object
-	provides an interface for storing vertex array data in persistent,
-	hardware-addressable memory. In cases where large amounts of
-	vertex data are in use, the index data used to construct
-	primitives (typically as passed to the GL through DrawElements)
-	can impose a significant bandwidth burden. ATI_element_array
-	allows the application to specify independent arrays of elements,
-	which can then be cached using ATI_vertex_array_object.
-	
+    
+    This extension provides a mechanism for an application to create
+    an array of index data for use in specifying geometric primitives.
+    
+    This extension is most useful when used in conjunction with the
+    ATI_vertex_array_object extension. ATI_vertex_array_object
+    provides an interface for storing vertex array data in persistent,
+    hardware-addressable memory. In cases where large amounts of
+    vertex data are in use, the index data used to construct
+    primitives (typically as passed to the GL through DrawElements)
+    can impose a significant bandwidth burden. ATI_element_array
+    allows the application to specify independent arrays of elements,
+    which can then be cached using ATI_vertex_array_object.
+    
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ATI/element_array.txt

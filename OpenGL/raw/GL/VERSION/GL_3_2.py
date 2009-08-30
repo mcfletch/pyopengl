@@ -82,4 +82,3 @@ doc='glFramebufferTextureFace(GLenum(target), GLenum(attachment), GLuint(texture
 argNames=('target','attachment','texture','level','face',),
 deprecated=_DEPRECATED,
 )
-

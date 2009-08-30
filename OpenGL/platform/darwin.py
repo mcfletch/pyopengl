@@ -25,64 +25,64 @@ import ctypes, ctypes.util
 from OpenGL.platform import baseplatform, ctypesloader
 
 class DarwinPlatform( baseplatform.BasePlatform ):
-	"""Darwin (OSX) platform implementation"""
-	DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )
-	EXTENSIONS_USE_BASE_FUNCTIONS = True
-	
-	# Get the pointers to the libraries...
-	OpenGL = ctypesloader.loadLibrary(
-		ctypes.cdll,
-		'OpenGL', 
-		mode=ctypes.RTLD_GLOBAL 
-	)
-	# CGL provides the windowing environment functionality
-	# but it is built into the GL libs.
-	GL = GLU = CGL = OpenGL
+    """Darwin (OSX) platform implementation"""
+    DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )
+    EXTENSIONS_USE_BASE_FUNCTIONS = True
+    
+    # Get the pointers to the libraries...
+    OpenGL = ctypesloader.loadLibrary(
+        ctypes.cdll,
+        'OpenGL', 
+        mode=ctypes.RTLD_GLOBAL 
+    )
+    # CGL provides the windowing environment functionality
+    # but it is built into the GL libs.
+    GL = GLU = CGL = OpenGL
 
-	# glut shouldn't need to be global, but just in case a dependent library makes
-	# the same assumption GLUT does...
-	GLUT = ctypesloader.loadLibrary(
-		ctypes.cdll,
-		'GLUT', 
-		mode=ctypes.RTLD_GLOBAL 
-	)
+    # glut shouldn't need to be global, but just in case a dependent library makes
+    # the same assumption GLUT does...
+    GLUT = ctypesloader.loadLibrary(
+        ctypes.cdll,
+        'GLUT', 
+        mode=ctypes.RTLD_GLOBAL 
+    )
 
-	# GLE is handled by GLUT under OS X
-	GLE = GLUT
+    # GLE is handled by GLUT under OS X
+    GLE = GLUT
 
-	GetCurrentContext = CurrentContextIsValid = staticmethod( 
-		CGL.CGLGetCurrentContext 
-	)
+    GetCurrentContext = CurrentContextIsValid = staticmethod( 
+        CGL.CGLGetCurrentContext 
+    )
 
-	def getGLUTFontPointer( self, constant ):
-		"""Platform specific function to retrieve a GLUT font pointer
-		
-		GLUTAPI void *glutBitmap9By15;
-		#define GLUT_BITMAP_9_BY_15     (&glutBitmap9By15)
-		
-		Key here is that we want the addressof the pointer in the DLL,
-		not the pointer in the DLL.  That is, our pointer is to the 
-		pointer defined in the DLL, we don't want the *value* stored in
-		that pointer.
-		"""
-		name = [ x.title() for x in constant.split( '_' )[1:] ]
-		internal = 'glut' + "".join( [x.title() for x in name] )
-		pointer = ctypes.c_void_p.in_dll( self.GLUT, internal )
-		return ctypes.c_void_p(ctypes.addressof(pointer))
+    def getGLUTFontPointer( self, constant ):
+        """Platform specific function to retrieve a GLUT font pointer
+        
+        GLUTAPI void *glutBitmap9By15;
+        #define GLUT_BITMAP_9_BY_15     (&glutBitmap9By15)
+        
+        Key here is that we want the addressof the pointer in the DLL,
+        not the pointer in the DLL.  That is, our pointer is to the 
+        pointer defined in the DLL, we don't want the *value* stored in
+        that pointer.
+        """
+        name = [ x.title() for x in constant.split( '_' )[1:] ]
+        internal = 'glut' + "".join( [x.title() for x in name] )
+        pointer = ctypes.c_void_p.in_dll( self.GLUT, internal )
+        return ctypes.c_void_p(ctypes.addressof(pointer))
 
-	def safeGetError( self ):
-		"""Provide context-not-present-safe error-checking
-		
-		Under OS-X an attempt to retrieve error without checking 
-		context will bus-error.  This function checks for a valid
-		context before running glGetError
-		
-		Note:
-			This is a likely candidate for rewriting in C, as it
-			is called for every almost function in the system!
-		"""
-		if self.CurrentContextIsValid():
-			return glGetError()
-		return None
+    def safeGetError( self ):
+        """Provide context-not-present-safe error-checking
+        
+        Under OS-X an attempt to retrieve error without checking 
+        context will bus-error.  This function checks for a valid
+        context before running glGetError
+        
+        Note:
+            This is a likely candidate for rewriting in C, as it
+            is called for every almost function in the system!
+        """
+        if self.CurrentContextIsValid():
+            return glGetError()
+        return None
 
 glGetError = DarwinPlatform.OpenGL.glGetError

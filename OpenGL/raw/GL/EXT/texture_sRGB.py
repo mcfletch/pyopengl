@@ -1,20 +1,20 @@
 '''OpenGL extension EXT.texture_sRGB
 
 Overview (from the spec)
-	
-	Conventional texture formats assume a linear color space.  So for
-	a conventional internal texture format such as GL_RGB8, the 256
-	discrete values for each 8-bit color component map linearly and
-	uniformly to the [0,1] range.
-	
-	The sRGB color space is based on typical (non-linear) monitor
-	characteristics expected in a dimly lit office.  It has been
-	standardized by the International Electrotechnical Commission (IEC)
-	as IEC 61966-2-1. The sRGB color space roughly corresponds to 2.2
-	gamma correction.
-	
-	This extension adds a few new uncompressed and compressed color
-	texture formats with sRGB color components.
+    
+    Conventional texture formats assume a linear color space.  So for
+    a conventional internal texture format such as GL_RGB8, the 256
+    discrete values for each 8-bit color component map linearly and
+    uniformly to the [0,1] range.
+    
+    The sRGB color space is based on typical (non-linear) monitor
+    characteristics expected in a dimly lit office.  It has been
+    standardized by the International Electrotechnical Commission (IEC)
+    as IEC 61966-2-1. The sRGB color space roughly corresponds to 2.2
+    gamma correction.
+    
+    This extension adds a few new uncompressed and compressed color
+    texture formats with sRGB color components.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/texture_sRGB.txt

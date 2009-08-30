@@ -1,9 +1,9 @@
 '''OpenGL extension HP.convolution_border_modes
 
 Overview (from the spec)
-	
-	This extension provides some additional border modes for the
-	EXT_convolution extension.
+    
+    This extension provides some additional border modes for the
+    EXT_convolution extension.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/HP/convolution_border_modes.txt

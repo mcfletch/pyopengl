@@ -1,13 +1,13 @@
 '''OpenGL extension EXT.clip_volume_hint
 
 Overview (from the spec)
-	
-	EXT_clip_volume_hint provides a mechanism for applications to
-	indicate that they do not require clip volume clipping for
-	primitives. It allows applications to maximize performance in
-	situations where they know that clipping is unnecessary.
-	EXT_clip_volume_hint is only an indication, though, and
-	implementations are free to ignore it.
+    
+    EXT_clip_volume_hint provides a mechanism for applications to
+    indicate that they do not require clip volume clipping for
+    primitives. It allows applications to maximize performance in
+    situations where they know that clipping is unnecessary.
+    EXT_clip_volume_hint is only an indication, though, and
+    implementations are free to ignore it.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/clip_volume_hint.txt

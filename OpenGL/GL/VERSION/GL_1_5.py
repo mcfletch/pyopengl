@@ -13,77 +13,76 @@ from OpenGL.raw.GL.VERSION.GL_1_5 import *
 from OpenGL.lazywrapper import lazy
 
 glDeleteBuffers = arrays.setInputArraySizeType(
-	glDeleteBuffers,
-	None,
-	arrays.GLuintArray,
-	'buffers',
+    glDeleteBuffers,
+    None,
+    arrays.GLuintArray,
+    'buffers',
 )
 
 glGenBuffers = wrapper.wrapper( glGenBuffers ).setOutput(
-	'buffers', lambda n: (n,), 'n',
+    'buffers', lambda n: (n,), 'n',
 )
 
 def _sizeOfArrayInput( pyArgs, index, wrapper ):
-	return (
-		arrays.ArrayDatatype.arrayByteCount( pyArgs[index] )
-	)
+    return (
+        arrays.ArrayDatatype.arrayByteCount( pyArgs[index] )
+    )
 
 glBufferData = wrapper.wrapper( glBufferData ).setPyConverter(
-	'data', arrays.asVoidArray(),
+    'data', arrays.asVoidArray(),
 ).setPyConverter( 'size' ).setCConverter(
-	'size', _sizeOfArrayInput,
+    'size', _sizeOfArrayInput,
 ).setReturnValues( 
-	wrapper.returnPyArgument( 'data' ) 
+    wrapper.returnPyArgument( 'data' ) 
 )
 
 glBufferSubData = wrapper.wrapper( glBufferSubData ).setPyConverter(
-	'data', arrays.asVoidArray(),
+    'data', arrays.asVoidArray(),
 ).setPyConverter( 'size' ).setCConverter(
-	'size', _sizeOfArrayInput,
+    'size', _sizeOfArrayInput,
 ).setReturnValues( 
-	wrapper.returnPyArgument( 'data' ) 
+    wrapper.returnPyArgument( 'data' ) 
 )
 
 glGetBufferParameteriv = wrapper.wrapper(glGetBufferParameteriv).setOutput(
-	"params",(1,),
+    "params",(1,),
 )
 @lazy( glGetBufferPointerv )
 def glGetBufferPointerv( baseOperation, target, pname, params=None ):
-	"""Retrieve a ctypes pointer to buffer's data"""
-	if params is None:
-		size = glGetBufferParameteriv( target, GL_BUFFER_SIZE )
-		data = arrays.ArrayDatatype.zeros( (size,), GL_UNSIGNED_BYTE )
-		result = baseOperation( target, pname, ctypes.byref( data ) )
-		return data
-	else:
-		return baseOperation( target, pname, params )
+    """Retrieve a ctypes pointer to buffer's data"""
+    if params is None:
+        size = glGetBufferParameteriv( target, GL_BUFFER_SIZE )
+        data = arrays.ArrayDatatype.zeros( (size,), GL_UNSIGNED_BYTE )
+        result = baseOperation( target, pname, ctypes.byref( data ) )
+        return data
+    else:
+        return baseOperation( target, pname, params )
 
 @lazy( glDeleteQueries )
 def glDeleteQueries( baseOperation, n, ids=None ):
-	if ids is None:
-		ids = arrays.GLuintArray.asArray( ids )
-		n = arrays.GLuintArray.arraySize( ids )
-	else:
-		ids = arrays.GLuintArray.asArray( ids )
-	return baseOperation( n,ids )
+    if ids is None:
+        ids = arrays.GLuintArray.asArray( ids )
+        n = arrays.GLuintArray.arraySize( ids )
+    else:
+        ids = arrays.GLuintArray.asArray( ids )
+    return baseOperation( n,ids )
 @lazy( glGenQueries )
 def glGenQueries( baseOperation, n, ids=None ):
-	"""Generate n queries, if ids is None, is allocated
-	
-	returns array of ids
-	"""
-	if ids is None:
-		ids = arrays.GLuintArray.zeros( (n,))
-	else:
-		ids = arrays.GLuintArray.asArray( ids )
-	baseOperation( n, ids )
-	return ids
+    """Generate n queries, if ids is None, is allocated
+    
+    returns array of ids
+    """
+    if ids is None:
+        ids = arrays.GLuintArray.zeros( (n,))
+    else:
+        ids = arrays.GLuintArray.asArray( ids )
+    baseOperation( n, ids )
+    return ids
 
 for func in (
-	'glGetQueryiv','glGetQueryObjectiv','glGetQueryObjectuiv',
+    'glGetQueryiv','glGetQueryObjectiv','glGetQueryObjectuiv',
 ):
-	globals()[func] = wrapper.wrapper(globals()[func]).setOutput(
-		"params", (1,)
-	)
+    globals()[func] = wrapper.wrapper(globals()[func]).setOutput(
+        "params", (1,)
+    )
 del func, glget
-

@@ -1,24 +1,24 @@
 '''OpenGL extension NV.texgen_emboss
 
 Overview (from the spec)
-	
-	This extension provides a new texture coordinate generation mode
-	suitable for multitexture-based embossing (or bump mapping) effects.
-	
-	Given two texture units, this extension generates the texture
-	coordinates of a second texture unit (an odd-numbered texture unit)
-	as a perturbation of a first texture unit (an even-numbered texture
-	unit one less than the second texture unit).  The perturbation is
-	based on the normal, tangent, and light vectors.  The normal vector
-	is supplied by glNormal; the light vector is supplied as a direction
-	vector to a specified OpenGL light's position; and the tanget
-	vector is supplied by the second texture unit's current texture
-	coordinate.  The perturbation is also scaled by program-supplied
-	scaling constants.
-	
-	If both texture units are bound to the same texture representing a
-	height field, by subtracting the difference between the resulting two
-	filtered texels, programs can achieve a per-pixel embossing effect.
+    
+    This extension provides a new texture coordinate generation mode
+    suitable for multitexture-based embossing (or bump mapping) effects.
+    
+    Given two texture units, this extension generates the texture
+    coordinates of a second texture unit (an odd-numbered texture unit)
+    as a perturbation of a first texture unit (an even-numbered texture
+    unit one less than the second texture unit).  The perturbation is
+    based on the normal, tangent, and light vectors.  The normal vector
+    is supplied by glNormal; the light vector is supplied as a direction
+    vector to a specified OpenGL light's position; and the tanget
+    vector is supplied by the second texture unit's current texture
+    coordinate.  The perturbation is also scaled by program-supplied
+    scaling constants.
+    
+    If both texture units are bound to the same texture representing a
+    height field, by subtracting the difference between the resulting two
+    filtered texels, programs can achieve a per-pixel embossing effect.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/NV/texgen_emboss.txt

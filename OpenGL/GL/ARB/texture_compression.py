@@ -13,21 +13,21 @@ from OpenGL.raw.GL.ARB.texture_compression import *
 from OpenGL.GL import images
 
 for dimensions in (1,2,3):
-	for function in ('glCompressedTexImage%sDARB','glCompressedTexSubImage%sDARB'):
-		name = function%(dimensions,)
-		globals()[ name ] = images.compressedImageFunction(
-			globals()[ name ]
-		)
-		del name, function
-	del dimensions
+    for function in ('glCompressedTexImage%sDARB','glCompressedTexSubImage%sDARB'):
+        name = function%(dimensions,)
+        globals()[ name ] = images.compressedImageFunction(
+            globals()[ name ]
+        )
+        del name, function
+    del dimensions
 
 if glGetCompressedTexImageARB:
-	def glGetCompressedTexImageARB( target, level, img=None ):
-		"""Retrieve a compressed texture image"""
-		if img is None:
-			length = glget.glGetTexLevelParameteriv(
-				target, 0, 
-				GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB, 
-			)
-			img = arrays.ArrayDataType.zeros( (length,), constants.GL_UNSIGNED_BYTE )
-		return glGetCompressedTexImageARB(target, 0, img);
+    def glGetCompressedTexImageARB( target, level, img=None ):
+        """Retrieve a compressed texture image"""
+        if img is None:
+            length = glget.glGetTexLevelParameteriv(
+                target, 0, 
+                GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB, 
+            )
+            img = arrays.ArrayDataType.zeros( (length,), constants.GL_UNSIGNED_BYTE )
+        return glGetCompressedTexImageARB(target, 0, img);

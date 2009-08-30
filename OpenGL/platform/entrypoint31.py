@@ -2,7 +2,7 @@
 
 Taken from the list at:
 
-	http://www.devklog.net/2008/08/23/forward-compatible-opengl-3-entry-points/
+    http://www.devklog.net/2008/08/23/forward-compatible-opengl-3-entry-points/
 """
 records = """glActiveTexture
 glAttachShader
@@ -184,9 +184,9 @@ glVertexAttribIPointer
 glVertexAttribPointer
 glViewport""".splitlines()
 def deprecated( name ):
-	for allowed in records:
-		if name == allowed:
-			return False 
-		elif allowed.endswith( '*' ) and allowed.startswith(name[:len(allowed)-1]):
-			return False 
-	return True 
+    for allowed in records:
+        if name == allowed:
+            return False 
+        elif allowed.endswith( '*' ) and allowed.startswith(name[:len(allowed)-1]):
+            return False 
+    return True 

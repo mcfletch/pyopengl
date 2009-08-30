@@ -1,16 +1,16 @@
 '''OpenGL extension EXT.convolution
 
 Overview (from the spec)
-	
-	This extension defines 1 and 2 dimensional convolution operations
-	at a fixed location in the pixel transfer process.  Thus pixel drawing,
-	reading, and copying, as well as texture image definition, are all
-	candidates for convolution.  The convolution kernels are themselves
-	treated as 1 and 2 dimensional images, which can be loaded from
-	application memory or from the framebuffer.
-	
-	This extension is designed to accommodate 3D convolution, but the
-	API is left for a future extension.
+    
+    This extension defines 1 and 2 dimensional convolution operations
+    at a fixed location in the pixel transfer process.  Thus pixel drawing,
+    reading, and copying, as well as texture image definition, are all
+    candidates for convolution.  The convolution kernels are themselves
+    treated as 1 and 2 dimensional images, which can be loaded from
+    application memory or from the framebuffer.
+    
+    This extension is designed to accommodate 3D convolution, but the
+    API is left for a future extension.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/convolution.txt

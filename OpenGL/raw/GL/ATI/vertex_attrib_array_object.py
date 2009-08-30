@@ -1,12 +1,12 @@
 '''OpenGL extension ATI.vertex_attrib_array_object
 
 Overview (from the spec)
-	
-	This extension defines an interface that allows multiple sets of
-	generic vertex attribute data to be cached in persistent server-side
-	memory.  It is intended to allow client data to be stored in memory
-	that can be directly accessed by graphics hardware.
-	
+    
+    This extension defines an interface that allows multiple sets of
+    generic vertex attribute data to be cached in persistent server-side
+    memory.  It is intended to allow client data to be stored in memory
+    that can be directly accessed by graphics hardware.
+    
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ATI/vertex_attrib_array_object.txt

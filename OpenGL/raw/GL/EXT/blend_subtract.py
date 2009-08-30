@@ -1,12 +1,12 @@
 '''OpenGL extension EXT.blend_subtract
 
 Overview (from the spec)
-	
-	Two additional blending equations are specified using the interface
-	defined by EXT_blend_minmax.  These equations are similar to the
-	default blending equation, but produce the difference of its left
-	and right hand sides, rather than the sum.  Image differences are
-	useful in many image processing applications.
+    
+    Two additional blending equations are specified using the interface
+    defined by EXT_blend_minmax.  These equations are similar to the
+    default blending equation, but produce the difference of its left
+    and right hand sides, rather than the sum.  Image differences are
+    useful in many image processing applications.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/blend_subtract.txt

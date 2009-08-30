@@ -1,11 +1,11 @@
 '''OpenGL extension EXT.secondary_color
 
 Overview (from the spec)
-	
-	This extension allows specifying the RGB components of the secondary
-	color used in the Color Sum stage, instead of using the default
-	(0,0,0,0) color. It applies only in RGBA mode and when LIGHTING is
-	disabled.
+    
+    This extension allows specifying the RGB components of the secondary
+    color used in the Color Sum stage, instead of using the default
+    (0,0,0,0) color. It applies only in RGBA mode and when LIGHTING is
+    disabled.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/secondary_color.txt

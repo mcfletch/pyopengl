@@ -1,17 +1,17 @@
 '''OpenGL extension SGIS.texture_color_mask
 
 Overview (from the spec)
-	
-	This extension implements the same functionality for texture
-	updates that glColorMask implements for color buffer updates.
-	Masks for updating textures with indexed internal formats
-	(the analog for glIndexMask) should be supported by a separate extension.
-	
-	The extension allows an application to update a subset of
-	components in an existing texture.	The masks are applied after
-	all pixel transfer operations have been performed, immediately
-	prior to writing the texel value into texture memory.  They
-	apply to all texture updates.
+    
+    This extension implements the same functionality for texture
+    updates that glColorMask implements for color buffer updates.
+    Masks for updating textures with indexed internal formats
+    (the analog for glIndexMask) should be supported by a separate extension.
+    
+    The extension allows an application to update a subset of
+    components in an existing texture.	The masks are applied after
+    all pixel transfer operations have been performed, immediately
+    prior to writing the texel value into texture memory.  They
+    apply to all texture updates.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIS/texture_color_mask.txt

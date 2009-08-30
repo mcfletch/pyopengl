@@ -34,4 +34,3 @@ GL_SRC2_RGB = constant.Constant( 'GL_SRC2_RGB', 0x8582 )
 GL_SRC0_ALPHA = constant.Constant( 'GL_SRC0_ALPHA', 0x8588 )
 GL_SRC1_ALPHA = constant.Constant( 'GL_SRC1_ALPHA', 0x8589 )
 GL_SRC2_ALPHA = constant.Constant( 'GL_SRC2_ALPHA', 0x858A )
-

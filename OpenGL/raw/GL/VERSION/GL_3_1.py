@@ -81,4 +81,3 @@ doc='glPrimitiveRestartIndex(GLuint(index)) -> None',
 argNames=('index',),
 deprecated=_DEPRECATED,
 )
-

@@ -5,6 +5,6 @@ from OpenGL.GLUT.special import *
 from OpenGL.GLUT.fonts import *
 from OpenGL.GLUT.freeglut import *
 if glutLeaveMainLoop:
-	HAVE_FREEGLUT = True 
+    HAVE_FREEGLUT = True 
 else:
-	HAVE_FREEGLUT = False 
+    HAVE_FREEGLUT = False 

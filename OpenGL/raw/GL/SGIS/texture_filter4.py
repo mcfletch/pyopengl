@@ -1,13 +1,13 @@
 '''OpenGL extension SGIS.texture_filter4
 
 Overview (from the spec)
-	
-	This extension allows 1D and 2D textures to be filtered using an
-	application-defined, four sample per dimension filter.  (In addition to
-	the NEAREST and LINEAR filters defined in the original GL Specification.)
-	Such filtering results in higher image quality.  It is defined only
-	for non-mipmapped filters.  The filter that is specified must be
-	symmetric and separable (in the 2D case).
+    
+    This extension allows 1D and 2D textures to be filtered using an
+    application-defined, four sample per dimension filter.  (In addition to
+    the NEAREST and LINEAR filters defined in the original GL Specification.)
+    Such filtering results in higher image quality.  It is defined only
+    for non-mipmapped filters.  The filter that is specified must be
+    symmetric and separable (in the 2D case).
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIS/texture_filter4.txt

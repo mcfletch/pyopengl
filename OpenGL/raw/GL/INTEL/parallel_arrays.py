@@ -1,8 +1,8 @@
 '''OpenGL extension INTEL.parallel_arrays
 
 Overview (from the spec)
-	
-	This extension adds the ability to format vertex arrays in a way that's 
+    
+    This extension adds the ability to format vertex arrays in a way that's 
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/INTEL/parallel_arrays.txt

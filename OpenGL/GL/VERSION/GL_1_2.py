@@ -13,7 +13,7 @@ from OpenGL.raw.GL.VERSION.GL_1_2 import *
 from OpenGL.GL.VERSION.GL_1_2_images import *
 
 glDrawRangeElements = wrapper.wrapper( simple.glDrawRangeElements ).setPyConverter(
-	'indices', arrays.AsArrayOfType( 'indices', 'type' ),
+    'indices', arrays.AsArrayOfType( 'indices', 'type' ),
 ).setReturnValues(
-	wrapper.returnPyArgument( 'indices' )
+    wrapper.returnPyArgument( 'indices' )
 )

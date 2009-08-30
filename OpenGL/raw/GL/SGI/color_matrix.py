@@ -1,27 +1,27 @@
 '''OpenGL extension SGI.color_matrix
 
 Overview (from the spec)
-	
-	    This extension adds a 4x4 matrix stack to the pixel transfer path.  The
-	    matrix operates on RGBA pixel groups, using the equation
-	
-		C' = MC,
-	
-	    where
-	
-		    |R|
-		C = |G|
-		    |B|
-		    |A|
-	
-	    and M is the 4x4 matrix on the top of the color matrix stack.  After
-	    the matrix multiplication, each resulting color component is scaled
-	    and biased by a programmed amount.  Color matrix multiplication follows
-	    convolution (and the scale, and bias that are associated with
-	    convolution.)
-	
-	    The color matrix can be used to reassign and duplicate color components.
-	    It can also be used to implement simple color space conversions.
+    
+        This extension adds a 4x4 matrix stack to the pixel transfer path.  The
+        matrix operates on RGBA pixel groups, using the equation
+    
+        C' = MC,
+    
+        where
+    
+            |R|
+        C = |G|
+            |B|
+            |A|
+    
+        and M is the 4x4 matrix on the top of the color matrix stack.  After
+        the matrix multiplication, each resulting color component is scaled
+        and biased by a programmed amount.  Color matrix multiplication follows
+        convolution (and the scale, and bias that are associated with
+        convolution.)
+    
+        The color matrix can be used to reassign and duplicate color components.
+        It can also be used to implement simple color space conversions.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGI/color_matrix.txt

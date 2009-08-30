@@ -11,205 +11,205 @@ log = logging.getLogger( 'OpenGL.arrays.arrayhelpers' )
 from OpenGL import acceleratesupport
 AsArrayTypedSizeChecked = None
 if acceleratesupport.ACCELERATE_AVAILABLE:
-	try:
-		from OpenGL_accelerate.arraydatatype import AsArrayTypedSizeChecked
-		from OpenGL_accelerate.wrapper import returnPyArgumentIndex
-		from OpenGL_accelerate.arraydatatype import (
-			AsArrayOfType,AsArrayTyped,AsArrayTypedSize
-		)
-	except ImportError, err:
-		log.warn(
-			"Unable to load arrayhelpers accelerator from OpenGL_accelerate"
-		)
+    try:
+        from OpenGL_accelerate.arraydatatype import AsArrayTypedSizeChecked
+        from OpenGL_accelerate.wrapper import returnPyArgumentIndex
+        from OpenGL_accelerate.arraydatatype import (
+            AsArrayOfType,AsArrayTyped,AsArrayTypedSize
+        )
+    except ImportError, err:
+        log.warn(
+            "Unable to load arrayhelpers accelerator from OpenGL_accelerate"
+        )
 if AsArrayTypedSizeChecked is None:
-	def returnPointer( result,baseOperation,pyArgs,cArgs, ):
-		"""Return the converted object as result of function
-		
-		Note: this is a hack that always returns pyArgs[0]!
-		"""
-		return pyArgs[0]
-	class AsArrayOfType( converters.PyConverter ):
-		"""Given arrayName and typeName coerce arrayName to array of type typeName
-		
-		TODO: It should be possible to drop this if ERROR_ON_COPY,
-		as array inputs always have to be the final objects in that 
-		case.
-		"""
-		argNames = ( 'arrayName','typeName' )
-		indexLookups = ( 
-			('arrayIndex', 'arrayName','pyArgIndex'),
-			('typeIndex', 'typeName','pyArgIndex'),
-		)
-		def __init__( self, arrayName='pointer', typeName='type' ):
-			self.arrayName = arrayName
-			self.typeName = typeName 
-		def __call__( self, arg, wrappedOperation, args):
-			"""Get the arg as an array of the appropriate type"""
-			type = args[ self.typeIndex ]
-			arrayType = arraydatatype.GL_CONSTANT_TO_ARRAY_TYPE[ type ]
-			return arrayType.asArray( arg )
-	class AsArrayTyped( converters.PyConverter ):
-		"""Given arrayName and arrayType, convert arrayName to array of type
-		
-		TODO: It should be possible to drop this if ERROR_ON_COPY,
-		as array inputs always have to be the final objects in that 
-		case.
-		"""
-		argNames = ( 'arrayName','arrayType' )
-		indexLookups = ( 
-			('arrayIndex', 'arrayName','pyArgIndex'),
-		)
-		def __init__( self, arrayName='pointer', arrayType=None ):
-			self.arrayName = arrayName
-			self.arrayType = arrayType
-		def __call__( self, arg, wrappedOperation, args):
-			"""Get the arg as an array of the appropriate type"""
-			return self.arrayType.asArray( arg )
-	class AsArrayTypedSize( converters.CConverter ):
-		"""Given arrayName and arrayType, determine size of arrayName
-		"""
-		argNames = ( 'arrayName','arrayType' )
-		indexLookups = ( 
-			('arrayIndex', 'arrayName','pyArgIndex'),
-		)
-		def __init__( self, arrayName='pointer', arrayType=None ):
-			self.arrayName = arrayName
-			self.arrayType = arrayType
-		def __call__( self, pyArgs, index, wrappedOperation ):
-			"""Get the arg as an array of the appropriate type"""
-			return self.arrayType.arraySize( pyArgs[self.arrayIndex ] )
+    def returnPointer( result,baseOperation,pyArgs,cArgs, ):
+        """Return the converted object as result of function
+        
+        Note: this is a hack that always returns pyArgs[0]!
+        """
+        return pyArgs[0]
+    class AsArrayOfType( converters.PyConverter ):
+        """Given arrayName and typeName coerce arrayName to array of type typeName
+        
+        TODO: It should be possible to drop this if ERROR_ON_COPY,
+        as array inputs always have to be the final objects in that 
+        case.
+        """
+        argNames = ( 'arrayName','typeName' )
+        indexLookups = ( 
+            ('arrayIndex', 'arrayName','pyArgIndex'),
+            ('typeIndex', 'typeName','pyArgIndex'),
+        )
+        def __init__( self, arrayName='pointer', typeName='type' ):
+            self.arrayName = arrayName
+            self.typeName = typeName 
+        def __call__( self, arg, wrappedOperation, args):
+            """Get the arg as an array of the appropriate type"""
+            type = args[ self.typeIndex ]
+            arrayType = arraydatatype.GL_CONSTANT_TO_ARRAY_TYPE[ type ]
+            return arrayType.asArray( arg )
+    class AsArrayTyped( converters.PyConverter ):
+        """Given arrayName and arrayType, convert arrayName to array of type
+        
+        TODO: It should be possible to drop this if ERROR_ON_COPY,
+        as array inputs always have to be the final objects in that 
+        case.
+        """
+        argNames = ( 'arrayName','arrayType' )
+        indexLookups = ( 
+            ('arrayIndex', 'arrayName','pyArgIndex'),
+        )
+        def __init__( self, arrayName='pointer', arrayType=None ):
+            self.arrayName = arrayName
+            self.arrayType = arrayType
+        def __call__( self, arg, wrappedOperation, args):
+            """Get the arg as an array of the appropriate type"""
+            return self.arrayType.asArray( arg )
+    class AsArrayTypedSize( converters.CConverter ):
+        """Given arrayName and arrayType, determine size of arrayName
+        """
+        argNames = ( 'arrayName','arrayType' )
+        indexLookups = ( 
+            ('arrayIndex', 'arrayName','pyArgIndex'),
+        )
+        def __init__( self, arrayName='pointer', arrayType=None ):
+            self.arrayName = arrayName
+            self.arrayType = arrayType
+        def __call__( self, pyArgs, index, wrappedOperation ):
+            """Get the arg as an array of the appropriate type"""
+            return self.arrayType.arraySize( pyArgs[self.arrayIndex ] )
 else:
-	returnPointer = returnPyArgumentIndex( 0 )
+    returnPointer = returnPyArgumentIndex( 0 )
 
 
 
 if not OpenGL.ERROR_ON_COPY:
-	def asArrayType( typ, size=None ):
-		"""Create PyConverter to get first argument as array of type"""
-		return converters.CallFuncPyConverter( typ.asArray )
+    def asArrayType( typ, size=None ):
+        """Create PyConverter to get first argument as array of type"""
+        return converters.CallFuncPyConverter( typ.asArray )
 else:
-	def asArrayType( typ, size=None ):
-		"""No converter required"""
-		return None
+    def asArrayType( typ, size=None ):
+        """No converter required"""
+        return None
 
 if not OpenGL.ARRAY_SIZE_CHECKING:
-	asArrayTypeSize = asArrayType
+    asArrayTypeSize = asArrayType
 else:
-	if AsArrayTypedSizeChecked:
-		asArrayTypeSize = AsArrayTypedSizeChecked
-	else:
-		def asArrayTypeSize( typ, size ):
-			"""Create PyConverter function to get array as type and check size
-			
-			Produces a raw function, not a PyConverter instance
-			"""
-			asArray = typ.asArray
-			dataType = typ.typeConstant
-			arraySize = typ.arraySize
-			def asArraySize( incoming, function, args ):
-				handler = typ.getHandler( incoming )
-				result = handler.asArray( incoming, dataType )
-				actualSize = handler.arraySize(result, dataType)
-				if actualSize != size:
-					raise ValueError(
-						"""Expected %r item array, got %r item array"""%(
-							size,
-							actualSize,
-						),
-						incoming,
-					)
-				return result
-			return asArraySize
+    if AsArrayTypedSizeChecked:
+        asArrayTypeSize = AsArrayTypedSizeChecked
+    else:
+        def asArrayTypeSize( typ, size ):
+            """Create PyConverter function to get array as type and check size
+            
+            Produces a raw function, not a PyConverter instance
+            """
+            asArray = typ.asArray
+            dataType = typ.typeConstant
+            arraySize = typ.arraySize
+            def asArraySize( incoming, function, args ):
+                handler = typ.getHandler( incoming )
+                result = handler.asArray( incoming, dataType )
+                actualSize = handler.arraySize(result, dataType)
+                if actualSize != size:
+                    raise ValueError(
+                        """Expected %r item array, got %r item array"""%(
+                            size,
+                            actualSize,
+                        ),
+                        incoming,
+                    )
+                return result
+            return asArraySize
 
 
 if not OpenGL.ERROR_ON_COPY:
-	def asVoidArray( ):
-		"""Create PyConverter returning incoming as an array of any type"""
-		from OpenGL.arrays import ArrayDatatype
-		return converters.CallFuncPyConverter( ArrayDatatype.asArray )
+    def asVoidArray( ):
+        """Create PyConverter returning incoming as an array of any type"""
+        from OpenGL.arrays import ArrayDatatype
+        return converters.CallFuncPyConverter( ArrayDatatype.asArray )
 else:
-	def asVoidArray( ):
-		"""If there's no copying allowed, we can use default passing"""
-		return None
+    def asVoidArray( ):
+        """If there's no copying allowed, we can use default passing"""
+        return None
 
 class storePointerType( object ):
-	"""Store named pointer value in context indexed by constant
-	
-	pointerName -- named pointer argument 
-	constant -- constant used to index in the context storage
-	
-	Note: OpenGL.STORE_POINTERS can be set with ERROR_ON_COPY
-	to ignore this storage operation.
-	
-	Stores the pyArgs (i.e. result of pyConverters) for the named
-	pointer argument...
-	"""
-	def __init__( self, pointerName, constant ):
-		self.pointerName = pointerName
-		self.constant = constant 
-	def finalise( self, wrapper ):
-		self.pointerIndex = wrapper.pyArgIndex( self.pointerName )
-	def __call__( self, result, baseOperation, pyArgs, cArgs ):
-		contextdata.setValue( self.constant, pyArgs[self.pointerIndex] )
+    """Store named pointer value in context indexed by constant
+    
+    pointerName -- named pointer argument 
+    constant -- constant used to index in the context storage
+    
+    Note: OpenGL.STORE_POINTERS can be set with ERROR_ON_COPY
+    to ignore this storage operation.
+    
+    Stores the pyArgs (i.e. result of pyConverters) for the named
+    pointer argument...
+    """
+    def __init__( self, pointerName, constant ):
+        self.pointerName = pointerName
+        self.constant = constant 
+    def finalise( self, wrapper ):
+        self.pointerIndex = wrapper.pyArgIndex( self.pointerName )
+    def __call__( self, result, baseOperation, pyArgs, cArgs ):
+        contextdata.setValue( self.constant, pyArgs[self.pointerIndex] )
 
 
 if not OpenGL.ERROR_ON_COPY:
-	def setInputArraySizeType( baseOperation, size, type, argName=0 ):
-		"""Decorate function with vector-handling code for a single argument
-		
-		if OpenGL.ERROR_ON_COPY is False, then we return the 
-		named argument, converting to the passed array type,
-		optionally checking that the array matches size.
-		
-		if OpenGL.ERROR_ON_COPY is True, then we will dramatically 
-		simplify this function, only wrapping if size is True, i.e.
-		only wrapping if we intend to do a size check on the array.
-		"""
-		function = wrapper.wrapper( baseOperation )
-		if not hasattr( function, 'returnValues' ):
-			if isinstance( argName, (str,unicode)):
-				function.setReturnValues( converters.returnPyArgument(argName) )
-			else:
-				raise TypeError( 
-					"""Argname should be a string/unicode: %s"""%(type(argName))
-				)
-		if size is not None:
-			function.setPyConverter( argName, asArrayTypeSize(type, size) )
-		else:
-			function.setPyConverter( argName, asArrayType(type) )
-		function.setCConverter( argName, converters.getPyArgsName( argName ) )
-		return function
+    def setInputArraySizeType( baseOperation, size, type, argName=0 ):
+        """Decorate function with vector-handling code for a single argument
+        
+        if OpenGL.ERROR_ON_COPY is False, then we return the 
+        named argument, converting to the passed array type,
+        optionally checking that the array matches size.
+        
+        if OpenGL.ERROR_ON_COPY is True, then we will dramatically 
+        simplify this function, only wrapping if size is True, i.e.
+        only wrapping if we intend to do a size check on the array.
+        """
+        function = wrapper.wrapper( baseOperation )
+        if not hasattr( function, 'returnValues' ):
+            if isinstance( argName, (str,unicode)):
+                function.setReturnValues( converters.returnPyArgument(argName) )
+            else:
+                raise TypeError( 
+                    """Argname should be a string/unicode: %s"""%(type(argName))
+                )
+        if size is not None:
+            function.setPyConverter( argName, asArrayTypeSize(type, size) )
+        else:
+            function.setPyConverter( argName, asArrayType(type) )
+        function.setCConverter( argName, converters.getPyArgsName( argName ) )
+        return function
 else:
-	def setInputArraySizeType( baseOperation, size, type, argName=0 ):
-		"""Decorate function with vector-handling code for a single argument
-		
-		if OpenGL.ERROR_ON_COPY is False, then we return the 
-		named argument, converting to the passed array type,
-		optionally checking that the array matches size.
-		
-		if OpenGL.ERROR_ON_COPY is True, then we will dramatically 
-		simplify this function, only wrapping if size is True, i.e.
-		only wrapping if we intend to do a size check on the array.
-		"""
-		if size is not None:
-			function = wrapper.wrapper( baseOperation )
-			# return value is always the source array...
-			function.setPyConverter( argName, asArrayTypeSize(type, size) )
-			function.setCConverter( argName, 
-				converters.getPyArgsName( argName ) 
-			)
-		else:
-			function = baseOperation
-		return function
-	
+    def setInputArraySizeType( baseOperation, size, type, argName=0 ):
+        """Decorate function with vector-handling code for a single argument
+        
+        if OpenGL.ERROR_ON_COPY is False, then we return the 
+        named argument, converting to the passed array type,
+        optionally checking that the array matches size.
+        
+        if OpenGL.ERROR_ON_COPY is True, then we will dramatically 
+        simplify this function, only wrapping if size is True, i.e.
+        only wrapping if we intend to do a size check on the array.
+        """
+        if size is not None:
+            function = wrapper.wrapper( baseOperation )
+            # return value is always the source array...
+            function.setPyConverter( argName, asArrayTypeSize(type, size) )
+            function.setCConverter( argName, 
+                converters.getPyArgsName( argName ) 
+            )
+        else:
+            function = baseOperation
+        return function
+    
 
 def arraySizeOfFirstType( typ, default ):
-	unitSize = typ.unitSize
-	def arraySizeOfFirst( pyArgs, index, baseOperation ):
-		"""Return the array size of the first argument"""
-		array = pyArgs[0]
-		if array is None:
-			return default
-		else:
-			return unitSize( array )
-	return arraySizeOfFirst
+    unitSize = typ.unitSize
+    def arraySizeOfFirst( pyArgs, index, baseOperation ):
+        """Return the array size of the first argument"""
+        array = pyArgs[0]
+        if array is None:
+            return default
+        else:
+            return unitSize( array )
+    return arraySizeOfFirst

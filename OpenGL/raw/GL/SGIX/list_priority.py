@@ -1,11 +1,11 @@
 '''OpenGL extension SGIX.list_priority
 
 Overview (from the spec)
-	
-	This extension provides a mechanism for specifying the relative
-	importance of display lists.  This information can be used by
-	an OpenGL implementation to guide the placement of display
-	list data in a storage hierarchy.
+    
+    This extension provides a mechanism for specifying the relative
+    importance of display lists.  This information can be used by
+    an OpenGL implementation to guide the placement of display
+    list data in a storage hierarchy.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/list_priority.txt

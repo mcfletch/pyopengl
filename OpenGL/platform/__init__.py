@@ -5,7 +5,7 @@ specific functionality required to support the base OpenGL
 functionality on that platform.  These modules are 
 registered using plugins in the:
 
-	OpenGL.plugin.PlatformPlugin
+    OpenGL.plugin.PlatformPlugin
 
 objects.  To support a new platform you'll need to create
 a new PlatformPlugin instance *before* you import 
@@ -20,17 +20,17 @@ import os, sys
 from OpenGL.plugins import PlatformPlugin
 
 def _load( ):
-	"""Load the os.name plugin for the platform functionality"""
-	
-	key = (sys.platform,os.name)
-	plugin  = PlatformPlugin.match( key )
-	plugin_class = plugin.load()
-	plugin.loaded = True
-	# create instance of this platform implementation
-	plugin = plugin_class()
+    """Load the os.name plugin for the platform functionality"""
+    
+    key = (sys.platform,os.name)
+    plugin  = PlatformPlugin.match( key )
+    plugin_class = plugin.load()
+    plugin.loaded = True
+    # create instance of this platform implementation
+    plugin = plugin_class()
 
-	# install into the platform module's namespace now
-	plugin.install(globals())
-	return plugin
+    # install into the platform module's namespace now
+    plugin.install(globals())
+    return plugin
 
 _load()

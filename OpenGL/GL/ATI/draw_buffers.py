@@ -13,15 +13,15 @@ from OpenGL.raw.GL.ATI.draw_buffers import *
 
 @lazy( glDrawBuffersATI )
 def glDrawBuffersATI( baseOperation, n=None, bufs=None ):
-	"""glDrawBuffersATI( bufs ) -> bufs 
-	
-	Wrapper will calculate n from dims of bufs if only 
-	one argument is provided...
-	"""
-	if bufs is None:
-		bufs = n
-		n = None
-	bufs = arrays.GLenumArray.asArray( bufs )
-	if n is None:
-		n = arrays.GLenumArray.arraySize( bufs )
-	return baseOperation( n,bufs )
+    """glDrawBuffersATI( bufs ) -> bufs 
+    
+    Wrapper will calculate n from dims of bufs if only 
+    one argument is provided...
+    """
+    if bufs is None:
+        bufs = n
+        n = None
+    bufs = arrays.GLenumArray.asArray( bufs )
+    if n is None:
+        n = arrays.GLenumArray.arraySize( bufs )
+    return baseOperation( n,bufs )

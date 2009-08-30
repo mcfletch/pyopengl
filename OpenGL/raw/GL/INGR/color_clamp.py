@@ -1,12 +1,12 @@
 '''OpenGL extension INGR.color_clamp
 
 Overview (from the spec)
-	
-	Various RGBA color space conversions require clamping to values
-	in a more constrained range than [0, 1].  This extension allows
-	the definition of independent color clamp values for each of the
-	four color components as part of the Final Conversion in the pixel
-	transfer path for draws, reads, and copies.
+    
+    Various RGBA color space conversions require clamping to values
+    in a more constrained range than [0, 1].  This extension allows
+    the definition of independent color clamp values for each of the
+    four color components as part of the Final Conversion in the pixel
+    transfer path for draws, reads, and copies.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/INGR/color_clamp.txt

@@ -217,280 +217,280 @@ struct__XDisplay._fields_ = [
 
 Display = struct__XDisplay 	# /usr/include/X11/Xlib.h:519
 glXChooseVisual = platform.createBaseFunction(
-	'glXChooseVisual', dll=platform.GL, resultType=POINTER(XVisualInfo), 
-	argTypes=[POINTER(Display), c_int, POINTER(c_int)],
-	doc='glXChooseVisual( POINTER(Display)(dpy), c_int(screen), POINTER(c_int)(attribList) ) -> POINTER(XVisualInfo)', 
-	argNames=['dpy', 'screen', 'attribList'],
+    'glXChooseVisual', dll=platform.GL, resultType=POINTER(XVisualInfo), 
+    argTypes=[POINTER(Display), c_int, POINTER(c_int)],
+    doc='glXChooseVisual( POINTER(Display)(dpy), c_int(screen), POINTER(c_int)(attribList) ) -> POINTER(XVisualInfo)', 
+    argNames=['dpy', 'screen', 'attribList'],
 )
 
 glXCreateContext = platform.createBaseFunction(
-	'glXCreateContext', dll=platform.GL, resultType=GLXContext, 
-	argTypes=[POINTER(Display), POINTER(XVisualInfo), GLXContext, c_int],
-	doc='glXCreateContext( POINTER(Display)(dpy), POINTER(XVisualInfo)(vis), GLXContext(shareList), c_int(direct) ) -> GLXContext', 
-	argNames=['dpy', 'vis', 'shareList', 'direct'],
+    'glXCreateContext', dll=platform.GL, resultType=GLXContext, 
+    argTypes=[POINTER(Display), POINTER(XVisualInfo), GLXContext, c_int],
+    doc='glXCreateContext( POINTER(Display)(dpy), POINTER(XVisualInfo)(vis), GLXContext(shareList), c_int(direct) ) -> GLXContext', 
+    argNames=['dpy', 'vis', 'shareList', 'direct'],
 )
 
 glXDestroyContext = platform.createBaseFunction(
-	'glXDestroyContext', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXContext],
-	doc='glXDestroyContext( POINTER(Display)(dpy), GLXContext(ctx) ) -> None', 
-	argNames=['dpy', 'ctx'],
+    'glXDestroyContext', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXContext],
+    doc='glXDestroyContext( POINTER(Display)(dpy), GLXContext(ctx) ) -> None', 
+    argNames=['dpy', 'ctx'],
 )
 
 glXMakeCurrent = platform.createBaseFunction(
-	'glXMakeCurrent', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, GLXContext],
-	doc='glXMakeCurrent( POINTER(Display)(dpy), GLXDrawable(drawable), GLXContext(ctx) ) -> c_int', 
-	argNames=['dpy', 'drawable', 'ctx'],
+    'glXMakeCurrent', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, GLXContext],
+    doc='glXMakeCurrent( POINTER(Display)(dpy), GLXDrawable(drawable), GLXContext(ctx) ) -> c_int', 
+    argNames=['dpy', 'drawable', 'ctx'],
 )
 
 glXCopyContext = platform.createBaseFunction(
-	'glXCopyContext', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXContext, GLXContext, c_ulong],
-	doc='glXCopyContext( POINTER(Display)(dpy), GLXContext(src), GLXContext(dst), c_ulong(mask) ) -> None', 
-	argNames=['dpy', 'src', 'dst', 'mask'],
+    'glXCopyContext', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXContext, GLXContext, c_ulong],
+    doc='glXCopyContext( POINTER(Display)(dpy), GLXContext(src), GLXContext(dst), c_ulong(mask) ) -> None', 
+    argNames=['dpy', 'src', 'dst', 'mask'],
 )
 
 glXSwapBuffers = platform.createBaseFunction(
-	'glXSwapBuffers', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXDrawable],
-	doc='glXSwapBuffers( POINTER(Display)(dpy), GLXDrawable(drawable) ) -> None', 
-	argNames=['dpy', 'drawable'],
+    'glXSwapBuffers', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXDrawable],
+    doc='glXSwapBuffers( POINTER(Display)(dpy), GLXDrawable(drawable) ) -> None', 
+    argNames=['dpy', 'drawable'],
 )
 
 Pixmap = XID 	# /usr/include/X11/X.h:107
 glXCreateGLXPixmap = platform.createBaseFunction(
-	'glXCreateGLXPixmap', dll=platform.GL, resultType=GLXPixmap, 
-	argTypes=[POINTER(Display), POINTER(XVisualInfo), Pixmap],
-	doc='glXCreateGLXPixmap( POINTER(Display)(dpy), POINTER(XVisualInfo)(visual), Pixmap(pixmap) ) -> GLXPixmap', 
-	argNames=['dpy', 'visual', 'pixmap'],
+    'glXCreateGLXPixmap', dll=platform.GL, resultType=GLXPixmap, 
+    argTypes=[POINTER(Display), POINTER(XVisualInfo), Pixmap],
+    doc='glXCreateGLXPixmap( POINTER(Display)(dpy), POINTER(XVisualInfo)(visual), Pixmap(pixmap) ) -> GLXPixmap', 
+    argNames=['dpy', 'visual', 'pixmap'],
 )
 
 glXDestroyGLXPixmap = platform.createBaseFunction(
-	'glXDestroyGLXPixmap', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXPixmap],
-	doc='glXDestroyGLXPixmap( POINTER(Display)(dpy), GLXPixmap(pixmap) ) -> None', 
-	argNames=['dpy', 'pixmap'],
+    'glXDestroyGLXPixmap', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXPixmap],
+    doc='glXDestroyGLXPixmap( POINTER(Display)(dpy), GLXPixmap(pixmap) ) -> None', 
+    argNames=['dpy', 'pixmap'],
 )
 
 glXQueryExtension = platform.createBaseFunction(
-	'glXQueryExtension', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), POINTER(c_int), POINTER(c_int)],
-	doc='glXQueryExtension( POINTER(Display)(dpy), POINTER(c_int)(errorb), POINTER(c_int)(event) ) -> c_int', 
-	argNames=['dpy', 'errorb', 'event'],
+    'glXQueryExtension', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), POINTER(c_int), POINTER(c_int)],
+    doc='glXQueryExtension( POINTER(Display)(dpy), POINTER(c_int)(errorb), POINTER(c_int)(event) ) -> c_int', 
+    argNames=['dpy', 'errorb', 'event'],
 )
 
 glXQueryVersion = platform.createBaseFunction(
-	'glXQueryVersion', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), POINTER(c_int), POINTER(c_int)],
-	doc='glXQueryVersion( POINTER(Display)(dpy), POINTER(c_int)(maj), POINTER(c_int)(min) ) -> c_int', 
-	argNames=['dpy', 'maj', 'min'],
+    'glXQueryVersion', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), POINTER(c_int), POINTER(c_int)],
+    doc='glXQueryVersion( POINTER(Display)(dpy), POINTER(c_int)(maj), POINTER(c_int)(min) ) -> c_int', 
+    argNames=['dpy', 'maj', 'min'],
 )
 
 glXIsDirect = platform.createBaseFunction(
-	'glXIsDirect', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXContext],
-	doc='glXIsDirect( POINTER(Display)(dpy), GLXContext(ctx) ) -> c_int', 
-	argNames=['dpy', 'ctx'],
+    'glXIsDirect', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXContext],
+    doc='glXIsDirect( POINTER(Display)(dpy), GLXContext(ctx) ) -> c_int', 
+    argNames=['dpy', 'ctx'],
 )
 
 glXGetConfig = platform.createBaseFunction(
-	'glXGetConfig', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), POINTER(XVisualInfo), c_int, POINTER(c_int)],
-	doc='glXGetConfig( POINTER(Display)(dpy), POINTER(XVisualInfo)(visual), c_int(attrib), POINTER(c_int)(value) ) -> c_int', 
-	argNames=['dpy', 'visual', 'attrib', 'value'],
+    'glXGetConfig', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), POINTER(XVisualInfo), c_int, POINTER(c_int)],
+    doc='glXGetConfig( POINTER(Display)(dpy), POINTER(XVisualInfo)(visual), c_int(attrib), POINTER(c_int)(value) ) -> c_int', 
+    argNames=['dpy', 'visual', 'attrib', 'value'],
 )
 
 glXGetCurrentContext = platform.createBaseFunction(
-	'glXGetCurrentContext', dll=platform.GL, resultType=GLXContext, 
-	argTypes=[],
-	doc='glXGetCurrentContext(  ) -> GLXContext', 
-	argNames=[],
+    'glXGetCurrentContext', dll=platform.GL, resultType=GLXContext, 
+    argTypes=[],
+    doc='glXGetCurrentContext(  ) -> GLXContext', 
+    argNames=[],
 )
 
 glXGetCurrentDrawable = platform.createBaseFunction(
-	'glXGetCurrentDrawable', dll=platform.GL, resultType=GLXDrawable, 
-	argTypes=[],
-	doc='glXGetCurrentDrawable(  ) -> GLXDrawable', 
-	argNames=[],
+    'glXGetCurrentDrawable', dll=platform.GL, resultType=GLXDrawable, 
+    argTypes=[],
+    doc='glXGetCurrentDrawable(  ) -> GLXDrawable', 
+    argNames=[],
 )
 
 glXWaitGL = platform.createBaseFunction(
-	'glXWaitGL', dll=platform.GL, resultType=None, 
-	argTypes=[],
-	doc='glXWaitGL(  ) -> None', 
-	argNames=[],
+    'glXWaitGL', dll=platform.GL, resultType=None, 
+    argTypes=[],
+    doc='glXWaitGL(  ) -> None', 
+    argNames=[],
 )
 
 glXWaitX = platform.createBaseFunction(
-	'glXWaitX', dll=platform.GL, resultType=None, 
-	argTypes=[],
-	doc='glXWaitX(  ) -> None', 
-	argNames=[],
+    'glXWaitX', dll=platform.GL, resultType=None, 
+    argTypes=[],
+    doc='glXWaitX(  ) -> None', 
+    argNames=[],
 )
 
 Font = XID 	# /usr/include/X11/X.h:105
 glXUseXFont = platform.createBaseFunction(
-	'glXUseXFont', dll=platform.GL, resultType=None, 
-	argTypes=[Font, c_int, c_int, c_int],
-	doc='glXUseXFont( Font(font), c_int(first), c_int(count), c_int(list) ) -> None', 
-	argNames=['font', 'first', 'count', 'list'],
+    'glXUseXFont', dll=platform.GL, resultType=None, 
+    argTypes=[Font, c_int, c_int, c_int],
+    doc='glXUseXFont( Font(font), c_int(first), c_int(count), c_int(list) ) -> None', 
+    argNames=['font', 'first', 'count', 'list'],
 )
 
 glXQueryExtensionsString = platform.createBaseFunction(
-	'glXQueryExtensionsString', dll=platform.GL, resultType=c_char_p, 
-	argTypes=[POINTER(Display), c_int],
-	doc='glXQueryExtensionsString( POINTER(Display)(dpy), c_int(screen) ) -> c_char_p', 
-	argNames=['dpy', 'screen'],
+    'glXQueryExtensionsString', dll=platform.GL, resultType=c_char_p, 
+    argTypes=[POINTER(Display), c_int],
+    doc='glXQueryExtensionsString( POINTER(Display)(dpy), c_int(screen) ) -> c_char_p', 
+    argNames=['dpy', 'screen'],
 )
 
 glXQueryServerString = platform.createBaseFunction(
-	'glXQueryServerString', dll=platform.GL, resultType=c_char_p, 
-	argTypes=[POINTER(Display), c_int, c_int],
-	doc='glXQueryServerString( POINTER(Display)(dpy), c_int(screen), c_int(name) ) -> c_char_p', 
-	argNames=['dpy', 'screen', 'name'],
+    'glXQueryServerString', dll=platform.GL, resultType=c_char_p, 
+    argTypes=[POINTER(Display), c_int, c_int],
+    doc='glXQueryServerString( POINTER(Display)(dpy), c_int(screen), c_int(name) ) -> c_char_p', 
+    argNames=['dpy', 'screen', 'name'],
 )
 
 glXGetClientString = platform.createBaseFunction(
-	'glXGetClientString', dll=platform.GL, resultType=c_char_p, 
-	argTypes=[POINTER(Display), c_int],
-	doc='glXGetClientString( POINTER(Display)(dpy), c_int(name) ) -> c_char_p', 
-	argNames=['dpy', 'name'],
+    'glXGetClientString', dll=platform.GL, resultType=c_char_p, 
+    argTypes=[POINTER(Display), c_int],
+    doc='glXGetClientString( POINTER(Display)(dpy), c_int(name) ) -> c_char_p', 
+    argNames=['dpy', 'name'],
 )
 
 glXGetCurrentDisplay = platform.createBaseFunction(
-	'glXGetCurrentDisplay', dll=platform.GL, resultType=POINTER(Display), 
-	argTypes=[],
-	doc='glXGetCurrentDisplay(  ) -> POINTER(Display)', 
-	argNames=[],
+    'glXGetCurrentDisplay', dll=platform.GL, resultType=POINTER(Display), 
+    argTypes=[],
+    doc='glXGetCurrentDisplay(  ) -> POINTER(Display)', 
+    argNames=[],
 )
 
 glXChooseFBConfig = platform.createBaseFunction(
-	'glXChooseFBConfig', dll=platform.GL, resultType=POINTER(GLXFBConfig), 
-	argTypes=[POINTER(Display), c_int, POINTER(c_int), POINTER(c_int)],
-	doc='glXChooseFBConfig( POINTER(Display)(dpy), c_int(screen), POINTER(c_int)(attribList), POINTER(c_int)(nitems) ) -> POINTER(GLXFBConfig)', 
-	argNames=['dpy', 'screen', 'attribList', 'nitems'],
+    'glXChooseFBConfig', dll=platform.GL, resultType=POINTER(GLXFBConfig), 
+    argTypes=[POINTER(Display), c_int, POINTER(c_int), POINTER(c_int)],
+    doc='glXChooseFBConfig( POINTER(Display)(dpy), c_int(screen), POINTER(c_int)(attribList), POINTER(c_int)(nitems) ) -> POINTER(GLXFBConfig)', 
+    argNames=['dpy', 'screen', 'attribList', 'nitems'],
 )
 
 glXGetFBConfigAttrib = platform.createBaseFunction(
-	'glXGetFBConfigAttrib', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXFBConfig, c_int, POINTER(c_int)],
-	doc='glXGetFBConfigAttrib( POINTER(Display)(dpy), GLXFBConfig(config), c_int(attribute), POINTER(c_int)(value) ) -> c_int', 
-	argNames=['dpy', 'config', 'attribute', 'value'],
+    'glXGetFBConfigAttrib', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXFBConfig, c_int, POINTER(c_int)],
+    doc='glXGetFBConfigAttrib( POINTER(Display)(dpy), GLXFBConfig(config), c_int(attribute), POINTER(c_int)(value) ) -> c_int', 
+    argNames=['dpy', 'config', 'attribute', 'value'],
 )
 
 glXGetFBConfigs = platform.createBaseFunction(
-	'glXGetFBConfigs', dll=platform.GL, resultType=POINTER(GLXFBConfig), 
-	argTypes=[POINTER(Display), c_int, POINTER(c_int)],
-	doc='glXGetFBConfigs( POINTER(Display)(dpy), c_int(screen), POINTER(c_int)(nelements) ) -> POINTER(GLXFBConfig)', 
-	argNames=['dpy', 'screen', 'nelements'],
+    'glXGetFBConfigs', dll=platform.GL, resultType=POINTER(GLXFBConfig), 
+    argTypes=[POINTER(Display), c_int, POINTER(c_int)],
+    doc='glXGetFBConfigs( POINTER(Display)(dpy), c_int(screen), POINTER(c_int)(nelements) ) -> POINTER(GLXFBConfig)', 
+    argNames=['dpy', 'screen', 'nelements'],
 )
 
 glXGetVisualFromFBConfig = platform.createBaseFunction(
-	'glXGetVisualFromFBConfig', dll=platform.GL, resultType=POINTER(XVisualInfo), 
-	argTypes=[POINTER(Display), GLXFBConfig],
-	doc='glXGetVisualFromFBConfig( POINTER(Display)(dpy), GLXFBConfig(config) ) -> POINTER(XVisualInfo)', 
-	argNames=['dpy', 'config'],
+    'glXGetVisualFromFBConfig', dll=platform.GL, resultType=POINTER(XVisualInfo), 
+    argTypes=[POINTER(Display), GLXFBConfig],
+    doc='glXGetVisualFromFBConfig( POINTER(Display)(dpy), GLXFBConfig(config) ) -> POINTER(XVisualInfo)', 
+    argNames=['dpy', 'config'],
 )
 
 Window = XID 	# /usr/include/X11/X.h:101
 glXCreateWindow = platform.createBaseFunction(
-	'glXCreateWindow', dll=platform.GL, resultType=GLXWindow, 
-	argTypes=[POINTER(Display), GLXFBConfig, Window, POINTER(c_int)],
-	doc='glXCreateWindow( POINTER(Display)(dpy), GLXFBConfig(config), Window(win), POINTER(c_int)(attribList) ) -> GLXWindow', 
-	argNames=['dpy', 'config', 'win', 'attribList'],
+    'glXCreateWindow', dll=platform.GL, resultType=GLXWindow, 
+    argTypes=[POINTER(Display), GLXFBConfig, Window, POINTER(c_int)],
+    doc='glXCreateWindow( POINTER(Display)(dpy), GLXFBConfig(config), Window(win), POINTER(c_int)(attribList) ) -> GLXWindow', 
+    argNames=['dpy', 'config', 'win', 'attribList'],
 )
 
 glXDestroyWindow = platform.createBaseFunction(
-	'glXDestroyWindow', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXWindow],
-	doc='glXDestroyWindow( POINTER(Display)(dpy), GLXWindow(window) ) -> None', 
-	argNames=['dpy', 'window'],
+    'glXDestroyWindow', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXWindow],
+    doc='glXDestroyWindow( POINTER(Display)(dpy), GLXWindow(window) ) -> None', 
+    argNames=['dpy', 'window'],
 )
 
 glXCreatePixmap = platform.createBaseFunction(
-	'glXCreatePixmap', dll=platform.GL, resultType=GLXPixmap, 
-	argTypes=[POINTER(Display), GLXFBConfig, Pixmap, POINTER(c_int)],
-	doc='glXCreatePixmap( POINTER(Display)(dpy), GLXFBConfig(config), Pixmap(pixmap), POINTER(c_int)(attribList) ) -> GLXPixmap', 
-	argNames=['dpy', 'config', 'pixmap', 'attribList'],
+    'glXCreatePixmap', dll=platform.GL, resultType=GLXPixmap, 
+    argTypes=[POINTER(Display), GLXFBConfig, Pixmap, POINTER(c_int)],
+    doc='glXCreatePixmap( POINTER(Display)(dpy), GLXFBConfig(config), Pixmap(pixmap), POINTER(c_int)(attribList) ) -> GLXPixmap', 
+    argNames=['dpy', 'config', 'pixmap', 'attribList'],
 )
 
 glXDestroyPixmap = platform.createBaseFunction(
-	'glXDestroyPixmap', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXPixmap],
-	doc='glXDestroyPixmap( POINTER(Display)(dpy), GLXPixmap(pixmap) ) -> None', 
-	argNames=['dpy', 'pixmap'],
+    'glXDestroyPixmap', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXPixmap],
+    doc='glXDestroyPixmap( POINTER(Display)(dpy), GLXPixmap(pixmap) ) -> None', 
+    argNames=['dpy', 'pixmap'],
 )
 
 glXCreatePbuffer = platform.createBaseFunction(
-	'glXCreatePbuffer', dll=platform.GL, resultType=GLXPbuffer, 
-	argTypes=[POINTER(Display), GLXFBConfig, POINTER(c_int)],
-	doc='glXCreatePbuffer( POINTER(Display)(dpy), GLXFBConfig(config), POINTER(c_int)(attribList) ) -> GLXPbuffer', 
-	argNames=['dpy', 'config', 'attribList'],
+    'glXCreatePbuffer', dll=platform.GL, resultType=GLXPbuffer, 
+    argTypes=[POINTER(Display), GLXFBConfig, POINTER(c_int)],
+    doc='glXCreatePbuffer( POINTER(Display)(dpy), GLXFBConfig(config), POINTER(c_int)(attribList) ) -> GLXPbuffer', 
+    argNames=['dpy', 'config', 'attribList'],
 )
 
 glXDestroyPbuffer = platform.createBaseFunction(
-	'glXDestroyPbuffer', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXPbuffer],
-	doc='glXDestroyPbuffer( POINTER(Display)(dpy), GLXPbuffer(pbuf) ) -> None', 
-	argNames=['dpy', 'pbuf'],
+    'glXDestroyPbuffer', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXPbuffer],
+    doc='glXDestroyPbuffer( POINTER(Display)(dpy), GLXPbuffer(pbuf) ) -> None', 
+    argNames=['dpy', 'pbuf'],
 )
 
 glXQueryDrawable = platform.createBaseFunction(
-	'glXQueryDrawable', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXDrawable, c_int, POINTER(c_uint)],
-	doc='glXQueryDrawable( POINTER(Display)(dpy), GLXDrawable(draw), c_int(attribute), POINTER(c_uint)(value) ) -> None', 
-	argNames=['dpy', 'draw', 'attribute', 'value'],
+    'glXQueryDrawable', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXDrawable, c_int, POINTER(c_uint)],
+    doc='glXQueryDrawable( POINTER(Display)(dpy), GLXDrawable(draw), c_int(attribute), POINTER(c_uint)(value) ) -> None', 
+    argNames=['dpy', 'draw', 'attribute', 'value'],
 )
 
 glXCreateNewContext = platform.createBaseFunction(
-	'glXCreateNewContext', dll=platform.GL, resultType=GLXContext, 
-	argTypes=[POINTER(Display), GLXFBConfig, c_int, GLXContext, c_int],
-	doc='glXCreateNewContext( POINTER(Display)(dpy), GLXFBConfig(config), c_int(renderType), GLXContext(shareList), c_int(direct) ) -> GLXContext', 
-	argNames=['dpy', 'config', 'renderType', 'shareList', 'direct'],
+    'glXCreateNewContext', dll=platform.GL, resultType=GLXContext, 
+    argTypes=[POINTER(Display), GLXFBConfig, c_int, GLXContext, c_int],
+    doc='glXCreateNewContext( POINTER(Display)(dpy), GLXFBConfig(config), c_int(renderType), GLXContext(shareList), c_int(direct) ) -> GLXContext', 
+    argNames=['dpy', 'config', 'renderType', 'shareList', 'direct'],
 )
 
 glXMakeContextCurrent = platform.createBaseFunction(
-	'glXMakeContextCurrent', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, GLXDrawable, GLXContext],
-	doc='glXMakeContextCurrent( POINTER(Display)(dpy), GLXDrawable(draw), GLXDrawable(read), GLXContext(ctx) ) -> c_int', 
-	argNames=['dpy', 'draw', 'read', 'ctx'],
+    'glXMakeContextCurrent', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, GLXDrawable, GLXContext],
+    doc='glXMakeContextCurrent( POINTER(Display)(dpy), GLXDrawable(draw), GLXDrawable(read), GLXContext(ctx) ) -> c_int', 
+    argNames=['dpy', 'draw', 'read', 'ctx'],
 )
 
 glXGetCurrentReadDrawable = platform.createBaseFunction(
-	'glXGetCurrentReadDrawable', dll=platform.GL, resultType=GLXDrawable, 
-	argTypes=[],
-	doc='glXGetCurrentReadDrawable(  ) -> GLXDrawable', 
-	argNames=[],
+    'glXGetCurrentReadDrawable', dll=platform.GL, resultType=GLXDrawable, 
+    argTypes=[],
+    doc='glXGetCurrentReadDrawable(  ) -> GLXDrawable', 
+    argNames=[],
 )
 
 glXQueryContext = platform.createBaseFunction(
-	'glXQueryContext', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXContext, c_int, POINTER(c_int)],
-	doc='glXQueryContext( POINTER(Display)(dpy), GLXContext(ctx), c_int(attribute), POINTER(c_int)(value) ) -> c_int', 
-	argNames=['dpy', 'ctx', 'attribute', 'value'],
+    'glXQueryContext', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXContext, c_int, POINTER(c_int)],
+    doc='glXQueryContext( POINTER(Display)(dpy), GLXContext(ctx), c_int(attribute), POINTER(c_int)(value) ) -> c_int', 
+    argNames=['dpy', 'ctx', 'attribute', 'value'],
 )
 
 glXSelectEvent = platform.createBaseFunction(
-	'glXSelectEvent', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXDrawable, c_ulong],
-	doc='glXSelectEvent( POINTER(Display)(dpy), GLXDrawable(drawable), c_ulong(mask) ) -> None', 
-	argNames=['dpy', 'drawable', 'mask'],
+    'glXSelectEvent', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXDrawable, c_ulong],
+    doc='glXSelectEvent( POINTER(Display)(dpy), GLXDrawable(drawable), c_ulong(mask) ) -> None', 
+    argNames=['dpy', 'drawable', 'mask'],
 )
 
 glXGetSelectedEvent = platform.createBaseFunction(
-	'glXGetSelectedEvent', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXDrawable, POINTER(c_ulong)],
-	doc='glXGetSelectedEvent( POINTER(Display)(dpy), GLXDrawable(drawable), POINTER(c_ulong)(mask) ) -> None', 
-	argNames=['dpy', 'drawable', 'mask'],
+    'glXGetSelectedEvent', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXDrawable, POINTER(c_ulong)],
+    doc='glXGetSelectedEvent( POINTER(Display)(dpy), GLXDrawable(drawable), POINTER(c_ulong)(mask) ) -> None', 
+    argNames=['dpy', 'drawable', 'mask'],
 )
 
 GLubyte = c_ubyte 	# /usr/include/GL/gl.h:154
 glXGetProcAddress = platform.createBaseFunction(
-	'glXGetProcAddress', dll=platform.GL, resultType=POINTER(CFUNCTYPE(None)), 
-	argTypes=[POINTER(GLubyte)],
-	doc='glXGetProcAddress( POINTER(GLubyte)(procname) ) -> POINTER(CFUNCTYPE(None))', 
-	argNames=['procname'],
+    'glXGetProcAddress', dll=platform.GL, resultType=POINTER(CFUNCTYPE(None)), 
+    argTypes=[POINTER(GLubyte)],
+    doc='glXGetProcAddress( POINTER(GLubyte)(procname) ) -> POINTER(CFUNCTYPE(None))', 
+    argNames=['procname'],
 )
 
 # GLXEXT_LEGACY (/usr/include/GL/glx.h:298)
@@ -573,112 +573,112 @@ glXGetProcAddress = platform.createBaseFunction(
 GLsizei = c_int 	# /usr/include/GL/gl.h:157
 GLfloat = c_float 	# /usr/include/GL/gl.h:158
 glXAllocateMemoryNV = platform.createBaseFunction(
-	'glXAllocateMemoryNV', dll=platform.GL, resultType=POINTER(c_void), 
-	argTypes=[GLsizei, GLfloat, GLfloat, GLfloat],
-	doc='glXAllocateMemoryNV( GLsizei(size), GLfloat(readfreq), GLfloat(writefreq), GLfloat(priority) ) -> POINTER(c_void)', 
-	argNames=['size', 'readfreq', 'writefreq', 'priority'],
+    'glXAllocateMemoryNV', dll=platform.GL, resultType=POINTER(c_void), 
+    argTypes=[GLsizei, GLfloat, GLfloat, GLfloat],
+    doc='glXAllocateMemoryNV( GLsizei(size), GLfloat(readfreq), GLfloat(writefreq), GLfloat(priority) ) -> POINTER(c_void)', 
+    argNames=['size', 'readfreq', 'writefreq', 'priority'],
 )
 
 GLvoid = None 	# /usr/include/GL/gl.h:150
 glXFreeMemoryNV = platform.createBaseFunction(
-	'glXFreeMemoryNV', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(GLvoid)],
-	doc='glXFreeMemoryNV( POINTER(GLvoid)(pointer) ) -> None', 
-	argNames=['pointer'],
+    'glXFreeMemoryNV', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(GLvoid)],
+    doc='glXFreeMemoryNV( POINTER(GLvoid)(pointer) ) -> None', 
+    argNames=['pointer'],
 )
 
 # MESA_allocate_memory (/usr/include/GL/glx.h:344)
 GLX_MESA_allocate_memory = constant.Constant( 'GLX_MESA_allocate_memory', 1 )
 glXAllocateMemoryMESA = platform.createBaseFunction(
-	'glXAllocateMemoryMESA', dll=platform.GL, resultType=POINTER(c_void), 
-	argTypes=[POINTER(Display), c_int, c_size_t, c_float, c_float, c_float],
-	doc='glXAllocateMemoryMESA( POINTER(Display)(dpy), c_int(scrn), c_size_t(size), c_float(readfreq), c_float(writefreq), c_float(priority) ) -> POINTER(c_void)', 
-	argNames=['dpy', 'scrn', 'size', 'readfreq', 'writefreq', 'priority'],
+    'glXAllocateMemoryMESA', dll=platform.GL, resultType=POINTER(c_void), 
+    argTypes=[POINTER(Display), c_int, c_size_t, c_float, c_float, c_float],
+    doc='glXAllocateMemoryMESA( POINTER(Display)(dpy), c_int(scrn), c_size_t(size), c_float(readfreq), c_float(writefreq), c_float(priority) ) -> POINTER(c_void)', 
+    argNames=['dpy', 'scrn', 'size', 'readfreq', 'writefreq', 'priority'],
 )
 
 glXFreeMemoryMESA = platform.createBaseFunction(
-	'glXFreeMemoryMESA', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), c_int, POINTER(None)],
-	doc='glXFreeMemoryMESA( POINTER(Display)(dpy), c_int(scrn), POINTER(None)(pointer) ) -> None', 
-	argNames=['dpy', 'scrn', 'pointer'],
+    'glXFreeMemoryMESA', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), c_int, POINTER(None)],
+    doc='glXFreeMemoryMESA( POINTER(Display)(dpy), c_int(scrn), POINTER(None)(pointer) ) -> None', 
+    argNames=['dpy', 'scrn', 'pointer'],
 )
 
 GLuint = c_uint 	# /usr/include/GL/gl.h:156
 glXGetMemoryOffsetMESA = platform.createBaseFunction(
-	'glXGetMemoryOffsetMESA', dll=platform.GL, resultType=GLuint, 
-	argTypes=[POINTER(Display), c_int, POINTER(None)],
-	doc='glXGetMemoryOffsetMESA( POINTER(Display)(dpy), c_int(scrn), POINTER(None)(pointer) ) -> GLuint', 
-	argNames=['dpy', 'scrn', 'pointer'],
+    'glXGetMemoryOffsetMESA', dll=platform.GL, resultType=GLuint, 
+    argTypes=[POINTER(Display), c_int, POINTER(None)],
+    doc='glXGetMemoryOffsetMESA( POINTER(Display)(dpy), c_int(scrn), POINTER(None)(pointer) ) -> GLuint', 
+    argNames=['dpy', 'scrn', 'pointer'],
 )
 
 # ARB_render_texture (/usr/include/GL/glx.h:361)
 GLX_ARB_render_texture = constant.Constant( 'GLX_ARB_render_texture', 1 )
 glXBindTexImageARB = platform.createBaseFunction(
-	'glXBindTexImageARB', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXPbuffer, c_int],
-	doc='glXBindTexImageARB( POINTER(Display)(dpy), GLXPbuffer(pbuffer), c_int(buffer) ) -> c_int', 
-	argNames=['dpy', 'pbuffer', 'buffer'],
+    'glXBindTexImageARB', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXPbuffer, c_int],
+    doc='glXBindTexImageARB( POINTER(Display)(dpy), GLXPbuffer(pbuffer), c_int(buffer) ) -> c_int', 
+    argNames=['dpy', 'pbuffer', 'buffer'],
 )
 
 glXReleaseTexImageARB = platform.createBaseFunction(
-	'glXReleaseTexImageARB', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXPbuffer, c_int],
-	doc='glXReleaseTexImageARB( POINTER(Display)(dpy), GLXPbuffer(pbuffer), c_int(buffer) ) -> c_int', 
-	argNames=['dpy', 'pbuffer', 'buffer'],
+    'glXReleaseTexImageARB', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXPbuffer, c_int],
+    doc='glXReleaseTexImageARB( POINTER(Display)(dpy), GLXPbuffer(pbuffer), c_int(buffer) ) -> c_int', 
+    argNames=['dpy', 'pbuffer', 'buffer'],
 )
 
 glXDrawableAttribARB = platform.createBaseFunction(
-	'glXDrawableAttribARB', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, POINTER(c_int)],
-	doc='glXDrawableAttribARB( POINTER(Display)(dpy), GLXDrawable(draw), POINTER(c_int)(attribList) ) -> c_int', 
-	argNames=['dpy', 'draw', 'attribList'],
+    'glXDrawableAttribARB', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, POINTER(c_int)],
+    doc='glXDrawableAttribARB( POINTER(Display)(dpy), GLXDrawable(draw), POINTER(c_int)(attribList) ) -> c_int', 
+    argNames=['dpy', 'draw', 'attribList'],
 )
 
 # NV_float_buffer (/usr/include/GL/glx.h:374)
 # MESA_swap_frame_usage (/usr/include/GL/glx.h:386)
 GLX_MESA_swap_frame_usage = constant.Constant( 'GLX_MESA_swap_frame_usage', 1 )
 glXGetFrameUsageMESA = platform.createBaseFunction(
-	'glXGetFrameUsageMESA', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, POINTER(c_float)],
-	doc='glXGetFrameUsageMESA( POINTER(Display)(dpy), GLXDrawable(drawable), POINTER(c_float)(usage) ) -> c_int', 
-	argNames=['dpy', 'drawable', 'usage'],
+    'glXGetFrameUsageMESA', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, POINTER(c_float)],
+    doc='glXGetFrameUsageMESA( POINTER(Display)(dpy), GLXDrawable(drawable), POINTER(c_float)(usage) ) -> c_int', 
+    argNames=['dpy', 'drawable', 'usage'],
 )
 
 glXBeginFrameTrackingMESA = platform.createBaseFunction(
-	'glXBeginFrameTrackingMESA', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable],
-	doc='glXBeginFrameTrackingMESA( POINTER(Display)(dpy), GLXDrawable(drawable) ) -> c_int', 
-	argNames=['dpy', 'drawable'],
+    'glXBeginFrameTrackingMESA', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable],
+    doc='glXBeginFrameTrackingMESA( POINTER(Display)(dpy), GLXDrawable(drawable) ) -> c_int', 
+    argNames=['dpy', 'drawable'],
 )
 
 glXEndFrameTrackingMESA = platform.createBaseFunction(
-	'glXEndFrameTrackingMESA', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable],
-	doc='glXEndFrameTrackingMESA( POINTER(Display)(dpy), GLXDrawable(drawable) ) -> c_int', 
-	argNames=['dpy', 'drawable'],
+    'glXEndFrameTrackingMESA', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable],
+    doc='glXEndFrameTrackingMESA( POINTER(Display)(dpy), GLXDrawable(drawable) ) -> c_int', 
+    argNames=['dpy', 'drawable'],
 )
 
 glXQueryFrameTrackingMESA = platform.createBaseFunction(
-	'glXQueryFrameTrackingMESA', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, POINTER(c_int64), POINTER(c_int64), POINTER(c_float)],
-	doc='glXQueryFrameTrackingMESA( POINTER(Display)(dpy), GLXDrawable(drawable), POINTER(c_int64)(swapCount), POINTER(c_int64)(missedFrames), POINTER(c_float)(lastMissedUsage) ) -> c_int', 
-	argNames=['dpy', 'drawable', 'swapCount', 'missedFrames', 'lastMissedUsage'],
+    'glXQueryFrameTrackingMESA', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, POINTER(c_int64), POINTER(c_int64), POINTER(c_float)],
+    doc='glXQueryFrameTrackingMESA( POINTER(Display)(dpy), GLXDrawable(drawable), POINTER(c_int64)(swapCount), POINTER(c_int64)(missedFrames), POINTER(c_float)(lastMissedUsage) ) -> c_int', 
+    argNames=['dpy', 'drawable', 'swapCount', 'missedFrames', 'lastMissedUsage'],
 )
 
 # MESA_swap_control (/usr/include/GL/glx.h:406)
 GLX_MESA_swap_control = constant.Constant( 'GLX_MESA_swap_control', 1 )
 glXSwapIntervalMESA = platform.createBaseFunction(
-	'glXSwapIntervalMESA', dll=platform.GL, resultType=c_int, 
-	argTypes=[c_uint],
-	doc='glXSwapIntervalMESA( c_uint(interval) ) -> c_int', 
-	argNames=['interval'],
+    'glXSwapIntervalMESA', dll=platform.GL, resultType=c_int, 
+    argTypes=[c_uint],
+    doc='glXSwapIntervalMESA( c_uint(interval) ) -> c_int', 
+    argNames=['interval'],
 )
 
 glXGetSwapIntervalMESA = platform.createBaseFunction(
-	'glXGetSwapIntervalMESA', dll=platform.GL, resultType=c_int, 
-	argTypes=[],
-	doc='glXGetSwapIntervalMESA(  ) -> c_int', 
-	argNames=[],
+    'glXGetSwapIntervalMESA', dll=platform.GL, resultType=c_int, 
+    argTypes=[],
+    doc='glXGetSwapIntervalMESA(  ) -> c_int', 
+    argNames=[],
 )
 
 # EXT_texture_from_pixmap (/usr/include/GL/glx.h:423)
@@ -775,4 +775,3 @@ __all__ = ['GLX_VERSION_1_1', 'GLX_VERSION_1_2', 'GLX_VERSION_1_3',
 'GLX_MESA_swap_control', 'glXSwapIntervalMESA', 'glXGetSwapIntervalMESA',
 'GLXPbufferClobberEvent', 'GLXEvent']
 # END GENERATED CONTENT (do not edit above this line)
-

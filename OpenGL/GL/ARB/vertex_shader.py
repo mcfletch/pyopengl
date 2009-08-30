@@ -15,24 +15,23 @@ from shader_objects import glGetObjectParameterivARB
 
 base_glGetActiveAttribARB = glGetActiveAttribARB
 def glGetActiveAttribARB(program, index):
-	"""Retrieve the name, size and type of the uniform of the index in the program"""
-	max_index = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_ATTRIBUTES_ARB ))
-	length = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB))
-	if index < max_index and index >= 0 and length > 0:
-		name = ctypes.create_string_buffer(length)
-		size = arrays.GLintArray.zeros( (1,))
-		gl_type = arrays.GLuintArray.zeros( (1,))
-		base_glGetActiveAttribARB(program, index, length, None, size, gl_type, name)
-		return name.value, size[0], gl_type[0]
-	raise IndexError, 'index out of range from zero to %i' % (max_index - 1, )
+    """Retrieve the name, size and type of the uniform of the index in the program"""
+    max_index = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_ATTRIBUTES_ARB ))
+    length = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB))
+    if index < max_index and index >= 0 and length > 0:
+        name = ctypes.create_string_buffer(length)
+        size = arrays.GLintArray.zeros( (1,))
+        gl_type = arrays.GLuintArray.zeros( (1,))
+        base_glGetActiveAttribARB(program, index, length, None, size, gl_type, name)
+        return name.value, size[0], gl_type[0]
+    raise IndexError, 'index out of range from zero to %i' % (max_index - 1, )
 glGetActiveAttribARB.wrappedOperation = base_glGetActiveAttribARB
 
 @lazy( glGetAttribLocationARB )
 def glGetAttribLocationARB( baseOperation, program, name ):
-	"""Check that name is a string with a null byte at the end of it"""
-	if not name:
-		raise ValueError( """Non-null name required""" )
-	elif name[-1] != '\000':
-		name = name + '\000'
-	return baseOperation( program, name )
-
+    """Check that name is a string with a null byte at the end of it"""
+    if not name:
+        raise ValueError( """Non-null name required""" )
+    elif name[-1] != '\000':
+        name = name + '\000'
+    return baseOperation( program, name )

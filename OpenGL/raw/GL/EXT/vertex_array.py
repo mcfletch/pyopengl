@@ -1,19 +1,19 @@
 '''OpenGL extension EXT.vertex_array
 
 Overview (from the spec)
-	
-	This extension adds the ability to specify multiple geometric primitives
-	with very few subroutine calls.  Instead of calling an OpenGL procedure
-	to pass each individual vertex, normal, or color, separate arrays
-	of vertexes, normals, and colors are prespecified, and are used to
-	define a sequence of primitives (all of the same type) when a single
-	call is made to DrawArraysEXT.  A stride mechanism is provided so that
-	an application can choose to keep all vertex data staggered in a
-	single array, or sparsely in separate arrays.  Single-array storage
-	may optimize performance on some implementations.
-	
-	This extension also supports the rendering of individual array elements,
-	each specified as an index into the enabled arrays.
+    
+    This extension adds the ability to specify multiple geometric primitives
+    with very few subroutine calls.  Instead of calling an OpenGL procedure
+    to pass each individual vertex, normal, or color, separate arrays
+    of vertexes, normals, and colors are prespecified, and are used to
+    define a sequence of primitives (all of the same type) when a single
+    call is made to DrawArraysEXT.  A stride mechanism is provided so that
+    an application can choose to keep all vertex data staggered in a
+    single array, or sparsely in separate arrays.  Single-array storage
+    may optimize performance on some implementations.
+    
+    This extension also supports the rendering of individual array elements,
+    each specified as an index into the enabled arrays.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/vertex_array.txt

@@ -1,10 +1,10 @@
 '''OpenGL extension HP.texture_lighting
 
 Overview (from the spec)
-	
-	This extension defines a mechanism for applications to request
-	that color originating from specular lighting be added to
-	the fragment color _after_ texture application.
+    
+    This extension defines a mechanism for applications to request
+    that color originating from specular lighting be added to
+    the fragment color _after_ texture application.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/HP/texture_lighting.txt

@@ -1,28 +1,28 @@
 '''OpenGL extension SGIX.framezoom
 
 Overview (from the spec)
-	
-	This extension provides a additional way to rasterize geometric
-	primitives and pixel rectangles.  The techique is to reduce the
-	number of pixels rasterized  and (possibly) the number of depth and
-	stencil operations performed per primitive.  Each pixel is zoomed
-	up and used to render an N x N block of screen pixels.  The
-	implementation is free to choose the number of stencil and z pixels
-	that will correspond to each N x N block.
-	
-	This extension provides an opportunity to the implementation to
-	perform expensive raster operations at a reduced resolution,
-	increasing performance.  Such operations may include
-	texture-mapping, depth & stencil tests, etc.  The hardware should
-	be allowed to perform operations that it accelerates at full
-	hardware speed.
-	
-	The visual result will be the same as if a scene were rendered into
-	a small window, and then that buffer was copied and zoomed up into
-	a large window.
-	
-	All OpenGL parameters that effect rasterization size will implicitly
-	be multipled by N (this includes point size, line width, etc).
+    
+    This extension provides a additional way to rasterize geometric
+    primitives and pixel rectangles.  The techique is to reduce the
+    number of pixels rasterized  and (possibly) the number of depth and
+    stencil operations performed per primitive.  Each pixel is zoomed
+    up and used to render an N x N block of screen pixels.  The
+    implementation is free to choose the number of stencil and z pixels
+    that will correspond to each N x N block.
+    
+    This extension provides an opportunity to the implementation to
+    perform expensive raster operations at a reduced resolution,
+    increasing performance.  Such operations may include
+    texture-mapping, depth & stencil tests, etc.  The hardware should
+    be allowed to perform operations that it accelerates at full
+    hardware speed.
+    
+    The visual result will be the same as if a scene were rendered into
+    a small window, and then that buffer was copied and zoomed up into
+    a large window.
+    
+    All OpenGL parameters that effect rasterization size will implicitly
+    be multipled by N (this includes point size, line width, etc).
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/framezoom.txt

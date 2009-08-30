@@ -335,4 +335,3 @@ doc='glResetMinmax(GLenum(target)) -> None',
 argNames=('target',),
 deprecated=_DEPRECATED,
 )
-

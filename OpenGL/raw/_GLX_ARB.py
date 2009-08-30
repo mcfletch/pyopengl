@@ -144,10 +144,10 @@ GLX_ARB_get_proc_address = constant.Constant( 'GLX_ARB_get_proc_address', 1 )
 __GLXextFuncPtr = CFUNCTYPE(None) 	# GL/glxext.h:314
 GLubyte = c_ubyte 	# /usr/include/GL/gl.h:154
 glXGetProcAddressARB = platform.createBaseFunction(
-	'glXGetProcAddressARB', dll=platform.GL, resultType=__GLXextFuncPtr, 
-	argTypes=[POINTER(GLubyte)],
-	doc='glXGetProcAddressARB( POINTER(GLubyte)() ) -> __GLXextFuncPtr', 
-	argNames=[''],
+    'glXGetProcAddressARB', dll=platform.GL, resultType=__GLXextFuncPtr, 
+    argTypes=[POINTER(GLubyte)],
+    doc='glXGetProcAddressARB( POINTER(GLubyte)() ) -> __GLXextFuncPtr', 
+    argNames=[''],
 )
 
 # ARB_multisample (GL/glxext.h:416)
@@ -161,26 +161,26 @@ GLX_EXT_visual_info = constant.Constant( 'GLX_EXT_visual_info', 1 )
 # SGI_swap_control (GL/glxext.h:432)
 GLX_SGI_swap_control = constant.Constant( 'GLX_SGI_swap_control', 1 )
 glXSwapIntervalSGI = platform.createBaseFunction(
-	'glXSwapIntervalSGI', dll=platform.GL, resultType=c_int, 
-	argTypes=[c_int],
-	doc='glXSwapIntervalSGI( c_int(None) ) -> c_int', 
-	argNames=['None'],
+    'glXSwapIntervalSGI', dll=platform.GL, resultType=c_int, 
+    argTypes=[c_int],
+    doc='glXSwapIntervalSGI( c_int(None) ) -> c_int', 
+    argNames=['None'],
 )
 
 # SGI_video_sync (GL/glxext.h:440)
 GLX_SGI_video_sync = constant.Constant( 'GLX_SGI_video_sync', 1 )
 glXGetVideoSyncSGI = platform.createBaseFunction(
-	'glXGetVideoSyncSGI', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(c_uint)],
-	doc='glXGetVideoSyncSGI( POINTER(c_uint)() ) -> c_int', 
-	argNames=[''],
+    'glXGetVideoSyncSGI', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(c_uint)],
+    doc='glXGetVideoSyncSGI( POINTER(c_uint)() ) -> c_int', 
+    argNames=[''],
 )
 
 glXWaitVideoSyncSGI = platform.createBaseFunction(
-	'glXWaitVideoSyncSGI', dll=platform.GL, resultType=c_int, 
-	argTypes=[c_int, c_int, POINTER(c_uint)],
-	doc='glXWaitVideoSyncSGI( c_int(None), c_int(None), POINTER(c_uint)() ) -> c_int', 
-	argNames=['None', 'None', ''],
+    'glXWaitVideoSyncSGI', dll=platform.GL, resultType=c_int, 
+    argTypes=[c_int, c_int, POINTER(c_uint)],
+    doc='glXWaitVideoSyncSGI( c_int(None), c_int(None), POINTER(c_uint)() ) -> c_int', 
+    argNames=['None', 'None', ''],
 )
 
 # SGI_make_current_read (GL/glxext.h:450)
@@ -218,17 +218,17 @@ struct___GLXcontextRec._fields_ = [
 
 GLXContext = POINTER(struct___GLXcontextRec) 	# /usr/include/GL/glx.h:178
 glXMakeCurrentReadSGI = platform.createBaseFunction(
-	'glXMakeCurrentReadSGI', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, GLXDrawable, GLXContext],
-	doc='glXMakeCurrentReadSGI( POINTER(Display)(), GLXDrawable(None), GLXDrawable(None), GLXContext(None) ) -> c_int', 
-	argNames=['', 'None', 'None', 'None'],
+    'glXMakeCurrentReadSGI', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, GLXDrawable, GLXContext],
+    doc='glXMakeCurrentReadSGI( POINTER(Display)(), GLXDrawable(None), GLXDrawable(None), GLXContext(None) ) -> c_int', 
+    argNames=['', 'None', 'None', 'None'],
 )
 
 glXGetCurrentReadDrawableSGI = platform.createBaseFunction(
-	'glXGetCurrentReadDrawableSGI', dll=platform.GL, resultType=GLXDrawable, 
-	argTypes=[],
-	doc='glXGetCurrentReadDrawableSGI(  ) -> GLXDrawable', 
-	argNames=[],
+    'glXGetCurrentReadDrawableSGI', dll=platform.GL, resultType=GLXDrawable, 
+    argTypes=[],
+    doc='glXGetCurrentReadDrawableSGI(  ) -> GLXDrawable', 
+    argNames=[],
 )
 
 # SGIX_video_source (GL/glxext.h:460)
@@ -238,39 +238,39 @@ GLX_EXT_visual_rating = constant.Constant( 'GLX_EXT_visual_rating', 1 )
 # EXT_import_context (GL/glxext.h:476)
 GLX_EXT_import_context = constant.Constant( 'GLX_EXT_import_context', 1 )
 glXGetCurrentDisplayEXT = platform.createBaseFunction(
-	'glXGetCurrentDisplayEXT', dll=platform.GL, resultType=POINTER(Display), 
-	argTypes=[],
-	doc='glXGetCurrentDisplayEXT(  ) -> POINTER(Display)', 
-	argNames=[],
+    'glXGetCurrentDisplayEXT', dll=platform.GL, resultType=POINTER(Display), 
+    argTypes=[],
+    doc='glXGetCurrentDisplayEXT(  ) -> POINTER(Display)', 
+    argNames=[],
 )
 
 glXQueryContextInfoEXT = platform.createBaseFunction(
-	'glXQueryContextInfoEXT', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXContext, c_int, POINTER(c_int)],
-	doc='glXQueryContextInfoEXT( POINTER(Display)(), GLXContext(None), c_int(None), POINTER(c_int)() ) -> c_int', 
-	argNames=['', 'None', 'None', ''],
+    'glXQueryContextInfoEXT', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXContext, c_int, POINTER(c_int)],
+    doc='glXQueryContextInfoEXT( POINTER(Display)(), GLXContext(None), c_int(None), POINTER(c_int)() ) -> c_int', 
+    argNames=['', 'None', 'None', ''],
 )
 
 GLXContextID = XID 	# /usr/include/GL/glx.h:184
 glXGetContextIDEXT = platform.createBaseFunction(
-	'glXGetContextIDEXT', dll=platform.GL, resultType=GLXContextID, 
-	argTypes=[GLXContext],
-	doc='glXGetContextIDEXT( GLXContext(None) ) -> GLXContextID', 
-	argNames=['None'],
+    'glXGetContextIDEXT', dll=platform.GL, resultType=GLXContextID, 
+    argTypes=[GLXContext],
+    doc='glXGetContextIDEXT( GLXContext(None) ) -> GLXContextID', 
+    argNames=['None'],
 )
 
 glXImportContextEXT = platform.createBaseFunction(
-	'glXImportContextEXT', dll=platform.GL, resultType=GLXContext, 
-	argTypes=[POINTER(Display), GLXContextID],
-	doc='glXImportContextEXT( POINTER(Display)(), GLXContextID(None) ) -> GLXContext', 
-	argNames=['', 'None'],
+    'glXImportContextEXT', dll=platform.GL, resultType=GLXContext, 
+    argTypes=[POINTER(Display), GLXContextID],
+    doc='glXImportContextEXT( POINTER(Display)(), GLXContextID(None) ) -> GLXContext', 
+    argNames=['', 'None'],
 )
 
 glXFreeContextEXT = platform.createBaseFunction(
-	'glXFreeContextEXT', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXContext],
-	doc='glXFreeContextEXT( POINTER(Display)(), GLXContext(None) ) -> None', 
-	argNames=['', 'None'],
+    'glXFreeContextEXT', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXContext],
+    doc='glXFreeContextEXT( POINTER(Display)(), GLXContext(None) ) -> None', 
+    argNames=['', 'None'],
 )
 
 # SGIX_fbconfig (GL/glxext.h:492)
@@ -291,33 +291,33 @@ struct___GLXFBConfigRec._fields_ = [
 
 GLXFBConfigSGIX = POINTER(struct___GLXFBConfigRec) 	# GL/glxext.h:323
 glXGetFBConfigAttribSGIX = platform.createBaseFunction(
-	'glXGetFBConfigAttribSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXFBConfigSGIX, c_int, POINTER(c_int)],
-	doc='glXGetFBConfigAttribSGIX( POINTER(Display)(), GLXFBConfigSGIX(None), c_int(None), POINTER(c_int)() ) -> c_int', 
-	argNames=['', 'None', 'None', ''],
+    'glXGetFBConfigAttribSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXFBConfigSGIX, c_int, POINTER(c_int)],
+    doc='glXGetFBConfigAttribSGIX( POINTER(Display)(), GLXFBConfigSGIX(None), c_int(None), POINTER(c_int)() ) -> c_int', 
+    argNames=['', 'None', 'None', ''],
 )
 
 glXChooseFBConfigSGIX = platform.createBaseFunction(
-	'glXChooseFBConfigSGIX', dll=platform.GL, resultType=POINTER(GLXFBConfigSGIX), 
-	argTypes=[POINTER(Display), c_int, POINTER(c_int), POINTER(c_int)],
-	doc='glXChooseFBConfigSGIX( POINTER(Display)(), c_int(None), POINTER(c_int)(), POINTER(c_int)() ) -> POINTER(GLXFBConfigSGIX)', 
-	argNames=['', 'None', '', ''],
+    'glXChooseFBConfigSGIX', dll=platform.GL, resultType=POINTER(GLXFBConfigSGIX), 
+    argTypes=[POINTER(Display), c_int, POINTER(c_int), POINTER(c_int)],
+    doc='glXChooseFBConfigSGIX( POINTER(Display)(), c_int(None), POINTER(c_int)(), POINTER(c_int)() ) -> POINTER(GLXFBConfigSGIX)', 
+    argNames=['', 'None', '', ''],
 )
 
 GLXPixmap = XID 	# /usr/include/GL/glx.h:179
 Pixmap = XID 	# /usr/include/X11/X.h:107
 glXCreateGLXPixmapWithConfigSGIX = platform.createBaseFunction(
-	'glXCreateGLXPixmapWithConfigSGIX', dll=platform.GL, resultType=GLXPixmap, 
-	argTypes=[POINTER(Display), GLXFBConfigSGIX, Pixmap],
-	doc='glXCreateGLXPixmapWithConfigSGIX( POINTER(Display)(), GLXFBConfigSGIX(None), Pixmap(None) ) -> GLXPixmap', 
-	argNames=['', 'None', 'None'],
+    'glXCreateGLXPixmapWithConfigSGIX', dll=platform.GL, resultType=GLXPixmap, 
+    argTypes=[POINTER(Display), GLXFBConfigSGIX, Pixmap],
+    doc='glXCreateGLXPixmapWithConfigSGIX( POINTER(Display)(), GLXFBConfigSGIX(None), Pixmap(None) ) -> GLXPixmap', 
+    argNames=['', 'None', 'None'],
 )
 
 glXCreateContextWithConfigSGIX = platform.createBaseFunction(
-	'glXCreateContextWithConfigSGIX', dll=platform.GL, resultType=GLXContext, 
-	argTypes=[POINTER(Display), GLXFBConfigSGIX, c_int, GLXContext, c_int],
-	doc='glXCreateContextWithConfigSGIX( POINTER(Display)(), GLXFBConfigSGIX(None), c_int(None), GLXContext(None), c_int(None) ) -> GLXContext', 
-	argNames=['', 'None', 'None', 'None', 'None'],
+    'glXCreateContextWithConfigSGIX', dll=platform.GL, resultType=GLXContext, 
+    argTypes=[POINTER(Display), GLXFBConfigSGIX, c_int, GLXContext, c_int],
+    doc='glXCreateContextWithConfigSGIX( POINTER(Display)(), GLXFBConfigSGIX(None), c_int(None), GLXContext(None), c_int(None) ) -> GLXContext', 
+    argNames=['', 'None', 'None', 'None', 'None'],
 )
 
 class struct_anon_208(Structure):
@@ -388,103 +388,103 @@ struct_anon_208._fields_ = [
 
 XVisualInfo = struct_anon_208 	# /usr/include/X11/Xutil.h:296
 glXGetVisualFromFBConfigSGIX = platform.createBaseFunction(
-	'glXGetVisualFromFBConfigSGIX', dll=platform.GL, resultType=POINTER(XVisualInfo), 
-	argTypes=[POINTER(Display), GLXFBConfigSGIX],
-	doc='glXGetVisualFromFBConfigSGIX( POINTER(Display)(), GLXFBConfigSGIX(None) ) -> POINTER(XVisualInfo)', 
-	argNames=['', 'None'],
+    'glXGetVisualFromFBConfigSGIX', dll=platform.GL, resultType=POINTER(XVisualInfo), 
+    argTypes=[POINTER(Display), GLXFBConfigSGIX],
+    doc='glXGetVisualFromFBConfigSGIX( POINTER(Display)(), GLXFBConfigSGIX(None) ) -> POINTER(XVisualInfo)', 
+    argNames=['', 'None'],
 )
 
 glXGetFBConfigFromVisualSGIX = platform.createBaseFunction(
-	'glXGetFBConfigFromVisualSGIX', dll=platform.GL, resultType=GLXFBConfigSGIX, 
-	argTypes=[POINTER(Display), POINTER(XVisualInfo)],
-	doc='glXGetFBConfigFromVisualSGIX( POINTER(Display)(), POINTER(XVisualInfo)() ) -> GLXFBConfigSGIX', 
-	argNames=['', ''],
+    'glXGetFBConfigFromVisualSGIX', dll=platform.GL, resultType=GLXFBConfigSGIX, 
+    argTypes=[POINTER(Display), POINTER(XVisualInfo)],
+    doc='glXGetFBConfigFromVisualSGIX( POINTER(Display)(), POINTER(XVisualInfo)() ) -> GLXFBConfigSGIX', 
+    argNames=['', ''],
 )
 
 # SGIX_pbuffer (GL/glxext.h:510)
 GLX_SGIX_pbuffer = constant.Constant( 'GLX_SGIX_pbuffer', 1 )
 GLXPbufferSGIX = XID 	# GL/glxext.h:327
 glXCreateGLXPbufferSGIX = platform.createBaseFunction(
-	'glXCreateGLXPbufferSGIX', dll=platform.GL, resultType=GLXPbufferSGIX, 
-	argTypes=[POINTER(Display), GLXFBConfigSGIX, c_uint, c_uint, POINTER(c_int)],
-	doc='glXCreateGLXPbufferSGIX( POINTER(Display)(), GLXFBConfigSGIX(None), c_uint(None), c_uint(None), POINTER(c_int)() ) -> GLXPbufferSGIX', 
-	argNames=['', 'None', 'None', 'None', ''],
+    'glXCreateGLXPbufferSGIX', dll=platform.GL, resultType=GLXPbufferSGIX, 
+    argTypes=[POINTER(Display), GLXFBConfigSGIX, c_uint, c_uint, POINTER(c_int)],
+    doc='glXCreateGLXPbufferSGIX( POINTER(Display)(), GLXFBConfigSGIX(None), c_uint(None), c_uint(None), POINTER(c_int)() ) -> GLXPbufferSGIX', 
+    argNames=['', 'None', 'None', 'None', ''],
 )
 
 glXDestroyGLXPbufferSGIX = platform.createBaseFunction(
-	'glXDestroyGLXPbufferSGIX', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXPbufferSGIX],
-	doc='glXDestroyGLXPbufferSGIX( POINTER(Display)(), GLXPbufferSGIX(None) ) -> None', 
-	argNames=['', 'None'],
+    'glXDestroyGLXPbufferSGIX', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXPbufferSGIX],
+    doc='glXDestroyGLXPbufferSGIX( POINTER(Display)(), GLXPbufferSGIX(None) ) -> None', 
+    argNames=['', 'None'],
 )
 
 glXQueryGLXPbufferSGIX = platform.createBaseFunction(
-	'glXQueryGLXPbufferSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXPbufferSGIX, c_int, POINTER(c_uint)],
-	doc='glXQueryGLXPbufferSGIX( POINTER(Display)(), GLXPbufferSGIX(None), c_int(None), POINTER(c_uint)() ) -> c_int', 
-	argNames=['', 'None', 'None', ''],
+    'glXQueryGLXPbufferSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXPbufferSGIX, c_int, POINTER(c_uint)],
+    doc='glXQueryGLXPbufferSGIX( POINTER(Display)(), GLXPbufferSGIX(None), c_int(None), POINTER(c_uint)() ) -> c_int', 
+    argNames=['', 'None', 'None', ''],
 )
 
 glXSelectEventSGIX = platform.createBaseFunction(
-	'glXSelectEventSGIX', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXDrawable, c_ulong],
-	doc='glXSelectEventSGIX( POINTER(Display)(), GLXDrawable(None), c_ulong(None) ) -> None', 
-	argNames=['', 'None', 'None'],
+    'glXSelectEventSGIX', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXDrawable, c_ulong],
+    doc='glXSelectEventSGIX( POINTER(Display)(), GLXDrawable(None), c_ulong(None) ) -> None', 
+    argNames=['', 'None', 'None'],
 )
 
 glXGetSelectedEventSGIX = platform.createBaseFunction(
-	'glXGetSelectedEventSGIX', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXDrawable, POINTER(c_ulong)],
-	doc='glXGetSelectedEventSGIX( POINTER(Display)(), GLXDrawable(None), POINTER(c_ulong)() ) -> None', 
-	argNames=['', 'None', ''],
+    'glXGetSelectedEventSGIX', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXDrawable, POINTER(c_ulong)],
+    doc='glXGetSelectedEventSGIX( POINTER(Display)(), GLXDrawable(None), POINTER(c_ulong)() ) -> None', 
+    argNames=['', 'None', ''],
 )
 
 # SGI_cushion (GL/glxext.h:526)
 GLX_SGI_cushion = constant.Constant( 'GLX_SGI_cushion', 1 )
 Window = XID 	# /usr/include/X11/X.h:101
 glXCushionSGI = platform.createBaseFunction(
-	'glXCushionSGI', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), Window, c_float],
-	doc='glXCushionSGI( POINTER(Display)(), Window(None), c_float(None) ) -> None', 
-	argNames=['', 'None', 'None'],
+    'glXCushionSGI', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), Window, c_float],
+    doc='glXCushionSGI( POINTER(Display)(), Window(None), c_float(None) ) -> None', 
+    argNames=['', 'None', 'None'],
 )
 
 # SGIX_video_resize (GL/glxext.h:534)
 GLX_SGIX_video_resize = constant.Constant( 'GLX_SGIX_video_resize', 1 )
 glXBindChannelToWindowSGIX = platform.createBaseFunction(
-	'glXBindChannelToWindowSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, c_int, Window],
-	doc='glXBindChannelToWindowSGIX( POINTER(Display)(), c_int(None), c_int(None), Window(None) ) -> c_int', 
-	argNames=['', 'None', 'None', 'None'],
+    'glXBindChannelToWindowSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, c_int, Window],
+    doc='glXBindChannelToWindowSGIX( POINTER(Display)(), c_int(None), c_int(None), Window(None) ) -> c_int', 
+    argNames=['', 'None', 'None', 'None'],
 )
 
 glXChannelRectSGIX = platform.createBaseFunction(
-	'glXChannelRectSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, c_int, c_int, c_int, c_int, c_int],
-	doc='glXChannelRectSGIX( POINTER(Display)(), c_int(None), c_int(None), c_int(None), c_int(None), c_int(None), c_int(None) ) -> c_int', 
-	argNames=['', 'None', 'None', 'None', 'None', 'None', 'None'],
+    'glXChannelRectSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, c_int, c_int, c_int, c_int, c_int],
+    doc='glXChannelRectSGIX( POINTER(Display)(), c_int(None), c_int(None), c_int(None), c_int(None), c_int(None), c_int(None) ) -> c_int', 
+    argNames=['', 'None', 'None', 'None', 'None', 'None', 'None'],
 )
 
 glXQueryChannelRectSGIX = platform.createBaseFunction(
-	'glXQueryChannelRectSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, c_int, POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int)],
-	doc='glXQueryChannelRectSGIX( POINTER(Display)(), c_int(None), c_int(None), POINTER(c_int)(), POINTER(c_int)(), POINTER(c_int)(), POINTER(c_int)() ) -> c_int', 
-	argNames=['', 'None', 'None', '', '', '', ''],
+    'glXQueryChannelRectSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, c_int, POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int)],
+    doc='glXQueryChannelRectSGIX( POINTER(Display)(), c_int(None), c_int(None), POINTER(c_int)(), POINTER(c_int)(), POINTER(c_int)(), POINTER(c_int)() ) -> c_int', 
+    argNames=['', 'None', 'None', '', '', '', ''],
 )
 
 glXQueryChannelDeltasSGIX = platform.createBaseFunction(
-	'glXQueryChannelDeltasSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, c_int, POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int)],
-	doc='glXQueryChannelDeltasSGIX( POINTER(Display)(), c_int(None), c_int(None), POINTER(c_int)(), POINTER(c_int)(), POINTER(c_int)(), POINTER(c_int)() ) -> c_int', 
-	argNames=['', 'None', 'None', '', '', '', ''],
+    'glXQueryChannelDeltasSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, c_int, POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int)],
+    doc='glXQueryChannelDeltasSGIX( POINTER(Display)(), c_int(None), c_int(None), POINTER(c_int)(), POINTER(c_int)(), POINTER(c_int)(), POINTER(c_int)() ) -> c_int', 
+    argNames=['', 'None', 'None', '', '', '', ''],
 )
 
 GLenum = c_uint 	# /usr/include/GL/gl.h:147
 glXChannelRectSyncSGIX = platform.createBaseFunction(
-	'glXChannelRectSyncSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, c_int, GLenum],
-	doc='glXChannelRectSyncSGIX( POINTER(Display)(), c_int(None), c_int(None), GLenum(None) ) -> c_int', 
-	argNames=['', 'None', 'None', 'None'],
+    'glXChannelRectSyncSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, c_int, GLenum],
+    doc='glXChannelRectSyncSGIX( POINTER(Display)(), c_int(None), c_int(None), GLenum(None) ) -> c_int', 
+    argNames=['', 'None', 'None', 'None'],
 )
 
 # SGIX_dmbuffer (GL/glxext.h:550)
@@ -492,72 +492,72 @@ GLX_SGIX_dmbuffer = constant.Constant( 'GLX_SGIX_dmbuffer', 1 )
 # SGIX_swap_group (GL/glxext.h:560)
 GLX_SGIX_swap_group = constant.Constant( 'GLX_SGIX_swap_group', 1 )
 glXJoinSwapGroupSGIX = platform.createBaseFunction(
-	'glXJoinSwapGroupSGIX', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXDrawable, GLXDrawable],
-	doc='glXJoinSwapGroupSGIX( POINTER(Display)(), GLXDrawable(None), GLXDrawable(None) ) -> None', 
-	argNames=['', 'None', 'None'],
+    'glXJoinSwapGroupSGIX', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXDrawable, GLXDrawable],
+    doc='glXJoinSwapGroupSGIX( POINTER(Display)(), GLXDrawable(None), GLXDrawable(None) ) -> None', 
+    argNames=['', 'None', 'None'],
 )
 
 # SGIX_swap_barrier (GL/glxext.h:568)
 GLX_SGIX_swap_barrier = constant.Constant( 'GLX_SGIX_swap_barrier', 1 )
 glXBindSwapBarrierSGIX = platform.createBaseFunction(
-	'glXBindSwapBarrierSGIX', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXDrawable, c_int],
-	doc='glXBindSwapBarrierSGIX( POINTER(Display)(), GLXDrawable(None), c_int(None) ) -> None', 
-	argNames=['', 'None', 'None'],
+    'glXBindSwapBarrierSGIX', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXDrawable, c_int],
+    doc='glXBindSwapBarrierSGIX( POINTER(Display)(), GLXDrawable(None), c_int(None) ) -> None', 
+    argNames=['', 'None', 'None'],
 )
 
 glXQueryMaxSwapBarriersSGIX = platform.createBaseFunction(
-	'glXQueryMaxSwapBarriersSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, POINTER(c_int)],
-	doc='glXQueryMaxSwapBarriersSGIX( POINTER(Display)(), c_int(None), POINTER(c_int)() ) -> c_int', 
-	argNames=['', 'None', ''],
+    'glXQueryMaxSwapBarriersSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, POINTER(c_int)],
+    doc='glXQueryMaxSwapBarriersSGIX( POINTER(Display)(), c_int(None), POINTER(c_int)() ) -> c_int', 
+    argNames=['', 'None', ''],
 )
 
 # SUN_get_transparent_index (GL/glxext.h:578)
 GLX_SUN_get_transparent_index = constant.Constant( 'GLX_SUN_get_transparent_index', 1 )
 glXGetTransparentIndexSUN = platform.createBaseFunction(
-	'glXGetTransparentIndexSUN', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), Window, Window, POINTER(c_long)],
-	doc='glXGetTransparentIndexSUN( POINTER(Display)(), Window(None), Window(None), POINTER(c_long)() ) -> c_int', 
-	argNames=['', 'None', 'None', ''],
+    'glXGetTransparentIndexSUN', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), Window, Window, POINTER(c_long)],
+    doc='glXGetTransparentIndexSUN( POINTER(Display)(), Window(None), Window(None), POINTER(c_long)() ) -> c_int', 
+    argNames=['', 'None', 'None', ''],
 )
 
 # MESA_copy_sub_buffer (GL/glxext.h:586)
 GLX_MESA_copy_sub_buffer = constant.Constant( 'GLX_MESA_copy_sub_buffer', 1 )
 glXCopySubBufferMESA = platform.createBaseFunction(
-	'glXCopySubBufferMESA', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(Display), GLXDrawable, c_int, c_int, c_int, c_int],
-	doc='glXCopySubBufferMESA( POINTER(Display)(), GLXDrawable(None), c_int(None), c_int(None), c_int(None), c_int(None) ) -> None', 
-	argNames=['', 'None', 'None', 'None', 'None', 'None'],
+    'glXCopySubBufferMESA', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(Display), GLXDrawable, c_int, c_int, c_int, c_int],
+    doc='glXCopySubBufferMESA( POINTER(Display)(), GLXDrawable(None), c_int(None), c_int(None), c_int(None), c_int(None) ) -> None', 
+    argNames=['', 'None', 'None', 'None', 'None', 'None'],
 )
 
 # MESA_pixmap_colormap (GL/glxext.h:594)
 GLX_MESA_pixmap_colormap = constant.Constant( 'GLX_MESA_pixmap_colormap', 1 )
 Colormap = XID 	# /usr/include/X11/X.h:109
 glXCreateGLXPixmapMESA = platform.createBaseFunction(
-	'glXCreateGLXPixmapMESA', dll=platform.GL, resultType=GLXPixmap, 
-	argTypes=[POINTER(Display), POINTER(XVisualInfo), Pixmap, Colormap],
-	doc='glXCreateGLXPixmapMESA( POINTER(Display)(), POINTER(XVisualInfo)(), Pixmap(None), Colormap(None) ) -> GLXPixmap', 
-	argNames=['', '', 'None', 'None'],
+    'glXCreateGLXPixmapMESA', dll=platform.GL, resultType=GLXPixmap, 
+    argTypes=[POINTER(Display), POINTER(XVisualInfo), Pixmap, Colormap],
+    doc='glXCreateGLXPixmapMESA( POINTER(Display)(), POINTER(XVisualInfo)(), Pixmap(None), Colormap(None) ) -> GLXPixmap', 
+    argNames=['', '', 'None', 'None'],
 )
 
 # MESA_release_buffers (GL/glxext.h:602)
 GLX_MESA_release_buffers = constant.Constant( 'GLX_MESA_release_buffers', 1 )
 glXReleaseBuffersMESA = platform.createBaseFunction(
-	'glXReleaseBuffersMESA', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable],
-	doc='glXReleaseBuffersMESA( POINTER(Display)(), GLXDrawable(None) ) -> c_int', 
-	argNames=['', 'None'],
+    'glXReleaseBuffersMESA', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable],
+    doc='glXReleaseBuffersMESA( POINTER(Display)(), GLXDrawable(None) ) -> c_int', 
+    argNames=['', 'None'],
 )
 
 # MESA_set_3dfx_mode (GL/glxext.h:610)
 GLX_MESA_set_3dfx_mode = constant.Constant( 'GLX_MESA_set_3dfx_mode', 1 )
 glXSet3DfxModeMESA = platform.createBaseFunction(
-	'glXSet3DfxModeMESA', dll=platform.GL, resultType=c_int, 
-	argTypes=[c_int],
-	doc='glXSet3DfxModeMESA( c_int(None) ) -> c_int', 
-	argNames=['None'],
+    'glXSet3DfxModeMESA', dll=platform.GL, resultType=c_int, 
+    argTypes=[c_int],
+    doc='glXSet3DfxModeMESA( c_int(None) ) -> c_int', 
+    argNames=['None'],
 )
 
 # SGIX_visual_select_group (GL/glxext.h:618)
@@ -567,38 +567,38 @@ GLX_OML_swap_method = constant.Constant( 'GLX_OML_swap_method', 1 )
 # OML_sync_control (GL/glxext.h:626)
 GLX_OML_sync_control = constant.Constant( 'GLX_OML_sync_control', 1 )
 glXGetSyncValuesOML = platform.createBaseFunction(
-	'glXGetSyncValuesOML', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, POINTER(c_int64), POINTER(c_int64), POINTER(c_int64)],
-	doc='glXGetSyncValuesOML( POINTER(Display)(), GLXDrawable(None), POINTER(c_int64)(), POINTER(c_int64)(), POINTER(c_int64)() ) -> c_int', 
-	argNames=['', 'None', '', '', ''],
+    'glXGetSyncValuesOML', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, POINTER(c_int64), POINTER(c_int64), POINTER(c_int64)],
+    doc='glXGetSyncValuesOML( POINTER(Display)(), GLXDrawable(None), POINTER(c_int64)(), POINTER(c_int64)(), POINTER(c_int64)() ) -> c_int', 
+    argNames=['', 'None', '', '', ''],
 )
 
 glXGetMscRateOML = platform.createBaseFunction(
-	'glXGetMscRateOML', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, POINTER(c_int32), POINTER(c_int32)],
-	doc='glXGetMscRateOML( POINTER(Display)(), GLXDrawable(None), POINTER(c_int32)(), POINTER(c_int32)() ) -> c_int', 
-	argNames=['', 'None', '', ''],
+    'glXGetMscRateOML', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, POINTER(c_int32), POINTER(c_int32)],
+    doc='glXGetMscRateOML( POINTER(Display)(), GLXDrawable(None), POINTER(c_int32)(), POINTER(c_int32)() ) -> c_int', 
+    argNames=['', 'None', '', ''],
 )
 
 glXSwapBuffersMscOML = platform.createBaseFunction(
-	'glXSwapBuffersMscOML', dll=platform.GL, resultType=c_int64, 
-	argTypes=[POINTER(Display), GLXDrawable, c_int64, c_int64, c_int64],
-	doc='glXSwapBuffersMscOML( POINTER(Display)(), GLXDrawable(None), c_int64(None), c_int64(None), c_int64(None) ) -> c_int64', 
-	argNames=['', 'None', 'None', 'None', 'None'],
+    'glXSwapBuffersMscOML', dll=platform.GL, resultType=c_int64, 
+    argTypes=[POINTER(Display), GLXDrawable, c_int64, c_int64, c_int64],
+    doc='glXSwapBuffersMscOML( POINTER(Display)(), GLXDrawable(None), c_int64(None), c_int64(None), c_int64(None) ) -> c_int64', 
+    argNames=['', 'None', 'None', 'None', 'None'],
 )
 
 glXWaitForMscOML = platform.createBaseFunction(
-	'glXWaitForMscOML', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, c_int64, c_int64, c_int64, POINTER(c_int64), POINTER(c_int64), POINTER(c_int64)],
-	doc='glXWaitForMscOML( POINTER(Display)(), GLXDrawable(None), c_int64(None), c_int64(None), c_int64(None), POINTER(c_int64)(), POINTER(c_int64)(), POINTER(c_int64)() ) -> c_int', 
-	argNames=['', 'None', 'None', 'None', 'None', '', '', ''],
+    'glXWaitForMscOML', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, c_int64, c_int64, c_int64, POINTER(c_int64), POINTER(c_int64), POINTER(c_int64)],
+    doc='glXWaitForMscOML( POINTER(Display)(), GLXDrawable(None), c_int64(None), c_int64(None), c_int64(None), POINTER(c_int64)(), POINTER(c_int64)(), POINTER(c_int64)() ) -> c_int', 
+    argNames=['', 'None', 'None', 'None', 'None', '', '', ''],
 )
 
 glXWaitForSbcOML = platform.createBaseFunction(
-	'glXWaitForSbcOML', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), GLXDrawable, c_int64, POINTER(c_int64), POINTER(c_int64), POINTER(c_int64)],
-	doc='glXWaitForSbcOML( POINTER(Display)(), GLXDrawable(None), c_int64(None), POINTER(c_int64)(), POINTER(c_int64)(), POINTER(c_int64)() ) -> c_int', 
-	argNames=['', 'None', 'None', '', '', ''],
+    'glXWaitForSbcOML', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), GLXDrawable, c_int64, POINTER(c_int64), POINTER(c_int64), POINTER(c_int64)],
+    doc='glXWaitForSbcOML( POINTER(Display)(), GLXDrawable(None), c_int64(None), POINTER(c_int64)(), POINTER(c_int64)(), POINTER(c_int64)() ) -> c_int', 
+    argNames=['', 'None', 'None', '', '', ''],
 )
 
 # NV_float_buffer (GL/glxext.h:642)
@@ -617,10 +617,10 @@ struct_anon_212._fields_ = [
 
 GLXHyperpipeNetworkSGIX = struct_anon_212 	# GL/glxext.h:652
 glXQueryHyperpipeNetworkSGIX = platform.createBaseFunction(
-	'glXQueryHyperpipeNetworkSGIX', dll=platform.GL, resultType=POINTER(GLXHyperpipeNetworkSGIX), 
-	argTypes=[POINTER(Display), POINTER(c_int)],
-	doc='glXQueryHyperpipeNetworkSGIX( POINTER(Display)(), POINTER(c_int)() ) -> POINTER(GLXHyperpipeNetworkSGIX)', 
-	argNames=['', ''],
+    'glXQueryHyperpipeNetworkSGIX', dll=platform.GL, resultType=POINTER(GLXHyperpipeNetworkSGIX), 
+    argTypes=[POINTER(Display), POINTER(c_int)],
+    doc='glXQueryHyperpipeNetworkSGIX( POINTER(Display)(), POINTER(c_int)() ) -> POINTER(GLXHyperpipeNetworkSGIX)', 
+    argNames=['', ''],
 )
 
 class struct_anon_213(Structure):
@@ -639,61 +639,61 @@ struct_anon_213._fields_ = [
 
 GLXHyperpipeConfigSGIX = struct_anon_213 	# GL/glxext.h:660
 glXHyperpipeConfigSGIX = platform.createBaseFunction(
-	'glXHyperpipeConfigSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, c_int, POINTER(GLXHyperpipeConfigSGIX), POINTER(c_int)],
-	doc='glXHyperpipeConfigSGIX( POINTER(Display)(), c_int(None), c_int(None), POINTER(GLXHyperpipeConfigSGIX)(), POINTER(c_int)() ) -> c_int', 
-	argNames=['', 'None', 'None', '', ''],
+    'glXHyperpipeConfigSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, c_int, POINTER(GLXHyperpipeConfigSGIX), POINTER(c_int)],
+    doc='glXHyperpipeConfigSGIX( POINTER(Display)(), c_int(None), c_int(None), POINTER(GLXHyperpipeConfigSGIX)(), POINTER(c_int)() ) -> c_int', 
+    argNames=['', 'None', 'None', '', ''],
 )
 
 glXQueryHyperpipeConfigSGIX = platform.createBaseFunction(
-	'glXQueryHyperpipeConfigSGIX', dll=platform.GL, resultType=POINTER(GLXHyperpipeConfigSGIX), 
-	argTypes=[POINTER(Display), c_int, POINTER(c_int)],
-	doc='glXQueryHyperpipeConfigSGIX( POINTER(Display)(), c_int(None), POINTER(c_int)() ) -> POINTER(GLXHyperpipeConfigSGIX)', 
-	argNames=['', 'None', ''],
+    'glXQueryHyperpipeConfigSGIX', dll=platform.GL, resultType=POINTER(GLXHyperpipeConfigSGIX), 
+    argTypes=[POINTER(Display), c_int, POINTER(c_int)],
+    doc='glXQueryHyperpipeConfigSGIX( POINTER(Display)(), c_int(None), POINTER(c_int)() ) -> POINTER(GLXHyperpipeConfigSGIX)', 
+    argNames=['', 'None', ''],
 )
 
 glXDestroyHyperpipeConfigSGIX = platform.createBaseFunction(
-	'glXDestroyHyperpipeConfigSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int],
-	doc='glXDestroyHyperpipeConfigSGIX( POINTER(Display)(), c_int(None) ) -> c_int', 
-	argNames=['', 'None'],
+    'glXDestroyHyperpipeConfigSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int],
+    doc='glXDestroyHyperpipeConfigSGIX( POINTER(Display)(), c_int(None) ) -> c_int', 
+    argNames=['', 'None'],
 )
 
 glXBindHyperpipeSGIX = platform.createBaseFunction(
-	'glXBindHyperpipeSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int],
-	doc='glXBindHyperpipeSGIX( POINTER(Display)(), c_int(None) ) -> c_int', 
-	argNames=['', 'None'],
+    'glXBindHyperpipeSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int],
+    doc='glXBindHyperpipeSGIX( POINTER(Display)(), c_int(None) ) -> c_int', 
+    argNames=['', 'None'],
 )
 
 glXQueryHyperpipeBestAttribSGIX = platform.createBaseFunction(
-	'glXQueryHyperpipeBestAttribSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, c_int, c_int, POINTER(None), POINTER(None)],
-	doc='glXQueryHyperpipeBestAttribSGIX( POINTER(Display)(), c_int(None), c_int(None), c_int(None), POINTER(None)(), POINTER(None)() ) -> c_int', 
-	argNames=['', 'None', 'None', 'None', '', ''],
+    'glXQueryHyperpipeBestAttribSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, c_int, c_int, POINTER(None), POINTER(None)],
+    doc='glXQueryHyperpipeBestAttribSGIX( POINTER(Display)(), c_int(None), c_int(None), c_int(None), POINTER(None)(), POINTER(None)() ) -> c_int', 
+    argNames=['', 'None', 'None', 'None', '', ''],
 )
 
 glXHyperpipeAttribSGIX = platform.createBaseFunction(
-	'glXHyperpipeAttribSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, c_int, c_int, POINTER(None)],
-	doc='glXHyperpipeAttribSGIX( POINTER(Display)(), c_int(None), c_int(None), c_int(None), POINTER(None)() ) -> c_int', 
-	argNames=['', 'None', 'None', 'None', ''],
+    'glXHyperpipeAttribSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, c_int, c_int, POINTER(None)],
+    doc='glXHyperpipeAttribSGIX( POINTER(Display)(), c_int(None), c_int(None), c_int(None), POINTER(None)() ) -> c_int', 
+    argNames=['', 'None', 'None', 'None', ''],
 )
 
 glXQueryHyperpipeAttribSGIX = platform.createBaseFunction(
-	'glXQueryHyperpipeAttribSGIX', dll=platform.GL, resultType=c_int, 
-	argTypes=[POINTER(Display), c_int, c_int, c_int, POINTER(None)],
-	doc='glXQueryHyperpipeAttribSGIX( POINTER(Display)(), c_int(None), c_int(None), c_int(None), POINTER(None)() ) -> c_int', 
-	argNames=['', 'None', 'None', 'None', ''],
+    'glXQueryHyperpipeAttribSGIX', dll=platform.GL, resultType=c_int, 
+    argTypes=[POINTER(Display), c_int, c_int, c_int, POINTER(None)],
+    doc='glXQueryHyperpipeAttribSGIX( POINTER(Display)(), c_int(None), c_int(None), c_int(None), POINTER(None)() ) -> c_int', 
+    argNames=['', 'None', 'None', 'None', ''],
 )
 
 # MESA_agp_offset (GL/glxext.h:693)
 GLX_MESA_agp_offset = constant.Constant( 'GLX_MESA_agp_offset', 1 )
 glXGetAGPOffsetMESA = platform.createBaseFunction(
-	'glXGetAGPOffsetMESA', dll=platform.GL, resultType=c_uint, 
-	argTypes=[POINTER(None)],
-	doc='glXGetAGPOffsetMESA( POINTER(None)() ) -> c_uint', 
-	argNames=[''],
+    'glXGetAGPOffsetMESA', dll=platform.GL, resultType=c_uint, 
+    argTypes=[POINTER(None)],
+    doc='glXGetAGPOffsetMESA( POINTER(None)() ) -> c_uint', 
+    argNames=[''],
 )
 
 # NV_vertex_array_range (/usr/include/GL/glx.h:330)
@@ -773,5 +773,4 @@ __all__ = ['GLX_GLXEXT_VERSION', 'GLX_SAMPLE_BUFFERS_ARB', 'GLX_SAMPLES_ARB',
 'glXQueryHyperpipeBestAttribSGIX', 'glXHyperpipeAttribSGIX',
 'glXQueryHyperpipeAttribSGIX', 'GLX_MESA_agp_offset', 'glXGetAGPOffsetMESA']
 # END GENERATED CONTENT (do not edit above this line)
-
 

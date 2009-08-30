@@ -1,10 +1,10 @@
 '''OpenGL extension EXT.abgr
 
 Overview (from the spec)
-	
-	EXT_abgr extends the list of host-memory color formats.  Specifically,
-	it provides a reverse-order alternative to image format RGBA.  The ABGR
-	component order matches the cpack Iris GL format on big-endian machines.
+    
+    EXT_abgr extends the list of host-memory color formats.  Specifically,
+    it provides a reverse-order alternative to image format RGBA.  The ABGR
+    component order matches the cpack Iris GL format on big-endian machines.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/abgr.txt

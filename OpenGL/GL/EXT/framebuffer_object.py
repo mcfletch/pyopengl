@@ -24,12 +24,12 @@ glGenRenderbuffersEXT = wrapper.wrapper(glGenRenderbuffersEXT).setOutput(
 
 @lazy( glDeleteFramebuffersEXT )
 def glDeleteFramebuffersEXT( baseOperation, n, framebuffers=None ):
-	"""glDeleteFramebuffersEXT( framebuffers ) -> None 
-	"""
-	if framebuffers is None:
-		framebuffers = arrays.GLuintArray.asArray( n )
-		n = arrays.GLuintArray.arraySize( framebuffers )
-	return baseOperation( n, framebuffers )
+    """glDeleteFramebuffersEXT( framebuffers ) -> None 
+    """
+    if framebuffers is None:
+        framebuffers = arrays.GLuintArray.asArray( n )
+        n = arrays.GLuintArray.arraySize( framebuffers )
+    return baseOperation( n, framebuffers )
 
 #glBindRenderbufferEXT # doesn't require wrapping
 #glBindFramebufferEXT  # doesn't require wrapping

@@ -8,5 +8,5 @@ GLU_OBJECT_PARAMETRIC_ERROR_EXT = constant.Constant( 'GLU_OBJECT_PARAMETRIC_ERRO
 GLU_OBJECT_PATH_LENGTH_EXT = constant.Constant( 'GLU_OBJECT_PATH_LENGTH_EXT', 100209)
 
 def gluInitObjectSpaceTessEXT():
-	'''Return boolean indicating whether this module is available'''
-	return extensions.hasGLUExtension( 'GLU_EXT_object_space_tess' )
+    '''Return boolean indicating whether this module is available'''
+    return extensions.hasGLUExtension( 'GLU_EXT_object_space_tess' )

@@ -17,8 +17,8 @@ glget.addGLGetConstant( GL_POINT_FADE_THRESHOLD_SIZE_ARB, (1,) )
 glget.addGLGetConstant( GL_POINT_DISTANCE_ATTENUATION_ARB, (3,) )
 
 glPointParameterfvARB = arrays.setInputArraySizeType(
-	glPointParameterfvARB,
-	None, # XXX should be dependant on the pname field!
-	arrays.GLfloatArray, 
-	'params',
+    glPointParameterfvARB,
+    None, # XXX should be dependant on the pname field!
+    arrays.GLfloatArray, 
+    'params',
 )

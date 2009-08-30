@@ -1,15 +1,15 @@
 '''OpenGL extension ATI.vertex_streams
 
 Overview (from the spec)
-	
-	This extension adds the ability to handle sets of auxilliary
-	vertex and normal coordinates. These sets of auxilliary
-	coordinates are termed streams, and can be routed selectively
-	into the blend stages provided by the vertex blending extension.
-	This functionality enables software animation techniques such
-	as keyframe vertex morphing.
-	
-	
+    
+    This extension adds the ability to handle sets of auxilliary
+    vertex and normal coordinates. These sets of auxilliary
+    coordinates are termed streams, and can be routed selectively
+    into the blend stages provided by the vertex blending extension.
+    This functionality enables software animation techniques such
+    as keyframe vertex morphing.
+    
+    
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ATI/vertex_streams.txt

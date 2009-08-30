@@ -238,33 +238,33 @@ WGL_ARB_buffer_region = constant.Constant( 'WGL_ARB_buffer_region', 1 )
 HDC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:63
 UINT = c_uint 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:52
 wglCreateBufferRegionARB = platform.createBaseFunction(
-	'wglCreateBufferRegionARB', dll=platform.GL, resultType=HANDLE, 
-	argTypes=[HDC, c_int, UINT],
-	doc='wglCreateBufferRegionARB( HDC(None), c_int(None), UINT(None) ) -> HANDLE', 
-	argNames=['None', 'None', 'None'],
+    'wglCreateBufferRegionARB', dll=platform.GL, resultType=HANDLE, 
+    argTypes=[HDC, c_int, UINT],
+    doc='wglCreateBufferRegionARB( HDC(None), c_int(None), UINT(None) ) -> HANDLE', 
+    argNames=['None', 'None', 'None'],
 )
 
 VOID = None 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:47
 wglDeleteBufferRegionARB = platform.createBaseFunction(
-	'wglDeleteBufferRegionARB', dll=platform.GL, resultType=VOID, 
-	argTypes=[HANDLE],
-	doc='wglDeleteBufferRegionARB( HANDLE(None) ) -> VOID', 
-	argNames=['None'],
+    'wglDeleteBufferRegionARB', dll=platform.GL, resultType=VOID, 
+    argTypes=[HANDLE],
+    doc='wglDeleteBufferRegionARB( HANDLE(None) ) -> VOID', 
+    argNames=['None'],
 )
 
 BOOL = c_long 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:54
 wglSaveBufferRegionARB = platform.createBaseFunction(
-	'wglSaveBufferRegionARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HANDLE, c_int, c_int, c_int, c_int],
-	doc='wglSaveBufferRegionARB( HANDLE(None), c_int(None), c_int(None), c_int(None), c_int(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', 'None'],
+    'wglSaveBufferRegionARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HANDLE, c_int, c_int, c_int, c_int],
+    doc='wglSaveBufferRegionARB( HANDLE(None), c_int(None), c_int(None), c_int(None), c_int(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', 'None'],
 )
 
 wglRestoreBufferRegionARB = platform.createBaseFunction(
-	'wglRestoreBufferRegionARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HANDLE, c_int, c_int, c_int, c_int, c_int, c_int],
-	doc='wglRestoreBufferRegionARB( HANDLE(None), c_int(None), c_int(None), c_int(None), c_int(None), c_int(None), c_int(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', 'None', 'None', 'None'],
+    'wglRestoreBufferRegionARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HANDLE, c_int, c_int, c_int, c_int, c_int, c_int],
+    doc='wglRestoreBufferRegionARB( HANDLE(None), c_int(None), c_int(None), c_int(None), c_int(None), c_int(None), c_int(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', 'None', 'None', 'None'],
 )
 
 PFNWGLCREATEBUFFERREGIONARBPROC = CFUNCTYPE(HANDLE, HDC, c_int, UINT) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:342
@@ -276,35 +276,35 @@ WGL_ARB_multisample = constant.Constant( 'WGL_ARB_multisample', 1 )
 # ARB_extensions_string (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:352)
 WGL_ARB_extensions_string = constant.Constant( 'WGL_ARB_extensions_string', 1 )
 wglGetExtensionsStringARB = platform.createBaseFunction(
-	'wglGetExtensionsStringARB', dll=platform.GL, resultType=c_char_p, 
-	argTypes=[HDC],
-	doc='wglGetExtensionsStringARB( HDC(None) ) -> c_char_p', 
-	argNames=['None'],
+    'wglGetExtensionsStringARB', dll=platform.GL, resultType=c_char_p, 
+    argTypes=[HDC],
+    doc='wglGetExtensionsStringARB( HDC(None) ) -> c_char_p', 
+    argNames=['None'],
 )
 
 PFNWGLGETEXTENSIONSSTRINGARBPROC = CFUNCTYPE(c_char_p, HDC) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:357
 # ARB_pixel_format (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:360)
 WGL_ARB_pixel_format = constant.Constant( 'WGL_ARB_pixel_format', 1 )
 wglGetPixelFormatAttribivARB = platform.createBaseFunction(
-	'wglGetPixelFormatAttribivARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(c_int)],
-	doc='wglGetPixelFormatAttribivARB( HDC(None), c_int(None), c_int(None), UINT(None), POINTER(c_int)(), POINTER(c_int)() ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', '', ''],
+    'wglGetPixelFormatAttribivARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(c_int)],
+    doc='wglGetPixelFormatAttribivARB( HDC(None), c_int(None), c_int(None), UINT(None), POINTER(c_int)(), POINTER(c_int)() ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', '', ''],
 )
 
 FLOAT = c_float 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:57
 wglGetPixelFormatAttribfvARB = platform.createBaseFunction(
-	'wglGetPixelFormatAttribfvARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(FLOAT)],
-	doc='wglGetPixelFormatAttribfvARB( HDC(None), c_int(None), c_int(None), UINT(None), POINTER(c_int)(), POINTER(FLOAT)() ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', '', ''],
+    'wglGetPixelFormatAttribfvARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(FLOAT)],
+    doc='wglGetPixelFormatAttribfvARB( HDC(None), c_int(None), c_int(None), UINT(None), POINTER(c_int)(), POINTER(FLOAT)() ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', '', ''],
 )
 
 wglChoosePixelFormatARB = platform.createBaseFunction(
-	'wglChoosePixelFormatARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(c_int), POINTER(FLOAT), UINT, POINTER(c_int), POINTER(UINT)],
-	doc='wglChoosePixelFormatARB( HDC(None), POINTER(c_int)(), POINTER(FLOAT)(), UINT(None), POINTER(c_int)(), POINTER(UINT)() ) -> BOOL', 
-	argNames=['None', '', '', 'None', '', ''],
+    'wglChoosePixelFormatARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(c_int), POINTER(FLOAT), UINT, POINTER(c_int), POINTER(UINT)],
+    doc='wglChoosePixelFormatARB( HDC(None), POINTER(c_int)(), POINTER(FLOAT)(), UINT(None), POINTER(c_int)(), POINTER(UINT)() ) -> BOOL', 
+    argNames=['None', '', '', 'None', '', ''],
 )
 
 PFNWGLGETPIXELFORMATATTRIBIVARBPROC = CFUNCTYPE(BOOL, HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(c_int)) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:367
@@ -314,17 +314,17 @@ PFNWGLCHOOSEPIXELFORMATARBPROC = CFUNCTYPE(BOOL, HDC, POINTER(c_int), POINTER(FL
 WGL_ARB_make_current_read = constant.Constant( 'WGL_ARB_make_current_read', 1 )
 HGLRC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:62
 wglMakeContextCurrentARB = platform.createBaseFunction(
-	'wglMakeContextCurrentARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, HDC, HGLRC],
-	doc='wglMakeContextCurrentARB( HDC(None), HDC(None), HGLRC(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None'],
+    'wglMakeContextCurrentARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, HDC, HGLRC],
+    doc='wglMakeContextCurrentARB( HDC(None), HDC(None), HGLRC(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None'],
 )
 
 wglGetCurrentReadDCARB = platform.createBaseFunction(
-	'wglGetCurrentReadDCARB', dll=platform.GL, resultType=HDC, 
-	argTypes=[],
-	doc='wglGetCurrentReadDCARB(  ) -> HDC', 
-	argNames=[],
+    'wglGetCurrentReadDCARB', dll=platform.GL, resultType=HDC, 
+    argTypes=[],
+    doc='wglGetCurrentReadDCARB(  ) -> HDC', 
+    argNames=[],
 )
 
 PFNWGLMAKECONTEXTCURRENTARBPROC = CFUNCTYPE(BOOL, HDC, HDC, HGLRC) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:378
@@ -332,38 +332,38 @@ PFNWGLGETCURRENTREADDCARBPROC = CFUNCTYPE(HDC) 	# http://oss.sgi.com/projects/og
 # ARB_pbuffer (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:382)
 WGL_ARB_pbuffer = constant.Constant( 'WGL_ARB_pbuffer', 1 )
 wglCreatePbufferARB = platform.createBaseFunction(
-	'wglCreatePbufferARB', dll=platform.GL, resultType=HPBUFFERARB, 
-	argTypes=[HDC, c_int, c_int, c_int, POINTER(c_int)],
-	doc='wglCreatePbufferARB( HDC(None), c_int(None), c_int(None), c_int(None), POINTER(c_int)() ) -> HPBUFFERARB', 
-	argNames=['None', 'None', 'None', 'None', ''],
+    'wglCreatePbufferARB', dll=platform.GL, resultType=HPBUFFERARB, 
+    argTypes=[HDC, c_int, c_int, c_int, POINTER(c_int)],
+    doc='wglCreatePbufferARB( HDC(None), c_int(None), c_int(None), c_int(None), POINTER(c_int)() ) -> HPBUFFERARB', 
+    argNames=['None', 'None', 'None', 'None', ''],
 )
 
 wglGetPbufferDCARB = platform.createBaseFunction(
-	'wglGetPbufferDCARB', dll=platform.GL, resultType=HDC, 
-	argTypes=[HPBUFFERARB],
-	doc='wglGetPbufferDCARB( HPBUFFERARB(None) ) -> HDC', 
-	argNames=['None'],
+    'wglGetPbufferDCARB', dll=platform.GL, resultType=HDC, 
+    argTypes=[HPBUFFERARB],
+    doc='wglGetPbufferDCARB( HPBUFFERARB(None) ) -> HDC', 
+    argNames=['None'],
 )
 
 wglReleasePbufferDCARB = platform.createBaseFunction(
-	'wglReleasePbufferDCARB', dll=platform.GL, resultType=c_int, 
-	argTypes=[HPBUFFERARB, HDC],
-	doc='wglReleasePbufferDCARB( HPBUFFERARB(None), HDC(None) ) -> c_int', 
-	argNames=['None', 'None'],
+    'wglReleasePbufferDCARB', dll=platform.GL, resultType=c_int, 
+    argTypes=[HPBUFFERARB, HDC],
+    doc='wglReleasePbufferDCARB( HPBUFFERARB(None), HDC(None) ) -> c_int', 
+    argNames=['None', 'None'],
 )
 
 wglDestroyPbufferARB = platform.createBaseFunction(
-	'wglDestroyPbufferARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HPBUFFERARB],
-	doc='wglDestroyPbufferARB( HPBUFFERARB(None) ) -> BOOL', 
-	argNames=['None'],
+    'wglDestroyPbufferARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HPBUFFERARB],
+    doc='wglDestroyPbufferARB( HPBUFFERARB(None) ) -> BOOL', 
+    argNames=['None'],
 )
 
 wglQueryPbufferARB = platform.createBaseFunction(
-	'wglQueryPbufferARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HPBUFFERARB, c_int, POINTER(c_int)],
-	doc='wglQueryPbufferARB( HPBUFFERARB(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
-	argNames=['None', 'None', ''],
+    'wglQueryPbufferARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HPBUFFERARB, c_int, POINTER(c_int)],
+    doc='wglQueryPbufferARB( HPBUFFERARB(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
+    argNames=['None', 'None', ''],
 )
 
 PFNWGLCREATEPBUFFERARBPROC = CFUNCTYPE(HPBUFFERARB, HDC, c_int, c_int, c_int, POINTER(c_int)) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:391
@@ -374,24 +374,24 @@ PFNWGLQUERYPBUFFERARBPROC = CFUNCTYPE(BOOL, HPBUFFERARB, c_int, POINTER(c_int)) 
 # ARB_render_texture (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:398)
 WGL_ARB_render_texture = constant.Constant( 'WGL_ARB_render_texture', 1 )
 wglBindTexImageARB = platform.createBaseFunction(
-	'wglBindTexImageARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HPBUFFERARB, c_int],
-	doc='wglBindTexImageARB( HPBUFFERARB(None), c_int(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglBindTexImageARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HPBUFFERARB, c_int],
+    doc='wglBindTexImageARB( HPBUFFERARB(None), c_int(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 
 wglReleaseTexImageARB = platform.createBaseFunction(
-	'wglReleaseTexImageARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HPBUFFERARB, c_int],
-	doc='wglReleaseTexImageARB( HPBUFFERARB(None), c_int(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglReleaseTexImageARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HPBUFFERARB, c_int],
+    doc='wglReleaseTexImageARB( HPBUFFERARB(None), c_int(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 
 wglSetPbufferAttribARB = platform.createBaseFunction(
-	'wglSetPbufferAttribARB', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HPBUFFERARB, POINTER(c_int)],
-	doc='wglSetPbufferAttribARB( HPBUFFERARB(None), POINTER(c_int)() ) -> BOOL', 
-	argNames=['None', ''],
+    'wglSetPbufferAttribARB', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HPBUFFERARB, POINTER(c_int)],
+    doc='wglSetPbufferAttribARB( HPBUFFERARB(None), POINTER(c_int)() ) -> BOOL', 
+    argNames=['None', ''],
 )
 
 PFNWGLBINDTEXIMAGEARBPROC = CFUNCTYPE(BOOL, HPBUFFERARB, c_int) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:405
@@ -404,32 +404,32 @@ WGL_EXT_display_color_table = constant.Constant( 'WGL_EXT_display_color_table', 
 GLboolean = c_ubyte 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:20
 GLushort = c_ushort 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:27
 wglCreateDisplayColorTableEXT = platform.createBaseFunction(
-	'wglCreateDisplayColorTableEXT', dll=platform.GL, resultType=GLboolean, 
-	argTypes=[GLushort],
-	doc='wglCreateDisplayColorTableEXT( GLushort(None) ) -> GLboolean', 
-	argNames=['None'],
+    'wglCreateDisplayColorTableEXT', dll=platform.GL, resultType=GLboolean, 
+    argTypes=[GLushort],
+    doc='wglCreateDisplayColorTableEXT( GLushort(None) ) -> GLboolean', 
+    argNames=['None'],
 )
 
 GLuint = c_uint 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:28
 wglLoadDisplayColorTableEXT = platform.createBaseFunction(
-	'wglLoadDisplayColorTableEXT', dll=platform.GL, resultType=GLboolean, 
-	argTypes=[POINTER(GLushort), GLuint],
-	doc='wglLoadDisplayColorTableEXT( POINTER(GLushort)(), GLuint(None) ) -> GLboolean', 
-	argNames=['', 'None'],
+    'wglLoadDisplayColorTableEXT', dll=platform.GL, resultType=GLboolean, 
+    argTypes=[POINTER(GLushort), GLuint],
+    doc='wglLoadDisplayColorTableEXT( POINTER(GLushort)(), GLuint(None) ) -> GLboolean', 
+    argNames=['', 'None'],
 )
 
 wglBindDisplayColorTableEXT = platform.createBaseFunction(
-	'wglBindDisplayColorTableEXT', dll=platform.GL, resultType=GLboolean, 
-	argTypes=[GLushort],
-	doc='wglBindDisplayColorTableEXT( GLushort(None) ) -> GLboolean', 
-	argNames=['None'],
+    'wglBindDisplayColorTableEXT', dll=platform.GL, resultType=GLboolean, 
+    argTypes=[GLushort],
+    doc='wglBindDisplayColorTableEXT( GLushort(None) ) -> GLboolean', 
+    argNames=['None'],
 )
 
 wglDestroyDisplayColorTableEXT = platform.createBaseFunction(
-	'wglDestroyDisplayColorTableEXT', dll=platform.GL, resultType=VOID, 
-	argTypes=[GLushort],
-	doc='wglDestroyDisplayColorTableEXT( GLushort(None) ) -> VOID', 
-	argNames=['None'],
+    'wglDestroyDisplayColorTableEXT', dll=platform.GL, resultType=VOID, 
+    argTypes=[GLushort],
+    doc='wglDestroyDisplayColorTableEXT( GLushort(None) ) -> VOID', 
+    argNames=['None'],
 )
 
 PFNWGLCREATEDISPLAYCOLORTABLEEXTPROC = CFUNCTYPE(GLboolean, GLushort) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:422
@@ -439,27 +439,27 @@ PFNWGLDESTROYDISPLAYCOLORTABLEEXTPROC = CFUNCTYPE(VOID, GLushort) 	# http://oss.
 # EXT_extensions_string (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:428)
 WGL_EXT_extensions_string = constant.Constant( 'WGL_EXT_extensions_string', 1 )
 wglGetExtensionsStringEXT = platform.createBaseFunction(
-	'wglGetExtensionsStringEXT', dll=platform.GL, resultType=c_char_p, 
-	argTypes=[],
-	doc='wglGetExtensionsStringEXT(  ) -> c_char_p', 
-	argNames=[],
+    'wglGetExtensionsStringEXT', dll=platform.GL, resultType=c_char_p, 
+    argTypes=[],
+    doc='wglGetExtensionsStringEXT(  ) -> c_char_p', 
+    argNames=[],
 )
 
 PFNWGLGETEXTENSIONSSTRINGEXTPROC = CFUNCTYPE(c_char_p) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:433
 # EXT_make_current_read (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:436)
 WGL_EXT_make_current_read = constant.Constant( 'WGL_EXT_make_current_read', 1 )
 wglMakeContextCurrentEXT = platform.createBaseFunction(
-	'wglMakeContextCurrentEXT', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, HDC, HGLRC],
-	doc='wglMakeContextCurrentEXT( HDC(None), HDC(None), HGLRC(None) ) -> BOOL', 
-	argNames=['None', 'None', 'None'],
+    'wglMakeContextCurrentEXT', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, HDC, HGLRC],
+    doc='wglMakeContextCurrentEXT( HDC(None), HDC(None), HGLRC(None) ) -> BOOL', 
+    argNames=['None', 'None', 'None'],
 )
 
 wglGetCurrentReadDCEXT = platform.createBaseFunction(
-	'wglGetCurrentReadDCEXT', dll=platform.GL, resultType=HDC, 
-	argTypes=[],
-	doc='wglGetCurrentReadDCEXT(  ) -> HDC', 
-	argNames=[],
+    'wglGetCurrentReadDCEXT', dll=platform.GL, resultType=HDC, 
+    argTypes=[],
+    doc='wglGetCurrentReadDCEXT(  ) -> HDC', 
+    argNames=[],
 )
 
 PFNWGLMAKECONTEXTCURRENTEXTPROC = CFUNCTYPE(BOOL, HDC, HDC, HGLRC) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:442
@@ -467,38 +467,38 @@ PFNWGLGETCURRENTREADDCEXTPROC = CFUNCTYPE(HDC) 	# http://oss.sgi.com/projects/og
 # EXT_pbuffer (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:446)
 WGL_EXT_pbuffer = constant.Constant( 'WGL_EXT_pbuffer', 1 )
 wglCreatePbufferEXT = platform.createBaseFunction(
-	'wglCreatePbufferEXT', dll=platform.GL, resultType=HPBUFFEREXT, 
-	argTypes=[HDC, c_int, c_int, c_int, POINTER(c_int)],
-	doc='wglCreatePbufferEXT( HDC(None), c_int(None), c_int(None), c_int(None), POINTER(c_int)() ) -> HPBUFFEREXT', 
-	argNames=['None', 'None', 'None', 'None', ''],
+    'wglCreatePbufferEXT', dll=platform.GL, resultType=HPBUFFEREXT, 
+    argTypes=[HDC, c_int, c_int, c_int, POINTER(c_int)],
+    doc='wglCreatePbufferEXT( HDC(None), c_int(None), c_int(None), c_int(None), POINTER(c_int)() ) -> HPBUFFEREXT', 
+    argNames=['None', 'None', 'None', 'None', ''],
 )
 
 wglGetPbufferDCEXT = platform.createBaseFunction(
-	'wglGetPbufferDCEXT', dll=platform.GL, resultType=HDC, 
-	argTypes=[HPBUFFEREXT],
-	doc='wglGetPbufferDCEXT( HPBUFFEREXT(None) ) -> HDC', 
-	argNames=['None'],
+    'wglGetPbufferDCEXT', dll=platform.GL, resultType=HDC, 
+    argTypes=[HPBUFFEREXT],
+    doc='wglGetPbufferDCEXT( HPBUFFEREXT(None) ) -> HDC', 
+    argNames=['None'],
 )
 
 wglReleasePbufferDCEXT = platform.createBaseFunction(
-	'wglReleasePbufferDCEXT', dll=platform.GL, resultType=c_int, 
-	argTypes=[HPBUFFEREXT, HDC],
-	doc='wglReleasePbufferDCEXT( HPBUFFEREXT(None), HDC(None) ) -> c_int', 
-	argNames=['None', 'None'],
+    'wglReleasePbufferDCEXT', dll=platform.GL, resultType=c_int, 
+    argTypes=[HPBUFFEREXT, HDC],
+    doc='wglReleasePbufferDCEXT( HPBUFFEREXT(None), HDC(None) ) -> c_int', 
+    argNames=['None', 'None'],
 )
 
 wglDestroyPbufferEXT = platform.createBaseFunction(
-	'wglDestroyPbufferEXT', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HPBUFFEREXT],
-	doc='wglDestroyPbufferEXT( HPBUFFEREXT(None) ) -> BOOL', 
-	argNames=['None'],
+    'wglDestroyPbufferEXT', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HPBUFFEREXT],
+    doc='wglDestroyPbufferEXT( HPBUFFEREXT(None) ) -> BOOL', 
+    argNames=['None'],
 )
 
 wglQueryPbufferEXT = platform.createBaseFunction(
-	'wglQueryPbufferEXT', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HPBUFFEREXT, c_int, POINTER(c_int)],
-	doc='wglQueryPbufferEXT( HPBUFFEREXT(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
-	argNames=['None', 'None', ''],
+    'wglQueryPbufferEXT', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HPBUFFEREXT, c_int, POINTER(c_int)],
+    doc='wglQueryPbufferEXT( HPBUFFEREXT(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
+    argNames=['None', 'None', ''],
 )
 
 PFNWGLCREATEPBUFFEREXTPROC = CFUNCTYPE(HPBUFFEREXT, HDC, c_int, c_int, c_int, POINTER(c_int)) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:455
@@ -509,24 +509,24 @@ PFNWGLQUERYPBUFFEREXTPROC = CFUNCTYPE(BOOL, HPBUFFEREXT, c_int, POINTER(c_int)) 
 # EXT_pixel_format (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:462)
 WGL_EXT_pixel_format = constant.Constant( 'WGL_EXT_pixel_format', 1 )
 wglGetPixelFormatAttribivEXT = platform.createBaseFunction(
-	'wglGetPixelFormatAttribivEXT', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(c_int)],
-	doc='wglGetPixelFormatAttribivEXT( HDC(None), c_int(None), c_int(None), UINT(None), POINTER(c_int)(), POINTER(c_int)() ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', '', ''],
+    'wglGetPixelFormatAttribivEXT', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(c_int)],
+    doc='wglGetPixelFormatAttribivEXT( HDC(None), c_int(None), c_int(None), UINT(None), POINTER(c_int)(), POINTER(c_int)() ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', '', ''],
 )
 
 wglGetPixelFormatAttribfvEXT = platform.createBaseFunction(
-	'wglGetPixelFormatAttribfvEXT', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(FLOAT)],
-	doc='wglGetPixelFormatAttribfvEXT( HDC(None), c_int(None), c_int(None), UINT(None), POINTER(c_int)(), POINTER(FLOAT)() ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', '', ''],
+    'wglGetPixelFormatAttribfvEXT', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(FLOAT)],
+    doc='wglGetPixelFormatAttribfvEXT( HDC(None), c_int(None), c_int(None), UINT(None), POINTER(c_int)(), POINTER(FLOAT)() ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', '', ''],
 )
 
 wglChoosePixelFormatEXT = platform.createBaseFunction(
-	'wglChoosePixelFormatEXT', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(c_int), POINTER(FLOAT), UINT, POINTER(c_int), POINTER(UINT)],
-	doc='wglChoosePixelFormatEXT( HDC(None), POINTER(c_int)(), POINTER(FLOAT)(), UINT(None), POINTER(c_int)(), POINTER(UINT)() ) -> BOOL', 
-	argNames=['None', '', '', 'None', '', ''],
+    'wglChoosePixelFormatEXT', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(c_int), POINTER(FLOAT), UINT, POINTER(c_int), POINTER(UINT)],
+    doc='wglChoosePixelFormatEXT( HDC(None), POINTER(c_int)(), POINTER(FLOAT)(), UINT(None), POINTER(c_int)(), POINTER(UINT)() ) -> BOOL', 
+    argNames=['None', '', '', 'None', '', ''],
 )
 
 PFNWGLGETPIXELFORMATATTRIBIVEXTPROC = CFUNCTYPE(BOOL, HDC, c_int, c_int, UINT, POINTER(c_int), POINTER(c_int)) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:469
@@ -535,17 +535,17 @@ PFNWGLCHOOSEPIXELFORMATEXTPROC = CFUNCTYPE(BOOL, HDC, POINTER(c_int), POINTER(FL
 # EXT_swap_control (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:474)
 WGL_EXT_swap_control = constant.Constant( 'WGL_EXT_swap_control', 1 )
 wglSwapIntervalEXT = platform.createBaseFunction(
-	'wglSwapIntervalEXT', dll=platform.GL, resultType=BOOL, 
-	argTypes=[c_int],
-	doc='wglSwapIntervalEXT( c_int(None) ) -> BOOL', 
-	argNames=['None'],
+    'wglSwapIntervalEXT', dll=platform.GL, resultType=BOOL, 
+    argTypes=[c_int],
+    doc='wglSwapIntervalEXT( c_int(None) ) -> BOOL', 
+    argNames=['None'],
 )
 
 wglGetSwapIntervalEXT = platform.createBaseFunction(
-	'wglGetSwapIntervalEXT', dll=platform.GL, resultType=c_int, 
-	argTypes=[],
-	doc='wglGetSwapIntervalEXT(  ) -> c_int', 
-	argNames=[],
+    'wglGetSwapIntervalEXT', dll=platform.GL, resultType=c_int, 
+    argTypes=[],
+    doc='wglGetSwapIntervalEXT(  ) -> c_int', 
+    argNames=[],
 )
 
 PFNWGLSWAPINTERVALEXTPROC = CFUNCTYPE(BOOL, c_int) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:480
@@ -557,17 +557,17 @@ WGL_NV_vertex_array_range = constant.Constant( 'WGL_NV_vertex_array_range', 1 )
 GLsizei = c_int 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:25
 GLfloat = c_float 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:29
 wglAllocateMemoryNV = platform.createBaseFunction(
-	'wglAllocateMemoryNV', dll=platform.GL, resultType=POINTER(c_void), 
-	argTypes=[GLsizei, GLfloat, GLfloat, GLfloat],
-	doc='wglAllocateMemoryNV( GLsizei(None), GLfloat(None), GLfloat(None), GLfloat(None) ) -> POINTER(c_void)', 
-	argNames=['None', 'None', 'None', 'None'],
+    'wglAllocateMemoryNV', dll=platform.GL, resultType=POINTER(c_void), 
+    argTypes=[GLsizei, GLfloat, GLfloat, GLfloat],
+    doc='wglAllocateMemoryNV( GLsizei(None), GLfloat(None), GLfloat(None), GLfloat(None) ) -> POINTER(c_void)', 
+    argNames=['None', 'None', 'None', 'None'],
 )
 
 wglFreeMemoryNV = platform.createBaseFunction(
-	'wglFreeMemoryNV', dll=platform.GL, resultType=None, 
-	argTypes=[POINTER(None)],
-	doc='wglFreeMemoryNV( POINTER(None)() ) -> None', 
-	argNames=[''],
+    'wglFreeMemoryNV', dll=platform.GL, resultType=None, 
+    argTypes=[POINTER(None)],
+    doc='wglFreeMemoryNV( POINTER(None)() ) -> None', 
+    argNames=[''],
 )
 
 PFNWGLALLOCATEMEMORYNVPROC = CFUNCTYPE(POINTER(c_void), GLsizei, GLfloat, GLfloat, GLfloat) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:494
@@ -580,46 +580,46 @@ WGL_EXT_multisample = constant.Constant( 'WGL_EXT_multisample', 1 )
 WGL_OML_sync_control = constant.Constant( 'WGL_OML_sync_control', 1 )
 INT64 = c_longlong 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:44
 wglGetSyncValuesOML = platform.createBaseFunction(
-	'wglGetSyncValuesOML', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(INT64), POINTER(INT64), POINTER(INT64)],
-	doc='wglGetSyncValuesOML( HDC(None), POINTER(INT64)(), POINTER(INT64)(), POINTER(INT64)() ) -> BOOL', 
-	argNames=['None', '', '', ''],
+    'wglGetSyncValuesOML', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(INT64), POINTER(INT64), POINTER(INT64)],
+    doc='wglGetSyncValuesOML( HDC(None), POINTER(INT64)(), POINTER(INT64)(), POINTER(INT64)() ) -> BOOL', 
+    argNames=['None', '', '', ''],
 )
 
 INT32 = c_int 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:37
 wglGetMscRateOML = platform.createBaseFunction(
-	'wglGetMscRateOML', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(INT32), POINTER(INT32)],
-	doc='wglGetMscRateOML( HDC(None), POINTER(INT32)(), POINTER(INT32)() ) -> BOOL', 
-	argNames=['None', '', ''],
+    'wglGetMscRateOML', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(INT32), POINTER(INT32)],
+    doc='wglGetMscRateOML( HDC(None), POINTER(INT32)(), POINTER(INT32)() ) -> BOOL', 
+    argNames=['None', '', ''],
 )
 
 wglSwapBuffersMscOML = platform.createBaseFunction(
-	'wglSwapBuffersMscOML', dll=platform.GL, resultType=INT64, 
-	argTypes=[HDC, INT64, INT64, INT64],
-	doc='wglSwapBuffersMscOML( HDC(None), INT64(None), INT64(None), INT64(None) ) -> INT64', 
-	argNames=['None', 'None', 'None', 'None'],
+    'wglSwapBuffersMscOML', dll=platform.GL, resultType=INT64, 
+    argTypes=[HDC, INT64, INT64, INT64],
+    doc='wglSwapBuffersMscOML( HDC(None), INT64(None), INT64(None), INT64(None) ) -> INT64', 
+    argNames=['None', 'None', 'None', 'None'],
 )
 
 wglSwapLayerBuffersMscOML = platform.createBaseFunction(
-	'wglSwapLayerBuffersMscOML', dll=platform.GL, resultType=INT64, 
-	argTypes=[HDC, c_int, INT64, INT64, INT64],
-	doc='wglSwapLayerBuffersMscOML( HDC(None), c_int(None), INT64(None), INT64(None), INT64(None) ) -> INT64', 
-	argNames=['None', 'None', 'None', 'None', 'None'],
+    'wglSwapLayerBuffersMscOML', dll=platform.GL, resultType=INT64, 
+    argTypes=[HDC, c_int, INT64, INT64, INT64],
+    doc='wglSwapLayerBuffersMscOML( HDC(None), c_int(None), INT64(None), INT64(None), INT64(None) ) -> INT64', 
+    argNames=['None', 'None', 'None', 'None', 'None'],
 )
 
 wglWaitForMscOML = platform.createBaseFunction(
-	'wglWaitForMscOML', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, INT64, INT64, INT64, POINTER(INT64), POINTER(INT64), POINTER(INT64)],
-	doc='wglWaitForMscOML( HDC(None), INT64(None), INT64(None), INT64(None), POINTER(INT64)(), POINTER(INT64)(), POINTER(INT64)() ) -> BOOL', 
-	argNames=['None', 'None', 'None', 'None', '', '', ''],
+    'wglWaitForMscOML', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, INT64, INT64, INT64, POINTER(INT64), POINTER(INT64), POINTER(INT64)],
+    doc='wglWaitForMscOML( HDC(None), INT64(None), INT64(None), INT64(None), POINTER(INT64)(), POINTER(INT64)(), POINTER(INT64)() ) -> BOOL', 
+    argNames=['None', 'None', 'None', 'None', '', '', ''],
 )
 
 wglWaitForSbcOML = platform.createBaseFunction(
-	'wglWaitForSbcOML', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, INT64, POINTER(INT64), POINTER(INT64), POINTER(INT64)],
-	doc='wglWaitForSbcOML( HDC(None), INT64(None), POINTER(INT64)(), POINTER(INT64)(), POINTER(INT64)() ) -> BOOL', 
-	argNames=['None', 'None', '', '', ''],
+    'wglWaitForSbcOML', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, INT64, POINTER(INT64), POINTER(INT64), POINTER(INT64)],
+    doc='wglWaitForSbcOML( HDC(None), INT64(None), POINTER(INT64)(), POINTER(INT64)(), POINTER(INT64)() ) -> BOOL', 
+    argNames=['None', 'None', '', '', ''],
 )
 
 PFNWGLGETSYNCVALUESOMLPROC = CFUNCTYPE(BOOL, HDC, POINTER(INT64), POINTER(INT64), POINTER(INT64)) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:516
@@ -631,17 +631,17 @@ PFNWGLWAITFORSBCOMLPROC = CFUNCTYPE(BOOL, HDC, INT64, POINTER(INT64), POINTER(IN
 # I3D_digital_video_control (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:524)
 WGL_I3D_digital_video_control = constant.Constant( 'WGL_I3D_digital_video_control', 1 )
 wglGetDigitalVideoParametersI3D = platform.createBaseFunction(
-	'wglGetDigitalVideoParametersI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, POINTER(c_int)],
-	doc='wglGetDigitalVideoParametersI3D( HDC(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
-	argNames=['None', 'None', ''],
+    'wglGetDigitalVideoParametersI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, POINTER(c_int)],
+    doc='wglGetDigitalVideoParametersI3D( HDC(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
+    argNames=['None', 'None', ''],
 )
 
 wglSetDigitalVideoParametersI3D = platform.createBaseFunction(
-	'wglSetDigitalVideoParametersI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, POINTER(c_int)],
-	doc='wglSetDigitalVideoParametersI3D( HDC(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
-	argNames=['None', 'None', ''],
+    'wglSetDigitalVideoParametersI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, POINTER(c_int)],
+    doc='wglSetDigitalVideoParametersI3D( HDC(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
+    argNames=['None', 'None', ''],
 )
 
 PFNWGLGETDIGITALVIDEOPARAMETERSI3DPROC = CFUNCTYPE(BOOL, HDC, c_int, POINTER(c_int)) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:530
@@ -649,32 +649,32 @@ PFNWGLSETDIGITALVIDEOPARAMETERSI3DPROC = CFUNCTYPE(BOOL, HDC, c_int, POINTER(c_i
 # I3D_gamma (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:534)
 WGL_I3D_gamma = constant.Constant( 'WGL_I3D_gamma', 1 )
 wglGetGammaTableParametersI3D = platform.createBaseFunction(
-	'wglGetGammaTableParametersI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, POINTER(c_int)],
-	doc='wglGetGammaTableParametersI3D( HDC(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
-	argNames=['None', 'None', ''],
+    'wglGetGammaTableParametersI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, POINTER(c_int)],
+    doc='wglGetGammaTableParametersI3D( HDC(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
+    argNames=['None', 'None', ''],
 )
 
 wglSetGammaTableParametersI3D = platform.createBaseFunction(
-	'wglSetGammaTableParametersI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, POINTER(c_int)],
-	doc='wglSetGammaTableParametersI3D( HDC(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
-	argNames=['None', 'None', ''],
+    'wglSetGammaTableParametersI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, POINTER(c_int)],
+    doc='wglSetGammaTableParametersI3D( HDC(None), c_int(None), POINTER(c_int)() ) -> BOOL', 
+    argNames=['None', 'None', ''],
 )
 
 USHORT = c_ushort 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:51
 wglGetGammaTableI3D = platform.createBaseFunction(
-	'wglGetGammaTableI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, POINTER(USHORT), POINTER(USHORT), POINTER(USHORT)],
-	doc='wglGetGammaTableI3D( HDC(None), c_int(None), POINTER(USHORT)(), POINTER(USHORT)(), POINTER(USHORT)() ) -> BOOL', 
-	argNames=['None', 'None', '', '', ''],
+    'wglGetGammaTableI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, POINTER(USHORT), POINTER(USHORT), POINTER(USHORT)],
+    doc='wglGetGammaTableI3D( HDC(None), c_int(None), POINTER(USHORT)(), POINTER(USHORT)(), POINTER(USHORT)() ) -> BOOL', 
+    argNames=['None', 'None', '', '', ''],
 )
 
 wglSetGammaTableI3D = platform.createBaseFunction(
-	'wglSetGammaTableI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, c_int, POINTER(USHORT), POINTER(USHORT), POINTER(USHORT)],
-	doc='wglSetGammaTableI3D( HDC(None), c_int(None), POINTER(USHORT)(), POINTER(USHORT)(), POINTER(USHORT)() ) -> BOOL', 
-	argNames=['None', 'None', '', '', ''],
+    'wglSetGammaTableI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, c_int, POINTER(USHORT), POINTER(USHORT), POINTER(USHORT)],
+    doc='wglSetGammaTableI3D( HDC(None), c_int(None), POINTER(USHORT)(), POINTER(USHORT)(), POINTER(USHORT)() ) -> BOOL', 
+    argNames=['None', 'None', '', '', ''],
 )
 
 PFNWGLGETGAMMATABLEPARAMETERSI3DPROC = CFUNCTYPE(BOOL, HDC, c_int, POINTER(c_int)) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:542
@@ -684,87 +684,87 @@ PFNWGLSETGAMMATABLEI3DPROC = CFUNCTYPE(BOOL, HDC, c_int, POINTER(USHORT), POINTE
 # I3D_genlock (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:548)
 WGL_I3D_genlock = constant.Constant( 'WGL_I3D_genlock', 1 )
 wglEnableGenlockI3D = platform.createBaseFunction(
-	'wglEnableGenlockI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC],
-	doc='wglEnableGenlockI3D( HDC(None) ) -> BOOL', 
-	argNames=['None'],
+    'wglEnableGenlockI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC],
+    doc='wglEnableGenlockI3D( HDC(None) ) -> BOOL', 
+    argNames=['None'],
 )
 
 wglDisableGenlockI3D = platform.createBaseFunction(
-	'wglDisableGenlockI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC],
-	doc='wglDisableGenlockI3D( HDC(None) ) -> BOOL', 
-	argNames=['None'],
+    'wglDisableGenlockI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC],
+    doc='wglDisableGenlockI3D( HDC(None) ) -> BOOL', 
+    argNames=['None'],
 )
 
 wglIsEnabledGenlockI3D = platform.createBaseFunction(
-	'wglIsEnabledGenlockI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(BOOL)],
-	doc='wglIsEnabledGenlockI3D( HDC(None), POINTER(BOOL)() ) -> BOOL', 
-	argNames=['None', ''],
+    'wglIsEnabledGenlockI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(BOOL)],
+    doc='wglIsEnabledGenlockI3D( HDC(None), POINTER(BOOL)() ) -> BOOL', 
+    argNames=['None', ''],
 )
 
 wglGenlockSourceI3D = platform.createBaseFunction(
-	'wglGenlockSourceI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, UINT],
-	doc='wglGenlockSourceI3D( HDC(None), UINT(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglGenlockSourceI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, UINT],
+    doc='wglGenlockSourceI3D( HDC(None), UINT(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 
 wglGetGenlockSourceI3D = platform.createBaseFunction(
-	'wglGetGenlockSourceI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(UINT)],
-	doc='wglGetGenlockSourceI3D( HDC(None), POINTER(UINT)() ) -> BOOL', 
-	argNames=['None', ''],
+    'wglGetGenlockSourceI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(UINT)],
+    doc='wglGetGenlockSourceI3D( HDC(None), POINTER(UINT)() ) -> BOOL', 
+    argNames=['None', ''],
 )
 
 wglGenlockSourceEdgeI3D = platform.createBaseFunction(
-	'wglGenlockSourceEdgeI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, UINT],
-	doc='wglGenlockSourceEdgeI3D( HDC(None), UINT(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglGenlockSourceEdgeI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, UINT],
+    doc='wglGenlockSourceEdgeI3D( HDC(None), UINT(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 
 wglGetGenlockSourceEdgeI3D = platform.createBaseFunction(
-	'wglGetGenlockSourceEdgeI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(UINT)],
-	doc='wglGetGenlockSourceEdgeI3D( HDC(None), POINTER(UINT)() ) -> BOOL', 
-	argNames=['None', ''],
+    'wglGetGenlockSourceEdgeI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(UINT)],
+    doc='wglGetGenlockSourceEdgeI3D( HDC(None), POINTER(UINT)() ) -> BOOL', 
+    argNames=['None', ''],
 )
 
 wglGenlockSampleRateI3D = platform.createBaseFunction(
-	'wglGenlockSampleRateI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, UINT],
-	doc='wglGenlockSampleRateI3D( HDC(None), UINT(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglGenlockSampleRateI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, UINT],
+    doc='wglGenlockSampleRateI3D( HDC(None), UINT(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 
 wglGetGenlockSampleRateI3D = platform.createBaseFunction(
-	'wglGetGenlockSampleRateI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(UINT)],
-	doc='wglGetGenlockSampleRateI3D( HDC(None), POINTER(UINT)() ) -> BOOL', 
-	argNames=['None', ''],
+    'wglGetGenlockSampleRateI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(UINT)],
+    doc='wglGetGenlockSampleRateI3D( HDC(None), POINTER(UINT)() ) -> BOOL', 
+    argNames=['None', ''],
 )
 
 wglGenlockSourceDelayI3D = platform.createBaseFunction(
-	'wglGenlockSourceDelayI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, UINT],
-	doc='wglGenlockSourceDelayI3D( HDC(None), UINT(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglGenlockSourceDelayI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, UINT],
+    doc='wglGenlockSourceDelayI3D( HDC(None), UINT(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 
 wglGetGenlockSourceDelayI3D = platform.createBaseFunction(
-	'wglGetGenlockSourceDelayI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(UINT)],
-	doc='wglGetGenlockSourceDelayI3D( HDC(None), POINTER(UINT)() ) -> BOOL', 
-	argNames=['None', ''],
+    'wglGetGenlockSourceDelayI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(UINT)],
+    doc='wglGetGenlockSourceDelayI3D( HDC(None), POINTER(UINT)() ) -> BOOL', 
+    argNames=['None', ''],
 )
 
 wglQueryGenlockMaxSourceDelayI3D = platform.createBaseFunction(
-	'wglQueryGenlockMaxSourceDelayI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(UINT), POINTER(UINT)],
-	doc='wglQueryGenlockMaxSourceDelayI3D( HDC(None), POINTER(UINT)(), POINTER(UINT)() ) -> BOOL', 
-	argNames=['None', '', ''],
+    'wglQueryGenlockMaxSourceDelayI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(UINT), POINTER(UINT)],
+    doc='wglQueryGenlockMaxSourceDelayI3D( HDC(None), POINTER(UINT)(), POINTER(UINT)() ) -> BOOL', 
+    argNames=['None', '', ''],
 )
 
 PFNWGLENABLEGENLOCKI3DPROC = CFUNCTYPE(BOOL, HDC) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:564
@@ -784,31 +784,31 @@ WGL_I3D_image_buffer = constant.Constant( 'WGL_I3D_image_buffer', 1 )
 LPVOID = POINTER(None) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:47
 DWORD = c_ulong 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:56
 wglCreateImageBufferI3D = platform.createBaseFunction(
-	'wglCreateImageBufferI3D', dll=platform.GL, resultType=LPVOID, 
-	argTypes=[HDC, DWORD, UINT],
-	doc='wglCreateImageBufferI3D( HDC(None), DWORD(None), UINT(None) ) -> LPVOID', 
-	argNames=['None', 'None', 'None'],
+    'wglCreateImageBufferI3D', dll=platform.GL, resultType=LPVOID, 
+    argTypes=[HDC, DWORD, UINT],
+    doc='wglCreateImageBufferI3D( HDC(None), DWORD(None), UINT(None) ) -> LPVOID', 
+    argNames=['None', 'None', 'None'],
 )
 
 wglDestroyImageBufferI3D = platform.createBaseFunction(
-	'wglDestroyImageBufferI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, LPVOID],
-	doc='wglDestroyImageBufferI3D( HDC(None), LPVOID(None) ) -> BOOL', 
-	argNames=['None', 'None'],
+    'wglDestroyImageBufferI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, LPVOID],
+    doc='wglDestroyImageBufferI3D( HDC(None), LPVOID(None) ) -> BOOL', 
+    argNames=['None', 'None'],
 )
 
 wglAssociateImageBufferEventsI3D = platform.createBaseFunction(
-	'wglAssociateImageBufferEventsI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(HANDLE), POINTER(LPVOID), POINTER(DWORD), UINT],
-	doc='wglAssociateImageBufferEventsI3D( HDC(None), POINTER(HANDLE)(), POINTER(LPVOID)(), POINTER(DWORD)(), UINT(None) ) -> BOOL', 
-	argNames=['None', '', '', '', 'None'],
+    'wglAssociateImageBufferEventsI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(HANDLE), POINTER(LPVOID), POINTER(DWORD), UINT],
+    doc='wglAssociateImageBufferEventsI3D( HDC(None), POINTER(HANDLE)(), POINTER(LPVOID)(), POINTER(DWORD)(), UINT(None) ) -> BOOL', 
+    argNames=['None', '', '', '', 'None'],
 )
 
 wglReleaseImageBufferEventsI3D = platform.createBaseFunction(
-	'wglReleaseImageBufferEventsI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[HDC, POINTER(LPVOID), UINT],
-	doc='wglReleaseImageBufferEventsI3D( HDC(None), POINTER(LPVOID)(), UINT(None) ) -> BOOL', 
-	argNames=['None', '', 'None'],
+    'wglReleaseImageBufferEventsI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[HDC, POINTER(LPVOID), UINT],
+    doc='wglReleaseImageBufferEventsI3D( HDC(None), POINTER(LPVOID)(), UINT(None) ) -> BOOL', 
+    argNames=['None', '', 'None'],
 )
 
 PFNWGLCREATEIMAGEBUFFERI3DPROC = CFUNCTYPE(LPVOID, HDC, DWORD, UINT) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:586
@@ -818,31 +818,31 @@ PFNWGLRELEASEIMAGEBUFFEREVENTSI3DPROC = CFUNCTYPE(BOOL, HDC, POINTER(LPVOID), UI
 # I3D_swap_frame_lock (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:592)
 WGL_I3D_swap_frame_lock = constant.Constant( 'WGL_I3D_swap_frame_lock', 1 )
 wglEnableFrameLockI3D = platform.createBaseFunction(
-	'wglEnableFrameLockI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[],
-	doc='wglEnableFrameLockI3D(  ) -> BOOL', 
-	argNames=[],
+    'wglEnableFrameLockI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[],
+    doc='wglEnableFrameLockI3D(  ) -> BOOL', 
+    argNames=[],
 )
 
 wglDisableFrameLockI3D = platform.createBaseFunction(
-	'wglDisableFrameLockI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[],
-	doc='wglDisableFrameLockI3D(  ) -> BOOL', 
-	argNames=[],
+    'wglDisableFrameLockI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[],
+    doc='wglDisableFrameLockI3D(  ) -> BOOL', 
+    argNames=[],
 )
 
 wglIsEnabledFrameLockI3D = platform.createBaseFunction(
-	'wglIsEnabledFrameLockI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[POINTER(BOOL)],
-	doc='wglIsEnabledFrameLockI3D( POINTER(BOOL)() ) -> BOOL', 
-	argNames=[''],
+    'wglIsEnabledFrameLockI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[POINTER(BOOL)],
+    doc='wglIsEnabledFrameLockI3D( POINTER(BOOL)() ) -> BOOL', 
+    argNames=[''],
 )
 
 wglQueryFrameLockMasterI3D = platform.createBaseFunction(
-	'wglQueryFrameLockMasterI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[POINTER(BOOL)],
-	doc='wglQueryFrameLockMasterI3D( POINTER(BOOL)() ) -> BOOL', 
-	argNames=[''],
+    'wglQueryFrameLockMasterI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[POINTER(BOOL)],
+    doc='wglQueryFrameLockMasterI3D( POINTER(BOOL)() ) -> BOOL', 
+    argNames=[''],
 )
 
 PFNWGLENABLEFRAMELOCKI3DPROC = CFUNCTYPE(BOOL) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:600
@@ -852,31 +852,31 @@ PFNWGLQUERYFRAMELOCKMASTERI3DPROC = CFUNCTYPE(BOOL, POINTER(BOOL)) 	# http://oss
 # I3D_swap_frame_usage (http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:606)
 WGL_I3D_swap_frame_usage = constant.Constant( 'WGL_I3D_swap_frame_usage', 1 )
 wglGetFrameUsageI3D = platform.createBaseFunction(
-	'wglGetFrameUsageI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[POINTER(c_float)],
-	doc='wglGetFrameUsageI3D( POINTER(c_float)() ) -> BOOL', 
-	argNames=[''],
+    'wglGetFrameUsageI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[POINTER(c_float)],
+    doc='wglGetFrameUsageI3D( POINTER(c_float)() ) -> BOOL', 
+    argNames=[''],
 )
 
 wglBeginFrameTrackingI3D = platform.createBaseFunction(
-	'wglBeginFrameTrackingI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[],
-	doc='wglBeginFrameTrackingI3D(  ) -> BOOL', 
-	argNames=[],
+    'wglBeginFrameTrackingI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[],
+    doc='wglBeginFrameTrackingI3D(  ) -> BOOL', 
+    argNames=[],
 )
 
 wglEndFrameTrackingI3D = platform.createBaseFunction(
-	'wglEndFrameTrackingI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[],
-	doc='wglEndFrameTrackingI3D(  ) -> BOOL', 
-	argNames=[],
+    'wglEndFrameTrackingI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[],
+    doc='wglEndFrameTrackingI3D(  ) -> BOOL', 
+    argNames=[],
 )
 
 wglQueryFrameTrackingI3D = platform.createBaseFunction(
-	'wglQueryFrameTrackingI3D', dll=platform.GL, resultType=BOOL, 
-	argTypes=[POINTER(DWORD), POINTER(DWORD), POINTER(c_float)],
-	doc='wglQueryFrameTrackingI3D( POINTER(DWORD)(), POINTER(DWORD)(), POINTER(c_float)() ) -> BOOL', 
-	argNames=['', '', ''],
+    'wglQueryFrameTrackingI3D', dll=platform.GL, resultType=BOOL, 
+    argTypes=[POINTER(DWORD), POINTER(DWORD), POINTER(c_float)],
+    doc='wglQueryFrameTrackingI3D( POINTER(DWORD)(), POINTER(DWORD)(), POINTER(c_float)() ) -> BOOL', 
+    argNames=['', '', ''],
 )
 
 PFNWGLGETFRAMEUSAGEI3DPROC = CFUNCTYPE(BOOL, POINTER(c_float)) 	# http://oss.sgi.com/projects/ogl-sample/ABI/wglext.h:614
@@ -1052,5 +1052,4 @@ __all__ = ['GLAPI', 'WGL_WGLEXT_VERSION', 'WGL_FRONT_COLOR_BUFFER_BIT_ARB',
 'PFNWGLQUERYFRAMETRACKINGI3DPROC', 'WGL_ATI_pixel_format_float',
 'WGL_NV_float_buffer']
 # END GENERATED CONTENT (do not edit above this line)
-
 

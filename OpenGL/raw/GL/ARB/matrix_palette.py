@@ -1,23 +1,23 @@
 '''OpenGL extension ARB.matrix_palette
 
 Overview (from the spec)
-	
-	This extension extends the abilities of ARB_vertex_blend to include 
-	a palette of modelview matrices.  The n vertex units use a palette
-	of m modelview matrices.  (Where n and m are constrained to
-	implementation defined maxima.)  Each vertex has a set of n
-	indices into the palette, and a corresponding set of n weights.
-	Matrix indices can be changed for each vertex (between Begin and
-	End).  
-	
-	When this extension is utilized, the enabled units transform each
-	vertex by the modelview matrices specified by the vertices'
-	respective indices.  These results are subsequently scaled by the
-	weights of the respective units and then summed to create the
-	eyespace vertex.   
-	
-	A similar procedure is followed for normals.  Normals, however,
-	are transformed by the inverse transpose of the modelview matrix.
+    
+    This extension extends the abilities of ARB_vertex_blend to include 
+    a palette of modelview matrices.  The n vertex units use a palette
+    of m modelview matrices.  (Where n and m are constrained to
+    implementation defined maxima.)  Each vertex has a set of n
+    indices into the palette, and a corresponding set of n weights.
+    Matrix indices can be changed for each vertex (between Begin and
+    End).  
+    
+    When this extension is utilized, the enabled units transform each
+    vertex by the modelview matrices specified by the vertices'
+    respective indices.  These results are subsequently scaled by the
+    weights of the respective units and then summed to create the
+    eyespace vertex.   
+    
+    A similar procedure is followed for normals.  Normals, however,
+    are transformed by the inverse transpose of the modelview matrix.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ARB/matrix_palette.txt

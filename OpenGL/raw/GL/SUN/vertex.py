@@ -1,10 +1,10 @@
 '''OpenGL extension SUN.vertex
 
 Overview (from the spec)
-	
-	This extension provides new GL commands to specify vertex data such as 
-	color and normal along with the vertex in one single GL command in order to
-	minimize the overhead in making GL commands for each set of vertex data.
+    
+    This extension provides new GL commands to specify vertex data such as 
+    color and normal along with the vertex in one single GL command in order to
+    minimize the overhead in making GL commands for each set of vertex data.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SUN/vertex.txt

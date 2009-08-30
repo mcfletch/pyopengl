@@ -417,4 +417,3 @@ doc='glMultTransposeMatrixd(GLdoubleArray(m)) -> None',
 argNames=('m',),
 deprecated=_DEPRECATED,
 )
-

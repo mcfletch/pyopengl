@@ -6,13 +6,13 @@ data-types to the set of types which PyOpenGL will handle as arguments
 to functions requiring typed pointers.
 
 Possible data types:
-	Numpy arrays
-	Numarray arrays
-	PyGame surfaces
-	PyMedia buffers
-	Python buffer-objects
-	Memory-mapped files
-	PIL images
+    Numpy arrays
+    Numarray arrays
+    PyGame surfaces
+    PyMedia buffers
+    Python buffer-objects
+    Memory-mapped files
+    PIL images
 """
 import ctypes
 import OpenGL

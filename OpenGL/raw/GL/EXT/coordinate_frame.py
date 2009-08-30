@@ -1,11 +1,11 @@
 '''OpenGL extension EXT.coordinate_frame
 
 Overview (from the spec)
-	
-	This extension allows specifying a per-vertex tangent and binormal
-	vector in addition to the normal vector, defining a coordinate frame.
-	The coordinate frame is used in additional extensions which also build
-	on fragment lighting to achieve bump mapping.
+    
+    This extension allows specifying a per-vertex tangent and binormal
+    vector in addition to the normal vector, defining a coordinate frame.
+    The coordinate frame is used in additional extensions which also build
+    on fragment lighting to achieve bump mapping.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/coordinate_frame.txt

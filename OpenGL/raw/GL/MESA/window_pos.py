@@ -1,22 +1,22 @@
 '''OpenGL extension MESA.window_pos
 
 Overview (from the spec)
-	
-	In order to set the current raster position to a specific window
-	coordinate with the RasterPos command, the modelview matrix, projection
-	matrix and viewport must be set very carefully.  Furthermore, if the
-	desired window coordinate is outside of the window's bounds one must
-	rely on a subtle side-effect of the Bitmap command in order to circumvent
-	frustum clipping.
-	
-	This extension provides a set of functions to directly set the
-	current raster position, bypassing the modelview matrix, the
-	projection matrix and the viewport to window mapping.  Furthermore,
-	clip testing is not performed.
-	
-	This greatly simplifies the process of setting the current raster
-	position to a specific window coordinate prior to calling DrawPixels,
-	CopyPixels or Bitmap.
+    
+    In order to set the current raster position to a specific window
+    coordinate with the RasterPos command, the modelview matrix, projection
+    matrix and viewport must be set very carefully.  Furthermore, if the
+    desired window coordinate is outside of the window's bounds one must
+    rely on a subtle side-effect of the Bitmap command in order to circumvent
+    frustum clipping.
+    
+    This extension provides a set of functions to directly set the
+    current raster position, bypassing the modelview matrix, the
+    projection matrix and the viewport to window mapping.  Furthermore,
+    clip testing is not performed.
+    
+    This greatly simplifies the process of setting the current raster
+    position to a specific window coordinate prior to calling DrawPixels,
+    CopyPixels or Bitmap.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/MESA/window_pos.txt

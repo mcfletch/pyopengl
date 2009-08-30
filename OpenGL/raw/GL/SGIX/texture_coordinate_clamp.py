@@ -1,12 +1,12 @@
 '''OpenGL extension SGIX.texture_coordinate_clamp
 
 Overview (from the spec)
-	
-	This extension provides a mechanism to specify the maximum texture coordinate
-	clamping values. Standard OpenGL always clamps the upper bound to 1.0 when
-	the wrap mode is set to CLAMP. This mechanism can be used to  guarantee 
-	that non-existent texel data will not be accessed when the texture image has 
-	dimensions that are not a power of 2.
+    
+    This extension provides a mechanism to specify the maximum texture coordinate
+    clamping values. Standard OpenGL always clamps the upper bound to 1.0 when
+    the wrap mode is set to CLAMP. This mechanism can be used to  guarantee 
+    that non-existent texel data will not be accessed when the texture image has 
+    dimensions that are not a power of 2.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/texture_coordinate_clamp.txt

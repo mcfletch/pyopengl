@@ -23,35 +23,35 @@ ctypes_version = [int(i) for i in ctypes.__version__.split('.')[:3]]
 
 # Basic OpenGL data-types as ctypes declarations...
 def _defineType( name, baseType, convertFunc = long ):
-	import OpenGL
-	do_wrapping = (
-		OpenGL.ALLOW_NUMPY_SCALARS or # explicitly require
-		(( # or we are using Python 2.5.x ctypes which doesn't support uint type numpy scalars
-			ctypes_version < [1,1,0]
-			and baseType in (ctypes.c_uint,ctypes.c_uint64,ctypes.c_ulong,ctypes.c_ushort)
-		) or
-		( # or we are using Python 2.5.x (x < 2) ctypes which doesn't support any numpy int scalars
-			ctypes_version < [1,0,2]
-			and baseType in (ctypes.c_int,ctypes.c_int64,ctypes.c_long,ctypes.c_short)
-		))
-	)
-	if do_wrapping:
-		original = baseType.from_param
-		if not getattr( original, 'from_param_numpy_scalar', False ):
-			def from_param( x, typeCode=None ):
-				try:
-					return original( x )
-				except TypeError, err:
-					try:
-						return original( convertFunc(x) )
-					except TypeError, err2:
-						raise err
-			from_param = staticmethod( from_param )
-			setattr( baseType, 'from_param', from_param )
-			baseType.from_param_numpy_scalar = True
-		return baseType
-	else:
-		return baseType
+    import OpenGL
+    do_wrapping = (
+        OpenGL.ALLOW_NUMPY_SCALARS or # explicitly require
+        (( # or we are using Python 2.5.x ctypes which doesn't support uint type numpy scalars
+            ctypes_version < [1,1,0]
+            and baseType in (ctypes.c_uint,ctypes.c_uint64,ctypes.c_ulong,ctypes.c_ushort)
+        ) or
+        ( # or we are using Python 2.5.x (x < 2) ctypes which doesn't support any numpy int scalars
+            ctypes_version < [1,0,2]
+            and baseType in (ctypes.c_int,ctypes.c_int64,ctypes.c_long,ctypes.c_short)
+        ))
+    )
+    if do_wrapping:
+        original = baseType.from_param
+        if not getattr( original, 'from_param_numpy_scalar', False ):
+            def from_param( x, typeCode=None ):
+                try:
+                    return original( x )
+                except TypeError, err:
+                    try:
+                        return original( convertFunc(x) )
+                    except TypeError, err2:
+                        raise err
+            from_param = staticmethod( from_param )
+            setattr( baseType, 'from_param', from_param )
+            baseType.from_param_numpy_scalar = True
+        return baseType
+    else:
+        return baseType
 
 GLvoid = None
 GLboolean = _defineType( 'GLboolean', ctypes.c_ubyte, bool )
@@ -100,15 +100,15 @@ GLhalfNV = GLhalfARB = ctypes.c_ushort
 
 
 ARRAY_TYPE_TO_CONSTANT = [
-	('GLclampd', GL_DOUBLE),
-	('GLclampf', GL_FLOAT),
-	('GLfloat', GL_FLOAT),
-	('GLdouble', GL_DOUBLE),
-	('GLbyte', GL_BYTE),
-	('GLshort', GL_SHORT),
-	('GLint', GL_INT),
-	('GLubyte', GL_UNSIGNED_BYTE),
-	('GLushort', GL_UNSIGNED_SHORT),
-	('GLuint', GL_UNSIGNED_INT),
-	('GLenum', GL_UNSIGNED_INT),
+    ('GLclampd', GL_DOUBLE),
+    ('GLclampf', GL_FLOAT),
+    ('GLfloat', GL_FLOAT),
+    ('GLdouble', GL_DOUBLE),
+    ('GLbyte', GL_BYTE),
+    ('GLshort', GL_SHORT),
+    ('GLint', GL_INT),
+    ('GLubyte', GL_UNSIGNED_BYTE),
+    ('GLushort', GL_UNSIGNED_SHORT),
+    ('GLuint', GL_UNSIGNED_INT),
+    ('GLenum', GL_UNSIGNED_INT),
 ]

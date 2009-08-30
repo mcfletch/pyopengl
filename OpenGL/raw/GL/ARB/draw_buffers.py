@@ -1,11 +1,11 @@
 '''OpenGL extension ARB.draw_buffers
 
 Overview (from the spec)
-	
-	This extension extends ARB_fragment_program and ARB_fragment_shader
-	to allow multiple output colors, and provides a mechanism for
-	directing those outputs to multiple color buffers.
-	
+    
+    This extension extends ARB_fragment_program and ARB_fragment_shader
+    to allow multiple output colors, and provides a mechanism for
+    directing those outputs to multiple color buffers.
+    
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ARB/draw_buffers.txt

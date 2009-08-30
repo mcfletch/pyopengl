@@ -15,29 +15,29 @@ from OpenGL.GL import glget
 from OpenGL import converters
 @lazy( glDeleteQueriesARB )
 def glDeleteQueriesARB( baseOperation, n, ids=None ):
-	if ids is None:
-		ids = arrays.GLuintArray.asArray( ids )
-		n = arrays.GLuintArray.arraySize( ids )
-	else:
-		ids = arrays.GLuintArray.asArray( ids )
-	return baseOperation( n,ids )
+    if ids is None:
+        ids = arrays.GLuintArray.asArray( ids )
+        n = arrays.GLuintArray.arraySize( ids )
+    else:
+        ids = arrays.GLuintArray.asArray( ids )
+    return baseOperation( n,ids )
 @lazy( glGenQueriesARB )
 def glGenQueriesARB( baseOperation, n, ids=None ):
-	"""Generate n queries, if ids is None, is allocated
-	
-	returns array of ids
-	"""
-	if ids is None:
-		ids = arrays.GLuintArray.zeros( (n,))
-	else:
-		ids = arrays.GLuintArray.asArray( ids )
-	baseOperation( n, ids )
-	return ids
+    """Generate n queries, if ids is None, is allocated
+    
+    returns array of ids
+    """
+    if ids is None:
+        ids = arrays.GLuintArray.zeros( (n,))
+    else:
+        ids = arrays.GLuintArray.asArray( ids )
+    baseOperation( n, ids )
+    return ids
 
 for func in (
-	'glGetQueryivARB','glGetQueryObjectivARB','glGetQueryObjectuivARB',
+    'glGetQueryivARB','glGetQueryObjectivARB','glGetQueryObjectuivARB',
 ):
-	globals()[func] = wrapper.wrapper(globals()[func]).setOutput(
-		"params", (1,)
-	)
+    globals()[func] = wrapper.wrapper(globals()[func]).setOutput(
+        "params", (1,)
+    )
 del func, glget
