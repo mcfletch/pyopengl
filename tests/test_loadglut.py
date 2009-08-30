@@ -1,10 +1,10 @@
 import ctypes
 try:
-	from ctypes.util import find_library
+    from ctypes.util import find_library
 except ImportError, err:
-	from ctypes.util import findLib 
-	def find_library( string ):
-		return findLib( string )[0]
+    from ctypes.util import findLib 
+    def find_library( string ):
+        return findLib( string )[0]
 
 GL = OpenGL = ctypes.CDLL( find_library('GL'), mode=ctypes.RTLD_GLOBAL )
 GLU = ctypes.CDLL( find_library('GLU'), mode=ctypes.RTLD_GLOBAL )
