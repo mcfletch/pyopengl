@@ -231,11 +231,6 @@ if VBO is None:
             """Context manager exit"""
             self.unbind()
             return False # do not supress exceptions...
-#        def map( self, access=GL_READ_WRITE ):
-#            """Return a mapped-buffer object array"""
-#            self.bind()
-#            voidp = glMapBuffer( self.resolve(self.target), access )
-#            instance = 
 
     class VBOOffset( object ):
         def __init__( self, vbo, offset ):
@@ -293,6 +288,8 @@ if VBO is None:
             return instance.offset
         def from_param( self, instance, typeCode=None ):
             return ctypes.c_void_p( instance.offset )
+
+
 
 FormatHandler.loadAll() # otherwise just the VBO would get loaded :)
 VBO_HANDLER = VBOHandler()
