@@ -94,10 +94,10 @@ if VBO is None:
         _no_cache_ = True # do not cache in context data arrays
         def __init__( 
             self, data, usage='GL_DYNAMIC_DRAW', 
-            target='GL_ARRAY_BUFFER',
+            target='GL_ARRAY_BUFFER', size=None,
         ):
-            self.data = data 
             self.usage = usage 
+            self.set_array( data, size )
             self.target = target 
             self.buffers = []
             self._copy_segments = []
@@ -108,10 +108,14 @@ if VBO is None:
             if isinstance( value, (str,unicode)):
                 return getattr( self.implementation, self.implementation.basename( value ) )
             return value
-        def set_array( self, data ):
+        def set_array( self, data, size=None ):
             """Update our entire array with new data"""
             self.data = data 
             self.copied = False
+            if size is not None:
+                self.size = size
+            elif self.data is not None:
+                self.size = ArrayDatatype.arrayByteCount( self.data )
         def __setitem__( self, slice, array):
             """Set slice of data on the array and vbo (if copied already)
             
@@ -188,8 +192,11 @@ if VBO is None:
                         dataptr = ArrayDatatype.voidDataPointer( data )
                         self.implementation.glBufferSubData(self.target, start, size, dataptr)
             else:
+                if self.data is not None and self.size is None:
+                    self.size = ArrayDatatype.arrayByteCount( self.data )
                 self.implementation.glBufferData(
                     self.target, 
+                    self.size,
                     self.data,
                     self.usage,
                 )
@@ -224,6 +231,11 @@ if VBO is None:
             """Context manager exit"""
             self.unbind()
             return False # do not supress exceptions...
+#        def map( self, access=GL_READ_WRITE ):
+#            """Return a mapped-buffer object array"""
+#            self.bind()
+#            voidp = glMapBuffer( self.resolve(self.target), access )
+#            instance = 
 
     class VBOOffset( object ):
         def __init__( self, vbo, offset ):
