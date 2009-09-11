@@ -1,14 +1,14 @@
 '''OpenGL extension EXT.pixel_transform
 
 Overview (from the spec)
-    
-    This extension provides support for scaling, rotation, translation and
-    shearing of two-dimensional pixel rectangles in the pixel rasterizer.
-    The transformation is defined via a 4x4 matrix, where only those entries
-    which apply as a 2D affine transformation will be accepted and used.
-    These matrices can be manipulated using the same functions as the other 
-    OpenGL matrix stacks.
-    
+	
+	This extension provides support for scaling, rotation, translation and
+	shearing of two-dimensional pixel rectangles in the pixel rasterizer.
+	The transformation is defined via a 4x4 matrix, where only those entries
+	which apply as a 2D affine transformation will be accepted and used.
+	These matrices can be manipulated using the same functions as the other 
+	OpenGL matrix stacks.
+	
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/pixel_transform.txt

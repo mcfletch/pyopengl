@@ -1,17 +1,17 @@
 '''OpenGL extension ARB.texture_env_add
 
 Overview (from the spec)
-    
-        New texture environment function ADD is supported with the following
-        equation:
-                Cv = Cf + Ct
-    
-        New function may be specified by calling TexEnv with ADD token.
-    
-        One possible application is to add a specular highlight texture to
-        a Gouraud-shaded primitive to emulate Phong shading, in a single
-        pass.
-    
+	
+	    New texture environment function ADD is supported with the following
+	    equation:
+				Cv = Cf + Ct
+	
+	    New function may be specified by calling TexEnv with ADD token.
+	
+	    One possible application is to add a specular highlight texture to
+	    a Gouraud-shaded primitive to emulate Phong shading, in a single
+	    pass.
+	
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ARB/texture_env_add.txt

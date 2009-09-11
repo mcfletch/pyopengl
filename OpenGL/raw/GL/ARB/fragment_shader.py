@@ -1,18 +1,18 @@
 '''OpenGL extension ARB.fragment_shader
 
 Overview (from the spec)
-    
-    This extension adds functionality to define fragment shader objects. A
-    fragment shader object is a shader object (see the ARB_shader_objects
-    extension) that, when attached to a program object, can be compiled and
-    linked to produce an executable that runs on the fragment processor in
-    OpenGL. The fragment processor is a programmable unit that replaces the
-    OpenGL 1.4 fixed-function texturing, color sum and fog stages. This
-    extension also defines how such an executable interacts with the fixed
-    functionality fragment processing of OpenGL 1.4. The language used to
-    write fragment shaders is not discussed here. That language is defined
-    in the OpenGL Shading Language specification as the Fragment Shading
-    Language.
+	
+	This extension adds functionality to define fragment shader objects. A
+	fragment shader object is a shader object (see the ARB_shader_objects
+	extension) that, when attached to a program object, can be compiled and
+	linked to produce an executable that runs on the fragment processor in
+	OpenGL. The fragment processor is a programmable unit that replaces the
+	OpenGL 1.4 fixed-function texturing, color sum and fog stages. This
+	extension also defines how such an executable interacts with the fixed
+	functionality fragment processing of OpenGL 1.4. The language used to
+	write fragment shaders is not discussed here. That language is defined
+	in the OpenGL Shading Language specification as the Fragment Shading
+	Language.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ARB/fragment_shader.txt

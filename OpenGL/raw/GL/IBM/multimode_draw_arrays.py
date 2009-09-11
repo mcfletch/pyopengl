@@ -1,17 +1,17 @@
 '''OpenGL extension IBM.multimode_draw_arrays
 
 Overview (from the spec)
-    
-    These functions behave identically to the standard OpenGL 1.1 functions
-    glDrawArrays() and glDrawElements() except they handle multiple lists of
-    vertices and multiple primitive modes in one call. Their main purpose is
-    to allow one function call to render more than one primitive regardless
-    of the primitive mode. 
-    
-    This extension is similar to the EXT_multi_draw_arrays extension 
-    except that it accomodates the specification of a  unique mode for
-    each primitive.
-    
+	
+	These functions behave identically to the standard OpenGL 1.1 functions
+	glDrawArrays() and glDrawElements() except they handle multiple lists of
+	vertices and multiple primitive modes in one call. Their main purpose is
+	to allow one function call to render more than one primitive regardless
+	of the primitive mode. 
+	
+	This extension is similar to the EXT_multi_draw_arrays extension 
+	except that it accomodates the specification of a  unique mode for
+	each primitive.
+	
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/IBM/multimode_draw_arrays.txt

@@ -1,26 +1,26 @@
 '''OpenGL extension SGIS.texture4D
 
 Overview (from the spec)
-    
-    This extension defines 4-dimensional texture mapping.  If EXT_subtexture
-    is supported, this extension also defines a mechanism to redefine a
-    portion of an existing 4-dimensional texture image.  Because
-    EXT_texture3D is required, this extension utilizes the 3-dimensional
-    image support defined in by EXT_texture3D as a base for 4-dimensional
-    image manipulation.
-    
-    The 4th dimension has an abstract, rather than physical, reference
-    and will be called "extent", since the definition of extent is "that which
-    specifies the range or magnitude of an area or volume."
-    
-    Four-dimensional texture mapping is more constrained than its one, two,
-    and three-dimensional counterparts.  Mipmapping is not supported, so
-    only the level-zero 4-dimensional texture image can be defined.  Cubic
-    filtering is not supported, so the border width must be either zero or
-    one.
-    
-    Four-dimensional textures are used primarily as color lookup tables for
-    color conversion.
+	
+	This extension defines 4-dimensional texture mapping.  If EXT_subtexture
+	is supported, this extension also defines a mechanism to redefine a
+	portion of an existing 4-dimensional texture image.  Because
+	EXT_texture3D is required, this extension utilizes the 3-dimensional
+	image support defined in by EXT_texture3D as a base for 4-dimensional
+	image manipulation.
+	
+	The 4th dimension has an abstract, rather than physical, reference
+	and will be called "extent", since the definition of extent is "that which
+	specifies the range or magnitude of an area or volume."
+	
+	Four-dimensional texture mapping is more constrained than its one, two,
+	and three-dimensional counterparts.  Mipmapping is not supported, so
+	only the level-zero 4-dimensional texture image can be defined.  Cubic
+	filtering is not supported, so the border width must be either zero or
+	one.
+	
+	Four-dimensional textures are used primarily as color lookup tables for
+	color conversion.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIS/texture4D.txt

@@ -1,24 +1,24 @@
 '''OpenGL extension ARB.window_pos
 
 Overview (from the spec)
-    
-    In order to set the current raster position to a specific window
-    coordinate with the RasterPos command, the modelview matrix, projection
-    matrix and viewport must be set very carefully.  Furthermore, if the
-    desired window coordinate is outside of the window's bounds one must rely
-    on a subtle side-effect of the Bitmap command in order to avoid frustum
-    clipping.
-    
-    This extension provides a set of functions to directly set the current
-    raster position in window coordinates, bypassing the modelview matrix, the
-    projection matrix and the viewport-to-window mapping.  Furthermore, clip
-    testing is not performed, so that the current raster position is always
-    valid.
-    
-    This greatly simplifies the process of setting the current raster position
-    to a specific window coordinate prior to calling DrawPixels, CopyPixels or
-    Bitmap.  Many matrix operations can be avoided when mixing 2D and 3D
-    rendering.
+	
+	In order to set the current raster position to a specific window
+	coordinate with the RasterPos command, the modelview matrix, projection
+	matrix and viewport must be set very carefully.  Furthermore, if the
+	desired window coordinate is outside of the window's bounds one must rely
+	on a subtle side-effect of the Bitmap command in order to avoid frustum
+	clipping.
+	
+	This extension provides a set of functions to directly set the current
+	raster position in window coordinates, bypassing the modelview matrix, the
+	projection matrix and the viewport-to-window mapping.  Furthermore, clip
+	testing is not performed, so that the current raster position is always
+	valid.
+	
+	This greatly simplifies the process of setting the current raster position
+	to a specific window coordinate prior to calling DrawPixels, CopyPixels or
+	Bitmap.  Many matrix operations can be avoided when mixing 2D and 3D
+	rendering.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ARB/window_pos.txt

@@ -1,25 +1,25 @@
 '''OpenGL extension SGIS.texture_select
 
 Overview (from the spec)
-    
-    This extension introduces several new texture internal formats.  The
-    purpose of these new formats is to reorganize the components of a
-    texture into groups of components.  The currently selected group
-    effectively becomes the internal format.
-    
-    Also, two new texture parameters are introduced that control the
-    selection of these groups of components.
-    
-    For example, assume a texture internal format of DUAL_LUMINANCE4_SGIS is
-    specified.  Now there are two groups of components, where each group has
-    a format of LUMINANCE4.  One of the two LUMINANCE groups is always
-    selected.  components can be selected and then interpreted as a LUMINANCE
-    texture.
-    
-    The purpose of this extension is allow better utilization of texture
-    memory by subdividing the internal representation of a texel into 1, 2,
-    or 4 smaller texels.  Additionally, this may improve performance of
-    texture downloads.
+	
+	This extension introduces several new texture internal formats.  The
+	purpose of these new formats is to reorganize the components of a
+	texture into groups of components.  The currently selected group
+	effectively becomes the internal format.
+	
+	Also, two new texture parameters are introduced that control the
+	selection of these groups of components.
+	
+	For example, assume a texture internal format of DUAL_LUMINANCE4_SGIS is
+	specified.  Now there are two groups of components, where each group has
+	a format of LUMINANCE4.  One of the two LUMINANCE groups is always
+	selected.  components can be selected and then interpreted as a LUMINANCE
+	texture.
+	
+	The purpose of this extension is allow better utilization of texture
+	memory by subdividing the internal representation of a texel into 1, 2,
+	or 4 smaller texels.  Additionally, this may improve performance of
+	texture downloads.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIS/texture_select.txt

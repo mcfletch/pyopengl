@@ -1,11 +1,11 @@
 '''OpenGL extension SGIX.async_histogram
 
 Overview (from the spec)
-    
-    This extension introduces a new asynchronous mode for histogram
-    and minmax readbacks.  It allows programs to get the contents of a
-    histogram or minmax table without blocking and to continue issuing
-    graphics commands during the readback.
+	
+	This extension introduces a new asynchronous mode for histogram
+	and minmax readbacks.  It allows programs to get the contents of a
+	histogram or minmax table without blocking and to continue issuing
+	graphics commands during the readback.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/async_histogram.txt

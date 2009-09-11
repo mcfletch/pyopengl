@@ -1,9 +1,9 @@
 '''OpenGL extension S3.s3tc
 
 Overview (from the spec)
-    
-    This extension allows specifying texture data in compressed S3TC
-    format.
+	
+	This extension allows specifying texture data in compressed S3TC
+	format.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/S3/s3tc.txt

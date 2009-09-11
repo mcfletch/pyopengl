@@ -1,15 +1,15 @@
 '''OpenGL extension SGIX.depth_texture
 
 Overview (from the spec)
-    
-    This extension defines a new depth texture format.  An important
-    application of depth texture images is shadow casting, but separating
-    this from the shadow extension allows for the potential use of depth
-    textures in other applications such as image-based rendering or
-    displacement mapping.  This extension does not define new depth-texture
-    environment functions, such as filtering or applying the depth values
-    computed from a texture, but leaves this to other extensions, such as
-    the shadow extension.
+	
+	This extension defines a new depth texture format.  An important
+	application of depth texture images is shadow casting, but separating
+	this from the shadow extension allows for the potential use of depth
+	textures in other applications such as image-based rendering or
+	displacement mapping.  This extension does not define new depth-texture
+	environment functions, such as filtering or applying the depth values
+	computed from a texture, but leaves this to other extensions, such as
+	the shadow extension.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/depth_texture.txt

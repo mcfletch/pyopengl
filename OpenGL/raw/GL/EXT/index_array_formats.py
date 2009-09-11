@@ -1,10 +1,10 @@
 '''OpenGL extension EXT.index_array_formats
 
 Overview (from the spec)
-    
-    This extends the number of packed vertex formats accepted by
-    InterleavedArrays to include formats which specify color indexes
-    rather than RGBA colors.
+	
+	This extends the number of packed vertex formats accepted by
+	InterleavedArrays to include formats which specify color indexes
+	rather than RGBA colors.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/index_array_formats.txt

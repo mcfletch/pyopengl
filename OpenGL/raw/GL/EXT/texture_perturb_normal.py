@@ -1,11 +1,11 @@
 '''OpenGL extension EXT.texture_perturb_normal
 
 Overview (from the spec)
-    
-    This extension defines a mechanism for using texture values to perturb
-    the fragment normal vector prior to fragment lighting.  It enables a
-    direct implementation of the original formulation of bump mapping by
-    Blinn.
+	
+	This extension defines a mechanism for using texture values to perturb
+	the fragment normal vector prior to fragment lighting.  It enables a
+	direct implementation of the original formulation of bump mapping by
+	Blinn.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/texture_perturb_normal.txt

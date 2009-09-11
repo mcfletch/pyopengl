@@ -1,15 +1,15 @@
 '''OpenGL extension EXT.packed_pixels
 
 Overview (from the spec)
-    
-    This extension provides support for packed pixels in host memory.  A
-    packed pixel is represented entirely by one unsigned byte, one
-    unsigned short, or one unsigned integer.  The fields with the packed
-    pixel are not proper machine types, but the pixel as a whole is.  Thus
-    the pixel storage modes, including PACK_SKIP_PIXELS, PACK_ROW_LENGTH,
-    PACK_SKIP_ROWS, PACK_IMAGE_HEIGHT_EXT, PACK_SKIP_IMAGES_EXT,
-    PACK_SWAP_BYTES, PACK_ALIGNMENT, and their unpacking counterparts all
-    work correctly with packed pixels.
+	
+	This extension provides support for packed pixels in host memory.  A
+	packed pixel is represented entirely by one unsigned byte, one
+	unsigned short, or one unsigned integer.  The fields with the packed
+	pixel are not proper machine types, but the pixel as a whole is.  Thus
+	the pixel storage modes, including PACK_SKIP_PIXELS, PACK_ROW_LENGTH,
+	PACK_SKIP_ROWS, PACK_IMAGE_HEIGHT_EXT, PACK_SKIP_IMAGES_EXT,
+	PACK_SWAP_BYTES, PACK_ALIGNMENT, and their unpacking counterparts all
+	work correctly with packed pixels.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/packed_pixels.txt

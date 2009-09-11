@@ -1,16 +1,16 @@
 '''OpenGL extension SGIX.async_pixel
 
 Overview (from the spec)
-    
-    This extension introduces a new asynchronous mode for texture
-    download, pixel download and pixel readback commands.  It allows
-    programs to transfer textures or images between the host and the
-    graphics accelerator in parallel with the execution of other
-    graphics commands (possibly taking advantage of a secondary path
-    to the graphics accelerator).  It also allows programs to issue
-    non-blocking pixel readback commands that return immediately after
-    they are issued so that the program can issue other commands while
-    the readback takes place.
+	
+	This extension introduces a new asynchronous mode for texture
+	download, pixel download and pixel readback commands.  It allows
+	programs to transfer textures or images between the host and the
+	graphics accelerator in parallel with the execution of other
+	graphics commands (possibly taking advantage of a secondary path
+	to the graphics accelerator).  It also allows programs to issue
+	non-blocking pixel readback commands that return immediately after
+	they are issued so that the program can issue other commands while
+	the readback takes place.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/async_pixel.txt

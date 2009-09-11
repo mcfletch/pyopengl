@@ -1,11 +1,11 @@
 '''OpenGL extension SGIS.sharpen_texture
 
 Overview (from the spec)
-    
-    This extension introduces texture magnification filters that sharpen
-    the resulting image by extrapolating from the level 1 image to the
-    level 0 image.  Sharpening can be enabled for all color channels, for
-    the alpha channel only, or for the red, green, and blue channels only.
+	
+	This extension introduces texture magnification filters that sharpen
+	the resulting image by extrapolating from the level 1 image to the
+	level 0 image.  Sharpening can be enabled for all color channels, for
+	the alpha channel only, or for the red, green, and blue channels only.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIS/sharpen_texture.txt

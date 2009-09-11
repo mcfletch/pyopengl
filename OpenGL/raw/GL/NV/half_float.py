@@ -1,22 +1,22 @@
 '''OpenGL extension NV.half_float
 
 Overview (from the spec)
-    
-    This extension introduces a new storage format and data type for
-    half-precision (16-bit) floating-point quantities.  The floating-point
-    format is very similar to the IEEE single-precision floating-point
-    standard, except that it has only 5 exponent bits and 10 mantissa bits.
-    Half-precision floats are smaller than full precision floats and provide a
-    larger dynamic range than similarly-sized normalized scalar data types.
-    
-    This extension allows applications to use half-precision floating point
-    data when specifying vertices or pixel data.  It adds new commands to
-    specify vertex attributes using the new data type, and extends the
-    existing vertex array and image specification commands to accept the new
-    data type.
-    
-    This storage format is also used to represent 16-bit components in the
-    floating-point frame buffers, as defined in the NV_float_buffer extension.
+	
+	This extension introduces a new storage format and data type for
+	half-precision (16-bit) floating-point quantities.  The floating-point
+	format is very similar to the IEEE single-precision floating-point
+	standard, except that it has only 5 exponent bits and 10 mantissa bits.
+	Half-precision floats are smaller than full precision floats and provide a
+	larger dynamic range than similarly-sized normalized scalar data types.
+	
+	This extension allows applications to use half-precision floating point
+	data when specifying vertices or pixel data.  It adds new commands to
+	specify vertex attributes using the new data type, and extends the
+	existing vertex array and image specification commands to accept the new
+	data type.
+	
+	This storage format is also used to represent 16-bit components in the
+	floating-point frame buffers, as defined in the NV_float_buffer extension.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/NV/half_float.txt

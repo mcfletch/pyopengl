@@ -1,13 +1,13 @@
 '''OpenGL extension SGIX.tag_sample_buffer
 
 Overview (from the spec)
-    
-    The extensions defines a special purpose fast multisample clear.
-    This clear can be used with some restrictions as a significantly
-    faster alternative to Clear(DEPTH_BUFFER_BIT).
-    
-    The extension is based on the RealityEngine architecture and will
-    probably never be supported by any other architecture.
+	
+	The extensions defines a special purpose fast multisample clear.
+	This clear can be used with some restrictions as a significantly
+	faster alternative to Clear(DEPTH_BUFFER_BIT).
+	
+	The extension is based on the RealityEngine architecture and will
+	probably never be supported by any other architecture.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/tag_sample_buffer.txt

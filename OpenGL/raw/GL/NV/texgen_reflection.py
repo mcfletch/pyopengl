@@ -1,16 +1,16 @@
 '''OpenGL extension NV.texgen_reflection
 
 Overview (from the spec)
-    
-    This extension provides two new texture coordinate generation modes
-    that are useful texture-based lighting and environment mapping.
-    The reflection map mode generates texture coordinates (s,t,r)
-    matching the vertex's eye-space reflection vector.  The reflection
-    map mode is useful for environment mapping without the singularity
-    inherent in sphere mapping.  The normal map mode generates texture
-    coordinates (s,t,r) matching the vertex's transformed eye-space
-    normal.  The normal map mode is useful for sophisticated cube map
-    texturing-based diffuse lighting models.
+	
+	This extension provides two new texture coordinate generation modes
+	that are useful texture-based lighting and environment mapping.
+	The reflection map mode generates texture coordinates (s,t,r)
+	matching the vertex's eye-space reflection vector.  The reflection
+	map mode is useful for environment mapping without the singularity
+	inherent in sphere mapping.  The normal map mode generates texture
+	coordinates (s,t,r) matching the vertex's transformed eye-space
+	normal.  The normal map mode is useful for sophisticated cube map
+	texturing-based diffuse lighting models.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/NV/texgen_reflection.txt

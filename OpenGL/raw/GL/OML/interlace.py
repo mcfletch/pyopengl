@@ -1,19 +1,19 @@
 '''OpenGL extension OML.interlace
 
 Overview (from the spec)
-    
-    This extension provides a way to interlace rows of pixels when
-    drawing, reading, or copying pixel rectangles or texture images. In
-    this context, interlacing means skiping over rows of pixels or
-    texels in the destination. This is useful for dealing with video
-    data since a single frame of video is typically composed from two
-    images or fields: one image specifying the data for even rows of the
-    frame and the other image specifying the data for odd rows of the
-    frame.
-    
-    The functionality provided by this extension is a combination
-    of the older SGIX_interlace and INGR_interlace_read extensions,
-    with  changes applying interlacing to texture image queries.
+	
+	This extension provides a way to interlace rows of pixels when
+	drawing, reading, or copying pixel rectangles or texture images. In
+	this context, interlacing means skiping over rows of pixels or
+	texels in the destination. This is useful for dealing with video
+	data since a single frame of video is typically composed from two
+	images or fields: one image specifying the data for even rows of the
+	frame and the other image specifying the data for odd rows of the
+	frame.
+	
+	The functionality provided by this extension is a combination
+	of the older SGIX_interlace and INGR_interlace_read extensions,
+	with  changes applying interlacing to texture image queries.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/OML/interlace.txt

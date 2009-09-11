@@ -1,14 +1,14 @@
 '''OpenGL extension SGIS.fog_function
 
 Overview (from the spec)
-    
-    This extension allows to define application-specific fog blend-factor
-    function.  Function is defined by the set of the "control" points and
-    should be monotonic. Each control point represented as a pair of the
-    eye-space distance value and corresponding value of the fog blending 
-    factor. The minimum number of control points is one. The maximum 
-    number is implementation dependent.
-    
+	
+	This extension allows to define application-specific fog blend-factor
+	function.  Function is defined by the set of the "control" points and
+	should be monotonic. Each control point represented as a pair of the
+	eye-space distance value and corresponding value of the fog blending 
+	factor. The minimum number of control points is one. The maximum 
+	number is implementation dependent.
+	
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIS/fog_function.txt

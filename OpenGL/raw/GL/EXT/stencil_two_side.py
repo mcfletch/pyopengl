@@ -1,13 +1,13 @@
 '''OpenGL extension EXT.stencil_two_side
 
 Overview (from the spec)
-    
-    This extension provides two-sided stencil testing where the
-    stencil-related state (stencil operations, reference value, compare
-    mask, and write mask) may be different for front- and back-facing
-    polygons.  Two-sided stencil testing may improve the performance
-    of stenciled shadow volume and Constructive Solid Geometry (CSG)
-    rendering algorithms.
+	
+	This extension provides two-sided stencil testing where the
+	stencil-related state (stencil operations, reference value, compare
+	mask, and write mask) may be different for front- and back-facing
+	polygons.  Two-sided stencil testing may improve the performance
+	of stenciled shadow volume and Constructive Solid Geometry (CSG)
+	rendering algorithms.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/stencil_two_side.txt

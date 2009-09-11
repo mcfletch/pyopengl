@@ -1,12 +1,12 @@
 '''OpenGL extension SGIX.shadow
 
 Overview (from the spec)
-    
-    This extension defines two new operations to be performed on texture
-    values before they are passed on to the filtering subsystem.  These
-    operations perform either a <= or >= test on the value from texture
-    memory and the iterated R value, and return 1.0 or 0.0 if the test
-    passes or fails, respectively.
+	
+	This extension defines two new operations to be performed on texture
+	values before they are passed on to the filtering subsystem.  These
+	operations perform either a <= or >= test on the value from texture
+	memory and the iterated R value, and return 1.0 or 0.0 if the test
+	passes or fails, respectively.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/shadow.txt

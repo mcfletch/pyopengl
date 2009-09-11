@@ -1,53 +1,53 @@
 '''OpenGL extension SGIX.sprite
 
 Overview (from the spec)
-    
-        This extension provides support for viewpoint dependent alignment
-        of geometry, in particular geometry that rotates about a point or
-        a specified axis to face the eye point.  The primary use is for
-        quickly rendering roughly cylindrically or spherically symmetric
-        objects, e.g. trees, smoke, clouds, etc. using geometry textured
-        with a partially transparent texture map.
-    
-        Rendering sprite geometry requires applying a transformation to
-        primitives before the current model view. This matrix includes a
-        rotation which is computed based on the current model view matrix
-        and a translation which is specified explicitly
-        (SPRITE_TRANSLATION_SGIX). The current model view matrix itself
-        is not modified.
-    
-        Primitives are first transformed by a rotation, depending on the
-        sprite mode:
-    
-        SPRITE_AXIAL_SGIX: The front of the object is rotated about
-        an axis so that it faces the eye as much as the axis
-        constraint allows.  This is used for roughly rendering cylindrical
-        objects such as trees in visual simulation. 
-    
-        SPRITE_OBJECT_ALIGNED_SGIX: The front of the object is
-        rotated about a point to face the eye with the remaining
-        rotational degree of freedom specified by aligning the top
-        of the object with a specified axis in object coordinates.
-        This is used for spherical objects and special effects such
-        as smoke which must maintain an alignment in object
-        coordinates for realism.
-    
-        SPRITE_EYE_ALIGNED_SGIX: The front of the object is rotated
-        about a point to face the eye with the remaining rotational
-        degree of freedom specified by aligning the top of the object
-        with a specified axis in eye coordinates. This is used for
-        rendering sprites which must maintain an alignment on the
-        screen, such as 3D annotations.
-    
-        The axis of rotation or alignment, SPRITE_AXIS_SGIX, can be 
-        an arbitrary direction to support geocentric coordinate frames
-        in which "up" is not along X, Y or Z.
-    
-        Sprite geometry is modeled in a canonical frame: +Z is the up
-        vector. -Y is the front vector which is rotated to point towards
-        the eye. In the discussion below, the eye vector is the vector to
-        the eye from the origin of the model view frame translated by the
-        sprite position.
+	
+	    This extension provides support for viewpoint dependent alignment
+	    of geometry, in particular geometry that rotates about a point or
+	    a specified axis to face the eye point.  The primary use is for
+	    quickly rendering roughly cylindrically or spherically symmetric
+	    objects, e.g. trees, smoke, clouds, etc. using geometry textured
+	    with a partially transparent texture map.
+	
+	    Rendering sprite geometry requires applying a transformation to
+	    primitives before the current model view. This matrix includes a
+	    rotation which is computed based on the current model view matrix
+	    and a translation which is specified explicitly
+	    (SPRITE_TRANSLATION_SGIX). The current model view matrix itself
+	    is not modified.
+	
+	    Primitives are first transformed by a rotation, depending on the
+	    sprite mode:
+	
+		SPRITE_AXIAL_SGIX: The front of the object is rotated about
+		an axis so that it faces the eye as much as the axis
+		constraint allows.  This is used for roughly rendering cylindrical
+		objects such as trees in visual simulation. 
+	
+		SPRITE_OBJECT_ALIGNED_SGIX: The front of the object is
+		rotated about a point to face the eye with the remaining
+		rotational degree of freedom specified by aligning the top
+		of the object with a specified axis in object coordinates.
+		This is used for spherical objects and special effects such
+		as smoke which must maintain an alignment in object
+		coordinates for realism.
+	
+		SPRITE_EYE_ALIGNED_SGIX: The front of the object is rotated
+		about a point to face the eye with the remaining rotational
+		degree of freedom specified by aligning the top of the object
+		with a specified axis in eye coordinates. This is used for
+		rendering sprites which must maintain an alignment on the
+		screen, such as 3D annotations.
+	
+	    The axis of rotation or alignment, SPRITE_AXIS_SGIX, can be 
+	    an arbitrary direction to support geocentric coordinate frames
+	    in which "up" is not along X, Y or Z.
+	
+	    Sprite geometry is modeled in a canonical frame: +Z is the up
+	    vector. -Y is the front vector which is rotated to point towards
+	    the eye. In the discussion below, the eye vector is the vector to
+	    the eye from the origin of the model view frame translated by the
+	    sprite position.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SGIX/sprite.txt

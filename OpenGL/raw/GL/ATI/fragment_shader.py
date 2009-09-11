@@ -1,25 +1,25 @@
 '''OpenGL extension ATI.fragment_shader
 
 Overview (from the spec)
-    
-    This extension exposes a powerful fragment shading model which
-    provides a very general means of expressing fragment color blending
-    and dependent texture address modification.  The programming is
-    a register-based model in which there is a fixed number of 
-    instructions, texture lookups, read/write registers, and constants.
-    
-    The fragment shader extension provides a unified instruction set
-    for operating on address or color data and eliminates the 
-    distinction between the two.  This extension provides all the 
-    interfaces necessary to fully expose this programmable fragment 
-    shader in GL.
-    
-    Although conceived as a device-independent extension which would 
-    expose the capabilities of future generations of hardware, changing 
-    trends in programmable hardware have affected the lifespan of this 
-    extension.  For this reason you will now find a fixed set of 
-    features and resources exposed, and the queries to determine this 
-    set have been deprecated.
+	
+	This extension exposes a powerful fragment shading model which
+	provides a very general means of expressing fragment color blending
+	and dependent texture address modification.  The programming is
+	a register-based model in which there is a fixed number of 
+	instructions, texture lookups, read/write registers, and constants.
+	
+	The fragment shader extension provides a unified instruction set
+	for operating on address or color data and eliminates the 
+	distinction between the two.  This extension provides all the 
+	interfaces necessary to fully expose this programmable fragment 
+	shader in GL.
+	
+	Although conceived as a device-independent extension which would 
+	expose the capabilities of future generations of hardware, changing 
+	trends in programmable hardware have affected the lifespan of this 
+	extension.  For this reason you will now find a fixed set of 
+	features and resources exposed, and the queries to determine this 
+	set have been deprecated.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ATI/fragment_shader.txt

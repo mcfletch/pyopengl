@@ -1,10 +1,10 @@
 '''OpenGL extension EXT.index_func
 
 Overview (from the spec)
-    
-    This extension provides a way to discard fragments when a comparison
-    between the fragment's index value and a reference index fails.  This
-    may be used similarly to the alpha test which is available in RGBA mode.
+	
+	This extension provides a way to discard fragments when a comparison
+	between the fragment's index value and a reference index fails.  This
+	may be used similarly to the alpha test which is available in RGBA mode.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/index_func.txt

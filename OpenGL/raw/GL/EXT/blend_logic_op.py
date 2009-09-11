@@ -1,13 +1,13 @@
 '''OpenGL extension EXT.blend_logic_op
 
 Overview (from the spec)
-    
-    A single additional blending equation is specified using the interface
-    defined by EXT_blend_minmax.  This equation is a simple logical
-    combination of the source and destination colors, where the specific
-    logical operation is as specified by LogicOp.  While only the XOR
-    operation may find wide application, the generality of full logical
-    operations is allowed.
+	
+	A single additional blending equation is specified using the interface
+	defined by EXT_blend_minmax.  This equation is a simple logical
+	combination of the source and destination colors, where the specific
+	logical operation is as specified by LogicOp.  While only the XOR
+	operation may find wide application, the generality of full logical
+	operations is allowed.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/blend_logic_op.txt

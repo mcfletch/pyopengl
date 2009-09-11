@@ -1,14 +1,14 @@
 '''OpenGL extension EXT.texture3D
 
 Overview (from the spec)
-    
-    This extension defines 3-dimensional texture mapping.  In order to
-    define a 3D texture image conveniently, this extension also defines the
-    in-memory formats for 3D images, and adds pixel storage modes to support
-    them.
-    
-    One important application of 3D textures is rendering volumes of image
-    data.
+	
+	This extension defines 3-dimensional texture mapping.  In order to
+	define a 3D texture image conveniently, this extension also defines the
+	in-memory formats for 3D images, and adds pixel storage modes to support
+	them.
+	
+	One important application of 3D textures is rendering volumes of image
+	data.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/texture3D.txt

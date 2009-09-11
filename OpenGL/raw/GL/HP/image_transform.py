@@ -1,15 +1,15 @@
 '''OpenGL extension HP.image_transform
 
 Overview (from the spec)
-    
-    This extension provides support for scaling, rotation, and translation
-    of two-dimensional pixel rectangles at a fixed location in the pixel
-    transfer process.  The 2D image transformation attributes are specified
-    as individual values so that that implementations may easily detect
-    scaling and rotation values that lend themselves to optimization.  2D
-    image transformation occurs immediately after the post-convolution color
-    table stage of the pixel pipeline.  This extension also defines a color
-    table that is applied immediately after the image transformation operation.
+	
+	This extension provides support for scaling, rotation, and translation
+	of two-dimensional pixel rectangles at a fixed location in the pixel
+	transfer process.  The 2D image transformation attributes are specified
+	as individual values so that that implementations may easily detect
+	scaling and rotation values that lend themselves to optimization.  2D
+	image transformation occurs immediately after the post-convolution color
+	table stage of the pixel pipeline.  This extension also defines a color
+	table that is applied immediately after the image transformation operation.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/HP/image_transform.txt

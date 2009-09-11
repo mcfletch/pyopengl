@@ -1,33 +1,33 @@
 '''OpenGL extension APPLE.specular_vector
 
 Overview (from the spec)
-    
-    An alternative specular lighting model is enabled by passing
-    the LIGHT_MODEL_SPECULAR_VECTOR token as the <pname> parameter
-    to LightModel, and TRUE as the <param> parameter.  The specular
-    vector lighting model calculates the specular intensity as the
-    dot product of the true reflection vector of the light source
-    and the vector from the vertex to the viewpoint.  This yields
-    results that are visually similar to but often more realistic
-    than the existing lighting model.  
-    
-    Mathematically, the specular component s.n in the existing
-    lighting model calculation is replaced with the following
-    alternative calculation.
-    
-    Given three vectors, n, l, and p, where n is the unit normal
-    vector at the vertex, l is the unit vector from the vertex to
-    the light position, and p is the unit vector from the vertex
-    to the viewpoint (or the vector {0,0,1} if
-    LIGHT_MODEL_LOCAL_VIEWER is false), the specular component is
-    given by
-    
-      (2 * cross(n, cross(n, l)) + l) . p
-    
-    All other lighting model and material parameters (shininess,
-    spotlight, attenuation, local viewer, and direction/positional
-    sources) operate normally.  The specular vector lighting model
-    affects both rgba and index modes.   
+	
+	An alternative specular lighting model is enabled by passing
+	the LIGHT_MODEL_SPECULAR_VECTOR token as the <pname> parameter
+	to LightModel, and TRUE as the <param> parameter.  The specular
+	vector lighting model calculates the specular intensity as the
+	dot product of the true reflection vector of the light source
+	and the vector from the vertex to the viewpoint.  This yields
+	results that are visually similar to but often more realistic
+	than the existing lighting model.  
+	
+	Mathematically, the specular component s.n in the existing
+	lighting model calculation is replaced with the following
+	alternative calculation.
+	
+	Given three vectors, n, l, and p, where n is the unit normal
+	vector at the vertex, l is the unit vector from the vertex to
+	the light position, and p is the unit vector from the vertex
+	to the viewpoint (or the vector {0,0,1} if
+	LIGHT_MODEL_LOCAL_VIEWER is false), the specular component is
+	given by
+	
+	  (2 * cross(n, cross(n, l)) + l) . p
+	
+	All other lighting model and material parameters (shininess,
+	spotlight, attenuation, local viewer, and direction/positional
+	sources) operate normally.  The specular vector lighting model
+	affects both rgba and index modes.   
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/APPLE/specular_vector.txt

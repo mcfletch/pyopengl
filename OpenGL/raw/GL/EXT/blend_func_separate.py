@@ -1,12 +1,12 @@
 '''OpenGL extension EXT.blend_func_separate
 
 Overview (from the spec)
-    
-    Blending capability is extended by defining a function that allows
-    independent setting of the RGB and alpha blend factors for blend
-    operations that require source and destination blend factors.  It
-    is not always desired that the blending used for RGB is also applied
-    to alpha.
+	
+	Blending capability is extended by defining a function that allows
+	independent setting of the RGB and alpha blend factors for blend
+	operations that require source and destination blend factors.  It
+	is not always desired that the blending used for RGB is also applied
+	to alpha.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/blend_func_separate.txt

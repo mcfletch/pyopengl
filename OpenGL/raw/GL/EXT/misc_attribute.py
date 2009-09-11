@@ -1,11 +1,11 @@
 '''OpenGL extension EXT.misc_attribute
 
 Overview (from the spec)
-    
-    EXT_misc_attribute extends the list of attribute groups. It provides
-    a miscellaneous group, controlled by the MISC_BIT_EXT bit, that contains
-    the attribute state of extensions that don't logically fit in any other
-    group. 
+	
+	EXT_misc_attribute extends the list of attribute groups. It provides
+	a miscellaneous group, controlled by the MISC_BIT_EXT bit, that contains
+	the attribute state of extensions that don't logically fit in any other
+	group. 
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/misc_attribute.txt

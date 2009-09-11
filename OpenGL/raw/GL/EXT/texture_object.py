@@ -1,11 +1,11 @@
 '''OpenGL extension EXT.texture_object
 
 Overview (from the spec)
-    
-    This extension introduces named texture objects.  The only way to name
-    a texture in GL 1.0 is by defining it as a single display list.  Because
-    display lists cannot be edited, these objects are static.  Yet it is
-    important to be able to change the images and parameters of a texture.
+	
+	This extension introduces named texture objects.  The only way to name
+	a texture in GL 1.0 is by defining it as a single display list.  Because
+	display lists cannot be edited, these objects are static.  Yet it is
+	important to be able to change the images and parameters of a texture.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/texture_object.txt

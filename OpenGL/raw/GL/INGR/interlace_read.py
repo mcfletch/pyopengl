@@ -1,11 +1,11 @@
 '''OpenGL extension INGR.interlace_read
 
 Overview (from the spec)
-    
-    This extension provides a way to skip rows of pixels when reading
-    or copying pixel rectangles.  This extension is complementary to
-    the EXT_interlace extension except that it has no affect on getting
-    texture images.
+	
+	This extension provides a way to skip rows of pixels when reading
+	or copying pixel rectangles.  This extension is complementary to
+	the EXT_interlace extension except that it has no affect on getting
+	texture images.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/INGR/interlace_read.txt

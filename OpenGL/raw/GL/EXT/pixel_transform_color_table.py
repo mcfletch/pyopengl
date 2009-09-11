@@ -1,9 +1,9 @@
 '''OpenGL extension EXT.pixel_transform_color_table
 
 Overview (from the spec)
-    
-    This extension defines a color table that is applied immediately
-    after the pixel transformation operation.
+	
+	This extension defines a color table that is applied immediately
+	after the pixel transformation operation.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/pixel_transform_color_table.txt

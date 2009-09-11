@@ -1,14 +1,14 @@
 '''OpenGL extension SUN.mesh_array
 
 Overview (from the spec)
-    
-    
-    This extension defines a new mesh primitive.
-    The primitive can only be used with vertex arrays and cannot be used in
-    immediate mode. The application must arrange the vertices in row major format.
-    For example if a quad mesh is 4 vertices wide the, vertices in the first
-    row are the first 4 vertices and vertices in the second row are vertices 5
-    through 8. 
+	
+	
+	This extension defines a new mesh primitive.
+	The primitive can only be used with vertex arrays and cannot be used in
+	immediate mode. The application must arrange the vertices in row major format.
+	For example if a quad mesh is 4 vertices wide the, vertices in the first
+	row are the first 4 vertices and vertices in the second row are vertices 5
+	through 8. 
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/SUN/mesh_array.txt

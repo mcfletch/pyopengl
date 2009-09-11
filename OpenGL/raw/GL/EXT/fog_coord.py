@@ -1,10 +1,10 @@
 '''OpenGL extension EXT.fog_coord
 
 Overview (from the spec)
-    
-    This extension allows specifying an explicit per-vertex fog
-    coordinate to be used in fog computations, rather than using a
-    fragment depth-based fog equation.
+	
+	This extension allows specifying an explicit per-vertex fog
+	coordinate to be used in fog computations, rather than using a
+	fragment depth-based fog equation.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/fog_coord.txt

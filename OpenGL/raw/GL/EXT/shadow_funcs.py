@@ -1,10 +1,10 @@
 '''OpenGL extension EXT.shadow_funcs
 
 Overview (from the spec)
-    
-    This extension generalizes the GL_ARB_shadow extension to support all
-    eight binary texture comparison functions rather than just GL_LEQUAL
-    and GL_GEQUAL.
+	
+	This extension generalizes the GL_ARB_shadow extension to support all
+	eight binary texture comparison functions rather than just GL_LEQUAL
+	and GL_GEQUAL.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/shadow_funcs.txt

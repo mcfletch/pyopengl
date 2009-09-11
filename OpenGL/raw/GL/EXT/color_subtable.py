@@ -1,12 +1,12 @@
 '''OpenGL extension EXT.color_subtable
 
 Overview (from the spec)
-    
-    This extension allows a portion of a color table to be redefined.
-    If EXT_copy_texture is implemented, this extension also defines a
-    method to load a portion of a color lookup table from the 
-    framebuffer.
-    
+	
+	This extension allows a portion of a color table to be redefined.
+	If EXT_copy_texture is implemented, this extension also defines a
+	method to load a portion of a color lookup table from the 
+	framebuffer.
+	
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/color_subtable.txt

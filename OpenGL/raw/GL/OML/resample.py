@@ -1,23 +1,23 @@
 '''OpenGL extension OML.resample
 
 Overview (from the spec)
-    
-    This extension enhances the resampling capabilities of the
-    OML_subsample extension. It is loosely based on the SGIX_resample
-    extension.
-    
-    When converting data from subsampled to uniform sampling, upsampling
-    may be performed by one of three methods: component replication,
-    zero fill, or adjacent neighbor averaging.
-    
-    When converting data from uniform sampling to subsampled form,
-    downsampling may be performed only by component decimation (point
-    sampling) or averaging.
-    
-    Upsampling and downsampling filters other than those defined by this
-    extension may be performed by appropriate use of convolution and
-    other pixel transfer operations. The zero fill unpacking mode is
-    included to assist applications wanting to define their own filters.
+	
+	This extension enhances the resampling capabilities of the
+	OML_subsample extension. It is loosely based on the SGIX_resample
+	extension.
+	
+	When converting data from subsampled to uniform sampling, upsampling
+	may be performed by one of three methods: component replication,
+	zero fill, or adjacent neighbor averaging.
+	
+	When converting data from uniform sampling to subsampled form,
+	downsampling may be performed only by component decimation (point
+	sampling) or averaging.
+	
+	Upsampling and downsampling filters other than those defined by this
+	extension may be performed by appropriate use of convolution and
+	other pixel transfer operations. The zero fill unpacking mode is
+	included to assist applications wanting to define their own filters.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/OML/resample.txt

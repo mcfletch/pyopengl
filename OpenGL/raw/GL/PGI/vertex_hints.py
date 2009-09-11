@@ -1,9 +1,9 @@
 '''OpenGL extension PGI.vertex_hints
 
 Overview (from the spec)
-    
-    The extension allows the app to give hints regarding what kinds of
-    OpenGL function calls will happen between Begin/End pairs.
+	
+	The extension allows the app to give hints regarding what kinds of
+	OpenGL function calls will happen between Begin/End pairs.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/PGI/vertex_hints.txt

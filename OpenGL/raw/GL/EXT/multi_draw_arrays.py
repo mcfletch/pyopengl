@@ -1,12 +1,12 @@
 '''OpenGL extension EXT.multi_draw_arrays
 
 Overview (from the spec)
-    
-    These functions behave identically to the standard OpenGL 1.1 functions
-    glDrawArrays() and glDrawElements() except they handle multiple lists of
-    vertices in one call. Their main purpose is to allow one function call
-    to render more than one primitive such as triangle strip, triangle fan,
-    etc.
+	
+	These functions behave identically to the standard OpenGL 1.1 functions
+	glDrawArrays() and glDrawElements() except they handle multiple lists of
+	vertices in one call. Their main purpose is to allow one function call
+	to render more than one primitive such as triangle strip, triangle fan,
+	etc.
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/EXT/multi_draw_arrays.txt

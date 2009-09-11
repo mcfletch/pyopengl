@@ -1,12 +1,12 @@
 '''OpenGL extension ARB.shading_language_100
 
 Overview (from the spec)
-    
-        This extension string indicates that the OpenGL Shading Language is
-        supported. The Shading Language is defined by a separate specification
-        document which can be downloaded from
-    
-        http://www.opengl.org/documentation/oglsl.html
+	
+	    This extension string indicates that the OpenGL Shading Language is
+	    supported. The Shading Language is defined by a separate specification
+	    document which can be downloaded from
+	
+		http://www.opengl.org/documentation/oglsl.html
 
 The official definition of this extension is available here:
 http://oss.sgi.com/projects/ogl-sample/registry/ARB/shading_language_100.txt
