@@ -22,5 +22,8 @@ if __name__ == "__main__":
     glutInitWindowPosition(0, 0)
     window = glutCreateWindow("hello")
     glutDisplayFunc(display)
-    glutMainLoop()
+    for name in (GL_VENDOR,GL_RENDERER,GL_SHADING_LANGUAGE_VERSION,GL_EXTENSIONS):
+        print name,glGetString(name)
+    
+#    glutMainLoop()
     
