@@ -14,6 +14,7 @@ import OpenGL
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_COMPILE_STATUS_ARB as GL_OBJECT_COMPILE_STATUS
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_LINK_STATUS_ARB as GL_OBJECT_LINK_STATUS
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_ACTIVE_UNIFORMS_ARB as GL_OBJECT_ACTIVE_UNIFORMS
+from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB as GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH
 from OpenGL.GL.ARB.shader_objects import glGetInfoLogARB as glGetInfoLog
 from OpenGL.lazywrapper import lazy
 
@@ -170,15 +171,16 @@ def glGetShaderSource( baseOperation, obj ):
 @lazy( glGetActiveUniform )
 def glGetActiveUniform(baseOperation,program, index):
     """Retrieve the name, size and type of the uniform of the index in the program"""
-    max_index = int(glGetShaderiv( program, GL_OBJECT_ACTIVE_UNIFORMS ))
-    length = int(glGetShaderiv( program, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH))
+    max_index = int(glGetProgramiv( program, GL_OBJECT_ACTIVE_UNIFORMS ))
+    length = int(glGetProgramiv( program, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH))
     if index < max_index and index >= 0:
         if length > 0:
             name = ctypes.create_string_buffer(length)
             size = arrays.GLintArray.zeros( (1,))
-            gl_type = arrays.GLuintArray.zeros( (1,))
-            baseOperation(program, index, length, None, size, gl_type, name)
-            return name.value[:int(size[0])], size[0], gl_type[0]
+            gl_type = arrays.GLenumArray.zeros( (1,))
+            namelen = arrays.GLsizeiArray.zeros( (1,))
+            baseOperation(program, index, length, namelen, size, gl_type, name)
+            return name.value[:int(namelen[0])], size[0], gl_type[0]
         raise ValueError( """No currently specified uniform names""" )
     raise IndexError, 'Index %s out of range 0 to %i' % (index, max_index - 1, )
 
