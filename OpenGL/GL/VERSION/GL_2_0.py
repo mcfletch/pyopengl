@@ -64,14 +64,30 @@ for size in (1,2,3,4):
     del size,name
 
 @lazy( glGetShaderiv )
-def glGetShaderiv( baseOperation, shader, pname ):
-    """Retrieve the integer parameter for the given shader"""
-    status = arrays.GLintArray.zeros( (1,))
-    status[0] = 1 
-    baseOperation(
-        shader, pname, status
-    )
-    return status[0]
+def glGetShaderiv( baseOperation, shader, pname, status=None ):
+    """Retrieve the integer parameter for the given shader
+    
+    shader -- shader ID to query 
+    pname -- parameter name 
+    status -- pointer to integer to receive status or None to 
+        return the parameter as an integer value 
+    
+    returns 
+        integer if status parameter is None
+        status if status parameter is not None
+    """
+    if status is None:
+        status = arrays.GLintArray.zeros( (1,))
+        status[0] = 1 
+        baseOperation(
+            shader, pname, status
+        )
+        return status[0]
+    else:
+        baseOperation(
+            shader, pname, status
+        )
+        return status
 @lazy( glGetProgramiv )
 def glGetProgramiv( baseOperation, program, pname, params=None ):
     """Will automatically allocate params if not provided"""
@@ -99,8 +115,6 @@ def _afterCheck( key ):
         status = ctypes.c_int()
         getter( cArguments[0], key, ctypes.byref(status))
         status = status.value
-
-
         if not status:
             raise error.GLError( 
                 result = result,
