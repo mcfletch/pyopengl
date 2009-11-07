@@ -25,5 +25,5 @@ if __name__ == "__main__":
     for name in (GL_VENDOR,GL_RENDERER,GL_SHADING_LANGUAGE_VERSION,GL_EXTENSIONS):
         print name,glGetString(name)
     
-#    glutMainLoop()
+    glutMainLoop()
     
