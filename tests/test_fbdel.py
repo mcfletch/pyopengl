@@ -11,14 +11,14 @@ def main():
     glutInitWindowPosition(0, 0)	
     window = glutCreateWindow("Framebuffer bug demo")
 
-        for i in range( 200 ):
-            fbo = EXT.glGenFramebuffersEXT(1)
-            print "FBO = ", fbo
-            EXT.glDeleteFramebuffersEXT (int(fbo))
-            fbo = ARB.glGenFramebuffers(1)
-            print "FBO = ", fbo
-            ARB.glDeleteFramebuffers(int(fbo))
-            glFlush()
+    for i in range( 200 ):
+        fbo = EXT.glGenFramebuffersEXT(1)
+        print "FBO = ", fbo
+        EXT.glDeleteFramebuffersEXT (int(fbo))
+        fbo = ARB.glGenFramebuffers(1)
+        print "FBO = ", fbo
+        ARB.glDeleteFramebuffers(int(fbo))
+        glFlush()
 
 # Print message to console, and kick off the main to get it rolling.
 main()

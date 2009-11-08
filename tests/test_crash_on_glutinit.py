@@ -6,4 +6,4 @@ if __name__ == "__main__":
     glutInitDisplayMode( GLUT_SINGLE )
     window = glutCreateWindow("hello")
     glutDisplayFunc( lambda *args: 1 )
-    glutMainLoop()
+    #glutMainLoop()

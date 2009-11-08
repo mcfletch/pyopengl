@@ -193,9 +193,14 @@ FormatHandler( 'list', 'OpenGL.arrays.lists.ListHandler', ['__builtin__.list','_
 FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler' )
 FormatHandler( 
     'ctypesarray', 'OpenGL.arrays.ctypesarrays.CtypesArrayHandler',
-    ['_ctypes.ArrayType'],
+    [
+        '_ctypes.ArrayType',
+    ],
 )
-FormatHandler( 'ctypesparameter', 'OpenGL.arrays.ctypesparameters.CtypesParameterHandler' )
+FormatHandler( 
+    'ctypesparameter',
+    'OpenGL.arrays.ctypesparameters.CtypesParameterHandler',
+)
 FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandler' )
 FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', ['numpy.ndarray'] )
 #FormatHandler( 'numarray', 'OpenGL.arrays.numarrays.NumarrayHandler' )
