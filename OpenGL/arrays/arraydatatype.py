@@ -241,7 +241,7 @@ if ADT is None:
     class GLuint64Array( ArrayDatatype, ctypes.POINTER(constants.GLuint64 )):
         """Array datatype for GLuint types"""
         baseType = constants.GLuint64
-        typeConstant = constants.GL_UNSIGNED_INT_64
+        typeConstant = constants.GL_UNSIGNED_INT64
 
     class GLenumArray( ArrayDatatype, ctypes.POINTER(constants.GLenum )):
         """Array datatype for GLenum types"""
@@ -266,6 +266,8 @@ else:
     GLubyteArray = GLbooleanArray = ADT( constants.GL_UNSIGNED_BYTE, constants.GLubyte )
     GLushortArray = ADT( constants.GL_UNSIGNED_SHORT, constants.GLushort )
     GLuintArray = ADT( constants.GL_UNSIGNED_INT, constants.GLuint )
+    GLint64Array = ADT( None, constants.GLint64 )
+    GLuint64Array = ADT( constants.GL_UNSIGNED_INT64, constants.GLuint64 )
     GLenumArray = ADT( constants.GL_UNSIGNED_INT, constants.GLenum )
     GLsizeiArray = ADT( constants.GL_INT, constants.GLsizei )
 
