@@ -26,8 +26,8 @@ glGetBooleanIndexedvEXT = platform.createExtensionFunction(
 'glGetBooleanIndexedvEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLuint,ctypes.POINTER(constants.GLboolean),),
-doc='glGetBooleanIndexedvEXT(GLenum(target), GLuint(index), POINTER(constants.GLboolean)(data)) -> None',
+argTypes=(constants.GLenum,constants.GLuint,arrays.GLbooleanArray,),
+doc='glGetBooleanIndexedvEXT(GLenum(target), GLuint(index), GLbooleanArray(data)) -> None',
 argNames=('target','index','data',),
 deprecated=_DEPRECATED,
 )

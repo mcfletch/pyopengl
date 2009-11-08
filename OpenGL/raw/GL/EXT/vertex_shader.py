@@ -456,8 +456,8 @@ glGetVariantBooleanvEXT = platform.createExtensionFunction(
 'glGetVariantBooleanvEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(constants.GLboolean),),
-doc='glGetVariantBooleanvEXT(GLuint(id), GLenum(value), POINTER(constants.GLboolean)(data)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLbooleanArray,),
+doc='glGetVariantBooleanvEXT(GLuint(id), GLenum(value), GLbooleanArray(data)) -> None',
 argNames=('id','value','data',),
 deprecated=_DEPRECATED,
 )
@@ -496,8 +496,8 @@ glGetInvariantBooleanvEXT = platform.createExtensionFunction(
 'glGetInvariantBooleanvEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(constants.GLboolean),),
-doc='glGetInvariantBooleanvEXT(GLuint(id), GLenum(value), POINTER(constants.GLboolean)(data)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLbooleanArray,),
+doc='glGetInvariantBooleanvEXT(GLuint(id), GLenum(value), GLbooleanArray(data)) -> None',
 argNames=('id','value','data',),
 deprecated=_DEPRECATED,
 )
@@ -526,8 +526,8 @@ glGetLocalConstantBooleanvEXT = platform.createExtensionFunction(
 'glGetLocalConstantBooleanvEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(constants.GLboolean),),
-doc='glGetLocalConstantBooleanvEXT(GLuint(id), GLenum(value), POINTER(constants.GLboolean)(data)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLbooleanArray,),
+doc='glGetLocalConstantBooleanvEXT(GLuint(id), GLenum(value), GLbooleanArray(data)) -> None',
 argNames=('id','value','data',),
 deprecated=_DEPRECATED,
 )

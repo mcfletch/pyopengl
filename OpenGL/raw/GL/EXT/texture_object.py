@@ -30,8 +30,8 @@ glAreTexturesResidentEXT = platform.createExtensionFunction(
 'glAreTexturesResidentEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=constants.GLboolean, 
-argTypes=(constants.GLsizei,arrays.GLuintArray,ctypes.POINTER(constants.GLboolean),),
-doc='glAreTexturesResidentEXT(GLsizei(n), GLuintArray(textures), POINTER(constants.GLboolean)(residences)) -> constants.GLboolean',
+argTypes=(constants.GLsizei,arrays.GLuintArray,arrays.GLbooleanArray,),
+doc='glAreTexturesResidentEXT(GLsizei(n), GLuintArray(textures), GLbooleanArray(residences)) -> constants.GLboolean',
 argNames=('n','textures','residences',),
 deprecated=_DEPRECATED,
 )

@@ -147,8 +147,8 @@ glGetIntegerui64i_vNV = platform.createExtensionFunction(
 'glGetIntegerui64i_vNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLuint,ctypes.POINTER(constants.GLuint64EXT),),
-doc='glGetIntegerui64i_vNV(GLenum(value), GLuint(index), POINTER(constants.GLuint64EXT)(result)) -> None',
+argTypes=(constants.GLenum,constants.GLuint,arrays.GLuint64Array,),
+doc='glGetIntegerui64i_vNV(GLenum(value), GLuint(index), GLuint64Array(result)) -> None',
 argNames=('value','index','result',),
 deprecated=_DEPRECATED,
 )

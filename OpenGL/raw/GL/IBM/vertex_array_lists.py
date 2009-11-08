@@ -77,8 +77,8 @@ glEdgeFlagPointerListIBM = platform.createExtensionFunction(
 'glEdgeFlagPointerListIBM',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLint,ctypes.POINTER(ctypes.POINTER(constants.GLboolean)),constants.GLint,),
-doc='glEdgeFlagPointerListIBM(GLint(stride), POINTER(ctypes.POINTER(constants.GLboolean))(pointer), GLint(ptrstride)) -> None',
+argTypes=(constants.GLint,arrays.GLbooleanArray,constants.GLint,),
+doc='glEdgeFlagPointerListIBM(GLint(stride), GLbooleanArray(pointer), GLint(ptrstride)) -> None',
 argNames=('stride','pointer','ptrstride',),
 deprecated=_DEPRECATED,
 )

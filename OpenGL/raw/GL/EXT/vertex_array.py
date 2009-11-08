@@ -112,8 +112,8 @@ glEdgeFlagPointerEXT = platform.createExtensionFunction(
 'glEdgeFlagPointerEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLsizei,constants.GLsizei,ctypes.POINTER(constants.GLboolean),),
-doc='glEdgeFlagPointerEXT(GLsizei(stride), GLsizei(count), POINTER(constants.GLboolean)(pointer)) -> None',
+argTypes=(constants.GLsizei,constants.GLsizei,arrays.GLbooleanArray,),
+doc='glEdgeFlagPointerEXT(GLsizei(stride), GLsizei(count), GLbooleanArray(pointer)) -> None',
 argNames=('stride','count','pointer',),
 deprecated=_DEPRECATED,
 )

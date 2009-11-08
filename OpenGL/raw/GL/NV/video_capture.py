@@ -124,8 +124,8 @@ glVideoCaptureNV = platform.createExtensionFunction(
 'glVideoCaptureNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=constants.GLenum, 
-argTypes=(constants.GLuint,arrays.GLuintArray,ctypes.POINTER(constants.GLuint64EXT),),
-doc='glVideoCaptureNV(GLuint(video_capture_slot), GLuintArray(sequence_num), POINTER(constants.GLuint64EXT)(capture_time)) -> constants.GLenum',
+argTypes=(constants.GLuint,arrays.GLuintArray,arrays.GLuint64Array,),
+doc='glVideoCaptureNV(GLuint(video_capture_slot), GLuintArray(sequence_num), GLuint64Array(capture_time)) -> constants.GLenum',
 argNames=('video_capture_slot','sequence_num','capture_time',),
 deprecated=_DEPRECATED,
 )

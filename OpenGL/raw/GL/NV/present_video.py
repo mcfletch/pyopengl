@@ -61,8 +61,8 @@ glGetVideoi64vNV = platform.createExtensionFunction(
 'glGetVideoi64vNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(constants.GLint64EXT),),
-doc='glGetVideoi64vNV(GLuint(video_slot), GLenum(pname), POINTER(constants.GLint64EXT)(params)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLint64Array,),
+doc='glGetVideoi64vNV(GLuint(video_slot), GLenum(pname), GLint64Array(params)) -> None',
 argNames=('video_slot','pname','params',),
 deprecated=_DEPRECATED,
 )
@@ -71,8 +71,8 @@ glGetVideoui64vNV = platform.createExtensionFunction(
 'glGetVideoui64vNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(constants.GLuint64EXT),),
-doc='glGetVideoui64vNV(GLuint(video_slot), GLenum(pname), POINTER(constants.GLuint64EXT)(params)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLuint64Array,),
+doc='glGetVideoui64vNV(GLuint(video_slot), GLenum(pname), GLuint64Array(params)) -> None',
 argNames=('video_slot','pname','params',),
 deprecated=_DEPRECATED,
 )

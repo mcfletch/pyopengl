@@ -16,8 +16,8 @@ glGetQueryObjecti64vEXT = platform.createExtensionFunction(
 'glGetQueryObjecti64vEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(constants.GLint64EXT),),
-doc='glGetQueryObjecti64vEXT(GLuint(id), GLenum(pname), POINTER(constants.GLint64EXT)(params)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLint64Array,),
+doc='glGetQueryObjecti64vEXT(GLuint(id), GLenum(pname), GLint64Array(params)) -> None',
 argNames=('id','pname','params',),
 deprecated=_DEPRECATED,
 )
@@ -26,8 +26,8 @@ glGetQueryObjectui64vEXT = platform.createExtensionFunction(
 'glGetQueryObjectui64vEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(constants.GLuint64EXT),),
-doc='glGetQueryObjectui64vEXT(GLuint(id), GLenum(pname), POINTER(constants.GLuint64EXT)(params)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLuint64Array,),
+doc='glGetQueryObjectui64vEXT(GLuint(id), GLenum(pname), GLuint64Array(params)) -> None',
 argNames=('id','pname','params',),
 deprecated=_DEPRECATED,
 )

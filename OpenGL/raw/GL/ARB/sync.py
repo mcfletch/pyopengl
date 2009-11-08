@@ -80,8 +80,8 @@ glGetInteger64v = platform.createExtensionFunction(
 'glGetInteger64v',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,ctypes.POINTER(constants.GLint64),),
-doc='glGetInteger64v(GLenum(pname), POINTER(constants.GLint64)(params)) -> None',
+argTypes=(constants.GLenum,arrays.GLint64Array,),
+doc='glGetInteger64v(GLenum(pname), GLint64Array(params)) -> None',
 argNames=('pname','params',),
 deprecated=_DEPRECATED,
 )

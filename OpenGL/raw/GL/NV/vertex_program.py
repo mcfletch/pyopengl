@@ -188,8 +188,8 @@ glAreProgramsResidentNV = platform.createExtensionFunction(
 'glAreProgramsResidentNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=constants.GLboolean, 
-argTypes=(constants.GLsizei,arrays.GLuintArray,ctypes.POINTER(constants.GLboolean),),
-doc='glAreProgramsResidentNV(GLsizei(n), GLuintArray(programs), POINTER(constants.GLboolean)(residences)) -> constants.GLboolean',
+argTypes=(constants.GLsizei,arrays.GLuintArray,arrays.GLbooleanArray,),
+doc='glAreProgramsResidentNV(GLsizei(n), GLuintArray(programs), GLbooleanArray(residences)) -> constants.GLboolean',
 argNames=('n','programs','residences',),
 deprecated=_DEPRECATED,
 )

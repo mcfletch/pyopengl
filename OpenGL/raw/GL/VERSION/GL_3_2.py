@@ -37,8 +37,8 @@ glGetInteger64i_v = platform.createExtensionFunction(
 'glGetInteger64i_v',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLuint,ctypes.POINTER(constants.GLint64),),
-doc='glGetInteger64i_v(GLenum(target), GLuint(index), POINTER(constants.GLint64)(data)) -> None',
+argTypes=(constants.GLenum,constants.GLuint,arrays.GLint64Array,),
+doc='glGetInteger64i_v(GLenum(target), GLuint(index), GLint64Array(data)) -> None',
 argNames=('target','index','data',),
 deprecated=_DEPRECATED,
 )
@@ -47,8 +47,8 @@ glGetBufferParameteri64v = platform.createExtensionFunction(
 'glGetBufferParameteri64v',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLenum,ctypes.POINTER(constants.GLint64),),
-doc='glGetBufferParameteri64v(GLenum(target), GLenum(pname), POINTER(constants.GLint64)(params)) -> None',
+argTypes=(constants.GLenum,constants.GLenum,arrays.GLint64Array,),
+doc='glGetBufferParameteri64v(GLenum(target), GLenum(pname), GLint64Array(params)) -> None',
 argNames=('target','pname','params',),
 deprecated=_DEPRECATED,
 )
@@ -82,3 +82,4 @@ doc='glFramebufferTextureFace(GLenum(target), GLenum(attachment), GLuint(texture
 argNames=('target','attachment','texture','level','face',),
 deprecated=_DEPRECATED,
 )
+
