@@ -73,7 +73,6 @@ class FormatHandler( object ):
             raise KeyError( """Unable to find data-format handler for %s"""%( type,))
     loadAll = classmethod( loadAll )
 
-
     def register( self, types=None ):
         """Register this class as handler for given set of types"""
         from OpenGL.arrays.arraydatatype import ArrayDatatype

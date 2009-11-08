@@ -40,8 +40,10 @@ if ADT is None:
                             handler = self.match( base )
                             if handler:
                                 handler = handler.load()
+                                if handler:
+                                    handler = handler()
                         if handler:
-                            self[ typ ] = handler 
+                            self[ typ ] = handler
                             if hasattr( handler, 'registerEquivalent' ):
                                 handler.registerEquivalent( typ, base )
                             return handler
