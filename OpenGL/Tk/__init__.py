@@ -1,9 +1,29 @@
 #!/usr/bin/env python
+"""Traditional PyOpenGL interface to Togl
+
+This module provides access to the Tkinter Togl widget 
+with a relatively "thick" wrapper API that creates a set 
+of default "examination" operations.
+
+Note that many (most) Linux distributions have 
+now split out the Tkinter bindings into a separate package,
+and that Togl must be separately downloaded (a script is 
+provided in the source distribution which downloads and 
+installs Togl 2.0 binaries for you).
+
+Because of the complexity and fragility of the installation, 
+it is recommended that you use Pygame, wxPython, PyGtk, or 
+PyQt for real-world projects, and GLUT or Pygame for simple 
+demo/testing interfaces.
+
+The Togl project is located here:
+
+    http://togl.sourceforge.net/
+"""
 # A class that creates an opengl widget.
 # Mike Hartshorn
 # Department of Chemistry
 # University of York, UK
-# 
 import os,sys, logging
 log = logging.getLogger( 'OpenGL.Tk' )
 from OpenGL.GL import *
@@ -118,11 +138,7 @@ class Togl(Widget):
     Department of Biophysical Chemistry
     University of Groningen, The Netherlands
     Very basic widget which provides access to Togl functions.
-    N.B. this requires a modified version of Togl 1.5 to gain access to the
-    extra functionality. This support should be included in Togl 1.6, I hope.
     """
-
-
     def __init__(self, master=None, cnf={}, **kw):
         Widget.__init__(self, master, 'togl', cnf, kw)
 
