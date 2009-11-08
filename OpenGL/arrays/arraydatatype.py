@@ -232,6 +232,16 @@ if ADT is None:
         """Array datatype for GLuint types"""
         baseType = constants.GLuint
         typeConstant = constants.GL_UNSIGNED_INT
+    
+    class GLint64Array( ArrayDatatype, ctypes.POINTER(constants.GLint64 )):
+        """Array datatype for GLuint types"""
+        baseType = constants.GLint64
+        typeConstant = None # TODO: find out what this should be!
+    
+    class GLuint64Array( ArrayDatatype, ctypes.POINTER(constants.GLuint64 )):
+        """Array datatype for GLuint types"""
+        baseType = constants.GLuint64
+        typeConstant = constants.GL_UNSIGNED_INT_64
 
     class GLenumArray( ArrayDatatype, ctypes.POINTER(constants.GLenum )):
         """Array datatype for GLenum types"""
