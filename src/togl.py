@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-"""Incredibly simple setup script that tries to install Tcl/Tk Togl widget into PyOpenGL"""
+"""Simple setup script that installs Tcl/Tk Togl widget into PyOpenGL"""
 import OpenGL,sys, os, shutil, logging, urllib, tarfile, zipfile, fnmatch
 import optparse
 log = logging.getLogger( 'togl-setup' )
@@ -8,9 +8,11 @@ if sys.maxint > 2L**32:
     suffix = '-64'
 else:
     suffix = ''
+# These three define what software we're going to install...
 TOGL_VERSION = '2.0'
 COMPILED_TK_VERSION = '8.4'
 BASE_URL = 'http://downloads.sourceforge.net/project/togl/Togl'
+
 DOWNLOAD_TEMPLATE = '%(BASE_URL)s/%(TOGL_VERSION)s/Togl%(TOGL_VERSION)s-%(COMPILED_TK_VERSION)s-%%s?use_mirror=iweb'%globals()
 
 urls = {
@@ -110,5 +112,3 @@ if __name__ == "__main__":
             setup( key )
     else:
         setup()
-    
-    
