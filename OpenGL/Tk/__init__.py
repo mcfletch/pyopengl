@@ -1,23 +1,16 @@
 #!/usr/bin/env python
-
-# This is statement is required by the build system to query build info
-if __name__ == '__build__':
-    raise Exception
-
 # A class that creates an opengl widget.
 # Mike Hartshorn
 # Department of Chemistry
 # University of York, UK
 # 
-
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from Tkinter import _default_root
 from Tkinter import *
 import math
-import os,sys
-
-#
+import os,sys, logging
+log = logging.getLogger( 'OpenGL.Tk' )
 
 def glTranslateScene(s, x, y, mousex, mousey):
     glMatrixMode(GL_MODELVIEW)
@@ -68,30 +61,41 @@ def v3distsq(a,b):
 if _default_root is None:
     _default_root = Tk()
 
-# add this file's directory to Tcl's search path
-# on Linux Togl is installed in ./linux2-tk8.0
-# on Windows (Python2.0) in ./win32-tk8.3  
+# Add this file's directory to Tcl's search path
+# This code is intended to work with the src/togl.py script 
+# which will populate the directory with the appropriate 
+# Binary Togl distribution.  Note that Togl 2.0 and above 
+# uses "stubs", so we don't care what Tk version we are using,
+# but that a different build is required for 64-bit Python.
+# Thus the directory structure is *not* the same as the 
+# original PyOpenGL versions.
+import sys 
+if sys.maxint > 2L**32:
+    suffix = '-64'
+else:
+    suffix = ''
 try:
     TOGL_DLL_PATH = os.path.join(
         os.path.dirname(__file__),
-        sys.platform + "-tk" + _default_root.getvar("tk_version")
+        'togl-'+ sys.platform + suffix,
     )
 except NameError, err:
     # no __file__, likely running as an egg
     TOGL_DLL_PATH = ""
+
+if not os.path.isdir( TOGL_DLL_PATH ):
+    log.warn( 'Expected Tk Togl installation in %s', TOGL_DLL_PATH )
 _default_root.tk.call('lappend', 'auto_path', TOGL_DLL_PATH)
 try:
     _default_root.tk.eval('load {} Togl')
-except TclError:
-    pass
+except TclError, err:
+    log.error( """Failure loading Togl package: %s""", err )
+    raise
 _default_root.tk.call('package', 'require', 'Togl')
 
 # This code is needed to avoid faults on sys.exit()
-# [DAA, Jan 1998]
-import sys
-oldexitfunc = None
-if hasattr(sys, 'exitfunc'):
-    oldexitfunc = sys.exitfunc
+# [DAA, Jan 1998], updated by mcfletch 2009
+import atexit
 def cleanup():
     from Tkinter import _default_root, TclError
     import Tkinter
@@ -100,9 +104,7 @@ def cleanup():
     except TclError:
         pass
     Tkinter._default_root = None
-    if oldexitfunc: oldexitfunc()
-sys.exitfunc = cleanup
-# [end DAA]
+atexit.register( cleanup )
 
 class Togl(Widget):
     """
