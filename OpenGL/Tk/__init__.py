@@ -4,13 +4,17 @@
 # Department of Chemistry
 # University of York, UK
 # 
-from OpenGL.GL import *
-from OpenGL.GLU import *
-from Tkinter import _default_root
-from Tkinter import *
-import math
 import os,sys, logging
 log = logging.getLogger( 'OpenGL.Tk' )
+from OpenGL.GL import *
+from OpenGL.GLU import *
+try:
+    from Tkinter import _default_root
+    from Tkinter import *
+except ImportError, err:
+    log.error( """Unable to import Tkinter, likely need to install a separate package (python-tk) to have Tkinter support.  You likely also want to run the src/togl.py script in the PyOpenGL source distribution to install the Togl widget""" )
+    raise
+import math
 
 def glTranslateScene(s, x, y, mousex, mousey):
     glMatrixMode(GL_MODELVIEW)
@@ -85,13 +89,14 @@ except NameError, err:
 
 if not os.path.isdir( TOGL_DLL_PATH ):
     log.warn( 'Expected Tk Togl installation in %s', TOGL_DLL_PATH )
+log.info( 'Loading Togl from: %s', TOGL_DLL_PATH )
 _default_root.tk.call('lappend', 'auto_path', TOGL_DLL_PATH)
+_default_root.tk.call('package', 'require', 'Togl')
 try:
     _default_root.tk.eval('load {} Togl')
 except TclError, err:
     log.error( """Failure loading Togl package: %s""", err )
     raise
-_default_root.tk.call('package', 'require', 'Togl')
 
 # This code is needed to avoid faults on sys.exit()
 # [DAA, Jan 1998], updated by mcfletch 2009
