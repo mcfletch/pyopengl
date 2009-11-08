@@ -194,6 +194,9 @@ deprecated=_DEPRECATED,
         'constants.GLushort': 'GLushortArray',
         'constants.short unsigned int':'GLushortArray',
         'constants.GLubyte': 'GLubyteArray',
+        'constants.GLbool': 'GLbooleanArray',
+        'constants.GLboolean': 'GLbooleanArray',
+        'arrays.GLbooleanArray': 'GLbooleanArray',
         'constants.GLbyte': 'GLbyteArray',
         'constants.char': 'GLbyteArray',
         'constants.gleDouble': 'GLdoubleArray',
@@ -210,6 +213,10 @@ deprecated=_DEPRECATED,
         'constants.c_float * 3': 'GLfloatArray',
         'constants.gleDouble * 3 * 2': 'GLdoubleArray',
         'constants.GLsizei': 'GLsizeiArray',
+        'constants.GLint64': 'GLint64Array',
+        'constants.GLint64EXT': 'GLint64Array',
+        'constants.GLuint64': 'GLuint64Array',
+        'constants.GLuint64EXT': 'GLuint64Array',
     }
     
 # Don't know how Tarn got the api_versions, short of manually entering them...
@@ -463,7 +470,7 @@ class Module( Helper ):
         else:
             data = open( specFile ).read()
         if 'Error 404' in data:
-            log.warn( """Specification %s is invalid (404 error)...""", specURL)
+            log.info( """Spec 404: %s""", specURL)
             data = ''
         return Specification( data )
     def process( self ):
@@ -509,7 +516,7 @@ class Module( Helper ):
             try:
                 fh = open( self.pathName, 'w')
             except IOError, err:
-                log.warn( "Unable to create module for %r", self.name )
+                log.warn( "Unable to create module for %r %s", self.name, err )
                 return False
             else:
                 fh.write( toWrite )
@@ -704,7 +711,7 @@ class Header( object ):
 
 if __name__ == "__main__":
     logging.basicConfig()
-    log.setLevel( logging.INFO )
+    log.setLevel( logging.WARN )
     header = Header()
     header.loadGLGetSizes()
     total,count = Header().autoGenerate()
