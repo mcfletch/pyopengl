@@ -29,7 +29,9 @@ def gluProject( baseFunction, objX, objY, objZ, model=None, proj=None, view=None
         model,proj,view,
         winX,winY,winZ,
     )
-    if not result:
+    # On Ubuntu 9.10 we see a None come out of baseFunction,
+    # despite it having a return-type specified of GLint!
+    if result is not None and result != simple.GLU_TRUE:
         raise ValueError( """Projection failed!""" )
     return winX.value, winY.value, winZ.value 
 
