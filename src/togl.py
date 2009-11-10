@@ -83,18 +83,19 @@ def setup( key=None, force=False ):
         for name in getnames():
             log.debug( 'Found file: %s', name )
             if fnmatch.fnmatch( name, WANTED_FILES ):
-                log.info( 'Found wanted file: %s', name )
-                source = getfile( name )
-                try:
-                    new = os.path.join(
-                        target_directory,
-                        os.path.basename( name ),
-                    )
-                    log.info( 'Writing file: %s', new )
-                    open( new,'wb' ).write( source.read() )
-                finally:
-                    if hasattr( source, 'close' ):
-                        source.close()
+                if not name.endswith( '/' ):
+                    log.info( 'Found wanted file: %s', name )
+                    source = getfile( name )
+                    try:
+                        new = os.path.join(
+                            target_directory,
+                            os.path.basename( name ),
+                        )
+                        log.info( 'Writing file: %s', new )
+                        open( new,'wb' ).write( source.read() )
+                    finally:
+                        if hasattr( source, 'close' ):
+                            source.close()
     finally:
         fh.close()
         if filename != url:
