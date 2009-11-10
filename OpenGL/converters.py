@@ -121,6 +121,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
         log.warn(
             "Unable to load converters accelerators (wrapper, arraydatatype) from OpenGL_accelerate"
         )
+        CallFuncPyConverter = None
 if CallFuncPyConverter is None:
     class CallFuncPyConverter( PyConverter ):
         """PyConverter that takes a callable and calls it on incoming"""
