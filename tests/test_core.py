@@ -892,6 +892,11 @@ class Tests( unittest.TestCase ):
         records = glRenderMode (GL_RENDER)
         # reporter says sees two records, Linux sees none, Win32 sees 1 :(
         assert len(records) == 1, records
+    
+    def test_get_max_tex_units( self ):
+        """SF#2895081 glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )"""
+        units = glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )
+        
         
 if __name__ == "__main__":
     unittest.main()

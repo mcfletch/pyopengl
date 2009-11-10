@@ -326,7 +326,7 @@ cdef class SizedOutput( Output ):
                     result = (result,)
                 return result
             except KeyError, err:
-                raise KeyError( """Unknown specifier %s"""%( specifier ))
+                raise KeyError( """Unknown specifier %s (lookup = %s)"""%( specifier, self.lookup ))
 
 cdef class AsArrayOfType(pyArgConverter):
     """Given arrayName and typeName coerce arrayName to array of type typeName
