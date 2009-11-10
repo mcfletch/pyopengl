@@ -41,6 +41,8 @@ class Implementation( object ):
         return self.available
     def deleter( self, buffers, key):
         """Produce a deleter callback to delete the given buffer"""
+        nfe = error.NullFunctionError
+        gluint = constants.GLuint
         def doBufferDeletion( *args, **named ):
             while buffers:
                 try:
@@ -51,9 +53,9 @@ class Implementation( object ):
                     try:
                         # Note that to avoid ERROR_ON_COPY issues 
                         # we have to pass an array-compatible type here...
-                        buf = constants.GLuint( buffer )
+                        buf = gluint( buffer )
                         self.glDeleteBuffers(1, buf)
-                    except (AttributeError, error.NullFunctionError), err:
+                    except (AttributeError, nfe), err:
                         pass
             try:
                 self._DELETERS_.pop( key )
