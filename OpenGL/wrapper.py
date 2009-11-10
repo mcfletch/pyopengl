@@ -115,6 +115,7 @@ class Wrapper( object ):
     def setOutput( 
         self, outArg, size=(1,), pnameArg=None, 
         arrayType=None, oldStyleReturn=SIZE_1_ARRAY_UNPACK,
+        orPassIn = False,
     ):
         """Set the given argName to be an output array
         
@@ -155,9 +156,13 @@ class Wrapper( object ):
             returnObject = conv.oldStyleReturn
         else:
             returnObject = converters.returnCArgument( outArg )
-        return self.setPyConverter(
-            outArg
-        ).setCConverter(
+        if orPassIn:
+            self.setPyConverter(
+                outArg, None
+            )
+        else:
+            self.setPyConverter( outArg )
+        return self.setCConverter(
             outArg, conv,
         ).setReturnValues(
             returnObject

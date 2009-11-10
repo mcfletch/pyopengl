@@ -185,8 +185,10 @@ if CallFuncPyConverter is None:
                 size (1,) are returned as scalar values.
         """
         argNames = ('name','size','arrayType' )
-        indexLookups = [ ('outIndex','name', 'cArgIndex' ), ]
-        __slots__ = ('index','size','arrayType')
+        indexLookups = [ 
+            ('outIndex','name', 'cArgIndex' ), 
+        ]
+        __slots__ = ('index','size','arrayType','outIndex','inIndex')
         def __call__( self, pyArgs, index, baseOperation ):
             """Return pyArgs[ self.index ]"""
             return self.arrayType.zeros( self.getSize(pyArgs) )
