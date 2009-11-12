@@ -115,6 +115,23 @@ class Block( object ):
 			else:
 				children[-1].tail += text[offset:]
 		return new_text, children 
+	def append( self, value ):
+		"""Append given value to our content"""
+		if isinstance( value, (str,unicode)):
+			if self.children:
+				last_child = self.children[-1]
+				if last_child.tail:
+					last_child.tail += value 
+				else:
+					last_child.tail = value 
+			elif self.text:
+				self.text += value 
+			else:
+				self.text = value 
+			return True
+		else:
+			# is a node of some form...
+			self.children.append( value )
 
 class Grouping( Block ):
 	def __init__( self,*args,**named ):
@@ -173,18 +190,18 @@ class Commentary( Grouping ):
 			if block.startswith( '*' ):
 				ul = UL()
 				li = None
-				self.children.append( ul )
+				self.append( ul )
 				for line in block.splitlines():
 					if line.startswith( '*' ):
 						li = LI( line[1:].lstrip())
-						ul.children.append( li )
+						ul.append( li )
 					else:
 						if li:
-							li.text += line 
+							li.append( line )
 			elif block.startswith( '=' ) and block.endswith( '=' ):
-				self.children.append( Title( block.strip( '=' ).strip() ))
+				self.append( Title( block.strip( '=' ).strip() ))
 			else:
-				self.children.append( Paragraph( block ))
+				self.append( Paragraph( block ))
 	
 class Code( Block ):
 	"""Used for machine-executable code"""
@@ -225,14 +242,14 @@ def parse_file( filename ):
 		if empty_match:
 			py_text = py_text[empty_match.end():]
 		if py_text.strip():
-			tutorial.children.append( Code( py_text ) )
+			tutorial.append( Code( py_text ) )
 		if match.group( 'commentary' ).strip():
-			tutorial.children.append( 
+			tutorial.append( 
 				Commentary( match.group('commentary') ) 
 			)
 		offset = match.end()
 	if text[offset:].strip():
-		tutorial.children.append( Code( text[ offset:] ) )
+		tutorial.append( Code( text[ offset:] ) )
 	return tutorial
 
 if __name__ == "__main__":
@@ -241,6 +258,7 @@ if __name__ == "__main__":
 		children =[
 			parse_file( os.path.join( test_dir,name ))
 			for name in [
+				'shader_intro.py',
 				'shader_1.py',
 				'shader_2.py',
 				'shader_3.py',
