@@ -11,6 +11,12 @@ try:
 except ImportError:
     log = None
 
+special_names = set([
+    'compileShader',
+    'compileProgram',
+    'VBO',
+])
+
 def glName( name ):
     """Is this a GL name?
     """
@@ -22,6 +28,8 @@ def glName( name ):
             name = name[len(prefix):]
             if name and name[0].isupper():
                 return 1
+    if name in special_names:
+        return True
     return 0
 
 def glProcess( filename, tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText ):
@@ -64,6 +72,7 @@ RAWSVN = '%(baseURL)s/%(deltaPath)s'
 VIEWSVN = '%(baseURL)s/%(deltaPath)s?view=markup'
 LOGGERHEAD = '%(baseURL)s/annotate/head:/%(deltaPath)s'
 GOOGLECODE = '%(baseURL)s/source/browse/trunk/%(deltaPath)s'
+GITHUB = '%(baseURL)s/blob/master/%(deltaPath)s'
 
 class SampleSource( object ):
     """A source from which samples may be generated"""
@@ -161,9 +170,9 @@ def loadData():
         ),
         SampleSource(
             os.path.join( SAMPLES, 'visionegg' ),
-            baseURL ='http://visionegg.org/trac/browser/trunk/visionegg',
+            baseURL ='http://github.com/visionegg/visionegg',
             projectName='{LGPL} VisionEgg',
-            urlTemplate = RAWSVN,
+            urlTemplate = GITHUB,
         ),
         SampleSource(
             os.path.join( SAMPLES, 'glchess' ),

@@ -30,13 +30,13 @@ ${navtable()}
 	<?python 
 	path = paths[0]
 	?>
-	<h1 class="path-name">Introduction to Shaders</h1>
+	<h1 class="path-name">Introduction to Shaders (Lighting)</h1>
 	<div class="path-body">
 		<div class="introduction">This is a low-level introductory tutorial path.  It is intended for those 
 		who have either never done 3D graphics with OpenGL, or who have only done "legacy"
-		OpenGL rendering (i.e. you learned OpenGL before about 2007).  It introduces the low-level 
-		rendering mechanisms required to write your own 3D renderers from scratch using the 
-		standard, modern VBO and Shader-based rendering model.
+		OpenGL rendering (i.e. you learned OpenGL before about 2007).  It walks through the development 
+		of low-level code to perform Blinn-Phong rendering of DirectionalLights, PointLights and SpotLights
+		as well as the basics of geometric rendering (with Vertex Buffer Objects).
 		</div>
 		${path_children( path )}
 	</div>
