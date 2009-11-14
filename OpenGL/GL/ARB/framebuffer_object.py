@@ -31,3 +31,8 @@ def glDeleteFramebuffers( baseOperation, n, framebuffers=None ):
         framebuffers = arrays.GLuintArray.asArray( n )
         n = arrays.GLuintArray.arraySize( framebuffers )
     return baseOperation( n, framebuffers )
+
+# Setup the GL_UNSIGNED_INT_24_8 image type
+from OpenGL import images 
+images.TYPE_TO_ARRAYTYPE[ GL_UNSIGNED_INT_24_8 ] = GL_UNSIGNED_INT
+images.TIGHT_PACK_FORMATS[ GL_UNSIGNED_INT_24_8 ] = 4
