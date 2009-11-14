@@ -61,6 +61,17 @@ ${navtable()}
 	?>
 	<h1 class="path-name">${path.text}</h1>
 	<div class="path-body">
+		<div class="introduction">These tutorials describe how to use a particular effect within OpenGL.
+		</div>
+		${path_children( path )}
+	</div>
+</div>
+<div class="path">
+	<?python 
+	path = paths[3]
+	?>
+	<h1 class="path-name">${path.text}</h1>
+	<div class="path-body">
 		<div class="introduction">These tutorials are translations of the famous "NeHe" series of tutorials.
 		These are low-level introductory tutorials which generally use the legacy OpenGL API.  The linked 
 		original tutorials are very gentle and thorough.
@@ -68,7 +79,7 @@ ${navtable()}
 		${path_children( path )}
 	</div>
 </div>
-<div py:for="path in paths[3:]" class="path">
+<div py:for="path in paths[4:]" class="path">
 	<h1 class="path-name">${path.text}</h1>
 	<div class="path-body">
 		${path_children( path )}
