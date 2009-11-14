@@ -9,7 +9,7 @@ log = logging.getLogger( 'OpenGL.arrays.vbo' )
 
 
 import weakref
-__all__ = ('VBO','VBOHandler')
+__all__ = ('VBO','VBOHandler','mapVBO')
 
 class Implementation( object ):
     """Abstraction point for the various implementations that can be used
@@ -299,3 +299,34 @@ VBO_HANDLER.register( [ VBO ] )
 
 VBOOFFSET_HANDLER = VBOOffsetHandler()
 VBOOFFSET_HANDLER.register( [ VBOOffset ] )
+
+PyBuffer_FromMemory = ctypes.pythonapi.PyBuffer_FromMemory
+PyBuffer_FromMemory.restype = ctypes.py_object
+_cleaners = {}
+def _cleaner( vbo ):
+    def clean( ref ):
+        try:
+            _cleaners.pop( vbo )
+        except Exception, err:
+            pass
+        else:
+            glUnmapBuffer( vbo.target )
+    return clean
+
+def mapVBO( vbo, access=GL.GL_READ_WRITE ):
+    """Map the given buffer into a numpy array...
+    
+    Method taken from:
+     http://www.mail-archive.com/numpy-discussion@lists.sourceforge.net/msg01161.html
+     
+    This should be considered an *experimental* API,
+    it is not guaranteed to be available in future revisions 
+    of this library!
+    """
+    vp = glMapBuffer( vbo.target, access )
+    buffer = PyBuffer_FromMemory( 
+        ctypes.c_void_p(vp), vbo.size 
+    )
+    array = frombuffer( buffer, 'B' )
+    _cleaners[vbo] = weakref.ref( array, _cleaner( vbo ))
+    return array
