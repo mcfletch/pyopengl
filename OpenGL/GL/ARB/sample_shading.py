@@ -3,6 +3,36 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.ARB.sample_shading to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	In standard multisample rendering, an implementation is allowed to
+	assign the same color and texture coordinate values to each sample,
+	which then allows the optimization where the shader is only
+	evaluated once and then distributed to the samples that have been
+	determined to be covered by the primitive currently being
+	rasterized. This can cause aliasing where the input color and
+	texture coordinates are used to generate a result that doesn't
+	antialias itself, for example with alpha-tested transparency.
+	
+	This extension adds the ability to explicitly request that an
+	implementation use a minimum number of unique set of fragment
+	computation inputs when multisampling a pixel. Specifying such a
+	requirement can reduce aliasing that results from evaluating the
+	fragment computations too few times per pixel.
+	
+	This extension adds new global state that controls the minimum
+	number of samples for which attribute data is independently
+	interpolated. When enabled, all operations that were traditionally
+	executed per-fragment operate independently on each sample.
+	
+	This also extends the shading language to allow control over the
+	sample being processed. This includes built-in fragment input
+	variables identifying the sample number and position being processed
+	when executing fragment shaders per sample.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/ARB/sample_shading.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

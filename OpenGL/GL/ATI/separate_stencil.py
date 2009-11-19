@@ -3,6 +3,15 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.ATI.separate_stencil to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension provides the ability to modify the stencil buffer
+	differently based on the facing direction of the primitive that
+	generated the fragment.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/ATI/separate_stencil.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

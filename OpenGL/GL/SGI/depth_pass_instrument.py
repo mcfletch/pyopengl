@@ -3,6 +3,9 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.SGI.depth_pass_instrument to provide a more 
 Python-friendly API
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/SGI/depth_pass_instrument.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

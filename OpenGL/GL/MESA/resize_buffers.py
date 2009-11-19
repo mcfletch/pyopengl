@@ -3,6 +3,27 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.MESA.resize_buffers to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	Mesa is often used as a client library with no integration with
+	the computer's window system (an X server, for example).  And since
+	Mesa does not have an event loop nor window system callbacks, it
+	cannot properly respond to window system events.  In particular,
+	Mesa cannot automatically detect when a window has been resized.
+	
+	Mesa's glViewport command queries the current window size and updates
+	its internal data structors accordingly.  This normally works fine
+	since most applications call glViewport in responce to window size
+	changes.
+	
+	In some situations, however, the application may not call glViewport
+	when a window size changes but would still like Mesa to adjust to
+	the new window size.  This extension exports a new function to solve
+	this problem.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/MESA/resize_buffers.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

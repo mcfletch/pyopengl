@@ -3,6 +3,12 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.SGIX.ir_instrument1 to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/SGIX/ir_instrument1.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

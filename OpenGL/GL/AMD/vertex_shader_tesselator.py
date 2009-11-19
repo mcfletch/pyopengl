@@ -3,6 +3,9 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.AMD.vertex_shader_tesselator to provide a more 
 Python-friendly API
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/AMD/vertex_shader_tesselator.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

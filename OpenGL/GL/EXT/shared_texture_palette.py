@@ -3,6 +3,19 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.shared_texture_palette to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	EXT_shared_texture_palette defines a shared texture palette which may be
+	used in place of the texture object palettes provided by
+	EXT_paletted_texture. This is useful for rapidly changing a palette
+	common to many textures, rather than having to reload the new palette
+	for each texture. The extension acts as a switch, causing all lookups
+	that would normally be done on the texture's palette to instead use the
+	shared palette.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/shared_texture_palette.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

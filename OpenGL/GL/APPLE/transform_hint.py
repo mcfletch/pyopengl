@@ -3,6 +3,29 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.APPLE.transform_hint to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	The transform_hint extension provides a new target,
+	TRANSFORM_HINT_APPLE, for the Hint procedure.  When the
+	transform hint is set to FASTEST the GL may choose to 
+	implement certain state dependent algebraic simplifications
+	in the geometry transformation that affect the sub-pixel
+	precision of the transformed vertex coordinates.  
+	
+	For example, if two polygons are rendered with identical object
+	coordinates, different GL state settings, and the transform
+	hint set to FASTEST, there is no gaurantee that the resulting 
+	window coordinates of the two polygons will be precisely
+	identical.  Therefore, precise tests of the window coordinates, 
+	such as a depth test setting of EQUAL, should not be used.
+	
+	If the transform hint is set to NICEST or DONT_CARE, two polygons
+	with identical object coordinates will always be transformed
+	to identical window coordinates.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/APPLE/transform_hint.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

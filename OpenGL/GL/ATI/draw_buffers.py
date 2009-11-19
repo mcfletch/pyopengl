@@ -3,6 +3,16 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.ATI.draw_buffers to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension extends ARB_fragment_program to allow multiple output 
+	colors, and provides a mechanism for directing those outputs to 
+	multiple color buffers.
+	
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/ATI/draw_buffers.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

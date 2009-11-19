@@ -3,6 +3,44 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.ARB.shader_objects to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension adds API calls that are necessary to manage shader
+	objects and program objects as defined in the OpenGL 2.0 white papers by
+	3Dlabs.
+	
+	The generation of an executable that runs on one of OpenGL's
+	programmable units is modeled to that of developing a typical C/C++
+	application. There are one or more source files, each of which are
+	stored by OpenGL in a shader object. Each shader object (source file)
+	needs to be compiled and attached to a program object. Once all shader
+	objects are compiled successfully, the program object needs to be linked
+	to produce an executable. This executable is part of the program object,
+	and can now be loaded onto the programmable units to make it part of the
+	current OpenGL state. Both the compile and link stages generate a text
+	string that can be queried to get more information. This information
+	could be, but is not limited to, compile errors, link errors,
+	optimization hints, etc. Values for uniform variables, declared in a
+	shader, can be set by the application and used to control a shader's
+	behavior.
+	
+	This extension defines functions for creating shader objects and program
+	objects, for compiling shader objects, for linking program objects, for
+	attaching shader objects to program objects, and for using a program
+	object as part of current state. Functions to load uniform values are
+	also defined. Some house keeping functions, like deleting an object and
+	querying object state, are also provided.
+	
+	Although this extension defines the API for creating shader objects, it
+	does not define any specific types of shader objects. It is assumed that
+	this extension will be implemented along with at least one such
+	additional extension for creating a specific type of OpenGL 2.0 shader
+	(e.g., the ARB_fragment_shader extension or the ARB_vertex_shader
+	extension).
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/ARB/shader_objects.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

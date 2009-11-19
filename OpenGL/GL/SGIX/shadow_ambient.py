@@ -3,6 +3,19 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.SGIX.shadow_ambient to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension allows a value other than 0.0 to be returned by the
+	SGIX_shadow operation in the case when the shadow test passes.
+	With this extension any floating point value in the range [0.0,
+	1.0] can be returned as the texture value when an object is in
+	shadow.  This allows the (untextured) ambient lighting and direct
+	shadowed lighting from a single light source to be computed in a
+	single pass.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/SGIX/shadow_ambient.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

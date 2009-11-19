@@ -3,6 +3,24 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.blend_equation_separate to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	EXT_blend_func_separate introduced separate RGB and alpha blend
+	factors.  EXT_blend_minmax introduced a distinct blend equation for
+	combining source and destination blend terms.  (EXT_blend_subtract &
+	EXT_blend_logic_op added other blend equation modes.)  OpenGL 1.4
+	integrated both functionalities into the core standard.
+	
+	While there are separate blend functions for the RGB and alpha blend
+	factors, OpenGL 1.4 provides a single blend equation that applies
+	to both RGB and alpha portions of blending.
+	
+	This extension provides a separate blend equation for RGB and alpha
+	to match the generality available for blend factors.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/blend_equation_separate.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

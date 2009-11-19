@@ -3,6 +3,18 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.NV.copy_image to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension enables efficient image data transfer between image
+	objects (i.e. textures and renderbuffers) without the need to bind
+	the objects or otherwise configure the rendering pipeline.  The
+	WGL and GLX versions allow copying between images in different
+	contexts, even if those contexts are in different sharelists or
+	even on different physical devices.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/NV/copy_image.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

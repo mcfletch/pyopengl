@@ -3,6 +3,18 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.blend_logic_op to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	A single additional blending equation is specified using the interface
+	defined by EXT_blend_minmax.  This equation is a simple logical
+	combination of the source and destination colors, where the specific
+	logical operation is as specified by LogicOp.  While only the XOR
+	operation may find wide application, the generality of full logical
+	operations is allowed.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/blend_logic_op.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

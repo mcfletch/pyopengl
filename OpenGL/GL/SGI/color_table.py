@@ -3,6 +3,25 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.SGI.color_table to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension defines a new RGBA-format color lookup mechanism.  It does
+	not replace the color lookups defined by the GL Specification, but rather
+	provides additional lookup capabilities with different operation.  The key
+	difference is that the new lookup tables are treated as 1-dimensional images
+	with internal formats, like texture images and convolution filter images.
+	From this follows the fact that the new tables can operate on a subset of
+	the components of passing pixel groups.  For example, a table with internal
+	format ALPHA modifies only the A component of each pixel group, leaving the
+	R, G, and B components unmodified.
+	
+	If EXT_copy_texture is implemented, this extension also defines methods to
+	initialize the color lookup tables from the framebuffer, in addition to the
+	standard memory source mechanisms.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/SGI/color_table.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

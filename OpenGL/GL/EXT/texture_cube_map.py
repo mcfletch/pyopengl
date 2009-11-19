@@ -3,6 +3,9 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.texture_cube_map to provide a more 
 Python-friendly API
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/texture_cube_map.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

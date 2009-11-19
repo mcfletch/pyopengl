@@ -3,6 +3,17 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.blend_func_separate to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	Blending capability is extended by defining a function that allows
+	independent setting of the RGB and alpha blend factors for blend
+	operations that require source and destination blend factors.  It
+	is not always desired that the blending used for RGB is also applied
+	to alpha.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/blend_func_separate.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

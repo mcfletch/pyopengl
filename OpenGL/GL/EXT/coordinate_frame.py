@@ -3,6 +3,16 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.coordinate_frame to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension allows specifying a per-vertex tangent and binormal
+	vector in addition to the normal vector, defining a coordinate frame.
+	The coordinate frame is used in additional extensions which also build
+	on fragment lighting to achieve bump mapping.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/coordinate_frame.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

@@ -3,6 +3,19 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.SGIS.fog_function to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension allows to define application-specific fog blend-factor
+	function.  Function is defined by the set of the "control" points and
+	should be monotonic. Each control point represented as a pair of the
+	eye-space distance value and corresponding value of the fog blending 
+	factor. The minimum number of control points is one. The maximum 
+	number is implementation dependent.
+	
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/SGIS/fog_function.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

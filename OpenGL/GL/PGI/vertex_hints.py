@@ -3,6 +3,14 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.PGI.vertex_hints to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	The extension allows the app to give hints regarding what kinds of
+	OpenGL function calls will happen between Begin/End pairs.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/PGI/vertex_hints.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

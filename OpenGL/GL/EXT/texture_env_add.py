@@ -3,6 +3,18 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.texture_env_add to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	New texture environment function ADD is supported with the following 
+	equation: 
+	                    Cv = min(1, Cf + Ct)
+	
+	New function may be specified by calling TexEnv with ADD token.
+	
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/texture_env_add.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

@@ -3,6 +3,9 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.INGR.blend_func_separate to provide a more 
 Python-friendly API
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/INGR/blend_func_separate.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

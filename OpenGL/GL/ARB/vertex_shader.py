@@ -3,6 +3,23 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.ARB.vertex_shader to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension adds programmable vertex level processing to OpenGL. The
+	application can write vertex shaders in a high level language as defined
+	in the OpenGL Shading Language specification. The language itself is not
+	discussed here. A vertex shader replaces the transformation, texture
+	coordinate generation and lighting parts of OpenGL, and it also adds
+	texture access at the vertex level. Furthermore, management of vertex
+	shader objects and loading generic attributes are discussed. A vertex
+	shader object, attached to a program object, can be compiled and linked
+	to produce an executable that runs on the vertex processor in OpenGL.
+	This extension also defines how such an executable interacts with the
+	fixed functionality vertex processing of OpenGL 1.4.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/ARB/vertex_shader.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

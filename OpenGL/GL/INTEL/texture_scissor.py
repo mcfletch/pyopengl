@@ -3,6 +3,12 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.INTEL.texture_scissor to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/INTEL/texture_scissor.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

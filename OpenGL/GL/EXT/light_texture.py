@@ -3,6 +3,30 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.light_texture to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension defines a general mechanism for substituting the
+	fragment color computed during texture environment processing in
+	place of other fragment attributes such as the fragment normal, or
+	as sources for some of the computations in the fragment processing
+	pipeline, for example as material or light parameters in the
+	fragment lighting computations.
+	
+	
+	Cf ----------------------+
+	                         |                 +-> to lighting parameters
+	                         v                 |
+	+------------+        +--------+     +-------------+
+	|            |        |        |     |             |
+	| texel      |------->| texenv |-----| texture     |---> Cf' (to Light Environment
+	| generation |        |        |     | application |          or Fog)
+	|            |        |        |     |             |
+	+------------+        +--------+     +-------------+
+	
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/light_texture.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

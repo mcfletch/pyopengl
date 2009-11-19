@@ -3,6 +3,14 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.PGI.misc_hints to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	The extension allows the app to give various hints regarding 
+	desired level of conformance, performance, features, etc.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/PGI/misc_hints.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

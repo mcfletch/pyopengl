@@ -3,6 +3,18 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.vertex_shader to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	EXT_vertex_shader adds a flexible way to change the per-vertex
+	processing in the GL pipeline. It provides a method to replace
+	the fixed vertex/normal transform and lighting with a user
+	specified means of generating processed vertices, texture
+	coordinates, color, and secondary color, along with a primitive's
+	associated state.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/vertex_shader.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

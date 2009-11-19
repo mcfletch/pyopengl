@@ -3,6 +3,17 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.color_subtable to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension allows a portion of a color table to be redefined.
+	If EXT_copy_texture is implemented, this extension also defines a
+	method to load a portion of a color lookup table from the 
+	framebuffer.
+	
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/color_subtable.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

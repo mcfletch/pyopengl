@@ -3,6 +3,16 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.ARB.copy_buffer to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension provides a mechanism to do an accelerated copy from one
+	buffer object to another. This may be useful to load buffer objects
+	in a "loading thread" while minimizing cost and synchronization effort
+	in the "rendering thread."
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/ARB/copy_buffer.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

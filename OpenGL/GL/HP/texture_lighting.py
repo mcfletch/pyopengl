@@ -3,6 +3,15 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.HP.texture_lighting to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension defines a mechanism for applications to request
+	that color originating from specular lighting be added to
+	the fragment color _after_ texture application.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/HP/texture_lighting.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

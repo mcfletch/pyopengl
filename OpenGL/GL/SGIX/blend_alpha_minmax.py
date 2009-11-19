@@ -3,6 +3,18 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.SGIX.blend_alpha_minmax to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	Two additional blending equations are specified using the interface
+	defined by EXT_blend_minmax.  These equations are similar to the
+	MIN_EXT and MAX_EXT blending equations, but the outcome for all four
+	color components is determined by a comparison of just the alpha
+	component's source and destination values.  These equations are useful
+	in image processing and advanced shading algorithms.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/SGIX/blend_alpha_minmax.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

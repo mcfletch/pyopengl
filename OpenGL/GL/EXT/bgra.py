@@ -3,6 +3,16 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.bgra to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	EXT_bgra extends the list of host-memory color formats.
+	Specifically, it provides formats which match the memory layout of
+	Windows DIBs so that applications can use the same data in both
+	Windows API calls and OpenGL pixel API calls.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/bgra.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

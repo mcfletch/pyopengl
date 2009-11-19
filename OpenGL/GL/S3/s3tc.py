@@ -3,6 +3,14 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.S3.s3tc to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension allows specifying texture data in compressed S3TC
+	format.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/S3/s3tc.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

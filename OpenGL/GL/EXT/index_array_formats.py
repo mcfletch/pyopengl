@@ -3,6 +3,15 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.index_array_formats to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extends the number of packed vertex formats accepted by
+	InterleavedArrays to include formats which specify color indexes
+	rather than RGBA colors.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/index_array_formats.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper

@@ -3,6 +3,18 @@
 This module customises the behaviour of the 
 OpenGL.raw.GL.EXT.framebuffer_blit to provide a more 
 Python-friendly API
+
+Overview (from the spec)
+	
+	This extension modifies EXT_framebuffer_object by splitting the
+	framebuffer object binding point into separate DRAW and READ
+	bindings.  This allows copying directly from one framebuffer to
+	another.  In addition, a new high performance blit function is
+	added to facilitate these blits and perform some data conversion
+	where allowed.
+
+The official definition of this extension is available here:
+http://www.opengl.org/registry/specs/EXT/framebuffer_blit.txt
 '''
 from OpenGL import platform, constants, constant, arrays
 from OpenGL import extensions, wrapper
