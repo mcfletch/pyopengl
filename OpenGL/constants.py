@@ -99,6 +99,11 @@ void = None
 
 GLhalfNV = GLhalfARB = ctypes.c_ushort
 
+# GL.ARB.sync extension, GLsync is an opaque pointer to a struct 
+# in the extensions header, basically just a "token" that can be 
+# passed to the various operations...
+GLsync = ctypes.c_void_p 
+
 
 ARRAY_TYPE_TO_CONSTANT = [
     ('GLclampd', GL_DOUBLE),
