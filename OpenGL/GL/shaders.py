@@ -32,7 +32,7 @@ __all__ = [
 def _alt( base, name ):
     if hasattr( GL, base ):
         root = getattr( GL, base )
-        if callable(root):
+        if hasattr(root,'__call__'):
             globals()[base] = alternate( 
                 getattr(GL,base),
                 getattr(module,name)

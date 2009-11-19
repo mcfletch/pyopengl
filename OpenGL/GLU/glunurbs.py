@@ -280,5 +280,5 @@ def gluPwlCurve( baseFunction, nurb, data, type ):
     else:
         raise ValueError( """Unrecognised type constant: %s"""%(type))
     size = arrays.GLfloatArray.arraySize( data )
-    size = int(size/divisor)
+    size = int(size//divisor)
     return baseFunction( nurb, size, data, divisor, type )

@@ -133,7 +133,7 @@ class Wrapper( object ):
             index = self.cArgIndex( outArg )
             arrayType = self.wrappedOperation.argtypes[ index ]
         if pnameArg is None:
-            assert not callable( size )
+            assert not hasattr(size,'__call__' )
             conv = converters.Output(
                 name=outArg,
                 size=size,
@@ -145,7 +145,7 @@ class Wrapper( object ):
                 size = size.__getitem__
             else:
                 setattr( self, '%s_FROM_%s'%(outArg,pnameArg), size )
-            assert callable( size )
+            assert hasattr( size, '__call__' )
             conv = converters.SizedOutput(
                 name=outArg,
                 specifier=pnameArg,
@@ -360,7 +360,7 @@ class Wrapper( object ):
                 calculate_cArgs = CArgCalculator( self, cConverters )
             else:
                 cConverters_mapped = [
-                    (i,converter,callable(converter))
+                    (i,converter,hasattr(converter,'__call__'))
                     for (i,converter) in enumerate( cConverters )
                 ]
                 def calculate_cArgs( pyArgs ):
@@ -800,7 +800,7 @@ class Wrapper( object ):
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
-                                    if not callable(converter):
+                                    if not hasattr(converter,'__call__'):
                                         cArgs.append( converter )
                                     else:
                                         try:
@@ -845,7 +845,7 @@ class Wrapper( object ):
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
-                                    if not callable(converter):
+                                    if not hasattr(converter,'__call__'):
                                         cArgs.append( converter )
                                     else:
                                         try:
@@ -886,7 +886,7 @@ class Wrapper( object ):
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
-                                    if not callable(converter):
+                                    if not hasattr(converter,'__call__'):
                                         cArgs.append( converter )
                                     else:
                                         try:
@@ -924,7 +924,7 @@ class Wrapper( object ):
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
-                                    if not callable(converter):
+                                    if not hasattr(converter,'__call__'):
                                         cArgs.append( converter )
                                     else:
                                         try:
@@ -960,7 +960,7 @@ class Wrapper( object ):
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
-                                    if not callable(converter):
+                                    if not hasattr(converter,'__call__'):
                                         cArgs.append( converter )
                                     else:
                                         try:
@@ -1005,7 +1005,7 @@ class Wrapper( object ):
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
-                                    if not callable(converter):
+                                    if not hasattr(converter,'__call__'):
                                         cArgs.append( converter )
                                     else:
                                         try:
@@ -1046,7 +1046,7 @@ class Wrapper( object ):
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
-                                    if not callable(converter):
+                                    if not hasattr(converter,'__call__'):
                                         cArgs.append( converter )
                                     else:
                                         try:
@@ -1084,7 +1084,7 @@ class Wrapper( object ):
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
-                                    if not callable(converter):
+                                    if not hasattr(converter,'__call__'):
                                         cArgs.append( converter )
                                     else:
                                         try:
@@ -1324,7 +1324,7 @@ class Wrapper( object ):
         if cConverters:
             cArgs = []
             for (index,converter) in enumerate( cConverters ):
-                if not callable(converter):
+                if not hasattr(converter,'__call__'):
                     cArgs.append( converter )
                 else:
                     try:

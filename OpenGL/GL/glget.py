@@ -604,7 +604,7 @@ glGetPixelMapusv = wrapper.wrapper(simple.glGetPixelMapusv).setOutput(
 )
 
 # 32 * 32 bits
-POLYGON_STIPPLE_SIZE = (32*32/8,)
+POLYGON_STIPPLE_SIZE = (32*32//8,)
 glGetPolygonStipple = glGetPolygonStippleub = wrapper.wrapper(simple.glGetPolygonStipple).setOutput(
     "mask",POLYGON_STIPPLE_SIZE, 
 )

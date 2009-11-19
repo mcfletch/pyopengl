@@ -93,7 +93,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
                 void **outData 
             )
         """
-        if (function is not None) and (not callable( function )):
+        if (function is not None) and (not hasattr( function,'__call__' )):
             raise TypeError( """Require a callable callback, got:  %s"""%(function,))
         def wrap( coords, vertex_data, weight, outData, *args ):
             """The run-time wrapper around the function"""
@@ -116,7 +116,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
         return wrap
     def dataWrapper( self, function ):
         """Wrap a function which only has the one data-pointer as last arg"""
-        if (function is not None) and (not callable( function )):
+        if (function is not None) and (not hasattr( function,'__call__' )):
             raise TypeError( """Require a callable callback, got:  %s"""%(function,))
         def wrap( *args ):
             """Just return the original object for polygon_data"""
@@ -129,7 +129,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
         return wrap
     def dataWrapper2( self, function ):
         """Wrap a function which has two data-pointers as last args"""
-        if (function is not None) and (not callable( function )):
+        if (function is not None) and (not hasattr( function,'__call__' )):
             raise TypeError( """Require a callable callback, got:  %s"""%(function,))
         def wrap( *args ):
             """Just return the original object for polygon_data"""
@@ -142,7 +142,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
         return wrap
     def vertexWrapper( self, function ):
         """Converts a vertex-pointer into an OOR vertex for processing"""
-        if (callable is not None) and (not callable( function )):
+        if (function is not None) and (not hasattr( function,'__call__' )):
             raise TypeError( """Require a callable callback, got:  %s"""%(function,))
         def wrap( vertex, data=None ):
             """Just return the original object for polygon_data"""

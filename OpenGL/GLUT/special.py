@@ -110,7 +110,7 @@ class GLUTCallback( object ):
         self.callbackType = FUNCTION_TYPE( None, *parameterTypes )
         self.CONTEXT_DATA_KEY = 'glut%sFunc'%(typeName, )
     def __call__( self, function, *args ):
-        if GLUT_GUARD_CALLBACKS and callable( function ):
+        if GLUT_GUARD_CALLBACKS and hasattr( function,'__call__' ):
             def safeCall( *args, **named ):
                 """Safe calling of GUI callbacks, exits on failures"""
                 try:
@@ -127,7 +127,7 @@ class GLUTCallback( object ):
             finalFunction = safeCall
         else:
             finalFunction = function
-        if callable( finalFunction ):
+        if hasattr( finalFunction,'__call__' ):
             cCallback = self.callbackType( finalFunction )
         else:
             cCallback = function

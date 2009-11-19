@@ -32,7 +32,7 @@ class Converter( object ):
         """
         argNames = list(self.argNames)
         for a in self.argNames:
-            if named.has_key( a ):
+            if a in named:
                 setattr( self, a, named[a] )
                 argNames.remove( a )
         for a,value in zip( argNames, args ):
