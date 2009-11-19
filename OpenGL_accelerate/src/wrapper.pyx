@@ -53,7 +53,7 @@ cdef class CArgCalculatorElement:
 		else:
 			self.converter = converter
 			self.doCAPI = False
-			self.callable = callable( converter )
+			self.callable = hasattr( converter, '__call__' )
 	def __call__( self, tuple pyArgs ):
 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
 		return self.c_call( pyArgs )
