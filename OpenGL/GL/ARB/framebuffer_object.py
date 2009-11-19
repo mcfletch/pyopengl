@@ -33,6 +33,13 @@ def glDeleteFramebuffers( baseOperation, n, framebuffers=None ):
     return baseOperation( n, framebuffers )
 
 # Setup the GL_UNSIGNED_INT_24_8 image type
-from OpenGL import images 
+from OpenGL import images
+from OpenGL.constants import GL_UNSIGNED_INT
 images.TYPE_TO_ARRAYTYPE[ GL_UNSIGNED_INT_24_8 ] = GL_UNSIGNED_INT
 images.TIGHT_PACK_FORMATS[ GL_UNSIGNED_INT_24_8 ] = 4
+
+# The extensions actually use the _EXT forms, which is a bit confusing 
+# for users, IMO.
+GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS = constant.Constant( 'GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS', 0x8CD9 )
+GL_FRAMEBUFFER_INCOMPLETE_FORMATS = constant.Constant( 'GL_FRAMEBUFFER_INCOMPLETE_FORMATS', 0x8CDA )
+GL_FRAMEBUFFER_UNSUPPORTED = constant.Constant( 'GL_FRAMEBUFFER_UNSUPPORTED', 0x8CDD )
