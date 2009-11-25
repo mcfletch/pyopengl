@@ -6,8 +6,19 @@ class Win32Platform( baseplatform.BasePlatform ):
     """Win32-specific platform implementation"""
 
     GLUT_GUARD_CALLBACKS = True
-    GL = OpenGL = ctypesloader.loadLibrary( ctypes.windll, 'opengl32', mode = ctypes.RTLD_GLOBAL )
-    GLU = ctypesloader.loadLibrary( ctypes.windll, 'glu32', mode = ctypes.RTLD_GLOBAL )
+    try:
+        GL = OpenGL = ctypesloader.loadLibrary( 
+            ctypes.windll, 'opengl32', mode = ctypes.RTLD_GLOBAL 
+        )
+    except OSError, err:
+        raise ImportError("Unable to load OpenGL library", *err.args)
+        
+    try:
+        GLU = ctypesloader.loadLibrary( 
+            ctypes.windll, 'glu32', mode = ctypes.RTLD_GLOBAL 
+        )
+    except OSError, err:
+        GLU = None
     
     GLUT = None 
     for possible in ('glut32','freeglut32','freeglut'):

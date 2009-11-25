@@ -30,11 +30,14 @@ class DarwinPlatform( baseplatform.BasePlatform ):
     EXTENSIONS_USE_BASE_FUNCTIONS = True
     
     # Get the pointers to the libraries...
-    OpenGL = ctypesloader.loadLibrary(
-        ctypes.cdll,
-        'OpenGL', 
-        mode=ctypes.RTLD_GLOBAL 
-    )
+    try:
+        OpenGL = ctypesloader.loadLibrary(
+            ctypes.cdll,
+            'OpenGL', 
+            mode=ctypes.RTLD_GLOBAL 
+        )
+    except OSError, err:
+        raise ImportError("Unable to load OpenGL library", *err.args)
     # CGL provides the windowing environment functionality
     # but it is built into the GL libs.
     GL = GLU = CGL = OpenGL

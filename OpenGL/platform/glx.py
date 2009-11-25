@@ -10,16 +10,22 @@ class GLXPlatform( baseplatform.BasePlatform ):
     # On Linux (and, I assume, most GLX platforms, we have to load 
     # GL and GLU with the "global" flag to allow GLUT to resolve its
     # references to GL/GLU functions).
-    GL = OpenGL = ctypesloader.loadLibrary(
-        ctypes.cdll,
-        'GL', 
-        mode=ctypes.RTLD_GLOBAL 
-    )
-    GLU = ctypesloader.loadLibrary(
-        ctypes.cdll,
-        'GLU',
-        mode=ctypes.RTLD_GLOBAL 
-    )
+    try:
+        GL = OpenGL = ctypesloader.loadLibrary(
+            ctypes.cdll,
+            'GL', 
+            mode=ctypes.RTLD_GLOBAL 
+        )
+    except OSError, err:
+        raise ImportError("Unable to load OpenGL library", *err.args)
+    try:
+        GLU = ctypesloader.loadLibrary(
+            ctypes.cdll,
+            'GLU',
+            mode=ctypes.RTLD_GLOBAL 
+        )
+    except OSError, err:
+        GLU = None
     # glut shouldn't need to be global, but just in case a dependent library makes
     # the same assumption GLUT does...
     try:
