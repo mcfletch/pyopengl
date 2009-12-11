@@ -203,5 +203,4 @@ FormatHandler(
 )
 FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandler' )
 FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', ['numpy.ndarray'] )
-#FormatHandler( 'numarray', 'OpenGL.arrays.numarrays.NumarrayHandler' )
 FormatHandler( 'numeric', 'OpenGL.arrays.numeric.NumericHandler', )
