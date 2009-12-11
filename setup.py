@@ -50,6 +50,7 @@ if __name__ == "__main__":
         options = {
             'sdist': {
                 'formats': ['gztar','zip'],
+		'force_manifest': True,
             },
         },
         data_files = datafiles,
