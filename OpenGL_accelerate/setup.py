@@ -127,6 +127,7 @@ speed-up is around 10% compared to unaccelerated code.
         options = {
             'sdist': {
                 'formats': ['gztar','zip'],
+		'force_manifest': True,
             },
         },
         package_dir = {
