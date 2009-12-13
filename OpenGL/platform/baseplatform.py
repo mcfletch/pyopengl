@@ -145,6 +145,7 @@ class BasePlatform( object ):
         func.__name__ = functionName
         func.DLL = dll
         func.extension = extension
+        func.deprecated = deprecated
         func = self.wrapLogging( 
             self.wrapContextCheck(
                 self.errorChecking( func, dll ),
@@ -235,6 +236,7 @@ class BasePlatform( object ):
                 doc = original.__doc__,
                 argNames = original.argNames,
                 extension = original.extension,
+                deprecated = original.deprecated,
             )
         elif hasattr( original, 'originalFunction' ):
             original = original.originalFunction
@@ -243,6 +245,7 @@ class BasePlatform( object ):
             resultType=original.restype, argTypes=original.argtypes,
             doc = original.__doc__, argNames = original.argNames,
             extension = original.extension,
+            deprecated = original.deprecated,
         )
     def nullFunction( 
         self,
@@ -260,6 +263,7 @@ class BasePlatform( object ):
             base = _NullFunctionPointer
         cls = type( functionName, (base,), {
             '__doc__': doc,
+            'deprecated': deprecated,
         } )
         return cls(
             functionName, dll, resultType, argTypes, argNames, extension=extension, doc=doc,
@@ -287,7 +291,7 @@ class BasePlatform( object ):
 
 class _NullFunctionPointer( object ):
     """Function-pointer-like object for undefined functions"""
-    def __init__( self, name, dll, resultType, argTypes, argNames, extension=None, doc=None ):
+    def __init__( self, name, dll, resultType, argTypes, argNames, extension=None, doc=None, deprecated=False ):
         from OpenGL import error
         self.__name__ = name
         self.DLL = dll
@@ -297,6 +301,7 @@ class _NullFunctionPointer( object ):
         self.restype = resultType
         self.extension = extension
         self.doc = doc
+        self.deprecated = deprecated
     resolved = False
     def __nonzero__( self ):
         """Make this object appear to be NULL"""
@@ -337,6 +342,7 @@ class _NullFunctionPointer( object ):
             )
 
 class _DeprecatedFunctionPointer( _NullFunctionPointer ):
+    deprecated = True
     def __call__( self, *args, **named ):
         from OpenGL import error
         raise error.NullFunctionError(
