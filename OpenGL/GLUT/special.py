@@ -109,6 +109,7 @@ class GLUTCallback( object ):
             self.wrappedOperation = failFunction
         self.callbackType = FUNCTION_TYPE( None, *parameterTypes )
         self.CONTEXT_DATA_KEY = 'glut%sFunc'%(typeName, )
+    argNames = ('function',)
     def __call__( self, function, *args ):
         if GLUT_GUARD_CALLBACKS and hasattr( function,'__call__' ):
             def safeCall( *args, **named ):
