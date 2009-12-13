@@ -1,5 +1,8 @@
 """Simplistic wrapper decorator for Python-coded wrappers"""
 
+class _LazyWrapper( object ):
+    """Marker to tell us that an object is a lazy wrapper"""
+
 def lazy( baseFunction ):
     """Produce a lazy-binding decorator that uses baseFunction
     
@@ -26,7 +29,7 @@ def lazy( baseFunction ):
                 'OpenGL.lazywrapper.lazy',
                 baseFunction.__name__,
             )
-        _with_wrapper = type( wrapper.__name__, (object,), {
+        _with_wrapper = type( wrapper.__name__, (_LazyWrapper,), {
             '__call__': __call__,
             '__repr__': __repr__,
             '__doc__': wrapper.__doc__,
