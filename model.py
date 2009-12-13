@@ -8,7 +8,7 @@ MAJOR_VERSION = '.'.join(__version__.split('.')[:2] )
 
 class NotDefined( object ):
     def __nonzero__( self ):
-        return False 
+        return False
 
 NOT_DEFINED = NotDefined()
 
@@ -24,15 +24,15 @@ class Reference( object ):
         self.sections[section.id] = section
         self.section_titles[section.title]= section
         for function in section.functions.values():
-            self.functions[ function.name ] = function 
-    
+            self.functions[ function.name ] = function
+
     def suffixed_name( self, a,b ):
         """Is b a with a suffix?"""
         if b.startswith( a ):
             for char in b[len(a):]:
                 if char not in self.suffix_chars:
-                    return False 
-            return True 
+                    return False
+            return True
         return False
     def get_crossref( self, title, volume=None,section=None ):
         raise NotImplemented( """Need a get_crossref method""" )
@@ -57,12 +57,12 @@ class Reference( object ):
         for source in self.package_names():
             result.append( (source,sorted([
                 (name,section) for name,section in self.section_titles.items()
-                if section.package == source 
+                if section.package == source
             ])))
         return result
 
 class RefSect( object ):
-    id = None 
+    id = None
     title = None
     purpose = None
     next = None
@@ -80,17 +80,17 @@ class RefSect( object ):
         self.constants = {}
     def set_deprecation( self, value ):
         """Set our deprecated flag"""
-        self.deprecated = value 
+        self.deprecated = value
     def has_function( self, name ):
         """Ask whether we have this name defined"""
         return (
-            self.functions.has_key( name ) or 
+            self.functions.has_key( name ) or
             self.py_functions.has_key( name )
         )
     def get_module( self ):
         """Retrieve our module"""
-        return self.reference.modules()[ 
-            self.reference.package_names().index( self.package ) 
+        return self.reference.modules()[
+            self.reference.package_names().index( self.package )
         ]
     def get_crossrefs( self, reference ):
         """Retrieve all cross-references from reference"""
@@ -112,7 +112,7 @@ class RefSect( object ):
                 )
                 for name in sorted(dir(source)):
                     if (
-                        self.reference.suffixed_name( name, function.name ) or 
+                        self.reference.suffixed_name( name, function.name ) or
                         self.reference.suffixed_name( function.name, name )
                     ):
                         if not self.has_function( name ):
@@ -127,7 +127,7 @@ class RefSect( object ):
     def get_samples( self, sample_set ):
         """Populate our sample-set for all of the available samples"""
         names = (
-            sorted(self.functions.keys()) + 
+            sorted(self.functions.keys()) +
             sorted(self.py_functions.keys())
         )
         filtered = []
@@ -141,13 +141,13 @@ class RefSect( object ):
 
 class Function( object ):
     """Function description produced from docs
-    
+
     Each function represents an original OpenGL function,
     which may have many Python-level functions associated
     with it.
     """
-    return_value = None 
-    varargs = varnamed = False 
+    return_value = None
+    varargs = varnamed = False
     docstring = None
     deprecated = False
     NOT_DEFINED = NOT_DEFINED
@@ -163,7 +163,7 @@ class Function( object ):
                 self.section.set_deprecation( True )
     def __repr__( self ):
         return '%s( %s ) -> %s'%(
-            self.name, 
+            self.name,
             self.parameters,
             self.return_value,
         )
@@ -171,34 +171,34 @@ class Function( object ):
 class PyFunction( Function ):
     """Python-implemented function produced via introspection"""
     def __init__( self, root_function, py_function, alias=None ):
-        self.root_function = root_function 
+        self.root_function = root_function
         self.py_function = py_function
         self.alias = alias
     @property
     def name( self ):
         """Introspect to get a name for our function"""
         if self.alias:
-            return self.alias 
+            return self.alias
         # okay, so do some introspection...
         if hasattr( self.py_function, '__name__' ):
             return self.py_function.__name__
         raise ValueError( """Don't know how to get name for %r type"""%(
             self.py_function.__class__,
         ))
-    @property 
+    @property
     def docstring( self ):
         """Retrieve docstring for pure-python objects"""
         if hasattr( self.py_function, '__doc__' ):
-            return self.py_function.__doc__ 
+            return self.py_function.__doc__
         return None
-    @property 
+    @property
     def section( self ):
-        return self.root_function.section 
-    @property 
+        return self.root_function.section
+    @property
     def python( self ):
         return {}
     _parameters = None
-    @property 
+    @property
     def parameters( self ):
         """Calculate (and store) parameter-list for the function"""
         if self._parameters is None:
@@ -207,17 +207,17 @@ class PyFunction( Function ):
     def get_parameters( self, target ):
         names = None
         if hasattr( target, 'pyConverterNames' ):
-            names = target.pyConverterNames 
+            names = target.pyConverterNames
         elif hasattr( target, 'argNames' ):
-            names = target.argNames 
+            names = target.argNames
         elif hasattr( target, 'wrapperFunction' ):
             # only values *past* the first for lazy-wrapped operations
             return self.get_parameters( target.wrapperFunction )[1:]
         elif hasattr( target, 'wrappedOperation' ):
             return self.get_parameters( target.wrappedOperation )
         elif isinstance( target, (types.FunctionType,types.MethodType) ):
-            args,varargs,varkw,defaults = inspect.getargspec( 
-                target 
+            args,varargs,varkw,defaults = inspect.getargspec(
+                target
             )
             defaults = defaults or ()
             default_dict = dict([
@@ -225,17 +225,17 @@ class PyFunction( Function ):
                 for (arg,default) in zip(args[-len(defaults):],defaults)
             ])
             parameters = [
-                Parameter( 
+                Parameter(
                     name, default=default_dict.get( name, NOT_DEFINED ),
                     function = self,
                 )
-                for name in args 
+                for name in args
             ]
             if varargs:
                 parameters.append(
                     Parameter(
                         varargs,
-                        function = self, 
+                        function = self,
                         varargs = True,
                     )
                 )
@@ -243,7 +243,7 @@ class PyFunction( Function ):
                 parameters.append(
                     Parameter(
                         varkw,
-                        function = self, 
+                        function = self,
                         varnamed = True,
                     )
                 )
@@ -252,36 +252,34 @@ class PyFunction( Function ):
             if hasattr( target, 'argtypes' ) and target.argtypes is None:
                 return []
             log.warn( """No parameters for type: %r""", target.__class__ )
-            import pdb
-            pdb.set_trace()
             names = []
         return [
             Parameter( name, data_type=None, function = self )
             for name in names
         ]
-    @property 
+    @property
     def return_value( self ):
         """Determine (if possible) whether we have a return-value type"""
         if hasattr( self.py_function, 'restype' ):
-            return self.py_function.restype 
+            return self.py_function.restype
         return None
 
 class Parameter( object ):
     """Description of a parameter to a function"""
     NOT_DEFINED = NOT_DEFINED
-    def __init__( 
+    def __init__(
         self, name, description=None,
         data_type=None,function=None,
-        default=NOT_DEFINED, 
-        varargs=False, varnamed=False 
+        default=NOT_DEFINED,
+        varargs=False, varnamed=False
     ):
         """Initialize with the values for the parameter"""
-        self.function = function 
+        self.function = function
         self.data_type = data_type
-        self.name = name 
+        self.name = name
         self.description = description
         self.default = default
-        self.varargs = varargs 
+        self.varargs = varargs
         self.varnamed = varnamed
     @property
     def has_default( self ):
@@ -289,23 +287,23 @@ class Parameter( object ):
 
 class ParameterReference( object ):
     def __init__( self, names, description ):
-        self.names = names 
+        self.names = names
         self.description = description
     def __repr__( self ):
         result = []
         return '\t\t%s -- %s'%( ', '.join(self.names), self.description )
 
 class Sample( object ):
-    def __init__( 
-        self, url, 
+    def __init__(
+        self, url,
         projectName, deltaPath,
-        tokenString=None, 
+        tokenString=None,
         sourceRow=None, sourceCol=None,
         endRow=None,endCol=None,
         lineText=None,
     ):
         self.positions = []
-        ( 
+        (
             self.url, self.projectName, self.deltaPath,
             self.tokenString,self.lineText,
         ) = (
@@ -325,8 +323,8 @@ class Sample( object ):
                 current = set.get( key )
                 if current is None:
                     current = cls( instance.url, instance.projectName, instance.deltaPath, instance.tokenString )
-                    set[key] = current 
+                    set[key] = current
                     result.append( current )
                 current.positions.extend( instance.positions )
         return result
-        
+
