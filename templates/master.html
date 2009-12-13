@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      py:strip="">
+<?python
+from dumbpydoc import Alternate
+?>
+<span py:def="breadcrumbs( module )">
+    <span py:for="parent in module.parents">
+        <span py:if="parent is not module" py:strip=""><a class="parent-link" href="${parent.name}.html">${parent.basename}</a>.</span>
+        <span py:if="parent is module" py:strip="">${parent.basename}</span>
+    </span>
+</span>
+<div py:def="docstring( obj )" class="doc-string programlisting">
+    ${obj.docstring}
+</div>
+<div py:def="pysignature( function,name=None )" class="py-signature">
+    <a name="py-${function.name}"/>
+    <div py:if="function.alternates" class="alternates">
+        <div class="alternate-description"><span class="py-function">${function.name}</span> (alternate implementations)</div>
+        <div py:for="alternate in function.alternates" class="alternate">
+            ${pysignature( alternate )}
+        </div>
+    </div>
+    <div py:if="not function.alternates" py:strip="">
+        <span class="py-function">${function.name}</span>( ${paramlist(function)} )
+        <span py:if="function.return_value">-&gt; ${function.return_value}</span>
+        <pre class="pydoc" py:if="function.docstring" py:content="function.docstring"/>
+    </div>
+</div>
+<span py:def="paramlist( function )" class="parameter-list">
+    <span py:for="i,param in enumerate(function.parameters)" class="param-def">
+        <span py:if="param.varargs" py:strip="">*</span>
+        <span py:if="param.varnamed" py:strip="">**</span>
+        <span py:if="param.data_type" py:strip="">${param.data_type}( </span>
+            ${param.name}
+        <span py:if="param.data_type" py:strip="">)</span>
+        <span py:if="param.has_default" py:strip=""> = ${repr(param.default)}</span>
+        <span py:strip="" py:if="i &lt; len(function.parameters)-1">, </span>
+    </span>
+</span>
+
+<head py:match="head" py:attrs="select('@*')">
+    <link rel="stylesheet" type="text/css" media="screen" href="manpage.css" />
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+    <title py:replace="''">Your title goes here</title>
+    <meta py:replace="select('*')"/>
+</head>
+
+<body py:match="body" py:attrs="select('@*')">
+  <div id="content">
+    <div py:replace="select('*|text()')"/>
+    <!-- End of content -->
+  </div>
+</body>
+</html>
