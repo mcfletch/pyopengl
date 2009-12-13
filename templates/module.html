@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+<xi:include href="master.html" />
+<head><title>${module.name}</title></head>
+<body class="python-module">
+    <h1>${breadcrumbs(module)}</h1>
+    ${docstring(module)}
+    <div class="modules" py:if="module.is_package and module.modules">
+        <h2><a name="modules" >Modules</a></h2>
+        <div py:for="child in module.modules" class="float-left module" style="width: 33%"><a href="${child.name}.html">${child.name}</a></div>
+        <div style="clear: both" />
+    </div>
+    <div class="functions" py:if="module.functions">
+        <h2><a name="functions" >Functions</a></h2>
+        <div py:for="name,func in module.functions">
+            ${pysignature( func,name )}
+        </div>
+    </div>
+    <div class="constants" py:if="module.constants">
+        <h2><a name="constants" >Constants</a></h2>
+        <div py:for="name,const in module.constants" class="constant">
+            ${const}
+        </div>
+    </div>
+</body>
+</html>

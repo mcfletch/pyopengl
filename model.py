@@ -175,6 +175,15 @@ class PyFunction( Function ):
         self.py_function = py_function
         self.alias = alias
     @property
+    def alternates( self ):
+        """Yield any alternate definitions"""
+        if hasattr( self.py_function, '_alternatives' ):
+            return [
+                PyFunction( self.root_function, alternate )
+                for alternate in self.py_function._alternatives
+            ]
+        return []
+    @property
     def name( self ):
         """Introspect to get a name for our function"""
         if self.alias:
