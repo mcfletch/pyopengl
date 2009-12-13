@@ -61,7 +61,8 @@ ${navtable()}
 	?>
 	<h1 class="path-name">${path.text}</h1>
 	<div class="path-body">
-		<div class="introduction">These tutorials describe how to use a particular effect within OpenGL.
+		<div class="introduction">These tutorials describe how to setup modern shadow-map-based shadow-casting.
+        These are fairly advanced tutorials which assume you are comfortable with OpenGL.
 		</div>
 		${path_children( path )}
 	</div>
