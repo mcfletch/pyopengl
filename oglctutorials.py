@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 """Generate the OpenGLContext shader tutorials from '''-string marked-up source code"""
 import re,os,sys,textwrap, datetime
-import kid, logging 
+import kid, logging
 log = logging.getLogger( 'tutorials' )
 
 text_re = re.compile(
@@ -37,9 +37,9 @@ def generate_index( paths ):
     """Generate index file for given paths"""
     next = paths[0].children[0]
     prev = paths[-1].children[-1]
-    
-    template = kid.Template( 
-        file='templates/tutorialindex.kid', 
+
+    template = kid.Template(
+        file='templates/tutorialindex.kid',
         paths=paths,
         next = next,
         prev = prev,
@@ -50,11 +50,11 @@ def generate_index( paths ):
     html_file = os.path.join( OUTPUT_DIRECTORY, 'index.xhtml' )
     print 'writing', html_file
     open( html_file, 'w').write( data )
-    
+
 
 def generate( tutorial, prev=None, next=None, path=None ):
-    template = kid.Template( 
-        file='templates/tutorial.kid', 
+    template = kid.Template(
+        file='templates/tutorial.kid',
         tutorial = tutorial,
         date=datetime.datetime.now().isoformat(),
         path = path,
@@ -72,18 +72,18 @@ class Block( object ):
     html_class = ''
     def __init__( self, text=None, children=None, tail=None ):
         """Initializes the block of text with given text"""
-        self.text = text 
-        self.children = children 
+        self.text = text
+        self.children = children
         self.tail = tail
         if self.text:
             self.text, children = self.markup( self.text )
             if not self.children:
-                self.children = children 
+                self.children = children
             else:
                 self.children[:0] = children
     def markup( self, text ):
         """Returns text, children"""
-        
+
         new_text, children = "",[]
         offset = 0
         for match in markup_re.finditer( text ):
@@ -101,33 +101,33 @@ class Block( object ):
                 for suffix in image_extensions:
                     if url.endswith( suffix ):
                         cls = Image
-                children.append( cls( 
+                children.append( cls(
                     match.group( 'link_text' ),
                     url,
                 ))
             else:
                 raise RuntimeError( "Unknown markup: %s", text )
         if not offset:
-            return text, children 
+            return text, children
         else:
             if children[-1].tail is None:
                 children[-1].tail = text[offset:]
             else:
                 children[-1].tail += text[offset:]
-        return new_text, children 
+        return new_text, children
     def append( self, value ):
         """Append given value to our content"""
         if isinstance( value, (str,unicode)):
             if self.children:
                 last_child = self.children[-1]
                 if last_child.tail:
-                    last_child.tail += value 
+                    last_child.tail += value
                 else:
-                    last_child.tail = value 
+                    last_child.tail = value
             elif self.text:
-                self.text += value 
+                self.text += value
             else:
-                self.text = value 
+                self.text = value
             return True
         else:
             # is a node of some form...
@@ -154,21 +154,21 @@ class TutorialPath( Grouping ):
 class Tutorial( Grouping ):
     html_tag = 'body'
     html_class = 'tutorial'
-    @property 
+    @property
     def title( self ):
         """find our first title descendant"""
         for item in self.children:
             if isinstance( item, Commentary ):
                 for child in item.children:
                     if isinstance( child, Title ):
-                        return child.text 
+                        return child.text
         return "No title found"
     def set_file( self, filename ):
         base = os.path.basename( filename )
         self.filename = base
         root = os.path.splitext( base )[0]
-        self.html_file = os.path.join( 
-            OUTPUT_DIRECTORY, '%s.xhtml'%(root) 
+        self.html_file = os.path.join(
+            OUTPUT_DIRECTORY, '%s.xhtml'%(root)
         )
         self.relative_link = '%s.xhtml'%( root, )
 
@@ -202,7 +202,7 @@ class Commentary( Grouping ):
                 self.append( Title( block.strip( '=' ).strip() ))
             else:
                 self.append( Paragraph( block ))
-    
+
 class Code( Block ):
     """Used for machine-executable code"""
     html_tag = 'div'
@@ -225,11 +225,11 @@ class Anchor( Block ):
     html_tag = 'a'
     def __init__( self, text, url ):
         super( Anchor, self ).__init__( text )
-        self.url = url 
+        self.url = url
 
 class Image( Anchor ):
     html_tag = 'img'
-    
+
 
 def parse_file( filename ):
     text = open( filename ).read()
@@ -244,8 +244,8 @@ def parse_file( filename ):
         if py_text.strip():
             tutorial.append( Code( py_text ) )
         if match.group( 'commentary' ).strip():
-            tutorial.append( 
-                Commentary( match.group('commentary') ) 
+            tutorial.append(
+                Commentary( match.group('commentary') )
             )
         offset = match.end()
     if text[offset:].strip():
@@ -253,7 +253,7 @@ def parse_file( filename ):
     return tutorial
 
 if __name__ == "__main__":
-    shaders = TutorialPath( 
+    shaders = TutorialPath(
         "Introduction to Shaders",
         children =[
             parse_file( os.path.join( test_dir,name ))
@@ -269,19 +269,22 @@ if __name__ == "__main__":
                 'shader_8.py',
                 'shader_9.py',
                 'shader_10.py',
+                'shader_11.py',
+                'shader_12.py',
             ]
-        ] 
+        ]
     )
-    effects = TutorialPath( 
-        "Special Effects",
+    effects = TutorialPath(
+        "Depth-map Shadows",
         children =[
             parse_file( os.path.join( test_dir,name ))
             for name in [
                 'shadow_1.py',
+                'shadow_2.py',
             ]
         ],
     )
-    nodes = TutorialPath( 
+    nodes = TutorialPath(
         "Scenegraph Nodes",
         children =[
             parse_file( os.path.join( test_dir,name ))
@@ -291,9 +294,9 @@ if __name__ == "__main__":
                 'nurbsobject.py',
                 'particles_simple.py',
             ]
-        ] 
+        ]
     )
-    nehe = TutorialPath( 
+    nehe = TutorialPath(
         "NeHe Translations",
         children =[
             parse_file( os.path.join( test_dir,name ))
@@ -310,10 +313,10 @@ if __name__ == "__main__":
                 'nehe6_multi.py',
                 'glprint.py',
             ]
-        ] 
+        ]
     )
     paths = [shaders,nodes,effects,nehe]
     generate_index( paths = paths )
     for path in paths:
         path.generate_children()
-        
+
