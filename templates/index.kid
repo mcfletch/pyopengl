@@ -9,10 +9,10 @@
 <ul class="toc"><li py:for="package in ref.package_names()">
     <a href="#${package}">${package} Reference</a>
 </li>
-<li><a href="http://pyopengl.sourceforge.net/documentation/pydoc/OpenGL.html">Overall PyDoc</a> -- includes Python-specific helper modules and the OpenGL extension modules.
+<li><a href="../pydoc/OpenGL.html">Overall PyDoc</a> -- includes Python-specific helper modules and the OpenGL extension modules.
 	<ul class="toc">
 	<li py:for="module_name,desc in implementation_module_names">
-		<a href="http://pyopengl.sourceforge.net/documentation/pydoc/OpenGL.${module_name}.html">OpenGL.${module_name} PyDoc</a> ${desc}
+		<a href="../pydoc/OpenGL.${module_name}.html">OpenGL.${module_name} PyDoc</a> ${desc}
 	</li>
 	</ul>
 </li>

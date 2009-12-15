@@ -7,16 +7,31 @@
 <?python
 from dumbpydoc import Alternate
 ?>
+<table py:def="nav_table(context)" width="100%">
+    <?python
+        previous = getattr( context, 'previous', None)
+        next = getattr( context,'next',None)
+    ?>
+<tbody><tr><td align="left">
+        <a id="nav-previous" py:if="previous" href="${previous.name}.html">Previous: ${previous.name}</a></td>
+    <td align="center">
+        ${breadcrumbs( module )}
+    </td>
+    <td align="right">
+        <a id="nav-next" py:if="next" href="${next.name}.html">Next: ${next.name}</a>
+    </td>
+</tr></tbody></table>
 <span py:def="breadcrumbs( module )">
     <span py:for="parent in module.parents">
         <span py:if="parent is not module" py:strip=""><a class="parent-link" href="${parent.name}.html">${parent.basename}</a>.</span>
         <span py:if="parent is module" py:strip="">${parent.basename}</span>
     </span>
 </span>
+<a py:def="classref( cls )" title="${cls.name}" href="${cls.module.name}.html#class-${cls.basename}">${cls.basename}</a>
 <div py:def="docstring( obj )" class="doc-string programlisting">
     ${obj.docstring}
 </div>
-<div py:def="pysignature( function,name=None )" class="py-signature">
+<div py:def="pysignature( function,name=None, link=None )" class="py-signature">
     <a name="py-${function.name}"/>
     <div py:if="function.alternates" class="alternates">
         <div class="alternate-description"><span class="py-function">${function.name}</span> (alternate implementations)</div>
@@ -25,7 +40,7 @@ from dumbpydoc import Alternate
         </div>
     </div>
     <div py:if="not function.alternates" py:strip="">
-        <span class="py-function">${function.name}</span>( ${paramlist(function)} )
+        <span class="py-function"><a py:strip="not link" href="../manual-3.0/${link}">${function.name}</a></span>( ${paramlist(function)} )
         <span py:if="function.return_value">-&gt; ${function.return_value}</span>
         <pre class="pydoc" py:if="function.docstring" py:content="function.docstring"/>
     </div>

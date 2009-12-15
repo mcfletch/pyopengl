@@ -3,7 +3,7 @@
 import glob, os, datetime, subprocess
 #import elementtree.ElementTree as ET
 import lxml.etree as ET
-import kid, logging 
+import kid, logging
 log = logging.getLogger( 'generate' )
 
 from directdocs.model import Function, Parameter, ParameterReference
@@ -22,7 +22,7 @@ MML_NS = "http://www.w3.org/1998/Math/MathML"
 WRAPPER = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book SYSTEM "test" [ <!ENTITY nbsp " "> ]>
 
-<book 
+<book
     xmlns="%s"
     xmlns:mml="%s">
 %%s
@@ -36,7 +36,7 @@ IMPLEMENTATION_MODULES = [
     ('arrays.vbo','Convenience module providing a Vertex Buffer Object abstraction layer'),
     ('GL.shaders','Convenience module providing a GLSL Shader abstraction layer (alternate declarations, convenience functions)'),
     #'Tk','GLX',
-]   
+]
 
 
 class Reference( model.Reference ):
@@ -90,23 +90,23 @@ class RefSect( model.RefSect ):
                 value = getattr( self, function )
                 processors[key ] = value
         self.id = tree[0].get('id')
-        self.title = self.name = tree[0].xpath( 
-            './/d:refmeta/d:refentrytitle', 
-            namespaces=self.query_namespace 
+        self.title = self.name = tree[0].xpath(
+            './/d:refmeta/d:refentrytitle',
+            namespaces=self.query_namespace
         )[0].text
         self.functions = dict([
             (x.text,Function(x.text,self))
-            for x in tree[0].xpath( 
-                './/d:refnamediv/d:refname', 
-                namespaces=self.query_namespace 
+            for x in tree[0].xpath(
+                './/d:refnamediv/d:refname',
+                namespaces=self.query_namespace
             )
         ])
-        self.purpose = tree[0].xpath( 
+        self.purpose = tree[0].xpath(
             './/d:refnamediv/d:refpurpose',namespaces=self.query_namespace
         )[0].text
         for func_prototype in tree[0].xpath(
             './/d:refsynopsisdiv/d:funcsynopsis/d:funcprototype',
-            namespaces=self.query_namespace 
+            namespaces=self.query_namespace
         ):
             self.process_funcprototype( func_prototype )
         processed_sections = {}
@@ -151,9 +151,9 @@ class RefSect( model.RefSect ):
         paramresults = []
         for param in params:
             if not param.tag.endswith( '}void' ):
-                typ = param.text 
+                typ = param.text
                 for item in param:
-                    paramname = item.text 
+                    paramname = item.text
                     if item.tail:
                         typ += item.tail
                 try:
@@ -183,13 +183,13 @@ class RefSect( model.RefSect ):
             for item in entry:
                 if item.tag.endswith( 'term' ):
                     value = [
-                        x.text.strip() 
-                        for x in item.iterdescendants() 
+                        x.text.strip()
+                        for x in item.iterdescendants()
                         if (x.text and x.tag.endswith( '}parameter' ))
                     ]
                     terms.extend(value)
                 else:
-                    description = item  
+                    description = item
             set.append( ParameterReference(terms,description))
 
         self.varrefs.extend( set )
@@ -223,7 +223,7 @@ def init_output( ):
 
 def main():
     init_output()
-    
+
     if os.path.isfile( references.CACHE_FILE ):
         import pickle
         samples = pickle.loads( open(references.CACHE_FILE).read())
@@ -251,9 +251,9 @@ def main():
     ref.check_crossrefs()
     # now generate some files...
     serial = kid.XHTMLSerializer( decl=True )
-    template = kid.Template( 
-        file='templates/index.kid', 
-        ref=ref, 
+    template = kid.Template(
+        file='templates/index.kid',
+        ref=ref,
         date=datetime.datetime.now().isoformat(),
         version=__version__,
         implementation_module_names = IMPLEMENTATION_MODULES,
@@ -270,12 +270,24 @@ def main():
             version=__version__,
         )
         data = template.serialize( output=serial )
-        open( 
+        open(
             os.path.join( OUTPUT_DIRECTORY,ref.url(section)), 'w'
         ).write( data )
 
+    # Now store out references for things which want to do Python: refsect
+    # lookups...
+    mapping = {}
+    for sectname,section in ref.sections.items():
+        for function in section.functions.keys():
+            mapping[function] = ref.url( section )
+        for pyname in section.py_functions.keys():
+            if pyname in mapping:
+                log.warn( 'Duplicate python function name: %s', pyname )
+            mapping[pyname] = ref.url( section )
+    data = pickle.dumps( mapping )
+    open( '.pyfunc-urls.pkl','wb').write( data )
+
 if __name__ == "__main__":
-    import logging 
+    import logging
     logging.basicConfig()
     main()
-
