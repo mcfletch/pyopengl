@@ -88,3 +88,13 @@ span.parameter {
 .float-left {
     float: left;
 }
+
+.class-pydoc .class-name {
+    color: green;
+}
+.class-pydoc .class-body {
+    margin-left: 4em;
+}
+.constants .constant-list {
+    margin-left: 4em;
+}

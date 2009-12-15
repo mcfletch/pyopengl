@@ -7,6 +7,7 @@
 <xi:include href="master.html" />
 <head><title>${module.name}</title></head>
 <body class="python-module">
+    ${nav_table(module)}
     <h1>${breadcrumbs(module)}</h1>
     ${docstring(module)}
     <div class="modules" py:if="module.is_package and module.modules">
@@ -17,14 +18,35 @@
     <div class="functions" py:if="module.functions">
         <h2><a name="functions" >Functions</a></h2>
         <div py:for="name,func in module.functions">
-            ${pysignature( func,name )}
+            ${pysignature( func,name, link=module.link( func,name ) )}
+        </div>
+    </div>
+    <div class="classes" py:if="module.classes">
+        <h2><a name="classes" >Classes</a></h2>
+        <div py:for="name,cls in module.classes" class="class-pydoc">
+            <div class="class-declaration">class <a name="class-${cls.basename}" class="class-name">${cls.basename}</a>(
+                <span py:for="base in cls.bases" class="base-class">${classref( base )}</span>
+            ):</div>
+            <div class="class-body">
+                <pre class="pydoc" py:if="cls.docstring" py:content="cls.docstring"/>
+                <div py:for="name,prop in cls.properties" class="property">
+                    ${prop.name}
+                    <pre class="pydoc" py:if="prop.docstring" py:content="prop.docstring"/>
+                </div>
+                <div py:for="name,func in cls.functions" py:strip="">
+                    ${pysignature( func, name )}
+                </div>
+            </div>
         </div>
     </div>
     <div class="constants" py:if="module.constants">
         <h2><a name="constants" >Constants</a></h2>
-        <div py:for="name,const in module.constants" class="constant">
-            ${const}
+        <div class="constant-list">
+            <div py:for="name,const in module.constants" class="constant">
+                ${const}
+            </div>
         </div>
     </div>
+    ${nav_table(module)}
 </body>
 </html>

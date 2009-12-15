@@ -195,6 +195,9 @@ class PyFunction( Function ):
             self.py_function.__class__,
         ))
     @property
+    def target( self ):
+        return self.py_function
+    @property
     def docstring( self ):
         """Retrieve docstring for pure-python objects"""
         if hasattr( self.py_function, '__doc__' ):
@@ -233,13 +236,18 @@ class PyFunction( Function ):
                 (arg,default)
                 for (arg,default) in zip(args[-len(defaults):],defaults)
             ])
-            parameters = [
-                Parameter(
-                    name, default=default_dict.get( name, NOT_DEFINED ),
-                    function = self,
-                )
-                for name in args
-            ]
+            try:
+                parameters = []
+                for name in args:
+                    if isinstance( name, list ):
+                        name = tuple(name)
+                    parameters.append( Parameter(
+                        name, default=default_dict.get( name, NOT_DEFINED ),
+                        function = self,
+                    ))
+            except Exception, err:
+                import pdb
+                pdb.set_trace()
             if varargs:
                 parameters.append(
                     Parameter(
