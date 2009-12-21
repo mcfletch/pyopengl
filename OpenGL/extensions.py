@@ -3,7 +3,8 @@
 This module provides the tools required to check whether
 an extension is available
 """
-import logging 
+from OpenGL.latebind import LateBind
+import logging
 log = logging.getLogger( 'OpenGL.extensions' )
 VERSION_PREFIX = 'GL_VERSION_GL_'
 CURRENT_GL_VERSION = None
@@ -12,7 +13,7 @@ AVAILABLE_GLU_EXTENSIONS = []
 
 def getGLVersion( ):
     """Retrieve 2-int declaration of major/minor GL version
-    
+
     returns [int(major),int(minor)] or False if not loaded
     """
     global CURRENT_GL_VERSION
@@ -27,7 +28,7 @@ def getGLVersion( ):
         else:
             return False # not yet loaded/supported
     return CURRENT_GL_VERSION
-    
+
 
 def hasGLExtension( specifier ):
     """Given a string specifier, check for extension being available"""
@@ -35,7 +36,7 @@ def hasGLExtension( specifier ):
     specifier = specifier.replace('.','_')
     if specifier.startswith( VERSION_PREFIX ):
         specifier = [
-            int(x) 
+            int(x)
             for x in specifier[ len(VERSION_PREFIX):].split('_')
         ]
         version = getGLVersion()
@@ -47,12 +48,12 @@ def hasGLExtension( specifier ):
         if not AVAILABLE_GL_EXTENSIONS:
             AVAILABLE_GL_EXTENSIONS[:] = glGetString( GL_EXTENSIONS ).split()
         result = specifier in AVAILABLE_GL_EXTENSIONS
-        log.info( 
-            'GL Extension %s %s', 
+        log.info(
+            'GL Extension %s %s',
             specifier,
-            ['unavailable','available'][bool(result)] 
+            ['unavailable','available'][bool(result)]
         )
-        return result 
+        return result
 
 def hasGLUExtension( specifier ):
     """Given a string specifier, check for extension being available"""
@@ -61,15 +62,13 @@ def hasGLUExtension( specifier ):
         AVAILABLE_GLU_EXTENSIONS[:] = gluGetString( GLU_EXTENSIONS )
     return specifier.replace('.','_') in AVAILABLE_GLU_EXTENSIONS
 
-class _Alternate( object ):
-    resolved = False 
-    implementation = None
+class _Alternate( LateBind ):
     def __init__( self, name, *alternates ):
         """Initialize set of alternative implementations of the same function"""
         self.__name__ = name
         self._alternatives = alternates
     def __nonzero__( self ):
-        if self.__class__.implementation:
+        if self._finalCall:
             return True
         for alternate in self._alternatives:
             if alternate:
@@ -78,10 +77,10 @@ class _Alternate( object ):
                     alternate.__name__,
                     ", ".join([x.__name__ for x in self._alternatives])
                 )
-                self.__class__.implementation = alternate
-                return True 
+                self.setFinalCall( alternate )
+                return True
         return False
-    def __call__( self, *args, **named ):
+    def finalise( self ):
         """Call, doing a late lookup and bind to find an implementation"""
         for alternate in self._alternatives:
             if alternate:
@@ -90,19 +89,17 @@ class _Alternate( object ):
                     alternate.__name__,
                     ", ".join([x.__name__ for x in self._alternatives])
                 )
-                self.__class__.implementation = alternate
-                self.__class__.__call__ = alternate.__call__
-                return self( *args, **named )
+                return alternate
         from OpenGL import error
         raise error.NullFunctionError(
-            """Attempt to call an undefined alterate function (%s), check for bool(%s) before calling"""%(
+            """Attempt to call an undefined alternate function (%s), check for bool(%s) before calling"""%(
                 ', '.join([x.__name__ for x in self._alternatives]),
                 self.__name__,
             )
         )
 def alternate( name, *functions ):
     """Construct a callable that functions as the first implementation found of given set of alternatives
-    
+
     if name is a function then its name will be used....
     """
     if not isinstance( name, (str,unicode)):

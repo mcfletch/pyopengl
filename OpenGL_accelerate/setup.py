@@ -5,7 +5,7 @@ from distutils.core import setup,Extension
 try:
     from Cython.Distutils import build_ext
 except ImportError, err:
-    have_cython = False 
+    have_cython = False
 else:
     have_cython = True
 
@@ -27,10 +27,10 @@ def cython_extension( name, include_dirs = (), ):
     """Create a cython extension object"""
     filenames = '%(name)s.c'%locals(), '%(name)s.pyx'%locals()
     filename = filenames[bool(have_cython)]
-    return Extension( 
+    return Extension(
         "OpenGL_accelerate.%(name)s"%locals(),
         [
-            os.path.join( 
+            os.path.join(
                 'src',
                 filename
             ),
@@ -46,6 +46,7 @@ extensions.extend([
     cython_extension( 'errorchecker' ),
     cython_extension( 'vbo' ),
     cython_extension( 'nones_formathandler' ),
+    cython_extension( 'latebind' ),
 ])
 
 try:
@@ -67,10 +68,10 @@ else:
                 'include',
             ),
         ]
-    extensions.append( cython_extension( 
-        'numpy_formathandler', includeDirectories 
+    extensions.append( cython_extension(
+        'numpy_formathandler', includeDirectories
     ) )
-    
+
 try:
     import Numeric
 except ImportError, err:
@@ -88,7 +89,7 @@ else:
             undefine_macros = definitions,
         ),
     ])
-    
+
 
 if __name__ == "__main__":
     extraArguments = {

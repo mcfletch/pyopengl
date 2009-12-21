@@ -5,12 +5,14 @@ glGetError = platform.OpenGL.glGetError
 from OpenGL import converters
 from OpenGL.converters import DefaultCConverter
 from OpenGL.converters import returnCArgument,returnPyArgument
+from OpenGL.latebind import LateBind
 log = logging.getLogger( 'OpenGL.wrapper' )
 
 from OpenGL import acceleratesupport
 cWrapper = None
 if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
+        from OpenGL_accelerate.latebind import LateBind
         from OpenGL_accelerate.wrapper import (
             Wrapper as cWrapper,
             CArgCalculator,
@@ -24,7 +26,8 @@ NULL = object()
 if not STORE_POINTERS:
     if not ERROR_ON_COPY:
         log.error( """You've specified (not STORE_POINTERS) yet ERROR_ON_COPY is False, this would cause segfaults, so (not STORE_POINTERS) is being ignored""" )
-        STORE_POINTERS = True 
+        STORE_POINTERS = True
+
 
 def asList( o ):
     """Convert to a list if not already one"""
@@ -32,38 +35,38 @@ def asList( o ):
         return list(o)
     return o
 
-class Wrapper( object ):
+class Wrapper( LateBind ):
     """Wrapper around a ctypes cFunction object providing SWIG-like hooks
-    
+
     Attributes:
-    
-        wrappedOperation -- base operation, normally a ctypes function 
+
+        wrappedOperation -- base operation, normally a ctypes function
             with data-types and error-checking specified
         pyConverters -- converters for incoming Python arguments,
             provide 1:1 mapping to incoming Python arguments, can
             suppress an argument from the argument-set as well
                 see setPyConverter
-        pyConverterNames -- caching/storage of the argument names 
-            for the Python converters 
+        pyConverterNames -- caching/storage of the argument names
+            for the Python converters
         cConverters -- converters for incoming C-level arguments
             produce Python-level objects in 1:1 mapping to ctypes
             arguments from pyConverters results
                 see setCConverter
-        cResolvers -- converters turning Python-level objects into 
-            ctypes-compatible data-types 
+        cResolvers -- converters turning Python-level objects into
+            ctypes-compatible data-types
                 see setCResolver
-    
+
     Generic Attributes:
-    
-        {ARG1}_LOOKUP_{ARG2} -- lookup dictionaries to provide sizes for 
-            ARG1 output value from the value of ARG2, provided for 
+
+        {ARG1}_LOOKUP_{ARG2} -- lookup dictionaries to provide sizes for
+            ARG1 output value from the value of ARG2, provided for
             documentation/reference
         {ARG1}_FROM_{ARG2} -- lookup functions to provide sizes for ARG1
-            output value from the value of ARG2, provided for 
+            output value from the value of ARG2, provided for
             documentation/reference
     """
     localProperties = (
-        'wrappedOperation', 
+        'wrappedOperation',
         '__file__',
         'pyConverters',
         'pyConverterNames',
@@ -112,20 +115,20 @@ class Wrapper( object ):
             raise KeyError( """No argument %r in argument list %r"""%(
                 argName, argNames
             ))
-    def setOutput( 
-        self, outArg, size=(1,), pnameArg=None, 
+    def setOutput(
+        self, outArg, size=(1,), pnameArg=None,
         arrayType=None, oldStyleReturn=SIZE_1_ARRAY_UNPACK,
         orPassIn = False,
     ):
         """Set the given argName to be an output array
-        
-        size -- either a tuple compatible with arrayType.zeros or 
+
+        size -- either a tuple compatible with arrayType.zeros or
             a function taking pname to produce such a value.
-        arrayType -- array data-type used to generate the output 
+        arrayType -- array data-type used to generate the output
             array using the zeros class method...
-        pname -- optional argument passed into size function, that 
-            is, the name of the argument whose *value* will be passed 
-            to the size function, often the name of an input argument 
+        pname -- optional argument passed into size function, that
+            is, the name of the argument whose *value* will be passed
+            to the size function, often the name of an input argument
             to be "sized" to match the output argument.
         """
         if arrayType is None:
@@ -169,20 +172,20 @@ class Wrapper( object ):
         )
     def setPyConverter( self, argName, function = NULL ):
         """Set Python-argument converter for given argument
-        
+
         argName -- the argument name which will be coerced to a usable internal
             format using the function provided.
         function -- None (indicating a simple copy), NULL (default) to eliminate
-            the argument from the Python argument-list, or a callable object with 
+            the argument from the Python argument-list, or a callable object with
             the signature:
-            
+
                 converter(arg, wrappedOperation, args)
-            
+
             where arg is the particular argument on which the convert is working,
-            wrappedOperation is the underlying wrapper, and args is the set of 
+            wrappedOperation is the underlying wrapper, and args is the set of
             original Python arguments to the function.
-        
-        Note that you need exactly the same number of pyConverters as Python 
+
+        Note that you need exactly the same number of pyConverters as Python
         arguments.
         """
         if not hasattr( self, 'pyConverters' ):
@@ -198,27 +201,27 @@ class Wrapper( object ):
             del self.pyConverters[i]
             del self.pyConverterNames[i]
         else:
-            self.pyConverters[i] = function 
+            self.pyConverters[i] = function
         return self
     def setCConverter( self, argName, function ):
         """Set C-argument converter for a given argument
-        
-        argName -- the argument name whose C-compatible representation will 
+
+        argName -- the argument name whose C-compatible representation will
             be calculated with the passed function.
         function -- None (indicating a simple copy), a non-callable object to
-            be copied into the result-list itself, or a callable object with 
+            be copied into the result-list itself, or a callable object with
             the signature:
-            
+
                 converter( pyArgs, index, wrappedOperation )
-            
-            where pyArgs is the set of passed Python arguments, with the 
-            pyConverters already applied, index is the index of the C argument 
+
+            where pyArgs is the set of passed Python arguments, with the
+            pyConverters already applied, index is the index of the C argument
             and wrappedOperation is the underlying function.
-        
-        C-argument converters are your chance to expand/contract a Python 
+
+        C-argument converters are your chance to expand/contract a Python
         argument list (pyArgs) to match the number of arguments expected by
         the ctypes baseOperation.  You can't have a "null" C-argument converter,
-        as *something* has to be passed to the C-level function in the 
+        as *something* has to be passed to the C-level function in the
         parameter.
         """
         if not hasattr( self, 'cConverters' ):
@@ -231,7 +234,7 @@ class Wrapper( object ):
             raise AttributeError( """No argument named %r left in cConverters: %s"""%(
                 argName, self.wrappedOperation.argNames,
             ))
-        self.cConverters[i] = function 
+        self.cConverters[i] = function
         return self
     def setCResolver( self, argName, function=NULL ):
         """Set C-argument converter for a given argument"""
@@ -248,7 +251,7 @@ class Wrapper( object ):
         if function is NULL:
             del self.cResolvers[i]
         else:
-            self.cResolvers[i] = function 
+            self.cResolvers[i] = function
         return self
     def setStoreValues( self, function=NULL ):
         """Set the storage-of-arguments function for the whole wrapper"""
@@ -303,16 +306,16 @@ class Wrapper( object ):
             #self.__class__.set_call( callFunction )
             #self.__class__.__dict__[ '__call__' ] = callFunction
             #print 'setting class call', callFunction
-            self._finalCall = callFunction
+            self.setFinalCall( callFunction )
             return callFunction
         #return self
     def finaliseCall( self ):
         """Produce specialised versions of call for finalised wrapper object
-        
+
         This returns a version of __call__ that only does that work which is
         required by the particular wrapper object
-        
-        This is essentially a huge set of expanded nested functions, very 
+
+        This is essentially a huge set of expanded nested functions, very
         inelegant...
         """
         pyConverters = getattr( self, 'pyConverters', None )
@@ -399,15 +402,15 @@ class Wrapper( object ):
         if cWrapper:
             return cWrapper(
                 wrappedOperation,
-                calculate_pyArgs=calculate_pyArgs, 
+                calculate_pyArgs=calculate_pyArgs,
                 calculate_cArgs=calculate_cArgs,
-                calculate_cArguments=calculate_cArguments, 
-                storeValues=storeValues, 
+                calculate_cArguments=calculate_cArguments,
+                storeValues=storeValues,
                 returnValues=returnValues,
             )
         if pyConverters:
             if cConverters:
-                # create a map of index,converter, callable 
+                # create a map of index,converter, callable
                 if cResolvers:
                     if storeValues:
                         if returnValues:
@@ -422,7 +425,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -451,7 +454,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -461,7 +464,7 @@ class Wrapper( object ):
                                     pyArgs,
                                     cArgs,
                                 )
-                                return result 
+                                return result
                             return wrapperCall
                     else: # null storeValues
                         if returnValues:
@@ -476,7 +479,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 return returnValues(
@@ -498,10 +501,10 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
-                                return result 
+                                return result
                             return wrapperCall
                 else:
                     # null cResolvers
@@ -518,7 +521,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -547,7 +550,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -557,7 +560,7 @@ class Wrapper( object ):
                                     pyArgs,
                                     cArgs,
                                 )
-                                return result 
+                                return result
                             return wrapperCall
                     else: # null storeValues
                         if returnValues:
@@ -572,7 +575,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 return returnValues(
@@ -594,10 +597,10 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
-                                return result 
+                                return result
                             return wrapperCall
             else:
                 # null cConverters
@@ -615,7 +618,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -644,7 +647,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -654,7 +657,7 @@ class Wrapper( object ):
                                     pyArgs,
                                     cArgs,
                                 )
-                                return result 
+                                return result
                             return wrapperCall
                     else: # null storeValues
                         if returnValues:
@@ -669,7 +672,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 return returnValues(
@@ -691,10 +694,10 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
-                                return result 
+                                return result
                             return wrapperCall
                 else:
                     # null cResolvers
@@ -748,7 +751,7 @@ class Wrapper( object ):
                                     pyArgs,
                                     cArguments,
                                 )
-                                return result 
+                                return result
                             return wrapperCall
                     else: # null storeValues
                         if returnValues:
@@ -786,7 +789,7 @@ class Wrapper( object ):
                                     err.cArgs = cArguments
                                     err.pyArgs = pyArgs
                                     raise err
-                                return result 
+                                return result
                             return wrapperCall
         else:
             # null pyConverters
@@ -796,7 +799,7 @@ class Wrapper( object ):
                         if returnValues:
                             def wrapperCall( *args ):
                                 """Wrapper with all possible operations"""
-                                pyArgs = args 
+                                pyArgs = args
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
@@ -821,7 +824,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -841,7 +844,7 @@ class Wrapper( object ):
                         else:
                             def wrapperCall( *args ):
                                 """Wrapper with all save returnValues"""
-                                pyArgs = args 
+                                pyArgs = args
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
@@ -866,7 +869,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -876,13 +879,13 @@ class Wrapper( object ):
                                     pyArgs,
                                     cArgs,
                                 )
-                                return result 
+                                return result
                             return wrapperCall
                     else: # null storeValues
                         if returnValues:
                             def wrapperCall( *args ):
                                 """Wrapper with all save storeValues"""
-                                pyArgs = args 
+                                pyArgs = args
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
@@ -907,7 +910,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 return returnValues(
@@ -920,7 +923,7 @@ class Wrapper( object ):
                         else:
                             def wrapperCall( *args ):
                                 """Wrapper with all save returnValues and storeValues"""
-                                pyArgs = args 
+                                pyArgs = args
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
@@ -945,10 +948,10 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
-                                return result 
+                                return result
                             return wrapperCall
                 else:
                     # null cResolvers
@@ -956,7 +959,7 @@ class Wrapper( object ):
                         if returnValues:
                             def wrapperCall( *args ):
                                 """Wrapper with all possible operations"""
-                                pyArgs = args 
+                                pyArgs = args
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
@@ -981,7 +984,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -1001,7 +1004,7 @@ class Wrapper( object ):
                         else:
                             def wrapperCall( *args ):
                                 """Wrapper with all save returnValues"""
-                                pyArgs = args 
+                                pyArgs = args
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
@@ -1026,7 +1029,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 # handle storage of persistent argument values...
@@ -1036,13 +1039,13 @@ class Wrapper( object ):
                                     pyArgs,
                                     cArgs,
                                 )
-                                return result 
+                                return result
                             return wrapperCall
                     else: # null storeValues
                         if returnValues:
                             def wrapperCall( *args ):
                                 """Wrapper with all save storeValues"""
-                                pyArgs = args 
+                                pyArgs = args
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
@@ -1067,7 +1070,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
                                 return returnValues(
@@ -1080,7 +1083,7 @@ class Wrapper( object ):
                         else:
                             def wrapperCall( *args ):
                                 """Wrapper with all save returnValues and storeValues"""
-                                pyArgs = args 
+                                pyArgs = args
                                 cArgs = []
                                 for (index,converter) in enumerate( cConverters ):
                                     # move enumerate out...
@@ -1105,10 +1108,10 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
-                                return result 
+                                return result
                             return wrapperCall
             else:
                 # null cConverters
@@ -1125,7 +1128,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = args
                                     raise err
                                 # handle storage of persistent argument values...
@@ -1153,7 +1156,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = args
                                     raise err
                                 # handle storage of persistent argument values...
@@ -1163,7 +1166,7 @@ class Wrapper( object ):
                                     args,
                                     cArgs,
                                 )
-                                return result 
+                                return result
                             return wrapperCall
                     else: # null storeValues
                         if returnValues:
@@ -1177,7 +1180,7 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = args
                                     raise err
                                 return returnValues(
@@ -1198,10 +1201,10 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArgs 
+                                    err.cArgs = cArgs
                                     err.pyArgs = args
                                     raise err
-                                return result 
+                                return result
                             return wrapperCall
                 else:
                     # null cResolvers
@@ -1253,7 +1256,7 @@ class Wrapper( object ):
                                     args,
                                     cArguments,
                                 )
-                                return result 
+                                return result
                             return wrapperCall
                     else: # null storeValues
                         if returnValues:
@@ -1286,17 +1289,17 @@ class Wrapper( object ):
                                     err.args = err.args + (cArguments,)
                                     raise err
                                 except error.GLError, err:
-                                    err.cArgs = cArguments 
+                                    err.cArgs = cArguments
                                     err.pyArgs = args
                                     raise err
-                                return result 
+                                return result
                             return wrapperCall
-    def __call__( self, *args, **named ):
-        """Finalise the wrapper before calling it"""
-        try:
-            return self._finalCall( *args, **named )
-        except AttributeError, err:
-            return self.finalise()( *args, **named )
+#    def __call__( self, *args, **named ):
+#        """Finalise the wrapper before calling it"""
+#        try:
+#            return self._finalCall( *args, **named )
+#        except AttributeError, err:
+#            return self.finalise()( *args, **named )
 
     def _unspecialised__call__( self, *args ):
         """Expand arguments, call the function, store values and check errors"""
@@ -1319,7 +1322,7 @@ class Wrapper( object ):
                 else:
                     pyArgs.append( converter(arg, self, args) )
         else:
-            pyArgs = args 
+            pyArgs = args
         cConverters = getattr( self, 'cConverters', None )
         if cConverters:
             cArgs = []
@@ -1356,7 +1359,7 @@ class Wrapper( object ):
             err.args = err.args + (cArguments,)
             raise err
         except error.GLError, err:
-            err.cArgs = cArgs 
+            err.cArgs = cArgs
             err.pyArgs = pyArgs
             raise err
         storeValues = getattr( self, 'storeValues', None )
@@ -1381,7 +1384,7 @@ class Wrapper( object ):
 
 def wrapper( wrappedOperation ):
     """Create a Wrapper sub-class instance for the given wrappedOperation
-    
+
     The purpose of this function is to create a subclass of Wrapper which
     has the __doc__ and __name__ of the wrappedOperation so that the instance of
     the wrapper will show up as <functionname instance @ address> by default,
