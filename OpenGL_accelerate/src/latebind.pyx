@@ -9,10 +9,16 @@ cdef class LateBind:
     cdef object _finalCall
     def setFinalCall( self, object finalCall ):
         """Set our finalCall to the callable object given"""
-        self._finalCall = finalCall.__call__
+        self._finalCall = finalCall
 
     def finalise( self ):
         """Finalise our target to our final callable object"""
+
+    def getFinalCall( self ):
+        """Retrieve and/or bind and retrieve final call"""
+        if not self._finalCall:
+            self._finalCall = self.finalise()
+        return self._finalCall
 
     def __call__( self, *args, **named ):
         """Call self._finalCall, calling finalise() first if not already called

@@ -68,18 +68,11 @@ class _Alternate( LateBind ):
         self.__name__ = name
         self._alternatives = alternates
     def __nonzero__( self ):
-        if self._finalCall:
-            return True
-        for alternate in self._alternatives:
-            if alternate:
-                log.info(
-                    """Chose alternate: %s from %s""",
-                    alternate.__name__,
-                    ", ".join([x.__name__ for x in self._alternatives])
-                )
-                self.setFinalCall( alternate )
-                return True
-        return False
+        from OpenGL import error
+        try:
+            return bool( self.getFinalCall())
+        except error.NullFunctionError, err:
+            return False
     def finalise( self ):
         """Call, doing a late lookup and bind to find an implementation"""
         for alternate in self._alternatives:
