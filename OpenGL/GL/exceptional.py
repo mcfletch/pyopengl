@@ -11,30 +11,30 @@ import OpenGL
 import ctypes
 
 __all__ = [
-    'glBegin', 
-    'glCallLists', 
-    'glColor', 
-    #'glColorTableParameterfv', 
-    'glDeleteTextures', 
-    'glEdgeFlagv', 
-    'glEnd', 
-    'glGenTextures', 
-    'glIndexdv', 
-    'glIndexfv', 
+    'glBegin',
+    'glCallLists',
+    'glColor',
+    #'glColorTableParameterfv',
+    'glDeleteTextures',
+    'glEdgeFlagv',
+    'glEnd',
+    'glGenTextures',
+    'glIndexdv',
+    'glIndexfv',
     'glIndexsv',
-    'glIndexubv', 
-    'glMap1d', 
+    'glIndexubv',
+    'glMap1d',
     'glMap1f',
     'glMap2d',
     'glMap2f',
-    'glMaterial', 
-    'glRasterPos', 
-    'glRectfv', 
-    'glRectiv', 
-    'glRectsv', 
-    'glTexGenfv', 
-    'glTexParameter', 
-    'glVertex', 
+    'glMaterial',
+    'glRasterPos',
+    'glRectfv',
+    'glRectiv',
+    'glRectsv',
+    'glTexGenfv',
+    'glTexParameter',
+    'glVertex',
     'glAreTexturesResident',
 ]
 
@@ -70,8 +70,8 @@ def glDeleteTextures( baseFunction, array ):
 def glMap2( baseFunction, arrayType ):
     def glMap2( target, u1, u2, v1, v2, points):
         """glMap2(target, u1, u2, v1, v2, points[][][]) -> None
-        
-        This is a completely non-standard signature which doesn't allow for most 
+
+        This is a completely non-standard signature which doesn't allow for most
         of the funky uses with strides and the like, but it has been like this for
         a very long time...
         """
@@ -79,11 +79,11 @@ def glMap2( baseFunction, arrayType ):
         uorder,vorder,vstride = arrayType.dimensions( ptr )
         ustride = vstride*vorder
         return baseFunction(
-            target, 
-            u1, u2, 
-            ustride, uorder, 
-            v1, v2, 
-            vstride, vorder, 
+            target,
+            u1, u2,
+            ustride, uorder,
+            v1, v2,
+            vstride, vorder,
             ptr
         )
     glMap2.__name__ = baseFunction.__name__
@@ -96,8 +96,8 @@ del glMap2
 def glMap1( baseFunction, arrayType ):
     def glMap1(target,u1,u2,points):
         """glMap1(target, u1, u2, points[][][]) -> None
-        
-        This is a completely non-standard signature which doesn't allow for most 
+
+        This is a completely non-standard signature which doesn't allow for most
         of the funky uses with strides and the like, but it has been like this for
         a very long time...
         """
@@ -134,8 +134,8 @@ def glVertex( *args ):
 
 @lazy( simple.glCallLists )
 def glCallLists( baseFunction, lists, *args ):
-    """glCallLists( str( lists ) or lists[] ) -> None 
-    
+    """glCallLists( str( lists ) or lists[] ) -> None
+
     Restricted version of glCallLists, takes a string or a GLuint compatible
     array data-type and passes into the base function.
     """
@@ -148,9 +148,9 @@ def glCallLists( baseFunction, lists, *args ):
             )
         ptr = arrays.GLuintArray.asArray( lists )
         size = arrays.GLuintArray.arraySize( ptr )
-        return baseFunction( 
-            size, 
-            constants.GL_UNSIGNED_INT, 
+        return baseFunction(
+            size,
+            constants.GL_UNSIGNED_INT,
             ctypes.c_void_p( arrays.GLuintArray.dataPointer(ptr))
         )
     return baseFunction( lists, *args )
@@ -168,9 +168,9 @@ def glTexParameter( target, pname, parameter ):
 @lazy( simple.glGenTextures )
 def glGenTextures( baseFunction, count, textures=None ):
     """Generate count new texture names
-    
+
     Note: for compatibility with PyOpenGL 2.x and below,
-    a count of 1 will return a single integer, rather than 
+    a count of 1 will return a single integer, rather than
     an array of integers.
     """
     if count <= 0:
@@ -188,7 +188,7 @@ def glGenTextures( baseFunction, count, textures=None ):
 
 def glMaterial( faces, constant, *args ):
     """glMaterial -- convenience function to dispatch on argument type
-    
+
     If passed a single argument in args, calls:
         glMaterialfv( faces, constant, args[0] )
     else calls:
@@ -203,8 +203,8 @@ def glMaterial( faces, constant, *args ):
         return simple.glMaterialf( faces, constant, *args )
 
 glColorDispatch = {
-    3: annotations.glColor3dv,
-    4: annotations.glColor4dv,
+    3: annotations.glColor3fv,
+    4: annotations.glColor4fv,
 }
 
 def glColor( *args ):
@@ -305,17 +305,17 @@ glTexGenfv = arrays.setInputArraySizeType(
 @lazy( simple.glAreTexturesResident )
 def glAreTexturesResident( baseFunction, *args ):
     """Allow both Pythonic and C-style calls to glAreTexturesResident
-    
+
         glAreTexturesResident( arrays.GLuintArray( textures) )
-    
-    or 
-    
+
+    or
+
         glAreTexturesResident( int(n), arrays.GLuintArray( textures), arrays.GLuboolean( output) )
-    
-    or 
-    
+
+    or
+
         glAreTexturesResident( int(n), arrays.GLuintArray( textures) )
-        
+
     returns the output arrays.GLubooleanArray
     """
     if len(args) == 1:
@@ -340,7 +340,7 @@ def glAreTexturesResident( baseFunction, *args ):
 
             output = arrays.GLbooleanArray.zeros( (n,))
     elif len(args) == 3:
-        n,textures,output = args 
+        n,textures,output = args
         textures = arrays.GLuintArray.asArray( textures )
         output = arrays.GLbooleanArray.asArray( output )
     else:
