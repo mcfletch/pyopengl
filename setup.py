@@ -34,7 +34,7 @@ if sys.platform == 'win32':
         (
             DLL_DIRECTORY, [
                 os.path.join( DLL_DIRECTORY,file)
-                for file in os.listdir( DLL_DIRECTORY ) 
+                for file in os.listdir( DLL_DIRECTORY )
             ]
         ),
     ]
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         options = {
             'sdist': {
                 'formats': ['gztar','zip'],
-		'force_manifest': True,
+                'force_manifest': True,
             },
         },
         data_files = datafiles,
