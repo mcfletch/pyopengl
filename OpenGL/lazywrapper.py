@@ -29,6 +29,7 @@ def lazy( baseFunction ):
             '__repr__': __repr__,
             '__doc__': wrapper.__doc__,
             '__nonzero__': __nonzero__,
+            'wrappedOperation': baseFunction,
             'restype': getattr(wrapper, 'restype',getattr(baseFunction,'restype',None)),
         } )
         with_wrapper = _with_wrapper(wrapper,baseFunction)
