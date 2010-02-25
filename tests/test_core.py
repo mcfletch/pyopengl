@@ -29,7 +29,7 @@ from OpenGL.arrays import arraydatatype
 import OpenGL
 from OpenGL.extensions import alternate
 import ctypes
-from OpenGL.GL.EXT.framebuffer_object import *
+from OpenGL.GL.framebufferobjects import *
 from OpenGL.GL.EXT.multi_draw_arrays import *
 from OpenGL.GL.ARB.imaging import *
 
@@ -611,22 +611,22 @@ class Tests( unittest.TestCase ):
         
         http://www.gamedev.net/reference/articles/article2331.asp
         """
-        if not glGenFramebuffersEXT:
+        if not glGenFramebuffers:
             return False
         width = height = 128
-        fbo = glGenFramebuffersEXT(1)
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo)
-        depthbuffer = glGenRenderbuffersEXT(1 )
-        glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depthbuffer)
-        glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT24, width, height)
-        glFramebufferRenderbufferEXT(
-            GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, 
+        fbo = glGenFramebuffers(1)
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo)
+        depthbuffer = glGenRenderbuffers(1 )
+        glBindRenderbuffer(GL_RENDERBUFFER, depthbuffer)
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, width, height)
+        glFramebufferRenderbuffer(
+            GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, 
             depthbuffer
         )
         img = glGenTextures(1)
         glBindTexture(GL_TEXTURE_2D, img)
         # NOTE: these lines are *key*, without them you'll likely get an unsupported format error,
-        # ie. GL_FRAMEBUFFER_UNSUPPORTED_EXT
+        # ie. GL_FRAMEBUFFER_UNSUPPORTED
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
         glTexImage2D(
@@ -635,14 +635,14 @@ class Tests( unittest.TestCase ):
             GL_INT, 
             None # no data transferred
         ) 
-        glFramebufferTexture2DEXT(
-            GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, 
+        glFramebufferTexture2D(
+            GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 
             img, 
             0 # mipmap level, normally 0
         )
-        status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT)
-        assert status == GL_FRAMEBUFFER_COMPLETE_EXT, status
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo)
+        status = glCheckFramebufferStatus(GL_FRAMEBUFFER)
+        assert status == GL_FRAMEBUFFER_COMPLETE, status
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glPushAttrib(GL_VIEWPORT_BIT) # viewport is shared with the main context
         try:
             glViewport(0,0,width, height)
@@ -657,7 +657,7 @@ class Tests( unittest.TestCase ):
             glEnd()
         finally:
             glPopAttrib(); # restore viewport
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0) # unbind
+        glBindFramebuffer(GL_FRAMEBUFFER, 0) # unbind
         
         glBindTexture(GL_TEXTURE_2D, img)
         
@@ -710,8 +710,8 @@ class Tests( unittest.TestCase ):
         """Test that glDrawBuffers with list argument doesn't crash"""
         a_type = constants.GLenum*2
         args = a_type(
-            GL_COLOR_ATTACHMENT0_EXT,
-            GL_COLOR_ATTACHMENT1_EXT,
+            GL_COLOR_ATTACHMENT0,
+            GL_COLOR_ATTACHMENT1,
         )
         try:
             glDrawBuffers( 2, args )
@@ -720,8 +720,8 @@ class Tests( unittest.TestCase ):
     def test_glDrawBuffers_list_valid( self ):
         """Test that glDrawBuffers with list argument where value is set"""
         previous = glGetIntegerv( GL_READ_BUFFER )
-        fbo = glGenFramebuffersEXT(1)
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo)
+        fbo = glGenFramebuffers(1)
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         try:
             img1,img2 = glGenTextures(2)
             for img in img1,img2:
@@ -734,27 +734,32 @@ class Tests( unittest.TestCase ):
                 ) 
             
 
-            glFramebufferTexture2DEXT(
-                GL_FRAMEBUFFER_EXT, 
-                GL_COLOR_ATTACHMENT0_EXT, 
+            glFramebufferTexture2D(
+                GL_FRAMEBUFFER, 
+                GL_COLOR_ATTACHMENT0, 
                 GL_TEXTURE_2D, img1, 0
             )
-            glFramebufferTexture2DEXT(
-                GL_FRAMEBUFFER_EXT, 
-                GL_COLOR_ATTACHMENT1_EXT, 
+            glFramebufferTexture2D(
+                GL_FRAMEBUFFER, 
+                GL_COLOR_ATTACHMENT1, 
                 GL_TEXTURE_2D, img2, 0
             )
             a_type = constants.GLenum*2
             drawingBuffers = a_type(
-                GL_COLOR_ATTACHMENT0_EXT, 
-                GL_COLOR_ATTACHMENT1_EXT,
+                GL_COLOR_ATTACHMENT0, 
+                GL_COLOR_ATTACHMENT1,
             )
             glDrawBuffers(2, drawingBuffers )
-            glReadBuffer( GL_COLOR_ATTACHMENT1_EXT )
-            pixels = glReadPixels( 0,0, 10,10, GL_RGB, GL_UNSIGNED_BYTE )
-            assert len(pixels) == 300, len(pixels)
+            try:
+                checkFramebufferStatus()
+            except error.GLError, err:
+                pass
+            else:
+                glReadBuffer( GL_COLOR_ATTACHMENT1 )
+                pixels = glReadPixels( 0,0, 10,10, GL_RGB, GL_UNSIGNED_BYTE )
+                assert len(pixels) == 300, len(pixels)
         finally:
-            glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, 0 )
+            glBindFramebuffer( GL_FRAMEBUFFER, 0 )
         
         glReadBuffer( previous )
         
