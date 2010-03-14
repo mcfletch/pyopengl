@@ -41,22 +41,22 @@ argNames=('target',),
 deprecated=_DEPRECATED,
 )
 
-glNamedMakeBufferResidentNV = platform.createExtensionFunction( 
-'glNamedMakeBufferResidentNV',dll=platform.GL,
+glMakeNamedBufferResidentNV = platform.createExtensionFunction( 
+'glMakeNamedBufferResidentNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
 argTypes=(constants.GLuint,constants.GLenum,),
-doc='glNamedMakeBufferResidentNV(GLuint(buffer), GLenum(access)) -> None',
+doc='glMakeNamedBufferResidentNV(GLuint(buffer), GLenum(access)) -> None',
 argNames=('buffer','access',),
 deprecated=_DEPRECATED,
 )
 
-glNamedMakeBufferNonResidentNV = platform.createExtensionFunction( 
-'glNamedMakeBufferNonResidentNV',dll=platform.GL,
+glMakeNamedBufferNonResidentNV = platform.createExtensionFunction( 
+'glMakeNamedBufferNonResidentNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
 argTypes=(constants.GLuint,),
-doc='glNamedMakeBufferNonResidentNV(GLuint(buffer)) -> None',
+doc='glMakeNamedBufferNonResidentNV(GLuint(buffer)) -> None',
 argNames=('buffer',),
 deprecated=_DEPRECATED,
 )

@@ -70,13 +70,3 @@ argNames=('target','attachment','texture','level',),
 deprecated=_DEPRECATED,
 )
 
-glFramebufferTextureFace = platform.createExtensionFunction( 
-'glFramebufferTextureFace',dll=platform.GL,
-extension=EXTENSION_NAME,
-resultType=None, 
-argTypes=(constants.GLenum,constants.GLenum,constants.GLuint,constants.GLint,constants.GLenum,),
-doc='glFramebufferTextureFace(GLenum(target), GLenum(attachment), GLuint(texture), GLint(level), GLenum(face)) -> None',
-argNames=('target','attachment','texture','level','face',),
-deprecated=_DEPRECATED,
-)
-
