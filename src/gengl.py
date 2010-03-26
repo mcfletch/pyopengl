@@ -2,7 +2,7 @@
 '''Hacked version of Pyglet's gengl that produces PyOpenGL-based modules
 
 To use, you have to do an svn co of pyglet to get the "tools" directory,
-add the package "wraptypes" to your site-packages and you should be able 
+add the package "wraptypes" to your site-packages and you should be able
 to run this script.
 
 Note: currently the AGL module can only be generated on OS-X, GLX can only
@@ -10,22 +10,22 @@ be generated on a GLX platform (e.g. Linux), WGL should generate anywhere
 as I'm using Alex's hacked/derived wgl.h as the source for it.
 
 TODO:
-    This wrapper is missing a lot of the operations from the original 
-    openglgenerator module.  It's only appropriate for generating the 
-    platform-specific modules (GLX, WGL, AGL).  Eventually should port 
-    the code from the openglgenerator module to support creating the 
+    This wrapper is missing a lot of the operations from the original
+    openglgenerator module.  It's only appropriate for generating the
+    platform-specific modules (GLX, WGL, AGL).  Eventually should port
+    the code from the openglgenerator module to support creating the
     extensions and core GL modules.
 '''
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions 
+# modification, are permitted provided that the following conditions
 # are met:
 #
 #  * Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright 
+#  * Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
@@ -62,7 +62,7 @@ from wraptypes import ctypesparser
 class CtypesFunction( ctypesparser.CtypesFunction ):
     def __init__(self, restype, parameters):
         if parameters and parameters[-1] == '...':
-             parameters = parameters[:-1]		
+             parameters = parameters[:-1]
         self.argnames = [ self.argname(p.declarator) for p in parameters ]
         super( CtypesFunction, self ).__init__( restype, parameters )
     def argname( self, parameter ):
@@ -88,6 +88,7 @@ GL_H = '/usr/include/GL/gl.h'
 GLU_H = '/usr/include/GL/glu.h'
 GLX_H = '/usr/include/GL/glx.h'
 WGL_H = os.path.join(script_dir, 'wgl.h')
+OSMESA_H = '/usr/include/GL/osmesa.h'
 
 CACHE_FILE = os.path.join(script_dir, '.gengl.cache')
 _cache = {}
@@ -162,7 +163,7 @@ class GLWrapper(wrap.CtypesWrapper):
         }).lstrip()
 
     def libFromRequires( self, requires  ):
-        return 'platform.GL'
+        return self.library or 'platform.GL'
 
     def handle_ctypes_function(self, name, restype, argtypes, filename, lineno, argnames):
         if self.does_emit(name, filename):
@@ -173,9 +174,9 @@ class GLWrapper(wrap.CtypesWrapper):
             self.all_names.append(name)
             #print >> self.file, '# %s:%d' % (filename, lineno)
             print >> self.file, '''%(name)s = platform.createBaseFunction(
-    %(name)r, dll=%(libname)s, resultType=%(returnType)s, 
+    %(name)r, dll=%(libname)s, resultType=%(returnType)s,
     argTypes=[%(argTypes)s],
-    doc=%(documentation)r, 
+    doc=%(documentation)r,
     argNames=%(argNames)r,
 )'''%dict(
     name = name,
@@ -200,7 +201,7 @@ class GLWrapper(wrap.CtypesWrapper):
 
     def handle_ifndef(self, name, filename, lineno):
         if (
-            self.requires_prefix and 
+            self.requires_prefix and
             name[:len(self.requires_prefix)] == self.requires_prefix
         ):
             self.requires = name[len(self.requires_prefix):]
@@ -215,9 +216,9 @@ class GLWrapper(wrap.CtypesWrapper):
         if base:
             if self.match_re:
                 if self.match_re.match( symbol ):
-                    return True 
+                    return True
                 else:
-                    return False 
+                    return False
         return base
 
 def progress(msg):
@@ -230,7 +231,7 @@ class ModuleWrapper(object):
     def __init__(
         self, header, filename,
         prologue='', requires_prefix=None, system_header=None,
-        match_re=None,
+        match_re=None, library=None,
     ):
         self.header = header
         self.filename = filename
@@ -238,10 +239,11 @@ class ModuleWrapper(object):
         self.requires_prefix = requires_prefix
         self.system_header = system_header
         self.match_re = match_re
+        self.library = library
 
     def wrap(self, dir):
         progress('Updating %s...' % self.filename)
-        source = read_url(self.header) 
+        source = read_url(self.header)
         filename = os.path.join(dir, self.filename)
 
         prologue = []
@@ -275,8 +277,8 @@ class ModuleWrapper(object):
                 source
         header_name = self.system_header or self.header
         wrapper.requires_prefix = self.requires_prefix
-        wrapper.begin_output(outfile, 
-                             library=None,
+        wrapper.begin_output(outfile,
+                             library=self.library,
                              emit_filenames=(header_name,))
         source = self.prologue + source
         wrapper.wrap(header_name, source)
@@ -284,30 +286,30 @@ class ModuleWrapper(object):
         print >> outfile, ''.join(epilogue)
 
 modules = {
-#	'gl':  
+#	'gl':
 #		ModuleWrapper(GL_H, 'gl.py'),
-#	'glu': 
+#	'glu':
 #		ModuleWrapper(GLU_H, 'glu.py'),
-#	'glext_arb': 
-#		ModuleWrapper(GLEXT_ABI_H, 'glext_arb.py', 
+#	'glext_arb':
+#		ModuleWrapper(GLEXT_ABI_H, 'glext_arb.py',
 #			requires_prefix='GL_', system_header='GL/glext.h',
 #			prologue='#define GL_GLEXT_PROTOTYPES\n#include <GL/gl.h>\n'),
-#	'glext_nv': 
+#	'glext_nv':
 #		ModuleWrapper(GLEXT_NV_H, 'glext_nv.py',
 #			requires_prefix='GL_', system_header='GL/glext.h',
 #			prologue='#define GL_GLEXT_PROTOTYPES\n#include <GL/gl.h>\n'),
-    'glx': 
-        ModuleWrapper(GLX_H, '_GLX.py', 
+    'glx':
+        ModuleWrapper(GLX_H, '_GLX.py',
             requires_prefix='GLX_',
             match_re = re.compile( 'glX|GLX' ),
         ),
-    'glx_arb': 
+    'glx_arb':
         ModuleWrapper(GLXEXT_ABI_H, '_GLX_ARB.py', requires_prefix='GLX_',
             system_header='GL/glxext.h',
             prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
             match_re = re.compile( 'glX|GLX_' ),
         ),
-    'glx_nv': 
+    'glx_nv':
         ModuleWrapper(GLXEXT_NV_H, '_GLX_NV.py', requires_prefix='GLX_',
             system_header='GL/glxext.h',
             prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
@@ -325,6 +327,10 @@ modules = {
         ModuleWrapper(WGLEXT_NV_H, '_WGL_NV.py', requires_prefix='WGL_',
             prologue='#define WGL_WGLEXT_PROTOTYPES\n'\
                      '#include "%s"\n' % WGL_H.encode('string_escape')),
+    'osmesa':
+        ModuleWrapper(OSMESA_H,'osmesa.py',requires_prefix='OSMESA_',
+            library = 'OSMESA',
+        ),
 }
 
 
