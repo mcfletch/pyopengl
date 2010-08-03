@@ -9,6 +9,7 @@ import ctypes
 EXTENSION_NAME = 'GL_ARB_transform_feedback3'
 _DEPRECATED = False
 GL_MAX_TRANSFORM_FEEDBACK_BUFFERS = constant.Constant( 'GL_MAX_TRANSFORM_FEEDBACK_BUFFERS', 0x8E70 )
+GL_MAX_VERTEX_STREAMS = constant.Constant( 'GL_MAX_VERTEX_STREAMS', 0x8E71 )
 glDrawTransformFeedbackStream = platform.createExtensionFunction( 
 'glDrawTransformFeedbackStream',dll=platform.GL,
 extension=EXTENSION_NAME,

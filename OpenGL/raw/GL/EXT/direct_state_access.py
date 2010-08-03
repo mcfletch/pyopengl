@@ -1611,6 +1611,36 @@ argNames=('buffer',),
 deprecated=_DEPRECATED,
 )
 
+glMapNamedBufferRangeEXT = platform.createExtensionFunction( 
+'glMapNamedBufferRangeEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=ctypes.c_void_p, 
+argTypes=(constants.GLuint,constants.GLintptr,constants.GLsizeiptr,constants.GLbitfield,),
+doc='glMapNamedBufferRangeEXT(GLuint(buffer), GLintptr(offset), GLsizeiptr(length), GLbitfield(access)) -> ctypes.c_void_p',
+argNames=('buffer','offset','length','access',),
+deprecated=_DEPRECATED,
+)
+
+glFlushMappedNamedBufferRangeEXT = platform.createExtensionFunction( 
+'glFlushMappedNamedBufferRangeEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLintptr,constants.GLsizeiptr,),
+doc='glFlushMappedNamedBufferRangeEXT(GLuint(buffer), GLintptr(offset), GLsizeiptr(length)) -> None',
+argNames=('buffer','offset','length',),
+deprecated=_DEPRECATED,
+)
+
+glNamedCopyBufferSubDataEXT = platform.createExtensionFunction( 
+'glNamedCopyBufferSubDataEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLuint,constants.GLintptr,constants.GLintptr,constants.GLsizeiptr,),
+doc='glNamedCopyBufferSubDataEXT(GLuint(readBuffer), GLuint(writeBuffer), GLintptr(readOffset), GLintptr(writeOffset), GLsizeiptr(size)) -> None',
+argNames=('readBuffer','writeBuffer','readOffset','writeOffset','size',),
+deprecated=_DEPRECATED,
+)
+
 glGetNamedBufferParameterivEXT = platform.createExtensionFunction( 
 'glGetNamedBufferParameterivEXT',dll=platform.GL,
 extension=EXTENSION_NAME,

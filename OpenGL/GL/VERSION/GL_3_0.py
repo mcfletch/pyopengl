@@ -1,7 +1,7 @@
 '''OpenGL extension VERSION.GL_3_0
 
-This module customises the behaviour of the
-OpenGL.raw.GL.VERSION.GL_3_0 to provide a more
+This module customises the behaviour of the 
+OpenGL.raw.GL.VERSION.GL_3_0 to provide a more 
 Python-friendly API
 
 The official definition of this extension is available here:

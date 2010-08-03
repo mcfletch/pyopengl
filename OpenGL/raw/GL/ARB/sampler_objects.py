@@ -43,8 +43,8 @@ glBindSampler = platform.createExtensionFunction(
 'glBindSampler',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLuint,),
-doc='glBindSampler(GLenum(unit), GLuint(sampler)) -> None',
+argTypes=(constants.GLuint,constants.GLuint,),
+doc='glBindSampler(GLuint(unit), GLuint(sampler)) -> None',
 argNames=('unit','sampler',),
 deprecated=_DEPRECATED,
 )

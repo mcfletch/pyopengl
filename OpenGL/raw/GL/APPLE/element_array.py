@@ -8,10 +8,10 @@ from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_APPLE_element_array'
 _DEPRECATED = False
-GL_ELEMENT_ARRAY_APPLE = constant.Constant( 'GL_ELEMENT_ARRAY_APPLE', 0x8768 )
-GL_ELEMENT_ARRAY_TYPE_APPLE = constant.Constant( 'GL_ELEMENT_ARRAY_TYPE_APPLE', 0x8769 )
+GL_ELEMENT_ARRAY_APPLE = constant.Constant( 'GL_ELEMENT_ARRAY_APPLE', 0x8A0C )
+GL_ELEMENT_ARRAY_TYPE_APPLE = constant.Constant( 'GL_ELEMENT_ARRAY_TYPE_APPLE', 0x8A0D )
 glget.addGLGetConstant( GL_ELEMENT_ARRAY_TYPE_APPLE, (1,) )
-GL_ELEMENT_ARRAY_POINTER_APPLE = constant.Constant( 'GL_ELEMENT_ARRAY_POINTER_APPLE', 0x876A )
+GL_ELEMENT_ARRAY_POINTER_APPLE = constant.Constant( 'GL_ELEMENT_ARRAY_POINTER_APPLE', 0x8A0E )
 glElementPointerAPPLE = platform.createExtensionFunction( 
 'glElementPointerAPPLE',dll=platform.GL,
 extension=EXTENSION_NAME,
