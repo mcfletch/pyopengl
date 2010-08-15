@@ -30,8 +30,8 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
 if NumpyHandler is None:
     # numpy's array interface has changed over time :(
     testArray = numpy.array( [1,2,3,4],'i' )
-    # Numpy's "ctypes" interface actually creates a new ctypes object 
-    # in python for every access of the .ctypes attribute... which can take 
+    # Numpy's "ctypes" interface actually creates a new ctypes object
+    # in python for every access of the .ctypes attribute... which can take
     # ridiculously large periods when you multiply it by millions of iterations
     if hasattr(testArray,'__array_interface__'):
         def dataPointer( cls, instance ):
@@ -55,16 +55,19 @@ if NumpyHandler is None:
                     return long(instance.__array_interface__['data'][0])
                 except AttributeError, err:
                     return long(instance.__array_data__[0],0)
-    del testArray
+    try:
+        del testArray
+    except NameError, err:
+        pass
     dataPointer = classmethod( dataPointer )
 
 
     class NumpyHandler( formathandler.FormatHandler ):
         """Numpy-specific data-type handler for OpenGL
-        
+
         Attributes:
-        
-            ERROR_ON_COPY -- if True, will raise errors 
+
+            ERROR_ON_COPY -- if True, will raise errors
                 if we have to copy an array object in order to produce
                 a contiguous array of the correct type.
         """
@@ -88,7 +91,7 @@ if NumpyHandler is None:
                     )
                 )
             return constant
-        
+
         @classmethod
         def arraySize( cls, value, typeCode = None ):
             """Given a data-value, calculate dimensions for the array"""
@@ -117,14 +120,14 @@ if NumpyHandler is None:
         @classmethod
         def contiguous( cls, source, typeCode=None ):
             """Get contiguous array from source
-            
+
             source -- numpy Python array (or compatible object)
                 for use as the data source.  If this is not a contiguous
-                array of the given typeCode, a copy will be made, 
+                array of the given typeCode, a copy will be made,
                 otherwise will just be returned unchanged.
             typeCode -- optional 1-character typeCode specifier for
                 the numpy.array function.
-                
+
             All gl*Pointer calls should use contiguous arrays, as non-
             contiguous arrays will be re-copied on every rendering pass.
             Although this doesn't raise an error, it does tend to slow
@@ -149,7 +152,7 @@ if NumpyHandler is None:
                     )
                 else:
                     # We have to do astype to avoid errors about unsafe conversions
-                    # XXX Confirm that this will *always* create a new contiguous array 
+                    # XXX Confirm that this will *always* create a new contiguous array
                     # XXX Guard against wacky conversion types like uint to float, where
                     # we really don't want to have the C-level conversion occur.
                     # XXX ascontiguousarray is apparently now available in numpy!
@@ -184,7 +187,7 @@ if NumpyHandler is None:
                     raise error.CopyError(
                         """Array of type %r passed, required array of type %r""",
                         instance.dtype.char, typeCode,
-                    )					
+                    )
                 return c_void_p( pointer )
 
 try:

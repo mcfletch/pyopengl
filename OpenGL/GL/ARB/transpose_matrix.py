@@ -1,11 +1,11 @@
 '''OpenGL extension ARB.transpose_matrix
 
-This module customises the behaviour of the 
-OpenGL.raw.GL.ARB.transpose_matrix to provide a more 
+This module customises the behaviour of the
+OpenGL.raw.GL.ARB.transpose_matrix to provide a more
 Python-friendly API
 
 Overview (from the spec)
-	
+
 	New functions and tokens are added allowing application matrices
 	stored in row major order rather than column major order to be
 	transferred to the OpenGL implementation.  This allows an application
@@ -13,7 +13,7 @@ Overview (from the spec)
 	have the array indices match the expected matrix row and column indexes.
 	These arrays are referred to as transpose matrices since they are
 	the transpose of the standard matrices passed to OpenGL.
-	
+
 	This extension adds an interface for transfering data to and from the
 	OpenGL pipeline, it does not change any OpenGL processing or imply any
 	changes in state representation.
@@ -36,8 +36,14 @@ for typ,arrayType in (
         globals()[name] = arrays.setInputArraySizeType(
             globals()[name],
             16,
-            arrayType, 
+            arrayType,
             'm',
         )
-        del function,name
-    del typ,arrayType
+        try:
+            del function,name
+        except NameError, err:
+            pass
+    try:
+        del typ,arrayType
+    except NameError, err:
+        pass

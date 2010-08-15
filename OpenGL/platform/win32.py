@@ -7,32 +7,35 @@ class Win32Platform( baseplatform.BasePlatform ):
 
     GLUT_GUARD_CALLBACKS = True
     try:
-        GL = OpenGL = ctypesloader.loadLibrary( 
-            ctypes.windll, 'opengl32', mode = ctypes.RTLD_GLOBAL 
+        GL = OpenGL = ctypesloader.loadLibrary(
+            ctypes.windll, 'opengl32', mode = ctypes.RTLD_GLOBAL
         )
     except OSError, err:
         raise ImportError("Unable to load OpenGL library", *err.args)
-        
+
     try:
-        GLU = ctypesloader.loadLibrary( 
-            ctypes.windll, 'glu32', mode = ctypes.RTLD_GLOBAL 
+        GLU = ctypesloader.loadLibrary(
+            ctypes.windll, 'glu32', mode = ctypes.RTLD_GLOBAL
         )
     except OSError, err:
         GLU = None
-    
-    GLUT = None 
+
+    GLUT = None
     for possible in ('glut32','freeglut32','freeglut'):
         # load first-up of the possible names...
         try:
-            GLUT = ctypesloader.loadLibrary( 
-                ctypes.windll, possible, mode = ctypes.RTLD_GLOBAL 
+            GLUT = ctypesloader.loadLibrary(
+                ctypes.windll, possible, mode = ctypes.RTLD_GLOBAL
             )
         except WindowsError, err:
             GLUT = None
         else:
             break
-    del possible 
-    
+    try:
+        del possible
+    except NameError, err:
+        pass
+
     GLE = None
     for libName in ('gle32','opengle32'):
         try:
@@ -42,7 +45,7 @@ class Win32Platform( baseplatform.BasePlatform ):
             pass
         else:
             break
-    
+
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.WINFUNCTYPE )
     # Win32 GLUT uses different types for callbacks and functions...
     GLUT_CALLBACK_TYPE = staticmethod( ctypes.CFUNCTYPE )
@@ -64,12 +67,12 @@ class Win32Platform( baseplatform.BasePlatform ):
 
     def getGLUTFontPointer( self,constant ):
         """Platform specific function to retrieve a GLUT font pointer
-        
+
         GLUTAPI void *glutBitmap9By15;
         #define GLUT_BITMAP_9_BY_15		(&glutBitmap9By15)
-        
+
         Key here is that we want the addressof the pointer in the DLL,
-        not the pointer in the DLL.  That is, our pointer is to the 
+        not the pointer in the DLL.  That is, our pointer is to the
         pointer defined in the DLL, we don't want the *value* stored in
         that pointer.
         """
@@ -82,12 +85,12 @@ class Win32Platform( baseplatform.BasePlatform ):
 
     def safeGetError( self ):
         """Provide context-not-present-safe error-checking
-        
-        Under OS-X an attempt to retrieve error without checking 
+
+        Under OS-X an attempt to retrieve error without checking
         context will bus-error.  Likely Windows will see the same.
-        This function checks for a valid context before running 
+        This function checks for a valid context before running
         glGetError
-        
+
         Note:
             This is a likely candidate for rewriting in C, as it
             is called for every almost function in the system!

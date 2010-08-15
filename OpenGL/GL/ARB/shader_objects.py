@@ -1,15 +1,15 @@
 '''OpenGL extension ARB.shader_objects
 
-This module customises the behaviour of the 
-OpenGL.raw.GL.ARB.shader_objects to provide a more 
+This module customises the behaviour of the
+OpenGL.raw.GL.ARB.shader_objects to provide a more
 Python-friendly API
 
 Overview (from the spec)
-	
+
 	This extension adds API calls that are necessary to manage shader
 	objects and program objects as defined in the OpenGL 2.0 white papers by
 	3Dlabs.
-	
+
 	The generation of an executable that runs on one of OpenGL's
 	programmable units is modeled to that of developing a typical C/C++
 	application. There are one or more source files, each of which are
@@ -24,14 +24,14 @@ Overview (from the spec)
 	optimization hints, etc. Values for uniform variables, declared in a
 	shader, can be set by the application and used to control a shader's
 	behavior.
-	
+
 	This extension defines functions for creating shader objects and program
 	objects, for compiling shader objects, for linking program objects, for
 	attaching shader objects to program objects, and for using a program
 	object as part of current state. Functions to load uniform values are
 	also defined. Some house keeping functions, like deleting an object and
 	querying object state, are also provided.
-	
+
 	Although this extension defines the API for creating shader objects, it
 	does not define any specific types of shader objects. It is assumed that
 	this extension will be implemented along with at least one such
@@ -54,9 +54,9 @@ from OpenGL.lazywrapper import lazy
 from OpenGL import converters, error
 GL_INFO_LOG_LENGTH_ARB = constant.Constant( 'GL_INFO_LOG_LENGTH_ARB', 0x8B84 )
 
-glShaderSourceARB = platform.createExtensionFunction( 
+glShaderSourceARB = platform.createExtensionFunction(
     'glShaderSourceARB', dll=platform.GL,
-    resultType=None, 
+    resultType=None,
     argTypes=(constants.GLhandleARB, constants.GLsizei, ctypes.POINTER(ctypes.c_char_p), arrays.GLintArray,),
     doc = 'glShaderSourceARB( GLhandleARB(shaderObj), [str(string),...] ) -> None',
     argNames = ('shaderObj', 'count', 'string', 'length',),
@@ -67,7 +67,7 @@ glShaderSourceARB = wrapper.wrapper(
     glShaderSourceARB
 ).setPyConverter(
     'count' # number of strings
-).setPyConverter( 
+).setPyConverter(
     'length' # lengths of strings
 ).setPyConverter(
     'string', conv.stringArray
@@ -78,7 +78,10 @@ glShaderSourceARB = wrapper.wrapper(
 ).setCConverter(
     'count', conv.totalCount,
 )
-del conv
+try:
+    del conv
+except NameError, err:
+    pass
 
 for size in (1,2,3,4):
     for format,arrayType in (
@@ -89,17 +92,23 @@ for size in (1,2,3,4):
         globals()[name] = arrays.setInputArraySizeType(
             globals()[name],
             None, # don't want to enforce size...
-            arrayType, 
+            arrayType,
             'value',
         )
-        del format, arrayType
-    del size
+        try:
+            del format, arrayType
+        except NameError, err:
+            pass
+    try:
+        del size
+    except NameError, err:
+        pass
 
 @lazy( glGetObjectParameterivARB )
 def glGetObjectParameterivARB( baseOperation, shader, pname ):
     """Retrieve the integer parameter for the given shader"""
     status = arrays.GLintArray.zeros( (1,))
-    status[0] = 1 
+    status[0] = 1
     baseOperation(
         shader, pname, status
     )
@@ -115,7 +124,7 @@ def glGetObjectParameterfvARB( baseOperation, shader, pname ):
 
 def _afterCheck( key ):
     """Generate an error-checking function for compilation operations"""
-    def GLSLCheckError( 
+    def GLSLCheckError(
         result,
         baseOperation=None,
         cArguments=None,
@@ -126,7 +135,7 @@ def _afterCheck( key ):
             cArguments[0], key
         )
         if not status:
-            raise error.GLError( 
+            raise error.GLError(
                 result = result,
                 baseOperation = baseOperation,
                 cArguments = cArguments,
@@ -146,7 +155,7 @@ if OpenGL.ERROR_CHECKING:
 @lazy( glGetInfoLogARB )
 def glGetInfoLogARB( baseOperation, obj ):
     """Retrieve the program/shader's error messages as a Python string
-    
+
     returns string which is '' if no message
     """
     length = int(glGetObjectParameterivARB(obj, GL_INFO_LOG_LENGTH_ARB))
@@ -169,7 +178,7 @@ def glGetAttachedObjectsARB( baseOperation, obj ):
 @lazy( glGetShaderSourceARB )
 def glGetShaderSourceARB( baseOperation, obj ):
     """Retrieve the program/shader's source code as a Python string
-    
+
     returns string which is '' if no source code
     """
     length = int(glGetObjectParameterivARB(obj, GL_OBJECT_SHADER_SOURCE_LENGTH_ARB))

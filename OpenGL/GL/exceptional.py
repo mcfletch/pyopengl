@@ -91,7 +91,10 @@ def glMap2( baseFunction, arrayType ):
     return glMap2
 glMap2d = glMap2( simple.glMap2d, arrays.GLdoubleArray )
 glMap2f = glMap2( simple.glMap2f, arrays.GLfloatArray )
-del glMap2
+try:
+    del glMap2
+except NameError, err:
+    pass
 
 def glMap1( baseFunction, arrayType ):
     def glMap1(target,u1,u2,points):
@@ -111,7 +114,10 @@ def glMap1( baseFunction, arrayType ):
     return glMap1
 glMap1d = glMap1( simple.glMap1d, arrays.GLdoubleArray )
 glMap1f = glMap1( simple.glMap1f, arrays.GLfloatArray )
-del glMap1
+try:
+    del glMap1
+except NameError, err:
+    pass
 
 def glRasterPos( *args ):
     """Choose glRasterPosX based on number of args"""

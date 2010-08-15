@@ -14,7 +14,7 @@ class NumberHandler( formathandler.FormatHandler ):
         constants.GLint,
         constants.GLshort,
         constants.GLuint,
-        constants.GLushort, 
+        constants.GLushort,
         constants.GLclampf,
         constants.GLclampd,
     )
@@ -46,7 +46,7 @@ class NumberHandler( formathandler.FormatHandler ):
         return 1
     def asArray( self, value, typeCode=None ):
         """Convert given value to an array value of given typeCode"""
-        
+
         if value.__class__ in TARGET_TYPES:
             return value
         targetType = CONSTANT_TO_TYPE.get( typeCode )
@@ -77,7 +77,7 @@ TARGET_TYPES = dict([
     for (n,c) in constants.ARRAY_TYPE_TO_CONSTANT
 ])
 TARGET_TYPE_TUPLE = tuple([
-    getattr(constants,n) 
+    getattr(constants,n)
     for (n,c) in constants.ARRAY_TYPE_TO_CONSTANT
 ])
 CONSTANT_TO_TYPE = dict([
@@ -90,4 +90,7 @@ BYTE_SIZES = dict([
     for (n,c) in constants.ARRAY_TYPE_TO_CONSTANT
 ])
 
-del n,c
+try:
+    del n,c
+except NameError, err:
+    pass

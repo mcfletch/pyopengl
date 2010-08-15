@@ -13,38 +13,38 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
     CALLBACK_TYPES = {
         # mapping from "which" GLU enumeration to a ctypes function type
         simple.GLU_TESS_BEGIN: FUNCTION_TYPE( None, simple.GLenum ),
-        simple.GLU_TESS_BEGIN_DATA: FUNCTION_TYPE( 
-            None, simple.GLenum, ctypes.c_void_p 
+        simple.GLU_TESS_BEGIN_DATA: FUNCTION_TYPE(
+            None, simple.GLenum, ctypes.c_void_p
         ),
         simple.GLU_TESS_EDGE_FLAG: FUNCTION_TYPE( None, simple.GLboolean),
-        simple.GLU_TESS_EDGE_FLAG_DATA: FUNCTION_TYPE( 
-            None, simple.GLboolean, ctypes.c_void_p 
+        simple.GLU_TESS_EDGE_FLAG_DATA: FUNCTION_TYPE(
+            None, simple.GLboolean, ctypes.c_void_p
         ),
         simple.GLU_TESS_VERTEX: FUNCTION_TYPE( None, ctypes.c_void_p ),
-        simple.GLU_TESS_VERTEX_DATA: FUNCTION_TYPE( 
+        simple.GLU_TESS_VERTEX_DATA: FUNCTION_TYPE(
             None, ctypes.c_void_p, ctypes.c_void_p
         ),
         simple.GLU_TESS_END: FUNCTION_TYPE( None ),
-        simple.GLU_TESS_END_DATA: FUNCTION_TYPE( None, ctypes.c_void_p), 
-        simple.GLU_TESS_COMBINE: FUNCTION_TYPE( 
-            None, 
-            ctypes.POINTER(simple.GLdouble), 
-            ctypes.POINTER(ctypes.c_void_p), 
+        simple.GLU_TESS_END_DATA: FUNCTION_TYPE( None, ctypes.c_void_p),
+        simple.GLU_TESS_COMBINE: FUNCTION_TYPE(
+            None,
+            ctypes.POINTER(simple.GLdouble),
+            ctypes.POINTER(ctypes.c_void_p),
             ctypes.POINTER(simple.GLfloat),
             ctypes.POINTER(ctypes.c_void_p)
         ),
-        simple.GLU_TESS_COMBINE_DATA: FUNCTION_TYPE( 
-            None, 
-            ctypes.POINTER(simple.GLdouble), 
-            ctypes.POINTER(ctypes.c_void_p), 
+        simple.GLU_TESS_COMBINE_DATA: FUNCTION_TYPE(
+            None,
+            ctypes.POINTER(simple.GLdouble),
+            ctypes.POINTER(ctypes.c_void_p),
             ctypes.POINTER(simple.GLfloat),
             ctypes.POINTER(ctypes.c_void_p),
             ctypes.c_void_p,
         ),
-        simple.GLU_TESS_ERROR: FUNCTION_TYPE( None, simple.GLenum), 
-        simple.GLU_TESS_ERROR_DATA: FUNCTION_TYPE( 
+        simple.GLU_TESS_ERROR: FUNCTION_TYPE( None, simple.GLenum),
+        simple.GLU_TESS_ERROR_DATA: FUNCTION_TYPE(
             None, simple.GLenum, ctypes.c_void_p
-        ), 
+        ),
         simple.GLU_ERROR : FUNCTION_TYPE( None, simple.GLenum )
     }
     WRAPPER_METHODS = {
@@ -52,10 +52,10 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
         simple.GLU_TESS_EDGE_FLAG_DATA: 'dataWrapper',
         simple.GLU_TESS_VERTEX: 'vertexWrapper',
         simple.GLU_TESS_VERTEX_DATA: 'vertexWrapper',
-        simple.GLU_TESS_END_DATA: 'dataWrapper', 
+        simple.GLU_TESS_END_DATA: 'dataWrapper',
         simple.GLU_TESS_COMBINE: 'combineWrapper',
         simple.GLU_TESS_COMBINE_DATA: 'combineWrapper',
-        simple.GLU_TESS_ERROR_DATA: 'dataWrapper', 
+        simple.GLU_TESS_ERROR_DATA: 'dataWrapper',
     }
     def gluTessVertex( self, location, data=None ):
         """Add a vertex to this tessellator, storing data for later lookup"""
@@ -72,25 +72,25 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
         return gluTessVertexBase( self, location, vp )
     def gluTessBeginPolygon( self, data ):
         """Note the object pointer to return it as a Python object"""
-        return simple.gluTessBeginPolygon( 
+        return simple.gluTessBeginPolygon(
             self, ctypes.c_void_p(self.noteObject( data ))
         )
     def combineWrapper( self, function ):
         """Wrap a Python function with ctypes-compatible wrapper for combine callback
-        
+
         For a Python combine callback, the signature looks like this:
             def combine(
-                GLdouble coords[3], 
-                void *vertex_data[4], 
+                GLdouble coords[3],
+                void *vertex_data[4],
                 GLfloat weight[4]
             ):
                 return data
         While the C signature looks like this:
-            void combine( 
-                GLdouble coords[3], 
-                void *vertex_data[4], 
-                GLfloat weight[4], 
-                void **outData 
+            void combine(
+                GLdouble coords[3],
+                void *vertex_data[4],
+                GLfloat weight[4],
+                void **outData
             )
         """
         if (function is not None) and (not hasattr( function,'__call__' )):
@@ -159,15 +159,18 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
         return wrap
 
 GLUtesselator.CALLBACK_FUNCTION_REGISTRARS = dict([
-    (c,createBaseFunction( 
-        'gluTessCallback', dll=GLU, resultType=None, 
+    (c,createBaseFunction(
+        'gluTessCallback', dll=GLU, resultType=None,
         argTypes=[ctypes.POINTER(GLUtesselator), simple.GLenum,funcType],
-        doc='gluTessCallback( POINTER(GLUtesselator)(tess), GLenum(which), _GLUfuncptr(CallBackFunc) ) -> None', 
+        doc='gluTessCallback( POINTER(GLUtesselator)(tess), GLenum(which), _GLUfuncptr(CallBackFunc) ) -> None',
         argNames=('tess', 'which', 'CallBackFunc'),
     ))
     for (c,funcType) in GLUtesselator.CALLBACK_TYPES.items()
 ])
-del c, funcType
+try:
+    del c, funcType
+except NameError, err:
+    pass
 
 def gluTessCallback( tess, which, function ):
     """Set a given gluTessellator callback for the given tessellator"""
@@ -180,11 +183,11 @@ def gluTessVertex( tess, location, data=None ):
     return tess.gluTessVertex( location, data )
 
 # /usr/include/GL/glu.h 293
-@lazy( 
-    createBaseFunction( 
-        'gluNewTess', dll=GLU, resultType=ctypes.POINTER(GLUtesselator), 
-        doc='gluNewTess(  ) -> POINTER(GLUtesselator)', 
-    ) 
+@lazy(
+    createBaseFunction(
+        'gluNewTess', dll=GLU, resultType=ctypes.POINTER(GLUtesselator),
+        doc='gluNewTess(  ) -> POINTER(GLUtesselator)',
+    )
 )
 def gluNewTess( baseFunction ):
     """Get a new tessellator object (just unpacks the pointer for you)"""
@@ -196,7 +199,7 @@ def gluGetTessProperty( baseFunction, tess, which, data=None ):
     if data is None:
         data = simple.GLdouble( 0.0 )
         baseFunction( tess, which, data )
-        return data.value 
+        return data.value
     else:
         return baseFunction( tess, which, data )
 

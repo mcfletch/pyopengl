@@ -1,7 +1,7 @@
 '''OpenGL extension VERSION.GL_2_0
 
-This module customises the behaviour of the 
-OpenGL.raw.GL.VERSION.GL_2_0 to provide a more 
+This module customises the behaviour of the
+OpenGL.raw.GL.VERSION.GL_2_0 to provide a more
 Python-friendly API
 
 The official definition of this extension is available here:
@@ -25,9 +25,9 @@ from OpenGL import converters, error, contextdata
 from OpenGL.arrays.arraydatatype import ArrayDatatype, GLenumArray
 GL_INFO_LOG_LENGTH = constant.Constant( 'GL_INFO_LOG_LENGTH', 0x8B84 )
 
-glShaderSource = platform.createExtensionFunction( 
+glShaderSource = platform.createExtensionFunction(
     'glShaderSource', dll=platform.GL,
-    resultType=None, 
+    resultType=None,
     argTypes=(constants.GLhandle, constants.GLsizei, ctypes.POINTER(ctypes.c_char_p), arrays.GLintArray,),
     doc = 'glShaderSource( GLhandle(shaderObj),[str(string),...]) -> None',
     argNames = ('shaderObj', 'count', 'string', 'length',),
@@ -38,7 +38,7 @@ glShaderSource = wrapper.wrapper(
     glShaderSource
 ).setPyConverter(
     'count' # number of strings
-).setPyConverter( 
+).setPyConverter(
     'length' # lengths of strings
 ).setPyConverter(
     'string', conv.stringArray
@@ -49,7 +49,10 @@ glShaderSource = wrapper.wrapper(
 ).setCConverter(
     'count', conv.totalCount,
 )
-del conv
+try:
+    del conv
+except NameError, err:
+    pass
 
 for size in (1,2,3,4):
     for format,arrayType in (
@@ -60,28 +63,34 @@ for size in (1,2,3,4):
         globals()[name] = arrays.setInputArraySizeType(
             globals()[name],
             None, # don't want to enforce size...
-            arrayType, 
+            arrayType,
             'value',
         )
-        del format, arrayType
-    del size,name
+        try:
+            del format, arrayType
+        except NameError, err:
+            pass
+    try:
+        del size,name
+    except NameError, err:
+        pass
 
 @lazy( glGetShaderiv )
 def glGetShaderiv( baseOperation, shader, pname, status=None ):
     """Retrieve the integer parameter for the given shader
-    
-    shader -- shader ID to query 
-    pname -- parameter name 
-    status -- pointer to integer to receive status or None to 
-        return the parameter as an integer value 
-    
-    returns 
+
+    shader -- shader ID to query
+    pname -- parameter name
+    status -- pointer to integer to receive status or None to
+        return the parameter as an integer value
+
+    returns
         integer if status parameter is None
         status if status parameter is not None
     """
     if status is None:
         status = arrays.GLintArray.zeros( (1,))
-        status[0] = 1 
+        status[0] = 1
         baseOperation(
             shader, pname, status
         )
@@ -108,7 +117,7 @@ def _afterCheck( key ):
         getter = glGetShaderiv
     else:
         getter = glGetProgramiv
-    def GLSLCheckError( 
+    def GLSLCheckError(
         result,
         baseOperation=None,
         cArguments=None,
@@ -119,7 +128,7 @@ def _afterCheck( key ):
         getter( cArguments[0], key, ctypes.byref(status))
         status = status.value
         if not status:
-            raise error.GLError( 
+            raise error.GLError(
                 result = result,
                 baseOperation = baseOperation,
                 cArguments = cArguments,
@@ -139,7 +148,7 @@ if OpenGL.ERROR_CHECKING:
 @lazy( glGetShaderInfoLog )
 def glGetShaderInfoLog( baseOperation, obj ):
     """Retrieve the shader's error messages as a Python string
-    
+
     returns string which is '' if no message
     """
     length = int(glGetShaderiv(obj, GL_INFO_LOG_LENGTH))
@@ -151,7 +160,7 @@ def glGetShaderInfoLog( baseOperation, obj ):
 @lazy( glGetProgramInfoLog )
 def glGetProgramInfoLog( baseOperation, obj ):
     """Retrieve the shader program's error messages as a Python string
-    
+
     returns string which is '' if no message
     """
     length = int(glGetProgramiv(obj, GL_INFO_LOG_LENGTH))
@@ -175,7 +184,7 @@ def glGetAttachedShaders( baseOperation, obj ):
 @lazy( glGetShaderSource )
 def glGetShaderSource( baseOperation, obj ):
     """Retrieve the program/shader's source code as a Python string
-    
+
     returns string which is '' if no source code
     """
     length = int(glGetShaderiv(obj, GL_OBJECT_SHADER_SOURCE_LENGTH))
@@ -219,27 +228,27 @@ def glGetAttribLocation( baseOperation, program, name ):
     return baseOperation( program, name )
 
 @lazy( glVertexAttribPointer )
-def glVertexAttribPointer( 
+def glVertexAttribPointer(
     baseOperation, index, size, type,
     normalized, stride, pointer,
 ):
     """Set an attribute pointer for a given shader (index)
-    
-    index -- the index of the generic vertex to bind, see 
+
+    index -- the index of the generic vertex to bind, see
         glGetAttribLocation for retrieval of the value,
         note that index is a global variable, not per-shader
     size -- number of basic elements per record, 1,2,3, or 4
-    type -- enum constant for data-type 
-    normalized -- whether to perform int to float 
+    type -- enum constant for data-type
+    normalized -- whether to perform int to float
         normalization on integer-type values
-    stride -- stride in machine units (bytes) between 
-        consecutive records, normally used to create 
-        "interleaved" arrays 
+    stride -- stride in machine units (bytes) between
+        consecutive records, normally used to create
+        "interleaved" arrays
     pointer -- data-pointer which provides the data-values,
-        normally a vertex-buffer-object or offset into the 
+        normally a vertex-buffer-object or offset into the
         same.
-    
-    This implementation stores a copy of the data-pointer 
+
+    This implementation stores a copy of the data-pointer
     in the contextdata structure in order to prevent null-
     reference errors in the renderer.
     """
@@ -248,15 +257,15 @@ def glVertexAttribPointer(
     contextdata.setValue( key, array )
     return baseOperation(
         index, size, type,
-        normalized, stride, 
-        ArrayDatatype.voidDataPointer( array ) 
+        normalized, stride,
+        ArrayDatatype.voidDataPointer( array )
     )
 
 @lazy( glDrawBuffers )
 def glDrawBuffers( baseOperation, n=None, bufs=None ):
-    """glDrawBuffers( bufs ) -> bufs 
-    
-    Wrapper will calculate n from dims of bufs if only 
+    """glDrawBuffers( bufs ) -> bufs
+
+    Wrapper will calculate n from dims of bufs if only
     one argument is provided...
     """
     if bufs is None:

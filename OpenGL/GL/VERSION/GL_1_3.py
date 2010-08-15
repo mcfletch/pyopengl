@@ -1,7 +1,7 @@
 '''OpenGL extension VERSION.GL_1_3
 
-This module customises the behaviour of the 
-OpenGL.raw.GL.VERSION.GL_1_3 to provide a more 
+This module customises the behaviour of the
+OpenGL.raw.GL.VERSION.GL_1_3 to provide a more
 Python-friendly API
 
 The official definition of this extension is available here:
@@ -26,11 +26,17 @@ for typ,arrayType in (
         globals()[name] = arrays.setInputArraySizeType(
             globals()[name],
             size,
-            arrayType, 
+            arrayType,
             'v',
         )
-        del size,name
-    del typ,arrayType
+        try:
+            del size,name
+        except NameError, err:
+            pass
+    try:
+        del typ,arrayType
+    except NameError, err:
+        pass
 
 for typ,arrayType in (
     ('d',arrays.GLdoubleArray),
@@ -41,8 +47,14 @@ for typ,arrayType in (
         globals()[name] = arrays.setInputArraySizeType(
             globals()[name],
             16,
-            arrayType, 
+            arrayType,
             'm',
         )
-        del function,name
-    del typ,arrayType
+        try:
+            del function,name
+        except NameError, err:
+            pass
+    try:
+        del typ,arrayType
+    except NameError, err:
+        pass

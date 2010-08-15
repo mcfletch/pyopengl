@@ -1,15 +1,15 @@
 '''OpenGL extension ARB.occlusion_query
 
-This module customises the behaviour of the 
-OpenGL.raw.GL.ARB.occlusion_query to provide a more 
+This module customises the behaviour of the
+OpenGL.raw.GL.ARB.occlusion_query to provide a more
 Python-friendly API
 
 Overview (from the spec)
-	
+
 	This extension defines a mechanism whereby an application can query
 	the number of pixels (or, more precisely, samples) drawn by a
 	primitive or group of primitives.
-	
+
 	The primary purpose of such a query (hereafter referred to as an
 	"occlusion query") is to determine the visibility of an object.
 	Typically, the application will render the major occluders in the
@@ -17,10 +17,10 @@ Overview (from the spec)
 	detail object in the scene.  Only if said bounding box is visible,
 	i.e., if at least one sample is drawn, should the corresponding object
 	be drawn.
-	
+
 	The earlier HP_occlusion_test extension defined a similar mechanism,
 	but it had two major shortcomings.
-	
+
 	- It returned the result as a simple GL_TRUE/GL_FALSE result, when in
 	  fact it is often useful to know exactly how many samples were
 	  drawn.
@@ -32,7 +32,7 @@ Overview (from the spec)
 	  This is a very simple model, but its performance is mediocre when
 	  an application wishes to perform many queries, and it eliminates
 	  most of the opportunities for parallelism between the CPU and GPU.
-	
+
 	This extension solves both of those problems.  It returns as its
 	result the number of samples that pass the depth and stencil tests,
 	and it encapsulates occlusion queries in "query objects" that allow
@@ -41,10 +41,10 @@ Overview (from the spec)
 	occlusion query results to be returned with other, more useful work,
 	such as rendering other parts of the scene or performing other
 	computations on the CPU.
-	
+
 	There are many situations where a pixel/sample count, rather than a
 	boolean result, is useful.
-	
+
 	- Objects that are visible but cover only a very small number of
 	  pixels can be skipped at a minimal reduction of image quality.
 	- Knowing exactly how many pixels an object might cover may help the
@@ -88,7 +88,7 @@ def glDeleteQueriesARB( baseOperation, n, ids=None ):
 @lazy( glGenQueriesARB )
 def glGenQueriesARB( baseOperation, n, ids=None ):
     """Generate n queries, if ids is None, is allocated
-    
+
     returns array of ids
     """
     if ids is None:
@@ -104,4 +104,7 @@ for func in (
     globals()[func] = wrapper.wrapper(globals()[func]).setOutput(
         "params", (1,)
     )
-del func, glget
+try:
+    del func, glget
+except NameError, err:
+    pass

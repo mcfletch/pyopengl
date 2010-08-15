@@ -1,7 +1,7 @@
 '''OpenGL extension ARB.multitexture
 
-This module customises the behaviour of the 
-OpenGL.raw.GL.ARB.multitexture to provide a more 
+This module customises the behaviour of the
+OpenGL.raw.GL.ARB.multitexture to provide a more
 Python-friendly API
 
 The official definition of this extension is available here:
@@ -24,8 +24,14 @@ for typ,arrayType in (
         globals()[name] = arrays.setInputArraySizeType(
             globals()[name],
             size,
-            arrayType, 
+            arrayType,
             'v',
         )
-        del size,name
-    del typ,arrayType
+        try:
+            del size,name
+        except NameError, err:
+            pass
+    try:
+        del typ,arrayType
+    except NameError, err:
+        pass

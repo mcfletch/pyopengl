@@ -1,6 +1,6 @@
 """Implementations for "held-pointers" of various types
 
-This argument type is special because it is stored, that is, it 
+This argument type is special because it is stored, that is, it
 needs to be cached on our side so that the memory address does not
 go out-of-scope
 
@@ -68,10 +68,10 @@ POINTER_FUNCTION_DATA = [
     ('glColorPointers',  simple.glColorPointer, simple.GL_SHORT, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
     ('glColorPointerub', simple.glColorPointer, simple.GL_UNSIGNED_BYTE, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
     # these data-types are mapped from diff Numeric types
-    ('glColorPointerb',  simple.glColorPointer, simple.GL_BYTE, simple.GL_COLOR_ARRAY_POINTER, 0, 3), 
+    ('glColorPointerb',  simple.glColorPointer, simple.GL_BYTE, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
     ('glColorPointerui', simple.glColorPointer, simple.GL_UNSIGNED_INT, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
     ('glColorPointerus', simple.glColorPointer, simple.GL_UNSIGNED_SHORT, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
-    
+
     ('glEdgeFlagPointerb', simple.glEdgeFlagPointer, simple.GL_BYTE, simple.GL_EDGE_FLAG_ARRAY_POINTER, 2, None),
 
     ('glIndexPointerd',  simple.glIndexPointer, simple.GL_DOUBLE, simple.GL_INDEX_ARRAY_POINTER, 1, None),
@@ -130,68 +130,71 @@ for name,function in [
     for args in POINTER_FUNCTION_DATA
 ]:
     globals()[name] = function
-del name, function
+try:
+    del name, function
+except NameError, err:
+    pass
 
 glVertexPointer = wrapper.wrapper( simple.glVertexPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setStoreValues( 
-    arrays.storePointerType( 'pointer', simple.GL_VERTEX_ARRAY_POINTER ) 
-).setReturnValues( 
-    wrapper.returnPyArgument( 'pointer' ) 
+).setStoreValues(
+    arrays.storePointerType( 'pointer', simple.GL_VERTEX_ARRAY_POINTER )
+).setReturnValues(
+    wrapper.returnPyArgument( 'pointer' )
 )
 glTexCoordPointer = wrapper.wrapper( simple.glTexCoordPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setStoreValues( 
-    arrays.storePointerType( 'pointer', simple.GL_TEXTURE_COORD_ARRAY_POINTER ) 
-).setReturnValues( 
-    wrapper.returnPyArgument( 'pointer' ) 
+).setStoreValues(
+    arrays.storePointerType( 'pointer', simple.GL_TEXTURE_COORD_ARRAY_POINTER )
+).setReturnValues(
+    wrapper.returnPyArgument( 'pointer' )
 )
 glNormalPointer = wrapper.wrapper( simple.glNormalPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setStoreValues( 
-    arrays.storePointerType( 'pointer', simple.GL_NORMAL_ARRAY_POINTER ) 
-).setReturnValues( 
-    wrapper.returnPyArgument( 'pointer' ) 
+).setStoreValues(
+    arrays.storePointerType( 'pointer', simple.GL_NORMAL_ARRAY_POINTER )
+).setReturnValues(
+    wrapper.returnPyArgument( 'pointer' )
 )
 glIndexPointer = wrapper.wrapper( simple.glIndexPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setStoreValues( 
-    arrays.storePointerType( 'pointer', simple.GL_INDEX_ARRAY_POINTER ) 
-).setReturnValues( 
-    wrapper.returnPyArgument( 'pointer' ) 
+).setStoreValues(
+    arrays.storePointerType( 'pointer', simple.GL_INDEX_ARRAY_POINTER )
+).setReturnValues(
+    wrapper.returnPyArgument( 'pointer' )
 )
 glEdgeFlagPointer = wrapper.wrapper( simple.glEdgeFlagPointer ).setPyConverter(
     # XXX type is wrong!
     'pointer', arrays.AsArrayTyped( 'pointer', arrays.GLushortArray ),
-).setStoreValues( 
-    arrays.storePointerType( 'pointer', simple.GL_EDGE_FLAG_ARRAY_POINTER ) 
-).setReturnValues( 
-    wrapper.returnPyArgument( 'pointer' ) 
+).setStoreValues(
+    arrays.storePointerType( 'pointer', simple.GL_EDGE_FLAG_ARRAY_POINTER )
+).setReturnValues(
+    wrapper.returnPyArgument( 'pointer' )
 )
 glColorPointer = wrapper.wrapper( simple.glColorPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
-).setStoreValues( 
-    arrays.storePointerType( 'pointer', simple.GL_COLOR_ARRAY_POINTER ) 
-).setReturnValues( 
-    wrapper.returnPyArgument( 'pointer' ) 
-)
-glInterleavedArrays = wrapper.wrapper( simple.glInterleavedArrays ).setStoreValues( 
-    arrays.storePointerType( 'pointer', GL_INTERLEAVED_ARRAY_POINTER ) 
-).setReturnValues( 
+).setStoreValues(
+    arrays.storePointerType( 'pointer', simple.GL_COLOR_ARRAY_POINTER )
+).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
-    
+glInterleavedArrays = wrapper.wrapper( simple.glInterleavedArrays ).setStoreValues(
+    arrays.storePointerType( 'pointer', GL_INTERLEAVED_ARRAY_POINTER )
+).setReturnValues(
+    wrapper.returnPyArgument( 'pointer' )
+)
+
 
 glDrawElements = wrapper.wrapper( simple.glDrawElements ).setPyConverter(
     'indices', arrays.AsArrayOfType( 'indices', 'type' ),
-).setReturnValues( 
-    wrapper.returnPyArgument( 'indices' ) 
+).setReturnValues(
+    wrapper.returnPyArgument( 'indices' )
 )
 
 def glDrawElementsTyped( type, suffix ):
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ type ]
-    function = wrapper.wrapper( 
-        simple.glDrawElements 
+    function = wrapper.wrapper(
+        simple.glDrawElements
     ).setPyConverter('type').setCConverter(
         'type', type
     ).setPyConverter('count').setCConverter(
@@ -204,7 +207,10 @@ def glDrawElementsTyped( type, suffix ):
     return function
 for type,suffix in ((simple.GL_UNSIGNED_BYTE,'ub'),(simple.GL_UNSIGNED_INT,'ui'),(simple.GL_UNSIGNED_SHORT,'us')):
     globals()['glDrawElements%(suffix)s'%globals()] = glDrawElementsTyped( type,suffix )
-del type,suffix,glDrawElementsTyped
+try:
+    del type,suffix,glDrawElementsTyped
+except NameError, err:
+    pass
 
 # create buffer of given size and return it for future reference
 # keep a per-context weakref around to allow us to return the original
@@ -229,7 +235,7 @@ def glFeedbackBuffer( size, type, buffer = None ):
 
 def glRenderMode( newMode ):
     """Change to the given rendering mode
-    
+
     If the current mode is GL_FEEDBACK or GL_SELECT, return
     the current buffer appropriate to the mode
     """
@@ -246,7 +252,7 @@ def glRenderMode( newMode ):
         return simple.glRenderMode( newMode )
     result = simple.glRenderMode( newMode )
     # result is now an integer telling us how many elements were copied...
-    
+
     if result < 0:
         if currentMode == simple.GL_SELECT:
             raise error.GLError(

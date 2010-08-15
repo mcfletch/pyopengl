@@ -17,7 +17,10 @@ DIRECT_RETURN_TYPES = (
     ctypes.c_char_p,
     ctypes.c_wchar_p,
 )
-del c
+try:
+    del c
+except NameError, err:
+    pass
 
 class CtypesParameterHandler( formathandler.FormatHandler ):
     """Ctypes Paramater-type-specific data-type handler for OpenGL"""
@@ -25,13 +28,13 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
     HANDLED_TYPES = (ParamaterType, _ctypes._SimpleCData)
     def from_param( cls, value, typeCode=None ):
         if isinstance( value, DIRECT_RETURN_TYPES ):
-            return value 
+            return value
         else:
             return ctypes.byref( value )
     from_param = voidDataPointer = classmethod( from_param )
     def dataPointer( cls, value ):
         if isinstance( value, DIRECT_RETURN_TYPES ):
-            return value 
+            return value
         else:
             return ctypes.addressof( value )
     dataPointer = classmethod( dataPointer )
@@ -39,14 +42,14 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
         """Return Numpy array of zeros in given size"""
         type = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
         for dim in dims:
-            type *= dim 
+            type *= dim
         return type() # should expicitly set to 0s
     def ones( self, dims, typeCode='d' ):
         """Return numpy array of ones in given size"""
         raise NotImplementedError( """Haven't got a good ones implementation yet""" )
 ##		type = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
 ##		for dim in dims:
-##			type *= dim 
+##			type *= dim
 ##		return type() # should expicitly set to 0s
     def arrayToGLType( self, value ):
         """Given a value, guess OpenGL type of the corresponding pointer"""
@@ -69,7 +72,7 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
             length = getattr( base, '_length_', None)
             if length is not None:
                 dims *= length
-        return dims 
+        return dims
     def arrayByteCount( self, value, typeCode = None ):
         """Given a data-value, calculate number of bytes required to represent"""
         if isinstance( value, ParamaterType ):
@@ -84,7 +87,7 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
             yield dimObject
             dimObject = getattr( dimObject, '_type_', None )
             if isinstance( dimObject, (str,unicode)):
-                dimObject = None 
+                dimObject = None
     def dims( self, value ):
         """Produce iterable of all dimensions"""
         if isinstance( value, ParamaterType ):
@@ -96,7 +99,7 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
     def asArray( self, value, typeCode=None ):
         """Convert given value to an array value of given typeCode"""
         if isinstance( value, DIRECT_RETURN_TYPES ):
-            return value 
+            return value
         if isinstance( value, ParamaterType ):
             value = value._obj
         return ctypes.byref( value )
@@ -119,7 +122,7 @@ ARRAY_TO_GL_TYPE_MAPPING = {
     constants.GLuint: constants.GL_UNSIGNED_INT,
     constants.GLshort: constants.GL_SHORT,
     constants.GLushort: constants.GL_UNSIGNED_SHORT,
-        
+
     constants.GLchar: constants.GL_CHAR,
     constants.GLbyte: constants.GL_BYTE,
     constants.GLubyte: constants.GL_UNSIGNED_BYTE,
@@ -131,7 +134,7 @@ GL_TYPE_TO_ARRAY_MAPPING = {
     constants.GL_UNSIGNED_INT: constants.GLuint,
     constants.GL_SHORT: constants.GLshort,
     constants.GL_UNSIGNED_SHORT: constants.GLushort,
-        
+
     constants.GL_CHAR: constants.GLchar,
     constants.GL_BYTE: constants.GLbyte,
     constants.GL_UNSIGNED_BYTE: constants.GLubyte,

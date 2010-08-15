@@ -15,10 +15,10 @@ from OpenGL.GL import images
 import ctypes
 
 glGetHistogramParameterfv = wrapper.wrapper(simple.glGetHistogramParameterfv).setOutput(
-    "params",(1,), 
+    "params",(1,),
 )
 glGetHistogramParameteriv = wrapper.wrapper(simple.glGetHistogramParameteriv).setOutput(
-    "params",(1,), 
+    "params",(1,),
 )
 
 for suffix,arrayConstant in [
@@ -38,8 +38,14 @@ for suffix,arrayConstant in [
             suffix, arrayConstant, getattr(simple, functionName),
         )
         globals()[functionName] = function
-        del function, functionName
-    del suffix,arrayConstant
+        try:
+            del function, functionName
+        except NameError, err:
+            pass
+    try:
+        del suffix,arrayConstant
+    except NameError, err:
+        pass
 
 glTexImage3D = images.setDimensionsAsInts(
     images.setImageInput(
@@ -94,20 +100,20 @@ glConvolutionFilter2D = images.setDimensionsAsInts(
 @lazy( simple.glGetConvolutionFilter )
 def glGetConvolutionFilter( baseFunction, target, format, type ):
     """Retrieve 1 or 2D convolution parameter "kernels" as pixel data"""
-    dims = ( 
-        glGetConvolutionParameteriv( target, imaging.GL_CONVOLUTION_WIDTH )[0], 
+    dims = (
+        glGetConvolutionParameteriv( target, imaging.GL_CONVOLUTION_WIDTH )[0],
     )
     if target != imaging.GL_CONVOLUTION_1D:
-        dims += ( 
-            glGetConvolutionParameteriv( target, imaging.GL_CONVOLUTION_HEIGHT )[0], 
+        dims += (
+            glGetConvolutionParameteriv( target, imaging.GL_CONVOLUTION_HEIGHT )[0],
         )
     # is it always 4?  Seems to be, but the spec/man-page isn't really clear about it...
     dims += (4,)
     array = images.images.SetupPixelRead( format, dims, type )
-    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ 
-        images.images.TYPE_TO_ARRAYTYPE.get(type,type) 
+    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[
+        images.images.TYPE_TO_ARRAYTYPE.get(type,type)
     ]
-    baseFunction( 
+    baseFunction(
         target, format, type,
         ctypes.c_void_p( arrayType.dataPointer(array))
     )
@@ -115,21 +121,21 @@ def glGetConvolutionFilter( baseFunction, target, format, type ):
 @lazy( simple.glGetSeparableFilter )
 def glGetSeparableFilter( baseFunction, target, format, type ):
     """Retrieve 2 1D convolution parameter "kernels" as pixel data"""
-    rowDims = ( 
-        glGetConvolutionParameteriv( imaging.GL_CONVOLUTION_WIDTH )[0], 
+    rowDims = (
+        glGetConvolutionParameteriv( imaging.GL_CONVOLUTION_WIDTH )[0],
         4,
     )
-    columnDims = ( 
-        glGetConvolutionParameteriv( imaging.GL_CONVOLUTION_HEIGHT )[0], 
+    columnDims = (
+        glGetConvolutionParameteriv( imaging.GL_CONVOLUTION_HEIGHT )[0],
         4,
     )
-    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ 
-        images.images.TYPE_TO_ARRAYTYPE.get(type,type) 
+    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[
+        images.images.TYPE_TO_ARRAYTYPE.get(type,type)
     ]
     row = images.images.SetupPixelRead( format, rowDims, type )
     column = images.images.SetupPixelRead( format, columnDims, type )
-    baseFunction( 
-        target, format, type, 
+    baseFunction(
+        target, format, type,
         ctypes.c_void_p( arrayType.dataPointer(row)),
         ctypes.c_void_p( arrayType.dataPointer(column)),
         None # span
@@ -138,15 +144,15 @@ def glGetSeparableFilter( baseFunction, target, format, type ):
 @lazy( simple.glGetColorTable )
 def glGetColorTable( baseFunction, target, format, type ):
     """Retrieve the current 1D color table as a bitmap"""
-    dims = ( 
+    dims = (
         glGetColorTableParameteriv(target, imaging.GL_COLOR_TABLE_WIDTH),
         4, # Grr, spec *seems* to say that it's different sizes, but it doesn't really say...
     )
     array = images.images.SetupPixelRead( format, dims, type )
-    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ 
-        images.images.TYPE_TO_ARRAYTYPE.get(type,type) 
+    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[
+        images.images.TYPE_TO_ARRAYTYPE.get(type,type)
     ]
-    baseFunction( 
+    baseFunction(
         target, format, type,
         ctypes.c_void_p( arrayType.dataPointer(array))
     )
@@ -160,10 +166,10 @@ def glGetHistogram( baseFunction, target, reset, format, type, values=None):
             imaging.GL_HISTOGRAM_WIDTH,
         )
         values = images.images.SetupPixelRead( format, (width,4), type )
-    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ 
-        images.images.TYPE_TO_ARRAYTYPE.get(type,type) 
+    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[
+        images.images.TYPE_TO_ARRAYTYPE.get(type,type)
     ]
-    baseFunction( 
+    baseFunction(
         target, reset, format, type,
         ctypes.c_void_p( arrayType.dataPointer(values))
     )
@@ -175,10 +181,10 @@ def glGetMinmax( baseFunction, target, reset, format, type, values=None):
     if values is None:
         width = 2
         values = images.images.SetupPixelRead( format, (width,4), type )
-    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ 
-        images.images.TYPE_TO_ARRAYTYPE.get(type,type) 
+    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[
+        images.images.TYPE_TO_ARRAYTYPE.get(type,type)
     ]
-    baseFunction( 
+    baseFunction(
         target, reset, format, type,
         ctypes.c_void_p( arrayType.dataPointer(values))
     )
@@ -202,10 +208,10 @@ GL_GET_CTP_SIZES = {
     imaging.GL_COLOR_TABLE_INTENSITY_SIZE :1,
 }
 glGetColorTableParameterfv = wrapper.wrapper(simple.glGetColorTableParameterfv).setOutput(
-    "params",GL_GET_CTP_SIZES, "pname", 
+    "params",GL_GET_CTP_SIZES, "pname",
 )
 glGetColorTableParameteriv = wrapper.wrapper(simple.glGetColorTableParameteriv).setOutput(
-    "params",GL_GET_CTP_SIZES, "pname", 
+    "params",GL_GET_CTP_SIZES, "pname",
 )
 GL_GET_CP_SIZES = {
     imaging.GL_CONVOLUTION_BORDER_MODE: 1,
@@ -219,8 +225,8 @@ GL_GET_CP_SIZES = {
     imaging.GL_MAX_CONVOLUTION_HEIGHT: 1,
 }
 glGetConvolutionParameteriv = wrapper.wrapper(simple.glGetConvolutionParameteriv).setOutput(
-    "params",GL_GET_CP_SIZES, "pname", 
+    "params",GL_GET_CP_SIZES, "pname",
 )
 glGetConvolutionParameterfv = wrapper.wrapper(simple.glGetConvolutionParameterfv).setOutput(
-    "params",GL_GET_CP_SIZES, "pname", 
+    "params",GL_GET_CP_SIZES, "pname",
 )

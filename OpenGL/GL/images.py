@@ -2,9 +2,9 @@
 
 ### Unresolved:
 
-    Following methods are not yet resolved due to my not being sure how the 
+    Following methods are not yet resolved due to my not being sure how the
     function should be wrapped:
-    
+
         glCompressedTexImage3D
         glCompressedTexImage2D
         glCompressedTexImage1D
@@ -24,7 +24,7 @@ def asInt( value ):
 ## update the image tables with standard image types...
 #images.FORMAT_BITS.update( {
 #	simple.GL_BITMAP : 1, # must be GL_UNSIGNED_BYTE
-#	
+#
 #	simple.GL_RED : 8,
 #	simple.GL_GREEN : 8,
 #	simple.GL_BLUE : 8,
@@ -43,7 +43,7 @@ def asInt( value ):
 #	simple.GL_CMYK_EXT : 32,
 #
 #	simple.GL_CMYKA_EXT : 40,
-#	
+#
 #	simple.GL_YCRCB_422_SGIX : 8, # must be GL_UNSIGNED_BYTE
 #	simple.GL_YCRCB_444_SGIX : 8, # must be GL_UNSIGNED_SHORT
 #
@@ -52,7 +52,7 @@ def asInt( value ):
 #} )
 images.COMPONENT_COUNTS.update( {
     simple.GL_BITMAP : 1, # must be GL_UNSIGNED_BYTE
-    
+
     simple.GL_RED : 1,
     simple.GL_GREEN : 1,
     simple.GL_BLUE : 1,
@@ -71,7 +71,7 @@ images.COMPONENT_COUNTS.update( {
     simple.GL_CMYK_EXT : 4,
 
     simple.GL_CMYKA_EXT : 5,
-    
+
     simple.GL_YCRCB_422_SGIX : 1, # must be GL_UNSIGNED_BYTE
     simple.GL_YCRCB_444_SGIX : 1, # must be GL_UNSIGNED_SHORT
 
@@ -173,9 +173,9 @@ __all__ = (
     'glReadPixelsub',
     'glReadPixelsui',
     'glReadPixelsus',
-    
+
     'glGetTexImage',
-    
+
     'glDrawPixels',
     'glDrawPixelsb',
     'glDrawPixelsf',
@@ -184,16 +184,16 @@ __all__ = (
     'glDrawPixelsub',
     'glDrawPixelsui',
     'glDrawPixelsus',
-    
-    
+
+
     'glTexSubImage2D',
     'glTexSubImage1D',
     #'glTexSubImage3D',
-    
+
     'glTexImage1D',
     'glTexImage2D',
     #'glTexImage3D',
-    
+
     'glGetTexImageb',
     'glGetTexImaged',
     'glGetTexImagef',
@@ -244,17 +244,17 @@ __all__ = (
     'glTexSubImage1Dus',
     'glTexSubImage2Dus',
     #'glTexSubImage3Dus',
-    
+
     #'glColorTable',
     #'glGetColorTable',
     #'glColorSubTable',
-    
+
     #'glConvolutionFilter1D',
     #'glConvolutionFilter2D',
     #'glGetConvolutionFilter',
     #'glSeparableFilter2D',
     #'glGetSeparableFilter',
-    
+
     #'glGetMinmax',
 )
 
@@ -270,9 +270,9 @@ for suffix,type in [
 ]:
     def glReadPixels( x,y,width,height,format,type=type, array=None ):
         """Read specified pixels from the current display buffer
-        
-        This typed version returns data in your specified default 
-        array data-type format, or in the passed array, which will 
+
+        This typed version returns data in your specified default
+        array data-type format, or in the passed array, which will
         be converted to the array-type required by the format.
         """
         x,y,width,height = asInt(x),asInt(y),asInt(width),asInt(height)
@@ -282,10 +282,10 @@ for suffix,type in [
         else:
             array = arrayType.asArray( array )
         imageData = arrayType.voidDataPointer( array )
-        simple.glReadPixels( 
+        simple.glReadPixels(
             x,y,
             width, height,
-            format,type, 
+            format,type,
             imageData
         )
         return array
@@ -300,8 +300,8 @@ for suffix,type in [
                 dims.append( glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_DEPTH ) )
         array = images.SetupPixelRead( format, tuple(dims), type )
         arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
-        simple.glGetTexImage( 
-            target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array)) 
+        simple.glGetTexImage(
+            target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array))
         )
         return array
     globals()["glGetTexImage%s"%(suffix,)] = glGetTexImage
@@ -315,40 +315,43 @@ for suffix,type in [
 ##				dims.append( glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_DEPTH ) )
 ##		array = images.SetupPixelRead( format, tuple(dims), type )
 ##		arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
-##		simple.glGetTexImage( 
-##			target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array)) 
+##		simple.glGetTexImage(
+##			target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array))
 ##		)
 ##		return array
 ##	"%s = glGetTexImage"%(suffix)
-    del suffix,type
+    try:
+        del suffix,type
+    except NameError, err:
+        pass
 # Now the real glReadPixels...
 def glReadPixels( x,y,width,height,format,type, array=None, outputType=str ):
     """Read specified pixels from the current display buffer
-    
-    x,y,width,height -- location and dimensions of the image to read 
+
+    x,y,width,height -- location and dimensions of the image to read
         from the buffer
     format -- pixel format for the resulting data
     type -- data-format for the resulting data
     array -- optional array/offset into which to store the value
-    outputType -- default (str) provides string output of the 
-        results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True 
-        and type == GL_UNSIGNED_BYTE.  Any other value will cause 
+    outputType -- default (str) provides string output of the
+        results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+        and type == GL_UNSIGNED_BYTE.  Any other value will cause
         output in the default array output format.
-    
-    returns the pixel data array in the format defined by the 
+
+    returns the pixel data array in the format defined by the
     format, type and outputType
     """
     x,y,width,height = asInt(x),asInt(y),asInt(width),asInt(height)
-    
+
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
     if array is None:
         array = images.SetupPixelRead( format, (width,height), type )
     else:
         array = arrayType.asArray( array )
     imageData = arrayType.voidDataPointer( array )
-    simple.glReadPixels( 
+    simple.glReadPixels(
         x,y,width,height,
-        format,type, 
+        format,type,
         imageData
     )
     if outputType is str:
@@ -358,18 +361,18 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=str ):
 
 def glGetTexImage( target, level,format,type, outputType=str ):
     """Get a texture-level as an image
-    
-    target -- enum constant for the texture engine to be read 
-    level -- the mip-map level to read 
-    format -- image format to read out the data 
+
+    target -- enum constant for the texture engine to be read
+    level -- the mip-map level to read
+    format -- image format to read out the data
     type -- data-type into which to read the data
-    
-    outputType -- default (str) provides string output of the 
-        results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True 
-        and type == GL_UNSIGNED_BYTE.  Any other value will cause 
+
+    outputType -- default (str) provides string output of the
+        results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+        and type == GL_UNSIGNED_BYTE.  Any other value will cause
         output in the default array output format.
-    
-    returns the pixel data array in the format defined by the 
+
+    returns the pixel data array in the format defined by the
     format, type and outputType
     """
     from OpenGL.GL import glget
@@ -380,8 +383,8 @@ def glGetTexImage( target, level,format,type, outputType=str ):
             dims.append( glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_DEPTH ) )
     array = images.SetupPixelRead( format, tuple(dims), type )
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
-    simple.glGetTexImage( 
-        target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array)) 
+    simple.glGetTexImage(
+        target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array))
     )
     if outputType is str:
         return images.returnFormat( array, type )
@@ -413,7 +416,7 @@ def setDimensionsAsInts( baseOperation ):
             baseOperation.setPyConverter( argName, asIntConverter )
     return baseOperation
 
-    
+
 
 class ImageInputConverter( object ):
     def __init__( self, rank, pixelsName=None, typeName='type' ):
@@ -434,7 +437,7 @@ class ImageInputConverter( object ):
 #	def cResolver( self, array ):
 #		return array
 #		return ctypes.c_void_p( arrays.ArrayDatatype.dataPointer( array ) )
-    
+
 class TypedImageInputConverter( ImageInputConverter ):
     def __init__( self, rank, pixelsName, arrayType, typeName=None ):
         self.rank = rank
@@ -460,8 +463,8 @@ class TypedImageInputConverter( ImageInputConverter ):
         return self.arrayType.dimensions( pyArgs[self.pixelsIndex] )[2]
     def type( self, pyArgs, index, wrappedOperation ):
         """Provide the item-type argument from our stored value
-        
-        This is used for pre-bound processing where we want to provide 
+
+        This is used for pre-bound processing where we want to provide
         the type by implication...
         """
         return self.typeName
@@ -487,16 +490,16 @@ DATA_SIZE_NAMES = (
     'imageSize',
 )
 
-def setImageInput( 
-    baseOperation, arrayType=None, dimNames=DIMENSION_NAMES, 
-    pixelName="pixels", typeName=None 
+def setImageInput(
+    baseOperation, arrayType=None, dimNames=DIMENSION_NAMES,
+    pixelName="pixels", typeName=None
 ):
     """Determine how to convert "pixels" into an image-compatible argument"""
     baseOperation = asWrapper( baseOperation )
     # rank is the count of width,height,depth arguments...
     rank = len([
         # rank is the number of dims we want, not the number we give...
-        argName for argName in baseOperation.argNames 
+        argName for argName in baseOperation.argNames
         if argName in dimNames
     ]) + 1
     if arrayType:
@@ -556,7 +559,7 @@ def typedImageFunction( suffix, arrayConstant,  baseFunction ):
         arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ arrayConstant ]
         function = setDimensionsAsInts(
             setImageInput(
-                baseFunction, 
+                baseFunction,
                 arrayType,
                 typeName = arrayConstant,
             )
@@ -579,7 +582,7 @@ def compressedImageFunction( baseFunction ):
     """Set the imageSize and dimensions-as-ints converters for baseFunction"""
     if baseFunction:
         return setDimensionsAsInts(
-            _setDataSize( 
+            _setDataSize(
                 baseFunction, argument='imageSize'
             )
         )
@@ -605,5 +608,11 @@ for suffix,arrayConstant in [
             suffix, arrayConstant, getattr(simple,functionName),
         )
         globals()[functionName] = function
-        del function, functionName
-    del suffix,arrayConstant
+        try:
+            del function, functionName
+        except NameError, err:
+            pass
+    try:
+        del suffix,arrayConstant
+    except NameError, err:
+        pass

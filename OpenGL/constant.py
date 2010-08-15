@@ -3,9 +3,9 @@ import sys
 
 class Constant( object ):
     """OpenGL constant that displays itself as a name rather than a value
-    
+
     The purpose of this class is to make debugging OpenGL code easier,
-    as you recieve messages that say what value you passed in in a 
+    as you recieve messages that say what value you passed in in a
     human-readable form, rather than as a bald number that requires
     lookup and disambiguation in the header file.
     """
@@ -21,11 +21,11 @@ class Constant( object ):
             if value > sys.maxint:
                 value = - (value & sys.maxint)
         base = super(Constant,cls).__new__( cls, value )
-        base.name = name 
+        base.name = name
         return base
     def __repr__( self ):
         """Return the name, rather than the bald value"""
-        return self.name 
+        return self.name
 
 class NumericConstant( Constant ):
     """Base class for numeric-value constants"""
@@ -37,13 +37,13 @@ class NumericConstant( Constant ):
         return self.name
     def __setstate__( self, state ):
         self.name = state
-        
+
 class IntConstant( NumericConstant, int ):
     """Integer constant"""
-    __slots__ = ('name',)
+    #__slots__ = ('name',)
 class FloatConstant( NumericConstant, float ):
     """Float constant"""
-    __slots__ = ('name',)
+    #__slots__ = ('name',)
 
 class StringConstant( Constant, str ):
     """String constants"""
@@ -58,10 +58,9 @@ if __name__ == "__main__":
     x = IntConstant( 'testint', 3 )
     y = FloatConstant( 'testfloat', 3.0 )
     z = StringConstant( 'teststr', 'some testing string' )
-    
+
     import pickle
     for val in x,y,z:
         restored = pickle.loads( pickle.dumps( val ))
         assert restored == val, (str(restored),str(val))
         assert restored.name == val.name, (restored.name,val.name)
-        

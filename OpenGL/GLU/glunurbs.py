@@ -28,11 +28,11 @@ __all__ = (
 # /usr/include/GL/glu.h 242
 class GLUnurbs(glustruct.GLUStruct, simple.GLUnurbs):
     """GLU Nurbs structure with oor and callback storage support
-    
-    IMPORTANT NOTE: the texture coordinate callback receives a raw ctypes 
-    data-pointer, as without knowing what type of evaluation is being done 
-    (1D or 2D) we cannot safely determine the size of the array to convert 
-    it.  This is a limitation of the C implementation.  To convert to regular 
+
+    IMPORTANT NOTE: the texture coordinate callback receives a raw ctypes
+    data-pointer, as without knowing what type of evaluation is being done
+    (1D or 2D) we cannot safely determine the size of the array to convert
+    it.  This is a limitation of the C implementation.  To convert to regular
     data-pointer, just call yourNurb.ptrAsArray( ptr, size, arrays.GLfloatArray )
     with the size of data you expect.
     """
@@ -43,44 +43,44 @@ class GLUnurbs(glustruct.GLUStruct, simple.GLUnurbs):
     }
     CALLBACK_TYPES = {
         # mapping from "which" GLU enumeration to a ctypes function type
-        simple.GLU_NURBS_BEGIN: FUNCTION_TYPE( 
-            None, simple.GLenum 
+        simple.GLU_NURBS_BEGIN: FUNCTION_TYPE(
+            None, simple.GLenum
         ),
-        simple.GLU_NURBS_BEGIN_DATA: FUNCTION_TYPE( 
-            None, simple.GLenum, ctypes.POINTER(simple.GLvoid) 
+        simple.GLU_NURBS_BEGIN_DATA: FUNCTION_TYPE(
+            None, simple.GLenum, ctypes.POINTER(simple.GLvoid)
         ),
-        simple.GLU_NURBS_VERTEX: FUNCTION_TYPE( 
+        simple.GLU_NURBS_VERTEX: FUNCTION_TYPE(
             None, ctypes.POINTER(simple.GLfloat)
         ),
-        simple.GLU_NURBS_VERTEX_DATA: FUNCTION_TYPE( 
-            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid) 
+        simple.GLU_NURBS_VERTEX_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid)
         ),
-        simple.GLU_NURBS_NORMAL: FUNCTION_TYPE( 
+        simple.GLU_NURBS_NORMAL: FUNCTION_TYPE(
             None, ctypes.POINTER(simple.GLfloat)
         ),
-        simple.GLU_NURBS_NORMAL_DATA: FUNCTION_TYPE( 
-            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid) 
+        simple.GLU_NURBS_NORMAL_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid)
         ),
-        simple.GLU_NURBS_COLOR: FUNCTION_TYPE( 
+        simple.GLU_NURBS_COLOR: FUNCTION_TYPE(
             None, ctypes.POINTER(simple.GLfloat)
         ),
-        simple.GLU_NURBS_COLOR_DATA: FUNCTION_TYPE( 
-            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid) 
+        simple.GLU_NURBS_COLOR_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid)
         ),
-        simple.GLU_NURBS_TEXTURE_COORD: FUNCTION_TYPE( 
+        simple.GLU_NURBS_TEXTURE_COORD: FUNCTION_TYPE(
             None, ctypes.POINTER(simple.GLfloat)
         ),
-        simple.GLU_NURBS_TEXTURE_COORD_DATA: FUNCTION_TYPE( 
-            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid) 
+        simple.GLU_NURBS_TEXTURE_COORD_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid)
         ),
-        simple.GLU_NURBS_END:FUNCTION_TYPE( 
+        simple.GLU_NURBS_END:FUNCTION_TYPE(
             None
         ),
-        simple.GLU_NURBS_END_DATA: FUNCTION_TYPE( 
-            None, ctypes.POINTER(simple.GLvoid) 
+        simple.GLU_NURBS_END_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(simple.GLvoid)
         ),
-        simple.GLU_NURBS_ERROR:FUNCTION_TYPE( 
-            None, simple.GLenum, 
+        simple.GLU_NURBS_ERROR:FUNCTION_TYPE(
+            None, simple.GLenum,
         ),
     }
     WRAPPER_METHODS = {
@@ -118,10 +118,10 @@ class GLUnurbs(glustruct.GLUStruct, simple.GLUnurbs):
         """Size-4 vector version..."""
         return self._vec3( function, 4 )
     def _tex( self, function ):
-        """Texture coordinate callback 
-        
-        NOTE: there is no way for *us* to tell what size the array is, you will 
-        get back a raw data-point, not an array, as you do for all other callback 
+        """Texture coordinate callback
+
+        NOTE: there is no way for *us* to tell what size the array is, you will
+        get back a raw data-point, not an array, as you do for all other callback
         types!!!
         """
         def oor( *args ):
@@ -149,7 +149,10 @@ for (c,funcType) in GLUnurbs.CALLBACK_TYPES.items():
     GLUnurbs.CALLBACK_FUNCTION_REGISTRARS[ c ] = cb
     assert funcType == GLUnurbs.CALLBACK_TYPES[c]
     assert cb.argtypes[-1] == funcType
-del c,cb, funcType
+try:
+    del c,cb, funcType
+except NameError, err:
+    pass
 
 def gluNurbsCallback( nurb, which, CallBackFunc ):
     """Dispatch to the nurb's addCallback operation"""
@@ -166,24 +169,24 @@ def gluNewNurbsRenderer( baseFunction ):
 @lazy( simple.gluNurbsCallbackData )
 def gluNurbsCallbackData( baseFunction, nurb, userData ):
     """Note the Python object for use as userData by the nurb"""
-    return baseFunction( 
-        nurb, nurb.noteObject( userData ) 
+    return baseFunction(
+        nurb, nurb.noteObject( userData )
     )
 
 MAX_ORDER = 8
 def checkOrder( order,knotCount,name ):
     """Check that order is valid..."""
     if order < 1:
-        raise error.GLUError( 
-            """%s should be 1 or more, is %s"""%( name,order,) 
+        raise error.GLUError(
+            """%s should be 1 or more, is %s"""%( name,order,)
         )
     elif order > MAX_ORDER:
-        raise error.GLUError( 
-            """%s should be %s or less, is %s"""%( name, MAX_ORDER, order) 
+        raise error.GLUError(
+            """%s should be %s or less, is %s"""%( name, MAX_ORDER, order)
         )
     elif knotCount < (2*order):
-        raise error.GLUError( 
-            """Knotcount must be at least 2x %s is %s should be at least %s"""%( name, knotCount, 2*order) 
+        raise error.GLUError(
+            """Knotcount must be at least 2x %s is %s should be at least %s"""%( name, knotCount, 2*order)
         )
 def checkKnots( knots, name ):
     """Check that knots are in ascending order"""
@@ -198,14 +201,14 @@ def checkKnots( knots, name ):
 @lazy( simple.gluNurbsCallbackDataEXT )
 def gluNurbsCallbackDataEXT( baseFunction,nurb, userData ):
     """Note the Python object for use as userData by the nurb"""
-    return baseFunction( 
-        nurb, nurb.noteObject( userData ) 
+    return baseFunction(
+        nurb, nurb.noteObject( userData )
     )
 
 @lazy( simple.gluNurbsCurve )
 def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
     """Pythonic version of gluNurbsCurve
-    
+
     Calculates knotCount, stride, and order automatically
     """
     knots = arrays.GLfloatArray.asArray( knots )
@@ -226,7 +229,7 @@ def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
 @lazy( simple.gluNurbsSurface )
 def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
     """Pythonic version of gluNurbsSurface
-    
+
     Calculates knotCount, stride, and order automatically
     """
     sKnots = arrays.GLfloatArray.asArray( sKnots )
@@ -239,8 +242,8 @@ def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
         length,width,step = arrays.GLfloatArray.dimensions( control )
     except ValueError, err:
         raise error.GLUError( """Need a 3-dimensional control array""" )
-    sOrder = sKnotCount - length 
-    tOrder = tKnotCount - width 
+    sOrder = sKnotCount - length
+    tOrder = tKnotCount - width
     sStride = width*step
     tStride = step
     if OpenGL.ERROR_CHECKING:
@@ -268,8 +271,8 @@ def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
 @lazy( simple.gluPwlCurve )
 def gluPwlCurve( baseFunction, nurb, data, type ):
     """gluPwlCurve -- piece-wise linear curve within GLU context
-    
-    data -- the data-array 
+
+    data -- the data-array
     type -- determines number of elements/data-point
     """
     data = arrays.GLfloatArray.asArray( data )

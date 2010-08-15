@@ -55,5 +55,6 @@ if __name__ == "__main__":
         },
         data_files = datafiles,
         cmdclass = {'install_data':smart_install_data},
+        use_2to3 = True,
         **metadata.metadata
     )

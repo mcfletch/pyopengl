@@ -1,6 +1,6 @@
 """Load font "constants" (actually void *s) from the GLUT DLL"""
 from OpenGL import platform
-import logging 
+import logging
 log = logging.getLogger( 'OpenGL.GLUT.fonts' )
 
 for name in [
@@ -24,6 +24,12 @@ for name in [
         globals()[name] = None
     else:
         globals()[name] = p
-        del p
+        try:
+            del p
+        except NameError, err:
+            pass
 
-del platform, name
+try:
+    del platform, name
+except NameError, err:
+    pass
