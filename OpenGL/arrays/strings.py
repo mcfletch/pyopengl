@@ -1,15 +1,18 @@
 """String-array-handling code for PyOpenGL
 """
-#from OpenGL.arrays._strings import dataPointer as old
 from OpenGL import constants
 from OpenGL.arrays import formathandler
 import ctypes
 
-psas = ctypes.pythonapi.PyString_AsString
-# it's a c_char_p, but if we use that then the code will 
+try:
+    psas = ctypes.pythonapi.PyString_AsString
+    BYTES_TYPE = str
+except AttributeError, err:
+    psas = ctypes.pythonapi.PyBytes_AsString
+    BYTES_TYPE = bytes
+# it's a c_char_p, but if we use that then the code will
 # attempt to use null-terminated versus arbitrarily sized
 psas.restype = ctypes.c_size_t
-#psas.restype = ctypes.c_char_p
 
 def dataPointer( value, typeCode=None ):
     new = psas( ctypes.py_object(value) )
@@ -17,7 +20,7 @@ def dataPointer( value, typeCode=None ):
 
 class StringHandler( formathandler.FormatHandler ):
     """String-specific data-type handler for OpenGL"""
-    HANDLED_TYPES = (str, )
+    HANDLED_TYPES = (BYTES_TYPE, )
     @classmethod
     def from_param( cls, value, typeCode=None ):
         return ctypes.c_void_p( dataPointer( value ) )
@@ -47,7 +50,7 @@ class StringHandler( formathandler.FormatHandler ):
             return value.tostring()
         elif hasattr( value, 'raw' ):
             return value.raw
-        # could convert types to string here, but we're not registered for 
+        # could convert types to string here, but we're not registered for
         # anything save string types...
         raise TypeError( """String handler got non-string object: %r"""%(type(value)))
     def dimensions( self, value, typeCode=None ):

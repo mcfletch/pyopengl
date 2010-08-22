@@ -191,6 +191,8 @@ FormatHandler( 'none', 'OpenGL.arrays.nones.NoneHandler' )
 import sys
 if sys.version_info[0] < 3:
     FormatHandler( 'str', 'OpenGL.arrays.strings.StringHandler' )
+else:
+    FormatHandler( 'bytes', 'OpenGL.arrays.strings.StringHandler' )
 FormatHandler( 'list', 'OpenGL.arrays.lists.ListHandler', ['__builtin__.list','__builtin__.tuple'] )
 FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler' )
 FormatHandler(
