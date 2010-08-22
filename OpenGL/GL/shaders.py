@@ -2,13 +2,13 @@
 
 The point of this module is to allow client code to use
 OpenGL 2.x style names to reference shader-related operations
-even if the local hardware only supports ARB extension-based 
+even if the local hardware only supports ARB extension-based
 shader rendering.
 
 There are also two utility methods compileProgram and compileShader
 which make it easy to create demos which are shader-using.
 """
-import logging 
+import logging
 logging.basicConfig()
 log = logging.getLogger( 'OpenGL.GL.shaders' )
 from OpenGL import GL
@@ -33,7 +33,7 @@ def _alt( base, name ):
     if hasattr( GL, base ):
         root = getattr( GL, base )
         if hasattr(root,'__call__'):
-            globals()[base] = alternate( 
+            globals()[base] = alternate(
                 getattr(GL,base),
                 getattr(module,name)
             )
@@ -41,7 +41,7 @@ def _alt( base, name ):
         else:
             globals()[base] = root
             __all__.append( base )
-        return True 
+        return True
     return False
 _excludes = ['glGetProgramiv']
 for module in shader_objects,fragment_shader,vertex_shader,vertex_program:
@@ -49,12 +49,12 @@ for module in shader_objects,fragment_shader,vertex_shader,vertex_program:
         found = None
         for suffix in ('ObjectARB','_ARB','ARB'):
             if name.endswith( suffix ):
-                found = False 
+                found = False
                 base = name[:-(len(suffix))]
                 if base not in _excludes:
                     if _alt( base, name ):
                         found = True
-                        break 
+                        break
         if found is False:
             log.debug( '''Found no alternate for: %s.%s''',
                 module.__name__,name,
@@ -87,28 +87,28 @@ class ShaderProgram( int ):
 
 def compileProgram(*shaders):
     """Create a new program, attach shaders and validate
-    
-    shaders -- arbitrary number of shaders to attach to the 
+
+    shaders -- arbitrary number of shaders to attach to the
         generated program.
-    
+
     This convenience function is *not* standard OpenGL,
-    but it does wind up being fairly useful for demos 
-    and the like.  You may wish to copy it to your code 
+    but it does wind up being fairly useful for demos
+    and the like.  You may wish to copy it to your code
     base to guard against PyOpenGL changes.
-    
+
     Usage:
-    
-        shader = compileProgram( 
+
+        shader = compileProgram(
             compileShader( source, GL_VERTEX_SHADER ),
             compileShader( source2, GL_FRAGMENT_SHADER ),
         )
         glUseProgram( shader )
-    
+
     Note:
-        If (and only if) validation of the linked program 
-        *passes* then the passed-in shader objects will be 
+        If (and only if) validation of the linked program
+        *passes* then the passed-in shader objects will be
         deleted from the GL.
-    
+
     returns GLuint shader program reference
     raises RuntimeError when a link/validation failure occurs
     """
@@ -135,23 +135,28 @@ def compileProgram(*shaders):
     for shader in shaders:
         glDeleteShader(shader)
     return ShaderProgram( program )
+def as_bytes( s ):
+    if isinstance( s, unicode ):
+        s = s.encode( ) # TODO: can we use latin-1 or utf-8?
+    return s
 def compileShader( source, shaderType ):
     """Compile shader source of given type
-    
+
     source -- GLSL source-code for the shader
     shaderType -- GLenum GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc,
-    
+
     returns GLuint compiled shader reference
     raises RuntimeError when a compilation failure occurs
     """
     if isinstance( source, (str,unicode)):
         source = [ source ]
+    source = [ as_bytes(s) for s in source ]
     shader = glCreateShader(shaderType)
     glShaderSource( shader, source )
     glCompileShader( shader )
     result = glGetShaderiv( shader, GL_COMPILE_STATUS )
     if not(result):
-        # TODO: this will be wrong if the user has 
+        # TODO: this will be wrong if the user has
         # disabled traditional unpacking array support.
         raise RuntimeError(
             """Shader compile failure (%s): %s"""%(
