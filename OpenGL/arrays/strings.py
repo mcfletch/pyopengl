@@ -4,19 +4,9 @@ from OpenGL import constants
 from OpenGL.arrays import formathandler
 import ctypes
 
-try:
-    psas = ctypes.pythonapi.PyString_AsString
-    BYTES_TYPE = str
-except AttributeError, err:
-    psas = ctypes.pythonapi.PyBytes_AsString
-    BYTES_TYPE = bytes
-# it's a c_char_p, but if we use that then the code will
-# attempt to use null-terminated versus arbitrarily sized
-psas.restype = ctypes.c_size_t
-
 def dataPointer( value, typeCode=None ):
-    new = psas( ctypes.py_object(value) )
-    return new
+    return ctypes.cast(ctypes.create_string_buffer(value),
+                           ctypes.c_void_p).value
 
 class StringHandler( formathandler.FormatHandler ):
     """String-specific data-type handler for OpenGL"""

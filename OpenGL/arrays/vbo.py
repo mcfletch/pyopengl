@@ -17,7 +17,7 @@ class Implementation( object ):
     available = False
     def _arbname( self, name ):
         return (
-            (name.startswith( 'gl' ) and name.endswith( 'ARB' )) or 
+            (name.startswith( 'gl' ) and name.endswith( 'ARB' )) or
             (name.startswith( 'GL_' ) and name.endswith( 'ARB' ))
         ) and (name != 'glInitVertexBufferObjectARB')
     def basename( self, name ):
@@ -51,7 +51,7 @@ class Implementation( object ):
                     break
                 else:
                     try:
-                        # Note that to avoid ERROR_ON_COPY issues 
+                        # Note that to avoid ERROR_ON_COPY issues
                         # we have to pass an array-compatible type here...
                         buf = gluint( buffer )
                         self.glDeleteBuffers(1, buf)
@@ -87,20 +87,20 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
 if VBO is None:
     class VBO( object ):
         """Instances can be passed into array-handling routines
-        
+
         You can check for whether VBOs are supported by accessing the implementation
-        attribute of the VBO, which will raise a RuntimeError if there is no available 
+        attribute of the VBO, which will raise a RuntimeError if there is no available
         implementation.
         """
         copied = False
         _no_cache_ = True # do not cache in context data arrays
-        def __init__( 
-            self, data, usage='GL_DYNAMIC_DRAW', 
+        def __init__(
+            self, data, usage='GL_DYNAMIC_DRAW',
             target='GL_ARRAY_BUFFER', size=None,
         ):
-            self.usage = usage 
+            self.usage = usage
             self.set_array( data, size )
-            self.target = target 
+            self.target = target
             self.buffers = []
             self._copy_segments = []
         _I_ = None
@@ -112,7 +112,7 @@ if VBO is None:
             return value
         def set_array( self, data, size=None ):
             """Update our entire array with new data"""
-            self.data = data 
+            self.data = data
             self.copied = False
             if size is not None:
                 self.size = size
@@ -120,24 +120,24 @@ if VBO is None:
                 self.size = ArrayDatatype.arrayByteCount( self.data )
         def __setitem__( self, slice, array):
             """Set slice of data on the array and vbo (if copied already)
-            
-            slice -- the Python slice object determining how the data should 
-                be copied into the vbo/array 
-            array -- something array-compatible that will be used as the 
-                source of the data, note that the data-format will have to 
-                be the same as the internal data-array to work properly, if 
+
+            slice -- the Python slice object determining how the data should
+                be copied into the vbo/array
+            array -- something array-compatible that will be used as the
+                source of the data, note that the data-format will have to
+                be the same as the internal data-array to work properly, if
                 not, the amount of data copied will be wrong.
-            
+
             This is a reasonably complex operation, it has to have all sorts
             of state-aware changes to correctly map the source into the low-level
-            OpenGL view of the buffer (which is just bytes as far as the GL 
+            OpenGL view of the buffer (which is just bytes as far as the GL
             is concerned).
             """
             if slice.step and not slice.step == 1:
                 raise NotImplemented( """Don't know how to map stepped arrays yet""" )
             # TODO: handle e.g. mapping character data into an integer data-set
             data = ArrayDatatype.asArray( array )
-            start = (slice.start or 0) 
+            start = (slice.start or 0)
             stop = (slice.stop or len(self.data))
             if start < 0:
                 start += len(self.data)
@@ -153,12 +153,12 @@ if VBO is None:
                     # re-copy the whole data-set
                     self.copied = False
                 elif len(data):
-                    # now the fun part, we need to make the array match the 
-                    # structure of the array we're going to copy into and make 
+                    # now the fun part, we need to make the array match the
+                    # structure of the array we're going to copy into and make
                     # the "size" parameter match the value we're going to copy in,
-                    # note that a 2D array (rather than a 1D array) may require 
+                    # note that a 2D array (rather than a 1D array) may require
                     # multiple mappings to copy into the memory area...
-                    
+
                     # find the step size from the dimensions and base size...
                     size = ArrayDatatype.arrayByteCount( data ) / len(array)
                     #baseSize = ArrayDatatype.unitSize( data )
@@ -197,7 +197,7 @@ if VBO is None:
                 if self.data is not None and self.size is None:
                     self.size = ArrayDatatype.arrayByteCount( self.data )
                 self.implementation.glBufferData(
-                    self.target, 
+                    self.target,
                     self.size,
                     self.data,
                     self.usage,
@@ -220,14 +220,14 @@ if VBO is None:
         def unbind( self ):
             """Unbind the buffer (make normal array operations active)"""
             self.implementation.glBindBuffer( self.target,0 )
-        
+
         def __add__( self, other ):
             """Add an integer to this VBO (offset)"""
             if hasattr( other, 'offset' ):
-                other = other.offset 
+                other = other.offset
             assert isinstance( other, (int,long) ), """Only know how to add integer/long offsets"""
             return VBOOffset( self, other )
-        
+
         __enter__ = bind
         def __exit__( self, exc_type=None, exc_val=None, exc_tb=None ):
             """Context manager exit"""
@@ -236,15 +236,15 @@ if VBO is None:
 
     class VBOOffset( object ):
         def __init__( self, vbo, offset ):
-            self.vbo = vbo 
-            self.offset = offset 
+            self.vbo = vbo
+            self.offset = offset
         def __getattr__( self, key ):
             if key != 'vbo':
                 return getattr( self.vbo, key )
             raise AttributeError( 'No %r key in VBOOffset'%(key,))
         def __add__( self, other ):
             if hasattr( other, 'offset' ):
-                other = other.offset 
+                other = other.offset
             return VBOOffset( self.vbo, self.offset + other )
 
 
@@ -253,7 +253,7 @@ if VBO is None:
         vp0 = ctypes.c_void_p( 0 )
         def dataPointer( self, instance ):
             """Retrieve data-pointer from the instance's data
-            
+
             Is always NULL, to indicate use of the bound pointer
             """
             return 0
@@ -262,7 +262,7 @@ if VBO is None:
         def zeros( self, dims, typeCode ):
             """Not implemented"""
             raise NotImplemented( """Don't have VBO output support yet""" )
-        ones = zeros 
+        ones = zeros
         def asArray( self, value, typeCode=None ):
             """Given a value, convert to array representation"""
             return value
@@ -284,7 +284,7 @@ if VBO is None:
     class VBOOffsetHandler( VBOHandler ):
         def dataPointer( self, instance ):
             """Retrieve data-pointer from the instance's data
-            
+
             Is always NULL, to indicate use of the bound pointer
             """
             return instance.offset
@@ -300,8 +300,9 @@ VBO_HANDLER.register( [ VBO ] )
 VBOOFFSET_HANDLER = VBOOffsetHandler()
 VBOOFFSET_HANDLER.register( [ VBOOffset ] )
 
-PyBuffer_FromMemory = ctypes.pythonapi.PyBuffer_FromMemory
-PyBuffer_FromMemory.restype = ctypes.py_object
+def PyBuffer_FromMemory(address, length):
+    return buffer((ctypes.c_char * length).from_address(address))
+
 _cleaners = {}
 def _cleaner( vbo ):
     def clean( ref ):
@@ -315,17 +316,17 @@ def _cleaner( vbo ):
 
 def mapVBO( vbo, access=GL.GL_READ_WRITE ):
     """Map the given buffer into a numpy array...
-    
+
     Method taken from:
      http://www.mail-archive.com/numpy-discussion@lists.sourceforge.net/msg01161.html
-     
+
     This should be considered an *experimental* API,
-    it is not guaranteed to be available in future revisions 
+    it is not guaranteed to be available in future revisions
     of this library!
     """
     vp = glMapBuffer( vbo.target, access )
-    buffer = PyBuffer_FromMemory( 
-        ctypes.c_void_p(vp), vbo.size 
+    buffer = PyBuffer_FromMemory(
+        ctypes.c_void_p(vp), vbo.size
     )
     array = frombuffer( buffer, 'B' )
     _cleaners[vbo] = weakref.ref( array, _cleaner( vbo ))
