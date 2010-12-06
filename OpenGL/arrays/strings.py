@@ -4,6 +4,11 @@ from OpenGL import constants
 from OpenGL.arrays import formathandler
 import ctypes
 
+try:
+    BYTES_TYPE = bytes
+except NameError, err:
+    BYTES_TYPE = str
+
 def dataPointer( value, typeCode=None ):
     return ctypes.cast(ctypes.create_string_buffer(value),
                            ctypes.c_void_p).value

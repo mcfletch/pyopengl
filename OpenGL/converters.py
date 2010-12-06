@@ -290,5 +290,8 @@ class StringLengths( CConverter ):
         from OpenGL import arrays
         result = (ctypes.c_char_p * len(strings))()
         for i,s in enumerate(strings):
-            result[i] = arrays.GLcharARBArray.dataPointer(s)
+            result[i] = ctypes.cast(
+                arrays.GLcharARBArray.dataPointer(s),
+                ctypes.c_char_p,
+            )
         return result
