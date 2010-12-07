@@ -35,6 +35,7 @@ if sys.platform == 'win32':
             DLL_DIRECTORY, [
                 os.path.join( DLL_DIRECTORY,file)
                 for file in os.listdir( DLL_DIRECTORY )
+                if os.path.isfile( file )
             ]
         ),
     ]
