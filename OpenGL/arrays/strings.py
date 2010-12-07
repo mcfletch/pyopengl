@@ -10,7 +10,7 @@ except NameError, err:
     BYTES_TYPE = str
 
 def dataPointer( value, typeCode=None ):
-    return ctypes.cast(ctypes.create_string_buffer(value),
+    return ctypes.cast(ctypes.c_char_p(value),
                            ctypes.c_void_p).value
 
 class StringHandler( formathandler.FormatHandler ):
