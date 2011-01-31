@@ -128,6 +128,8 @@ class Function( Helper ):
             new = self.cTypeToPyType( base[:-1] )
             if new == 'constants.GLvoid':
                 return 'ctypes.c_void_p'
+            elif new == 'ctypes.c_void_p':
+                return 'arrays.GLvoidpArray'
             elif self.CTYPE_TO_ARRAY_TYPE.has_key( new ):
                 return 'arrays.%s'%(self.CTYPE_TO_ARRAY_TYPE[new])
             elif new in ( 'arrays.GLcharArray','arrays.GLcharARBArray'):

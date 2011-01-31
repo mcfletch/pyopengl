@@ -139,12 +139,12 @@ argNames=('sampler','pname','params',),
 deprecated=_DEPRECATED,
 )
 
-glGetSamplerParameterIfv = platform.createExtensionFunction( 
-'glGetSamplerParameterIfv',dll=platform.GL,
+glGetSamplerParameterIuiv = platform.createExtensionFunction( 
+'glGetSamplerParameterIuiv',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,arrays.GLfloatArray,),
-doc='glGetSamplerParameterIfv(GLuint(sampler), GLenum(pname), GLfloatArray(params)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLuintArray,),
+doc='glGetSamplerParameterIuiv(GLuint(sampler), GLenum(pname), GLuintArray(params)) -> None',
 argNames=('sampler','pname','params',),
 deprecated=_DEPRECATED,
 )

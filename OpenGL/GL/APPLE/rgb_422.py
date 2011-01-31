@@ -14,7 +14,7 @@ Overview (from the spec)
 	There is a previous extension, namely GL_APPLE_ycbcr_422 that provided
 	transparent support for this kind of data.   However, that extension
 	left the exact conversion from Y'CbCr to RGB undefined.  In reality,
-	it really had always been based on the ITU-R BT.601 standard, which
+	it really had always been based on the ITU-R BT.601 standard, which 
 	meant it was not particularly useful for dealing with high definition
 	video data, which is encoded using the Rec. 709 standard.
 	
@@ -22,18 +22,18 @@ Overview (from the spec)
 	hardware, but on more modern graphics processors this is done via
 	a combination of 422 sampling formats and fragment shader instructions.
 	
-	This extension essentially exposes a "raw" 422 texture format that
+	This extension essentially exposes a "raw" 422 texture format that 
 	allows developers to access the raw pre-converted Y'CbCr components
 	so that they have full control over the colorspace conversion.
 	
 	In order to avoid defining entirely new color channels within GL,
 	the Y, Cb and Cr color channels within the 422 data are mapped into
 	the existing green, blue and red color channels, respectively.  Developers
-	must essentially write their own fragment shader to perform the desired
+	must write their own fragment shader/program to perform the desired
 	color space transformation.
 	
 	Note: Because of the use of the packed UNSIGNED_SHORT_8_8[_REV] types, the
-	correct type to use based on the layout of the data in memory (Cb Y Cr Y
+	correct type to use based on the layout of the data in memory (Cb Y Cr Y 
 	versus Y Cb Y Cr) will necessarily be sensitive to host endianness.
 	
 	This extension differs from the EXT_422_pixels extension in a couple of
@@ -42,7 +42,7 @@ Overview (from the spec)
 	component orderings.  Second, this extension provides no defined method
 	of filtering the chroma values between adjacent pixels.   And lastly,
 	the color channel assignments are slightly different, essentially to
-	match more closely the rough meanings of the Y, Cb and Cr values in
+	match more closely the rough meanings of the Y, Cb and Cr values in 
 	422 video data.
 
 The official definition of this extension is available here:

@@ -25,18 +25,18 @@ from OpenGL.GL.pointers import glDrawElements
 #	'count', arrays.ArrayDatatype.voidDataPointer ,
 #)
 
-@lazy( glMultiDrawElements )
-def glMultiDrawElements(baseOperation, primtype, counts, typ, indices, primcount=None):
-    """Currently glMultiDrawElements is not working in the wrapper 
-    
-    We are replacing the code with a sequence of glDrawElements calls
-    as per the spec for the function.  Basically we'd spend more effort
-    making an array of array pointers than we would creating a simple
-    iteration in Python.
-    """
-    if primcount is not None:
-        for i in xrange( primcount ):
-            glDrawElements( primtype, counts[i], typ, indices[i] )
-    else:
-        for c,i in zip( counts, indices ):
-            glDrawElements( primtype, c, typ, i )
+#@lazy( glMultiDrawElements )
+#def glMultiDrawElements(baseOperation, primtype, counts, typ, indices, primcount=None):
+#    """Currently glMultiDrawElements is not working in the wrapper 
+#    
+#    We are replacing the code with a sequence of glDrawElements calls
+#    as per the spec for the function.  Basically we'd spend more effort
+#    making an array of array pointers than we would creating a simple
+#    iteration in Python.
+#    """
+#    if primcount is not None:
+#        for i in xrange( primcount ):
+#            glDrawElements( primtype, counts[i], typ, indices[i] )
+#    else:
+#        for c,i in zip( counts, indices ):
+#            glDrawElements( primtype, c, typ, i )

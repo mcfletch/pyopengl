@@ -1,28 +1,28 @@
 '''OpenGL extension ARB.texture_compression
 
-This module customises the behaviour of the
-OpenGL.raw.GL.ARB.texture_compression to provide a more
+This module customises the behaviour of the 
+OpenGL.raw.GL.ARB.texture_compression to provide a more 
 Python-friendly API
 
 Overview (from the spec)
-
+	
 	Compressing texture images can reduce texture memory utilization and
 	improve performance when rendering textured primitives.  This extension
 	allows OpenGL applications to use compressed texture images by providing:
-
+	
 	    (1) A framework upon which extensions providing specific compressed
 	        image formats can be built.
-
+	
 	    (2) A set of generic compressed internal formats that allow
 	        applications to specify that texture images should be stored in
 	        compressed form without needing to code for specific compression
 	        formats.
-
+	
 	An application can define compressed texture images by providing a texture
 	image stored in a specific compressed image format.  This extension does
 	not define any specific compressed image formats, but it does provide the
 	mechanisms necessary to enable other extensions that do.
-
+	
 	An application can also define compressed texture images by providing an
 	uncompressed texture image but specifying a compressed internal format.
 	In this case, the GL will automatically compress the texture image using
@@ -37,7 +37,7 @@ Overview (from the spec)
 	range of platforms with differing compression algorithms and also allow
 	future GL implementations to substitute improved compression methods
 	transparently.
-
+	
 	Compressed texture images can be obtained from the GL in uncompressed form
 	by calling GetTexImage and in compressed form by calling
 	GetCompressedTexImageARB.  Queried compressed images can be saved and
@@ -45,19 +45,19 @@ Overview (from the spec)
 	texture images do not need to be processed by the GL and should
 	significantly improve texture loading performance relative to uncompressed
 	images.
-
+	
 	This extension does not define specific compressed image formats (e.g.,
 	S3TC, FXT1), nor does it provide means to encode or decode such images.
 	To support images in a specific compressed format, a hardware vendor
 	would:
-
+	
 	  (1) Provide a new extension defininig specific compressed
 	      <internalformat> and <format> tokens for TexImage[123]D,
 	      TexSubImage[123]D, CopyTexImage[12]D, CompressedTexImage[123]DARB,
 	      CompressedTexSubImage[123]DARB, and GetCompressedTexImageARB calls.
-
+	
 	  (2) Specify the encoding of compressed images of that specific format.
-
+	
 	  (3) Specify a method for deriving the size of compressed images of that
 	      specific format, using the <internalformat>, <width>, <height>,
 	      <depth> parameters, and (if necessary) the compressed image itself.

@@ -59,8 +59,8 @@ glGetPerfMonitorCounterInfoAMD = platform.createExtensionFunction(
 'glGetPerfMonitorCounterInfoAMD',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLuint,constants.GLenum,ctypes.POINTER(constants.void),),
-doc='glGetPerfMonitorCounterInfoAMD(GLuint(group), GLuint(counter), GLenum(pname), POINTER(constants.void)(data)) -> None',
+argTypes=(constants.GLuint,constants.GLuint,constants.GLenum,ctypes.c_void_p,),
+doc='glGetPerfMonitorCounterInfoAMD(GLuint(group), GLuint(counter), GLenum(pname), c_void_p(data)) -> None',
 argNames=('group','counter','pname','data',),
 deprecated=_DEPRECATED,
 )

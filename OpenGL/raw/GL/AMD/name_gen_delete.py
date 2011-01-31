@@ -13,6 +13,35 @@ GL_PERFORMANCE_MONITOR_AMD = constant.Constant( 'GL_PERFORMANCE_MONITOR_AMD', 0x
 GL_QUERY_OBJECT_AMD = constant.Constant( 'GL_QUERY_OBJECT_AMD', 0x9153 )
 GL_VERTEX_ARRAY_OBJECT_AMD = constant.Constant( 'GL_VERTEX_ARRAY_OBJECT_AMD', 0x9154 )
 GL_SAMPLER_OBJECT_AMD = constant.Constant( 'GL_SAMPLER_OBJECT_AMD', 0x9155 )
+glGenNamesAMD = platform.createExtensionFunction( 
+'glGenNamesAMD',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLenum,constants.GLuint,arrays.GLuintArray,),
+doc='glGenNamesAMD(GLenum(identifier), GLuint(num), GLuintArray(names)) -> None',
+argNames=('identifier','num','names',),
+deprecated=_DEPRECATED,
+)
+
+glDeleteNamesAMD = platform.createExtensionFunction( 
+'glDeleteNamesAMD',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLenum,constants.GLuint,arrays.GLuintArray,),
+doc='glDeleteNamesAMD(GLenum(identifier), GLuint(num), GLuintArray(names)) -> None',
+argNames=('identifier','num','names',),
+deprecated=_DEPRECATED,
+)
+
+glIsNameAMD = platform.createExtensionFunction( 
+'glIsNameAMD',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=constants.GLboolean, 
+argTypes=(constants.GLenum,constants.GLuint,),
+doc='glIsNameAMD(GLenum(identifier), GLuint(name)) -> constants.GLboolean',
+argNames=('identifier','name',),
+deprecated=_DEPRECATED,
+)
 
 
 def glInitNameGenDeleteAMD():

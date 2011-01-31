@@ -484,8 +484,8 @@ glGetVariantPointervEXT = platform.createExtensionFunction(
 'glGetVariantPointervEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glGetVariantPointervEXT(GLuint(id), GLenum(value), POINTER(ctypes.c_void_p)(data)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLvoidpArray,),
+doc='glGetVariantPointervEXT(GLuint(id), GLenum(value), GLvoidpArray(data)) -> None',
 argNames=('id','value','data',),
 deprecated=_DEPRECATED,
 )

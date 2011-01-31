@@ -210,6 +210,7 @@ ARRAY_TO_GL_TYPE_MAPPING = {
     lookupDtype('c'): constants.GL_UNSIGNED_BYTE,
     lookupDtype('b'): constants.GL_BYTE,
     lookupDtype('I'): constants.GL_UNSIGNED_INT,
+    #lookupDtype('P'), constants.GL_VOID_P, # normally duplicates another type (e.g. 'I')
     None: None,
 }
 GL_TYPE_TO_ARRAY_MAPPING = {
@@ -221,5 +222,6 @@ GL_TYPE_TO_ARRAY_MAPPING = {
     constants.GL_UNSIGNED_INT: lookupDtype('I'),
     constants.GL_UNSIGNED_BYTE: lookupDtype('B'),
     constants.GL_UNSIGNED_SHORT: lookupDtype(USHORT_TYPE),
+    constants.GL_VOID_P: lookupDtype('P'),
     None: None,
 }

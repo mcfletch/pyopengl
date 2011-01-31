@@ -12,6 +12,105 @@ GL_SURFACE_STATE_NV = constant.Constant( 'GL_SURFACE_STATE_NV', 0x86EB )
 GL_SURFACE_REGISTERED_NV = constant.Constant( 'GL_SURFACE_REGISTERED_NV', 0x86FD )
 GL_SURFACE_MAPPED_NV = constant.Constant( 'GL_SURFACE_MAPPED_NV', 0x8700 )
 GL_WRITE_DISCARD_NV = constant.Constant( 'GL_WRITE_DISCARD_NV', 0x88BE )
+glVDPAUInitNV = platform.createExtensionFunction( 
+'glVDPAUInitNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(ctypes.c_void_p,ctypes.c_void_p,),
+doc='glVDPAUInitNV(c_void_p(vdpDevice), c_void_p(getProcAddress)) -> None',
+argNames=('vdpDevice','getProcAddress',),
+deprecated=_DEPRECATED,
+)
+
+glVDPAUFiniNV = platform.createExtensionFunction( 
+'glVDPAUFiniNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(),
+doc='glVDPAUFiniNV() -> None',
+argNames=(),
+deprecated=_DEPRECATED,
+)
+
+glVDPAURegisterVideoSurfaceNV = platform.createExtensionFunction( 
+'glVDPAURegisterVideoSurfaceNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=constants.GLvdpauSurfaceNV, 
+argTypes=(ctypes.c_void_p,constants.GLenum,constants.GLsizei,arrays.GLuintArray,),
+doc='glVDPAURegisterVideoSurfaceNV(c_void_p(vdpSurface), GLenum(target), GLsizei(numTextureNames), GLuintArray(textureNames)) -> constants.GLvdpauSurfaceNV',
+argNames=('vdpSurface','target','numTextureNames','textureNames',),
+deprecated=_DEPRECATED,
+)
+
+glVDPAURegisterOutputSurfaceNV = platform.createExtensionFunction( 
+'glVDPAURegisterOutputSurfaceNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=constants.GLvdpauSurfaceNV, 
+argTypes=(ctypes.c_void_p,constants.GLenum,constants.GLsizei,arrays.GLuintArray,),
+doc='glVDPAURegisterOutputSurfaceNV(c_void_p(vdpSurface), GLenum(target), GLsizei(numTextureNames), GLuintArray(textureNames)) -> constants.GLvdpauSurfaceNV',
+argNames=('vdpSurface','target','numTextureNames','textureNames',),
+deprecated=_DEPRECATED,
+)
+
+glVDPAUIsSurfaceNV = platform.createExtensionFunction( 
+'glVDPAUIsSurfaceNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLvdpauSurfaceNV,),
+doc='glVDPAUIsSurfaceNV(GLvdpauSurfaceNV(surface)) -> None',
+argNames=('surface',),
+deprecated=_DEPRECATED,
+)
+
+glVDPAUUnregisterSurfaceNV = platform.createExtensionFunction( 
+'glVDPAUUnregisterSurfaceNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLvdpauSurfaceNV,),
+doc='glVDPAUUnregisterSurfaceNV(GLvdpauSurfaceNV(surface)) -> None',
+argNames=('surface',),
+deprecated=_DEPRECATED,
+)
+
+glVDPAUGetSurfaceivNV = platform.createExtensionFunction( 
+'glVDPAUGetSurfaceivNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLvdpauSurfaceNV,constants.GLenum,constants.GLsizei,arrays.GLsizeiArray,arrays.GLintArray,),
+doc='glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV(surface), GLenum(pname), GLsizei(bufSize), GLsizeiArray(length), GLintArray(values)) -> None',
+argNames=('surface','pname','bufSize','length','values',),
+deprecated=_DEPRECATED,
+)
+
+glVDPAUSurfaceAccessNV = platform.createExtensionFunction( 
+'glVDPAUSurfaceAccessNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLvdpauSurfaceNV,constants.GLenum,),
+doc='glVDPAUSurfaceAccessNV(GLvdpauSurfaceNV(surface), GLenum(access)) -> None',
+argNames=('surface','access',),
+deprecated=_DEPRECATED,
+)
+
+glVDPAUMapSurfacesNV = platform.createExtensionFunction( 
+'glVDPAUMapSurfacesNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLsizei,ctypes.POINTER(constants.GLvdpauSurfaceNV),),
+doc='glVDPAUMapSurfacesNV(GLsizei(numSurfaces), POINTER(constants.GLvdpauSurfaceNV)(surfaces)) -> None',
+argNames=('numSurfaces','surfaces',),
+deprecated=_DEPRECATED,
+)
+
+glVDPAUUnmapSurfacesNV = platform.createExtensionFunction( 
+'glVDPAUUnmapSurfacesNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLsizei,ctypes.POINTER(constants.GLvdpauSurfaceNV),),
+doc='glVDPAUUnmapSurfacesNV(GLsizei(numSurface), POINTER(constants.GLvdpauSurfaceNV)(surfaces)) -> None',
+argNames=('numSurface','surfaces',),
+deprecated=_DEPRECATED,
+)
 
 
 def glInitVdpauInteropNV():

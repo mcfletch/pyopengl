@@ -123,8 +123,8 @@ glStencilFuncSeparate = platform.createExtensionFunction(
 extension=EXTENSION_NAME,
 resultType=None, 
 argTypes=(constants.GLenum,constants.GLenum,constants.GLint,constants.GLuint,),
-doc='glStencilFuncSeparate(GLenum(frontfunc), GLenum(backfunc), GLint(ref), GLuint(mask)) -> None',
-argNames=('frontfunc','backfunc','ref','mask',),
+doc='glStencilFuncSeparate(GLenum(face), GLenum(func), GLint(ref), GLuint(mask)) -> None',
+argNames=('face','func','ref','mask',),
 deprecated=_DEPRECATED,
 )
 
@@ -392,8 +392,8 @@ glGetVertexAttribPointerv = platform.createExtensionFunction(
 'glGetVertexAttribPointerv',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glGetVertexAttribPointerv(GLuint(index), GLenum(pname), POINTER(ctypes.c_void_p)(pointer)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLvoidpArray,),
+doc='glGetVertexAttribPointerv(GLuint(index), GLenum(pname), GLvoidpArray(pointer)) -> None',
 argNames=('index','pname','pointer',),
 deprecated=_DEPRECATED,
 )

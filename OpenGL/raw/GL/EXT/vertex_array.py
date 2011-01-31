@@ -109,8 +109,8 @@ glGetPointervEXT = platform.createExtensionFunction(
 'glGetPointervEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glGetPointervEXT(GLenum(pname), POINTER(ctypes.c_void_p)(params)) -> None',
+argTypes=(constants.GLenum,arrays.GLvoidpArray,),
+doc='glGetPointervEXT(GLenum(pname), GLvoidpArray(params)) -> None',
 argNames=('pname','params',),
 deprecated=_DEPRECATED,
 )

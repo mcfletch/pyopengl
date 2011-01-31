@@ -18,8 +18,8 @@ glVertexPointervINTEL = platform.createExtensionFunction(
 'glVertexPointervINTEL',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLint,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glVertexPointervINTEL(GLint(size), GLenum(type), POINTER(ctypes.c_void_p)(pointer)) -> None',
+argTypes=(constants.GLint,constants.GLenum,arrays.GLvoidpArray,),
+doc='glVertexPointervINTEL(GLint(size), GLenum(type), GLvoidpArray(pointer)) -> None',
 argNames=('size','type','pointer',),
 deprecated=_DEPRECATED,
 )
@@ -28,8 +28,8 @@ glNormalPointervINTEL = platform.createExtensionFunction(
 'glNormalPointervINTEL',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glNormalPointervINTEL(GLenum(type), POINTER(ctypes.c_void_p)(pointer)) -> None',
+argTypes=(constants.GLenum,arrays.GLvoidpArray,),
+doc='glNormalPointervINTEL(GLenum(type), GLvoidpArray(pointer)) -> None',
 argNames=('type','pointer',),
 deprecated=_DEPRECATED,
 )
@@ -38,8 +38,8 @@ glColorPointervINTEL = platform.createExtensionFunction(
 'glColorPointervINTEL',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLint,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glColorPointervINTEL(GLint(size), GLenum(type), POINTER(ctypes.c_void_p)(pointer)) -> None',
+argTypes=(constants.GLint,constants.GLenum,arrays.GLvoidpArray,),
+doc='glColorPointervINTEL(GLint(size), GLenum(type), GLvoidpArray(pointer)) -> None',
 argNames=('size','type','pointer',),
 deprecated=_DEPRECATED,
 )
@@ -48,8 +48,8 @@ glTexCoordPointervINTEL = platform.createExtensionFunction(
 'glTexCoordPointervINTEL',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLint,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glTexCoordPointervINTEL(GLint(size), GLenum(type), POINTER(ctypes.c_void_p)(pointer)) -> None',
+argTypes=(constants.GLint,constants.GLenum,arrays.GLvoidpArray,),
+doc='glTexCoordPointervINTEL(GLint(size), GLenum(type), GLvoidpArray(pointer)) -> None',
 argNames=('size','type','pointer',),
 deprecated=_DEPRECATED,
 )

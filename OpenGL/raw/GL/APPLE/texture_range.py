@@ -26,8 +26,8 @@ glGetTexParameterPointervAPPLE = platform.createExtensionFunction(
 'glGetTexParameterPointervAPPLE',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glGetTexParameterPointervAPPLE(GLenum(target), GLenum(pname), POINTER(ctypes.c_void_p)(params)) -> None',
+argTypes=(constants.GLenum,constants.GLenum,arrays.GLvoidpArray,),
+doc='glGetTexParameterPointervAPPLE(GLenum(target), GLenum(pname), GLvoidpArray(params)) -> None',
 argNames=('target','pname','params',),
 deprecated=_DEPRECATED,
 )

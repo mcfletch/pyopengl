@@ -38,6 +38,9 @@ GL_FOG_COORD_ARRAY_LENGTH_NV = constant.Constant( 'GL_FOG_COORD_ARRAY_LENGTH_NV'
 glget.addGLGetConstant( GL_FOG_COORD_ARRAY_LENGTH_NV, (1,) )
 GL_ELEMENT_ARRAY_LENGTH_NV = constant.Constant( 'GL_ELEMENT_ARRAY_LENGTH_NV', 0x8F33 )
 glget.addGLGetConstant( GL_ELEMENT_ARRAY_LENGTH_NV, (1,) )
+GL_DRAW_INDIRECT_UNIFIED_NV = constant.Constant( 'GL_DRAW_INDIRECT_UNIFIED_NV', 0x8F40 )
+GL_DRAW_INDIRECT_ADDRESS_NV = constant.Constant( 'GL_DRAW_INDIRECT_ADDRESS_NV', 0x8F41 )
+GL_DRAW_INDIRECT_LENGTH_NV = constant.Constant( 'GL_DRAW_INDIRECT_LENGTH_NV', 0x8F42 )
 glBufferAddressRangeNV = platform.createExtensionFunction( 
 'glBufferAddressRangeNV',dll=platform.GL,
 extension=EXTENSION_NAME,

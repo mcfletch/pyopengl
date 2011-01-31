@@ -19,6 +19,7 @@ GL_FLOAT = Constant( 'GL_FLOAT', 0x1406 )
 GL_DOUBLE = Constant( 'GL_DOUBLE', 0x140a )
 GL_CHAR = str
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
+GL_VOID_P = object()
 
 ctypes_version = [int(i) for i in ctypes.__version__.split('.')[:3]]
 
@@ -103,7 +104,7 @@ GLhalfNV = GLhalfARB = ctypes.c_ushort
 # in the extensions header, basically just a "token" that can be 
 # passed to the various operations...
 GLsync = ctypes.c_void_p 
-
+GLvoidp = ctypes.c_void_p
 
 ARRAY_TYPE_TO_CONSTANT = [
     ('GLclampd', GL_DOUBLE),

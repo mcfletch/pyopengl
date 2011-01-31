@@ -20,6 +20,115 @@ GL_DOUBLE_MAT3x2_EXT = constant.Constant( 'GL_DOUBLE_MAT3x2_EXT', 0x8F4B )
 GL_DOUBLE_MAT3x4_EXT = constant.Constant( 'GL_DOUBLE_MAT3x4_EXT', 0x8F4C )
 GL_DOUBLE_MAT4x2_EXT = constant.Constant( 'GL_DOUBLE_MAT4x2_EXT', 0x8F4D )
 GL_DOUBLE_MAT4x3_EXT = constant.Constant( 'GL_DOUBLE_MAT4x3_EXT', 0x8F4E )
+glVertexAttribL1dEXT = platform.createExtensionFunction( 
+'glVertexAttribL1dEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLdouble,),
+doc='glVertexAttribL1dEXT(GLuint(index), GLdouble(x)) -> None',
+argNames=('index','x',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL2dEXT = platform.createExtensionFunction( 
+'glVertexAttribL2dEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLdouble,constants.GLdouble,),
+doc='glVertexAttribL2dEXT(GLuint(index), GLdouble(x), GLdouble(y)) -> None',
+argNames=('index','x','y',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL3dEXT = platform.createExtensionFunction( 
+'glVertexAttribL3dEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLdouble,constants.GLdouble,constants.GLdouble,),
+doc='glVertexAttribL3dEXT(GLuint(index), GLdouble(x), GLdouble(y), GLdouble(z)) -> None',
+argNames=('index','x','y','z',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL4dEXT = platform.createExtensionFunction( 
+'glVertexAttribL4dEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLdouble,constants.GLdouble,constants.GLdouble,constants.GLdouble,),
+doc='glVertexAttribL4dEXT(GLuint(index), GLdouble(x), GLdouble(y), GLdouble(z), GLdouble(w)) -> None',
+argNames=('index','x','y','z','w',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL1dvEXT = platform.createExtensionFunction( 
+'glVertexAttribL1dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLdoubleArray,),
+doc='glVertexAttribL1dvEXT(GLuint(index), GLdoubleArray(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL2dvEXT = platform.createExtensionFunction( 
+'glVertexAttribL2dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLdoubleArray,),
+doc='glVertexAttribL2dvEXT(GLuint(index), GLdoubleArray(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL3dvEXT = platform.createExtensionFunction( 
+'glVertexAttribL3dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLdoubleArray,),
+doc='glVertexAttribL3dvEXT(GLuint(index), GLdoubleArray(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL4dvEXT = platform.createExtensionFunction( 
+'glVertexAttribL4dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLdoubleArray,),
+doc='glVertexAttribL4dvEXT(GLuint(index), GLdoubleArray(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribLPointerEXT = platform.createExtensionFunction( 
+'glVertexAttribLPointerEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLenum,constants.GLsizei,ctypes.c_void_p,),
+doc='glVertexAttribLPointerEXT(GLuint(index), GLint(size), GLenum(type), GLsizei(stride), c_void_p(pointer)) -> None',
+argNames=('index','size','type','stride','pointer',),
+deprecated=_DEPRECATED,
+)
+
+glGetVertexAttribLdvEXT = platform.createExtensionFunction( 
+'glGetVertexAttribLdvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLdoubleArray,),
+doc='glGetVertexAttribLdvEXT(GLuint(index), GLenum(pname), GLdoubleArray(params)) -> None',
+argNames=('index','pname','params',),
+deprecated=_DEPRECATED,
+)
+
+glVertexArrayVertexAttribLOffsetEXT = platform.createExtensionFunction( 
+'glVertexArrayVertexAttribLOffsetEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLuint,constants.GLuint,constants.GLint,constants.GLenum,constants.GLsizei,constants.GLintptr,),
+doc='glVertexArrayVertexAttribLOffsetEXT(GLuint(vaobj), GLuint(buffer), GLuint(index), GLint(size), GLenum(type), GLsizei(stride), GLintptr(offset)) -> None',
+argNames=('vaobj','buffer','index','size','type','stride','offset',),
+deprecated=_DEPRECATED,
+)
 
 
 def glInitVertexAttrib64BitEXT():

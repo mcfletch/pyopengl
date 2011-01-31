@@ -9,6 +9,195 @@ import ctypes
 EXTENSION_NAME = 'GL_NV_vertex_attrib_integer_64bit'
 _DEPRECATED = False
 
+glVertexAttribL1i64NV = platform.createExtensionFunction( 
+'glVertexAttribL1i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint64EXT,),
+doc='glVertexAttribL1i64NV(GLuint(index), GLint64EXT(x)) -> None',
+argNames=('index','x',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL2i64NV = platform.createExtensionFunction( 
+'glVertexAttribL2i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint64EXT,constants.GLint64EXT,),
+doc='glVertexAttribL2i64NV(GLuint(index), GLint64EXT(x), GLint64EXT(y)) -> None',
+argNames=('index','x','y',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL3i64NV = platform.createExtensionFunction( 
+'glVertexAttribL3i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint64EXT,constants.GLint64EXT,constants.GLint64EXT,),
+doc='glVertexAttribL3i64NV(GLuint(index), GLint64EXT(x), GLint64EXT(y), GLint64EXT(z)) -> None',
+argNames=('index','x','y','z',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL4i64NV = platform.createExtensionFunction( 
+'glVertexAttribL4i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint64EXT,constants.GLint64EXT,constants.GLint64EXT,constants.GLint64EXT,),
+doc='glVertexAttribL4i64NV(GLuint(index), GLint64EXT(x), GLint64EXT(y), GLint64EXT(z), GLint64EXT(w)) -> None',
+argNames=('index','x','y','z','w',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL1i64vNV = platform.createExtensionFunction( 
+'glVertexAttribL1i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLint64Array,),
+doc='glVertexAttribL1i64vNV(GLuint(index), GLint64Array(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL2i64vNV = platform.createExtensionFunction( 
+'glVertexAttribL2i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLint64Array,),
+doc='glVertexAttribL2i64vNV(GLuint(index), GLint64Array(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL3i64vNV = platform.createExtensionFunction( 
+'glVertexAttribL3i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLint64Array,),
+doc='glVertexAttribL3i64vNV(GLuint(index), GLint64Array(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL4i64vNV = platform.createExtensionFunction( 
+'glVertexAttribL4i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLint64Array,),
+doc='glVertexAttribL4i64vNV(GLuint(index), GLint64Array(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL1ui64NV = platform.createExtensionFunction( 
+'glVertexAttribL1ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLuint64EXT,),
+doc='glVertexAttribL1ui64NV(GLuint(index), GLuint64EXT(x)) -> None',
+argNames=('index','x',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL2ui64NV = platform.createExtensionFunction( 
+'glVertexAttribL2ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLuint64EXT,constants.GLuint64EXT,),
+doc='glVertexAttribL2ui64NV(GLuint(index), GLuint64EXT(x), GLuint64EXT(y)) -> None',
+argNames=('index','x','y',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL3ui64NV = platform.createExtensionFunction( 
+'glVertexAttribL3ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLuint64EXT,constants.GLuint64EXT,constants.GLuint64EXT,),
+doc='glVertexAttribL3ui64NV(GLuint(index), GLuint64EXT(x), GLuint64EXT(y), GLuint64EXT(z)) -> None',
+argNames=('index','x','y','z',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL4ui64NV = platform.createExtensionFunction( 
+'glVertexAttribL4ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLuint64EXT,constants.GLuint64EXT,constants.GLuint64EXT,constants.GLuint64EXT,),
+doc='glVertexAttribL4ui64NV(GLuint(index), GLuint64EXT(x), GLuint64EXT(y), GLuint64EXT(z), GLuint64EXT(w)) -> None',
+argNames=('index','x','y','z','w',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL1ui64vNV = platform.createExtensionFunction( 
+'glVertexAttribL1ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLuint64Array,),
+doc='glVertexAttribL1ui64vNV(GLuint(index), GLuint64Array(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL2ui64vNV = platform.createExtensionFunction( 
+'glVertexAttribL2ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLuint64Array,),
+doc='glVertexAttribL2ui64vNV(GLuint(index), GLuint64Array(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL3ui64vNV = platform.createExtensionFunction( 
+'glVertexAttribL3ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLuint64Array,),
+doc='glVertexAttribL3ui64vNV(GLuint(index), GLuint64Array(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribL4ui64vNV = platform.createExtensionFunction( 
+'glVertexAttribL4ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,arrays.GLuint64Array,),
+doc='glVertexAttribL4ui64vNV(GLuint(index), GLuint64Array(v)) -> None',
+argNames=('index','v',),
+deprecated=_DEPRECATED,
+)
+
+glGetVertexAttribLi64vNV = platform.createExtensionFunction( 
+'glGetVertexAttribLi64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLint64Array,),
+doc='glGetVertexAttribLi64vNV(GLuint(index), GLenum(pname), GLint64Array(params)) -> None',
+argNames=('index','pname','params',),
+deprecated=_DEPRECATED,
+)
+
+glGetVertexAttribLui64vNV = platform.createExtensionFunction( 
+'glGetVertexAttribLui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLuint64Array,),
+doc='glGetVertexAttribLui64vNV(GLuint(index), GLenum(pname), GLuint64Array(params)) -> None',
+argNames=('index','pname','params',),
+deprecated=_DEPRECATED,
+)
+
+glVertexAttribLFormatNV = platform.createExtensionFunction( 
+'glVertexAttribLFormatNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLenum,constants.GLsizei,),
+doc='glVertexAttribLFormatNV(GLuint(index), GLint(size), GLenum(type), GLsizei(stride)) -> None',
+argNames=('index','size','type','stride',),
+deprecated=_DEPRECATED,
+)
 
 
 def glInitVertexAttribInteger64BitNV():

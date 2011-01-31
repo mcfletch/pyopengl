@@ -702,8 +702,8 @@ glGetVertexAttribPointervARB = platform.createExtensionFunction(
 'glGetVertexAttribPointervARB',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glGetVertexAttribPointervARB(GLuint(index), GLenum(pname), POINTER(ctypes.c_void_p)(pointer)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLvoidpArray,),
+doc='glGetVertexAttribPointervARB(GLuint(index), GLenum(pname), GLvoidpArray(pointer)) -> None',
 argNames=('index','pname','pointer',),
 deprecated=_DEPRECATED,
 )

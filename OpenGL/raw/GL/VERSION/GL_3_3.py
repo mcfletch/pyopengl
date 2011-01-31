@@ -8,5 +8,14 @@ from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_3_3'
 _DEPRECATED = False
-
+GL_VERTEX_ATTRIB_ARRAY_DIVISOR = constant.Constant( 'GL_VERTEX_ATTRIB_ARRAY_DIVISOR', 0x88FE )
+glVertexAttribDivisor = platform.createExtensionFunction( 
+'glVertexAttribDivisor',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLuint,),
+doc='glVertexAttribDivisor(GLuint(index), GLuint(divisor)) -> None',
+argNames=('index','divisor',),
+deprecated=_DEPRECATED,
+)
 

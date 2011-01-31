@@ -21,6 +21,45 @@ GL_DEBUG_CATEGORY_PERFORMANCE_AMD = constant.Constant( 'GL_DEBUG_CATEGORY_PERFOR
 GL_DEBUG_CATEGORY_SHADER_COMPILER_AMD = constant.Constant( 'GL_DEBUG_CATEGORY_SHADER_COMPILER_AMD', 0x914E )
 GL_DEBUG_CATEGORY_APPLICATION_AMD = constant.Constant( 'GL_DEBUG_CATEGORY_APPLICATION_AMD', 0x914F )
 GL_DEBUG_CATEGORY_OTHER_AMD = constant.Constant( 'GL_DEBUG_CATEGORY_OTHER_AMD', 0x9150 )
+glDebugMessageEnableAMD = platform.createExtensionFunction( 
+'glDebugMessageEnableAMD',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLenum,constants.GLenum,constants.GLsizei,arrays.GLuintArray,constants.GLboolean,),
+doc='glDebugMessageEnableAMD(GLenum(category), GLenum(severity), GLsizei(count), GLuintArray(ids), GLboolean(enabled)) -> None',
+argNames=('category','severity','count','ids','enabled',),
+deprecated=_DEPRECATED,
+)
+
+glDebugMessageInsertAMD = platform.createExtensionFunction( 
+'glDebugMessageInsertAMD',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLenum,constants.GLenum,constants.GLuint,constants.GLsizei,arrays.GLcharArray,),
+doc='glDebugMessageInsertAMD(GLenum(category), GLenum(severity), GLuint(id), GLsizei(length), GLcharArray(buf)) -> None',
+argNames=('category','severity','id','length','buf',),
+deprecated=_DEPRECATED,
+)
+
+glDebugMessageCallbackAMD = platform.createExtensionFunction( 
+'glDebugMessageCallbackAMD',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLDEBUGPROCAMD,ctypes.c_void_p,),
+doc='glDebugMessageCallbackAMD(GLDEBUGPROCAMD(callback), c_void_p(userParam)) -> None',
+argNames=('callback','userParam',),
+deprecated=_DEPRECATED,
+)
+
+glGetDebugMessageLogAMD = platform.createExtensionFunction( 
+'glGetDebugMessageLogAMD',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=constants.GLuint, 
+argTypes=(constants.GLuint,constants.GLsizei,arrays.GLuintArray,arrays.GLuintArray,arrays.GLuintArray,arrays.GLsizeiArray,arrays.GLcharArray,),
+doc='glGetDebugMessageLogAMD(GLuint(count), GLsizei(bufsize), GLuintArray(categories), GLuintArray(severities), GLuintArray(ids), GLsizeiArray(lengths), GLcharArray(message)) -> constants.GLuint',
+argNames=('count','bufsize','categories','severities','ids','lengths','message',),
+deprecated=_DEPRECATED,
+)
 
 
 def glInitDebugOutputAMD():

@@ -12,6 +12,29 @@ GL_MAX_GEOMETRY_PROGRAM_INVOCATIONS_NV = constant.Constant( 'GL_MAX_GEOMETRY_PRO
 GL_MIN_FRAGMENT_INTERPOLATION_OFFSET_NV = constant.Constant( 'GL_MIN_FRAGMENT_INTERPOLATION_OFFSET_NV', 0x8E5B )
 GL_MAX_FRAGMENT_INTERPOLATION_OFFSET_NV = constant.Constant( 'GL_MAX_FRAGMENT_INTERPOLATION_OFFSET_NV', 0x8E5C )
 GL_FRAGMENT_PROGRAM_INTERPOLATION_OFFSET_BITS_NV = constant.Constant( 'GL_FRAGMENT_PROGRAM_INTERPOLATION_OFFSET_BITS_NV', 0x8E5D )
+GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_NV = constant.Constant( 'GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_NV', 0x8E5E )
+GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_NV = constant.Constant( 'GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_NV', 0x8E5F )
+GL_MAX_PROGRAM_SUBROUTINE_PARAMETERS_NV = constant.Constant( 'GL_MAX_PROGRAM_SUBROUTINE_PARAMETERS_NV', 0x8F44 )
+GL_MAX_PROGRAM_SUBROUTINE_NUM_NV = constant.Constant( 'GL_MAX_PROGRAM_SUBROUTINE_NUM_NV', 0x8F45 )
+glProgramSubroutineParametersuivNV = platform.createExtensionFunction( 
+'glProgramSubroutineParametersuivNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLenum,constants.GLsizei,arrays.GLuintArray,),
+doc='glProgramSubroutineParametersuivNV(GLenum(target), GLsizei(count), GLuintArray(params)) -> None',
+argNames=('target','count','params',),
+deprecated=_DEPRECATED,
+)
+
+glGetProgramSubroutineParameteruivNV = platform.createExtensionFunction( 
+'glGetProgramSubroutineParameteruivNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLenum,constants.GLuint,arrays.GLuintArray,),
+doc='glGetProgramSubroutineParameteruivNV(GLenum(target), GLuint(index), GLuintArray(param)) -> None',
+argNames=('target','index','param',),
+deprecated=_DEPRECATED,
+)
 
 
 def glInitGpuProgram5NV():

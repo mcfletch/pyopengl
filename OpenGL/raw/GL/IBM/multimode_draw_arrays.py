@@ -23,8 +23,8 @@ glMultiModeDrawElementsIBM = platform.createExtensionFunction(
 'glMultiModeDrawElementsIBM',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(arrays.GLuintArray,arrays.GLsizeiArray,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),constants.GLsizei,constants.GLint,),
-doc='glMultiModeDrawElementsIBM(GLuintArray(mode), GLsizeiArray(count), GLenum(type), POINTER(ctypes.c_void_p)(indices), GLsizei(primcount), GLint(modestride)) -> None',
+argTypes=(arrays.GLuintArray,arrays.GLsizeiArray,constants.GLenum,arrays.GLvoidpArray,constants.GLsizei,constants.GLint,),
+doc='glMultiModeDrawElementsIBM(GLuintArray(mode), GLsizeiArray(count), GLenum(type), GLvoidpArray(indices), GLsizei(primcount), GLint(modestride)) -> None',
 argNames=('mode','count','type','indices','primcount','modestride',),
 deprecated=_DEPRECATED,
 )

@@ -14,7 +14,7 @@ except ImportError, err:
 pygame.display.init()
 import OpenGL 
 OpenGL.CONTEXT_CHECKING = True
-OpenGL.FORWARD_COMPATIBLE_ONLY = True
+OpenGL.FORWARD_COMPATIBLE_ONLY = False
 from OpenGL.GL import *
 try:
     glGetError()
@@ -691,6 +691,9 @@ class Tests( unittest.TestCase ):
                     [0,8,9,1, 2,10,11,3,],
                     [4,12,13,5,6,14,15,7],
                 ],'B')
+                index_pointers = arrays.GLvoidpArray.zeros( (2,))
+                index_pointers[0] = arrays.GLbyteArray.dataPointer( indices )
+                index_pointers[1] = arrays.GLbyteArray.dataPointer( indices[1] )
                 counts = [ len(x) for x in indices ]
                 glEnableClientState( GL_VERTEX_ARRAY )
                 glDisableClientState( GL_COLOR_ARRAY )
@@ -699,7 +702,7 @@ class Tests( unittest.TestCase ):
                     glVertexPointerd( points )
                     glDisable( GL_LIGHTING )
                     try:
-                        glMultiDrawElements(GL_QUAD_STRIP, counts, GL_UNSIGNED_BYTE, indices, 2)
+                        glMultiDrawElements(GL_QUAD_STRIP, counts, GL_UNSIGNED_BYTE, index_pointers, 2)
                     finally:
                         glEnable( GL_LIGHTING )
                 finally:

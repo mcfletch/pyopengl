@@ -835,8 +835,8 @@ glGetPointerIndexedvEXT = platform.createExtensionFunction(
 'glGetPointerIndexedvEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLuint,ctypes.POINTER(ctypes.c_void_p),),
-doc='glGetPointerIndexedvEXT(GLenum(target), GLuint(index), POINTER(ctypes.c_void_p)(data)) -> None',
+argTypes=(constants.GLenum,constants.GLuint,arrays.GLvoidpArray,),
+doc='glGetPointerIndexedvEXT(GLenum(target), GLuint(index), GLvoidpArray(data)) -> None',
 argNames=('target','index','data',),
 deprecated=_DEPRECATED,
 )
@@ -1655,8 +1655,8 @@ glGetNamedBufferPointervEXT = platform.createExtensionFunction(
 'glGetNamedBufferPointervEXT',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glGetNamedBufferPointervEXT(GLuint(buffer), GLenum(pname), POINTER(ctypes.c_void_p)(params)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLvoidpArray,),
+doc='glGetNamedBufferPointervEXT(GLuint(buffer), GLenum(pname), GLvoidpArray(params)) -> None',
 argNames=('buffer','pname','params',),
 deprecated=_DEPRECATED,
 )
@@ -1898,6 +1898,176 @@ resultType=None,
 argTypes=(constants.GLenum,constants.GLenum,constants.GLuint,),
 doc='glMultiTexRenderbufferEXT(GLenum(texunit), GLenum(target), GLuint(renderbuffer)) -> None',
 argNames=('texunit','target','renderbuffer',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform1dEXT = platform.createExtensionFunction( 
+'glProgramUniform1dEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLdouble,),
+doc='glProgramUniform1dEXT(GLuint(program), GLint(location), GLdouble(x)) -> None',
+argNames=('program','location','x',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform2dEXT = platform.createExtensionFunction( 
+'glProgramUniform2dEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLdouble,constants.GLdouble,),
+doc='glProgramUniform2dEXT(GLuint(program), GLint(location), GLdouble(x), GLdouble(y)) -> None',
+argNames=('program','location','x','y',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform3dEXT = platform.createExtensionFunction( 
+'glProgramUniform3dEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLdouble,constants.GLdouble,constants.GLdouble,),
+doc='glProgramUniform3dEXT(GLuint(program), GLint(location), GLdouble(x), GLdouble(y), GLdouble(z)) -> None',
+argNames=('program','location','x','y','z',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform4dEXT = platform.createExtensionFunction( 
+'glProgramUniform4dEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLdouble,constants.GLdouble,constants.GLdouble,constants.GLdouble,),
+doc='glProgramUniform4dEXT(GLuint(program), GLint(location), GLdouble(x), GLdouble(y), GLdouble(z), GLdouble(w)) -> None',
+argNames=('program','location','x','y','z','w',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform1dvEXT = platform.createExtensionFunction( 
+'glProgramUniform1dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLdoubleArray,),
+doc='glProgramUniform1dvEXT(GLuint(program), GLint(location), GLsizei(count), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform2dvEXT = platform.createExtensionFunction( 
+'glProgramUniform2dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLdoubleArray,),
+doc='glProgramUniform2dvEXT(GLuint(program), GLint(location), GLsizei(count), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform3dvEXT = platform.createExtensionFunction( 
+'glProgramUniform3dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLdoubleArray,),
+doc='glProgramUniform3dvEXT(GLuint(program), GLint(location), GLsizei(count), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform4dvEXT = platform.createExtensionFunction( 
+'glProgramUniform4dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLdoubleArray,),
+doc='glProgramUniform4dvEXT(GLuint(program), GLint(location), GLsizei(count), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniformMatrix2dvEXT = platform.createExtensionFunction( 
+'glProgramUniformMatrix2dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,constants.GLboolean,arrays.GLdoubleArray,),
+doc='glProgramUniformMatrix2dvEXT(GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','transpose','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniformMatrix3dvEXT = platform.createExtensionFunction( 
+'glProgramUniformMatrix3dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,constants.GLboolean,arrays.GLdoubleArray,),
+doc='glProgramUniformMatrix3dvEXT(GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','transpose','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniformMatrix4dvEXT = platform.createExtensionFunction( 
+'glProgramUniformMatrix4dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,constants.GLboolean,arrays.GLdoubleArray,),
+doc='glProgramUniformMatrix4dvEXT(GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','transpose','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniformMatrix2x3dvEXT = platform.createExtensionFunction( 
+'glProgramUniformMatrix2x3dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,constants.GLboolean,arrays.GLdoubleArray,),
+doc='glProgramUniformMatrix2x3dvEXT(GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','transpose','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniformMatrix2x4dvEXT = platform.createExtensionFunction( 
+'glProgramUniformMatrix2x4dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,constants.GLboolean,arrays.GLdoubleArray,),
+doc='glProgramUniformMatrix2x4dvEXT(GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','transpose','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniformMatrix3x2dvEXT = platform.createExtensionFunction( 
+'glProgramUniformMatrix3x2dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,constants.GLboolean,arrays.GLdoubleArray,),
+doc='glProgramUniformMatrix3x2dvEXT(GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','transpose','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniformMatrix3x4dvEXT = platform.createExtensionFunction( 
+'glProgramUniformMatrix3x4dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,constants.GLboolean,arrays.GLdoubleArray,),
+doc='glProgramUniformMatrix3x4dvEXT(GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','transpose','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniformMatrix4x2dvEXT = platform.createExtensionFunction( 
+'glProgramUniformMatrix4x2dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,constants.GLboolean,arrays.GLdoubleArray,),
+doc='glProgramUniformMatrix4x2dvEXT(GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','transpose','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniformMatrix4x3dvEXT = platform.createExtensionFunction( 
+'glProgramUniformMatrix4x3dvEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,constants.GLboolean,arrays.GLdoubleArray,),
+doc='glProgramUniformMatrix4x3dvEXT(GLuint(program), GLint(location), GLsizei(count), GLboolean(transpose), GLdoubleArray(value)) -> None',
+argNames=('program','location','count','transpose','value',),
 deprecated=_DEPRECATED,
 )
 

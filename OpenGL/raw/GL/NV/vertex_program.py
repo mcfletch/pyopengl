@@ -282,8 +282,8 @@ glGetVertexAttribPointervNV = platform.createExtensionFunction(
 'glGetVertexAttribPointervNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glGetVertexAttribPointervNV(GLuint(index), GLenum(pname), POINTER(ctypes.c_void_p)(pointer)) -> None',
+argTypes=(constants.GLuint,constants.GLenum,arrays.GLvoidpArray,),
+doc='glGetVertexAttribPointervNV(GLuint(index), GLenum(pname), GLvoidpArray(pointer)) -> None',
 argNames=('index','pname','pointer',),
 deprecated=_DEPRECATED,
 )
@@ -352,8 +352,8 @@ glProgramParameters4dvNV = platform.createExtensionFunction(
 'glProgramParameters4dvNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLuint,constants.GLuint,arrays.GLdoubleArray,),
-doc='glProgramParameters4dvNV(GLenum(target), GLuint(index), GLuint(count), GLdoubleArray(v)) -> None',
+argTypes=(constants.GLenum,constants.GLuint,constants.GLsizei,arrays.GLdoubleArray,),
+doc='glProgramParameters4dvNV(GLenum(target), GLuint(index), GLsizei(count), GLdoubleArray(v)) -> None',
 argNames=('target','index','count','v',),
 deprecated=_DEPRECATED,
 )
@@ -362,8 +362,8 @@ glProgramParameters4fvNV = platform.createExtensionFunction(
 'glProgramParameters4fvNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLuint,constants.GLuint,arrays.GLfloatArray,),
-doc='glProgramParameters4fvNV(GLenum(target), GLuint(index), GLuint(count), GLfloatArray(v)) -> None',
+argTypes=(constants.GLenum,constants.GLuint,constants.GLsizei,arrays.GLfloatArray,),
+doc='glProgramParameters4fvNV(GLenum(target), GLuint(index), GLsizei(count), GLfloatArray(v)) -> None',
 argNames=('target','index','count','v',),
 deprecated=_DEPRECATED,
 )

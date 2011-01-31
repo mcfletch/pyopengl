@@ -50,16 +50,6 @@ argNames=('target','pname','params',),
 deprecated=_DEPRECATED,
 )
 
-glProgramParameteri = platform.createExtensionFunction( 
-'glProgramParameteri',dll=platform.GL,
-extension=EXTENSION_NAME,
-resultType=None, 
-argTypes=(constants.GLuint,constants.GLenum,constants.GLint,),
-doc='glProgramParameteri(GLuint(program), GLenum(pname), GLint(value)) -> None',
-argNames=('program','pname','value',),
-deprecated=_DEPRECATED,
-)
-
 glFramebufferTexture = platform.createExtensionFunction( 
 'glFramebufferTexture',dll=platform.GL,
 extension=EXTENSION_NAME,

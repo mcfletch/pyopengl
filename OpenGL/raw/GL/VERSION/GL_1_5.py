@@ -219,8 +219,8 @@ glGetBufferPointerv = platform.createExtensionFunction(
 'glGetBufferPointerv',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),),
-doc='glGetBufferPointerv(GLenum(target), GLenum(pname), POINTER(ctypes.c_void_p)(params)) -> None',
+argTypes=(constants.GLenum,constants.GLenum,arrays.GLvoidpArray,),
+doc='glGetBufferPointerv(GLenum(target), GLenum(pname), GLvoidpArray(params)) -> None',
 argNames=('target','pname','params',),
 deprecated=_DEPRECATED,
 )

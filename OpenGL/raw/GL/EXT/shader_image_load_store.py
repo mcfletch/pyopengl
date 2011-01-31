@@ -63,6 +63,25 @@ GL_FRAMEBUFFER_BARRIER_BIT_EXT = constant.Constant( 'GL_FRAMEBUFFER_BARRIER_BIT_
 GL_TRANSFORM_FEEDBACK_BARRIER_BIT_EXT = constant.Constant( 'GL_TRANSFORM_FEEDBACK_BARRIER_BIT_EXT', 0x800 )
 GL_ATOMIC_COUNTER_BARRIER_BIT_EXT = constant.Constant( 'GL_ATOMIC_COUNTER_BARRIER_BIT_EXT', 0x1000 )
 GL_ALL_BARRIER_BITS_EXT = constant.Constant( 'GL_ALL_BARRIER_BITS_EXT', 0xFFFFFFFF )
+glBindImageTextureEXT = platform.createExtensionFunction( 
+'glBindImageTextureEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLuint,constants.GLint,constants.GLboolean,constants.GLint,constants.GLenum,constants.GLint,),
+doc='glBindImageTextureEXT(GLuint(index), GLuint(texture), GLint(level), GLboolean(layered), GLint(layer), GLenum(access), GLint(format)) -> None',
+argNames=('index','texture','level','layered','layer','access','format',),
+deprecated=_DEPRECATED,
+)
+
+glMemoryBarrierEXT = platform.createExtensionFunction( 
+'glMemoryBarrierEXT',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLbitfield,),
+doc='glMemoryBarrierEXT(GLbitfield(barriers)) -> None',
+argNames=('barriers',),
+deprecated=_DEPRECATED,
+)
 
 
 def glInitShaderImageLoadStoreEXT():

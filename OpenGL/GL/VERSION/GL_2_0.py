@@ -1,7 +1,7 @@
 '''OpenGL extension VERSION.GL_2_0
 
-This module customises the behaviour of the
-OpenGL.raw.GL.VERSION.GL_2_0 to provide a more
+This module customises the behaviour of the 
+OpenGL.raw.GL.VERSION.GL_2_0 to provide a more 
 Python-friendly API
 
 The official definition of this extension is available here:

@@ -43,8 +43,8 @@ glMultiDrawElementsBaseVertex = platform.createExtensionFunction(
 'glMultiDrawElementsBaseVertex',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,arrays.GLsizeiArray,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),constants.GLsizei,arrays.GLintArray,),
-doc='glMultiDrawElementsBaseVertex(GLenum(mode), GLsizeiArray(count), GLenum(type), POINTER(ctypes.c_void_p)(indices), GLsizei(primcount), GLintArray(basevertex)) -> None',
+argTypes=(constants.GLenum,arrays.GLsizeiArray,constants.GLenum,arrays.GLvoidpArray,constants.GLsizei,arrays.GLintArray,),
+doc='glMultiDrawElementsBaseVertex(GLenum(mode), GLsizeiArray(count), GLenum(type), GLvoidpArray(indices), GLsizei(primcount), GLintArray(basevertex)) -> None',
 argNames=('mode','count','type','indices','primcount','basevertex',),
 deprecated=_DEPRECATED,
 )

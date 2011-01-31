@@ -36,6 +36,335 @@ GL_FLOAT16_NV = constant.Constant( 'GL_FLOAT16_NV', 0x8FF8 )
 GL_FLOAT16_VEC2_NV = constant.Constant( 'GL_FLOAT16_VEC2_NV', 0x8FF9 )
 GL_FLOAT16_VEC3_NV = constant.Constant( 'GL_FLOAT16_VEC3_NV', 0x8FFA )
 GL_FLOAT16_VEC4_NV = constant.Constant( 'GL_FLOAT16_VEC4_NV', 0x8FFB )
+glUniform1i64NV = platform.createExtensionFunction( 
+'glUniform1i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLint64EXT,),
+doc='glUniform1i64NV(GLint(location), GLint64EXT(x)) -> None',
+argNames=('location','x',),
+deprecated=_DEPRECATED,
+)
+
+glUniform2i64NV = platform.createExtensionFunction( 
+'glUniform2i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLint64EXT,constants.GLint64EXT,),
+doc='glUniform2i64NV(GLint(location), GLint64EXT(x), GLint64EXT(y)) -> None',
+argNames=('location','x','y',),
+deprecated=_DEPRECATED,
+)
+
+glUniform3i64NV = platform.createExtensionFunction( 
+'glUniform3i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLint64EXT,constants.GLint64EXT,constants.GLint64EXT,),
+doc='glUniform3i64NV(GLint(location), GLint64EXT(x), GLint64EXT(y), GLint64EXT(z)) -> None',
+argNames=('location','x','y','z',),
+deprecated=_DEPRECATED,
+)
+
+glUniform4i64NV = platform.createExtensionFunction( 
+'glUniform4i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLint64EXT,constants.GLint64EXT,constants.GLint64EXT,constants.GLint64EXT,),
+doc='glUniform4i64NV(GLint(location), GLint64EXT(x), GLint64EXT(y), GLint64EXT(z), GLint64EXT(w)) -> None',
+argNames=('location','x','y','z','w',),
+deprecated=_DEPRECATED,
+)
+
+glUniform1i64vNV = platform.createExtensionFunction( 
+'glUniform1i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLsizei,arrays.GLint64Array,),
+doc='glUniform1i64vNV(GLint(location), GLsizei(count), GLint64Array(value)) -> None',
+argNames=('location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glUniform2i64vNV = platform.createExtensionFunction( 
+'glUniform2i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLsizei,arrays.GLint64Array,),
+doc='glUniform2i64vNV(GLint(location), GLsizei(count), GLint64Array(value)) -> None',
+argNames=('location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glUniform3i64vNV = platform.createExtensionFunction( 
+'glUniform3i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLsizei,arrays.GLint64Array,),
+doc='glUniform3i64vNV(GLint(location), GLsizei(count), GLint64Array(value)) -> None',
+argNames=('location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glUniform4i64vNV = platform.createExtensionFunction( 
+'glUniform4i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLsizei,arrays.GLint64Array,),
+doc='glUniform4i64vNV(GLint(location), GLsizei(count), GLint64Array(value)) -> None',
+argNames=('location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glUniform1ui64NV = platform.createExtensionFunction( 
+'glUniform1ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLuint64EXT,),
+doc='glUniform1ui64NV(GLint(location), GLuint64EXT(x)) -> None',
+argNames=('location','x',),
+deprecated=_DEPRECATED,
+)
+
+glUniform2ui64NV = platform.createExtensionFunction( 
+'glUniform2ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLuint64EXT,constants.GLuint64EXT,),
+doc='glUniform2ui64NV(GLint(location), GLuint64EXT(x), GLuint64EXT(y)) -> None',
+argNames=('location','x','y',),
+deprecated=_DEPRECATED,
+)
+
+glUniform3ui64NV = platform.createExtensionFunction( 
+'glUniform3ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLuint64EXT,constants.GLuint64EXT,constants.GLuint64EXT,),
+doc='glUniform3ui64NV(GLint(location), GLuint64EXT(x), GLuint64EXT(y), GLuint64EXT(z)) -> None',
+argNames=('location','x','y','z',),
+deprecated=_DEPRECATED,
+)
+
+glUniform4ui64NV = platform.createExtensionFunction( 
+'glUniform4ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLuint64EXT,constants.GLuint64EXT,constants.GLuint64EXT,constants.GLuint64EXT,),
+doc='glUniform4ui64NV(GLint(location), GLuint64EXT(x), GLuint64EXT(y), GLuint64EXT(z), GLuint64EXT(w)) -> None',
+argNames=('location','x','y','z','w',),
+deprecated=_DEPRECATED,
+)
+
+glUniform1ui64vNV = platform.createExtensionFunction( 
+'glUniform1ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLsizei,arrays.GLuint64Array,),
+doc='glUniform1ui64vNV(GLint(location), GLsizei(count), GLuint64Array(value)) -> None',
+argNames=('location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glUniform2ui64vNV = platform.createExtensionFunction( 
+'glUniform2ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLsizei,arrays.GLuint64Array,),
+doc='glUniform2ui64vNV(GLint(location), GLsizei(count), GLuint64Array(value)) -> None',
+argNames=('location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glUniform3ui64vNV = platform.createExtensionFunction( 
+'glUniform3ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLsizei,arrays.GLuint64Array,),
+doc='glUniform3ui64vNV(GLint(location), GLsizei(count), GLuint64Array(value)) -> None',
+argNames=('location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glUniform4ui64vNV = platform.createExtensionFunction( 
+'glUniform4ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLint,constants.GLsizei,arrays.GLuint64Array,),
+doc='glUniform4ui64vNV(GLint(location), GLsizei(count), GLuint64Array(value)) -> None',
+argNames=('location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glGetUniformi64vNV = platform.createExtensionFunction( 
+'glGetUniformi64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,arrays.GLint64Array,),
+doc='glGetUniformi64vNV(GLuint(program), GLint(location), GLint64Array(params)) -> None',
+argNames=('program','location','params',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform1i64NV = platform.createExtensionFunction( 
+'glProgramUniform1i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLint64EXT,),
+doc='glProgramUniform1i64NV(GLuint(program), GLint(location), GLint64EXT(x)) -> None',
+argNames=('program','location','x',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform2i64NV = platform.createExtensionFunction( 
+'glProgramUniform2i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLint64EXT,constants.GLint64EXT,),
+doc='glProgramUniform2i64NV(GLuint(program), GLint(location), GLint64EXT(x), GLint64EXT(y)) -> None',
+argNames=('program','location','x','y',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform3i64NV = platform.createExtensionFunction( 
+'glProgramUniform3i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLint64EXT,constants.GLint64EXT,constants.GLint64EXT,),
+doc='glProgramUniform3i64NV(GLuint(program), GLint(location), GLint64EXT(x), GLint64EXT(y), GLint64EXT(z)) -> None',
+argNames=('program','location','x','y','z',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform4i64NV = platform.createExtensionFunction( 
+'glProgramUniform4i64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLint64EXT,constants.GLint64EXT,constants.GLint64EXT,constants.GLint64EXT,),
+doc='glProgramUniform4i64NV(GLuint(program), GLint(location), GLint64EXT(x), GLint64EXT(y), GLint64EXT(z), GLint64EXT(w)) -> None',
+argNames=('program','location','x','y','z','w',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform1i64vNV = platform.createExtensionFunction( 
+'glProgramUniform1i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLint64Array,),
+doc='glProgramUniform1i64vNV(GLuint(program), GLint(location), GLsizei(count), GLint64Array(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform2i64vNV = platform.createExtensionFunction( 
+'glProgramUniform2i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLint64Array,),
+doc='glProgramUniform2i64vNV(GLuint(program), GLint(location), GLsizei(count), GLint64Array(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform3i64vNV = platform.createExtensionFunction( 
+'glProgramUniform3i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLint64Array,),
+doc='glProgramUniform3i64vNV(GLuint(program), GLint(location), GLsizei(count), GLint64Array(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform4i64vNV = platform.createExtensionFunction( 
+'glProgramUniform4i64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLint64Array,),
+doc='glProgramUniform4i64vNV(GLuint(program), GLint(location), GLsizei(count), GLint64Array(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform1ui64NV = platform.createExtensionFunction( 
+'glProgramUniform1ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLuint64EXT,),
+doc='glProgramUniform1ui64NV(GLuint(program), GLint(location), GLuint64EXT(x)) -> None',
+argNames=('program','location','x',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform2ui64NV = platform.createExtensionFunction( 
+'glProgramUniform2ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLuint64EXT,constants.GLuint64EXT,),
+doc='glProgramUniform2ui64NV(GLuint(program), GLint(location), GLuint64EXT(x), GLuint64EXT(y)) -> None',
+argNames=('program','location','x','y',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform3ui64NV = platform.createExtensionFunction( 
+'glProgramUniform3ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLuint64EXT,constants.GLuint64EXT,constants.GLuint64EXT,),
+doc='glProgramUniform3ui64NV(GLuint(program), GLint(location), GLuint64EXT(x), GLuint64EXT(y), GLuint64EXT(z)) -> None',
+argNames=('program','location','x','y','z',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform4ui64NV = platform.createExtensionFunction( 
+'glProgramUniform4ui64NV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLuint64EXT,constants.GLuint64EXT,constants.GLuint64EXT,constants.GLuint64EXT,),
+doc='glProgramUniform4ui64NV(GLuint(program), GLint(location), GLuint64EXT(x), GLuint64EXT(y), GLuint64EXT(z), GLuint64EXT(w)) -> None',
+argNames=('program','location','x','y','z','w',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform1ui64vNV = platform.createExtensionFunction( 
+'glProgramUniform1ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLuint64Array,),
+doc='glProgramUniform1ui64vNV(GLuint(program), GLint(location), GLsizei(count), GLuint64Array(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform2ui64vNV = platform.createExtensionFunction( 
+'glProgramUniform2ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLuint64Array,),
+doc='glProgramUniform2ui64vNV(GLuint(program), GLint(location), GLsizei(count), GLuint64Array(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform3ui64vNV = platform.createExtensionFunction( 
+'glProgramUniform3ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLuint64Array,),
+doc='glProgramUniform3ui64vNV(GLuint(program), GLint(location), GLsizei(count), GLuint64Array(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
+
+glProgramUniform4ui64vNV = platform.createExtensionFunction( 
+'glProgramUniform4ui64vNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLint,constants.GLsizei,arrays.GLuint64Array,),
+doc='glProgramUniform4ui64vNV(GLuint(program), GLint(location), GLsizei(count), GLuint64Array(value)) -> None',
+argNames=('program','location','count','value',),
+deprecated=_DEPRECATED,
+)
 
 
 def glInitGpuShader5NV():

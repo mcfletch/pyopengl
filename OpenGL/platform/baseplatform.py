@@ -346,7 +346,7 @@ class _DeprecatedFunctionPointer( _NullFunctionPointer ):
     def __call__( self, *args, **named ):
         from OpenGL import error
         raise error.NullFunctionError(
-            """Attempt to call a deprecated function %s while OpenGL in FORWARD_COMPATIBLE_ONLY mode.  Set OpenGL.FORWARD_COMPATIBLE_ONLY to True to use legacy entry points"""%(
+            """Attempt to call a deprecated function %s while OpenGL in FORWARD_COMPATIBLE_ONLY mode.  Set OpenGL.FORWARD_COMPATIBLE_ONLY to False to use legacy entry points"""%(
                 self.__name__,
             )
         )

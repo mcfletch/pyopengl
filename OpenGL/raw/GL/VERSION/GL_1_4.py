@@ -48,8 +48,8 @@ glMultiDrawElements = platform.createExtensionFunction(
 'glMultiDrawElements',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,arrays.GLsizeiArray,constants.GLenum,ctypes.POINTER(ctypes.c_void_p),constants.GLsizei,),
-doc='glMultiDrawElements(GLenum(mode), GLsizeiArray(count), GLenum(type), POINTER(ctypes.c_void_p)(indices), GLsizei(primcount)) -> None',
+argTypes=(constants.GLenum,arrays.GLsizeiArray,constants.GLenum,arrays.GLvoidpArray,constants.GLsizei,),
+doc='glMultiDrawElements(GLenum(mode), GLsizeiArray(count), GLenum(type), GLvoidpArray(indices), GLsizei(primcount)) -> None',
 argNames=('mode','count','type','indices','primcount',),
 deprecated=_DEPRECATED,
 )

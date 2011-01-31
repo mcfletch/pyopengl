@@ -92,8 +92,8 @@ glReplacementCodePointerSUN = platform.createExtensionFunction(
 'glReplacementCodePointerSUN',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLenum,constants.GLsizei,ctypes.POINTER(ctypes.c_void_p),),
-doc='glReplacementCodePointerSUN(GLenum(type), GLsizei(stride), POINTER(ctypes.c_void_p)(pointer)) -> None',
+argTypes=(constants.GLenum,constants.GLsizei,arrays.GLvoidpArray,),
+doc='glReplacementCodePointerSUN(GLenum(type), GLsizei(stride), GLvoidpArray(pointer)) -> None',
 argNames=('type','stride','pointer',),
 deprecated=_DEPRECATED,
 )

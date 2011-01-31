@@ -8,5 +8,64 @@ from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = 'GL_VERSION_GL_4_0'
 _DEPRECATED = False
+GL_SAMPLE_SHADING = constant.Constant( 'GL_SAMPLE_SHADING', 0x8C36 )
+GL_MIN_SAMPLE_SHADING_VALUE = constant.Constant( 'GL_MIN_SAMPLE_SHADING_VALUE', 0x8C37 )
+GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET = constant.Constant( 'GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET', 0x8E5E )
+GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET = constant.Constant( 'GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET', 0x8E5F )
+GL_TEXTURE_CUBE_MAP_ARRAY = constant.Constant( 'GL_TEXTURE_CUBE_MAP_ARRAY', 0x9009 )
+GL_TEXTURE_BINDING_CUBE_MAP_ARRAY = constant.Constant( 'GL_TEXTURE_BINDING_CUBE_MAP_ARRAY', 0x900A )
+GL_PROXY_TEXTURE_CUBE_MAP_ARRAY = constant.Constant( 'GL_PROXY_TEXTURE_CUBE_MAP_ARRAY', 0x900B )
+GL_SAMPLER_CUBE_MAP_ARRAY = constant.Constant( 'GL_SAMPLER_CUBE_MAP_ARRAY', 0x900C )
+GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW = constant.Constant( 'GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW', 0x900D )
+GL_INT_SAMPLER_CUBE_MAP_ARRAY = constant.Constant( 'GL_INT_SAMPLER_CUBE_MAP_ARRAY', 0x900E )
+GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY = constant.Constant( 'GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY', 0x900F )
+glMinSampleShading = platform.createExtensionFunction( 
+'glMinSampleShading',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLclampf,),
+doc='glMinSampleShading(GLclampf(value)) -> None',
+argNames=('value',),
+deprecated=_DEPRECATED,
+)
 
+glBlendEquationi = platform.createExtensionFunction( 
+'glBlendEquationi',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLenum,),
+doc='glBlendEquationi(GLuint(buf), GLenum(mode)) -> None',
+argNames=('buf','mode',),
+deprecated=_DEPRECATED,
+)
+
+glBlendEquationSeparatei = platform.createExtensionFunction( 
+'glBlendEquationSeparatei',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLenum,constants.GLenum,),
+doc='glBlendEquationSeparatei(GLuint(buf), GLenum(modeRGB), GLenum(modeAlpha)) -> None',
+argNames=('buf','modeRGB','modeAlpha',),
+deprecated=_DEPRECATED,
+)
+
+glBlendFunci = platform.createExtensionFunction( 
+'glBlendFunci',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLenum,constants.GLenum,),
+doc='glBlendFunci(GLuint(buf), GLenum(src), GLenum(dst)) -> None',
+argNames=('buf','src','dst',),
+deprecated=_DEPRECATED,
+)
+
+glBlendFuncSeparatei = platform.createExtensionFunction( 
+'glBlendFuncSeparatei',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLuint,constants.GLenum,constants.GLenum,constants.GLenum,constants.GLenum,),
+doc='glBlendFuncSeparatei(GLuint(buf), GLenum(srcRGB), GLenum(dstRGB), GLenum(srcAlpha), GLenum(dstAlpha)) -> None',
+argNames=('buf','srcRGB','dstRGB','srcAlpha','dstAlpha',),
+deprecated=_DEPRECATED,
+)
 

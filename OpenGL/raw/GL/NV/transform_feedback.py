@@ -34,6 +34,7 @@ GL_INTERLEAVED_ATTRIBS_NV = constant.Constant( 'GL_INTERLEAVED_ATTRIBS_NV', 0x8C
 GL_SEPARATE_ATTRIBS_NV = constant.Constant( 'GL_SEPARATE_ATTRIBS_NV', 0x8C8D )
 GL_TRANSFORM_FEEDBACK_BUFFER_NV = constant.Constant( 'GL_TRANSFORM_FEEDBACK_BUFFER_NV', 0x8C8E )
 GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_NV = constant.Constant( 'GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_NV', 0x8C8F )
+GL_LAYER_NV = constant.Constant( 'GL_LAYER_NV', 0x8DAA )
 glBeginTransformFeedbackNV = platform.createExtensionFunction( 
 'glBeginTransformFeedbackNV',dll=platform.GL,
 extension=EXTENSION_NAME,
@@ -98,9 +99,9 @@ glTransformFeedbackVaryingsNV = platform.createExtensionFunction(
 'glTransformFeedbackVaryingsNV',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=None, 
-argTypes=(constants.GLuint,constants.GLsizei,ctypes.POINTER( ctypes.POINTER( constants.GLchar )),constants.GLenum,),
-doc='glTransformFeedbackVaryingsNV(GLuint(program), GLsizei(count), POINTER( ctypes.POINTER( constants.GLchar ))(varyings), GLenum(bufferMode)) -> None',
-argNames=('program','count','varyings','bufferMode',),
+argTypes=(constants.GLuint,constants.GLsizei,arrays.GLintArray,constants.GLenum,),
+doc='glTransformFeedbackVaryingsNV(GLuint(program), GLsizei(count), GLintArray(locations), GLenum(bufferMode)) -> None',
+argNames=('program','count','locations','bufferMode',),
 deprecated=_DEPRECATED,
 )
 
@@ -141,6 +142,16 @@ resultType=None,
 argTypes=(constants.GLuint,constants.GLuint,arrays.GLintArray,),
 doc='glGetTransformFeedbackVaryingNV(GLuint(program), GLuint(index), GLintArray(location)) -> None',
 argNames=('program','index','location',),
+deprecated=_DEPRECATED,
+)
+
+glTransformFeedbackStreamAttribsNV = platform.createExtensionFunction( 
+'glTransformFeedbackStreamAttribsNV',dll=platform.GL,
+extension=EXTENSION_NAME,
+resultType=None, 
+argTypes=(constants.GLsizei,arrays.GLintArray,constants.GLsizei,arrays.GLintArray,constants.GLenum,),
+doc='glTransformFeedbackStreamAttribsNV(GLsizei(count), GLintArray(attribs), GLsizei(nbuffers), GLintArray(bufstreams), GLenum(bufferMode)) -> None',
+argNames=('count','attribs','nbuffers','bufstreams','bufferMode',),
 deprecated=_DEPRECATED,
 )
 

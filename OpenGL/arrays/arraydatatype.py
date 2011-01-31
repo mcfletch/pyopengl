@@ -253,6 +253,10 @@ if ADT is None:
         """Array datatype for GLenum types"""
         baseType = constants.GLsizei
         typeConstant = constants.GL_INT
+    class GLvoidpArray( ArrayDatatype, ctypes.POINTER(constants.GLvoid )):
+        """Array datatype for GLenum types"""
+        baseType = constants.GLvoidp
+        typeConstant = constants.GL_VOID_P
 else:
     # Cython-coded array handler
     log.info( 'Using accelerated ArrayDatatype' )
@@ -272,7 +276,7 @@ else:
     GLuint64Array = ADT( constants.GL_UNSIGNED_INT64, constants.GLuint64 )
     GLenumArray = ADT( constants.GL_UNSIGNED_INT, constants.GLenum )
     GLsizeiArray = ADT( constants.GL_INT, constants.GLsizei )
-
+    GLvoidpArray = ADT( constants.GLvoidpp, None )
 
 GL_CONSTANT_TO_ARRAY_TYPE = {
     constants.GL_DOUBLE : GLclampdArray,
