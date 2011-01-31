@@ -80,7 +80,7 @@ from OpenGL import converters
 @lazy( glDeleteQueriesARB )
 def glDeleteQueriesARB( baseOperation, n, ids=None ):
     if ids is None:
-        ids = arrays.GLuintArray.asArray( ids )
+        ids = arrays.GLuintArray.asArray( n )
         n = arrays.GLuintArray.arraySize( ids )
     else:
         ids = arrays.GLuintArray.asArray( ids )

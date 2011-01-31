@@ -102,7 +102,7 @@ def glGetBufferPointerv( baseOperation, target, pname, params=None ):
 @lazy( glDeleteQueries )
 def glDeleteQueries( baseOperation, n, ids=None ):
     if ids is None:
-        ids = arrays.GLuintArray.asArray( ids )
+        ids = arrays.GLuintArray.asArray( n )
         n = arrays.GLuintArray.arraySize( ids )
     else:
         ids = arrays.GLuintArray.asArray( ids )
