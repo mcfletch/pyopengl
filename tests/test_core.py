@@ -57,7 +57,7 @@ class Tests( unittest.TestCase ):
         pygame.key.set_repeat(500,30)
         glMatrixMode (GL_PROJECTION)
         glLoadIdentity()
-        gluPerspective(40.0, 300/300, 1.0, 20.0)
+        gluPerspective(40.0, 300/300., 1.0, 20.0)
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
         gluLookAt(
