@@ -276,7 +276,7 @@ else:
     GLuint64Array = ADT( constants.GL_UNSIGNED_INT64, constants.GLuint64 )
     GLenumArray = ADT( constants.GL_UNSIGNED_INT, constants.GLenum )
     GLsizeiArray = ADT( constants.GL_INT, constants.GLsizei )
-    GLvoidpArray = ADT( constants.GLvoidpp, None )
+    GLvoidpArray = ADT( constants.GL_VOID_P, constants.GLvoidp )
 
 GL_CONSTANT_TO_ARRAY_TYPE = {
     constants.GL_DOUBLE : GLclampdArray,
