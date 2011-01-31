@@ -116,7 +116,7 @@ class OpenGLFunction( codegenerator.Function ):
             # side effect should be to make the type available,
             # but doesn't work with GLvoid
             typeName = generator.type_name(argType.typ)
-            if self.CTYPE_TO_ARRAY_TYPE.has_key( typeName ):
+            if typeName in self.CTYPE_TO_ARRAY_TYPE:
                 return 'arrays.%s'%(self.CTYPE_TO_ARRAY_TYPE[typeName])
             elif (typeName == 'GLvoid'):
                 # normal to not have pointers to it...

@@ -62,9 +62,9 @@ class NumberHandler( formathandler.FormatHandler ):
         """Register a sub-class for handling as the base-type"""
         global TARGET_TYPE_TUPLE
         for source in (DEFAULT_TYPES, TARGET_TYPES, BYTE_SIZES):
-            if source.has_key( base ):
+            if base in source:
                 source[typ] = source[base]
-        if TARGET_TYPES.has_key( base ):
+        if base in TARGET_TYPES:
             TARGET_TYPE_TUPLE = TARGET_TYPE_TUPLE + (base,)
 
 DEFAULT_TYPES = {

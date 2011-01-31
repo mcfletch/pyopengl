@@ -128,7 +128,7 @@ class DefaultFormatter(pydoc.HTMLDoc):
                 module = sys.modules.get(modname)
                 if modname != name and module and hasattr(module, key):
                     if getattr(module, key) is base:
-                        if not cdict.has_key(key):
+                        if not key in cdict:
                             cdict[key] = cdict[base] = modname + '.html#' + key
         funcs, fdict = [], {}
         for key, value in inspect.getmembers(object, inspect.isroutine):
@@ -427,7 +427,7 @@ class PackageDocumentationGenerator:
         try:
             while self.pending:
                 try:
-                    if self.completed.has_key( self.pending[0] ):
+                    if self.pending[0] in self.completed:
                         raise AlreadyDone( self.pending[0] )
                     self.info( """Start %s"""% (repr(self.pending[0])))
                     object = pydoc.locate ( self.pending[0] )

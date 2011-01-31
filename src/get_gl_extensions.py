@@ -130,7 +130,7 @@ class Function( Helper ):
                 return 'ctypes.c_void_p'
             elif new == 'ctypes.c_void_p':
                 return 'arrays.GLvoidpArray'
-            elif self.CTYPE_TO_ARRAY_TYPE.has_key( new ):
+            elif new in self.CTYPE_TO_ARRAY_TYPE:
                 return 'arrays.%s'%(self.CTYPE_TO_ARRAY_TYPE[new])
             elif new in ( 'arrays.GLcharArray','arrays.GLcharARBArray'):
                 # can't have a pointer to these...
@@ -400,7 +400,7 @@ class Module( Helper ):
                 name,value = match.groups()
                 value = int(value,0)
                 result.append( '%(name)s = constant.Constant( %(name)r, 0x%(value)X )'%locals() )
-                if glGets.has_key( name ) or glGetSizes.has_key( name ):
+                if name in glGets or name in glGetSizes:
                     size = glGetSizes.get( name, [] )
                     if len(size) == 0: # not yet specified...
                         glGetSizes[ name ] = []
@@ -452,7 +452,7 @@ class Module( Helper ):
         """
         specFile = os.path.splitext( self.pathName )[0] + '.txt'
         specURLFragment = nameToPathMinusGL(self.name)
-        if self.SPEC_EXCEPTIONS.has_key( specURLFragment ):
+        if specURLFragment in self.SPEC_EXCEPTIONS:
             specURL = self.SPEC_EXCEPTIONS[ specURLFragment ]
         else:
             specURL = '%s/%s.txt'%( 

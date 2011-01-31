@@ -11,10 +11,10 @@ def parseFeedback( buffer, entryCount ):
     while bufferIndex < entryCount:
         token = int(buffer[bufferIndex])
         bufferIndex += 1
-        if SINGLE_VERTEX_TOKENS.has_key( token):
+        if token in SINGLE_VERTEX_TOKENS:
             vData, bufferIndex = getVertex( buffer, bufferIndex )
             result.append( (SINGLE_VERTEX_TOKENS.get(token), Vertex(*vData)) )
-        elif DOUBLE_VERTEX_TOKENS.has_key( token ):
+        elif token in DOUBLE_VERTEX_TOKENS:
             vData, bufferIndex = getVertex( buffer, bufferIndex )
             vData2, bufferIndex = getVertex( buffer, bufferIndex )
             result.append( (
