@@ -88,9 +88,12 @@ if VBO is None:
     class VBO( object ):
         """Instances can be passed into array-handling routines
 
-        You can check for whether VBOs are supported by accessing the implementation
-        attribute of the VBO, which will raise a RuntimeError if there is no available
-        implementation.
+        You can check for whether VBOs are supported by accessing the implementation:
+
+            if bool(vbo.get_implementation()):
+                # vbo version of code
+            else:
+                # fallback version of code
         """
         copied = False
         _no_cache_ = True # do not cache in context data arrays
