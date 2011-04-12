@@ -133,3 +133,8 @@ GLDEBUGPROCARB = _FUNCTION_TYPE(
     ctypes.c_char_p, # message 
     ctypes.c_void_p, # userParam
 )
+class _cl_context( ctypes.Structure ):
+    """Placeholder/empty structure for _cl_context"""
+class _cl_event( ctypes.Structure ):
+    """Placeholder/empty structure for _cl_event"""
+    

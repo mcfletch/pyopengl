@@ -14,8 +14,8 @@ glCreateSyncFromCLeventARB = platform.createExtensionFunction(
 'glCreateSyncFromCLeventARB',dll=platform.GL,
 extension=EXTENSION_NAME,
 resultType=constants.GLsync, 
-argTypes=(ctypes.POINTER(constants.struct _cl_context),ctypes.POINTER(constants.struct _cl_event),constants.GLbitfield,),
-doc='glCreateSyncFromCLeventARB(POINTER(constants.struct _cl_context)(context), POINTER(constants.struct _cl_event)(event), GLbitfield(flags)) -> constants.GLsync',
+argTypes=(ctypes.POINTER(constants._cl_context),ctypes.POINTER(constants._cl_event),constants.GLbitfield,),
+doc='glCreateSyncFromCLeventARB(POINTER(constants._cl_context)(context), POINTER(constants._cl_event)(event), GLbitfield(flags)) -> constants.GLsync',
 argNames=('context','event','flags',),
 deprecated=_DEPRECATED,
 )
