@@ -27,18 +27,15 @@ Overview (from the spec)
 	the data until completion is forced by the use of Finish or the APPLE_fence
 	extension.
 	
-	Vertex array range can be enabled in two ways.  EnableClientState can be
-	used with the VERTEX_ARRAY_RANGE_APPLE param to enable vertex array range
-	for the client context.  One can also simply set the vertex array storage
-	hint to either STORAGE_CACHED_APPLE or STORAGE_SHARED_APPLE (as discussed
-	below) to enable a particular vertex array range.  Once this is done, use of
-	vertex array range requires the definition of a specific memory range for
-	vertex data through VertexArrayRangeAPPLE.  It is recommended this data be
-	page aligned (4096 byte boundaries) and a multiple of page size in length
-	for maximum efficiency in data handling and internal flushing, but this is
-	not a requirement and any location and length of data can be defined as a
-	vertex array.  This extension provides no memory allocators as any
-	convenient memory allocator can be used.
+	EnableClientState must be used with the VERTEX_ARRAY_RANGE_APPLE param to
+	enable vertex array range.  Once this is done use of vertex array range
+	requires the definition of a specific memory range for vertex data through
+	VertexArrayRangeAPPLE.  It is recommended this data be page aligned (4096
+	byte boundaries) and a multiple of page size in length for maximum
+	efficiency in data handling and internal flushing, but this is not a
+	requirement and any location and length of data can be defined as a vertex
+	array.  This extension provides no memory allocators as any convenient
+	memory allocator can be used.
 	
 	Once a data set is established, using VertexArrayRangeAPPLE, it can be can
 	be drawn using standard OpenGL vertex array commands, as one would do
@@ -49,7 +46,7 @@ Overview (from the spec)
 	the vertex array range by disabling the VERTEX_ARRAY_RANGE_APPLE client
 	state should not change the results of an application's OpenGL drawing.
 	
-	For static data no additional coherency nor synchronization must be done and
+	For static data no addition coherency nor synchronization must be done and
 	the client is free to draw with the specified draw as it sees fit.
 	
 	If data is dynamic, thus to be modified, FlushVertexArrayRangeAPPLE should
@@ -62,7 +59,7 @@ Overview (from the spec)
 	range modified and does not have to be the entire vertex array range.
 	Additionally, data maybe read immediately after a flush without need for
 	further synchronization, thus overlapping areas of data maybe read, modified
-	and written between two successive flushes and the data will be
+	and written between two successive flushings and the data will be
 	consistent.
 	
 	To synchronize data modification after drawing two methods can be used. A
@@ -90,38 +87,19 @@ Overview (from the spec)
 	any commitments for the array range.  In this case once
 	VertexArrayRangeAPPLE returns it is safe to de-allocate the memory.
 	
-	Three types of storage hints are available for vertex array ranges; client,
-	shared, and cached.  These hints are set by passing the
-	STORAGE_CLIENT_APPLE, STORAGE_SHARED_APPLE, or STORAGE_CACHED_APPLE param to
-	VertexArrayParameteriAPPLE with VERTEX_ARRAY_STORAGE_HINT_APPLE pname.
-	Client storage, the default OpenGL behavior, occurs when
-	VERTEX_ARRAY_RANGE_APPLE is disabled AND the STORAGE_CLIENT_APPLE hint is
-	set. Note, STORAGE_CLIENT_APPLE is also the default hint setting.  Shared
-	memory usage is normally used for dynamic data that is expected to be
-	modified and is likely mapped to AGP memory space for access by both the
-	graphics hardware and client.  It is set when either
-	VERTEX_ARRAY_RANGE_APPLE is enabled, without the STORAGE_CACHED_APPLE hint
-	being set, or in all cases when the STORAGE_SHARED_APPLE hint is set.
-	Finally, the cached storage is designed to support static data and data which
-	could be cached in VRAM. This provides maximum access bandwidth for the
-	vertex array and occurs when the STORAGE_CACHED_APPLE hint is set. 
-	
-	The following pseudo-code represents the treatment of a vertex array range
-	memory depending on the hint setting and whether vertex array range is
-	enabled for the client context:
-	
-	if (VERTEX_ARRAY_STORAGE_HINT_APPLE == STORAGE_CACHED_APPLE)
-	    vertex array is treated as cached
-	else if (VERTEX_ARRAY_STORAGE_HINT_APPLE == STORAGE_SHARED_APPLE)
-		vertex array is treated as shared
-	else if (VERTEX_ARRAY_RANGE_APPLE enabled)
-		vertex array is treated as shared
-	else 
-		vertex array is treated as client
-	
-	Note, these hints can affect how array flushes are handled and the overhead
-	associated with flushing the array, it is recommended that data be handled
-	as shared unless it really is static and there are no plans to modify it.
+	An additional option is presented for vertex array ranges, the ability of
+	the client to hint to OpenGL the type of access and/or use the vertex array
+	memory is expected to have, by using VertexArrayParameteriAPPLE with either
+	of the STORAGE_CACHED_APPLE or STORAGE_SHARED_APPLE parameter.  By default,
+	all vertex array ranges are considered to be "shared".  These options allow
+	the tuning of memory handling by OpenGL.  "Shared" memory is normally used
+	for dynamic data that is expected to be modified and is likely mapped to AGP
+	space for access by the graphics hardware and client.  "Cached" memory is
+	designed to support static data and could be cached into to VRAM to provide
+	the maximum access bandwidth for the vertex array.  Note, these hints can
+	affect how array flushes are handled and the overhead associated with
+	flushing the array, it is recommended that data be left as "shared" unless
+	it really is static and there are no plans to modify it.
 	
 	To summarize the vertex array range extension provides relaxed
 	synchronization rules for handling vertex array data allowing high bandwidth
