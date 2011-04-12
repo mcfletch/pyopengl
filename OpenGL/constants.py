@@ -93,7 +93,7 @@ GLint64 = GLint64EXT = _defineType('GLint64', ctypes.c_int64, long )
 
 # ptrdiff_t, actually...
 GLsizeiptrARB = GLsizeiptr = GLsizei
-GLintptrARB = GLintptr = GLint
+GLvdpauSurfaceNV = GLintptrARB = GLintptr = GLint
 size_t = ctypes.c_ulong
 
 void = None
@@ -125,16 +125,26 @@ _FUNCTION_TYPE = PLATFORM.functionTypeFor(PLATFORM.GL)
 
 GLDEBUGPROCARB = _FUNCTION_TYPE(
     void, 
-    ctypes.c_uint,  # source,
+    GLenum,  # source,
     GLenum, #type,
-    ctypes.c_uint, # id 
-    ctypes.c_uint, # severity
-    ctypes.c_int, # length
+    GLuint, # id 
+    GLenum, # severity
+    GLsizei, # length
     ctypes.c_char_p, # message 
-    ctypes.c_void_p, # userParam
+    GLvoidp, # userParam
 )
+
 class _cl_context( ctypes.Structure ):
     """Placeholder/empty structure for _cl_context"""
 class _cl_event( ctypes.Structure ):
     """Placeholder/empty structure for _cl_event"""
     
+GLDEBUGPROCAMD = _FUNCTION_TYPE(
+    void,
+    GLuint,# id,
+    GLenum,# category,
+    GLenum,# severity,
+    GLsizei,# length,
+    ctypes.c_char_p,# message,
+    GLvoidp,# userParam
+)
