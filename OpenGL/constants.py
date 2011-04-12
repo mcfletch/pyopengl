@@ -119,3 +119,17 @@ ARRAY_TYPE_TO_CONSTANT = [
     ('GLuint', GL_UNSIGNED_INT),
     ('GLenum', GL_UNSIGNED_INT),
 ]
+
+from OpenGL.platform import PLATFORM
+_FUNCTION_TYPE = PLATFORM.functionTypeFor(PLATFORM.GL)
+
+GLDEBUGPROCARB = _FUNCTION_TYPE(
+    void, 
+    ctypes.c_uint,  # source,
+    GLenum, #type,
+    ctypes.c_uint, # id 
+    ctypes.c_uint, # severity
+    ctypes.c_int, # length
+    ctypes.c_char_p, # message 
+    ctypes.c_void_p, # userParam
+)
