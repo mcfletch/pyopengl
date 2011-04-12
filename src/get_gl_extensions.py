@@ -122,6 +122,8 @@ class Function( Helper ):
         base = base.strip()
         if base.endswith( 'const' ):
             return self.cTypeToPyType( base[:-5] )
+        elif base.startswith( 'struct' ):
+            return self.cTypeToPyType( base[6:] )
         elif base.startswith( 'const' ):
             return self.cTypeToPyType( base[5:] )
         elif base.endswith( '*' ):
