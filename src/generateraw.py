@@ -23,7 +23,7 @@ MODULE_DEFINITIONS = [
     ('GLUT', ('glut[A-Z0-9].*','GLUT[_a-z0-9].*')),
     ('GLE', None),
     ('GLX', None),
-    ('WGL', ('wgl.*','WGL.*',),
+    ('WGL', ('wgl.*','WGL.*',)),
     ('AGL', None),
 ]
 def filterModules( arguments ):
