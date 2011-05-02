@@ -23,6 +23,7 @@ platform module *not* in the module here!
 from OpenGL.platform import GLUT, CurrentContextIsValid, GLUT_GUARD_CALLBACKS
 from OpenGL import contextdata, error, platform, logs
 from OpenGL.raw import GLUT as simple
+from OpenGL._bytes import bytes, _NULL_8_BYTE
 import ctypes, os, sys, traceback
 PLATFORM = platform.PLATFORM
 FUNCTION_TYPE = simple.CALLBACK_FUNCTION_TYPE
@@ -309,7 +310,7 @@ def glutInit( *args ):
     else:
         count=0
         args = []
-    args = [str(x) for x in args]
+    args = [as_8_bit(x) for x in args]
     if not count:
         count, args = 1, ['foo']
     holder = (ctypes.c_char_p * len(args))()

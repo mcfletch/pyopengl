@@ -1,11 +1,20 @@
 #! /usr/bin/env python
 """OpenGL-ctypes setup script (setuptools-based)
 """
-from distutils.core import setup
+extra_commands = {}
+try:
+    from setuptools import setup 
+except ImportError:
+    from distutils.core import setup
+    try:
+        from distutils.command.build_py import build_py_2to3
+        extra_commands['build_py'] = build_py_2to3
+    except ImportError:
+        pass
+
 import sys, os
 sys.path.insert(0, '.' )
 import metadata
-
 def is_package( path ):
     return os.path.isfile( os.path.join( path, '__init__.py' ))
 def find_packages( root ):
@@ -26,6 +35,7 @@ class smart_install_data(install_data):
         self.install_dir = getattr(install_cmd, 'install_lib')
         # should create the directory if it doesn't exist!!!
         return install_data.run(self)
+extra_commands['install_data'] = smart_install_data
 
 if sys.platform == 'win32':
     # binary versions of GLUT and GLE for Win32 (sigh)
@@ -55,7 +65,7 @@ if __name__ == "__main__":
             },
         },
         data_files = datafiles,
-        cmdclass = {'install_data':smart_install_data},
+        cmdclass = extra_commands,
         use_2to3 = True,
         **metadata.metadata
     )

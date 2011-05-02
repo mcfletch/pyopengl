@@ -4,6 +4,7 @@ This module provides the tools required to check whether
 an extension is available
 """
 from OpenGL.latebind import LateBind
+from OpenGL._bytes import bytes,as_8_bit
 import logging
 log = logging.getLogger( 'OpenGL.extensions' )
 VERSION_PREFIX = 'GL_VERSION_GL_'
@@ -23,7 +24,7 @@ def getGLVersion( ):
         log.info( 'OpenGL Version: %s', new )
         if new:
             CURRENT_GL_VERSION = [
-                int(x) for x in new.split(' ',1)[0].split( '.' )
+                int(x) for x in new.split(as_8_bit(' '),1)[0].split( as_8_bit('.') )
             ]
         else:
             return False # not yet loaded/supported
@@ -33,11 +34,11 @@ def getGLVersion( ):
 def hasGLExtension( specifier ):
     """Given a string specifier, check for extension being available"""
     global AVAILABLE_GL_EXTENSIONS
-    specifier = specifier.replace('.','_')
+    specifier = specifier.replace(as_8_bit('.'),as_8_bit('_'))
     if specifier.startswith( VERSION_PREFIX ):
         specifier = [
             int(x)
-            for x in specifier[ len(VERSION_PREFIX):].split('_')
+            for x in specifier[ len(VERSION_PREFIX):].split(as_8_bit('_'))
         ]
         version = getGLVersion()
         if not version:
@@ -70,7 +71,7 @@ def hasGLUExtension( specifier ):
     from OpenGL.GLU import gluGetString, GLU_EXTENSIONS
     if not AVAILABLE_GLU_EXTENSIONS:
         AVAILABLE_GLU_EXTENSIONS[:] = gluGetString( GLU_EXTENSIONS )
-    return specifier.replace('.','_') in AVAILABLE_GLU_EXTENSIONS
+    return specifier.replace(as_8_bit('.'),as_8_bit('_')) in AVAILABLE_GLU_EXTENSIONS
 
 class _Alternate( LateBind ):
     def __init__( self, name, *alternates ):

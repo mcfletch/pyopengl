@@ -15,6 +15,7 @@ pygame.display.init()
 import OpenGL 
 OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
+from OpenGL._bytes import bytes, _NULL_8_BYTE
 from OpenGL.GL import *
 try:
     glGetError()
@@ -550,8 +551,8 @@ class Tests( unittest.TestCase ):
             If we had a reasonable lib that dumped raw image data to a shared-mem file
             we might be able to use this for movie display :) 
             """
-            fh = open( 'mmap-test-data.dat', 'w+' )
-            fh.write( '\000'*(32*32*3+1))
+            fh = open( 'mmap-test-data.dat', 'wb+' )
+            fh.write( _NULL_8_BYTE*(32*32*3+1))
             fh.flush()
             fh.close()
             # using numpy.memmap here...

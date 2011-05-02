@@ -3,11 +3,7 @@
 from OpenGL import constants
 from OpenGL.arrays import formathandler
 import ctypes
-
-try:
-    BYTES_TYPE = bytes
-except NameError, err:
-    BYTES_TYPE = str
+from OpenGL._bytes import bytes
 
 def dataPointer( value, typeCode=None ):
     return ctypes.cast(ctypes.c_char_p(value),
@@ -15,7 +11,7 @@ def dataPointer( value, typeCode=None ):
 
 class StringHandler( formathandler.FormatHandler ):
     """String-specific data-type handler for OpenGL"""
-    HANDLED_TYPES = (BYTES_TYPE, )
+    HANDLED_TYPES = (bytes, )
     @classmethod
     def from_param( cls, value, typeCode=None ):
         return ctypes.c_void_p( dataPointer( value ) )
@@ -39,7 +35,7 @@ class StringHandler( formathandler.FormatHandler ):
         return len(value)
     def asArray( self, value, typeCode=None ):
         """Convert given value to an array value of given typeCode"""
-        if isinstance( value, str ):
+        if isinstance( value, bytes ):
             return value
         elif hasattr( value, 'tostring' ):
             return value.tostring()

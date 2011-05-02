@@ -1,5 +1,6 @@
 """Implementations for common converter types"""
 import ctypes,logging
+from OpenGL._bytes import bytes,as_8_bit
 log = logging.getLogger( 'OpenGL.converters' )
 
 class Converter( object ):
@@ -281,9 +282,9 @@ class StringLengths( CConverter ):
         return len(pyArgs[self.index])
     def stringArray( self, arg, baseOperation, args ):
         """Create basic array-of-strings object from pyArg"""
-        if isinstance( arg, str ):
+        if isinstance( arg, bytes ):
             arg = [arg]
-        value = [str(x) for x in arg]
+        value = [as_8_bit(x) for x in arg]
         return value
     def stringArrayForC( self, strings ):
         """Create a ctypes pointer to char-pointer set"""
