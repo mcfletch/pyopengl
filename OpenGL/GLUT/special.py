@@ -23,7 +23,7 @@ platform module *not* in the module here!
 from OpenGL.platform import GLUT, CurrentContextIsValid, GLUT_GUARD_CALLBACKS
 from OpenGL import contextdata, error, platform, logs
 from OpenGL.raw import GLUT as simple
-from OpenGL._bytes import bytes, _NULL_8_BYTE
+from OpenGL._bytes import bytes, _NULL_8_BYTE, as_8_bit
 import ctypes, os, sys, traceback
 PLATFORM = platform.PLATFORM
 FUNCTION_TYPE = simple.CALLBACK_FUNCTION_TYPE
