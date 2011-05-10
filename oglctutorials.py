@@ -5,7 +5,7 @@ import kid, logging
 log = logging.getLogger( 'tutorials' )
 
 text_re = re.compile(
-    r"""^[ \t]*(''')(?P<commentary>.*?)(''')[ \t]*$""",
+    r"""^[ \t]*?(''')(?P<commentary>.*?)(''')[ \t]*?$""",
     re.MULTILINE|re.I|re.DOTALL
 )
 block_splitter = re.compile(r"""\n[ \t]*\n""",re.MULTILINE|re.I|re.DOTALL)
@@ -232,7 +232,7 @@ class Image( Anchor ):
 
 
 def parse_file( filename ):
-    text = open( filename ).read()
+    text = open( filename ).read().replace( '\r\n','\n' )
     tutorial = Tutorial()
     tutorial.set_file( filename )
     offset = 0

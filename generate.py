@@ -194,6 +194,8 @@ class RefSect( model.RefSect ):
 
         self.varrefs.extend( set )
 
+        
+
 def load_file( filename ):
     data = WRAPPER%(open(filename).read())
     parser = ET.ETCompatXMLParser(resolve_entities=False)
