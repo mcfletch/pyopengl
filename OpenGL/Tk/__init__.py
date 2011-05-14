@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Traditional PyOpenGL interface to Togl
 
 This module provides access to the Tkinter Togl widget 
