@@ -262,3 +262,37 @@ glutGetProcAddress = platform.createBaseFunction(
     doc='glutGetProcAddress( STRING(procName) ) -> c_void_p', 
     argNames=('procName',),
 )
+
+glutInitContextFlags = platform.createBaseFunction(
+    'glutInitContextFlags', dll=platform.GLUT, resultType=None,
+    argTypes=[GLint],
+    doc='glutInitContextFlags( GLint(flags) ) -> None',
+    argNames = ('flags',),
+)
+glutInitContextProfile = platform.createBaseFunction(
+    'glutInitContextProfile', dll=platform.GLUT, resultType=None,
+    argTypes=[GLint],
+    doc='glutInitContextProfile( GLint(profile) ) -> None',
+    argNames = ('profile',),
+)
+glutInitContextVersion = platform.createBaseFunction(
+    'glutInitContextVersion', dll=platform.GLUT, resultType=None,
+    argTypes=[GLint,GLint],
+    doc='glutInitContextVersion( GLint(majorVersion), GLint(minorVersion) ) -> None',
+    argNames = ('majorVersion','minorVersion'),
+)
+glutFullScreenToggle = platform.createBaseFunction(
+    'glutFullScreenToggle', dll=platform.GLUT, resultType=None,
+    argTypes=[],
+    doc='glutFullScreenToggle( ) -> None',
+    argNames = (),
+)
+
+# TODO: this entry point is quite messy, needs a wrapper that creates size, then makes a result 
+# object that will de-allocate the memory for the result when finished.  Bleh.
+glutGetModeValues = platform.createBaseFunction(
+    'glutGetModeValues', dll=platform.GLUT, resultType=ctypes.POINTER(GLint),
+    argTypes=[GLint,ctypes.POINTER(GLint)],
+    doc='glutInitContextVersion( GLenum(mode), POINTER(GLint)(size) ) -> POINTER(GLint)',
+    argNames = ('mode','size'),
+)
