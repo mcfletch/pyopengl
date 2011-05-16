@@ -13,6 +13,14 @@ Basic usage:
         glNormalPointer( my_vbo + 12, ... )
     finally:
         my_vbo.unbind()
+    
+    or 
+    
+    with my_vbo:
+        ...
+        glVertexPointer( my_vbo, ... )
+        ...
+        glNormalPointer( my_vbo + 12, ... )        
 
 See the OpenGLContext shader tutorials for a gentle introduction on the 
 usage of VBO objects:
@@ -171,7 +179,13 @@ if VBO is None:
                 return getattr( self.implementation, self.implementation.basename( value ) )
             return value
         def set_array( self, data, size=None ):
-            """Update our entire array with new data"""
+            """Update our entire array with new data
+            
+            data -- PyOpenGL-compatible array-data structure, numpy arrays, ctypes arrays, etc.
+            size -- if not provided, will use arrayByteCount to determine the size of the data-array,
+                thus this value (number of bytes) is required when using opaque data-structures,
+                (such as ctypes pointers) as the array data-source.
+            """
             self.data = data
             self.copied = False
             if size is not None:
@@ -230,8 +244,10 @@ if VBO is None:
                         (start,(stop-start), data)
                     )
         def __len__( self ):
+            """Delegate length/truth checks to our data-array"""
             return len( self.data )
         def __getattr__( self, key ):
+            """Delegate failing attribute lookups to our data-array"""
             if key not in ('data','usage','target','buffers', 'copied','_I_','implementation','_copy_segments' ):
                 return getattr( self.data, key )
             else:
@@ -245,7 +261,13 @@ if VBO is None:
             self.implementation._DELETERS_[ id(self) ] = weakref.ref( self, self.implementation.deleter( self.buffers, id(self) ))
             return self.buffers
         def copy_data( self ):
-            """Copy our data into the buffer on the GL side"""
+            """Copy our data into the buffer on the GL side (if required)
+            
+            Ensures that the GL's version of the data in the VBO matches our 
+            internal view of the data, either by copying the entire data-set 
+            over with glBufferData or by updating the already-transferred 
+            data with glBufferSubData.
+            """
             assert self.buffers, """Should do create_buffers before copy_data"""
             if self.copied:
                 if self._copy_segments:
@@ -272,7 +294,11 @@ if VBO is None:
                     except (AttributeError,error.NullFunctionError), err:
                         pass
         def bind( self ):
-            """Bind this buffer for use in vertex calls"""
+            """Bind this buffer for use in vertex calls
+            
+            If we have not yet created our implementation-level VBO, then we 
+            will create it before binding.  Once bound, calls self.copy_data()
+            """
             if not self.buffers:
                 buffers = self.create_buffers()
             self.implementation.glBindBuffer( self.target, self.buffers[0])
@@ -282,7 +308,7 @@ if VBO is None:
             self.implementation.glBindBuffer( self.target,0 )
 
         def __add__( self, other ):
-            """Add an integer to this VBO (offset)"""
+            """Add an integer to this VBO (create a VBOOffset)"""
             if hasattr( other, 'offset' ):
                 other = other.offset
             assert isinstance( other, (int,long) ), """Only know how to add integer/long offsets"""
