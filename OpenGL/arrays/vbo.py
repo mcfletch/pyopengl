@@ -10,6 +10,7 @@ Basic usage:
         ...
         glVertexPointer( my_vbo, ... )
         ...
+        glNormalPointer( my_vbo + 12, ... )
     finally:
         my_vbo.unbind()
 
@@ -17,6 +18,9 @@ See the OpenGLContext shader tutorials for a gentle introduction on the
 usage of VBO objects:
 
     http://pyopengl.sourceforge.net/context/tutorials/shader_intro.xhtml
+
+This implementation will choose either the ARB or Core implementation 
+of the VBO functions.
 """
 from OpenGL import GL
 from OpenGL.arrays.arraydatatype import ArrayDatatype
