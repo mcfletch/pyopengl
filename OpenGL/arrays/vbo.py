@@ -1,4 +1,23 @@
-"""VertexBufferObject helper class"""
+"""VertexBufferObject helper class
+
+Basic usage:
+
+    my_data = numpy.array( data, 'f')
+    my_vbo = vbo.VBO( my_data )
+    ...
+    my_vbo.bind()
+    try:
+        ...
+        glVertexPointer( my_vbo, ... )
+        ...
+    finally:
+        my_vbo.unbind()
+
+See the OpenGLContext shader tutorials for a gentle introduction on the 
+usage of VBO objects:
+
+    http://pyopengl.sourceforge.net/context/tutorials/shader_intro.xhtml
+"""
 from OpenGL import GL
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
@@ -101,6 +120,40 @@ if VBO is None:
             self, data, usage='GL_DYNAMIC_DRAW',
             target='GL_ARRAY_BUFFER', size=None,
         ):
+            """Initialize the VBO object 
+            
+            data -- PyOpenGL-compatible array-data structure, numpy arrays, ctypes arrays, etc.
+            usage -- OpenGL usage constant describing expected data-flow patterns (this is a hint 
+                to the GL about where/how to cache the data)
+                
+                GL_STATIC_DRAW_ARB
+                GL_STATIC_READ_ARB
+                GL_STATIC_COPY_ARB
+                GL_DYNAMIC_DRAW_ARB
+                GL_DYNAMIC_READ_ARB
+                GL_DYNAMIC_COPY_ARB
+                GL_STREAM_DRAW_ARB
+                GL_STREAM_READ_ARB
+                GL_STREAM_COPY_ARB
+                
+                DRAW constants suggest to the card that the data will be primarily used to draw 
+                on the card.  READ that the data will be read back into the GL.  COPY means that 
+                the data will be used both for DRAW and READ operations.
+                
+                STATIC suggests that the data will only be written once (or a small number of times).
+                DYNAMIC suggests that the data will be used a small number of times before being 
+                discarded.
+                STREAM suggests that the data will be updated approximately every time that it is 
+                used (that is, it will likely only be used once).
+                
+            target -- VBO target to which to bind (array or indices)
+                GL_ARRAY_BUFFER -- array-data binding 
+                GL_ELEMENT_ARRAY_BUFFER -- index-data binding
+            
+            size -- if not provided, will use arrayByteCount to determine the size of the data-array,
+                thus this value (number of bytes) is required when using opaque data-structures,
+                (such as ctypes pointers) as the array data-source.
+            """
             self.usage = usage
             self.set_array( data, size )
             self.target = target
