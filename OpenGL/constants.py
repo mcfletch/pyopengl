@@ -103,7 +103,9 @@ GLhalfNV = GLhalfARB = ctypes.c_ushort
 # GL.ARB.sync extension, GLsync is an opaque pointer to a struct 
 # in the extensions header, basically just a "token" that can be 
 # passed to the various operations...
-GLsync = ctypes.c_void_p 
+class _GLsync( ctypes.Structure ):
+    """Opaque structure definition to fool ctypes into treating us as a real structure"""
+GLsync = ctypes.POINTER( _GLsync ) # ctypes.c_void_p does *not* work as a return type...
 GLvoidp = ctypes.c_void_p
 
 ARRAY_TYPE_TO_CONSTANT = [
