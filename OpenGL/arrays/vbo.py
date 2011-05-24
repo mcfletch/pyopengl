@@ -27,8 +27,8 @@ usage of VBO objects:
 
     http://pyopengl.sourceforge.net/context/tutorials/shader_intro.xhtml
 
-This implementation will choose either the ARB or Core implementation 
-of the VBO functions.
+This implementation will choose either the ARB or Core (OpenGL 1.5) 
+implementation of the VBO functions.
 """
 from OpenGL import GL
 from OpenGL.arrays.arraydatatype import ArrayDatatype
@@ -72,6 +72,8 @@ class Implementation( object ):
         return self.available
     def deleter( self, buffers, key):
         """Produce a deleter callback to delete the given buffer"""
+        # these values are stored here to avoid them being cleaned up 
+        # to non during module deletion and causing errors to be raised
         nfe = error.NullFunctionError
         gluint = constants.GLuint
         def doBufferDeletion( *args, **named ):
@@ -321,6 +323,12 @@ if VBO is None:
             return False # do not supress exceptions...
 
     class VBOOffset( object ):
+        """Offset into a VBO instance 
+        
+        This class is normally instantiated by doing a my_vbo + int operation,
+        it can be passed to VBO requiring operations and will generate the 
+        appropriate integer offset value to be passed in.
+        """
         def __init__( self, vbo, offset ):
             self.vbo = vbo
             self.offset = offset
@@ -344,6 +352,7 @@ if VBO is None:
             """
             return 0
         def from_param( self, instance, typeCode=None ):
+            """Always returns c_void_p(0)"""
             return self.vp0
         def zeros( self, dims, typeCode ):
             """Not implemented"""
@@ -368,16 +377,16 @@ if VBO is None:
             return ArrayDatatype.dimensions( value.data )
 
     class VBOOffsetHandler( VBOHandler ):
+        """Handles VBOOffset instances passed in as array data"""
         def dataPointer( self, instance ):
             """Retrieve data-pointer from the instance's data
 
-            Is always NULL, to indicate use of the bound pointer
+            returns instance' offset
             """
             return instance.offset
         def from_param( self, instance, typeCode=None ):
+            """Returns a c_void_p( instance.offset )"""
             return ctypes.c_void_p( instance.offset )
-
-
 
 FormatHandler.loadAll() # otherwise just the VBO would get loaded :)
 VBO_HANDLER = VBOHandler()
@@ -391,6 +400,7 @@ def PyBuffer_FromMemory(address, length):
 
 _cleaners = {}
 def _cleaner( vbo ):
+    """Construct a mapped-array cleaner function to unmap vbo.target"""
     def clean( ref ):
         try:
             _cleaners.pop( vbo )
@@ -409,8 +419,13 @@ def mapVBO( vbo, access=GL.GL_READ_WRITE ):
     This should be considered an *experimental* API,
     it is not guaranteed to be available in future revisions
     of this library!
+    
+    
     """
     vp = glMapBuffer( vbo.target, access )
+    # TODO: obviously this is not the right way to do this should allow each format 
+    # handler to convert the pointer in their own way...
+    from numpy import frombuffer
     buffer = PyBuffer_FromMemory(
         ctypes.c_void_p(vp), vbo.size
     )
