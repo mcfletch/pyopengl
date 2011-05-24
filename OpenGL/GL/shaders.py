@@ -12,7 +12,10 @@ import logging
 logging.basicConfig()
 log = logging.getLogger( 'OpenGL.GL.shaders' )
 from OpenGL import GL
-from OpenGL.GL.ARB import shader_objects, fragment_shader, vertex_shader, vertex_program
+from OpenGL.GL.ARB import (
+    shader_objects, fragment_shader, vertex_shader, vertex_program,
+    geometry_shader4, separate_shader_objects, get_program_binary,
+)
 from OpenGL.extensions import alternate
 
 __all__ = [
@@ -44,7 +47,10 @@ def _alt( base, name ):
         return True
     return False
 _excludes = ['glGetProgramiv']
-for module in shader_objects,fragment_shader,vertex_shader,vertex_program:
+for module in (
+    shader_objects,fragment_shader,vertex_shader,vertex_program,
+   geometry_shader4,
+):
     for name in dir(module):
         found = None
         for suffix in ('ObjectARB','_ARB','ARB'):
@@ -75,6 +81,7 @@ GL_VALIDATE_STATUS = GL.GL_VALIDATE_STATUS
 GL_COMPILE_STATUS = GL.GL_COMPILE_STATUS
 GL_LINK_STATUS = GL.GL_LINK_STATUS
 GL_FALSE = GL.GL_FALSE
+GL_TRUE = GL.GL_TRUE
 
 class ShaderProgram( int ):
     """Integer sub-class with context-manager operation"""
@@ -84,12 +91,62 @@ class ShaderProgram( int ):
     def __exit__( self, typ, val, tb ):
         """Stop use of the program"""
         glUseProgram( 0 )
+    
+    def check_validate( self ):
+        # Validation has to occur *after* linking/loading
+        glValidateProgram( self )
+        validation = glGetProgramiv( self, GL_VALIDATE_STATUS )
+        if validation == GL_FALSE:
+            raise RuntimeError(
+                """Validation failure (%s): %s"""%(
+                validation,
+                glGetProgramInfoLog( self ),
+            ))
+        return self
 
-def compileProgram(*shaders):
+    def check_linked( self ):
+        """Check validation and link status for this program"""
+        link_status = glGetProgramiv( self, GL_LINK_STATUS )
+        if link_status == GL_FALSE:
+            raise RuntimeError(
+                """Link failure (%s): %s"""%(
+                link_status,
+                glGetProgramInfoLog( self ),
+            ))
+        return self
+
+    def retrieve( self ):
+        """Attempt to retrieve binary for this compiled shader
+        
+        returns (format,binaryData) for the shader program
+        """
+        from OpenGL.constants import GLint,GLenum 
+        from OpenGL.arrays import GLbyteArray
+        size = GLint()
+        glGetProgramiv( self, get_program_binary.GL_PROGRAM_BINARY_LENGTH, size )
+        result = GLbyteArray.zeros( (size.value,))
+        size2 = GLint()
+        format = GLenum()
+        get_program_binary.glGetProgramBinary( self, size.value, size2, format, result )
+        return format.value, result 
+    def load( self, format, binary ):
+        """Attempt to load binary-format for a pre-compiled shader"""
+        get_program_binary.glProgramBinary( self, format, binary, len(binary))
+        self.check_validate()
+        self.check_linked()
+        return self
+
+def compileProgram(*shaders, **named):
     """Create a new program, attach shaders and validate
 
     shaders -- arbitrary number of shaders to attach to the
         generated program.
+    separable (keyword only) -- set the separable flag to allow 
+        for partial installation of shader into the pipeline (see 
+        glUseProgramStages)
+    retrievable (keyword only) -- set the retrievable flag to 
+        allow retrieval of the program binary representation, (see 
+        glProgramBinary, glGetProgramBinary)
 
     This convenience function is *not* standard OpenGL,
     but it does wind up being fairly useful for demos
@@ -113,28 +170,19 @@ def compileProgram(*shaders):
     raises RuntimeError when a link/validation failure occurs
     """
     program = glCreateProgram()
+    if named.get('separable'):
+        glProgramParameteri( program, separate_shader_objects.GL_PROGRAM_SEPARABLE, GL_TRUE )
+    if named.get('retrievable'):
+        glProgramParameteri( program, get_program_binary.GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE )
     for shader in shaders:
         glAttachShader(program, shader)
+    program = ShaderProgram( program )
     glLinkProgram(program)
-    # Validation has to occur *after* linking
-    glValidateProgram( program )
-    validation = glGetProgramiv( program, GL_VALIDATE_STATUS )
-    if validation == GL_FALSE:
-        raise RuntimeError(
-            """Validation failure (%s): %s"""%(
-            validation,
-            glGetProgramInfoLog( program ),
-        ))
-    link_status = glGetProgramiv( program, GL_LINK_STATUS )
-    if link_status == GL_FALSE:
-        raise RuntimeError(
-            """Link failure (%s): %s"""%(
-            link_status,
-            glGetProgramInfoLog( program ),
-        ))
+    program.check_validate()
+    program.check_linked()
     for shader in shaders:
         glDeleteShader(shader)
-    return ShaderProgram( program )
+    return program
 def as_bytes( s ):
     if isinstance( s, unicode ):
         s = s.encode( ) # TODO: can we use latin-1 or utf-8?
