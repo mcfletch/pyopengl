@@ -178,6 +178,11 @@ cdef class VBO:
             return getattr( self.data, key )
         else:
             raise AttributeError( key )
+    def __int__( self ):
+        """Get our VBO id"""
+        if not self.buffer:
+            self.create_buffers()
+        return self.buffer
     def create_buffers( self ):
         """Create the internal buffer(s)"""
         assert not self.created, """Already created the buffer"""

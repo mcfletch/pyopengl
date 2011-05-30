@@ -163,7 +163,10 @@ if VBO is None:
             target -- VBO target to which to bind (array or indices)
                 GL_ARRAY_BUFFER -- array-data binding 
                 GL_ELEMENT_ARRAY_BUFFER -- index-data binding
-            
+                GL_UNIFORM_BUFFER -- used to pass mid-size arrays of data packed into a buffer
+                GL_TEXTURE_BUFFER -- used to pass large arrays of data as a pseudo-texture
+                GL_TRANSFORM_FEEDBACK_BUFFER -- used to receive transformed vertices for processing
+                
             size -- if not provided, will use arrayByteCount to determine the size of the data-array,
                 thus this value (number of bytes) is required when using opaque data-structures,
                 (such as ctypes pointers) as the array data-source.
@@ -295,6 +298,11 @@ if VBO is None:
                         self.implementation.glDeleteBuffers(1, self.buffers.pop(0))
                     except (AttributeError,error.NullFunctionError), err:
                         pass
+        def __int__( self ):
+            """Get our VBO id"""
+            if not self.buffers:
+                self.create_buffers()
+            return self.buffers[0]
         def bind( self ):
             """Bind this buffer for use in vertex calls
             
