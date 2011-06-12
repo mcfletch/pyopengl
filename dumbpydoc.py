@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 """Extremely dumb replacement for pydoc"""
 from directdocs import model,references
+import OpenGL
+OpenGL.USE_ACCELERATE = False
 from OpenGL.extensions import _Alternate as Alternate
 from OpenGL.GLUT.special import GLUTCallback
 from OpenGL.wrapper import Wrapper
@@ -128,7 +130,7 @@ class PyModule( object ):
                     mod = self.sub_module(name)
                     if mod:
                         self.modules.append( mod )
-            for name in sorted(glob.glob(os.path.join( dirname, '*.py' ))):
+            for name in sorted(glob.glob(os.path.join( dirname, '*.py' ))+glob.glob(os.path.join( dirname, '*.so' ))):
                 basename = os.path.splitext( os.path.basename( name ))[0]
                 if basename != '__init__':
                     mod = self.sub_module(basename)
@@ -213,7 +215,7 @@ class Class( object ):
                 staticmethod,
             )):
                 self.functions.append( (key,model.PyFunction( None, value, alias=key )))
-            elif hasattr( value, '__get__' ):
+            elif hasattr( value, '__get__' ) and key not in ('__dict__','__weakref__'):
                 self.properties.append( (key,Property(value,key,self)))
 
 class Property( object ):
@@ -260,7 +262,10 @@ def render( mod ):
 if __name__ == '__main__':
     logging.basicConfig( level=logging.DEBUG )
     for mod in [
-        'OpenGL.GL.ARB',
+#        'OpenGL.GL.ARB',
+#        'OpenGL.GL.selection',
+        'OpenGL.arrays.vbo',
+        'OpenGL_accelerate',
 #        'OpenGLContext',
 #        'vrml',
     ]:
