@@ -156,11 +156,11 @@ class Function( object ):
         self.section = section
         self.python = {} # name to python function...
         self.parameters = []
-        if section.package == 'GL':
-            from OpenGL.platform import entrypoint31
-            self.deprecated = entrypoint31.deprecated( self.name )
-            if self.deprecated:
-                self.section.set_deprecation( True )
+#        if section.package == 'GL':
+#            from OpenGL.platform import entrypoint31
+#            self.deprecated = entrypoint31.deprecated( self.name )
+#            if self.deprecated:
+#                self.section.set_deprecation( True )
     def __repr__( self ):
         return '%s( %s ) -> %s'%(
             self.name,
