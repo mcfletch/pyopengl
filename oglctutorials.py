@@ -209,6 +209,8 @@ class Code( Block ):
     html_class = 'code-sample'
     def markup( self, text ):
         return text, None
+class CollapsedCode( Code ):
+    html_class = 'code-sample collapsed'
 class Paragraph( Block ):
     """Generic paragraph in commentary"""
     html_tag = 'div'
@@ -242,7 +244,11 @@ def parse_file( filename ):
         if empty_match:
             py_text = py_text[empty_match.end():]
         if py_text.strip():
-            tutorial.append( Code( py_text ) )
+            if py_text.lstrip().startswith( '#collapse' ):
+                code = CollapsedCode( '\n'.join(py_text.splitlines()[1:] ))
+            else:
+                code = Code( py_text )
+            tutorial.append( code )
         if match.group( 'commentary' ).strip():
             tutorial.append(
                 Commentary( match.group('commentary') )
@@ -271,6 +277,7 @@ if __name__ == "__main__":
                 'shader_10.py',
                 'shader_11.py',
                 'shader_12.py',
+                'shader_instanced.py',
             ]
         ]
     )
