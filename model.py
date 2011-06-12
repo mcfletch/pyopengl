@@ -196,12 +196,14 @@ class PyFunction( Function ):
         ))
     @property
     def target( self ):
-        return self.py_function
+        function = self.py_function
+        function = getattr( function, '__func__', function )
+        return function
     @property
     def docstring( self ):
         """Retrieve docstring for pure-python objects"""
-        if hasattr( self.py_function, '__doc__' ):
-            return self.py_function.__doc__
+        if hasattr( self.target, '__doc__' ):
+            return self.target.__doc__
         return None
     @property
     def section( self ):
@@ -214,7 +216,7 @@ class PyFunction( Function ):
     def parameters( self ):
         """Calculate (and store) parameter-list for the function"""
         if self._parameters is None:
-            self._parameters = self.get_parameters( self.py_function )
+            self._parameters = self.get_parameters( self.target )
         return self._parameters
     def get_parameters( self, target ):
         names = None
