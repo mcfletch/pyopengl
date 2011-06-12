@@ -62,6 +62,19 @@ class BZRSource( CVSSource ):
     def update_command( self ):
         return 'bzr update'
 
+class HgSource( CVSSource ):
+    @property 
+    def checkout_command( self ):
+        assert self.root 
+        assert self.dirname 
+        return 'hg clone %s %s'%(
+            self.root, self.dirname,
+        )
+    @property
+    def update_command( self ):
+        """Note: requires enabling the fetch extension (sigh)"""
+        return 'hg fetch'
+
 class GITSource( CVSSource ):
     @property
     def checkout_command( self ):
@@ -147,6 +160,18 @@ checkouts = [
     BZRSource(
         'lp:~bebraw/scocca/devel',
         dirname = 'scocca',
+    ),
+    HgSource(
+        'https://bitbucket.org/tartley/gltutpy',
+        dirname = 'gltutpy',
+    ),
+    HgSource(
+        'https://bitbucket.org/tartley/algorithmic-generation-of-geometry',
+        dirname = 'agog',
+    ),
+    HgSource(
+        'https://bitbucket.org/tartley/gloopy',
+        dirname = 'gloopy',
     ),
     # pymol # not pyopengl AFAICS
     # {LGPL} mirra # no online view of code AFAICS
