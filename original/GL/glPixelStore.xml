@@ -72,17 +72,10 @@
     <refsect1 id="description"><title>Description</title>
         <para>
             <function>glPixelStore</function> sets pixel storage modes that affect the operation of subsequent
-            <citerefentry><refentrytitle>glDrawPixels</refentrytitle></citerefentry> and <citerefentry><refentrytitle>glReadPixels</refentrytitle></citerefentry> as well as the unpacking of
-            polygon stipple patterns (see <citerefentry><refentrytitle>glPolygonStipple</refentrytitle></citerefentry>), bitmaps (see
-            <citerefentry><refentrytitle>glBitmap</refentrytitle></citerefentry>), texture patterns (see <citerefentry><refentrytitle>glTexImage1D</refentrytitle></citerefentry>,
+            <citerefentry><refentrytitle>glReadPixels</refentrytitle></citerefentry> as well as the unpacking of
+            texture patterns (see <citerefentry><refentrytitle>glTexImage1D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexImage2D</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glTexImage3D</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glTexSubImage1D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexSubImage2D</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glTexSubImage3D</refentrytitle></citerefentry>).
-            Additionally, if the <code>ARB_imaging</code> extension is supported, pixel
-            storage modes affect convolution filters
-            (see <citerefentry><refentrytitle>glConvolutionFilter1D</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glConvolutionFilter2D</refentrytitle></citerefentry>, and
-            <citerefentry><refentrytitle>glSeparableFilter2D</refentrytitle></citerefentry>, color table (see <citerefentry><refentrytitle>glColorTable</refentrytitle></citerefentry>, and
-            <citerefentry><refentrytitle>glColorSubTable</refentrytitle></citerefentry>, and unpacking histogram (See <citerefentry><refentrytitle>glHistogram</refentrytitle></citerefentry>),
-            and minmax (See <citerefentry><refentrytitle>glMinmax</refentrytitle></citerefentry>) data.
         </para>
         <para>
             <parameter>pname</parameter> is a symbolic constant indicating the parameter to be set, and
@@ -98,56 +91,55 @@
                         If true,
                         byte ordering for multibyte color components,
                         depth components,
-                        color indices,
                         or stencil indices
                         is reversed.
                         That is,
                         if a four-byte component consists of bytes
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 0:-->
+                            <!-- eqn: b sub 0: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>0</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 1:-->
+                            <!-- eqn: b sub 1: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>1</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 2:-->
+                            <!-- eqn: b sub 2: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>2</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 3:-->
+                            <!-- eqn: b sub 3: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>3</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         it is stored in memory as
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 3:-->
+                            <!-- eqn: b sub 3: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>3</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 2:-->
+                            <!-- eqn: b sub 2: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>2</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 1:-->
+                            <!-- eqn: b sub 1: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>1</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 0:-->
+                            <!-- eqn: b sub 0: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>0</mml:mn>
                             </mml:msub>
@@ -173,7 +165,6 @@
                         bits are ordered within a byte from least significant to most significant;
                         otherwise,
                         the first bit in each byte is the most significant one.
-                        This parameter is significant for bitmap data only.
                     </para>
                 </listitem>
             </varlistentry>
@@ -190,7 +181,7 @@
                     </para>
                     <para>
                         <informalequation><mml:math>
-                            <!-- eqn: k  =   left {      lpile { n l above {a over s} left ceiling { s n l } over a right ceiling}         lpile {s  >=  a above s  <  a }:-->
+                            <!-- eqn: k  =   left {      lpile { n l above {a over s} left ceiling { s n l } over a right ceiling}         lpile {s  >=  a above s  <  a }: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">k</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -269,7 +260,7 @@
                         is the size, in bytes, of a single component
                         (if 
                         <inlineequation><mml:math>
-                            <!-- eqn: a < s:-->
+                            <!-- eqn: a < s: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">a</mml:mi>
                                 <mml:mo>&lt;</mml:mo>
@@ -278,7 +269,7 @@
                         </mml:math></inlineequation>,
                         then it is as if 
                         <inlineequation><mml:math>
-                            <!-- eqn: a  =  s:-->
+                            <!-- eqn: a  =  s: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">a</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -290,7 +281,7 @@
                     </para>
                     <para>
                         <inlineequation><mml:math>
-                            <!-- eqn: k  =  8 a left ceiling { n l } over { 8 a } right ceiling:-->
+                            <!-- eqn: k  =  8 a left ceiling { n l } over { 8 a } right ceiling: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">k</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -355,7 +346,7 @@
                     </para>
                     <para>
                         <informalequation><mml:math>
-                            <!-- eqn: k  =   left {        lpile { n l h above {a over s} left ceiling { s n l h } over a right ceiling}        lpile {s  >=  a above s  <  a }:-->
+                            <!-- eqn: k  =   left {        lpile { n l h above {a over s} left ceiling { s n l h } over a right ceiling}        lpile {s  >=  a above s  <  a }: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">k</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -444,7 +435,7 @@
                         is the size, in bytes, of a single
                         component (if 
                         <inlineequation><mml:math>
-                            <!-- eqn: a < s:-->
+                            <!-- eqn: a < s: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">a</mml:mi>
                                 <mml:mo>&lt;</mml:mo>
@@ -453,7 +444,7 @@
                         </mml:math></inlineequation>,
                         then it is as if 
                         <inlineequation><mml:math>
-                            <!-- eqn: a = s:-->
+                            <!-- eqn: a = s: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">a</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -489,7 +480,7 @@
                         is equivalent to incrementing
                         the pointer by 
                         <inlineequation><mml:math>
-                            <!-- eqn: i n:-->
+                            <!-- eqn: i n: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">i</mml:mi>
                                 <mml:mo>&it;</mml:mo>
@@ -505,7 +496,7 @@
                         is equivalent to incrementing
                         the pointer by 
                         <inlineequation><mml:math>
-                            <!-- eqn: j m:-->
+                            <!-- eqn: j m: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">j</mml:mi>
                                 <mml:mo>&it;</mml:mo>
@@ -522,7 +513,7 @@
                         is equivalent to incrementing
                         the pointer by 
                         <inlineequation><mml:math>
-                            <!-- eqn: k p:-->
+                            <!-- eqn: k p: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">k</mml:mi>
                                 <mml:mo>&it;</mml:mo>
@@ -553,23 +544,15 @@
         <para>
             The other six of the twelve storage parameters affect how pixel data is
             read from client memory.
-            These values are significant for <citerefentry><refentrytitle>glDrawPixels</refentrytitle></citerefentry>,
+            These values are significant for
             <citerefentry><refentrytitle>glTexImage1D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexImage2D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexImage3D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexSubImage1D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glTexSubImage2D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glTexSubImage3D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glBitmap</refentrytitle></citerefentry>, and
-            <citerefentry><refentrytitle>glPolygonStipple</refentrytitle></citerefentry>.
+            <citerefentry><refentrytitle>glTexSubImage2D</refentrytitle></citerefentry>, and
+            <citerefentry><refentrytitle>glTexSubImage3D</refentrytitle></citerefentry>
         </para>
         <para>
-            Additionally, if the <code>ARB_imaging</code> extension is supported,
-            <citerefentry><refentrytitle>glColorTable</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glColorSubTable</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glConvolutionFilter1D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glConvolutionFilter2D</refentrytitle></citerefentry>, and
-            <citerefentry><refentrytitle>glSeparableFilter2D</refentrytitle></citerefentry>.
             They are as follows:
         </para>
         <variablelist>
@@ -580,56 +563,55 @@
                         If true,
                         byte ordering for multibyte color components,
                         depth components,
-                        color indices,
                         or stencil indices
                         is reversed.
                         That is,
                         if a four-byte component consists of bytes
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 0:-->
+                            <!-- eqn: b sub 0: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>0</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 1:-->
+                            <!-- eqn: b sub 1: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>1</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 2:-->
+                            <!-- eqn: b sub 2: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>2</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 3:-->
+                            <!-- eqn: b sub 3: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>3</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         it is taken from memory as
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 3:-->
+                            <!-- eqn: b sub 3: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>3</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 2:-->
+                            <!-- eqn: b sub 2: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>2</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 1:-->
+                            <!-- eqn: b sub 1: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>1</mml:mn>
                             </mml:msub>
                         </mml:math></inlineequation>,
                         <inlineequation><mml:math>
-                            <!-- eqn: b sub 0:-->
+                            <!-- eqn: b sub 0: -->
                             <mml:msub><mml:mi mathvariant="italic">b</mml:mi>
                             <mml:mn>0</mml:mn>
                             </mml:msub>
@@ -655,7 +637,6 @@
                         bits are ordered within a byte from least significant to most significant;
                         otherwise,
                         the first bit in each byte is the most significant one.
-                        This is relevant only for bitmap data.
                     </para>
                 </listitem>
             </varlistentry>
@@ -672,7 +653,7 @@
                     </para>
                     <para>
                         <informalequation><mml:math>
-                            <!-- eqn: k  =   left {       lpile { n l above {a over s} left ceiling { s n l } over a right ceiling }        lpile { s  >=  a above s  <  a }:-->
+                            <!-- eqn: k  =   left {       lpile { n l above {a over s} left ceiling { s n l } over a right ceiling }        lpile { s  >=  a above s  <  a }: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">k</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -751,7 +732,7 @@
                         is the size, in bytes, of a single component
                         (if 
                         <inlineequation><mml:math>
-                            <!-- eqn: a < s:-->
+                            <!-- eqn: a < s: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">a</mml:mi>
                                 <mml:mo>&lt;</mml:mo>
@@ -760,7 +741,7 @@
                         </mml:math></inlineequation>,
                         then it is as if 
                         <inlineequation><mml:math>
-                            <!-- eqn: a = s:-->
+                            <!-- eqn: a = s: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">a</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -772,7 +753,7 @@
                     </para>
                     <para>
                         <inlineequation><mml:math>
-                            <!-- eqn: k  =  8 a left ceiling { n l } over { 8 a } right ceiling:-->
+                            <!-- eqn: k  =  8 a left ceiling { n l } over { 8 a } right ceiling: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">k</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -837,7 +818,7 @@
                     </para>
                     <para>
                         <informalequation><mml:math>
-                            <!-- eqn: k  =   left {       lpile { n l h above {a over s} left ceiling { s n l h } over a right ceiling }        lpile { s   >=  a above s  <  a }:-->
+                            <!-- eqn: k  =   left {       lpile { n l h above {a over s} left ceiling { s n l h } over a right ceiling }        lpile { s   >=  a above s  <  a }: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">k</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -925,7 +906,7 @@
                         is the size, in bytes, of a single component
                         (if 
                         <inlineequation><mml:math>
-                            <!-- eqn: a < s:-->
+                            <!-- eqn: a < s: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">a</mml:mi>
                                 <mml:mo>&lt;</mml:mo>
@@ -934,7 +915,7 @@
                         </mml:math></inlineequation>,
                         then it is as if 
                         <inlineequation><mml:math>
-                            <!-- eqn: a  =  s:-->
+                            <!-- eqn: a  =  s: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">a</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -965,19 +946,16 @@
                         These values are provided as a convenience to the programmer;
                         they provide no functionality that cannot be duplicated by
                         incrementing the pointer passed to
-                        <citerefentry><refentrytitle>glDrawPixels</refentrytitle></citerefentry>,
                         <citerefentry><refentrytitle>glTexImage1D</refentrytitle></citerefentry>,
                         <citerefentry><refentrytitle>glTexImage2D</refentrytitle></citerefentry>,
-                        <citerefentry><refentrytitle>glTexSubImage1D</refentrytitle></citerefentry>,
-                        <citerefentry><refentrytitle>glTexSubImage2D</refentrytitle></citerefentry>,
-                        <citerefentry><refentrytitle>glBitmap</refentrytitle></citerefentry>, or
-                        <citerefentry><refentrytitle>glPolygonStipple</refentrytitle></citerefentry>.
+                        <citerefentry><refentrytitle>glTexSubImage1D</refentrytitle></citerefentry> or
+                        <citerefentry><refentrytitle>glTexSubImage2D</refentrytitle></citerefentry>.
                         Setting <constant>GL_UNPACK_SKIP_PIXELS</constant> to 
                         <inlineequation><mml:math><mml:mi mathvariant="italic">i</mml:mi></mml:math></inlineequation>
                         is equivalent to incrementing
                         the pointer by 
                         <inlineequation><mml:math>
-                            <!-- eqn: i n:-->
+                            <!-- eqn: i n: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">i</mml:mi>
                                 <mml:mo>&it;</mml:mo>
@@ -993,7 +971,7 @@
                         is equivalent to incrementing
                         the pointer by 
                         <inlineequation><mml:math>
-                            <!-- eqn: j k:-->
+                            <!-- eqn: j k: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">j</mml:mi>
                                 <mml:mo>&it;</mml:mo>
@@ -1093,7 +1071,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0,\(if right ):-->
+                            <!-- eqn: left [ 0,\(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1113,7 +1091,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0, \(if right ):-->
+                            <!-- eqn: left [ 0, \(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1133,7 +1111,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0,\(if right ):-->
+                            <!-- eqn: left [ 0,\(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1153,7 +1131,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0,\(if right ):-->
+                            <!-- eqn: left [ 0,\(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1173,7 +1151,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0,\(if right ):-->
+                            <!-- eqn: left [ 0,\(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1235,7 +1213,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0,\(if right ):-->
+                            <!-- eqn: left [ 0,\(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1255,7 +1233,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0,\(if right ):-->
+                            <!-- eqn: left [ 0,\(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1275,7 +1253,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0,\(if right ):-->
+                            <!-- eqn: left [ 0,\(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1295,7 +1273,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0,\(if right ):-->
+                            <!-- eqn: left [ 0,\(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1315,7 +1293,7 @@
                         </entry>
                         <entry align="center">
                         <inlineequation><mml:math>
-                            <!-- eqn: left [ 0,\(if right ):-->
+                            <!-- eqn: left [ 0,\(if right ): -->
                             <mml:mfenced open="[" close=")">
                                 <mml:mn>0</mml:mn>
                                 <mml:infinity/>
@@ -1355,37 +1333,6 @@
             Boolean parameters are set to false if <parameter>param</parameter> is 0 and true otherwise.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
-        <para>
-            The pixel storage modes in effect when
-            <citerefentry><refentrytitle>glDrawPixels</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glReadPixels</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glTexImage1D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glTexImage2D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glTexImage3D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glTexSubImage1D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glTexSubImage2D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glTexSubImage3D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glBitmap</refentrytitle></citerefentry>,
-            or <citerefentry><refentrytitle>glPolygonStipple</refentrytitle></citerefentry> is placed in a display list control the interpretation
-            of memory data.
-            Likewise, if the <code>ARB_imaging</code> extension is supported, the pixel
-            storage modes in effect when
-            <citerefentry><refentrytitle>glColorTable</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glColorSubTable</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glConvolutionFilter1D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glConvolutionFilter2D</refentrytitle></citerefentry>, of
-            <citerefentry><refentrytitle>glSeparableFilter2D</refentrytitle></citerefentry> is placed in a display list control the
-            interpretation of memory data.
-            The pixel storage modes in effect when a display list is executed are
-            not significant.
-        </para>
-        <para>
-            Pixel storage modes are client state and must be pushed and restored
-            using
-            <citerefentry><refentrytitle>glPushClientAttrib</refentrytitle></citerefentry> and <citerefentry><refentrytitle>glPopClientAttrib</refentrytitle></citerefentry>.
-        </para>
-    </refsect1>
     <refsect1 id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>pname</parameter> is not an accepted value.
@@ -1395,11 +1342,6 @@
             pixel skip,
             or row skip value is specified,
             or if alignment is specified as other than 1, 2, 4, or 8.
-        </para>
-        <para>
-            <constant>GL_INVALID_OPERATION</constant> is generated if <function>glPixelStore</function>
-            is executed between the execution of <citerefentry><refentrytitle>glBegin</refentrytitle></citerefentry>
-            and the corresponding execution of <citerefentry><refentrytitle>glEnd</refentrytitle></citerefentry>.
         </para>
     </refsect1>
     <refsect1 id="associatedgets"><title>Associated Gets</title>
@@ -1454,20 +1396,6 @@
     </refsect1>
     <refsect1 id="seealso"><title>See Also</title>
         <para>
-            <citerefentry><refentrytitle>glBitmap</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glColorTable</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glColorSubTable</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glConvolutionFilter1D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glConvolutionFilter2D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glSeparableFilter2D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glDrawPixels</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glHistogram</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glMinmax</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glPixelMap</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glPixelTransfer</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glPixelZoom</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glPolygonStipple</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glPushClientAttrib</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glReadPixels</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexImage1D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexImage2D</refentrytitle></citerefentry>,
