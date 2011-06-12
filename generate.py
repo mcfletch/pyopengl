@@ -150,7 +150,7 @@ class RefSect( model.RefSect ):
             funcname = child.text
         paramresults = []
         for param in params:
-            if not param.tag.endswith( '}void' ):
+            if not (param.tag.endswith( '}void' ) or (param.text or '').strip() == 'void' ):
                 typ = param.text
                 for item in param:
                     paramname = item.text
@@ -226,6 +226,7 @@ def init_output( ):
 def main():
     init_output()
 
+    log.info( 'Loading references' )
     if os.path.isfile( references.CACHE_FILE ):
         import pickle
         samples = pickle.loads( open(references.CACHE_FILE).read())
@@ -240,6 +241,7 @@ def main():
     files.sort()
     ref = Reference()
     for package,path in files:
+        log.info( 'Loading: %s', path )
         #print 'loading', path
         try:
             tree = load_file( path )
@@ -250,8 +252,10 @@ def main():
         r.process( tree )
         ref.append( r )
         r.get_samples( samples )
+    log.info( 'Checking cross-references' )
     ref.check_crossrefs()
     # now generate some files...
+    log.info( 'Generating index' )
     serial = kid.XHTMLSerializer( decl=True )
     template = kid.Template(
         file='templates/index.kid',
@@ -264,6 +268,7 @@ def main():
     open( os.path.join(OUTPUT_DIRECTORY,'index.xhtml'), 'w').write( data )
 
     for name,section in ref.sections.items():
+        log.warn( 'Generating: %s', name )
         template = kid.Template(
             file = 'templates/section.kid',
             ref=ref,
@@ -291,5 +296,5 @@ def main():
 
 if __name__ == "__main__":
     import logging
-    logging.basicConfig()
+    logging.basicConfig(level=logging.DEBUG)
     main()

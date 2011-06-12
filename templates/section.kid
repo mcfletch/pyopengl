@@ -1,3 +1,11 @@
+<?python
+def ref_name( docbook ):
+    """One section (glDrawTransformFeedbackStream) has a non-standard reference form"""
+    if len(docbook):
+        return docbook[0].text 
+    else:
+        return docbook.text 
+?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://purl.org/kid/ns#">
 <table py:def="nav_table()" width="100%"><tbody><tr><td align="left">
 <a id="nav-previous" py:if="section.previous" href="${ref.url(section.previous)}">Previous: ${section.previous.title}</a></td>
@@ -33,18 +41,16 @@ approach_set = {
     'parameter': 'paramref',
 }
 approach = approach_set.get( basetag, 'para' )
-#if approach == 'crossref':
-#   import pdb
-#   pdb.set_trace()
+
 ?>
     <div py:if="approach=='para'" class="${basetag}">${contents(docbook)}</div>
     <span py:if="approach=='span'" class="${basetag}">${contents(docbook)}</span>
-    <a class="crossref" py:if="approach=='crossref'" py:strip="not ref.get_crossref(docbook[0].text,section=section)"
-        href="${ref.url(ref.get_crossref(docbook[0].text,section=section))}"
-    >${docbook[0].text}</a>
-    <a class="function" py:if="approach=='function'" py:strip="not ref.get_crossref(docbook.text,section=section)"
-        href="${ref.url(ref.get_crossref(docbook.text,section=section))}"
-    >${docbook.text}</a>
+    <a class="crossref" py:if="approach=='crossref'" py:strip="not ref.get_crossref(ref_name(docbook),section=section)"
+        href="${ref.url(ref.get_crossref(ref_name(docbook),section=section))}"
+    >${ref_name(docbook)}</a>
+    <a class="function" py:if="approach=='function'" py:strip="not ref.get_crossref(ref_name(docbook),section=section)"
+        href="${ref.url(ref.get_crossref(ref_name(docbook),section=section))}"
+    >${ref_name(docbook)}</a>
     <a class="extref" py:if="approach=='extref'"
         href="${docbook.get('url')}"
     >${docbook.text}</a>
