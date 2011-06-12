@@ -73,6 +73,7 @@ VIEWSVN = '%(baseURL)s/%(deltaPath)s?view=markup'
 LOGGERHEAD = '%(baseURL)s/annotate/head:/%(deltaPath)s'
 GOOGLECODE = '%(baseURL)s/source/browse/trunk/%(deltaPath)s'
 GITHUB = '%(baseURL)s/blob/master/%(deltaPath)s'
+BITBUCKET = '%(baseURL)s/src/tip/%(deltaPath)s'
 
 class SampleSource( object ):
     """A source from which samples may be generated"""
@@ -204,7 +205,24 @@ def loadData():
             projectName='{LGPL or GPL or MPL} Kamaelia',
             urlTemplate = VIEWSVN,
         ),
-        
+        SampleSource(
+            os.path.join( SAMPLES, 'agog' ),
+            baseURL='https://bitbucket.org/tartley/algorithmic-generation-of-geometry/',
+            projectName = 'AGoG',
+            urlTemplate = BITBUCKET,
+        ),
+        SampleSource(
+            os.path.join( SAMPLES, 'gloopy' ),
+            baseURL = 'https://bitbucket.org/tartley/gloopy/',
+            projectName = 'Gloopy',
+            urlTemplate = BITBUCKET,
+        ),
+        SampleSource(
+            os.path.join( SAMPLES, 'gltutpy' ),
+            baseURL = 'https://bitbucket.org/tartley/gltutpy/',
+            projectName = 'OpenGL Tutorial (Python Translation)',
+            urlTemplate = BITBUCKET,
+        ),
     ]:
         generate_tokens_dir( s.localDir, processFunction = s.processEntry)
     result = SampleSource.nameMapping
