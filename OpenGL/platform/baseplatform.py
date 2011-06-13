@@ -121,6 +121,7 @@ class BasePlatform( object ):
         doc = None, argNames = (),
         extension = None,
         deprecated = False,
+        module = None,
     ):
         """Core operation to create a new base ctypes function
         
@@ -165,6 +166,11 @@ class BasePlatform( object ):
                 dll,
             )
         )
+        if MODULE_ANNOTATIONS:
+            if not module:
+                module = _find_module( )
+            if module:
+                func.__module__ = module
         return func
 
     def createBaseFunction( 
@@ -280,6 +286,7 @@ class BasePlatform( object ):
         doc = None, argNames = (),
         extension = None,
         deprecated = False,
+        module = None,
     ):
         """Construct a "null" function pointer"""
         if deprecated:
@@ -290,6 +297,11 @@ class BasePlatform( object ):
             '__doc__': doc,
             'deprecated': deprecated,
         } )
+        if MODULE_ANNOTATIONS:
+            if not module:
+                module = _find_module( )
+            if module:
+                cls.__module__ = module
         return cls(
             functionName, dll, resultType, argTypes, argNames, extension=extension, doc=doc,
         )

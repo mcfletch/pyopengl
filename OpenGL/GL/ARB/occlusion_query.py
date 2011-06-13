@@ -79,6 +79,11 @@ from OpenGL.GL import glget
 from OpenGL import converters
 @lazy( glDeleteQueriesARB )
 def glDeleteQueriesARB( baseOperation, n, ids=None ):
+    """Delete the given queries 
+    
+    n -- either the number of queries to delete, or an array of query values 
+    ids -- if provided, the array/pointer to the queries to delete 
+    """
     if ids is None:
         ids = arrays.GLuintArray.asArray( n )
         n = arrays.GLuintArray.arraySize( ids )

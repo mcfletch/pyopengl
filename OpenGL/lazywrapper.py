@@ -1,5 +1,6 @@
 """Simplistic wrapper decorator for Python-coded wrappers"""
 from OpenGL.latebind import Curry
+from OpenGL import MODULE_ANNOTATIONS
 
 class _LazyWrapper( Curry ):
     """Marker to tell us that an object is a lazy wrapper"""
@@ -34,6 +35,8 @@ def lazy( baseFunction ):
         } )
         with_wrapper = _with_wrapper(wrapper,baseFunction)
         with_wrapper.__name__ = wrapper.__name__
+        if hasattr( baseFunction, '__module__' ):
+            with_wrapper.__module__ = baseFunction.__module__
         return with_wrapper
     return wrap
 

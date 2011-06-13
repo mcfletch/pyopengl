@@ -1397,5 +1397,7 @@ def wrapper( wrappedOperation ):
         '__slots__': ('wrappedOperation', ),
     }
     cls = type( wrappedOperation.__name__, (Wrapper,), dict )
+    if hasattr( wrappedOperation, '__module__' ):
+        cls.__module__ = wrappedOperation.__module__
     instance = cls(wrappedOperation)
     return instance
