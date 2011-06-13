@@ -20,3 +20,14 @@ numpy_formathandler.so
 vbo.so
 wrapper.so
 wrapper.pyd
+*.profile
+src/pptab.py
+src/strict_exprtab.py
+src/parser.out
+src/exprtab.py
+src/parsetab.py
+src/*.cache
+OpenGL_accelerate/__pycache__
+*.bak
+ChangeLog.txt
+*.egg-info
