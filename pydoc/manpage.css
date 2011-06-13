@@ -98,3 +98,25 @@ span.parameter {
 .constants .constant-list {
     margin-left: 4em;
 }
+.doc-string {
+    margin-left: 4em;
+}
+.doc-string .paragraph {
+    margin-top: .25em;
+    margin-bottom: .25em;
+}
+.indent-level-0 {
+    margin-left: 0;
+}
+.indent-level-4 {
+    margin-left: 2em;
+}
+.indent-level-8 {
+    margin-left: 4em;
+}
+.indent-level-12 {
+    margin-left: 6em;
+}
+.indent-level-16 {
+    margin-left: 8em;
+}
