@@ -338,20 +338,31 @@ if VBO is None:
         appropriate integer offset value to be passed in.
         """
         def __init__( self, vbo, offset ):
+            """Initialize the offset with vbo and offset (unsigned integer)"""
             self.vbo = vbo
             self.offset = offset
         def __getattr__( self, key ):
+            """Delegate any undefined attribute save vbo to our vbo"""
             if key != 'vbo':
                 return getattr( self.vbo, key )
             raise AttributeError( 'No %r key in VBOOffset'%(key,))
         def __add__( self, other ):
+            """Allow adding integers or other VBOOffset instances 
+            
+            returns a VBOOffset to the this VBO with other.offset + self.offset
+            or, if other has no offset, returns VBOOffset with self.offset + other
+            """
             if hasattr( other, 'offset' ):
                 other = other.offset
             return VBOOffset( self.vbo, self.offset + other )
 
 
     class VBOHandler( FormatHandler ):
-        """Handles VBO instances passed in as array data"""
+        """Handles VBO instances passed in as array data
+        
+        This FormatHandler is registered with PyOpenGL on import of this module 
+        to provide handling of VBO objects as array data-sources
+        """
         vp0 = ctypes.c_void_p( 0 )
         def dataPointer( self, instance ):
             """Retrieve data-pointer from the instance's data
@@ -385,7 +396,11 @@ if VBO is None:
             return ArrayDatatype.dimensions( value.data )
 
     class VBOOffsetHandler( VBOHandler ):
-        """Handles VBOOffset instances passed in as array data"""
+        """Handles VBOOffset instances passed in as array data
+        
+        Registered on module import to provide support for VBOOffset instances 
+        as sources for array data.
+        """
         def dataPointer( self, instance ):
             """Retrieve data-pointer from the instance's data
 
@@ -396,15 +411,14 @@ if VBO is None:
             """Returns a c_void_p( instance.offset )"""
             return ctypes.c_void_p( instance.offset )
 
+# TODO: this is BAD! should not have a side effect like this required 
+# to register a handler properly...
 FormatHandler.loadAll() # otherwise just the VBO would get loaded :)
 VBO_HANDLER = VBOHandler()
 VBO_HANDLER.register( [ VBO ] )
 
 VBOOFFSET_HANDLER = VBOOffsetHandler()
 VBOOFFSET_HANDLER.register( [ VBOOffset ] )
-
-def PyBuffer_FromMemory(address, length):
-    return buffer((ctypes.c_char * length).from_address(address))
 
 _cleaners = {}
 def _cleaner( vbo ):
@@ -415,7 +429,7 @@ def _cleaner( vbo ):
         except Exception, err:
             pass
         else:
-            glUnmapBuffer( vbo.target )
+            vbo.implementation.glUnmapBuffer( vbo.target )
     return clean
 
 def mapVBO( vbo, access=GL.GL_READ_WRITE ):
@@ -428,15 +442,14 @@ def mapVBO( vbo, access=GL.GL_READ_WRITE ):
     it is not guaranteed to be available in future revisions
     of this library!
     
-    
+    Simplification to use ctypes cast from comment by 'sashimi' on my blog...
     """
-    vp = glMapBuffer( vbo.target, access )
+    from numpy import frombuffer
+    vp = vbo.implementation.glMapBuffer( vbo.target, access )
     # TODO: obviously this is not the right way to do this should allow each format 
     # handler to convert the pointer in their own way...
-    from numpy import frombuffer
-    buffer = PyBuffer_FromMemory(
-        ctypes.c_void_p(vp), vbo.size
-    )
-    array = frombuffer( buffer, 'B' )
+    vp_array = ctypes.cast(vp, ctypes.POINTER(ctypes.c_byte*vbo.size) )
+    # Note: we could have returned the raw ctypes.c_byte array instead...
+    array = frombuffer( vp_array, 'B' )
     _cleaners[vbo] = weakref.ref( array, _cleaner( vbo ))
     return array
