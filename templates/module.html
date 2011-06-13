@@ -28,10 +28,10 @@
                 <span py:for="base in cls.bases" class="base-class">${classref( base )}</span>
             ):</div>
             <div class="class-body">
-                <pre class="pydoc" py:if="cls.docstring" py:content="cls.docstring"/>
+                ${docstring( cls )}
                 <div py:for="name,prop in cls.properties" class="property">
                     ${prop.name}
-                    <pre class="pydoc" py:if="prop.docstring" py:content="prop.docstring"/>
+                    ${docstring( prop )}
                 </div>
                 <div py:for="name,func in cls.functions" py:strip="">
                     ${pysignature( func, name )}

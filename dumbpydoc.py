@@ -2,7 +2,8 @@
 """Extremely dumb replacement for pydoc"""
 from directdocs import model,references
 import OpenGL
-OpenGL.USE_ACCELERATE = False
+OpenGL.USE_ACCELERATE = False # document the Python versions
+OpenGL.MODULE_ANNOTATIONS = True # tell us where the constants/alternates are defined...
 from OpenGL.extensions import _Alternate as Alternate
 from OpenGL.GLUT.special import GLUTCallback
 from OpenGL.wrapper import Wrapper
@@ -12,6 +13,7 @@ from ctypes import _CFuncPtr as CFunctionType
 from OpenGL.error import glCheckError
 from OpenGL.platform.baseplatform import _NullFunctionPointer as NullFunc
 from OpenGL import platform
+import dumbmarkup
 
 CythonMethod = type( glCheckError )
 
@@ -21,6 +23,7 @@ loader = TemplateLoader(['templates'])
 log = logging.getLogger( 'dumbpydoc' )
 
 FUNCTION_MAPPING = pickle.load( open( '.pyfunc-urls.pkl' ))
+
 
 class PyModule( object ):
     OPENGL_FUNCS = (
@@ -154,9 +157,19 @@ class PyModule( object ):
         if isinstance( obj, self.INTERESTING_TYPES):
             module = getattr(obj, '__module__',None)
             if module is not None:
-                if not module == self.name:
+                if not (
+                    module == self.name
+                    # is from raw definition of our module
+                    or module.replace( '.raw','' ) == self.name
+                    or module.replace('.raw','').replace('_DEPRECATED','') == self.name 
+                    # special case for the root namespace for OpenGL.GL
+                    or (
+                        module.startswith( 'OpenGL.raw.GL.VERSION' )
+                        or module.startswith( 'OpenGL.raw.GL.constants')
+                    ) and self.name == 'OpenGL.GL'
+                ):
                     # only document where defined for functions...
-                    log.warn( 'Filtering %s by module exclusion: %s', obj, module )
+                    log.warn( 'Filtering %s by module exclusion: %s for %s', obj, module, self.name )
                     return False
                     # Need to figure out how to restrict...
             return True
@@ -169,6 +182,8 @@ class PyModule( object ):
     def link( self, func, name=None ):
         """Should we do a link to the manual page instead of local description?"""
         return FUNCTION_MAPPING.get( name or func.name )
+    
+    
 
 class Class( object ):
     """Metadata describing a class to be documented"""
@@ -262,10 +277,11 @@ def render( mod ):
 if __name__ == '__main__':
     logging.basicConfig( level=logging.DEBUG )
     for mod in [
-#        'OpenGL.GL.ARB',
+        'OpenGL',
+#        'OpenGL.GL.ARB.sync',
 #        'OpenGL.GL.selection',
-        'OpenGL.arrays.vbo',
-        'OpenGL_accelerate',
+#        'OpenGL.arrays.vbo',
+#        'OpenGL_accelerate',
 #        'OpenGLContext',
 #        'vrml',
     ]:

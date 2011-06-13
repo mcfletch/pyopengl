@@ -1,4 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://purl.org/kid/ns#">
+<xi:include href="master.html" />
 <table width="100%" py:def="navtable(bottom=False)" class="navtable"><thead>
 	<tr>
 		<td width="8em;"/><th align="center"><a href="index.xhtml">OpenGLContext Python tutorials</a></th><td width="8em;"/>
@@ -18,17 +19,6 @@
 	</tr>
 </thead></table>
 
-<div py:def="children(node)" py:if="node.children" py:strip=""><div py:for="child in node.children" py:strip="">${convert(child)}</div></div>
-<div py:def="node_content(node)" py:strip="">${node.text}${children(node)}</div>
-<div py:def="convert( node )" py:strip="">
-	<h1 py:if="node.html_tag == 'h1'" class="${node.html_class}">${node_content(node)}</h1>
-	<div py:if="node.html_tag == 'div'" class="${node.html_class}">${node_content(node)}</div>
-	<ul py:if="node.html_tag == 'ul'" class="${node.html_class}">${node_content(node)}</ul>
-	<li py:if="node.html_tag == 'li'" class="${node.html_class}">${node_content(node)}</li>
-	<a py:if="node.html_tag == 'a'" class="${node.html_class}" href="${node.url}">${node_content(node)}</a>
-	<img py:if="node.html_tag == 'img'" class="${node.html_class} wiki" src="${node.url}" alt="${node.text}" />
-	${node.tail}
-</div>
 <head>
     <title>${path.text}: ${tutorial.title}</title>
     <link rel="stylesheet" href="./tutorial.css" type="text/css" />
