@@ -100,7 +100,12 @@ class Implementation( object ):
 IMPLEMENTATION = None
 
 def get_implementation( *args ):
-    """Retrieve the appropriate implementation for this machine"""
+    """Retrieve the appropriate implementation for this machine
+    
+    Note that this should be considered an internal API and not used 
+    by external code, as the whole "implementation" approach is likely 
+    to be revisited.
+    """
     global IMPLEMENTATION
     if IMPLEMENTATION is None:
         IMPLEMENTATION = Implementation()
@@ -355,7 +360,6 @@ if VBO is None:
             if hasattr( other, 'offset' ):
                 other = other.offset
             return VBOOffset( self.vbo, self.offset + other )
-
 
     class VBOHandler( FormatHandler ):
         """Handles VBO instances passed in as array data
