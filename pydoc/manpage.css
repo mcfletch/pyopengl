@@ -89,6 +89,7 @@ span.parameter {
     float: left;
 }
 
+/* specific to the pydoc pages */
 .class-pydoc .class-name {
     color: green;
 }
@@ -105,18 +106,18 @@ span.parameter {
     margin-top: .25em;
     margin-bottom: .25em;
 }
-.indent-level-0 {
+.python-module .indent-level-0 {
     margin-left: 0;
 }
-.indent-level-4 {
+.python-module .indent-level-4 {
     margin-left: 2em;
 }
-.indent-level-8 {
+.python-module .indent-level-8 {
     margin-left: 4em;
 }
-.indent-level-12 {
+.python-module .indent-level-12 {
     margin-left: 6em;
 }
-.indent-level-16 {
+.python-module .indent-level-16 {
     margin-left: 8em;
 }
