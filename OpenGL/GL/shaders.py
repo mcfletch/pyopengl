@@ -1,7 +1,7 @@
 """Convenience module providing common shader entry points
 
 The point of this module is to allow client code to use
-OpenGL 2.x style names to reference shader-related operations
+OpenGL Core names to reference shader-related operations
 even if the local hardware only supports ARB extension-based
 shader rendering.
 
@@ -93,7 +93,12 @@ class ShaderProgram( int ):
         glUseProgram( 0 )
     
     def check_validate( self ):
-        # Validation has to occur *after* linking/loading
+        """Check that the program validates
+        
+        Validation has to occur *after* linking/loading
+        
+        raises RuntimeError on failures
+        """
         glValidateProgram( self )
         validation = glGetProgramiv( self, GL_VALIDATE_STATUS )
         if validation == GL_FALSE:
@@ -105,7 +110,10 @@ class ShaderProgram( int ):
         return self
 
     def check_linked( self ):
-        """Check validation and link status for this program"""
+        """Check link status for this program
+        
+        raises RuntimeError on failures
+        """
         link_status = glGetProgramiv( self, GL_LINK_STATUS )
         if link_status == GL_FALSE:
             raise RuntimeError(
@@ -117,6 +125,10 @@ class ShaderProgram( int ):
 
     def retrieve( self ):
         """Attempt to retrieve binary for this compiled shader
+        
+        Note that binaries for a program are *not* generally portable,
+        they should be used solely for caching compiled programs for 
+        local use; i.e. to reduce compilation overhead.
         
         returns (format,binaryData) for the shader program
         """
@@ -130,7 +142,10 @@ class ShaderProgram( int ):
         get_program_binary.glGetProgramBinary( self, size.value, size2, format, result )
         return format.value, result 
     def load( self, format, binary ):
-        """Attempt to load binary-format for a pre-compiled shader"""
+        """Attempt to load binary-format for a pre-compiled shader
+        
+        See notes in retrieve
+        """
         get_program_binary.glProgramBinary( self, format, binary, len(binary))
         self.check_validate()
         self.check_linked()
@@ -166,7 +181,7 @@ def compileProgram(*shaders, **named):
         *passes* then the passed-in shader objects will be
         deleted from the GL.
 
-    returns GLuint shader program reference
+    returns ShaderProgram() (GLuint) program reference
     raises RuntimeError when a link/validation failure occurs
     """
     program = glCreateProgram()
@@ -184,6 +199,7 @@ def compileProgram(*shaders, **named):
         glDeleteShader(shader)
     return program
 def as_bytes( s ):
+    """Utility to retrieve s as raw string (8-bit)"""
     if isinstance( s, unicode ):
         s = s.encode( ) # TODO: can we use latin-1 or utf-8?
     return s

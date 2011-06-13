@@ -4,7 +4,8 @@ import ctypes
 from OpenGL.platform import ctypesloader
 import sys
 import OpenGL as top_level_module
-from OpenGL import logs
+from OpenGL import logs, MODULE_ANNOTATIONS
+
 
 class _CheckContext( object ):
     def __init__( self, func, ccisvalid ):
@@ -24,6 +25,18 @@ class _CheckContext( object ):
             from OpenGL import error
             raise error.NoContext( self.func, args, named )
         return self.func( *args, **named )
+
+def _find_module( exclude = (__name__,)):
+    frame = sys._getframe()
+    while frame and '__name__' in frame.f_globals:
+        if exclude:
+            if not frame.f_globals['__name__'] in exclude:
+                return frame.f_globals['__name__']
+            
+        else:
+            return frame.f_globals['__name__']
+        frame = frame.f_back
+    return None
 
 class BasePlatform( object ):
     """Base class for per-platform implementations
@@ -161,6 +174,7 @@ class BasePlatform( object ):
         doc = None, argNames = (),
         extension = None,
         deprecated = False,
+        module = None,
     ):
         """Create a base function for given name
         
@@ -170,31 +184,42 @@ class BasePlatform( object ):
         base function from a DLL.
         """
         from OpenGL import wrapper
+        result = None
         try:
-            if top_level_module.FORWARD_COMPATIBLE_ONLY and dll is self.GL:
-                if deprecated:
-                    return self.nullFunction(
-                        functionName, dll=dll,
-                        resultType=resultType, 
-                        argTypes=argTypes,
-                        doc = doc, argNames = argNames,
-                        extension = extension,
-                        deprecated = deprecated,
-                    )
-            return self.constructFunction(
-                functionName, dll, 
-                resultType=resultType, argTypes=argTypes,
-                doc = doc, argNames = argNames,
-                extension = extension,
-            )
+            if (
+                top_level_module.FORWARD_COMPATIBLE_ONLY and 
+                dll is self.GL and 
+                deprecated
+            ):
+                result = self.nullFunction(
+                    functionName, dll=dll,
+                    resultType=resultType, 
+                    argTypes=argTypes,
+                    doc = doc, argNames = argNames,
+                    extension = extension,
+                    deprecated = deprecated,
+                )
+            else:
+                result = self.constructFunction(
+                    functionName, dll, 
+                    resultType=resultType, argTypes=argTypes,
+                    doc = doc, argNames = argNames,
+                    extension = extension,
+                )
         except AttributeError, err:
-            return self.nullFunction( 
+            result = self.nullFunction( 
                 functionName, dll=dll,
                 resultType=resultType, 
                 argTypes=argTypes,
                 doc = doc, argNames = argNames,
                 extension = extension,
             )
+        if MODULE_ANNOTATIONS:
+            if not module:
+                module = _find_module( )
+            if module:
+                result.__module__ = module
+        return result
     def checkExtension( self, name ):
         """Check whether the given extension is supported by current context"""
         if not name:

@@ -162,6 +162,12 @@ with these sets of flags.
         operations.
 
         Default: True
+    
+    MODULE_ANNOTATIONS -- if True, attempt to annotate alternates() and 
+        constants to track in which module they are defined (only useful 
+        for the documentation-generation passes, really).
+        
+        Default: False
 """
 from OpenGL.version import __version__
 
@@ -179,6 +185,7 @@ CONTEXT_CHECKING = False
 FULL_LOGGING = False
 ALLOW_NUMPY_SCALARS = False
 UNSIGNED_BYTE_IMAGES_AS_STRING = True
+MODULE_ANNOTATIONS = False
 
 # Declarations of plugins provided by PyOpenGL itself
 from OpenGL.plugins import PlatformPlugin, FormatHandler

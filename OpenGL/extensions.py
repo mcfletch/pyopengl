@@ -5,6 +5,8 @@ an extension is available
 """
 from OpenGL.latebind import LateBind
 from OpenGL._bytes import bytes,as_8_bit
+import OpenGL as root
+import sys
 import logging
 log = logging.getLogger( 'OpenGL.extensions' )
 VERSION_PREFIX = 'GL_VERSION_GL_'
@@ -78,6 +80,10 @@ class _Alternate( LateBind ):
         """Initialize set of alternative implementations of the same function"""
         self.__name__ = name
         self._alternatives = alternates
+        if root.MODULE_ANNOTATIONS:
+            frame = sys._getframe().f_back
+            if frame and frame.f_back and '__name__' in frame.f_back.f_globals:
+                self.__module__ = frame.f_back.f_globals['__name__']
     def __nonzero__( self ):
         from OpenGL import error
         try:

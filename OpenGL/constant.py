@@ -1,5 +1,6 @@
 """Implementation of OpenGL constant objects"""
 import sys
+import OpenGL as root
 
 class Constant( object ):
     """OpenGL constant that displays itself as a name rather than a value
@@ -22,6 +23,10 @@ class Constant( object ):
                 value = - (value & sys.maxint)
         base = super(Constant,cls).__new__( cls, value )
         base.name = name
+        if root.MODULE_ANNOTATIONS:
+            frame = sys._getframe().f_back
+            if frame and frame.f_back and '__name__' in frame.f_back.f_globals:
+                base.__module__ = frame.f_back.f_globals['__name__']
         return base
     def __repr__( self ):
         """Return the name, rather than the bald value"""
@@ -40,10 +45,8 @@ class NumericConstant( Constant ):
 
 class IntConstant( NumericConstant, int ):
     """Integer constant"""
-    #__slots__ = ('name',)
 class FloatConstant( NumericConstant, float ):
     """Float constant"""
-    #__slots__ = ('name',)
 
 class StringConstant( Constant, str ):
     """String constants"""
