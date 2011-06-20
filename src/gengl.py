@@ -286,51 +286,51 @@ class ModuleWrapper(object):
         print >> outfile, ''.join(epilogue)
 
 modules = {
-#	'gl':
-#		ModuleWrapper(GL_H, 'gl.py'),
-#	'glu':
-#		ModuleWrapper(GLU_H, 'glu.py'),
-#	'glext_arb':
-#		ModuleWrapper(GLEXT_ABI_H, 'glext_arb.py',
-#			requires_prefix='GL_', system_header='GL/glext.h',
-#			prologue='#define GL_GLEXT_PROTOTYPES\n#include <GL/gl.h>\n'),
-#	'glext_nv':
-#		ModuleWrapper(GLEXT_NV_H, 'glext_nv.py',
-#			requires_prefix='GL_', system_header='GL/glext.h',
-#			prologue='#define GL_GLEXT_PROTOTYPES\n#include <GL/gl.h>\n'),
-    'glx':
-        ModuleWrapper(GLX_H, '_GLX.py',
-            requires_prefix='GLX_',
-            match_re = re.compile( 'glX|GLX' ),
-        ),
-    'glx_arb':
-        ModuleWrapper(GLXEXT_ABI_H, '_GLX_ARB.py', requires_prefix='GLX_',
-            system_header='GL/glxext.h',
-            prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
-            match_re = re.compile( 'glX|GLX_' ),
-        ),
-    'glx_nv':
-        ModuleWrapper(GLXEXT_NV_H, '_GLX_NV.py', requires_prefix='GLX_',
-            system_header='GL/glxext.h',
-            prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
-            match_re = re.compile( 'glX|GLX_' ),
-        ),
-    'agl':
-        ModuleWrapper(AGL_H, 'AGL.py'),
-    'wgl':
-        ModuleWrapper(WGL_H, '_WGL.py'),
-    'wgl_arb':
-        ModuleWrapper(WGLEXT_ABI_H, '_WGL_ARB.py', requires_prefix='WGL_',
-            prologue='#define WGL_WGLEXT_PROTOTYPES\n'\
-                     '#include "%s"\n' % WGL_H.encode('string_escape')),
-    'wgl_nv':
-        ModuleWrapper(WGLEXT_NV_H, '_WGL_NV.py', requires_prefix='WGL_',
-            prologue='#define WGL_WGLEXT_PROTOTYPES\n'\
-                     '#include "%s"\n' % WGL_H.encode('string_escape')),
-    'osmesa':
-        ModuleWrapper(OSMESA_H,'osmesa.py',requires_prefix='OSMESA_',
-            library = 'OSMESA',
-        ),
+	'gl':
+		ModuleWrapper(GL_H, 'gl.py'),
+##	'glu':
+##		ModuleWrapper(GLU_H, 'glu.py'),
+##	'glext_arb':
+##		ModuleWrapper(GLEXT_ABI_H, 'glext_arb.py',
+##			requires_prefix='GL_', system_header='GL/glext.h',
+##			prologue='#define GL_GLEXT_PROTOTYPES\n#include <GL/gl.h>\n'),
+##	'glext_nv':
+##		ModuleWrapper(GLEXT_NV_H, 'glext_nv.py',
+##			requires_prefix='GL_', system_header='GL/glext.h',
+##			prologue='#define GL_GLEXT_PROTOTYPES\n#include <GL/gl.h>\n'),
+#    'glx':
+#        ModuleWrapper(GLX_H, '_GLX.py',
+#            requires_prefix='GLX_',
+#            match_re = re.compile( 'glX|GLX' ),
+#        ),
+#    'glx_arb':
+#        ModuleWrapper(GLXEXT_ABI_H, '_GLX_ARB.py', requires_prefix='GLX_',
+#            system_header='GL/glxext.h',
+#            prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
+#            match_re = re.compile( 'glX|GLX_' ),
+#        ),
+#    'glx_nv':
+#        ModuleWrapper(GLXEXT_NV_H, '_GLX_NV.py', requires_prefix='GLX_',
+#            system_header='GL/glxext.h',
+#            prologue='#define GLX_GLXEXT_PROTOTYPES\n#include <GL/glx.h>\n',
+#            match_re = re.compile( 'glX|GLX_' ),
+#        ),
+#    'agl':
+#        ModuleWrapper(AGL_H, 'AGL.py'),
+#    'wgl':
+#        ModuleWrapper(WGL_H, '_WGL.py'),
+#    'wgl_arb':
+#        ModuleWrapper(WGLEXT_ABI_H, '_WGL_ARB.py', requires_prefix='WGL_',
+#            prologue='#define WGL_WGLEXT_PROTOTYPES\n'\
+#                     '#include "%s"\n' % WGL_H.encode('string_escape')),
+#    'wgl_nv':
+#        ModuleWrapper(WGLEXT_NV_H, '_WGL_NV.py', requires_prefix='WGL_',
+#            prologue='#define WGL_WGLEXT_PROTOTYPES\n'\
+#                     '#include "%s"\n' % WGL_H.encode('string_escape')),
+#    'osmesa':
+#        ModuleWrapper(OSMESA_H,'osmesa.py',requires_prefix='OSMESA_',
+#            library = 'OSMESA',
+#        ),
 }
 
 

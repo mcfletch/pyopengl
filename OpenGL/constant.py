@@ -45,6 +45,9 @@ class NumericConstant( Constant ):
 
 class IntConstant( NumericConstant, int ):
     """Integer constant"""
+    def __str__( self ):
+        """Return the value as a human-friendly string"""
+        return '%s (0x%X)'%(self.name,self)
 class FloatConstant( NumericConstant, float ):
     """Float constant"""
 

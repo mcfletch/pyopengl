@@ -22,16 +22,7 @@ class FormatHandler( object ):
     GENERIC_OUTPUT_PREFERENCES = ['numpy','numeric','ctypesarrays']
     ALL_OUTPUT_HANDLERS = []
     def loadAll( cls ):
-        """Load all setuptools-registered FormatHandler classes
-        
-        register a new datatype with code similar to this in your
-        package's setup.py for setuptools:
-        
-        entry_points = {
-            'OpenGL.arrays.formathandler':[
-                'numpy = OpenGL.arrays.numpymodule.NumpyHandler',
-            ],
-        }
+        """Load all OpenGL.plugins-registered FormatHandler classes
         """
         for entrypoint in plugins.FormatHandler.all():
             cls.loadPlugin( entrypoint )
