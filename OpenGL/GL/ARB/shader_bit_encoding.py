@@ -9,7 +9,7 @@ Overview (from the spec)
 	This extension trivially adds built-in functions for getting/setting
 	the bit encoding for floating-point values in the OpenGL Shading Language.
 	
-	These functions are pulled out of EXT_gpu_shader5, since support for such
+	These functions are pulled out of ARB_gpu_shader5, since support for such
 	built-in functions exists in current hardware.
 
 The official definition of this extension is available here:
