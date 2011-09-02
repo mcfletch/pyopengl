@@ -31,3 +31,5 @@ OpenGL_accelerate/__pycache__
 *.bak
 ChangeLog.txt
 *.egg-info
+tests/threadex
+OpenGL/raw/GLEXT
