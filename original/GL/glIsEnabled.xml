@@ -11,7 +11,7 @@
         <manvolnum>3G</manvolnum>
     </refmeta>
     <refnamediv>
-        <refname>glIsEnabled, glIsEnabledi</refname>
+        <refname>glIsEnabled</refname>
         <refpurpose>test whether a capability is enabled</refpurpose>
     </refnamediv>
     <refsynopsisdiv><title>C Specification</title>
@@ -19,13 +19,6 @@
             <funcprototype>
                 <funcdef>GLboolean <function>glIsEnabled</function></funcdef>
                 <paramdef>GLenum <parameter>cap</parameter></paramdef>
-            </funcprototype>
-        </funcsynopsis>
-        <funcsynopsis>
-            <funcprototype>
-                <funcdef>GLboolean <function>glIsEnabledi</function></funcdef>
-                <paramdef>GLenum <parameter>cap</parameter></paramdef>
-                <paramdef>GLuint <parameter>index</parameter></paramdef>
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
@@ -39,22 +32,12 @@
                 </para>
             </listitem>
         </varlistentry>
-        <varlistentry>
-            <term><parameter>index</parameter></term>
-            <listitem>
-                <para>
-                    Specifies the index of the capability.
-                </para>
-            </listitem>
-        </varlistentry>
         </variablelist>
     </refsect1>
     <refsect1 id="description"><title>Description</title>
         <para>
             <function>glIsEnabled</function> returns <constant>GL_TRUE</constant> if <parameter>cap</parameter> is an enabled capability
-            and returns <constant>GL_FALSE</constant> otherwise. Boolean states that are indexed may be tested with <function>glIsEnabledi</function>.
-            For <function>glIsEnabledi</function>, <parameter>index</parameter> specifies the index of the capability to test. <parameter>index</parameter>
-            must be between zero and the count of indexed capabilities for <parameter>cap</parameter>.
+            and returns <constant>GL_FALSE</constant> otherwise.
             Initially all capabilities except <constant>GL_DITHER</constant> are disabled;
             <constant>GL_DITHER</constant> is initially enabled.
         </para>
@@ -80,6 +63,22 @@
                 <tbody>
                     <row>
                         <entry align="left">
+                        <constant>GL_ALPHA_TEST</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glAlphaFunc</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_AUTO_NORMAL</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glEvalCoord</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
                         <constant>GL_BLEND</constant>
                         </entry>
                         <entry align="left">
@@ -88,10 +87,18 @@
                     </row>
                     <row>
                         <entry align="left">
-                        <constant>GL_CLIP_DISTANCE</constant><emphasis>i</emphasis>
+                        <constant>GL_CLIP_PLANE</constant><emphasis>i</emphasis>
                         </entry>
                         <entry align="left">
-                        <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>
+                        <citerefentry><refentrytitle>glClipPlane</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_COLOR_ARRAY</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glColorPointer</refentrytitle></citerefentry>
                         </entry>
                     </row>
                     <row>
@@ -104,18 +111,50 @@
                     </row>
                     <row>
                         <entry align="left">
-                        <constant>GL_CULL_FACE</constant>
+                        <constant>GL_COLOR_MATERIAL</constant>
                         </entry>
                         <entry align="left">
-                        <citerefentry><refentrytitle>glCullFace</refentrytitle></citerefentry>
+                        <citerefentry><refentrytitle>glColorMaterial</refentrytitle></citerefentry>
                         </entry>
                     </row>
                     <row>
                         <entry align="left">
-                        <constant>GL_DEPTH_CLAMP</constant>
+                        <constant>GL_COLOR_SUM</constant>
                         </entry>
                         <entry align="left">
-                        <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>
+                        <citerefentry><refentrytitle>glSecondaryColor</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_COLOR_TABLE</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glColorTable</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_CONVOLUTION_1D</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glConvolutionFilter1D</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_CONVOLUTION_2D</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glConvolutionFilter2D</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_CULL_FACE</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glCullFace</refentrytitle></citerefentry>
                         </entry>
                     </row>
                     <row>
@@ -136,10 +175,66 @@
                     </row>
                     <row>
                         <entry align="left">
-                        <constant>GL_FRAMEBUFFER_SRGB</constant>
+                        <constant>GL_EDGE_FLAG_ARRAY</constant>
                         </entry>
                         <entry align="left">
-                        <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>
+                        <citerefentry><refentrytitle>glEdgeFlagPointer</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_FOG</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glFog</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_FOG_COORD_ARRAY</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glFogCoordPointer</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_HISTOGRAM</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glHistogram</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_INDEX_ARRAY</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glIndexPointer</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_INDEX_LOGIC_OP</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glLogicOp</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_LIGHT</constant><emphasis>i</emphasis>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glLightModel</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glLight</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_LIGHTING</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMaterial</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glLightModel</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glLight</refentrytitle></citerefentry>
                         </entry>
                     </row>
                     <row>
@@ -152,10 +247,186 @@
                     </row>
                     <row>
                         <entry align="left">
+                        <constant>GL_LINE_STIPPLE</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glLineStipple</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP1_COLOR_4</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap1</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP1_INDEX</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap1</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP1_NORMAL</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap1</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP1_TEXTURE_COORD_1</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap1</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP1_TEXTURE_COORD_2</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap1</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP1_TEXTURE_COORD_3</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap1</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP1_TEXTURE_COORD_4</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap1</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP2_COLOR_4</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap2</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP2_INDEX</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap2</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP2_NORMAL</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap2</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP2_TEXTURE_COORD_1</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap2</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP2_TEXTURE_COORD_2</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap2</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP2_TEXTURE_COORD_3</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap2</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP2_TEXTURE_COORD_4</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap2</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP2_VERTEX_3</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap2</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MAP2_VERTEX_4</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMap2</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_MINMAX</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glMinmax</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
                         <constant>GL_MULTISAMPLE</constant>
                         </entry>
                         <entry align="left">
                         <citerefentry><refentrytitle>glSampleCoverage</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_NORMAL_ARRAY</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glNormalPointer</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_NORMALIZE</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glNormal</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_POINT_SMOOTH</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glPointSize</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_POINT_SPRITE</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>
                         </entry>
                     </row>
                     <row>
@@ -192,18 +463,34 @@
                     </row>
                     <row>
                         <entry align="left">
-                        <constant>GL_PROGRAM_POINT_SIZE</constant>
+                        <constant>GL_POLYGON_STIPPLE</constant>
                         </entry>
                         <entry align="left">
-                        <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>
+                        <citerefentry><refentrytitle>glPolygonStipple</refentrytitle></citerefentry>
                         </entry>
                     </row>
                     <row>
                         <entry align="left">
-                        <constant>GL_PRIMITIVE_RESTART</constant> 
+                        <constant>GL_POST_COLOR_MATRIX_COLOR_TABLE</constant>
                         </entry>
                         <entry align="left">
-                        <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glPrimitiveRestartIndex</refentrytitle></citerefentry>
+                        <citerefentry><refentrytitle>glColorTable</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_POST_CONVOLUTION_COLOR_TABLE</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glColorTable</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_RESCALE_NORMAL</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glNormal</refentrytitle></citerefentry>
                         </entry>
                     </row>
                     <row>
@@ -232,18 +519,26 @@
                     </row>
                     <row>
                         <entry align="left">
-                        <constant>GL_SAMPLE_MASK</constant>
-                        </entry>
-                        <entry align="left">
-                        <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry align="left">
                         <constant>GL_SCISSOR_TEST</constant>
                         </entry>
                         <entry align="left">
                         <citerefentry><refentrytitle>glScissor</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_SECONDARY_COLOR_ARRAY</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glSecondaryColorPointer</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_SEPARABLE_2D</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glSeparableFilter2D</refentrytitle></citerefentry>
                         </entry>
                     </row>
                     <row>
@@ -256,7 +551,95 @@
                     </row>
                     <row>
                         <entry align="left">
-                        <constant>GL_TEXTURE_CUBEMAP_SEAMLESS</constant>
+                        <constant>GL_TEXTURE_1D</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glTexImage1D</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_TEXTURE_2D</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glTexImage2D</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_TEXTURE_3D</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glTexImage3D</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_TEXTURE_COORD_ARRAY</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glTexCoordPointer</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_TEXTURE_CUBE_MAP</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glTexImage2D</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_TEXTURE_GEN_Q</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glTexGen</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_TEXTURE_GEN_R</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glTexGen</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_TEXTURE_GEN_S</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glTexGen</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_TEXTURE_GEN_T</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glTexGen</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_VERTEX_ARRAY</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glVertexPointer</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_VERTEX_PROGRAM_POINT_SIZE</constant>
+                        </entry>
+                        <entry align="left">
+                        <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry align="left">
+                        <constant>GL_VERTEX_PROGRAM_TWO_SIDE</constant>
                         </entry>
                         <entry align="left">
                         <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>
@@ -271,7 +654,72 @@
     <refsect1 id="notes"><title>Notes</title>
         <para>
             If an error is generated,
-            <function>glIsEnabled</function> and <function>glIsEnabledi</function> return <constant>GL_FALSE</constant>.
+            <function>glIsEnabled</function> returns 0.
+        </para>
+        <para>
+            <constant>GL_COLOR_LOGIC_OP</constant>,
+            <constant>GL_COLOR_ARRAY</constant>,
+            <constant>GL_EDGE_FLAG_ARRAY</constant>,
+            <constant>GL_INDEX_ARRAY</constant>,
+            <constant>GL_INDEX_LOGIC_OP</constant>,
+            <constant>GL_NORMAL_ARRAY</constant>,
+            <constant>GL_POLYGON_OFFSET_FILL</constant>,
+            <constant>GL_POLYGON_OFFSET_LINE</constant>,
+            <constant>GL_POLYGON_OFFSET_POINT</constant>,
+            <constant>GL_TEXTURE_COORD_ARRAY</constant>, and
+            <constant>GL_VERTEX_ARRAY</constant>
+            are available only
+            if the GL version is 1.1 or greater.
+        </para>
+        <para>
+            <constant>GL_RESCALE_NORMAL</constant>, and <constant>GL_TEXTURE_3D</constant> are available only if the GL
+            version is 1.2 or greater.
+        </para>
+        <para>
+            <constant>GL_MULTISAMPLE</constant>,
+            <constant>GL_SAMPLE_ALPHA_TO_COVERAGE</constant>,
+            <constant>GL_SAMPLE_ALPHA_TO_ONE</constant>,
+            <constant>GL_SAMPLE_COVERAGE</constant>,
+            <constant>GL_TEXTURE_CUBE_MAP</constant>
+            are available only if the GL version is 1.3 or greater.
+        </para>
+        <para>
+            <constant>GL_FOG_COORD_ARRAY</constant> and <constant>GL_SECONDARY_COLOR_ARRAY</constant>
+            are available only if the GL version is 1.4 or greater.
+        </para>
+        <para>
+            <constant>GL_POINT_SPRITE</constant>,
+            <constant>GL_VERTEX_PROGRAM_POINT_SIZE</constant>, and
+            <constant>GL_VERTEX_PROGRAM_TWO_SIDE</constant>
+            are available only if the GL version is 2.0 or greater.
+        </para>
+        <para>
+            <constant>GL_COLOR_TABLE</constant>, <constant>GL_CONVOLUTION_1D</constant>, <constant>GL_CONVOLUTION_2D</constant>,
+            <constant>GL_HISTOGRAM</constant>, <constant>GL_MINMAX</constant>,
+            <constant>GL_POST_COLOR_MATRIX_COLOR_TABLE</constant>,
+            <constant>GL_POST_CONVOLUTION_COLOR_TABLE</constant>, and
+            <constant>GL_SEPARABLE_2D</constant> are available only if <code>ARB_imaging</code> is
+            returned when <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> is called with <constant>GL_EXTENSIONS</constant>.
+        </para>
+        <para>
+            For OpenGL versions 1.3 and greater, or when the <code>ARB_multitexture</code> extension is supported, the following
+            parameters return the associated value for the active texture unit:
+            <constant>GL_TEXTURE_1D</constant>,
+            <constant>GL_TEXTURE_2D</constant>,
+            <constant>GL_TEXTURE_3D</constant>,
+            <constant>GL_TEXTURE_CUBE_MAP</constant>,
+            <constant>GL_TEXTURE_GEN_S</constant>,
+            <constant>GL_TEXTURE_GEN_T</constant>,
+            <constant>GL_TEXTURE_GEN_R</constant>,
+            <constant>GL_TEXTURE_GEN_Q</constant>,
+            <constant>GL_TEXTURE_MATRIX</constant>, and
+            <constant>GL_TEXTURE_STACK_DEPTH</constant>.
+            Likewise, the following parameters return the associated value for the
+            active client texture unit:
+            <constant>GL_TEXTURE_COORD_ARRAY</constant>,
+            <constant>GL_TEXTURE_COORD_ARRAY_SIZE</constant>,
+            <constant>GL_TEXTURE_COORD_ARRAY_STRIDE</constant>,
+            <constant>GL_TEXTURE_COORD_ARRAY_TYPE</constant>.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
@@ -279,22 +727,22 @@
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>cap</parameter> is not an accepted value.
         </para>
         <para>
-            <constant>GL_INVALID_VALUE</constant> is generated by <function>glIsEnabledi</function> if <parameter>index</parameter> is outside the
-            valid range for the indexed state <parameter>cap</parameter>.
+            <constant>GL_INVALID_OPERATION</constant> is generated if <function>glIsEnabled</function>
+            is executed between the execution of <citerefentry><refentrytitle>glBegin</refentrytitle></citerefentry>
+            and the corresponding execution of <citerefentry><refentrytitle>glEnd</refentrytitle></citerefentry>.
         </para>
     </refsect1>
     <refsect1 id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glDisable</refentrytitle></citerefentry>,
+            <citerefentry><refentrytitle>glEnableClientState</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry>
         </para>
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
             Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. Copyright <trademark class="copyright"></trademark> 2010-2011
-            Khronos Group. This document is licensed under the SGI
+            Silicon Graphics, Inc. This document is licensed under the SGI
             Free Software B License. For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
         </para>

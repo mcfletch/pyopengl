@@ -30,7 +30,10 @@
             <listitem>
                 <para>
                     Specifies the polygons that <parameter>mode</parameter> applies to.
-                    Must be <constant>GL_FRONT_AND_BACK</constant> for front- and back-facing polygons.
+                    Must be
+                    <constant>GL_FRONT</constant> for front-facing polygons,
+                    <constant>GL_BACK</constant> for back-facing polygons,
+                    or <constant>GL_FRONT_AND_BACK</constant> for front- and back-facing polygons.
                 </para>
             </listitem>
         </varlistentry>
@@ -53,7 +56,9 @@
         <para>
             <function>glPolygonMode</function> controls the interpretation of polygons for rasterization.
             <parameter>face</parameter> describes which polygons <parameter>mode</parameter> applies to:
-            both front and back-facing polygons (<constant>GL_FRONT_AND_BACK</constant>).
+            front-facing polygons (<constant>GL_FRONT</constant>),
+            back-facing polygons (<constant>GL_BACK</constant>),
+            or both (<constant>GL_FRONT_AND_BACK</constant>).
             The polygon mode affects only the final rasterization of polygons.
             In particular,
             a polygon's vertices are lit and
@@ -82,6 +87,9 @@
                 <listitem>
                     <para>
                         Boundary edges of the polygon are drawn as line segments.
+                        They are treated as connected line segments for line stippling;
+                        the line stipple counter and pattern are not reset between segments
+                        (see <citerefentry><refentrytitle>glLineStipple</refentrytitle></citerefentry>).
                         Line attributes such as
                         <constant>GL_LINE_WIDTH</constant> and
                         <constant>GL_LINE_SMOOTH</constant> control
@@ -95,7 +103,9 @@
                 <listitem>
                     <para>
                         The interior of the polygon is filled.
-                        Polygon attributes such as <constant>GL_POLYGON_SMOOTH</constant> control the rasterization of the polygon.
+                        Polygon attributes such as
+                        <constant>GL_POLYGON_STIPPLE</constant> and
+                        <constant>GL_POLYGON_SMOOTH</constant> control the rasterization of the polygon.
                     </para>
                 </listitem>
             </varlistentry>
@@ -103,10 +113,11 @@
     </refsect1>
     <refsect1 id="examples"><title>Examples</title>
         <para>
-            To draw a surface with outlined polygons,
+            To draw a surface with filled back-facing polygons
+            and outlined front-facing polygons,
             call
             <programlisting>
-glPolygonMode(<constant>GL_FRONT_AND_BACK</constant>, <constant>GL_LINE</constant>);
+glPolygonMode(<constant>GL_FRONT</constant>, <constant>GL_LINE</constant>);
             </programlisting>
         </para>
     </refsect1>
@@ -114,13 +125,18 @@ glPolygonMode(<constant>GL_FRONT_AND_BACK</constant>, <constant>GL_LINE</constan
         <para>
             Vertices are marked as boundary or nonboundary with an edge flag.
             Edge flags are generated internally by the GL when it decomposes
-            triangle stips and fans.
+            polygons; they can be set explicitly using <citerefentry><refentrytitle>glEdgeFlag</refentrytitle></citerefentry>.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if either <parameter>face</parameter> or <parameter>mode</parameter> is not
             an accepted value.
+        </para>
+        <para>
+            <constant>GL_INVALID_OPERATION</constant> is generated if <function>glPolygonMode</function>
+            is executed between the execution of <citerefentry><refentrytitle>glBegin</refentrytitle></citerefentry>
+            and the corresponding execution of <citerefentry><refentrytitle>glEnd</refentrytitle></citerefentry>.
         </para>
     </refsect1>
     <refsect1 id="associatedgets"><title>Associated Gets</title>
@@ -130,8 +146,12 @@ glPolygonMode(<constant>GL_FRONT_AND_BACK</constant>, <constant>GL_LINE</constan
     </refsect1>
     <refsect1 id="seealso"><title>See Also</title>
         <para>
+            <citerefentry><refentrytitle>glBegin</refentrytitle></citerefentry>,
+            <citerefentry><refentrytitle>glEdgeFlag</refentrytitle></citerefentry>,
+            <citerefentry><refentrytitle>glLineStipple</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glLineWidth</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glPointSize</refentrytitle></citerefentry>
+            <citerefentry><refentrytitle>glPointSize</refentrytitle></citerefentry>,
+            <citerefentry><refentrytitle>glPolygonStipple</refentrytitle></citerefentry>
         </para>
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
