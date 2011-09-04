@@ -1,6 +1,6 @@
 """Common code for accelerated modules"""
 import OpenGL,logging
-needed_version = (3,0,1)
+needed_version = (3,0,2)
 log = logging.getLogger( 'OpenGL.acceleratesupport' )
 try:
     import OpenGL_accelerate
