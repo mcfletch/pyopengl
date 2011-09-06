@@ -33,3 +33,4 @@ ChangeLog.txt
 *.egg-info
 tests/threadex
 OpenGL/raw/GLEXT
+src/gle-3.1.0*
