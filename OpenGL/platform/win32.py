@@ -1,6 +1,14 @@
 """Windows-specific platform features"""
 import ctypes
 from OpenGL.platform import ctypesloader, baseplatform
+import sys
+
+if sys.hexversion < 0x2070000:
+    vc = 'vc7'
+# TODO: add Python 3.x compiler compatibility...
+else:
+    vc = 'vc9'
+
 
 class Win32Platform( baseplatform.BasePlatform ):
     """Win32-specific platform implementation"""
@@ -37,7 +45,7 @@ class Win32Platform( baseplatform.BasePlatform ):
         pass
 
     GLE = None
-    for libName in ('gle32','opengle32'):
+    for libName in ('opengle32.%s'%(vc,),'gle32'):
         try:
             GLE = ctypesloader.loadLibrary( ctypes.cdll, libName )
             GLE.FunctionType = ctypes.CFUNCTYPE
