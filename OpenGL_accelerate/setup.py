@@ -4,7 +4,7 @@
 from distutils.core import setup,Extension
 try:
     from Cython.Distutils import build_ext
-except ImportError, err:
+except ImportError:
     have_cython = False
 else:
     have_cython = True
@@ -51,7 +51,7 @@ extensions.extend([
 
 try:
     import numpy
-except ImportError, err:
+except ImportError:
     sys.stderr.write(
         """Unable to import numpy, skipping numpy extension building\n"""
     )
@@ -74,7 +74,7 @@ else:
 
 try:
     import Numeric
-except ImportError, err:
+except ImportError:
     sys.stderr.write(
         """Unable to import Numeric, skipping Numeric extension building\n"""
     )
