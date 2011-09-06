@@ -34,3 +34,5 @@ ChangeLog.txt
 tests/threadex
 OpenGL/raw/GLEXT
 src/gle-3.1.0*
+src/gl.spec
+src/glext.h*
