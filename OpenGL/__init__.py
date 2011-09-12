@@ -205,7 +205,7 @@ FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler' )
 FormatHandler(
     'ctypesarray', 'OpenGL.arrays.ctypesarrays.CtypesArrayHandler',
     [
-        '_ctypes.ArrayType',
+        '_ctypes.ArrayType','_ctypes.PyCArrayType',
     ],
 )
 FormatHandler(
