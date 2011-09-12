@@ -135,6 +135,10 @@ cdef class ArrayDatatype:
             )
         return handler.from_param( value, self.typeConstant )
     
+    def __call__( self, object value ):
+        """We cannot simply reference from_param as under Python 2.7 that makes us non-callable"""
+        return self.from_param( value )
+    
     def dataPointer( self, value ):
         """Given a value in a known data-pointer type, return long for pointer"""
         handler = self.handler.c_lookup( value )
