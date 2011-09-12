@@ -1,18 +1,19 @@
 #! /usr/bin/env python
 """OpenGL-ctypes setup script (setuptools-based)
 """
+import sys, os
 extra_commands = {}
 try:
     from setuptools import setup 
 except ImportError:
     from distutils.core import setup
+if sys.hexversion >= 0x3000000:
     try:
         from distutils.command.build_py import build_py_2to3
         extra_commands['build_py'] = build_py_2to3
     except ImportError:
         pass
 
-import sys, os
 sys.path.insert(0, '.' )
 import metadata
 def is_package( path ):
