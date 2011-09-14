@@ -18,3 +18,6 @@ from OpenGL.GL.ARB.vertex_array_object import *
 from OpenGL.GL.ARB.texture_buffer_object import *
 from OpenGL.GL.ARB.framebuffer_object import *
 from OpenGL.GL.ARB.map_buffer_range import *
+
+from ctypes import c_char_p
+glGetStringi.restype = c_char_p
