@@ -52,13 +52,14 @@ def hasGLExtension( specifier ):
         if not AVAILABLE_GL_EXTENSIONS:
             try:
                 AVAILABLE_GL_EXTENSIONS[:] = glGetString( GL_EXTENSIONS ).split()
-            except error.GLError, err:
+            except (AttributeError, error.GLError), err:
                 # OpenGL 3.0 deprecates glGetString( GL_EXTENSIONS )
                 from OpenGL.GL import GL_NUM_EXTENSIONS, glGetStringi, glGetIntegerv
                 count = glGetIntegerv( GL_NUM_EXTENSIONS )
                 for i in range( count ):
+                    extension = glGetStringi( GL_EXTENSIONS, i )
                     AVAILABLE_GL_EXTENSIONS.append(
-                        glGetStringi( GL_EXTENSIONS, i )
+                        extension
                     )
         result = specifier in AVAILABLE_GL_EXTENSIONS
         log.info(
