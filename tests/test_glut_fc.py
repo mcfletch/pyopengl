@@ -16,7 +16,12 @@ def display():
         glutSetWindow(window);
         glClearColor (0.0, 0.0, (time.time()%1.0)/1.0, 0.0)
         glClear (GL_COLOR_BUFFER_BIT)
-        glGetString( GL_EXTENSIONS )
+        try:
+            glGetString( GL_EXTENSIONS )
+        except GLError, err:
+            pass 
+        else:
+            print 'Egads, glGetString should not have worked!'
         glFlush ()
         glutSwapBuffers()
     except Exception, err:
