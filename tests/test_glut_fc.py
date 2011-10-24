@@ -6,6 +6,7 @@ OpenGL.USE_ACCELERATE = False
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
+from OpenGL.GL import shaders
 import time
 start = time.time()
 
@@ -27,8 +28,6 @@ def display():
     except Exception, err:
         glutDestroyWindow( window )
         raise
-        import sys 
-        sys.exit( 1 )
 
 size = (250,250)
 
