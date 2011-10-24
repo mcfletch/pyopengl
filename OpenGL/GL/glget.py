@@ -31,7 +31,7 @@ __all__ = (
     'glGetTexParameteriv',
 )
 
-glGetString = platform.OpenGL.glGetString
+glGetString = simple.glGetString
 glGetString.restype = ctypes.c_char_p
 glGetString.__doc__ = """glGetString( constant ) -> Current string value"""
 
