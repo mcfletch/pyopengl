@@ -132,7 +132,7 @@ def glVertexAttribPointerARB(
     in the contextdata structure in order to prevent null-
     reference errors in the renderer.
     """
-    array = ArrayDatatype.asArray( pointer )
+    array = ArrayDatatype.asArray( pointer, type )
     key = ('vertex-attrib',index)
     contextdata.setValue( key, array )
     return baseOperation(
