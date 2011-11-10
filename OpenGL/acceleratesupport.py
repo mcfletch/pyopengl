@@ -1,10 +1,11 @@
 """Common code for accelerated modules"""
-import OpenGL,logging
+import logging
+from OpenGL import _configflags
 needed_version = (3,0,2)
 log = logging.getLogger( 'OpenGL.acceleratesupport' )
 try:
     import OpenGL_accelerate
-    if OpenGL.USE_ACCELERATE:
+    if _configflags.USE_ACCELERATE:
         if OpenGL_accelerate.__version_tuple__ <  needed_version:
             log.warn( """Incompatible version of OpenGL_accelerate found, need at least %s found %s""", needed_version, OpenGL_accelerate.__version_tuple__)
             raise ImportError( """Old version of OpenGL_accelerate""" )

@@ -3,7 +3,7 @@
 import ctypes
 from OpenGL.platform import ctypesloader
 import sys
-import OpenGL as top_level_module
+from OpenGL import _configflags
 from OpenGL import logs, MODULE_ANNOTATIONS
 
 
@@ -91,7 +91,7 @@ class BasePlatform( object ):
     def errorChecking( self, func, dll ):
         """Add error checking to the function if appropriate"""
         from OpenGL import error
-        if top_level_module.ERROR_CHECKING:
+        if _configflags.ERROR_CHECKING:
             if dll not in (self.GLUT,):
                 #GLUT spec says error-checking is basically undefined...
                 # there *may* be GL errors on GLUT calls that e.g. render 
@@ -100,7 +100,7 @@ class BasePlatform( object ):
         return func
     def wrapContextCheck( self, func, dll ):
         """Wrap function with context-checking if appropriate"""
-        if top_level_module.CONTEXT_CHECKING and dll is not self.GLUT:
+        if _configflags.CONTEXT_CHECKING and dll is not self.GLUT:
             return _CheckContext( func, self.CurrentContextIsValid )
         return func 
     def wrapLogging( self, func ):
@@ -193,7 +193,7 @@ class BasePlatform( object ):
         result = None
         try:
             if (
-                top_level_module.FORWARD_COMPATIBLE_ONLY and 
+                _configflags.FORWARD_COMPATIBLE_ONLY and 
                 dll is self.GL and 
                 deprecated
             ):

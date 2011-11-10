@@ -1,6 +1,6 @@
 """Implementation of OpenGL constant objects"""
 import sys
-import OpenGL as root
+from OpenGL import _configflags
 
 class Constant( object ):
     """OpenGL constant that displays itself as a name rather than a value
@@ -23,7 +23,7 @@ class Constant( object ):
                 value = - (value & sys.maxint)
         base = super(Constant,cls).__new__( cls, value )
         base.name = name
-        if root.MODULE_ANNOTATIONS:
+        if _configflags.MODULE_ANNOTATIONS:
             frame = sys._getframe().f_back
             if frame and frame.f_back and '__name__' in frame.f_back.f_globals:
                 base.__module__ = frame.f_back.f_globals['__name__']

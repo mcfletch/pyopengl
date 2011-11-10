@@ -13,6 +13,7 @@ import ctypes
 import weakref
 from OpenGL.platform import PLATFORM
 import OpenGL
+from OpenGL import _configflags
 
 __all__ = (
     'GLUnurbs',
@@ -219,7 +220,7 @@ def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
     except ValueError, err:
         raise error.GLUError( """Need a 2-dimensional control array""" )
     order = knotCount - length
-    if OpenGL.ERROR_CHECKING:
+    if _configflags.ERROR_CHECKING:
         checkOrder( order, knotCount, 'order of NURBS curve')
         checkKnots( knots, 'knots of NURBS curve')
     return baseFunction(
@@ -246,7 +247,7 @@ def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
     tOrder = tKnotCount - width
     sStride = width*step
     tStride = step
-    if OpenGL.ERROR_CHECKING:
+    if _configflags.ERROR_CHECKING:
         checkOrder( sOrder, sKnotCount, 'sOrder of NURBS surface')
         checkOrder( tOrder, tKnotCount, 'tOrder of NURBS surface')
         checkKnots( sKnots, 'sKnots of NURBS surface')

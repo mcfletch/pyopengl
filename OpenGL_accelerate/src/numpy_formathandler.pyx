@@ -27,8 +27,8 @@ cdef class NumpyHandler(FormatHandler):
 	
 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):
 		if ERROR_ON_COPY is None:
-			import OpenGL
-			ERROR_ON_COPY = OpenGL.ERROR_ON_COPY
+			from OpenGL import _configflags
+			ERROR_ON_COPY = _configflags.ERROR_ON_COPY
 		if a_to_gl is None:
 			from OpenGL.arrays.numpymodule import ARRAY_TO_GL_TYPE_MAPPING
 			a_to_gl = ARRAY_TO_GL_TYPE_MAPPING

@@ -8,6 +8,7 @@ from OpenGL.raw import GL as simple
 from OpenGL.raw.GL import constants
 from OpenGL.raw.GL import annotations
 import OpenGL
+from OpenGL import _configflags
 import ctypes
 
 __all__ = [
@@ -44,7 +45,7 @@ glRasterPosDispatch = {
     4: simple.glRasterPos4d,
 }
 
-if OpenGL.ERROR_CHECKING:
+if _configflags.ERROR_CHECKING:
     @lazy( simple.glBegin )
     def glBegin( baseFunction, mode ):
         """Begin GL geometry-definition mode, disable automatic error checking"""
@@ -181,7 +182,7 @@ def glGenTextures( baseFunction, count, textures=None ):
     """
     if count <= 0:
         raise ValueError( """Can't generate 0 or fewer textures""" )
-    elif count == 1 and OpenGL.SIZE_1_ARRAY_UNPACK:
+    elif count == 1 and _configflags.SIZE_1_ARRAY_UNPACK:
         # this traditionally returned a single int/long, so we'll continue to
         # do so, even though it would be easier not to bother.
         textures = simple.GLuint( 0 )

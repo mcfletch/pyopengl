@@ -17,7 +17,7 @@ def glVertexPointerd( array ):
     storedPointers[ GL_VERTEX_ARRAY ] = arg4
     return arg4
 """
-from OpenGL import platform, arrays, error, wrapper, contextdata, converters, constant, ERROR_ON_COPY
+from OpenGL import platform, arrays, error, wrapper, contextdata, converters, constant
 from OpenGL.raw import GL as simple
 from OpenGL.raw.GL import annotations
 import ctypes

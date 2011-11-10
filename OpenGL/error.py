@@ -9,7 +9,7 @@ throughout the system.
 """
 import OpenGL, logging
 log = logging.getLogger( 'OpenGL.error' )
-from OpenGL import platform
+from OpenGL import platform, _configflags
 __all__ = (
     "Error",'GLError','GLUError','GLUTError','glCheckError',
     'GLerror','GLUerror','GLUTerror',
@@ -158,7 +158,7 @@ class GLUTError( Error ):
     """GLUT error implementation class"""
 
 
-if OpenGL.ERROR_CHECKING:
+if _configflags.ERROR_CHECKING:
     from OpenGL import acceleratesupport
     _ErrorChecker = None
     if acceleratesupport.ACCELERATE_AVAILABLE:

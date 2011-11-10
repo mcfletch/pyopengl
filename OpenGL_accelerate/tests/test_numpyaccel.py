@@ -1,6 +1,7 @@
 import unittest, numpy, ctypes
 from OpenGL_accelerate import numpy_formathandler as npf
-from OpenGL import error, constants, ERROR_ON_COPY
+from OpenGL import error, constants
+from OpenGL._configflags import ERROR_ON_COPY
 
 class TestAccelNumpy( unittest.TestCase ):
     def setUp( self ):

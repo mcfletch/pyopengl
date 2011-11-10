@@ -11,7 +11,7 @@ except ImportError, err:
 import traceback, logging
 
 getLog = logging.getLogger
-from OpenGL import ERROR_LOGGING, FULL_LOGGING
+from OpenGL._configflags import ERROR_LOGGING, FULL_LOGGING
 
 if not hasattr( traceback, 'format_exc' ):
     # Python 2.3 and below... do we care any more?

@@ -25,9 +25,9 @@ ctypes_version = [int(i) for i in ctypes.__version__.split('.')[:3]]
 
 # Basic OpenGL data-types as ctypes declarations...
 def _defineType( name, baseType, convertFunc = long ):
-    import OpenGL
+    from OpenGL import _configflags
     do_wrapping = (
-        OpenGL.ALLOW_NUMPY_SCALARS or # explicitly require
+        _configflags.ALLOW_NUMPY_SCALARS or # explicitly require
         (( # or we are using Python 2.5.x ctypes which doesn't support uint type numpy scalars
             ctypes_version < [1,1,0]
             and baseType in (ctypes.c_uint,ctypes.c_uint64,ctypes.c_ulong,ctypes.c_ushort)

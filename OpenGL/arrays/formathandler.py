@@ -34,7 +34,8 @@ class FormatHandler( object ):
             try:
                 plugin_class = entrypoint.load()
             except ImportError, err:
-                from OpenGL import logs,WARN_ON_FORMAT_UNAVAILABLE
+                from OpenGL import logs
+                from OpenGL._configflags import WARN_ON_FORMAT_UNAVAILABLE
                 log = logs.getLog( 'OpenGL.formathandler' )
                 if WARN_ON_FORMAT_UNAVAILABLE:
                     logFunc = log.warn

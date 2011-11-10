@@ -4,6 +4,7 @@ These are functions intended to be used in wrapping
 GL functions that deal with OpenGL array data-types.
 """
 import OpenGL
+from OpenGL import _configflags
 from OpenGL import contextdata, error, wrapper, constants, converters
 from OpenGL.arrays import arraydatatype
 import logging
@@ -83,7 +84,7 @@ else:
 
 
 
-if not OpenGL.ERROR_ON_COPY:
+if not _configflags.ERROR_ON_COPY:
     def asArrayType( typ, size=None ):
         """Create PyConverter to get first argument as array of type"""
         return converters.CallFuncPyConverter( typ.asArray )
@@ -92,7 +93,7 @@ else:
         """No converter required"""
         return None
 
-if not OpenGL.ARRAY_SIZE_CHECKING:
+if not _configflags.ARRAY_SIZE_CHECKING:
     asArrayTypeSize = asArrayType
 else:
     if AsArrayTypedSizeChecked:
@@ -122,7 +123,7 @@ else:
             return asArraySize
 
 
-if not OpenGL.ERROR_ON_COPY:
+if not _configflags.ERROR_ON_COPY:
     def asVoidArray( ):
         """Create PyConverter returning incoming as an array of any type"""
         from OpenGL.arrays import ArrayDatatype
@@ -153,7 +154,7 @@ class storePointerType( object ):
         contextdata.setValue( self.constant, pyArgs[self.pointerIndex] )
 
 
-if not OpenGL.ERROR_ON_COPY:
+if not _configflags.ERROR_ON_COPY:
     def setInputArraySizeType( baseOperation, size, type, argName=0 ):
         """Decorate function with vector-handling code for a single argument
         

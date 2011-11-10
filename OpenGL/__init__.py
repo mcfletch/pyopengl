@@ -15,6 +15,11 @@ The implication there is that your library code should be
 able to work with any of the valid configurations available
 with these sets of flags.
 
+Further, once any entry point has been loaded, the variables 
+can no longer be updated.  The OpenGL._confligflags module 
+imports the variables from this location, and once that 
+import occurs the flags should no longer be changed.
+
     ERROR_CHECKING -- if set to a False value before
         importing any OpenGL.* libraries will completely
         disable error-checking.  This can dramatically

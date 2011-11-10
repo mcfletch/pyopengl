@@ -11,6 +11,7 @@ except ImportError, err:
     raise ImportError( """No numpy module present: %s"""%(err))
 
 import operator,logging
+from OpenGL import _configflags
 import OpenGL
 import ctypes
 c_void_p = ctypes.c_void_p
@@ -74,7 +75,7 @@ if NumpyHandler is None:
         HANDLED_TYPES = (numpy.ndarray,)# list, tuple )
         dataPointer = dataPointer
         isOutput = True
-        ERROR_ON_COPY = OpenGL.ERROR_ON_COPY
+        ERROR_ON_COPY = _configflags.ERROR_ON_COPY
         @classmethod
         def zeros( cls, dims, typeCode ):
             """Return Numpy array of zeros in given size"""

@@ -9,7 +9,8 @@ Note:
 REGISTRY_NAME = 'ctypesarrays'
 import ctypes, _ctypes
 
-from OpenGL import constants, constant, error, ERROR_ON_COPY
+from OpenGL import constants, constant, error
+from OpenGL._configflags import ERROR_ON_COPY
 from OpenGL.arrays import formathandler
 HANDLED_TYPES = (list,tuple)
 import operator

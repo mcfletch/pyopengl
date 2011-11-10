@@ -43,6 +43,7 @@ the tables described above!
 from OpenGL.raw import GL as simple
 from OpenGL import arrays
 import OpenGL
+from OpenGL import _configflags
 import ctypes
 
 def SetupPixelRead( format, dims, type):
@@ -131,7 +132,7 @@ def returnFormat( data, type ):
     Uses OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING to control whether to perform the 
     conversions.
     """
-    if OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING:
+    if _configflags.UNSIGNED_BYTE_IMAGES_AS_STRING:
         if type == simple.GL_UNSIGNED_BYTE:
             if hasattr( data, 'tostring' ):
                 return data.tostring()
