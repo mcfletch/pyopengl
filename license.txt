@@ -185,3 +185,9 @@ following license/copyright notice (available in OpenGL/Tk/*/LICENSE if Togl is 
     IS PROVIDED ON AN "AS IS" BASIS, AND THE AUTHORS AND DISTRIBUTORS HAVE
     NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR
     MODIFICATIONS.
+
+OpenGL-ctypes includes an OS-Mesa platform driver which is (MIT
+Licensed), Copyright (c) 2012 Xu, Yuan <xuyuan.cn@gmail.com>:
+
+	https://github.com/xuyuan/PyOSMesa
+	http://opensource.org/licenses/MIT
