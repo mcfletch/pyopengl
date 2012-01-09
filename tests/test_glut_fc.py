@@ -23,6 +23,7 @@ def display():
             pass 
         else:
             print 'Egads, glGetString should not have worked!'
+        assert bool( glGenVertexArrays ), "Should have vertex array support in 3.2"
         glFlush ()
         glutSwapBuffers()
     except Exception, err:
