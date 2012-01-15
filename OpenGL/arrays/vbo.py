@@ -60,13 +60,13 @@ class Implementation( object ):
             return name
     def __init__( self ):
         names = [name for name in dir(vertex_buffer_object) if self._arbname( name )]
-        if not GL.glBufferData:
+        if GL.glBufferData:
             for name in names:
-                setattr( self, self.basename(name), getattr( vertex_buffer_object, name ))
+                setattr( self, self.basename(name), getattr( GL, self.basename(name) ))
             self.available = True
         elif vertex_buffer_object.glBufferDataARB:
             for name in names:
-                setattr( self, self.basename(name), getattr( GL, self.basename(name) ))
+                setattr( self, self.basename(name), getattr( vertex_buffer_object, name ))
             self.available = True
     def __nonzero__( self ):
         return self.available
