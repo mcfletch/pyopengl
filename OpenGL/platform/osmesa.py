@@ -1,6 +1,7 @@
 """OSMesa-specific features"""
 import ctypes, ctypes.util
 from OpenGL.platform import baseplatform, ctypesloader
+from OpenGL.constant import Constant
 
 assert hasattr( ctypes, 'RTLD_GLOBAL' ), """Old ctypes without ability to load .so for global resolution: Get ctypes CVS branch_1_0, not CVS HEAD or released versions!"""
 
@@ -45,12 +46,19 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
 
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )
 
-    #    glXGetProcAddressARB = GL.glXGetProcAddressARB
-    #glXGetProcAddressARB.restype = ctypes.c_void_p
-    #getExtensionProcedure = staticmethod( glXGetProcAddressARB )
+    GLenum = ctypes.c_uint
+    GLboolean = ctypes.c_ubyte
+    GLsizei = ctypes.c_int
+    GLint = ctypes.c_int
 
     baseplatform.BasePlatform.EXPORTED_NAMES += ['OSMesaCreateContext',
-        'OSMesaMakeCurrent', 'OSMesaGetCurrentContext', 'OSMesaDestroyContext']
+        'OSMesaCreateContextExt', 'OSMesaMakeCurrent', 'OSMesaGetIntegerv',
+        'OSMesaGetCurrentContext', 'OSMesaDestroyContext', 'OSMesaPixelStore',
+        'OSMesaGetDepthBuffer', 'OSMesaGetColorBuffer',
+        'OSMESA_COLOR_INDEX', 'OSMESA_RGBA', 'OSMESA_BGRA', 'OSMESA_ARGB',
+        'OSMESA_RGB', 'OSMESA_BGR', 'OSMESA_BGR', 'OSMESA_ROW_LENGTH',
+        'OSMESA_Y_UP', 'OSMESA_WIDTH', 'OSMESA_HEIGHT', 'OSMESA_FORMAT',
+        'OSMESA_TYPE', 'OSMESA_MAX_WIDTH', 'OSMESA_MAX_HEIGHT']
 
     # export OSMesa functions from osmesa.h
     class struct_osmesa_context(ctypes.Structure):
@@ -61,13 +69,35 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
     ]
     OSMesaContext = ctypes.POINTER(struct_osmesa_context)
 
-    GLenum = ctypes.c_uint
-    GLboolean = ctypes.c_ubyte
-    GLsizei = ctypes.c_int
+    # Values for the format parameter of OSMesaCreateContext()
+    OSMESA_COLOR_INDEX = Constant('OSMESA_COLOR_INDEX', 6400)
+    OSMESA_RGBA = Constant('OSMESA_RGBA', 6408)
+    OSMESA_BGRA = Constant('OSMESA_BGRA', 0x1)
+    OSMESA_ARGB = Constant('OSMESA_ARGB', 0x2)
+    OSMESA_RGB = Constant('OSMESA_RGB', 6407)
+    OSMESA_BGR = Constant('OSMESA_BGR',	0x4)
+    OSMESA_RGB_565 = Constant('OSMESA_BGR', 0x5)
+
+    # OSMesaPixelStore() parameters:
+    OSMESA_ROW_LENGTH = Constant('OSMESA_ROW_LENGTH', 0x10)
+    OSMESA_Y_UP = Constant('OSMESA_Y_UP', 0x11)
+
+    # Accepted by OSMesaGetIntegerv:
+    OSMESA_WIDTH = Constant('OSMESA_WIDTH', 0x20)
+    OSMESA_HEIGHT = Constant('OSMESA_HEIGHT', 0x21)
+    OSMESA_FORMAT = Constant('OSMESA_FORMAT', 0x22)
+    OSMESA_TYPE = Constant('OSMESA_TYPE', 0x23)
+    OSMESA_MAX_WIDTH = Constant('OSMESA_MAX_WIDTH', 0x24)
+    OSMESA_MAX_HEIGHT = Constant('OSMESA_MAX_HEIGHT', 0x25)
 
     OSMesaCreateContext = GL.OSMesaCreateContext
     OSMesaCreateContext.argtypes = [GLenum, OSMesaContext]
     OSMesaCreateContext.restype = OSMesaContext
+    
+    OSMesaCreateContextExt = GL.OSMesaCreateContextExt
+    OSMesaCreateContextExt.argtypes = [GLenum, GLint, GLint, GLint,
+                                       OSMesaContext]
+    OSMesaCreateContextExt.restype = OSMesaContext
 
     OSMesaDestroyContext = GL.OSMesaDestroyContext
     OSMesaDestroyContext.argtypes = [OSMesaContext]
@@ -80,6 +110,39 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
     OSMesaGetCurrentContext = GL.OSMesaGetCurrentContext
     #OSMesaGetCurrentContext.restype = OSMesaContext
     GetCurrentContext = CurrentContextIsValid = OSMesaGetCurrentContext
+
+    OSMesaPixelStore = GL.OSMesaPixelStore
+    OSMesaPixelStore.argtypes = [GLint, GLint]
+    OSMesaPixelStore.restype = None
+
+    def OSMesaGetIntegerv(self, pname):
+        value = self.GLint()
+        self.GL.OSMesaGetIntegerv(pname, ctypes.byref(value))
+        return value.value
+
+    def OSMesaGetDepthBuffer(self, c):
+        width, height, bytesPerValue = self.GLint(), self.GLint(), self.GLint()
+        buffer = ctypes.POINTER(self.GLint)()
+
+        if self.GL.OSMesaGetDepthBuffer(c, ctypes.byref(width),
+                                        ctypes.byref(height),
+                                        ctypes.byref(bytesPerValue),
+                                        ctypes.byref(buffer)):
+            return width.value, height.value, bytesPerValue.value, buffer
+        else:
+            return 0, 0, 0, None
+
+    def OSMesaGetColorBuffer(self, c):
+        width, height, format = self.GLint(), self.GLint(), self.GLint()
+        buffer = ctypes.c_void_p()
+
+        if self.GL.OSMesaGetColorBuffer(c, ctypes.byref(width),
+                                        ctypes.byref(height),
+                                        ctypes.byref(format),
+                                        ctypes.byref(buffer)):
+            return width.value, height.value, format.value, buffer
+        else:
+            return 0, 0, 0, None
 
     def getGLUTFontPointer( self, constant ):
         """Platform specific function to retrieve a GLUT font pointer
