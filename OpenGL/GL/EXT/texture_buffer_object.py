@@ -28,7 +28,7 @@ Overview (from the spec)
 	assembly shaders (NV_gpu_program4), the TXF instruction is used.  For GLSL
 	(EXT_gpu_shader4), a new sampler type and texel fetch function are used.
 	
-	While buffer textures can be substantially larger than equivalent
+	Buffer textures can be substantially larger than equivalent
 	one-dimensional textures; the maximum texture size supported for buffer
 	textures in the initial implementation of this extension is 2^27 texels,
 	versus 2^13 (8192) texels for otherwise equivalent one-dimensional
