@@ -3,9 +3,6 @@ import ctypes, ctypes.util
 from OpenGL.platform import baseplatform, ctypesloader
 from OpenGL.constant import Constant
 
-assert hasattr( ctypes, 'RTLD_GLOBAL' ), """Old ctypes without ability to load .so for global resolution: Get ctypes CVS branch_1_0, not CVS HEAD or released versions!"""
-
-
 class OSMesaPlatform( baseplatform.BasePlatform ):
     """OSMesa implementation for PyOpenGL"""
     try:

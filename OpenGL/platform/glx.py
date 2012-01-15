@@ -2,9 +2,6 @@
 import ctypes, ctypes.util
 from OpenGL.platform import baseplatform, ctypesloader
 
-assert hasattr( ctypes, 'RTLD_GLOBAL' ), """Old ctypes without ability to load .so for global resolution: Get ctypes CVS branch_1_0, not CVS HEAD or released versions!"""
-
-
 class GLXPlatform( baseplatform.BasePlatform ):
     """Posix (Linux, FreeBSD, etceteras) implementation for PyOpenGL"""
     # On Linux (and, I assume, most GLX platforms, we have to load 
