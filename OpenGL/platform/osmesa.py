@@ -137,6 +137,9 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
             return 0, 0, 0, None
 
     def OSMesaGetColorBuffer(self, c):
+        # TODO: make output array types which can handle the operation 
+        # provide an API to convert pointers + sizes to array instances,
+        # e.g. numpy.ctypeslib.as_array( ptr, bytesize ).astype( 'B' ).reshape( height,width )
         width, height, format = self.GLint(), self.GLint(), self.GLint()
         buffer = ctypes.c_void_p()
 
