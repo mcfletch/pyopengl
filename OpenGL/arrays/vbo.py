@@ -415,15 +415,6 @@ if VBO is None:
             """Returns a c_void_p( instance.offset )"""
             return ctypes.c_void_p( instance.offset )
 
-# TODO: this is BAD! should not have a side effect like this required 
-# to register a handler properly...
-FormatHandler.loadAll() # otherwise just the VBO would get loaded :)
-VBO_HANDLER = VBOHandler()
-VBO_HANDLER.register( [ VBO ] )
-
-VBOOFFSET_HANDLER = VBOOffsetHandler()
-VBOOFFSET_HANDLER.register( [ VBOOffset ] )
-
 _cleaners = {}
 def _cleaner( vbo ):
     """Construct a mapped-array cleaner function to unmap vbo.target"""

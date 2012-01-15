@@ -221,3 +221,5 @@ FormatHandler(
 FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandler' )
 FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', ['numpy.ndarray'] )
 FormatHandler( 'numeric', 'OpenGL.arrays.numeric.NumericHandler', )
+FormatHandler( 'vbo', 'OpenGL.arrays.vbo.VBOHandler', ['OpenGL.arrays.vbo.VBO','OpenGL_accelerate.vbo.VBO'] )
+FormatHandler( 'vbooffset', 'OpenGL.arrays.vbo.VBOOffsetHandler', ['OpenGL.arrays.vbo.VBOOffset','OpenGL_accelerate.vbo.VBOOffset'] )
