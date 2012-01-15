@@ -21,8 +21,7 @@ from OpenGL.plugins import PlatformPlugin
 
 def _load( ):
     """Load the os.name plugin for the platform functionality"""
-    
-    key = (sys.platform,os.name)
+    key = (os.environ.get( 'PYOPENGL_PLATFORM'), sys.platform,os.name)
     plugin  = PlatformPlugin.match( key )
     plugin_class = plugin.load()
     plugin.loaded = True

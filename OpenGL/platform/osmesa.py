@@ -1,4 +1,11 @@
-"""OSMesa-specific features"""
+"""OSMesa-specific features
+
+To request an OSMesa context, you need to run your script with:
+
+    PYOPENGL_PLATFORM=osmesa
+
+defined in your shell/execution environment.
+"""
 import ctypes, ctypes.util
 from OpenGL.platform import baseplatform, ctypesloader
 from OpenGL.constant import Constant
