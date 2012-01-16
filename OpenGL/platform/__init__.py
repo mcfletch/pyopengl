@@ -33,3 +33,34 @@ def _load( ):
     return plugin
 
 _load()
+
+def types(resultType,*argTypes):
+    """Decorator to add returnType, argTypes and argNames to a function"""
+    def add_types( function ):
+        """Adds the given metadata to the function, introspects var names from declaration"""
+        function.resultType = resultType
+        function.argTypes = argTypes 
+        function.argNames = function.func_code.co_varnames
+        return function 
+    return add_types
+
+def unpack_constants( constants, namespace ):
+    """Create constants and add to the namespace"""
+    from OpenGL.constant import Constant
+    for line in constants.splitlines():
+        if line and line.split():
+            name,value = line.split()
+            namespace[name] = Constant( name, int(value,16) )
+
+def createFunction( function, dll,extension,deprecated ):
+    """Allows the more compact declaration format to use the old-style constructor"""
+    return createExtensionFunction(
+        function.__name__,
+        dll,
+        resultType = function.resultType,
+        argTypes = function.argTypes,
+        doc = None, argNames = function.argNames,
+        extension = extension,
+        deprecated = deprecated,
+        module = function.__module__,
+    )

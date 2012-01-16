@@ -80,7 +80,7 @@ class Helper( object ):
             return item
 
 class Function( Helper ):
-    def __init__( self, returnType, name, signature, dll='platform.GL' ):
+    def __init__( self, returnType, name, signature):
         """Parse definition into our various elements"""
         self.returnType = self.parseReturnType(returnType)
         self.name = name
@@ -96,7 +96,6 @@ class Function( Helper ):
 ##				if item.strip().strip('*')
 ##			])
 ##		)
-        self.dll = dll
     findName = re.compile( '[a-zA-z0-9]*$' )
     def parseReturnType( self, returnType ):
         return self.cTypeToPyType( returnType )
@@ -128,7 +127,7 @@ class Function( Helper ):
             return self.cTypeToPyType( base[5:] )
         elif base.endswith( '*' ):
             new = self.cTypeToPyType( base[:-1] )
-            if new == 'constants.GLvoid':
+            if new == '_cs.GLvoid':
                 return 'ctypes.c_void_p'
             elif new == 'ctypes.c_void_p':
                 return 'arrays.GLvoidpArray'
@@ -136,28 +135,27 @@ class Function( Helper ):
                 return 'arrays.%s'%(self.CTYPE_TO_ARRAY_TYPE[new])
             elif new in ( 'arrays.GLcharArray','arrays.GLcharARBArray'):
                 # can't have a pointer to these...
-                return 'ctypes.POINTER( ctypes.POINTER( constants.GLchar ))'
-            elif new in ( 'constants.GLcharARB',):
+                return 'ctypes.POINTER( ctypes.POINTER( _cs.GLchar ))'
+            elif new in ( '_cs.GLcharARB',):
                 return 'ctypes.POINTER( ctypes.c_char_p )'
             else:
                 log.warn( 'Unconverted pointer type in %s: %r', self.name, new )
                 return 'ctypes.POINTER(%s)'%(new)
         else:
-            return 'constants.%s'%(base,)
+            return '_cs.%s'%(base,)
     def errorReturn( self ):
         return '0'
     def declaration( self ):
         """Produce a declaration for this function in ctypes format"""
-        dll = self.dll
         returnType = self.returnType
         if self.argTypes:
-            argTypes = '(%s,)'%( ','.join(self.argTypes))
+            argTypes = ','.join(self.argTypes)
         else:
-            argTypes = '()'
+            argTypes = ''
         if self.argNames:
-            argNames = '(%s,)'%( ','.join([repr(x) for x in self.argNames]))
+            argNames = ','.join(self.argNames)
         else:
-            argNames = '()'
+            argNames = ''
         arguments = ', '.join([
             '%(type)s(%(name)s)'%locals()
             for (type,name) in [
@@ -166,62 +164,55 @@ class Function( Helper ):
             ]
         ])
         name = self.name 
-        if returnType.strip() in ('constants.GLvoid', 'constants.void'):
+        if returnType.strip() in ('_cs.GLvoid', '_cs.void'):
             returnType = pyReturn = 'None'
         else:
             pyReturn = self.returnType
         log.info( 'returnType %s -> %s', self.returnType, pyReturn )
         doc = '%(name)s(%(arguments)s) -> %(pyReturn)s'%locals()
         return self.TEMPLATE%locals()
-    TEMPLATE = """%(name)s = platform.createExtensionFunction( 
-%(name)r,dll=%(dll)s,
-extension=EXTENSION_NAME,
-resultType=%(returnType)s, 
-argTypes=%(argTypes)s,
-doc=%(doc)r,
-argNames=%(argNames)s,
-deprecated=_DEPRECATED,
-)
-"""
+    TEMPLATE = """@_f
+@_p.types(%(returnType)s,%(argTypes)s)
+def %(name)s( %(argNames)s ):pass"""
     CTYPE_TO_ARRAY_TYPE = {
-        'constants.GLfloat': 'GLfloatArray',
-        'constants.float': 'GLfloatArray',
-        'constants.GLclampf': 'GLclampfArray',
-        'constants.GLdouble': 'GLdoubleArray',
-        'constants.double': 'GLdoubleArray',
-        'constants.int': 'GLintArray',
-        'constants.GLint': 'GLintArray',
-        'constants.GLuint': 'GLuintArray',
-        'constants.unsigned int':'GLuintArray',
-        'constants.unsigned char': 'GLbyteArray',
-        'constants.uint': 'GLuintArray',
-        'constants.GLshort': 'GLshortArray',
-        'constants.GLushort': 'GLushortArray',
-        'constants.short unsigned int':'GLushortArray',
-        'constants.GLubyte': 'GLubyteArray',
-        'constants.GLbool': 'GLbooleanArray',
-        'constants.GLboolean': 'GLbooleanArray',
+        '_cs.GLfloat': 'GLfloatArray',
+        '_cs.float': 'GLfloatArray',
+        '_cs.GLclampf': 'GLclampfArray',
+        '_cs.GLdouble': 'GLdoubleArray',
+        '_cs.double': 'GLdoubleArray',
+        '_cs.int': 'GLintArray',
+        '_cs.GLint': 'GLintArray',
+        '_cs.GLuint': 'GLuintArray',
+        '_cs.unsigned int':'GLuintArray',
+        '_cs.unsigned char': 'GLbyteArray',
+        '_cs.uint': 'GLuintArray',
+        '_cs.GLshort': 'GLshortArray',
+        '_cs.GLushort': 'GLushortArray',
+        '_cs.short unsigned int':'GLushortArray',
+        '_cs.GLubyte': 'GLubyteArray',
+        '_cs.GLbool': 'GLbooleanArray',
+        '_cs.GLboolean': 'GLbooleanArray',
         'arrays.GLbooleanArray': 'GLbooleanArray',
-        'constants.GLbyte': 'GLbyteArray',
-        'constants.char': 'GLbyteArray',
-        'constants.gleDouble': 'GLdoubleArray',
-        'constants.GLchar': 'GLcharArray',
-        'constants.GLcharARB': 'GLcharARBArray',
-        'constants.GLhalfNV': 'GLushortArray',
-        'constants.GLhandle': 'GLuintArray',
-        'constants.GLhandleARB': 'GLuintArray',
-        'constants.GLenum': 'GLuintArray',
+        '_cs.GLbyte': 'GLbyteArray',
+        '_cs.char': 'GLbyteArray',
+        '_cs.gleDouble': 'GLdoubleArray',
+        '_cs.GLchar': 'GLcharArray',
+        '_cs.GLcharARB': 'GLcharARBArray',
+        '_cs.GLhalfNV': 'GLushortArray',
+        '_cs.GLhandle': 'GLuintArray',
+        '_cs.GLhandleARB': 'GLuintArray',
+        '_cs.GLenum': 'GLuintArray',
         # following should all have special sub-classes that enforce dimensions
-        'constants.gleDouble * 4': 'GLdoubleArray',
-        'constants.gleDouble * 3': 'GLdoubleArray',
-        'constants.gleDouble * 2': 'GLdoubleArray',
-        'constants.c_float * 3': 'GLfloatArray',
-        'constants.gleDouble * 3 * 2': 'GLdoubleArray',
-        'constants.GLsizei': 'GLsizeiArray',
-        'constants.GLint64': 'GLint64Array',
-        'constants.GLint64EXT': 'GLint64Array',
-        'constants.GLuint64': 'GLuint64Array',
-        'constants.GLuint64EXT': 'GLuint64Array',
+        '_cs.gleDouble * 4': 'GLdoubleArray',
+        '_cs.gleDouble * 3': 'GLdoubleArray',
+        '_cs.gleDouble * 2': 'GLdoubleArray',
+        '_cs.c_float * 3': 'GLfloatArray',
+        '_cs.gleDouble * 3 * 2': 'GLdoubleArray',
+        '_cs.GLsizei': 'GLsizeiArray',
+        '_cs.GLint64': 'GLint64Array',
+        '_cs.GLint64EXT': 'GLint64Array',
+        '_cs.GLuint64': 'GLuint64Array',
+        '_cs.GLuint64EXT': 'GLuint64Array',
     }
     
 # Don't know how Tarn got the api_versions, short of manually entering them...
@@ -229,19 +220,38 @@ WRAPPER_TEMPLATE = """'''OpenGL extension %(owner)s.%(module)s
 
 Automatically generated by the get_gl_extensions script, do not edit!
 '''
-from OpenGL import platform, constants, constant, arrays
-from OpenGL import extensions
+from OpenGL import platform as _p, constants as _cs, arrays
 from OpenGL.GL import glget
 import ctypes
 EXTENSION_NAME = %(constantModule)r
-_DEPRECATED = %(deprecatedFlag)r
+def _f( function ):
+    return _p.createFunction( function,%(dll)s,%(constantModule)r,%(deprecatedFlag)r)
 %(constants)s
-%(declarations)s%(deprecated)s
+%(declarations)s
+%(deprecated)s
+"""
+
+WRAPPER_TEMPLATE_NO_FUNCTIONS = """'''OpenGL extension %(owner)s.%(module)s
+
+Automatically generated by the get_gl_extensions script, do not edit!
+'''
+from OpenGL import platform as _p
+EXTENSION_NAME = %(constantModule)r
+%(constants)s
+%(deprecated)s
+"""
+WRAPPER_TEMPLATE_NOTHING = """'''OpenGL extension %(owner)s.%(module)s
+
+Automatically generated by the get_gl_extensions script, do not edit!
+'''
+EXTENSION_NAME = %(constantModule)r
+%(deprecated)s
 """
 
 INIT_TEMPLATE = """
 def glInit%(camelModule)s%(owner)s():
     '''Return boolean indicating whether this extension is available'''
+    from OpenGL import extensions
     return extensions.hasGLExtension( EXTENSION_NAME )
 """
 FINAL_MODULE_TEMPLATE = """'''OpenGL extension %(owner)s.%(module)s
@@ -264,11 +274,20 @@ class Module( Helper ):
     targetDirectory = os.path.join( '..','OpenGL')
     rawTargetDirectory = os.path.join( '..','OpenGL','raw')
     prefix = 'GL'
+    dll = '_p.GL'
     defineFinder = re.compile( r'\#define[ \t]+([a-zA-Z0-9_]+)[ \t]*(0x[0-9a-fA-F]+)' )
     functionFinder = re.compile( r'GLAPI[ \t]+(.*?)[ \t]+APIENTRY[ \t]+([a-zA-Z0-9_]+)[ \t]*\(' )
     signatureFinderTemplate = r'typedef[ \t]+%(returnTypeRE)s[ \t]+\(APIENTRYP[ \t]+PFN%(nameUpper)sPROC\)[ \t]*(\(.*?\))[;]'
     typeDefFinder = re.compile( r'typedef[ \t]+(([a-zA-Z0-9_]+[ \t]*)+);' )
-    RAW_MODULE_TEMPLATE = WRAPPER_TEMPLATE + INIT_TEMPLATE
+    
+    @property
+    def RAW_MODULE_TEMPLATE( self ):
+        if self.functions:
+            return WRAPPER_TEMPLATE + INIT_TEMPLATE
+        elif self.constants:
+            return WRAPPER_TEMPLATE_NO_FUNCTIONS + INIT_TEMPLATE
+        else:
+            return WRAPPER_TEMPLATE_NOTHING + INIT_TEMPLATE
     
     def __init__( self, name, segments, header ):
         log.info( 'name: %r', name )
@@ -395,20 +414,21 @@ class Module( Helper ):
         This is, of course, all heuristically done :)
         """
         result = []
+        glget_set = []
         glGets = self.getSpecification().glGetConstants()
         glGetSizes = self.header.glGetSizes
         for segment in self.segments:
             for match in self.defineFinder.finditer( segment ):
                 name,value = match.groups()
                 value = int(value,0)
-                result.append( '%(name)s = constant.Constant( %(name)r, 0x%(value)X )'%locals() )
+                result.append( '%(name)s 0x%(value)X'%locals() )
                 if name in glGets or name in glGetSizes:
                     size = glGetSizes.get( name, [] )
                     if len(size) == 0: # not yet specified...
                         glGetSizes[ name ] = []
                     elif len(size) == 1: # static size...
                         size = size[0]
-                        result.append(
+                        glget_set.append(
                             """glget.addGLGetConstant( %(name)s, %(size)s )"""%locals()
                         )
                     else:
@@ -434,10 +454,17 @@ class Module( Helper ):
                                 for (key,value) in set 
                             ])
                         )
-                        result.append(
+                        glget_set.append(
                             """glget.addGLGetConstant( %(name)s, %(size)s, %(param)r )"""%locals()
                         )
-        return '\n'.join(result)
+        if result:
+            constants = "\n".join( result )
+            result = [
+                '_p.unpack_constants( """%(constants)s""", globals())'%locals()
+            ]
+        if glget_set:
+            result.extend( glget_set )
+        return "\n".join( result )
     SPEC_EXCEPTIONS = {
         # different URLs... grr...
         '3DFX/multisample': 'http://oss.sgi.com/projects/ogl-sample/registry/3DFX/3dfx_multisample.txt',
@@ -535,7 +562,7 @@ class Module( Helper ):
         """Produce import line for deprecated functions if appropriate"""
         name = self.name + '_DEPRECATED'
         if self.header.registry.get( name ):
-            return '''# import legacy entry points to allow checking for bool(entryPoint)
+            return '''# import deprecated
 from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s_DEPRECATED import *'''%self
         return ''
 
