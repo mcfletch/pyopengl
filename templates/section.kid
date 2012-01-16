@@ -178,6 +178,7 @@ ${nav_table()}
     </div>
 </div>
 ${nav_table()}
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
-
