@@ -2,73 +2,74 @@ a:link			{ color: #113b89 }
 a:active		{ color: #071960 }
 a:visted	{ background-color: #113b89; color: white; }
 body {
-	font-family: Arial, Helvetica, sans-serif;
-	 color: black;
-	background-color: white; 
-	margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+     color: black;
+    background-color: white; 
+    margin: 0;
 }
 .content {
-	margin: .25em;
+    margin: .25em;
 }
 h1 {
-	margin: 0;
+    margin: 0;
 }
 h1, h2 { 
-	background-image: url(greypinstripe.png);
-	color: #111144;
+    background-image: url(greypinstripe.png);
+    color: #111144;
+    padding: .25em;
 }
 .purpose {
-	margin-left: 2em;
-	margin-right: 2em;
-	margin-top: .5em;
-	margin-bottom: .25em;
-	padding: .5em;
-	border: thin lightgrey solid;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: .5em;
+    margin-bottom: .25em;
+    padding: .5em;
+    border: thin lightgrey solid;
 }
 .signature {
-	margin-left: 2em;
+    margin-left: 2em;
 }
 .py-signature {
-	margin-left: 1em;
-	color: darkgreen;
+    margin-left: 1em;
+    color: darkgreen;
 }
 table {
-	background-color: lightgrey;
+    background-color: lightgrey;
 }
 tr {
-	background-color: white;
+    background-color: white;
 }
 th {
-	background-image: url(greypinstripe.png);
-	padding: .25em;
+    background-image: url(greypinstripe.png);
+    padding: .25em;
 }
 
 div.simpara, div.para {
-	margin: .25em;
+    margin: .25em;
 }
 
 span.parameter {
-	color: blue;
+    color: blue;
 }
 
 .c-function {
-	color: darkgrey;
+    color: darkgrey;
 }
 
 .pydoc {
-	border: solid lightgrey thin;
-	background: lightyellow;
-	color: darkgreen;
-	font-size: 80%;
-	margin-left: 1em;
-	margin-top: 0;
-	margin-bottom: .25em;
+    border: solid lightgrey thin;
+    background: lightyellow;
+    color: darkgreen;
+    font-size: 80%;
+    margin-left: 1em;
+    margin-top: 0;
+    margin-bottom: .25em;
 }
 .sample-key {
-	color: darkgrey;
+    color: darkgrey;
 }
 .py-sample {
-	margin-left: 1.5em;
+    margin-left: 1.5em;
 }
 .deprecated, .deprecation-warning {
     background-color: #fff0f0;
@@ -77,7 +78,7 @@ span.parameter {
     margin-left: 2em;
 }
 .programlisting {
-	white-space: pre;
+    white-space: pre;
 }
 .metadata {
     margin: 2em;
