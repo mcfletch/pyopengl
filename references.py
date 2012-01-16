@@ -70,7 +70,7 @@ def generate_tokens_dir( directory, filterFunction=glName, processFunction=glPro
 VIEWCVS =  '%(baseURL)s/%(deltaPath)s?rev=HEAD&content-type=text/vnd.viewcvs-markup'
 RAWSVN = '%(baseURL)s/%(deltaPath)s'
 VIEWSVN = '%(baseURL)s/%(deltaPath)s?view=markup'
-LOGGERHEAD = '%(baseURL)s/annotate/head:/%(deltaPath)s'
+LOGGERHEAD = '%(baseURL)s/view/head:/%(deltaPath)s'
 GOOGLECODE = '%(baseURL)s/source/browse/trunk/%(deltaPath)s'
 GITHUB = '%(baseURL)s/blob/master/%(deltaPath)s'
 BITBUCKET = '%(baseURL)s/src/tip/%(deltaPath)s'
