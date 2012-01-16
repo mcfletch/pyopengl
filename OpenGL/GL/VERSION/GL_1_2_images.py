@@ -10,7 +10,8 @@ if functionName to see if the function is available at run-time.
 from OpenGL import wrapper, constants, arrays
 from OpenGL.lazywrapper import lazy
 from OpenGL.raw.GL.VERSION import GL_1_2 as simple
-from OpenGL.raw.GL.ARB import imaging
+from OpenGL.GL.ARB.imaging import *
+
 from OpenGL.GL import images
 import ctypes
 
@@ -100,12 +101,14 @@ glConvolutionFilter2D = images.setDimensionsAsInts(
 @lazy( simple.glGetConvolutionFilter )
 def glGetConvolutionFilter( baseFunction, target, format, type ):
     """Retrieve 1 or 2D convolution parameter "kernels" as pixel data"""
+    from OpenGL.error import glCheckError
+    glCheckError(None)
     dims = (
-        glGetConvolutionParameteriv( target, imaging.GL_CONVOLUTION_WIDTH )[0],
+        glGetConvolutionParameteriv( target, GL_CONVOLUTION_WIDTH )[0],
     )
-    if target != imaging.GL_CONVOLUTION_1D:
+    if target != GL_CONVOLUTION_1D:
         dims += (
-            glGetConvolutionParameteriv( target, imaging.GL_CONVOLUTION_HEIGHT )[0],
+            glGetConvolutionParameteriv( target, GL_CONVOLUTION_HEIGHT )[0],
         )
     # is it always 4?  Seems to be, but the spec/man-page isn't really clear about it...
     dims += (4,)
@@ -122,11 +125,11 @@ def glGetConvolutionFilter( baseFunction, target, format, type ):
 def glGetSeparableFilter( baseFunction, target, format, type ):
     """Retrieve 2 1D convolution parameter "kernels" as pixel data"""
     rowDims = (
-        glGetConvolutionParameteriv( imaging.GL_CONVOLUTION_WIDTH )[0],
+        glGetConvolutionParameteriv( GL_CONVOLUTION_WIDTH )[0],
         4,
     )
     columnDims = (
-        glGetConvolutionParameteriv( imaging.GL_CONVOLUTION_HEIGHT )[0],
+        glGetConvolutionParameteriv( GL_CONVOLUTION_HEIGHT )[0],
         4,
     )
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[
@@ -145,7 +148,7 @@ def glGetSeparableFilter( baseFunction, target, format, type ):
 def glGetColorTable( baseFunction, target, format, type ):
     """Retrieve the current 1D color table as a bitmap"""
     dims = (
-        glGetColorTableParameteriv(target, imaging.GL_COLOR_TABLE_WIDTH),
+        glGetColorTableParameteriv(target, GL_COLOR_TABLE_WIDTH),
         4, # Grr, spec *seems* to say that it's different sizes, but it doesn't really say...
     )
     array = images.images.SetupPixelRead( format, dims, type )
@@ -163,7 +166,7 @@ def glGetHistogram( baseFunction, target, reset, format, type, values=None):
     if values is None:
         width = glGetHistogramParameteriv(
             target,
-            imaging.GL_HISTOGRAM_WIDTH,
+            GL_HISTOGRAM_WIDTH,
         )
         values = images.images.SetupPixelRead( format, (width,4), type )
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[
@@ -198,14 +201,14 @@ glColorTableParameterfv = arrays.setInputArraySizeType(
     'params',
 )
 GL_GET_CTP_SIZES = {
-    imaging.GL_COLOR_TABLE_FORMAT :1,
-    imaging.GL_COLOR_TABLE_WIDTH  :1,
-    imaging.GL_COLOR_TABLE_RED_SIZE :1,
-    imaging.GL_COLOR_TABLE_GREEN_SIZE :1,
-    imaging.GL_COLOR_TABLE_BLUE_SIZE :1,
-    imaging.GL_COLOR_TABLE_ALPHA_SIZE :1,
-    imaging.GL_COLOR_TABLE_LUMINANCE_SIZE :1,
-    imaging.GL_COLOR_TABLE_INTENSITY_SIZE :1,
+    GL_COLOR_TABLE_FORMAT :1,
+    GL_COLOR_TABLE_WIDTH  :1,
+    GL_COLOR_TABLE_RED_SIZE :1,
+    GL_COLOR_TABLE_GREEN_SIZE :1,
+    GL_COLOR_TABLE_BLUE_SIZE :1,
+    GL_COLOR_TABLE_ALPHA_SIZE :1,
+    GL_COLOR_TABLE_LUMINANCE_SIZE :1,
+    GL_COLOR_TABLE_INTENSITY_SIZE :1,
 }
 glGetColorTableParameterfv = wrapper.wrapper(simple.glGetColorTableParameterfv).setOutput(
     "params",GL_GET_CTP_SIZES, "pname",
@@ -214,15 +217,15 @@ glGetColorTableParameteriv = wrapper.wrapper(simple.glGetColorTableParameteriv).
     "params",GL_GET_CTP_SIZES, "pname",
 )
 GL_GET_CP_SIZES = {
-    imaging.GL_CONVOLUTION_BORDER_MODE: 1,
-    imaging.GL_CONVOLUTION_BORDER_COLOR: 4,
-    imaging.GL_CONVOLUTION_FILTER_SCALE: 4,
-    imaging.GL_CONVOLUTION_FILTER_BIAS: 4,
-    imaging.GL_CONVOLUTION_FORMAT: 1,
-    imaging.GL_CONVOLUTION_WIDTH: 1,
-    imaging.GL_CONVOLUTION_HEIGHT: 1,
-    imaging.GL_MAX_CONVOLUTION_WIDTH: 1,
-    imaging.GL_MAX_CONVOLUTION_HEIGHT: 1,
+    GL_CONVOLUTION_BORDER_MODE: 1,
+    GL_CONVOLUTION_BORDER_COLOR: 4,
+    GL_CONVOLUTION_FILTER_SCALE: 4,
+    GL_CONVOLUTION_FILTER_BIAS: 4,
+    GL_CONVOLUTION_FORMAT: 1,
+    GL_CONVOLUTION_WIDTH: 1,
+    GL_CONVOLUTION_HEIGHT: 1,
+    GL_MAX_CONVOLUTION_WIDTH: 1,
+    GL_MAX_CONVOLUTION_HEIGHT: 1,
 }
 glGetConvolutionParameteriv = wrapper.wrapper(simple.glGetConvolutionParameteriv).setOutput(
     "params",GL_GET_CP_SIZES, "pname",
