@@ -64,6 +64,21 @@ GL_TEXTURE_COMPRESSED 0x86A1
 GL_NUM_COMPRESSED_TEXTURE_FORMATS 0x86A2
 GL_COMPRESSED_TEXTURE_FORMATS 0x86A3
 GL_CLAMP_TO_BORDER 0x812D""", globals())
+glget.addGLGetConstant( GL_ACTIVE_TEXTURE, (1,) )
+glget.addGLGetConstant( GL_MULTISAMPLE, (1,) )
+glget.addGLGetConstant( GL_SAMPLE_ALPHA_TO_COVERAGE, (1,) )
+glget.addGLGetConstant( GL_SAMPLE_ALPHA_TO_ONE, (1,) )
+glget.addGLGetConstant( GL_SAMPLE_COVERAGE, (1,) )
+glget.addGLGetConstant( GL_SAMPLE_BUFFERS, (1,) )
+glget.addGLGetConstant( GL_SAMPLES, (1,) )
+glget.addGLGetConstant( GL_SAMPLE_COVERAGE_VALUE, (1,) )
+glget.addGLGetConstant( GL_SAMPLE_COVERAGE_INVERT, (1,) )
+glget.addGLGetConstant( GL_TEXTURE_CUBE_MAP, (1,) )
+glget.addGLGetConstant( GL_TEXTURE_BINDING_CUBE_MAP, (1,) )
+glget.addGLGetConstant( GL_MAX_CUBE_MAP_TEXTURE_SIZE, (1,) )
+glget.addGLGetConstant( GL_TEXTURE_COMPRESSION_HINT, (1,) )
+glget.addGLGetConstant( GL_NUM_COMPRESSED_TEXTURE_FORMATS, (1,) )
+glget.addGLGetConstant( GL_COMPRESSED_TEXTURE_FORMATS, (1,) )
 @_f
 @_p.types(None,_cs.GLenum)
 def glActiveTexture( texture ):pass

@@ -21,6 +21,12 @@ GL_DECR_WRAP 0x8508
 GL_TEXTURE_DEPTH_SIZE 0x884A
 GL_TEXTURE_COMPARE_MODE 0x884C
 GL_TEXTURE_COMPARE_FUNC 0x884D""", globals())
+glget.addGLGetConstant( GL_BLEND_DST_RGB, (1,) )
+glget.addGLGetConstant( GL_BLEND_SRC_RGB, (1,) )
+glget.addGLGetConstant( GL_BLEND_DST_ALPHA, (1,) )
+glget.addGLGetConstant( GL_BLEND_SRC_ALPHA, (1,) )
+glget.addGLGetConstant( GL_POINT_FADE_THRESHOLD_SIZE, (1,) )
+glget.addGLGetConstant( GL_MAX_TEXTURE_LOD_BIAS, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
 def glBlendFuncSeparate( sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha ):pass

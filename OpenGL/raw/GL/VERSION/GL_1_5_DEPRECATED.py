@@ -28,5 +28,17 @@ GL_SRC2_RGB 0x8582
 GL_SRC0_ALPHA 0x8588
 GL_SRC1_ALPHA 0x8589
 GL_SRC2_ALPHA 0x858A""", globals())
+glget.addGLGetConstant( GL_VERTEX_ARRAY_BUFFER_BINDING, (1,) )
+glget.addGLGetConstant( GL_NORMAL_ARRAY_BUFFER_BINDING, (1,) )
+glget.addGLGetConstant( GL_COLOR_ARRAY_BUFFER_BINDING, (1,) )
+glget.addGLGetConstant( GL_INDEX_ARRAY_BUFFER_BINDING, (1,) )
+glget.addGLGetConstant( GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING, (1,) )
+glget.addGLGetConstant( GL_EDGE_FLAG_ARRAY_BUFFER_BINDING, (1,) )
+glget.addGLGetConstant( GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING, (1,) )
+glget.addGLGetConstant( GL_FOG_COORD_SRC, (1,) )
+glget.addGLGetConstant( GL_FOG_COORD_ARRAY_TYPE, (1,) )
+glget.addGLGetConstant( GL_FOG_COORD_ARRAY_STRIDE, (1,) )
+glget.addGLGetConstant( GL_FOG_COORD_ARRAY, (1,) )
+glget.addGLGetConstant( GL_FOG_COORD_ARRAY_BUFFER_BINDING, (1,) )
 
 

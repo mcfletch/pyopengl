@@ -42,6 +42,12 @@ GL_PRIMARY_COLOR 0x8577
 GL_PREVIOUS 0x8578
 GL_DOT3_RGB 0x86AE
 GL_DOT3_RGBA 0x86AF""", globals())
+glget.addGLGetConstant( GL_CLIENT_ACTIVE_TEXTURE, (1,) )
+glget.addGLGetConstant( GL_MAX_TEXTURE_UNITS, (1,) )
+glget.addGLGetConstant( GL_TRANSPOSE_MODELVIEW_MATRIX, (4,4) )
+glget.addGLGetConstant( GL_TRANSPOSE_PROJECTION_MATRIX, (4,4) )
+glget.addGLGetConstant( GL_TRANSPOSE_TEXTURE_MATRIX, (4,4) )
+glget.addGLGetConstant( GL_TRANSPOSE_COLOR_MATRIX, (4,4) )
 @_f
 @_p.types(None,_cs.GLenum)
 def glClientActiveTexture( texture ):pass

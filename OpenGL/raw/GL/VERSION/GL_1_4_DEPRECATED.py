@@ -28,6 +28,17 @@ GL_SECONDARY_COLOR_ARRAY 0x845E
 GL_TEXTURE_FILTER_CONTROL 0x8500
 GL_DEPTH_TEXTURE_MODE 0x884B
 GL_COMPARE_R_TO_TEXTURE 0x884E""", globals())
+glget.addGLGetConstant( GL_POINT_SIZE_MIN, (1,) )
+glget.addGLGetConstant( GL_POINT_SIZE_MAX, (1,) )
+glget.addGLGetConstant( GL_POINT_DISTANCE_ATTENUATION, (3,) )
+glget.addGLGetConstant( GL_GENERATE_MIPMAP_HINT, (1,) )
+glget.addGLGetConstant( GL_CURRENT_FOG_COORDINATE, (1,) )
+glget.addGLGetConstant( GL_COLOR_SUM, (1,) )
+glget.addGLGetConstant( GL_CURRENT_SECONDARY_COLOR, (4,) )
+glget.addGLGetConstant( GL_SECONDARY_COLOR_ARRAY_SIZE, (1,) )
+glget.addGLGetConstant( GL_SECONDARY_COLOR_ARRAY_TYPE, (1,) )
+glget.addGLGetConstant( GL_SECONDARY_COLOR_ARRAY_STRIDE, (1,) )
+glget.addGLGetConstant( GL_SECONDARY_COLOR_ARRAY, (1,) )
 @_f
 @_p.types(None,_cs.GLfloat)
 def glFogCoordf( coord ):pass

@@ -13,6 +13,7 @@ GL_MAX 0x8008
 GL_BLEND_EQUATION 0x8009
 GL_FUNC_SUBTRACT 0x800A
 GL_FUNC_REVERSE_SUBTRACT 0x800B""", globals())
+glget.addGLGetConstant( GL_BLEND_COLOR, (4,) )
 # import deprecated
 from OpenGL.raw.GL.ARB.imaging_DEPRECATED import *
 

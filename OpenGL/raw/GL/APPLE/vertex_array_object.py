@@ -6,6 +6,7 @@ EXTENSION_NAME = 'GL_APPLE_vertex_array_object'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_APPLE_vertex_array_object',False)
 _p.unpack_constants( """GL_VERTEX_ARRAY_BINDING_APPLE 0x85B5""", globals())
+glget.addGLGetConstant( GL_VERTEX_ARRAY_BINDING_APPLE, (1,) )
 @_f
 @_p.types(None,_cs.GLuint)
 def glBindVertexArrayAPPLE( array ):pass

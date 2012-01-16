@@ -3,6 +3,7 @@ from OpenGL import platform as _p
 from OpenGL.GL import glget
 EXTENSION_NAME = 'GL_APPLE_client_storage'
 _p.unpack_constants( """GL_UNPACK_CLIENT_STORAGE_APPLE 0x85B2""", globals())
+glget.addGLGetConstant( GL_UNPACK_CLIENT_STORAGE_APPLE, (1,) )
 
 
 def glInitClientStorageAPPLE():

@@ -41,6 +41,20 @@ GL_SMOOTH_POINT_SIZE_GRANULARITY 0xB13
 GL_SMOOTH_LINE_WIDTH_RANGE 0xB22
 GL_SMOOTH_LINE_WIDTH_GRANULARITY 0xB23
 GL_ALIASED_LINE_WIDTH_RANGE 0x846E""", globals())
+glget.addGLGetConstant( GL_TEXTURE_BINDING_3D, (1,) )
+glget.addGLGetConstant( GL_PACK_SKIP_IMAGES, (1,) )
+glget.addGLGetConstant( GL_PACK_IMAGE_HEIGHT, (1,) )
+glget.addGLGetConstant( GL_UNPACK_SKIP_IMAGES, (1,) )
+glget.addGLGetConstant( GL_UNPACK_IMAGE_HEIGHT, (1,) )
+glget.addGLGetConstant( GL_TEXTURE_3D, (1,) )
+glget.addGLGetConstant( GL_MAX_3D_TEXTURE_SIZE, (1,) )
+glget.addGLGetConstant( GL_MAX_ELEMENTS_VERTICES, (1,) )
+glget.addGLGetConstant( GL_MAX_ELEMENTS_INDICES, (1,) )
+glget.addGLGetConstant( GL_SMOOTH_POINT_SIZE_RANGE, (2,) )
+glget.addGLGetConstant( GL_SMOOTH_POINT_SIZE_GRANULARITY, (1,) )
+glget.addGLGetConstant( GL_SMOOTH_LINE_WIDTH_RANGE, (2,) )
+glget.addGLGetConstant( GL_SMOOTH_LINE_WIDTH_GRANULARITY, (1,) )
+glget.addGLGetConstant( GL_ALIASED_LINE_WIDTH_RANGE, (2,) )
 @_f
 @_p.types(None,_cs.GLclampf,_cs.GLclampf,_cs.GLclampf,_cs.GLclampf)
 def glBlendColor( red,green,blue,alpha ):pass

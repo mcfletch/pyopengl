@@ -10,6 +10,7 @@ GL_CURRENT_QUERY_ARB 0x8865
 GL_QUERY_RESULT_ARB 0x8866
 GL_QUERY_RESULT_AVAILABLE_ARB 0x8867
 GL_SAMPLES_PASSED_ARB 0x8914""", globals())
+glget.addGLGetConstant( GL_QUERY_COUNTER_BITS_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
 def glGenQueriesARB( n,ids ):pass

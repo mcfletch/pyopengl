@@ -32,6 +32,9 @@ GL_DYNAMIC_DRAW 0x88E8
 GL_DYNAMIC_READ 0x88E9
 GL_DYNAMIC_COPY 0x88EA
 GL_SAMPLES_PASSED 0x8914""", globals())
+glget.addGLGetConstant( GL_QUERY_COUNTER_BITS, (1,) )
+glget.addGLGetConstant( GL_ARRAY_BUFFER_BINDING, (1,) )
+glget.addGLGetConstant( GL_ELEMENT_ARRAY_BUFFER_BINDING, (1,) )
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
 def glGenQueries( n,ids ):pass

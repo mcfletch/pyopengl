@@ -40,6 +40,9 @@ GL_TEXTURE31_ARB 0x84DF
 GL_ACTIVE_TEXTURE_ARB 0x84E0
 GL_CLIENT_ACTIVE_TEXTURE_ARB 0x84E1
 GL_MAX_TEXTURE_UNITS_ARB 0x84E2""", globals())
+glget.addGLGetConstant( GL_ACTIVE_TEXTURE_ARB, (1,) )
+glget.addGLGetConstant( GL_CLIENT_ACTIVE_TEXTURE_ARB, (1,) )
+glget.addGLGetConstant( GL_MAX_TEXTURE_UNITS_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLenum)
 def glActiveTextureARB( texture ):pass

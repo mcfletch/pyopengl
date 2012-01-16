@@ -10,6 +10,9 @@ GL_LIGHT_MODEL_COLOR_CONTROL 0x81F8
 GL_SINGLE_COLOR 0x81F9
 GL_SEPARATE_SPECULAR_COLOR 0x81FA
 GL_ALIASED_POINT_SIZE_RANGE 0x846D""", globals())
+glget.addGLGetConstant( GL_RESCALE_NORMAL, (1,) )
+glget.addGLGetConstant( GL_LIGHT_MODEL_COLOR_CONTROL, (1,) )
+glget.addGLGetConstant( GL_ALIASED_POINT_SIZE_RANGE, (2,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glColorTable( target,internalformat,width,format,type,table ):pass

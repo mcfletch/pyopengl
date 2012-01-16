@@ -22,6 +22,10 @@ GL_SAMPLE_MASK_VALUE_EXT 0x80AA
 GL_SAMPLE_MASK_INVERT_EXT 0x80AB
 GL_SAMPLE_PATTERN_EXT 0x80AC
 GL_MULTISAMPLE_BIT_EXT 0x20000000""", globals())
+glget.addGLGetConstant( GL_MULTISAMPLE_EXT, (1,) )
+glget.addGLGetConstant( GL_SAMPLE_ALPHA_TO_MASK_EXT, (1,) )
+glget.addGLGetConstant( GL_SAMPLE_ALPHA_TO_ONE_EXT, (1,) )
+glget.addGLGetConstant( GL_SAMPLE_MASK_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLclampf,_cs.GLboolean)
 def glSampleMaskEXT( value,invert ):pass

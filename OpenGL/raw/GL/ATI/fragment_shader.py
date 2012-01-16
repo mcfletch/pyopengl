@@ -110,6 +110,14 @@ GL_COMP_BIT_ATI 0x2
 GL_NEGATE_BIT_ATI 0x4
 GL_BIAS_BIT_ATI 0x8""", globals())
 glget.addGLGetConstant( GL_FRAGMENT_SHADER_ATI, (1,) )
+glget.addGLGetConstant( GL_NUM_FRAGMENT_REGISTERS_ATI, (1,) )
+glget.addGLGetConstant( GL_NUM_FRAGMENT_CONSTANTS_ATI, (1,) )
+glget.addGLGetConstant( GL_NUM_PASSES_ATI, (1,) )
+glget.addGLGetConstant( GL_NUM_INSTRUCTIONS_PER_PASS_ATI, (1,) )
+glget.addGLGetConstant( GL_NUM_INSTRUCTIONS_TOTAL_ATI, (1,) )
+glget.addGLGetConstant( GL_NUM_INPUT_INTERPOLATOR_COMPONENTS_ATI, (1,) )
+glget.addGLGetConstant( GL_NUM_LOOPBACK_COMPONENTS_ATI, (1,) )
+glget.addGLGetConstant( GL_COLOR_ALPHA_PAIRING_ATI, (1,) )
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint)
 def glGenFragmentShadersATI( range ):pass
