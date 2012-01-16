@@ -1,6 +1,6 @@
 """Utility module to parse a Feedback buffer"""
 from OpenGL import contextdata
-from OpenGL.raw import GL as simple
+from OpenGL.raw.GL.VERSION import GL_1_1 as simple
 from OpenGL.GL import glget
 
 def parseFeedback( buffer, entryCount ):

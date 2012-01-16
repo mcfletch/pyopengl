@@ -1,13 +1,14 @@
 """OpenGL.GL, the core GL library and extensions to it"""
-from OpenGL.raw.GL import *
-from OpenGL.raw.GL.annotations import *
-
-from OpenGL.GL.pointers import *
+# early import of our modules to prevent import loops...
+from OpenGL.GL.VERSION.GL_1_1 import *
 from OpenGL.GL.glget import *
+from OpenGL.GL.pointers import *
 from OpenGL.GL.images import *
 
 from OpenGL.GL.exceptional import *
 from OpenGL.error import *
+
+from OpenGL.GL.glget import *
 
 from OpenGL.GL.VERSION.GL_1_2 import *
 from OpenGL.GL.VERSION.GL_1_3 import *

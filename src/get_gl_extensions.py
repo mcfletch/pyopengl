@@ -400,6 +400,7 @@ class Module( Helper ):
             result.append( '%(returnType)s %(name)s%(signature)s;'%function )
             result.append( 'DOC(%(name)s, "%(name)s%(pysignature)s")'%function )
         return "\n".join( result )
+    GLGET_CONSTANT = """glget.addGLGetConstant( %(name)s, %(size)s )"""
     def constants( self ):
         """Retrieve constants from the segments
 
@@ -421,7 +422,7 @@ class Module( Helper ):
                     elif len(size) == 1: # static size...
                         size = size[0]
                         glget_set.append(
-                            """glget.addGLGetConstant( %(name)s, %(size)s )"""%locals()
+                            self.GLGET_CONSTANT %locals()
                         )
                     else:
                         # param name, then (key,value) for rest of elements
@@ -732,6 +733,7 @@ class Header( object ):
         ])
         open( 'glgetsizes.csv','w').write( data )
 
+        
 
 if __name__ == "__main__":
     logging.basicConfig()

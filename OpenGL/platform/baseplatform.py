@@ -228,12 +228,12 @@ class BasePlatform( object ):
         return result
     def checkExtension( self, name ):
         """Check whether the given extension is supported by current context"""
-        if not name:
+        if not name or name == 'GL_VERSION_GL_1_1':
             return True
         context = self.GetCurrentContext()
         if context:
             from OpenGL import contextdata
-            from OpenGL.raw.GL import GL_EXTENSIONS
+            from OpenGL.raw.GL.VERSION.GL_1_1 import GL_EXTENSIONS
             set = contextdata.getValue( GL_EXTENSIONS, context=context )
             if set is None:
                 set = {}

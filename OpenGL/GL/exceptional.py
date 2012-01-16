@@ -1,12 +1,11 @@
 """Exceptional cases that need some extra wrapping"""
 from OpenGL.platform import GL,GLU,createBaseFunction
-from OpenGL import arrays, error, wrapper
+from OpenGL import arrays, error, wrapper, constants
 from OpenGL.arrays.arraydatatype import GLfloatArray, GLdoubleArray
 from OpenGL import constants as data_types
 from OpenGL.lazywrapper import lazy
-from OpenGL.raw import GL as simple
-from OpenGL.raw.GL import constants
-from OpenGL.raw.GL import annotations
+from OpenGL.raw.GL.VERSION import GL_1_1 as simple
+from OpenGL.GL.VERSION import GL_1_1 as full
 import OpenGL
 from OpenGL import _configflags
 import ctypes
@@ -40,27 +39,27 @@ __all__ = [
 ]
 
 glRasterPosDispatch = {
-    2: simple.glRasterPos2d,
-    3: simple.glRasterPos3d,
-    4: simple.glRasterPos4d,
+    2: full.glRasterPos2d,
+    3: full.glRasterPos3d,
+    4: full.glRasterPos4d,
 }
 
 if _configflags.ERROR_CHECKING:
-    @lazy( simple.glBegin )
+    @lazy( full.glBegin )
     def glBegin( baseFunction, mode ):
         """Begin GL geometry-definition mode, disable automatic error checking"""
         error.onBegin( )
         return baseFunction( mode )
-    @lazy( simple.glEnd )
+    @lazy( full.glEnd )
     def glEnd( baseFunction ):
         """Finish GL geometry-definition mode, re-enable automatic error checking"""
         error.onEnd( )
         return baseFunction( )
 else:
-    glBegin = simple.glBegin
-    glEnd = simple.glEnd
+    glBegin = full.glBegin
+    glEnd = full.glEnd
 
-@lazy( simple.glDeleteTextures )
+@lazy( full.glDeleteTextures )
 def glDeleteTextures( baseFunction, array ):
     """Delete specified set of textures"""
     ptr = arrays.GLuintArray.asArray( array )
@@ -90,8 +89,8 @@ def glMap2( baseFunction, arrayType ):
     glMap2.__name__ = baseFunction.__name__
     glMap2.baseFunction = baseFunction
     return glMap2
-glMap2d = glMap2( simple.glMap2d, arrays.GLdoubleArray )
-glMap2f = glMap2( simple.glMap2f, arrays.GLfloatArray )
+glMap2d = glMap2( full.glMap2d, arrays.GLdoubleArray )
+glMap2f = glMap2( full.glMap2f, arrays.GLfloatArray )
 try:
     del glMap2
 except NameError, err:
@@ -113,8 +112,8 @@ def glMap1( baseFunction, arrayType ):
     glMap1.__name__ == baseFunction.__name__
     glMap1.baseFunction = baseFunction
     return glMap1
-glMap1d = glMap1( simple.glMap1d, arrays.GLdoubleArray )
-glMap1f = glMap1( simple.glMap1f, arrays.GLfloatArray )
+glMap1d = glMap1( full.glMap1d, arrays.GLdoubleArray )
+glMap1f = glMap1( full.glMap1f, arrays.GLfloatArray )
 try:
     del glMap1
 except NameError, err:
@@ -128,9 +127,9 @@ def glRasterPos( *args ):
     return glRasterPosDispatch[ len(args) ]( *args )
 
 glVertexDispatch = {
-    2: simple.glVertex2d,
-    3: simple.glVertex3d,
-    4: simple.glVertex4d,
+    2: full.glVertex2d,
+    3: full.glVertex3d,
+    4: full.glVertex4d,
 }
 def glVertex( *args ):
     """Choose glVertexX based on number of args"""
@@ -139,7 +138,7 @@ def glVertex( *args ):
         args = args[0]
     return glVertexDispatch[ len(args) ]( *args )
 
-@lazy( simple.glCallLists )
+@lazy( full.glCallLists )
 def glCallLists( baseFunction, lists, *args ):
     """glCallLists( str( lists ) or lists[] ) -> None
 
@@ -150,14 +149,14 @@ def glCallLists( baseFunction, lists, *args ):
         if isinstance( lists, str ):
             return baseFunction(
                 len(lists),
-                constants.GL_UNSIGNED_BYTE,
+                full.GL_UNSIGNED_BYTE,
                 ctypes.c_void_p(arrays.GLubyteArray.dataPointer( lists )),
             )
         ptr = arrays.GLuintArray.asArray( lists )
         size = arrays.GLuintArray.arraySize( ptr )
         return baseFunction(
             size,
-            constants.GL_UNSIGNED_INT,
+            full.GL_UNSIGNED_INT,
             ctypes.c_void_p( arrays.GLuintArray.dataPointer(ptr))
         )
     return baseFunction( lists, *args )
@@ -165,14 +164,14 @@ def glCallLists( baseFunction, lists, *args ):
 def glTexParameter( target, pname, parameter ):
     """Set a texture parameter, choose underlying call based on pname and parameter"""
     if isinstance( parameter, float ):
-        return simple.glTexParameterf( target, pname, parameter )
+        return full.glTexParameterf( target, pname, parameter )
     elif isinstance( parameter, int ):
-        return simple.glTexParameteri( target, pname, parameter )
+        return full.glTexParameteri( target, pname, parameter )
     else:
-        value = GLfloatArray.asArray( parameter, constants.GL_FLOAT )
-        return simple.glTexParameterfv( target, pname, value )
+        value = GLfloatArray.asArray( parameter, full.GL_FLOAT )
+        return full.glTexParameterfv( target, pname, value )
 
-@lazy( simple.glGenTextures )
+@lazy( full.glGenTextures )
 def glGenTextures( baseFunction, count, textures=None ):
     """Generate count new texture names
 
@@ -185,7 +184,7 @@ def glGenTextures( baseFunction, count, textures=None ):
     elif count == 1 and _configflags.SIZE_1_ARRAY_UNPACK:
         # this traditionally returned a single int/long, so we'll continue to
         # do so, even though it would be easier not to bother.
-        textures = simple.GLuint( 0 )
+        textures = constants.GLuint( 0 )
         baseFunction( count, textures)
         return textures.value
     else:
@@ -205,13 +204,13 @@ def glMaterial( faces, constant, *args ):
         arg = GLfloatArray.asArray( args[0] )
         if arg is None:
             raise ValueError( """Null value in glMaterial: %s"""%(args,) )
-        return simple.glMaterialfv( faces, constant, arg )
+        return full.glMaterialfv( faces, constant, arg )
     else:
-        return simple.glMaterialf( faces, constant, *args )
+        return full.glMaterialf( faces, constant, *args )
 
 glColorDispatch = {
-    3: annotations.glColor3fv,
-    4: annotations.glColor4fv,
+    3: full.glColor3fv,
+    4: full.glColor4fv,
 }
 
 def glColor( *args ):
@@ -226,11 +225,11 @@ def glColor( *args ):
         function = glColorDispatch[arrays.GLfloatArray.arraySize( arg )]
         return function( arg )
     elif arglen == 2:
-        return simple.glColor2d( *args )
+        return full.glColor2d( *args )
     elif arglen == 3:
-        return simple.glColor3d( *args )
+        return full.glColor3d( *args )
     elif arglen == 4:
-        return simple.glColor4d( *args )
+        return full.glColor4d( *args )
     else:
         raise ValueError( """Don't know how to handle arguments: %s"""%(args,))
 
@@ -238,7 +237,7 @@ def glColor( *args ):
 # Rectagle coordinates,
 glRectfv = arrays.setInputArraySizeType(
     arrays.setInputArraySizeType(
-        simple.glRectfv,
+        full.glRectfv,
         2,
         arrays.GLfloatArray,
         'v1',
@@ -249,7 +248,7 @@ glRectfv = arrays.setInputArraySizeType(
 )
 glRectiv = arrays.setInputArraySizeType(
     arrays.setInputArraySizeType(
-        simple.glRectiv,
+        full.glRectiv,
         2,
         arrays.GLintArray,
         'v1',
@@ -260,7 +259,7 @@ glRectiv = arrays.setInputArraySizeType(
 )
 glRectsv = arrays.setInputArraySizeType(
     arrays.setInputArraySizeType(
-        simple.glRectsv,
+        full.glRectsv,
         2,
         arrays.GLshortArray,
         'v1',
@@ -272,44 +271,44 @@ glRectsv = arrays.setInputArraySizeType(
 
 
 glIndexsv = arrays.setInputArraySizeType(
-    simple.glIndexsv,
+    full.glIndexsv,
     1,
     arrays.GLshortArray,
     'c',
 )
 glIndexdv = arrays.setInputArraySizeType(
-    simple.glIndexdv,
+    full.glIndexdv,
     1,
     arrays.GLdoubleArray,
     'c',
 )
 glIndexfv = arrays.setInputArraySizeType(
-    simple.glIndexfv,
+    full.glIndexfv,
     1,
     arrays.GLfloatArray,
     'c',
 )
 glIndexubv = arrays.setInputArraySizeType(
-    simple.glIndexubv,
+    full.glIndexubv,
     1,
     arrays.GLbyteArray,
     'c',
 )
 glEdgeFlagv = arrays.setInputArraySizeType(
-    simple.glEdgeFlagv,
+    full.glEdgeFlagv,
     1,
     arrays.GLubyteArray,
     'flag',
 )
 glTexGenfv = arrays.setInputArraySizeType(
-    simple.glTexGenfv,
+    full.glTexGenfv,
     None,
     arrays.GLfloatArray,
     'params',
 )
 
 #'glAreTexturesResident',
-@lazy( simple.glAreTexturesResident )
+@lazy( full.glAreTexturesResident )
 def glAreTexturesResident( baseFunction, *args ):
     """Allow both Pythonic and C-style calls to glAreTexturesResident
 

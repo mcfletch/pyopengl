@@ -40,7 +40,7 @@ the tables described above!
     XXX Should be an API to handle that instead of direct modification.
 
 """
-from OpenGL.raw import GL as simple
+from OpenGL.raw.GL.VERSION import GL_1_1 as simple
 from OpenGL import arrays
 import OpenGL
 from OpenGL import _configflags

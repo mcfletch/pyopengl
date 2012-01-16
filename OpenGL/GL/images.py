@@ -12,8 +12,8 @@
         glCompressedTexSubImage2D
         glCompressedTexSubImage1D
 """
-from OpenGL.raw import GL as simple
-from OpenGL import images, arrays, wrapper, platform
+from OpenGL.raw.GL.VERSION import GL_1_1,GL_1_2
+from OpenGL import images, arrays, wrapper, platform, constants
 import ctypes
 
 def asInt( value ):
@@ -22,143 +22,83 @@ def asInt( value ):
     return value
 
 ## update the image tables with standard image types...
-#images.FORMAT_BITS.update( {
-#	simple.GL_BITMAP : 1, # must be GL_UNSIGNED_BYTE
-#
-#	simple.GL_RED : 8,
-#	simple.GL_GREEN : 8,
-#	simple.GL_BLUE : 8,
-#	simple.GL_ALPHA : 8,
-#	simple.GL_LUMINANCE : 8,
-#	simple.GL_LUMINANCE_ALPHA : 8,
-#	simple.GL_COLOR_INDEX : 8,
-#	simple.GL_STENCIL_INDEX : 8,
-#	simple.GL_DEPTH_COMPONENT : 8,
-#	simple.GL_RGB : 24,
-#	simple.GL_BGR : 24,
-#
-#	simple.GL_RGBA : 32,
-#	simple.GL_BGRA : 32,
-#	simple.GL_ABGR_EXT : 32,
-#	simple.GL_CMYK_EXT : 32,
-#
-#	simple.GL_CMYKA_EXT : 40,
-#
-#	simple.GL_YCRCB_422_SGIX : 8, # must be GL_UNSIGNED_BYTE
-#	simple.GL_YCRCB_444_SGIX : 8, # must be GL_UNSIGNED_SHORT
-#
-#	simple.GL_FORMAT_SUBSAMPLE_24_24_OML : 32, # must be GL_UNSIGNED_INT_10_10_10_2
-#	simple.GL_FORMAT_SUBSAMPLE_244_244_OML : 32, # must be GL_UNSIGNED_INT_10_10_10_2
-#} )
 images.COMPONENT_COUNTS.update( {
-    simple.GL_BITMAP : 1, # must be GL_UNSIGNED_BYTE
+    GL_1_1.GL_BITMAP : 1, # must be GL_UNSIGNED_BYTE
 
-    simple.GL_RED : 1,
-    simple.GL_GREEN : 1,
-    simple.GL_BLUE : 1,
-    simple.GL_ALPHA : 1,
-    simple.GL_LUMINANCE : 1,
-    simple.GL_LUMINANCE_ALPHA : 2,
-    simple.GL_COLOR_INDEX : 1,
-    simple.GL_STENCIL_INDEX : 1,
-    simple.GL_DEPTH_COMPONENT : 1,
-    simple.GL_RGB : 3,
-    simple.GL_BGR : 3,
+    GL_1_1.GL_RED : 1,
+    GL_1_1.GL_GREEN : 1,
+    GL_1_1.GL_BLUE : 1,
+    GL_1_1.GL_ALPHA : 1,
+    GL_1_1.GL_LUMINANCE : 1,
+    GL_1_1.GL_LUMINANCE_ALPHA : 2,
+    GL_1_1.GL_COLOR_INDEX : 1,
+    GL_1_1.GL_STENCIL_INDEX : 1,
+    GL_1_1.GL_DEPTH_COMPONENT : 1,
+    GL_1_1.GL_RGB : 3,
+    GL_1_2.GL_BGR : 3,
 
-    simple.GL_RGBA : 4,
-    simple.GL_BGRA : 4,
-    simple.GL_ABGR_EXT : 4,
-    simple.GL_CMYK_EXT : 4,
-
-    simple.GL_CMYKA_EXT : 5,
-
-    simple.GL_YCRCB_422_SGIX : 1, # must be GL_UNSIGNED_BYTE
-    simple.GL_YCRCB_444_SGIX : 1, # must be GL_UNSIGNED_SHORT
-
-    simple.GL_FORMAT_SUBSAMPLE_24_24_OML : 1, # must be GL_UNSIGNED_INT_10_10_10_2
-    simple.GL_FORMAT_SUBSAMPLE_244_244_OML : 1, # must be GL_UNSIGNED_INT_10_10_10_2
+    GL_1_1.GL_RGBA : 4,
+    GL_1_2.GL_BGRA : 4,
 } )
 
-#images.TYPE_TO_BITS.update( {
-#	simple.GL_UNSIGNED_BYTE_3_3_2 : 8,
-#	simple.GL_UNSIGNED_BYTE_2_3_3_REV : 8,
-#	simple.GL_UNSIGNED_SHORT_4_4_4_4 : 16,
-#	simple.GL_UNSIGNED_SHORT_4_4_4_4_REV : 16,
-#	simple.GL_UNSIGNED_SHORT_5_5_5_1 : 16,
-#	simple.GL_UNSIGNED_SHORT_1_5_5_5_REV : 16,
-#	simple.GL_UNSIGNED_SHORT_5_6_5 : 16,
-#	simple.GL_UNSIGNED_SHORT_5_6_5_REV : 16,
-#	simple.GL_UNSIGNED_INT_8_8_8_8 : 32,
-#	simple.GL_UNSIGNED_INT_8_8_8_8_REV : 32,
-#	simple.GL_UNSIGNED_INT_10_10_10_2 : 32,
-#	simple.GL_UNSIGNED_INT_2_10_10_10_REV : 32,
-#	simple.GL_UNSIGNED_BYTE : ctypes.sizeof(simple.GLubyte) * 8,
-#	simple.GL_BYTE: ctypes.sizeof(simple.GLbyte) * 8,
-#	simple.GL_UNSIGNED_SHORT :  ctypes.sizeof(simple.GLushort) * 8,
-#	simple.GL_SHORT :  ctypes.sizeof(simple.GLshort) * 8,
-#	simple.GL_UNSIGNED_INT : ctypes.sizeof(simple.GLuint) * 8,
-#	simple.GL_INT : ctypes.sizeof(simple.GLint) * 8,
-#	simple.GL_FLOAT : ctypes.sizeof(simple.GLfloat) * 8,
-#	simple.GL_DOUBLE : ctypes.sizeof(simple.GLdouble) * 8,
-#} )
 images.TYPE_TO_ARRAYTYPE.update( {
-    simple.GL_UNSIGNED_BYTE_3_3_2 : simple.GL_UNSIGNED_BYTE,
-    simple.GL_UNSIGNED_BYTE_2_3_3_REV : simple.GL_UNSIGNED_BYTE,
-    simple.GL_UNSIGNED_SHORT_4_4_4_4 : simple.GL_UNSIGNED_SHORT,
-    simple.GL_UNSIGNED_SHORT_4_4_4_4_REV : simple.GL_UNSIGNED_SHORT,
-    simple.GL_UNSIGNED_SHORT_5_5_5_1 : simple.GL_UNSIGNED_SHORT,
-    simple.GL_UNSIGNED_SHORT_1_5_5_5_REV : simple.GL_UNSIGNED_SHORT,
-    simple.GL_UNSIGNED_SHORT_5_6_5 : simple.GL_UNSIGNED_SHORT,
-    simple.GL_UNSIGNED_SHORT_5_6_5_REV : simple.GL_UNSIGNED_SHORT,
-    simple.GL_UNSIGNED_INT_8_8_8_8 : simple.GL_UNSIGNED_INT,
-    simple.GL_UNSIGNED_INT_8_8_8_8_REV : simple.GL_UNSIGNED_INT,
-    simple.GL_UNSIGNED_INT_10_10_10_2 : simple.GL_UNSIGNED_INT,
-    simple.GL_UNSIGNED_INT_2_10_10_10_REV : simple.GL_UNSIGNED_INT,
-    simple.GL_UNSIGNED_BYTE : simple.GL_UNSIGNED_BYTE,
-    simple.GL_BYTE: simple.GL_BYTE,
-    simple.GL_UNSIGNED_SHORT : simple.GL_UNSIGNED_SHORT,
-    simple.GL_SHORT :  simple.GL_SHORT,
-    simple.GL_UNSIGNED_INT : simple.GL_UNSIGNED_INT,
-    simple.GL_INT : simple.GL_INT,
-    simple.GL_FLOAT : simple.GL_FLOAT,
-    simple.GL_DOUBLE : simple.GL_DOUBLE,
-    simple.GL_BITMAP : simple.GL_UNSIGNED_BYTE,
+    GL_1_2.GL_UNSIGNED_BYTE_3_3_2 : GL_1_1.GL_UNSIGNED_BYTE,
+    GL_1_2.GL_UNSIGNED_BYTE_2_3_3_REV : GL_1_1.GL_UNSIGNED_BYTE,
+    GL_1_2.GL_UNSIGNED_SHORT_4_4_4_4 : GL_1_1.GL_UNSIGNED_SHORT,
+    GL_1_2.GL_UNSIGNED_SHORT_4_4_4_4_REV : GL_1_1.GL_UNSIGNED_SHORT,
+    GL_1_2.GL_UNSIGNED_SHORT_5_5_5_1 : GL_1_1.GL_UNSIGNED_SHORT,
+    GL_1_2.GL_UNSIGNED_SHORT_1_5_5_5_REV : GL_1_1.GL_UNSIGNED_SHORT,
+    GL_1_2.GL_UNSIGNED_SHORT_5_6_5 : GL_1_1.GL_UNSIGNED_SHORT,
+    GL_1_2.GL_UNSIGNED_SHORT_5_6_5_REV : GL_1_1.GL_UNSIGNED_SHORT,
+    GL_1_2.GL_UNSIGNED_INT_8_8_8_8 : GL_1_1.GL_UNSIGNED_INT,
+    GL_1_2.GL_UNSIGNED_INT_8_8_8_8_REV : GL_1_1.GL_UNSIGNED_INT,
+    GL_1_2.GL_UNSIGNED_INT_10_10_10_2 : GL_1_1.GL_UNSIGNED_INT,
+    GL_1_2.GL_UNSIGNED_INT_2_10_10_10_REV : GL_1_1.GL_UNSIGNED_INT,
+    GL_1_1.GL_UNSIGNED_BYTE : GL_1_1.GL_UNSIGNED_BYTE,
+    GL_1_1.GL_BYTE: GL_1_1.GL_BYTE,
+    GL_1_1.GL_UNSIGNED_SHORT : GL_1_1.GL_UNSIGNED_SHORT,
+    GL_1_1.GL_SHORT :  GL_1_1.GL_SHORT,
+    GL_1_1.GL_UNSIGNED_INT : GL_1_1.GL_UNSIGNED_INT,
+    GL_1_1.GL_INT : GL_1_1.GL_INT,
+    GL_1_1.GL_FLOAT : GL_1_1.GL_FLOAT,
+    GL_1_1.GL_DOUBLE : GL_1_1.GL_DOUBLE,
+    GL_1_1.GL_BITMAP : GL_1_1.GL_UNSIGNED_BYTE,
 } )
 images.TIGHT_PACK_FORMATS.update({
-    simple.GL_UNSIGNED_BYTE_3_3_2 : 3,
-    simple.GL_UNSIGNED_BYTE_2_3_3_REV : 3,
-    simple.GL_UNSIGNED_SHORT_4_4_4_4 : 4,
-    simple.GL_UNSIGNED_SHORT_4_4_4_4_REV : 4,
-    simple.GL_UNSIGNED_SHORT_5_5_5_1 : 4,
-    simple.GL_UNSIGNED_SHORT_1_5_5_5_REV : 4,
-    simple.GL_UNSIGNED_SHORT_5_6_5 : 3,
-    simple.GL_UNSIGNED_SHORT_5_6_5_REV : 3,
-    simple.GL_UNSIGNED_INT_8_8_8_8 : 4,
-    simple.GL_UNSIGNED_INT_8_8_8_8_REV : 4,
-    simple.GL_UNSIGNED_INT_10_10_10_2 : 4,
-    simple.GL_UNSIGNED_INT_2_10_10_10_REV : 4,
-    simple.GL_BITMAP: 8, # single bits, 8 of them...
+    GL_1_2.GL_UNSIGNED_BYTE_3_3_2 : 3,
+    GL_1_2.GL_UNSIGNED_BYTE_2_3_3_REV : 3,
+    GL_1_2.GL_UNSIGNED_SHORT_4_4_4_4 : 4,
+    GL_1_2.GL_UNSIGNED_SHORT_4_4_4_4_REV : 4,
+    GL_1_2.GL_UNSIGNED_SHORT_5_5_5_1 : 4,
+    GL_1_2.GL_UNSIGNED_SHORT_1_5_5_5_REV : 4,
+    GL_1_2.GL_UNSIGNED_SHORT_5_6_5 : 3,
+    GL_1_2.GL_UNSIGNED_SHORT_5_6_5_REV : 3,
+    GL_1_2.GL_UNSIGNED_INT_8_8_8_8 : 4,
+    GL_1_2.GL_UNSIGNED_INT_8_8_8_8_REV : 4,
+    GL_1_2.GL_UNSIGNED_INT_10_10_10_2 : 4,
+    GL_1_2.GL_UNSIGNED_INT_2_10_10_10_REV : 4,
+    GL_1_1.GL_BITMAP: 8, # single bits, 8 of them...
 })
 
 images.RANK_PACKINGS.update( {
     4: [
-        (simple.glPixelStorei,simple.GL_PACK_SKIP_VOLUMES_SGIS, 0),
-        (simple.glPixelStorei,simple.GL_PACK_IMAGE_DEPTH_SGIS, 0),
-        (simple.glPixelStorei,simple.GL_PACK_ALIGNMENT, 1),
+        # Note the sgis parameters are skipped here unless you import 
+        # the sgis texture4D extension...
+        (GL_1_1.glPixelStorei,GL_1_1.GL_PACK_ALIGNMENT, 1),
     ],
     3: [
-        (simple.glPixelStorei,simple.GL_PACK_SKIP_IMAGES, 0),
-        (simple.glPixelStorei,simple.GL_PACK_IMAGE_HEIGHT, 0),
-        (simple.glPixelStorei,simple.GL_PACK_ALIGNMENT, 1),
+        (GL_1_1.glPixelStorei,GL_1_2.GL_PACK_SKIP_IMAGES, 0),
+        (GL_1_1.glPixelStorei,GL_1_2.GL_PACK_IMAGE_HEIGHT, 0),
+        (GL_1_1.glPixelStorei,GL_1_1.GL_PACK_ALIGNMENT, 1),
     ],
     2: [
-        (simple.glPixelStorei,simple.GL_PACK_ROW_LENGTH, 0),
-        (simple.glPixelStorei,simple.GL_PACK_SKIP_ROWS, 0),
-        (simple.glPixelStorei,simple.GL_PACK_ALIGNMENT, 1),
+        (GL_1_1.glPixelStorei,GL_1_1.GL_PACK_ROW_LENGTH, 0),
+        (GL_1_1.glPixelStorei,GL_1_1.GL_PACK_SKIP_ROWS, 0),
+        (GL_1_1.glPixelStorei,GL_1_1.GL_PACK_ALIGNMENT, 1),
     ],
     1: [
-        (simple.glPixelStorei,simple.GL_PACK_SKIP_PIXELS, 0),
-        (simple.glPixelStorei,simple.GL_PACK_ALIGNMENT, 1),
+        (GL_1_1.glPixelStorei,GL_1_1.GL_PACK_SKIP_PIXELS, 0),
+        (GL_1_1.glPixelStorei,GL_1_1.GL_PACK_ALIGNMENT, 1),
     ],
 } )
 
@@ -259,14 +199,14 @@ __all__ = (
 )
 
 for suffix,type in [
-    ('b',simple.GL_BYTE),
-    ('d',simple.GL_DOUBLE),
-    ('f',simple.GL_FLOAT),
-    ('i',simple.GL_INT),
-    ('s',simple.GL_SHORT),
-    ('ub',simple.GL_UNSIGNED_BYTE),
-    ('ui',simple.GL_UNSIGNED_INT),
-    ('us',simple.GL_UNSIGNED_SHORT),
+    ('b',constants.GL_BYTE),
+    ('d',constants.GL_DOUBLE),
+    ('f',constants.GL_FLOAT),
+    ('i',constants.GL_INT),
+    ('s',constants.GL_SHORT),
+    ('ub',constants.GL_UNSIGNED_BYTE),
+    ('ui',constants.GL_UNSIGNED_INT),
+    ('us',constants.GL_UNSIGNED_SHORT),
 ]:
     def glReadPixels( x,y,width,height,format,type=type, array=None ):
         """Read specified pixels from the current display buffer
@@ -282,7 +222,7 @@ for suffix,type in [
         else:
             array = arrayType.asArray( array )
         imageData = arrayType.voidDataPointer( array )
-        simple.glReadPixels(
+        GL_1_1.glReadPixels(
             x,y,
             width, height,
             format,type,
@@ -293,14 +233,14 @@ for suffix,type in [
     def glGetTexImage( target, level,format,type=type ):
         """Get a texture-level as an image"""
         from OpenGL.GL import glget
-        dims = [glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_WIDTH )]
-        if target != simple.GL_TEXTURE_1D:
-            dims.append( glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_HEIGHT ) )
-            if target != simple.GL_TEXTURE_2D:
-                dims.append( glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_DEPTH ) )
+        dims = [glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_WIDTH )]
+        if target != GL_1_1.GL_TEXTURE_1D:
+            dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
+            if target != GL_1_1.GL_TEXTURE_2D:
+                dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_DEPTH ) )
         array = images.SetupPixelRead( format, tuple(dims), type )
         arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
-        simple.glGetTexImage(
+        GL_1_1.glGetTexImage(
             target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array))
         )
         return array
@@ -308,14 +248,14 @@ for suffix,type in [
 ##	def glGetTexSubImage( target, level,format,type ):
 ##		"""Get a texture-level as an image"""
 ##		from OpenGL.GL import glget
-##		dims = [glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_WIDTH )]
-##		if target != simple.GL_TEXTURE_1D:
-##			dims.append( glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_HEIGHT ) )
-##			if target != simple.GL_TEXTURE_2D:
-##				dims.append( glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_DEPTH ) )
+##		dims = [glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_WIDTH )]
+##		if target != GL_1_1.GL_TEXTURE_1D:
+##			dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
+##			if target != GL_1_1.GL_TEXTURE_2D:
+##				dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_DEPTH ) )
 ##		array = images.SetupPixelRead( format, tuple(dims), type )
 ##		arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
-##		simple.glGetTexImage(
+##		GL_1_1.glGetTexImage(
 ##			target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array))
 ##		)
 ##		return array
@@ -349,7 +289,7 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=str ):
     else:
         array = arrayType.asArray( array )
     imageData = arrayType.voidDataPointer( array )
-    simple.glReadPixels(
+    GL_1_1.glReadPixels(
         x,y,width,height,
         format,type,
         imageData
@@ -376,14 +316,14 @@ def glGetTexImage( target, level,format,type, outputType=str ):
     format, type and outputType
     """
     from OpenGL.GL import glget
-    dims = [glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_WIDTH )]
-    if target != simple.GL_TEXTURE_1D:
-        dims.append( glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_HEIGHT ) )
-        if target != simple.GL_TEXTURE_2D:
-            dims.append( glget.glGetTexLevelParameteriv( target, level, simple.GL_TEXTURE_DEPTH ) )
+    dims = [glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_WIDTH )]
+    if target != GL_1_1.GL_TEXTURE_1D:
+        dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
+        if target != GL_1_1.GL_TEXTURE_2D:
+            dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_DEPTH ) )
     array = images.SetupPixelRead( format, tuple(dims), type )
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
-    simple.glGetTexImage(
+    GL_1_1.glGetTexImage(
         target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array))
     )
     if outputType is str:
@@ -527,27 +467,27 @@ def setImageInput(
 
 glDrawPixels = setDimensionsAsInts(
     setImageInput(
-        simple.glDrawPixels
+        GL_1_1.glDrawPixels
     )
 )
 glTexSubImage2D = setDimensionsAsInts(
     setImageInput(
-        simple.glTexSubImage2D
+        GL_1_1.glTexSubImage2D
     )
 )
 glTexSubImage1D = setDimensionsAsInts(
     setImageInput(
-        simple.glTexSubImage1D
+        GL_1_1.glTexSubImage1D
     )
 )
 glTexImage2D = setDimensionsAsInts(
     setImageInput(
-        simple.glTexImage2D
+        GL_1_1.glTexImage2D
     )
 )
 glTexImage1D = setDimensionsAsInts(
     setImageInput(
-        simple.glTexImage1D
+        GL_1_1.glTexImage1D
     )
 )
 
@@ -590,13 +530,13 @@ def compressedImageFunction( baseFunction ):
         return baseFunction
 
 for suffix,arrayConstant in [
-    ('b', simple.GL_BYTE),
-    ('f', simple.GL_FLOAT),
-    ('i', simple.GL_INT),
-    ('s', simple.GL_SHORT),
-    ('ub', simple.GL_UNSIGNED_BYTE),
-    ('ui', simple.GL_UNSIGNED_INT),
-    ('us', simple.GL_UNSIGNED_SHORT),
+    ('b', constants.GL_BYTE),
+    ('f', constants.GL_FLOAT),
+    ('i', constants.GL_INT),
+    ('s', constants.GL_SHORT),
+    ('ub', constants.GL_UNSIGNED_BYTE),
+    ('ui', constants.GL_UNSIGNED_INT),
+    ('us', constants.GL_UNSIGNED_SHORT),
 ]:
     for functionName in (
         'glTexImage1D','glTexImage2D',
@@ -605,7 +545,7 @@ for suffix,arrayConstant in [
         #'glTexSubImage3D','glTexImage3D', # extension/1.2 standard
     ):
         functionName, function = typedImageFunction(
-            suffix, arrayConstant, getattr(simple,functionName),
+            suffix, arrayConstant, getattr(GL_1_1,functionName),
         )
         globals()[functionName] = function
         try:
