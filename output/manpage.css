@@ -70,3 +70,11 @@ span.parameter {
 .py-sample {
 	margin-left: 30px;
 }
+.code, .constant {
+    display: inline;
+    font-family: monospace;
+    font-size: 110%;
+}
+.constant {
+    color: #007700;
+}

@@ -217,10 +217,12 @@ def init_output( ):
     if not os.path.isdir( OUTPUT_DIRECTORY ):
         print 'Creating new manual directory: %s'%(OUTPUT_DIRECTORY )
         os.mkdir( OUTPUT_DIRECTORY )
-        for file in os.listdir( 'output' ):
-            src = os.path.join( 'output', file )
-            dst = os.path.join( OUTPUT_DIRECTORY, file )
-            os.link( src, dst )
+    for file in os.listdir( 'output' ):
+        src = os.path.join( 'output', file )
+        dst = os.path.join( OUTPUT_DIRECTORY, file )
+        if os.path.exists( dst ):
+            os.remove( dst )
+        os.link( src, dst )
 
 
 def main():
