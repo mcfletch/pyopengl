@@ -5,31 +5,31 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	 color: black;
 	background-color: white; 
-	margin: 0px;
+	margin: 0;
 }
 .content {
-	margin: 5px;
+	margin: .25em;
 }
 h1 {
-	margin: 0px;
+	margin: 0;
 }
 h1, h2 { 
 	background-image: url(greypinstripe.png);
 	color: #111144;
 }
 .purpose {
-	margin-left: 30px;
-	margin-right: 30px;
-	margin-top: 30px;
-	margin-bottom: 5px;
-	padding: 10px;
+	margin-left: 2em;
+	margin-right: 2em;
+	margin-top: .5em;
+	margin-bottom: .25em;
+	padding: .5em;
 	border: thin lightgrey solid;
 }
 .signature {
-	margin-left: 30px;
+	margin-left: 2em;
 }
 .py-signature {
-	margin-left: 10px;
+	margin-left: 1em;
 	color: darkgreen;
 }
 table {
@@ -40,11 +40,11 @@ tr {
 }
 th {
 	background-image: url(greypinstripe.png);
-	padding: 5px;
+	padding: .25em;
 }
 
 div.simpara, div.para {
-	margin: 5px;
+	margin: .25em;
 }
 
 span.parameter {
@@ -59,16 +59,30 @@ span.parameter {
 	border: solid lightgrey thin;
 	background: lightyellow;
 	color: darkgreen;
-	font-size: smaller;
-	margin-left: 30px;
-	margin-top: 0px;
-	margin-bottom: 5px;
+	font-size: 80%;
+	margin-left: 1em;
+	margin-top: 0;
+	margin-bottom: .25em;
 }
 .sample-key {
 	color: darkgrey;
 }
 .py-sample {
-	margin-left: 30px;
+	margin-left: 1.5em;
+}
+.deprecated, .deprecation-warning {
+    background-color: #fff0f0;
+}
+.deprecation-description {
+    margin-left: 2em;
+}
+.programlisting {
+	white-space: pre;
+}
+.metadata {
+    margin: 2em;
+    color: grey;
+    font-size: 50%;
 }
 .code, .constant {
     display: inline;
