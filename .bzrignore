@@ -5,7 +5,7 @@ MANIFEST
 build
 dist
 callgrind.out*
-*.~1~
+*.~?~
 documentation/pydoc/*.html
 src/glext.h
 OpenGL/GL/*/*.txt
@@ -36,3 +36,4 @@ OpenGL/raw/GLEXT
 src/gle-3.1.0*
 src/gl.spec
 src/glext.h*
+OpenGL_accelerate/*.so
