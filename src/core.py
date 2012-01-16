@@ -21,13 +21,6 @@ class CoreModule( get_gl_extensions.VersionModule ):
             self._header = content[start:stop]
         return self._header
 
-#    def constants( self ):
-#        result = []
-#        for match in constant.finditer(self.read_header()):
-#            result.append('%(name)s %(value)s'%match.groupdict() )
-#        constants = '\n'.join( result )
-#        return '_p.unpack_constants( """%(constants)s""", globals())'%locals()
-        
     def findFunctions( self ):
         declarations = self.read_header()
         functions = []
