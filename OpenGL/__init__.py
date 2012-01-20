@@ -143,7 +143,7 @@ import occurs the flags should no longer be changed.
         Default: False
 
     UNSIGNED_BYTE_IMAGES_AS_STRING -- if True, we will return
-        GL_UNSIGNED_BYTE image-data as strings, istead of arrays
+        GL_UNSIGNED_BYTE image-data as strings, instead of arrays
         for glReadPixels and glGetTexImage
 
         Default: True
