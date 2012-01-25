@@ -119,6 +119,10 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
     OSMesaPixelStore.argtypes = [GLint, GLint]
     OSMesaPixelStore.restype = None
 
+    OSMesaGetProcAddress = GL.OSMesaGetProcAddress
+    OSMesaGetProcAddress.restype = ctypes.c_void_p
+    getExtensionProcedure = staticmethod( OSMesaGetProcAddress )
+
     def OSMesaGetIntegerv(self, pname):
         value = self.GLint()
         self.GL.OSMesaGetIntegerv(pname, ctypes.byref(value))
