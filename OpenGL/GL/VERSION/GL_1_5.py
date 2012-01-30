@@ -57,7 +57,7 @@ def glBufferData( baseOperation, target, size, data=None, usage=None ):
     return baseOperation( target, size, data, usage )
 
 @lazy( glBufferSubData )
-def glBufferSubData( baseOperation, target, offset, size, data=None ):
+def glBufferSubData( baseOperation, target, offset, size=None, data=None ):
     """Copy subset of data into the currently bound vertex-buffer-data object
 
     target -- the symbolic constant indicating which buffer type is intended
@@ -69,7 +69,14 @@ def glBufferSubData( baseOperation, target, offset, size, data=None ):
         copying over a data-set
 
     Note that if size is not an int/long it is considered to be data
+    *iff* data is None
     """
+    if size is None:
+        if data is None:
+            raise TypeError( "Need data or size" )
+    elif (not isinstance( size, (int,long))) and (data is None):
+        data = size 
+        size = None
     try:
         if size is not None:
             size = int( size )

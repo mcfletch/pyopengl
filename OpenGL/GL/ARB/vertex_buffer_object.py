@@ -115,19 +115,26 @@ def glBufferDataARB( baseOperation, target, size, data=None, usage=None ):
     return baseOperation( target, size, data, usage )
 
 @lazy( glBufferSubDataARB )
-def glBufferSubDataARB( baseOperation, target, offset, size, data=None ):
+def glBufferSubDataARB( baseOperation, target, offset, size=None, data=None ):
     """Copy subset of data into the currently bound vertex-buffer-data object
-    
+
     target -- the symbolic constant indicating which buffer type is intended
     offset -- offset from beginning of buffer at which to copy bytes
     size -- the count-in-bytes of the array (if an int/long), if None,
-        calculate size from data, if an array and data is None, use as 
+        calculate size from data, if an array and data is None, use as
         data (i.e. the parameter can be omitted and calculated)
-    data -- data-pointer to be used, may be None to initialize without 
-        copying over a data-set 
-    
+    data -- data-pointer to be used, may be None to initialize without
+        copying over a data-set
+
     Note that if size is not an int/long it is considered to be data
+    *iff* data is None
     """
+    if size is None:
+        if data is None:
+            raise TypeError( "Need data or size" )
+    elif (not isinstance( size, (int,long))) and (data is None):
+        data = size 
+        size = None
     try:
         if size is not None:
             size = int( size )
