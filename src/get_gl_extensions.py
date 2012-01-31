@@ -78,6 +78,14 @@ class Helper( object ):
             return item()
         else:
             return item
+reserved_names = set((
+    'in',
+    'for',
+    'import',
+    'from',
+    'while',
+    'with',
+))
 
 class Function( Helper ):
     def __init__( self, returnType, name, signature):
@@ -112,6 +120,8 @@ class Function( Helper ):
             if not nameMatch:
                 raise ValueError( item )
             name = nameMatch.group(0)
+            if name in reserved_names:
+                name = name + '_'
             rest = item[:nameMatch.start(0)].strip()
             types.append( self.cTypeToPyType( rest ) )
             names.append( name )

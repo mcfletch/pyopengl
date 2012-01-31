@@ -153,10 +153,10 @@ def glShaderOp2EXT( op,res,arg1,arg2 ):pass
 def glShaderOp3EXT( op,res,arg1,arg2,arg3 ):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glSwizzleEXT( res,in,outX,outY,outZ,outW ):pass
+def glSwizzleEXT( res,in_,outX,outY,outZ,outW ):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glWriteMaskEXT( res,in,outX,outY,outZ,outW ):pass
+def glWriteMaskEXT( res,in_,outX,outY,outZ,outW ):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
 def glInsertComponentEXT( res,src,num ):pass
