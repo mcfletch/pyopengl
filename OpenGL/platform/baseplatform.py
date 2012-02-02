@@ -6,7 +6,6 @@ import sys
 from OpenGL import _configflags
 from OpenGL import logs, MODULE_ANNOTATIONS
 
-
 class _CheckContext( object ):
     def __init__( self, func, ccisvalid ):
         self.func = func 
@@ -127,6 +126,8 @@ class BasePlatform( object ):
         
         raises AttributeError if can't find the procedure...
         """
+        if extension == 'GL_VERSION_GL_1_1':
+            extension = None
         if extension and not self.checkExtension( extension ):
             raise AttributeError( """Extension not available""" )
         argTypes = [ self.finalArgType( t ) for t in argTypes ]
