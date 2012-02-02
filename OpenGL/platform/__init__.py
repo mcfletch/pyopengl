@@ -56,7 +56,7 @@ def createFunction( function, dll,extension,deprecated ):
     """Allows the more compact declaration format to use the old-style constructor"""
     return createExtensionFunction(
         function.__name__,
-        dll,
+        dll or PLATFORM.GL,
         resultType = function.resultType,
         argTypes = function.argTypes,
         doc = None, argNames = function.argNames,
