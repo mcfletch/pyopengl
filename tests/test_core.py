@@ -810,49 +810,54 @@ class Tests( unittest.TestCase ):
             assert not glShaderSource
             assert not glUniform1f
     
-##    def test_tess_collection( self ):
-##        """SF#2354596 tessellation combine results collected"""
-##        def tessvertex(vertex_data, polygon_data):
-##            polygon_data.append(vertex_data)
-##
-##        def tesscombine(coords, vertex_data, weight):
-##            return (True,coords)	# generated vertices marked as True
-##
-##        def tessedge(flag):
-##            pass	# dummy
-##        collected=[]	# collect triangle vertices
-##
-##        # set up tessellator in CSG intersection mode
-##        tess=gluNewTess()
-##        gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ABS_GEQ_TWO)
-##        gluTessCallback(tess, GLU_TESS_VERTEX_DATA,  tessvertex)
-##        gluTessCallback(tess, GLU_TESS_COMBINE,      tesscombine)
-##        gluTessCallback(tess, GLU_TESS_EDGE_FLAG,    tessedge)	# no strips
-##
-##        gluTessBeginPolygon(tess, collected)
-##
-##        # First square
-##        gluTessBeginContour(tess)
-##        gluTessVertex(tess, [-1,0,-1], (False,[-1,0,-1]))
-##        gluTessVertex(tess, [ 1,0,-1], (False,[ 1,0,-1]))
-##        gluTessVertex(tess, [ 1,0, 1], (False,[ 1,0, 1]))
-##        gluTessVertex(tess, [-1,0, 1], (False,[-1,0, 1]))
-##        gluTessEndContour(tess)
-##
-##        # Second square, intersects with first
-##        gluTessBeginContour(tess)
-##        gluTessVertex(tess, [0.5,0,-0.5], (False,[0.5,0,-0.5]))
-##        gluTessVertex(tess, [1.5,0,-0.5], (False,[1.5,0,-0.5]))
-##        gluTessVertex(tess, [1.5,0, 0.5], (False,[1.5,0, 0.5]))
-##        gluTessVertex(tess, [0.5,0, 0.5], (False,[0.5,0, 0.5]))
-##        gluTessEndContour(tess)
-##
-##        gluTessEndPolygon(tess)
-##
-##        # Show collected triangle vertices :-
-##        # Original input vertices are marked as False.
-##        # Vertices generated in combine callback are marked as True.
-##        assert collected
+    def test_tess_collection( self ):
+        """SF#2354596 tessellation combine results collected"""
+        def tessvertex(vertex_data, polygon_data):
+            # polygon data *should* be collected here
+            assert polygon_data is collected, polygon_data
+            polygon_data.append(vertex_data)
+
+        def tesscombine(coords, vertex_data, weight,polygon_data):
+            return (True,coords)	# generated vertices marked as True
+
+        def tessedge(flag,*args,**named):
+            pass	# dummy
+        collected=[]	# collect triangle vertices
+
+        # set up tessellator in CSG intersection mode
+        tess=gluNewTess()
+        gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ABS_GEQ_TWO)
+        gluTessCallback(tess, GLU_TESS_VERTEX_DATA,  tessvertex)
+        gluTessCallback(tess, GLU_TESS_COMBINE_DATA,      tesscombine)
+        gluTessCallback(tess, GLU_TESS_EDGE_FLAG,    tessedge)	# no strips
+
+        gluTessBeginPolygon(tess, collected)
+
+        # First square
+        gluTessBeginContour(tess)
+        gluTessVertex(tess, [-1,0,-1], (False,[-1,0,-1]))
+        gluTessVertex(tess, [ 1,0,-1], (False,[ 1,0,-1]))
+        gluTessVertex(tess, [ 1,0, 1], (False,[ 1,0, 1]))
+        gluTessVertex(tess, [-1,0, 1], (False,[-1,0, 1]))
+        gluTessEndContour(tess)
+
+        # Second square, intersects with first
+        gluTessBeginContour(tess)
+        gluTessVertex(tess, [0.5,0,-0.5], (False,[0.5,0,-0.5]))
+        gluTessVertex(tess, [1.5,0,-0.5], (False,[1.5,0,-0.5]))
+        gluTessVertex(tess, [1.5,0, 0.5], (False,[1.5,0, 0.5]))
+        gluTessVertex(tess, [0.5,0, 0.5], (False,[0.5,0, 0.5]))
+        gluTessEndContour(tess)
+
+        gluTessEndPolygon(tess)
+
+        err = glGetError()
+        assert not err, gluErrorString( err )
+
+        # Show collected triangle vertices :-
+        # Original input vertices are marked as False.
+        # Vertices generated in combine callback are marked as True.
+        assert collected
     
     def test_get_boolean_bitmap( self ):
         # should not raise error
