@@ -812,12 +812,13 @@ class Tests( unittest.TestCase ):
     
     def test_tess_collection( self ):
         """SF#2354596 tessellation combine results collected"""
-        def start(*args):
-            print 'start'
-        def tessvertex(vertex_data, polygon_data):
+        def start(typ=None):
+            print 'start', typ
+        def tessvertex(vertex_data):
             # polygon data *should* be collected here
-            assert polygon_data is collected, polygon_data
-            polygon_data.append(vertex_data)
+            #assert polygon_data is collected, polygon_data
+            #polygon_data.append(vertex_data)
+            collected.append( vertex_data )
             return polygon_data
         combined = []
         def tesscombine(coords, vertex_data, weight):
@@ -834,32 +835,26 @@ class Tests( unittest.TestCase ):
         gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ABS_GEQ_TWO)
         gluTessCallback(tess, GLU_TESS_BEGIN, start)
         gluTessCallback(tess, GLU_TESS_END, start)
-        gluTessCallback(tess, GLU_TESS_VERTEX_DATA,  tessvertex)
         gluTessCallback(tess, GLU_TESS_COMBINE,      tesscombine)
         gluTessCallback(tess, GLU_TESS_EDGE_FLAG,    tessedge)	# no strips
+        gluTessCallback(tess, GLU_TESS_VERTEX,  tessvertex)
 
         gluTessBeginPolygon(tess, collected)
         try:
-
-            # First square
-            gluTessBeginContour(tess)
-            try:
-                gluTessVertex(tess, [-1,0,-1], (False,[-1,0,-1]))
-                gluTessVertex(tess, [ 1,0,-1], (False,[ 1,0,-1]))
-                gluTessVertex(tess, [ 1,0, 1], (False,[ 1,0, 1]))
-                gluTessVertex(tess, [-1,0, 1], (False,[-1,0, 1]))
-            finally:
-                gluTessEndContour(tess)
-
-            # Second square, intersects with first
-            gluTessBeginContour(tess)
-            try:
-                gluTessVertex(tess, [0.5,0,-0.5], (False,[0.5,0,-0.5]))
-                gluTessVertex(tess, [1.5,0,-0.5], (False,[1.5,0,-0.5]))
-                gluTessVertex(tess, [1.5,0, 0.5], (False,[1.5,0, 0.5]))
-                gluTessVertex(tess, [0.5,0, 0.5], (False,[0.5,0, 0.5]))
-            finally:
-                gluTessEndContour(tess)
+            for contour in [
+                # first square
+                [(-1,0,-1),(1,0,-1),(1,0,1),(-1,0,1)],
+                # second intersects the first
+                [(.5,0,-.5),(1.5,0,-.5),(1.5,0,.5),(.5,0,.5)],
+            ]:
+                
+                gluTessBeginContour(tess)
+                try:
+                    for point in contour:
+                        point = array( point, 'f' )
+                        gluTessVertex( tess, point, (False,point))
+                finally:
+                    gluTessEndContour(tess)
         finally:
             result = gluTessEndPolygon(tess)
 
@@ -868,6 +863,63 @@ class Tests( unittest.TestCase ):
         # Original input vertices are marked as False.
         # Vertices generated in combine callback are marked as True.
         assert collected
+    
+    def test_tess_cb_traditional( self ):
+        outline = [
+            [191,   0],
+            [ 191, 1480],
+            [ 191, 1480],
+            [ 401, 1480],
+            [ 401, 1480],
+            [401,   856],
+            [401,   856],
+            [1105,  856],
+            [1105,  856],
+            [1105, 1480],
+            [1105, 1480],
+            [1315, 1480],
+            [1315, 1480],
+            [1315,    0],
+            [1315,    0],
+            [1105,    0],
+            [1105,    0],
+            [1105,  699],
+            [1105,  699],
+            [401,   699],
+            [401,   699],
+            [401,     0],
+            [401,     0],
+            [191,     0],
+            [191,     0],
+            [191,     0],
+        ]
+        scale = 1200.
+        self.tess = gluNewTess()
+        gluTessCallback(self.tess, GLU_TESS_BEGIN, glBegin)
+        def test( t, polyData=None ):
+            glNormal( 0,0, -1 )
+            glColor3f( t[0],t[1],t[2] )
+            return glVertex3f( t[0],t[1],t[2])
+        gluTessCallback(self.tess, GLU_TESS_VERTEX_DATA, test)
+        gluTessCallback(self.tess, GLU_TESS_END, glEnd);
+        combined = []
+        def combine( points, vertices, weights ):
+            #print 'combine called', points, vertices, weights
+            combined.append( points )
+            return points
+        gluTessCallback(self.tess, GLU_TESS_COMBINE, combine)
+        gluTessBeginPolygon( self.tess, None )
+        try:
+            gluTessBeginContour( self.tess )
+            try:
+                for (x,y) in outline:
+                    vertex = array((x/scale,y/scale,0.0),'d')
+                    gluTessVertex(self.tess, vertex, vertex)
+            finally:
+                gluTessEndContour( self.tess )
+        finally:
+            gluTessEndPolygon(self.tess)
+        
     
     def test_get_boolean_bitmap( self ):
         # should not raise error
