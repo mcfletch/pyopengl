@@ -15,6 +15,11 @@ class _CheckContext( object ):
             return setattr( self.func, key, value )
         else:
             self.__dict__[key] = value 
+    def __repr__( self ):
+        if hasattr( self.func, '__doc__' ):
+            return self.func.__doc__ 
+        else:
+            return repr( self.func )
     def __getattr__( self, key ):
         if key != 'func':
             return getattr(self.func, key )
