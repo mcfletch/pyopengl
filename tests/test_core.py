@@ -814,15 +814,14 @@ class Tests( unittest.TestCase ):
         """SF#2354596 tessellation combine results collected"""
         def start(typ=None):
             print 'start', typ
-        def tessvertex(vertex_data):
+        def tessvertex(vertex_data, polygon_data):
             # polygon data *should* be collected here
-            #assert polygon_data is collected, polygon_data
-            #polygon_data.append(vertex_data)
-            collected.append( vertex_data )
+            assert polygon_data is collected, polygon_data
+            polygon_data.append(vertex_data)
+            #collected.append( vertex_data )
             return polygon_data
         combined = []
         def tesscombine(coords, vertex_data, weight):
-            #polygon_data.append( coords )
             combined.append( coords )
             return (True,coords)	# generated vertices marked as True
 
@@ -833,11 +832,11 @@ class Tests( unittest.TestCase ):
         # set up tessellator in CSG intersection mode
         tess=gluNewTess()
         gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ABS_GEQ_TWO)
-        gluTessCallback(tess, GLU_TESS_BEGIN, start)
-        gluTessCallback(tess, GLU_TESS_END, start)
+        gluTessCallback(tess, GLU_TESS_BEGIN, glBegin)
+        gluTessCallback(tess, GLU_TESS_END, glEnd)
         gluTessCallback(tess, GLU_TESS_COMBINE,      tesscombine)
         gluTessCallback(tess, GLU_TESS_EDGE_FLAG,    tessedge)	# no strips
-        gluTessCallback(tess, GLU_TESS_VERTEX,  tessvertex)
+        gluTessCallback(tess, GLU_TESS_VERTEX_DATA,  tessvertex)
 
         gluTessBeginPolygon(tess, collected)
         try:
