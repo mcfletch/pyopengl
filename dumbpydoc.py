@@ -86,11 +86,13 @@ class PyModule( object ):
             return None
     @property
     def parents( self ):
-        """Yield parents in closest-to-farthest order"""
+        """Produce parents in closest-to-farthest order"""
         names = self.name.split('.')
+        result = []
         for i in range(1,len(names)):
-            yield PyModule( ".".join( names[:i] ))
-        yield self
+            result.append( PyModule( ".".join( names[:i] )) )
+        result.append( self )
+        return result
 
     @property
     def title( self ):

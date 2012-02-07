@@ -94,10 +94,12 @@ class RefSect( object ):
         ]
     def get_crossrefs( self, reference ):
         """Retrieve all cross-references from reference"""
+        result = []
         for (title,volume) in self.see_also:
             target = reference.get_crossref( title, volume, self )
             if target is not None:
-                yield target
+                result.append( target )
+        return result
         # should also look for mentions in the description sections
     def find_python_functions( self ):
         """Find our functions, aliases and the like in python module"""

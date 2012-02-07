@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://purl.org/kid/ns#">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/">
 <div py:def="path_children(path)" py:for="tutorial in path.children" class="tutorial">
 	<a href="${tutorial.relative_link}" class="tutorial-link">${ tutorial.title }</a>
 </div>

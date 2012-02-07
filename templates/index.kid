@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://purl.org/kid/ns#">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/">
 <head>
     <title>PyOpenGL ${version} Function Reference</title>
     <link rel="stylesheet" href="./manpage.css" type="text/css" />

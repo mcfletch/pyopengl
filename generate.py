@@ -3,13 +3,16 @@
 import glob, os, datetime, subprocess
 #import elementtree.ElementTree as ET
 import lxml.etree as ET
-import kid, logging
+from genshi.template import TemplateLoader
+import logging
 log = logging.getLogger( 'generate' )
 
 from directdocs.model import Function, Parameter, ParameterReference
 from directdocs import model,references
 from OpenGL import __version__
 from OpenGL import GL, GLU, GLUT, GLE,GLX
+
+loader = TemplateLoader([os.path.join(os.path.dirname( __file__ ), 'templates')])
 
 OUTPUT_DIRECTORY = 'manual-%s'%(model.MAJOR_VERSION,)
 
@@ -258,27 +261,28 @@ def main():
     ref.check_crossrefs()
     # now generate some files...
     log.info( 'Generating index' )
-    serial = kid.XHTMLSerializer( decl=True )
-    template = kid.Template(
-        file='templates/index.kid',
+    stream = loader.load(
+        'index.kid',
+    ).generate(
         ref=ref,
         date=datetime.datetime.now().isoformat(),
         version=__version__,
         implementation_module_names = IMPLEMENTATION_MODULES,
     )
-    data = template.serialize( output=serial )
+    data = stream.render('xhtml')
     open( os.path.join(OUTPUT_DIRECTORY,'index.xhtml'), 'w').write( data )
 
     for name,section in ref.sections.items():
         log.warn( 'Generating: %s', name )
-        template = kid.Template(
-            file = 'templates/section.kid',
+        stream = loader.load(
+            'section.kid',
+        ).generate(
             ref=ref,
             section=section,
             date=datetime.datetime.now().isoformat(),
             version=__version__,
         )
-        data = template.serialize( output=serial )
+        data = stream.render('xhtml')
         open(
             os.path.join( OUTPUT_DIRECTORY,ref.url(section)), 'w'
         ).write( data )

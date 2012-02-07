@@ -1,9 +1,12 @@
 #! /usr/bin/env python
 """Generate the OpenGLContext shader tutorials from '''-string marked-up source code"""
 import re,os,sys,textwrap, datetime
-import kid, logging
+from genshi.template import TemplateLoader
+import logging
 log = logging.getLogger( 'tutorials' )
 from dumbmarkup import *
+
+loader = TemplateLoader([os.path.join(os.path.dirname( __file__ ), 'templates')])
 
 text_re = re.compile(
     r"""^[ \t]*?(''')(?P<commentary>.*?)(''')[ \t]*?$""",
@@ -32,37 +35,70 @@ OUTPUT_DIRECTORY=os.path.join(
 if not os.path.isdir( OUTPUT_DIRECTORY ):
     os.makedirs( OUTPUT_DIRECTORY )
 
-serial = kid.XHTMLSerializer( decl=True )
+class TutorialPath( Grouping ):
+    """Path through a series of tutorials"""
+    def generate_children( self ):
+        first = self.children
+        for i in range( len(first)):
+            next = prev = None
+            if i > 0:
+                prev = first[i-1]
+            if i < len(first)-1:
+                next = first[i+1]
+            generate( first[i], next=next,prev=prev, path=self )
+
+class Tutorial( Grouping ):
+    html_tag = 'body'
+    html_class = 'tutorial'
+    @property
+    def title( self ):
+        """find our first title descendant"""
+        for item in self.children:
+            if isinstance( item, Commentary ):
+                for child in item.children:
+                    if isinstance( child, Title ):
+                        return child.text
+        return "No title found"
+    def set_file( self, filename ):
+        base = os.path.basename( filename )
+        self.filename = base
+        root = os.path.splitext( base )[0]
+        self.html_file = os.path.join(
+            OUTPUT_DIRECTORY, '%s.xhtml'%(root)
+        )
+        self.relative_link = '%s.xhtml'%( root, )
 
 def generate_index( paths ):
     """Generate index file for given paths"""
     next = paths[0].children[0]
     prev = paths[-1].children[-1]
 
-    template = kid.Template(
-        file='templates/tutorialindex.kid',
+    stream = loader.load(
+        'tutorialindex.kid'
+    ).generate(
         paths=paths,
         next = next,
         prev = prev,
         date=datetime.datetime.now().strftime( '%Y-%m-%d' ),
         version = OpenGLContext.__version__,
     )
-    data = template.serialize( output=serial )
+    data = stream.render( 'xhtml' )
     html_file = os.path.join( OUTPUT_DIRECTORY, 'index.xhtml' )
     print 'writing', html_file
     open( html_file, 'w').write( data )
 
 
 def generate( tutorial, prev=None, next=None, path=None ):
-    template = kid.Template(
-        file='templates/tutorial.kid',
+    stream = loader.load(
+        'tutorial.kid',
+    ).generate(
         tutorial = tutorial,
         date=datetime.datetime.now().isoformat(),
         path = path,
         prev=prev,
         next=next,
     )
-    data = template.serialize( output=serial )
+    data = stream.render( 'xhtml' )
     print 'writing', tutorial.html_file
     open( tutorial.html_file, 'w').write( data )
 

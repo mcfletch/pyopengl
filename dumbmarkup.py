@@ -1,6 +1,6 @@
 """Simplistic wiki-like format parsing support"""
 import re,os,sys,textwrap, datetime
-import kid, logging
+import logging
 log = logging.getLogger( __name__ )
 
 text_re = re.compile(
@@ -105,39 +105,6 @@ class Grouping( Block ):
         super( Grouping, self ).__init__(*args,**named)
         if self.children is None:
             self.children = []
-
-class TutorialPath( Grouping ):
-    """Path through a series of tutorials"""
-    def generate_children( self ):
-        first = self.children
-        for i in range( len(first)):
-            next = prev = None
-            if i > 0:
-                prev = first[i-1]
-            if i < len(first)-1:
-                next = first[i+1]
-            generate( first[i], next=next,prev=prev, path=self )
-
-class Tutorial( Grouping ):
-    html_tag = 'body'
-    html_class = 'tutorial'
-    @property
-    def title( self ):
-        """find our first title descendant"""
-        for item in self.children:
-            if isinstance( item, Commentary ):
-                for child in item.children:
-                    if isinstance( child, Title ):
-                        return child.text
-        return "No title found"
-    def set_file( self, filename ):
-        base = os.path.basename( filename )
-        self.filename = base
-        root = os.path.splitext( base )[0]
-        self.html_file = os.path.join(
-            OUTPUT_DIRECTORY, '%s.xhtml'%(root)
-        )
-        self.relative_link = '%s.xhtml'%( root, )
 
 class Title( Block ):
     html_tag = 'h1'
