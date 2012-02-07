@@ -1,5 +1,5 @@
 
-<refentry id="glDrawElementsBaseVertex">
+<refentry id="glDrawElementsInstancedBaseVertex">
     <refmeta>
         <refmetainfo>
             <copyright>
