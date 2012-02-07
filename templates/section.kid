@@ -109,13 +109,16 @@ else:
 <div py:def="format_samples( sample_set )" class="py-samples">
     <div py:for="(key,samples) in sample_set" py:strip="">
         <div class="sample-key">${key}</div>
-        <div py:strip="" py:for="sample in samples" py:replace="format_sample( sample )" />
+        <div py:strip="" py:for="sample in samples"><div py:replace="format_sample( sample )" /></div>
     </div>
 </div>
 <div py:def="format_sample( sample )" class="py-sample">
     <span class="sample-project">${sample.projectName}</span>
     <a href="${sample.url}" title="${sample.lineText}">${sample.deltaPath}</a> 
-    Lines: <span class="sample-lines">${", ".join([str(x[0]) for x in sample.positions[:20]])}<span py:if="len(sample.positions)&gt;20" py:strip="">...</span></span>
+    <?python 
+    sample_lines = ", ".join([str(x[0]) for x in sample.positions[:20]])
+    ?>
+    Lines: <span class="sample-lines">${sample_lines}<span py:if="len(sample.positions)&gt;20" py:strip="">...</span></span>
 </div>
 <head>
     <title>${section.title} : PyOpenGL ${version} ${section.package} Man Pages</title>
