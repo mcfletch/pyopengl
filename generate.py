@@ -253,10 +253,11 @@ def main():
         except Exception, err:
             err.args += (path,)
             raise
-        r = RefSect( package, ref )
-        r.process( tree )
-        ref.append( r )
-        r.get_samples( samples )
+        else:
+            r = RefSect( package, ref )
+            r.process( tree )
+            ref.append( r )
+            r.get_samples( samples )
     log.info( 'Checking cross-references' )
     ref.check_crossrefs()
     # now generate some files...
@@ -272,8 +273,9 @@ def main():
     data = stream.render('xhtml')
     open( os.path.join(OUTPUT_DIRECTORY,'index.xhtml'), 'w').write( data )
 
-    for name,section in ref.sections.items():
-        log.warn( 'Generating: %s', name )
+    for name,section in sorted(ref.sections.items()):
+        output_file = os.path.join( OUTPUT_DIRECTORY,ref.url(section))
+        log.warn( 'Generating: %s -> %s',name, output_file )
         stream = loader.load(
             'section.kid',
         ).generate(
@@ -284,7 +286,7 @@ def main():
         )
         data = stream.render('xhtml')
         open(
-            os.path.join( OUTPUT_DIRECTORY,ref.url(section)), 'w'
+            output_file, 'w'
         ).write( data )
 
     # Now store out references for things which want to do Python: refsect
