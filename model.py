@@ -21,6 +21,12 @@ class Reference( object ):
         self.constants = {}
     def append( self, section ):
         """Add the given section to our tables"""
+        if section.id != section.title:
+            log.warn( "Unmatched id/title: %s (title) %s (id)", section.title, section.id )
+        if section.id in self.sections:
+            log.warn( "Duplicate section id: %s", section.id )
+        if section.title in self.sections:
+            log.warn( "Duplicate section title: %s", section.title )
         self.sections[section.id] = section
         self.section_titles[section.title]= section
         for function in section.functions.values():
