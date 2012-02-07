@@ -6,6 +6,7 @@ def ref_name( docbook ):
         return docbook[0].text 
     else:
         return docbook.text 
+need_math_render = []
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/">
 <table py:def="nav_table()" width="100%"><tbody><tr><td align="left">
@@ -24,29 +25,28 @@ def ref_name( docbook ):
 #print docbook, docbook[:]
 approach = 'para'
 if docbook.tag.startswith( '{http://www.w3.org/1998/Math/MathML}' ):
-    approach = 'copy'
+    need_math_render.append( True )
+basetag = docbook.tag.split( "}" )[1]
+approach_set = {
+    'citerefentry':'crossref',
+    'constant':'span',
+    'informaltable': 'table',
+    'emphasis':'span',
+    'colspec':'',
+    'function':'function',
+    'inlineequation':'expand',
+    'refsect1':'expand',
+    'math':'copy',
+    'title':'heading',
+    'variablelist':'dl',
+    'term':'dt',
+    'listitem':'dd',
+    'ulink':'extref',
+    'parameter': 'paramref',
+}
+approach = approach_set.get( basetag, 'para' )
+if approach == 'copy':
     copy = ET( docbook )
-else:
-    basetag = docbook.tag.split( "}" )[1]
-    approach_set = {
-        'citerefentry':'crossref',
-        'constant':'span',
-        'informaltable': 'table',
-        'emphasis':'span',
-        'colspec':'',
-        'function':'function',
-        'inlineequation':'expand',
-        'refsect1':'expand',
-        'math':'copy',
-        'title':'heading',
-        'variablelist':'dl',
-        'term':'dt',
-        'listitem':'dd',
-        'ulink':'extref',
-        'parameter': 'paramref',
-    }
-    approach = approach_set.get( basetag, 'para' )
-
 ?>
     <div py:if="approach=='copy'" py:strip="">${copy}</div>
     <div py:if="approach=='para'" class="${basetag}">${contents(docbook)}</div>
@@ -185,8 +185,15 @@ ${nav_table()}
         <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
     </div>
 </div>
+<div class="mathjax-note" py:if="need_math_render">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax"
+        src="http://www.mathjax.org/badge.gif"
+        border="0" alt="Powered by MathJax" /></a></div>
+    <script py:if="need_math_render" type="text/javascript"
+       src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</div>
 ${nav_table()}
-<script type="text/javascript"
-   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
