@@ -1,4 +1,5 @@
 <?python
+from genshi.input import ET
 def ref_name( docbook ):
     """One section (glDrawTransformFeedbackStream) has a non-standard reference form"""
     if len(docbook):
@@ -6,7 +7,7 @@ def ref_name( docbook ):
     else:
         return docbook.text 
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://purl.org/kid/ns#">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/">
 <table py:def="nav_table()" width="100%"><tbody><tr><td align="left">
 <a id="nav-previous" py:if="section.previous" href="${ref.url(section.previous)}">Previous: ${section.previous.title}</a></td>
 <td align="center">
@@ -17,32 +18,37 @@ def ref_name( docbook ):
 </td>
 </tr></tbody></table>
 
-<div py:def="contents( docbook )" py:strip="">${docbook.text}${[convert(x) for x in docbook]}</div>
+<div py:def="contents( docbook )" py:strip="">${docbook.text}<div py:for="x in docbook" py:strip="">${convert(x)}</div></div>
 <div py:def="convert( docbook )" py:strip="">
     <?python
 #print docbook, docbook[:]
 approach = 'para'
-basetag = docbook.tag.split( "}" )[1]
-approach_set = {
-    'citerefentry':'crossref',
-    'constant':'span',
-    'informaltable': 'table',
-    'emphasis':'span',
-    'colspec':'',
-    'function':'function',
-    'inlineequation':'expand',
-    'refsect1':'expand',
-    'math':'copy',
-    'title':'heading',
-    'variablelist':'dl',
-    'term':'dt',
-    'listitem':'dd',
-    'ulink':'extref',
-    'parameter': 'paramref',
-}
-approach = approach_set.get( basetag, 'para' )
+if docbook.tag.startswith( '{http://www.w3.org/1998/Math/MathML}' ):
+    approach = 'copy'
+    copy = ET( docbook )
+else:
+    basetag = docbook.tag.split( "}" )[1]
+    approach_set = {
+        'citerefentry':'crossref',
+        'constant':'span',
+        'informaltable': 'table',
+        'emphasis':'span',
+        'colspec':'',
+        'function':'function',
+        'inlineequation':'expand',
+        'refsect1':'expand',
+        'math':'copy',
+        'title':'heading',
+        'variablelist':'dl',
+        'term':'dt',
+        'listitem':'dd',
+        'ulink':'extref',
+        'parameter': 'paramref',
+    }
+    approach = approach_set.get( basetag, 'para' )
 
 ?>
+    <div py:if="approach=='copy'" py:strip="">${copy}</div>
     <div py:if="approach=='para'" class="${basetag}">${contents(docbook)}</div>
     <span py:if="approach=='span'" class="${basetag}">${contents(docbook)}</span>
     <a class="crossref" py:if="approach=='crossref'" py:strip="not ref.get_crossref(ref_name(docbook),section=section)"
@@ -72,8 +78,7 @@ approach = approach_set.get( basetag, 'para' )
             </div>
         </div>
     </tbody></table>
-    <div py:if="approach=='expand'" py:strip="">${[convert(x) for x in docbook]}</div>
-    <div py:if="approach=='copy'" py:strip="">${docbook}</div>
+    <div py:if="approach=='expand'" py:strip=""><div py:for="x in docbook" py:strip="">${convert(x)}</div></div>
     <h2 py:if="approach=='heading'" class="${basetag}">${contents(docbook)}</h2>
     <dd py:if="approach=='dd'" class="${basetag}">${contents(docbook)}</dd>
     <dl py:if="approach=='dl'" class="${basetag}">${contents(docbook)}</dl>
@@ -154,7 +159,7 @@ ${nav_table()}
         </div>
     </div>
     <div class="section" py:for="subsect in section.discussions" id="${subsect.get('id')}">
-        ${convert(subsect)}
+        ${ convert(subsect) }
     </div>
     <div class="see-also" py:if="section.see_also">
         <h2>See Also</h2>
