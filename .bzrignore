@@ -22,3 +22,5 @@ pyui2
 visionegg
 .man?
 .samples/*
+*.~?~
+*.pkl
