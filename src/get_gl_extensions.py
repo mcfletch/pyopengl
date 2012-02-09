@@ -36,7 +36,7 @@ glGetBoolean/glGetInteger/glGetFloat/glGetDouble
     specification (.txt file) under a New Tokens header with a note
     that they can be passed to glGetBoolean will be so registered.
 """
-import urllib, os, sys, re, string, traceback, logging, textwrap
+import urllib, os, sys, re, string, traceback, logging, textwrap, keyword
 EXTENSION_HEADER_SOURCE = 'http://www.opengl.org/registry/api/glext.h'
 #ROOT_EXTENSION_SOURCE = 'http://oss.sgi.com/projects/ogl-sample/registry/'
 ROOT_EXTENSION_SOURCE = 'http://www.opengl.org/registry/specs/'
@@ -87,6 +87,8 @@ reserved_names = set((
     'with',
 ))
 
+reserved_names = set(keyword.kwlist)
+            
 class Function( Helper ):
     def __init__( self, returnType, name, signature):
         """Parse definition into our various elements"""
