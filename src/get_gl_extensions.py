@@ -78,14 +78,6 @@ class Helper( object ):
             return item()
         else:
             return item
-reserved_names = set((
-    'in',
-    'for',
-    'import',
-    'from',
-    'while',
-    'with',
-))
 
 reserved_names = set(keyword.kwlist)
             

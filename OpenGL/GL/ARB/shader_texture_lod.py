@@ -46,9 +46,9 @@ Overview (from the spec)
 	
 	    texture1DGradARB(         sampler1D sampler,
 	                              float P, float dPdx, float dPdy );
-	    texture1DProjGradARB(     sampler2D sampler,
+	    texture1DProjGradARB(     sampler1D sampler,
 	                              vec2  P, float dPdx, float dPdy );
-	    texture1DProjGradARB(     sampler2D sampler,
+	    texture1DProjGradARB(     sampler1D sampler,
 	                              vec4  P, float dPdx, float dPdy );
 	
 	    texture2DGradARB(         sampler2D sampler,
