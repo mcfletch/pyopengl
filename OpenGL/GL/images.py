@@ -12,7 +12,7 @@
         glCompressedTexSubImage2D
         glCompressedTexSubImage1D
 """
-from OpenGL.raw.GL.VERSION import GL_1_1,GL_1_2
+from OpenGL.raw.GL.VERSION import GL_1_1,GL_1_2, GL_3_0
 from OpenGL import images, arrays, wrapper, platform, constants
 import ctypes
 
@@ -29,16 +29,40 @@ images.COMPONENT_COUNTS.update( {
     GL_1_1.GL_GREEN : 1,
     GL_1_1.GL_BLUE : 1,
     GL_1_1.GL_ALPHA : 1,
+    GL_3_0.GL_RED_INTEGER : 1,
+    GL_3_0.GL_GREEN_INTEGER : 1,
+    GL_3_0.GL_BLUE_INTEGER : 1,
+    GL_3_0.GL_ALPHA_INTEGER : 1,
     GL_1_1.GL_LUMINANCE : 1,
     GL_1_1.GL_LUMINANCE_ALPHA : 2,
     GL_1_1.GL_COLOR_INDEX : 1,
     GL_1_1.GL_STENCIL_INDEX : 1,
     GL_1_1.GL_DEPTH_COMPONENT : 1,
+
     GL_1_1.GL_RGB : 3,
     GL_1_2.GL_BGR : 3,
+    GL_3_0.GL_RGB16F : 3,
+    GL_3_0.GL_RGB16I : 3,
+    GL_3_0.GL_RGB16UI : 3,
+    GL_3_0.GL_RGB32F : 3,
+    GL_3_0.GL_RGB32I : 3,
+    GL_3_0.GL_RGB32UI : 3,
+    GL_3_0.GL_RGB8I : 3,
+    GL_3_0.GL_RGB8UI : 3,
+    GL_3_0.GL_RGB9_E5 : 3,
+    GL_3_0.GL_RGB_INTEGER : 3,
 
     GL_1_1.GL_RGBA : 4,
     GL_1_2.GL_BGRA : 4,
+    GL_3_0.GL_RGBA16F : 4,
+    GL_3_0.GL_RGBA16I : 4,
+    GL_3_0.GL_RGBA16UI : 4,
+    GL_3_0.GL_RGBA32F : 4,
+    GL_3_0.GL_RGBA32I : 4,
+    GL_3_0.GL_RGBA32UI : 4,
+    GL_3_0.GL_RGBA8I : 4,
+    GL_3_0.GL_RGBA8UI : 4,
+    GL_3_0.GL_RGBA_INTEGER : 4,
 } )
 
 images.TYPE_TO_ARRAYTYPE.update( {
@@ -237,7 +261,7 @@ for suffix,type in [
         if target != GL_1_1.GL_TEXTURE_1D:
             dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
             if target != GL_1_1.GL_TEXTURE_2D:
-                dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_DEPTH ) )
+                dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_2.GL_TEXTURE_DEPTH ) )
         array = images.SetupPixelRead( format, tuple(dims), type )
         arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
         GL_1_1.glGetTexImage(
@@ -252,7 +276,7 @@ for suffix,type in [
 ##		if target != GL_1_1.GL_TEXTURE_1D:
 ##			dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
 ##			if target != GL_1_1.GL_TEXTURE_2D:
-##				dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_DEPTH ) )
+##				dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_2.GL_TEXTURE_DEPTH ) )
 ##		array = images.SetupPixelRead( format, tuple(dims), type )
 ##		arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
 ##		GL_1_1.glGetTexImage(
@@ -320,7 +344,7 @@ def glGetTexImage( target, level,format,type, outputType=str ):
     if target != GL_1_1.GL_TEXTURE_1D:
         dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
         if target != GL_1_1.GL_TEXTURE_2D:
-            dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_DEPTH ) )
+            dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_2.GL_TEXTURE_DEPTH ) )
     array = images.SetupPixelRead( format, tuple(dims), type )
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
     GL_1_1.glGetTexImage(

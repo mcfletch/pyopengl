@@ -36,6 +36,7 @@ GL_RGBA16_SNORM 0x8F9B
 GL_SIGNED_NORMALIZED 0x8F9C
 GL_PRIMITIVE_RESTART 0x8F9D
 GL_PRIMITIVE_RESTART_INDEX 0x8F9E""", globals())
+glget.addGLGetConstant( GL_TEXTURE_BINDING_RECTANGLE, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
 def glDrawArraysInstanced( mode,first,count,primcount ):pass

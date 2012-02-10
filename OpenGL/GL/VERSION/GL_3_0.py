@@ -21,3 +21,5 @@ from OpenGL.GL.ARB.map_buffer_range import *
 
 from ctypes import c_char_p
 glGetStringi.restype = c_char_p
+GL_DEPTH_BUFFER = constant.Constant( 'GL_DEPTH_BUFFER', 0x8223 )
+GL_STENCIL_BUFFER = constant.Constant( 'GL_STENCIL_BUFFER', 0x8224 )
