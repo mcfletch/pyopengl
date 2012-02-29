@@ -1,5 +1,6 @@
 """Windows-specific platform features"""
 import ctypes
+import platform
 from OpenGL.platform import ctypesloader, baseplatform
 import sys
 
