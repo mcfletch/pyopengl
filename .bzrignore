@@ -37,3 +37,4 @@ src/gle-3.1.0*
 src/gl.spec
 src/glext.h*
 OpenGL_accelerate/*.so
+src/glut-*-bin*

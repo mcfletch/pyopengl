@@ -9,6 +9,9 @@ if sys.hexversion < 0x2070000:
 else:
     vc = 'vc9'
 
+def _size():
+    return platform.architecture()[0].strip( 'bits' )
+size = _size()
 
 class Win32Platform( baseplatform.BasePlatform ):
     """Win32-specific platform implementation"""
@@ -29,7 +32,7 @@ class Win32Platform( baseplatform.BasePlatform ):
         GLU = None
 
     GLUT = None
-    for possible in ('glut32','freeglut32','freeglut'):
+    for possible in ('glut%s'%(size,),'freeglut%s'%(size,),'freeglut'):
         # load first-up of the possible names...
         try:
             GLUT = ctypesloader.loadLibrary(
@@ -45,7 +48,7 @@ class Win32Platform( baseplatform.BasePlatform ):
         pass
 
     GLE = None
-    for libName in ('opengle32.%s'%(vc,),'gle32'):
+    for libName in ('opengle%s.%s'%(size,vc,),'gle%s'%(size,)):
         try:
             GLE = ctypesloader.loadLibrary( ctypes.cdll, libName )
             GLE.FunctionType = ctypes.CFUNCTYPE
