@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-"""Build the GLE distribution
+"""Build the (Open)GLE distribution
 
 Start a VC shell:
     
@@ -10,6 +10,10 @@ Then run this script with the appropriate (32-bit or 64-bit python):
 
     c:\python27-32\python.exe buildgledll.py
     c:\python27-64\python.exe buildgledll.py
+
+Note: the name "opengle" is required because someone issues DMCA takedown orders against anything named "gle.dll"
+despite the name GLE referring to the GLE project for a very long time (they took PyOpenGL offline for a while
+due to such a takedown notice).
 """
 import sys, os, subprocess, requests, logging, platform, shutil, glob
 log = logging.getLogger( 'buildgle' )
@@ -18,6 +22,16 @@ DOWNLOAD_URL = 'http://downloads.sourceforge.net/project/gle/gle/gle-3.1.0/gle-3
 GLE_VERSION = '3.1.0'
 GLE_SOURCE_DIR = 'gle-%(GLE_VERSION)s'%globals()
 TAR_FILE = '%(GLE_SOURCE_DIR)s.tar.gz'%globals()
+EXPORTS = """
+gleExtrusion gleGetNumSides gleSetJoinStyle glePolyCylinder gleSpiral gleSetNumSides uview_direction gleScrew
+gleHelicoid gleToroid gleExtrusion gleTextureMode gleSuperExtrusion gleLathe gleGetJoinStyle glePolyCone gleTwistExtrusion 
+urot_omega rot_about_axis urot_prince rot_prince urot_about_axis rot_omega rot_axis uviewpoint urot_axis"""
+
+if sys.hexversion < 0x2070000:
+    VC = 'vc7'
+# TODO: add Python 3.x compiler compatibility...
+else:
+    VC = 'vc9'
 
 def download_and_unpack():
     if not os.path.exists( TAR_FILE ):
@@ -42,13 +56,16 @@ def build():
         for file in glob.glob( '*%(suffix)s.dll'%locals() ):
             os.remove( file )
 
-        outfile = 'opengle%(suffix)s.dll'%locals()
+        vc = VC
+        outfile = 'opengle%(suffix)s.%(vc)s.dll'%locals()
+        target = os.path.join( current, '..', 'OpenGL','DLLS', outfile )
+        exports = " ".join([ '/EXPORT:%s'%(x) for x in EXPORTS.split() if x])
 
         subprocess.check_call( 'cl -c /D"WIN32" /D "_WINDLL" /Gd /MD *.c' )
-        subprocess.check_call( 'link /EXPORT:gleExtrusion /EXPORT:gleGetNumSides /EXPORT:gleSetJoinStyle /EXPORT:glePolyCylinder /EXPORT:gleSpiral /EXPORT:gleSetNumSides /EXPORT:uview_direction /EXPORT:gleScrew /EXPORT:gleHelicoid /EXPORT:gleToroid /EXPORT:urot_omega /EXPORT:rot_about_axis /EXPORT:gleExtrusion /EXPORT:gleTextureMode /EXPORT:urot_prince /EXPORT:rot_prince /EXPORT:gleSuperExtrusion /EXPORT:urot_about_axis /EXPORT:rot_omega /EXPORT:gleLathe /EXPORT:gleGetJoinStyle /EXPORT:glePolyCone /EXPORT:rot_axis /EXPORT:uviewpoint /EXPORT:gleTwistExtrusion /EXPORT:urot_axis /LIBPATH:"C:\Program Files\Microsoft Platform SDK\Lib" /DLL /OUT:%(outfile)s opengl32.lib glu32.lib *.obj'%locals() )
+        subprocess.check_call( 'link  /LIBPATH:"C:\Program Files\Microsoft Platform SDK\Lib" %(exports)s /DLL /OUT:%(outfile)s opengl32.lib glu32.lib *.obj'%locals() )
 
-        shutil.copyfile( outfile, os.path.join( current, '..', 'OpenGL','DLLS', outfile ))
-        print 'Created file %(outfile)s in OpenGL/DLLS directory'%locals()
+        shutil.copyfile( outfile, target )
+        print 'Created file %(target)s'%locals()
         
     finally:
         os.chdir( current )
@@ -60,19 +77,3 @@ def main():
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
     main()
-
-"""
-;REM Batch file to compile GLE as a DLL using Toolkit compiler
-;REM Copy to the GLE source directory, i.e.:
-;REM 
-;REM 	copy buildgledll.bat \csrc\gle-3.1.0\src\
-;REM 	vc7.bat
-;REM 	buildgledll.bat
-;REM 
-;REM  Now put the DLL somewhere useful, such as \winnt\system32
-;REM 
-;REM 	cp gle32.dll \WINNT\system32
-;REM 
-;REM  Though realistically, we want to package it for regular users
-;REM  Download URL: http://downloads.sourceforge.net/project/gle/gle/gle-3.1.0/gle-3.1.0.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fgle%2F&ts=1315332658&use_mirror=voxel
-"""
