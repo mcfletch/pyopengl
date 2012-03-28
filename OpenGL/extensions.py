@@ -9,7 +9,7 @@ import OpenGL as root
 import sys
 import logging
 log = logging.getLogger( 'OpenGL.extensions' )
-VERSION_PREFIX = 'GL_VERSION_GL_'
+VERSION_PREFIX = as_8_bit('GL_VERSION_GL_')
 CURRENT_GL_VERSION = None
 AVAILABLE_GL_EXTENSIONS = []
 AVAILABLE_GLU_EXTENSIONS = []
@@ -89,7 +89,7 @@ def getGLVersion( ):
 def hasGLExtension( specifier ):
     """Given a string specifier, check for extension being available"""
     global AVAILABLE_GL_EXTENSIONS
-    specifier = specifier.replace(as_8_bit('.'),as_8_bit('_'))
+    specifier = as_8_bit(specifier).replace(as_8_bit('.'),as_8_bit('_'))
     if specifier.startswith( VERSION_PREFIX ):
         specifier = [
             int(x)
