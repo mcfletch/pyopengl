@@ -2,6 +2,7 @@
 """
 import ctypes
 from OpenGL.platform import ctypesloader
+from OpenGL._bytes import as_8_bit
 import sys
 from OpenGL import _configflags
 from OpenGL import logs, MODULE_ANNOTATIONS
@@ -139,7 +140,7 @@ class BasePlatform( object ):
         if extension and not self.EXTENSIONS_USE_BASE_FUNCTIONS:
             # what about the VERSION values???
             if self.checkExtension( extension ):
-                pointer = self.getExtensionProcedure( functionName )
+                pointer = self.getExtensionProcedure( as_8_bit(functionName) )
                 if pointer:
                     func = self.functionTypeFor( dll )(
                         resultType,
