@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 """Builds accelleration functions for PyOpenGL
 """
-from distutils.core import setup,Extension
+try:
+    from setuptools import setup,Extension
+except ImportError, err:
+    from distutils.core import setup,Extension
 try:
     from Cython.Distutils import build_ext
 except ImportError:
