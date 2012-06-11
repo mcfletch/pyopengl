@@ -107,7 +107,8 @@ def hasGLExtension( specifier ):
                 AVAILABLE_GL_EXTENSIONS[:] = glGetString( GL_EXTENSIONS ).split()
             except (AttributeError, error.GLError), err:
                 # OpenGL 3.0 deprecates glGetString( GL_EXTENSIONS )
-                from OpenGL.GL import GL_NUM_EXTENSIONS, glGetStringi, glGetIntegerv
+                from OpenGL.GL.VERSION.GL_3_0 import GL_NUM_EXTENSIONS, glGetStringi
+                from OpenGL.GL import glGetIntegerv
                 count = glGetIntegerv( GL_NUM_EXTENSIONS )
                 for i in range( count ):
                     extension = glGetStringi( GL_EXTENSIONS, i )
@@ -151,12 +152,13 @@ class _Alternate( LateBind ):
             frame = sys._getframe().f_back
             if frame and frame.f_back and '__name__' in frame.f_back.f_globals:
                 self.__module__ = frame.f_back.f_globals['__name__']
-    def __nonzero__( self ):
+    def __bool__( self ):
         from OpenGL import error
         try:
             return bool( self.getFinalCall())
         except error.NullFunctionError, err:
             return False
+    __nonzero__ = __bool__ # Python 2.6 compatibility
     def finalise( self ):
         """Call, doing a late lookup and bind to find an implementation"""
         for alternate in self._alternatives:
