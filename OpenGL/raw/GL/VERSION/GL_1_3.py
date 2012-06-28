@@ -83,7 +83,7 @@ glget.addGLGetConstant( GL_COMPRESSED_TEXTURE_FORMATS, (1,) )
 @_p.types(None,_cs.GLenum)
 def glActiveTexture( texture ):pass
 @_f
-@_p.types(None,_cs.GLclampf,_cs.GLboolean)
+@_p.types(None,_cs.GLfloat,_cs.GLboolean)
 def glSampleCoverage( value,invert ):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLsizei,ctypes.c_void_p)

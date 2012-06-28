@@ -8,7 +8,7 @@ def _f( function ):
 _p.unpack_constants( """GL_SAMPLE_SHADING_ARB 0x8C36
 GL_MIN_SAMPLE_SHADING_VALUE_ARB 0x8C37""", globals())
 @_f
-@_p.types(None,_cs.GLclampf)
+@_p.types(None,_cs.GLfloat)
 def glMinSampleShadingARB( value ):pass
 
 

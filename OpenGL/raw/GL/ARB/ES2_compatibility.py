@@ -18,7 +18,8 @@ GL_SHADER_COMPILER 0x8DFA
 GL_NUM_SHADER_BINARY_FORMATS 0x8DF9
 GL_MAX_VERTEX_UNIFORM_VECTORS 0x8DFB
 GL_MAX_VARYING_VECTORS 0x8DFC
-GL_MAX_FRAGMENT_UNIFORM_VECTORS 0x8DFD""", globals())
+GL_MAX_FRAGMENT_UNIFORM_VECTORS 0x8DFD
+GL_RGB565 0x8D62""", globals())
 @_f
 @_p.types(None,)
 def glReleaseShaderCompiler(  ):pass
@@ -29,10 +30,10 @@ def glShaderBinary( count,shaders,binaryformat,binary,length ):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray,arrays.GLintArray)
 def glGetShaderPrecisionFormat( shadertype,precisiontype,range,precision ):pass
 @_f
-@_p.types(None,_cs.GLclampf,_cs.GLclampf)
+@_p.types(None,_cs.GLfloat,_cs.GLfloat)
 def glDepthRangef( n,f ):pass
 @_f
-@_p.types(None,_cs.GLclampf)
+@_p.types(None,_cs.GLfloat)
 def glClearDepthf( d ):pass
 
 

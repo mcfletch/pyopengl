@@ -17,7 +17,7 @@ GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW 0x900D
 GL_INT_SAMPLER_CUBE_MAP_ARRAY 0x900E
 GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY 0x900F""", globals())
 @_f
-@_p.types(None,_cs.GLclampf)
+@_p.types(None,_cs.GLfloat)
 def glMinSampleShading( value ):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)

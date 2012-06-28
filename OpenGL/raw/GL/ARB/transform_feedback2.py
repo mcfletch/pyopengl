@@ -6,8 +6,8 @@ EXTENSION_NAME = 'GL_ARB_transform_feedback2'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_transform_feedback2',False)
 _p.unpack_constants( """GL_TRANSFORM_FEEDBACK 0x8E22
-GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED 0x8E23
-GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE 0x8E24
+GL_TRANSFORM_FEEDBACK_PAUSED 0x8E23
+GL_TRANSFORM_FEEDBACK_ACTIVE 0x8E24
 GL_TRANSFORM_FEEDBACK_BINDING 0x8E25""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)

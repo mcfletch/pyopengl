@@ -56,7 +56,7 @@ glget.addGLGetConstant( GL_SMOOTH_LINE_WIDTH_RANGE, (2,) )
 glget.addGLGetConstant( GL_SMOOTH_LINE_WIDTH_GRANULARITY, (1,) )
 glget.addGLGetConstant( GL_ALIASED_LINE_WIDTH_RANGE, (2,) )
 @_f
-@_p.types(None,_cs.GLclampf,_cs.GLclampf,_cs.GLclampf,_cs.GLclampf)
+@_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
 def glBlendColor( red,green,blue,alpha ):pass
 @_f
 @_p.types(None,_cs.GLenum)
