@@ -33,8 +33,9 @@ class Win32Platform( baseplatform.BasePlatform ):
         GLU = None
 
     GLUT = None
-    for possible in ('glut%s'%(size,),'freeglut%s'%(size,),'freeglut'):
-        # load first-up of the possible names...
+    for possible in ('freeglut%s'%(size,),'freeglut', 'glut%s'%(size,)):
+        # Prefer FreeGLUT if the user has installed it, fallback to the included 
+        # GLUT if it is installed
         try:
             GLUT = ctypesloader.loadLibrary(
                 ctypes.windll, possible, mode = ctypes.RTLD_GLOBAL
