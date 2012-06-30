@@ -226,7 +226,7 @@ cdef class ArrayDatatype:
         )
         
         
-    def dimensions( self, value ):
+    def dimensions( self, value, typeCode=None ):
         """Given a data-value, get the dimensions (assumes full structure info)"""
         if typeCode is None:
             typeCode = self.typeConstant
@@ -237,7 +237,7 @@ cdef class ArrayDatatype:
             )
         return handler.dimensions( value )
     
-    def arrayByteCount( self, value ):
+    def arrayByteCount( self, value, typeCode=None ):
         """Given a data-value, try to determine number of bytes it's final form occupies
         
         For most data-types this is arraySize() * atomic-unit-size
