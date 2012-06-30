@@ -63,26 +63,26 @@ cdef class NumpyHandler(FormatHandler):
 					working,
 				)
 			)
-		return c_void_p(<unsigned long> (working.data))
+		return c_void_p(<size_t> (working.data))
 	
 	cdef c_dataPointer( self, object instance ):
 		"""Retrieve data-pointer directly"""
-		return <unsigned long> (<np.ndarray>self.c_check_array( instance )).data 
+		return <size_t> (<np.ndarray>self.c_check_array( instance )).data 
 	cdef c_zeros( self, object dims, object typeCode ):
 		"""Create an array initialized to zeros"""
 		cdef np.ndarray c_dims
 		try:
 			c_dims = PyArray_ContiguousFromAny( 
-				dims, np.NPY_ULONG, 1,1 
+				dims, np.NPY_INTP, 1,1 
 			)
 		except (ValueError,TypeError), err:
 			dims = (int(dims),)
 			c_dims = PyArray_ContiguousFromAny( 
-				dims, np.NPY_ULONG, 1,1 
+				dims, np.NPY_INTP, 1,1 
 			)
 		cdef np.dtype typecode = self.typeCodeToDtype( typeCode )
 		Py_INCREF( typecode )
-		return PyArray_Zeros( c_dims.shape[0], <np.Py_intptr_t *>c_dims.data, typecode, 0 )
+		return PyArray_Zeros( c_dims.shape[0], <np.npy_intp *>c_dims.data, typecode, 0 )
 	cdef c_arraySize( self, object instance, object typeCode ):
 		"""Retrieve array size reference"""
 		return (<np.ndarray>self.c_check_array( instance )).size
