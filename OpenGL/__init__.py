@@ -201,11 +201,15 @@ PlatformPlugin( 'posix', 'OpenGL.platform.glx.GLXPlatform' )
 PlatformPlugin( 'osmesa', 'OpenGL.platform.osmesa.OSMesaPlatform')
 
 FormatHandler( 'none', 'OpenGL.arrays.nones.NoneHandler' )
+
 import sys
 if sys.version_info[0] < 3:
     FormatHandler( 'str', 'OpenGL.arrays.strings.StringHandler' )
+    FormatHandler( 'unicode', 'OpenGL.arrays.strings.UnicodeHandler' )
 else:
     FormatHandler( 'bytes', 'OpenGL.arrays.strings.StringHandler' )
+    FormatHandler( 'str', 'OpenGL.arrays.strings.UnicodeHandler' )
+    
 FormatHandler( 'list', 'OpenGL.arrays.lists.ListHandler', ['__builtin__.list','__builtin__.tuple'] )
 FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler' )
 FormatHandler(

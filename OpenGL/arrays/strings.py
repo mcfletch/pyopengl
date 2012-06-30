@@ -3,7 +3,8 @@
 from OpenGL import constants
 from OpenGL.arrays import formathandler
 import ctypes
-from OpenGL._bytes import bytes
+from OpenGL import _bytes
+from OpenGL._configflags import ERROR_ON_COPY
 
 def dataPointer( value, typeCode=None ):
     return ctypes.cast(ctypes.c_char_p(value),
@@ -11,7 +12,7 @@ def dataPointer( value, typeCode=None ):
 
 class StringHandler( formathandler.FormatHandler ):
     """String-specific data-type handler for OpenGL"""
-    HANDLED_TYPES = (bytes, )
+    HANDLED_TYPES = (_bytes.bytes, )
     @classmethod
     def from_param( cls, value, typeCode=None ):
         return ctypes.c_void_p( dataPointer( value ) )
@@ -49,6 +50,22 @@ class StringHandler( formathandler.FormatHandler ):
         raise TypeError(
             """Cannot calculate dimensions for a String data-type"""
         )
+
+class UnicodeHandler( StringHandler ):
+    HANDLED_TYPES = (_bytes.unicode,)
+    @classmethod
+    def from_param( cls, value ):
+        # TODO: raise CopyError if the flag is set!
+        converted = _bytes.as_8_bit( value )
+        result = StringHandler.from_param(  )
+        if converted is not value:
+            if ERROR_ON_COPY:
+                raise error.CopyError(
+                    """Unicode string passed, cannot copy with ERROR_ON_COPY set, please use 8-bit strings"""
+                )
+            result._temporary_array_ = converted 
+        return result
+
 
 BYTE_SIZES = {
     constants.GL_DOUBLE: ctypes.sizeof( constants.GLdouble ),
