@@ -17,8 +17,8 @@ class _CheckContext( object ):
         else:
             self.__dict__[key] = value 
     def __repr__( self ):
-        if hasattr( self.func, '__doc__' ):
-            return self.func.__doc__ 
+        if getattr( self.func, '__doc__', None ):
+            return self.func.__doc__    
         else:
             return repr( self.func )
     def __getattr__( self, key ):
