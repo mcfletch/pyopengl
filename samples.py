@@ -141,6 +141,10 @@ checkouts = [
         'git://github.com/visionegg/visionegg.git',
         dirname = 'visionegg',
     ),
+    GITSource(
+        'git://github.com/tito/pymt.git',
+        dirname = 'pymt',
+    ),
     SVNSource(
         'http://svn.gnome.org/svn/gnome-games/trunk/glchess',
         dirname = 'glchess',
@@ -172,6 +176,10 @@ checkouts = [
     HgSource(
         'https://bitbucket.org/tartley/gloopy',
         dirname = 'gloopy',
+    ),
+    HgSource(
+        'https://code.google.com/p/visvis/',
+        dirname = 'visvis',
     ),
     # pymol # not pyopengl AFAICS
     # {LGPL} mirra # no online view of code AFAICS
