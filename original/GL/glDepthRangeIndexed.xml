@@ -19,8 +19,8 @@
             <funcprototype>
                 <funcdef>void <function>glDepthRangeIndexed</function></funcdef>
                 <paramdef>GLuint <parameter>index</parameter></paramdef>
-                <paramdef>GLclampd <parameter>nearVal</parameter></paramdef>
-                <paramdef>GLclampd <parameter>farVal</parameter></paramdef>
+                <paramdef>GLdouble <parameter>nearVal</parameter></paramdef>
+                <paramdef>GLdouble <parameter>farVal</parameter></paramdef>
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
@@ -112,6 +112,14 @@
             </mml:math></inlineequation>
             are acceptable.
         </para>
+        <para>
+            The type of the <parameter>nearVal</parameter> and
+            <parameter>farVal</parameter> parameters was changed from
+            GLclampd to GLdouble. This change is transparent to user
+            code and is described in detail on the
+            <citerefentry><refentrytitle>removedTypes</refentrytitle></citerefentry>
+            page.
+        </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
         <para>
@@ -131,7 +139,8 @@
             <citerefentry><refentrytitle>glDepthRangeArray</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glPolygonOffset</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glViewportArray</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glViewport</refentrytitle></citerefentry>
+            <citerefentry><refentrytitle>glViewport</refentrytitle></citerefentry>,
+            <citerefentry><refentrytitle>removedTypes</refentrytitle></citerefentry>
         </para>
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>

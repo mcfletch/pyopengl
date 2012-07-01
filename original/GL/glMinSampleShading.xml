@@ -18,7 +18,7 @@
         <funcsynopsis>
             <funcprototype>
                 <funcdef>void <function>glMinSampleShading</function></funcdef>
-                <paramdef>GLclampf <parameter>value</parameter></paramdef>
+                <paramdef>GLfloat <parameter>value</parameter></paramdef>
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
@@ -54,6 +54,15 @@
             used to select that subset of the fragment's samples is implementation dependent.
         </para>
     </refsect1>
+    <refsect1 id="notes"><title>Notes</title>
+        <para>
+            The type of the <parameter>value</parameter> parameter was
+            changed from GLclampf to GLfloat. This change is transparent
+            to user code and is described in detail on the
+            <citerefentry><refentrytitle>removedTypes</refentrytitle></citerefentry>
+            page.
+        </para>
+    </refsect1>
     <refsect1 id="errors"><title>Errors</title>
         <para>
             None.
@@ -65,6 +74,11 @@
         </para>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_SAMPLES</constant>.
+        </para>
+    </refsect1>
+    <refsect1 id="seealso"><title>See Also</title>
+        <para>
+            <citerefentry><refentrytitle>removedTypes</refentrytitle></citerefentry>
         </para>
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>

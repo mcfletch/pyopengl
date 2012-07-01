@@ -65,6 +65,7 @@
         <para>
             <function>glMapBufferRange</function> maps all or part of the data store of a buffer object into the client's address
             space. <parameter>target</parameter> specifies the target to which the buffer is bound and must be one of <constant>GL_ARRAY_BUFFER</constant>,
+            <constant>GL_ATOMIC_COUNTER_BUFFER</constant>,
             <constant>GL_COPY_READ_BUFFER</constant>, <constant>GL_COPY_WRITE_BUFFER</constant>, <constant>GL_ELEMENT_ARRAY_BUFFER</constant>,
             <constant>GL_PIXEL_PACK_BUFFER</constant>, <constant>GL_PIXEL_UNPACK_BUFFER</constant>, <constant>GL_TEXTURE_BUFFER</constant>,
             <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant>, or <constant>GL_UNIFORM_BUFFER</constant>. <parameter>offset</parameter> and
@@ -143,6 +144,18 @@
         </para>
         <para>
             If an error occurs, <function>glMapBufferRange</function> returns a <code>NULL</code> pointer.
+            If no error occurs, the returned pointer will reflect an alignment of at least <constant>GL_MIN_MAP_BUFFER_ALIGNMENT</constant>
+            basic machine units. The value of <constant>GL_MIN_MAP_BUFFER_ALIGNMENT</constant> can be retrieved by calling
+            <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with <parameter>pname</parameter> set to
+            <constant>GL_MIN_MAP_BUFFER_ALIGNMENT</constant> and must be a power of two that is at least 64. Subtracting <parameter>offset</parameter>
+            from this returned pointed will always produce a multiple of <constant>GL_MIN_MAP_BUFFER_ALINMENT</constant>.
+        </para>
+    </refsect1>
+    <refsect1 id="notes"><title>Notes</title>
+        <para>
+            Alignment of the returned pointer is guaranteed only if the version
+            of the GL version is 4.2 or greater. Also, the <constant>GL_ATOMIC_COUNTER_BUFFER</constant>
+            target is accepted only if the GL version is 4.2 or greater.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
@@ -193,7 +206,7 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010 Khronos Group. 
+            Copyright <trademark class="copyright"></trademark> 2010-2011 Khronos Group. 
             This material may be distributed subject to the terms and conditions set forth in 
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.

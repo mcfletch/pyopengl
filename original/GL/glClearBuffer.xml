@@ -115,7 +115,7 @@
         <para>
             If <parameter>buffer</parameter> is <constant>GL_STENCIL</constant>, <parameter>drawBuffer</parameter> must be zero, and <parameter>value</parameter>
             points to a single value to clear the stencil buffer to. Only <function>glClearBufferiv</function> should be used to clear
-            stencil buffers. Masing and type conversion are performed in the same fashion as
+            stencil buffers. Masking and type conversion are performed in the same fashion as
             <citerefentry><refentrytitle>glClearStencil</refentrytitle></citerefentry>.
         </para>
         <para>

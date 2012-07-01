@@ -702,15 +702,18 @@
         <para>
             If <parameter>pname</parameter> is <constant>GL_UNIFORM_OFFSET</constant>, then an array of uniform buffer
             offsets is returned. For uniforms in a named uniform block, the returned value will be its offset, in basic
-            machine units, relative to the beginning of the uniform block in the buffer object data store. For uniforms
-            in the default uniform block, -1 will be returned.
+            machine units, relative to the beginning of the uniform block in the buffer object data store.
+            For atomic counter uniforms, the returned value will be its offset relative to the beginning of its active
+            atomic counter buffer.
+            For all other uniforms, -1 will be returned.
         </para>
         <para>
             If <parameter>pname</parameter> is <constant>GL_UNIFORM_ARRAY_STRIDE</constant>, then an array identifying the
-            stride between elements, in basic machine units, of each of the uniforms specified by the corresponding array of
-            <parameter>uniformIndices</parameter> is returned.  The stride of a uniform associated with the default uniform
-            block is -1.  Note that this information only makes sense for uniforms that are arrays. For uniforms that are
-            not arrays, but are declared in a named uniform block, an array stride of zero is returned.
+            stride between elements of each of the uniforms specified by the corresponding array of
+            <parameter>uniformIndices</parameter> is returned.
+            For uniforms in named uniform blocks and for uniforms declared as atomic counters, the stride is the difference,
+            in basic machine units, of consecutive elements in an array, or zero for uniforms not declared as an array.
+            For all other uniforms, a stride of -1 will be returned.
         </para>
         <para>
             If <parameter>pname</parameter> is <constant>GL_UNIFORM_MATRIX_STRIDE</constant>, then an array identifying the stride
@@ -726,6 +729,13 @@
             value of one indicates a row-major matrix, and a value of zero indicates a column-major matrix, a matrix in the default
             uniform block, or a non-matrix.
         </para>
+        <para>
+            If <parameter>pname</parameter> is <constant>GL_UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX</constant>, then an array
+            identifying the active atomic counter buffer index of each of the uniforms specified by the corresponding array
+            of <parameter>uniformIndices</parameter> is returned. For uniforms other than atomic counters, the returned buffer
+            index is -1. The returned indices may be passed to <citerefentry><refentrytitle>glGetActiveAtomicCounterBufferiv</refentrytitle></citerefentry>
+            to query the properties of the associated buffer, and not necessarily the binding point specified in the uniform declaration.
+        </para>
     </refsect1>
     <refsect1 id="notes"><title>Notes</title>
         <para>
@@ -737,6 +747,10 @@
             <constant>GL_DOUBLE_MAT3x4</constant>, <constant>GL_DOUBLE_MAT4x2</constant>,
             and <constant>GL_DOUBLE_MAT4x3</constant> are only available if the GL
             version is 4.1 or higher.
+        </para>
+        <para>
+            <constant>GL_UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX</constant> is only accepted by <parameter>pname</parameter>
+            if the GL version is 4.2 or higher.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
