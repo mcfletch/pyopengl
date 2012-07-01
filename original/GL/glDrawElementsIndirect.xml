@@ -71,8 +71,8 @@
         <para>
             <function>glDrawElementsIndirect</function> specifies multiple indexed geometric primitives
             with very few subroutine calls. <function>glDrawElementsIndirect</function> behaves
-            similarly to <citerefentry><refentrytitle>glDrawElementsInstancedBaseVertex</refentrytitle></citerefentry>,
-            execpt that the parameters to <citerefentry><refentrytitle>glDrawElementsInstancedBaseVertex</refentrytitle></citerefentry>
+            similarly to <citerefentry><refentrytitle>glDrawElementsInstancedBaseVertexBaseInstance</refentrytitle></citerefentry>,
+            execpt that the parameters to <citerefentry><refentrytitle>glDrawElementsInstancedBaseVertexBaseInstance</refentrytitle></citerefentry>
             are stored in memory at the address given by <parameter>indirect</parameter>.
         </para>
         <para>
@@ -83,7 +83,7 @@
         uint  primCount;
         uint  firstIndex;
         uint  baseVertex;
-        uint  reservedMustBeZero;
+        uint  baseInstance;
     } DrawElementsIndirectCommand;]]></programlisting>
         <para>
             <function>glDrawElementsIndirect</function> is equivalent to:
@@ -91,12 +91,13 @@
 <programlisting><![CDATA[    void glDrawElementsIndirect(GLenum mode, GLenum type, const void * indirect)
     {
         const DrawElementsIndirectCommand *cmd  = (const DrawElementsIndirectCommand *)indirect;
-        glDrawElementsInstancedBaseVertex(mode,
-                                          cmd->count,
-                                          type,
-                                          cmd->firstIndex + size-of-type,
-                                          cmd->primCount,
-                                          cmd->baseVertex);
+        glDrawElementsInstancedBaseVertexBaseInstance(mode,
+                                                      cmd->count,
+                                                      type,
+                                                      cmd->firstIndex + size-of-type,
+                                                      cmd->primCount,
+                                                      cmd->baseVertex,
+                                                      cmd->baseInstance);
     }]]></programlisting>
         </para>
         <para>
@@ -117,6 +118,14 @@
             Vertex attributes that are modified by <function>glDrawElementsIndirect</function> have an
             unspecified value after <function>glDrawElementsIndirect</function> returns. Attributes that aren't
             modified remain well defined.
+        </para>
+    </refsect1>
+    <refsect1 id="notes"><title>Notes</title>
+        <para>
+            The <parameter>baseInstance</parameter> member of the <parameter>DrawElementsIndirectCommand</parameter>
+            structure is defined only if the GL version is 4.2 or greater. For versions of the GL less than 4.2,
+            this parameter is present but is reserved and should be set to zero. On earlier versions of the GL,
+            behavior is undefined if it is non-zero.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>

@@ -37,9 +37,8 @@
                     <constant>GL_FRONT</constant>,
                     <constant>GL_BACK</constant>,
                     <constant>GL_LEFT</constant>,
-                    <constant>GL_RIGHT</constant>, and
-                    <constant>GL_AUX</constant><emphasis>i</emphasis>,
-                    where <emphasis>i</emphasis> is between 0 and the value of <constant>GL_AUX_BUFFERS</constant> minus 1.
+                    <constant>GL_RIGHT</constant>, and the constants
+                    <constant>GL_COLOR_ATTACHMENT<emphasis>i</emphasis></constant>.
                 </para>
             </listitem>
         </varlistentry>
@@ -49,11 +48,9 @@
         <para>
             <function>glReadBuffer</function> specifies a color buffer as the source for subsequent
             <citerefentry><refentrytitle>glReadPixels</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glCopyTexImage1D</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glCopyTexImage2D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glCopyTexSubImage1D</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glCopyTexSubImage2D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glCopyTexSubImage3D</refentrytitle></citerefentry>, and
-            <citerefentry><refentrytitle>glCopyPixels</refentrytitle></citerefentry> commands.
+            <citerefentry><refentrytitle>glCopyTexSubImage1D</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glCopyTexSubImage2D</refentrytitle></citerefentry>, and
+            <citerefentry><refentrytitle>glCopyTexSubImage3D</refentrytitle></citerefentry> commands.
             <parameter>mode</parameter> accepts one of twelve or more predefined values.
-            (<constant>GL_AUX0</constant> through <constant>GL_AUX3</constant> are always defined.)
             In a fully configured system,
             <constant>GL_FRONT</constant>,
             <constant>GL_LEFT</constant>, and
@@ -62,6 +59,9 @@
             <constant>GL_RIGHT</constant> name the front right buffer, and
             <constant>GL_BACK_LEFT</constant> and
             <constant>GL_BACK</constant> name the back left buffer.
+            Further more, the constants <constant>GL_COLOR_ATTACHMENT<emphasis>i</emphasis></constant> may be used to indicate the
+            <emphasis>i</emphasis><superscript>th</superscript> color attachment where <emphasis>i</emphasis> ranges from zero to the
+            value of <constant>GL_MAX_COLOR_ATTACHMENTS</constant> minus one.
         </para>
         <para>
             Nonstereo double-buffered configurations have only a front left and a
@@ -84,11 +84,6 @@
             <constant>GL_INVALID_OPERATION</constant> is generated if <parameter>mode</parameter> specifies a buffer
             that does not exist.
         </para>
-        <para>
-            <constant>GL_INVALID_OPERATION</constant> is generated if <function>glReadBuffer</function>
-            is executed between the execution of <citerefentry><refentrytitle>glBegin</refentrytitle></citerefentry>
-            and the corresponding execution of <citerefentry><refentrytitle>glEnd</refentrytitle></citerefentry>.
-        </para>
     </refsect1>
     <refsect1 id="associatedgets"><title>Associated Gets</title>
         <para>
@@ -97,7 +92,6 @@
     </refsect1>
     <refsect1 id="seealso"><title>See Also</title>
         <para>
-            <citerefentry><refentrytitle>glCopyPixels</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glCopyTexImage1D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glCopyTexImage2D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glCopyTexSubImage1D</refentrytitle></citerefentry>,
@@ -109,8 +103,9 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. This document is licensed under the SGI
+            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"></trademark> 2011 Khronos Group.
+            This document is licensed under the SGI
             Free Software B License. For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
         </para>

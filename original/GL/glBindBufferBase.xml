@@ -31,7 +31,8 @@
             <listitem>
                 <para>
                     Specify the target of the bind operation. <parameter>target</parameter> must be
-                    either <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant> or <constant>GL_UNIFORM_BUFFER</constant>.
+                    one of <constant>GL_ATOMIC_COUNTER_BUFFER</constant>,
+                    <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant> or <constant>GL_UNIFORM_BUFFER</constant>.
                 </para>
             </listitem>
         </varlistentry>
@@ -75,6 +76,7 @@
     <refsect1 id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not
+            <constant>GL_ATOMIC_COUNTER_BUFFER</constant>,
             <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant> or <constant>GL_UNIFORM_BUFFER</constant>.
         </para>
         <para>
@@ -97,7 +99,7 @@
         </para>
     </refsect1>    <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010 Khronos Group. 
+            Copyright <trademark class="copyright"></trademark> 2010-2011 Khronos Group. 
             This material may be distributed subject to the terms and conditions set forth in 
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
