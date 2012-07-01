@@ -16,7 +16,6 @@ def ensure_sources( ):
         
         if not os.path.isdir( target ):
             os.system( "svn co --username anonymous --password anonymous %(source)s %(target)s"%locals())
-            return True
         else:
             cwd = os.getcwd()
             try:
@@ -25,7 +24,6 @@ def ensure_sources( ):
                 os.system( command )
             finally:
                 os.chdir( cwd )
-            return False 
 
 def package_name( name ):
     if name.startswith( 'glX' ):
