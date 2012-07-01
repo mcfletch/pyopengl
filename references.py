@@ -72,6 +72,7 @@ RAWSVN = '%(baseURL)s/%(deltaPath)s'
 VIEWSVN = '%(baseURL)s/%(deltaPath)s?view=markup'
 LOGGERHEAD = '%(baseURL)s/view/head:/%(deltaPath)s'
 GOOGLECODE = '%(baseURL)s/source/browse/trunk/%(deltaPath)s'
+GOOGLECODE_HG = '%(baseURL)s/source/browse/%(deltaPath)s'
 GITHUB = '%(baseURL)s/blob/master/%(deltaPath)s'
 BITBUCKET = '%(baseURL)s/src/tip/%(deltaPath)s'
 
@@ -176,6 +177,12 @@ def loadData():
             urlTemplate = GITHUB,
         ),
         SampleSource(
+            os.path.join( SAMPLES, 'pymt' ),
+            baseURL ='http://github.com/tito/pymt',
+            projectName='{LGPL} PyMT',
+            urlTemplate = GITHUB,
+        ),
+        SampleSource(
             os.path.join( SAMPLES, 'glchess' ),
             baseURL ='http://svn.gnome.org/viewvc/gnome-games/trunk/glchess',
             projectName='{GPL} GLChess',
@@ -222,6 +229,12 @@ def loadData():
             baseURL = 'https://bitbucket.org/tartley/gltutpy/',
             projectName = 'OpenGL Tutorial (Python Translation)',
             urlTemplate = BITBUCKET,
+        ),
+        SampleSource(
+            os.path.join( SAMPLES, 'visvis' ),
+            baseURL = 'http://code.google.com/p/visvis',
+            projectName = 'Visvis',
+            urlTemplate = GOOGLECODE_HG,
         ),
     ]:
         generate_tokens_dir( s.localDir, processFunction = s.processEntry)
