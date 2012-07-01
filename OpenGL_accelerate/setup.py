@@ -75,30 +75,12 @@ else:
         'numpy_formathandler', includeDirectories
     ) )
 
-try:
-    import Numeric
-except ImportError:
-    sys.stderr.write(
-        """Unable to import Numeric, skipping Numeric extension building\n"""
-    )
-else:
-    definitions = [
-        ('USE_NUMPY', False ),
-    ]
-    extensions.extend( [
-        Extension("OpenGL_accelerate.numeric_accel", [
-                os.path.join( 'src', "_arrays.c")
-            ],
-            undefine_macros = definitions,
-        ),
-    ])
-
-
 if __name__ == "__main__":
     extraArguments = {
         'classifiers': [
             """License :: OSI Approved :: BSD License""",
             """Programming Language :: Python""",
+            """Programming Language :: Python :: 3""",
             """Programming Language :: C""",
             """Topic :: Software Development :: Libraries :: Python Modules""",
             """Topic :: Multimedia :: Graphics :: 3D Rendering""",
