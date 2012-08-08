@@ -330,7 +330,7 @@ class Module( Helper ):
             for title,section in specification.blocks( specification.source ):
                 if title.startswith( 'Overview' ):
                     self.overview = 'Overview (from the spec)\n%s\n\n'%(
-                        indent( section.replace('\xd4','O').replace('\xd5','O') )
+                        indent( section.replace('\xd4','O').replace('\xd5','O').decode( 'ascii', 'ignore' ).encode( 'ascii', 'ignore' ) )
                     )
                     break
 

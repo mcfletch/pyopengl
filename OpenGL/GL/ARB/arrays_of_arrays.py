@@ -89,7 +89,7 @@ Overview (from the spec)
 	    vec4 a[3][2] = {{ vec4(0.0), vec4(1.0) },   
 	                    { vec4(0.0), vec4(1.0) },   
 	                    { vec4(0.0), vec4(1.0) }  };  // requires matching nesting of 
-	                                                  // {} with object’s hierarchy
+	                                                  // {} with objects hierarchy
 	
 	
 	Note that all the above is naturally already specified in the core 
