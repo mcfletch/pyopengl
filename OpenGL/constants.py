@@ -125,7 +125,7 @@ ARRAY_TYPE_TO_CONSTANT = [
 from OpenGL.platform import PLATFORM as _p
 _FUNCTION_TYPE = _p.functionTypeFor(_p.GL)
 
-GLDEBUGPROCARB = _FUNCTION_TYPE(
+GLDEBUGPROCARB = GLDEBUGPROC = _FUNCTION_TYPE(
     void, 
     GLenum,  # source,
     GLenum, #type,
