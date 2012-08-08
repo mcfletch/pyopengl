@@ -834,9 +834,9 @@ class Tests( unittest.TestCase ):
         gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ABS_GEQ_TWO)
         gluTessCallback(tess, GLU_TESS_BEGIN, glBegin)
         gluTessCallback(tess, GLU_TESS_END, glEnd)
-        gluTessCallback(tess, GLU_TESS_COMBINE,      tesscombine)
-        gluTessCallback(tess, GLU_TESS_EDGE_FLAG,    tessedge)	# no strips
-        gluTessCallback(tess, GLU_TESS_VERTEX_DATA,  tessvertex)
+        gluTessCallback(tess, GLU_TESS_COMBINE, tesscombine)
+        gluTessCallback(tess, GLU_TESS_EDGE_FLAG, tessedge)	# no strips
+        gluTessCallback(tess, GLU_TESS_VERTEX, tessvertex)
 
         gluTessBeginPolygon(tess, collected)
         try:
