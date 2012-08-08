@@ -22,5 +22,6 @@ from OpenGL.GL.ARB.conservative_depth import *
 from OpenGL.GL.ARB.internalformat_query import *
 from OpenGL.GL.ARB.map_buffer_alignment import *
 from OpenGL.GL.ARB.shader_atomic_counters import *
+from OpenGL.GL.ARB.shader_image_load_store import *
 from OpenGL.GL.ARB.shading_language_packing import *
 from OpenGL.GL.ARB.texture_storage import *
