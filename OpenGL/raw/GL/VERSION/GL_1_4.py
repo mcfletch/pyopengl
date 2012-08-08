@@ -32,10 +32,10 @@ glget.addGLGetConstant( GL_MAX_TEXTURE_LOD_BIAS, (1,) )
 def glBlendFuncSeparate( sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha ):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray,arrays.GLsizeiArray,_cs.GLsizei)
-def glMultiDrawArrays( mode,first,count,primcount ):pass
+def glMultiDrawArrays( mode,first,count,drawcount ):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLsizeiArray,_cs.GLenum,arrays.GLvoidpArray,_cs.GLsizei)
-def glMultiDrawElements( mode,count,type,indices,primcount ):pass
+def glMultiDrawElements( mode,count,type,indices,drawcount ):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
 def glPointParameterf( pname,param ):pass

@@ -39,10 +39,10 @@ GL_PRIMITIVE_RESTART_INDEX 0x8F9E""", globals())
 glget.addGLGetConstant( GL_TEXTURE_BINDING_RECTANGLE, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glDrawArraysInstanced( mode,first,count,primcount ):pass
+def glDrawArraysInstanced( mode,first,count,instancecount ):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
-def glDrawElementsInstanced( mode,count,type,indices,primcount ):pass
+def glDrawElementsInstanced( mode,count,type,indices,instancecount ):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint)
 def glTexBuffer( target,internalformat,buffer ):pass

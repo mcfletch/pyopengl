@@ -32,7 +32,9 @@ Overview (from the spec)
 	This extension introduces the program pipeline object that serves as
 	a container for the program bound to any particular rendering stage.
 	It can be bound, unbound, and rebound to simply save and restore the
-	complete shader stage to program object bindings.
+	complete shader stage to program object bindings.  Like framebuffer
+	and vertex array objects, program pipeline objects are "container"
+	objects that are not shared between contexts.
 	
 	To bind a program object to a specific shader stage or set of
 	stages, UseProgramStages is used.  The VERTEX_SHADER_BIT,
