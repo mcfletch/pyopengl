@@ -106,9 +106,12 @@
             <parameter>params</parameter> is the value of <constant>GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS</constant> for <parameter>uniformBlockIndex</parameter>.
         </para>
         <para>
-            If <parameter>pname</parameter> is <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER</constant>, <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER</constant>,
-            or <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER</constant>, then a boolean value indicating whether the uniform block identified by
-            <parameter>uniformBlockIndex</parameter> is referenced by the vertex, geometry, or fragment programming stages of program, respectively, is returned.
+            If <parameter>pname</parameter> is <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER</constant>, <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER</constant>,
+            <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER</constant>, <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER</constant>,
+            <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER</constant>, or <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER</constant>
+            then a boolean value indicating whether the uniform block identified by
+            <parameter>uniformBlockIndex</parameter> is referenced by the vertex, tessellation control, tessellation evaluation, geometry, fragment or compute
+            programming stages of program, respectively, is returned.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
@@ -127,6 +130,10 @@
     <refsect1 id="notes"><title>Notes</title>
         <para>
             <function>glGetActiveUniformBlockiv</function> is available only if the GL version is 3.1 or greater.
+        </para>
+        <para>
+            <constant>GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER</constant> is accepted only if the GL version is 4.3
+            or greater.
         </para>
     </refsect1>
     <refsect1 id="seealso"><title>See Also</title>

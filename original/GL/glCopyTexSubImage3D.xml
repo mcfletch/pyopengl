@@ -40,7 +40,7 @@
             <listitem>
                 <para>
                     Specifies the target texture.
-                    Must be <constant>GL_TEXTURE_3D</constant>
+                    Must be <constant>GL_TEXTURE_3D</constant> or <constant>GL_TEXTURE_2D_ARRAY</constant>.
                 </para>
             </listitem>
         </varlistentry>
@@ -109,7 +109,7 @@
     <refsect1 id="description"><title>Description</title>
         <para>
             <function>glCopyTexSubImage3D</function> replaces a rectangular portion of a three-dimensional
-            texture image with pixels from the current <constant>GL_READ_BUFFER</constant> (rather
+            or two-dimensional array texture image with pixels from the current <constant>GL_READ_BUFFER</constant> (rather
             than from main memory, as is the case for <citerefentry><refentrytitle>glTexSubImage3D</refentrytitle></citerefentry>).
         </para>
         <para>
@@ -208,7 +208,9 @@
             </mml:math></inlineequation>,
             where 
             <inlineequation><mml:math><mml:mi mathvariant="italic">max</mml:mi></mml:math></inlineequation>
-            is the returned value of <constant>GL_MAX_3D_TEXTURE_SIZE</constant>.
+            is the returned value of <constant>GL_MAX_3D_TEXTURE_SIZE</constant> if <parameter>target</parameter>
+            is <constant>GL_TEXTURE_3D</constant> or the returned value of <constant>GL_MAX_ARRAY_TEXTURE_LAYERS</constant>
+            if <parameter>target</parameter> is <constant>GL_TEXTURE_2D_ARRAY</constant>.
         </para>
         <para>
             <constant>GL_INVALID_VALUE</constant> is generated if 

@@ -99,8 +99,9 @@
                     <constant>GL_TEXTURE_BLUE_SIZE</constant>,
                     <constant>GL_TEXTURE_ALPHA_SIZE</constant>,
                     <constant>GL_TEXTURE_DEPTH_SIZE</constant>,
-                    <constant>GL_TEXTURE_COMPRESSED</constant>, and
-                    <constant>GL_TEXTURE_COMPRESSED_IMAGE_SIZE</constant>
+                    <constant>GL_TEXTURE_COMPRESSED</constant>,
+                    <constant>GL_TEXTURE_COMPRESSED_IMAGE_SIZE</constant>, and
+                    <constant>GL_TEXTURE_BUFFER_OFFSET</constant>
                      are accepted.
                 </para>
             </listitem>
@@ -297,6 +298,30 @@
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term><constant>GL_TEXTURE_BUFFER_OFFSET</constant></term>
+                <listitem>
+                    <para>
+                    </para>
+                    <para>
+                        <parameter>params</parameter> returns a single integer value, the offset into the
+                        data store of the buffer bound to a buffer texture.
+                        <citerefentry><refentrytitle>glTexBufferRange</refentrytitle></citerefentry>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><constant>GL_TEXTURE_BUFFER_SIZE</constant></term>
+                <listitem>
+                    <para>
+                    </para>
+                    <para>
+                        <parameter>params</parameter> returns a single integer value, the size of the range of a
+                        data store of the buffer bound to a buffer texture.
+                        <citerefentry><refentrytitle>glTexBufferRange</refentrytitle></citerefentry>.
+                    </para>
+                </listitem>
+            </varlistentry>
         </variablelist>
     </refsect1>
     <refsect1 id="notes"><title>Notes</title>
@@ -306,6 +331,10 @@
         </para>
         <para>
             <function>glGetTexLevelParameter</function> returns the texture level parameters for the active texture unit.
+        </para>
+        <para>
+            <constant>GL_TEXTURE_BUFFER_OFFSET</constant> and <constant>GL_TEXTURE_BUFFER_SIZE</constant> are available only
+            if the GL version is 4.3 or greater.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
@@ -359,7 +388,7 @@
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
             Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. Copyright <trademark class="copyright"></trademark> 2010
+            Silicon Graphics, Inc. Copyright <trademark class="copyright"></trademark> 2010-2012
             Khronos Group. This document is licensed under the SGI
             Free Software B License. For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.

@@ -32,7 +32,8 @@
                     <constant>GL_ELEMENT_ARRAY_BARRIER_BIT</constant>, <constant>GL_UNIFORM_BARRIER_BIT</constant>, <constant>GL_TEXTURE_FETCH_BARRIER_BIT</constant>,
                     <constant>GL_SHADER_IMAGE_ACCESS_BARRIER_BIT</constant>, <constant>GL_COMMAND_BARRIER_BIT</constant>, <constant>GL_PIXEL_BUFFER_BARRIER_BIT</constant>,
                     <constant>GL_TEXTURE_UPDATE_BARRIER_BIT</constant>, <constant>GL_BUFFER_UPDATE_BARRIER_BIT</constant>,
-                    <constant>GL_FRAMEBUFFER_BARRIER_BIT</constant>, <constant>GL_TRANSFORM_FEEDBACK_BARRIER_BIT</constant> or <constant>GL_ATOMIC_COUNTER_BARRIER_BIT</constant>.
+                    <constant>GL_FRAMEBUFFER_BARRIER_BIT</constant>, <constant>GL_TRANSFORM_FEEDBACK_BARRIER_BIT</constant>, <constant>GL_ATOMIC_COUNTER_BARRIER_BIT</constant>,
+                    or <constant>GL_SHADER_STORAGE_BARRIER_BIT</constant>.
                     If the special value <constant>GL_ALL_BARRIER_BITS</constant> is specified, all supported barriers will be inserted.
                 </para>
             </listitem>
@@ -193,6 +194,15 @@
                     </para>
                     </listitem>
                 </varlistentry>
+                <varlistentry>
+                    <term><constant>GL_SHADER_STORAGE_BARRIER_BIT</constant></term>
+                    <listitem>
+                    <para>
+                        Accesses to shader storage blocks after the
+                        barrier will reflect writes prior to the barrier.
+                    </para>
+                    </listitem>
+                </varlistentry>
             </variablelist>
         </para>
         <para>
@@ -265,6 +275,9 @@
     <refsect1 id="notes"><title>Notes</title>
         <para>
             <function>glMemoryBarrier</function> is available only if the GL version is 4.2 or higher.
+        </para>
+        <para>
+            <constant>GL_SHADER_STORAGE_BARRIER_BIT</constant> is available only if the GL version is 4.3 or higher.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>

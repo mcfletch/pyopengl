@@ -33,9 +33,13 @@
             <listitem>
                 <para>
                     Specifies the target buffer object.
-                    The symbolic constant must be <constant>GL_ARRAY_BUFFER</constant>,
+                    The symbolic constant must be
+                    <constant>GL_ARRAY_BUFFER</constant>,
+                    <constant>GL_ATOMIC_COUNTER_BUFFER</constant>,
                     <constant>GL_COPY_READ_BUFFER</constant>,
                     <constant>GL_COPY_WRITE_BUFFER</constant>,
+                    <constant>GL_DRAW_INDIRECT_BUFFER</constant>,
+                    <constant>GL_DISPATCH_INDIRECT_BUFFER</constant>,
                     <constant>GL_ELEMENT_ARRAY_BUFFER</constant>,
                     <constant>GL_PIXEL_PACK_BUFFER</constant>,
                     <constant>GL_PIXEL_UNPACK_BUFFER</constant>,
@@ -160,6 +164,14 @@
             platform, with an additional base-level requirement that an offset within a buffer to
             a datum comprising <inlineequation><mml:math><mml:mi mathvariant="italic">N</mml:mi> bytes be a 
             multiple of <mml:mi mathvariant="italic">N</mml:mi></mml:math></inlineequation>.
+        </para>
+        <para>
+            The <constant>GL_ATOMIC_COUNTER_BUFFER</constant> target is available only if the GL version
+            is 4.2 or greater.
+        </para>
+        <para>
+            The <constant>GL_DISPATCH_INDIRECT_BUFFER</constant> target is available only if the GL version
+            is 4.3 or greater.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
