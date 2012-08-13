@@ -73,11 +73,13 @@
             <listitem>
                 <para>
                     Specifies the symbolic name of a texture parameter.
+                    <constant>GL_DEPTH_STENCIL_TEXTURE_MODE</constant>,
                     <constant>GL_TEXTURE_BASE_LEVEL</constant>,
                     <constant>GL_TEXTURE_BORDER_COLOR</constant>,
                     <constant>GL_TEXTURE_COMPARE_MODE</constant>,
                     <constant>GL_TEXTURE_COMPARE_FUNC</constant>,
                     <constant>GL_TEXTURE_IMMUTABLE_FORMAT</constant>,
+                    <constant>GL_TEXTURE_IMMUTABLE_LEVELS</constant>,
                     <constant>GL_TEXTURE_LOD_BIAS</constant>,
                     <constant>GL_TEXTURE_MAG_FILTER</constant>,
                     <constant>GL_TEXTURE_MAX_LEVEL</constant>,
@@ -89,6 +91,10 @@
                     <constant>GL_TEXTURE_SWIZZLE_B</constant>,
                     <constant>GL_TEXTURE_SWIZZLE_A</constant>,
                     <constant>GL_TEXTURE_SWIZZLE_RGBA</constant>,
+                    <constant>GL_TEXTURE_VIEW_MIN_LAYER</constant>,
+                    <constant>GL_TEXTURE_VIEW_MIN_LEVEL</constant>,
+                    <constant>GL_TEXTURE_VIEW_NUM_LAYERS</constant>,
+                    <constant>GL_TEXTURE_VIEW_NUM_LEVELS</constant>,
                     <constant>GL_TEXTURE_WRAP_S</constant>,
                     <constant>GL_TEXTURE_WRAP_T</constant>, and
                     <constant>GL_TEXTURE_WRAP_R</constant>
@@ -124,6 +130,15 @@
             with the same interpretations:
         </para>
         <variablelist>
+            <varlistentry>
+                <term><constant>GL_DEPTH_STENCIL_TEXTURE_MODE</constant></term>
+                <listitem>
+                    <para>
+                        Returns the single-value depth stencil texture mode, a symbolic constant.
+                        The initial value is <constant>GL_DEPTH_COMPONENT</constant>.
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry>
                 <term><constant>GL_TEXTURE_MAG_FILTER</constant></term>
                 <listitem>
@@ -295,6 +310,51 @@
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term><constant>GL_TEXTURE_VIEW_MIN_LEVEL</constant></term>
+                <listitem>
+                    <para>
+                        Returns a single-valued base level of a texture view relative to its parent.  The
+                        initial value is 0. See <citerefentry><refentrytitle>glTextureView</refentrytitle></citerefentry>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><constant>GL_TEXTURE_VIEW_NUM_LEVELS</constant></term>
+                <listitem>
+                    <para>
+                        Returns a single-valued number of levels of detail of a texture view.
+                        See <citerefentry><refentrytitle>glTextureView</refentrytitle></citerefentry>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><constant>GL_TEXTURE_VIEW_MIN_LAYER</constant></term>
+                <listitem>
+                    <para>
+                        Returns a single-valued first level of a texture array view relative to its parent.
+                        See <citerefentry><refentrytitle>glTextureView</refentrytitle></citerefentry>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><constant>GL_TEXTURE_VIEW_NUM_LAYERS</constant></term>
+                <listitem>
+                    <para>
+                        Returns a single-valued number of layers in a texture array view.
+                        See <citerefentry><refentrytitle>glTextureView</refentrytitle></citerefentry>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><constant>GL_TEXTURE_IMMUTABLE_LEVELS</constant></term>
+                <listitem>
+                    <para>
+                        Returns a single-valued number of immutable texture levels in a texture view.
+                        See <citerefentry><refentrytitle>glTextureView</refentrytitle></citerefentry>.
+                    </para>
+                </listitem>
+            </varlistentry>
         </variablelist>
     <para>
         In addition to the parameters that may be set with <citerefentry><refentrytitle>glTexParameter</refentrytitle></citerefentry>,
@@ -319,6 +379,11 @@
             If an error is generated,
             no change is made to the contents of <parameter>params</parameter>.
         </para>
+        <para>
+            <constant>GL_DEPTH_STENCIL_TEXTURE_MODE</constant>, <constant>GL_TEXTURE_VIEW_MIN_LEVEL</constant>,
+            <constant>GL_TEXTURE_VIEW_NUM_LEVELS</constant>, <constant>GL_TEXTURE_VIEW_MIN_LAYER</constant>,
+            <constant>GL_TEXTURE_VIEW_NUM_LAYERS</constant> and <constant>GL_TEXTURE_IMMUTABLE_LEVELS</constant> are available only if the GL version is 4.3 or greater.
+        </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
         <para>
@@ -331,13 +396,14 @@
             <citerefentry><refentrytitle>glTexParameter</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexStorage1D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexStorage2D</refentrytitle></citerefentry>,
-            <citerefentry><refentrytitle>glTexStorage3D</refentrytitle></citerefentry>
+            <citerefentry><refentrytitle>glTexStorage3D</refentrytitle></citerefentry>,
+            <citerefentry><refentrytitle>glTextureView</refentrytitle></citerefentry>
         </para>
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
             Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. Copyright <trademark class="copyright"></trademark> 2010-2011
+            Silicon Graphics, Inc. Copyright <trademark class="copyright"></trademark> 2010-2012
             Khronos Group. This document is licensed under the SGI
             Free Software B License. For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.

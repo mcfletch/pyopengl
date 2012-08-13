@@ -43,6 +43,7 @@
             <constant>GL_ACTIVE_UNIFORM_BLOCKS</constant>,
             <constant>GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH</constant>,
             <constant>GL_ACTIVE_UNIFORM_MAX_LENGTH</constant>,
+            <constant>GL_COMPUTE_WORK_GROUP_SIZE</constant>
             <constant>GL_PROGRAM_BINARY_LENGTH</constant>,
             <constant>GL_TRANSFORM_FEEDBACK_BUFFER_MODE</constant>,
             <constant>GL_TRANSFORM_FEEDBACK_VARYINGS</constant>,
@@ -211,6 +212,21 @@
         </varlistentry>
 
         <varlistentry>
+        <term><constant>GL_COMPUTE_WORK_GROUP_SIZE</constant></term>
+        <listitem>
+            <para>
+            </para>
+            <para> <parameter>params</parameter> returns an
+            array of three integers containing the local work group size of
+            the compute program as specified by its input layout qualifier(s).
+            <parameter>program</parameter> must be the name of a program object
+            that has been previously linked successfully and contains a binary
+            for the compute shader stage.
+            </para>
+        </listitem>
+        </varlistentry>
+
+        <varlistentry>
         <term><constant>GL_TRANSFORM_FEEDBACK_BUFFER_MODE</constant></term>
         <listitem>
             <para>
@@ -286,6 +302,10 @@
         and <constant>GL_GEOMETRY_OUTPUT_TYPE</constant> are accepted only if the GL
         version is 3.2 or greater.
     </para>
+    <para>
+        <constant>GL_COMPUTE_WORK_GROUP_SIZE</constant> is accepted only if the
+        GL version is 4.3 or greater.
+    </para>
 
     <para>If an error is generated, no change is made to the
     contents of <parameter>params</parameter>.</para>
@@ -307,6 +327,10 @@
     <para><constant>GL_INVALID_ENUM</constant>
     is generated if <parameter>pname</parameter>
     is not an accepted value.</para>
+
+    <para><constant>GL_INVALID_OPERATION</constant> is generated if <parameter>pname</parameter>
+    is <constant>GL_COMPUTE_WORK_GROUP_SIZE</constant> and <parameter>program</parameter>
+    does not contain a binary for the compute shader stage.</para>
 
     </refsect1>
     <refsect1 id="associatedgets"><title>Associated Gets</title>

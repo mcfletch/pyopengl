@@ -105,10 +105,11 @@
             If <parameter>pname</parameter> is <constant>GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER</constant>,
             <constant>GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER</constant>,
             <constant>GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER</constant>,
-            <constant>GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER</constant>, or
-            <constant>GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER</constant>, then a boolean value indicating
+            <constant>GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER</constant>,
+            <constant>GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER</constant>,
+            <constant>GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER</constant> then a boolean value indicating
             whether the atomic counter buffer identified by <parameter>bufferIndex</parameter> is referenced by the vertex,
-            tessellation control, tessellation evaluation, geometry or fragment processing stages of <parameter>program</parameter>,
+            tessellation control, tessellation evaluation, geometry, fragment or compute processing stages of <parameter>program</parameter>,
             respectively, is returned.
         </para>
     </refsect1>
@@ -116,6 +117,10 @@
         <para>
             <function>glGetActiveAtomicCounterBufferiv</function> is available only if the
             GL version is 4.2 or higher.
+        </para>
+        <para>
+            <constant>GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER</constant> is available
+            only of the GL version is 4.3 or higher.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>

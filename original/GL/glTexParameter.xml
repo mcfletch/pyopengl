@@ -53,6 +53,7 @@
                 <para>
                     Specifies the symbolic name of a single-valued texture parameter.
                     <parameter>pname</parameter> can be one of the following:
+                    <constant>GL_DEPTH_STENCIL_TEXTURE_MODE</constant>,
                     <constant>GL_TEXTURE_BASE_LEVEL</constant>,
                     <constant>GL_TEXTURE_COMPARE_FUNC</constant>,
                     <constant>GL_TEXTURE_COMPARE_MODE</constant>,
@@ -136,6 +137,7 @@
                 <para>
                     Specifies the symbolic name of a texture parameter.
                     <parameter>pname</parameter> can be one of the following:
+                    <constant>GL_DEPTH_STENCIL_TEXTURE_MODE</constant>,
                     <constant>GL_TEXTURE_BASE_LEVEL</constant>,
                     <constant>GL_TEXTURE_BORDER_COLOR</constant>,
                     <constant>GL_TEXTURE_COMPARE_FUNC</constant>,
@@ -177,6 +179,23 @@
             <constant>GL_TEXTURE_2D_ARRAY</constant>, <constant>GL_TEXTURE_RECTANGLE</constant>, or <constant>GL_TEXTURE_3D</constant>.
             The following symbols are accepted in <parameter>pname</parameter>:
         </para>
+        <variablelist>
+            <varlistentry>
+                <term><constant>GL_DEPTH_STENCIL_TEXTURE_MODE</constant></term>
+                <listitem>
+                    <para>
+                        Specifies the mode used to read from depth-stencil format textures. <parameter>params</parameter>
+                        must be one of <constant>GL_DEPTH_COMPONENT</constant> or <constant>GL_STENCIL_COMPONENT</constant>.
+                        If the depth stencil mode is <constant>GL_DEPTH_COMPONENT</constant>, then reads from depth-stencil
+                        format textures will return the depth component of the texel in
+                        <inlineequation><mml:math><mml:msub><mml:mi>R</mml:mi><mml:mi>t</mml:mi></mml:msub></mml:math></inlineequation> and the stencil component
+                        will be discarded. If the depth stencil mode is <constant>GL_STENCIL_COMPONENT</constant> then
+                        the stencil component is returned in <inlineequation><mml:math><mml:msub><mml:mi>R</mml:mi><mml:mi>t</mml:mi></mml:msub></mml:math></inlineequation>
+                        and the depth component is discarded. The initial value is <constant>GL_DEPTH_COMPONENT</constant>.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
         <variablelist>
             <varlistentry>
                 <term><constant>GL_TEXTURE_BASE_LEVEL</constant></term>
@@ -1308,6 +1327,9 @@
         <para>
             <function>glTexParameter</function> specifies the texture parameters for the active texture unit, specified
             by calling <citerefentry><refentrytitle>glActiveTexture</refentrytitle></citerefentry>.
+        </para>
+        <para>
+            <constant>GL_DEPTH_STENCIL_TEXTURE_MODE</constant> is available only if the GL version is 4.3 or greater.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>

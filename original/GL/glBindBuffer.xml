@@ -36,6 +36,7 @@
                     <constant>GL_COPY_READ_BUFFER</constant>,
                     <constant>GL_COPY_WRITE_BUFFER</constant>,
                     <constant>GL_DRAW_INDIRECT_BUFFER</constant>,
+                    <constant>GL_DISPATCH_INDIRECT_BUFFER</constant>,
                     <constant>GL_ELEMENT_ARRAY_BUFFER</constant>,
                     <constant>GL_PIXEL_PACK_BUFFER</constant>,
                     <constant>GL_PIXEL_UNPACK_BUFFER</constant>,
@@ -96,7 +97,12 @@
             When a non-zero buffer object is bound to the <constant>GL_DRAW_INDIRECT_BUFFER</constant> target,
             parameters for draws issued through <citerefentry><refentrytitle>glDrawArraysIndirect</refentrytitle></citerefentry>
             and <citerefentry><refentrytitle>glDrawElementsIndirect</refentrytitle></citerefentry> are sourced
-            from that buffer object.
+            from the specified offset in that buffer object's data store.
+        </para>
+        <para>
+            When a non-zero buffer object is bound to the <constant>GL_DISPATCH_INDIRECT_BUFFER</constant> target,
+            the parameters for compute dispatches issued through <citerefentry><refentrytitle>glDispatchComputeIndirect</refentrytitle></citerefentry>
+            are sourced from the specified offset in that buffer object's data store.
         </para>
         <para>
             While a non-zero buffer object is bound to the <constant>GL_ELEMENT_ARRAY_BUFFER</constant> target, 
@@ -172,6 +178,9 @@
         <para>
             The <constant>GL_ATOMIC_COUNTER_BUFER</constant> target is available only if the GL version is 4.2 or greater.
         </para>
+        <para>
+            The <constant>GL_DISPATCH_INDIRECT_BUFFER</constant> target is available only if the GL version is 4.3 or greater.
+        </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
         <para>
@@ -198,6 +207,9 @@
         </para>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_DRAW_INDIRECT_BUFFER_BINDING</constant>
+        </para>
+        <para>
+            <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_DISPATCH_INDIRECT_BUFFER_BINDING</constant>
         </para>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_ELEMENT_ARRAY_BUFFER_BINDING</constant>
