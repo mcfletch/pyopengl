@@ -111,7 +111,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
                     )
                 )
             outP = ctypes.c_void_p(self.noteObject(result))
-            outData.contents = outP
+            outData.contents.value = outP.value
             return None
         return wrap
     def dataWrapper( self, function ):

@@ -812,33 +812,39 @@ class Tests( unittest.TestCase ):
     
     def test_tess_collection( self ):
         """SF#2354596 tessellation combine results collected"""
-        def start(typ=None):
-            print 'start', typ
-        def tessvertex(vertex_data, polygon_data):
+        all_vertices = []
+        combinations = []
+        def start(*args):
+            pass
+        def stop(*args):
+            pass
+        def tessvertex(vertex_data, polygon_data=None):
             # polygon data *should* be collected here
-            assert polygon_data is collected, polygon_data
-            polygon_data.append(vertex_data)
+            #assert polygon_data is all_vertices, polygon_data
+            all_vertices.append(vertex_data)
             #collected.append( vertex_data )
             return polygon_data
-        combined = []
-        def tesscombine(coords, vertex_data, weight):
-            combined.append( coords )
-            return (True,coords)	# generated vertices marked as True
+        def tesscombine(coords, vertex_data, weights,_=None):
+            new = (True,coords)
+            combinations.append( coords )
+            return new
 
         def tessedge(flag,*args,**named):
             pass	# dummy
-        collected=[]	# collect triangle vertices
+        def tesserr( enum ):
+            raise RuntimeError( gluErrorString( enum ) )
 
         # set up tessellator in CSG intersection mode
         tess=gluNewTess()
         gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ABS_GEQ_TWO)
-        gluTessCallback(tess, GLU_TESS_BEGIN, glBegin)
-        gluTessCallback(tess, GLU_TESS_END, glEnd)
+        gluTessCallback(tess, GLU_TESS_BEGIN, start)
+        gluTessCallback(tess, GLU_TESS_END, stop)
         gluTessCallback(tess, GLU_TESS_COMBINE, tesscombine)
         gluTessCallback(tess, GLU_TESS_EDGE_FLAG, tessedge)	# no strips
         gluTessCallback(tess, GLU_TESS_VERTEX, tessvertex)
+        gluTessCallback(tess, GLU_TESS_ERROR, tesserr )
 
-        gluTessBeginPolygon(tess, collected)
+        gluTessBeginPolygon(tess, all_vertices)
         try:
             for contour in [
                 # first square
@@ -857,11 +863,15 @@ class Tests( unittest.TestCase ):
         finally:
             result = gluTessEndPolygon(tess)
 
-        assert len(combined) == 2, "Should have generated two new vertices"
         # Show collected triangle vertices :-
         # Original input vertices are marked as False.
         # Vertices generated in combine callback are marked as True.
-        assert collected
+        assert all_vertices, "Nothing collected"
+        combined,original = [x for x in all_vertices if x[0]], [x for x in all_vertices if not x[0]]
+        
+        assert combined, ("No combined vertices", all_vertices )
+        assert original, ("No original vertices", all_vertices )
+        assert len(combinations) == 2, combinations
     
     def test_tess_cb_traditional( self ):
         outline = [
