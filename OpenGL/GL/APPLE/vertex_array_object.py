@@ -17,7 +17,7 @@ Overview (from the spec)
 	
 	GenVertexArraysAPPLE creates a list of n number of vertex array object
 	names.  After creating a name, BindVertexArrayAPPLE associates the name with
-	a vertex array object and selects this vertex array and its associated
+	a vertex array object and selects this vertex array and it's associated
 	state as current.  To get back to the default vertex array and its
 	associated state the client should bind to vertex array named 0.
 	

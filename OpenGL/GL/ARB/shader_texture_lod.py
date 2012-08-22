@@ -35,7 +35,7 @@ Overview (from the spec)
 	    texture1DLod,   texture1DProjLod,
 	    texture2DLod,   texture2DProjLod,
 	    texture3DLod,   texture3DProjLod,
-	    textureCubeLod,
+	    textureCubeLod, textureCubProjLod,
 	    shadow1DLod,    shadow1DProjLod,
 	    shadow2DLod,    shadow2DProjLod,
 	
