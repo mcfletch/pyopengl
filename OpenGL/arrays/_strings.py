@@ -63,5 +63,5 @@ dataPointer = calculateOffset()
 
 if __name__ == "__main__":
     a  = 'this'
-    print id(a), dataPointer( a ), dataPointer(a) - id(a)
+    print((id(a), dataPointer( a ), dataPointer(a) - id(a)))
     

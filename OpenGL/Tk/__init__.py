@@ -350,17 +350,6 @@ http://www.yorvic.york.ac.uk/~mjh/
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
 
-
-    def report_opengl_errors(message = "OpenGL error:"):
-        """Report any opengl errors that occured while drawing."""
-
-        print 'report_opengl_errors is now useless.  glGetError replaced by GLexception'
-#		while 1:
-#			err_value = glGetError()
-#			if not err_value: break	 
-#			print message, gluErrorString(err_value)
-
-
     def set_background(self, r, g, b):
         """Change the background colour of the widget."""
 
