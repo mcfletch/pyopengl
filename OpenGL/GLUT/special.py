@@ -329,7 +329,7 @@ def glutInit( *args ):
     finally:
         os.chdir( currentDirectory )
     return [
-        str(holder[i]) for i in range( count.value )
+        holder[i] for i in range( count.value )
     ]
 glutInit.wrappedOperation = simple.glutInit
 
