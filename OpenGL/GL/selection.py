@@ -23,7 +23,7 @@ class GLSelectRecord( object ):
     Names are unmodified, so normally are slices of the array passed in 
     to GLSelectRecord.fromArray( array )
     """
-    DISTANCE_DIVISOR = float((2L**32)-1)
+    DISTANCE_DIVISOR = float((2**32)-1)
     __slots__ = ('near','far','names')
     def fromArray( cls, array, total ):
         """Produce list with all records from the array"""

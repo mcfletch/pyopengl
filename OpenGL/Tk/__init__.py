@@ -99,7 +99,7 @@ if _default_root is None:
 # Thus the directory structure is *not* the same as the 
 # original PyOpenGL versions.
 import sys 
-if sys.maxint > 2L**32:
+if sys.maxint > 2**32:
     suffix = '-64'
 else:
     suffix = ''
