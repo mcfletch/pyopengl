@@ -3,7 +3,7 @@
 """
 try:
     from setuptools import setup,Extension
-except ImportError, err:
+except ImportError:
     from distutils.core import setup,Extension
 try:
     from Cython.Distutils import build_ext
