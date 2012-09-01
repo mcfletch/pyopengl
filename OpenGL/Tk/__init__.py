@@ -28,11 +28,17 @@ log = logging.getLogger( 'OpenGL.Tk' )
 from OpenGL.GL import *
 from OpenGL.GLU import *
 try:
-    from Tkinter import _default_root
-    from Tkinter import *
+    from tkinter import _default_root
+    from tkinter import *
+    from tkinter import dialog
 except ImportError as err:
-    log.error( """Unable to import Tkinter, likely need to install a separate package (python-tk) to have Tkinter support.  You likely also want to run the src/togl.py script in the PyOpenGL source distribution to install the Togl widget""" )
-    raise
+    try:
+        from Tkinter import _default_root
+        from Tkinter import *
+        import Dialog as dialog
+    except ImportError as err:
+        log.error( """Unable to import Tkinter, likely need to install a separate package (python-tk) to have Tkinter support.  You likely also want to run the src/togl.py script in the PyOpenGL source distribution to install the Togl widget""" )
+        raise
 import math
 
 def glTranslateScene(s, x, y, mousex, mousey):
@@ -121,13 +127,15 @@ except TclError as err:
 # [DAA, Jan 1998], updated by mcfletch 2009
 import atexit
 def cleanup():
-    from Tkinter import _default_root, TclError
-    import Tkinter
+    try:
+        import tkinter 
+    except ImportError as err:
+        import Tkinter as tkinter
     try: 
-        if _default_root: _default_root.destroy()
-    except TclError:
+        if tkinter._default_root: tkinter._default_root.destroy()
+    except (TclError,AttributeError) as err:
         pass
-    Tkinter._default_root = None
+    tkinter._default_root = None
 atexit.register( cleanup )
 
 class Togl(Widget):
