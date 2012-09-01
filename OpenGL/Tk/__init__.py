@@ -264,7 +264,7 @@ http://www.yorvic.york.ac.uk/~mjh/
         it changes size."""
 
         #Widget.__init__(self, master, 'togl', cnf, kw)
-        apply(RawOpengl.__init__, (self, master, cnf), kw)
+        RawOpengl.__init__(*(self, master, cnf), **kw)
         self.initialised = 0
 
         # Current coordinates of the mouse.
