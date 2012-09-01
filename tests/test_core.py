@@ -5,10 +5,10 @@ logging.basicConfig()
 
 try:
     from numpy import *
-except ImportError, err:
+except ImportError as err:
     try:
         from Numeric import *
-    except ImportError, err:
+    except ImportError as err:
         array = None
 
 pygame.display.init()
@@ -19,7 +19,7 @@ from OpenGL._bytes import bytes, _NULL_8_BYTE
 from OpenGL.GL import *
 try:
     glGetError()
-except error.NoContext, err:
+except error.NoContext as err:
     # good, should have got this error 
     pass
 else:
@@ -211,13 +211,13 @@ class Tests( unittest.TestCase ):
         """Test for error catching/checking"""
         try:
             glClear( GL_INVALID_VALUE )
-        except Exception, err:
+        except Exception as err:
             assert err.err == 1281, ("""Expected invalid value (1281)""", err.err)
         else:
             raise RuntimeError( """No error on invalid glClear""" )
         try:
             glColorPointer(GL_INVALID_VALUE,GL_BYTE,0,None)
-        except Exception, err:
+        except Exception as err:
             assert err.err == 1281, ("""Expected invalid value (1281)""", err.err)
             assert err.baseOperation, err.baseOperation
             assert err.pyArgs == (GL_INVALID_VALUE, GL_BYTE, 0, None), err.pyArgs
@@ -226,7 +226,7 @@ class Tests( unittest.TestCase ):
             raise RuntimeError( """No error on invalid glColorPointer""" )
         try:
             glBitmap(-1,-1,0,0,0,0,"")
-        except Exception, err:
+        except Exception as err:
             assert err.err in (1281,1282), ("""Expected invalid value (1281) or invalid operation (1282)""", err.err)
         else:
             raise RuntimeError( """No error on invalid glBitmap""" )
@@ -243,13 +243,13 @@ class Tests( unittest.TestCase ):
             try:
                 try:
                     glVertex3f( 0.,1.,0. )
-                except Exception, err:
+                except Exception as err:
                     traceback.print_exc()
                 glVertex3fv( [-1,0,0] )
                 glVertex3dv( [1,0,0] )
                 try:
                     glVertex3dv( [1,0] )
-                except ValueError, err:
+                except ValueError as err:
                     #Got expected value error (good)
                     pass
                 else:
@@ -371,7 +371,7 @@ class Tests( unittest.TestCase ):
                 from OpenGLContext import texture
                 import Image 
                 from OpenGL.GLUT import glutSolidTeapot
-            except ImportError, err:
+            except ImportError as err:
                 pass
             else:
                 glEnable( GL_TEXTURE_2D )
@@ -387,7 +387,7 @@ class Tests( unittest.TestCase ):
                     try:
                         glTexCoord2f( .5, 1 )
                         glVertex3f( 0.,1.,0. )
-                    except Exception, err:
+                    except Exception as err:
                         traceback.print_exc()
                     glTexCoord2f( 0, 0 )
                     glVertex3fv( [-1,0,0] )
@@ -395,7 +395,7 @@ class Tests( unittest.TestCase ):
                     glVertex3dv( [1,0,0] )
                     try:
                         glVertex3dv( [1,0] )
-                    except ValueError, err:
+                    except ValueError as err:
                         #Got expected value error (good)
                         pass
                     else:
@@ -474,7 +474,7 @@ class Tests( unittest.TestCase ):
         for notFloat,shouldWork in ((0,True), (object(),False), (object,False)):
             try:
                 glColor4f( 0,1,1,notFloat )
-            except Exception, err:
+            except Exception as err:
                 if shouldWork:
                     raise 
             else:
@@ -501,7 +501,7 @@ class Tests( unittest.TestCase ):
         assert len(result) == 2
         for (tex,expected,found) in zip( textures, residents, result ):
             if expected != found:
-                print 'Warning: texture %s residence expected %s got %s'%( tex, expected, found )
+                print('Warning: texture %s residence expected %s got %s'%( tex, expected, found ))
         
     if OpenGL.ALLOW_NUMPY_SCALARS:
         def test_passBackResults( self ):
@@ -678,7 +678,7 @@ class Tests( unittest.TestCase ):
     def test_gl_1_2_support( self ):
         if glBlendColor:
             glBlendColor( .3, .4, 1.0, .3 )
-            print 'OpenGL 1.2 support'
+            print('OpenGL 1.2 support')
     if array:
         def test_glmultidraw( self ):
             """Test that glMultiDrawElements works, uses glDrawElements"""
@@ -709,7 +709,7 @@ class Tests( unittest.TestCase ):
                 finally:
                     glDisableClientState( GL_VERTEX_ARRAY )
             else:
-                print 'No multi_draw_arrays support'
+                print('No multi_draw_arrays support')
     def test_glDrawBuffers_list( self ):
         """Test that glDrawBuffers with list argument doesn't crash"""
         a_type = constants.GLenum*2
@@ -719,7 +719,7 @@ class Tests( unittest.TestCase ):
         )
         try:
             glDrawBuffers( 2, args )
-        except GLError, err:
+        except GLError as err:
             assert err.err == GL_INVALID_OPERATION, err
     def test_glDrawBuffers_list_valid( self ):
         """Test that glDrawBuffers with list argument where value is set"""
@@ -756,7 +756,7 @@ class Tests( unittest.TestCase ):
             glDrawBuffers(2, drawingBuffers )
             try:
                 checkFramebufferStatus()
-            except error.GLError, err:
+            except error.GLError as err:
                 pass
             else:
                 glReadBuffer( GL_COLOR_ATTACHMENT1 )
@@ -773,7 +773,7 @@ class Tests( unittest.TestCase ):
             glEnable( GL_HISTOGRAM )
             glDisable( GL_HISTOGRAM )
         else:
-            print 'No ARB imaging extension'
+            print('No ARB imaging extension')
     if not OpenGL.ERROR_ON_COPY:
         def test_gluNurbsCurve( self ):
             """Test that gluNurbsCurve raises error on invalid arguments"""
