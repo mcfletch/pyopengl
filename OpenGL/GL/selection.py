@@ -36,7 +36,7 @@ class GLSelectRecord( object ):
             count = array[index]
             near = array[index+1]
             far = array[index+2]
-            names = map(uintToLong, array[index+3:index+3+count])
+            names = [ uintToLong(v) for v in array[index+3:index+3+count]]
             result.append(  cls( near, far, names ) )
             index += 3+count
         return result
