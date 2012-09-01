@@ -4,12 +4,16 @@ This code is resonsible for turning gluint *
 arrays into structured representations for use
 by Python-level code.
 """
+try:
+    long 
+except NameError as err:
+    long = int
+
 def uintToLong( value ):
     if value < 0:
         # array type without a uint, so represented as an int 
         value = (value & 0x7fffffff) + 0x80000000
     return value
-
 
 class GLSelectRecord( object ):
     """Minimalist object for storing an OpenGL selection-buffer record

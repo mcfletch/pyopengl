@@ -5,6 +5,7 @@ an extension is available
 """
 from OpenGL.latebind import LateBind
 from OpenGL._bytes import bytes,as_8_bit
+from OpenGL._bytes import bytes,unicode,as_8_bit
 import OpenGL as root
 import sys
 import logging
@@ -181,7 +182,7 @@ def alternate( name, *functions ):
 
     if name is a function then its name will be used....
     """
-    if not isinstance( name, (str,unicode)):
+    if not isinstance( name, (bytes,unicode)):
         functions = (name,)+functions
         name = name.__name__
     return type( name, (_Alternate,), {} )( name, *functions )

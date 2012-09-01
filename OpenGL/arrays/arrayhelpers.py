@@ -7,6 +7,7 @@ import OpenGL
 from OpenGL import _configflags
 from OpenGL import contextdata, error, wrapper, constants, converters
 from OpenGL.arrays import arraydatatype
+from OpenGL._bytes import bytes,unicode
 import logging
 log = logging.getLogger( 'OpenGL.arrays.arrayhelpers' )
 from OpenGL import acceleratesupport
@@ -168,7 +169,7 @@ if not _configflags.ERROR_ON_COPY:
         """
         function = wrapper.wrapper( baseOperation )
         if not hasattr( function, 'returnValues' ):
-            if isinstance( argName, (str,unicode)):
+            if isinstance( argName, (bytes,unicode)):
                 function.setReturnValues( converters.returnPyArgument(argName) )
             else:
                 raise TypeError( 

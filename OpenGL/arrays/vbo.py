@@ -35,8 +35,13 @@ from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.GL.ARB import vertex_buffer_object
 from OpenGL import constants, error
+from OpenGL._bytes import bytes,unicode,as_8_bit
 import ctypes,logging
 log = logging.getLogger( 'OpenGL.arrays.vbo' )
+try:
+    long 
+except NameError as err:
+    long = int
 
 
 import weakref
@@ -186,7 +191,7 @@ if VBO is None:
         implementation = property( get_implementation, )
         def resolve( self, value ):
             """Resolve string constant to constant"""
-            if isinstance( value, (str,unicode)):
+            if isinstance( value, (bytes,unicode)):
                 return getattr( self.implementation, self.implementation.basename( value ) )
             return value
         def set_array( self, data, size=None ):

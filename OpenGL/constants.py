@@ -5,6 +5,10 @@ uses (note, doesn't include the OpenGL-ES types!)
 """
 import ctypes
 from OpenGL.constant import Constant
+try:
+    long 
+except NameError as err:
+    long = int
 
 GL_FALSE = Constant( 'GL_FALSE', 0x0 )
 GL_TRUE = Constant( 'GL_TRUE', 0x1 )

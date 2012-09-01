@@ -23,10 +23,14 @@ platform module *not* in the module here!
 from OpenGL.platform import GLUT, CurrentContextIsValid, GLUT_GUARD_CALLBACKS
 from OpenGL import contextdata, error, platform, logs
 from OpenGL.raw import GLUT as simple
-from OpenGL._bytes import bytes, _NULL_8_BYTE, as_8_bit
+from OpenGL._bytes import bytes, unicode,_NULL_8_BYTE, as_8_bit
 import ctypes, os, sys, traceback
 PLATFORM = platform.PLATFORM
 FUNCTION_TYPE = simple.CALLBACK_FUNCTION_TYPE
+try:
+    long 
+except NameError as err:
+    long = int
 
 log = logs.getLog( 'OpenGL.GLUT.special' )
 
@@ -300,7 +304,7 @@ def glutInit( *args ):
                 raise ValueError( """Specified count of %s does not match length (%s) of argument list %s"""%(
                     count, len(args), args,
                 ))
-        elif isinstance( arg, (str,unicode)):
+        elif isinstance( arg, (bytes,unicode)):
             # passing in a sequence of strings as individual arguments
             args = (arg,)+args 
             count = len(args)

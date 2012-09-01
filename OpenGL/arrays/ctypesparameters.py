@@ -5,6 +5,7 @@ import ctypes, _ctypes
 
 from OpenGL import constants, constant
 from OpenGL.arrays import formathandler
+from OpenGL._bytes import bytes,unicode,as_8_bit
 import operator
 
 c = ctypes.c_float(0)
@@ -86,7 +87,7 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
         while dimObject is not None:
             yield dimObject
             dimObject = getattr( dimObject, '_type_', None )
-            if isinstance( dimObject, (str,unicode)):
+            if isinstance( dimObject, (bytes,unicode)):
                 dimObject = None
     def dims( self, value ):
         """Produce iterable of all dimensions"""
