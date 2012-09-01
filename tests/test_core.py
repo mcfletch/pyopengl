@@ -2,6 +2,11 @@
 import unittest, pygame, pygame.display, time, traceback, os, sys
 import logging 
 logging.basicConfig()
+import pickle
+try:
+    import cPickle
+except ImportError as err:
+    cPickle = pickle
 
 try:
     from numpy import *
@@ -417,7 +422,6 @@ class Tests( unittest.TestCase ):
                 glDisableClientState( GL_VERTEX_ARRAY )
     def test_constantPickle( self ):
         """Test that our constants can be pickled/unpickled properly"""
-        import pickle, cPickle
         for p in pickle,cPickle:
             v = p.loads( p.dumps( GL_VERTEX_ARRAY ))
             assert v == GL_VERTEX_ARRAY, (v,GL_VERTEX_ARRAY)
@@ -501,7 +505,7 @@ class Tests( unittest.TestCase ):
         assert len(result) == 2
         for (tex,expected,found) in zip( textures, residents, result ):
             if expected != found:
-                print('Warning: texture %s residence expected %s got %s'%( tex, expected, found ))
+                print(('Warning: texture %s residence expected %s got %s'%( tex, expected, found )))
         
     if OpenGL.ALLOW_NUMPY_SCALARS:
         def test_passBackResults( self ):
