@@ -34,7 +34,7 @@ class GLSelectRecord( object ):
         result = []
         index = 0
         arrayLength = len(array)
-        for item in xrange( total ):
+        for item in range( total ):
             if index + 2 >= arrayLength:
                 break
             count = array[index]
