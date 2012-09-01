@@ -203,7 +203,7 @@ def glGetActiveUniformARB(baseOperation, program, index):
             baseOperation(program, index, length,namelen,size, gl_type, name)
             return name.value[:int(namelen[0])], size[0], gl_type[0]
         raise ValueError( """No currently specified uniform names""" )
-    raise IndexError, 'Index %s out of range 0 to %i' % (index, max_index - 1, )
+    raise IndexError('Index %s out of range 0 to %i' % (index, max_index - 1, ))
 
 @lazy( glGetUniformLocationARB )
 def glGetUniformLocationARB( baseOperation, program, name ):

@@ -42,7 +42,7 @@ def glGetActiveAttribARB(program, index):
         gl_type = arrays.GLuintArray.zeros( (1,))
         base_glGetActiveAttribARB(program, index, length, None, size, gl_type, name)
         return name.value, size[0], gl_type[0]
-    raise IndexError, 'index out of range from zero to %i' % (max_index - 1, )
+    raise IndexError('index out of range from zero to %i' % (max_index - 1, ))
 glGetActiveAttribARB.wrappedOperation = base_glGetActiveAttribARB
 
 @lazy( glGetAttribLocationARB )
