@@ -135,7 +135,7 @@ for name,function in [
     globals()[name] = function
 try:
     del name, function
-except NameError, err:
+except NameError as err:
     pass
 
 glVertexPointer = wrapper.wrapper( simple.glVertexPointer ).setPyConverter(
@@ -212,7 +212,7 @@ for type,suffix in ((simple.GL_UNSIGNED_BYTE,'ub'),(simple.GL_UNSIGNED_INT,'ui')
     globals()['glDrawElements%(suffix)s'%globals()] = glDrawElementsTyped( type,suffix )
 try:
     del type,suffix,glDrawElementsTyped
-except NameError, err:
+except NameError as err:
     pass
 
 # create buffer of given size and return it for future reference
@@ -248,7 +248,7 @@ def glRenderMode( newMode ):
     currentMode = glGetIntegerv( simple.GL_RENDER_MODE )
     try:
         currentMode = currentMode[0]
-    except (TypeError,ValueError,IndexError), err:
+    except (TypeError,ValueError,IndexError) as err:
         pass
     if currentMode in (simple.GL_RENDER,0):
         # no array needs to be returned...

@@ -19,7 +19,7 @@ DIRECT_RETURN_TYPES = (
 )
 try:
     del c
-except NameError, err:
+except NameError as err:
     pass
 
 class CtypesParameterHandler( formathandler.FormatHandler ):

@@ -12,7 +12,7 @@ ADT = None
 if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.arraydatatype import ArrayDatatype as ADT
-    except ImportError, err:
+    except ImportError as err:
         log.warn(
             "Unable to load ArrayDatatype accelerator from OpenGL_accelerate"
         )
@@ -29,7 +29,7 @@ if ADT is None:
             """Lookup of handler for given value"""
             try:
                 typ = value.__class__
-            except AttributeError, err:
+            except AttributeError as err:
                 typ = type(value)
             handler = self.get( typ )
             if not handler:
@@ -118,7 +118,7 @@ if ADT is None:
             """Given a value in a known data-pointer type, return long for pointer"""
             try:
                 return cls.getHandler(value).dataPointer( value )
-            except Exception, err:
+            except Exception as err:
                 log.warn(
                     """Failure in dataPointer for %s instance %s""", type(value), value,
                 )
@@ -129,7 +129,7 @@ if ADT is None:
             pointer = cls.dataPointer( value )
             try:
                 return ctypes.c_void_p(pointer)
-            except TypeError, err:
+            except TypeError as err:
                 return pointer
         voidDataPointer = classmethod( logs.logOnFail( voidDataPointer, log ) )
         def typedPointer( cls, value ):

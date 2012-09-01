@@ -99,7 +99,7 @@ class GLUTCallback( object ):
         ]))
         try:
             self.wrappedOperation = getattr( GLUT, 'glut%sFunc'%(typeName) )
-        except AttributeError, err:
+        except AttributeError as err:
             def failFunction( *args, **named ):
                 from OpenGL import error
                 raise error.NullFunctionError(
@@ -119,7 +119,7 @@ class GLUTCallback( object ):
                     if not CurrentContextIsValid():
                         raise RuntimeError( """No valid context!""" )
                     return function( *args, **named )
-                except Exception, err:
+                except Exception as err:
                     traceback.print_exc()
                     sys.stderr.write( """GLUT %s callback %s with %s,%s failed: returning None %s\n"""%(
                         self.typeName, function, args, named, err, 
@@ -337,7 +337,7 @@ def glutDestroyWindow( window ):
         context = contextdata.getContext()
         result = contextdata.cleanupContext( context )
         log.info( """Cleaning up context data for window %s: %s""", window, result )
-    except Exception, err:
+    except Exception as err:
         log.error( """Error attempting to clean up context data for GLUT window %s: %s""", window, result )
     return _base_glutDestroyWindow( window )
 glutDestroyWindow.wrappedOperation = simple.glutDestroyWindow

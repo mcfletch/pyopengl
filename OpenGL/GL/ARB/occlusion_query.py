@@ -111,5 +111,5 @@ for func in (
     )
 try:
     del func, glget
-except NameError, err:
+except NameError as err:
     pass

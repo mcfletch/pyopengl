@@ -93,7 +93,7 @@ glMap2d = glMap2( full.glMap2d, arrays.GLdoubleArray )
 glMap2f = glMap2( full.glMap2f, arrays.GLfloatArray )
 try:
     del glMap2
-except NameError, err:
+except NameError as err:
     pass
 
 def glMap1( baseFunction, arrayType ):
@@ -116,7 +116,7 @@ glMap1d = glMap1( full.glMap1d, arrays.GLdoubleArray )
 glMap1f = glMap1( full.glMap1f, arrays.GLfloatArray )
 try:
     del glMap1
-except NameError, err:
+except NameError as err:
     pass
 
 def glRasterPos( *args ):
@@ -333,7 +333,7 @@ def glAreTexturesResident( baseFunction, *args ):
     elif len(args) == 2:
         try:
             n = int( args[0] )
-        except TypeError, err:
+        except TypeError as err:
             textures = args[0]
             textures = arrays.GLuintArray.asArray( textures )
 

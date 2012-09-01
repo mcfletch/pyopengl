@@ -138,7 +138,7 @@ def glBufferSubDataARB( baseOperation, target, offset, size=None, data=None ):
     try:
         if size is not None:
             size = int( size )
-    except TypeError, err:
+    except TypeError as err:
         if data is not None:
             raise TypeError(
                 """Expect an integer size *or* a data-array, not both"""

@@ -80,7 +80,7 @@ class Implementation( object ):
             while buffers:
                 try:
                     buffer = buffers.pop()
-                except IndexError, err:
+                except IndexError as err:
                     break
                 else:
                     try:
@@ -88,11 +88,11 @@ class Implementation( object ):
                         # we have to pass an array-compatible type here...
                         buf = gluint( buffer )
                         self.glDeleteBuffers(1, buf)
-                    except (AttributeError, nfe), err:
+                    except (AttributeError, nfe) as err:
                         pass
             try:
                 self._DELETERS_.pop( key )
-            except KeyError, err:
+            except KeyError as err:
                 pass
         return doBufferDeletion
     _DELETERS_ = {}
@@ -118,7 +118,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
         from OpenGL_accelerate.vbo import (
             VBO,VBOOffset,VBOHandler,VBOOffsetHandler,
         )
-    except ImportError, err:
+    except ImportError as err:
         log.warn(
             "Unable to load VBO accelerator from OpenGL_accelerate"
         )
@@ -301,7 +301,7 @@ if VBO is None:
                 while self.buffers:
                     try:
                         self.implementation.glDeleteBuffers(1, self.buffers.pop(0))
-                    except (AttributeError,error.NullFunctionError), err:
+                    except (AttributeError,error.NullFunctionError) as err:
                         pass
         def __int__( self ):
             """Get our VBO id"""
@@ -421,7 +421,7 @@ def _cleaner( vbo ):
     def clean( ref ):
         try:
             _cleaners.pop( vbo )
-        except Exception, err:
+        except Exception as err:
             pass
         else:
             vbo.implementation.glUnmapBuffer( vbo.target )

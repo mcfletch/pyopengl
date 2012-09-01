@@ -18,7 +18,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
         from OpenGL_accelerate.arraydatatype import (
             AsArrayOfType,AsArrayTyped,AsArrayTypedSize
         )
-    except ImportError, err:
+    except ImportError as err:
         log.warn(
             "Unable to load arrayhelpers accelerator from OpenGL_accelerate"
         )

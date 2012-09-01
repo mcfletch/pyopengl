@@ -152,7 +152,7 @@ for (c,funcType) in GLUnurbs.CALLBACK_TYPES.items():
     assert cb.argtypes[-1] == funcType
 try:
     del c,cb, funcType
-except NameError, err:
+except NameError as err:
     pass
 
 def gluNurbsCallback( nurb, which, CallBackFunc ):
@@ -217,7 +217,7 @@ def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
     control = arrays.GLfloatArray.asArray( control )
     try:
         length,step = arrays.GLfloatArray.dimensions( control )
-    except ValueError, err:
+    except ValueError as err:
         raise error.GLUError( """Need a 2-dimensional control array""" )
     order = knotCount - length
     if _configflags.ERROR_CHECKING:
@@ -241,7 +241,7 @@ def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
 
     try:
         length,width,step = arrays.GLfloatArray.dimensions( control )
-    except ValueError, err:
+    except ValueError as err:
         raise error.GLUError( """Need a 3-dimensional control array""" )
     sOrder = sKnotCount - length
     tOrder = tKnotCount - width

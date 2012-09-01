@@ -105,7 +105,7 @@ def hasGLExtension( specifier ):
         if not AVAILABLE_GL_EXTENSIONS:
             try:
                 AVAILABLE_GL_EXTENSIONS[:] = glGetString( GL_EXTENSIONS ).split()
-            except (AttributeError, error.GLError), err:
+            except (AttributeError, error.GLError) as err:
                 # OpenGL 3.0 deprecates glGetString( GL_EXTENSIONS )
                 from OpenGL.GL.VERSION.GL_3_0 import GL_NUM_EXTENSIONS, glGetStringi
                 from OpenGL.GL import glGetIntegerv
@@ -156,7 +156,7 @@ class _Alternate( LateBind ):
         from OpenGL import error
         try:
             return bool( self.getFinalCall())
-        except error.NullFunctionError, err:
+        except error.NullFunctionError as err:
             return False
     __nonzero__ = __bool__ # Python 2.6 compatibility
     def finalise( self ):

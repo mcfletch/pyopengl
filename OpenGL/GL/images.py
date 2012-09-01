@@ -286,7 +286,7 @@ for suffix,type in [
 ##	"%s = glGetTexImage"%(suffix)
     try:
         del suffix,type
-    except NameError, err:
+    except NameError as err:
         pass
 # Now the real glReadPixels...
 def glReadPixels( x,y,width,height,format,type, array=None, outputType=str ):
@@ -574,9 +574,9 @@ for suffix,arrayConstant in [
         globals()[functionName] = function
         try:
             del function, functionName
-        except NameError, err:
+        except NameError as err:
             pass
     try:
         del suffix,arrayConstant
-    except NameError, err:
+    except NameError as err:
         pass

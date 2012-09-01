@@ -118,7 +118,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
         from OpenGL_accelerate.wrapper import (
             returnCArgument, returnPyArgument,
         )
-    except ImportError, err:
+    except ImportError as err:
         log.warn(
             "Unable to load converters accelerators (wrapper, arraydatatype) from OpenGL_accelerate"
         )
@@ -149,7 +149,7 @@ if CallFuncPyConverter is None:
             """Return pyArgs[self.index] or raise a ValueError"""
             try:
                 return pyArgs[ self.index ]
-            except IndexError, err:
+            except IndexError as err:
                 raise ValueError(
                     """Expected parameter index %r, but pyArgs only length %s"""%(
                     self.index,
@@ -168,7 +168,7 @@ if CallFuncPyConverter is None:
             """Return pyArgs[ self.index ]"""
             try:
                 return pyArgs[ self.index ]
-            except AttributeError, err:
+            except AttributeError as err:
                 raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
 
     class Output( CConverter ):
@@ -203,7 +203,7 @@ if CallFuncPyConverter is None:
             if thisSize == (1,):
                 try:
                     return result[0]
-                except TypeError, err:
+                except TypeError as err:
                     return result
             else:
                 return result
@@ -225,12 +225,12 @@ if CallFuncPyConverter is None:
             """Retrieve the array size for this argument"""
             try:
                 specifier = pyArgs[ self.index ]
-            except AttributeError, err:
+            except AttributeError as err:
                 raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
             else:
                 try:
                     return self.lookup( specifier )
-                except KeyError, err:
+                except KeyError as err:
                     raise KeyError( """Unknown specifier %s"""%( specifier ))
     class returnCArgument( ReturnValues ):
         """ReturnValues returning the named cArgs value"""

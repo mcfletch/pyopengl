@@ -53,7 +53,7 @@ glShaderSource = wrapper.wrapper(
 )
 try:
     del conv
-except NameError, err:
+except NameError as err:
     pass
 
 for size in (1,2,3,4):
@@ -70,11 +70,11 @@ for size in (1,2,3,4):
         )
         try:
             del format, arrayType
-        except NameError, err:
+        except NameError as err:
             pass
     try:
         del size,name
-    except NameError, err:
+    except NameError as err:
         pass
 
 @lazy( glGetShaderiv )

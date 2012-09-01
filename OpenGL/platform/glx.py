@@ -13,7 +13,7 @@ class GLXPlatform( baseplatform.BasePlatform ):
             'GL', 
             mode=ctypes.RTLD_GLOBAL 
         )
-    except OSError, err:
+    except OSError as err:
         raise ImportError("Unable to load OpenGL library", *err.args)
     try:
         GLU = ctypesloader.loadLibrary(
@@ -21,7 +21,7 @@ class GLXPlatform( baseplatform.BasePlatform ):
             'GLU',
             mode=ctypes.RTLD_GLOBAL 
         )
-    except OSError, err:
+    except OSError as err:
         GLU = None
     # glut shouldn't need to be global, but just in case a dependent library makes
     # the same assumption GLUT does...
@@ -31,7 +31,7 @@ class GLXPlatform( baseplatform.BasePlatform ):
             'glut', 
             mode=ctypes.RTLD_GLOBAL 
         )
-    except OSError, err:
+    except OSError as err:
         GLUT = None
     # GLX doesn't seem to have its own loadable module?
     GLX = GL
@@ -44,7 +44,7 @@ class GLXPlatform( baseplatform.BasePlatform ):
             'gle', 
             mode=ctypes.RTLD_GLOBAL 
         )
-    except OSError, err:
+    except OSError as err:
         GLE = None
 
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )

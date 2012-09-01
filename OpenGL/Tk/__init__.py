@@ -30,7 +30,7 @@ from OpenGL.GLU import *
 try:
     from Tkinter import _default_root
     from Tkinter import *
-except ImportError, err:
+except ImportError as err:
     log.error( """Unable to import Tkinter, likely need to install a separate package (python-tk) to have Tkinter support.  You likely also want to run the src/togl.py script in the PyOpenGL source distribution to install the Togl widget""" )
     raise
 import math
@@ -102,7 +102,7 @@ try:
         os.path.dirname(__file__),
         'togl-'+ sys.platform + suffix,
     )
-except NameError, err:
+except NameError as err:
     # no __file__, likely running as an egg
     TOGL_DLL_PATH = ""
 
@@ -113,7 +113,7 @@ _default_root.tk.call('lappend', 'auto_path', TOGL_DLL_PATH)
 _default_root.tk.call('package', 'require', 'Togl')
 try:
     _default_root.tk.eval('load {} Togl')
-except TclError, err:
+except TclError as err:
     log.error( """Failure loading Togl package: %s""", err )
     raise
 

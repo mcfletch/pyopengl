@@ -22,7 +22,7 @@ class NumberHandler( formathandler.FormatHandler ):
         """If it's a ctypes value, pass on, otherwise do asArray"""
         try:
             return ctypes.byref(value)
-        except TypeError, err:
+        except TypeError as err:
             err.args += (' If you have ERROR_ON_COPY enabled, remember to pass in an array to array-requiring functions.', )
             raise
     dataPointer = from_param
@@ -92,5 +92,5 @@ BYTE_SIZES = dict([
 
 try:
     del n,c
-except NameError, err:
+except NameError as err:
     pass

@@ -119,7 +119,7 @@ class GLError( Error ):
             try:
                 from OpenGL.GLU import gluErrorString
                 self.description = value = gluErrorString( self.err )
-            except Exception, err:
+            except Exception as err:
                 return None
         if value is None:
             return None
@@ -164,7 +164,7 @@ if _configflags.ERROR_CHECKING:
     if acceleratesupport.ACCELERATE_AVAILABLE:
         try:
             from OpenGL_accelerate.errorchecker import _ErrorChecker
-        except ImportError, err:
+        except ImportError as err:
             log.warn( """OpenGL_accelerate seems to be installed, but unable to import error checking entry point!""" )
     if _ErrorChecker is None:
         class _ErrorChecker( object ):

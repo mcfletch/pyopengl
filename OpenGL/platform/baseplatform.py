@@ -219,7 +219,7 @@ class BasePlatform( object ):
                     doc = doc, argNames = argNames,
                     extension = extension,
                 )
-        except AttributeError, err:
+        except AttributeError as err:
             result = self.nullFunction( 
                 functionName, dll=dll,
                 resultType=resultType, 
@@ -366,7 +366,7 @@ class _NullFunctionPointer( object ):
                 argNames = self.argNames,
                 extension = self.extension,
             )
-        except AttributeError, err:
+        except AttributeError as err:
             return None 
         else:
             # now short-circuit so that we don't need to check again...

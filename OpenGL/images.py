@@ -77,7 +77,7 @@ def rankPacking( rank ):
     for func,which,arg in RANK_PACKINGS[rank]:
         try:
             func(which,arg)
-        except Exception, err:
+        except Exception as err:
             # XXX should be logging a warning!
             pass
 

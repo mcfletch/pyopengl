@@ -48,7 +48,7 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
         """Given a data-value, calculate dimensions for the array"""
         try:
             return value.__class__.__component_count__
-        except AttributeError, err:
+        except AttributeError as err:
             dims = 1
             for length in self.dims( value ):
                 dims *= length
@@ -69,7 +69,7 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
         """Produce iterable of all dimensions"""
         try:
             return value.__class__.__dimensions__
-        except AttributeError, err:
+        except AttributeError as err:
             dimensions = []
             for base in self.types( value ):
                 length = getattr( base, '_length_', None)
@@ -85,7 +85,7 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
         """Determine unit size of an array (if possible)"""
         try:
             return value.__class__.__min_dimension__
-        except AttributeError, err:
+        except AttributeError as err:
             dim = self.dims( value )[-1]
             value.__class__.__min_dimension__ = dim
             return dim

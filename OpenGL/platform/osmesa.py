@@ -18,7 +18,7 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
             'OSMesa', 
             mode=ctypes.RTLD_GLOBAL 
         )
-    except OSError, err:
+    except OSError as err:
         raise ImportError("Unable to load OpenGL library", *err.args)
     try:
         GLU = ctypesloader.loadLibrary(
@@ -26,7 +26,7 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
             'GLU',
             mode=ctypes.RTLD_GLOBAL 
         )
-    except OSError, err:
+    except OSError as err:
         GLU = None
     # glut shouldn't need to be global, but just in case a dependent library makes
     # the same assumption GLUT does...
@@ -36,7 +36,7 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
             'glut', 
             mode=ctypes.RTLD_GLOBAL 
         )
-    except OSError, err:
+    except OSError as err:
         GLUT = None
 
     try:
@@ -45,7 +45,7 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
             'gle', 
             mode=ctypes.RTLD_GLOBAL 
         )
-    except OSError, err:
+    except OSError as err:
         GLE = None
 
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )

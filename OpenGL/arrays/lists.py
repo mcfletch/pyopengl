@@ -45,7 +45,7 @@ class ListHandler( formathandler.FormatHandler ):
     def from_param( self, instance, typeCode=None ):
         try:
             return ctypes.byref( instance )
-        except TypeError, err:
+        except TypeError as err:
             array = self.asArray( instance, typeCode )
             pp = ctypes.c_void_p( ctypes.addressof( array ) )
             pp._temporary_array_ = (array,)
@@ -72,7 +72,7 @@ class ListHandler( formathandler.FormatHandler ):
         """
         try:
             dimensions = [ len(x) ]
-        except (TypeError,AttributeError,ValueError), err:
+        except (TypeError,AttributeError,ValueError) as err:
             return []
         else:
             childDimension = None

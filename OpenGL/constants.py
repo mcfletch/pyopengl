@@ -43,10 +43,10 @@ def _defineType( name, baseType, convertFunc = long ):
             def from_param( x, typeCode=None ):
                 try:
                     return original( x )
-                except TypeError, err:
+                except TypeError as err:
                     try:
                         return original( convertFunc(x) )
-                    except TypeError, err2:
+                    except TypeError as err2:
                         raise err
             from_param = staticmethod( from_param )
             setattr( baseType, 'from_param', from_param )

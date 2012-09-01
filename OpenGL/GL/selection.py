@@ -57,7 +57,7 @@ class GLSelectRecord( object ):
         elif key in self.__slots__:
             try:
                 return getattr( self, key )
-            except AttributeError, err:
+            except AttributeError as err:
                 raise KeyError( """Don't have an index/key %r for %s instant"""%(
                     key, self.__class__,
                 ))

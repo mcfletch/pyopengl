@@ -6,7 +6,7 @@ formatted exception or err if traceback not available.
 """
 try:
     from cStringIO import StringIO
-except ImportError, err:
+except ImportError as err:
     from StringIO import StringIO
 import traceback, logging
 
@@ -30,7 +30,7 @@ def getException(error):
     """Get formatted traceback from exception"""
     try:
         return format_exc( limit=10 )
-    except Exception, err:
+    except Exception as err:
         return str( error )
 
 logging.Logger.getException = staticmethod( getException )
@@ -72,7 +72,7 @@ class _FullLoggedFunction( _LoggedFunction ):
         self._callTrace.info( '%s( %s )', function.__name__, argRepr )
         try:
             return function( *args, **named )
-        except Exception, err:
+        except Exception as err:
             self.log.warn(
                 """Failure on %s: %s""", function.__name__, self.log.getException( err )
             )
@@ -83,7 +83,7 @@ class _ErrorLoggedFunction ( _LoggedFunction ):
         function = getattr( self, '' )
         try:
             return function( *args, **named )
-        except Exception, err:
+        except Exception as err:
             self.log.warn(
                 """Failure on %s: %s""", function.__name__, self.log.getException( err )
             )

@@ -20,7 +20,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             PyArgCalculator,
             CArgumentCalculator,
         )
-    except ImportError, err:
+    except ImportError as err:
         log.warn( """OpenGL_accelerate seems to be installed, but unable to import expected wrapper entry points!""" )
 NULL = object()
 
@@ -103,7 +103,7 @@ class Wrapper( LateBind ):
             argNames = self.wrappedOperation.argNames
         try:
             return asList( argNames ).index( argName )
-        except (ValueError,IndexError), err:
+        except (ValueError,IndexError) as err:
             raise KeyError( """No argument %r in argument list %r"""%(
                 argName, argNames
             ))
@@ -112,7 +112,7 @@ class Wrapper( LateBind ):
         argNames = self.wrappedOperation.argNames
         try:
             return asList( argNames ).index( argName )
-        except (ValueError,IndexError), err:
+        except (ValueError,IndexError) as err:
             raise KeyError( """No argument %r in argument list %r"""%(
                 argName, argNames
             ))
@@ -259,7 +259,7 @@ class Wrapper( LateBind ):
         if function is NULL or ERROR_ON_COPY and not STORE_POINTERS:
             try:
                 del self.storeValues
-            except Exception, err:
+            except Exception as err:
                 pass
         else:
             self.storeValues = function
@@ -269,7 +269,7 @@ class Wrapper( LateBind ):
         if function is NULL:
             try:
                 del self.returnValues
-            except Exception, err:
+            except Exception as err:
                 pass
         else:
             self.returnValues = function
@@ -283,7 +283,7 @@ class Wrapper( LateBind ):
                     if hasattr( item, 'finalise' ):
                         try:
                             item.finalise( self )
-                        except Exception, err:
+                        except Exception as err:
                             raise error.Error(
                                 """Error finalising item %s in %s for %s (%r): %s"""%(
                                     i,attribute,self,item,err,
@@ -353,7 +353,7 @@ class Wrapper( LateBind ):
                         else:
                             try:
                                 yield converter(args[index], self, args)
-                            except Exception, err:
+                            except Exception as err:
                                 if hasattr( err, 'args' ):
                                     err.args += ( converter, )
                                 raise
@@ -372,7 +372,7 @@ class Wrapper( LateBind ):
                         if canCall:
                             try:
                                 yield converter( pyArgs, index, self )
-                            except Exception, err:
+                            except Exception as err:
                                 if hasattr( err, 'args' ):
                                     err.args += (
                                         """Failure in cConverter %r"""%(converter),
@@ -395,7 +395,7 @@ class Wrapper( LateBind ):
                         else:
                             try:
                                 yield converter( cArgs[i] )
-                            except Exception, err:
+                            except Exception as err:
                                 err.args += (converter,)
                                 raise
         else:
@@ -422,10 +422,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -451,10 +451,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -476,10 +476,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -498,10 +498,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -518,10 +518,10 @@ class Wrapper( LateBind ):
                                 cArguments = cArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -547,10 +547,10 @@ class Wrapper( LateBind ):
                                 cArguments = cArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -572,10 +572,10 @@ class Wrapper( LateBind ):
                                 cArguments = cArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -594,10 +594,10 @@ class Wrapper( LateBind ):
                                 cArguments = cArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -615,10 +615,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -644,10 +644,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -669,10 +669,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -691,10 +691,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -710,10 +710,10 @@ class Wrapper( LateBind ):
                                 cArguments = pyArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArguments
                                     err.pyArgs = pyArgs
                                     raise err
@@ -738,10 +738,10 @@ class Wrapper( LateBind ):
                                 cArguments = pyArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArguments
                                     err.pyArgs = pyArgs
                                     raise err
@@ -762,10 +762,10 @@ class Wrapper( LateBind ):
                                 cArguments = pyArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArguments
                                     err.pyArgs = pyArgs
                                     raise err
@@ -783,10 +783,10 @@ class Wrapper( LateBind ):
                                 cArguments = pyArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArguments
                                     err.pyArgs = pyArgs
                                     raise err
@@ -811,7 +811,7 @@ class Wrapper( LateBind ):
                                             cArgs.append(
                                                 converter( pyArgs, index, self )
                                             )
-                                        except Exception, err:
+                                        except Exception as err:
                                             if hasattr( err, 'args' ):
                                                 err.args += (
                                                     """Failure in cConverter %r"""%(converter),
@@ -821,10 +821,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -856,7 +856,7 @@ class Wrapper( LateBind ):
                                             cArgs.append(
                                                 converter( pyArgs, index, self )
                                             )
-                                        except Exception, err:
+                                        except Exception as err:
                                             if hasattr( err, 'args' ):
                                                 err.args += (
                                                     """Failure in cConverter %r"""%(converter),
@@ -866,10 +866,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -897,7 +897,7 @@ class Wrapper( LateBind ):
                                             cArgs.append(
                                                 converter( pyArgs, index, self )
                                             )
-                                        except Exception, err:
+                                        except Exception as err:
                                             if hasattr( err, 'args' ):
                                                 err.args += (
                                                     """Failure in cConverter %r"""%(converter),
@@ -907,10 +907,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -935,7 +935,7 @@ class Wrapper( LateBind ):
                                             cArgs.append(
                                                 converter( pyArgs, index, self )
                                             )
-                                        except Exception, err:
+                                        except Exception as err:
                                             if hasattr( err, 'args' ):
                                                 err.args += (
                                                     """Failure in cConverter %r"""%(converter),
@@ -945,10 +945,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -971,7 +971,7 @@ class Wrapper( LateBind ):
                                             cArgs.append(
                                                 converter( pyArgs, index, self )
                                             )
-                                        except Exception, err:
+                                        except Exception as err:
                                             if hasattr( err, 'args' ):
                                                 err.args += (
                                                     """Failure in cConverter %r"""%(converter),
@@ -981,10 +981,10 @@ class Wrapper( LateBind ):
                                 cArguments = cArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -1016,7 +1016,7 @@ class Wrapper( LateBind ):
                                             cArgs.append(
                                                 converter( pyArgs, index, self )
                                             )
-                                        except Exception, err:
+                                        except Exception as err:
                                             if hasattr( err, 'args' ):
                                                 err.args += (
                                                     """Failure in cConverter %r"""%(converter),
@@ -1026,10 +1026,10 @@ class Wrapper( LateBind ):
                                 cArguments = cArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -1057,7 +1057,7 @@ class Wrapper( LateBind ):
                                             cArgs.append(
                                                 converter( pyArgs, index, self )
                                             )
-                                        except Exception, err:
+                                        except Exception as err:
                                             if hasattr( err, 'args' ):
                                                 err.args += (
                                                     """Failure in cConverter %r"""%(converter),
@@ -1067,10 +1067,10 @@ class Wrapper( LateBind ):
                                 cArguments = cArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -1095,7 +1095,7 @@ class Wrapper( LateBind ):
                                             cArgs.append(
                                                 converter( pyArgs, index, self )
                                             )
-                                        except Exception, err:
+                                        except Exception as err:
                                             if hasattr( err, 'args' ):
                                                 err.args += (
                                                     """Failure in cConverter %r"""%(converter),
@@ -1105,10 +1105,10 @@ class Wrapper( LateBind ):
                                 cArguments = cArgs
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = pyArgs
                                     raise err
@@ -1125,10 +1125,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = args
                                     raise err
@@ -1153,10 +1153,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = args
                                     raise err
@@ -1177,10 +1177,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = args
                                     raise err
@@ -1198,10 +1198,10 @@ class Wrapper( LateBind ):
                                 cArguments = tuple(calculate_cArguments( cArgs ))
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArgs
                                     err.pyArgs = args
                                     raise err
@@ -1216,10 +1216,10 @@ class Wrapper( LateBind ):
                                 cArguments = args
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArguments
                                     err.pyArgs = args
                                     raise err
@@ -1243,10 +1243,10 @@ class Wrapper( LateBind ):
                                 cArguments = args
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArguments
                                     err.pyArgs = args
                                     raise err
@@ -1266,10 +1266,10 @@ class Wrapper( LateBind ):
                                 cArguments = args
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArguments
                                     err.pyArgs = args
                                     raise err
@@ -1286,10 +1286,10 @@ class Wrapper( LateBind ):
                                 cArguments = args
                                 try:
                                     result = self.wrappedOperation( *cArguments )
-                                except ctypes.ArgumentError, err:
+                                except ctypes.ArgumentError as err:
                                     err.args = err.args + (cArguments,)
                                     raise err
-                                except error.GLError, err:
+                                except error.GLError as err:
                                     err.cArgs = cArguments
                                     err.pyArgs = args
                                     raise err
@@ -1335,7 +1335,7 @@ class Wrapper( LateBind ):
                         cArgs.append(
                             converter( pyArgs, index, self )
                         )
-                    except Exception, err:
+                    except Exception as err:
                         if hasattr( err, 'args' ):
                             err.args += (
                                 """Failure in cConverter %r"""%(converter),
@@ -1356,10 +1356,10 @@ class Wrapper( LateBind ):
             cArguments = cArgs
         try:
             result = self.wrappedOperation( *cArguments )
-        except ctypes.ArgumentError, err:
+        except ctypes.ArgumentError as err:
             err.args = err.args + (cArguments,)
             raise err
-        except error.GLError, err:
+        except error.GLError as err:
             err.cArgs = cArgs
             err.pyArgs = pyArgs
             raise err

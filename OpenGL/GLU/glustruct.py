@@ -35,7 +35,7 @@ class GLUStruct( object ):
         identity = id(object)
         try:
             self.dataPointers[ identity ] = object
-        except AttributeError, err:
+        except AttributeError as err:
             self.dataPointers = { identity: object }
         return identity
     def originalObject( self, voidPointer ):
@@ -47,11 +47,11 @@ class GLUStruct( object ):
         else:
             try:
                 identity = voidPointer.value 
-            except AttributeError, err:
+            except AttributeError as err:
                 identity = voidPointer[0]
         try:
             return self.dataPointers[ identity ]
-        except (KeyError,AttributeError), err:
+        except (KeyError,AttributeError) as err:
             return voidPointer
     def addCallback( self, which, function ):
         """Register a callback for this structure object"""
@@ -69,7 +69,7 @@ class GLUStruct( object ):
         # XXX this is ugly, query to ctypes list on how to fix it...
         try:
             self.CALLBACK_FUNCTION_REGISTRARS[which]( self, which, cCallback )
-        except ctypes.ArgumentError, err:
+        except ctypes.ArgumentError as err:
             err.args += (which,cCallback)
             raise
         #gluTessCallbackBase( self, which, cCallback)
