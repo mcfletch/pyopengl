@@ -42,7 +42,7 @@ class NumericHandler( formathandler.FormatHandler ):
         if constant is None:
             raise TypeError(
                 """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
-                    typeCode, ARRAY_TO_GL_TYPE_MAPPING.keys(), value,
+                    typeCode, list(ARRAY_TO_GL_TYPE_MAPPING.keys()), value,
                 )
             )
         return constant

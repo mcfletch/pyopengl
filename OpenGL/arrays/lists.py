@@ -95,7 +95,7 @@ class ListHandler( formathandler.FormatHandler ):
             return result
         raise TypeError(
             """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
-                value._type_, ARRAY_TO_GL_TYPE_MAPPING.keys(), value,
+                value._type_, list(ARRAY_TO_GL_TYPE_MAPPING.keys()), value,
             )
         )
     def arraySize( self, value, typeCode = None ):
