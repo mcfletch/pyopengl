@@ -4,32 +4,14 @@ Adds constants to the log objects.
 Adds getException(err) to log objects to retrieve 
 formatted exception or err if traceback not available.
 """
-try:
-    from cStringIO import StringIO
-except ImportError as err:
-    from StringIO import StringIO
 import traceback, logging
-
-getLog = logging.getLogger
 from OpenGL._configflags import ERROR_LOGGING, FULL_LOGGING
-
-if not hasattr( traceback, 'format_exc' ):
-    # Python 2.3 and below... do we care any more?
-    def format_exc( limit ):
-        file = StringIO()
-        try:
-            traceback.print_exc( limit=10, file = file )
-            exception = file.getvalue()
-        finally:
-            file.close()
-        return exception
-else:
-    format_exc = traceback.format_exc
+getLog = logging.getLogger
 
 def getException(error):
     """Get formatted traceback from exception"""
     try:
-        return format_exc( limit=10 )
+        return traceback.format_exc( limit=10 )
     except Exception as err:
         return str( error )
 
