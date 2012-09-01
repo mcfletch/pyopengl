@@ -48,7 +48,7 @@ def checkFramebufferStatus():
     ]:
         if status == error_constant:
             status = error_constant
-            description = str(status)    
+            description = str(status)
     raise GLError( 
         err=status, 
         result=status, 

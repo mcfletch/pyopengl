@@ -6,6 +6,7 @@ from OpenGL import constants as data_types
 from OpenGL.lazywrapper import lazy
 from OpenGL.raw.GL.VERSION import GL_1_1 as simple
 from OpenGL.GL.VERSION import GL_1_1 as full
+from OpenGL._bytes import bytes,unicode,as_8_bit
 import OpenGL
 from OpenGL import _configflags
 import ctypes
@@ -140,13 +141,13 @@ def glVertex( *args ):
 
 @lazy( full.glCallLists )
 def glCallLists( baseFunction, lists, *args ):
-    """glCallLists( str( lists ) or lists[] ) -> None
+    """glCallLists( bytes( lists ) or lists[] ) -> None
 
     Restricted version of glCallLists, takes a string or a GLuint compatible
     array data-type and passes into the base function.
     """
     if not len(args):
-        if isinstance( lists, str ):
+        if isinstance( lists, bytes ):
             return baseFunction(
                 len(lists),
                 full.GL_UNSIGNED_BYTE,

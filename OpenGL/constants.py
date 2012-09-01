@@ -5,6 +5,7 @@ uses (note, doesn't include the OpenGL-ES types!)
 """
 import ctypes
 from OpenGL.constant import Constant
+from OpenGL._bytes import bytes,unicode,as_8_bit
 try:
     long 
 except NameError as err:
@@ -21,7 +22,7 @@ GL_UNSIGNED_INT = Constant( 'GL_UNSIGNED_INT', 0x1405 )
 GL_UNSIGNED_INT64 = Constant( 'GL_UNSIGNED_INT64_AMD', 0x8BC2 )
 GL_FLOAT = Constant( 'GL_FLOAT', 0x1406 )
 GL_DOUBLE = Constant( 'GL_DOUBLE', 0x140a )
-GL_CHAR = str
+GL_CHAR = bytes
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
 GL_VOID_P = object()
 

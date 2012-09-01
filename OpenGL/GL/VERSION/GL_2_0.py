@@ -31,7 +31,7 @@ glShaderSource = platform.createExtensionFunction(
     'glShaderSource', dll=platform.GL,
     resultType=None,
     argTypes=(constants.GLhandle, constants.GLsizei, ctypes.POINTER(ctypes.c_char_p), arrays.GLintArray,),
-    doc = 'glShaderSource( GLhandle(shaderObj),[str(string),...]) -> None',
+    doc = 'glShaderSource( GLhandle(shaderObj),[bytes(string),...]) -> None',
     argNames = ('shaderObj', 'count', 'string', 'length',),
     extension = EXTENSION_NAME,
 )

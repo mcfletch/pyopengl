@@ -60,7 +60,7 @@ class IntConstant( NumericConstant, int ):
 class FloatConstant( NumericConstant, float ):
     """Float constant"""
 
-class StringConstant( Constant, str ):
+class StringConstant( Constant, bytes ):
     """String constants"""
     def __repr__( self ):
         """Return the value as a human-friendly string"""

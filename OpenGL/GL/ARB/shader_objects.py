@@ -59,7 +59,7 @@ glShaderSourceARB = platform.createExtensionFunction(
     'glShaderSourceARB', dll=platform.GL,
     resultType=None,
     argTypes=(constants.GLhandleARB, constants.GLsizei, ctypes.POINTER(ctypes.c_char_p), arrays.GLintArray,),
-    doc = 'glShaderSourceARB( GLhandleARB(shaderObj), [str(string),...] ) -> None',
+    doc = 'glShaderSourceARB( GLhandleARB(shaderObj), [bytes(string),...] ) -> None',
     argNames = ('shaderObj', 'count', 'string', 'length',),
     extension = EXTENSION_NAME,
 )
