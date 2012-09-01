@@ -90,6 +90,7 @@ class Wrapper( LateBind ):
     def __nonzero__( self ):
         """Is this function/wrapper available?"""
         return bool( self.wrappedOperation )
+    __bool__ = __nonzero__
     def __setattr__( self, key, value ):
         """Forward attribute setting to our wrappedOperation"""
         if key in self.localProperties:

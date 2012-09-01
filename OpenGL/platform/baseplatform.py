@@ -352,6 +352,7 @@ class _NullFunctionPointer( object ):
         if self.extension and not self.resolved:
             self.load()
         return self.resolved
+    __bool__ = __nonzero__
     def load( self ):
         """Attempt to load the function again, presumably with a context this time"""
         from OpenGL import platform

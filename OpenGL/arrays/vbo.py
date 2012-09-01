@@ -70,6 +70,7 @@ class Implementation( object ):
             self.available = True
     def __nonzero__( self ):
         return self.available
+    __bool__ = __nonzero__
     def deleter( self, buffers, key):
         """Produce a deleter callback to delete the given buffer"""
         # these values are stored here to avoid them being cleaned up 
