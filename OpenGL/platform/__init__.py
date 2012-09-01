@@ -40,7 +40,10 @@ def types(resultType,*argTypes):
         """Adds the given metadata to the function, introspects var names from declaration"""
         function.resultType = resultType
         function.argTypes = argTypes 
-        function.argNames = function.func_code.co_varnames
+        if hasattr( function, 'func_code' ): # python 2.x
+            function.argNames = function.func_code.co_varnames
+        else:
+            function.argNames = function.__code__.co_varnames
         return function 
     return add_types
 
