@@ -65,6 +65,19 @@ VERSION_EXTENSIONS = [
         'GL_ARB_vertex_attrib_64bit',
         'GL_ARB_viewport_array',
     ]),
+    ((4,2), [
+        'GL_ARB_base_instance',
+        'GL_ARB_shading_language_420pack',
+        'GL_ARB_transform_feedback_instanced',
+        'GL_ARB_compressed_texture_pixel_storage',
+        'GL_ARB_conservative_depth',
+        'GL_ARB_internalformat_query',
+        'GL_ARB_map_buffer_alignment',
+        'GL_ARB_shader_atomic_counters',
+        'GL_ARB_shader_image_load_store',
+        'GL_ARB_shading_language_packing',
+        'GL_ARB_texture_storage',
+    ]),
 ]
 
 def getGLVersion( ):
