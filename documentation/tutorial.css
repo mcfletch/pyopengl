@@ -1,39 +1,41 @@
-h1,h2,h3 {
-	color: #111144;
-	background-image: url(../greypinstripe.png);
-	border-top-style: solid; 
-	border-top-width: 1 
+body {
+    margin: 0;
+    padding: 0;
 }
-.footer {
+h1 {
+    margin-top: 0;
+    padding-top: .25em;
+}
+h1,h2,h3 {
+    padding-left: .25em;
 	color: #111144;
-	background-image: url(../greypinstripe.png);
-	text-align: center;
-	border-bottom-style: solid; 
-	border-bottom-width: 1 
+	background-image: url(greypinstripe.png);
+	border-top-style: solid; 
+	border-top-width: 1px;
 }
 .introduction {
-	margin-left: 60;
-	margin-right: 60;
+	margin-left: 60px;
+	margin-right: 60px;
 	color: #555555;
 }
 .technical {
-	margin-left: 60;
-	margin-right: 60;
+	margin-left: 60px;
+	margin-right: 60px;
 	color: #557755;
 }
 p {
-	margin-left: 10;
-	margin-right: 10;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 ul {
-	margin-left: 30;
+	margin-left: 30px;
 }
 pre {
 	background-color: #ffffcc; 
-	margin-left: 60;
+	margin-left: 60px;
 }
 blockquote {
-	margin-left: 90;
+	margin-left: 90px;
 }
 body {
 	background-color: #FFFFFF; 
