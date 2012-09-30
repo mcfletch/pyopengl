@@ -2,31 +2,31 @@ h1,h2,h3 {
 	color: #111144;
 	background-image: url(greypinstripe.png);
 	border-top-style: solid; 
-	border-top-width: 1 
+	border-top-width: 1px;
 }
 .introduction {
-	margin-left: 60;
-	margin-right: 60;
+	margin-left: 60px;
+	margin-right: 60px;
 	color: #555555;
 }
 .technical {
-	margin-left: 60;
-	margin-right: 60;
+	margin-left: 60px;
+	margin-right: 60px;
 	color: #557755;
 }
 p {
-	margin-left: 10;
-	margin-right: 10;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 ul {
-	margin-left: 30;
+	margin-left: 30px;
 }
 pre {
 	background-color: #ffffcc; 
-	margin-left: 60;
+	margin-left: 60px;
 }
 blockquote {
-	margin-left: 90;
+	margin-left: 90px;
 }
 body {
 	background-color: #FFFFFF; 
