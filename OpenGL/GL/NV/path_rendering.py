@@ -239,7 +239,7 @@ Overview (from the spec)
 	    const unsigned char *word = "OpenGL";
 	    const GLsizei wordLen = (GLsizei)strlen(word);
 	    const GLfloat emScale = 2048;  // match TrueType convention
-	    GLuint templatePathObject = ~0;  // Non-existant path object
+	    GLuint templatePathObject = ~0;  // Non-existent path object
 	    glPathGlyphsNV(glyphBase,
 	                   GL_SYSTEM_FONT_NAME_NV, "Helvetica", GL_BOLD_BIT_NV,
 	                   wordLen, GL_UNSIGNED_BYTE, word,

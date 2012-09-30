@@ -20,7 +20,7 @@ Overview (from the spec)
 	antialiasing.  The technique separates "samples" into two types of
 	samples.  "Color samples" are samples with color, depth, and 
 	stencil information stored in the multisample buffer.  "Coverage
-	samples include both color samples and additional samples that only
+	samples" include both color samples and additional samples that only
 	provide pixel coverage information.
 	
 	This extension follows the example of the

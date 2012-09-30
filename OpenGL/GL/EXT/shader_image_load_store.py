@@ -30,10 +30,11 @@ Overview (from the spec)
 	shaders to write to texture and buffer object memory using the built-in
 	image functions, such optimizations could lead to non-deterministic
 	results.  To avoid this, implementations supporting this extension may not
-	perform such optimizations.  However, enabling early per-fragment tests
-	guarantees that such tests will be performed prior to fragment shader
-	execution, and ensures that image stores and atomics will not be performed
-	by fragment shader invocations where these per-fragment tests fail.
+	perform such optimizations on shaders having such side effects.  However,
+	enabling early per-fragment tests guarantees that such tests will be
+	performed prior to fragment shader execution, and ensures that image
+	stores and atomics will not be performed by fragment shader invocations
+	where these per-fragment tests fail.
 	
 	Finally, this extension provides both a GLSL built-in function and an
 	OpenGL API function allowing applications some control over the ordering
