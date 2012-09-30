@@ -89,6 +89,22 @@
                 <paramdef>const GLint * <parameter>params</parameter></paramdef>
             </funcprototype>
         </funcsynopsis>
+        <funcsynopsis>
+            <funcprototype>
+                <funcdef>void <function>glSamplerParameterIiv</function></funcdef>
+                <paramdef>GLuint <parameter>sampler</parameter></paramdef>
+                <paramdef>GLenum <parameter>pname</parameter></paramdef>
+                <paramdef>const GLint *<parameter>params</parameter></paramdef>
+            </funcprototype>
+        </funcsynopsis>
+        <funcsynopsis>
+            <funcprototype>
+                <funcdef>void <function>glSamplerParameterIuiv</function></funcdef>
+                <paramdef>GLuint <parameter>sampler</parameter></paramdef>
+                <paramdef>GLenum <parameter>pname</parameter></paramdef>
+                <paramdef>const GLuint *<parameter>params</parameter></paramdef>
+            </funcprototype>
+        </funcsynopsis>
     </refsynopsisdiv>
     <refsect1 id="parameters2"><title>Parameters</title>
         <variablelist>

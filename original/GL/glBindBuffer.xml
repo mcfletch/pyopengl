@@ -40,6 +40,7 @@
                     <constant>GL_ELEMENT_ARRAY_BUFFER</constant>,
                     <constant>GL_PIXEL_PACK_BUFFER</constant>,
                     <constant>GL_PIXEL_UNPACK_BUFFER</constant>,
+                    <constant>GL_SHADER_STORAGE_BUFFER</constant>,
                     <constant>GL_TEXTURE_BUFFER</constant>,
                     <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant>, or
                     <constant>GL_UNIFORM_BUFFER</constant>.
@@ -153,11 +154,12 @@
             <constant>GL_TRANSFORM_FEEDABCK_BUFFER</constant> binding.
         </para>
         <para>
-            Likewise, the <constant>GL_UNIFORM_BUFFER</constant> and <constant>GL_ATOMIC_COUNTER_BUFFER</constant> buffer binding points may
-            be used, but do not directly affect uniform buffer or atomic counter buffer state, respectively.
+            Likewise, the <constant>GL_UNIFORM_BUFFER</constant>, <constant>GL_ATOMIC_COUNTER_BUFFER</constant> and <constant>GL_SHADER_STORAGE_BUFFER</constant>
+            buffer binding points may
+            be used, but do not directly affect uniform buffer, atomic counter buffer or shader storage buffer state, respectively.
             <citerefentry><refentrytitle>glBindBufferBase</refentrytitle></citerefentry>
             or <citerefentry><refentrytitle>glBindBufferRange</refentrytitle></citerefentry> must be used to bind a buffer to
-            an indexed uniform buffer or atomic counter buffer binding point.
+            an indexed uniform buffer, atomic counter buffer or shader storage buffer binding point.
         </para>
         <para>
             A buffer object binding created with <function>glBindBuffer</function> remains active until a different
@@ -179,7 +181,7 @@
             The <constant>GL_ATOMIC_COUNTER_BUFER</constant> target is available only if the GL version is 4.2 or greater.
         </para>
         <para>
-            The <constant>GL_DISPATCH_INDIRECT_BUFFER</constant> target is available only if the GL version is 4.3 or greater.
+            The <constant>GL_DISPATCH_INDIRECT_BUFFER</constant> and <constant>GL_SHADER_STORAGE_BUFFER</constant> targets are available only if the GL version is 4.3 or greater.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
@@ -219,6 +221,9 @@
         </para>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_PIXEL_UNPACK_BUFFER_BINDING</constant>
+        </para>
+        <para>
+            <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_SHADER_STORAGE_BUFFER_BINDING</constant>
         </para>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_TRANSFORM_FEEDBACK_BUFFER_BINDING</constant>

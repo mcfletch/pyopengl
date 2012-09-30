@@ -17,7 +17,7 @@
     <refsynopsisdiv><title>C Specification</title>
         <funcsynopsis>
             <funcprototype>
-                <funcdef>void <function>glGetFramebufferAttachmentParameter</function></funcdef>
+                <funcdef>void <function>glGetFramebufferAttachmentParameteriv</function></funcdef>
                 <paramdef>GLenum <parameter>target</parameter></paramdef>
                 <paramdef>GLenum <parameter>attachment</parameter></paramdef>
                 <paramdef>GLenum <parameter>pname</parameter></paramdef>
