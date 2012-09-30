@@ -63,7 +63,44 @@ GL_TEXTURE_COMPRESSED_IMAGE_SIZE 0x86A0
 GL_TEXTURE_COMPRESSED 0x86A1
 GL_NUM_COMPRESSED_TEXTURE_FORMATS 0x86A2
 GL_COMPRESSED_TEXTURE_FORMATS 0x86A3
-GL_CLAMP_TO_BORDER 0x812D""", globals())
+GL_CLAMP_TO_BORDER 0x812D
+GL_CLIENT_ACTIVE_TEXTURE 0x84E1
+GL_MAX_TEXTURE_UNITS 0x84E2
+GL_TRANSPOSE_MODELVIEW_MATRIX 0x84E3
+GL_TRANSPOSE_PROJECTION_MATRIX 0x84E4
+GL_TRANSPOSE_TEXTURE_MATRIX 0x84E5
+GL_TRANSPOSE_COLOR_MATRIX 0x84E6
+GL_MULTISAMPLE_BIT 0x20000000
+GL_NORMAL_MAP 0x8511
+GL_REFLECTION_MAP 0x8512
+GL_COMPRESSED_ALPHA 0x84E9
+GL_COMPRESSED_LUMINANCE 0x84EA
+GL_COMPRESSED_LUMINANCE_ALPHA 0x84EB
+GL_COMPRESSED_INTENSITY 0x84EC
+GL_COMBINE 0x8570
+GL_COMBINE_RGB 0x8571
+GL_COMBINE_ALPHA 0x8572
+GL_SOURCE0_RGB 0x8580
+GL_SOURCE1_RGB 0x8581
+GL_SOURCE2_RGB 0x8582
+GL_SOURCE0_ALPHA 0x8588
+GL_SOURCE1_ALPHA 0x8589
+GL_SOURCE2_ALPHA 0x858A
+GL_OPERAND0_RGB 0x8590
+GL_OPERAND1_RGB 0x8591
+GL_OPERAND2_RGB 0x8592
+GL_OPERAND0_ALPHA 0x8598
+GL_OPERAND1_ALPHA 0x8599
+GL_OPERAND2_ALPHA 0x859A
+GL_RGB_SCALE 0x8573
+GL_ADD_SIGNED 0x8574
+GL_INTERPOLATE 0x8575
+GL_SUBTRACT 0x84E7
+GL_CONSTANT 0x8576
+GL_PRIMARY_COLOR 0x8577
+GL_PREVIOUS 0x8578
+GL_DOT3_RGB 0x86AE
+GL_DOT3_RGBA 0x86AF""", globals())
 glget.addGLGetConstant( GL_ACTIVE_TEXTURE, (1,) )
 glget.addGLGetConstant( GL_MULTISAMPLE, (1,) )
 glget.addGLGetConstant( GL_SAMPLE_ALPHA_TO_COVERAGE, (1,) )
@@ -79,6 +116,12 @@ glget.addGLGetConstant( GL_MAX_CUBE_MAP_TEXTURE_SIZE, (1,) )
 glget.addGLGetConstant( GL_TEXTURE_COMPRESSION_HINT, (1,) )
 glget.addGLGetConstant( GL_NUM_COMPRESSED_TEXTURE_FORMATS, (1,) )
 glget.addGLGetConstant( GL_COMPRESSED_TEXTURE_FORMATS, (1,) )
+glget.addGLGetConstant( GL_CLIENT_ACTIVE_TEXTURE, (1,) )
+glget.addGLGetConstant( GL_MAX_TEXTURE_UNITS, (1,) )
+glget.addGLGetConstant( GL_TRANSPOSE_MODELVIEW_MATRIX, (4,4) )
+glget.addGLGetConstant( GL_TRANSPOSE_PROJECTION_MATRIX, (4,4) )
+glget.addGLGetConstant( GL_TRANSPOSE_TEXTURE_MATRIX, (4,4) )
+glget.addGLGetConstant( GL_TRANSPOSE_COLOR_MATRIX, (4,4) )
 @_f
 @_p.types(None,_cs.GLenum)
 def glActiveTexture( texture ):pass
@@ -106,5 +149,115 @@ def glCompressedTexSubImage1D( target,level,xoffset,width,format,imageSize,data 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,ctypes.c_void_p)
 def glGetCompressedTexImage( target,level,img ):pass
-# import deprecated
-from OpenGL.raw.GL.VERSION.GL_1_3_DEPRECATED import *
+@_f
+@_p.types(None,_cs.GLenum)
+def glClientActiveTexture( texture ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLdouble)
+def glMultiTexCoord1d( target,s ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
+def glMultiTexCoord1dv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLfloat)
+def glMultiTexCoord1f( target,s ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMultiTexCoord1fv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLint)
+def glMultiTexCoord1i( target,s ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLintArray)
+def glMultiTexCoord1iv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLshort)
+def glMultiTexCoord1s( target,s ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLshortArray)
+def glMultiTexCoord1sv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble)
+def glMultiTexCoord2d( target,s,t ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
+def glMultiTexCoord2dv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat)
+def glMultiTexCoord2f( target,s,t ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMultiTexCoord2fv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint)
+def glMultiTexCoord2i( target,s,t ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLintArray)
+def glMultiTexCoord2iv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort)
+def glMultiTexCoord2s( target,s,t ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLshortArray)
+def glMultiTexCoord2sv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
+def glMultiTexCoord3d( target,s,t,r ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
+def glMultiTexCoord3dv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
+def glMultiTexCoord3f( target,s,t,r ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMultiTexCoord3fv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint)
+def glMultiTexCoord3i( target,s,t,r ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLintArray)
+def glMultiTexCoord3iv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort,_cs.GLshort)
+def glMultiTexCoord3s( target,s,t,r ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLshortArray)
+def glMultiTexCoord3sv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
+def glMultiTexCoord4d( target,s,t,r,q ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
+def glMultiTexCoord4dv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
+def glMultiTexCoord4f( target,s,t,r,q ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMultiTexCoord4fv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
+def glMultiTexCoord4i( target,s,t,r,q ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLintArray)
+def glMultiTexCoord4iv( target,v ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort,_cs.GLshort,_cs.GLshort)
+def glMultiTexCoord4s( target,s,t,r,q ):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLshortArray)
+def glMultiTexCoord4sv( target,v ):pass
+@_f
+@_p.types(None,arrays.GLfloatArray)
+def glLoadTransposeMatrixf( m ):pass
+@_f
+@_p.types(None,arrays.GLdoubleArray)
+def glLoadTransposeMatrixd( m ):pass
+@_f
+@_p.types(None,arrays.GLfloatArray)
+def glMultTransposeMatrixf( m ):pass
+@_f
+@_p.types(None,arrays.GLdoubleArray)
+def glMultTransposeMatrixd( m ):pass
+

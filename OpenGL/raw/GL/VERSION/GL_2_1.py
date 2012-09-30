@@ -20,7 +20,14 @@ GL_SRGB8 0x8C41
 GL_SRGB_ALPHA 0x8C42
 GL_SRGB8_ALPHA8 0x8C43
 GL_COMPRESSED_SRGB 0x8C48
-GL_COMPRESSED_SRGB_ALPHA 0x8C49""", globals())
+GL_COMPRESSED_SRGB_ALPHA 0x8C49
+GL_CURRENT_RASTER_SECONDARY_COLOR 0x845F
+GL_SLUMINANCE_ALPHA 0x8C44
+GL_SLUMINANCE8_ALPHA8 0x8C45
+GL_SLUMINANCE 0x8C46
+GL_SLUMINANCE8 0x8C47
+GL_COMPRESSED_SLUMINANCE 0x8C4A
+GL_COMPRESSED_SLUMINANCE_ALPHA 0x8C4B""", globals())
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
 def glUniformMatrix2x3fv( location,count,transpose,value ):pass
@@ -39,5 +46,4 @@ def glUniformMatrix3x4fv( location,count,transpose,value ):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
 def glUniformMatrix4x3fv( location,count,transpose,value ):pass
-# import deprecated
-from OpenGL.raw.GL.VERSION.GL_2_1_DEPRECATED import *
+

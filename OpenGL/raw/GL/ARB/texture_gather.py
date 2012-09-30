@@ -3,7 +3,8 @@ from OpenGL import platform as _p
 from OpenGL.GL import glget
 EXTENSION_NAME = 'GL_ARB_texture_gather'
 _p.unpack_constants( """GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB 0x8E5E
-GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB 0x8E5F""", globals())
+GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB 0x8E5F
+GL_MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB 0x8F9F""", globals())
 
 
 def glInitTextureGatherARB():

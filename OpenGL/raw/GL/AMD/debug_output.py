@@ -5,7 +5,8 @@ import ctypes
 EXTENSION_NAME = 'GL_AMD_debug_output'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_debug_output',False)
-_p.unpack_constants( """GL_MAX_DEBUG_LOGGED_MESSAGES_AMD 0x9144
+_p.unpack_constants( """GL_MAX_DEBUG_MESSAGE_LENGTH_AMD 0x9143
+GL_MAX_DEBUG_LOGGED_MESSAGES_AMD 0x9144
 GL_DEBUG_LOGGED_MESSAGES_AMD 0x9145
 GL_DEBUG_SEVERITY_HIGH_AMD 0x9146
 GL_DEBUG_SEVERITY_MEDIUM_AMD 0x9147

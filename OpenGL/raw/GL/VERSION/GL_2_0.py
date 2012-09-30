@@ -84,7 +84,11 @@ GL_LOWER_LEFT 0x8CA1
 GL_UPPER_LEFT 0x8CA2
 GL_STENCIL_BACK_REF 0x8CA3
 GL_STENCIL_BACK_VALUE_MASK 0x8CA4
-GL_STENCIL_BACK_WRITEMASK 0x8CA5""", globals())
+GL_STENCIL_BACK_WRITEMASK 0x8CA5
+GL_VERTEX_PROGRAM_TWO_SIDE 0x8643
+GL_POINT_SPRITE 0x8861
+GL_COORD_REPLACE 0x8862
+GL_MAX_TEXTURE_COORDS 0x8871""", globals())
 glget.addGLGetConstant( GL_BLEND_EQUATION_RGB, (1,) )
 glget.addGLGetConstant( GL_VERTEX_PROGRAM_POINT_SIZE, (1,) )
 glget.addGLGetConstant( GL_STENCIL_BACK_FUNC, (1,) )
@@ -122,6 +126,9 @@ glget.addGLGetConstant( GL_POINT_SPRITE_COORD_ORIGIN, (1,) )
 glget.addGLGetConstant( GL_STENCIL_BACK_REF, (1,) )
 glget.addGLGetConstant( GL_STENCIL_BACK_VALUE_MASK, (1,) )
 glget.addGLGetConstant( GL_STENCIL_BACK_WRITEMASK, (1,) )
+glget.addGLGetConstant( GL_VERTEX_PROGRAM_TWO_SIDE, (1,) )
+glget.addGLGetConstant( GL_POINT_SPRITE, (1,) )
+glget.addGLGetConstant( GL_MAX_TEXTURE_COORDS, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
 def glBlendEquationSeparate( modeRGB,modeAlpha ):pass
@@ -401,5 +408,4 @@ def glVertexAttrib4usv( index,v ):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLsizei,ctypes.c_void_p)
 def glVertexAttribPointer( index,size,type,normalized,stride,pointer ):pass
-# import deprecated
-from OpenGL.raw.GL.VERSION.GL_2_0_DEPRECATED import *
+

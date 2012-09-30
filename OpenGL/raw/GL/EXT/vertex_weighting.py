@@ -28,7 +28,7 @@ def glVertexWeightfEXT( weight ):pass
 @_p.types(None,arrays.GLfloatArray)
 def glVertexWeightfvEXT( weight ):pass
 @_f
-@_p.types(None,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
+@_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glVertexWeightPointerEXT( size,type,stride,pointer ):pass
 
 

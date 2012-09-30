@@ -104,7 +104,10 @@ GL_QUERY_BY_REGION_WAIT 0x8E15
 GL_QUERY_BY_REGION_NO_WAIT 0x8E16
 GL_BUFFER_ACCESS_FLAGS 0x911F
 GL_BUFFER_MAP_LENGTH 0x9120
-GL_BUFFER_MAP_OFFSET 0x9121""", globals())
+GL_BUFFER_MAP_OFFSET 0x9121
+GL_CLAMP_VERTEX_COLOR 0x891A
+GL_CLAMP_FRAGMENT_COLOR 0x891B
+GL_ALPHA_INTEGER 0x8D97""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLboolean,_cs.GLboolean,_cs.GLboolean,_cs.GLboolean)
 def glColorMaski( index,r,g,b,a ):pass
@@ -279,5 +282,4 @@ def glClearBufferfi( buffer,drawbuffer,depth,stencil ):pass
 @_f
 @_p.types(arrays.GLubyteArray,_cs.GLenum,_cs.GLuint)
 def glGetStringi( name,index ):pass
-# import deprecated
-from OpenGL.raw.GL.VERSION.GL_3_0_DEPRECATED import *
+

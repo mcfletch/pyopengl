@@ -28,6 +28,12 @@ def glPixelTransformParameterivEXT( target,pname,params ):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glPixelTransformParameterfvEXT( target,pname,params ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
+def glGetPixelTransformParameterivEXT( target,pname,params ):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
+def glGetPixelTransformParameterfvEXT( target,pname,params ):pass
 
 
 def glInitPixelTransformEXT():

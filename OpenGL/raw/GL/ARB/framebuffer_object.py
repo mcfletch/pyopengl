@@ -80,7 +80,10 @@ GL_RENDERBUFFER_ALPHA_SIZE 0x8D53
 GL_RENDERBUFFER_DEPTH_SIZE 0x8D54
 GL_RENDERBUFFER_STENCIL_SIZE 0x8D55
 GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE 0x8D56
-GL_MAX_SAMPLES 0x8D57""", globals())
+GL_MAX_SAMPLES 0x8D57
+GL_INDEX 0x8222
+GL_TEXTURE_LUMINANCE_TYPE 0x8C14
+GL_TEXTURE_INTENSITY_TYPE 0x8C15""", globals())
 glget.addGLGetConstant( GL_MAX_RENDERBUFFER_SIZE, (1,) )
 glget.addGLGetConstant( GL_RENDERBUFFER_BINDING, (1,) )
 glget.addGLGetConstant( GL_MAX_COLOR_ATTACHMENTS, (1,) )
@@ -145,8 +148,7 @@ def glRenderbufferStorageMultisample( target,samples,internalformat,width,height
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint)
 def glFramebufferTextureLayer( target,attachment,texture,level,layer ):pass
-# import deprecated
-from OpenGL.raw.GL.ARB.framebuffer_object_DEPRECATED import *
+
 
 def glInitFramebufferObjectARB():
     '''Return boolean indicating whether this extension is available'''
