@@ -1,39 +1,50 @@
+h2 {
+    font-size: 105%;
+    font-weight: bold;
+}
 pre {
-	color: #000080; 
-	margin-left: 90;
+    color: #000080; 
+    margin-left: 90;
 }
 p {
-	margin-left: 10;
-	margin-right: 10;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 ul {
-	margin-left: 30;
+    margin-left: 30px;
 }
 blockquote {
-	margin-left: 90;
+    margin-left: 90px;
 }
 th {
-	// background-color: #F5F5F5; 
-	background-image: url(greypinstripe.png);
-	color: #111144;
+    background-image: url(greypinstripe.png);
+    color: #111144;
+    vertical-align: top;
 }
-td {
-	vertical-align: top;
+th.noback {
+    background-color: white;
+    background-image: none;
 }
+td, th {
+    vertical-align: top;
+}
+
+
 body {
-	background-color: #FFFFFF; 
-	color: #000000;
-	font-family: Arial, Helvetica;
+    background-color: #FFFFFF; 
+    color: #000000;
+    font-family: Arial, Helvetica;
+    margin: 0;
 }
 a:link {
-	color: #3333e0;
-	text-decoration: none;
+    color: #3333e0;
+    text-decoration: none;
 }
 a:visited {
-	color: #1111aa;
-	text-decoration: none;
+    color: #1111aa;
+    text-decoration: none;
 }
 a:active {
-	color: #111133;
-	text-decoration: none;
+    color: #111133;
+    text-decoration: none;
 }
