@@ -1,124 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html><head>
-
-
-  
-  
-  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-
-
-  
-  
-  
-  
-  
-  <title>Installing (and Building) PyOpenGL</title><link rel="stylesheet" type="text/css" href="tutorial.css">
-
-
-  
-  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Installing PyOpenGL</title><link rel="stylesheet" type="text/css" href="tutorial.css">
   <meta name="author" content="Mike C. Fletcher"></head>
-
 <body>
+<h1>Installing PyOpenGL</h1>
 
+<p>Most users of PyOpenGL should use <a href="http://pypi.python.org/pypi/pip">pip</a> 
+to install PyOpenGL automatically.  It can be installed either to the system Python or a 
+<a href="http://pypi.python.org/pypi/virtualenv">Virtualenv</a>.</p>
+<pre>$ pip install PyOpenGL PyOpenGL_accelerate</pre>
 
-<h1>Installing (and Building) PyOpenGL</h1>
+<h2>Manual Installation</h2>
+<p>If you cannot, or would prefer not to, use <code>pip</code>, 
+you can download the package from the 
+    <a href="http://pypi.python.org/pypi/PyOpenGL">PyOpenGL PyPI page</a>.
+The package uses <a href="http://pypi.python.org/pypi/distribute">Distribute</a> 
+for its installation.</p>
+<pre>$ tar -zxvf PyOpenGL-3.0.2.tar.gz
+$ cd PyOpenGL-3.0.2
+$ python setup.py install</pre>
+<p>If you would like the (optional) PyOpenGL-accelerate package, download it from 
+the <a href="http://pypi.python.org/pypi/PyOpenGL-accelerate">PyOpenGL_accelerate PyPI page</a>
+and follow the same basic steps:</p>
+<p class="technical">Note that you will require a working C compiler to compile the 
+PyOpenGL-accelerate package.  Pre-built packages are available for 
+MS Windows 32 and MS Windows 64 users.</p>
+<pre>$ tar -zxvf PyOpenGL-accelerate-3.0.2.tar.gz
+$ cd PyOpenGL-accelerate-3.0.2
+$ python setup.py install</pre>
 
-
-<p class="introduction">This document describes the process of
-installing <span style="font-weight: bold;">PyOpenGL 3.x</span>. &nbsp;PyOpenGL 3.x final releases use standard Python distutils.</p>
-
-
-
-<h2>Dependencies</h2>
-
-<p>PyOpenGL has a number of dependencies which need to be installed
-before installing PyOpenGL. &nbsp;This list should point you to
-everything you need to get ready for running PyOpenGL:</p>
-
-
-
+<h2>Recommended Enhancements for PyOpenGL</h2>
 <ul>
-
-  <li><a href="http://www.python.org/">Python</a> 2.x series, 2.4+</li>
-  <li><a href="http://starship.python.net/crew/theller/ctypes/">ctypes</a> (standard with Python 2.5 and above)</li><li>OpenGL 1.1 and GLU (available pre-installed on most modern
-machines)</li>
-
-  
-  <ul>
-
-    <li>If your machine is a very old Win95 machine that has never had
-an OpenGL game, package, or graphics-card installed it is possible that
-you don't have OpenGL installed. &nbsp;You can get it <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q154877">from
-Microsoft</a> in this (rare) case. &nbsp;Because of MSDN's rather
-capricious content-management system, that link may fail at some point.
-&nbsp;Search for OpenGL95.exe on Microsoft's site to find it if this
-happens.</li>
-
-  
-  </ul>
-
-</ul>
-
-<p>Optional PyOpenGL Dependencies:</p>
-
-<ul>
-
-  <li><a href="http://numpy.scipy.org/">Numpy</a> or Numeric</li>
-
-  
-  <ul>
-
-    <li>You will likely want a numeric library for any real-world code</li>
-
-  
-  </ul>
-
-  
-  <ul>
-
-    <li>We recommend using numpy if you are not supporting legacy code written to use Numeric</li>
-
-  
-  </ul>
-
-  <li><a href="http://www.opengl.org/resources/libraries/">GLUT</a> or <a href="http://freeglut.sourceforge.net/">FreeGLUT</a></li>
-
-  
-  <ul>
-
-    <li>Available as an rpm/deb/ebuild for most modern Linux machines</li>
-
-    <li>Available as a <a href="http://www.xmission.com/%7Enate/glut.html">Win32 binary package</a></li><ul><li>The Win32 package of PyOpenGL includes a copy of GLUT for 32-bit Win32</li></ul>
-
-  
-  </ul>
-
+  <li><a href="http://numpy.scipy.org/">Numpy</a></li>
+  <li><a href="http://www.opengl.org/resources/libraries/">GLUT</a> or <a href="http://freeglut.sourceforge.net/">FreeGLUT</a>
+      <ul>
+        <li>Available as an rpm/deb/ebuild for most modern Linux machines</li>
+        <li>The Win32 and Win64 binary installers for PyOpenGL include a copy of GLUT</li>
+      </ul>
+  </li>
   <li><a href="http://www.pythonware.com/products/pil/index.htm">Python
 Imaging Library</a> (PIL) any recent version&nbsp;</li>
-
-  
-  <ul>
-
-    <li>Not technically required for PyOpenGL, but you'll almost
-certainly need it for most PyOpenGL projects</li>
-
-    <li>Required for OpenGLContext (for all but the most simplistic of
-scenes)</li>
-
-  
-  </ul>
   <li><a href="http://www.linas.org/gle">GLE</a></li>
   <ul>
-    <li>The GL Extrusion library, available on most Linux distributions</li>
-    <li><a href="http://downloads.sourceforge.net/pyopengl/gle32.zip">Precompiled Win32 version</a> is downloadable from the project file area (gle32.zip)</li><ul><li>The Win32 package of PyOpenGL includes a copy of GLE compiled as a DLL for 32-bit Win32</li></ul>
+    <li>The GL Extrusion library, available on most Linux distributions (libgle3)</li>
+    <li>The Win32 package of PyOpenGL includes a copy of GLE compiled as a DLL</li>
   </ul>
-  <li><a href="http://togl.sourceforge.net/">Togl</a> v1.5+</li>
-  <ul>
-    <li>You will need the Tcl/Tk version for your Python installation (often not installed)</li>
-    <li>Only required if you want to use PyOpenGL with Tk-based GUI programs</li>
-  </ul>
-
 </ul>
 <p class="technical">Note that Togl support is deprecated,
 it's there for legacy code (once you compile Togl), but you should
@@ -129,31 +56,23 @@ are projects which attempt to provide Togl support, feel free to
 install those into your Python's Tk installation if you need Togl under
 Python.</p>
 
-<p>OpenGLContext dependencies beyond PyOpenGL:</p>
+<h2>OpenGLContext Dependencies</h2>
 
 <ul>
-
+  <li>PyOpenGL</li>
+  <li><a href="http://numpy.scipy.org/">Numpy</a> (Required, normally a binary distribution is desirable)</li>
+  <li><a href="http://www.pythonware.com/products/pil/index.htm">Python
+Imaging Library</a> (PIL) any recent version (Required, normally a binary distribution is desirable)</li>
   <li><a href="http://pydispatcher.sourceforge.net/">PyDispatcher</a></li>
-
-  
-  <ul>
-
-    <li>Provides the event-routing and field-watching infrastructure
-for the scenegraph</li>
-
-  
-  </ul>
 </ul>
-<p>Optional, but generally useful OpenGLContext dependencies:</p>
+<p>Once you have the dependencies, you can install OpenGLContext itself</p>
+<pre>$ pip install PyDispatcher PyVRML97 OpenGLContext</pre>
+<p>Recommended Enhancements for OpenGLContext </p>
 <ul>
-
   <li><a href="http://sourceforge.net/project/showfiles.php?group_id=55673">SimpleParse</a>
 2.1</li>
   <ul>
-
     <li>Provides the VRML97 parser, strongly recommended</li>
-
-  
   </ul>
 
   <li><a href="http://sourceforge.net/projects/ttfquery/">TTFQuery</a>
@@ -209,40 +128,31 @@ text, only available for Win32 systems of course.&nbsp; The WGL
 polygonal text is not used by the scenegraph engine, so it is not
 required for anything save playing with the WGL polygonal text
 demonstration module.</li>
-
-  
   </ul>
 
 </ul>
 
 
-<h2>Standard Install (distutils (or setuptools))</h2>
-
-<p>PyOpenGL uses standard distutils. &nbsp;You can download the source packages and install like so:</p><pre>tar -zxvf PyOpenGL-3.0.0.tar.gz<br>cd PyOpenGL-3.0.0<br>python setup.py install</pre><p>If
-you prefer to use easy_install, for instance within a virtualenv
-container, you will need to install setuptools (e.g. by running <a href="http://peak.telecommunity.com/dist/ez_setup.py">ez_setup.py</a>), then run:</p><pre>easy_install PyOpenGL</pre><p>To update your install to the latest release of PyOpenGL with an easy_install based install:</p>
-
-
-
-<pre>easy_install -U PyOpenGL<br></pre><p>If you want to install
-your Python egg files in a non-standard location be sure to setup your
-.pydistutils.cfg to support this before installing the packages.</p>
-
-
-
-<p class="technical">You may want to uninstall any previous version of PyOpenGL before installing a new version, as there may be conflicts.</p><p class="technical">If you use setuptools to package your application,
-you should declare a dependency on "PyOpenGL" to pull in the latest
-PyOpenGL 3.x release.</p><p class="technical">Various
-PyOpenGL 3.0.0 alphas were dependent on setuptools. &nbsp;This is no
-longer the case, as setuptools plugin mechanism was causing conflicts
-with platform packaging tools (py2exe, pyinstaller).</p><h2>BZR (Developer) Install</h2>
+<h2>BZR (Developer) Install</h2>
 
 <p>If you would like to contribute to PyOpenGL development or just need
 to ride the bleeding edge, you will likely want to work with a
-source-code checkout. &nbsp;You will need the&nbsp;<a href="http://bazaar-vcs.org/">Bazaar</a> (bzr) tool to work with the repository:</p><pre>bzr branch lp:pyopengl OpenGL-ctypes</pre><p>You
-will need to put the "OpenGL" directory inside the OpenGL-ctypes
-directory created above on your PYTHONPATH for instance via a symlink
-or a .pth file.</p><p>To contribute your changes back, either publish
+source-code checkout. &nbsp;You will need the&nbsp;<a href="http://bazaar-vcs.org/">Bazaar</a> (bzr) tool to work with the repository:</p>
+<pre>$ bzr branch lp:pyopengl
+$ cd pyopengl
+$ python setup.py develop --user
+$ cd OpenGL_accelerate
+$ python setup.py develop --user
+$ cd ../../</pre>
+<p>To contribute to OpenGLContext development (or to run the tests, for instance):</p>
+<pre>$ bzr branch lp:pyvrml97
+$ cd pyvrml97 
+$ python setup.py develop --user
+$ cd ../
+$ bzr branch lp:openglcontext
+$ cd openglcontext
+$ python setup.py develop --user</pre>
+<p>To contribute your changes back, either publish
 your branch publicly (for instance on LaunchPad) or create a "merge
 directive" to send to pyopengl-devel@lists.sourceforge.net:</p><pre>bzr send -o my-changes.diff<br></pre><p>Note that you'll need to subscribe to <a href="https://lists.sourceforge.net/lists/listinfo/pyopengl-devel">pyopengl-devel</a> to post changes to it. &nbsp;If you prefer you can send them to <a href="mailto:mcfletch@vrplumber.com">Mike Fletcher</a> instead.</p><h3>Building Documentation</h3>
 
