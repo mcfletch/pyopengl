@@ -23,6 +23,14 @@
                 <paramdef>GLint * <parameter>data</parameter></paramdef>
             </funcprototype>
         </funcsynopsis>
+        <funcsynopsis>
+            <funcprototype>
+                <funcdef>void <function>glGetBufferParameteri64v</function></funcdef>
+                <paramdef>GLenum <parameter>target</parameter></paramdef>
+                <paramdef>GLenum <parameter>value</parameter></paramdef>
+                <paramdef>GLint64 * <parameter>data</parameter></paramdef>
+            </funcprototype>
+        </funcsynopsis>
     </refsynopsisdiv>
     <refsect1 id="parameters"><title>Parameters</title>
         <variablelist>

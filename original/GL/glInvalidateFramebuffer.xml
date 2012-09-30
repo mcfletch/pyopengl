@@ -17,7 +17,7 @@
     <refsynopsisdiv><title>C Specification</title>
         <funcsynopsis>
             <funcprototype>
-                <funcdef>void <function>glInvalidateSubFramebuffer</function></funcdef>
+                <funcdef>void <function>glInvalidateFramebuffer</function></funcdef>
                 <paramdef>GLenum <parameter>target</parameter></paramdef>
                 <paramdef>GLsizei <parameter>numAttachments</parameter></paramdef>
                 <paramdef>const GLenum * <parameter>attachments</parameter></paramdef>

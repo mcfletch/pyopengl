@@ -34,7 +34,8 @@
                 <para>
                     Specify the target of the bind operation. <parameter>target</parameter> must be
                     one of <constant>GL_ATOMIC_COUNTER_BUFFER</constant>,
-                    <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant> or <constant>GL_UNIFORM_BUFFER</constant>.
+                    <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant>, <constant>GL_UNIFORM_BUFFER</constant>,
+                    or <constant>GL_SHADER_STORAGE_BUFFER</constant>.
                 </para>
             </listitem>
         </varlistentry>
@@ -94,12 +95,16 @@
         <para>
             The <constant>GL_ATOMIC_COUNTER_BUFER</constant> target is available only if the GL version is 4.2 or greater.
         </para>
+        <para>
+            The <constant>GL_SHADER_STORAGE_BUFFER</constant> target is available only if the GL version is 4.3 or greater.
+        </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not
             one of <constant>GL_ATOMIC_COUNTER_BUFFER</constant>,
-            <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant> or <constant>GL_UNIFORM_BUFFER</constant>.
+            <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant>, <constant>GL_UNIFORM_BUFFER</constant> or
+            <constant>GL_SHADER_STORAGE_BUFFER</constant>.
         </para>
         <para>
             <constant>GL_INVALID_VALUE</constant> is generated if <parameter>index</parameter> is greater

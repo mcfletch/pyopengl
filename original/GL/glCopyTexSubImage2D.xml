@@ -44,8 +44,9 @@
                     <constant>GL_TEXTURE_CUBE_MAP_NEGATIVE_X</constant>,
                     <constant>GL_TEXTURE_CUBE_MAP_POSITIVE_Y</constant>,
                     <constant>GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</constant>,
-                    <constant>GL_TEXTURE_CUBE_MAP_POSITIVE_Z</constant>, or
-                    <constant>GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</constant>.
+                    <constant>GL_TEXTURE_CUBE_MAP_POSITIVE_Z</constant>,
+                    <constant>GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</constant>, or
+                    <constant>GL_TEXTURE_1D_ARRAY</constant>.
                 </para>
             </listitem>
         </varlistentry>
@@ -105,8 +106,9 @@
     </refsect1>
     <refsect1 id="description"><title>Description</title>
         <para>
-            <function>glCopyTexSubImage2D</function> replaces a rectangular portion of a two-dimensional texture image or
-            cube-map texture image with pixels from the current <constant>GL_READ_BUFFER</constant>
+            <function>glCopyTexSubImage2D</function> replaces a rectangular portion of a two-dimensional texture image,
+            cube-map texture image or a linear portion of a number of slices of a one-dimensional array texture
+            with pixels from the current <constant>GL_READ_BUFFER</constant>
             (rather than from main memory, as is the case for <citerefentry><refentrytitle>glTexSubImage2D</refentrytitle></citerefentry>).
         </para>
         <para>
@@ -166,6 +168,11 @@
             such a specification has no effect.
         </para>
         <para>
+            When <parameter>target</parameter> is <constant>GL_TEXTURE_1D_ARRAY</constant>
+            then the y coordinate and height are treated as the start slice and number
+            of slices to modify.
+        </para>
+        <para>
             If any of the pixels within the specified rectangle of the current
             <constant>GL_READ_BUFFER</constant> are outside the read window associated with the current
             rendering context, then the values obtained for those pixels are undefined.
@@ -188,8 +195,9 @@
             <constant>GL_TEXTURE_CUBE_MAP_NEGATIVE_X</constant>,
             <constant>GL_TEXTURE_CUBE_MAP_POSITIVE_Y</constant>,
             <constant>GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</constant>,
-            <constant>GL_TEXTURE_CUBE_MAP_POSITIVE_Z</constant>, or
-            <constant>GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</constant>.
+            <constant>GL_TEXTURE_CUBE_MAP_POSITIVE_Z</constant>,
+            <constant>GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</constant>, or
+            <constant>GL_TEXTURE_1D_ARRAY</constant>.
         </para>
         <para>
             <constant>GL_INVALID_OPERATION</constant> is generated if the texture array has not been
@@ -326,7 +334,8 @@
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
             Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. This document is licensed under the SGI
+            Silicon Graphics, Inc. Copyright <trademark class="copyright"></trademark> 2012 Khronos Group.
+            This document is licensed under the SGI
             Free Software B License. For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
         </para>

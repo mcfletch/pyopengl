@@ -17,7 +17,7 @@
     <refsynopsisdiv><title>C Specification</title>
         <funcsynopsis>
             <funcprototype>
-                <funcdef>void <function>glTexStorage2DMultisample</function></funcdef>
+                <funcdef>void <function>glTexStorage3DMultisample</function></funcdef>
                 <paramdef>GLenum <parameter>target</parameter></paramdef>
                 <paramdef>GLsizei <parameter>samples</parameter></paramdef>
                 <paramdef>GLenum <parameter>internalformat</parameter></paramdef>

@@ -43,6 +43,7 @@
                     <constant>GL_ELEMENT_ARRAY_BUFFER</constant>,
                     <constant>GL_PIXEL_PACK_BUFFER</constant>,
                     <constant>GL_PIXEL_UNPACK_BUFFER</constant>,
+                    <constant>GL_SHADER_STORAGE_BUFFER</constant>,
                     <constant>GL_TEXTURE_BUFFER</constant>,
                     <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant>, or
                     <constant>GL_UNIFORM_BUFFER</constant>.
@@ -170,7 +171,7 @@
             is 4.2 or greater.
         </para>
         <para>
-            The <constant>GL_DISPATCH_INDIRECT_BUFFER</constant> target is available only if the GL version
+            The <constant>GL_DISPATCH_INDIRECT_BUFFER</constant> and <constant>GL_SHADER_STORAGE_BUFFER</constant> targets are available only if the GL version
             is 4.3 or greater.
         </para>
     </refsect1>
@@ -214,6 +215,7 @@
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
             Copyright <trademark class="copyright"></trademark> 2005 Addison-Wesley. 
+            Copyright <trademark class="copyright"></trademark> 2011-2012 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in 
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.

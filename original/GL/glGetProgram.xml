@@ -37,6 +37,7 @@
             <constant>GL_VALIDATE_STATUS</constant>,
             <constant>GL_INFO_LOG_LENGTH</constant>,
             <constant>GL_ATTACHED_SHADERS</constant>,
+            <constant>GL_ACTIVE_ATOMIC_COUNTER_BUFFERS</constant>,
             <constant>GL_ACTIVE_ATTRIBUTES</constant>,
             <constant>GL_ACTIVE_ATTRIBUTE_MAX_LENGTH</constant>,
             <constant>GL_ACTIVE_UNIFORMS</constant>,
