@@ -9,34 +9,34 @@
 <h1>PyOpenGL for OpenGL Programmers<br>
 </h1>
 <p class="introduction">This document describes those features of
-PyOpenGL which are likely to be unfamiliar to OpenGL programmers.&nbsp;
+PyOpenGL which are likely to be unfamiliar to OpenGL programmers.
 It also explains various features of PyOpenGL which are not covered in
 general OpenGL documentation.<br>
 </p>
 
 <h2>Speed Concerns</h2><p>PyOpenGL 3.x is far slower than PyOpenGL 2.x,
-and PyOpenGL 2.x was not fast. &nbsp;Out of the box PyOpenGL 3.x is
+and PyOpenGL 2.x was not fast. Out of the box PyOpenGL 3.x is
 configured to be as helpful and robust as possible, both traits which
-make the system much slower than it could be. &nbsp;PyOpenGL is now
+make the system much slower than it could be. PyOpenGL is now
 implemented using ctypes, rather than SWIG, the flexibility of ctypes
-has a significant cost in terms of performance. &nbsp;PyOpenGL 3.x is
+has a significant cost in terms of performance. PyOpenGL 3.x is
 also far more flexible with regard to data-types, that flexibility has
-a noticeable performance cost. &nbsp;Throughout this document you will
+a noticeable performance cost. Throughout this document you will
 see descriptions for how to trade off flexibility, helpfulness and
 robustness in order to claw back speed.</p><p>If you are attempting to
 do per-vertex operations (e.g. glColor, glNormal, glVertex) then you
-will find that PyOpenGL 3.x is ridiculously slow. &nbsp;Luckily, all of
-those features are now deprecated. &nbsp;For array-based geometry where
+will find that PyOpenGL 3.x is ridiculously slow. Luckily, all of
+those features are now deprecated. For array-based geometry where
 the arrays are large and in native-format-compatible formats,
 PyOpenGL's overhead tends to be amortized over the size of the arrays
 being processed.</p><h2>Method Signatures vs. C OpenGL<br>
 </h2>
 <p>Most of the functions which appear in PyOpenGL 3 are identical in
 calling method and functionality to that of the appropriate C
-specification.&nbsp; There are a few exceptions because of the
+specification. There are a few exceptions because of the
 differences between C and Python. Most of these exceptions are due to
 the difference between C and Python in the way that they access
-arrays.&nbsp; For example, a C function like this:</p>
+arrays. For example, a C function like this:</p>
 <pre>void foo(int count, const int *args);</pre>
 <p>will have the Python binding:</p>
 <pre>foo(args) -&gt; None</pre>
@@ -55,7 +55,7 @@ can disable PyOpenGL's error checking by setting a module-level flag in
 the OpenGL package before importing any of the sub-modules, like so:</p><pre>import OpenGL<br>OpenGL.ERROR_CHECKING = False<br>from OpenGL.GL import *<br>from OpenGL.GLU import *<br>...</pre>
 <p>This will tend to cause a huge speed increase in your code, as the
 number of OpenGL calls issued will roughly halve compared to the
-error-checking version of the same script. &nbsp;You will normally want
+error-checking version of the same script. You will normally want
 to develop with error-checking on and only switch it off for
 production/release code.</p><p>The exceptions normally raised by PyOpenGL are:<br>
 </p>
@@ -67,7 +67,7 @@ GL.GLerror</li>
 </ul>
 <p>GL.GLerror is a subclass of GL.Error and has a large amount of extra information regarding the call wrapping process:</p><ul><li>err -- OpenGL error code</li><li>result -- OpenGL result-code for the operation</li><li>baseOperation -- the base OpenGL function being called</li><li>pyArgs -- the set of top-level arguments passed to the function</li><li>cArgs -- the set of Python-level objects expanded from pyArgs</li><li>cArguments -- the set of C-level objects converted from cArgs</li><li>description -- textual OpenGL description of the error (normally pretty terse, useful primarily to look at the documentation)</li></ul>
 <h2>Logging</h2><p>By default, PyOpenGL will log errors to the Python
-logging module. &nbsp;You can disable this by setting a flag before
+logging module. You can disable this by setting a flag before
 importing the OpenGL sub-modules:</p><pre>import OpenGL<br>OpenGL.ERROR_LOGGING = False<br>from OpenGL.GL import *<br>...<br></pre><p>which will provide a performance improvement for non-development code.</p><p>Conversely,
 if you are finding that your code is crashing and you need to trace
 through the operation of PyOpenGL then it is possible to instruct
@@ -83,21 +83,21 @@ need to remain in-memory to prevent memory-access failures for later
 calls (e.g. references to pointers require that the object holding the
 memory remain in-memory)</li><li>runs a function to choose what value to return from the function</li></ul><p>These
 operations are implemented by the OpenGL.wrapper.Wrapper class, which
-is the focus of most of the&nbsp;OpenGL_accelerate module's optimizations
+is the focus of most of theOpenGL_accelerate module's optimizations
 (for obvious reasons).</p><h2>Array Handling</h2>
 
-<p>PyOpenGL 3.x supports a significant range of array-compatible data-types, among the default plug-ins are:</p><ul><li>numpy arrays</li><li>Numeric arrays&nbsp;</li><li>numarray arrays</li><li>Python strings (buffers in Python 2.6)</li><li>numbers (acting as pointers-to-single-value arrays)</li><li>ctypes arrays</li><li>ctypes parameters</li><li>ctypes pointers</li><li>lists/tuples</li><li>"vertex buffer objects" (a demonstration wrapper which is mostly intended to provide a template for other format types)</li></ul><p>when
+<p>PyOpenGL 3.x supports a significant range of array-compatible data-types, among the default plug-ins are:</p><ul><li>numpy arrays</li><li>Python strings (byte-strings)</li><li>numbers (acting as pointers-to-single-value arrays)</li><li>ctypes arrays</li><li>ctypes parameters</li><li>ctypes pointers</li><li>lists/tuples</li><li>vertex buffer objects</li></ul><p>when
 a PyOpenGL 3.x entry point requires an "array" data-type (or a void*
 data-type), it will use the PyOpenGL FormatHandler plugins
 (OpenGL.arrays.formathandler) to decide how to convert the array to a
 format compatible with the low-level OpenGL APIs.</p><p>Certain
 format-types may allow for use as array types while not actually
-containing a compatible copy of the data. &nbsp;Python lists, tuples
+containing a compatible copy of the data. Python lists, tuples
 and numbers all require the creation of a temporary variable to hold
-their data. &nbsp;As such you generally should not use them for
-performance-critical operations. &nbsp;Similarly, if you pass a numpy
+their data. As such you generally should not use them for
+performance-critical operations. Similarly, if you pass a numpy
 array with an incompatible data-type the wrapper may have to copy the
-data in order to pass it into the C-level functions. &nbsp;For numpy
+data in order to pass it into the C-level functions. For numpy
 arrays, where the behavior is fast enough that you might not realize
 it, but can negatively impact your performance, you can prevent this
 behaviour by setting a flag in the OpenGL package before importing any
@@ -116,7 +116,7 @@ Most other arguments are derived from the dimensions of the array.</p>
 besides glXPointer.</p>
 <p>For instance, glDrawElements has the Python binding:</p>
 <pre>glDrawElements(mode, count, type, indices) -&gt; None</pre>
-<p>where indices is expected to be a string.&nbsp; There are also the
+<p>where indices is expected to be a string. There are also the
 decorated bindings:</p>
 <pre>glDrawElementsub(mode, indices[]) -&gt; None<br>glDrawElementsus(mode, indices[]) -&gt; None<br>glDrawElementsui(mode, indices[]) -&gt; None</pre>
 <p>where "indices" is now a single dimensional array.</p>
@@ -137,7 +137,7 @@ etc. are within the ClientAttrib block if you chose to use this scheme.</p>
 automatic there is no need for glGetPointerv function, so it is excluded.</p>
 <p class="technical">Note that the function glInterleavedArrays is also
 present, but it does not have the variants that the others do (i.e., no
-glInterleavedArraysf). &nbsp;glInterleavedArrays has been unofficially
+glInterleavedArraysf). glInterleavedArrays has been unofficially
 deprecated for a long time, and is officially deprecated as of OpenGL
 3.x</p><p class="technical">Note that for performance you may wish to use
 the "raw" version of array-handling functions, as these often have less
@@ -164,22 +164,22 @@ operating in standard OpenGL mode.<br>
 </p>
 <h2>Extensions and Conditional Functionality<br>
 </h2>
-<p>PyOpenGL has support for most OpenGL extensions. &nbsp;Extensions are
+<p>PyOpenGL has support for most OpenGL extensions. Extensions are
 available as "normal" function pointers by importing the constructed
 package name for the extension, for instance:</p><pre>from OpenGL.GL.ARB.vertex_buffer_object import *<br>buffer = glGenBuffersARB(1)</pre><p>there
 is no need to call initialization functions or the like for the
-extension module. &nbsp;You can, if you like, call the "init" function for
+extension module. You can, if you like, call the "init" function for
 the extension to retrieve a boolean indicating whether the local
 machine supports a given extension, like so:</p><pre>if glInitVertexBufferObjectARB():<br>	...<br></pre><p>However, it is normally clearer to test for the boolean truth of the entry points you wish to use:</p><pre>if (glGenBuffersARB):<br>	buffers = glGenBuffersARB( 1 )</pre><p>There
 are often a number of entry points which implement the same API, for
 which you would like to use whichever implementation is available
-(likely with some preference in order). &nbsp;The OpenGL.extensions module
+(likely with some preference in order). The OpenGL.extensions module
 provides an easy mechanism to support this:</p><pre>from OpenGL.extensions import alternate<br>glCreateProgram = alternate( 'glCreateProgram', glCreateProgram, glCreateProgramObjectARB)<br>glCreateProgram = alternate( glCreateProgram, glCreateProgramObjectARB)</pre><p>If
 the first element is a string it will be used as the name of the
 alternate object, otherwise the name is taken from the first argument.</p><h2>Selection and Feedback Buffers<br>
 </h2>
 <p class="technical">Note that both selection and feedback buffers are
-deprecated in OpenGL 3.x. &nbsp;You should be replacing
+deprecated in OpenGL 3.x. You should be replacing
 selection-buffer usage with either "unique color" selection rendering
 or mathematical generated selection operations.</p><p>Normally in OpenGL to use a selection buffer one would do the
 following:</p>
@@ -315,6 +315,6 @@ be provided:<br>
     <li>glVertex</li>
   </ul>
 </ul>
-<p class="footer"><a href="index.html"><img src="../images/doc_logo_icon.gif" title="" alt="Documentation" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>&nbsp;<a href="http://pyopengl.sourceforge.net/"><img title="" alt="PyOpenGL" src="file:///S:/PyOpenGLWebSite/images/icon2.jpg" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a> A
+<p class="footer"><a href="index.html"><img src="../images/doc_logo_icon.gif" title="" alt="Documentation" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>&nbsp;<a href="http://pyopengl.sourceforge.net/"><img title="" alt="PyOpenGL" src="../images/icon2.jpg" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a> A
 SourceForge Open-Source project: <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1" style="border: 0px solid ; width: 88px; height: 31px;" alt="SourceForge" title="" align="middle"></a></p>
 </body></html>
