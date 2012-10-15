@@ -8,6 +8,7 @@ import ctypes, _ctypes
 
 from OpenGL import constants, constant
 from OpenGL.arrays import formathandler
+from OpenGL._bytes import bytes,unicode
 import operator
 
 class CtypesArrayHandler( formathandler.FormatHandler ):
@@ -41,14 +42,14 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
             return result
         raise TypeError(
             """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
-                value._type_, ARRAY_TO_GL_TYPE_MAPPING.keys(), value,
+                value._type_, list(ARRAY_TO_GL_TYPE_MAPPING.keys()), value,
             )
         )
     def arraySize( self, value, typeCode = None ):
         """Given a data-value, calculate dimensions for the array"""
         try:
             return value.__class__.__component_count__
-        except AttributeError, err:
+        except AttributeError as err:
             dims = 1
             for length in self.dims( value ):
                 dims *= length
@@ -63,13 +64,13 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
         while dimObject is not None:
             yield dimObject
             dimObject = getattr( dimObject, '_type_', None )
-            if isinstance( dimObject, (str,unicode)):
+            if isinstance( dimObject, (bytes,unicode)):
                 dimObject = None 
     def dims( self, value ):
         """Produce iterable of all dimensions"""
         try:
             return value.__class__.__dimensions__
-        except AttributeError, err:
+        except AttributeError as err:
             dimensions = []
             for base in self.types( value ):
                 length = getattr( base, '_length_', None)
@@ -85,7 +86,7 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
         """Determine unit size of an array (if possible)"""
         try:
             return value.__class__.__min_dimension__
-        except AttributeError, err:
+        except AttributeError as err:
             dim = self.dims( value )[-1]
             value.__class__.__min_dimension__ = dim
             return dim

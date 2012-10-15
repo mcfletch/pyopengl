@@ -22,14 +22,14 @@ class Win32Platform( baseplatform.BasePlatform ):
         GL = OpenGL = ctypesloader.loadLibrary(
             ctypes.windll, 'opengl32', mode = ctypes.RTLD_GLOBAL
         )
-    except OSError, err:
+    except OSError as err:
         raise ImportError("Unable to load OpenGL library", *err.args)
 
     try:
         GLU = ctypesloader.loadLibrary(
             ctypes.windll, 'glu32', mode = ctypes.RTLD_GLOBAL
         )
-    except OSError, err:
+    except OSError as err:
         GLU = None
 
     GLUT = None
@@ -40,13 +40,13 @@ class Win32Platform( baseplatform.BasePlatform ):
             GLUT = ctypesloader.loadLibrary(
                 ctypes.windll, possible, mode = ctypes.RTLD_GLOBAL
             )
-        except WindowsError, err:
+        except WindowsError as err:
             GLUT = None
         else:
             break
     try:
         del possible
-    except NameError, err:
+    except NameError as err:
         pass
 
     GLE = None
@@ -54,7 +54,7 @@ class Win32Platform( baseplatform.BasePlatform ):
         try:
             GLE = ctypesloader.loadLibrary( ctypes.cdll, libName )
             GLE.FunctionType = ctypes.CFUNCTYPE
-        except WindowsError, err:
+        except WindowsError as err:
             pass
         else:
             break

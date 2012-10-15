@@ -41,11 +41,11 @@ for suffix,arrayConstant in [
         globals()[functionName] = function
         try:
             del function, functionName
-        except NameError, err:
+        except NameError as err:
             pass
     try:
         del suffix,arrayConstant
-    except NameError, err:
+    except NameError as err:
         pass
 
 glTexImage3D = images.setDimensionsAsInts(

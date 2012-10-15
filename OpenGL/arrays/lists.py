@@ -12,6 +12,7 @@ import ctypes, _ctypes
 from OpenGL import constants, constant, error
 from OpenGL._configflags import ERROR_ON_COPY
 from OpenGL.arrays import formathandler
+from OpenGL._bytes import bytes,unicode,as_8_bit
 HANDLED_TYPES = (list,tuple)
 import operator
 
@@ -45,7 +46,7 @@ class ListHandler( formathandler.FormatHandler ):
     def from_param( self, instance, typeCode=None ):
         try:
             return ctypes.byref( instance )
-        except TypeError, err:
+        except TypeError as err:
             array = self.asArray( instance, typeCode )
             pp = ctypes.c_void_p( ctypes.addressof( array ) )
             pp._temporary_array_ = (array,)
@@ -72,7 +73,7 @@ class ListHandler( formathandler.FormatHandler ):
         """
         try:
             dimensions = [ len(x) ]
-        except (TypeError,AttributeError,ValueError), err:
+        except (TypeError,AttributeError,ValueError) as err:
             return []
         else:
             childDimension = None
@@ -95,7 +96,7 @@ class ListHandler( formathandler.FormatHandler ):
             return result
         raise TypeError(
             """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
-                value._type_, ARRAY_TO_GL_TYPE_MAPPING.keys(), value,
+                value._type_, list(ARRAY_TO_GL_TYPE_MAPPING.keys()), value,
             )
         )
     def arraySize( self, value, typeCode = None ):
@@ -112,7 +113,7 @@ class ListHandler( formathandler.FormatHandler ):
         while dimObject is not None:
             yield dimObject
             dimObject = getattr( dimObject, '_type_', None )
-            if isinstance( dimObject, (str,unicode)):
+            if isinstance( dimObject, (bytes,unicode)):
                 dimObject = None 
     def dims( self, value ):
         """Produce iterable of all dimensions"""

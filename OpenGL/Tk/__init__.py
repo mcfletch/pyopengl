@@ -28,11 +28,17 @@ log = logging.getLogger( 'OpenGL.Tk' )
 from OpenGL.GL import *
 from OpenGL.GLU import *
 try:
-    from Tkinter import _default_root
-    from Tkinter import *
-except ImportError, err:
-    log.error( """Unable to import Tkinter, likely need to install a separate package (python-tk) to have Tkinter support.  You likely also want to run the src/togl.py script in the PyOpenGL source distribution to install the Togl widget""" )
-    raise
+    from tkinter import _default_root
+    from tkinter import *
+    from tkinter import dialog
+except ImportError as err:
+    try:
+        from Tkinter import _default_root
+        from Tkinter import *
+        import Dialog as dialog
+    except ImportError as err:
+        log.error( """Unable to import Tkinter, likely need to install a separate package (python-tk) to have Tkinter support.  You likely also want to run the src/togl.py script in the PyOpenGL source distribution to install the Togl widget""" )
+        raise
 import math
 
 def glTranslateScene(s, x, y, mousex, mousey):
@@ -55,7 +61,7 @@ def glRotateScene(s, xcenter, ycenter, zcenter, x, y, mousex, mousey):
 
 
 def sub(x, y):
-    return map(lambda a, b: a-b, x, y)
+    return list(map(lambda a, b: a-b, x, y))
 
 
 def dot(x, y):
@@ -66,8 +72,8 @@ def dot(x, y):
 
 
 def glDistFromLine(x, p1, p2):
-    f = map(lambda x, y: x-y, p2, p1)
-    g = map(lambda x, y: x-y, x, p1)
+    f = list(map(lambda x, y: x-y, p2, p1))
+    g = list(map(lambda x, y: x-y, x, p1))
     return dot(g, g) - dot(f, g)**2/dot(f, f)
 
 
@@ -93,7 +99,7 @@ if _default_root is None:
 # Thus the directory structure is *not* the same as the 
 # original PyOpenGL versions.
 import sys 
-if sys.maxint > 2L**32:
+if sys.maxint > 2**32:
     suffix = '-64'
 else:
     suffix = ''
@@ -102,7 +108,7 @@ try:
         os.path.dirname(__file__),
         'togl-'+ sys.platform + suffix,
     )
-except NameError, err:
+except NameError as err:
     # no __file__, likely running as an egg
     TOGL_DLL_PATH = ""
 
@@ -113,7 +119,7 @@ _default_root.tk.call('lappend', 'auto_path', TOGL_DLL_PATH)
 _default_root.tk.call('package', 'require', 'Togl')
 try:
     _default_root.tk.eval('load {} Togl')
-except TclError, err:
+except TclError as err:
     log.error( """Failure loading Togl package: %s""", err )
     raise
 
@@ -121,13 +127,15 @@ except TclError, err:
 # [DAA, Jan 1998], updated by mcfletch 2009
 import atexit
 def cleanup():
-    from Tkinter import _default_root, TclError
-    import Tkinter
+    try:
+        import tkinter 
+    except ImportError as err:
+        import Tkinter as tkinter
     try: 
-        if _default_root: _default_root.destroy()
-    except TclError:
+        if tkinter._default_root: tkinter._default_root.destroy()
+    except (TclError,AttributeError) as err:
         pass
-    Tkinter._default_root = None
+    tkinter._default_root = None
 atexit.register( cleanup )
 
 class Togl(Widget):
@@ -264,7 +272,7 @@ http://www.yorvic.york.ac.uk/~mjh/
         it changes size."""
 
         #Widget.__init__(self, master, 'togl', cnf, kw)
-        apply(RawOpengl.__init__, (self, master, cnf), kw)
+        RawOpengl.__init__(*(self, master, cnf), **kw)
         self.initialised = 0
 
         # Current coordinates of the mouse.
@@ -349,17 +357,6 @@ http://www.yorvic.york.ac.uk/~mjh/
         glEnable(GL_DEPTH_TEST)
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
-
-
-    def report_opengl_errors(message = "OpenGL error:"):
-        """Report any opengl errors that occured while drawing."""
-
-        print 'report_opengl_errors is now useless.  glGetError replaced by GLexception'
-#		while 1:
-#			err_value = glGetError()
-#			if not err_value: break	 
-#			print message, gluErrorString(err_value)
-
 
     def set_background(self, r, g, b):
         """Change the background colour of the widget."""

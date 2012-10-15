@@ -18,7 +18,7 @@ for name in [
         # Win32 just has pointers to values 1,2,3,etc
         # GLX has pointers to font structures...
         p = platform.getGLUTFontPointer( name )
-    except (ValueError,AttributeError), err:
+    except (ValueError,AttributeError) as err:
         if platform.GLUT:
             log.warn( '''Unable to load font: %s''', name )
         globals()[name] = None
@@ -26,10 +26,10 @@ for name in [
         globals()[name] = p
         try:
             del p
-        except NameError, err:
+        except NameError as err:
             pass
 
 try:
     del platform, name
-except NameError, err:
+except NameError as err:
     pass

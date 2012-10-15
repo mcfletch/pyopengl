@@ -68,7 +68,7 @@ def setValue( constant, value, context=None, weak=False ):
     if value is None:
         try:
             del current[ constant ]
-        except (KeyError,TypeError,ValueError), err:
+        except (KeyError,TypeError,ValueError) as err:
             pass 
     else:
         # XXX potential for failure here if a non-weakref-able objects
@@ -90,7 +90,7 @@ def delValue( constant, context=None ):
             try:
                 del contextStorage[ constant ]
                 found = True
-            except KeyError, err:
+            except KeyError as err:
                 pass
     return found
 
@@ -125,7 +125,7 @@ def cleanupContext( context=None ):
     for storage in STORAGES:
         try:
             del storedPointers[ context ]
-        except KeyError, err:
+        except KeyError as err:
             return False
         else:
             return True

@@ -11,6 +11,7 @@ Porting note:
     is *not* the memory address of the string will not work!
 """
 import ctypes
+from OpenGL._bytes import bytes,unicode
 PI_DIGITS = '31415926535897931'
 
 def calculateOffset( ):
@@ -45,7 +46,7 @@ def calculateOffset( ):
             
             Returns the raw data-pointer to the internal buffer of the passed string
             """
-            if not isinstance( data, str ):
+            if not isinstance( data, bytes ):
                 raise TypeError(
                     """This function can only handle Python strings!  Got %s"""%(
                         type(data),
@@ -63,5 +64,5 @@ dataPointer = calculateOffset()
 
 if __name__ == "__main__":
     a  = 'this'
-    print id(a), dataPointer( a ), dataPointer(a) - id(a)
+    print((id(a), dataPointer( a ), dataPointer(a) - id(a)))
     

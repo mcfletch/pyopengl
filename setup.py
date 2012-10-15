@@ -7,12 +7,6 @@ try:
     from setuptools import setup 
 except ImportError:
     from distutils.core import setup
-if sys.hexversion >= 0x3000000:
-    try:
-        from distutils.command.build_py import build_py_2to3
-        extra_commands['build_py'] = build_py_2to3
-    except ImportError:
-        pass
 
 sys.path.insert(0, '.' )
 import metadata
@@ -67,6 +61,5 @@ if __name__ == "__main__":
         },
         data_files = datafiles,
         cmdclass = extra_commands,
-        use_2to3 = True,
         **metadata.metadata
     )

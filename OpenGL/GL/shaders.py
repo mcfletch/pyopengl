@@ -17,6 +17,7 @@ from OpenGL.GL.ARB import (
     geometry_shader4, separate_shader_objects, get_program_binary,
 )
 from OpenGL.extensions import alternate
+from OpenGL._bytes import bytes,unicode,as_8_bit
 
 __all__ = [
     'glAttachShader',
@@ -198,11 +199,6 @@ def compileProgram(*shaders, **named):
     for shader in shaders:
         glDeleteShader(shader)
     return program
-def as_bytes( s ):
-    """Utility to retrieve s as raw string (8-bit)"""
-    if isinstance( s, unicode ):
-        s = s.encode( ) # TODO: can we use latin-1 or utf-8?
-    return s
 def compileShader( source, shaderType ):
     """Compile shader source of given type
 
@@ -212,9 +208,9 @@ def compileShader( source, shaderType ):
     returns GLuint compiled shader reference
     raises RuntimeError when a compilation failure occurs
     """
-    if isinstance( source, (str,unicode)):
+    if isinstance( source, (bytes,unicode)):
         source = [ source ]
-    source = [ as_bytes(s) for s in source ]
+    source = [ as_8_bit(s) for s in source ]
     shader = glCreateShader(shaderType)
     glShaderSource( shader, source )
     glCompileShader( shader )

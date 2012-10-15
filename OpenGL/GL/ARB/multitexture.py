@@ -29,9 +29,9 @@ for typ,arrayType in (
         )
         try:
             del size,name
-        except NameError, err:
+        except NameError as err:
             pass
     try:
         del typ,arrayType
-    except NameError, err:
+    except NameError as err:
         pass

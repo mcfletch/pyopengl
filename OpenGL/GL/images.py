@@ -14,6 +14,7 @@
 """
 from OpenGL.raw.GL.VERSION import GL_1_1,GL_1_2, GL_3_0
 from OpenGL import images, arrays, wrapper, platform, constants
+from OpenGL._bytes import bytes,unicode,as_8_bit
 import ctypes
 
 def asInt( value ):
@@ -286,10 +287,10 @@ for suffix,type in [
 ##	"%s = glGetTexImage"%(suffix)
     try:
         del suffix,type
-    except NameError, err:
+    except NameError as err:
         pass
 # Now the real glReadPixels...
-def glReadPixels( x,y,width,height,format,type, array=None, outputType=str ):
+def glReadPixels( x,y,width,height,format,type, array=None, outputType=bytes ):
     """Read specified pixels from the current display buffer
 
     x,y,width,height -- location and dimensions of the image to read
@@ -297,7 +298,7 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=str ):
     format -- pixel format for the resulting data
     type -- data-format for the resulting data
     array -- optional array/offset into which to store the value
-    outputType -- default (str) provides string output of the
+    outputType -- default (bytes) provides string output of the
         results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
         and type == GL_UNSIGNED_BYTE.  Any other value will cause
         output in the default array output format.
@@ -318,12 +319,12 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=str ):
         format,type,
         imageData
     )
-    if outputType is str:
+    if outputType is bytes:
         return images.returnFormat( array, type )
     else:
         return array
 
-def glGetTexImage( target, level,format,type, outputType=str ):
+def glGetTexImage( target, level,format,type, outputType=bytes ):
     """Get a texture-level as an image
 
     target -- enum constant for the texture engine to be read
@@ -331,7 +332,7 @@ def glGetTexImage( target, level,format,type, outputType=str ):
     format -- image format to read out the data
     type -- data-type into which to read the data
 
-    outputType -- default (str) provides string output of the
+    outputType -- default (bytes) provides string output of the
         results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
         and type == GL_UNSIGNED_BYTE.  Any other value will cause
         output in the default array output format.
@@ -350,7 +351,7 @@ def glGetTexImage( target, level,format,type, outputType=str ):
     GL_1_1.glGetTexImage(
         target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array))
     )
-    if outputType is str:
+    if outputType is bytes:
         return images.returnFormat( array, type )
     else:
         return array
@@ -574,9 +575,9 @@ for suffix,arrayConstant in [
         globals()[functionName] = function
         try:
             del function, functionName
-        except NameError, err:
+        except NameError as err:
             pass
     try:
         del suffix,arrayConstant
-    except NameError, err:
+    except NameError as err:
         pass

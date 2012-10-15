@@ -7,8 +7,12 @@ type as well.
 REGISTRY_NAME = 'numpy'
 try:
     import numpy
-except ImportError, err:
+except ImportError as err:
     raise ImportError( """No numpy module present: %s"""%(err))
+try:
+    long 
+except NameError as err:
+    long = int
 
 import operator,logging
 from OpenGL import _configflags
@@ -24,7 +28,7 @@ NumpyHandler = None
 if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.numpy_formathandler import NumpyHandler
-    except ImportError, err:
+    except ImportError as err:
         log.warn(
             "Unable to load numpy_formathandler accelerator from OpenGL_accelerate"
         )
@@ -39,26 +43,26 @@ if NumpyHandler is None:
             """Convert given instance to a data-pointer value (integer)"""
             try:
                 return long(instance.__array_interface__['data'][0])
-            except AttributeError, err:
+            except AttributeError as err:
                 instance = cls.asArray( instance )
                 try:
                     return long(instance.__array_interface__['data'][0])
-                except AttributeError, err:
+                except AttributeError as err:
                     return long(instance.__array_data__[0],0)
     else:
         def dataPointer( cls, instance ):
             """Convert given instance to a data-pointer value (integer)"""
             try:
                 return long(instance.__array_data__[0],0)
-            except AttributeError, err:
+            except AttributeError as err:
                 instance = cls.asArray( instance )
                 try:
                     return long(instance.__array_interface__['data'][0])
-                except AttributeError, err:
+                except AttributeError as err:
                     return long(instance.__array_data__[0],0)
     try:
         del testArray
-    except NameError, err:
+    except NameError as err:
         pass
     dataPointer = classmethod( dataPointer )
 
@@ -88,7 +92,7 @@ if NumpyHandler is None:
             if constant is None:
                 raise TypeError(
                     """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
-                        typeCode, ARRAY_TO_GL_TYPE_MAPPING.keys(), value,
+                        typeCode, list(ARRAY_TO_GL_TYPE_MAPPING.keys()), value,
                     )
                 )
             return constant
@@ -102,7 +106,7 @@ if NumpyHandler is None:
             """Given a data-value, calculate number of bytes required to represent"""
             try:
                 return value.nbytes
-            except AttributeError, err:
+            except AttributeError as err:
                 if cls.ERROR_ON_COPY:
                     raise error.CopyError(
                         """Non-numpy array passed to numpy arrayByteCount: %s""",
@@ -137,7 +141,7 @@ if NumpyHandler is None:
             typeCode = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
             try:
                 contiguous = source.flags.contiguous
-            except AttributeError, err:
+            except AttributeError as err:
                 if typeCode:
                     return numpy.ascontiguousarray( source, typeCode )
                 else:
@@ -178,7 +182,7 @@ if NumpyHandler is None:
         def from_param( cls, instance, typeCode=None ):
             try:
                 pointer = cls.dataPointer( instance )
-            except TypeError, err:
+            except TypeError as err:
                 array = cls.asArray( instance, typeCode )
                 pp = cls.dataPointer( array )
                 pp._temporary_array_ = (array,)
@@ -194,7 +198,7 @@ if NumpyHandler is None:
 try:
     numpy.array( [1], 's' )
     SHORT_TYPE = 's'
-except TypeError, err:
+except TypeError as err:
     SHORT_TYPE = 'h'
     USHORT_TYPE = 'H'
 

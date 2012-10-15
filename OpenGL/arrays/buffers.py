@@ -8,6 +8,10 @@ import ctypes,sys
 from OpenGL.arrays import _buffers
 from OpenGL import constants
 from OpenGL.arrays import formathandler
+try:
+    reduce 
+except NameError as err:
+    from functools import reduce
 
 class BufferHandler( formathandler.FormatHandler ):
     """Buffer-protocol data-type handler for OpenGL"""

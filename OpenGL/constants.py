@@ -5,6 +5,11 @@ uses (note, doesn't include the OpenGL-ES types!)
 """
 import ctypes
 from OpenGL.constant import Constant
+from OpenGL._bytes import bytes,unicode,as_8_bit
+try:
+    long 
+except NameError as err:
+    long = int
 
 GL_FALSE = Constant( 'GL_FALSE', 0x0 )
 GL_TRUE = Constant( 'GL_TRUE', 0x1 )
@@ -17,7 +22,7 @@ GL_UNSIGNED_INT = Constant( 'GL_UNSIGNED_INT', 0x1405 )
 GL_UNSIGNED_INT64 = Constant( 'GL_UNSIGNED_INT64_AMD', 0x8BC2 )
 GL_FLOAT = Constant( 'GL_FLOAT', 0x1406 )
 GL_DOUBLE = Constant( 'GL_DOUBLE', 0x140a )
-GL_CHAR = str
+GL_CHAR = bytes
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
 GL_VOID_P = object()
 
@@ -43,10 +48,10 @@ def _defineType( name, baseType, convertFunc = long ):
             def from_param( x, typeCode=None ):
                 try:
                     return original( x )
-                except TypeError, err:
+                except TypeError as err:
                     try:
                         return original( convertFunc(x) )
-                    except TypeError, err2:
+                    except TypeError as err2:
                         raise err
             from_param = staticmethod( from_param )
             setattr( baseType, 'from_param', from_param )

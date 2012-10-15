@@ -81,11 +81,11 @@ for dimensions in (1,2,3):
         )
         try:
             del name, function
-        except NameError, err:
+        except NameError as err:
             pass
     try:
         del dimensions
-    except NameError, err:
+    except NameError as err:
         pass
 
 if glGetCompressedTexImageARB:

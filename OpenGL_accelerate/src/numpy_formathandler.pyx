@@ -5,6 +5,7 @@ cimport numpy as np
 from OpenGL_accelerate.formathandler cimport FormatHandler
 import traceback, weakref
 from OpenGL.error import CopyError
+from OpenGL._bytes import bytes,unicode
 
 cdef extern from "Python.h":
 	cdef void Py_INCREF( object )
@@ -120,7 +121,7 @@ cdef class NumpyHandler(FormatHandler):
 		"""Convert type-code specification to a numpy dtype instance"""
 		if isinstance( typeCode, np.dtype ):
 			return typeCode
-		elif isinstance( typeCode, str ):
+		elif isinstance( typeCode, (bytes,unicode) ):
 			return np.dtype( typeCode )
 		else:
 			return self.gl_constant_to_array[ typeCode ]

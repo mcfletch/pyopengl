@@ -59,7 +59,7 @@ glShaderSourceARB = platform.createExtensionFunction(
     'glShaderSourceARB', dll=platform.GL,
     resultType=None,
     argTypes=(constants.GLhandleARB, constants.GLsizei, ctypes.POINTER(ctypes.c_char_p), arrays.GLintArray,),
-    doc = 'glShaderSourceARB( GLhandleARB(shaderObj), [str(string),...] ) -> None',
+    doc = 'glShaderSourceARB( GLhandleARB(shaderObj), [bytes(string),...] ) -> None',
     argNames = ('shaderObj', 'count', 'string', 'length',),
     extension = EXTENSION_NAME,
 )
@@ -81,7 +81,7 @@ glShaderSourceARB = wrapper.wrapper(
 )
 try:
     del conv
-except NameError, err:
+except NameError as err:
     pass
 
 for size in (1,2,3,4):
@@ -98,11 +98,11 @@ for size in (1,2,3,4):
         )
         try:
             del format, arrayType
-        except NameError, err:
+        except NameError as err:
             pass
     try:
         del size
-    except NameError, err:
+    except NameError as err:
         pass
 
 @lazy( glGetObjectParameterivARB )
@@ -203,7 +203,7 @@ def glGetActiveUniformARB(baseOperation, program, index):
             baseOperation(program, index, length,namelen,size, gl_type, name)
             return name.value[:int(namelen[0])], size[0], gl_type[0]
         raise ValueError( """No currently specified uniform names""" )
-    raise IndexError, 'Index %s out of range 0 to %i' % (index, max_index - 1, )
+    raise IndexError('Index %s out of range 0 to %i' % (index, max_index - 1, ))
 
 @lazy( glGetUniformLocationARB )
 def glGetUniformLocationARB( baseOperation, program, name ):

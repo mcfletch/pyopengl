@@ -219,7 +219,7 @@ class BasePlatform( object ):
                     doc = doc, argNames = argNames,
                     extension = extension,
                 )
-        except AttributeError, err:
+        except AttributeError as err:
             result = self.nullFunction( 
                 functionName, dll=dll,
                 resultType=resultType, 
@@ -352,6 +352,7 @@ class _NullFunctionPointer( object ):
         if self.extension and not self.resolved:
             self.load()
         return self.resolved
+    __bool__ = __nonzero__
     def load( self ):
         """Attempt to load the function again, presumably with a context this time"""
         from OpenGL import platform
@@ -366,7 +367,7 @@ class _NullFunctionPointer( object ):
                 argNames = self.argNames,
                 extension = self.extension,
             )
-        except AttributeError, err:
+        except AttributeError as err:
             return None 
         else:
             # now short-circuit so that we don't need to check again...

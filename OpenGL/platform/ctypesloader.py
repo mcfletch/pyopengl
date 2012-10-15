@@ -45,13 +45,13 @@ def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
             name = fullName
         elif os.path.isfile( os.path.join( DLL_DIRECTORY, name + '.dll' )):
             name = os.path.join( DLL_DIRECTORY, name + '.dll' )
-    except Exception, err:
+    except Exception as err:
         log.info( '''Failed on util.find_library( %r ): %s''', name, err )
         # Should the call fail, we just try to load the base filename...
         pass
     try:
         return dllType( name, mode )
-    except Exception, err:
+    except Exception as err:
         err.args += (name,fullName)
         raise
 

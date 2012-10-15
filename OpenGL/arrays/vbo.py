@@ -35,8 +35,13 @@ from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.GL.ARB import vertex_buffer_object
 from OpenGL import constants, error
+from OpenGL._bytes import bytes,unicode,as_8_bit
 import ctypes,logging
 log = logging.getLogger( 'OpenGL.arrays.vbo' )
+try:
+    long 
+except NameError as err:
+    long = int
 
 
 import weakref
@@ -70,6 +75,7 @@ class Implementation( object ):
             self.available = True
     def __nonzero__( self ):
         return self.available
+    __bool__ = __nonzero__
     def deleter( self, buffers, key):
         """Produce a deleter callback to delete the given buffer"""
         # these values are stored here to avoid them being cleaned up 
@@ -80,7 +86,7 @@ class Implementation( object ):
             while buffers:
                 try:
                     buffer = buffers.pop()
-                except IndexError, err:
+                except IndexError as err:
                     break
                 else:
                     try:
@@ -88,11 +94,11 @@ class Implementation( object ):
                         # we have to pass an array-compatible type here...
                         buf = gluint( buffer )
                         self.glDeleteBuffers(1, buf)
-                    except (AttributeError, nfe), err:
+                    except (AttributeError, nfe) as err:
                         pass
             try:
                 self._DELETERS_.pop( key )
-            except KeyError, err:
+            except KeyError as err:
                 pass
         return doBufferDeletion
     _DELETERS_ = {}
@@ -118,7 +124,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
         from OpenGL_accelerate.vbo import (
             VBO,VBOOffset,VBOHandler,VBOOffsetHandler,
         )
-    except ImportError, err:
+    except ImportError as err:
         log.warn(
             "Unable to load VBO accelerator from OpenGL_accelerate"
         )
@@ -185,7 +191,7 @@ if VBO is None:
         implementation = property( get_implementation, )
         def resolve( self, value ):
             """Resolve string constant to constant"""
-            if isinstance( value, (str,unicode)):
+            if isinstance( value, (bytes,unicode)):
                 return getattr( self.implementation, self.implementation.basename( value ) )
             return value
         def set_array( self, data, size=None ):
@@ -301,7 +307,7 @@ if VBO is None:
                 while self.buffers:
                     try:
                         self.implementation.glDeleteBuffers(1, self.buffers.pop(0))
-                    except (AttributeError,error.NullFunctionError), err:
+                    except (AttributeError,error.NullFunctionError) as err:
                         pass
         def __int__( self ):
             """Get our VBO id"""
@@ -421,7 +427,7 @@ def _cleaner( vbo ):
     def clean( ref ):
         try:
             _cleaners.pop( vbo )
-        except Exception, err:
+        except Exception as err:
             pass
         else:
             vbo.implementation.glUnmapBuffer( vbo.target )

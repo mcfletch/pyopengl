@@ -11,7 +11,7 @@ Eventual Goals:
 REGISTRY_NAME = 'numeric'
 try:
     import Numeric
-except ImportError, err:
+except ImportError as err:
     raise ImportError( """No Numeric module present: %s"""%(err))
 import operator
 from OpenGL.arrays import _numeric
@@ -42,7 +42,7 @@ class NumericHandler( formathandler.FormatHandler ):
         if constant is None:
             raise TypeError(
                 """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
-                    typeCode, ARRAY_TO_GL_TYPE_MAPPING.keys(), value,
+                    typeCode, list(ARRAY_TO_GL_TYPE_MAPPING.keys()), value,
                 )
             )
         return constant
@@ -50,7 +50,7 @@ class NumericHandler( formathandler.FormatHandler ):
         """Given a data-value, calculate dimensions for the array"""
         try:
             dimValue = value.shape
-        except AttributeError, err:
+        except AttributeError as err:
             # XXX it's a list or a tuple, how do we determine dimensions there???
             # for now we'll just punt and convert to an array first...
             value = self.asArray( value, typeCode )

@@ -4,7 +4,7 @@ LateBind = Curry = None
 if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.latebind import LateBind, Curry
-    except ImportError, err:
+    except ImportError as err:
         pass
 if LateBind is None:
     class LateBind(object):
@@ -39,7 +39,7 @@ if LateBind is None:
             """
             try:
                 return self._finalCall( *args, **named )
-            except (TypeError,AttributeError), err:
+            except (TypeError,AttributeError) as err:
                 if self._finalCall is None:
                     self._finalCall = self.finalise()
                 return self._finalCall( *args, **named )

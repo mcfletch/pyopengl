@@ -104,7 +104,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
             args = tuple( [ self.originalObject( x ) for x in args ] )
             try:
                 result = function( coords, vertex_data, weight, *args )
-            except Exception, err:
+            except Exception as err:
                 raise err.__class__(
                     """Failure during combine callback %r with args( %s,%s,%s,*%s):\n%s"""%(
                         function, coords, vertex_data, weight, args, str(err),
@@ -123,7 +123,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
             args = args[:-1] + ( self.originalObject(args[-1]), )
             try:
                 return function( *args )
-            except Exception, err:
+            except Exception as err:
                 err.args += (function,args)
                 raise
         return wrap
@@ -136,7 +136,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
             args = args[:-2] + ( self.originalObject(args[-2]), self.originalObject(args[-1]), )
             try:
                 return function( *args )
-            except Exception, err:
+            except Exception as err:
                 err.args += (function,args)
                 raise
         return wrap
@@ -153,7 +153,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
                     return function( vertex, data )
                 else:
                     return function( vertex )
-            except Exception, err:
+            except Exception as err:
                 err.args += (function,(vertex,data))
                 raise
         return wrap
@@ -169,7 +169,7 @@ GLUtesselator.CALLBACK_FUNCTION_REGISTRARS = dict([
 ])
 try:
     del c, funcType
-except NameError, err:
+except NameError as err:
     pass
 
 def gluTessCallback( tess, which, function ):

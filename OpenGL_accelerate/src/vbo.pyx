@@ -2,6 +2,7 @@
 import ctypes, weakref
 from OpenGL_accelerate.formathandler cimport FormatHandler
 from OpenGL import error
+from OpenGL._bytes import bytes,unicode
 
 cdef extern from "Python.h":
     cdef void Py_XINCREF( object )
@@ -101,7 +102,7 @@ cdef class VBO:
         return self._I_
     cdef unsigned int c_resolve( self, value ):
         """Resolve string constant to constant"""
-        if isinstance( value, (str,unicode)):
+        if isinstance( value, (bytes,unicode)):
             return getattr(
                 self.get_implementation(),
                 self.get_implementation().basename( value )

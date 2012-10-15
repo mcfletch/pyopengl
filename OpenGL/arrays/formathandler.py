@@ -33,7 +33,7 @@ class FormatHandler( object ):
             from OpenGL.arrays.arraydatatype import ArrayDatatype
             try:
                 plugin_class = entrypoint.load()
-            except ImportError, err:
+            except ImportError as err:
                 from OpenGL import logs
                 from OpenGL._configflags import WARN_ON_FORMAT_UNAVAILABLE
                 log = logs.getLog( 'OpenGL.formathandler' )
@@ -56,7 +56,7 @@ class FormatHandler( object ):
         registry = ArrayDatatype.getRegistry()
         try:
             return registry[ type ]
-        except KeyError, err:
+        except KeyError as err:
             key = '%s.%s'%(type.__module__,type.__name__)
             plugin = cls.LAZY_TYPE_REGISTRY.get( key )
             if plugin:

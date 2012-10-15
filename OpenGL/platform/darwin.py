@@ -36,7 +36,7 @@ class DarwinPlatform( baseplatform.BasePlatform ):
             'OpenGL', 
             mode=ctypes.RTLD_GLOBAL 
         )
-    except OSError, err:
+    except OSError as err:
         raise ImportError("Unable to load OpenGL library", *err.args)
     # CGL provides the windowing environment functionality
     # but it is built into the GL libs.

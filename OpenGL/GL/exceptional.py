@@ -6,6 +6,7 @@ from OpenGL import constants as data_types
 from OpenGL.lazywrapper import lazy
 from OpenGL.raw.GL.VERSION import GL_1_1 as simple
 from OpenGL.GL.VERSION import GL_1_1 as full
+from OpenGL._bytes import bytes,unicode,as_8_bit
 import OpenGL
 from OpenGL import _configflags
 import ctypes
@@ -93,7 +94,7 @@ glMap2d = glMap2( full.glMap2d, arrays.GLdoubleArray )
 glMap2f = glMap2( full.glMap2f, arrays.GLfloatArray )
 try:
     del glMap2
-except NameError, err:
+except NameError as err:
     pass
 
 def glMap1( baseFunction, arrayType ):
@@ -116,7 +117,7 @@ glMap1d = glMap1( full.glMap1d, arrays.GLdoubleArray )
 glMap1f = glMap1( full.glMap1f, arrays.GLfloatArray )
 try:
     del glMap1
-except NameError, err:
+except NameError as err:
     pass
 
 def glRasterPos( *args ):
@@ -140,13 +141,13 @@ def glVertex( *args ):
 
 @lazy( full.glCallLists )
 def glCallLists( baseFunction, lists, *args ):
-    """glCallLists( str( lists ) or lists[] ) -> None
+    """glCallLists( bytes( lists ) or lists[] ) -> None
 
     Restricted version of glCallLists, takes a string or a GLuint compatible
     array data-type and passes into the base function.
     """
     if not len(args):
-        if isinstance( lists, str ):
+        if isinstance( lists, bytes ):
             return baseFunction(
                 len(lists),
                 full.GL_UNSIGNED_BYTE,
@@ -333,7 +334,7 @@ def glAreTexturesResident( baseFunction, *args ):
     elif len(args) == 2:
         try:
             n = int( args[0] )
-        except TypeError, err:
+        except TypeError as err:
             textures = args[0]
             textures = arrays.GLuintArray.asArray( textures )
 

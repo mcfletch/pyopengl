@@ -5,6 +5,7 @@ import ctypes, _ctypes
 
 from OpenGL import constants, constant
 from OpenGL.arrays import formathandler
+from OpenGL._bytes import bytes,unicode,as_8_bit
 import operator
 
 c = ctypes.c_float(0)
@@ -19,7 +20,7 @@ DIRECT_RETURN_TYPES = (
 )
 try:
     del c
-except NameError, err:
+except NameError as err:
     pass
 
 class CtypesParameterHandler( formathandler.FormatHandler ):
@@ -60,7 +61,7 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
             return result
         raise TypeError(
             """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
-                value._type_, ARRAY_TO_GL_TYPE_MAPPING.keys(), value,
+                value._type_, list(ARRAY_TO_GL_TYPE_MAPPING.keys()), value,
             )
         )
     def arraySize( self, value, typeCode = None ):
@@ -86,7 +87,7 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
         while dimObject is not None:
             yield dimObject
             dimObject = getattr( dimObject, '_type_', None )
-            if isinstance( dimObject, (str,unicode)):
+            if isinstance( dimObject, (bytes,unicode)):
                 dimObject = None
     def dims( self, value ):
         """Produce iterable of all dimensions"""
