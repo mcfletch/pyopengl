@@ -42,6 +42,11 @@ else:
     def as_8_bit( x, encoding='utf-8' ):
         if isinstance( x,unicode ):
             return x.encode(encoding)
+        elif isinstance( x, bytes ):
+            # Note: this can create an 8-bit string that is *not* in encoding,
+            # but that is potentially exactly what we wanted, as these can 
+            # be arbitrary byte-streams being passed to C functions
+            return x
         return str(x).encode( encoding )
     unicode = str
 
