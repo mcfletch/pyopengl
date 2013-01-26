@@ -1,10 +1,11 @@
 #! /usr/bin/env python
 """Get the EGL and ES header files"""
 import requests, os, logging, re
+from funcparse import Function,Helper
 log = logging.getLogger( 'build_gles' )
 here = os.path.dirname( __file__ )
-HEADER_DIR = os.path.join( here, 'include' )
-EGL_DIR = os.path.join( here, 'egl' )
+HEADER_DIR = os.path.join( here, 'es','include' )
+EGL_DIR = os.path.join( here, 'es','egl' )
 HEADER_FILES = [
     # EGL 1.4...
     'http://www.khronos.org/registry/egl/api/KHR/khrplatform.h',
@@ -38,7 +39,6 @@ def ensure_headers( force=False ):
         
 
 CONSTANT_DEFINE = re.compile( r'^#define\W+(?P<name>\w+)\W+(?P<value>(0x[0-9a-fA-F]+)|([0-9]+))', re.M )
-EGL_API = re.compile( r'^EGLAPI[ \t\n](?P<returntype>[a-zA-Z0-9_ *]+)\W+EGLAPIENTRY\W+(?P<name>[_a-z0-9A-Z]+)[(](?P<arguments>[^)]+)[)]', re.M|re.DOTALL )
 def find_constants( header ):
     """Given a header, try to find our constants"""
     for constant in CONSTANT_DEFINE.finditer( header ):
@@ -71,11 +71,17 @@ def parse_type( typ ):
     while typ.endswith( '*' ):
         typ = typ[:-1].strip()
         indirections += 1
+    while typ.startswith( 'struct' ):
+        typ = typ[6:].strip()
+    
     for i in range( indirections ):
         typ = 'pointer(%s)'%( typ, )
     return typ
         
+EGL_API = re.compile( r'^EGLAPI[ \t\n](?P<returntype>[a-zA-Z0-9_ *]+)\W+EGLAPIENTRY\W+(?P<name>[_a-z0-9A-Z]+)[ \t]*[(](?P<arguments>[^)]+)[)]', re.M|re.DOTALL )
 def egl():
+    module = os.path.join( EGL_DIR, 'egl.py' )
+    log.info( 'Starting EGL module %s', module )
     khr = open( os.path.join( HEADER_DIR, 'khrplatform.h' ) ).read()
     platform = open( os.path.join( HEADER_DIR, 'eglplatform.h' ) ).read()
     core = open( os.path.join( HEADER_DIR, 'egl.h' ) ).read()
@@ -84,26 +90,34 @@ def egl():
     for header in (khr,platform,core,ext):
         constants.extend( find_constants( header ))
     functions = []
-    for header in (core,):
+    for header in (core,ext):
         for function in EGL_API.finditer( header ):
             function = function.groupdict()
             function['returntype'] = parse_type( function['returntype'] )
-            args = parse_args( function['arguments'])
-            function['arg_names'] = ",".join( [x['name'] for x in args] )
-            function['arg_types'] = ",".join( [function['returntype']] + [x['type'] for x in args] )
+            function = Function( function['returntype'], function['name'], function['arguments'] )
             functions.append( function )
-    module = os.path.join( EGL_DIR, 'egl.py' )
     if not os.path.exists( EGL_DIR ):
         os.makedirs( EGL_DIR )
     with open( module, 'w' ) as fh:
+        fh.write('''"""egl wrapper for PyOpenGL"""
+from OpenGL import platform as _p
+from OpenGL.egl import khr as _cs
+from OpenGL import arrays
+
+import ctypes
+def _f( function ):
+    return _p.createFunction( function,_p.EGL,False)
+''')
         for constant in constants:
             fh.write( '%(name)s=%(value)s\n'%constant )
         for function in functions:
-            fh.write( '@t(%(arg_types)s)\ndef %(name)s(%(arg_names)s): pass\n'%function )
-    log.info( '%s constants', len(constants))
-    if len(functions)<34:
-        log.error( 'Expected at least 34 function for egl 1.4!' )
-    log.info( '%s functions', len(functions))
+            fh.write( function.declaration() )
+            fh.write('\n')
+            log.debug( '%s', function['name'] )
+    log.info( '  %s constants', len(constants))
+    if len(functions)<73:
+        log.error( 'Expected more functions!' )
+    log.info( '  %s functions', len(functions))
         
 def main():
     ensure_headers()

@@ -36,7 +36,8 @@ glGetBoolean/glGetInteger/glGetFloat/glGetDouble
     specification (.txt file) under a New Tokens header with a note
     that they can be passed to glGetBoolean will be so registered.
 """
-import urllib, os, sys, re, string, traceback, logging, textwrap, keyword
+import urllib, os, sys, re, string, traceback, logging, textwrap
+from funcparse import Helper, Function
 EXTENSION_HEADER_SOURCE = 'http://www.opengl.org/registry/api/glext.h'
 #ROOT_EXTENSION_SOURCE = 'http://oss.sgi.com/projects/ogl-sample/registry/'
 ROOT_EXTENSION_SOURCE = 'http://www.opengl.org/registry/specs/'
@@ -66,158 +67,6 @@ def indent( text, indent='\t' ):
         '%s%s'%(indent,line) 
         for line in text.splitlines()
     ])
-
-
-class Helper( object ):
-    root = ROOT_EXTENSION_SOURCE
-    def __getitem__( self, key ):
-        item = getattr( self, key, None )
-        if item is None:
-            raise KeyError( key )
-        if callable( item ):
-            return item()
-        else:
-            return item
-
-reserved_names = set(keyword.kwlist)
-            
-class Function( Helper ):
-    def __init__( self, returnType, name, signature):
-        """Parse definition into our various elements"""
-        self.returnType = self.parseReturnType(returnType)
-        self.name = name
-        try:
-            self.argTypes, self.argNames = self.parseArguments( signature )
-        except Exception, err:
-            log.error( """Error parsing arguments for %s %s: %s""", name, signature, err )
-            self.argTypes, self.argNames = (), ()
-##		self.pysignature = '(%s)'%(
-##			", ".join([
-##				item.split()[-1].strip('*')
-##				for item in signature[1:-1].split( ',' )
-##				if item.strip().strip('*')
-##			])
-##		)
-    findName = re.compile( '[a-zA-z0-9]*$' )
-    def parseReturnType( self, returnType ):
-        return self.cTypeToPyType( returnType )
-    def parseArguments( self, signature ):
-        """Parse a C argument-type declaration into a ctypes-style argTypes and argNames"""
-        signature = signature.strip()[1:-1]
-        # first and easiest case is a void call...
-        if not signature.strip() or signature.strip() == 'void':
-            return (), ()
-        types, names = [], []
-        for item in signature.split( ',' ):
-            item = item.strip()
-            nameMatch = self.findName.search( item )
-            if not nameMatch:
-                raise ValueError( item )
-            name = nameMatch.group(0)
-            if name in reserved_names:
-                name = name + '_'
-            rest = item[:nameMatch.start(0)].strip()
-            types.append( self.cTypeToPyType( rest ) )
-            names.append( name )
-        return types, names
-    def cTypeToPyType( self, base ):
-        """Given a C declared type for an argument/return type, get Python/ctypes version"""
-        base = base.strip()
-        if base.endswith( 'const' ):
-            return self.cTypeToPyType( base[:-5] )
-        elif base.startswith( 'struct' ):
-            return self.cTypeToPyType( base[6:] )
-        elif base.startswith( 'const' ):
-            return self.cTypeToPyType( base[5:] )
-        elif base.endswith( '*' ):
-            new = self.cTypeToPyType( base[:-1] )
-            if new == '_cs.GLvoid':
-                return 'ctypes.c_void_p'
-            elif new == 'ctypes.c_void_p':
-                return 'arrays.GLvoidpArray'
-            elif new in self.CTYPE_TO_ARRAY_TYPE:
-                return 'arrays.%s'%(self.CTYPE_TO_ARRAY_TYPE[new])
-            elif new in ( 'arrays.GLcharArray','arrays.GLcharARBArray'):
-                # can't have a pointer to these...
-                return 'ctypes.POINTER( ctypes.POINTER( _cs.GLchar ))'
-            elif new in ( '_cs.GLcharARB',):
-                return 'ctypes.POINTER( ctypes.c_char_p )'
-            else:
-                log.warn( 'Unconverted pointer type in %s: %r', self.name, new )
-                return 'ctypes.POINTER(%s)'%(new)
-        else:
-            return '_cs.%s'%(base,)
-    def errorReturn( self ):
-        return '0'
-    def declaration( self ):
-        """Produce a declaration for this function in ctypes format"""
-        returnType = self.returnType
-        if self.argTypes:
-            argTypes = ','.join(self.argTypes)
-        else:
-            argTypes = ''
-        if self.argNames:
-            argNames = ','.join(self.argNames)
-        else:
-            argNames = ''
-        arguments = ', '.join([
-            '%(type)s(%(name)s)'%locals()
-            for (type,name) in [
-                (type.split('.',1)[1],name)
-                for type,name in zip( self.argTypes,self.argNames )
-            ]
-        ])
-        name = self.name 
-        if returnType.strip() in ('_cs.GLvoid', '_cs.void'):
-            returnType = pyReturn = 'None'
-        else:
-            pyReturn = self.returnType
-        log.info( 'returnType %s -> %s', self.returnType, pyReturn )
-        doc = '%(name)s(%(arguments)s) -> %(pyReturn)s'%locals()
-        return self.TEMPLATE%locals()
-    TEMPLATE = """@_f
-@_p.types(%(returnType)s,%(argTypes)s)
-def %(name)s( %(argNames)s ):pass"""
-    CTYPE_TO_ARRAY_TYPE = {
-        '_cs.GLfloat': 'GLfloatArray',
-        '_cs.float': 'GLfloatArray',
-        '_cs.GLclampf': 'GLclampfArray',
-        '_cs.GLdouble': 'GLdoubleArray',
-        '_cs.double': 'GLdoubleArray',
-        '_cs.int': 'GLintArray',
-        '_cs.GLint': 'GLintArray',
-        '_cs.GLuint': 'GLuintArray',
-        '_cs.unsigned int':'GLuintArray',
-        '_cs.unsigned char': 'GLbyteArray',
-        '_cs.uint': 'GLuintArray',
-        '_cs.GLshort': 'GLshortArray',
-        '_cs.GLushort': 'GLushortArray',
-        '_cs.short unsigned int':'GLushortArray',
-        '_cs.GLubyte': 'GLubyteArray',
-        '_cs.GLbool': 'GLbooleanArray',
-        '_cs.GLboolean': 'GLbooleanArray',
-        'arrays.GLbooleanArray': 'GLbooleanArray',
-        '_cs.GLbyte': 'GLbyteArray',
-        '_cs.char': 'GLbyteArray',
-        '_cs.gleDouble': 'GLdoubleArray',
-        '_cs.GLchar': 'GLcharArray',
-        '_cs.GLcharARB': 'GLcharARBArray',
-        '_cs.GLhalfNV': 'GLushortArray',
-        '_cs.GLhandle': 'GLuintArray',
-        '_cs.GLhandleARB': 'GLuintArray',
-        '_cs.GLenum': 'GLuintArray',
-        # following should all have special sub-classes that enforce dimensions
-        '_cs.gleDouble * 4': 'GLdoubleArray',
-        '_cs.gleDouble * 3': 'GLdoubleArray',
-        '_cs.gleDouble * 2': 'GLdoubleArray',
-        '_cs.c_float * 3': 'GLfloatArray',
-        '_cs.gleDouble * 3 * 2': 'GLdoubleArray',
-        '_cs.GLsizei': 'GLsizeiArray',
-        '_cs.GLint64': 'GLint64Array',
-        '_cs.GLint64EXT': 'GLint64Array',
-        '_cs.GLuint64': 'GLuint64Array',
-        '_cs.GLuint64EXT': 'GLuint64Array',
-    }
     
 # Don't know how Tarn got the api_versions, short of manually entering them...
 WRAPPER_TEMPLATE = """'''Autogenerated by get_gl_extensions script, do not edit!'''
@@ -267,6 +116,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
 """
 
 class Module( Helper ):
+    root = ROOT_EXTENSION_SOURCE
     targetDirectory = os.path.join( '..','OpenGL')
     rawTargetDirectory = os.path.join( '..','OpenGL','raw')
     prefix = 'GL'
@@ -482,7 +332,7 @@ class Module( Helper ):
             specURL = self.SPEC_EXCEPTIONS[ specURLFragment ]
         else:
             specURL = '%s/%s.txt'%( 
-                ROOT_EXTENSION_SOURCE, 
+                self.root, 
                 specURLFragment,
             )
         if not os.path.isfile( specFile ):
@@ -577,7 +427,6 @@ class VersionModule( Module ):
         a reasonable wrapping of it...
         """
         return Specification( '' )
-    
 
 class Specification( object ):
     """Parser for parsing OpenGL specifications for interesting information
@@ -623,8 +472,6 @@ class Specification( object ):
                                 table['GL_%s'%(constant,)] = value 
                         break
         return table
-
-
 
 class Header( object ):
     """Manages the overall header source
@@ -736,8 +583,6 @@ class Header( object ):
             for (key,value) in items 
         ])
         open( 'glgetsizes.csv','w').write( data )
-
-        
 
 if __name__ == "__main__":
     logging.basicConfig()
