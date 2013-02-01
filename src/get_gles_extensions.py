@@ -5,7 +5,7 @@ from funcparse import Function,Helper
 log = logging.getLogger( 'build_gles' )
 here = os.path.dirname( __file__ )
 HEADER_DIR = os.path.join( here, 'es','include' )
-EGL_DIR = os.path.join( here, 'es','egl' )
+EGL_DIR = os.path.join( here, '..','OpenGL','egl' )
 HEADER_FILES = [
     # EGL 1.4...
     'http://www.khronos.org/registry/egl/api/KHR/khrplatform.h',
@@ -77,10 +77,41 @@ def parse_type( typ ):
     for i in range( indirections ):
         typ = 'pointer(%s)'%( typ, )
     return typ
-        
+
+EGL_PREFIX = '''"""egl wrapper for PyOpenGL"""
+# THIS FILE IS AUTO-GENERATED DO NOT EDIT!
+
+from OpenGL import platform as _p
+from . import khr as _cs
+from OpenGL import arrays
+import ctypes
+
+# Callback types, this is a hack to avoid making the 
+# khr module depend on the platform or needing to change generator for now...
+CALLBACK_TYPE = _p.PLATFORM.functionTypeFor( _p.PLATFORM.EGL )
+_cs.EGLSetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, _cs.EGLsizeiANDROID, ctypes.c_voidp, _cs.EGLsizeiANDROID )
+_cs.EGLGetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, _cs.EGLsizeiANDROID, ctypes.c_voidp, _cs.EGLsizeiANDROID )
+
+EGL_DEFAULT_DISPLAY = _cs.EGLNativeDisplayType(None)
+EGL_NO_CONTEXT = _cs.EGLContext(0)
+EGL_NO_DISPLAY = _cs.EGLDisplay(0)
+EGL_NO_SURFACE = _cs.EGLSurface(0)
+EGL_DONT_CARE = -1
+
+
+import ctypes
+def _f( function ):
+    return _p.createFunction( function,_p.EGL,None,False)
+'''
+EGL_SUFFIX = '''
+'''
+    
 EGL_API = re.compile( r'^EGLAPI[ \t\n](?P<returntype>[a-zA-Z0-9_ *]+)\W+EGLAPIENTRY\W+(?P<name>[_a-z0-9A-Z]+)[ \t]*[(](?P<arguments>[^)]+)[)]', re.M|re.DOTALL )
+EGL_SUPPRESS = set([
+    'eglGetProcAddress',
+])
 def egl():
-    module = os.path.join( EGL_DIR, 'egl.py' )
+    module = os.path.join( EGL_DIR, '__init__.py' )
     log.info( 'Starting EGL module %s', module )
     khr = open( os.path.join( HEADER_DIR, 'khrplatform.h' ) ).read()
     platform = open( os.path.join( HEADER_DIR, 'eglplatform.h' ) ).read()
@@ -93,21 +124,14 @@ def egl():
     for header in (core,ext):
         for function in EGL_API.finditer( header ):
             function = function.groupdict()
-            function['returntype'] = parse_type( function['returntype'] )
+            #function['returntype'] = parse_type( function['returntype'] )
             function = Function( function['returntype'], function['name'], function['arguments'] )
-            functions.append( function )
+            if function.name not in EGL_SUPPRESS:
+                functions.append( function )
     if not os.path.exists( EGL_DIR ):
         os.makedirs( EGL_DIR )
     with open( module, 'w' ) as fh:
-        fh.write('''"""egl wrapper for PyOpenGL"""
-from OpenGL import platform as _p
-from OpenGL.egl import khr as _cs
-from OpenGL import arrays
-
-import ctypes
-def _f( function ):
-    return _p.createFunction( function,_p.EGL,False)
-''')
+        fh.write(EGL_PREFIX)
         for constant in constants:
             fh.write( '%(name)s=%(value)s\n'%constant )
         for function in functions:
@@ -115,7 +139,7 @@ def _f( function ):
             fh.write('\n')
             log.debug( '%s', function['name'] )
     log.info( '  %s constants', len(constants))
-    if len(functions)<73:
+    if len(functions)<72:
         log.error( 'Expected more functions!' )
     log.info( '  %s functions', len(functions))
         

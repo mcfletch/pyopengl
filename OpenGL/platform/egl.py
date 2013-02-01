@@ -20,6 +20,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
         )
     except OSError as err:
         raise ImportError("Unable to load GLES2 library", *err.args)
+    GLUT = None
     OpenGL = GL = GLES2
     try:
         EGL = ctypesloader.loadLibrary(
