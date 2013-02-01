@@ -69,7 +69,7 @@ class BasePlatform( object ):
     EXPORTED_NAMES = [
         'GetCurrentContext','CurrentContextIsValid','safeGetError',
         'createBaseFunction', 'createExtensionFunction', 'copyBaseFunction',
-        'GL','GLU','GLUT','GLE','OpenGL',
+        'GL','GLU','GLUT','GLE','OpenGL','EGL',
         'getGLUTFontPointer',
         'GLUT_GUARD_CALLBACKS',
     ]
@@ -82,7 +82,7 @@ class BasePlatform( object ):
     def install( self, namespace ):
         """Install this platform instance into the platform module"""
         for name in self.EXPORTED_NAMES:
-            namespace[ name ] = getattr(self,name)
+            namespace[ name ] = getattr(self,name,None)
         namespace['PLATFORM'] = self
         return self
     
