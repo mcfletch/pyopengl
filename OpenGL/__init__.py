@@ -199,6 +199,7 @@ PlatformPlugin( 'linux2', 'OpenGL.platform.glx.GLXPlatform' )
 PlatformPlugin( 'darwin', 'OpenGL.platform.darwin.DarwinPlatform' )
 PlatformPlugin( 'posix', 'OpenGL.platform.glx.GLXPlatform' )
 PlatformPlugin( 'osmesa', 'OpenGL.platform.osmesa.OSMesaPlatform')
+PlatformPlugin( 'egl', 'OpenGL.platform.egl.EGLPlatform')
 
 FormatHandler( 'none', 'OpenGL.arrays.nones.NoneHandler' )
 
