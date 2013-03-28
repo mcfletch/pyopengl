@@ -250,7 +250,7 @@ if ADT is None:
         baseType = constants.GLenum
         typeConstant = constants.GL_UNSIGNED_INT
     class GLsizeiArray( ArrayDatatype, ctypes.POINTER(constants.GLsizei )):
-        """Array datatype for GLenum types"""
+        """Array datatype for GLsizei types"""
         baseType = constants.GLsizei
         typeConstant = constants.GL_INT
     class GLvoidpArray( ArrayDatatype, ctypes.POINTER(constants.GLvoid )):
