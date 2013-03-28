@@ -80,7 +80,6 @@ def parse_type( typ ):
 
 EGL_PREFIX = '''"""egl wrapper for PyOpenGL"""
 # THIS FILE IS AUTO-GENERATED DO NOT EDIT!
-
 from OpenGL import platform as _p
 from . import khr as _cs
 from OpenGL import arrays
@@ -98,8 +97,6 @@ EGL_NO_DISPLAY = _cs.EGLDisplay(0)
 EGL_NO_SURFACE = _cs.EGLSurface(0)
 EGL_DONT_CARE = -1
 
-
-import ctypes
 def _f( function ):
     return _p.createFunction( function,_p.EGL,None,False)
 '''

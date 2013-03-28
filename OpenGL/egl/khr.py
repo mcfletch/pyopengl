@@ -2,15 +2,18 @@
 import ctypes
 pointer = ctypes.pointer
 
+class _EGLDisplay( ctypes.Structure ):
+    """Opaque structure for EGLDisplays"""
+
 EGLBoolean = ctypes.c_uint
 EGLenum = ctypes.c_uint 
 EGLint = ctypes.c_long
-EGLConfig = ctypes.c_voidp
-EGLContext = ctypes.c_voidp
-EGLDisplay = ctypes.c_voidp
-EGLSurface = ctypes.c_voidp
-EGLClientBuffer = ctypes.c_voidp
-EGLImageKHR = ctypes.c_voidp
+EGLConfig = ctypes.c_ssize_t
+EGLContext = ctypes.c_ssize_t
+EGLDisplay = ctypes.c_ssize_t
+EGLSurface = ctypes.c_ssize_t
+EGLClientBuffer = ctypes.c_ssize_t
+EGLImageKHR = ctypes.c_ssize_t
 EGLNativeFileDescriptorKHR = ctypes.c_int
 
 EGLSyncKHR = EGLSyncNV = ctypes.c_voidp
