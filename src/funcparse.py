@@ -148,4 +148,12 @@ def %(name)s( %(argNames)s ):pass"""
         '_cs.GLint64EXT': 'GLint64Array',
         '_cs.GLuint64': 'GLuint64Array',
         '_cs.GLuint64EXT': 'GLuint64Array',
+        
+        '_cs.EGLint':'GLintArray',
+        '_cs.EGLConfig':'GLvoidpArray',
+        '_cs.EGLuint64KHR':'GLuint64Array',
+        '_cs.EGLNativeDisplayType':'GLvoidpArray',
+        '_cs.EGLNativeWindowType': 'GLvoidpArray',
+        '_cs.EGLNativePixmapType': 'GLvoidpArray',
+        '_cs.EGLTimeKHR': 'GLuint64Array',
     }

@@ -360,7 +360,7 @@ def eglGetError(  ):pass
 @_p.types(_cs.EGLDisplay,_cs.EGLNativeDisplayType)
 def eglGetDisplay( display_id ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,ctypes.POINTER(_cs.EGLint),ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,arrays.GLintArray,arrays.GLintArray)
 def eglInitialize( dpy,major,minor ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay)
@@ -369,28 +369,28 @@ def eglTerminate( dpy ):pass
 @_p.types(arrays.GLbyteArray,_cs.EGLDisplay,_cs.EGLint)
 def eglQueryString( dpy,name ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,ctypes.POINTER(_cs.EGLConfig),_cs.EGLint,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,arrays.GLvoidpArray,_cs.EGLint,arrays.GLintArray)
 def eglGetConfigs( dpy,configs,config_size,num_config ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,ctypes.POINTER(_cs.EGLint),ctypes.POINTER(_cs.EGLConfig),_cs.EGLint,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,arrays.GLintArray,arrays.GLvoidpArray,_cs.EGLint,arrays.GLintArray)
 def eglChooseConfig( dpy,attrib_list,configs,config_size,num_config ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLint,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLint,arrays.GLintArray)
 def eglGetConfigAttrib( dpy,config,attribute,value ):pass
 @_f
-@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLNativeWindowType,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLNativeWindowType,arrays.GLintArray)
 def eglCreateWindowSurface( dpy,config,win,attrib_list ):pass
 @_f
-@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,arrays.GLintArray)
 def eglCreatePbufferSurface( dpy,config,attrib_list ):pass
 @_f
-@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLNativePixmapType,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLNativePixmapType,arrays.GLintArray)
 def eglCreatePixmapSurface( dpy,config,pixmap,attrib_list ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface)
 def eglDestroySurface( dpy,surface ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,_cs.EGLint,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,_cs.EGLint,arrays.GLintArray)
 def eglQuerySurface( dpy,surface,attribute,value ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLenum)
@@ -405,7 +405,7 @@ def eglWaitClient(  ):pass
 @_p.types(_cs.EGLBoolean,)
 def eglReleaseThread(  ):pass
 @_f
-@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLenum,_cs.EGLClientBuffer,_cs.EGLConfig,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLenum,_cs.EGLClientBuffer,_cs.EGLConfig,arrays.GLintArray)
 def eglCreatePbufferFromClientBuffer( dpy,buftype,buffer,config,attrib_list ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,_cs.EGLint,_cs.EGLint)
@@ -420,7 +420,7 @@ def eglReleaseTexImage( dpy,surface,buffer ):pass
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLint)
 def eglSwapInterval( dpy,interval ):pass
 @_f
-@_p.types(_cs.EGLContext,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLContext,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLContext,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLContext,arrays.GLintArray)
 def eglCreateContext( dpy,config,share_context,attrib_list ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLContext)
@@ -438,7 +438,7 @@ def eglGetCurrentSurface( readdraw ):pass
 @_p.types(_cs.EGLDisplay,)
 def eglGetCurrentDisplay(  ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLContext,_cs.EGLint,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLContext,_cs.EGLint,arrays.GLintArray)
 def eglQueryContext( dpy,ctx,attribute,value ):pass
 @_f
 @_p.types(_cs.EGLBoolean,)
@@ -453,19 +453,19 @@ def eglSwapBuffers( dpy,surface ):pass
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,_cs.EGLNativePixmapType)
 def eglCopyBuffers( dpy,surface,target ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,arrays.GLintArray)
 def eglLockSurfaceKHR( display,surface,attrib_list ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface)
 def eglUnlockSurfaceKHR( display,surface ):pass
 @_f
-@_p.types(_cs.EGLImageKHR,_cs.EGLDisplay,_cs.EGLContext,_cs.EGLenum,_cs.EGLClientBuffer,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLImageKHR,_cs.EGLDisplay,_cs.EGLContext,_cs.EGLenum,_cs.EGLClientBuffer,arrays.GLintArray)
 def eglCreateImageKHR( dpy,ctx,target,buffer,attrib_list ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLImageKHR)
 def eglDestroyImageKHR( dpy,image ):pass
 @_f
-@_p.types(_cs.EGLSyncKHR,_cs.EGLDisplay,_cs.EGLenum,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLSyncKHR,_cs.EGLDisplay,_cs.EGLenum,arrays.GLintArray)
 def eglCreateSyncKHR( dpy,type,attrib_list ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSyncKHR)
@@ -477,10 +477,10 @@ def eglClientWaitSyncKHR( dpy,sync,flags,timeout ):pass
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSyncKHR,_cs.EGLenum)
 def eglSignalSyncKHR( dpy,sync,mode ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSyncKHR,_cs.EGLint,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSyncKHR,_cs.EGLint,arrays.GLintArray)
 def eglGetSyncAttribKHR( dpy,sync,attribute,value ):pass
 @_f
-@_p.types(_cs.EGLSyncNV,_cs.EGLDisplay,_cs.EGLenum,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLSyncNV,_cs.EGLDisplay,_cs.EGLenum,arrays.GLintArray)
 def eglCreateFenceSyncNV( dpy,condition,attrib_list ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLSyncNV)
@@ -495,16 +495,16 @@ def eglClientWaitSyncNV( sync,flags,timeout ):pass
 @_p.types(_cs.EGLBoolean,_cs.EGLSyncNV,_cs.EGLenum)
 def eglSignalSyncNV( sync,mode ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLSyncNV,_cs.EGLint,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLSyncNV,_cs.EGLint,arrays.GLintArray)
 def eglGetSyncAttribNV( sync,attribute,value ):pass
 @_f
 @_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,ctypes.POINTER(_cs.EGLClientPixmapHI))
 def eglCreatePixmapSurfaceHI( dpy,config,pixmap ):pass
 @_f
-@_p.types(_cs.EGLImageKHR,_cs.EGLDisplay,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLImageKHR,_cs.EGLDisplay,arrays.GLintArray)
 def eglCreateDRMImageMESA( dpy,attrib_list ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLImageKHR,ctypes.POINTER(_cs.EGLint),ctypes.POINTER(_cs.EGLint),ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLImageKHR,arrays.GLintArray,arrays.GLintArray,arrays.GLintArray)
 def eglExportDRMImageMESA( dpy,image,name,handle,stride ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,_cs.EGLint,_cs.EGLint,_cs.EGLint,_cs.EGLint)
@@ -516,7 +516,7 @@ def eglGetSystemTimeFrequencyNV(  ):pass
 @_p.types(_cs.EGLuint64NV,)
 def eglGetSystemTimeNV(  ):pass
 @_f
-@_p.types(_cs.EGLStreamKHR,_cs.EGLDisplay,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLStreamKHR,_cs.EGLDisplay,arrays.GLintArray)
 def eglCreateStreamKHR( dpy,attrib_list ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR)
@@ -525,10 +525,10 @@ def eglDestroyStreamKHR( dpy,stream ):pass
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR,_cs.EGLenum,_cs.EGLint)
 def eglStreamAttribKHR( dpy,stream,attribute,value ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR,_cs.EGLenum,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR,_cs.EGLenum,arrays.GLintArray)
 def eglQueryStreamKHR( dpy,stream,attribute,value ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR,_cs.EGLenum,ctypes.POINTER(_cs.EGLuint64KHR))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR,_cs.EGLenum,arrays.GLuint64Array)
 def eglQueryStreamu64KHR( dpy,stream,attribute,value ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR)
@@ -540,10 +540,10 @@ def eglStreamConsumerAcquireKHR( dpy,stream ):pass
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR)
 def eglStreamConsumerReleaseKHR( dpy,stream ):pass
 @_f
-@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLStreamKHR,ctypes.POINTER(_cs.EGLint))
+@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,_cs.EGLStreamKHR,arrays.GLintArray)
 def eglCreateStreamProducerSurfaceKHR( dpy,config,stream,attrib_list ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR,_cs.EGLenum,ctypes.POINTER(_cs.EGLTimeKHR))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLStreamKHR,_cs.EGLenum,arrays.GLuint64Array)
 def eglQueryStreamTimeKHR( dpy,stream,attribute,value ):pass
 @_f
 @_p.types(_cs.EGLNativeFileDescriptorKHR,_cs.EGLDisplay,_cs.EGLStreamKHR)
@@ -555,13 +555,13 @@ def eglCreateStreamFromFileDescriptorKHR( dpy,file_descriptor ):pass
 @_p.types(_cs.EGLint,_cs.EGLDisplay,_cs.EGLSyncKHR,_cs.EGLint)
 def eglWaitSyncKHR( dpy,sync,flags ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,ctypes.POINTER(_cs.EGLNativeDisplayType))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,arrays.GLvoidpArray)
 def eglQueryNativeDisplayNV( dpy,display_id ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,ctypes.POINTER(_cs.EGLNativeWindowType))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,arrays.GLvoidpArray)
 def eglQueryNativeWindowNV( dpy,surf,window ):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,ctypes.POINTER(_cs.EGLNativePixmapType))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,arrays.GLvoidpArray)
 def eglQueryNativePixmapNV( dpy,surf,pixmap ):pass
 @_f
 @_p.types(None,_cs.EGLDisplay,_cs.EGLSetBlobFuncANDROID,_cs.EGLGetBlobFuncANDROID)
