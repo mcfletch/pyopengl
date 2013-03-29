@@ -2,9 +2,6 @@
 import ctypes
 pointer = ctypes.pointer
 
-class _EGLDisplay( ctypes.Structure ):
-    """Opaque structure for EGLDisplays"""
-
 EGLBoolean = ctypes.c_uint
 EGLenum = ctypes.c_uint 
 EGLint = ctypes.c_long
@@ -39,3 +36,5 @@ NativeDisplayType = EGLNativeDisplayType
 NativePixmapType = EGLNativePixmapType
 NativeWindowType = EGLNativeWindowType
 
+del ctypes 
+del pointer 

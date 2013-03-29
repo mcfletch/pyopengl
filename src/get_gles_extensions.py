@@ -81,20 +81,22 @@ def parse_type( typ ):
 EGL_PREFIX = '''"""egl wrapper for PyOpenGL"""
 # THIS FILE IS AUTO-GENERATED DO NOT EDIT!
 from OpenGL import platform as _p
+from .khr import *
 from . import khr as _cs
 from OpenGL import arrays
+from OpenGL.constant import IntConstant as C
 import ctypes
 
 # Callback types, this is a hack to avoid making the 
 # khr module depend on the platform or needing to change generator for now...
 CALLBACK_TYPE = _p.PLATFORM.functionTypeFor( _p.PLATFORM.EGL )
-_cs.EGLSetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, _cs.EGLsizeiANDROID, ctypes.c_voidp, _cs.EGLsizeiANDROID )
-_cs.EGLGetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, _cs.EGLsizeiANDROID, ctypes.c_voidp, _cs.EGLsizeiANDROID )
+_cs.EGLSetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, EGLsizeiANDROID, ctypes.c_voidp, EGLsizeiANDROID )
+_cs.EGLGetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, EGLsizeiANDROID, ctypes.c_voidp, EGLsizeiANDROID )
 
-EGL_DEFAULT_DISPLAY = _cs.EGLNativeDisplayType(None)
-EGL_NO_CONTEXT = _cs.EGLContext(0)
-EGL_NO_DISPLAY = _cs.EGLDisplay(0)
-EGL_NO_SURFACE = _cs.EGLSurface(0)
+EGL_DEFAULT_DISPLAY = EGLNativeDisplayType(None)
+EGL_NO_CONTEXT = EGLContext(0)
+EGL_NO_DISPLAY = EGLDisplay(0)
+EGL_NO_SURFACE = EGLSurface(0)
 EGL_DONT_CARE = -1
 
 def _f( function ):
@@ -130,7 +132,7 @@ def egl():
     with open( module, 'w' ) as fh:
         fh.write(EGL_PREFIX)
         for constant in constants:
-            fh.write( '%(name)s=%(value)s\n'%constant )
+            fh.write( '%(name)s=C(%(name)r,%(value)s)\n'%constant )
         for function in functions:
             fh.write( function.declaration() )
             fh.write('\n')

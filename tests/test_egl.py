@@ -1,11 +1,11 @@
 #! /usr/bin/env python
 import OpenGL,ctypes
 OpenGL.USE_ACCELERATE = False
-from OpenGL import egl
+from OpenGL.egl import *
 
 def describe_config( display, config ):
     """Describe the given configuration"""
-    parameters = '''EGL_CONFIG_ID,
+    parameters = (EGL_CONFIG_ID,
         EGL_BUFFER_SIZE,
         EGL_LEVEL,
         EGL_RED_SIZE,
@@ -14,34 +14,47 @@ def describe_config( display, config ):
         EGL_ALPHA_SIZE,
         EGL_DEPTH_SIZE,
         EGL_STENCIL_SIZE,
-        EGL_SURFACE_TYPE'''.replace(',','').split()
+        EGL_SURFACE_TYPE)
     description = []
     for param in parameters:
         value = ctypes.c_long()
-        
-        egl.eglGetConfigAttrib(display, config, getattr(egl,param), value)
+        eglGetConfigAttrib(display, config, param, value)
         description.append( '%s = %s'%( param, value.value, ))
     return '\n'.join( description )
 
 def main():
     major,minor = ctypes.c_long(),ctypes.c_long()
-    display = egl.eglGetDisplay(egl.EGL_DEFAULT_DISPLAY)
+    display = eglGetDisplay(EGL_DEFAULT_DISPLAY)
     #display = ctypes.c_voidp( display )
     print 'wrapped', display
-    if not egl.eglInitialize( display, major, minor):
+    if not eglInitialize( display, major, minor):
         print 'Unable to initialize'
     print 'EGL version %s.%s'%(major.value,minor.value)
     
     num_configs = ctypes.c_long()
-    egl.eglGetConfigs(display, None, 0, num_configs)
+    eglGetConfigs(display, None, 0, num_configs)
     print '%s configs'%(num_configs.value)
-    configs = (egl._cs.EGLConfig * num_configs.value)()
-    egl.eglGetConfigs(display,configs,num_configs.value,num_configs)
+    
+    configs = (EGLConfig * num_configs.value)()
+    eglGetConfigs(display,configs,num_configs.value,num_configs)
     for config_id in configs:
         print config_id
         print describe_config( display, config_id )
     
-   
+    print 'Attempting to bind and create contexts/apis'
+    eglBindAPI(EGL_OPENGL_API)
+    ctx = eglCreateContext(display, configs[0], EGL_NO_CONTEXT, None)
+    if ctx == EGL_NO_CONTEXT:
+        print 'Unable to create the regular context'
+    else:
+        print 'Created regular context'
+    
+    pbufAttribs = (EGLint * 5)(* [EGL_WIDTH,500, EGL_HEIGHT, 500, EGL_NONE])
+    pbuffer = eglCreatePbufferSurface(display, configs[0], pbufAttribs);
+    if (pbuffer == EGL_NO_SURFACE):
+        print 'Unable to create pbuffer surface'
+    else:
+        print 'created pbuffer surface'
 
 if __name__ == "__main__":
     main()
