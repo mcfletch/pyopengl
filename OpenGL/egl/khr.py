@@ -5,19 +5,21 @@ pointer = ctypes.pointer
 EGLBoolean = ctypes.c_uint
 EGLenum = ctypes.c_uint 
 EGLint = ctypes.c_long
-EGLConfig = ctypes.c_ssize_t
-EGLContext = ctypes.c_ssize_t
-EGLDisplay = ctypes.c_ssize_t
-EGLSurface = ctypes.c_ssize_t
-EGLClientBuffer = ctypes.c_ssize_t
-EGLImageKHR = ctypes.c_ssize_t
+
+EGLConfig = ctypes.c_size_t
+EGLContext = ctypes.c_size_t
+EGLDisplay = ctypes.c_size_t
+EGLSurface = ctypes.c_size_t
+EGLClientBuffer = ctypes.c_size_t
+EGLImageKHR = ctypes.c_size_t
+
 EGLNativeFileDescriptorKHR = ctypes.c_int
 
 EGLSyncKHR = EGLSyncNV = ctypes.c_voidp
 EGLTimeKHR = EGLTimeNV = ctypes.c_ulonglong
 EGLuint64KHR = EGLuint64NV = ctypes.c_ulonglong
 EGLStreamKHR = ctypes.c_voidp
-EGLsizeiANDROID = ctypes.c_ssize_t
+EGLsizeiANDROID = ctypes.c_size_t
 
 class EGLClientPixmapHI( ctypes.Structure):
     _fields_ = [
