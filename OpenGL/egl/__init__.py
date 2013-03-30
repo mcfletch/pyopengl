@@ -641,4 +641,3 @@ def eglSwapBuffersRegionNOK(dpy,surface,numRects,rects):pass
 
 del ctypes 
 del arrays 
-del C

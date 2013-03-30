@@ -106,7 +106,6 @@ def _f( function ):
 EGL_SUFFIX = '''
 del ctypes 
 del arrays 
-del C
 '''
     
 EGL_API = re.compile( r'^(EGLAPI|GL_APICALL)[ \t\n](?P<returntype>[a-zA-Z0-9_ *]+)\W+(EGLAPIENTRY|GL_APIENTRY)\W+(?P<name>[_a-z0-9A-Z]+)[ \t]*[(](?P<arguments>[^)]+)[)]', re.M|re.DOTALL )
