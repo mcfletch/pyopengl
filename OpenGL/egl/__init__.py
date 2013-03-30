@@ -353,6 +353,27 @@ EGL_YUV_FULL_RANGE_EXT=C('EGL_YUV_FULL_RANGE_EXT',0x3282)
 EGL_YUV_NARROW_RANGE_EXT=C('EGL_YUV_NARROW_RANGE_EXT',0x3283)
 EGL_YUV_CHROMA_SITING_0_EXT=C('EGL_YUV_CHROMA_SITING_0_EXT',0x3284)
 EGL_YUV_CHROMA_SITING_0_5_EXT=C('EGL_YUV_CHROMA_SITING_0_5_EXT',0x3285)
+EGL_MESA_screen_surface=C('EGL_MESA_screen_surface',1)
+EGL_BAD_SCREEN_MESA=C('EGL_BAD_SCREEN_MESA',0x4000)
+EGL_BAD_MODE_MESA=C('EGL_BAD_MODE_MESA',0x4001)
+EGL_SCREEN_COUNT_MESA=C('EGL_SCREEN_COUNT_MESA',0x4002)
+EGL_SCREEN_POSITION_MESA=C('EGL_SCREEN_POSITION_MESA',0x4003)
+EGL_SCREEN_POSITION_GRANULARITY_MESA=C('EGL_SCREEN_POSITION_GRANULARITY_MESA',0x4004)
+EGL_MODE_ID_MESA=C('EGL_MODE_ID_MESA',0x4005)
+EGL_REFRESH_RATE_MESA=C('EGL_REFRESH_RATE_MESA',0x4006)
+EGL_OPTIMAL_MESA=C('EGL_OPTIMAL_MESA',0x4007)
+EGL_INTERLACED_MESA=C('EGL_INTERLACED_MESA',0x4008)
+EGL_SCREEN_BIT_MESA=C('EGL_SCREEN_BIT_MESA',0x08)
+EGL_MESA_copy_context=C('EGL_MESA_copy_context',1)
+EGL_MESA_drm_display=C('EGL_MESA_drm_display',1)
+EGL_DRM_BUFFER_USE_CURSOR_MESA=C('EGL_DRM_BUFFER_USE_CURSOR_MESA',0x0004)
+EGL_WL_bind_wayland_display=C('EGL_WL_bind_wayland_display',1)
+EGL_WAYLAND_BUFFER_WL=C('EGL_WAYLAND_BUFFER_WL',0x31D5)
+EGL_NOK_swap_region=C('EGL_NOK_swap_region',1)
+EGL_NOK_texture_from_pixmap=C('EGL_NOK_texture_from_pixmap',1)
+EGL_Y_INVERTED_NOK=C('EGL_Y_INVERTED_NOK',0x307F)
+EGL_ANDROID_image_native_buffer=C('EGL_ANDROID_image_native_buffer',1)
+EGL_NATIVE_BUFFER_ANDROID=C('EGL_NATIVE_BUFFER_ANDROID',0x3140)
 @_f
 @_p.types(_cs.EGLint,)
 def eglGetError(  ):pass
@@ -569,3 +590,51 @@ def eglSetBlobCacheFuncsANDROID( dpy,set,get ):pass
 @_f
 @_p.types(_cs.EGLint,_cs.EGLDisplay,_cs.EGLSyncKHR)
 def eglDupNativeFenceFDANDROID( dpy,sync ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLScreenMESA,arrays.GLintArray,ctypes.POINTER(_cs.EGLModeMESA),_cs.EGLint,arrays.GLintArray)
+def eglChooseModeMESA( dpy,screen,attrib_list,modes,modes_size,num_modes ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLScreenMESA,ctypes.POINTER(_cs.EGLModeMESA),_cs.EGLint,arrays.GLintArray)
+def eglGetModesMESA( dpy,screen,modes,modes_size,num_modes ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLModeMESA,_cs.EGLint,arrays.GLintArray)
+def eglGetModeAttribMESA( dpy,mode,attribute,value ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,ctypes.POINTER(_cs.EGLScreenMESA),_cs.EGLint,arrays.GLintArray)
+def eglGetScreensMESA( dpy,screens,max_screens,num_screens ):pass
+@_f
+@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,arrays.GLintArray)
+def eglCreateScreenSurfaceMESA( dpy,config,attrib_list ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLint,_cs.EGLSurface,_cs.EGLModeMESA)
+def eglShowScreenSurfaceMESA( dpy,screen,surface,mode ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLScreenMESA,_cs.EGLint,_cs.EGLint)
+def eglScreenPositionMESA( dpy,screen,x,y ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLScreenMESA,_cs.EGLint,arrays.GLintArray)
+def eglQueryScreenMESA( dpy,screen,attribute,value ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLScreenMESA,ctypes.POINTER(_cs.EGLSurface))
+def eglQueryScreenSurfaceMESA( dpy,screen,surface ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLScreenMESA,ctypes.POINTER(_cs.EGLModeMESA))
+def eglQueryScreenModeMESA( dpy,screen,mode ):pass
+@_f
+@_p.types(arrays.GLbyteArray,_cs.EGLDisplay,_cs.EGLModeMESA)
+def eglQueryModeStringMESA( dpy,mode ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLContext,_cs.EGLContext,_cs.EGLint)
+def eglCopyContextMESA( dpy,source,dest,mask ):pass
+@_f
+@_p.types(_cs.EGLDisplay,_cs.c_int)
+def eglGetDRMDisplayMESA( fd ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,ctypes.POINTER(_cs.wl_display))
+def eglBindWaylandDisplayWL( dpy,display ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,ctypes.POINTER(_cs.wl_display))
+def eglUnbindWaylandDisplayWL( dpy,display ):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,_cs.EGLint,arrays.GLintArray)
+def eglSwapBuffersRegionNOK( dpy,surface,numRects,rects ):pass
