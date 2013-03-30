@@ -115,7 +115,7 @@ class Function( Helper ):
         return self.TEMPLATE%locals()
     TEMPLATE = """@_f
 @_p.types(%(returnType)s,%(argTypes)s)
-def %(name)s( %(argNames)s ):pass"""
+def %(name)s(%(argNames)s):pass"""
     CTYPE_TO_ARRAY_TYPE = {
         '_cs.GLfloat': 'GLfloatArray',
         '_cs.float': 'GLfloatArray',

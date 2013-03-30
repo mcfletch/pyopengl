@@ -85,7 +85,7 @@ from OpenGL import platform as _p
 from OpenGL.khr import *
 from OpenGL import khr as _cs
 from OpenGL import arrays
-from OpenGL.constant import IntConstant as C
+from OpenGL.constant import IntConstant as _C
 import ctypes
 
 # Callback types, this is a hack to avoid making the 
@@ -142,7 +142,7 @@ def write_module( constant_headers, headers, module, suppress=None, prefix=None,
     with open( module, 'w' ) as fh:
         fh.write(prefix or '')
         for constant in constants:
-            fh.write( '%(name)s=C(%(name)r,%(value)s)\n'%constant )
+            fh.write( '%(name)s=_C(%(name)r,%(value)s)\n'%constant )
         for function in functions:
             fh.write( function.declaration() )
             fh.write('\n')
@@ -174,7 +174,7 @@ GLES_PREFIX = '''"""GLES %(es_version)s wrapper for PyOpenGL"""
 from OpenGL import constants as _cs 
 from OpenGL import platform as _p
 from OpenGL import arrays
-from OpenGL.constant import IntConstant as C
+from OpenGL.constant import IntConstant as _C
 import ctypes
 
 def _f( function ):
