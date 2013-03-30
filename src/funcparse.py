@@ -77,6 +77,8 @@ class Function( Helper ):
                 log.warn( 'Unconverted pointer type in %s: %r', self.name, new )
                 return 'ctypes.POINTER(%s)'%(new)
         else:
+            if base == 'int':
+                base = 'c_int'
             return '_cs.%s'%(base,)
     def errorReturn( self ):
         return '0'

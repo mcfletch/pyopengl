@@ -116,11 +116,12 @@ def egl():
     platform = open( os.path.join( HEADER_DIR, 'eglplatform.h' ) ).read()
     core = open( os.path.join( HEADER_DIR, 'egl.h' ) ).read()
     ext = open( os.path.join( HEADER_DIR, 'eglext.h' ) ).read()
+    mesa= open( os.path.join( HEADER_DIR, 'eglmesaext.h')).read()
     constants = []
-    for header in (khr,platform,core,ext):
+    for header in (khr,platform,core,ext,mesa):
         constants.extend( find_constants( header ))
     functions = []
-    for header in (core,ext):
+    for header in (core,ext,mesa):
         for function in EGL_API.finditer( header ):
             function = function.groupdict()
             #function['returntype'] = parse_type( function['returntype'] )
