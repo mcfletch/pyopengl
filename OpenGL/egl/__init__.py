@@ -1,8 +1,8 @@
 """egl wrapper for PyOpenGL"""
 # THIS FILE IS AUTO-GENERATED DO NOT EDIT!
 from OpenGL import platform as _p
-from .khr import *
-from . import khr as _cs
+from OpenGL.khr import *
+from OpenGL import khr as _cs
 from OpenGL import arrays
 from OpenGL.constant import IntConstant as C
 import ctypes
@@ -638,3 +638,7 @@ def eglUnbindWaylandDisplayWL( dpy,display ):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,_cs.EGLint,arrays.GLintArray)
 def eglSwapBuffersRegionNOK( dpy,surface,numRects,rects ):pass
+
+del ctypes 
+del arrays 
+del C

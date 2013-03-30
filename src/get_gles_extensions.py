@@ -3,9 +3,10 @@
 import requests, os, logging, re
 from funcparse import Function,Helper
 log = logging.getLogger( 'build_gles' )
-here = os.path.dirname( __file__ )
-HEADER_DIR = os.path.join( here, 'es','include' )
-EGL_DIR = os.path.join( here, '..','OpenGL','egl' )
+HERE = os.path.dirname( __file__ )
+HEADER_DIR = os.path.join( HERE, 'es','include' )
+EGL_DIR = os.path.join( HERE, '..','OpenGL','egl' )
+
 HEADER_FILES = [
     # EGL 1.4...
     'http://www.khronos.org/registry/egl/api/KHR/khrplatform.h',
@@ -81,8 +82,8 @@ def parse_type( typ ):
 EGL_PREFIX = '''"""egl wrapper for PyOpenGL"""
 # THIS FILE IS AUTO-GENERATED DO NOT EDIT!
 from OpenGL import platform as _p
-from .khr import *
-from . import khr as _cs
+from OpenGL.khr import *
+from OpenGL import khr as _cs
 from OpenGL import arrays
 from OpenGL.constant import IntConstant as C
 import ctypes
@@ -103,50 +104,112 @@ def _f( function ):
     return _p.createFunction( function,_p.EGL,None,False)
 '''
 EGL_SUFFIX = '''
+del ctypes 
+del arrays 
+del C
 '''
     
-EGL_API = re.compile( r'^EGLAPI[ \t\n](?P<returntype>[a-zA-Z0-9_ *]+)\W+EGLAPIENTRY\W+(?P<name>[_a-z0-9A-Z]+)[ \t]*[(](?P<arguments>[^)]+)[)]', re.M|re.DOTALL )
+EGL_API = re.compile( r'^(EGLAPI|GL_APICALL)[ \t\n](?P<returntype>[a-zA-Z0-9_ *]+)\W+(EGLAPIENTRY|GL_APIENTRY)\W+(?P<name>[_a-z0-9A-Z]+)[ \t]*[(](?P<arguments>[^)]+)[)]', re.M|re.DOTALL )
 EGL_SUPPRESS = set([
     'eglGetProcAddress',
 ])
-def egl():
-    module = os.path.join( EGL_DIR, '__init__.py' )
-    log.info( 'Starting EGL module %s', module )
-    khr = open( os.path.join( HEADER_DIR, 'khrplatform.h' ) ).read()
-    platform = open( os.path.join( HEADER_DIR, 'eglplatform.h' ) ).read()
-    core = open( os.path.join( HEADER_DIR, 'egl.h' ) ).read()
-    ext = open( os.path.join( HEADER_DIR, 'eglext.h' ) ).read()
-    mesa= open( os.path.join( HEADER_DIR, 'eglmesaext.h')).read()
+
+def load_header( header ):
+    filename = os.path.join( HEADER_DIR, header )
+    if not os.path.exists( filename ):
+        raise RuntimeError( "Missing header %s", filename )
+    return open( filename ).read()
+
+def write_module( constant_headers, headers, module, suppress=None, prefix=None, suffix=None ):
+    suppress = suppress or set()
+    
+    constant_headers = [load_header(h) for h in constant_headers]
+    headers = [load_header(h) for h in headers ]
+    
     constants = []
-    for header in (khr,platform,core,ext,mesa):
+    for header in constant_headers:
         constants.extend( find_constants( header ))
     functions = []
-    for header in (core,ext,mesa):
+    for header in headers:
         for function in EGL_API.finditer( header ):
             function = function.groupdict()
             #function['returntype'] = parse_type( function['returntype'] )
             function = Function( function['returntype'], function['name'], function['arguments'] )
-            if function.name not in EGL_SUPPRESS:
+            if function.name not in suppress:
                 functions.append( function )
-    if not os.path.exists( EGL_DIR ):
-        os.makedirs( EGL_DIR )
+    if not os.path.exists( os.path.dirname( module ) ):
+        os.makedirs( os.path.dirname( module ) )
     with open( module, 'w' ) as fh:
-        fh.write(EGL_PREFIX)
+        fh.write(prefix or '')
         for constant in constants:
             fh.write( '%(name)s=C(%(name)r,%(value)s)\n'%constant )
         for function in functions:
             fh.write( function.declaration() )
             fh.write('\n')
             log.debug( '%s', function['name'] )
+        fh.write(suffix or '')
+    log.info( 'File: %s', module )
     log.info( '  %s constants', len(constants))
-    if len(functions)<72:
-        log.error( 'Expected more functions!' )
     log.info( '  %s functions', len(functions))
+
+def egl():
+    module = os.path.join( EGL_DIR, '__init__.py' )
+    log.info( 'Starting EGL module %s', module )
+    khr = 'khrplatform.h'
+    platform = 'eglplatform.h'
+    core = 'egl.h'
+    ext = 'eglext.h'
+    mesa= 'eglmesaext.h'
+    
+    write_module( 
+        constant_headers = (khr,platform,core,ext,mesa),
+        headers= (core,ext,mesa),
+        module = module,
+        suppress = EGL_SUPPRESS,
+        prefix = EGL_PREFIX,
+        suffix= EGL_SUFFIX,
+    )
+
+GLES_PREFIX = '''"""GLES %(es_version)s wrapper for PyOpenGL"""
+from OpenGL import constants as _cs 
+from OpenGL import platform as _p
+from OpenGL import arrays
+from OpenGL.constant import IntConstant as C
+import ctypes
+
+def _f( function ):
+    return _p.createFunction( function,_p.GL,None,False)
+'''
+GLES_SUFFIX = '''
+'''
+GLES_SUPPRESS = set([
+#    'glRenderbufferStorageMultisampleAPPLE', # missing parameter names...
+#    'glRenderbufferStorageMultisampleEXT',
+#    'glFramebufferTexture2DMultisampleEXT',
+])
+
+def gles():
+    """Create the GLES 2 and 3 modules"""
+    for es_version in (2,3):
+        target_dir = os.path.join( HERE, '..', 'OpenGL','es%(es_version)s'%locals() )
+        target_module = os.path.join( target_dir, '__init__.py' )
+        headers = [ h%locals() for h in [
+            'gl%(es_version)s.h','gl%(es_version)sext.h','gl%(es_version)splatform.h']
+        ]
+        write_module( 
+            constant_headers = headers,
+            headers= headers,
+            module = target_module,
+            suppress = GLES_SUPPRESS,
+            prefix = GLES_PREFIX%locals(),
+            suffix= GLES_SUFFIX,
+        )
         
 def main():
     ensure_headers()
     egl()
-                
+    gles()
+
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
     main()

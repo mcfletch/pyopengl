@@ -155,3 +155,6 @@ GLDEBUGPROCAMD = _FUNCTION_TYPE(
     ctypes.c_char_p,# message,
     GLvoidp,# userParam
 )
+
+GLeglImageOES = GLvoidp 
+c_int = ctypes.c_int

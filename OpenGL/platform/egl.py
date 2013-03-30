@@ -11,7 +11,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
             mode=ctypes.RTLD_GLOBAL 
         )
     except OSError as err:
-        raise ImportError("Unable to load GLES1 library", *err.args)
+        GLES1 = None
     try:
         GLES2 = ctypesloader.loadLibrary(
             ctypes.cdll,
@@ -19,7 +19,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
             mode=ctypes.RTLD_GLOBAL 
         )
     except OSError as err:
-        raise ImportError("Unable to load GLES2 library", *err.args)
+        GLES2 = None
     GLUT = None
     OpenGL = GL = GLES2
     try:
@@ -44,8 +44,6 @@ class EGLPlatform( baseplatform.BasePlatform ):
 
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )
 
-    # This loads the GLX functions from the GL .so, not sure if that's
-    # really kosher...
     GetCurrentContext = CurrentContextIsValid = staticmethod(
         EGL.eglGetCurrentContext
     )

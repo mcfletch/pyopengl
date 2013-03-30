@@ -18,14 +18,14 @@ class Function( Helper ):
     """Parse function parameters from C-style declaration"""
     def __init__( self, returnType, name, signature):
         """Parse definition into our various elements"""
-        self.returnType = self.parseReturnType(returnType)
         self.name = name
+        self.returnType = self.parseReturnType(returnType)
         try:
             self.argTypes, self.argNames = self.parseArguments( signature )
         except Exception, err:
             log.error( """Error parsing arguments for %s %s: %s""", name, signature, err )
             self.argTypes, self.argNames = (), ()
-    findName = re.compile( '[a-zA-z0-9]*$' )
+    findName = re.compile( '[a-zA-z0-9]+$' )
     def parseReturnType( self, returnType ):
         return self.cTypeToPyType( returnType )
     def parseArguments( self, signature ):
@@ -37,18 +37,23 @@ class Function( Helper ):
         if not signature.strip() or signature.strip() == 'void':
             return (), ()
         types, names = [], []
-        for item in signature.split( ',' ):
+        for i,item in enumerate(signature.split( ',' )):
             # TODO: have to hack around the official header having junk here...
             if item.strip() == 'EGLSyncKHR':
                 item = 'EGLSyncKHR sync'
             item = item.strip()
             nameMatch = self.findName.search( item )
             if not nameMatch:
-                raise ValueError( item )
-            name = nameMatch.group(0)
+                name = 'arg_%i'%i
+                rest = item
+            else:
+                name = nameMatch.group(0)
+                rest = item[:nameMatch.start(0)].strip()
+                if not rest:
+                    rest = name 
+                    name = 'arg_%i'%i
             if name in reserved_names:
                 name = name + '_'
-            rest = item[:nameMatch.start(0)].strip()
             types.append( self.cTypeToPyType( rest ) )
             names.append( name )
         return types, names
