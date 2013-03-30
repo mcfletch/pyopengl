@@ -2,9 +2,9 @@
 import ctypes
 pointer = ctypes.pointer
 
-EGLBoolean = ctypes.c_uint
-EGLenum = ctypes.c_uint 
-EGLint = ctypes.c_long
+EGLBoolean = ctypes.c_uint32
+EGLenum = ctypes.c_uint32
+EGLint = c_int = ctypes.c_int32
 
 EGLConfig = ctypes.c_size_t
 EGLContext = ctypes.c_size_t
@@ -12,6 +12,9 @@ EGLDisplay = ctypes.c_size_t
 EGLSurface = ctypes.c_size_t
 EGLClientBuffer = ctypes.c_size_t
 EGLImageKHR = ctypes.c_size_t
+
+EGLScreenMESA = ctypes.c_ulong
+EGLModeMESA = ctypes.c_ulong
 
 EGLNativeFileDescriptorKHR = ctypes.c_int
 
@@ -28,6 +31,9 @@ class EGLClientPixmapHI( ctypes.Structure):
         ('iHeight',EGLint),
         ('iStride',EGLint),
     ]
+class wl_display( ctypes.Structure):
+    """Opaque structure from Mesa Wayland API"""
+    _fields_ = []
 
 # These are X11... no good, really...
 EGLNativeDisplayType = ctypes.c_voidp # Display *
