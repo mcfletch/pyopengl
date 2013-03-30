@@ -1,4 +1,10 @@
 #! /usr/bin/env python
+"""Implements the functionality in MESA's EGL + OpenGL demo1:
+
+    http://cgit.freedesktop.org/mesa/demos/tree/src/egl/opengl/demo1.c
+
+Basically just to check if the EGL code works...
+"""
 import OpenGL,ctypes
 OpenGL.USE_ACCELERATE = False
 from OpenGL.egl import *
