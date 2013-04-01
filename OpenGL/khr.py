@@ -36,9 +36,9 @@ class wl_display( ctypes.Structure):
     _fields_ = []
 
 # These are X11... no good, really...
-EGLNativeDisplayType = ctypes.c_voidp # Display *
-EGLNativePixmapType = ctypes.c_voidp # Pixmap 
-EGLNativeWindowType = ctypes.c_voidp # Window
+EGLNativeDisplayType = ctypes.c_size_t # Display *
+EGLNativePixmapType = ctypes.c_size_t # Pixmap 
+EGLNativeWindowType = ctypes.c_size_t # Window
 
 NativeDisplayType = EGLNativeDisplayType 
 NativePixmapType = EGLNativePixmapType
