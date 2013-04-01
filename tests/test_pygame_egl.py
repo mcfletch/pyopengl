@@ -4,6 +4,14 @@
 http://pandorawiki.org/Combining_OpenGL_ES_1.1_and_SDL_to_create_a_window_on_the_Pandora
 
 suggests this should be possible.
+
+You will need:
+
+    libegl1-mesa
+    libgles1-mesa 
+    libgles2-mesa 
+
+lots and lots and lots of luck!
 """
 import pygame
 import pygame.display
