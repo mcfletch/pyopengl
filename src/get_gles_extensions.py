@@ -94,10 +94,10 @@ CALLBACK_TYPE = _p.PLATFORM.functionTypeFor( _p.PLATFORM.EGL )
 _cs.EGLSetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, EGLsizeiANDROID, ctypes.c_voidp, EGLsizeiANDROID )
 _cs.EGLGetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, EGLsizeiANDROID, ctypes.c_voidp, EGLsizeiANDROID )
 
-EGL_DEFAULT_DISPLAY = EGLNativeDisplayType(0)
-EGL_NO_CONTEXT = EGLContext(0)
-EGL_NO_DISPLAY = EGLDisplay(0)
-EGL_NO_SURFACE = EGLSurface(0)
+EGL_DEFAULT_DISPLAY = EGLNativeDisplayType()
+EGL_NO_CONTEXT = EGLContext()
+EGL_NO_DISPLAY = EGLDisplay()
+EGL_NO_SURFACE = EGLSurface()
 EGL_DONT_CARE = -1
 
 def _f( function ):
