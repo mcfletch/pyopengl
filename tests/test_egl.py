@@ -31,7 +31,9 @@ def describe_config( display, config ):
 def main():
     major,minor = ctypes.c_long(),ctypes.c_long()
     display = eglGetDisplay(EGL_DEFAULT_DISPLAY)
-    #display = ctypes.c_voidp( display )
+    print 'Display return value', display 
+    print 'Display address', display.address
+    display = display.as_voidp
     print 'wrapped', display
     if not eglInitialize( display, major, minor):
         print 'Unable to initialize'
@@ -44,8 +46,8 @@ def main():
     configs = (EGLConfig * num_configs.value)()
     eglGetConfigs(display,configs,num_configs.value,num_configs)
     for config_id in configs:
-        print config_id
-        print describe_config( display, config_id )
+        #print config_id
+        describe_config( display, config_id )
     
     print 'Attempting to bind and create contexts/apis'
     eglBindAPI(EGL_OPENGL_API)
