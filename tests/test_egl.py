@@ -33,8 +33,8 @@ def main():
     display = eglGetDisplay(EGL_DEFAULT_DISPLAY)
     print 'Display return value', display 
     print 'Display address', display.address
-    display = display.as_voidp
-    print 'wrapped', display
+    #display = display.as_voidp
+    #print 'wrapped', display
     if not eglInitialize( display, major, minor):
         print 'Unable to initialize'
     print 'EGL version %s.%s'%(major.value,minor.value)
