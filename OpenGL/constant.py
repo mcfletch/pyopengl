@@ -23,8 +23,10 @@ class Constant( object ):
         """Initialise the constant with the given name and value"""
         if isinstance( value, float ) and cls is not FloatConstant:
             return FloatConstant( name, value )
-        elif isinstance( value, (int,long) ) and cls is not IntConstant:
+        elif isinstance( value, int ) and cls is not IntConstant:
             return IntConstant( name, value )
+        elif isinstance( value, long ) and cls is not LongConstant:
+            return LongConstant( name, value )
         elif isinstance( value, (bytes,unicode) ) and cls is not StringConstant:
             return StringConstant( name, as_8_bit(value) )
         if isinstance( value, long ):
@@ -54,9 +56,8 @@ class NumericConstant( Constant ):
 
 class IntConstant( NumericConstant, int ):
     """Integer constant"""
-    def __str__( self ):
-        """Return the value as a human-friendly string"""
-        return '%s (0x%X)'%(self.name,self)
+class LongConstant( NumericConstant, long ):
+    """Long integer constant"""
 class FloatConstant( NumericConstant, float ):
     """Float constant"""
 
