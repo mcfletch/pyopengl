@@ -617,6 +617,7 @@ class Tests( unittest.TestCase ):
         http://www.gamedev.net/reference/articles/article2331.asp
         """
         if not glGenFramebuffers:
+            print 'No Frame Buffer Support!'
             return False
         width = height = 128
         fbo = glGenFramebuffers(1)
