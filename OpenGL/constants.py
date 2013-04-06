@@ -6,6 +6,8 @@ uses (note, doesn't include the OpenGL-ES types!)
 import ctypes
 from OpenGL.constant import Constant
 from OpenGL._bytes import bytes,unicode,as_8_bit
+from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls
+
 try:
     long 
 except NameError as err:
@@ -99,7 +101,7 @@ GLint64 = GLint64EXT = _defineType('GLint64', ctypes.c_int64, long )
 # ptrdiff_t, actually...
 GLsizeiptrARB = GLsizeiptr = GLsizei
 GLvdpauSurfaceNV = GLintptrARB = GLintptr = GLint
-size_t = ctypes.c_ulong
+size_t = ctypes.c_size_t
 
 void = None
 
@@ -108,9 +110,7 @@ GLhalfNV = GLhalfARB = ctypes.c_ushort
 # GL.ARB.sync extension, GLsync is an opaque pointer to a struct 
 # in the extensions header, basically just a "token" that can be 
 # passed to the various operations...
-class _GLsync( ctypes.Structure ):
-    """Opaque structure definition to fool ctypes into treating us as a real structure"""
-GLsync = ctypes.POINTER( _GLsync ) # ctypes.c_void_p does *not* work as a return type...
+GLsync = _opaque_pointer_cls( 'GLsync' )
 GLvoidp = ctypes.c_void_p
 
 ARRAY_TYPE_TO_CONSTANT = [
