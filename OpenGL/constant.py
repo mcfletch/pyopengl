@@ -19,16 +19,17 @@ class Constant( object ):
     human-readable form, rather than as a bald number that requires
     lookup and disambiguation in the header file.
     """
-    def __new__( cls, name, value ):
+    def __new__( cls, name, value=None ):
         """Initialise the constant with the given name and value"""
-        if isinstance( value, float ) and cls is not FloatConstant:
-            return FloatConstant( name, value )
-        elif isinstance( value, int ) and cls is not IntConstant:
-            return IntConstant( name, value )
-        elif isinstance( value, long ) and cls is not LongConstant:
-            return LongConstant( name, value )
-        elif isinstance( value, (bytes,unicode) ) and cls is not StringConstant:
-            return StringConstant( name, as_8_bit(value) )
+        if not isinstance( value, Constant ):
+            if isinstance( value, float ) and cls is not FloatConstant:
+                return FloatConstant( name, value )
+            elif isinstance( value, int ) and cls is not IntConstant:
+                return IntConstant( name, value )
+            elif isinstance( value, long ) and cls is not LongConstant:
+                return LongConstant( name, value )
+            elif isinstance( value, (bytes,unicode) ) and cls is not StringConstant:
+                return StringConstant( name, as_8_bit(value) )
         if isinstance( value, long ):
             if value > maxsize: # TODO: I'm guessing this should really by sizeof GLint, not 
                 value = - (value & maxsize)
@@ -42,6 +43,9 @@ class Constant( object ):
     def __repr__( self ):
         """Return the name, rather than the bald value"""
         return self.name
+    def __getnewargs__( self ):
+        """Produce the new arguments for recreating the instance"""
+        return (self.name,) + super( Constant, self ).__getnewargs__()
 
 class NumericConstant( Constant ):
     """Base class for numeric-value constants"""
@@ -56,8 +60,11 @@ class NumericConstant( Constant ):
 
 class IntConstant( NumericConstant, int ):
     """Integer constant"""
-class LongConstant( NumericConstant, long ):
-    """Long integer constant"""
+if int is not long:
+    class LongConstant( NumericConstant, long ):
+        """Long integer constant"""
+else:
+    LongConstant = IntConstant
 class FloatConstant( NumericConstant, float ):
     """Float constant"""
 
@@ -66,9 +73,6 @@ class StringConstant( Constant, bytes ):
     def __repr__( self ):
         """Return the value as a human-friendly string"""
         return '%s (%s)'%(self.name,super(Constant,self).__str__())
-    def __getnewargs__( self ):
-        """Produce the new arguments for recreating the instance"""
-        return (self.name,) + super( Constant, self ).__getnewargs__()
 
 if __name__ == "__main__":
     x = IntConstant( 'testint', 3 )

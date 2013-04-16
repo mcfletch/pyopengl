@@ -1,6 +1,10 @@
 """Base class for GLU callback-caching structures"""
 import ctypes
 import weakref
+try:
+    long 
+except NameError as err:
+    long = int
 
 class GLUStruct( object ):
     """Mix-in class for GLU Structures that want to retain references to callbacks

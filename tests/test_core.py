@@ -20,7 +20,7 @@ pygame.display.init()
 import OpenGL 
 OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
-from OpenGL._bytes import bytes, _NULL_8_BYTE
+from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode
 from OpenGL.GL import *
 try:
     glGetError()
@@ -538,9 +538,9 @@ class Tests( unittest.TestCase ):
         """Issue #1959860 incompatable change to returning arrays reversed"""
         width,height = self.width, self.height
         readback_image1 = glReadPixels(0,0,width,height,GL_RGB, GL_UNSIGNED_BYTE)
-        assert isinstance( readback_image1, str ), type( readback_image1 )
+        assert isinstance( readback_image1, bytes ), type( readback_image1 )
         readback_image1 = glReadPixels(0,0,width,height,GL_RGB, GL_BYTE)
-        assert not isinstance( readback_image1, str ), type(readback_image2)
+        assert not isinstance( readback_image1, bytes ), type(readback_image2)
     
     if array:
         def test_glreadpixels_warray( self ):
@@ -617,7 +617,7 @@ class Tests( unittest.TestCase ):
         http://www.gamedev.net/reference/articles/article2331.asp
         """
         if not glGenFramebuffers:
-            print 'No Frame Buffer Support!'
+            print( 'No Frame Buffer Support!' )
             return False
         width = height = 128
         fbo = glGenFramebuffers(1)
@@ -784,7 +784,7 @@ class Tests( unittest.TestCase ):
             """Test that gluNurbsCurve raises error on invalid arguments"""
             nurb = gluNewNurbsRenderer()
             gluBeginCurve( nurb )
-            self.failUnlessRaises( error.GLUerror,
+            self.assertRaises( error.GLUerror,
                 gluNurbsCurve,
                     nurb, 
                     [0, 1.0],

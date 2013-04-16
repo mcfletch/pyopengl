@@ -65,6 +65,9 @@ class UnicodeHandler( StringHandler ):
                 )
             result._temporary_array_ = converted 
         return result
+    def asArray( self, value, typeCode=None ):
+        value = _bytes.as_8_bit( value )
+        return StringHandler.asArray( self, value, typeCode=typeCode )
 
 
 BYTE_SIZES = {
