@@ -63,8 +63,9 @@ class Win32Platform( baseplatform.BasePlatform ):
     # Win32 GLUT uses different types for callbacks and functions...
     GLUT_CALLBACK_TYPE = staticmethod( ctypes.CFUNCTYPE )
     WGL = ctypes.windll.gdi32
-    getExtensionProcedure = staticmethod( OpenGL.wglGetProcAddress )
-    getExtensionProcedure.restype = ctypes.c_void_p
+    wglGetProcAddress = OpenGL.wglGetProcAddress
+    wglGetProcAddress.restype = ctypes.c_void_p
+    getExtensionProcedure = staticmethod( wglGetProcAddress )
 
     GLUT_FONT_CONSTANTS = {
         'GLUT_STROKE_ROMAN': ctypes.c_void_p( 0),
