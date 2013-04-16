@@ -791,14 +791,14 @@ class Tests( unittest.TestCase ):
                     [[0,0,0],[1,0,0],[1,1,0]],
                     GL_MAP1_VERTEX_3,
             )
-            self.failUnlessRaises( error.GLUerror,
+            self.assertRaises( error.GLUerror,
                 gluNurbsCurve,
                     nurb, 
                     [],
                     [[0,0,0],[1,0,0],[1,1,0]],
                     GL_MAP1_VERTEX_3,
             )
-            self.failUnlessRaises( error.GLUerror,
+            self.assertRaises( error.GLUerror,
                 gluNurbsCurve,
                     nurb, 
                     [],
