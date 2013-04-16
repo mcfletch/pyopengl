@@ -64,6 +64,7 @@ class Win32Platform( baseplatform.BasePlatform ):
     GLUT_CALLBACK_TYPE = staticmethod( ctypes.CFUNCTYPE )
     WGL = ctypes.windll.gdi32
     getExtensionProcedure = staticmethod( OpenGL.wglGetProcAddress )
+    getExtensionProcedure.restype = ctypes.c_void_p
 
     GLUT_FONT_CONSTANTS = {
         'GLUT_STROKE_ROMAN': ctypes.c_void_p( 0),
@@ -91,8 +92,10 @@ class Win32Platform( baseplatform.BasePlatform ):
         """
         return self.GLUT_FONT_CONSTANTS[ constant ]
 
+    wglGetCurrentContext = GL.wglGetCurrentContext
+    wglGetCurrentContext.restype = ctypes.c_void_p
     GetCurrentContext = CurrentContextIsValid = staticmethod(
-        GL.wglGetCurrentContext
+        wglGetCurrentContext
     )
 
 
