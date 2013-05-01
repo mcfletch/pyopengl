@@ -139,7 +139,7 @@ def hasGLExtension( specifier ):
                 if v <= check:
                     for v_ext in v_exts:
                         if v_ext not in AVAILABLE_GL_EXTENSIONS:
-                            AVAILABLE_GL_EXTENSIONS.append( v_ext )
+                            AVAILABLE_GL_EXTENSIONS.append( as_8_bit(v_ext) )
                 else:
                     break
         result = specifier in AVAILABLE_GL_EXTENSIONS
