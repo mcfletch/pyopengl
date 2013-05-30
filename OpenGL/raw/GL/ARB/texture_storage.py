@@ -8,22 +8,22 @@ def _f( function ):
 _p.unpack_constants( """GL_TEXTURE_IMMUTABLE_FORMAT 0x912F""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei)
-def glTexStorage1D( target,levels,internalformat,width ):pass
+def glTexStorage1D(target,levels,internalformat,width):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei)
-def glTexStorage2D( target,levels,internalformat,width,height ):pass
+def glTexStorage2D(target,levels,internalformat,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei)
-def glTexStorage3D( target,levels,internalformat,width,height,depth ):pass
+def glTexStorage3D(target,levels,internalformat,width,height,depth):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei)
-def glTextureStorage1DEXT( texture,target,levels,internalformat,width ):pass
+def glTextureStorage1DEXT(texture,target,levels,internalformat,width):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei)
-def glTextureStorage2DEXT( texture,target,levels,internalformat,width,height ):pass
+def glTextureStorage2DEXT(texture,target,levels,internalformat,width,height):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei)
-def glTextureStorage3DEXT( texture,target,levels,internalformat,width,height,depth ):pass
+def glTextureStorage3DEXT(texture,target,levels,internalformat,width,height,depth):pass
 
 
 def glInitTextureStorageARB():

@@ -9,7 +9,7 @@ _p.unpack_constants( """GL_SAMPLE_SHADING_ARB 0x8C36
 GL_MIN_SAMPLE_SHADING_VALUE_ARB 0x8C37""", globals())
 @_f
 @_p.types(None,_cs.GLfloat)
-def glMinSampleShadingARB( value ):pass
+def glMinSampleShadingARB(value):pass
 
 
 def glInitSampleShadingARB():

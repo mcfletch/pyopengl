@@ -11,19 +11,19 @@ GL_ELEMENT_ARRAY_POINTER_APPLE 0x8A0E""", globals())
 glget.addGLGetConstant( GL_ELEMENT_ARRAY_TYPE_APPLE, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,ctypes.c_void_p)
-def glElementPointerAPPLE( type,pointer ):pass
+def glElementPointerAPPLE(type,pointer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei)
-def glDrawElementArrayAPPLE( mode,first,count ):pass
+def glDrawElementArrayAPPLE(mode,first,count):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLsizei)
-def glDrawRangeElementArrayAPPLE( mode,start,end,first,count ):pass
+def glDrawRangeElementArrayAPPLE(mode,start,end,first,count):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray,arrays.GLsizeiArray,_cs.GLsizei)
-def glMultiDrawElementArrayAPPLE( mode,first,count,primcount ):pass
+def glMultiDrawElementArrayAPPLE(mode,first,count,primcount):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,arrays.GLintArray,arrays.GLsizeiArray,_cs.GLsizei)
-def glMultiDrawRangeElementArrayAPPLE( mode,start,end,first,count,primcount ):pass
+def glMultiDrawRangeElementArrayAPPLE(mode,start,end,first,count,primcount):pass
 
 
 def glInitElementArrayAPPLE():

@@ -10,7 +10,7 @@ GL_INDEX_TEST_FUNC_EXT 0x81B6
 GL_INDEX_TEST_REF_EXT 0x81B7""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLclampf)
-def glIndexFuncEXT( func,ref ):pass
+def glIndexFuncEXT(func,ref):pass
 
 
 def glInitIndexFuncEXT():

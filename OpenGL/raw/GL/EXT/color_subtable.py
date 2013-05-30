@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glColorSubTableEXT( target,start,count,format,type,data ):pass
+def glColorSubTableEXT(target,start,count,format,type,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLint,_cs.GLint,_cs.GLsizei)
-def glCopyColorSubTableEXT( target,start,x,y,width ):pass
+def glCopyColorSubTableEXT(target,start,x,y,width):pass
 
 
 def glInitColorSubtableEXT():

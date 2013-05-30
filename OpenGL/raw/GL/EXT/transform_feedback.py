@@ -22,25 +22,25 @@ GL_TRANSFORM_FEEDBACK_BUFFER_MODE_EXT 0x8C7F
 GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT 0x8C76""", globals())
 @_f
 @_p.types(None,_cs.GLenum)
-def glBeginTransformFeedbackEXT( primitiveMode ):pass
+def glBeginTransformFeedbackEXT(primitiveMode):pass
 @_f
 @_p.types(None,)
-def glEndTransformFeedbackEXT(  ):pass
+def glEndTransformFeedbackEXT():pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
-def glBindBufferRangeEXT( target,index,buffer,offset,size ):pass
+def glBindBufferRangeEXT(target,index,buffer,offset,size):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLintptr)
-def glBindBufferOffsetEXT( target,index,buffer,offset ):pass
+def glBindBufferOffsetEXT(target,index,buffer,offset):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint)
-def glBindBufferBaseEXT( target,index,buffer ):pass
+def glBindBufferBaseEXT(target,index,buffer):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.POINTER( ctypes.POINTER( _cs.GLchar )),_cs.GLenum)
-def glTransformFeedbackVaryingsEXT( program,count,varyings,bufferMode ):pass
+def glTransformFeedbackVaryingsEXT(program,count,varyings,bufferMode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLsizeiArray,arrays.GLuintArray,arrays.GLcharArray)
-def glGetTransformFeedbackVaryingEXT( program,index,bufSize,length,size,type,name ):pass
+def glGetTransformFeedbackVaryingEXT(program,index,bufSize,length,size,type,name):pass
 
 
 def glInitTransformFeedbackEXT():

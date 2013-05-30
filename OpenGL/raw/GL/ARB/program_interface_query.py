@@ -54,22 +54,22 @@ GL_LOCATION_INDEX 0x930F
 GL_IS_PER_PATCH 0x92E7""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetProgramInterfaceiv( program,programInterface,pname,params ):pass
+def glGetProgramInterfaceiv(program,programInterface,pname,params):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLcharArray)
-def glGetProgramResourceIndex( program,programInterface,name ):pass
+def glGetProgramResourceIndex(program,programInterface,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetProgramResourceName( program,programInterface,index,bufSize,length,name ):pass
+def glGetProgramResourceName(program,programInterface,index,bufSize,length,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray)
-def glGetProgramResourceiv( program,programInterface,index,propCount,props,bufSize,length,params ):pass
+def glGetProgramResourceiv(program,programInterface,index,propCount,props,bufSize,length,params):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,_cs.GLenum,arrays.GLcharArray)
-def glGetProgramResourceLocation( program,programInterface,name ):pass
+def glGetProgramResourceLocation(program,programInterface,name):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,_cs.GLenum,arrays.GLcharArray)
-def glGetProgramResourceLocationIndex( program,programInterface,name ):pass
+def glGetProgramResourceLocationIndex(program,programInterface,name):pass
 
 
 def glInitProgramInterfaceQueryARB():

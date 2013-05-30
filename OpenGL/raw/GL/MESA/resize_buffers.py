@@ -8,7 +8,7 @@ def _f( function ):
 
 @_f
 @_p.types(None,)
-def glResizeBuffersMESA(  ):pass
+def glResizeBuffersMESA():pass
 
 
 def glInitResizeBuffersMESA():

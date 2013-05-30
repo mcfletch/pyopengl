@@ -18,139 +18,139 @@ GL_VERTEX_SOURCE_ATI 0x8774""", globals())
 glget.addGLGetConstant( GL_MAX_VERTEX_STREAMS_ATI, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort)
-def glVertexStream1sATI( stream,x ):pass
+def glVertexStream1sATI(stream,x):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glVertexStream1svATI( stream,coords ):pass
+def glVertexStream1svATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glVertexStream1iATI( stream,x ):pass
+def glVertexStream1iATI(stream,x):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glVertexStream1ivATI( stream,coords ):pass
+def glVertexStream1ivATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glVertexStream1fATI( stream,x ):pass
+def glVertexStream1fATI(stream,x):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glVertexStream1fvATI( stream,coords ):pass
+def glVertexStream1fvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble)
-def glVertexStream1dATI( stream,x ):pass
+def glVertexStream1dATI(stream,x):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glVertexStream1dvATI( stream,coords ):pass
+def glVertexStream1dvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort)
-def glVertexStream2sATI( stream,x,y ):pass
+def glVertexStream2sATI(stream,x,y):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glVertexStream2svATI( stream,coords ):pass
+def glVertexStream2svATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint)
-def glVertexStream2iATI( stream,x,y ):pass
+def glVertexStream2iATI(stream,x,y):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glVertexStream2ivATI( stream,coords ):pass
+def glVertexStream2ivATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat)
-def glVertexStream2fATI( stream,x,y ):pass
+def glVertexStream2fATI(stream,x,y):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glVertexStream2fvATI( stream,coords ):pass
+def glVertexStream2fvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble)
-def glVertexStream2dATI( stream,x,y ):pass
+def glVertexStream2dATI(stream,x,y):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glVertexStream2dvATI( stream,coords ):pass
+def glVertexStream2dvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glVertexStream3sATI( stream,x,y,z ):pass
+def glVertexStream3sATI(stream,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glVertexStream3svATI( stream,coords ):pass
+def glVertexStream3svATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint)
-def glVertexStream3iATI( stream,x,y,z ):pass
+def glVertexStream3iATI(stream,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glVertexStream3ivATI( stream,coords ):pass
+def glVertexStream3ivATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glVertexStream3fATI( stream,x,y,z ):pass
+def glVertexStream3fATI(stream,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glVertexStream3fvATI( stream,coords ):pass
+def glVertexStream3fvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexStream3dATI( stream,x,y,z ):pass
+def glVertexStream3dATI(stream,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glVertexStream3dvATI( stream,coords ):pass
+def glVertexStream3dvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glVertexStream4sATI( stream,x,y,z,w ):pass
+def glVertexStream4sATI(stream,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glVertexStream4svATI( stream,coords ):pass
+def glVertexStream4svATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glVertexStream4iATI( stream,x,y,z,w ):pass
+def glVertexStream4iATI(stream,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glVertexStream4ivATI( stream,coords ):pass
+def glVertexStream4ivATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glVertexStream4fATI( stream,x,y,z,w ):pass
+def glVertexStream4fATI(stream,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glVertexStream4fvATI( stream,coords ):pass
+def glVertexStream4fvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexStream4dATI( stream,x,y,z,w ):pass
+def glVertexStream4dATI(stream,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glVertexStream4dvATI( stream,coords ):pass
+def glVertexStream4dvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLbyte,_cs.GLbyte,_cs.GLbyte)
-def glNormalStream3bATI( stream,nx,ny,nz ):pass
+def glNormalStream3bATI(stream,nx,ny,nz):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLbyteArray)
-def glNormalStream3bvATI( stream,coords ):pass
+def glNormalStream3bvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glNormalStream3sATI( stream,nx,ny,nz ):pass
+def glNormalStream3sATI(stream,nx,ny,nz):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glNormalStream3svATI( stream,coords ):pass
+def glNormalStream3svATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint)
-def glNormalStream3iATI( stream,nx,ny,nz ):pass
+def glNormalStream3iATI(stream,nx,ny,nz):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glNormalStream3ivATI( stream,coords ):pass
+def glNormalStream3ivATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glNormalStream3fATI( stream,nx,ny,nz ):pass
+def glNormalStream3fATI(stream,nx,ny,nz):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glNormalStream3fvATI( stream,coords ):pass
+def glNormalStream3fvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glNormalStream3dATI( stream,nx,ny,nz ):pass
+def glNormalStream3dATI(stream,nx,ny,nz):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glNormalStream3dvATI( stream,coords ):pass
+def glNormalStream3dvATI(stream,coords):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glClientActiveVertexStreamATI( stream ):pass
+def glClientActiveVertexStreamATI(stream):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glVertexBlendEnviATI( pname,param ):pass
+def glVertexBlendEnviATI(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glVertexBlendEnvfATI( pname,param ):pass
+def glVertexBlendEnvfATI(pname,param):pass
 
 
 def glInitVertexStreamsATI():

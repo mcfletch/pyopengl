@@ -11,22 +11,22 @@ GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS 0x8355
 GL_PIXEL_GROUP_COLOR_SGIS 0x8356""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glPixelTexGenParameteriSGIS( pname,param ):pass
+def glPixelTexGenParameteriSGIS(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glPixelTexGenParameterivSGIS( pname,params ):pass
+def glPixelTexGenParameterivSGIS(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glPixelTexGenParameterfSGIS( pname,param ):pass
+def glPixelTexGenParameterfSGIS(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glPixelTexGenParameterfvSGIS( pname,params ):pass
+def glPixelTexGenParameterfvSGIS(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glGetPixelTexGenParameterivSGIS( pname,params ):pass
+def glGetPixelTexGenParameterivSGIS(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glGetPixelTexGenParameterfvSGIS( pname,params ):pass
+def glGetPixelTexGenParameterfvSGIS(pname,params):pass
 
 
 def glInitPixelTextureSGIS():

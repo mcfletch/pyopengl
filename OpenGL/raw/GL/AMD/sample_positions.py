@@ -8,7 +8,7 @@ def _f( function ):
 _p.unpack_constants( """GL_SUBSAMPLE_DISTANCE_AMD 0x883F""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glSetMultisamplefvAMD( pname,index,val ):pass
+def glSetMultisamplefvAMD(pname,index,val):pass
 
 
 def glInitSamplePositionsAMD():

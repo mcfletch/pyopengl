@@ -11,10 +11,10 @@ GL_TEXTURE_STORAGE_HINT_APPLE 0x85BC
 GL_STORAGE_PRIVATE_APPLE 0x85BD""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glTextureRangeAPPLE( target,length,pointer ):pass
+def glTextureRangeAPPLE(target,length,pointer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLvoidpArray)
-def glGetTexParameterPointervAPPLE( target,pname,params ):pass
+def glGetTexParameterPointervAPPLE(target,pname,params):pass
 
 
 def glInitTextureRangeAPPLE():

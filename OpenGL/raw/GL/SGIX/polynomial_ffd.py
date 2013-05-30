@@ -5,22 +5,24 @@ import ctypes
 EXTENSION_NAME = 'GL_SGIX_polynomial_ffd'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_polynomial_ffd',False)
-_p.unpack_constants( """GL_GEOMETRY_DEFORMATION_SGIX 0x8194
+_p.unpack_constants( """GL_TEXTURE_DEFORMATION_BIT_SGIX 0x1
+GL_GEOMETRY_DEFORMATION_BIT_SGIX 0x2
+GL_GEOMETRY_DEFORMATION_SGIX 0x8194
 GL_TEXTURE_DEFORMATION_SGIX 0x8195
 GL_DEFORMATIONS_MASK_SGIX 0x8196
 GL_MAX_DEFORMATION_ORDER_SGIX 0x8197""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,arrays.GLdoubleArray)
-def glDeformationMap3dSGIX( target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,w1,w2,wstride,worder,points ):pass
+def glDeformationMap3dSGIX(target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,w1,w2,wstride,worder,points):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,arrays.GLfloatArray)
-def glDeformationMap3fSGIX( target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,w1,w2,wstride,worder,points ):pass
+def glDeformationMap3fSGIX(target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,w1,w2,wstride,worder,points):pass
 @_f
 @_p.types(None,_cs.GLbitfield)
-def glDeformSGIX( mask ):pass
+def glDeformSGIX(mask):pass
 @_f
 @_p.types(None,_cs.GLbitfield)
-def glLoadIdentityDeformationMapSGIX( mask ):pass
+def glLoadIdentityDeformationMapSGIX(mask):pass
 
 
 def glInitPolynomialFfdSGIX():

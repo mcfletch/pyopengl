@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glProgramEnvParameters4fvEXT( target,index,count,params ):pass
+def glProgramEnvParameters4fvEXT(target,index,count,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glProgramLocalParameters4fvEXT( target,index,count,params ):pass
+def glProgramLocalParameters4fvEXT(target,index,count,params):pass
 
 
 def glInitGpuProgramParametersEXT():

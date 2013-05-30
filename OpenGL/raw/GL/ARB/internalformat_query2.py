@@ -106,7 +106,7 @@ GL_VIEW_CLASS_BPTC_UNORM 0x82D2
 GL_VIEW_CLASS_BPTC_FLOAT 0x82D3""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLint64Array)
-def glGetInternalformati64v( target,internalformat,pname,bufSize,params ):pass
+def glGetInternalformati64v(target,internalformat,pname,bufSize,params):pass
 
 
 def glInitInternalformatQuery2ARB():

@@ -8,10 +8,10 @@ def _f( function ):
 _p.unpack_constants( """GL_TIME_ELAPSED_EXT 0x88BF""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLint64Array)
-def glGetQueryObjecti64vEXT( id,pname,params ):pass
+def glGetQueryObjecti64vEXT(id,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuint64Array)
-def glGetQueryObjectui64vEXT( id,pname,params ):pass
+def glGetQueryObjectui64vEXT(id,pname,params):pass
 
 
 def glInitTimerQueryEXT():

@@ -9,22 +9,22 @@ _p.unpack_constants( """GL_INSTRUMENT_BUFFER_POINTER_SGIX 0x8180
 GL_INSTRUMENT_MEASUREMENTS_SGIX 0x8181""", globals())
 @_f
 @_p.types(_cs.GLint,)
-def glGetInstrumentsSGIX(  ):pass
+def glGetInstrumentsSGIX():pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLintArray)
-def glInstrumentsBufferSGIX( size,buffer ):pass
+def glInstrumentsBufferSGIX(size,buffer):pass
 @_f
 @_p.types(_cs.GLint,arrays.GLintArray)
-def glPollInstrumentsSGIX( marker_p ):pass
+def glPollInstrumentsSGIX(marker_p):pass
 @_f
 @_p.types(None,_cs.GLint)
-def glReadInstrumentsSGIX( marker ):pass
+def glReadInstrumentsSGIX(marker):pass
 @_f
 @_p.types(None,)
-def glStartInstrumentsSGIX(  ):pass
+def glStartInstrumentsSGIX():pass
 @_f
 @_p.types(None,_cs.GLint)
-def glStopInstrumentsSGIX( marker ):pass
+def glStopInstrumentsSGIX(marker):pass
 
 
 def glInitInstrumentsSGIX():

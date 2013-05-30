@@ -72,59 +72,59 @@ glget.addGLGetConstant( GL_FOG_COORD_ARRAY, (1,) )
 glget.addGLGetConstant( GL_FOG_COORD_ARRAY_BUFFER_BINDING, (1,) )
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenQueries( n,ids ):pass
+def glGenQueries(n,ids):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteQueries( n,ids ):pass
+def glDeleteQueries(n,ids):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsQuery( id ):pass
+def glIsQuery(id):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBeginQuery( target,id ):pass
+def glBeginQuery(target,id):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glEndQuery( target ):pass
+def glEndQuery(target):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetQueryiv( target,pname,params ):pass
+def glGetQueryiv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetQueryObjectiv( id,pname,params ):pass
+def glGetQueryObjectiv(id,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuintArray)
-def glGetQueryObjectuiv( id,pname,params ):pass
+def glGetQueryObjectuiv(id,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindBuffer( target,buffer ):pass
+def glBindBuffer(target,buffer):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteBuffers( n,buffers ):pass
+def glDeleteBuffers(n,buffers):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenBuffers( n,buffers ):pass
+def glGenBuffers(n,buffers):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsBuffer( buffer ):pass
+def glIsBuffer(buffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizeiptr,ctypes.c_void_p,_cs.GLenum)
-def glBufferData( target,size,data,usage ):pass
+def glBufferData(target,size,data,usage):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,ctypes.c_void_p)
-def glBufferSubData( target,offset,size,data ):pass
+def glBufferSubData(target,offset,size,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,ctypes.c_void_p)
-def glGetBufferSubData( target,offset,size,data ):pass
+def glGetBufferSubData(target,offset,size,data):pass
 @_f
 @_p.types(ctypes.c_void_p,_cs.GLenum,_cs.GLenum)
-def glMapBuffer( target,access ):pass
+def glMapBuffer(target,access):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLenum)
-def glUnmapBuffer( target ):pass
+def glUnmapBuffer(target):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetBufferParameteriv( target,pname,params ):pass
+def glGetBufferParameteriv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLvoidpArray)
-def glGetBufferPointerv( target,pname,params ):pass
+def glGetBufferPointerv(target,pname,params):pass
 

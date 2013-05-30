@@ -9,7 +9,7 @@ _p.unpack_constants( """GL_STENCIL_TAG_BITS_EXT 0x88F2
 GL_STENCIL_CLEAR_TAG_VALUE_EXT 0x88F3""", globals())
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLuint)
-def glStencilClearTagEXT( stencilTagBits,stencilClearTag ):pass
+def glStencilClearTagEXT(stencilTagBits,stencilClearTag):pass
 
 
 def glInitStencilClearTagEXT():

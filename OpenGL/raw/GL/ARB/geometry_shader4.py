@@ -32,16 +32,16 @@ glget.addGLGetConstant( GL_MAX_GEOMETRY_OUTPUT_VERTICES_ARB, (1,) )
 glget.addGLGetConstant( GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
-def glProgramParameteriARB( program,pname,value ):pass
+def glProgramParameteriARB(program,pname,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint)
-def glFramebufferTextureARB( target,attachment,texture,level ):pass
+def glFramebufferTextureARB(target,attachment,texture,level):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint)
-def glFramebufferTextureLayerARB( target,attachment,texture,level,layer ):pass
+def glFramebufferTextureLayerARB(target,attachment,texture,level,layer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLenum)
-def glFramebufferTextureFaceARB( target,attachment,texture,level,face ):pass
+def glFramebufferTextureFaceARB(target,attachment,texture,level,face):pass
 
 
 def glInitGeometryShader4ARB():

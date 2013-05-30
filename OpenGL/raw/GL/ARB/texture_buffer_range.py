@@ -10,10 +10,10 @@ GL_TEXTURE_BUFFER_SIZE 0x919E
 GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT 0x919F""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
-def glTexBufferRange( target,internalformat,buffer,offset,size ):pass
+def glTexBufferRange(target,internalformat,buffer,offset,size):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
-def glTextureBufferRangeEXT( texture,target,internalformat,buffer,offset,size ):pass
+def glTextureBufferRangeEXT(texture,target,internalformat,buffer,offset,size):pass
 
 
 def glInitTextureBufferRangeARB():

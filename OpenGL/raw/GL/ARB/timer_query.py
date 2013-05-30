@@ -9,13 +9,13 @@ _p.unpack_constants( """GL_TIME_ELAPSED 0x88BF
 GL_TIMESTAMP 0x8E28""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glQueryCounter( id,target ):pass
+def glQueryCounter(id,target):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLint64Array)
-def glGetQueryObjecti64v( id,pname,params ):pass
+def glGetQueryObjecti64v(id,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuint64Array)
-def glGetQueryObjectui64v( id,pname,params ):pass
+def glGetQueryObjectui64v(id,pname,params):pass
 
 
 def glInitTimerQueryARB():

@@ -21,16 +21,16 @@ GL_DEBUG_CATEGORY_APPLICATION_AMD 0x914F
 GL_DEBUG_CATEGORY_OTHER_AMD 0x9150""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray,_cs.GLboolean)
-def glDebugMessageEnableAMD( category,severity,count,ids,enabled ):pass
+def glDebugMessageEnableAMD(category,severity,count,ids,enabled):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLcharArray)
-def glDebugMessageInsertAMD( category,severity,id,length,buf ):pass
+def glDebugMessageInsertAMD(category,severity,id,length,buf):pass
 @_f
 @_p.types(None,_cs.GLDEBUGPROCAMD,ctypes.c_void_p)
-def glDebugMessageCallbackAMD( callback,userParam ):pass
+def glDebugMessageCallbackAMD(callback,userParam):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,arrays.GLuintArray,arrays.GLuintArray,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetDebugMessageLogAMD( count,bufsize,categories,severities,ids,lengths,message ):pass
+def glGetDebugMessageLogAMD(count,bufsize,categories,severities,ids,lengths,message):pass
 
 
 def glInitDebugOutputAMD():

@@ -9,22 +9,22 @@ _p.unpack_constants( """GL_ASYNC_MARKER_SGIX 0x8329""", globals())
 glget.addGLGetConstant( GL_ASYNC_MARKER_SGIX, (1,) )
 @_f
 @_p.types(None,_cs.GLuint)
-def glAsyncMarkerSGIX( marker ):pass
+def glAsyncMarkerSGIX(marker):pass
 @_f
 @_p.types(_cs.GLint,arrays.GLuintArray)
-def glFinishAsyncSGIX( markerp ):pass
+def glFinishAsyncSGIX(markerp):pass
 @_f
 @_p.types(_cs.GLint,arrays.GLuintArray)
-def glPollAsyncSGIX( markerp ):pass
+def glPollAsyncSGIX(markerp):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLsizei)
-def glGenAsyncMarkersSGIX( range ):pass
+def glGenAsyncMarkersSGIX(range):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei)
-def glDeleteAsyncMarkersSGIX( marker,range ):pass
+def glDeleteAsyncMarkersSGIX(marker,range):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsAsyncMarkerSGIX( marker ):pass
+def glIsAsyncMarkerSGIX(marker):pass
 
 
 def glInitAsyncSGIX():

@@ -18,13 +18,13 @@ glget.addGLGetConstant( GL_MAX_BINDABLE_UNIFORM_SIZE_EXT, (1,) )
 glget.addGLGetConstant( GL_UNIFORM_BUFFER_BINDING_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLuint)
-def glUniformBufferEXT( program,location,buffer ):pass
+def glUniformBufferEXT(program,location,buffer):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,_cs.GLint)
-def glGetUniformBufferSizeEXT( program,location ):pass
+def glGetUniformBufferSizeEXT(program,location):pass
 @_f
 @_p.types(_cs.GLintptr,_cs.GLuint,_cs.GLint)
-def glGetUniformOffsetEXT( program,location ):pass
+def glGetUniformOffsetEXT(program,location):pass
 
 
 def glInitBindableUniformEXT():

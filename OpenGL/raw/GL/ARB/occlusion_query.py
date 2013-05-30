@@ -13,28 +13,28 @@ GL_SAMPLES_PASSED_ARB 0x8914""", globals())
 glget.addGLGetConstant( GL_QUERY_COUNTER_BITS_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenQueriesARB( n,ids ):pass
+def glGenQueriesARB(n,ids):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteQueriesARB( n,ids ):pass
+def glDeleteQueriesARB(n,ids):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsQueryARB( id ):pass
+def glIsQueryARB(id):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBeginQueryARB( target,id ):pass
+def glBeginQueryARB(target,id):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glEndQueryARB( target ):pass
+def glEndQueryARB(target):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetQueryivARB( target,pname,params ):pass
+def glGetQueryivARB(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetQueryObjectivARB( id,pname,params ):pass
+def glGetQueryObjectivARB(id,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuintArray)
-def glGetQueryObjectuivARB( id,pname,params ):pass
+def glGetQueryObjectuivARB(id,pname,params):pass
 
 
 def glInitOcclusionQueryARB():

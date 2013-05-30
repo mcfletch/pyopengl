@@ -14,64 +14,64 @@ GL_RESET_NOTIFICATION_STRATEGY_ARB 0x8256
 GL_NO_RESET_NOTIFICATION_ARB 0x8261""", globals())
 @_f
 @_p.types(_cs.GLenum,)
-def glGetGraphicsResetStatusARB(  ):pass
+def glGetGraphicsResetStatusARB():pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLdoubleArray)
-def glGetnMapdvARB( target,query,bufSize,v ):pass
+def glGetnMapdvARB(target,query,bufSize,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLfloatArray)
-def glGetnMapfvARB( target,query,bufSize,v ):pass
+def glGetnMapfvARB(target,query,bufSize,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLintArray)
-def glGetnMapivARB( target,query,bufSize,v ):pass
+def glGetnMapivARB(target,query,bufSize,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLfloatArray)
-def glGetnPixelMapfvARB( map,bufSize,values ):pass
+def glGetnPixelMapfvARB(map,bufSize,values):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray)
-def glGetnPixelMapuivARB( map,bufSize,values ):pass
+def glGetnPixelMapuivARB(map,bufSize,values):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLushortArray)
-def glGetnPixelMapusvARB( map,bufSize,values ):pass
+def glGetnPixelMapusvARB(map,bufSize,values):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLubyteArray)
-def glGetnPolygonStippleARB( bufSize,pattern ):pass
+def glGetnPolygonStippleARB(bufSize,pattern):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glGetnColorTableARB( target,format,type,bufSize,table ):pass
+def glGetnColorTableARB(target,format,type,bufSize,table):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glGetnConvolutionFilterARB( target,format,type,bufSize,image ):pass
+def glGetnConvolutionFilterARB(target,format,type,bufSize,image):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p,_cs.GLsizei,ctypes.c_void_p,ctypes.c_void_p)
-def glGetnSeparableFilterARB( target,format,type,rowBufSize,row,columnBufSize,column,span ):pass
+def glGetnSeparableFilterARB(target,format,type,rowBufSize,row,columnBufSize,column,span):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glGetnHistogramARB( target,reset,format,type,bufSize,values ):pass
+def glGetnHistogramARB(target,reset,format,type,bufSize,values):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glGetnMinmaxARB( target,reset,format,type,bufSize,values ):pass
+def glGetnMinmaxARB(target,reset,format,type,bufSize,values):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glGetnTexImageARB( target,level,format,type,bufSize,img ):pass
+def glGetnTexImageARB(target,level,format,type,bufSize,img):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glReadnPixelsARB( x,y,width,height,format,type,bufSize,data ):pass
+def glReadnPixelsARB(x,y,width,height,format,type,bufSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei,ctypes.c_void_p)
-def glGetnCompressedTexImageARB( target,lod,bufSize,img ):pass
+def glGetnCompressedTexImageARB(target,lod,bufSize,img):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLfloatArray)
-def glGetnUniformfvARB( program,location,bufSize,params ):pass
+def glGetnUniformfvARB(program,location,bufSize,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLintArray)
-def glGetnUniformivARB( program,location,bufSize,params ):pass
+def glGetnUniformivARB(program,location,bufSize,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLuintArray)
-def glGetnUniformuivARB( program,location,bufSize,params ):pass
+def glGetnUniformuivARB(program,location,bufSize,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLdoubleArray)
-def glGetnUniformdvARB( program,location,bufSize,params ):pass
+def glGetnUniformdvARB(program,location,bufSize,params):pass
 
 
 def glInitRobustnessARB():

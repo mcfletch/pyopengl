@@ -15,10 +15,10 @@ glget.addGLGetConstant( GL_VERTEX_ARRAY_RANGE_VALID_NV, (1,) )
 glget.addGLGetConstant( GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV, (1,) )
 @_f
 @_p.types(None,)
-def glFlushVertexArrayRangeNV(  ):pass
+def glFlushVertexArrayRangeNV():pass
 @_f
 @_p.types(None,_cs.GLsizei,ctypes.c_void_p)
-def glVertexArrayRangeNV( length,pointer ):pass
+def glVertexArrayRangeNV(length,pointer):pass
 
 
 def glInitVertexArrayRangeNV():

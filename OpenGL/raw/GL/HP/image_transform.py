@@ -22,22 +22,22 @@ GL_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP 0x8162
 GL_PROXY_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP 0x8163""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
-def glImageTransformParameteriHP( target,pname,param ):pass
+def glImageTransformParameteriHP(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
-def glImageTransformParameterfHP( target,pname,param ):pass
+def glImageTransformParameterfHP(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glImageTransformParameterivHP( target,pname,params ):pass
+def glImageTransformParameterivHP(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glImageTransformParameterfvHP( target,pname,params ):pass
+def glImageTransformParameterfvHP(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetImageTransformParameterivHP( target,pname,params ):pass
+def glGetImageTransformParameterivHP(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetImageTransformParameterfvHP( target,pname,params ):pass
+def glGetImageTransformParameterfvHP(target,pname,params):pass
 
 
 def glInitImageTransformHP():

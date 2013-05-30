@@ -8,7 +8,7 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei)
-def glCopyImageSubDataNV( srcName,srcTarget,srcLevel,srcX,srcY,srcZ,dstName,dstTarget,dstLevel,dstX,dstY,dstZ,width,height,depth ):pass
+def glCopyImageSubDataNV(srcName,srcTarget,srcLevel,srcX,srcY,srcZ,dstName,dstTarget,dstLevel,dstX,dstY,dstZ,width,height,depth):pass
 
 
 def glInitCopyImageNV():

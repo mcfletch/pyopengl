@@ -8,28 +8,28 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
-def glColorPointerListIBM( size,type,stride,pointer,ptrstride ):pass
+def glColorPointerListIBM(size,type,stride,pointer,ptrstride):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
-def glSecondaryColorPointerListIBM( size,type,stride,pointer,ptrstride ):pass
+def glSecondaryColorPointerListIBM(size,type,stride,pointer,ptrstride):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLbooleanArray,_cs.GLint)
-def glEdgeFlagPointerListIBM( stride,pointer,ptrstride ):pass
+def glEdgeFlagPointerListIBM(stride,pointer,ptrstride):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
-def glFogCoordPointerListIBM( type,stride,pointer,ptrstride ):pass
+def glFogCoordPointerListIBM(type,stride,pointer,ptrstride):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
-def glIndexPointerListIBM( type,stride,pointer,ptrstride ):pass
+def glIndexPointerListIBM(type,stride,pointer,ptrstride):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
-def glNormalPointerListIBM( type,stride,pointer,ptrstride ):pass
+def glNormalPointerListIBM(type,stride,pointer,ptrstride):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
-def glTexCoordPointerListIBM( size,type,stride,pointer,ptrstride ):pass
+def glTexCoordPointerListIBM(size,type,stride,pointer,ptrstride):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
-def glVertexPointerListIBM( size,type,stride,pointer,ptrstride ):pass
+def glVertexPointerListIBM(size,type,stride,pointer,ptrstride):pass
 
 
 def glInitVertexArrayListsIBM():

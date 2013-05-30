@@ -51,25 +51,25 @@ glget.addGLGetConstant( GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, (1,) )
 glget.addGLGetConstant( GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, (1,) )
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.POINTER( ctypes.POINTER( _cs.GLchar )),arrays.GLuintArray)
-def glGetUniformIndices( program,uniformCount,uniformNames,uniformIndices ):pass
+def glGetUniformIndices(program,uniformCount,uniformNames,uniformIndices):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,_cs.GLenum,arrays.GLintArray)
-def glGetActiveUniformsiv( program,uniformCount,uniformIndices,pname,params ):pass
+def glGetActiveUniformsiv(program,uniformCount,uniformIndices,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetActiveUniformName( program,uniformIndex,bufSize,length,uniformName ):pass
+def glGetActiveUniformName(program,uniformIndex,bufSize,length,uniformName):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint,arrays.GLcharArray)
-def glGetUniformBlockIndex( program,uniformBlockName ):pass
+def glGetUniformBlockIndex(program,uniformBlockName):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetActiveUniformBlockiv( program,uniformBlockIndex,pname,params ):pass
+def glGetActiveUniformBlockiv(program,uniformBlockIndex,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetActiveUniformBlockName( program,uniformBlockIndex,bufSize,length,uniformBlockName ):pass
+def glGetActiveUniformBlockName(program,uniformBlockIndex,bufSize,length,uniformBlockName):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glUniformBlockBinding( program,uniformBlockIndex,uniformBlockBinding ):pass
+def glUniformBlockBinding(program,uniformBlockIndex,uniformBlockBinding):pass
 
 
 def glInitUniformBufferObjectARB():

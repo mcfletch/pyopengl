@@ -18,13 +18,13 @@ glget.addGLGetConstant( GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB, (1,) )
 glget.addGLGetConstant( GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLuint,arrays.GLcharARBArray)
-def glBindAttribLocationARB( programObj,index,name ):pass
+def glBindAttribLocationARB(programObj,index,name):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray,arrays.GLuintArray,arrays.GLcharARBArray)
-def glGetActiveAttribARB( programObj,index,maxLength,length,size,type,name ):pass
+def glGetActiveAttribARB(programObj,index,maxLength,length,size,type,name):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLhandleARB,arrays.GLcharARBArray)
-def glGetAttribLocationARB( programObj,name ):pass
+def glGetAttribLocationARB(programObj,name):pass
 
 
 def glInitVertexShaderARB():

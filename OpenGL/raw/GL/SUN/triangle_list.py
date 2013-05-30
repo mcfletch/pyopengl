@@ -27,25 +27,25 @@ glget.addGLGetConstant( GL_REPLACEMENT_CODE_ARRAY_TYPE_SUN, (1,) )
 glget.addGLGetConstant( GL_REPLACEMENT_CODE_ARRAY_STRIDE_SUN, (1,) )
 @_f
 @_p.types(None,_cs.GLuint)
-def glReplacementCodeuiSUN( code ):pass
+def glReplacementCodeuiSUN(code):pass
 @_f
 @_p.types(None,_cs.GLushort)
-def glReplacementCodeusSUN( code ):pass
+def glReplacementCodeusSUN(code):pass
 @_f
 @_p.types(None,_cs.GLubyte)
-def glReplacementCodeubSUN( code ):pass
+def glReplacementCodeubSUN(code):pass
 @_f
 @_p.types(None,arrays.GLuintArray)
-def glReplacementCodeuivSUN( code ):pass
+def glReplacementCodeuivSUN(code):pass
 @_f
 @_p.types(None,arrays.GLushortArray)
-def glReplacementCodeusvSUN( code ):pass
+def glReplacementCodeusvSUN(code):pass
 @_f
 @_p.types(None,arrays.GLubyteArray)
-def glReplacementCodeubvSUN( code ):pass
+def glReplacementCodeubvSUN(code):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLvoidpArray)
-def glReplacementCodePointerSUN( type,stride,pointer ):pass
+def glReplacementCodePointerSUN(type,stride,pointer):pass
 
 
 def glInitTriangleListSUN():

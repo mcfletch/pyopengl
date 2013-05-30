@@ -62,55 +62,55 @@ glget.addGLGetConstant( GL_RENDERBUFFER_BINDING_EXT, (1,) )
 glget.addGLGetConstant( GL_MAX_COLOR_ATTACHMENTS_EXT, (1,) )
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsRenderbufferEXT( renderbuffer ):pass
+def glIsRenderbufferEXT(renderbuffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindRenderbufferEXT( target,renderbuffer ):pass
+def glBindRenderbufferEXT(target,renderbuffer):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteRenderbuffersEXT( n,renderbuffers ):pass
+def glDeleteRenderbuffersEXT(n,renderbuffers):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenRenderbuffersEXT( n,renderbuffers ):pass
+def glGenRenderbuffersEXT(n,renderbuffers):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei)
-def glRenderbufferStorageEXT( target,internalformat,width,height ):pass
+def glRenderbufferStorageEXT(target,internalformat,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetRenderbufferParameterivEXT( target,pname,params ):pass
+def glGetRenderbufferParameterivEXT(target,pname,params):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsFramebufferEXT( framebuffer ):pass
+def glIsFramebufferEXT(framebuffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindFramebufferEXT( target,framebuffer ):pass
+def glBindFramebufferEXT(target,framebuffer):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteFramebuffersEXT( n,framebuffers ):pass
+def glDeleteFramebuffersEXT(n,framebuffers):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenFramebuffersEXT( n,framebuffers ):pass
+def glGenFramebuffersEXT(n,framebuffers):pass
 @_f
 @_p.types(_cs.GLenum,_cs.GLenum)
-def glCheckFramebufferStatusEXT( target ):pass
+def glCheckFramebufferStatusEXT(target):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint)
-def glFramebufferTexture1DEXT( target,attachment,textarget,texture,level ):pass
+def glFramebufferTexture1DEXT(target,attachment,textarget,texture,level):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint)
-def glFramebufferTexture2DEXT( target,attachment,textarget,texture,level ):pass
+def glFramebufferTexture2DEXT(target,attachment,textarget,texture,level):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint)
-def glFramebufferTexture3DEXT( target,attachment,textarget,texture,level,zoffset ):pass
+def glFramebufferTexture3DEXT(target,attachment,textarget,texture,level,zoffset):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLuint)
-def glFramebufferRenderbufferEXT( target,attachment,renderbuffertarget,renderbuffer ):pass
+def glFramebufferRenderbufferEXT(target,attachment,renderbuffertarget,renderbuffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetFramebufferAttachmentParameterivEXT( target,attachment,pname,params ):pass
+def glGetFramebufferAttachmentParameterivEXT(target,attachment,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glGenerateMipmapEXT( target ):pass
+def glGenerateMipmapEXT(target):pass
 
 
 def glInitFramebufferObjectEXT():

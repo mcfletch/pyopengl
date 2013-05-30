@@ -16,10 +16,10 @@ GL_MIN_LOD_WARNING_AMD 0x919C
 GL_TEXTURE_STORAGE_SPARSE_BIT_AMD 0x1""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLbitfield)
-def glTexStorageSparseAMD( target,internalFormat,width,height,depth,layers,flags ):pass
+def glTexStorageSparseAMD(target,internalFormat,width,height,depth,layers,flags):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLbitfield)
-def glTextureStorageSparseAMD( texture,target,internalFormat,width,height,depth,layers,flags ):pass
+def glTextureStorageSparseAMD(texture,target,internalFormat,width,height,depth,layers,flags):pass
 
 
 def glInitSparseTextureAMD():

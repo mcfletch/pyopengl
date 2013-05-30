@@ -15,22 +15,22 @@ glget.addGLGetConstant( GL_TEXTURE_2D_BINDING_EXT, (1,) )
 glget.addGLGetConstant( GL_TEXTURE_3D_BINDING_EXT, (1,) )
 @_f
 @_p.types(_cs.GLboolean,_cs.GLsizei,arrays.GLuintArray,arrays.GLbooleanArray)
-def glAreTexturesResidentEXT( n,textures,residences ):pass
+def glAreTexturesResidentEXT(n,textures,residences):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindTextureEXT( target,texture ):pass
+def glBindTextureEXT(target,texture):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteTexturesEXT( n,textures ):pass
+def glDeleteTexturesEXT(n,textures):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenTexturesEXT( n,textures ):pass
+def glGenTexturesEXT(n,textures):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsTextureEXT( texture ):pass
+def glIsTextureEXT(texture):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray,arrays.GLclampfArray)
-def glPrioritizeTexturesEXT( n,textures,priorities ):pass
+def glPrioritizeTexturesEXT(n,textures,priorities):pass
 
 
 def glInitTextureObjectEXT():

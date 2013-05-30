@@ -10,28 +10,28 @@ GL_GLOBAL_ALPHA_FACTOR_SUN 0x81DA""", globals())
 glget.addGLGetConstant( GL_GLOBAL_ALPHA_FACTOR_SUN, (1,) )
 @_f
 @_p.types(None,_cs.GLbyte)
-def glGlobalAlphaFactorbSUN( factor ):pass
+def glGlobalAlphaFactorbSUN(factor):pass
 @_f
 @_p.types(None,_cs.GLshort)
-def glGlobalAlphaFactorsSUN( factor ):pass
+def glGlobalAlphaFactorsSUN(factor):pass
 @_f
 @_p.types(None,_cs.GLint)
-def glGlobalAlphaFactoriSUN( factor ):pass
+def glGlobalAlphaFactoriSUN(factor):pass
 @_f
 @_p.types(None,_cs.GLfloat)
-def glGlobalAlphaFactorfSUN( factor ):pass
+def glGlobalAlphaFactorfSUN(factor):pass
 @_f
 @_p.types(None,_cs.GLdouble)
-def glGlobalAlphaFactordSUN( factor ):pass
+def glGlobalAlphaFactordSUN(factor):pass
 @_f
 @_p.types(None,_cs.GLubyte)
-def glGlobalAlphaFactorubSUN( factor ):pass
+def glGlobalAlphaFactorubSUN(factor):pass
 @_f
 @_p.types(None,_cs.GLushort)
-def glGlobalAlphaFactorusSUN( factor ):pass
+def glGlobalAlphaFactorusSUN(factor):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glGlobalAlphaFactoruiSUN( factor ):pass
+def glGlobalAlphaFactoruiSUN(factor):pass
 
 
 def glInitGlobalAlphaSUN():

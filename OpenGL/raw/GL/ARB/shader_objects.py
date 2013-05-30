@@ -41,121 +41,121 @@ GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB 0x8B87
 GL_OBJECT_SHADER_SOURCE_LENGTH_ARB 0x8B88""", globals())
 @_f
 @_p.types(None,_cs.GLhandleARB)
-def glDeleteObjectARB( obj ):pass
+def glDeleteObjectARB(obj):pass
 @_f
 @_p.types(_cs.GLhandleARB,_cs.GLenum)
-def glGetHandleARB( pname ):pass
+def glGetHandleARB(pname):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLhandleARB)
-def glDetachObjectARB( containerObj,attachedObj ):pass
+def glDetachObjectARB(containerObj,attachedObj):pass
 @_f
 @_p.types(_cs.GLhandleARB,_cs.GLenum)
-def glCreateShaderObjectARB( shaderType ):pass
+def glCreateShaderObjectARB(shaderType):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLsizei,ctypes.POINTER( ctypes.POINTER( _cs.GLchar )),arrays.GLintArray)
-def glShaderSourceARB( shaderObj,count,string,length ):pass
+def glShaderSourceARB(shaderObj,count,string,length):pass
 @_f
 @_p.types(None,_cs.GLhandleARB)
-def glCompileShaderARB( shaderObj ):pass
+def glCompileShaderARB(shaderObj):pass
 @_f
 @_p.types(_cs.GLhandleARB,)
-def glCreateProgramObjectARB(  ):pass
+def glCreateProgramObjectARB():pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLhandleARB)
-def glAttachObjectARB( containerObj,obj ):pass
+def glAttachObjectARB(containerObj,obj):pass
 @_f
 @_p.types(None,_cs.GLhandleARB)
-def glLinkProgramARB( programObj ):pass
+def glLinkProgramARB(programObj):pass
 @_f
 @_p.types(None,_cs.GLhandleARB)
-def glUseProgramObjectARB( programObj ):pass
+def glUseProgramObjectARB(programObj):pass
 @_f
 @_p.types(None,_cs.GLhandleARB)
-def glValidateProgramARB( programObj ):pass
+def glValidateProgramARB(programObj):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLfloat)
-def glUniform1fARB( location,v0 ):pass
+def glUniform1fARB(location,v0):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLfloat,_cs.GLfloat)
-def glUniform2fARB( location,v0,v1 ):pass
+def glUniform2fARB(location,v0,v1):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glUniform3fARB( location,v0,v1,v2 ):pass
+def glUniform3fARB(location,v0,v1,v2):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glUniform4fARB( location,v0,v1,v2,v3 ):pass
+def glUniform4fARB(location,v0,v1,v2,v3):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint)
-def glUniform1iARB( location,v0 ):pass
+def glUniform1iARB(location,v0):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint)
-def glUniform2iARB( location,v0,v1 ):pass
+def glUniform2iARB(location,v0,v1):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glUniform3iARB( location,v0,v1,v2 ):pass
+def glUniform3iARB(location,v0,v1,v2):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glUniform4iARB( location,v0,v1,v2,v3 ):pass
+def glUniform4iARB(location,v0,v1,v2,v3):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLfloatArray)
-def glUniform1fvARB( location,count,value ):pass
+def glUniform1fvARB(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLfloatArray)
-def glUniform2fvARB( location,count,value ):pass
+def glUniform2fvARB(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLfloatArray)
-def glUniform3fvARB( location,count,value ):pass
+def glUniform3fvARB(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLfloatArray)
-def glUniform4fvARB( location,count,value ):pass
+def glUniform4fvARB(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLintArray)
-def glUniform1ivARB( location,count,value ):pass
+def glUniform1ivARB(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLintArray)
-def glUniform2ivARB( location,count,value ):pass
+def glUniform2ivARB(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLintArray)
-def glUniform3ivARB( location,count,value ):pass
+def glUniform3ivARB(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLintArray)
-def glUniform4ivARB( location,count,value ):pass
+def glUniform4ivARB(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix2fvARB( location,count,transpose,value ):pass
+def glUniformMatrix2fvARB(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix3fvARB( location,count,transpose,value ):pass
+def glUniformMatrix3fvARB(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix4fvARB( location,count,transpose,value ):pass
+def glUniformMatrix4fvARB(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLenum,arrays.GLfloatArray)
-def glGetObjectParameterfvARB( obj,pname,params ):pass
+def glGetObjectParameterfvARB(obj,pname,params):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLenum,arrays.GLintArray)
-def glGetObjectParameterivARB( obj,pname,params ):pass
+def glGetObjectParameterivARB(obj,pname,params):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharARBArray)
-def glGetInfoLogARB( obj,maxLength,length,infoLog ):pass
+def glGetInfoLogARB(obj,maxLength,length,infoLog):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLuintArray)
-def glGetAttachedObjectsARB( containerObj,maxCount,count,obj ):pass
+def glGetAttachedObjectsARB(containerObj,maxCount,count,obj):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLhandleARB,arrays.GLcharARBArray)
-def glGetUniformLocationARB( programObj,name ):pass
+def glGetUniformLocationARB(programObj,name):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray,arrays.GLuintArray,arrays.GLcharARBArray)
-def glGetActiveUniformARB( programObj,index,maxLength,length,size,type,name ):pass
+def glGetActiveUniformARB(programObj,index,maxLength,length,size,type,name):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLint,arrays.GLfloatArray)
-def glGetUniformfvARB( programObj,location,params ):pass
+def glGetUniformfvARB(programObj,location,params):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLint,arrays.GLintArray)
-def glGetUniformivARB( programObj,location,params ):pass
+def glGetUniformivARB(programObj,location,params):pass
 @_f
 @_p.types(None,_cs.GLhandleARB,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharARBArray)
-def glGetShaderSourceARB( obj,maxLength,length,source ):pass
+def glGetShaderSourceARB(obj,maxLength,length,source):pass
 
 
 def glInitShaderObjectsARB():

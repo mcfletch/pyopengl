@@ -15,52 +15,52 @@ GL_MAX_PROGRAM_GENERIC_ATTRIBS_NV 0x8DA5
 GL_MAX_PROGRAM_GENERIC_RESULTS_NV 0x8DA6""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glProgramLocalParameterI4iNV( target,index,x,y,z,w ):pass
+def glProgramLocalParameterI4iNV(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
-def glProgramLocalParameterI4ivNV( target,index,params ):pass
+def glProgramLocalParameterI4ivNV(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLintArray)
-def glProgramLocalParametersI4ivNV( target,index,count,params ):pass
+def glProgramLocalParametersI4ivNV(target,index,count,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glProgramLocalParameterI4uiNV( target,index,x,y,z,w ):pass
+def glProgramLocalParameterI4uiNV(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLuintArray)
-def glProgramLocalParameterI4uivNV( target,index,params ):pass
+def glProgramLocalParameterI4uivNV(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray)
-def glProgramLocalParametersI4uivNV( target,index,count,params ):pass
+def glProgramLocalParametersI4uivNV(target,index,count,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glProgramEnvParameterI4iNV( target,index,x,y,z,w ):pass
+def glProgramEnvParameterI4iNV(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
-def glProgramEnvParameterI4ivNV( target,index,params ):pass
+def glProgramEnvParameterI4ivNV(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLintArray)
-def glProgramEnvParametersI4ivNV( target,index,count,params ):pass
+def glProgramEnvParametersI4ivNV(target,index,count,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glProgramEnvParameterI4uiNV( target,index,x,y,z,w ):pass
+def glProgramEnvParameterI4uiNV(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLuintArray)
-def glProgramEnvParameterI4uivNV( target,index,params ):pass
+def glProgramEnvParameterI4uivNV(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray)
-def glProgramEnvParametersI4uivNV( target,index,count,params ):pass
+def glProgramEnvParametersI4uivNV(target,index,count,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
-def glGetProgramLocalParameterIivNV( target,index,params ):pass
+def glGetProgramLocalParameterIivNV(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLuintArray)
-def glGetProgramLocalParameterIuivNV( target,index,params ):pass
+def glGetProgramLocalParameterIuivNV(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
-def glGetProgramEnvParameterIivNV( target,index,params ):pass
+def glGetProgramEnvParameterIivNV(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLuintArray)
-def glGetProgramEnvParameterIuivNV( target,index,params ):pass
+def glGetProgramEnvParameterIuivNV(target,index,params):pass
 
 
 def glInitGpuProgram4NV():

@@ -14,10 +14,10 @@ GL_DISCRETE_AMD 0x9006
 GL_CONTINUOUS_AMD 0x9007""", globals())
 @_f
 @_p.types(None,_cs.GLfloat)
-def glTessellationFactorAMD( factor ):pass
+def glTessellationFactorAMD(factor):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glTessellationModeAMD( mode ):pass
+def glTessellationModeAMD(mode):pass
 
 
 def glInitVertexShaderTesselatorAMD():

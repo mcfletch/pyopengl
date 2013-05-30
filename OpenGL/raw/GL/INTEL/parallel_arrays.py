@@ -13,16 +13,16 @@ GL_TEXTURE_COORD_ARRAY_PARALLEL_POINTERS_INTEL 0x83F8""", globals())
 glget.addGLGetConstant( GL_PARALLEL_ARRAYS_INTEL, (1,) )
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,arrays.GLvoidpArray)
-def glVertexPointervINTEL( size,type,pointer ):pass
+def glVertexPointervINTEL(size,type,pointer):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLvoidpArray)
-def glNormalPointervINTEL( type,pointer ):pass
+def glNormalPointervINTEL(type,pointer):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,arrays.GLvoidpArray)
-def glColorPointervINTEL( size,type,pointer ):pass
+def glColorPointervINTEL(size,type,pointer):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,arrays.GLvoidpArray)
-def glTexCoordPointervINTEL( size,type,pointer ):pass
+def glTexCoordPointervINTEL(size,type,pointer):pass
 
 
 def glInitParallelArraysINTEL():

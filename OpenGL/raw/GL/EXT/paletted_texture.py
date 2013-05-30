@@ -14,16 +14,16 @@ GL_COLOR_INDEX16_EXT 0x80E7
 GL_TEXTURE_INDEX_SIZE_EXT 0x80ED""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glColorTableEXT( target,internalFormat,width,format,type,table ):pass
+def glColorTableEXT(target,internalFormat,width,format,type,table):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetColorTableEXT( target,format,type,data ):pass
+def glGetColorTableEXT(target,format,type,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetColorTableParameterivEXT( target,pname,params ):pass
+def glGetColorTableParameterivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetColorTableParameterfvEXT( target,pname,params ):pass
+def glGetColorTableParameterfvEXT(target,pname,params):pass
 
 
 def glInitPalettedTextureEXT():

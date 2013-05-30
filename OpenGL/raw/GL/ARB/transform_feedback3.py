@@ -9,16 +9,16 @@ _p.unpack_constants( """GL_MAX_TRANSFORM_FEEDBACK_BUFFERS 0x8E70
 GL_MAX_VERTEX_STREAMS 0x8E71""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint)
-def glDrawTransformFeedbackStream( mode,id,stream ):pass
+def glDrawTransformFeedbackStream(mode,id,stream):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint)
-def glBeginQueryIndexed( target,index,id ):pass
+def glBeginQueryIndexed(target,index,id):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glEndQueryIndexed( target,index ):pass
+def glEndQueryIndexed(target,index):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetQueryIndexediv( target,index,pname,params ):pass
+def glGetQueryIndexediv(target,index,pname,params):pass
 
 
 def glInitTransformFeedback3ARB():

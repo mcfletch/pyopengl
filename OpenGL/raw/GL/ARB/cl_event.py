@@ -9,7 +9,7 @@ _p.unpack_constants( """GL_SYNC_CL_EVENT_ARB 0x8240
 GL_SYNC_CL_EVENT_COMPLETE_ARB 0x8241""", globals())
 @_f
 @_p.types(_cs.GLsync,ctypes.POINTER(_cs._cl_context),ctypes.POINTER(_cs._cl_event),_cs.GLbitfield)
-def glCreateSyncFromCLeventARB( context,event,flags ):pass
+def glCreateSyncFromCLeventARB(context,event,flags):pass
 
 
 def glInitClEventARB():

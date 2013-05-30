@@ -8,16 +8,16 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.void))
-def glClearBufferData( target,internalformat,format,type,data ):pass
+def glClearBufferData(target,internalformat,format,type,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.void))
-def glClearBufferSubData( target,internalformat,offset,size,format,type,data ):pass
+def glClearBufferSubData(target,internalformat,offset,size,format,type,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.void))
-def glClearNamedBufferDataEXT( buffer,internalformat,format,type,data ):pass
+def glClearNamedBufferDataEXT(buffer,internalformat,format,type,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizeiptr,_cs.GLsizeiptr,ctypes.POINTER(_cs.void))
-def glClearNamedBufferSubDataEXT( buffer,internalformat,format,type,offset,size,data ):pass
+def glClearNamedBufferSubDataEXT(buffer,internalformat,format,type,offset,size,data):pass
 
 
 def glInitClearBufferObjectARB():

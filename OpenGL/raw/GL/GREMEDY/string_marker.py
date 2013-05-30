@@ -8,7 +8,7 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLsizei,ctypes.c_void_p)
-def glStringMarkerGREMEDY( len,string ):pass
+def glStringMarkerGREMEDY(len,string):pass
 
 
 def glInitStringMarkerGREMEDY():

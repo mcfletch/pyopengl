@@ -15,16 +15,16 @@ glget.addGLGetConstant( GL_TRANSPOSE_TEXTURE_MATRIX_ARB, (4,4) )
 glget.addGLGetConstant( GL_TRANSPOSE_COLOR_MATRIX_ARB, (4,4) )
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glLoadTransposeMatrixfARB( m ):pass
+def glLoadTransposeMatrixfARB(m):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glLoadTransposeMatrixdARB( m ):pass
+def glLoadTransposeMatrixdARB(m):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glMultTransposeMatrixfARB( m ):pass
+def glMultTransposeMatrixfARB(m):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glMultTransposeMatrixdARB( m ):pass
+def glMultTransposeMatrixdARB(m):pass
 
 
 def glInitTransposeMatrixARB():

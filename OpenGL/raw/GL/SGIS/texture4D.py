@@ -17,10 +17,10 @@ GL_MAX_4D_TEXTURE_SIZE_SGIS 0x8138
 GL_TEXTURE_4D_BINDING_SGIS 0x814F""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glTexImage4DSGIS( target,level,internalformat,width,height,depth,size4d,border,format,type,pixels ):pass
+def glTexImage4DSGIS(target,level,internalformat,width,height,depth,size4d,border,format,type,pixels):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glTexSubImage4DSGIS( target,level,xoffset,yoffset,zoffset,woffset,width,height,depth,size4d,format,type,pixels ):pass
+def glTexSubImage4DSGIS(target,level,xoffset,yoffset,zoffset,woffset,width,height,depth,size4d,format,type,pixels):pass
 
 
 def glInitTexture4DSGIS():

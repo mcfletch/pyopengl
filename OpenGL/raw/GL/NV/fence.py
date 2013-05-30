@@ -10,25 +10,25 @@ GL_FENCE_STATUS_NV 0x84F3
 GL_FENCE_CONDITION_NV 0x84F4""", globals())
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteFencesNV( n,fences ):pass
+def glDeleteFencesNV(n,fences):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenFencesNV( n,fences ):pass
+def glGenFencesNV(n,fences):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsFenceNV( fence ):pass
+def glIsFenceNV(fence):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glTestFenceNV( fence ):pass
+def glTestFenceNV(fence):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetFenceivNV( fence,pname,params ):pass
+def glGetFenceivNV(fence,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glFinishFenceNV( fence ):pass
+def glFinishFenceNV(fence):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glSetFenceNV( fence,condition ):pass
+def glSetFenceNV(fence,condition):pass
 
 
 def glInitFenceNV():

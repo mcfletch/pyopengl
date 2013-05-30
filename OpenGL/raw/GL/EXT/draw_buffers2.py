@@ -8,22 +8,22 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLboolean,_cs.GLboolean,_cs.GLboolean,_cs.GLboolean)
-def glColorMaskIndexedEXT( index,r,g,b,a ):pass
+def glColorMaskIndexedEXT(index,r,g,b,a):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLbooleanArray)
-def glGetBooleanIndexedvEXT( target,index,data ):pass
+def glGetBooleanIndexedvEXT(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
-def glGetIntegerIndexedvEXT( target,index,data ):pass
+def glGetIntegerIndexedvEXT(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glEnableIndexedEXT( target,index ):pass
+def glEnableIndexedEXT(target,index):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glDisableIndexedEXT( target,index ):pass
+def glDisableIndexedEXT(target,index):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLenum,_cs.GLuint)
-def glIsEnabledIndexedEXT( target,index ):pass
+def glIsEnabledIndexedEXT(target,index):pass
 
 
 def glInitDrawBuffers2EXT():

@@ -9,7 +9,7 @@ _p.unpack_constants( """GL_REFERENCE_PLANE_SGIX 0x817D
 GL_REFERENCE_PLANE_EQUATION_SGIX 0x817E""", globals())
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glReferencePlaneSGIX( equation ):pass
+def glReferencePlaneSGIX(equation):pass
 
 
 def glInitReferencePlaneSGIX():

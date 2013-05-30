@@ -11,13 +11,13 @@ GL_FLOAT_32_UNSIGNED_INT_24_8_REV_NV 0x8DAD
 GL_DEPTH_BUFFER_FLOAT_MODE_NV 0x8DAF""", globals())
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble)
-def glDepthRangedNV( zNear,zFar ):pass
+def glDepthRangedNV(zNear,zFar):pass
 @_f
 @_p.types(None,_cs.GLdouble)
-def glClearDepthdNV( depth ):pass
+def glClearDepthdNV(depth):pass
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble)
-def glDepthBoundsdNV( zmin,zmax ):pass
+def glDepthBoundsdNV(zmin,zmax):pass
 
 
 def glInitDepthBufferFloatNV():

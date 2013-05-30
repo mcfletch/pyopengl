@@ -71,10 +71,10 @@ GL_MAX_FRAGMENT_IMAGE_UNIFORMS 0x90CE
 GL_MAX_COMBINED_IMAGE_UNIFORMS 0x90CF""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLboolean,_cs.GLint,_cs.GLenum,_cs.GLenum)
-def glBindImageTexture( unit,texture,level,layered,layer,access,format ):pass
+def glBindImageTexture(unit,texture,level,layered,layer,access,format):pass
 @_f
 @_p.types(None,_cs.GLbitfield)
-def glMemoryBarrier( barriers ):pass
+def glMemoryBarrier(barriers):pass
 
 
 def glInitShaderImageLoadStoreARB():

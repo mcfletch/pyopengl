@@ -147,196 +147,196 @@ glget.addGLGetConstant( GL_MAP2_VERTEX_ATTRIB14_4_NV, (4,) )
 glget.addGLGetConstant( GL_MAP2_VERTEX_ATTRIB15_4_NV, (4,) )
 @_f
 @_p.types(_cs.GLboolean,_cs.GLsizei,arrays.GLuintArray,arrays.GLbooleanArray)
-def glAreProgramsResidentNV( n,programs,residences ):pass
+def glAreProgramsResidentNV(n,programs,residences):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindProgramNV( target,id ):pass
+def glBindProgramNV(target,id):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteProgramsNV( n,programs ):pass
+def glDeleteProgramsNV(n,programs):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glExecuteProgramNV( target,id,params ):pass
+def glExecuteProgramNV(target,id,params):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenProgramsNV( n,programs ):pass
+def glGenProgramsNV(n,programs):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLdoubleArray)
-def glGetProgramParameterdvNV( target,index,pname,params ):pass
+def glGetProgramParameterdvNV(target,index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetProgramParameterfvNV( target,index,pname,params ):pass
+def glGetProgramParameterfvNV(target,index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetProgramivNV( id,pname,params ):pass
+def glGetProgramivNV(id,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLubyteArray)
-def glGetProgramStringNV( id,pname,program ):pass
+def glGetProgramStringNV(id,pname,program):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetTrackMatrixivNV( target,address,pname,params ):pass
+def glGetTrackMatrixivNV(target,address,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLdoubleArray)
-def glGetVertexAttribdvNV( index,pname,params ):pass
+def glGetVertexAttribdvNV(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetVertexAttribfvNV( index,pname,params ):pass
+def glGetVertexAttribfvNV(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetVertexAttribivNV( index,pname,params ):pass
+def glGetVertexAttribivNV(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLvoidpArray)
-def glGetVertexAttribPointervNV( index,pname,pointer ):pass
+def glGetVertexAttribPointervNV(index,pname,pointer):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsProgramNV( id ):pass
+def glIsProgramNV(id):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray)
-def glLoadProgramNV( target,id,len,program ):pass
+def glLoadProgramNV(target,id,len,program):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glProgramParameter4dNV( target,index,x,y,z,w ):pass
+def glProgramParameter4dNV(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLdoubleArray)
-def glProgramParameter4dvNV( target,index,v ):pass
+def glProgramParameter4dvNV(target,index,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glProgramParameter4fNV( target,index,x,y,z,w ):pass
+def glProgramParameter4fNV(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glProgramParameter4fvNV( target,index,v ):pass
+def glProgramParameter4fvNV(target,index,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLdoubleArray)
-def glProgramParameters4dvNV( target,index,count,v ):pass
+def glProgramParameters4dvNV(target,index,count,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glProgramParameters4fvNV( target,index,count,v ):pass
+def glProgramParameters4fvNV(target,index,count,v):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glRequestResidentProgramsNV( n,programs ):pass
+def glRequestResidentProgramsNV(n,programs):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glTrackMatrixNV( target,address,matrix,transform ):pass
+def glTrackMatrixNV(target,address,matrix,transform):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glVertexAttribPointerNV( index,fsize,type,stride,pointer ):pass
+def glVertexAttribPointerNV(index,fsize,type,stride,pointer):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble)
-def glVertexAttrib1dNV( index,x ):pass
+def glVertexAttrib1dNV(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib1dvNV( index,v ):pass
+def glVertexAttrib1dvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat)
-def glVertexAttrib1fNV( index,x ):pass
+def glVertexAttrib1fNV(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib1fvNV( index,v ):pass
+def glVertexAttrib1fvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort)
-def glVertexAttrib1sNV( index,x ):pass
+def glVertexAttrib1sNV(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib1svNV( index,v ):pass
+def glVertexAttrib1svNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttrib2dNV( index,x,y ):pass
+def glVertexAttrib2dNV(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib2dvNV( index,v ):pass
+def glVertexAttrib2dvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat)
-def glVertexAttrib2fNV( index,x,y ):pass
+def glVertexAttrib2fNV(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib2fvNV( index,v ):pass
+def glVertexAttrib2fvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort,_cs.GLshort)
-def glVertexAttrib2sNV( index,x,y ):pass
+def glVertexAttrib2sNV(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib2svNV( index,v ):pass
+def glVertexAttrib2svNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttrib3dNV( index,x,y,z ):pass
+def glVertexAttrib3dNV(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib3dvNV( index,v ):pass
+def glVertexAttrib3dvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glVertexAttrib3fNV( index,x,y,z ):pass
+def glVertexAttrib3fNV(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib3fvNV( index,v ):pass
+def glVertexAttrib3fvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glVertexAttrib3sNV( index,x,y,z ):pass
+def glVertexAttrib3sNV(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib3svNV( index,v ):pass
+def glVertexAttrib3svNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttrib4dNV( index,x,y,z,w ):pass
+def glVertexAttrib4dNV(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib4dvNV( index,v ):pass
+def glVertexAttrib4dvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glVertexAttrib4fNV( index,x,y,z,w ):pass
+def glVertexAttrib4fNV(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib4fvNV( index,v ):pass
+def glVertexAttrib4fvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glVertexAttrib4sNV( index,x,y,z,w ):pass
+def glVertexAttrib4sNV(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib4svNV( index,v ):pass
+def glVertexAttrib4svNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte)
-def glVertexAttrib4ubNV( index,x,y,z,w ):pass
+def glVertexAttrib4ubNV(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
-def glVertexAttrib4ubvNV( index,v ):pass
+def glVertexAttrib4ubvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLdoubleArray)
-def glVertexAttribs1dvNV( index,count,v ):pass
+def glVertexAttribs1dvNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glVertexAttribs1fvNV( index,count,v ):pass
+def glVertexAttribs1fvNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLshortArray)
-def glVertexAttribs1svNV( index,count,v ):pass
+def glVertexAttribs1svNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLdoubleArray)
-def glVertexAttribs2dvNV( index,count,v ):pass
+def glVertexAttribs2dvNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glVertexAttribs2fvNV( index,count,v ):pass
+def glVertexAttribs2fvNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLshortArray)
-def glVertexAttribs2svNV( index,count,v ):pass
+def glVertexAttribs2svNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLdoubleArray)
-def glVertexAttribs3dvNV( index,count,v ):pass
+def glVertexAttribs3dvNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glVertexAttribs3fvNV( index,count,v ):pass
+def glVertexAttribs3fvNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLshortArray)
-def glVertexAttribs3svNV( index,count,v ):pass
+def glVertexAttribs3svNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLdoubleArray)
-def glVertexAttribs4dvNV( index,count,v ):pass
+def glVertexAttribs4dvNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glVertexAttribs4fvNV( index,count,v ):pass
+def glVertexAttribs4fvNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLshortArray)
-def glVertexAttribs4svNV( index,count,v ):pass
+def glVertexAttribs4svNV(index,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray)
-def glVertexAttribs4ubvNV( index,count,v ):pass
+def glVertexAttribs4ubvNV(index,count,v):pass
 
 
 def glInitVertexProgramNV():

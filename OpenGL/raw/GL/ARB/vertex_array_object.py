@@ -9,16 +9,16 @@ _p.unpack_constants( """GL_VERTEX_ARRAY_BINDING 0x85B5""", globals())
 glget.addGLGetConstant( GL_VERTEX_ARRAY_BINDING, (1,) )
 @_f
 @_p.types(None,_cs.GLuint)
-def glBindVertexArray( array ):pass
+def glBindVertexArray(array):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteVertexArrays( n,arrays ):pass
+def glDeleteVertexArrays(n,arrays):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenVertexArrays( n,arrays ):pass
+def glGenVertexArrays(n,arrays):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsVertexArray( array ):pass
+def glIsVertexArray(array):pass
 
 
 def glInitVertexArrayObjectARB():

@@ -26,25 +26,25 @@ glget.addGLGetConstant( GL_POST_CONVOLUTION_COLOR_TABLE_SGI, (1,) )
 glget.addGLGetConstant( GL_POST_COLOR_MATRIX_COLOR_TABLE_SGI, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glColorTableSGI( target,internalformat,width,format,type,table ):pass
+def glColorTableSGI(target,internalformat,width,format,type,table):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glColorTableParameterfvSGI( target,pname,params ):pass
+def glColorTableParameterfvSGI(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glColorTableParameterivSGI( target,pname,params ):pass
+def glColorTableParameterivSGI(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei)
-def glCopyColorTableSGI( target,internalformat,x,y,width ):pass
+def glCopyColorTableSGI(target,internalformat,x,y,width):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetColorTableSGI( target,format,type,table ):pass
+def glGetColorTableSGI(target,format,type,table):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetColorTableParameterfvSGI( target,pname,params ):pass
+def glGetColorTableParameterfvSGI(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetColorTableParameterivSGI( target,pname,params ):pass
+def glGetColorTableParameterivSGI(target,pname,params):pass
 
 
 def glInitColorTableSGI():

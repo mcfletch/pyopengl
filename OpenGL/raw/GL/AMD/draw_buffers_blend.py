@@ -8,16 +8,16 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glBlendFuncIndexedAMD( buf,src,dst ):pass
+def glBlendFuncIndexedAMD(buf,src,dst):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glBlendFuncSeparateIndexedAMD( buf,srcRGB,dstRGB,srcAlpha,dstAlpha ):pass
+def glBlendFuncSeparateIndexedAMD(buf,srcRGB,dstRGB,srcAlpha,dstAlpha):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glBlendEquationIndexedAMD( buf,mode ):pass
+def glBlendEquationIndexedAMD(buf,mode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glBlendEquationSeparateIndexedAMD( buf,modeRGB,modeAlpha ):pass
+def glBlendEquationSeparateIndexedAMD(buf,modeRGB,modeAlpha):pass
 
 
 def glInitDrawBuffersBlendAMD():

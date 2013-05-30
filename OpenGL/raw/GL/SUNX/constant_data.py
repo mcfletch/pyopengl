@@ -9,7 +9,7 @@ _p.unpack_constants( """GL_UNPACK_CONSTANT_DATA_SUNX 0x81D5
 GL_TEXTURE_CONSTANT_DATA_SUNX 0x81D6""", globals())
 @_f
 @_p.types(None,)
-def glFinishTextureSUNX(  ):pass
+def glFinishTextureSUNX():pass
 
 
 def glInitConstantDataSUNX():

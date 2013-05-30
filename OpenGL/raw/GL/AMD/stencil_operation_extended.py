@@ -11,7 +11,7 @@ GL_STENCIL_OP_VALUE_AMD 0x874C
 GL_STENCIL_BACK_OP_VALUE_AMD 0x874D""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glStencilOpValueAMD( face,value ):pass
+def glStencilOpValueAMD(face,value):pass
 
 
 def glInitStencilOperationExtendedAMD():

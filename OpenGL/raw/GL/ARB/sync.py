@@ -22,25 +22,25 @@ GL_SYNC_FLUSH_COMMANDS_BIT 0x1
 GL_TIMEOUT_IGNORED 0xFFFFFFFFFFFFFFFF""", globals())
 @_f
 @_p.types(_cs.GLsync,_cs.GLenum,_cs.GLbitfield)
-def glFenceSync( condition,flags ):pass
+def glFenceSync(condition,flags):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLsync)
-def glIsSync( sync ):pass
+def glIsSync(sync):pass
 @_f
 @_p.types(None,_cs.GLsync)
-def glDeleteSync( sync ):pass
+def glDeleteSync(sync):pass
 @_f
 @_p.types(_cs.GLenum,_cs.GLsync,_cs.GLbitfield,_cs.GLuint64)
-def glClientWaitSync( sync,flags,timeout ):pass
+def glClientWaitSync(sync,flags,timeout):pass
 @_f
 @_p.types(None,_cs.GLsync,_cs.GLbitfield,_cs.GLuint64)
-def glWaitSync( sync,flags,timeout ):pass
+def glWaitSync(sync,flags,timeout):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLint64Array)
-def glGetInteger64v( pname,params ):pass
+def glGetInteger64v(pname,params):pass
 @_f
 @_p.types(None,_cs.GLsync,_cs.GLenum,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray)
-def glGetSynciv( sync,pname,bufSize,length,values ):pass
+def glGetSynciv(sync,pname,bufSize,length,values):pass
 
 
 def glInitSyncARB():

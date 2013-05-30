@@ -13,7 +13,7 @@ GL_BLEND_COLOR_EXT 0x8005""", globals())
 glget.addGLGetConstant( GL_BLEND_COLOR_EXT, (4,) )
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glBlendColorEXT( red,green,blue,alpha ):pass
+def glBlendColorEXT(red,green,blue,alpha):pass
 
 
 def glInitBlendColorEXT():

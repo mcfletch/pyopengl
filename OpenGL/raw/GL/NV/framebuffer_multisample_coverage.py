@@ -12,7 +12,7 @@ GL_MULTISAMPLE_COVERAGE_MODES_NV 0x8E12""", globals())
 glget.addGLGetConstant( GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei)
-def glRenderbufferStorageMultisampleCoverageNV( target,coverageSamples,colorSamples,internalformat,width,height ):pass
+def glRenderbufferStorageMultisampleCoverageNV(target,coverageSamples,colorSamples,internalformat,width,height):pass
 
 
 def glInitFramebufferMultisampleCoverageNV():

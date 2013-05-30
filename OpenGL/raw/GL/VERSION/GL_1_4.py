@@ -63,137 +63,137 @@ glget.addGLGetConstant( GL_SECONDARY_COLOR_ARRAY_STRIDE, (1,) )
 glget.addGLGetConstant( GL_SECONDARY_COLOR_ARRAY, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glBlendFuncSeparate( sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha ):pass
+def glBlendFuncSeparate(sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray,arrays.GLsizeiArray,_cs.GLsizei)
-def glMultiDrawArrays( mode,first,count,drawcount ):pass
+def glMultiDrawArrays(mode,first,count,drawcount):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLsizeiArray,_cs.GLenum,arrays.GLvoidpArray,_cs.GLsizei)
-def glMultiDrawElements( mode,count,type,indices,drawcount ):pass
+def glMultiDrawElements(mode,count,type,indices,drawcount):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glPointParameterf( pname,param ):pass
+def glPointParameterf(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glPointParameterfv( pname,params ):pass
+def glPointParameterfv(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glPointParameteri( pname,param ):pass
+def glPointParameteri(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glPointParameteriv( pname,params ):pass
+def glPointParameteriv(pname,params):pass
 @_f
 @_p.types(None,_cs.GLfloat)
-def glFogCoordf( coord ):pass
+def glFogCoordf(coord):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glFogCoordfv( coord ):pass
+def glFogCoordfv(coord):pass
 @_f
 @_p.types(None,_cs.GLdouble)
-def glFogCoordd( coord ):pass
+def glFogCoordd(coord):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glFogCoorddv( coord ):pass
+def glFogCoorddv(coord):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glFogCoordPointer( type,stride,pointer ):pass
+def glFogCoordPointer(type,stride,pointer):pass
 @_f
 @_p.types(None,_cs.GLbyte,_cs.GLbyte,_cs.GLbyte)
-def glSecondaryColor3b( red,green,blue ):pass
+def glSecondaryColor3b(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLbyteArray)
-def glSecondaryColor3bv( v ):pass
+def glSecondaryColor3bv(v):pass
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glSecondaryColor3d( red,green,blue ):pass
+def glSecondaryColor3d(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glSecondaryColor3dv( v ):pass
+def glSecondaryColor3dv(v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glSecondaryColor3f( red,green,blue ):pass
+def glSecondaryColor3f(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glSecondaryColor3fv( v ):pass
+def glSecondaryColor3fv(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint)
-def glSecondaryColor3i( red,green,blue ):pass
+def glSecondaryColor3i(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLintArray)
-def glSecondaryColor3iv( v ):pass
+def glSecondaryColor3iv(v):pass
 @_f
 @_p.types(None,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glSecondaryColor3s( red,green,blue ):pass
+def glSecondaryColor3s(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLshortArray)
-def glSecondaryColor3sv( v ):pass
+def glSecondaryColor3sv(v):pass
 @_f
 @_p.types(None,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte)
-def glSecondaryColor3ub( red,green,blue ):pass
+def glSecondaryColor3ub(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLubyteArray)
-def glSecondaryColor3ubv( v ):pass
+def glSecondaryColor3ubv(v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glSecondaryColor3ui( red,green,blue ):pass
+def glSecondaryColor3ui(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLuintArray)
-def glSecondaryColor3uiv( v ):pass
+def glSecondaryColor3uiv(v):pass
 @_f
 @_p.types(None,_cs.GLushort,_cs.GLushort,_cs.GLushort)
-def glSecondaryColor3us( red,green,blue ):pass
+def glSecondaryColor3us(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLushortArray)
-def glSecondaryColor3usv( v ):pass
+def glSecondaryColor3usv(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glSecondaryColorPointer( size,type,stride,pointer ):pass
+def glSecondaryColorPointer(size,type,stride,pointer):pass
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble)
-def glWindowPos2d( x,y ):pass
+def glWindowPos2d(x,y):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glWindowPos2dv( v ):pass
+def glWindowPos2dv(v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat)
-def glWindowPos2f( x,y ):pass
+def glWindowPos2f(x,y):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glWindowPos2fv( v ):pass
+def glWindowPos2fv(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint)
-def glWindowPos2i( x,y ):pass
+def glWindowPos2i(x,y):pass
 @_f
 @_p.types(None,arrays.GLintArray)
-def glWindowPos2iv( v ):pass
+def glWindowPos2iv(v):pass
 @_f
 @_p.types(None,_cs.GLshort,_cs.GLshort)
-def glWindowPos2s( x,y ):pass
+def glWindowPos2s(x,y):pass
 @_f
 @_p.types(None,arrays.GLshortArray)
-def glWindowPos2sv( v ):pass
+def glWindowPos2sv(v):pass
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glWindowPos3d( x,y,z ):pass
+def glWindowPos3d(x,y,z):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glWindowPos3dv( v ):pass
+def glWindowPos3dv(v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glWindowPos3f( x,y,z ):pass
+def glWindowPos3f(x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glWindowPos3fv( v ):pass
+def glWindowPos3fv(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint)
-def glWindowPos3i( x,y,z ):pass
+def glWindowPos3i(x,y,z):pass
 @_f
 @_p.types(None,arrays.GLintArray)
-def glWindowPos3iv( v ):pass
+def glWindowPos3iv(v):pass
 @_f
 @_p.types(None,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glWindowPos3s( x,y,z ):pass
+def glWindowPos3s(x,y,z):pass
 @_f
 @_p.types(None,arrays.GLshortArray)
-def glWindowPos3sv( v ):pass
+def glWindowPos3sv(v):pass
 

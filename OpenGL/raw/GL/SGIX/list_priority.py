@@ -8,22 +8,22 @@ def _f( function ):
 _p.unpack_constants( """GL_LIST_PRIORITY_SGIX 0x8182""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetListParameterfvSGIX( list,pname,params ):pass
+def glGetListParameterfvSGIX(list,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetListParameterivSGIX( list,pname,params ):pass
+def glGetListParameterivSGIX(list,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLfloat)
-def glListParameterfSGIX( list,pname,param ):pass
+def glListParameterfSGIX(list,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glListParameterfvSGIX( list,pname,params ):pass
+def glListParameterfvSGIX(list,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
-def glListParameteriSGIX( list,pname,param ):pass
+def glListParameteriSGIX(list,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glListParameterivSGIX( list,pname,params ):pass
+def glListParameterivSGIX(list,pname,params):pass
 
 
 def glInitListPrioritySGIX():

@@ -15,7 +15,7 @@ glget.addGLGetConstant( GL_BLEND_DST_ALPHA_EXT, (1,) )
 glget.addGLGetConstant( GL_BLEND_SRC_ALPHA_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glBlendFuncSeparateEXT( sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha ):pass
+def glBlendFuncSeparateEXT(sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha):pass
 
 
 def glInitBlendFuncSeparateEXT():

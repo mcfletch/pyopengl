@@ -13,22 +13,22 @@ GL_PRESENT_TIME_NV 0x8E2A
 GL_PRESENT_DURATION_NV 0x8E2B""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint64EXT,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLuint)
-def glPresentFrameKeyedNV( video_slot,minPresentTime,beginPresentTimeId,presentDurationId,type,target0,fill0,key0,target1,fill1,key1 ):pass
+def glPresentFrameKeyedNV(video_slot,minPresentTime,beginPresentTimeId,presentDurationId,type,target0,fill0,key0,target1,fill1,key1):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint64EXT,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLuint)
-def glPresentFrameDualFillNV( video_slot,minPresentTime,beginPresentTimeId,presentDurationId,type,target0,fill0,target1,fill1,target2,fill2,target3,fill3 ):pass
+def glPresentFrameDualFillNV(video_slot,minPresentTime,beginPresentTimeId,presentDurationId,type,target0,fill0,target1,fill1,target2,fill2,target3,fill3):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetVideoivNV( video_slot,pname,params ):pass
+def glGetVideoivNV(video_slot,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuintArray)
-def glGetVideouivNV( video_slot,pname,params ):pass
+def glGetVideouivNV(video_slot,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLint64Array)
-def glGetVideoi64vNV( video_slot,pname,params ):pass
+def glGetVideoi64vNV(video_slot,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuint64Array)
-def glGetVideoui64vNV( video_slot,pname,params ):pass
+def glGetVideoui64vNV(video_slot,pname,params):pass
 
 
 def glInitPresentVideoNV():

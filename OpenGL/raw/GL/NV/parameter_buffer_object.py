@@ -13,13 +13,13 @@ GL_FRAGMENT_PROGRAM_PARAMETER_BUFFER_NV 0x8DA4""", globals())
 glget.addGLGetConstant( GL_VERTEX_PROGRAM_PARAMETER_BUFFER_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glProgramBufferParametersfvNV( target,buffer,index,count,params ):pass
+def glProgramBufferParametersfvNV(target,bindingIndex,wordIndex,count,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLintArray)
-def glProgramBufferParametersIivNV( target,buffer,index,count,params ):pass
+def glProgramBufferParametersIivNV(target,bindingIndex,wordIndex,count,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray)
-def glProgramBufferParametersIuivNV( target,buffer,index,count,params ):pass
+def glProgramBufferParametersIuivNV(target,bindingIndex,wordIndex,count,params):pass
 
 
 def glInitParameterBufferObjectNV():

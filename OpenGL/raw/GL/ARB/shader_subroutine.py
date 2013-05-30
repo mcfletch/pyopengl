@@ -16,28 +16,28 @@ GL_NUM_COMPATIBLE_SUBROUTINES 0x8E4A
 GL_COMPATIBLE_SUBROUTINES 0x8E4B""", globals())
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,_cs.GLenum,arrays.GLcharArray)
-def glGetSubroutineUniformLocation( program,shadertype,name ):pass
+def glGetSubroutineUniformLocation(program,shadertype,name):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLcharArray)
-def glGetSubroutineIndex( program,shadertype,name ):pass
+def glGetSubroutineIndex(program,shadertype,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetActiveSubroutineUniformiv( program,shadertype,index,pname,values ):pass
+def glGetActiveSubroutineUniformiv(program,shadertype,index,pname,values):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetActiveSubroutineUniformName( program,shadertype,index,bufsize,length,name ):pass
+def glGetActiveSubroutineUniformName(program,shadertype,index,bufsize,length,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetActiveSubroutineName( program,shadertype,index,bufsize,length,name ):pass
+def glGetActiveSubroutineName(program,shadertype,index,bufsize,length,name):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray)
-def glUniformSubroutinesuiv( shadertype,count,indices ):pass
+def glUniformSubroutinesuiv(shadertype,count,indices):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLuintArray)
-def glGetUniformSubroutineuiv( shadertype,location,params ):pass
+def glGetUniformSubroutineuiv(shadertype,location,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetProgramStageiv( program,shadertype,pname,values ):pass
+def glGetProgramStageiv(program,shadertype,pname,values):pass
 
 
 def glInitShaderSubroutineARB():

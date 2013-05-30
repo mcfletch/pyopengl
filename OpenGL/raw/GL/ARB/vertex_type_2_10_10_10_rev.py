@@ -8,118 +8,118 @@ def _f( function ):
 _p.unpack_constants( """GL_INT_2_10_10_10_REV 0x8D9F""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glVertexP2ui( type,value ):pass
+def glVertexP2ui(type,value):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glVertexP2uiv( type,value ):pass
+def glVertexP2uiv(type,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glVertexP3ui( type,value ):pass
+def glVertexP3ui(type,value):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glVertexP3uiv( type,value ):pass
+def glVertexP3uiv(type,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glVertexP4ui( type,value ):pass
+def glVertexP4ui(type,value):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glVertexP4uiv( type,value ):pass
+def glVertexP4uiv(type,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glTexCoordP1ui( type,coords ):pass
+def glTexCoordP1ui(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glTexCoordP1uiv( type,coords ):pass
+def glTexCoordP1uiv(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glTexCoordP2ui( type,coords ):pass
+def glTexCoordP2ui(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glTexCoordP2uiv( type,coords ):pass
+def glTexCoordP2uiv(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glTexCoordP3ui( type,coords ):pass
+def glTexCoordP3ui(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glTexCoordP3uiv( type,coords ):pass
+def glTexCoordP3uiv(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glTexCoordP4ui( type,coords ):pass
+def glTexCoordP4ui(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glTexCoordP4uiv( type,coords ):pass
+def glTexCoordP4uiv(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint)
-def glMultiTexCoordP1ui( texture,type,coords ):pass
+def glMultiTexCoordP1ui(texture,type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
-def glMultiTexCoordP1uiv( texture,type,coords ):pass
+def glMultiTexCoordP1uiv(texture,type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint)
-def glMultiTexCoordP2ui( texture,type,coords ):pass
+def glMultiTexCoordP2ui(texture,type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
-def glMultiTexCoordP2uiv( texture,type,coords ):pass
+def glMultiTexCoordP2uiv(texture,type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint)
-def glMultiTexCoordP3ui( texture,type,coords ):pass
+def glMultiTexCoordP3ui(texture,type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
-def glMultiTexCoordP3uiv( texture,type,coords ):pass
+def glMultiTexCoordP3uiv(texture,type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint)
-def glMultiTexCoordP4ui( texture,type,coords ):pass
+def glMultiTexCoordP4ui(texture,type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
-def glMultiTexCoordP4uiv( texture,type,coords ):pass
+def glMultiTexCoordP4uiv(texture,type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glNormalP3ui( type,coords ):pass
+def glNormalP3ui(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glNormalP3uiv( type,coords ):pass
+def glNormalP3uiv(type,coords):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glColorP3ui( type,color ):pass
+def glColorP3ui(type,color):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glColorP3uiv( type,color ):pass
+def glColorP3uiv(type,color):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glColorP4ui( type,color ):pass
+def glColorP4ui(type,color):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glColorP4uiv( type,color ):pass
+def glColorP4uiv(type,color):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glSecondaryColorP3ui( type,color ):pass
+def glSecondaryColorP3ui(type,color):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
-def glSecondaryColorP3uiv( type,color ):pass
+def glSecondaryColorP3uiv(type,color):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLboolean,_cs.GLuint)
-def glVertexAttribP1ui( index,type,normalized,value ):pass
+def glVertexAttribP1ui(index,type,normalized,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLboolean,arrays.GLuintArray)
-def glVertexAttribP1uiv( index,type,normalized,value ):pass
+def glVertexAttribP1uiv(index,type,normalized,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLboolean,_cs.GLuint)
-def glVertexAttribP2ui( index,type,normalized,value ):pass
+def glVertexAttribP2ui(index,type,normalized,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLboolean,arrays.GLuintArray)
-def glVertexAttribP2uiv( index,type,normalized,value ):pass
+def glVertexAttribP2uiv(index,type,normalized,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLboolean,_cs.GLuint)
-def glVertexAttribP3ui( index,type,normalized,value ):pass
+def glVertexAttribP3ui(index,type,normalized,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLboolean,arrays.GLuintArray)
-def glVertexAttribP3uiv( index,type,normalized,value ):pass
+def glVertexAttribP3uiv(index,type,normalized,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLboolean,_cs.GLuint)
-def glVertexAttribP4ui( index,type,normalized,value ):pass
+def glVertexAttribP4ui(index,type,normalized,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLboolean,arrays.GLuintArray)
-def glVertexAttribP4uiv( index,type,normalized,value ):pass
+def glVertexAttribP4uiv(index,type,normalized,value):pass
 
 
 def glInitVertexType2101010RevARB():

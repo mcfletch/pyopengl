@@ -16,16 +16,16 @@ GL_MAX_FRAMEBUFFER_LAYERS 0x9317
 GL_MAX_FRAMEBUFFER_SAMPLES 0x9318""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
-def glFramebufferParameteri( target,pname,param ):pass
+def glFramebufferParameteri(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetFramebufferParameteriv( target,pname,params ):pass
+def glGetFramebufferParameteriv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
-def glNamedFramebufferParameteriEXT( framebuffer,pname,param ):pass
+def glNamedFramebufferParameteriEXT(framebuffer,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetNamedFramebufferParameterivEXT( framebuffer,pname,params ):pass
+def glGetNamedFramebufferParameterivEXT(framebuffer,pname,params):pass
 
 
 def glInitFramebufferNoAttachmentsARB():

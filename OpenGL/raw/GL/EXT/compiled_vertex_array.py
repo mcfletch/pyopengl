@@ -11,10 +11,10 @@ glget.addGLGetConstant( GL_ARRAY_ELEMENT_LOCK_FIRST_EXT, (1,) )
 glget.addGLGetConstant( GL_ARRAY_ELEMENT_LOCK_COUNT_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei)
-def glLockArraysEXT( first,count ):pass
+def glLockArraysEXT(first,count):pass
 @_f
 @_p.types(None,)
-def glUnlockArraysEXT(  ):pass
+def glUnlockArraysEXT():pass
 
 
 def glInitCompiledVertexArrayEXT():

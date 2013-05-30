@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(ctypes.c_void_p,_cs.GLuint)
-def glMapObjectBufferATI( buffer ):pass
+def glMapObjectBufferATI(buffer):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glUnmapObjectBufferATI( buffer ):pass
+def glUnmapObjectBufferATI(buffer):pass
 
 
 def glInitMapObjectBufferATI():

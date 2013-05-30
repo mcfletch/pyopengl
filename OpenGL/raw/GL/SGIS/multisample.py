@@ -32,10 +32,10 @@ glget.addGLGetConstant( GL_SAMPLE_MASK_INVERT_SGIS, (1,) )
 glget.addGLGetConstant( GL_SAMPLE_PATTERN_SGIS, (1,) )
 @_f
 @_p.types(None,_cs.GLclampf,_cs.GLboolean)
-def glSampleMaskSGIS( value,invert ):pass
+def glSampleMaskSGIS(value,invert):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glSamplePatternSGIS( pattern ):pass
+def glSamplePatternSGIS(pattern):pass
 
 
 def glInitMultisampleSGIS():

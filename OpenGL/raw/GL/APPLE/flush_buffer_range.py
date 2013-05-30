@@ -9,10 +9,10 @@ _p.unpack_constants( """GL_BUFFER_SERIALIZED_MODIFY_APPLE 0x8A12
 GL_BUFFER_FLUSHING_UNMAP_APPLE 0x8A13""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
-def glBufferParameteriAPPLE( target,pname,param ):pass
+def glBufferParameteriAPPLE(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr)
-def glFlushMappedBufferRangeAPPLE( target,offset,size ):pass
+def glFlushMappedBufferRangeAPPLE(target,offset,size):pass
 
 
 def glInitFlushBufferRangeAPPLE():

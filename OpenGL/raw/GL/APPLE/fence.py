@@ -9,28 +9,28 @@ _p.unpack_constants( """GL_DRAW_PIXELS_APPLE 0x8A0A
 GL_FENCE_APPLE 0x8A0B""", globals())
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenFencesAPPLE( n,fences ):pass
+def glGenFencesAPPLE(n,fences):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteFencesAPPLE( n,fences ):pass
+def glDeleteFencesAPPLE(n,fences):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glSetFenceAPPLE( fence ):pass
+def glSetFenceAPPLE(fence):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsFenceAPPLE( fence ):pass
+def glIsFenceAPPLE(fence):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glTestFenceAPPLE( fence ):pass
+def glTestFenceAPPLE(fence):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glFinishFenceAPPLE( fence ):pass
+def glFinishFenceAPPLE(fence):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLenum,_cs.GLuint)
-def glTestObjectAPPLE( object,name ):pass
+def glTestObjectAPPLE(object,name):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glFinishObjectAPPLE( object,name ):pass
+def glFinishObjectAPPLE(object,name):pass
 
 
 def glInitFenceAPPLE():

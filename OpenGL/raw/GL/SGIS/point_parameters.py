@@ -11,10 +11,10 @@ GL_POINT_FADE_THRESHOLD_SIZE_SGIS 0x8128
 GL_DISTANCE_ATTENUATION_SGIS 0x8129""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glPointParameterfSGIS( pname,param ):pass
+def glPointParameterfSGIS(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glPointParameterfvSGIS( pname,params ):pass
+def glPointParameterfvSGIS(pname,params):pass
 
 
 def glInitPointParametersSGIS():

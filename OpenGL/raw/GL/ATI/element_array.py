@@ -11,13 +11,13 @@ GL_ELEMENT_ARRAY_POINTER_ATI 0x876A""", globals())
 glget.addGLGetConstant( GL_ELEMENT_ARRAY_TYPE_ATI, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,ctypes.c_void_p)
-def glElementPointerATI( type,pointer ):pass
+def glElementPointerATI(type,pointer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei)
-def glDrawElementArrayATI( mode,count ):pass
+def glDrawElementArrayATI(mode,count):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei)
-def glDrawRangeElementArrayATI( mode,start,end,count ):pass
+def glDrawRangeElementArrayATI(mode,start,end,count):pass
 
 
 def glInitElementArrayATI():

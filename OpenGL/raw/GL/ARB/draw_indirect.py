@@ -9,10 +9,10 @@ _p.unpack_constants( """GL_DRAW_INDIRECT_BUFFER 0x8F3F
 GL_DRAW_INDIRECT_BUFFER_BINDING 0x8F43""", globals())
 @_f
 @_p.types(None,_cs.GLenum,ctypes.c_void_p)
-def glDrawArraysIndirect( mode,indirect ):pass
+def glDrawArraysIndirect(mode,indirect):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glDrawElementsIndirect( mode,type,indirect ):pass
+def glDrawElementsIndirect(mode,type,indirect):pass
 
 
 def glInitDrawIndirectARB():

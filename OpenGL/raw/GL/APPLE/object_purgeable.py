@@ -13,13 +13,13 @@ GL_UNDEFINED_APPLE 0x8A1C
 GL_PURGEABLE_APPLE 0x8A1D""", globals())
 @_f
 @_p.types(_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLenum)
-def glObjectPurgeableAPPLE( objectType,name,option ):pass
+def glObjectPurgeableAPPLE(objectType,name,option):pass
 @_f
 @_p.types(_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLenum)
-def glObjectUnpurgeableAPPLE( objectType,name,option ):pass
+def glObjectUnpurgeableAPPLE(objectType,name,option):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetObjectParameterivAPPLE( objectType,name,pname,params ):pass
+def glGetObjectParameterivAPPLE(objectType,name,pname,params):pass
 
 
 def glInitObjectPurgeableAPPLE():

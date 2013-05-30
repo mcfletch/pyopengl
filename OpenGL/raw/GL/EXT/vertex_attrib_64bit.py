@@ -19,37 +19,37 @@ GL_DOUBLE_MAT4x2_EXT 0x8F4D
 GL_DOUBLE_MAT4x3_EXT 0x8F4E""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble)
-def glVertexAttribL1dEXT( index,x ):pass
+def glVertexAttribL1dEXT(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttribL2dEXT( index,x,y ):pass
+def glVertexAttribL2dEXT(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttribL3dEXT( index,x,y,z ):pass
+def glVertexAttribL3dEXT(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttribL4dEXT( index,x,y,z,w ):pass
+def glVertexAttribL4dEXT(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttribL1dvEXT( index,v ):pass
+def glVertexAttribL1dvEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttribL2dvEXT( index,v ):pass
+def glVertexAttribL2dvEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttribL3dvEXT( index,v ):pass
+def glVertexAttribL3dvEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttribL4dvEXT( index,v ):pass
+def glVertexAttribL4dvEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glVertexAttribLPointerEXT( index,size,type,stride,pointer ):pass
+def glVertexAttribLPointerEXT(index,size,type,stride,pointer):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLdoubleArray)
-def glGetVertexAttribLdvEXT( index,pname,params ):pass
+def glGetVertexAttribLdvEXT(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
-def glVertexArrayVertexAttribLOffsetEXT( vaobj,buffer,index,size,type,stride,offset ):pass
+def glVertexArrayVertexAttribLOffsetEXT(vaobj,buffer,index,size,type,stride,offset):pass
 
 
 def glInitVertexAttrib64BitEXT():

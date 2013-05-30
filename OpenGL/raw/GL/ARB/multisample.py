@@ -24,7 +24,7 @@ glget.addGLGetConstant( GL_SAMPLE_COVERAGE_VALUE_ARB, (1,) )
 glget.addGLGetConstant( GL_SAMPLE_COVERAGE_INVERT_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLboolean)
-def glSampleCoverageARB( value,invert ):pass
+def glSampleCoverageARB(value,invert):pass
 
 
 def glInitMultisampleARB():

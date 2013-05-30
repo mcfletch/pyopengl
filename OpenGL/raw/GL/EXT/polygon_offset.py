@@ -13,7 +13,7 @@ glget.addGLGetConstant( GL_POLYGON_OFFSET_FACTOR_EXT, (1,) )
 glget.addGLGetConstant( GL_POLYGON_OFFSET_BIAS_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat)
-def glPolygonOffsetEXT( factor,bias ):pass
+def glPolygonOffsetEXT(factor,bias):pass
 
 
 def glInitPolygonOffsetEXT():

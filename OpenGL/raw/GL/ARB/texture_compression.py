@@ -21,25 +21,25 @@ glget.addGLGetConstant( GL_NUM_COMPRESSED_TEXTURE_FORMATS_ARB, (1,) )
 glget.addGLGetConstant( GL_COMPRESSED_TEXTURE_FORMATS_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexImage3DARB( target,level,internalformat,width,height,depth,border,imageSize,data ):pass
+def glCompressedTexImage3DARB(target,level,internalformat,width,height,depth,border,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexImage2DARB( target,level,internalformat,width,height,border,imageSize,data ):pass
+def glCompressedTexImage2DARB(target,level,internalformat,width,height,border,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLint,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexImage1DARB( target,level,internalformat,width,border,imageSize,data ):pass
+def glCompressedTexImage1DARB(target,level,internalformat,width,border,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexSubImage3DARB( target,level,xoffset,yoffset,zoffset,width,height,depth,format,imageSize,data ):pass
+def glCompressedTexSubImage3DARB(target,level,xoffset,yoffset,zoffset,width,height,depth,format,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexSubImage2DARB( target,level,xoffset,yoffset,width,height,format,imageSize,data ):pass
+def glCompressedTexSubImage2DARB(target,level,xoffset,yoffset,width,height,format,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexSubImage1DARB( target,level,xoffset,width,format,imageSize,data ):pass
+def glCompressedTexSubImage1DARB(target,level,xoffset,width,format,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,ctypes.c_void_p)
-def glGetCompressedTexImageARB( target,level,img ):pass
+def glGetCompressedTexImageARB(target,level,img):pass
 
 
 def glInitTextureCompressionARB():

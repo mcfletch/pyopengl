@@ -8,52 +8,52 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble)
-def glWindowPos2dARB( x,y ):pass
+def glWindowPos2dARB(x,y):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glWindowPos2dvARB( v ):pass
+def glWindowPos2dvARB(v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat)
-def glWindowPos2fARB( x,y ):pass
+def glWindowPos2fARB(x,y):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glWindowPos2fvARB( v ):pass
+def glWindowPos2fvARB(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint)
-def glWindowPos2iARB( x,y ):pass
+def glWindowPos2iARB(x,y):pass
 @_f
 @_p.types(None,arrays.GLintArray)
-def glWindowPos2ivARB( v ):pass
+def glWindowPos2ivARB(v):pass
 @_f
 @_p.types(None,_cs.GLshort,_cs.GLshort)
-def glWindowPos2sARB( x,y ):pass
+def glWindowPos2sARB(x,y):pass
 @_f
 @_p.types(None,arrays.GLshortArray)
-def glWindowPos2svARB( v ):pass
+def glWindowPos2svARB(v):pass
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glWindowPos3dARB( x,y,z ):pass
+def glWindowPos3dARB(x,y,z):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glWindowPos3dvARB( v ):pass
+def glWindowPos3dvARB(v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glWindowPos3fARB( x,y,z ):pass
+def glWindowPos3fARB(x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glWindowPos3fvARB( v ):pass
+def glWindowPos3fvARB(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint)
-def glWindowPos3iARB( x,y,z ):pass
+def glWindowPos3iARB(x,y,z):pass
 @_f
 @_p.types(None,arrays.GLintArray)
-def glWindowPos3ivARB( v ):pass
+def glWindowPos3ivARB(v):pass
 @_f
 @_p.types(None,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glWindowPos3sARB( x,y,z ):pass
+def glWindowPos3sARB(x,y,z):pass
 @_f
 @_p.types(None,arrays.GLshortArray)
-def glWindowPos3svARB( v ):pass
+def glWindowPos3svARB(v):pass
 
 
 def glInitWindowPosARB():

@@ -27,58 +27,58 @@ GL_FRAGMENT_LIGHT6_SGIX 0x8412
 GL_FRAGMENT_LIGHT7_SGIX 0x8413""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
-def glFragmentColorMaterialSGIX( face,mode ):pass
+def glFragmentColorMaterialSGIX(face,mode):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
-def glFragmentLightfSGIX( light,pname,param ):pass
+def glFragmentLightfSGIX(light,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glFragmentLightfvSGIX( light,pname,params ):pass
+def glFragmentLightfvSGIX(light,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
-def glFragmentLightiSGIX( light,pname,param ):pass
+def glFragmentLightiSGIX(light,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glFragmentLightivSGIX( light,pname,params ):pass
+def glFragmentLightivSGIX(light,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glFragmentLightModelfSGIX( pname,param ):pass
+def glFragmentLightModelfSGIX(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glFragmentLightModelfvSGIX( pname,params ):pass
+def glFragmentLightModelfvSGIX(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glFragmentLightModeliSGIX( pname,param ):pass
+def glFragmentLightModeliSGIX(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glFragmentLightModelivSGIX( pname,params ):pass
+def glFragmentLightModelivSGIX(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
-def glFragmentMaterialfSGIX( face,pname,param ):pass
+def glFragmentMaterialfSGIX(face,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glFragmentMaterialfvSGIX( face,pname,params ):pass
+def glFragmentMaterialfvSGIX(face,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
-def glFragmentMaterialiSGIX( face,pname,param ):pass
+def glFragmentMaterialiSGIX(face,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glFragmentMaterialivSGIX( face,pname,params ):pass
+def glFragmentMaterialivSGIX(face,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetFragmentLightfvSGIX( light,pname,params ):pass
+def glGetFragmentLightfvSGIX(light,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetFragmentLightivSGIX( light,pname,params ):pass
+def glGetFragmentLightivSGIX(light,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetFragmentMaterialfvSGIX( face,pname,params ):pass
+def glGetFragmentMaterialfvSGIX(face,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetFragmentMaterialivSGIX( face,pname,params ):pass
+def glGetFragmentMaterialivSGIX(face,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glLightEnviSGIX( pname,param ):pass
+def glLightEnviSGIX(pname,param):pass
 
 
 def glInitFragmentLightingSGIX():

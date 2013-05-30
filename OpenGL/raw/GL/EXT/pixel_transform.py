@@ -18,22 +18,22 @@ glget.addGLGetConstant( GL_PIXEL_TRANSFORM_2D_STACK_DEPTH_EXT, (1,) )
 glget.addGLGetConstant( GL_MAX_PIXEL_TRANSFORM_2D_STACK_DEPTH_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
-def glPixelTransformParameteriEXT( target,pname,param ):pass
+def glPixelTransformParameteriEXT(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
-def glPixelTransformParameterfEXT( target,pname,param ):pass
+def glPixelTransformParameterfEXT(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glPixelTransformParameterivEXT( target,pname,params ):pass
+def glPixelTransformParameterivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glPixelTransformParameterfvEXT( target,pname,params ):pass
+def glPixelTransformParameterfvEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetPixelTransformParameterivEXT( target,pname,params ):pass
+def glGetPixelTransformParameterivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetPixelTransformParameterfvEXT( target,pname,params ):pass
+def glGetPixelTransformParameterfvEXT(target,pname,params):pass
 
 
 def glInitPixelTransformEXT():

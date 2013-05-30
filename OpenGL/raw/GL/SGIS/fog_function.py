@@ -10,10 +10,10 @@ GL_FOG_FUNC_POINTS_SGIS 0x812B
 GL_MAX_FOG_FUNC_POINTS_SGIS 0x812C""", globals())
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLfloatArray)
-def glFogFuncSGIS( n,points ):pass
+def glFogFuncSGIS(n,points):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glGetFogFuncSGIS( points ):pass
+def glGetFogFuncSGIS(points):pass
 
 
 def glInitFogFunctionSGIS():

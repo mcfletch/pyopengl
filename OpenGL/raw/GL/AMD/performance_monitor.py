@@ -14,37 +14,37 @@ GL_PERFMON_RESULT_SIZE_AMD 0x8BC5
 GL_PERFMON_RESULT_AMD 0x8BC6""", globals())
 @_f
 @_p.types(None,arrays.GLintArray,_cs.GLsizei,arrays.GLuintArray)
-def glGetPerfMonitorGroupsAMD( numGroups,groupsSize,groups ):pass
+def glGetPerfMonitorGroupsAMD(numGroups,groupsSize,groups):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray,arrays.GLintArray,_cs.GLsizei,arrays.GLuintArray)
-def glGetPerfMonitorCountersAMD( group,numCounters,maxActiveCounters,counterSize,counters ):pass
+def glGetPerfMonitorCountersAMD(group,numCounters,maxActiveCounters,counterSize,counters):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetPerfMonitorGroupStringAMD( group,bufSize,length,groupString ):pass
+def glGetPerfMonitorGroupStringAMD(group,bufSize,length,groupString):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetPerfMonitorCounterStringAMD( group,counter,bufSize,length,counterString ):pass
+def glGetPerfMonitorCounterStringAMD(group,counter,bufSize,length,counterString):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,ctypes.c_void_p)
-def glGetPerfMonitorCounterInfoAMD( group,counter,pname,data ):pass
+def glGetPerfMonitorCounterInfoAMD(group,counter,pname,data):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenPerfMonitorsAMD( n,monitors ):pass
+def glGenPerfMonitorsAMD(n,monitors):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeletePerfMonitorsAMD( n,monitors ):pass
+def glDeletePerfMonitorsAMD(n,monitors):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLboolean,_cs.GLuint,_cs.GLint,arrays.GLuintArray)
-def glSelectPerfMonitorCountersAMD( monitor,enable,group,numCounters,counterList ):pass
+def glSelectPerfMonitorCountersAMD(monitor,enable,group,numCounters,counterList):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glBeginPerfMonitorAMD( monitor ):pass
+def glBeginPerfMonitorAMD(monitor):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glEndPerfMonitorAMD( monitor ):pass
+def glEndPerfMonitorAMD(monitor):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray,arrays.GLintArray)
-def glGetPerfMonitorCounterDataAMD( monitor,pname,dataSize,data,bytesWritten ):pass
+def glGetPerfMonitorCounterDataAMD(monitor,pname,dataSize,data,bytesWritten):pass
 
 
 def glInitPerformanceMonitorAMD():

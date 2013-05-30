@@ -13,34 +13,34 @@ GL_VIEWPORT_INDEX_PROVOKING_VERTEX 0x825F
 GL_UNDEFINED_VERTEX 0x8260""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glViewportArrayv( first,count,v ):pass
+def glViewportArrayv(first,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glViewportIndexedf( index,x,y,w,h ):pass
+def glViewportIndexedf(index,x,y,w,h):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glViewportIndexedfv( index,v ):pass
+def glViewportIndexedfv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLintArray)
-def glScissorArrayv( first,count,v ):pass
+def glScissorArrayv(first,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glScissorIndexed( index,left,bottom,width,height ):pass
+def glScissorIndexed(index,left,bottom,width,height):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glScissorIndexedv( index,v ):pass
+def glScissorIndexedv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLdoubleArray)
-def glDepthRangeArrayv( first,count,v ):pass
+def glDepthRangeArrayv(first,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble)
-def glDepthRangeIndexed( index,n,f ):pass
+def glDepthRangeIndexed(index,n,f):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glGetFloati_v( target,index,data ):pass
+def glGetFloati_v(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLdoubleArray)
-def glGetDoublei_v( target,index,data ):pass
+def glGetDoublei_v(target,index,data):pass
 
 
 def glInitViewportArrayARB():

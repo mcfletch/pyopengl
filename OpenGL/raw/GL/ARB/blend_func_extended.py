@@ -11,10 +11,10 @@ GL_ONE_MINUS_SRC1_ALPHA 0x88FB
 GL_MAX_DUAL_SOURCE_DRAW_BUFFERS 0x88FC""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,arrays.GLcharArray)
-def glBindFragDataLocationIndexed( program,colorNumber,index,name ):pass
+def glBindFragDataLocationIndexed(program,colorNumber,index,name):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,arrays.GLcharArray)
-def glGetFragDataIndex( program,name ):pass
+def glGetFragDataIndex(program,name):pass
 
 
 def glInitBlendFuncExtendedARB():

@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,ctypes.POINTER(_cs.void),_cs.GLsizei,_cs.GLsizei)
-def glMultiDrawArraysIndirect( mode,indirect,drawcount,stride ):pass
+def glMultiDrawArraysIndirect(mode,indirect,drawcount,stride):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.void),_cs.GLsizei,_cs.GLsizei)
-def glMultiDrawElementsIndirect( mode,type,indirect,drawcount,stride ):pass
+def glMultiDrawElementsIndirect(mode,type,indirect,drawcount,stride):pass
 
 
 def glInitMultiDrawIndirectARB():

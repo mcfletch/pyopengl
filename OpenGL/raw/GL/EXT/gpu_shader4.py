@@ -32,37 +32,37 @@ GL_UNSIGNED_INT_SAMPLER_2D_ARRAY_EXT 0x8DD7
 GL_UNSIGNED_INT_SAMPLER_BUFFER_EXT 0x8DD8""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,arrays.GLuintArray)
-def glGetUniformuivEXT( program,location,params ):pass
+def glGetUniformuivEXT(program,location,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,arrays.GLcharArray)
-def glBindFragDataLocationEXT( program,color,name ):pass
+def glBindFragDataLocationEXT(program,color,name):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,arrays.GLcharArray)
-def glGetFragDataLocationEXT( program,name ):pass
+def glGetFragDataLocationEXT(program,name):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint)
-def glUniform1uiEXT( location,v0 ):pass
+def glUniform1uiEXT(location,v0):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint,_cs.GLuint)
-def glUniform2uiEXT( location,v0,v1 ):pass
+def glUniform2uiEXT(location,v0,v1):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glUniform3uiEXT( location,v0,v1,v2 ):pass
+def glUniform3uiEXT(location,v0,v1,v2):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glUniform4uiEXT( location,v0,v1,v2,v3 ):pass
+def glUniform4uiEXT(location,v0,v1,v2,v3):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuintArray)
-def glUniform1uivEXT( location,count,value ):pass
+def glUniform1uivEXT(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuintArray)
-def glUniform2uivEXT( location,count,value ):pass
+def glUniform2uivEXT(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuintArray)
-def glUniform3uivEXT( location,count,value ):pass
+def glUniform3uivEXT(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuintArray)
-def glUniform4uivEXT( location,count,value ):pass
+def glUniform4uivEXT(location,count,value):pass
 
 
 def glInitGpuShader4EXT():

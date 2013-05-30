@@ -22,10 +22,10 @@ glget.addGLGetConstant( GL_TEXTURE_3D_EXT, (1,) )
 glget.addGLGetConstant( GL_MAX_3D_TEXTURE_SIZE_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glTexImage3DEXT( target,level,internalformat,width,height,depth,border,format,type,pixels ):pass
+def glTexImage3DEXT(target,level,internalformat,width,height,depth,border,format,type,pixels):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glTexSubImage3DEXT( target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels ):pass
+def glTexSubImage3DEXT(target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels):pass
 
 
 def glInitTexture3DEXT():

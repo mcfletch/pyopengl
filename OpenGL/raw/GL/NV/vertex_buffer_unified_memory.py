@@ -40,40 +40,40 @@ glget.addGLGetConstant( GL_FOG_COORD_ARRAY_LENGTH_NV, (1,) )
 glget.addGLGetConstant( GL_ELEMENT_ARRAY_LENGTH_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint64EXT,_cs.GLsizeiptr)
-def glBufferAddressRangeNV( pname,index,address,length ):pass
+def glBufferAddressRangeNV(pname,index,address,length):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei)
-def glVertexFormatNV( size,type,stride ):pass
+def glVertexFormatNV(size,type,stride):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei)
-def glNormalFormatNV( type,stride ):pass
+def glNormalFormatNV(type,stride):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei)
-def glColorFormatNV( size,type,stride ):pass
+def glColorFormatNV(size,type,stride):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei)
-def glIndexFormatNV( type,stride ):pass
+def glIndexFormatNV(type,stride):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei)
-def glTexCoordFormatNV( size,type,stride ):pass
+def glTexCoordFormatNV(size,type,stride):pass
 @_f
 @_p.types(None,_cs.GLsizei)
-def glEdgeFlagFormatNV( stride ):pass
+def glEdgeFlagFormatNV(stride):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei)
-def glSecondaryColorFormatNV( size,type,stride ):pass
+def glSecondaryColorFormatNV(size,type,stride):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei)
-def glFogCoordFormatNV( type,stride ):pass
+def glFogCoordFormatNV(type,stride):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLsizei)
-def glVertexAttribFormatNV( index,size,type,normalized,stride ):pass
+def glVertexAttribFormatNV(index,size,type,normalized,stride):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei)
-def glVertexAttribIFormatNV( index,size,type,stride ):pass
+def glVertexAttribIFormatNV(index,size,type,stride):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLuint64Array)
-def glGetIntegerui64i_vNV( value,index,result ):pass
+def glGetIntegerui64i_vNV(value,index,result):pass
 
 
 def glInitVertexBufferUnifiedMemoryNV():

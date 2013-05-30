@@ -9,16 +9,16 @@ _p.unpack_constants( """GL_VERTEX_ARRAY_BINDING_APPLE 0x85B5""", globals())
 glget.addGLGetConstant( GL_VERTEX_ARRAY_BINDING_APPLE, (1,) )
 @_f
 @_p.types(None,_cs.GLuint)
-def glBindVertexArrayAPPLE( array ):pass
+def glBindVertexArrayAPPLE(array):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteVertexArraysAPPLE( n,arrays ):pass
+def glDeleteVertexArraysAPPLE(n,arrays):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenVertexArraysAPPLE( n,arrays ):pass
+def glGenVertexArraysAPPLE(n,arrays):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsVertexArrayAPPLE( array ):pass
+def glIsVertexArrayAPPLE(array):pass
 
 
 def glInitVertexArrayObjectAPPLE():

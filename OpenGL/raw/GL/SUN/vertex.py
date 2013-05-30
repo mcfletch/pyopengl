@@ -8,124 +8,124 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLfloat,_cs.GLfloat)
-def glColor4ubVertex2fSUN( r,g,b,a,x,y ):pass
+def glColor4ubVertex2fSUN(r,g,b,a,x,y):pass
 @_f
 @_p.types(None,arrays.GLubyteArray,arrays.GLfloatArray)
-def glColor4ubVertex2fvSUN( c,v ):pass
+def glColor4ubVertex2fvSUN(c,v):pass
 @_f
 @_p.types(None,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glColor4ubVertex3fSUN( r,g,b,a,x,y,z ):pass
+def glColor4ubVertex3fSUN(r,g,b,a,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLubyteArray,arrays.GLfloatArray)
-def glColor4ubVertex3fvSUN( c,v ):pass
+def glColor4ubVertex3fvSUN(c,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glColor3fVertex3fSUN( r,g,b,x,y,z ):pass
+def glColor3fVertex3fSUN(r,g,b,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLfloatArray)
-def glColor3fVertex3fvSUN( c,v ):pass
+def glColor3fVertex3fvSUN(c,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glNormal3fVertex3fSUN( nx,ny,nz,x,y,z ):pass
+def glNormal3fVertex3fSUN(nx,ny,nz,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLfloatArray)
-def glNormal3fVertex3fvSUN( n,v ):pass
+def glNormal3fVertex3fvSUN(n,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glColor4fNormal3fVertex3fSUN( r,g,b,a,nx,ny,nz,x,y,z ):pass
+def glColor4fNormal3fVertex3fSUN(r,g,b,a,nx,ny,nz,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glColor4fNormal3fVertex3fvSUN( c,n,v ):pass
+def glColor4fNormal3fVertex3fvSUN(c,n,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glTexCoord2fVertex3fSUN( s,t,x,y,z ):pass
+def glTexCoord2fVertex3fSUN(s,t,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLfloatArray)
-def glTexCoord2fVertex3fvSUN( tc,v ):pass
+def glTexCoord2fVertex3fvSUN(tc,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glTexCoord4fVertex4fSUN( s,t,p,q,x,y,z,w ):pass
+def glTexCoord4fVertex4fSUN(s,t,p,q,x,y,z,w):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLfloatArray)
-def glTexCoord4fVertex4fvSUN( tc,v ):pass
+def glTexCoord4fVertex4fvSUN(tc,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glTexCoord2fColor4ubVertex3fSUN( s,t,r,g,b,a,x,y,z ):pass
+def glTexCoord2fColor4ubVertex3fSUN(s,t,r,g,b,a,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLubyteArray,arrays.GLfloatArray)
-def glTexCoord2fColor4ubVertex3fvSUN( tc,c,v ):pass
+def glTexCoord2fColor4ubVertex3fvSUN(tc,c,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glTexCoord2fColor3fVertex3fSUN( s,t,r,g,b,x,y,z ):pass
+def glTexCoord2fColor3fVertex3fSUN(s,t,r,g,b,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glTexCoord2fColor3fVertex3fvSUN( tc,c,v ):pass
+def glTexCoord2fColor3fVertex3fvSUN(tc,c,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glTexCoord2fNormal3fVertex3fSUN( s,t,nx,ny,nz,x,y,z ):pass
+def glTexCoord2fNormal3fVertex3fSUN(s,t,nx,ny,nz,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glTexCoord2fNormal3fVertex3fvSUN( tc,n,v ):pass
+def glTexCoord2fNormal3fVertex3fvSUN(tc,n,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glTexCoord2fColor4fNormal3fVertex3fSUN( s,t,r,g,b,a,nx,ny,nz,x,y,z ):pass
+def glTexCoord2fColor4fNormal3fVertex3fSUN(s,t,r,g,b,a,nx,ny,nz,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glTexCoord2fColor4fNormal3fVertex3fvSUN( tc,c,n,v ):pass
+def glTexCoord2fColor4fNormal3fVertex3fvSUN(tc,c,n,v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glTexCoord4fColor4fNormal3fVertex4fSUN( s,t,p,q,r,g,b,a,nx,ny,nz,x,y,z,w ):pass
+def glTexCoord4fColor4fNormal3fVertex4fSUN(s,t,p,q,r,g,b,a,nx,ny,nz,x,y,z,w):pass
 @_f
 @_p.types(None,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glTexCoord4fColor4fNormal3fVertex4fvSUN( tc,c,n,v ):pass
+def glTexCoord4fColor4fNormal3fVertex4fvSUN(tc,c,n,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glReplacementCodeuiVertex3fSUN( rc,x,y,z ):pass
+def glReplacementCodeuiVertex3fSUN(rc,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLfloatArray)
-def glReplacementCodeuiVertex3fvSUN( rc,v ):pass
+def glReplacementCodeuiVertex3fvSUN(rc,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glReplacementCodeuiColor4ubVertex3fSUN( rc,r,g,b,a,x,y,z ):pass
+def glReplacementCodeuiColor4ubVertex3fSUN(rc,r,g,b,a,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLubyteArray,arrays.GLfloatArray)
-def glReplacementCodeuiColor4ubVertex3fvSUN( rc,c,v ):pass
+def glReplacementCodeuiColor4ubVertex3fvSUN(rc,c,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glReplacementCodeuiColor3fVertex3fSUN( rc,r,g,b,x,y,z ):pass
+def glReplacementCodeuiColor3fVertex3fSUN(rc,r,g,b,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glReplacementCodeuiColor3fVertex3fvSUN( rc,c,v ):pass
+def glReplacementCodeuiColor3fVertex3fvSUN(rc,c,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glReplacementCodeuiNormal3fVertex3fSUN( rc,nx,ny,nz,x,y,z ):pass
+def glReplacementCodeuiNormal3fVertex3fSUN(rc,nx,ny,nz,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glReplacementCodeuiNormal3fVertex3fvSUN( rc,n,v ):pass
+def glReplacementCodeuiNormal3fVertex3fvSUN(rc,n,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glReplacementCodeuiColor4fNormal3fVertex3fSUN( rc,r,g,b,a,nx,ny,nz,x,y,z ):pass
+def glReplacementCodeuiColor4fNormal3fVertex3fSUN(rc,r,g,b,a,nx,ny,nz,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glReplacementCodeuiColor4fNormal3fVertex3fvSUN( rc,c,n,v ):pass
+def glReplacementCodeuiColor4fNormal3fVertex3fvSUN(rc,c,n,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glReplacementCodeuiTexCoord2fVertex3fSUN( rc,s,t,x,y,z ):pass
+def glReplacementCodeuiTexCoord2fVertex3fSUN(rc,s,t,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glReplacementCodeuiTexCoord2fVertex3fvSUN( rc,tc,v ):pass
+def glReplacementCodeuiTexCoord2fVertex3fvSUN(rc,tc,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN( rc,s,t,nx,ny,nz,x,y,z ):pass
+def glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN(rc,s,t,nx,ny,nz,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN( rc,tc,n,v ):pass
+def glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN(rc,tc,n,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN( rc,s,t,r,g,b,a,nx,ny,nz,x,y,z ):pass
+def glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN(rc,s,t,r,g,b,a,nx,ny,nz,x,y,z):pass
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN( rc,tc,c,n,v ):pass
+def glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN(rc,tc,c,n,v):pass
 
 
 def glInitVertexSUN():

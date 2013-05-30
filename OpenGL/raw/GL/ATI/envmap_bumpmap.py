@@ -15,16 +15,16 @@ GL_BUMP_ENVMAP_ATI 0x877B
 GL_BUMP_TARGET_ATI 0x877C""", globals())
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glTexBumpParameterivATI( pname,param ):pass
+def glTexBumpParameterivATI(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glTexBumpParameterfvATI( pname,param ):pass
+def glTexBumpParameterfvATI(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glGetTexBumpParameterivATI( pname,param ):pass
+def glGetTexBumpParameterivATI(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glGetTexBumpParameterfvATI( pname,param ):pass
+def glGetTexBumpParameterfvATI(pname,param):pass
 
 
 def glInitEnvmapBumpmapATI():

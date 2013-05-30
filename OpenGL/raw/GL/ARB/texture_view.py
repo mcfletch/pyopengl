@@ -12,7 +12,7 @@ GL_TEXTURE_VIEW_NUM_LAYERS 0x82DE
 GL_TEXTURE_IMMUTABLE_LEVELS 0x82DF""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glTextureView( texture,target,origtexture,internalformat,minlevel,numlevels,minlayer,numlayers ):pass
+def glTextureView(texture,target,origtexture,internalformat,minlevel,numlevels,minlayer,numlayers):pass
 
 
 def glInitTextureViewARB():

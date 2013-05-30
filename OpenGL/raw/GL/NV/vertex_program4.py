@@ -8,73 +8,73 @@ def _f( function ):
 _p.unpack_constants( """GL_VERTEX_ATTRIB_ARRAY_INTEGER_NV 0x88FD""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint)
-def glVertexAttribI1iEXT( index,x ):pass
+def glVertexAttribI1iEXT(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint)
-def glVertexAttribI2iEXT( index,x,y ):pass
+def glVertexAttribI2iEXT(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glVertexAttribI3iEXT( index,x,y,z ):pass
+def glVertexAttribI3iEXT(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glVertexAttribI4iEXT( index,x,y,z,w ):pass
+def glVertexAttribI4iEXT(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint)
-def glVertexAttribI1uiEXT( index,x ):pass
+def glVertexAttribI1uiEXT(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glVertexAttribI2uiEXT( index,x,y ):pass
+def glVertexAttribI2uiEXT(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glVertexAttribI3uiEXT( index,x,y,z ):pass
+def glVertexAttribI3uiEXT(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glVertexAttribI4uiEXT( index,x,y,z,w ):pass
+def glVertexAttribI4uiEXT(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttribI1ivEXT( index,v ):pass
+def glVertexAttribI1ivEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttribI2ivEXT( index,v ):pass
+def glVertexAttribI2ivEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttribI3ivEXT( index,v ):pass
+def glVertexAttribI3ivEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttribI4ivEXT( index,v ):pass
+def glVertexAttribI4ivEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttribI1uivEXT( index,v ):pass
+def glVertexAttribI1uivEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttribI2uivEXT( index,v ):pass
+def glVertexAttribI2uivEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttribI3uivEXT( index,v ):pass
+def glVertexAttribI3uivEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttribI4uivEXT( index,v ):pass
+def glVertexAttribI4uivEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLbyteArray)
-def glVertexAttribI4bvEXT( index,v ):pass
+def glVertexAttribI4bvEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttribI4svEXT( index,v ):pass
+def glVertexAttribI4svEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
-def glVertexAttribI4ubvEXT( index,v ):pass
+def glVertexAttribI4ubvEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLushortArray)
-def glVertexAttribI4usvEXT( index,v ):pass
+def glVertexAttribI4usvEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glVertexAttribIPointerEXT( index,size,type,stride,pointer ):pass
+def glVertexAttribIPointerEXT(index,size,type,stride,pointer):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetVertexAttribIivEXT( index,pname,params ):pass
+def glGetVertexAttribIivEXT(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuintArray)
-def glGetVertexAttribIuivEXT( index,pname,params ):pass
+def glGetVertexAttribIuivEXT(index,pname,params):pass
 
 
 def glInitVertexProgram4NV():

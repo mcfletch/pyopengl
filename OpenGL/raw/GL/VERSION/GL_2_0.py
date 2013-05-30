@@ -131,281 +131,281 @@ glget.addGLGetConstant( GL_POINT_SPRITE, (1,) )
 glget.addGLGetConstant( GL_MAX_TEXTURE_COORDS, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
-def glBlendEquationSeparate( modeRGB,modeAlpha ):pass
+def glBlendEquationSeparate(modeRGB,modeAlpha):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDrawBuffers( n,bufs ):pass
+def glDrawBuffers(n,bufs):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glStencilOpSeparate( face,sfail,dpfail,dppass ):pass
+def glStencilOpSeparate(face,sfail,dpfail,dppass):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLuint)
-def glStencilFuncSeparate( face,func,ref,mask ):pass
+def glStencilFuncSeparate(face,func,ref,mask):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glStencilMaskSeparate( face,mask ):pass
+def glStencilMaskSeparate(face,mask):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint)
-def glAttachShader( program,shader ):pass
+def glAttachShader(program,shader):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,arrays.GLcharArray)
-def glBindAttribLocation( program,index,name ):pass
+def glBindAttribLocation(program,index,name):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glCompileShader( shader ):pass
+def glCompileShader(shader):pass
 @_f
 @_p.types(_cs.GLuint,)
-def glCreateProgram(  ):pass
+def glCreateProgram():pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLenum)
-def glCreateShader( type ):pass
+def glCreateShader(type):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glDeleteProgram( program ):pass
+def glDeleteProgram(program):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glDeleteShader( shader ):pass
+def glDeleteShader(shader):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint)
-def glDetachShader( program,shader ):pass
+def glDetachShader(program,shader):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glDisableVertexAttribArray( index ):pass
+def glDisableVertexAttribArray(index):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glEnableVertexAttribArray( index ):pass
+def glEnableVertexAttribArray(index):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray,arrays.GLuintArray,arrays.GLcharArray)
-def glGetActiveAttrib( program,index,bufSize,length,size,type,name ):pass
+def glGetActiveAttrib(program,index,bufSize,length,size,type,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray,arrays.GLuintArray,arrays.GLcharArray)
-def glGetActiveUniform( program,index,bufSize,length,size,type,name ):pass
+def glGetActiveUniform(program,index,bufSize,length,size,type,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLuintArray)
-def glGetAttachedShaders( program,maxCount,count,obj ):pass
+def glGetAttachedShaders(program,maxCount,count,obj):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,arrays.GLcharArray)
-def glGetAttribLocation( program,name ):pass
+def glGetAttribLocation(program,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetProgramiv( program,pname,params ):pass
+def glGetProgramiv(program,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetProgramInfoLog( program,bufSize,length,infoLog ):pass
+def glGetProgramInfoLog(program,bufSize,length,infoLog):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetShaderiv( shader,pname,params ):pass
+def glGetShaderiv(shader,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetShaderInfoLog( shader,bufSize,length,infoLog ):pass
+def glGetShaderInfoLog(shader,bufSize,length,infoLog):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetShaderSource( shader,bufSize,length,source ):pass
+def glGetShaderSource(shader,bufSize,length,source):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,arrays.GLcharArray)
-def glGetUniformLocation( program,name ):pass
+def glGetUniformLocation(program,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,arrays.GLfloatArray)
-def glGetUniformfv( program,location,params ):pass
+def glGetUniformfv(program,location,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,arrays.GLintArray)
-def glGetUniformiv( program,location,params ):pass
+def glGetUniformiv(program,location,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLdoubleArray)
-def glGetVertexAttribdv( index,pname,params ):pass
+def glGetVertexAttribdv(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetVertexAttribfv( index,pname,params ):pass
+def glGetVertexAttribfv(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetVertexAttribiv( index,pname,params ):pass
+def glGetVertexAttribiv(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLvoidpArray)
-def glGetVertexAttribPointerv( index,pname,pointer ):pass
+def glGetVertexAttribPointerv(index,pname,pointer):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsProgram( program ):pass
+def glIsProgram(program):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsShader( shader ):pass
+def glIsShader(shader):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glLinkProgram( program ):pass
+def glLinkProgram(program):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.POINTER( ctypes.POINTER( _cs.GLchar )),arrays.GLintArray)
-def glShaderSource( shader,count,string,length ):pass
+def glShaderSource(shader,count,string,length):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glUseProgram( program ):pass
+def glUseProgram(program):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLfloat)
-def glUniform1f( location,v0 ):pass
+def glUniform1f(location,v0):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLfloat,_cs.GLfloat)
-def glUniform2f( location,v0,v1 ):pass
+def glUniform2f(location,v0,v1):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glUniform3f( location,v0,v1,v2 ):pass
+def glUniform3f(location,v0,v1,v2):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glUniform4f( location,v0,v1,v2,v3 ):pass
+def glUniform4f(location,v0,v1,v2,v3):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint)
-def glUniform1i( location,v0 ):pass
+def glUniform1i(location,v0):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint)
-def glUniform2i( location,v0,v1 ):pass
+def glUniform2i(location,v0,v1):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glUniform3i( location,v0,v1,v2 ):pass
+def glUniform3i(location,v0,v1,v2):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glUniform4i( location,v0,v1,v2,v3 ):pass
+def glUniform4i(location,v0,v1,v2,v3):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLfloatArray)
-def glUniform1fv( location,count,value ):pass
+def glUniform1fv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLfloatArray)
-def glUniform2fv( location,count,value ):pass
+def glUniform2fv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLfloatArray)
-def glUniform3fv( location,count,value ):pass
+def glUniform3fv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLfloatArray)
-def glUniform4fv( location,count,value ):pass
+def glUniform4fv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLintArray)
-def glUniform1iv( location,count,value ):pass
+def glUniform1iv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLintArray)
-def glUniform2iv( location,count,value ):pass
+def glUniform2iv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLintArray)
-def glUniform3iv( location,count,value ):pass
+def glUniform3iv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLintArray)
-def glUniform4iv( location,count,value ):pass
+def glUniform4iv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix2fv( location,count,transpose,value ):pass
+def glUniformMatrix2fv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix3fv( location,count,transpose,value ):pass
+def glUniformMatrix3fv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix4fv( location,count,transpose,value ):pass
+def glUniformMatrix4fv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glValidateProgram( program ):pass
+def glValidateProgram(program):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble)
-def glVertexAttrib1d( index,x ):pass
+def glVertexAttrib1d(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib1dv( index,v ):pass
+def glVertexAttrib1dv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat)
-def glVertexAttrib1f( index,x ):pass
+def glVertexAttrib1f(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib1fv( index,v ):pass
+def glVertexAttrib1fv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort)
-def glVertexAttrib1s( index,x ):pass
+def glVertexAttrib1s(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib1sv( index,v ):pass
+def glVertexAttrib1sv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttrib2d( index,x,y ):pass
+def glVertexAttrib2d(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib2dv( index,v ):pass
+def glVertexAttrib2dv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat)
-def glVertexAttrib2f( index,x,y ):pass
+def glVertexAttrib2f(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib2fv( index,v ):pass
+def glVertexAttrib2fv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort,_cs.GLshort)
-def glVertexAttrib2s( index,x,y ):pass
+def glVertexAttrib2s(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib2sv( index,v ):pass
+def glVertexAttrib2sv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttrib3d( index,x,y,z ):pass
+def glVertexAttrib3d(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib3dv( index,v ):pass
+def glVertexAttrib3dv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glVertexAttrib3f( index,x,y,z ):pass
+def glVertexAttrib3f(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib3fv( index,v ):pass
+def glVertexAttrib3fv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glVertexAttrib3s( index,x,y,z ):pass
+def glVertexAttrib3s(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib3sv( index,v ):pass
+def glVertexAttrib3sv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLbyteArray)
-def glVertexAttrib4Nbv( index,v ):pass
+def glVertexAttrib4Nbv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttrib4Niv( index,v ):pass
+def glVertexAttrib4Niv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib4Nsv( index,v ):pass
+def glVertexAttrib4Nsv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte)
-def glVertexAttrib4Nub( index,x,y,z,w ):pass
+def glVertexAttrib4Nub(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
-def glVertexAttrib4Nubv( index,v ):pass
+def glVertexAttrib4Nubv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttrib4Nuiv( index,v ):pass
+def glVertexAttrib4Nuiv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLushortArray)
-def glVertexAttrib4Nusv( index,v ):pass
+def glVertexAttrib4Nusv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLbyteArray)
-def glVertexAttrib4bv( index,v ):pass
+def glVertexAttrib4bv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttrib4d( index,x,y,z,w ):pass
+def glVertexAttrib4d(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib4dv( index,v ):pass
+def glVertexAttrib4dv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glVertexAttrib4f( index,x,y,z,w ):pass
+def glVertexAttrib4f(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib4fv( index,v ):pass
+def glVertexAttrib4fv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttrib4iv( index,v ):pass
+def glVertexAttrib4iv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glVertexAttrib4s( index,x,y,z,w ):pass
+def glVertexAttrib4s(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib4sv( index,v ):pass
+def glVertexAttrib4sv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
-def glVertexAttrib4ubv( index,v ):pass
+def glVertexAttrib4ubv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttrib4uiv( index,v ):pass
+def glVertexAttrib4uiv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLushortArray)
-def glVertexAttrib4usv( index,v ):pass
+def glVertexAttrib4usv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLsizei,ctypes.c_void_p)
-def glVertexAttribPointer( index,size,type,normalized,stride,pointer ):pass
+def glVertexAttribPointer(index,size,type,normalized,stride,pointer):pass
 

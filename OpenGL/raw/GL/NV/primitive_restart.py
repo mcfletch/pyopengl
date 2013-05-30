@@ -11,10 +11,10 @@ glget.addGLGetConstant( GL_PRIMITIVE_RESTART_NV, (1,) )
 glget.addGLGetConstant( GL_PRIMITIVE_RESTART_INDEX_NV, (1,) )
 @_f
 @_p.types(None,)
-def glPrimitiveRestartNV(  ):pass
+def glPrimitiveRestartNV():pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glPrimitiveRestartIndexNV( index ):pass
+def glPrimitiveRestartIndexNV(index):pass
 
 
 def glInitPrimitiveRestartNV():

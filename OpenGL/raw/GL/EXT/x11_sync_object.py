@@ -8,7 +8,7 @@ def _f( function ):
 _p.unpack_constants( """GL_SYNC_X11_FENCE_EXT 0x90E1""", globals())
 @_f
 @_p.types(_cs.GLsync,_cs.GLenum,_cs.GLintptr,_cs.GLbitfield)
-def glImportSyncEXT( external_sync_type,external_sync,flags ):pass
+def glImportSyncEXT(external_sync_type,external_sync,flags):pass
 
 
 def glInitX11SyncObjectEXT():

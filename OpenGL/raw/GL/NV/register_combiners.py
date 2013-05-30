@@ -62,43 +62,43 @@ glget.addGLGetConstant( GL_NUM_GENERAL_COMBINERS_NV, (1,) )
 glget.addGLGetConstant( GL_COLOR_SUM_CLAMP_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glCombinerParameterfvNV( pname,params ):pass
+def glCombinerParameterfvNV(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glCombinerParameterfNV( pname,param ):pass
+def glCombinerParameterfNV(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glCombinerParameterivNV( pname,params ):pass
+def glCombinerParameterivNV(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glCombinerParameteriNV( pname,param ):pass
+def glCombinerParameteriNV(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glCombinerInputNV( stage,portion,variable,input,mapping,componentUsage ):pass
+def glCombinerInputNV(stage,portion,variable,input,mapping,componentUsage):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLboolean,_cs.GLboolean,_cs.GLboolean)
-def glCombinerOutputNV( stage,portion,abOutput,cdOutput,sumOutput,scale,bias,abDotProduct,cdDotProduct,muxSum ):pass
+def glCombinerOutputNV(stage,portion,abOutput,cdOutput,sumOutput,scale,bias,abDotProduct,cdDotProduct,muxSum):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glFinalCombinerInputNV( variable,input,mapping,componentUsage ):pass
+def glFinalCombinerInputNV(variable,input,mapping,componentUsage):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetCombinerInputParameterfvNV( stage,portion,variable,pname,params ):pass
+def glGetCombinerInputParameterfvNV(stage,portion,variable,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetCombinerInputParameterivNV( stage,portion,variable,pname,params ):pass
+def glGetCombinerInputParameterivNV(stage,portion,variable,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetCombinerOutputParameterfvNV( stage,portion,pname,params ):pass
+def glGetCombinerOutputParameterfvNV(stage,portion,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetCombinerOutputParameterivNV( stage,portion,pname,params ):pass
+def glGetCombinerOutputParameterivNV(stage,portion,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetFinalCombinerInputParameterfvNV( variable,pname,params ):pass
+def glGetFinalCombinerInputParameterfvNV(variable,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetFinalCombinerInputParameterivNV( variable,pname,params ):pass
+def glGetFinalCombinerInputParameterivNV(variable,pname,params):pass
 
 
 def glInitRegisterCombinersNV():

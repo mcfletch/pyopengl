@@ -16,13 +16,13 @@ GL_TEXTURE_MATERIAL_FACE_EXT 0x8351
 GL_TEXTURE_MATERIAL_PARAMETER_EXT 0x8352""", globals())
 @_f
 @_p.types(None,_cs.GLenum)
-def glApplyTextureEXT( mode ):pass
+def glApplyTextureEXT(mode):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glTextureLightEXT( pname ):pass
+def glTextureLightEXT(pname):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
-def glTextureMaterialEXT( face,mode ):pass
+def glTextureMaterialEXT(face,mode):pass
 
 
 def glInitLightTextureEXT():

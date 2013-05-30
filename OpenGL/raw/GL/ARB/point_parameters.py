@@ -15,10 +15,10 @@ glget.addGLGetConstant( GL_POINT_FADE_THRESHOLD_SIZE_ARB, (1,) )
 glget.addGLGetConstant( GL_POINT_DISTANCE_ATTENUATION_ARB, (3,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glPointParameterfARB( pname,param ):pass
+def glPointParameterfARB(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glPointParameterfvARB( pname,params ):pass
+def glPointParameterfvARB(pname,params):pass
 
 
 def glInitPointParametersARB():

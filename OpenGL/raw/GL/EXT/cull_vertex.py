@@ -10,10 +10,10 @@ GL_CULL_VERTEX_EYE_POSITION_EXT 0x81AB
 GL_CULL_VERTEX_OBJECT_POSITION_EXT 0x81AC""", globals())
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glCullParameterdvEXT( pname,params ):pass
+def glCullParameterdvEXT(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glCullParameterfvEXT( pname,params ):pass
+def glCullParameterfvEXT(pname,params):pass
 
 
 def glInitCullVertexEXT():

@@ -27,7 +27,7 @@ GL_WIDE_LINE_HINT_PGI 0x1A222
 GL_BACK_NORMALS_HINT_PGI 0x1A223""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glHintPGI( target,mode ):pass
+def glHintPGI(target,mode):pass
 
 
 def glInitMiscHintsPGI():

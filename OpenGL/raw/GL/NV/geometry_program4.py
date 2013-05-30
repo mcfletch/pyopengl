@@ -25,16 +25,16 @@ glget.addGLGetConstant( GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_EXT, (1,) )
 glget.addGLGetConstant( GL_PROGRAM_POINT_SIZE_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glProgramVertexLimitNV( target,limit ):pass
+def glProgramVertexLimitNV(target,limit):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint)
-def glFramebufferTextureEXT( target,attachment,texture,level ):pass
+def glFramebufferTextureEXT(target,attachment,texture,level):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint)
-def glFramebufferTextureLayerEXT( target,attachment,texture,level,layer ):pass
+def glFramebufferTextureLayerEXT(target,attachment,texture,level,layer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLenum)
-def glFramebufferTextureFaceEXT( target,attachment,texture,level,face ):pass
+def glFramebufferTextureFaceEXT(target,attachment,texture,level,face):pass
 
 
 def glInitGeometryProgram4NV():

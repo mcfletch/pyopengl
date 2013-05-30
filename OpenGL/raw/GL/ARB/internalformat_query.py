@@ -8,7 +8,7 @@ def _f( function ):
 _p.unpack_constants( """GL_NUM_SAMPLE_COUNTS 0x9380""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLintArray)
-def glGetInternalformativ( target,internalformat,pname,bufSize,params ):pass
+def glGetInternalformativ(target,internalformat,pname,bufSize,params):pass
 
 
 def glInitInternalformatQueryARB():

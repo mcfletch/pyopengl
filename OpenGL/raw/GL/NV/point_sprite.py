@@ -12,10 +12,10 @@ glget.addGLGetConstant( GL_POINT_SPRITE_NV, (1,) )
 glget.addGLGetConstant( GL_POINT_SPRITE_R_MODE_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glPointParameteriNV( pname,param ):pass
+def glPointParameteriNV(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glPointParameterivNV( pname,params ):pass
+def glPointParameterivNV(pname,params):pass
 
 
 def glInitPointSpriteNV():

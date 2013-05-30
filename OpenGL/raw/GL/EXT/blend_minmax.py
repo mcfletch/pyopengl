@@ -12,7 +12,7 @@ GL_BLEND_EQUATION_EXT 0x8009""", globals())
 glget.addGLGetConstant( GL_BLEND_EQUATION_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum)
-def glBlendEquationEXT( mode ):pass
+def glBlendEquationEXT(mode):pass
 
 
 def glInitBlendMinmaxEXT():

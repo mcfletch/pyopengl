@@ -8,7 +8,7 @@ def _f( function ):
 _p.unpack_constants( """GL_TEXTURE_COLOR_WRITEMASK_SGIS 0x81EF""", globals())
 @_f
 @_p.types(None,_cs.GLboolean,_cs.GLboolean,_cs.GLboolean,_cs.GLboolean)
-def glTextureColorMaskSGIS( red,green,blue,alpha ):pass
+def glTextureColorMaskSGIS(red,green,blue,alpha):pass
 
 
 def glInitTextureColorMaskSGIS():

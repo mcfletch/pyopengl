@@ -8,19 +8,19 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLint)
-def glCopyTexImage1DEXT( target,level,internalformat,x,y,width,border ):pass
+def glCopyTexImage1DEXT(target,level,internalformat,x,y,width,border):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLint)
-def glCopyTexImage2DEXT( target,level,internalformat,x,y,width,height,border ):pass
+def glCopyTexImage2DEXT(target,level,internalformat,x,y,width,height,border):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei)
-def glCopyTexSubImage1DEXT( target,level,xoffset,x,y,width ):pass
+def glCopyTexSubImage1DEXT(target,level,xoffset,x,y,width):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glCopyTexSubImage2DEXT( target,level,xoffset,yoffset,x,y,width,height ):pass
+def glCopyTexSubImage2DEXT(target,level,xoffset,yoffset,x,y,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glCopyTexSubImage3DEXT( target,level,xoffset,yoffset,zoffset,x,y,width,height ):pass
+def glCopyTexSubImage3DEXT(target,level,xoffset,yoffset,zoffset,x,y,width,height):pass
 
 
 def glInitCopyTextureEXT():

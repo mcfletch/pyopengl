@@ -19,10 +19,11 @@ GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS 0x90DC
 GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS 0x90DD
 GL_MAX_SHADER_STORAGE_BLOCK_SIZE 0x90DE
 GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT 0x90DF
-GL_SHADER_STORAGE_BARRIER_BIT 0x2000""", globals())
+GL_SHADER_STORAGE_BARRIER_BIT 0x2000
+GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES 0x8F39""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glShaderStorageBlockBinding( program,storageBlockIndex,storageBlockBinding ):pass
+def glShaderStorageBlockBinding(program,storageBlockIndex,storageBlockBinding):pass
 
 
 def glInitShaderStorageBufferObjectARB():

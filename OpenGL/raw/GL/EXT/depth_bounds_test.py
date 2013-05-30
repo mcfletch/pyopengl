@@ -11,7 +11,7 @@ glget.addGLGetConstant( GL_DEPTH_BOUNDS_TEST_EXT, (1,) )
 glget.addGLGetConstant( GL_DEPTH_BOUNDS_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLclampd,_cs.GLclampd)
-def glDepthBoundsEXT( zmin,zmax ):pass
+def glDepthBoundsEXT(zmin,zmax):pass
 
 
 def glInitDepthBoundsTestEXT():

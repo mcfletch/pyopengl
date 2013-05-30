@@ -11,10 +11,10 @@ GL_POINT_FADE_THRESHOLD_SIZE_EXT 0x8128
 GL_DISTANCE_ATTENUATION_EXT 0x8129""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glPointParameterfEXT( pname,param ):pass
+def glPointParameterfEXT(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glPointParameterfvEXT( pname,params ):pass
+def glPointParameterfvEXT(pname,params):pass
 
 
 def glInitPointParametersEXT():

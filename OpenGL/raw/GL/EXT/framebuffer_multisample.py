@@ -11,7 +11,7 @@ GL_MAX_SAMPLES_EXT 0x8D57""", globals())
 glget.addGLGetConstant( GL_MAX_SAMPLES_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei)
-def glRenderbufferStorageMultisampleEXT( target,samples,internalformat,width,height ):pass
+def glRenderbufferStorageMultisampleEXT(target,samples,internalformat,width,height):pass
 
 
 def glInitFramebufferMultisampleEXT():

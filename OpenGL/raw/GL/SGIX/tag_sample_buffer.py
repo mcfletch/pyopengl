@@ -8,7 +8,7 @@ def _f( function ):
 
 @_f
 @_p.types(None,)
-def glTagSampleBufferSGIX(  ):pass
+def glTagSampleBufferSGIX():pass
 
 
 def glInitTagSampleBufferSGIX():

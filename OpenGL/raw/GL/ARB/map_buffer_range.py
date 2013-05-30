@@ -13,10 +13,10 @@ GL_MAP_FLUSH_EXPLICIT_BIT 0x10
 GL_MAP_UNSYNCHRONIZED_BIT 0x20""", globals())
 @_f
 @_p.types(ctypes.c_void_p,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,_cs.GLbitfield)
-def glMapBufferRange( target,offset,length,access ):pass
+def glMapBufferRange(target,offset,length,access):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr)
-def glFlushMappedBufferRange( target,offset,length ):pass
+def glFlushMappedBufferRange(target,offset,length):pass
 
 
 def glInitMapBufferRangeARB():

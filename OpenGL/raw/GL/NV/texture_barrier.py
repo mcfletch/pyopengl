@@ -8,7 +8,7 @@ def _f( function ):
 
 @_f
 @_p.types(None,)
-def glTextureBarrierNV(  ):pass
+def glTextureBarrierNV():pass
 
 
 def glInitTextureBarrierNV():

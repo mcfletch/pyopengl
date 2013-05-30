@@ -8,16 +8,16 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glBlendEquationiARB( buf,mode ):pass
+def glBlendEquationiARB(buf,mode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glBlendEquationSeparateiARB( buf,modeRGB,modeAlpha ):pass
+def glBlendEquationSeparateiARB(buf,modeRGB,modeAlpha):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glBlendFunciARB( buf,src,dst ):pass
+def glBlendFunciARB(buf,src,dst):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glBlendFuncSeparateiARB( buf,srcRGB,dstRGB,srcAlpha,dstAlpha ):pass
+def glBlendFuncSeparateiARB(buf,srcRGB,dstRGB,srcAlpha,dstAlpha):pass
 
 
 def glInitDrawBuffersBlendARB():

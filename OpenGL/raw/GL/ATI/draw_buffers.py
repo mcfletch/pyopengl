@@ -41,7 +41,7 @@ glget.addGLGetConstant( GL_DRAW_BUFFER14_ATI, (1,) )
 glget.addGLGetConstant( GL_DRAW_BUFFER15_ATI, (1,) )
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDrawBuffersATI( n,bufs ):pass
+def glDrawBuffersATI(n,bufs):pass
 
 
 def glInitDrawBuffersATI():

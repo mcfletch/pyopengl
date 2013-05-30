@@ -10,7 +10,7 @@ GL_BLEND_EQUATION_ALPHA_EXT 0x883D""", globals())
 glget.addGLGetConstant( GL_BLEND_EQUATION_ALPHA_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
-def glBlendEquationSeparateEXT( modeRGB,modeAlpha ):pass
+def glBlendEquationSeparateEXT(modeRGB,modeAlpha):pass
 
 
 def glInitBlendEquationSeparateEXT():

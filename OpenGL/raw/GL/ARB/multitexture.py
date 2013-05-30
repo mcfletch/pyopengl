@@ -45,106 +45,106 @@ glget.addGLGetConstant( GL_CLIENT_ACTIVE_TEXTURE_ARB, (1,) )
 glget.addGLGetConstant( GL_MAX_TEXTURE_UNITS_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLenum)
-def glActiveTextureARB( texture ):pass
+def glActiveTextureARB(texture):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glClientActiveTextureARB( texture ):pass
+def glClientActiveTextureARB(texture):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble)
-def glMultiTexCoord1dARB( target,s ):pass
+def glMultiTexCoord1dARB(target,s):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glMultiTexCoord1dvARB( target,v ):pass
+def glMultiTexCoord1dvARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glMultiTexCoord1fARB( target,s ):pass
+def glMultiTexCoord1fARB(target,s):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glMultiTexCoord1fvARB( target,v ):pass
+def glMultiTexCoord1fvARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glMultiTexCoord1iARB( target,s ):pass
+def glMultiTexCoord1iARB(target,s):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glMultiTexCoord1ivARB( target,v ):pass
+def glMultiTexCoord1ivARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort)
-def glMultiTexCoord1sARB( target,s ):pass
+def glMultiTexCoord1sARB(target,s):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glMultiTexCoord1svARB( target,v ):pass
+def glMultiTexCoord1svARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble)
-def glMultiTexCoord2dARB( target,s,t ):pass
+def glMultiTexCoord2dARB(target,s,t):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glMultiTexCoord2dvARB( target,v ):pass
+def glMultiTexCoord2dvARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat)
-def glMultiTexCoord2fARB( target,s,t ):pass
+def glMultiTexCoord2fARB(target,s,t):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glMultiTexCoord2fvARB( target,v ):pass
+def glMultiTexCoord2fvARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint)
-def glMultiTexCoord2iARB( target,s,t ):pass
+def glMultiTexCoord2iARB(target,s,t):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glMultiTexCoord2ivARB( target,v ):pass
+def glMultiTexCoord2ivARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort)
-def glMultiTexCoord2sARB( target,s,t ):pass
+def glMultiTexCoord2sARB(target,s,t):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glMultiTexCoord2svARB( target,v ):pass
+def glMultiTexCoord2svARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glMultiTexCoord3dARB( target,s,t,r ):pass
+def glMultiTexCoord3dARB(target,s,t,r):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glMultiTexCoord3dvARB( target,v ):pass
+def glMultiTexCoord3dvARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glMultiTexCoord3fARB( target,s,t,r ):pass
+def glMultiTexCoord3fARB(target,s,t,r):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glMultiTexCoord3fvARB( target,v ):pass
+def glMultiTexCoord3fvARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint)
-def glMultiTexCoord3iARB( target,s,t,r ):pass
+def glMultiTexCoord3iARB(target,s,t,r):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glMultiTexCoord3ivARB( target,v ):pass
+def glMultiTexCoord3ivARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glMultiTexCoord3sARB( target,s,t,r ):pass
+def glMultiTexCoord3sARB(target,s,t,r):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glMultiTexCoord3svARB( target,v ):pass
+def glMultiTexCoord3svARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glMultiTexCoord4dARB( target,s,t,r,q ):pass
+def glMultiTexCoord4dARB(target,s,t,r,q):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glMultiTexCoord4dvARB( target,v ):pass
+def glMultiTexCoord4dvARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glMultiTexCoord4fARB( target,s,t,r,q ):pass
+def glMultiTexCoord4fARB(target,s,t,r,q):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glMultiTexCoord4fvARB( target,v ):pass
+def glMultiTexCoord4fvARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glMultiTexCoord4iARB( target,s,t,r,q ):pass
+def glMultiTexCoord4iARB(target,s,t,r,q):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glMultiTexCoord4ivARB( target,v ):pass
+def glMultiTexCoord4ivARB(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glMultiTexCoord4sARB( target,s,t,r,q ):pass
+def glMultiTexCoord4sARB(target,s,t,r,q):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glMultiTexCoord4svARB( target,v ):pass
+def glMultiTexCoord4svARB(target,v):pass
 
 
 def glInitMultitextureARB():

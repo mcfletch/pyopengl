@@ -36,7 +36,7 @@ GL_UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX 0x92DA
 GL_UNSIGNED_INT_ATOMIC_COUNTER 0x92DB""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetActiveAtomicCounterBufferiv( program,bufferIndex,pname,params ):pass
+def glGetActiveAtomicCounterBufferiv(program,bufferIndex,pname,params):pass
 
 
 def glInitShaderAtomicCountersARB():

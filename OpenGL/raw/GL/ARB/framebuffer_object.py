@@ -29,6 +29,7 @@ GL_TEXTURE_ALPHA_TYPE 0x8C13
 GL_TEXTURE_DEPTH_TYPE 0x8C16
 GL_UNSIGNED_NORMALIZED 0x8C17
 GL_FRAMEBUFFER_BINDING 0x8CA6
+GL_DRAW_FRAMEBUFFER_BINDING 0x8CA6
 GL_RENDERBUFFER_BINDING 0x8CA7
 GL_READ_FRAMEBUFFER 0x8CA8
 GL_DRAW_FRAMEBUFFER 0x8CA9
@@ -90,64 +91,64 @@ glget.addGLGetConstant( GL_MAX_COLOR_ATTACHMENTS, (1,) )
 glget.addGLGetConstant( GL_MAX_SAMPLES, (1,) )
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsRenderbuffer( renderbuffer ):pass
+def glIsRenderbuffer(renderbuffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindRenderbuffer( target,renderbuffer ):pass
+def glBindRenderbuffer(target,renderbuffer):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteRenderbuffers( n,renderbuffers ):pass
+def glDeleteRenderbuffers(n,renderbuffers):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenRenderbuffers( n,renderbuffers ):pass
+def glGenRenderbuffers(n,renderbuffers):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei)
-def glRenderbufferStorage( target,internalformat,width,height ):pass
+def glRenderbufferStorage(target,internalformat,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetRenderbufferParameteriv( target,pname,params ):pass
+def glGetRenderbufferParameteriv(target,pname,params):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsFramebuffer( framebuffer ):pass
+def glIsFramebuffer(framebuffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindFramebuffer( target,framebuffer ):pass
+def glBindFramebuffer(target,framebuffer):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteFramebuffers( n,framebuffers ):pass
+def glDeleteFramebuffers(n,framebuffers):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenFramebuffers( n,framebuffers ):pass
+def glGenFramebuffers(n,framebuffers):pass
 @_f
 @_p.types(_cs.GLenum,_cs.GLenum)
-def glCheckFramebufferStatus( target ):pass
+def glCheckFramebufferStatus(target):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint)
-def glFramebufferTexture1D( target,attachment,textarget,texture,level ):pass
+def glFramebufferTexture1D(target,attachment,textarget,texture,level):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint)
-def glFramebufferTexture2D( target,attachment,textarget,texture,level ):pass
+def glFramebufferTexture2D(target,attachment,textarget,texture,level):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint)
-def glFramebufferTexture3D( target,attachment,textarget,texture,level,zoffset ):pass
+def glFramebufferTexture3D(target,attachment,textarget,texture,level,zoffset):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLuint)
-def glFramebufferRenderbuffer( target,attachment,renderbuffertarget,renderbuffer ):pass
+def glFramebufferRenderbuffer(target,attachment,renderbuffertarget,renderbuffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetFramebufferAttachmentParameteriv( target,attachment,pname,params ):pass
+def glGetFramebufferAttachmentParameteriv(target,attachment,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glGenerateMipmap( target ):pass
+def glGenerateMipmap(target):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLbitfield,_cs.GLenum)
-def glBlitFramebuffer( srcX0,srcY0,srcX1,srcY1,dstX0,dstY0,dstX1,dstY1,mask,filter ):pass
+def glBlitFramebuffer(srcX0,srcY0,srcX1,srcY1,dstX0,dstY0,dstX1,dstY1,mask,filter):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei)
-def glRenderbufferStorageMultisample( target,samples,internalformat,width,height ):pass
+def glRenderbufferStorageMultisample(target,samples,internalformat,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint)
-def glFramebufferTextureLayer( target,attachment,texture,level,layer ):pass
+def glFramebufferTextureLayer(target,attachment,texture,level,layer):pass
 
 
 def glInitFramebufferObjectARB():

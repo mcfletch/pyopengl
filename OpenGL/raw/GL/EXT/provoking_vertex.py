@@ -13,7 +13,7 @@ glget.addGLGetConstant( GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT, (1,) )
 glget.addGLGetConstant( GL_PROVOKING_VERTEX_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum)
-def glProvokingVertexEXT( mode ):pass
+def glProvokingVertexEXT(mode):pass
 
 
 def glInitProvokingVertexEXT():

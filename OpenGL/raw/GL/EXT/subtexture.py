@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glTexSubImage1DEXT( target,level,xoffset,width,format,type,pixels ):pass
+def glTexSubImage1DEXT(target,level,xoffset,width,format,type,pixels):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glTexSubImage2DEXT( target,level,xoffset,yoffset,width,height,format,type,pixels ):pass
+def glTexSubImage2DEXT(target,level,xoffset,yoffset,width,height,format,type,pixels):pass
 
 
 def glInitSubtextureEXT():

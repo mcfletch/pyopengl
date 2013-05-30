@@ -8,16 +8,16 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
-def glTexStorage2DMultisample( target,samples,internalformat,width,height,fixedsamplelocations ):pass
+def glTexStorage2DMultisample(target,samples,internalformat,width,height,fixedsamplelocations):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
-def glTexStorage3DMultisample( target,samples,internalformat,width,height,depth,fixedsamplelocations ):pass
+def glTexStorage3DMultisample(target,samples,internalformat,width,height,depth,fixedsamplelocations):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
-def glTextureStorage2DMultisampleEXT( texture,target,samples,internalformat,width,height,fixedsamplelocations ):pass
+def glTextureStorage2DMultisampleEXT(texture,target,samples,internalformat,width,height,fixedsamplelocations):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
-def glTextureStorage3DMultisampleEXT( texture,target,samples,internalformat,width,height,depth,fixedsamplelocations ):pass
+def glTextureStorage3DMultisampleEXT(texture,target,samples,internalformat,width,height,depth,fixedsamplelocations):pass
 
 
 def glInitTextureStorageMultisampleARB():

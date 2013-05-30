@@ -8,13 +8,13 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLuint)
-def glDrawArraysInstancedBaseInstance( mode,first,count,instancecount,baseinstance ):pass
+def glDrawArraysInstancedBaseInstance(mode,first,count,instancecount,baseinstance):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.POINTER(_cs.void),_cs.GLsizei,_cs.GLuint)
-def glDrawElementsInstancedBaseInstance( mode,count,type,indices,instancecount,baseinstance ):pass
+def glDrawElementsInstancedBaseInstance(mode,count,type,indices,instancecount,baseinstance):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.POINTER(_cs.void),_cs.GLsizei,_cs.GLint,_cs.GLuint)
-def glDrawElementsInstancedBaseVertexBaseInstance( mode,count,type,indices,instancecount,basevertex,baseinstance ):pass
+def glDrawElementsInstancedBaseVertexBaseInstance(mode,count,type,indices,instancecount,basevertex,baseinstance):pass
 
 
 def glInitBaseInstanceARB():

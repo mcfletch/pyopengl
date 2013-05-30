@@ -19,58 +19,58 @@ GL_DOUBLE_MAT4x2 0x8F4D
 GL_DOUBLE_MAT4x3 0x8F4E""", globals())
 @_f
 @_p.types(None,_cs.GLint,_cs.GLdouble)
-def glUniform1d( location,x ):pass
+def glUniform1d(location,x):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLdouble,_cs.GLdouble)
-def glUniform2d( location,x,y ):pass
+def glUniform2d(location,x,y):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glUniform3d( location,x,y,z ):pass
+def glUniform3d(location,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glUniform4d( location,x,y,z,w ):pass
+def glUniform4d(location,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLdoubleArray)
-def glUniform1dv( location,count,value ):pass
+def glUniform1dv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLdoubleArray)
-def glUniform2dv( location,count,value ):pass
+def glUniform2dv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLdoubleArray)
-def glUniform3dv( location,count,value ):pass
+def glUniform3dv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLdoubleArray)
-def glUniform4dv( location,count,value ):pass
+def glUniform4dv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
-def glUniformMatrix2dv( location,count,transpose,value ):pass
+def glUniformMatrix2dv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
-def glUniformMatrix3dv( location,count,transpose,value ):pass
+def glUniformMatrix3dv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
-def glUniformMatrix4dv( location,count,transpose,value ):pass
+def glUniformMatrix4dv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
-def glUniformMatrix2x3dv( location,count,transpose,value ):pass
+def glUniformMatrix2x3dv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
-def glUniformMatrix2x4dv( location,count,transpose,value ):pass
+def glUniformMatrix2x4dv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
-def glUniformMatrix3x2dv( location,count,transpose,value ):pass
+def glUniformMatrix3x2dv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
-def glUniformMatrix3x4dv( location,count,transpose,value ):pass
+def glUniformMatrix3x4dv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
-def glUniformMatrix4x2dv( location,count,transpose,value ):pass
+def glUniformMatrix4x2dv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
-def glUniformMatrix4x3dv( location,count,transpose,value ):pass
+def glUniformMatrix4x3dv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,arrays.GLdoubleArray)
-def glGetUniformdv( program,location,params ):pass
+def glGetUniformdv(program,location,params):pass
 
 
 def glInitGpuShaderFp64ARB():

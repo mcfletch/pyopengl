@@ -110,176 +110,176 @@ GL_CLAMP_FRAGMENT_COLOR 0x891B
 GL_ALPHA_INTEGER 0x8D97""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLboolean,_cs.GLboolean,_cs.GLboolean,_cs.GLboolean)
-def glColorMaski( index,r,g,b,a ):pass
+def glColorMaski(index,r,g,b,a):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLbooleanArray)
-def glGetBooleani_v( target,index,data ):pass
+def glGetBooleani_v(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
-def glGetIntegeri_v( target,index,data ):pass
+def glGetIntegeri_v(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glEnablei( target,index ):pass
+def glEnablei(target,index):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glDisablei( target,index ):pass
+def glDisablei(target,index):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLenum,_cs.GLuint)
-def glIsEnabledi( target,index ):pass
+def glIsEnabledi(target,index):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glBeginTransformFeedback( primitiveMode ):pass
+def glBeginTransformFeedback(primitiveMode):pass
 @_f
 @_p.types(None,)
-def glEndTransformFeedback(  ):pass
+def glEndTransformFeedback():pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
-def glBindBufferRange( target,index,buffer,offset,size ):pass
+def glBindBufferRange(target,index,buffer,offset,size):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint)
-def glBindBufferBase( target,index,buffer ):pass
+def glBindBufferBase(target,index,buffer):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.POINTER( ctypes.POINTER( _cs.GLchar )),_cs.GLenum)
-def glTransformFeedbackVaryings( program,count,varyings,bufferMode ):pass
+def glTransformFeedbackVaryings(program,count,varyings,bufferMode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLsizeiArray,arrays.GLuintArray,arrays.GLcharArray)
-def glGetTransformFeedbackVarying( program,index,bufSize,length,size,type,name ):pass
+def glGetTransformFeedbackVarying(program,index,bufSize,length,size,type,name):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
-def glClampColor( target,clamp ):pass
+def glClampColor(target,clamp):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glBeginConditionalRender( id,mode ):pass
+def glBeginConditionalRender(id,mode):pass
 @_f
 @_p.types(None,)
-def glEndConditionalRender(  ):pass
+def glEndConditionalRender():pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glVertexAttribIPointer( index,size,type,stride,pointer ):pass
+def glVertexAttribIPointer(index,size,type,stride,pointer):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetVertexAttribIiv( index,pname,params ):pass
+def glGetVertexAttribIiv(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuintArray)
-def glGetVertexAttribIuiv( index,pname,params ):pass
+def glGetVertexAttribIuiv(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint)
-def glVertexAttribI1i( index,x ):pass
+def glVertexAttribI1i(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint)
-def glVertexAttribI2i( index,x,y ):pass
+def glVertexAttribI2i(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glVertexAttribI3i( index,x,y,z ):pass
+def glVertexAttribI3i(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glVertexAttribI4i( index,x,y,z,w ):pass
+def glVertexAttribI4i(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint)
-def glVertexAttribI1ui( index,x ):pass
+def glVertexAttribI1ui(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glVertexAttribI2ui( index,x,y ):pass
+def glVertexAttribI2ui(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glVertexAttribI3ui( index,x,y,z ):pass
+def glVertexAttribI3ui(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glVertexAttribI4ui( index,x,y,z,w ):pass
+def glVertexAttribI4ui(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttribI1iv( index,v ):pass
+def glVertexAttribI1iv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttribI2iv( index,v ):pass
+def glVertexAttribI2iv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttribI3iv( index,v ):pass
+def glVertexAttribI3iv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttribI4iv( index,v ):pass
+def glVertexAttribI4iv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttribI1uiv( index,v ):pass
+def glVertexAttribI1uiv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttribI2uiv( index,v ):pass
+def glVertexAttribI2uiv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttribI3uiv( index,v ):pass
+def glVertexAttribI3uiv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttribI4uiv( index,v ):pass
+def glVertexAttribI4uiv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLbyteArray)
-def glVertexAttribI4bv( index,v ):pass
+def glVertexAttribI4bv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttribI4sv( index,v ):pass
+def glVertexAttribI4sv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
-def glVertexAttribI4ubv( index,v ):pass
+def glVertexAttribI4ubv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLushortArray)
-def glVertexAttribI4usv( index,v ):pass
+def glVertexAttribI4usv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,arrays.GLuintArray)
-def glGetUniformuiv( program,location,params ):pass
+def glGetUniformuiv(program,location,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,arrays.GLcharArray)
-def glBindFragDataLocation( program,color,name ):pass
+def glBindFragDataLocation(program,color,name):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,arrays.GLcharArray)
-def glGetFragDataLocation( program,name ):pass
+def glGetFragDataLocation(program,name):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint)
-def glUniform1ui( location,v0 ):pass
+def glUniform1ui(location,v0):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint,_cs.GLuint)
-def glUniform2ui( location,v0,v1 ):pass
+def glUniform2ui(location,v0,v1):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glUniform3ui( location,v0,v1,v2 ):pass
+def glUniform3ui(location,v0,v1,v2):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glUniform4ui( location,v0,v1,v2,v3 ):pass
+def glUniform4ui(location,v0,v1,v2,v3):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuintArray)
-def glUniform1uiv( location,count,value ):pass
+def glUniform1uiv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuintArray)
-def glUniform2uiv( location,count,value ):pass
+def glUniform2uiv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuintArray)
-def glUniform3uiv( location,count,value ):pass
+def glUniform3uiv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuintArray)
-def glUniform4uiv( location,count,value ):pass
+def glUniform4uiv(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glTexParameterIiv( target,pname,params ):pass
+def glTexParameterIiv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
-def glTexParameterIuiv( target,pname,params ):pass
+def glTexParameterIuiv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetTexParameterIiv( target,pname,params ):pass
+def glGetTexParameterIiv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
-def glGetTexParameterIuiv( target,pname,params ):pass
+def glGetTexParameterIuiv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLintArray)
-def glClearBufferiv( buffer,drawbuffer,value ):pass
+def glClearBufferiv(buffer,drawbuffer,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLuintArray)
-def glClearBufferuiv( buffer,drawbuffer,value ):pass
+def glClearBufferuiv(buffer,drawbuffer,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLfloatArray)
-def glClearBufferfv( buffer,drawbuffer,value ):pass
+def glClearBufferfv(buffer,drawbuffer,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLfloat,_cs.GLint)
-def glClearBufferfi( buffer,drawbuffer,depth,stencil ):pass
+def glClearBufferfi(buffer,drawbuffer,depth,stencil):pass
 @_f
 @_p.types(arrays.GLubyteArray,_cs.GLenum,_cs.GLuint)
-def glGetStringi( name,index ):pass
+def glGetStringi(name,index):pass
 

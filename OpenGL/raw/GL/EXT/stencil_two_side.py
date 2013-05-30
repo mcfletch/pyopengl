@@ -11,7 +11,7 @@ glget.addGLGetConstant( GL_STENCIL_TEST_TWO_SIDE_EXT, (1,) )
 glget.addGLGetConstant( GL_ACTIVE_STENCIL_FACE_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum)
-def glActiveStencilFaceEXT( face ):pass
+def glActiveStencilFaceEXT(face):pass
 
 
 def glInitStencilTwoSideEXT():

@@ -97,190 +97,190 @@ glget.addGLGetConstant( GL_MAX_VERTEX_ATTRIBS_ARB, (1,) )
 glget.addGLGetConstant( GL_TRANSPOSE_CURRENT_MATRIX_ARB, (4, 4) )
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble)
-def glVertexAttrib1dARB( index,x ):pass
+def glVertexAttrib1dARB(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib1dvARB( index,v ):pass
+def glVertexAttrib1dvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat)
-def glVertexAttrib1fARB( index,x ):pass
+def glVertexAttrib1fARB(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib1fvARB( index,v ):pass
+def glVertexAttrib1fvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort)
-def glVertexAttrib1sARB( index,x ):pass
+def glVertexAttrib1sARB(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib1svARB( index,v ):pass
+def glVertexAttrib1svARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttrib2dARB( index,x,y ):pass
+def glVertexAttrib2dARB(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib2dvARB( index,v ):pass
+def glVertexAttrib2dvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat)
-def glVertexAttrib2fARB( index,x,y ):pass
+def glVertexAttrib2fARB(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib2fvARB( index,v ):pass
+def glVertexAttrib2fvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort,_cs.GLshort)
-def glVertexAttrib2sARB( index,x,y ):pass
+def glVertexAttrib2sARB(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib2svARB( index,v ):pass
+def glVertexAttrib2svARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttrib3dARB( index,x,y,z ):pass
+def glVertexAttrib3dARB(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib3dvARB( index,v ):pass
+def glVertexAttrib3dvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glVertexAttrib3fARB( index,x,y,z ):pass
+def glVertexAttrib3fARB(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib3fvARB( index,v ):pass
+def glVertexAttrib3fvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glVertexAttrib3sARB( index,x,y,z ):pass
+def glVertexAttrib3sARB(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib3svARB( index,v ):pass
+def glVertexAttrib3svARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLbyteArray)
-def glVertexAttrib4NbvARB( index,v ):pass
+def glVertexAttrib4NbvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttrib4NivARB( index,v ):pass
+def glVertexAttrib4NivARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib4NsvARB( index,v ):pass
+def glVertexAttrib4NsvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte)
-def glVertexAttrib4NubARB( index,x,y,z,w ):pass
+def glVertexAttrib4NubARB(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
-def glVertexAttrib4NubvARB( index,v ):pass
+def glVertexAttrib4NubvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttrib4NuivARB( index,v ):pass
+def glVertexAttrib4NuivARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLushortArray)
-def glVertexAttrib4NusvARB( index,v ):pass
+def glVertexAttrib4NusvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLbyteArray)
-def glVertexAttrib4bvARB( index,v ):pass
+def glVertexAttrib4bvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttrib4dARB( index,x,y,z,w ):pass
+def glVertexAttrib4dARB(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttrib4dvARB( index,v ):pass
+def glVertexAttrib4dvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glVertexAttrib4fARB( index,x,y,z,w ):pass
+def glVertexAttrib4fARB(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVertexAttrib4fvARB( index,v ):pass
+def glVertexAttrib4fvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVertexAttrib4ivARB( index,v ):pass
+def glVertexAttrib4ivARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLshort,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glVertexAttrib4sARB( index,x,y,z,w ):pass
+def glVertexAttrib4sARB(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVertexAttrib4svARB( index,v ):pass
+def glVertexAttrib4svARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
-def glVertexAttrib4ubvARB( index,v ):pass
+def glVertexAttrib4ubvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVertexAttrib4uivARB( index,v ):pass
+def glVertexAttrib4uivARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLushortArray)
-def glVertexAttrib4usvARB( index,v ):pass
+def glVertexAttrib4usvARB(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLsizei,ctypes.c_void_p)
-def glVertexAttribPointerARB( index,size,type,normalized,stride,pointer ):pass
+def glVertexAttribPointerARB(index,size,type,normalized,stride,pointer):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glEnableVertexAttribArrayARB( index ):pass
+def glEnableVertexAttribArrayARB(index):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glDisableVertexAttribArrayARB( index ):pass
+def glDisableVertexAttribArrayARB(index):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glProgramStringARB( target,format,len,string ):pass
+def glProgramStringARB(target,format,len,string):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindProgramARB( target,program ):pass
+def glBindProgramARB(target,program):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteProgramsARB( n,programs ):pass
+def glDeleteProgramsARB(n,programs):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenProgramsARB( n,programs ):pass
+def glGenProgramsARB(n,programs):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glProgramEnvParameter4dARB( target,index,x,y,z,w ):pass
+def glProgramEnvParameter4dARB(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLdoubleArray)
-def glProgramEnvParameter4dvARB( target,index,params ):pass
+def glProgramEnvParameter4dvARB(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glProgramEnvParameter4fARB( target,index,x,y,z,w ):pass
+def glProgramEnvParameter4fARB(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glProgramEnvParameter4fvARB( target,index,params ):pass
+def glProgramEnvParameter4fvARB(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glProgramLocalParameter4dARB( target,index,x,y,z,w ):pass
+def glProgramLocalParameter4dARB(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLdoubleArray)
-def glProgramLocalParameter4dvARB( target,index,params ):pass
+def glProgramLocalParameter4dvARB(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glProgramLocalParameter4fARB( target,index,x,y,z,w ):pass
+def glProgramLocalParameter4fARB(target,index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glProgramLocalParameter4fvARB( target,index,params ):pass
+def glProgramLocalParameter4fvARB(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLdoubleArray)
-def glGetProgramEnvParameterdvARB( target,index,params ):pass
+def glGetProgramEnvParameterdvARB(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glGetProgramEnvParameterfvARB( target,index,params ):pass
+def glGetProgramEnvParameterfvARB(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLdoubleArray)
-def glGetProgramLocalParameterdvARB( target,index,params ):pass
+def glGetProgramLocalParameterdvARB(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glGetProgramLocalParameterfvARB( target,index,params ):pass
+def glGetProgramLocalParameterfvARB(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetProgramivARB( target,pname,params ):pass
+def glGetProgramivARB(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetProgramStringARB( target,pname,string ):pass
+def glGetProgramStringARB(target,pname,string):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLdoubleArray)
-def glGetVertexAttribdvARB( index,pname,params ):pass
+def glGetVertexAttribdvARB(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetVertexAttribfvARB( index,pname,params ):pass
+def glGetVertexAttribfvARB(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetVertexAttribivARB( index,pname,params ):pass
+def glGetVertexAttribivARB(index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLvoidpArray)
-def glGetVertexAttribPointervARB( index,pname,pointer ):pass
+def glGetVertexAttribPointervARB(index,pname,pointer):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsProgramARB( program ):pass
+def glIsProgramARB(program):pass
 
 
 def glInitVertexProgramARB():

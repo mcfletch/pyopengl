@@ -14,40 +14,40 @@ GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET 0x82D9
 GL_MAX_VERTEX_ATTRIB_BINDINGS 0x82DA""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLsizei)
-def glBindVertexBuffer( bindingindex,buffer,offset,stride ):pass
+def glBindVertexBuffer(bindingindex,buffer,offset,stride):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLuint)
-def glVertexAttribFormat( attribindex,size,type,normalized,relativeoffset ):pass
+def glVertexAttribFormat(attribindex,size,type,normalized,relativeoffset):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLuint)
-def glVertexAttribIFormat( attribindex,size,type,relativeoffset ):pass
+def glVertexAttribIFormat(attribindex,size,type,relativeoffset):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLuint)
-def glVertexAttribLFormat( attribindex,size,type,relativeoffset ):pass
+def glVertexAttribLFormat(attribindex,size,type,relativeoffset):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint)
-def glVertexAttribBinding( attribindex,bindingindex ):pass
+def glVertexAttribBinding(attribindex,bindingindex):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint)
-def glVertexBindingDivisor( bindingindex,divisor ):pass
+def glVertexBindingDivisor(bindingindex,divisor):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLsizei)
-def glVertexArrayBindVertexBufferEXT( vaobj,bindingindex,buffer,offset,stride ):pass
+def glVertexArrayBindVertexBufferEXT(vaobj,bindingindex,buffer,offset,stride):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLuint)
-def glVertexArrayVertexAttribFormatEXT( vaobj,attribindex,size,type,normalized,relativeoffset ):pass
+def glVertexArrayVertexAttribFormatEXT(vaobj,attribindex,size,type,normalized,relativeoffset):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLuint)
-def glVertexArrayVertexAttribIFormatEXT( vaobj,attribindex,size,type,relativeoffset ):pass
+def glVertexArrayVertexAttribIFormatEXT(vaobj,attribindex,size,type,relativeoffset):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLuint)
-def glVertexArrayVertexAttribLFormatEXT( vaobj,attribindex,size,type,relativeoffset ):pass
+def glVertexArrayVertexAttribLFormatEXT(vaobj,attribindex,size,type,relativeoffset):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glVertexArrayVertexAttribBindingEXT( vaobj,attribindex,bindingindex ):pass
+def glVertexArrayVertexAttribBindingEXT(vaobj,attribindex,bindingindex):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glVertexArrayVertexBindingDivisorEXT( vaobj,bindingindex,divisor ):pass
+def glVertexArrayVertexBindingDivisorEXT(vaobj,bindingindex,divisor):pass
 
 
 def glInitVertexAttribBindingARB():

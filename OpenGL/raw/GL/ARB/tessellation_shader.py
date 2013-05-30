@@ -39,10 +39,10 @@ GL_TESS_EVALUATION_SHADER 0x8E87
 GL_TESS_CONTROL_SHADER 0x8E88""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glPatchParameteri( pname,value ):pass
+def glPatchParameteri(pname,value):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glPatchParameterfv( pname,values ):pass
+def glPatchParameterfv(pname,values):pass
 
 
 def glInitTessellationShaderARB():

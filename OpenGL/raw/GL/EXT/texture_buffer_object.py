@@ -17,7 +17,7 @@ glget.addGLGetConstant( GL_TEXTURE_BUFFER_DATA_STORE_BINDING_EXT, (1,) )
 glget.addGLGetConstant( GL_TEXTURE_BUFFER_FORMAT_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint)
-def glTexBufferEXT( target,internalformat,buffer ):pass
+def glTexBufferEXT(target,internalformat,buffer):pass
 
 
 def glInitTextureBufferObjectEXT():

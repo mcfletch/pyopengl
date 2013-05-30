@@ -34,16 +34,16 @@ glget.addGLGetConstant( GL_MAX_DEPTH_TEXTURE_SAMPLES, (1,) )
 glget.addGLGetConstant( GL_MAX_INTEGER_SAMPLES, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
-def glTexImage2DMultisample( target,samples,internalformat,width,height,fixedsamplelocations ):pass
+def glTexImage2DMultisample(target,samples,internalformat,width,height,fixedsamplelocations):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
-def glTexImage3DMultisample( target,samples,internalformat,width,height,depth,fixedsamplelocations ):pass
+def glTexImage3DMultisample(target,samples,internalformat,width,height,depth,fixedsamplelocations):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glGetMultisamplefv( pname,index,val ):pass
+def glGetMultisamplefv(pname,index,val):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLbitfield)
-def glSampleMaski( index,mask ):pass
+def glSampleMaski(index,mask):pass
 
 
 def glInitTextureMultisampleARB():

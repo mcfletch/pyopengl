@@ -57,34 +57,34 @@ glget.addGLGetConstant( GL_WEIGHT_ARRAY_STRIDE_ARB, (1,) )
 glget.addGLGetConstant( GL_WEIGHT_ARRAY_SIZE_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLint,arrays.GLbyteArray)
-def glWeightbvARB( size,weights ):pass
+def glWeightbvARB(size,weights):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLshortArray)
-def glWeightsvARB( size,weights ):pass
+def glWeightsvARB(size,weights):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLintArray)
-def glWeightivARB( size,weights ):pass
+def glWeightivARB(size,weights):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLfloatArray)
-def glWeightfvARB( size,weights ):pass
+def glWeightfvARB(size,weights):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLdoubleArray)
-def glWeightdvARB( size,weights ):pass
+def glWeightdvARB(size,weights):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLubyteArray)
-def glWeightubvARB( size,weights ):pass
+def glWeightubvARB(size,weights):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLushortArray)
-def glWeightusvARB( size,weights ):pass
+def glWeightusvARB(size,weights):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLuintArray)
-def glWeightuivARB( size,weights ):pass
+def glWeightuivARB(size,weights):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glWeightPointerARB( size,type,stride,pointer ):pass
+def glWeightPointerARB(size,type,stride,pointer):pass
 @_f
 @_p.types(None,_cs.GLint)
-def glVertexBlendARB( count ):pass
+def glVertexBlendARB(count):pass
 
 
 def glInitVertexBlendARB():

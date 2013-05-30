@@ -5,9 +5,12 @@ import ctypes
 EXTENSION_NAME = 'GL_EXT_vertex_weighting'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_vertex_weighting',False)
-_p.unpack_constants( """GL_MODELVIEW1_STACK_DEPTH_EXT 0x8502
+_p.unpack_constants( """GL_MODELVIEW0_STACK_DEPTH_EXT 0xBA3
+GL_MODELVIEW1_STACK_DEPTH_EXT 0x8502
+GL_MODELVIEW0_MATRIX_EXT 0xBA6
 GL_MODELVIEW1_MATRIX_EXT 0x8506
 GL_VERTEX_WEIGHTING_EXT 0x8509
+GL_MODELVIEW0_EXT 0x1700
 GL_MODELVIEW1_EXT 0x850A
 GL_CURRENT_VERTEX_WEIGHT_EXT 0x850B
 GL_VERTEX_WEIGHT_ARRAY_EXT 0x850C
@@ -23,13 +26,13 @@ glget.addGLGetConstant( GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT, (1,) )
 glget.addGLGetConstant( GL_VERTEX_WEIGHT_ARRAY_STRIDE_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLfloat)
-def glVertexWeightfEXT( weight ):pass
+def glVertexWeightfEXT(weight):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glVertexWeightfvEXT( weight ):pass
+def glVertexWeightfvEXT(weight):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glVertexWeightPointerEXT( size,type,stride,pointer ):pass
+def glVertexWeightPointerEXT(size,type,stride,pointer):pass
 
 
 def glInitVertexWeightingEXT():

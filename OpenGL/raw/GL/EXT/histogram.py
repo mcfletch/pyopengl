@@ -23,34 +23,34 @@ glget.addGLGetConstant( GL_HISTOGRAM_EXT, (1,) )
 glget.addGLGetConstant( GL_MINMAX_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetHistogramEXT( target,reset,format,type,values ):pass
+def glGetHistogramEXT(target,reset,format,type,values):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetHistogramParameterfvEXT( target,pname,params ):pass
+def glGetHistogramParameterfvEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetHistogramParameterivEXT( target,pname,params ):pass
+def glGetHistogramParameterivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetMinmaxEXT( target,reset,format,type,values ):pass
+def glGetMinmaxEXT(target,reset,format,type,values):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetMinmaxParameterfvEXT( target,pname,params ):pass
+def glGetMinmaxParameterfvEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetMinmaxParameterivEXT( target,pname,params ):pass
+def glGetMinmaxParameterivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLboolean)
-def glHistogramEXT( target,width,internalformat,sink ):pass
+def glHistogramEXT(target,width,internalformat,sink):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLboolean)
-def glMinmaxEXT( target,internalformat,sink ):pass
+def glMinmaxEXT(target,internalformat,sink):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glResetHistogramEXT( target ):pass
+def glResetHistogramEXT(target):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glResetMinmaxEXT( target ):pass
+def glResetMinmaxEXT(target):pass
 
 
 def glInitHistogramEXT():

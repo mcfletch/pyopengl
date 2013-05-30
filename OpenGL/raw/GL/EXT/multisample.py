@@ -28,10 +28,10 @@ glget.addGLGetConstant( GL_SAMPLE_ALPHA_TO_ONE_EXT, (1,) )
 glget.addGLGetConstant( GL_SAMPLE_MASK_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLclampf,_cs.GLboolean)
-def glSampleMaskEXT( value,invert ):pass
+def glSampleMaskEXT(value,invert):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glSamplePatternEXT( pattern ):pass
+def glSamplePatternEXT(pattern):pass
 
 
 def glInitMultisampleEXT():

@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glDrawArraysInstancedARB( mode,first,count,primcount ):pass
+def glDrawArraysInstancedARB(mode,first,count,primcount):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
-def glDrawElementsInstancedARB( mode,count,type,indices,primcount ):pass
+def glDrawElementsInstancedARB(mode,count,type,indices,primcount):pass
 
 
 def glInitDrawInstancedARB():

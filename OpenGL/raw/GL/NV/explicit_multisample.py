@@ -20,13 +20,13 @@ glget.addGLGetConstant( GL_TEXTURE_RENDERBUFFER_DATA_STORE_BINDING_NV, (1,) )
 glget.addGLGetConstant( GL_MAX_SAMPLE_MASK_WORDS_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
-def glGetMultisamplefvNV( pname,index,val ):pass
+def glGetMultisamplefvNV(pname,index,val):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLbitfield)
-def glSampleMaskIndexedNV( index,mask ):pass
+def glSampleMaskIndexedNV(index,mask):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glTexRenderbufferNV( target,renderbuffer ):pass
+def glTexRenderbufferNV(target,renderbuffer):pass
 
 
 def glInitExplicitMultisampleNV():

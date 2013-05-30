@@ -35,103 +35,103 @@ GL_FLOAT16_VEC3_NV 0x8FFA
 GL_FLOAT16_VEC4_NV 0x8FFB""", globals())
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint64EXT)
-def glUniform1i64NV( location,x ):pass
+def glUniform1i64NV(location,x):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint64EXT,_cs.GLint64EXT)
-def glUniform2i64NV( location,x,y ):pass
+def glUniform2i64NV(location,x,y):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint64EXT,_cs.GLint64EXT,_cs.GLint64EXT)
-def glUniform3i64NV( location,x,y,z ):pass
+def glUniform3i64NV(location,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint64EXT,_cs.GLint64EXT,_cs.GLint64EXT,_cs.GLint64EXT)
-def glUniform4i64NV( location,x,y,z,w ):pass
+def glUniform4i64NV(location,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLint64Array)
-def glUniform1i64vNV( location,count,value ):pass
+def glUniform1i64vNV(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLint64Array)
-def glUniform2i64vNV( location,count,value ):pass
+def glUniform2i64vNV(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLint64Array)
-def glUniform3i64vNV( location,count,value ):pass
+def glUniform3i64vNV(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLint64Array)
-def glUniform4i64vNV( location,count,value ):pass
+def glUniform4i64vNV(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint64EXT)
-def glUniform1ui64NV( location,x ):pass
+def glUniform1ui64NV(location,x):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint64EXT,_cs.GLuint64EXT)
-def glUniform2ui64NV( location,x,y ):pass
+def glUniform2ui64NV(location,x,y):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint64EXT,_cs.GLuint64EXT,_cs.GLuint64EXT)
-def glUniform3ui64NV( location,x,y,z ):pass
+def glUniform3ui64NV(location,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLuint64EXT,_cs.GLuint64EXT,_cs.GLuint64EXT,_cs.GLuint64EXT)
-def glUniform4ui64NV( location,x,y,z,w ):pass
+def glUniform4ui64NV(location,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuint64Array)
-def glUniform1ui64vNV( location,count,value ):pass
+def glUniform1ui64vNV(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuint64Array)
-def glUniform2ui64vNV( location,count,value ):pass
+def glUniform2ui64vNV(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuint64Array)
-def glUniform3ui64vNV( location,count,value ):pass
+def glUniform3ui64vNV(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,arrays.GLuint64Array)
-def glUniform4ui64vNV( location,count,value ):pass
+def glUniform4ui64vNV(location,count,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,arrays.GLint64Array)
-def glGetUniformi64vNV( program,location,params ):pass
+def glGetUniformi64vNV(program,location,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint64EXT)
-def glProgramUniform1i64NV( program,location,x ):pass
+def glProgramUniform1i64NV(program,location,x):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint64EXT,_cs.GLint64EXT)
-def glProgramUniform2i64NV( program,location,x,y ):pass
+def glProgramUniform2i64NV(program,location,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint64EXT,_cs.GLint64EXT,_cs.GLint64EXT)
-def glProgramUniform3i64NV( program,location,x,y,z ):pass
+def glProgramUniform3i64NV(program,location,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint64EXT,_cs.GLint64EXT,_cs.GLint64EXT,_cs.GLint64EXT)
-def glProgramUniform4i64NV( program,location,x,y,z,w ):pass
+def glProgramUniform4i64NV(program,location,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLint64Array)
-def glProgramUniform1i64vNV( program,location,count,value ):pass
+def glProgramUniform1i64vNV(program,location,count,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLint64Array)
-def glProgramUniform2i64vNV( program,location,count,value ):pass
+def glProgramUniform2i64vNV(program,location,count,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLint64Array)
-def glProgramUniform3i64vNV( program,location,count,value ):pass
+def glProgramUniform3i64vNV(program,location,count,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLint64Array)
-def glProgramUniform4i64vNV( program,location,count,value ):pass
+def glProgramUniform4i64vNV(program,location,count,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLuint64EXT)
-def glProgramUniform1ui64NV( program,location,x ):pass
+def glProgramUniform1ui64NV(program,location,x):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLuint64EXT,_cs.GLuint64EXT)
-def glProgramUniform2ui64NV( program,location,x,y ):pass
+def glProgramUniform2ui64NV(program,location,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLuint64EXT,_cs.GLuint64EXT,_cs.GLuint64EXT)
-def glProgramUniform3ui64NV( program,location,x,y,z ):pass
+def glProgramUniform3ui64NV(program,location,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLuint64EXT,_cs.GLuint64EXT,_cs.GLuint64EXT,_cs.GLuint64EXT)
-def glProgramUniform4ui64NV( program,location,x,y,z,w ):pass
+def glProgramUniform4ui64NV(program,location,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLuint64Array)
-def glProgramUniform1ui64vNV( program,location,count,value ):pass
+def glProgramUniform1ui64vNV(program,location,count,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLuint64Array)
-def glProgramUniform2ui64vNV( program,location,count,value ):pass
+def glProgramUniform2ui64vNV(program,location,count,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLuint64Array)
-def glProgramUniform3ui64vNV( program,location,count,value ):pass
+def glProgramUniform3ui64vNV(program,location,count,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,arrays.GLuint64Array)
-def glProgramUniform4ui64vNV( program,location,count,value ):pass
+def glProgramUniform4ui64vNV(program,location,count,value):pass
 
 
 def glInitGpuShader5NV():

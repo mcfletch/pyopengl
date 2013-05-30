@@ -8,5 +8,5 @@ def _f( function ):
 _p.unpack_constants( """GL_VERTEX_ATTRIB_ARRAY_DIVISOR 0x88FE""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint)
-def glVertexAttribDivisor( index,divisor ):pass
+def glVertexAttribDivisor(index,divisor):pass
 

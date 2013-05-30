@@ -9,7 +9,7 @@ _p.unpack_constants( """GL_PIXEL_TEX_GEN_SGIX 0x8139
 GL_PIXEL_TEX_GEN_MODE_SGIX 0x832B""", globals())
 @_f
 @_p.types(None,_cs.GLenum)
-def glPixelTexGenSGIX( mode ):pass
+def glPixelTexGenSGIX(mode):pass
 
 
 def glInitPixelTextureSGIX():

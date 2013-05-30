@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray,arrays.GLsizeiArray,_cs.GLsizei)
-def glMultiDrawArraysEXT( mode,first,count,primcount ):pass
+def glMultiDrawArraysEXT(mode,first,count,primcount):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLsizeiArray,_cs.GLenum,arrays.GLvoidpArray,_cs.GLsizei)
-def glMultiDrawElementsEXT( mode,count,type,indices,primcount ):pass
+def glMultiDrawElementsEXT(mode,count,type,indices,primcount):pass
 
 
 def glInitMultiDrawArraysEXT():

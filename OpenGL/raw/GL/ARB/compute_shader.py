@@ -25,10 +25,10 @@ GL_DISPATCH_INDIRECT_BUFFER_BINDING 0x90EF
 GL_COMPUTE_SHADER_BIT 0x20""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glDispatchCompute( num_groups_x,num_groups_y,num_groups_z ):pass
+def glDispatchCompute(num_groups_x,num_groups_y,num_groups_z):pass
 @_f
 @_p.types(None,_cs.GLintptr)
-def glDispatchComputeIndirect( indirect ):pass
+def glDispatchComputeIndirect(indirect):pass
 
 
 def glInitComputeShaderARB():

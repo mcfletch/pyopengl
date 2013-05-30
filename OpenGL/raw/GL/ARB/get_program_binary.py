@@ -11,13 +11,13 @@ GL_NUM_PROGRAM_BINARY_FORMATS 0x87FE
 GL_PROGRAM_BINARY_FORMATS 0x87FF""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLuintArray,ctypes.c_void_p)
-def glGetProgramBinary( program,bufSize,length,binaryFormat,binary ):pass
+def glGetProgramBinary(program,bufSize,length,binaryFormat,binary):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
-def glProgramBinary( program,binaryFormat,binary,length ):pass
+def glProgramBinary(program,binaryFormat,binary,length):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
-def glProgramParameteri( program,pname,value ):pass
+def glProgramParameteri(program,pname,value):pass
 
 
 def glInitGetProgramBinaryARB():

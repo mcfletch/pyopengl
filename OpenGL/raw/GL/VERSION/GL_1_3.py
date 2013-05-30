@@ -124,140 +124,140 @@ glget.addGLGetConstant( GL_TRANSPOSE_TEXTURE_MATRIX, (4,4) )
 glget.addGLGetConstant( GL_TRANSPOSE_COLOR_MATRIX, (4,4) )
 @_f
 @_p.types(None,_cs.GLenum)
-def glActiveTexture( texture ):pass
+def glActiveTexture(texture):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLboolean)
-def glSampleCoverage( value,invert ):pass
+def glSampleCoverage(value,invert):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexImage3D( target,level,internalformat,width,height,depth,border,imageSize,data ):pass
+def glCompressedTexImage3D(target,level,internalformat,width,height,depth,border,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexImage2D( target,level,internalformat,width,height,border,imageSize,data ):pass
+def glCompressedTexImage2D(target,level,internalformat,width,height,border,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLint,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexImage1D( target,level,internalformat,width,border,imageSize,data ):pass
+def glCompressedTexImage1D(target,level,internalformat,width,border,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexSubImage3D( target,level,xoffset,yoffset,zoffset,width,height,depth,format,imageSize,data ):pass
+def glCompressedTexSubImage3D(target,level,xoffset,yoffset,zoffset,width,height,depth,format,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexSubImage2D( target,level,xoffset,yoffset,width,height,format,imageSize,data ):pass
+def glCompressedTexSubImage2D(target,level,xoffset,yoffset,width,height,format,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glCompressedTexSubImage1D( target,level,xoffset,width,format,imageSize,data ):pass
+def glCompressedTexSubImage1D(target,level,xoffset,width,format,imageSize,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,ctypes.c_void_p)
-def glGetCompressedTexImage( target,level,img ):pass
+def glGetCompressedTexImage(target,level,img):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glClientActiveTexture( texture ):pass
+def glClientActiveTexture(texture):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble)
-def glMultiTexCoord1d( target,s ):pass
+def glMultiTexCoord1d(target,s):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glMultiTexCoord1dv( target,v ):pass
+def glMultiTexCoord1dv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glMultiTexCoord1f( target,s ):pass
+def glMultiTexCoord1f(target,s):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glMultiTexCoord1fv( target,v ):pass
+def glMultiTexCoord1fv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glMultiTexCoord1i( target,s ):pass
+def glMultiTexCoord1i(target,s):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glMultiTexCoord1iv( target,v ):pass
+def glMultiTexCoord1iv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort)
-def glMultiTexCoord1s( target,s ):pass
+def glMultiTexCoord1s(target,s):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glMultiTexCoord1sv( target,v ):pass
+def glMultiTexCoord1sv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble)
-def glMultiTexCoord2d( target,s,t ):pass
+def glMultiTexCoord2d(target,s,t):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glMultiTexCoord2dv( target,v ):pass
+def glMultiTexCoord2dv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat)
-def glMultiTexCoord2f( target,s,t ):pass
+def glMultiTexCoord2f(target,s,t):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glMultiTexCoord2fv( target,v ):pass
+def glMultiTexCoord2fv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint)
-def glMultiTexCoord2i( target,s,t ):pass
+def glMultiTexCoord2i(target,s,t):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glMultiTexCoord2iv( target,v ):pass
+def glMultiTexCoord2iv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort)
-def glMultiTexCoord2s( target,s,t ):pass
+def glMultiTexCoord2s(target,s,t):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glMultiTexCoord2sv( target,v ):pass
+def glMultiTexCoord2sv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glMultiTexCoord3d( target,s,t,r ):pass
+def glMultiTexCoord3d(target,s,t,r):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glMultiTexCoord3dv( target,v ):pass
+def glMultiTexCoord3dv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glMultiTexCoord3f( target,s,t,r ):pass
+def glMultiTexCoord3f(target,s,t,r):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glMultiTexCoord3fv( target,v ):pass
+def glMultiTexCoord3fv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint)
-def glMultiTexCoord3i( target,s,t,r ):pass
+def glMultiTexCoord3i(target,s,t,r):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glMultiTexCoord3iv( target,v ):pass
+def glMultiTexCoord3iv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glMultiTexCoord3s( target,s,t,r ):pass
+def glMultiTexCoord3s(target,s,t,r):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glMultiTexCoord3sv( target,v ):pass
+def glMultiTexCoord3sv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glMultiTexCoord4d( target,s,t,r,q ):pass
+def glMultiTexCoord4d(target,s,t,r,q):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
-def glMultiTexCoord4dv( target,v ):pass
+def glMultiTexCoord4dv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glMultiTexCoord4f( target,s,t,r,q ):pass
+def glMultiTexCoord4f(target,s,t,r,q):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glMultiTexCoord4fv( target,v ):pass
+def glMultiTexCoord4fv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glMultiTexCoord4i( target,s,t,r,q ):pass
+def glMultiTexCoord4i(target,s,t,r,q):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glMultiTexCoord4iv( target,v ):pass
+def glMultiTexCoord4iv(target,v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLshort,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glMultiTexCoord4s( target,s,t,r,q ):pass
+def glMultiTexCoord4s(target,s,t,r,q):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLshortArray)
-def glMultiTexCoord4sv( target,v ):pass
+def glMultiTexCoord4sv(target,v):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glLoadTransposeMatrixf( m ):pass
+def glLoadTransposeMatrixf(m):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glLoadTransposeMatrixd( m ):pass
+def glLoadTransposeMatrixd(m):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glMultTransposeMatrixf( m ):pass
+def glMultTransposeMatrixf(m):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glMultTransposeMatrixd( m ):pass
+def glMultTransposeMatrixd(m):pass
 

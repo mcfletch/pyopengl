@@ -9,7 +9,7 @@ _p.unpack_constants( """GL_PERTURB_EXT 0x85AE
 GL_TEXTURE_NORMAL_EXT 0x85AF""", globals())
 @_f
 @_p.types(None,_cs.GLenum)
-def glTextureNormalEXT( mode ):pass
+def glTextureNormalEXT(mode):pass
 
 
 def glInitTexturePerturbNormalEXT():

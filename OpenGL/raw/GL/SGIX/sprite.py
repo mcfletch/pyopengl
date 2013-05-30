@@ -14,16 +14,16 @@ GL_SPRITE_OBJECT_ALIGNED_SGIX 0x814D
 GL_SPRITE_EYE_ALIGNED_SGIX 0x814E""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glSpriteParameterfSGIX( pname,param ):pass
+def glSpriteParameterfSGIX(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glSpriteParameterfvSGIX( pname,params ):pass
+def glSpriteParameterfvSGIX(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glSpriteParameteriSGIX( pname,param ):pass
+def glSpriteParameteriSGIX(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
-def glSpriteParameterivSGIX( pname,params ):pass
+def glSpriteParameterivSGIX(pname,params):pass
 
 
 def glInitSpriteSGIX():

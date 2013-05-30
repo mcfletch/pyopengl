@@ -15,10 +15,10 @@ GL_DETAIL_TEXTURE_MODE_SGIS 0x809B
 GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS 0x809C""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLfloatArray)
-def glDetailTexFuncSGIS( target,n,points ):pass
+def glDetailTexFuncSGIS(target,n,points):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glGetDetailTexFuncSGIS( target,points ):pass
+def glGetDetailTexFuncSGIS(target,points):pass
 
 
 def glInitDetailTextureSGIS():

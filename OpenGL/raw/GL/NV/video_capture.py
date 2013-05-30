@@ -37,40 +37,40 @@ GL_VIDEO_CAPTURE_SURFACE_ORIGIN_NV 0x903C""", globals())
 glget.addGLGetConstant( GL_VIDEO_BUFFER_BINDING_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLuint)
-def glBeginVideoCaptureNV( video_capture_slot ):pass
+def glBeginVideoCaptureNV(video_capture_slot):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLintptrARB)
-def glBindVideoCaptureStreamBufferNV( video_capture_slot,stream,frame_region,offset ):pass
+def glBindVideoCaptureStreamBufferNV(video_capture_slot,stream,frame_region,offset):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLuint)
-def glBindVideoCaptureStreamTextureNV( video_capture_slot,stream,frame_region,target,texture ):pass
+def glBindVideoCaptureStreamTextureNV(video_capture_slot,stream,frame_region,target,texture):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glEndVideoCaptureNV( video_capture_slot ):pass
+def glEndVideoCaptureNV(video_capture_slot):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetVideoCaptureivNV( video_capture_slot,pname,params ):pass
+def glGetVideoCaptureivNV(video_capture_slot,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetVideoCaptureStreamivNV( video_capture_slot,stream,pname,params ):pass
+def glGetVideoCaptureStreamivNV(video_capture_slot,stream,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetVideoCaptureStreamfvNV( video_capture_slot,stream,pname,params ):pass
+def glGetVideoCaptureStreamfvNV(video_capture_slot,stream,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLdoubleArray)
-def glGetVideoCaptureStreamdvNV( video_capture_slot,stream,pname,params ):pass
+def glGetVideoCaptureStreamdvNV(video_capture_slot,stream,pname,params):pass
 @_f
 @_p.types(_cs.GLenum,_cs.GLuint,arrays.GLuintArray,arrays.GLuint64Array)
-def glVideoCaptureNV( video_capture_slot,sequence_num,capture_time ):pass
+def glVideoCaptureNV(video_capture_slot,sequence_num,capture_time):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glVideoCaptureStreamParameterivNV( video_capture_slot,stream,pname,params ):pass
+def glVideoCaptureStreamParameterivNV(video_capture_slot,stream,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glVideoCaptureStreamParameterfvNV( video_capture_slot,stream,pname,params ):pass
+def glVideoCaptureStreamParameterfvNV(video_capture_slot,stream,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLdoubleArray)
-def glVideoCaptureStreamParameterdvNV( video_capture_slot,stream,pname,params ):pass
+def glVideoCaptureStreamParameterdvNV(video_capture_slot,stream,pname,params):pass
 
 
 def glInitVideoCaptureNV():

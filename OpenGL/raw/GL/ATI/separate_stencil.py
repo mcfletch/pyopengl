@@ -11,10 +11,10 @@ GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI 0x8802
 GL_STENCIL_BACK_PASS_DEPTH_PASS_ATI 0x8803""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glStencilOpSeparateATI( face,sfail,dpfail,dppass ):pass
+def glStencilOpSeparateATI(face,sfail,dpfail,dppass):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLuint)
-def glStencilFuncSeparateATI( frontfunc,backfunc,ref,mask ):pass
+def glStencilFuncSeparateATI(frontfunc,backfunc,ref,mask):pass
 
 
 def glInitSeparateStencilATI():

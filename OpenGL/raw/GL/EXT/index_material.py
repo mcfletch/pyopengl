@@ -10,7 +10,7 @@ GL_INDEX_MATERIAL_PARAMETER_EXT 0x81B9
 GL_INDEX_MATERIAL_FACE_EXT 0x81BA""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
-def glIndexMaterialEXT( face,mode ):pass
+def glIndexMaterialEXT(face,mode):pass
 
 
 def glInitIndexMaterialEXT():

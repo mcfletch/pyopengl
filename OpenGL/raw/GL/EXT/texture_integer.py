@@ -54,22 +54,22 @@ GL_LUMINANCE_ALPHA_INTEGER_EXT 0x8D9D
 GL_RGBA_INTEGER_MODE_EXT 0x8D9E""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glTexParameterIivEXT( target,pname,params ):pass
+def glTexParameterIivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
-def glTexParameterIuivEXT( target,pname,params ):pass
+def glTexParameterIuivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetTexParameterIivEXT( target,pname,params ):pass
+def glGetTexParameterIivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
-def glGetTexParameterIuivEXT( target,pname,params ):pass
+def glGetTexParameterIuivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint)
-def glClearColorIiEXT( red,green,blue,alpha ):pass
+def glClearColorIiEXT(red,green,blue,alpha):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glClearColorIuiEXT( red,green,blue,alpha ):pass
+def glClearColorIuiEXT(red,green,blue,alpha):pass
 
 
 def glInitTextureIntegerEXT():

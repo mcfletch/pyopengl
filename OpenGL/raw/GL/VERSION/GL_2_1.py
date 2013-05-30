@@ -30,20 +30,20 @@ GL_COMPRESSED_SLUMINANCE 0x8C4A
 GL_COMPRESSED_SLUMINANCE_ALPHA 0x8C4B""", globals())
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix2x3fv( location,count,transpose,value ):pass
+def glUniformMatrix2x3fv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix3x2fv( location,count,transpose,value ):pass
+def glUniformMatrix3x2fv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix2x4fv( location,count,transpose,value ):pass
+def glUniformMatrix2x4fv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix4x2fv( location,count,transpose,value ):pass
+def glUniformMatrix4x2fv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix3x4fv( location,count,transpose,value ):pass
+def glUniformMatrix3x4fv(location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glUniformMatrix4x3fv( location,count,transpose,value ):pass
+def glUniformMatrix4x3fv(location,count,transpose,value):pass
 

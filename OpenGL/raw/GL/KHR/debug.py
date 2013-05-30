@@ -45,34 +45,34 @@ GL_DEBUG_OUTPUT 0x92E0
 GL_CONTEXT_FLAG_DEBUG_BIT 0x2""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray,_cs.GLboolean)
-def glDebugMessageControl( source,type,severity,count,ids,enabled ):pass
+def glDebugMessageControl(source,type,severity,count,ids,enabled):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLsizei,arrays.GLcharArray)
-def glDebugMessageInsert( source,type,id,severity,length,buf ):pass
+def glDebugMessageInsert(source,type,id,severity,length,buf):pass
 @_f
 @_p.types(None,_cs.GLDEBUGPROC,ctypes.POINTER(_cs.void))
-def glDebugMessageCallback( callback,userParam ):pass
+def glDebugMessageCallback(callback,userParam):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,arrays.GLuintArray,arrays.GLuintArray,arrays.GLuintArray,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetDebugMessageLog( count,bufsize,sources,types,ids,severities,lengths,messageLog ):pass
+def glGetDebugMessageLog(count,bufsize,sources,types,ids,severities,lengths,messageLog):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLcharArray)
-def glPushDebugGroup( source,id,length,message ):pass
+def glPushDebugGroup(source,id,length,message):pass
 @_f
 @_p.types(None,)
-def glPopDebugGroup(  ):pass
+def glPopDebugGroup():pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLcharArray)
-def glObjectLabel( identifier,name,length,label ):pass
+def glObjectLabel(identifier,name,length,label):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetObjectLabel( identifier,name,bufSize,length,label ):pass
+def glGetObjectLabel(identifier,name,bufSize,length,label):pass
 @_f
 @_p.types(None,ctypes.POINTER(_cs.void),_cs.GLsizei,arrays.GLcharArray)
-def glObjectPtrLabel( ptr,length,label ):pass
+def glObjectPtrLabel(ptr,length,label):pass
 @_f
 @_p.types(None,ctypes.POINTER(_cs.void),_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetObjectPtrLabel( ptr,bufSize,length,label ):pass
+def glGetObjectPtrLabel(ptr,bufSize,length,label):pass
 
 
 def glInitDebugKHR():

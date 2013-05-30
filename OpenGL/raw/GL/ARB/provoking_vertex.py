@@ -13,7 +13,7 @@ glget.addGLGetConstant( GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION, (1,) )
 glget.addGLGetConstant( GL_PROVOKING_VERTEX, (1,) )
 @_f
 @_p.types(None,_cs.GLenum)
-def glProvokingVertex( mode ):pass
+def glProvokingVertex(mode):pass
 
 
 def glInitProvokingVertexARB():

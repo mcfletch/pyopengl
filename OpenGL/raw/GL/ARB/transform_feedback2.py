@@ -7,29 +7,31 @@ def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_transform_feedback2',False)
 _p.unpack_constants( """GL_TRANSFORM_FEEDBACK 0x8E22
 GL_TRANSFORM_FEEDBACK_PAUSED 0x8E23
+GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED 0x8E23
 GL_TRANSFORM_FEEDBACK_ACTIVE 0x8E24
+GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE 0x8E24
 GL_TRANSFORM_FEEDBACK_BINDING 0x8E25""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindTransformFeedback( target,id ):pass
+def glBindTransformFeedback(target,id):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteTransformFeedbacks( n,ids ):pass
+def glDeleteTransformFeedbacks(n,ids):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenTransformFeedbacks( n,ids ):pass
+def glGenTransformFeedbacks(n,ids):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsTransformFeedback( id ):pass
+def glIsTransformFeedback(id):pass
 @_f
 @_p.types(None,)
-def glPauseTransformFeedback(  ):pass
+def glPauseTransformFeedback():pass
 @_f
 @_p.types(None,)
-def glResumeTransformFeedback(  ):pass
+def glResumeTransformFeedback():pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glDrawTransformFeedback( mode,id ):pass
+def glDrawTransformFeedback(mode,id):pass
 
 
 def glInitTransformFeedback2ARB():

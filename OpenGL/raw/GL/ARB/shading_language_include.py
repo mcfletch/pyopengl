@@ -10,22 +10,22 @@ GL_NAMED_STRING_LENGTH_ARB 0x8DE9
 GL_NAMED_STRING_TYPE_ARB 0x8DEA""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLcharArray,_cs.GLint,arrays.GLcharArray)
-def glNamedStringARB( type,namelen,name,stringlen,string ):pass
+def glNamedStringARB(type,namelen,name,stringlen,string):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLcharArray)
-def glDeleteNamedStringARB( namelen,name ):pass
+def glDeleteNamedStringARB(namelen,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.POINTER( ctypes.POINTER( _cs.GLchar )),arrays.GLintArray)
-def glCompileShaderIncludeARB( shader,count,path,length ):pass
+def glCompileShaderIncludeARB(shader,count,path,length):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLint,arrays.GLcharArray)
-def glIsNamedStringARB( namelen,name ):pass
+def glIsNamedStringARB(namelen,name):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLcharArray,_cs.GLsizei,arrays.GLintArray,arrays.GLcharArray)
-def glGetNamedStringARB( namelen,name,bufSize,stringlen,string ):pass
+def glGetNamedStringARB(namelen,name,bufSize,stringlen,string):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLcharArray,_cs.GLenum,arrays.GLintArray)
-def glGetNamedStringivARB( namelen,name,pname,params ):pass
+def glGetNamedStringivARB(namelen,name,pname,params):pass
 
 
 def glInitShadingLanguageIncludeARB():

@@ -11,10 +11,10 @@ GL_LINEAR_SHARPEN_COLOR_SGIS 0x80AF
 GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS 0x80B0""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLfloatArray)
-def glSharpenTexFuncSGIS( target,n,points ):pass
+def glSharpenTexFuncSGIS(target,n,points):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
-def glGetSharpenTexFuncSGIS( target,points ):pass
+def glGetSharpenTexFuncSGIS(target,points):pass
 
 
 def glInitSharpenTextureSGIS():

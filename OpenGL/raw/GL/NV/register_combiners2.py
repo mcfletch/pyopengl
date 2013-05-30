@@ -9,10 +9,10 @@ _p.unpack_constants( """GL_PER_STAGE_CONSTANTS_NV 0x8535""", globals())
 glget.addGLGetConstant( GL_PER_STAGE_CONSTANTS_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glCombinerStageParameterfvNV( stage,pname,params ):pass
+def glCombinerStageParameterfvNV(stage,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetCombinerStageParameterfvNV( stage,pname,params ):pass
+def glGetCombinerStageParameterfvNV(stage,pname,params):pass
 
 
 def glInitRegisterCombiners2NV():

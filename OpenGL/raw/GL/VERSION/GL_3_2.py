@@ -29,11 +29,11 @@ GL_MAX_FRAGMENT_INPUT_COMPONENTS 0x9125
 GL_CONTEXT_PROFILE_MASK 0x9126""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLint64Array)
-def glGetInteger64i_v( target,index,data ):pass
+def glGetInteger64i_v(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLint64Array)
-def glGetBufferParameteri64v( target,pname,params ):pass
+def glGetBufferParameteri64v(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint)
-def glFramebufferTexture( target,attachment,texture,level ):pass
+def glFramebufferTexture(target,attachment,texture,level):pass
 

@@ -9,10 +9,10 @@ _p.unpack_constants( """GL_FILTER4_SGIS 0x8146
 GL_TEXTURE_FILTER4_SIZE_SGIS 0x8147""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetTexFilterFuncSGIS( target,filter,weights ):pass
+def glGetTexFilterFuncSGIS(target,filter,weights):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLfloatArray)
-def glTexFilterFuncSGIS( target,filter,n,weights ):pass
+def glTexFilterFuncSGIS(target,filter,n,weights):pass
 
 
 def glInitTextureFilter4SGIS():

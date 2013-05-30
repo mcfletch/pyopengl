@@ -11,10 +11,10 @@ GL_QUERY_BY_REGION_WAIT_NV 0x8E15
 GL_QUERY_BY_REGION_NO_WAIT_NV 0x8E16""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glBeginConditionalRenderNV( id,mode ):pass
+def glBeginConditionalRenderNV(id,mode):pass
 @_f
 @_p.types(None,)
-def glEndConditionalRenderNV(  ):pass
+def glEndConditionalRenderNV():pass
 
 
 def glInitConditionalRenderNV():

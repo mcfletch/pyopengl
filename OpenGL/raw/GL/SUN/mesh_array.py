@@ -9,7 +9,7 @@ _p.unpack_constants( """GL_QUAD_MESH_SUN 0x8614
 GL_TRIANGLE_MESH_SUN 0x8615""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glDrawMeshArraysSUN( mode,first,count,width ):pass
+def glDrawMeshArraysSUN(mode,first,count,width):pass
 
 
 def glInitMeshArraySUN():

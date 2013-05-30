@@ -34,40 +34,40 @@ GL_LAYER_NV 0x8DAA""", globals())
 glget.addGLGetConstant( GL_TRANSFORM_FEEDBACK_BUFFER_MODE_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum)
-def glBeginTransformFeedbackNV( primitiveMode ):pass
+def glBeginTransformFeedbackNV(primitiveMode):pass
 @_f
 @_p.types(None,)
-def glEndTransformFeedbackNV(  ):pass
+def glEndTransformFeedbackNV():pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray,_cs.GLenum)
-def glTransformFeedbackAttribsNV( count,attribs,bufferMode ):pass
+def glTransformFeedbackAttribsNV(count,attribs,bufferMode):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
-def glBindBufferRangeNV( target,index,buffer,offset,size ):pass
+def glBindBufferRangeNV(target,index,buffer,offset,size):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLintptr)
-def glBindBufferOffsetNV( target,index,buffer,offset ):pass
+def glBindBufferOffsetNV(target,index,buffer,offset):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint)
-def glBindBufferBaseNV( target,index,buffer ):pass
+def glBindBufferBaseNV(target,index,buffer):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLintArray,_cs.GLenum)
-def glTransformFeedbackVaryingsNV( program,count,locations,bufferMode ):pass
+def glTransformFeedbackVaryingsNV(program,count,locations,bufferMode):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLcharArray)
-def glActiveVaryingNV( program,name ):pass
+def glActiveVaryingNV(program,name):pass
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,arrays.GLcharArray)
-def glGetVaryingLocationNV( program,name ):pass
+def glGetVaryingLocationNV(program,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLsizeiArray,arrays.GLuintArray,arrays.GLcharArray)
-def glGetActiveVaryingNV( program,index,bufSize,length,size,type,name ):pass
+def glGetActiveVaryingNV(program,index,bufSize,length,size,type,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,arrays.GLintArray)
-def glGetTransformFeedbackVaryingNV( program,index,location ):pass
+def glGetTransformFeedbackVaryingNV(program,index,location):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLintArray,_cs.GLsizei,arrays.GLintArray,_cs.GLenum)
-def glTransformFeedbackStreamAttribsNV( count,attribs,nbuffers,bufstreams,bufferMode ):pass
+def glTransformFeedbackStreamAttribsNV(count,attribs,nbuffers,bufstreams,bufferMode):pass
 
 
 def glInitTransformFeedbackNV():

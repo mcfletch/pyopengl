@@ -18,22 +18,22 @@ glget.addGLGetConstant( GL_MAX_TEXTURE_IMAGE_UNITS_NV, (1,) )
 glget.addGLGetConstant( GL_FRAGMENT_PROGRAM_BINDING_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glProgramNamedParameter4fNV( id,len,name,x,y,z,w ):pass
+def glProgramNamedParameter4fNV(id,len,name,x,y,z,w):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray,arrays.GLfloatArray)
+def glProgramNamedParameter4fvNV(id,len,name,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glProgramNamedParameter4dNV( id,len,name,x,y,z,w ):pass
-@_f
-@_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray,arrays.GLfloatArray)
-def glProgramNamedParameter4fvNV( id,len,name,v ):pass
+def glProgramNamedParameter4dNV(id,len,name,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray,arrays.GLdoubleArray)
-def glProgramNamedParameter4dvNV( id,len,name,v ):pass
+def glProgramNamedParameter4dvNV(id,len,name,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray,arrays.GLfloatArray)
-def glGetProgramNamedParameterfvNV( id,len,name,params ):pass
+def glGetProgramNamedParameterfvNV(id,len,name,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray,arrays.GLdoubleArray)
-def glGetProgramNamedParameterdvNV( id,len,name,params ):pass
+def glGetProgramNamedParameterdvNV(id,len,name,params):pass
 
 
 def glInitFragmentProgramNV():

@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glDrawArraysInstancedEXT( mode,start,count,primcount ):pass
+def glDrawArraysInstancedEXT(mode,start,count,primcount):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
-def glDrawElementsInstancedEXT( mode,count,type,indices,primcount ):pass
+def glDrawElementsInstancedEXT(mode,count,type,indices,primcount):pass
 
 
 def glInitDrawInstancedEXT():

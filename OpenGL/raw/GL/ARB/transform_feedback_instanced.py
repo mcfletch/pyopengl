@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei)
-def glDrawTransformFeedbackInstanced( mode,id,instancecount ):pass
+def glDrawTransformFeedbackInstanced(mode,id,instancecount):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei)
-def glDrawTransformFeedbackStreamInstanced( mode,id,stream,instancecount ):pass
+def glDrawTransformFeedbackStreamInstanced(mode,id,stream,instancecount):pass
 
 
 def glInitTransformFeedbackInstancedARB():

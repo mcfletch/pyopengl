@@ -7,10 +7,11 @@ def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_framebuffer_blit',False)
 _p.unpack_constants( """GL_READ_FRAMEBUFFER_EXT 0x8CA8
 GL_DRAW_FRAMEBUFFER_EXT 0x8CA9
+GL_DRAW_FRAMEBUFFER_BINDING_EXT 0x8CA6
 GL_READ_FRAMEBUFFER_BINDING_EXT 0x8CAA""", globals())
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLbitfield,_cs.GLenum)
-def glBlitFramebufferEXT( srcX0,srcY0,srcX1,srcY1,dstX0,dstY0,dstX1,dstY1,mask,filter ):pass
+def glBlitFramebufferEXT(srcX0,srcY0,srcX1,srcY1,dstX0,dstY0,dstX1,dstY1,mask,filter):pass
 
 
 def glInitFramebufferBlitEXT():

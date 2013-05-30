@@ -12,13 +12,13 @@ GL_VERTEX_ARRAY_OBJECT_AMD 0x9154
 GL_SAMPLER_OBJECT_AMD 0x9155""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLuintArray)
-def glGenNamesAMD( identifier,num,names ):pass
+def glGenNamesAMD(identifier,num,names):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLuintArray)
-def glDeleteNamesAMD( identifier,num,names ):pass
+def glDeleteNamesAMD(identifier,num,names):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLenum,_cs.GLuint)
-def glIsNameAMD( identifier,name ):pass
+def glIsNameAMD(identifier,name):pass
 
 
 def glInitNameGenDeleteAMD():

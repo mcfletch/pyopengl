@@ -11,34 +11,34 @@ GL_SURFACE_MAPPED_NV 0x8700
 GL_WRITE_DISCARD_NV 0x88BE""", globals())
 @_f
 @_p.types(None,ctypes.c_void_p,ctypes.c_void_p)
-def glVDPAUInitNV( vdpDevice,getProcAddress ):pass
+def glVDPAUInitNV(vdpDevice,getProcAddress):pass
 @_f
 @_p.types(None,)
-def glVDPAUFiniNV(  ):pass
+def glVDPAUFiniNV():pass
 @_f
 @_p.types(_cs.GLvdpauSurfaceNV,ctypes.c_void_p,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray)
-def glVDPAURegisterVideoSurfaceNV( vdpSurface,target,numTextureNames,textureNames ):pass
+def glVDPAURegisterVideoSurfaceNV(vdpSurface,target,numTextureNames,textureNames):pass
 @_f
 @_p.types(_cs.GLvdpauSurfaceNV,ctypes.c_void_p,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray)
-def glVDPAURegisterOutputSurfaceNV( vdpSurface,target,numTextureNames,textureNames ):pass
+def glVDPAURegisterOutputSurfaceNV(vdpSurface,target,numTextureNames,textureNames):pass
 @_f
 @_p.types(None,_cs.GLvdpauSurfaceNV)
-def glVDPAUIsSurfaceNV( surface ):pass
+def glVDPAUIsSurfaceNV(surface):pass
 @_f
 @_p.types(None,_cs.GLvdpauSurfaceNV)
-def glVDPAUUnregisterSurfaceNV( surface ):pass
+def glVDPAUUnregisterSurfaceNV(surface):pass
 @_f
 @_p.types(None,_cs.GLvdpauSurfaceNV,_cs.GLenum,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray)
-def glVDPAUGetSurfaceivNV( surface,pname,bufSize,length,values ):pass
+def glVDPAUGetSurfaceivNV(surface,pname,bufSize,length,values):pass
 @_f
 @_p.types(None,_cs.GLvdpauSurfaceNV,_cs.GLenum)
-def glVDPAUSurfaceAccessNV( surface,access ):pass
+def glVDPAUSurfaceAccessNV(surface,access):pass
 @_f
 @_p.types(None,_cs.GLsizei,ctypes.POINTER(_cs.GLvdpauSurfaceNV))
-def glVDPAUMapSurfacesNV( numSurfaces,surfaces ):pass
+def glVDPAUMapSurfacesNV(numSurfaces,surfaces):pass
 @_f
 @_p.types(None,_cs.GLsizei,ctypes.POINTER(_cs.GLvdpauSurfaceNV))
-def glVDPAUUnmapSurfacesNV( numSurface,surfaces ):pass
+def glVDPAUUnmapSurfacesNV(numSurface,surfaces):pass
 
 
 def glInitVdpauInteropNV():

@@ -8,34 +8,34 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble)
-def glVertexAttribL1d( index,x ):pass
+def glVertexAttribL1d(index,x):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttribL2d( index,x,y ):pass
+def glVertexAttribL2d(index,x,y):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttribL3d( index,x,y,z ):pass
+def glVertexAttribL3d(index,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glVertexAttribL4d( index,x,y,z,w ):pass
+def glVertexAttribL4d(index,x,y,z,w):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttribL1dv( index,v ):pass
+def glVertexAttribL1dv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttribL2dv( index,v ):pass
+def glVertexAttribL2dv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttribL3dv( index,v ):pass
+def glVertexAttribL3dv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVertexAttribL4dv( index,v ):pass
+def glVertexAttribL4dv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glVertexAttribLPointer( index,size,type,stride,pointer ):pass
+def glVertexAttribLPointer(index,size,type,stride,pointer):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLdoubleArray)
-def glGetVertexAttribLdv( index,pname,params ):pass
+def glGetVertexAttribLdv(index,pname,params):pass
 
 
 def glInitVertexAttrib64BitARB():

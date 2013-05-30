@@ -50,31 +50,31 @@ glget.addGLGetConstant( GL_MAX_MAP_TESSELLATION_NV, (1,) )
 glget.addGLGetConstant( GL_MAX_RATIONAL_EVAL_ORDER_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLint,_cs.GLboolean,ctypes.c_void_p)
-def glMapControlPointsNV( target,index,type,ustride,vstride,uorder,vorder,packed,points ):pass
+def glMapControlPointsNV(target,index,type,ustride,vstride,uorder,vorder,packed,points):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glMapParameterivNV( target,pname,params ):pass
+def glMapParameterivNV(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glMapParameterfvNV( target,pname,params ):pass
+def glMapParameterfvNV(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean,ctypes.c_void_p)
-def glGetMapControlPointsNV( target,index,type,ustride,vstride,packed,points ):pass
+def glGetMapControlPointsNV(target,index,type,ustride,vstride,packed,points):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetMapParameterivNV( target,pname,params ):pass
+def glGetMapParameterivNV(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetMapParameterfvNV( target,pname,params ):pass
+def glGetMapParameterfvNV(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetMapAttribParameterivNV( target,index,pname,params ):pass
+def glGetMapAttribParameterivNV(target,index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetMapAttribParameterfvNV( target,index,pname,params ):pass
+def glGetMapAttribParameterfvNV(target,index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
-def glEvalMapsNV( target,mode ):pass
+def glEvalMapsNV(target,mode):pass
 
 
 def glInitEvaluatorsNV():

@@ -8,46 +8,46 @@ def _f( function ):
 _p.unpack_constants( """GL_SAMPLER_BINDING 0x8919""", globals())
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenSamplers( count,samplers ):pass
+def glGenSamplers(count,samplers):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteSamplers( count,samplers ):pass
+def glDeleteSamplers(count,samplers):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsSampler( sampler ):pass
+def glIsSampler(sampler):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint)
-def glBindSampler( unit,sampler ):pass
+def glBindSampler(unit,sampler):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
-def glSamplerParameteri( sampler,pname,param ):pass
+def glSamplerParameteri(sampler,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glSamplerParameteriv( sampler,pname,param ):pass
+def glSamplerParameteriv(sampler,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLfloat)
-def glSamplerParameterf( sampler,pname,param ):pass
+def glSamplerParameterf(sampler,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glSamplerParameterfv( sampler,pname,param ):pass
+def glSamplerParameterfv(sampler,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glSamplerParameterIiv( sampler,pname,param ):pass
+def glSamplerParameterIiv(sampler,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuintArray)
-def glSamplerParameterIuiv( sampler,pname,param ):pass
+def glSamplerParameterIuiv(sampler,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetSamplerParameteriv( sampler,pname,params ):pass
+def glGetSamplerParameteriv(sampler,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetSamplerParameterIiv( sampler,pname,params ):pass
+def glGetSamplerParameterIiv(sampler,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetSamplerParameterfv( sampler,pname,params ):pass
+def glGetSamplerParameterfv(sampler,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuintArray)
-def glGetSamplerParameterIuiv( sampler,pname,params ):pass
+def glGetSamplerParameterIuiv(sampler,pname,params):pass
 
 
 def glInitSamplerObjectsARB():

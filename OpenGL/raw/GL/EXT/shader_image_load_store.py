@@ -62,10 +62,10 @@ GL_ATOMIC_COUNTER_BARRIER_BIT_EXT 0x1000
 GL_ALL_BARRIER_BITS_EXT 0xFFFFFFFF""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLboolean,_cs.GLint,_cs.GLenum,_cs.GLint)
-def glBindImageTextureEXT( index,texture,level,layered,layer,access,format ):pass
+def glBindImageTextureEXT(index,texture,level,layered,layer,access,format):pass
 @_f
 @_p.types(None,_cs.GLbitfield)
-def glMemoryBarrierEXT( barriers ):pass
+def glMemoryBarrierEXT(barriers):pass
 
 
 def glInitShaderImageLoadStoreEXT():

@@ -38,43 +38,43 @@ glget.addGLGetConstant( GL_POST_CONVOLUTION_BLUE_BIAS_EXT, (1,) )
 glget.addGLGetConstant( GL_POST_CONVOLUTION_ALPHA_BIAS_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glConvolutionFilter1DEXT( target,internalformat,width,format,type,image ):pass
+def glConvolutionFilter1DEXT(target,internalformat,width,format,type,image):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glConvolutionFilter2DEXT( target,internalformat,width,height,format,type,image ):pass
+def glConvolutionFilter2DEXT(target,internalformat,width,height,format,type,image):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
-def glConvolutionParameterfEXT( target,pname,params ):pass
+def glConvolutionParameterfEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glConvolutionParameterfvEXT( target,pname,params ):pass
+def glConvolutionParameterfvEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
-def glConvolutionParameteriEXT( target,pname,params ):pass
+def glConvolutionParameteriEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glConvolutionParameterivEXT( target,pname,params ):pass
+def glConvolutionParameterivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei)
-def glCopyConvolutionFilter1DEXT( target,internalformat,x,y,width ):pass
+def glCopyConvolutionFilter1DEXT(target,internalformat,x,y,width):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glCopyConvolutionFilter2DEXT( target,internalformat,x,y,width,height ):pass
+def glCopyConvolutionFilter2DEXT(target,internalformat,x,y,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetConvolutionFilterEXT( target,format,type,image ):pass
+def glGetConvolutionFilterEXT(target,format,type,image):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetConvolutionParameterfvEXT( target,pname,params ):pass
+def glGetConvolutionParameterfvEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetConvolutionParameterivEXT( target,pname,params ):pass
+def glGetConvolutionParameterivEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p,ctypes.c_void_p,ctypes.c_void_p)
-def glGetSeparableFilterEXT( target,format,type,row,column,span ):pass
+def glGetSeparableFilterEXT(target,format,type,row,column,span):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p,ctypes.c_void_p)
-def glSeparableFilter2DEXT( target,internalformat,width,height,format,type,row,column ):pass
+def glSeparableFilter2DEXT(target,internalformat,width,height,format,type,row,column):pass
 
 
 def glInitConvolutionEXT():

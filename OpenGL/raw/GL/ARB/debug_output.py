@@ -29,16 +29,16 @@ GL_DEBUG_SEVERITY_MEDIUM_ARB 0x9147
 GL_DEBUG_SEVERITY_LOW_ARB 0x9148""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray,_cs.GLboolean)
-def glDebugMessageControlARB( source,type,severity,count,ids,enabled ):pass
+def glDebugMessageControlARB(source,type,severity,count,ids,enabled):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLsizei,arrays.GLcharArray)
-def glDebugMessageInsertARB( source,type,id,severity,length,buf ):pass
+def glDebugMessageInsertARB(source,type,id,severity,length,buf):pass
 @_f
 @_p.types(None,_cs.GLDEBUGPROCARB,ctypes.c_void_p)
-def glDebugMessageCallbackARB( callback,userParam ):pass
+def glDebugMessageCallbackARB(callback,userParam):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,arrays.GLuintArray,arrays.GLuintArray,arrays.GLuintArray,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetDebugMessageLogARB( count,bufsize,sources,types,ids,severities,lengths,messageLog ):pass
+def glGetDebugMessageLogARB(count,bufsize,sources,types,ids,severities,lengths,messageLog):pass
 
 
 def glInitDebugOutputARB():

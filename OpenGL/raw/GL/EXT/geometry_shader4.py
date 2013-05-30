@@ -20,7 +20,7 @@ glget.addGLGetConstant( GL_MAX_GEOMETRY_OUTPUT_VERTICES_EXT, (1,) )
 glget.addGLGetConstant( GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
-def glProgramParameteriEXT( program,pname,value ):pass
+def glProgramParameteriEXT(program,pname,value):pass
 
 
 def glInitGeometryShader4EXT():

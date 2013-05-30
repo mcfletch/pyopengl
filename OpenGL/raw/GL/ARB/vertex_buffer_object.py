@@ -49,37 +49,37 @@ glget.addGLGetConstant( GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING_ARB, (1,) )
 glget.addGLGetConstant( GL_WEIGHT_ARRAY_BUFFER_BINDING_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindBufferARB( target,buffer ):pass
+def glBindBufferARB(target,buffer):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteBuffersARB( n,buffers ):pass
+def glDeleteBuffersARB(n,buffers):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenBuffersARB( n,buffers ):pass
+def glGenBuffersARB(n,buffers):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsBufferARB( buffer ):pass
+def glIsBufferARB(buffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizeiptrARB,ctypes.c_void_p,_cs.GLenum)
-def glBufferDataARB( target,size,data,usage ):pass
+def glBufferDataARB(target,size,data,usage):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptrARB,_cs.GLsizeiptrARB,ctypes.c_void_p)
-def glBufferSubDataARB( target,offset,size,data ):pass
+def glBufferSubDataARB(target,offset,size,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptrARB,_cs.GLsizeiptrARB,ctypes.c_void_p)
-def glGetBufferSubDataARB( target,offset,size,data ):pass
+def glGetBufferSubDataARB(target,offset,size,data):pass
 @_f
 @_p.types(ctypes.c_void_p,_cs.GLenum,_cs.GLenum)
-def glMapBufferARB( target,access ):pass
+def glMapBufferARB(target,access):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLenum)
-def glUnmapBufferARB( target ):pass
+def glUnmapBufferARB(target):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetBufferParameterivARB( target,pname,params ):pass
+def glGetBufferParameterivARB(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLvoidpArray)
-def glGetBufferPointervARB( target,pname,params ):pass
+def glGetBufferPointervARB(target,pname,params):pass
 
 
 def glInitVertexBufferObjectARB():

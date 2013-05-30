@@ -26,27 +26,19 @@ GL_PATH_FILL_MASK_NV 0x9081
 GL_PATH_FILL_COVER_MODE_NV 0x9082
 GL_PATH_STROKE_COVER_MODE_NV 0x9083
 GL_PATH_STROKE_MASK_NV 0x9084
-GL_PATH_SAMPLE_QUALITY_NV 0x9085
-GL_PATH_STROKE_BOUND_NV 0x9086
-GL_PATH_STROKE_OVERSAMPLE_COUNT_NV 0x9087
 GL_COUNT_UP_NV 0x9088
 GL_COUNT_DOWN_NV 0x9089
 GL_PATH_OBJECT_BOUNDING_BOX_NV 0x908A
 GL_CONVEX_HULL_NV 0x908B
-GL_MULTI_HULLS_NV 0x908C
 GL_BOUNDING_BOX_NV 0x908D
 GL_TRANSLATE_X_NV 0x908E
 GL_TRANSLATE_Y_NV 0x908F
 GL_TRANSLATE_2D_NV 0x9090
 GL_TRANSLATE_3D_NV 0x9091
 GL_AFFINE_2D_NV 0x9092
-GL_PROJECTIVE_2D_NV 0x9093
 GL_AFFINE_3D_NV 0x9094
-GL_PROJECTIVE_3D_NV 0x9095
 GL_TRANSPOSE_AFFINE_2D_NV 0x9096
-GL_TRANSPOSE_PROJECTIVE_2D_NV 0x9097
 GL_TRANSPOSE_AFFINE_3D_NV 0x9098
-GL_TRANSPOSE_PROJECTIVE_3D_NV 0x9099
 GL_UTF8_NV 0x909A
 GL_UTF16_NV 0x909B
 GL_BOUNDING_BOX_OF_BOUNDING_BOXES_NV 0x909C
@@ -126,167 +118,167 @@ GL_GLYPH_HORIZONTAL_BEARING_ADVANCE_BIT_NV 0x10
 GL_GLYPH_VERTICAL_BEARING_X_BIT_NV 0x20
 GL_GLYPH_VERTICAL_BEARING_Y_BIT_NV 0x40
 GL_GLYPH_VERTICAL_BEARING_ADVANCE_BIT_NV 0x80
-GL_GLYPH_HAS_KERNING_NV 0x100
-GL_FONT_X_MIN_BOUNDS_NV 0x10000
-GL_FONT_Y_MIN_BOUNDS_NV 0x20000
-GL_FONT_X_MAX_BOUNDS_NV 0x40000
-GL_FONT_Y_MAX_BOUNDS_NV 0x80000
-GL_FONT_UNITS_PER_EM_NV 0x100000
-GL_FONT_ASCENDER_NV 0x200000
-GL_FONT_DESCENDER_NV 0x400000
-GL_FONT_HEIGHT_NV 0x800000
-GL_FONT_MAX_ADVANCE_WIDTH_NV 0x1000000
-GL_FONT_MAX_ADVANCE_HEIGHT_NV 0x2000000
-GL_FONT_UNDERLINE_POSITION_NV 0x4000000
-GL_FONT_UNDERLINE_THICKNESS_NV 0x8000000
-GL_FONT_HAS_KERNING_NV 0x10000000""", globals())
+GL_GLYPH_HAS_KERNING_BIT_NV 0x100
+GL_FONT_X_MIN_BOUNDS_BIT_NV 0x10000
+GL_FONT_Y_MIN_BOUNDS_BIT_NV 0x20000
+GL_FONT_X_MAX_BOUNDS_BIT_NV 0x40000
+GL_FONT_Y_MAX_BOUNDS_BIT_NV 0x80000
+GL_FONT_UNITS_PER_EM_BIT_NV 0x100000
+GL_FONT_ASCENDER_BIT_NV 0x200000
+GL_FONT_DESCENDER_BIT_NV 0x400000
+GL_FONT_HEIGHT_BIT_NV 0x800000
+GL_FONT_MAX_ADVANCE_WIDTH_BIT_NV 0x1000000
+GL_FONT_MAX_ADVANCE_HEIGHT_BIT_NV 0x2000000
+GL_FONT_UNDERLINE_POSITION_BIT_NV 0x4000000
+GL_FONT_UNDERLINE_THICKNESS_BIT_NV 0x8000000
+GL_FONT_HAS_KERNING_BIT_NV 0x10000000""", globals())
 @_f
 @_p.types(_cs.GLuint,_cs.GLsizei)
-def glGenPathsNV( range ):pass
+def glGenPathsNV(range):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei)
-def glDeletePathsNV( path,range ):pass
+def glDeletePathsNV(path,range):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsPathNV( path ):pass
+def glIsPathNV(path):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
-def glPathCommandsNV( path,numCommands,commands,numCoords,coordType,coords ):pass
+def glPathCommandsNV(path,numCommands,commands,numCoords,coordType,coords):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
-def glPathCoordsNV( path,numCoords,coordType,coords ):pass
+def glPathCoordsNV(path,numCoords,coordType,coords):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,arrays.GLubyteArray,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
-def glPathSubCommandsNV( path,commandStart,commandsToDelete,numCommands,commands,numCoords,coordType,coords ):pass
+def glPathSubCommandsNV(path,commandStart,commandsToDelete,numCommands,commands,numCoords,coordType,coords):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
-def glPathSubCoordsNV( path,coordStart,numCoords,coordType,coords ):pass
+def glPathSubCoordsNV(path,coordStart,numCoords,coordType,coords):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glPathStringNV( path,format,length,pathString ):pass
+def glPathStringNV(path,format,length,pathString):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLenum,_cs.GLuint,_cs.GLfloat)
-def glPathGlyphsNV( firstPathName,fontTarget,fontName,fontStyle,numGlyphs,type,charcodes,handleMissingGlyphs,pathParameterTemplate,emScale ):pass
+def glPathGlyphsNV(firstPathName,fontTarget,fontName,fontStyle,numGlyphs,type,charcodes,handleMissingGlyphs,pathParameterTemplate,emScale):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLuint,_cs.GLsizei,_cs.GLenum,_cs.GLuint,_cs.GLfloat)
-def glPathGlyphRangeNV( firstPathName,fontTarget,fontName,fontStyle,firstGlyph,numGlyphs,handleMissingGlyphs,pathParameterTemplate,emScale ):pass
+def glPathGlyphRangeNV(firstPathName,fontTarget,fontName,fontStyle,firstGlyph,numGlyphs,handleMissingGlyphs,pathParameterTemplate,emScale):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,arrays.GLfloatArray)
-def glWeightPathsNV( resultPath,numPaths,paths,weights ):pass
+def glWeightPathsNV(resultPath,numPaths,paths,weights):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint)
-def glCopyPathNV( resultPath,srcPath ):pass
+def glCopyPathNV(resultPath,srcPath):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLfloat)
-def glInterpolatePathsNV( resultPath,pathA,pathB,weight ):pass
+def glInterpolatePathsNV(resultPath,pathA,pathB,weight):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glTransformPathNV( resultPath,srcPath,transformType,transformValues ):pass
+def glTransformPathNV(resultPath,srcPath,transformType,transformValues):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glPathParameterivNV( path,pname,value ):pass
+def glPathParameterivNV(path,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
-def glPathParameteriNV( path,pname,value ):pass
+def glPathParameteriNV(path,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glPathParameterfvNV( path,pname,value ):pass
+def glPathParameterfvNV(path,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLfloat)
-def glPathParameterfNV( path,pname,value ):pass
+def glPathParameterfNV(path,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glPathDashArrayNV( path,dashCount,dashArray ):pass
+def glPathDashArrayNV(path,dashCount,dashArray):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLuint)
-def glPathStencilFuncNV( func,ref,mask ):pass
+def glPathStencilFuncNV(func,ref,mask):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat)
-def glPathStencilDepthOffsetNV( factor,units ):pass
+def glPathStencilDepthOffsetNV(factor,units):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint)
-def glStencilFillPathNV( path,fillMode,mask ):pass
+def glStencilFillPathNV(path,fillMode,mask):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLuint)
-def glStencilStrokePathNV( path,reference,mask ):pass
+def glStencilStrokePathNV(path,reference,mask):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glStencilFillPathInstancedNV( numPaths,pathNameType,paths,pathBase,fillMode,mask,transformType,transformValues ):pass
+def glStencilFillPathInstancedNV(numPaths,pathNameType,paths,pathBase,fillMode,mask,transformType,transformValues):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLint,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glStencilStrokePathInstancedNV( numPaths,pathNameType,paths,pathBase,reference,mask,transformType,transformValues ):pass
+def glStencilStrokePathInstancedNV(numPaths,pathNameType,paths,pathBase,reference,mask,transformType,transformValues):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glPathCoverDepthFuncNV( func ):pass
+def glPathCoverDepthFuncNV(func):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glPathColorGenNV( color,genMode,colorFormat,coeffs ):pass
+def glPathColorGenNV(color,genMode,colorFormat,coeffs):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,arrays.GLfloatArray)
-def glPathTexGenNV( texCoordSet,genMode,components,coeffs ):pass
+def glPathTexGenNV(texCoordSet,genMode,components,coeffs):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glPathFogGenNV( genMode ):pass
+def glPathFogGenNV(genMode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glCoverFillPathNV( path,coverMode ):pass
+def glCoverFillPathNV(path,coverMode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glCoverStrokePathNV( path,coverMode ):pass
+def glCoverStrokePathNV(path,coverMode):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glCoverFillPathInstancedNV( numPaths,pathNameType,paths,pathBase,coverMode,transformType,transformValues ):pass
+def glCoverFillPathInstancedNV(numPaths,pathNameType,paths,pathBase,coverMode,transformType,transformValues):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glCoverStrokePathInstancedNV( numPaths,pathNameType,paths,pathBase,coverMode,transformType,transformValues ):pass
+def glCoverStrokePathInstancedNV(numPaths,pathNameType,paths,pathBase,coverMode,transformType,transformValues):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetPathParameterivNV( path,pname,value ):pass
+def glGetPathParameterivNV(path,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetPathParameterfvNV( path,pname,value ):pass
+def glGetPathParameterfvNV(path,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
-def glGetPathCommandsNV( path,commands ):pass
+def glGetPathCommandsNV(path,commands):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glGetPathCoordsNV( path,coords ):pass
+def glGetPathCoordsNV(path,coords):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glGetPathDashArrayNV( path,dashArray ):pass
+def glGetPathDashArrayNV(path,dashArray):pass
 @_f
 @_p.types(None,_cs.GLbitfield,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
-def glGetPathMetricsNV( metricQueryMask,numPaths,pathNameType,paths,pathBase,stride,metrics ):pass
+def glGetPathMetricsNV(metricQueryMask,numPaths,pathNameType,paths,pathBase,stride,metrics):pass
 @_f
 @_p.types(None,_cs.GLbitfield,_cs.GLuint,_cs.GLsizei,_cs.GLsizei,arrays.GLfloatArray)
-def glGetPathMetricRangeNV( metricQueryMask,firstPathName,numPaths,stride,metrics ):pass
+def glGetPathMetricRangeNV(metricQueryMask,firstPathName,numPaths,stride,metrics):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLenum,arrays.GLfloatArray)
-def glGetPathSpacingNV( pathListMode,numPaths,pathNameType,paths,pathBase,advanceScale,kerningScale,transformType,returnedSpacing ):pass
+def glGetPathSpacingNV(pathListMode,numPaths,pathNameType,paths,pathBase,advanceScale,kerningScale,transformType,returnedSpacing):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetPathColorGenivNV( color,pname,value ):pass
+def glGetPathColorGenivNV(color,pname,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetPathColorGenfvNV( color,pname,value ):pass
+def glGetPathColorGenfvNV(color,pname,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetPathTexGenivNV( texCoordSet,pname,value ):pass
+def glGetPathTexGenivNV(texCoordSet,pname,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetPathTexGenfvNV( texCoordSet,pname,value ):pass
+def glGetPathTexGenfvNV(texCoordSet,pname,value):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint,_cs.GLuint,_cs.GLfloat,_cs.GLfloat)
-def glIsPointInFillPathNV( path,mask,x,y ):pass
+def glIsPointInFillPathNV(path,mask,x,y):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint,_cs.GLfloat,_cs.GLfloat)
-def glIsPointInStrokePathNV( path,x,y ):pass
+def glIsPointInStrokePathNV(path,x,y):pass
 @_f
 @_p.types(_cs.GLfloat,_cs.GLuint,_cs.GLsizei,_cs.GLsizei)
-def glGetPathLengthNV( path,startSegment,numSegments ):pass
+def glGetPathLengthNV(path,startSegment,numSegments):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint,_cs.GLsizei,_cs.GLsizei,_cs.GLfloat,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
-def glPointAlongPathNV( path,startSegment,numSegments,distance,x,y,tangentX,tangentY ):pass
+def glPointAlongPathNV(path,startSegment,numSegments,distance,x,y,tangentX,tangentY):pass
 
 
 def glInitPathRenderingNV():

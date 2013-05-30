@@ -14,25 +14,25 @@ glget.addGLGetConstant( GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV, (1,) )
 glget.addGLGetConstant( GL_TRANSFORM_FEEDBACK_BINDING_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glBindTransformFeedbackNV( target,id ):pass
+def glBindTransformFeedbackNV(target,id):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteTransformFeedbacksNV( n,ids ):pass
+def glDeleteTransformFeedbacksNV(n,ids):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenTransformFeedbacksNV( n,ids ):pass
+def glGenTransformFeedbacksNV(n,ids):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsTransformFeedbackNV( id ):pass
+def glIsTransformFeedbackNV(id):pass
 @_f
 @_p.types(None,)
-def glPauseTransformFeedbackNV(  ):pass
+def glPauseTransformFeedbackNV():pass
 @_f
 @_p.types(None,)
-def glResumeTransformFeedbackNV(  ):pass
+def glResumeTransformFeedbackNV():pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glDrawTransformFeedbackNV( mode,id ):pass
+def glDrawTransformFeedbackNV(mode,id):pass
 
 
 def glInitTransformFeedback2NV():

@@ -17,25 +17,25 @@ GL_VERTEX_ATTRIB_MAP2_ORDER_APPLE 0x8A08
 GL_VERTEX_ATTRIB_MAP2_DOMAIN_APPLE 0x8A09""", globals())
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glEnableVertexAttribAPPLE( index,pname ):pass
+def glEnableVertexAttribAPPLE(index,pname):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glDisableVertexAttribAPPLE( index,pname ):pass
+def glDisableVertexAttribAPPLE(index,pname):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint,_cs.GLenum)
-def glIsVertexAttribEnabledAPPLE( index,pname ):pass
+def glIsVertexAttribEnabledAPPLE(index,pname):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,arrays.GLdoubleArray)
-def glMapVertexAttrib1dAPPLE( index,size,u1,u2,stride,order,points ):pass
+def glMapVertexAttrib1dAPPLE(index,size,u1,u2,stride,order,points):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,arrays.GLfloatArray)
-def glMapVertexAttrib1fAPPLE( index,size,u1,u2,stride,order,points ):pass
+def glMapVertexAttrib1fAPPLE(index,size,u1,u2,stride,order,points):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,arrays.GLdoubleArray)
-def glMapVertexAttrib2dAPPLE( index,size,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points ):pass
+def glMapVertexAttrib2dAPPLE(index,size,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,arrays.GLfloatArray)
-def glMapVertexAttrib2fAPPLE( index,size,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points ):pass
+def glMapVertexAttrib2fAPPLE(index,size,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points):pass
 
 
 def glInitVertexProgramEvaluatorsAPPLE():

@@ -8,7 +8,7 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLuint)
-def glTbufferMask3DFX( mask ):pass
+def glTbufferMask3DFX(mask):pass
 
 
 def glInitTbufferDFX():

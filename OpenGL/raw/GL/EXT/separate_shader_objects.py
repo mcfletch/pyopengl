@@ -8,13 +8,13 @@ def _f( function ):
 _p.unpack_constants( """GL_ACTIVE_PROGRAM_EXT 0x8B8D""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint)
-def glUseShaderProgramEXT( type,program ):pass
+def glUseShaderProgramEXT(type,program):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glActiveProgramEXT( program ):pass
+def glActiveProgramEXT(program):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLenum,arrays.GLcharArray)
-def glCreateShaderProgramEXT( type,string ):pass
+def glCreateShaderProgramEXT(type,string):pass
 
 
 def glInitSeparateShaderObjectsEXT():

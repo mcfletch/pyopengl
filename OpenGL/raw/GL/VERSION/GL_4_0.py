@@ -18,17 +18,17 @@ GL_INT_SAMPLER_CUBE_MAP_ARRAY 0x900E
 GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY 0x900F""", globals())
 @_f
 @_p.types(None,_cs.GLfloat)
-def glMinSampleShading( value ):pass
+def glMinSampleShading(value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
-def glBlendEquationi( buf,mode ):pass
+def glBlendEquationi(buf,mode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glBlendEquationSeparatei( buf,modeRGB,modeAlpha ):pass
+def glBlendEquationSeparatei(buf,modeRGB,modeAlpha):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glBlendFunci( buf,src,dst ):pass
+def glBlendFunci(buf,src,dst):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glBlendFuncSeparatei( buf,srcRGB,dstRGB,srcAlpha,dstAlpha ):pass
+def glBlendFuncSeparatei(buf,srcRGB,dstRGB,srcAlpha,dstAlpha):pass
 

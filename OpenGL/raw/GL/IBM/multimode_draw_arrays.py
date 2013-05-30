@@ -8,10 +8,10 @@ def _f( function ):
 
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLintArray,arrays.GLsizeiArray,_cs.GLsizei,_cs.GLint)
-def glMultiModeDrawArraysIBM( mode,first,count,primcount,modestride ):pass
+def glMultiModeDrawArraysIBM(mode,first,count,primcount,modestride):pass
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLsizeiArray,_cs.GLenum,arrays.GLvoidpArray,_cs.GLsizei,_cs.GLint)
-def glMultiModeDrawElementsIBM( mode,count,type,indices,primcount,modestride ):pass
+def glMultiModeDrawElementsIBM(mode,count,type,indices,primcount,modestride):pass
 
 
 def glInitMultimodeDrawArraysIBM():

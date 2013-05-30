@@ -16,7 +16,7 @@ glget.addGLGetConstant( GL_CLAMP_FRAGMENT_COLOR_ARB, (1,) )
 glget.addGLGetConstant( GL_CLAMP_READ_COLOR_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
-def glClampColorARB( target,clamp ):pass
+def glClampColorARB(target,clamp):pass
 
 
 def glInitColorBufferFloatARB():

@@ -15,13 +15,13 @@ GL_STORAGE_SHARED_APPLE 0x85BF""", globals())
 glget.addGLGetConstant( GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE, (1,) )
 @_f
 @_p.types(None,_cs.GLsizei,ctypes.c_void_p)
-def glVertexArrayRangeAPPLE( length,pointer ):pass
+def glVertexArrayRangeAPPLE(length,pointer):pass
 @_f
 @_p.types(None,_cs.GLsizei,ctypes.c_void_p)
-def glFlushVertexArrayRangeAPPLE( length,pointer ):pass
+def glFlushVertexArrayRangeAPPLE(length,pointer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glVertexArrayParameteriAPPLE( pname,param ):pass
+def glVertexArrayParameteriAPPLE(pname,param):pass
 
 
 def glInitVertexArrayRangeAPPLE():

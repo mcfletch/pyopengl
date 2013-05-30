@@ -41,7 +41,7 @@ glget.addGLGetConstant( GL_DRAW_BUFFER14_ARB, (1,) )
 glget.addGLGetConstant( GL_DRAW_BUFFER15_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDrawBuffersARB( n,bufs ):pass
+def glDrawBuffersARB(n,bufs):pass
 
 
 def glInitDrawBuffersARB():

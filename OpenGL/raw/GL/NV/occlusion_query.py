@@ -13,25 +13,25 @@ glget.addGLGetConstant( GL_PIXEL_COUNTER_BITS_NV, (1,) )
 glget.addGLGetConstant( GL_CURRENT_OCCLUSION_QUERY_ID_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glGenOcclusionQueriesNV( n,ids ):pass
+def glGenOcclusionQueriesNV(n,ids):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
-def glDeleteOcclusionQueriesNV( n,ids ):pass
+def glDeleteOcclusionQueriesNV(n,ids):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
-def glIsOcclusionQueryNV( id ):pass
+def glIsOcclusionQueryNV(id):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glBeginOcclusionQueryNV( id ):pass
+def glBeginOcclusionQueryNV(id):pass
 @_f
 @_p.types(None,)
-def glEndOcclusionQueryNV(  ):pass
+def glEndOcclusionQueryNV():pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetOcclusionQueryivNV( id,pname,params ):pass
+def glGetOcclusionQueryivNV(id,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuintArray)
-def glGetOcclusionQueryuivNV( id,pname,params ):pass
+def glGetOcclusionQueryuivNV(id,pname,params):pass
 
 
 def glInitOcclusionQueryNV():

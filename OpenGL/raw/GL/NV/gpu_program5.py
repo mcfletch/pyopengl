@@ -15,10 +15,10 @@ GL_MAX_PROGRAM_SUBROUTINE_PARAMETERS_NV 0x8F44
 GL_MAX_PROGRAM_SUBROUTINE_NUM_NV 0x8F45""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray)
-def glProgramSubroutineParametersuivNV( target,count,params ):pass
+def glProgramSubroutineParametersuivNV(target,count,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLuintArray)
-def glGetProgramSubroutineParameteruivNV( target,index,param ):pass
+def glGetProgramSubroutineParameteruivNV(target,index,param):pass
 
 
 def glInitGpuProgram5NV():

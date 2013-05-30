@@ -9,7 +9,7 @@ _p.unpack_constants( """GL_MAX_ELEMENTS_VERTICES_EXT 0x80E8
 GL_MAX_ELEMENTS_INDICES_EXT 0x80E9""", globals())
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
-def glDrawRangeElementsEXT( mode,start,end,count,type,indices ):pass
+def glDrawRangeElementsEXT(mode,start,end,count,type,indices):pass
 
 
 def glInitDrawRangeElementsEXT():

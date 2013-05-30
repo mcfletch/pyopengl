@@ -8,22 +8,22 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei)
-def glInvalidateTexSubImage( texture,level,xoffset,yoffset,zoffset,width,height,depth ):pass
+def glInvalidateTexSubImage(texture,level,xoffset,yoffset,zoffset,width,height,depth):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint)
-def glInvalidateTexImage( texture,level ):pass
+def glInvalidateTexImage(texture,level):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
-def glInvalidateBufferSubData( buffer,offset,length ):pass
+def glInvalidateBufferSubData(buffer,offset,length):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glInvalidateBufferData( buffer ):pass
+def glInvalidateBufferData(buffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray)
-def glInvalidateFramebuffer( target,numAttachments,attachments ):pass
+def glInvalidateFramebuffer(target,numAttachments,attachments):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glInvalidateSubFramebuffer( target,numAttachments,attachments,x,y,width,height ):pass
+def glInvalidateSubFramebuffer(target,numAttachments,attachments,x,y,width,height):pass
 
 
 def glInitInvalidateSubdataARB():

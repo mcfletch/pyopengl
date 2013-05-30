@@ -22,19 +22,19 @@ glget.addGLGetConstant( GL_MATRIX_INDEX_ARRAY_TYPE_ARB, (1,) )
 glget.addGLGetConstant( GL_MATRIX_INDEX_ARRAY_STRIDE_ARB, (1,) )
 @_f
 @_p.types(None,_cs.GLint)
-def glCurrentPaletteMatrixARB( index ):pass
+def glCurrentPaletteMatrixARB(index):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLubyteArray)
-def glMatrixIndexubvARB( size,indices ):pass
+def glMatrixIndexubvARB(size,indices):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLushortArray)
-def glMatrixIndexusvARB( size,indices ):pass
+def glMatrixIndexusvARB(size,indices):pass
 @_f
 @_p.types(None,_cs.GLint,arrays.GLuintArray)
-def glMatrixIndexuivARB( size,indices ):pass
+def glMatrixIndexuivARB(size,indices):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glMatrixIndexPointerARB( size,type,stride,pointer ):pass
+def glMatrixIndexPointerARB(size,type,stride,pointer):pass
 
 
 def glInitMatrixPaletteARB():

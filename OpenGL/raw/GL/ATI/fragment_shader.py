@@ -120,46 +120,46 @@ glget.addGLGetConstant( GL_NUM_LOOPBACK_COMPONENTS_ATI, (1,) )
 glget.addGLGetConstant( GL_COLOR_ALPHA_PAIRING_ATI, (1,) )
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint)
-def glGenFragmentShadersATI( range ):pass
+def glGenFragmentShadersATI(range):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glBindFragmentShaderATI( id ):pass
+def glBindFragmentShaderATI(id):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glDeleteFragmentShaderATI( id ):pass
+def glDeleteFragmentShaderATI(id):pass
 @_f
 @_p.types(None,)
-def glBeginFragmentShaderATI(  ):pass
+def glBeginFragmentShaderATI():pass
 @_f
 @_p.types(None,)
-def glEndFragmentShaderATI(  ):pass
+def glEndFragmentShaderATI():pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum)
-def glPassTexCoordATI( dst,coord,swizzle ):pass
+def glPassTexCoordATI(dst,coord,swizzle):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum)
-def glSampleMapATI( dst,interp,swizzle ):pass
+def glSampleMapATI(dst,interp,swizzle):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glColorFragmentOp1ATI( op,dst,dstMask,dstMod,arg1,arg1Rep,arg1Mod ):pass
+def glColorFragmentOp1ATI(op,dst,dstMask,dstMod,arg1,arg1Rep,arg1Mod):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glColorFragmentOp2ATI( op,dst,dstMask,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod ):pass
+def glColorFragmentOp2ATI(op,dst,dstMask,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glColorFragmentOp3ATI( op,dst,dstMask,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod,arg3,arg3Rep,arg3Mod ):pass
+def glColorFragmentOp3ATI(op,dst,dstMask,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod,arg3,arg3Rep,arg3Mod):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glAlphaFragmentOp1ATI( op,dst,dstMod,arg1,arg1Rep,arg1Mod ):pass
+def glAlphaFragmentOp1ATI(op,dst,dstMod,arg1,arg1Rep,arg1Mod):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glAlphaFragmentOp2ATI( op,dst,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod ):pass
+def glAlphaFragmentOp2ATI(op,dst,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glAlphaFragmentOp3ATI( op,dst,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod,arg3,arg3Rep,arg3Mod ):pass
+def glAlphaFragmentOp3ATI(op,dst,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod,arg3,arg3Rep,arg3Mod):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glSetFragmentShaderConstantATI( dst,value ):pass
+def glSetFragmentShaderConstantATI(dst,value):pass
 
 
 def glInitFragmentShaderATI():

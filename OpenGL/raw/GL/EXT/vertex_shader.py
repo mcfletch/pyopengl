@@ -129,130 +129,130 @@ glget.addGLGetConstant( GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCALS_EXT, (1,) )
 glget.addGLGetConstant( GL_VERTEX_SHADER_OPTIMIZED_EXT, (1,) )
 @_f
 @_p.types(None,)
-def glBeginVertexShaderEXT(  ):pass
+def glBeginVertexShaderEXT():pass
 @_f
 @_p.types(None,)
-def glEndVertexShaderEXT(  ):pass
+def glEndVertexShaderEXT():pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glBindVertexShaderEXT( id ):pass
+def glBindVertexShaderEXT(id):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint)
-def glGenVertexShadersEXT( range ):pass
+def glGenVertexShadersEXT(range):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glDeleteVertexShaderEXT( id ):pass
+def glDeleteVertexShaderEXT(id):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint)
-def glShaderOp1EXT( op,res,arg1 ):pass
+def glShaderOp1EXT(op,res,arg1):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glShaderOp2EXT( op,res,arg1,arg2 ):pass
+def glShaderOp2EXT(op,res,arg1,arg2):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glShaderOp3EXT( op,res,arg1,arg2,arg3 ):pass
+def glShaderOp3EXT(op,res,arg1,arg2,arg3):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glSwizzleEXT( res,in_,outX,outY,outZ,outW ):pass
+def glSwizzleEXT(res,in_,outX,outY,outZ,outW):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glWriteMaskEXT( res,in_,outX,outY,outZ,outW ):pass
+def glWriteMaskEXT(res,in_,outX,outY,outZ,outW):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glInsertComponentEXT( res,src,num ):pass
+def glInsertComponentEXT(res,src,num):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glExtractComponentEXT( res,src,num ):pass
+def glExtractComponentEXT(res,src,num):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLuint)
-def glGenSymbolsEXT( datatype,storagetype,range,components ):pass
+def glGenSymbolsEXT(datatype,storagetype,range,components):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p)
-def glSetInvariantEXT( id,type,addr ):pass
+def glSetInvariantEXT(id,type,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p)
-def glSetLocalConstantEXT( id,type,addr ):pass
+def glSetLocalConstantEXT(id,type,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLbyteArray)
-def glVariantbvEXT( id,addr ):pass
+def glVariantbvEXT(id,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLshortArray)
-def glVariantsvEXT( id,addr ):pass
+def glVariantsvEXT(id,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLintArray)
-def glVariantivEXT( id,addr ):pass
+def glVariantivEXT(id,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
-def glVariantfvEXT( id,addr ):pass
+def glVariantfvEXT(id,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLdoubleArray)
-def glVariantdvEXT( id,addr ):pass
+def glVariantdvEXT(id,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
-def glVariantubvEXT( id,addr ):pass
+def glVariantubvEXT(id,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLushortArray)
-def glVariantusvEXT( id,addr ):pass
+def glVariantusvEXT(id,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLuintArray)
-def glVariantuivEXT( id,addr ):pass
+def glVariantuivEXT(id,addr):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,ctypes.c_void_p)
-def glVariantPointerEXT( id,type,stride,addr ):pass
+def glVariantPointerEXT(id,type,stride,addr):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glEnableVariantClientStateEXT( id ):pass
+def glEnableVariantClientStateEXT(id):pass
 @_f
 @_p.types(None,_cs.GLuint)
-def glDisableVariantClientStateEXT( id ):pass
+def glDisableVariantClientStateEXT(id):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glBindLightParameterEXT( light,value ):pass
+def glBindLightParameterEXT(light,value):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glBindMaterialParameterEXT( face,value ):pass
+def glBindMaterialParameterEXT(face,value):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glBindTexGenParameterEXT( unit,coord,value ):pass
+def glBindTexGenParameterEXT(unit,coord,value):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLenum,_cs.GLenum)
-def glBindTextureUnitParameterEXT( unit,value ):pass
+def glBindTextureUnitParameterEXT(unit,value):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLenum)
-def glBindParameterEXT( value ):pass
+def glBindParameterEXT(value):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint,_cs.GLenum)
-def glIsVariantEnabledEXT( id,cap ):pass
+def glIsVariantEnabledEXT(id,cap):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLbooleanArray)
-def glGetVariantBooleanvEXT( id,value,data ):pass
+def glGetVariantBooleanvEXT(id,value,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetVariantIntegervEXT( id,value,data ):pass
+def glGetVariantIntegervEXT(id,value,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetVariantFloatvEXT( id,value,data ):pass
+def glGetVariantFloatvEXT(id,value,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLvoidpArray)
-def glGetVariantPointervEXT( id,value,data ):pass
+def glGetVariantPointervEXT(id,value,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLbooleanArray)
-def glGetInvariantBooleanvEXT( id,value,data ):pass
+def glGetInvariantBooleanvEXT(id,value,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetInvariantIntegervEXT( id,value,data ):pass
+def glGetInvariantIntegervEXT(id,value,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetInvariantFloatvEXT( id,value,data ):pass
+def glGetInvariantFloatvEXT(id,value,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLbooleanArray)
-def glGetLocalConstantBooleanvEXT( id,value,data ):pass
+def glGetLocalConstantBooleanvEXT(id,value,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
-def glGetLocalConstantIntegervEXT( id,value,data ):pass
+def glGetLocalConstantIntegervEXT(id,value,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
-def glGetLocalConstantFloatvEXT( id,value,data ):pass
+def glGetLocalConstantFloatvEXT(id,value,data):pass
 
 
 def glInitVertexShaderEXT():

@@ -19,55 +19,55 @@ glget.addGLGetConstant( GL_SECONDARY_COLOR_ARRAY_TYPE_EXT, (1,) )
 glget.addGLGetConstant( GL_SECONDARY_COLOR_ARRAY_STRIDE_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLbyte,_cs.GLbyte,_cs.GLbyte)
-def glSecondaryColor3bEXT( red,green,blue ):pass
+def glSecondaryColor3bEXT(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLbyteArray)
-def glSecondaryColor3bvEXT( v ):pass
+def glSecondaryColor3bvEXT(v):pass
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
-def glSecondaryColor3dEXT( red,green,blue ):pass
+def glSecondaryColor3dEXT(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glSecondaryColor3dvEXT( v ):pass
+def glSecondaryColor3dvEXT(v):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glSecondaryColor3fEXT( red,green,blue ):pass
+def glSecondaryColor3fEXT(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glSecondaryColor3fvEXT( v ):pass
+def glSecondaryColor3fvEXT(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLint)
-def glSecondaryColor3iEXT( red,green,blue ):pass
+def glSecondaryColor3iEXT(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLintArray)
-def glSecondaryColor3ivEXT( v ):pass
+def glSecondaryColor3ivEXT(v):pass
 @_f
 @_p.types(None,_cs.GLshort,_cs.GLshort,_cs.GLshort)
-def glSecondaryColor3sEXT( red,green,blue ):pass
+def glSecondaryColor3sEXT(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLshortArray)
-def glSecondaryColor3svEXT( v ):pass
+def glSecondaryColor3svEXT(v):pass
 @_f
 @_p.types(None,_cs.GLubyte,_cs.GLubyte,_cs.GLubyte)
-def glSecondaryColor3ubEXT( red,green,blue ):pass
+def glSecondaryColor3ubEXT(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLubyteArray)
-def glSecondaryColor3ubvEXT( v ):pass
+def glSecondaryColor3ubvEXT(v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
-def glSecondaryColor3uiEXT( red,green,blue ):pass
+def glSecondaryColor3uiEXT(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLuintArray)
-def glSecondaryColor3uivEXT( v ):pass
+def glSecondaryColor3uivEXT(v):pass
 @_f
 @_p.types(None,_cs.GLushort,_cs.GLushort,_cs.GLushort)
-def glSecondaryColor3usEXT( red,green,blue ):pass
+def glSecondaryColor3usEXT(red,green,blue):pass
 @_f
 @_p.types(None,arrays.GLushortArray)
-def glSecondaryColor3usvEXT( v ):pass
+def glSecondaryColor3usvEXT(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glSecondaryColorPointerEXT( size,type,stride,pointer ):pass
+def glSecondaryColorPointerEXT(size,type,stride,pointer):pass
 
 
 def glInitSecondaryColorEXT():

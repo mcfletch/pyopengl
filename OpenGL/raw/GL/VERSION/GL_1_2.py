@@ -65,116 +65,116 @@ glget.addGLGetConstant( GL_LIGHT_MODEL_COLOR_CONTROL, (1,) )
 glget.addGLGetConstant( GL_ALIASED_POINT_SIZE_RANGE, (2,) )
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
-def glBlendColor( red,green,blue,alpha ):pass
+def glBlendColor(red,green,blue,alpha):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glBlendEquation( mode ):pass
+def glBlendEquation(mode):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
-def glDrawRangeElements( mode,start,end,count,type,indices ):pass
+def glDrawRangeElements(mode,start,end,count,type,indices):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glTexImage3D( target,level,internalformat,width,height,depth,border,format,type,pixels ):pass
+def glTexImage3D(target,level,internalformat,width,height,depth,border,format,type,pixels):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glTexSubImage3D( target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels ):pass
+def glTexSubImage3D(target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glCopyTexSubImage3D( target,level,xoffset,yoffset,zoffset,x,y,width,height ):pass
+def glCopyTexSubImage3D(target,level,xoffset,yoffset,zoffset,x,y,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glColorTable( target,internalformat,width,format,type,table ):pass
+def glColorTable(target,internalformat,width,format,type,table):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glColorTableParameterfv( target,pname,params ):pass
+def glColorTableParameterfv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glColorTableParameteriv( target,pname,params ):pass
+def glColorTableParameteriv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei)
-def glCopyColorTable( target,internalformat,x,y,width ):pass
+def glCopyColorTable(target,internalformat,x,y,width):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetColorTable( target,format,type,table ):pass
+def glGetColorTable(target,format,type,table):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetColorTableParameterfv( target,pname,params ):pass
+def glGetColorTableParameterfv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetColorTableParameteriv( target,pname,params ):pass
+def glGetColorTableParameteriv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glColorSubTable( target,start,count,format,type,data ):pass
+def glColorSubTable(target,start,count,format,type,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLint,_cs.GLint,_cs.GLsizei)
-def glCopyColorSubTable( target,start,x,y,width ):pass
+def glCopyColorSubTable(target,start,x,y,width):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glConvolutionFilter1D( target,internalformat,width,format,type,image ):pass
+def glConvolutionFilter1D(target,internalformat,width,format,type,image):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glConvolutionFilter2D( target,internalformat,width,height,format,type,image ):pass
+def glConvolutionFilter2D(target,internalformat,width,height,format,type,image):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
-def glConvolutionParameterf( target,pname,params ):pass
+def glConvolutionParameterf(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glConvolutionParameterfv( target,pname,params ):pass
+def glConvolutionParameterfv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
-def glConvolutionParameteri( target,pname,params ):pass
+def glConvolutionParameteri(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glConvolutionParameteriv( target,pname,params ):pass
+def glConvolutionParameteriv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei)
-def glCopyConvolutionFilter1D( target,internalformat,x,y,width ):pass
+def glCopyConvolutionFilter1D(target,internalformat,x,y,width):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
-def glCopyConvolutionFilter2D( target,internalformat,x,y,width,height ):pass
+def glCopyConvolutionFilter2D(target,internalformat,x,y,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetConvolutionFilter( target,format,type,image ):pass
+def glGetConvolutionFilter(target,format,type,image):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetConvolutionParameterfv( target,pname,params ):pass
+def glGetConvolutionParameterfv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetConvolutionParameteriv( target,pname,params ):pass
+def glGetConvolutionParameteriv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p,ctypes.c_void_p,ctypes.c_void_p)
-def glGetSeparableFilter( target,format,type,row,column,span ):pass
+def glGetSeparableFilter(target,format,type,row,column,span):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p,ctypes.c_void_p)
-def glSeparableFilter2D( target,internalformat,width,height,format,type,row,column ):pass
+def glSeparableFilter2D(target,internalformat,width,height,format,type,row,column):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetHistogram( target,reset,format,type,values ):pass
+def glGetHistogram(target,reset,format,type,values):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetHistogramParameterfv( target,pname,params ):pass
+def glGetHistogramParameterfv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetHistogramParameteriv( target,pname,params ):pass
+def glGetHistogramParameteriv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
-def glGetMinmax( target,reset,format,type,values ):pass
+def glGetMinmax(target,reset,format,type,values):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
-def glGetMinmaxParameterfv( target,pname,params ):pass
+def glGetMinmaxParameterfv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
-def glGetMinmaxParameteriv( target,pname,params ):pass
+def glGetMinmaxParameteriv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLboolean)
-def glHistogram( target,width,internalformat,sink ):pass
+def glHistogram(target,width,internalformat,sink):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLboolean)
-def glMinmax( target,internalformat,sink ):pass
+def glMinmax(target,internalformat,sink):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glResetHistogram( target ):pass
+def glResetHistogram(target):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glResetMinmax( target ):pass
+def glResetMinmax(target):pass
 

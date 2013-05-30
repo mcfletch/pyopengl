@@ -23,19 +23,19 @@ GL_MAX_FRAGMENT_UNIFORM_VECTORS 0x8DFD
 GL_RGB565 0x8D62""", globals())
 @_f
 @_p.types(None,)
-def glReleaseShaderCompiler(  ):pass
+def glReleaseShaderCompiler():pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
-def glShaderBinary( count,shaders,binaryformat,binary,length ):pass
+def glShaderBinary(count,shaders,binaryformat,binary,length):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray,arrays.GLintArray)
-def glGetShaderPrecisionFormat( shadertype,precisiontype,range,precision ):pass
+def glGetShaderPrecisionFormat(shadertype,precisiontype,range,precision):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat)
-def glDepthRangef( n,f ):pass
+def glDepthRangef(n,f):pass
 @_f
 @_p.types(None,_cs.GLfloat)
-def glClearDepthf( d ):pass
+def glClearDepthf(d):pass
 
 
 def glInitEs2CompatibilityARB():

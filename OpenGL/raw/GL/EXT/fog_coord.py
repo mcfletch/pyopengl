@@ -18,19 +18,19 @@ glget.addGLGetConstant( GL_FOG_COORDINATE_ARRAY_TYPE_EXT, (1,) )
 glget.addGLGetConstant( GL_FOG_COORDINATE_ARRAY_STRIDE_EXT, (1,) )
 @_f
 @_p.types(None,_cs.GLfloat)
-def glFogCoordfEXT( coord ):pass
+def glFogCoordfEXT(coord):pass
 @_f
 @_p.types(None,arrays.GLfloatArray)
-def glFogCoordfvEXT( coord ):pass
+def glFogCoordfvEXT(coord):pass
 @_f
 @_p.types(None,_cs.GLdouble)
-def glFogCoorddEXT( coord ):pass
+def glFogCoorddEXT(coord):pass
 @_f
 @_p.types(None,arrays.GLdoubleArray)
-def glFogCoorddvEXT( coord ):pass
+def glFogCoorddvEXT(coord):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glFogCoordPointerEXT( type,stride,pointer ):pass
+def glFogCoordPointerEXT(type,stride,pointer):pass
 
 
 def glInitFogCoordEXT():

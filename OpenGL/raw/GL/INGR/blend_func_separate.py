@@ -8,7 +8,7 @@ def _f( function ):
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
-def glBlendFuncSeparateINGR( sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha ):pass
+def glBlendFuncSeparateINGR(sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha):pass
 
 
 def glInitBlendFuncSeparateINGR():

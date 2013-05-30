@@ -15,10 +15,10 @@ glget.addGLGetConstant( GL_WRITE_PIXEL_DATA_RANGE_LENGTH_NV, (1,) )
 glget.addGLGetConstant( GL_READ_PIXEL_DATA_RANGE_LENGTH_NV, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
-def glPixelDataRangeNV( target,length,pointer ):pass
+def glPixelDataRangeNV(target,length,pointer):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glFlushPixelDataRangeNV( target ):pass
+def glFlushPixelDataRangeNV(target):pass
 
 
 def glInitPixelDataRangeNV():

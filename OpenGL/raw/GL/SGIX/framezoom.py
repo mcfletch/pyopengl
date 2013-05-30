@@ -10,7 +10,7 @@ GL_FRAMEZOOM_FACTOR_SGIX 0x818C
 GL_MAX_FRAMEZOOM_FACTOR_SGIX 0x818D""", globals())
 @_f
 @_p.types(None,_cs.GLint)
-def glFrameZoomSGIX( factor ):pass
+def glFrameZoomSGIX(factor):pass
 
 
 def glInitFramezoomSGIX():

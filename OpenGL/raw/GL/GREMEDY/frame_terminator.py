@@ -8,7 +8,7 @@ def _f( function ):
 
 @_f
 @_p.types(None,)
-def glFrameTerminatorGREMEDY(  ):pass
+def glFrameTerminatorGREMEDY():pass
 
 
 def glInitFrameTerminatorGREMEDY():

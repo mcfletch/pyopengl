@@ -20,10 +20,10 @@ glget.addGLGetConstant( GL_PN_TRIANGLES_NORMAL_MODE_ATI, (1,) )
 glget.addGLGetConstant( GL_PN_TRIANGLES_TESSELATION_LEVEL_ATI, (1,) )
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
-def glPNTrianglesiATI( pname,param ):pass
+def glPNTrianglesiATI(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
-def glPNTrianglesfATI( pname,param ):pass
+def glPNTrianglesfATI(pname,param):pass
 
 
 def glInitPnTrianglesATI():
