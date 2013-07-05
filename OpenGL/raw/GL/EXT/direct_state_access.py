@@ -626,6 +626,63 @@ def glProgramUniformMatrix4x2dvEXT(program,location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLdoubleArray)
 def glProgramUniformMatrix4x3dvEXT(program,location,count,transpose,value):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayVertexOffsetEXT(vaobj,buffer,size,type,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayColorOffsetEXT(vaobj,buffer,size,type,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayEdgeFlagOffsetEXT(vaobj,buffer,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayIndexOffsetEXT(vaobj,buffer,type,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayNormalOffsetEXT(vaobj,buffer,type,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayTexCoordOffsetEXT(vaobj,buffer,size,type,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayMultiTexCoordOffsetEXT(vaobj,buffer,texunit,size,type,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayFogCoordOffsetEXT(vaobj,buffer,type,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
+def glVertexArraySecondaryColorOffsetEXT(vaobj,buffer,size,type,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayVertexAttribOffsetEXT(vaobj,buffer,index,size,type,normalized,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLintptr)
+def glVertexArrayVertexAttribIOffsetEXT(vaobj,buffer,index,size,type,stride,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLenum)
+def glEnableVertexArrayEXT(vaobj,array):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLenum)
+def glDisableVertexArrayEXT(vaobj,array):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint)
+def glEnableVertexArrayAttribEXT(vaobj,index):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint)
+def glDisableVertexArrayAttribEXT(vaobj,index):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
+def glGetVertexArrayIntegervEXT(vaobj,pname,param):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.POINTER(ctypes.POINTER(_cs.void)))
+def glGetVertexArrayPointervEXT(vaobj,pname,param):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
+def glGetVertexArrayIntegeri_vEXT(vaobj,index,pname,param):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,ctypes.POINTER(ctypes.POINTER(_cs.void)))
+def glGetVertexArrayPointeri_vEXT(vaobj,index,pname,param):pass
 
 
 def glInitDirectStateAccessEXT():
