@@ -138,6 +138,10 @@ def returnFormat( data, type ):
                 return data.tostring()
             elif hasattr( data, 'raw' ):
                 return data.raw 
+            elif hasattr( data, '_type_' ):
+                s = ctypes.string_at( ctypes.cast( data, ctypes.c_voidp ), ctypes.sizeof( data ))
+                result = s[:] # copy into a new string
+                return s
     return data
 
 
