@@ -17,7 +17,7 @@ cdef class HandlerRegistry:
     cdef object match
     cdef object output_handler
     cdef object preferredOutput
-    GENERIC_OUTPUT_PREFERENCES = ['numpy','numeric','ctypesarrays']
+    GENERIC_OUTPUT_PREFERENCES = ['numpy','ctypesarrays']
     cdef object all_output_handlers
     def __init__( self, plugin_match ):
         self.registry = {}
