@@ -64,9 +64,6 @@ import occurs the flags should no longer be changed.
         testing stages to prevent raising errors on
         recoverable conditions at run-time.
 
-        Note: this feature does not currently work with
-            numarray or Numeric arrays.
-
         Default: False
 
     CONTEXT_CHECKING -- if set to True, PyOpenGL will wrap
@@ -225,6 +222,5 @@ FormatHandler(
 )
 FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandler' )
 FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', ['numpy.ndarray'] )
-FormatHandler( 'numeric', 'OpenGL.arrays.numeric.NumericHandler', )
 FormatHandler( 'vbo', 'OpenGL.arrays.vbo.VBOHandler', ['OpenGL.arrays.vbo.VBO','OpenGL_accelerate.vbo.VBO'] )
 FormatHandler( 'vbooffset', 'OpenGL.arrays.vbo.VBOOffsetHandler', ['OpenGL.arrays.vbo.VBOOffset','OpenGL_accelerate.vbo.VBOOffset'] )

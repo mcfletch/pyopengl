@@ -22,7 +22,6 @@ inspect.isbuiltin = isbuiltin
 
 if __name__ == "__main__":
     excludes = [
-        "Numeric",
         "numpy",
         "_tkinter",
         "Tkinter",

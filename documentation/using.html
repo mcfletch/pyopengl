@@ -526,7 +526,7 @@ C and/or Hardware).</p>
 
 <p>Array based geometry uses OpenGL 1.1 features (supported almost
 everywhere) that allow for passing large arrays of data to be processed
-with a single call. &nbsp;Using numpy (or Numeric) arrays, you can
+with a single call. &nbsp;Using numpy arrays, you can
 readily pass your data into those functions without any need for
 Python-level iteration. &nbsp;This is the more flexible of the two
 approaches, as it allows for readily mutating the data being rendered
@@ -750,37 +750,8 @@ when porting code:</p>
   <li>setuptools required</li><ul><li>You *must* run
 setuptools installation in order to register the egg entry points, if
 you do not you will have *no* data formats supported and nothing will
-work at all</li></ul><li>numpy versus Numeric</li>
-
-
-
-
-
-  
-  
-  
-  
-  
-  <ul>
-
-
-
-
-
-    <li>PyOpenGL 2.x used (only) the older "Numeric" module.
-&nbsp;PyOpenGL 3.x can use Numeric (with an optional C extension), but
-uses numpy by default.</li>
-
-
-
-
-
-  
-  
-  
-  
-  
-  </ul><li>strings deprecated as array return-types for all save image data</li><ul><li>PyOpenGL
+work at all</li></ul>
+<li>strings deprecated as array return-types for all save image data</li><ul><li>PyOpenGL
 2.x would normally return your GL_UNSIGNED_BYTE data as strings.
 &nbsp;We continue to support this for image operations (glGetTexImage,
 glReadPixels), but we provide a way to turn off the behaviour and
