@@ -2,10 +2,9 @@
 """Python 3.x buffer-handling (currently just for bytes/bytearray types)
 """
 import ctypes,sys
-
 _fields_ = [
     ('buf',ctypes.c_void_p),
-    ('obj',ctypes.py_object),
+    ('obj',ctypes.c_void_p),
     ('len',ctypes.c_size_t),
     ('itemsize',ctypes.c_size_t),
 
@@ -32,9 +31,10 @@ class Py_buffer(ctypes.Structure):
     @property
     def dims( self ):
         return self.shape[:self.ndim]
-    def __del__( self ):
-        # TODO: use a weakref
-        ReleaseBuffer( self )
+#    def __del__( self ):
+#        # TODO: use a weakref
+#        print 'Releasing'
+#        #ReleaseBuffer( self )
 
 BUFFER_POINTER = ctypes.POINTER( Py_buffer )
 
@@ -53,6 +53,9 @@ except AttributeError as err:
     # Python 2.6 doesn't appear to have CheckBuffer support...
     CheckBuffer = lambda x: True
 
+IncRef = ctypes.pythonapi.Py_IncRef 
+IncRef.argtypes = [ ctypes.py_object ]
+    
 GetBuffer = ctypes.pythonapi.PyObject_GetBuffer
 GetBuffer.argtypes = [ ctypes.py_object, BUFFER_POINTER, ctypes.c_int ]
 GetBuffer.restype = ctypes.c_int
@@ -62,23 +65,42 @@ ReleaseBuffer.argtypes = [ BUFFER_POINTER ]
 ReleaseBuffer.restype = None
 
 def test():
+    import numpy
+    import operator
+    try:
+        reduce
+    except NameError as err:
+        from functools import reduce
+    buf = Py_buffer()
+    # deallocation of the buf causes glibc abort :(
+    bufp = ctypes.pointer( buf )
     for x in [
-        b'this and that', # sigh, 2to3 converts this to unicode... I *mean* an 8-bit buffer
+        b'this and that',
+        memoryview(b'this'),
         # These are the things you'd have thought might support it...
         #(ctypes.c_int * 3)( 1,2,3 ),
-        #numpy.arange(0,3,dtype='b'),
+        numpy.arange(0,9,dtype='b').reshape((3,3)),
     ]:
-        buf = Py_buffer()
         assert CheckBuffer( x )
-        result = GetBuffer( x, buf, PyBUF_CONTIG_RO )
+        result = GetBuffer( x, bufp, PyBUF_CONTIG_RO )
+        buf = bufp[0]
+        #IncRef( x ) # No doesn't seem to be due to incref failure
         assert result == 0, "Retrieval of buffer failed"
-        print(('length:', buf.len))
-        print(('readonly', buf.readonly))
-        print(('format', buf.format))
-        print(('ndim', buf.ndim))
-        print(('shape', buf.shape[:buf.ndim]))
-        print(('dims', buf.dims ))
-        print(('c data pointer',buf.buf))
-        assert buf.len == len(x), "Mismatch in size of buffer (%s, expected %s)"%(buf.len,len(x))
+        print('length:', buf.len)
+        print('readonly', buf.readonly)
+        print('format', buf.format)
+        print('ndim', buf.ndim)
+        print('shape', buf.shape[:buf.ndim])
+        print('dims', buf.dims )
+        print('c data pointer',buf.buf)
+        assert buf.len == reduce(operator.__mul__,buf.dims), "Mismatch in size of buffer (%s, expected %s)"%(buf.len,len(x))
+        # Always decrefs
+        ReleaseBuffer( bufp )
+        assert buf.obj == None, buf.obj
+    print('finished')
+    del bufp 
+    del buf
+    print('deleted')
 if __name__ == "__main__":
     test()
+    

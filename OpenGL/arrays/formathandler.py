@@ -19,7 +19,7 @@ class FormatHandler( object ):
     HANDLED_TYPES = ()
     preferredOutput = None
     isOutput = False
-    GENERIC_OUTPUT_PREFERENCES = ['numpy','numeric','ctypesarrays']
+    GENERIC_OUTPUT_PREFERENCES = ['numpy','ctypesarrays']
     ALL_OUTPUT_HANDLERS = []
     def loadAll( cls ):
         """Load all OpenGL.plugins-registered FormatHandler classes

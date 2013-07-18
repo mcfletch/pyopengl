@@ -11,10 +11,7 @@ except ImportError as err:
 try:
     from numpy import *
 except ImportError as err:
-    try:
-        from Numeric import *
-    except ImportError as err:
-        array = None
+    array = None
 
 pygame.display.init()
 import OpenGL 
