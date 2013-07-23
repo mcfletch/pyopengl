@@ -15,7 +15,10 @@ _fields_ = [
     ('strides',ctypes.POINTER(ctypes.c_size_t)),
     ('suboffsets',ctypes.POINTER(ctypes.c_size_t)),
 ]
-if sys.version_info[0] < 3:
+if sys.version_info[:2] < [2.7]:
+    # 2.7.5 documentation is incorrect about the structure, it is actually 
+    # the Python 3.x version of the struct, so only 2.6 needs the different 
+    # form
     _fields_.extend( [
         ('internal',ctypes.c_void_p),
     ] )
