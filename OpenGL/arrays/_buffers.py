@@ -81,22 +81,29 @@ def test():
         b'this and that',
         memoryview(b'this'),
         # These are the things you'd have thought might support it...
-        #(ctypes.c_int * 3)( 1,2,3 ),
-        numpy.arange(0,9,dtype='b').reshape((3,3)),
+        (ctypes.c_int * 3)( 1,2,3 ),
+        numpy.arange(0,9,dtype='I').reshape((3,3)),
+        numpy.arange(0,9,dtype='I').reshape((3,3))[:,1],
     ]:
         assert CheckBuffer( x )
-        result = GetBuffer( x, bufp, PyBUF_CONTIG_RO )
+        result = GetBuffer( x, bufp, PyBUF_STRIDES )
+        print('')
+        print( 'Object:', x )
         buf = bufp[0]
         #IncRef( x ) # No doesn't seem to be due to incref failure
         assert result == 0, "Retrieval of buffer failed"
         print('length:', buf.len)
+        print('itemsize', buf.itemsize)
         print('readonly', buf.readonly)
         print('format', buf.format)
         print('ndim', buf.ndim)
         print('shape', buf.shape[:buf.ndim])
         print('dims', buf.dims )
         print('c data pointer',buf.buf)
-        assert buf.len == reduce(operator.__mul__,buf.dims), "Mismatch in size of buffer (%s, expected %s)"%(buf.len,len(x))
+        if buf.strides:
+            print('strides', buf.strides[:buf.ndim])
+        if buf.suboffsets:
+            print('suboffsets', buf.strides[:buf.ndim])
         # Always decrefs
         ReleaseBuffer( bufp )
         assert buf.obj == None, buf.obj
