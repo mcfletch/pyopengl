@@ -27,6 +27,10 @@ if sys.version_info[:2] < (2,6):
     bytes = str 
 else:
     bytes = bytes
+try:
+    long = long
+except NameError as err:
+    long = int
 if sys.version_info[:2] < (3,0):
     # traditional setup, with bytes defined...
     unicode = unicode
@@ -34,7 +38,8 @@ if sys.version_info[:2] < (3,0):
     def as_8_bit( x, encoding='utf-8' ):
         if isinstance( x, unicode ):
             return x.encode( encoding )
-        return bytes( x ) 
+        return bytes( x )
+    integer_types = int,long
 else:
     # new setup, str is now unicode...
     STR_IS_BYTES = False
@@ -49,5 +54,10 @@ else:
             return x
         return str(x).encode( encoding )
     unicode = str
+    integer_types = int,
 
 STR_IS_UNICODE = not STR_IS_BYTES
+if hasattr( sys, 'maxsize' ):
+    maxsize = sys.maxsize 
+else:
+    maxsize = sys.maxint

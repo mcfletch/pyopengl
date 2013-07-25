@@ -4,15 +4,12 @@ REGISTRY_NAME = 'numbers'
 from OpenGL import constants
 from OpenGL.arrays import formathandler
 import ctypes
-try:
-    long 
-except NameError as err:
-    long = int
+from OpenGL._bytes import long, integer_types
 
 class NumberHandler( formathandler.FormatHandler ):
     """Allows the user to pass a bald Python float,int, etceteras as an array-of-1"""
-    HANDLED_TYPES = (
-        int,long,float,
+    HANDLED_TYPES = integer_types + (
+        float,
         constants.GLdouble,
         constants.GLfloat,
         constants.GLint,

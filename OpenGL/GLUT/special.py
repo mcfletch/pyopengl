@@ -27,10 +27,7 @@ from OpenGL._bytes import bytes, unicode,_NULL_8_BYTE, as_8_bit
 import ctypes, os, sys, traceback
 PLATFORM = platform.PLATFORM
 FUNCTION_TYPE = simple.CALLBACK_FUNCTION_TYPE
-try:
-    long 
-except NameError as err:
-    long = int
+from OpenGL._bytes import long, integer_types
 
 log = logs.getLog( 'OpenGL.GLUT.special' )
 
@@ -297,7 +294,7 @@ def glutInit( *args ):
     if args:
         arg,args = args[0],args[1:]
         count = None
-        if isinstance(arg, (int,long)):
+        if isinstance(arg, integer_types):
             # raw API style, (count, values)
             count = arg
             if count != len(args):

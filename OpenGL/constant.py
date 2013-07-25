@@ -1,15 +1,7 @@
 """Implementation of OpenGL constant objects"""
 import sys
-from OpenGL._bytes import bytes,unicode,as_8_bit
-try:
-    long 
-except NameError as err:
-    long = int
+from OpenGL._bytes import bytes,unicode,as_8_bit, long, integer_types, maxsize
 from OpenGL import _configflags
-if hasattr( sys, 'maxsize' ):
-    maxsize = sys.maxsize 
-else:
-    maxsize = sys.maxint
 
 class Constant( object ):
     """OpenGL constant that displays itself as a name rather than a value
@@ -30,7 +22,7 @@ class Constant( object ):
                 return LongConstant( name, value )
             elif isinstance( value, (bytes,unicode) ) and cls is not StringConstant:
                 return StringConstant( name, as_8_bit(value) )
-        if isinstance( value, long ):
+        if isinstance( value, integer_types ):
             if value > maxsize: # TODO: I'm guessing this should really by sizeof GLint, not 
                 value = - (value & maxsize)
         base = super(Constant,cls).__new__( cls, value )

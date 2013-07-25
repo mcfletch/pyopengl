@@ -4,7 +4,6 @@ This module provides the tools required to check whether
 an extension is available
 """
 from OpenGL.latebind import LateBind
-from OpenGL._bytes import bytes,as_8_bit
 from OpenGL._bytes import bytes,unicode,as_8_bit
 import OpenGL as root
 import sys

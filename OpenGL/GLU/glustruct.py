@@ -1,10 +1,7 @@
 """Base class for GLU callback-caching structures"""
 import ctypes
 import weakref
-try:
-    long 
-except NameError as err:
-    long = int
+from OpenGL._bytes import long, integer_types
 
 class GLUStruct( object ):
     """Mix-in class for GLU Structures that want to retain references to callbacks
@@ -44,7 +41,7 @@ class GLUStruct( object ):
         return identity
     def originalObject( self, voidPointer ):
         """Given a void-pointer, try to find our original Python object"""
-        if isinstance( voidPointer, (int,long)):
+        if isinstance( voidPointer, integer_types):
             identity = voidPointer
         elif voidPointer is None:
             return None

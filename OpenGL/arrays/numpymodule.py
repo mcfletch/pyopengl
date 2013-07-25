@@ -9,10 +9,7 @@ try:
     import numpy
 except ImportError as err:
     raise ImportError( """No numpy module present: %s"""%(err))
-try:
-    long 
-except NameError as err:
-    long = int
+from OpenGL._bytes import long, integer_types
 
 import operator,logging
 from OpenGL import _configflags

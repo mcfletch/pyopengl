@@ -38,11 +38,7 @@ from OpenGL import constants, error
 from OpenGL._bytes import bytes,unicode,as_8_bit
 import ctypes,logging
 log = logging.getLogger( 'OpenGL.arrays.vbo' )
-try:
-    long 
-except NameError as err:
-    long = int
-
+from OpenGL._bytes import long, integer_types
 
 import weakref
 __all__ = ('VBO','VBOHandler','mapVBO')
@@ -332,7 +328,7 @@ if VBO is None:
             """Add an integer to this VBO (create a VBOOffset)"""
             if hasattr( other, 'offset' ):
                 other = other.offset
-            assert isinstance( other, (int,long) ), """Only know how to add integer/long offsets"""
+            assert isinstance( other, integer_types ), """Only know how to add integer/long offsets"""
             return VBOOffset( self, other )
 
         __enter__ = bind

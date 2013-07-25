@@ -4,10 +4,7 @@ This code is resonsible for turning gluint *
 arrays into structured representations for use
 by Python-level code.
 """
-try:
-    long 
-except NameError as err:
-    long = int
+from OpenGL._bytes import long, integer_types
 
 def uintToLong( value ):
     if value < 0:
@@ -56,7 +53,7 @@ class GLSelectRecord( object ):
         return uintToLong( value ) / self.DISTANCE_DIVISOR
     def __getitem__( self, key ):
         """Allow for treating the record as a three-tuple"""
-        if isinstance( key, (int,long)):
+        if isinstance( key, integer_types):
             return (self.near,self.far,self.names)[key]
         elif key in self.__slots__:
             try:

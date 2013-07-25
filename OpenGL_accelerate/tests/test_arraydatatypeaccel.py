@@ -2,6 +2,7 @@ import unittest, numpy, ctypes
 from OpenGL.arrays import arraydatatype as adt
 from OpenGL.arrays import vbo
 from OpenGL import error, constants
+from OpenGL._bytes import integer_types
 
 class _BaseTest( unittest.TestCase ):
     def setUp( self ):
@@ -12,7 +13,7 @@ class _BaseTest( unittest.TestCase ):
         assert isinstance( p, ctypes.c_void_p )
     def test_dataPointer( self ):
         p = self.handler.dataPointer( self.array )
-        assert isinstance( p, (int,long))
+        assert isinstance( p, integer_types)
     def test_arraySize( self ):
         p = self.handler.arraySize( self.array )
         assert p == 6, p
@@ -40,7 +41,7 @@ class TestNumpy( _BaseTest ):
         super(TestNumpy,self).setUp()
     def test_dataPointer( self ):
         p = self.handler.dataPointer( self.array )
-        assert isinstance( p, (int,long))
+        assert isinstance( p, integer_types)
         assert p == self.array.ctypes.data
     def test_zeros( self ):
         p = self.handler.zeros( (2,3,4), 'f' )

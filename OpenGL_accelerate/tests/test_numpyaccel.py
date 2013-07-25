@@ -1,6 +1,7 @@
 import unittest, numpy, ctypes
 from OpenGL_accelerate import numpy_formathandler as npf
 from OpenGL import error, constants
+from OpenGL._bytes import integer_types
 from OpenGL._configflags import ERROR_ON_COPY
 
 class TestAccelNumpy( unittest.TestCase ):
@@ -13,7 +14,7 @@ class TestAccelNumpy( unittest.TestCase ):
         assert isinstance( p, ctypes.c_void_p )
     def test_dataPointer( self ):
         p = self.handler.dataPointer( self.array )
-        assert isinstance( p, (int,long))
+        assert isinstance( p, integer_types)
         assert p == self.array.ctypes.data
     def test_zeros( self ):
         p = self.handler.zeros( (2,3,4), 'f' )
