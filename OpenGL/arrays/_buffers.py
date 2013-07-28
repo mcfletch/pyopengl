@@ -51,6 +51,8 @@ class Py_buffer(ctypes.Structure):
         result = GetBuffer( object, buf, flags )
         if result != 0:
             raise ValueError( "Unable to retrieve Buffer from %s"%(object,))
+        if not buf.buf:
+            raise ValueError( "Null pointer result from %s"%(object,) )
         return buf
     _fields_ = _fields_
     @property
