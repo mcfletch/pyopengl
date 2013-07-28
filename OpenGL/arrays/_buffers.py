@@ -11,6 +11,7 @@ PyBUF_ND = 0x0008
 PyBUF_STRIDES = (0x0010 | PyBUF_ND)
 PyBUF_CONTIG = (PyBUF_ND | PyBUF_WRITABLE)
 PyBUF_CONTIG_RO = (PyBUF_ND)
+PyBUF_C_CONTIGUOUS = (0x0020 | PyBUF_STRIDES)
 PyBUF_FORMAT = 0x0004
     
 _fields_ = [
@@ -42,7 +43,7 @@ else:
 class Py_buffer(ctypes.Structure):
     """Wrapper around the Python buffer structure..."""
     @classmethod 
-    def from_object( cls, object, flags=PyBUF_STRIDES|PyBUF_FORMAT ):
+    def from_object( cls, object, flags=PyBUF_STRIDES|PyBUF_FORMAT|PyBUF_C_CONTIGUOUS ):
         """Create a new Py_buffer referencing ram of object"""
         if not CheckBuffer( object ):
             raise TypeError( "%s type does not support Buffer Protocol"%(object.__class__,))
