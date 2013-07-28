@@ -5,6 +5,7 @@ Will *only* work for Python 2.6+, and pretty much just works for strings
 under 2.6 (in terms of the common object types).
 """
 import ctypes,sys
+from OpenGL._bytes import bytes
 from OpenGL.arrays import _buffers
 from OpenGL import constants
 from OpenGL.arrays import formathandler
@@ -12,10 +13,23 @@ try:
     reduce 
 except NameError as err:
     from functools import reduce
+HANDLED_TYPES = [bytes,bytearray]
+if sys.version_info[:2] >= (3,0):
+    import array as silly_array
+    HANDLED_TYPES.append( silly_array )
+try:
+    import numpy
+    HANDLED_TYPES.append( numpy.ndarray )
+except ImportError as err:
+    pass
+try:
+    HANDLED_TYPES.append( memoryview )
+except NameError:
+    pass 
 
 class BufferHandler( formathandler.FormatHandler ):
     """Buffer-protocol data-type handler for OpenGL"""
-    HANDLED_TYPES = (bytes,bytearray)
+    HANDLED_TYPES = tuple( HANDLED_TYPES )
     @classmethod
     def from_param( cls, value, typeCode=None ):
         if not isinstance( value, _buffers.Py_buffer ):
