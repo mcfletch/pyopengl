@@ -4,6 +4,15 @@
 import ctypes,sys
 if sys.version_info[:2] < (2,6):
     raise ImportError( 'Buffer interface only usable on Python 2.6+' )
+
+PyBUF_SIMPLE = 0
+PyBUF_WRITABLE = PyBUF_WRITEABLE = 0x0001
+PyBUF_ND = 0x0008
+PyBUF_STRIDES = (0x0010 | PyBUF_ND)
+PyBUF_CONTIG = (PyBUF_ND | PyBUF_WRITABLE)
+PyBUF_CONTIG_RO = (PyBUF_ND)
+PyBUF_FORMAT = 0x0004
+    
 _fields_ = [
     ('buf',ctypes.c_void_p),
     ('obj',ctypes.c_void_p),
@@ -32,24 +41,34 @@ else:
     ] )
 class Py_buffer(ctypes.Structure):
     """Wrapper around the Python buffer structure..."""
+    @classmethod 
+    def from_object( cls, object, flags=PyBUF_STRIDES|PyBUF_FORMAT ):
+        """Create a new Py_buffer referencing ram of object"""
+        if not CheckBuffer( object ):
+            raise TypeError( "%s type does not support Buffer Protocol"%(object.__class__,))
+        buf = cls()
+        # deallocation of the buf causes glibc abort :(
+        result = GetBuffer( object, buf, flags )
+        if result != 0:
+            raise ValueError( "Unable to retrieve Buffer from %s"%(object,))
+        return buf
     _fields_ = _fields_
     @property
     def dims( self ):
         return self.shape[:self.ndim]
-#    def __del__( self ):
-#        # TODO: use a weakref
-#        print 'Releasing'
-#        #ReleaseBuffer( self )
+    @property 
+    def dim_strides( self ):
+        if self.strides:
+            return self.strides[:self.ndim]
+        return None
+    
+    def __enter__(self):
+        pass 
+    def __exit__( self, exc_type=None, exc_value=None, traceback=None):
+        ReleaseBuffer( self )
 
 BUFFER_POINTER = ctypes.POINTER( Py_buffer )
 
-PyBUF_SIMPLE = 0
-PyBUF_WRITABLE = PyBUF_WRITEABLE = 0x0001
-PyBUF_ND = 0x0008
-PyBUF_STRIDES = (0x0010 | PyBUF_ND)
-PyBUF_CONTIG = (PyBUF_ND | PyBUF_WRITABLE)
-PyBUF_CONTIG_RO = (PyBUF_ND)
-PyBUF_FORMAT = 0x0004
 
 try:
     CheckBuffer = ctypes.pythonapi.PyObject_CheckBuffer

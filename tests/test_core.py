@@ -1017,15 +1017,9 @@ class Tests( unittest.TestCase ):
             pass
         
         from OpenGL.arrays import _buffers
-        buf = _buffers.Py_buffer()
-        # deallocation of the buf causes glibc abort :(
-        bufp = ctypes.pointer( buf )
         for object,length,itemsize,readonly,ndim,format,shape,strides in structures:
-            assert _buffers.CheckBuffer( object )
-            result = _buffers.GetBuffer( object, bufp, _buffers.PyBUF_STRIDES|_buffers.PyBUF_FORMAT )
-            try:
-                buf = bufp[0]
-                assert result == 0, "Retrieval of buffer failed"
+            buf = _buffers.Py_buffer.from_object( object )
+            with buf:
                 assert buf.len == length, (object,length,buf.len)
                 assert buf.itemsize == itemsize, (object,itemsize,buf.itemsize)
                 assert buf.readonly == readonly, (object,readonly,buf.readonly)
@@ -1038,11 +1032,8 @@ class Tests( unittest.TestCase ):
                     assert not buf.strides 
                 else:
                     assert buf.strides[:buf.ndim] == strides, (object, strides, buf.strides[:buf.ndim])
-            finally:
-                _buffers.ReleaseBuffer( bufp )
             assert buf.obj == None, buf.obj
-        del bufp 
-        del buf
+            del buf
         
 if __name__ == "__main__":
     unittest.main()
