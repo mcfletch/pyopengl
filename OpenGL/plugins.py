@@ -3,12 +3,13 @@
 class Plugin( object ):
     """Base class for plugins to be loaded"""
     loaded = False
-    def __init__( self, name, import_path, check = None ):
+    def __init__( self, name, import_path, check = None, **named ):
         """Register the plug-in"""
         self.name = name 
         self.import_path = import_path
         self.check = check
         self.registry.append( self )
+        self.__dict__.update( named )
     def load( self ):
         """Attempt to load and return our entry point"""
         return importByName( self.import_path )
@@ -19,6 +20,12 @@ class Plugin( object ):
     def all( cls ):
         """Iterate over all registered plugins"""
         return cls.registry[:]
+    @classmethod 
+    def by_name( cls, name ):
+        for instance in cls.all():
+            if instance.name == name:
+                return instance 
+        return None
     
 def importByName( fullName ):
     """Import a class by name"""

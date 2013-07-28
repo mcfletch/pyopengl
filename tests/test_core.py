@@ -16,6 +16,7 @@ except ImportError as err:
 
 pygame.display.init()
 import OpenGL 
+OpenGL.USE_ACCELERATE = False
 OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
 from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode

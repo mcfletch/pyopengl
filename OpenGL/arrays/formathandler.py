@@ -47,8 +47,9 @@ class FormatHandler( object ):
                 )
             else:
                 handler = plugin_class()
-                handler.register( handler.HANDLED_TYPES )
+                #handler.register( handler.HANDLED_TYPES )
                 ArrayDatatype.getRegistry()[ entrypoint.name ] = handler
+                return handler
             entrypoint.loaded = True
     @classmethod
     def typeLookup( cls, type ):

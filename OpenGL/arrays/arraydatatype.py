@@ -54,23 +54,23 @@ if ADT is None:
                 )
             return handler
         
+        def handler_by_plugin_name( self, name ):
+            plugin = plugins.FormatHandler.by_name( name )
+            try:
+                return plugin.load()
+            except ImportError as err:
+                return None
+        
         def get_output_handler( self ):
             """Fast-path lookup for output handler object"""
             if self.output_handler is None:
-                if not self:
-                    formathandler.FormatHandler.loadAll()
                 if self.preferredOutput is not None:
-                    self.output_handler = self.get( self.preferredOutput )
+                    self.output_handler = self.handler_by_plugin_name( self.preferredOutput )
                 if not self.output_handler:
                     for preferred in self.GENERIC_OUTPUT_PREFERENCES:
-                        self.output_handler = self.get( preferred )
+                        self.output_handler = self.handler_by_plugin_name( preferred )
                         if self.output_handler:
                             break
-                if not self.output_handler:
-                    # look for anything that can do output...
-                    for handler in self.all_output_handlers:
-                        self.output_handler = handler 
-                        break
                 if not self.output_handler:
                     raise RuntimeError(
                         """Unable to find any output handler at all (not even ctypes/numpy ones!)"""

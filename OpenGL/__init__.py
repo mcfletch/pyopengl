@@ -198,29 +198,53 @@ PlatformPlugin( 'posix', 'OpenGL.platform.glx.GLXPlatform' )
 PlatformPlugin( 'osmesa', 'OpenGL.platform.osmesa.OSMesaPlatform')
 PlatformPlugin( 'egl', 'OpenGL.platform.egl.EGLPlatform')
 
-FormatHandler( 'none', 'OpenGL.arrays.nones.NoneHandler' )
+FormatHandler( 'none', 'OpenGL.arrays.nones.NoneHandler', ['__builtin__.NoneType'],isOutput=False )
 
 import sys
 if sys.version_info[0] < 3:
-    FormatHandler( 'str', 'OpenGL.arrays.strings.StringHandler' )
-    FormatHandler( 'unicode', 'OpenGL.arrays.strings.UnicodeHandler' )
+    FormatHandler( 'str', 'OpenGL.arrays.strings.StringHandler',['__builtin__.str'], isOutput=False )
+    FormatHandler( 'unicode', 'OpenGL.arrays.strings.UnicodeHandler',['__builtin__.unicode'], isOutput=False )
 else:
-    FormatHandler( 'bytes', 'OpenGL.arrays.strings.StringHandler' )
-    FormatHandler( 'str', 'OpenGL.arrays.strings.UnicodeHandler' )
+    FormatHandler( 'bytes', 'OpenGL.arrays.strings.StringHandler',['__builtin__.bytes'], isOutput=False )
+    FormatHandler( 'str', 'OpenGL.arrays.strings.UnicodeHandler',['__builtin__.str'], isOutput=False )
     
-FormatHandler( 'list', 'OpenGL.arrays.lists.ListHandler', ['__builtin__.list','__builtin__.tuple'] )
-FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler' )
+FormatHandler( 'list', 'OpenGL.arrays.lists.ListHandler', [
+    '__builtin__.list',
+    '__builtin__.tuple',
+], isOutput=False )
+FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler', [
+    '__builtin__.int',
+    '__builtin__.float',
+    '__builtin__.long',
+], isOutput=False )
 FormatHandler(
     'ctypesarray', 'OpenGL.arrays.ctypesarrays.CtypesArrayHandler',
     [
-        '_ctypes.ArrayType','_ctypes.PyCArrayType',
+        '_ctypes.ArrayType',
+        '_ctypes.PyCArrayType',
+        '_ctypes.Array',
     ],
+    isOutput=True,
 )
 FormatHandler(
     'ctypesparameter',
     'OpenGL.arrays.ctypesparameters.CtypesParameterHandler',
+    [
+        '__builtin__.CArgObject',
+        'ctypes.c_uint',
+        'ctypes.c_int',
+        'ctypes.c_float',
+        'ctypes.c_double',
+        'ctypes.c_long',
+        'ctypes.c_longlong',
+    ],
+    isOutput=True,
 )
-FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandler' )
-FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', ['numpy.ndarray'] )
-FormatHandler( 'vbo', 'OpenGL.arrays.vbo.VBOHandler', ['OpenGL.arrays.vbo.VBO','OpenGL_accelerate.vbo.VBO'] )
-FormatHandler( 'vbooffset', 'OpenGL.arrays.vbo.VBOOffsetHandler', ['OpenGL.arrays.vbo.VBOOffset','OpenGL_accelerate.vbo.VBOOffset'] )
+FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandler',[
+    'ctypes.c_void_p',
+    '_ctypes._Pointer',
+    'ctypes.c_char_p',
+],isOutput=False )
+FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', ['numpy.ndarray'],isOutput=True )
+FormatHandler( 'vbo', 'OpenGL.arrays.vbo.VBOHandler', ['OpenGL.arrays.vbo.VBO','OpenGL_accelerate.vbo.VBO'],isOutput=False )
+FormatHandler( 'vbooffset', 'OpenGL.arrays.vbo.VBOOffsetHandler', ['OpenGL.arrays.vbo.VBOOffset','OpenGL_accelerate.vbo.VBOOffset'],isOutput=False )
