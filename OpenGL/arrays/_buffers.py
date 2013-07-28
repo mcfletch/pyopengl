@@ -2,6 +2,8 @@
 """Python 3.x buffer-handling (currently just for bytes/bytearray types)
 """
 import ctypes,sys
+if sys.version_info[:2] < (2,6):
+    raise ImportError( 'Buffer interface only usable on Python 2.6+' )
 _fields_ = [
     ('buf',ctypes.c_void_p),
     ('obj',ctypes.c_void_p),
@@ -15,7 +17,7 @@ _fields_ = [
     ('strides',ctypes.POINTER(ctypes.c_size_t)),
     ('suboffsets',ctypes.POINTER(ctypes.c_size_t)),
 ]
-if sys.version_info[:2] < [2.7]:
+if sys.version_info[:2] < (2,7):
     # 2.7.5 documentation is incorrect about the structure, it is actually 
     # the Python 3.x version of the struct, so only 2.6 needs the different 
     # form
@@ -47,6 +49,7 @@ PyBUF_ND = 0x0008
 PyBUF_STRIDES = (0x0010 | PyBUF_ND)
 PyBUF_CONTIG = (PyBUF_ND | PyBUF_WRITABLE)
 PyBUF_CONTIG_RO = (PyBUF_ND)
+PyBUF_FORMAT = 0x0004
 
 try:
     CheckBuffer = ctypes.pythonapi.PyObject_CheckBuffer
@@ -66,51 +69,3 @@ GetBuffer.restype = ctypes.c_int
 ReleaseBuffer = ctypes.pythonapi.PyBuffer_Release
 ReleaseBuffer.argtypes = [ BUFFER_POINTER ]
 ReleaseBuffer.restype = None
-
-def test():
-    import numpy
-    import operator
-    try:
-        reduce
-    except NameError as err:
-        from functools import reduce
-    buf = Py_buffer()
-    # deallocation of the buf causes glibc abort :(
-    bufp = ctypes.pointer( buf )
-    for x in [
-        b'this and that',
-        memoryview(b'this'),
-        # These are the things you'd have thought might support it...
-        (ctypes.c_int * 3)( 1,2,3 ),
-        numpy.arange(0,9,dtype='I').reshape((3,3)),
-        numpy.arange(0,9,dtype='I').reshape((3,3))[:,1],
-    ]:
-        assert CheckBuffer( x )
-        result = GetBuffer( x, bufp, PyBUF_STRIDES )
-        print('')
-        print( 'Object:', x )
-        buf = bufp[0]
-        #IncRef( x ) # No doesn't seem to be due to incref failure
-        assert result == 0, "Retrieval of buffer failed"
-        print('length:', buf.len)
-        print('itemsize', buf.itemsize)
-        print('readonly', buf.readonly)
-        print('format', buf.format)
-        print('ndim', buf.ndim)
-        print('shape', buf.shape[:buf.ndim])
-        print('dims', buf.dims )
-        print('c data pointer',buf.buf)
-        if buf.strides:
-            print('strides', buf.strides[:buf.ndim])
-        if buf.suboffsets:
-            print('suboffsets', buf.strides[:buf.ndim])
-        # Always decrefs
-        ReleaseBuffer( bufp )
-        assert buf.obj == None, buf.obj
-    print('finished')
-    del bufp 
-    del buf
-    print('deleted')
-if __name__ == "__main__":
-    test()
-    

@@ -2,6 +2,7 @@
 import unittest, pygame, pygame.display, time, traceback, os, sys
 import logging 
 logging.basicConfig()
+HERE = os.path.dirname( __file__ )
 import pickle
 try:
     import cPickle
@@ -378,7 +379,7 @@ class Tests( unittest.TestCase ):
             else:
                 glEnable( GL_TEXTURE_2D )
                 ourTexture = texture.Texture(
-                    Image.open( 'yingyang.png' )
+                    Image.open( os.path.join( HERE, 'yingyang.png') )
                 )
                 ourTexture()
                 
@@ -983,7 +984,65 @@ class Tests( unittest.TestCase ):
     def test_get_max_tex_units( self ):
         """SF#2895081 glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )"""
         units = glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )
+    
+    def test_buffer_api_basic(self):
+        import numpy
+        import array as silly_array
+        import operator
+        try:
+            reduce
+        except NameError as err:
+            from functools import reduce
+        structures = [
+            (b'this and that',13,1,True,1,b'B',[13],[1]),
+            ((constants.GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
+        ]
+        if sys.version_info[:2] >= (3,0):
+            # only supports buffer protocol in 3.x
+            structures.append(
+                (silly_array.array('I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
+            )
+        try:
+            structures.append( (memoryview(b'this'),4,1,True,1,b'B',[4],[1]) )
+        except NameError as err:
+            # Python 2.6 doesn't have memory view 
+            pass
+        try:
+            structures.extend( [
+                (numpy.arange(0,9,dtype='I').reshape((3,3)),36,4,False,2,b'I',[3,3],[12,4]),
+                (numpy.arange(0,9,dtype='I').reshape((3,3))[:,1],12,4,False,1,b'I',[3],[12]),
+            ])
+        except NameError as err:
+            # Don't have numpy installed...
+            pass
         
+        from OpenGL.arrays import _buffers
+        buf = _buffers.Py_buffer()
+        # deallocation of the buf causes glibc abort :(
+        bufp = ctypes.pointer( buf )
+        for object,length,itemsize,readonly,ndim,format,shape,strides in structures:
+            assert _buffers.CheckBuffer( object )
+            result = _buffers.GetBuffer( object, bufp, _buffers.PyBUF_STRIDES|_buffers.PyBUF_FORMAT )
+            try:
+                buf = bufp[0]
+                assert result == 0, "Retrieval of buffer failed"
+                assert buf.len == length, (object,length,buf.len)
+                assert buf.itemsize == itemsize, (object,itemsize,buf.itemsize)
+                assert buf.readonly == readonly, (object,readonly,buf.readonly)
+                assert buf.ndim == ndim, (object,ndim,buf.ndim)
+                assert buf.format == format, (object,format,buf.format)
+                assert buf.shape[:buf.ndim] == shape, (object, shape, buf.shape[:buf.ndim])
+                assert buf.dims == shape, (object, shape, buf.dims )
+                assert buf.buf 
+                if strides is None:
+                    assert not buf.strides 
+                else:
+                    assert buf.strides[:buf.ndim] == strides, (object, strides, buf.strides[:buf.ndim])
+            finally:
+                _buffers.ReleaseBuffer( bufp )
+            assert buf.obj == None, buf.obj
+        del bufp 
+        del buf
         
 if __name__ == "__main__":
     unittest.main()
