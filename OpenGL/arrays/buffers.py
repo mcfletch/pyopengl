@@ -35,6 +35,10 @@ class BufferHandler( formathandler.FormatHandler ):
         if not isinstance( value, _buffers.Py_buffer ):
             raise TypeError( """Can't convert value to py-buffer in from_param""" )
         return value.buf
+    def dataPointer( value ):
+        if not isinstance( value, _buffers.Py_buffer ):
+            value = _buffers.Py_buffer.from_object( value )
+        return ctypes.c_void_p(value.internal)
     dataPointer = staticmethod( dataPointer )
     def zeros( self, dims, typeCode=None ):
         """Currently don't allow strings as output types!"""
@@ -44,22 +48,19 @@ class BufferHandler( formathandler.FormatHandler ):
         raise NotImplemented( """Have not implemented ones for buffer type""" )
     def arrayToGLType( self, value ):
         """Given a value, guess OpenGL type of the corresponding pointer"""
-        raise NotImplemented( """Can't guess data-type from a string-type argument""" )
+        format = value.format 
+        if format in ARRAY_TO_GL_TYPE_MAPPING:
+            return ARRAY_TO_GL_TYPE_MAPPING[format]
+        raise TypeError( 'Unknown format: %r'%(format,))
     def arraySize( self, value, typeCode = None ):
         """Given a data-value, calculate ravelled size for the array"""
-        # need to get bits-per-element...
-        # TODO: verify that multi-dim gives ravelled for buffer API
-        return value.len
+        return value.len // value.itemsize
     def arrayByteCount( self, value, typeCode = None ):
         """Given a data-value, calculate number of bytes required to represent"""
-        return value.len * value.itemsize
+        return value.len
     def asArray( self, value, typeCode=None ):
         """Convert given value to an array value of given typeCode"""
-        if not CheckBuffer( value ):
-            raise TypeError( """Require a type which supports the buffer protocol, %s doesn't"""%( type(value)))
-        buf = Py_buffer()
-        GetBuffer( value, buf, PyBUF_CONTIG_RO )
-        return buf
+        return _buffers.Py_buffer.from_object( value )
     def dimensions( self, value, typeCode=None ):
         """Determine dimensions of the passed array value (if possible)"""
         return value.dims
@@ -73,4 +74,16 @@ BYTE_SIZES = {
     constants.GL_UNSIGNED_SHORT: ctypes.sizeof( constants.GLshort ),
     constants.GL_BYTE: ctypes.sizeof( constants.GLbyte ),
     constants.GL_UNSIGNED_INT: ctypes.sizeof( constants.GLuint ),
+}
+ARRAY_TO_GL_TYPE_MAPPING = {
+    'd': constants.GL_DOUBLE,
+    'f': constants.GL_FLOAT,
+    'i': constants.GL_INT,
+    'h': constants.GL_SHORT,
+    'H': constants.GL_UNSIGNED_SHORT,
+    'B': constants.GL_UNSIGNED_BYTE,
+    'c': constants.GL_UNSIGNED_BYTE,
+    'b': constants.GL_BYTE,
+    'I': constants.GL_UNSIGNED_INT,
+    None: None,
 }

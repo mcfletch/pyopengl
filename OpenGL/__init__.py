@@ -245,6 +245,11 @@ FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandl
     '_ctypes._Pointer',
     'ctypes.c_char_p',
 ],isOutput=False )
-FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', ['numpy.ndarray'],isOutput=True )
+FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', [
+#    'numpy.ndarray',
+],isOutput=True )
+FormatHandler( 'buffer', 'OpenGL.arrays.buffers.BufferHandler', [
+    'numpy.ndarray',
+],isOutput=True )
 FormatHandler( 'vbo', 'OpenGL.arrays.vbo.VBOHandler', ['OpenGL.arrays.vbo.VBO','OpenGL_accelerate.vbo.VBO'],isOutput=False )
 FormatHandler( 'vbooffset', 'OpenGL.arrays.vbo.VBOOffsetHandler', ['OpenGL.arrays.vbo.VBOOffset','OpenGL_accelerate.vbo.VBOOffset'],isOutput=False )
