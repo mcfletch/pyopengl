@@ -9,6 +9,7 @@ from OpenGL._bytes import bytes
 from OpenGL.arrays import _buffers
 from OpenGL import constants
 from OpenGL.arrays import formathandler
+from OpenGL import _configflags
 try:
     reduce 
 except NameError as err:
@@ -17,6 +18,7 @@ except NameError as err:
 class BufferHandler( formathandler.FormatHandler ):
     """Buffer-protocol data-type handler for OpenGL"""
     isOutput=False
+    ERROR_ON_COPY = _configflags.ERROR_ON_COPY
     @classmethod
     def from_param( cls, value, typeCode=None ):
         if not isinstance( value, _buffers.Py_buffer ):
