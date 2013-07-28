@@ -19,6 +19,7 @@ class CtypesPointerHandler( formathandler.FormatHandler ):
         return value
     dataPointer = staticmethod( ctypes.addressof )
     HANDLED_TYPES = (ctypes._Pointer, )
+    isOutput=False
     def voidDataPointer( cls, value ):
         """Given value in a known data-pointer type, return void_p for pointer"""
         return ctypes.cast( value, ctypes.c_void_p )
