@@ -1019,7 +1019,7 @@ class Tests( unittest.TestCase ):
         
         from OpenGL.arrays import _buffers
         for object,length,itemsize,readonly,ndim,format,shape,strides in structures:
-            buf = _buffers.Py_buffer.from_object( object )
+            buf = _buffers.Py_buffer.from_object( object, _buffers.PyBUF_STRIDES|_buffers.PyBUF_FORMAT )
             with buf:
                 assert buf.len == length, (object,length,buf.len)
                 assert buf.itemsize == itemsize, (object,itemsize,buf.itemsize)
