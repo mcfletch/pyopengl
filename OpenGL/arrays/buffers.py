@@ -4,7 +4,7 @@
 Will *only* work for Python 2.6+, and pretty much just works for strings
 under 2.6 (in terms of the common object types).
 """
-import ctypes,sys
+import ctypes,sys,operator
 from OpenGL._bytes import bytes
 from OpenGL.arrays import _buffers
 from OpenGL import constants
@@ -13,55 +13,52 @@ try:
     reduce 
 except NameError as err:
     from functools import reduce
-HANDLED_TYPES = [bytes,bytearray]
-if sys.version_info[:2] >= (3,0):
-    import array as silly_array
-    HANDLED_TYPES.append( silly_array )
-try:
-    import numpy
-    HANDLED_TYPES.append( numpy.ndarray )
-except ImportError as err:
-    pass
-try:
-    HANDLED_TYPES.append( memoryview )
-except NameError:
-    pass 
 
 class BufferHandler( formathandler.FormatHandler ):
     """Buffer-protocol data-type handler for OpenGL"""
-    HANDLED_TYPES = tuple( HANDLED_TYPES )
+    isOutput=False
     @classmethod
     def from_param( cls, value, typeCode=None ):
         if not isinstance( value, _buffers.Py_buffer ):
-            raise TypeError( """Can't convert value to py-buffer in from_param""" )
+            value = cls.asArray( value )
+            #raise TypeError( """Can't convert value to py-buffer in from_param""" )
         return value.buf
     def dataPointer( value ):
         if not isinstance( value, _buffers.Py_buffer ):
             value = _buffers.Py_buffer.from_object( value )
-        return ctypes.c_void_p(value.internal)
+        return ctypes.c_void_p(value.buf)
     dataPointer = staticmethod( dataPointer )
-    def zeros( self, dims, typeCode=None ):
+    @classmethod
+    def zeros( cls, dims, typeCode=None ):
         """Currently don't allow strings as output types!"""
-        return self.asArray( bytearray( b'\000'*reduce(operator.mul,dims)*BYTE_SIZES[typeCode] ) )
-    def ones( self, dims, typeCode=None ):
+        raise NotImplementedError( "Generic buffer type does not have output capability" )
+        return cls.asArray( bytearray( b'\000'*reduce(operator.mul,dims)*BYTE_SIZES[typeCode] ) )
+    @classmethod
+    def ones( cls, dims, typeCode=None ):
         """Currently don't allow strings as output types!"""
-        raise NotImplemented( """Have not implemented ones for buffer type""" )
-    def arrayToGLType( self, value ):
+        raise NotImplementedError( """Have not implemented ones for buffer type""" )
+    @classmethod
+    def arrayToGLType( cls, value ):
         """Given a value, guess OpenGL type of the corresponding pointer"""
         format = value.format 
         if format in ARRAY_TO_GL_TYPE_MAPPING:
             return ARRAY_TO_GL_TYPE_MAPPING[format]
         raise TypeError( 'Unknown format: %r'%(format,))
-    def arraySize( self, value, typeCode = None ):
+    @classmethod
+    def arraySize( cls, value, typeCode = None ):
         """Given a data-value, calculate ravelled size for the array"""
         return value.len // value.itemsize
-    def arrayByteCount( self, value, typeCode = None ):
+    @classmethod
+    def arrayByteCount( cls, value, typeCode = None ):
         """Given a data-value, calculate number of bytes required to represent"""
         return value.len
-    def asArray( self, value, typeCode=None ):
+    @classmethod
+    def asArray( cls, value, typeCode=None ):
         """Convert given value to an array value of given typeCode"""
-        return _buffers.Py_buffer.from_object( value )
-    def dimensions( self, value, typeCode=None ):
+        buf = _buffers.Py_buffer.from_object( value )
+        return buf
+    @classmethod
+    def dimensions( cls, value, typeCode=None ):
         """Determine dimensions of the passed array value (if possible)"""
         return value.dims
 
