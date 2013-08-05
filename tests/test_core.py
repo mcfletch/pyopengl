@@ -16,7 +16,7 @@ except ImportError as err:
 
 pygame.display.init()
 import OpenGL 
-OpenGL.USE_ACCELERATE = False
+#OpenGL.USE_ACCELERATE = False
 OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
 from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode
@@ -1035,6 +1035,14 @@ class Tests( unittest.TestCase ):
                     assert buf.strides[:buf.ndim] == strides, (object, strides, buf.strides[:buf.ndim])
             assert buf.obj == None, buf.obj
             del buf
+    
+    def test_bytes_array_support( self ):
+        color = b'\000'*12
+        glColor3fv( color )
+    def test_bytearray_support( self ):
+        color = bytearray( b'\000'*12 )
+        glColor3fv( color )
+        
         
 if __name__ == "__main__":
     unittest.main()
