@@ -112,14 +112,15 @@ cdef class MemoryviewHandler(FormatHandler):
         
     cdef c_asArray( self, object instance, object typeCode ):
         """Retrieve the given value as a (contiguous) array of type typeCode"""
-        cdef Py_buffer * buffer
-        cdef object result
-        result = self.c_as_memoryview( instance )
-        buffer = PyMemoryView_GET_BUFFER( result )
-        actual_type = self.array_to_gl_constant.get( buffer.format, self.array_to_gl_constant )
-        if actual_type != typeCode:
-            raise TypeError( 'Incompatible type: %s, needed %s', buffer.format, typeCode )
-        return result
+        return self.c_as_memoryview( instance )
+#        cdef Py_buffer * buffer
+#        cdef object result
+#        result = self.c_as_memoryview( instance )
+#        buffer = PyMemoryView_GET_BUFFER( result )
+#        actual_type = self.array_to_gl_constant.get( buffer.format, self.array_to_gl_constant )
+#        if actual_type != typeCode:
+#            raise TypeError( 'Incompatible type: %s, needed %s', buffer.format, typeCode )
+#        return result
     cdef c_unitSize( self, object instance, typeCode ):
         """Retrieve last dimension of the array"""
         return PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) ).itemsize
