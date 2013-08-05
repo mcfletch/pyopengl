@@ -16,7 +16,8 @@ except ImportError as err:
 
 pygame.display.init()
 import OpenGL 
-#OpenGL.USE_ACCELERATE = False
+if os.environ.get( 'TEST_NO_ACCELERATE' ):
+    OpenGL.USE_ACCELERATE = False
 OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
 from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode
@@ -547,7 +548,8 @@ class Tests( unittest.TestCase ):
             width,height = self.width, self.height
             data = zeros( (width,height,3), 'B' )
             image1 = glReadPixelsub(0,0,width,height,GL_RGB,array=data)
-            
+        
+        # currently crashes in py_buffer operation
         def test_mmap_data( self ):
             """Test that we can use mmap data array
             
@@ -1042,7 +1044,11 @@ class Tests( unittest.TestCase ):
     def test_bytearray_support( self ):
         color = bytearray( b'\000'*12 )
         glColor3fv( color )
-        
+    def test_memoryview_support( self ):
+        color = bytearray( b'\000'*12 )
+        mem = memoryview( color )
+        glColor3fv( mem )
+
         
 if __name__ == "__main__":
     unittest.main()
