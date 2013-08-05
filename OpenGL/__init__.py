@@ -247,9 +247,12 @@ FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandl
 ],isOutput=False )
 FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', [
     'numpy.ndarray',
+    'numpy.core.memmap.memmap',
 ],isOutput=True )
 FormatHandler( 'buffer', 'OpenGL.arrays.buffers.BufferHandler', [
     'OpenGL.arrays._buffers.Py_buffer',
+    '__builtin__.memoryview', # only available in Python 2.7+
+    '__builtin__.bytearray',
 ],isOutput=True )
 FormatHandler( 'vbo', 'OpenGL.arrays.vbo.VBOHandler', ['OpenGL.arrays.vbo.VBO','OpenGL_accelerate.vbo.VBO'],isOutput=False )
 FormatHandler( 'vbooffset', 'OpenGL.arrays.vbo.VBOOffsetHandler', ['OpenGL.arrays.vbo.VBOOffset','OpenGL_accelerate.vbo.VBOOffset'],isOutput=False )
