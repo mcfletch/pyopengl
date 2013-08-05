@@ -108,15 +108,17 @@ else:
             asArray = typ.asArray
             dataType = typ.typeConstant
             arraySize = typ.arraySize
+            expectedBytes = constants.sizeof( typ.baseType ) * size
             def asArraySize( incoming, function, args ):
                 handler = typ.getHandler( incoming )
                 result = handler.asArray( incoming, dataType )
-                actualSize = handler.arraySize(result, dataType)
-                if actualSize != size:
+                # check that the number of bytes expected is present...
+                byteSize = handler.arrayByteCount( result )
+                if byteSize != expectedBytes:
                     raise ValueError(
-                        """Expected %r item array, got %r item array"""%(
-                            size,
-                            actualSize,
+                        """Expected %r byte array, got %r byte array"""%(
+                            expectedBytes,
+                            byteSize,
                         ),
                         incoming,
                     )
