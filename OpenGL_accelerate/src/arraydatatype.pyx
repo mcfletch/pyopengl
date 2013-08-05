@@ -29,6 +29,8 @@ cdef class HandlerRegistry:
         self.registry[key] = value
     def __call__( self, value ):
         return self.c_lookup( value )
+
+    
     
     cdef object c_lookup( self, object value ):
         """C-level lookup of handler for given value"""
@@ -41,13 +43,13 @@ cdef class HandlerRegistry:
         if not handler:
             if hasattr( typ, '__mro__' ):
                 for base in typ.__mro__:
-                    handler = self.registry.get( base )
-                    if not handler:
-                        handler = self.match( base )
-                        if handler:
-                            handler = handler.load()
-                            if handler:
-                                handler=handler()
+                    plugin = self.registry.get( base )
+                    if not plugin:
+                        plugin = self.match( base )
+                        if plugin:
+                            cls = plugin.load()
+                            if cls:
+                                handler=cls()
                     if handler:
                         self.registry[ typ ] = handler
                         if hasattr( handler, 'registerEquivalent' ):
@@ -64,23 +66,25 @@ cdef class HandlerRegistry:
         """Fast-path lookup for output handler object"""
         if self.output_handler is None:
             if self.preferredOutput is not None:
-                self.output_handler = self.registry.get( self.preferredOutput )
+                self.output_handler = self.c_handler_by_plugin_name( self.preferredOutput )
             if not self.output_handler:
                 for preferred in self.GENERIC_OUTPUT_PREFERENCES:
-                    self.output_handler = self.registry.get( preferred )
+                    self.output_handler = self.c_handler_by_plugin_name( preferred )
                     if self.output_handler:
                         break
-            if not self.output_handler:
-                # look for anything that can do output...
-                for handler in self.all_output_handlers:
-                    self.output_handler = handler 
-                    break
             if not self.output_handler:
                 raise RuntimeError(
                     """Unable to find any output handler at all (not even ctypes/numpy ones!)"""
                 )
         return self.output_handler
-            
+    cdef object c_handler_by_plugin_name( self, str name ):
+        plugin = plugins.FormatHandler.by_name( name )
+        try:
+            handler = plugin.load()
+            return handler()
+        except ImportError as err:
+            return None
+    
     def register( self, handler, types=None ):
         """Register this class as handler for given set of types"""
         if not isinstance( types, (list,tuple)):
@@ -221,6 +225,7 @@ cdef class ArrayDatatype:
             return (<FormatHandler>handler).c_zeros( 
                 dims, typeCode 
             )
+        print 'handler', handler
         return handler.zeros( 
             dims, typeCode
         )
@@ -385,15 +390,16 @@ cdef class AsArrayTypedSizeChecked( AsArrayTyped ):
     cdef int size 
     def __init__( self, arrayType=None, size=None ):
         super(AsArrayTypedSizeChecked,self).__init__( 'pointer', arrayType )
-        self.size = size
+        baseSize = constants.sizeof( arrayType.baseType )
+        self.size = size * baseSize
     cdef object c_call( self, object incoming, object function, tuple arguments ):
         """Get the arg as an array of the appropriate type"""
         cdef int actualSize
         result = self.arrayType.asArray( incoming )
-        actualSize = self.arrayType.arraySize( result )
+        actualSize = self.arrayType.arrayByteCount( result )
         if actualSize != self.size:
             raise ValueError(
-                """Expected %r item array, got %r item array"""%(
+                """Expected %r byte array, got %r byte array"""%(
                     self.size,
                     actualSize,
                 ),

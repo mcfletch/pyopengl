@@ -50,6 +50,7 @@ extensions.extend([
     cython_extension( 'vbo' ),
     cython_extension( 'nones_formathandler' ),
     cython_extension( 'latebind' ),
+    cython_extension( 'buffers_formathandler' ),
 ])
 
 try:
