@@ -59,6 +59,8 @@ class Py_buffer(ctypes.Structure):
     @property
     def dims( self ):
         return self.shape[:self.ndim]
+    def __len__( self ):
+        return self.shape[0]
     @property 
     def dim_strides( self ):
         if self.strides:

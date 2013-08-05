@@ -4,7 +4,7 @@
 Will *only* work for Python 2.6+, and pretty much just works for strings
 under 2.6 (in terms of the common object types).
 """
-import ctypes,sys,operator,logging
+import ctypes,sys,operator,logging,traceback
 from OpenGL.arrays import _buffers
 from OpenGL import constants
 from OpenGL.arrays import formathandler
@@ -16,19 +16,20 @@ try:
 except NameError as err:
     from functools import reduce
 
-MemoryViewHandler = BufferHandler = None
+MemoryviewHandler = BufferHandler = None
 if sys.version_info[:2] > (2,6):
     # Only Python 2.7+ has memoryview support, and the accelerate module 
     # requires memoryviews to be able to pass around the buffer structures
     if acceleratesupport.ACCELERATE_AVAILABLE:
         try:
-            from OpenGL_accelerate.numpy_formathandler import MemoryViewHandler
+            from OpenGL_accelerate.buffers_formathandler import MemoryviewHandler
         except ImportError as err:
+            traceback.print_exc()
             log.warn(
                 "Unable to load buffers_formathandler accelerator from OpenGL_accelerate"
             )
         else:
-            BufferHandler = MemoryViewHandler
+            BufferHandler = MemoryviewHandler
 if not BufferHandler:
     class BufferHandler( formathandler.FormatHandler ):
         """Buffer-protocol data-type handler for OpenGL"""
@@ -43,7 +44,7 @@ if not BufferHandler:
         def dataPointer( value ):
             if not isinstance( value, _buffers.Py_buffer ):
                 value = _buffers.Py_buffer.from_object( value )
-            return ctypes.c_void_p(value.buf)
+            return value.buf
         dataPointer = staticmethod( dataPointer )
         @classmethod
         def zeros( cls, dims, typeCode=None ):
@@ -69,6 +70,9 @@ if not BufferHandler:
         def arrayByteCount( cls, value, typeCode = None ):
             """Given a data-value, calculate number of bytes required to represent"""
             return value.len
+        @classmethod 
+        def unitSize( cls, value, default=None ):
+            return value.dims[-1]
         @classmethod
         def asArray( cls, value, typeCode=None ):
             """Convert given value to an array value of given typeCode"""
