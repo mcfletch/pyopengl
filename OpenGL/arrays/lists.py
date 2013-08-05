@@ -154,6 +154,9 @@ class ListHandler( formathandler.FormatHandler ):
     def dimensions( self, value, typeCode=None ):
         """Determine dimensions of the passed array value (if possible)"""
         return tuple( self.dims(value) )
+    def arrayByteCount( self, value, typeCode = None ):
+        """Given a data-value, calculate number of bytes required to represent"""
+        return ctypes.sizeof( value )
 
 
 ARRAY_TO_GL_TYPE_MAPPING = {
