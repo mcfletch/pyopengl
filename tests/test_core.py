@@ -549,7 +549,8 @@ class Tests( unittest.TestCase ):
             data = zeros( (width,height,3), 'B' )
             image1 = glReadPixelsub(0,0,width,height,GL_RGB,array=data)
         
-        # currently crashes in py_buffer operation
+        # currently crashes in py_buffer operation, so reverted to raw numpy 
+        # api
         def test_mmap_data( self ):
             """Test that we can use mmap data array
             
