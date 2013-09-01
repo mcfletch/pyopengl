@@ -311,15 +311,17 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=bytes ):
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
     if array is None:
         array = images.SetupPixelRead( format, (width,height), type )
+        owned = True
     else:
         array = arrayType.asArray( array )
+        owned = False
     imageData = arrayType.voidDataPointer( array )
     GL_1_1.glReadPixels(
         x,y,width,height,
         format,type,
         imageData
     )
-    if outputType is bytes:
+    if owned and outputType is bytes:
         return images.returnFormat( array, type )
     else:
         return array
