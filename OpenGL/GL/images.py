@@ -245,7 +245,10 @@ for suffix,type in [
         if array is None:
             array = images.SetupPixelRead( format, (width,height), type )
         else:
-            array = arrayType.asArray( array )
+            if array != 0:
+                array = arrayType.asArray( array )
+            else:
+                array = arrayType.asArray( None )
         imageData = arrayType.voidDataPointer( array )
         GL_1_1.glReadPixels(
             x,y,
@@ -313,7 +316,10 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=bytes ):
         array = images.SetupPixelRead( format, (width,height), type )
         owned = True
     else:
-        array = arrayType.asArray( array )
+        if array != 0:
+            array = arrayType.asArray( array )
+        else:
+            array = arrayType.asArray( None )
         owned = False
     imageData = arrayType.voidDataPointer( array )
     GL_1_1.glReadPixels(
