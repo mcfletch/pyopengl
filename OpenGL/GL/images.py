@@ -243,13 +243,14 @@ for suffix,type in [
         x,y,width,height = asInt(x),asInt(y),asInt(width),asInt(height)
         arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
         if array is None:
-            array = images.SetupPixelRead( format, (width,height), type )
+            imageData = images.SetupPixelRead( format, (width,height), type )
         else:
             if isinstance( array, integer_types):
-                array = ctypes.c_void_p( array )
+                imageData = ctypes.c_void_p( array )
             else:
                 array = arrayType.asArray( array )
-        imageData = arrayType.voidDataPointer( array )
+                imageData = arrayType.voidDataPointer( array )
+
         GL_1_1.glReadPixels(
             x,y,
             width, height,
@@ -313,15 +314,16 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=bytes ):
 
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
     if array is None:
-        array = images.SetupPixelRead( format, (width,height), type )
+        imageData = images.SetupPixelRead( format, (width,height), type )
         owned = True
     else:
         if isinstance( array, integer_types):
-            array = ctypes.c_void_p( array )
+            imageData = ctypes.c_void_p( array )
         else:
             array = arrayType.asArray( array )
+            imageData = arrayType.voidDataPointer( array )
         owned = False
-    imageData = arrayType.voidDataPointer( array )
+
     GL_1_1.glReadPixels(
         x,y,width,height,
         format,type,
