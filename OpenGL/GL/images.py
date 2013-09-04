@@ -14,7 +14,7 @@
 """
 from OpenGL.raw.GL.VERSION import GL_1_1,GL_1_2, GL_3_0
 from OpenGL import images, arrays, wrapper, platform, constants
-from OpenGL._bytes import bytes,unicode,as_8_bit
+from OpenGL._bytes import bytes,unicode,as_8_bit,integer_types
 import ctypes
 
 def asInt( value ):
@@ -245,7 +245,10 @@ for suffix,type in [
         if array is None:
             array = images.SetupPixelRead( format, (width,height), type )
         else:
-            array = arrayType.asArray( array )
+            if isinstance( array, integer_types):
+                array = ctypes.c_void_p( array )
+            else:
+                array = arrayType.asArray( array )
         imageData = arrayType.voidDataPointer( array )
         GL_1_1.glReadPixels(
             x,y,
@@ -313,7 +316,10 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=bytes ):
         array = images.SetupPixelRead( format, (width,height), type )
         owned = True
     else:
-        array = arrayType.asArray( array )
+        if isinstance( array, integer_types):
+            array = ctypes.c_void_p( array )
+        else:
+            array = arrayType.asArray( array )
         owned = False
     imageData = arrayType.voidDataPointer( array )
     GL_1_1.glReadPixels(
