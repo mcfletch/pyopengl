@@ -233,7 +233,7 @@ for suffix,type in [
     ('ui',constants.GL_UNSIGNED_INT),
     ('us',constants.GL_UNSIGNED_SHORT),
 ]:
-    def glReadPixels( x,y,width,height,format,type=type, array=None ):
+    def glReadPixels( x,y,width,height,format,type=type, array=None, outputType=bytes ):
         """Read specified pixels from the current display buffer
 
         This typed version returns data in your specified default
@@ -242,22 +242,27 @@ for suffix,type in [
         """
         x,y,width,height = asInt(x),asInt(y),asInt(width),asInt(height)
         arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
+        
         if array is None:
-            imageData = images.SetupPixelRead( format, (width,height), type )
+            array = imageData = images.SetupPixelRead( format, (width,height), type )
+            owned = True
         else:
             if isinstance( array, integer_types):
                 imageData = ctypes.c_void_p( array )
             else:
                 array = arrayType.asArray( array )
                 imageData = arrayType.voidDataPointer( array )
-
+            owned = False
         GL_1_1.glReadPixels(
             x,y,
             width, height,
             format,type,
             imageData
         )
-        return array
+        if owned and outputType is bytes:
+            return images.returnFormat( array, type )
+        else:
+            return array
     globals()["glReadPixels%s"%(suffix,)] = glReadPixels
     def glGetTexImage( target, level,format,type=type ):
         """Get a texture-level as an image"""
@@ -314,7 +319,7 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=bytes ):
 
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
     if array is None:
-        imageData = images.SetupPixelRead( format, (width,height), type )
+        array = imageData = images.SetupPixelRead( format, (width,height), type )
         owned = True
     else:
         if isinstance( array, integer_types):
