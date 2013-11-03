@@ -9,6 +9,7 @@ class Registry( object ):
         self.enum_namespaces = {}
         self.enumeration_set = {}
         self.command_set = {}
+        self.apis = {}
         self.feature_set = {}
         self.extension_set = {}
     def load( self, tree ):
@@ -51,10 +52,8 @@ class Registry( object ):
             enum = Enum( name, value )
             context.append( enum )
             self.enumeration_set[name] = enum
-        elif context is not None:
-            print 'Not none but not a namespace'
-#        else:
-#            print 'Need to handle requires too'
+        elif isinstance( element, (Require,Remove)):
+            context.append( self.enumeration_set[name] )
     
     def debug_enums( self ):
         for name,namespace in self.enum_namespaces.items():
@@ -67,9 +66,6 @@ class Registry( object ):
         proto = element.find( 'proto' )
         if proto is not None:
             name = proto.find('name').text
-            if name == 'glVertex4iv':
-                import pdb
-                pdb.set_trace()
             return_type = self._type_decl( proto )
             arg_names = []
             arg_types = []
@@ -81,6 +77,8 @@ class Registry( object ):
                 aliases.append( alias.get('name') )
             command = Command( name, return_type, arg_names, arg_types, aliases )
             self.command_set[name] = command
+        elif isinstance( context, (Require,Remove)):
+            context.append( self.command_set[element.get('name')])
     
     def _type_decl( self, proto ):
         """Get the string type declaration for parent (proto/param)"""
@@ -100,6 +98,28 @@ class Registry( object ):
     def debug_commands( self ):
         for name,command in sorted(self.command_set.items()):
             print command
+        
+    def feature( self, element, context=None ):
+        api,name,number = [element.get(x) for x in ('api','name','number')]
+        feature = Feature( api, name, number )
+        self.feature_set[name] = feature 
+        self.dispatch( element, feature )
+    
+    def require( self, element, context ):
+        if isinstance( context, (Feature,Extension)):
+            profile,comment = element.get('profile'),element.get('comment')
+            require = Require( profile, comment )
+            context.append( require )
+            self.dispatch( element, require )
+    def remove( self, element, context ):
+        if isinstance( context, Feature):
+            profile,comment = element.get('profile'),element.get('comment')
+            remove = Remove( profile, comment )
+            context.append( remove )
+            self.dispatch( element, remove )
+    
+    def debug_apis( self ):
+        print [x.api for x in self.feature_set.values()]
 
 class EnumNamespace( list ):
     def __init__( self, namespace, *args ):
@@ -130,17 +150,21 @@ class Command( object ):
         )
 
 # The order-dependent set of require/remove holding features/extensions
-class Feature( list ):
-    def __init__( self, api, name, number ):
+class Module( list ):
+    """Base class for Features and Extensions"""
+    def __init__( self, name ):
+        self.name = name 
+
+class Feature( Module ):
+    def __init__( self, name, api, number ):
+        super( Feature, self ).__init__(name)
         self.api = api 
-        self.name = name 
         self.number = number 
-        super( Feature, self ).__init__()
-class Extension( list ):
+class Extension( Module ):
     def __init__(self, name, apis ):
-        self.name = name 
+        super( Extension, self ).__init__(name)
         self.apis = apis # only available for these APIs
-        super( Extension, self ).__init__()
+    
 class Require( list ):
     def __init__( self, profile=None, comment=None ):
         self.profile = profile 
@@ -162,5 +186,6 @@ if __name__ == "__main__":
     registry = parse( sys.argv[1] )
     #registry.debug_types()
     #registry.debug_enums()
-    registry.debug_commands()
+    #registry.debug_commands()
+    registry.debug_apis()
     
