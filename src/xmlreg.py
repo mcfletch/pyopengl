@@ -24,7 +24,7 @@ class Registry( object ):
                 if method:
                     method( element, context )
                 else:
-#                    print 'Expand', element.tag
+                    print 'Expand', element.tag
                     self.dispatch( element, context )
     
     def type( self, element, context=None ):
@@ -52,7 +52,7 @@ class Registry( object ):
             enum = Enum( name, value )
             context.append( enum )
             self.enumeration_set[name] = enum
-        elif isinstance( element, (Require,Remove)):
+        elif isinstance( element, (Require,Remove,EnumGroup)):
             context.append( self.enumeration_set[name] )
     
     def debug_enums( self ):
@@ -104,6 +104,15 @@ class Registry( object ):
         feature = Feature( api, name, number )
         self.feature_set[name] = feature 
         self.dispatch( element, feature )
+    def extension( self, element, context=None ):
+        name,apis,require = [element.get(x) for x in ['name','supported','protect']]
+        extension = Extension( name, apis.split('|'),require)
+        self.dispatch( element, extension )
+    def unused( self, element, context=None):
+        pass
+    def group( self, element, context=None):
+        group = EnumGroup( element.get('name'))
+        self.dispatch( element, group )
     
     def require( self, element, context ):
         if isinstance( context, (Feature,Extension)):
@@ -125,6 +134,10 @@ class EnumNamespace( list ):
     def __init__( self, namespace, *args ):
         self.namespace = namespace 
         super( EnumNamespace, self ).__init__(*args)
+class EnumGroup( list ):
+    def __init__( self, name, *args ):
+        self.name = name 
+        super( EnumGroup, self ).__init__( *args )
 class Enum( object ):
     def __init__( self, name, crep ):
         self.name = name 
@@ -161,9 +174,10 @@ class Feature( Module ):
         self.api = api 
         self.number = number 
 class Extension( Module ):
-    def __init__(self, name, apis ):
+    def __init__(self, name, apis, require=None ):
         super( Extension, self ).__init__(name)
         self.apis = apis # only available for these APIs
+        self.require = require
     
 class Require( list ):
     def __init__( self, profile=None, comment=None ):
@@ -183,9 +197,13 @@ def parse( xmlfile ):
 
 
 if __name__ == "__main__":
-    registry = parse( sys.argv[1] )
+    if sys.argv[1:]:
+        for file in sys.argv[1:]:
+            print file
+            registry = parse( file )
+    
     #registry.debug_types()
     #registry.debug_enums()
     #registry.debug_commands()
-    registry.debug_apis()
+    #registry.debug_apis()
     
