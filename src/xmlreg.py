@@ -52,8 +52,12 @@ class Registry( object ):
             enum = Enum( name, value )
             context.append( enum )
             self.enumeration_set[name] = enum
-        elif isinstance( element, (Require,Remove,EnumGroup)):
+        elif isinstance( element, (Require,Remove)):
             context.append( self.enumeration_set[name] )
+        elif isinstance( element, EnumGroup ):
+            name = element.get('name')
+            assert name, 'No name on %s'%ET.tostring(element)
+            context.append( name )
     
     def debug_enums( self ):
         for name,namespace in self.enum_namespaces.items():
@@ -66,7 +70,9 @@ class Registry( object ):
         proto = element.find( 'proto' )
         if proto is not None:
             name = proto.find('name').text
+            assert name, 'No name in command: %s'%(ET.tostring( element))
             return_type = self._type_decl( proto )
+            assert return_type, 'No return type in command: %s'%(ET.tostring( element))
             arg_names = []
             arg_types = []
             for param in [x for x in element if x.tag == 'param']:
@@ -165,26 +171,67 @@ class Command( object ):
 # The order-dependent set of require/remove holding features/extensions
 class Module( list ):
     """Base class for Features and Extensions"""
+    feature = False
     def __init__( self, name ):
         self.name = name 
 
 class Feature( Module ):
-    def __init__( self, name, api, number ):
-        super( Feature, self ).__init__(name)
+    feature = True
+    NORMALIZERS = {
+        'GL_VERSION_ES_CM_1_0': 'GL_ES_VERSION_1_0',
+    }
+    def __init__( self, api,name,number ):
+        super( Feature, self ).__init__(self.NORMALIZERS.get(name,name))
         self.api = api 
+        if name == 'GL_ES_VERSION_3_0':
+            self.api = 'gles3'
         self.number = number 
+    _profiles = None
+    @property 
+    def profiles( self ):
+        """Create set of profiles with subsets of our functionality"""
+        if self._profiles is None:
+            profiles = {}
+            for req in self:
+                # Logic isn't right here, there's a base and then 
+                # a set of profiles which customize the base...
+                profile = req.profile or ''
+                set = profiles.get( profile )
+                if set is None:
+                    set = Module( profile or '' )
+                    set.feature = True
+                    profiles[profile] = set
+                if req.require:
+                    
+                    set.extend( req )
+                else:
+                    for item in req:
+                        while item in set:
+                            set.remove( item )
+            self._profiles = sorted(profiles.values(),key=lambda x: x.name)
+        return self._profiles
+    
 class Extension( Module ):
     def __init__(self, name, apis, require=None ):
         super( Extension, self ).__init__(name)
         self.apis = apis # only available for these APIs
         self.require = require
+    @property
+    def profiles( self ):
+        module = Module( 'default' )
+        module.extend( self )
+        return module
     
 class Require( list ):
+    require = True
+    remove = False
     def __init__( self, profile=None, comment=None ):
         self.profile = profile 
         self.comment = comment 
         super( Require, self ).__init__()
 class Remove( list ):
+    require = False
+    remove = True
     def __init__( self, profile=None, comment=None ):
         self.profile = profile 
         self.comment = comment 
