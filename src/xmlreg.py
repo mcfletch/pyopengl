@@ -52,9 +52,9 @@ class Registry( object ):
             enum = Enum( name, value )
             context.append( enum )
             self.enumeration_set[name] = enum
-        elif isinstance( element, (Require,Remove)):
-            context.append( self.enumeration_set[name] )
-        elif isinstance( element, EnumGroup ):
+        elif isinstance( context, (Require,Remove)):
+            context.append( self.enumeration_set[element.get('name')] )
+        elif isinstance( context, EnumGroup ):
             name = element.get('name')
             assert name, 'No name on %s'%ET.tostring(element)
             context.append( name )
@@ -145,11 +145,11 @@ class EnumGroup( list ):
         self.name = name 
         super( EnumGroup, self ).__init__( *args )
 class Enum( object ):
-    def __init__( self, name, crep ):
+    def __init__( self, name, value ):
         self.name = name 
-        self.crep = crep 
+        self.value = value
     def __repr__( self ):
-        return '%s = %s'%( self.name, self.crep,)
+        return '%s = %s'%( self.name, self.value )
 
 class Command( object ):
     def __init__( self, name, returnType, argNames, argTypes, aliases=None ):
