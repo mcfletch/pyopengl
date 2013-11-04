@@ -178,7 +178,9 @@ class Module( list ):
 class Feature( Module ):
     feature = True
     NORMALIZERS = {
-        'GL_VERSION_ES_CM_1_0': 'GL_ES_VERSION_1_0',
+        'GL_VERSION_ES_CM_1_0': 'GLES_VERSION_1_0',
+        'GL_ES_VERSION_2_0': 'GLES_VERSION_2_0',
+        'GL_ES_VERSION_3_0': 'GLES_VERSION_3_0',
     }
     def __init__( self, api,name,number ):
         super( Feature, self ).__init__(self.NORMALIZERS.get(name,name))
