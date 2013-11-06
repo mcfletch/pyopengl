@@ -49,6 +49,10 @@ CTYPE_TO_ARRAY_TYPE = {
     '_cs.EGLNativeWindowType': 'GLvoidpArray',
     '_cs.EGLNativePixmapType': 'GLvoidpArray',
     '_cs.EGLTimeKHR': 'GLuint64Array',
+    
+}
+SPECIAL_TYPES = {
+    '__eglMustCastToProperFunctionPointerType': 'ctypes.c_void_p',
 }
 
 
@@ -76,6 +80,8 @@ def ctype_to_pytype( base ):
         else:
             log.debug( 'Unconverted pointer type: %r', new )
             return 'ctypes.POINTER(%s)'%(new)
+    elif base in SPECIAL_TYPES:
+        return SPECIAL_TYPES.get( base )
     else:
         if base == 'int':
             base = 'c_int'
