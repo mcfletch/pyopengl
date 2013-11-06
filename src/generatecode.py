@@ -29,7 +29,7 @@ class Generator( object ):
         return '%s%s=_C(%r,%s)'%(comment, enum.name,enum.name,enum.value)
     def function( self, function ):
         """Produce a declaration for this function in ctypes format"""
-        returnType = function.returnType
+        returnType = self.type_translator( function.returnType )
         if function.argTypes:
             argTypes = ','.join([self.type_translator(x) for x in function.argTypes])
         else:
