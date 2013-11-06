@@ -14,6 +14,9 @@ def main():
     for name,feature in registry.feature_set.items():
         print feature.name, feature.api
         generator.module( feature )
+    for name,extension in registry.extension_set.items():
+        print extension.name, extension.apis
+        generator.module( extension )
 #        for req in feature:
 #            if isinstance( req, xmlreg.Require ):
 #                if req.profile:

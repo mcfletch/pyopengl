@@ -113,6 +113,7 @@ class Registry( object ):
     def extension( self, element, context=None ):
         name,apis,require = [element.get(x) for x in ['name','supported','protect']]
         extension = Extension( name, apis.split('|'),require)
+        self.extension_set[name] = extension
         self.dispatch( element, extension )
     def unused( self, element, context=None):
         pass
