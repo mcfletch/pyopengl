@@ -108,6 +108,8 @@ def hasGLExtension( specifier ):
             int(x)
             for x in specifier[ len(VERSION_PREFIX):].split(as_8_bit('_'))
         ]
+        if specifier[:2] <= [1,1]:
+            return True
         version = getGLVersion()
         if not version:
             return version
