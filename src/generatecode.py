@@ -107,6 +107,7 @@ from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
 from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
+%(init_function)s
 """
     dll = '_p.GL'
     def __init__( self, registry, overall ):
@@ -192,7 +193,9 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
                     if isinstance( item, xmlreg.Enum ):
                         functions.append( item )
         return functions
-    
+    @property 
+    def init_function( self ):
+        return self.INIT_TEMPLATE%self
     @property
     def constants( self ):
         try:
@@ -229,7 +232,6 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
         allowing us to review the document locally in order to provide
         a reasonable wrapping of it...
         """
-        return Specification('')
         if self.registry.feature:
             return Specification('')
         specFile = os.path.splitext( self.pathName )[0] + '.txt'
