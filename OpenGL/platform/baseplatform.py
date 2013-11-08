@@ -235,7 +235,7 @@ class BasePlatform( object ):
         return result
     def checkExtension( self, name ):
         """Check whether the given extension is supported by current context"""
-        if not name or name == 'GL_VERSION_GL_1_1':
+        if not name or name in ('GL_VERSION_GL_1_0', 'GL_VERSION_GL_1_1'):
             return True
         context = self.GetCurrentContext()
         if context:
