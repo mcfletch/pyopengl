@@ -68,7 +68,7 @@ class ModuleGenerator( object ):
 from OpenGL import platform as _p, arrays
 from OpenGL.raw.%(prefix)s import _types as _cs
 from OpenGL.constant import Constant as _C
-from OpenGL.GL import glget
+%(extra_imports)s
 import ctypes
 EXTENSION_NAME = %(constantModule)r
 def _f( function ):
@@ -160,6 +160,12 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
     def __getattr__( self, key ):
         if key not in ('registry',):
             return getattr( self.registry, key )
+    @property
+    def extra_imports( self ):
+        if self.name == 'GL_VERSION_1_1':
+            # spec files have not properly separated out these two...
+            return 'from OpenGL.raw.GL.VERSION.GL_1_0 import *'
+        return ''
             
     def shouldReplace( self ):
         """Should we replace the given filename?"""
