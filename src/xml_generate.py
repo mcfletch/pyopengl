@@ -4,10 +4,21 @@ import os, sys, logging
 import xmlreg, generatecode
 import ctypetopytype
 
-    
+KHRONOS_API = os.path.join( os.path.dirname(__file__), '..','..','khronosapi' )
+DEFAULT_FILES = [
+    'gl.xml',
+    'glx.xml',
+    'wgl.xml',
+    'egl.xml',
+]
 
-def main():
-    registry = xmlreg.parse( sys.argv[1] )
+def main(khronosapi=None):
+    khronosapi = khronosapi or KHRONOS_API
+    files = [ os.path.join( khronosapi, f ) for f in DEFAULT_FILES ]
+    for file in files:
+        generate_for_file( file )
+def generate_for_file( filename ):
+    registry = xmlreg.parse( filename )
     generator = generatecode.Generator(
         ctypetopytype.ctype_to_pytype
     )

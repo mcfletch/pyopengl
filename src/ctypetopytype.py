@@ -66,7 +66,7 @@ def ctype_to_pytype( base ):
             return ctype_to_pytype( base[len(strip):] )
     if base.endswith( '*' ):
         new = ctype_to_pytype( base[:-1] )
-        if new == '_cs.GLvoid':
+        if new in ('_cs.GLvoid','_cs.void','_cs.c_void'):
             return 'ctypes.c_void_p'
         elif new == 'ctypes.c_void_p':
             return 'arrays.GLvoidpArray'
@@ -85,4 +85,13 @@ def ctype_to_pytype( base ):
     else:
         if base == 'int':
             base = 'c_int'
+        elif ' ' in base:
+            components = base.split()
+            if components[0] == 'unsigned':
+                if len(components) == 2:
+                    base = 'c_u'+components[1]
+                else:
+                    raise ValueError( base )
+            else:
+                raise ValueError( base )
         return '_cs.%s'%(base,)
