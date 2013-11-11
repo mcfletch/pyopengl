@@ -28,15 +28,15 @@ class Generator( object ):
         gen.generate()
         return gen
     GLGET_PARAM_GROUPS = [
-        'MaterialParameter',
-        'PixelMap',
-        'LightParameter',
+        #'MaterialParameter',
+        #'PixelMap',
+        #'LightParameter',
         'GetPName',
-        'GetPixelMap',
-        'GetMapQuery',
+        #'GetPixelMap',
+        #'GetMapQuery',
         'GetPointervPName',
-        'TextureEnvParameter',
-        'TextureGenParameter',
+        #'TextureEnvParameter',
+        #'TextureGenParameter',
     ]
     def group_sizes( self ):
         """Generate a group-sizes data-table for the given group-name"""
@@ -60,8 +60,10 @@ class Generator( object ):
                     size = size[0]
                     result.append( '%(name)s_sizes[%(value)s] = %(size)s # %(ename)s'%locals())
                 else:
+                    self.glGetSizes[ enum_name ] = ''
                     size = 'TODO'
                     result.append( '# %(name)s_sizes[%(value)s] = %(size)s # %(ename)s'%locals())
+        self.saveGLGetSizes()
         return '\n'.join( result )
     def enum( self, enum ):
         comment = ''
@@ -120,12 +122,14 @@ def %(name)s(%(argNames)s):pass"""
         else:
             for line in lines:
                 if line and line[0]:
-                    table[line[0].strip('"')] = [
+                    value = [
                         v for v in [
                             v.strip('"') for v in line[1:]
                         ]
                         if v
                     ]
+                    if value:
+                        table[line[0].strip('"')] = value
         return table
     def saveGLGetSizes( self ):
         """Save out sorted list of glGet sizes to disk"""
