@@ -7,11 +7,13 @@ class Registry( object ):
     def __init__( self ):
         self.type_set = {}
         self.enum_namespaces = {}
+        self.enum_groups = {}
         self.enumeration_set = {}
         self.command_set = {}
         self.apis = {}
         self.feature_set = {}
         self.extension_set = {}
+        
     def load( self, tree ):
         """Load an lxml.etree structure into our internal descriptions"""
         self.dispatch( tree, None )
@@ -118,8 +120,11 @@ class Registry( object ):
     def unused( self, element, context=None):
         pass
     def group( self, element, context=None):
-        group = EnumGroup( element.get('name'))
-        self.dispatch( element, group )
+        name = element.get('name')
+        current = self.enum_groups.get( name )
+        if current is None:
+            current = self.enum_groups[name] = EnumGroup( name )
+        self.dispatch( element, current )
     
     def require( self, element, context ):
         if isinstance( context, (Feature,Extension)):
