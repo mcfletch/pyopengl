@@ -20,12 +20,32 @@ class Generator( object ):
     dll = '_p.GL'
     includeOverviews = True
     
-    def __init__( self, type_translator ):
+    def __init__( self, registry, type_translator ):
+        self.registry = registry
         self.type_translator = type_translator
     def module( self, module ):
         gen = ModuleGenerator(module,self)
         gen.generate()
         return gen
+    def group_sizes( self ):
+        """Generate a group-sizes data-table for the given group-name"""
+        result = []
+        for name,group in sorted(self.registry.enum_groups.items()):
+            if not name.lower().startswith( 'get' ):
+                continue
+            result.append( '%(name)s_sizes = {}'%locals())
+            for enum_name in group:
+                enum = self.registry.enumeration_set.get( enum_name )
+                size = self.glGetSizes.get( enum.name )
+                ename = enum.name
+                value = enum.value
+                if size:
+                    size = size[0]
+                    result.append( '%(name)s_sizes[%(value)s] = %(size)s # %(ename)s'%locals())
+                else:
+                    size = 'TODO'
+                    result.append( '# %(name)s_sizes[%(value)s] = %(size)s # %(ename)s'%locals())
+        return '\n'.join( result )
     def enum( self, enum ):
         comment = ''
         try:
@@ -61,6 +81,44 @@ class Generator( object ):
     FUNCTION_TEMPLATE = """@_f
 @_p.types(%(returnType)s,%(argTypes)s)
 def %(name)s(%(argNames)s):pass"""
+
+    _glGetSizes = None
+    @property
+    def glGetSizes( self ):
+        if self._glGetSizes is None:
+            self._glGetSizes = self.loadGLGetSizes()
+        return self._glGetSizes
+    def loadGLGetSizes( self ):
+        """Load manually-generated table of glGet* sizes"""
+        table = {}
+        try:
+            lines = [
+                line.split('\t')
+                for line in open( os.path.join( HERE, 'glgetsizes.csv') ).read().splitlines()
+            ]
+        except IOError, err:
+            pass 
+        else:
+            for line in lines:
+                if line and line[0]:
+                    table[line[0].strip('"')] = [
+                        v for v in [
+                            v.strip('"') for v in line[1:]
+                        ]
+                        if v
+                    ]
+        return table
+    def saveGLGetSizes( self ):
+        """Save out sorted list of glGet sizes to disk"""
+        items = self.glGetSizes.items()
+        items.sort()
+        data = "\n".join([
+            '%s\t%s'%(
+                key,"\t".join(value)
+            )
+            for (key,value) in items 
+        ])
+        open( os.path.join( HERE, 'glgetsizes.csv'),'w').write( data )
 
 class ModuleGenerator( object ):
     ROOT_EXTENSION_SOURCE = 'http://www.opengl.org/registry/specs/'
@@ -192,6 +250,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
                 for item in req:
                     if isinstance( item, xmlreg.Enum ):
                         functions.append( item )
+        functions.sort( key = lambda x: x.name )
         return functions
     @property 
     def init_function( self ):
@@ -214,6 +273,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
                 for item in req:
                     if isinstance( item, xmlreg.Command):
                         functions.append( item )
+        functions.sort( key = lambda x: x.name )
         result = []
         for function in functions:
             result.append( self.overall.function( function ) )
@@ -243,7 +303,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
                 self.ROOT_EXTENSION_SOURCE, 
                 specURLFragment,
             )
-        if not os.path.isfile( specFile ):
+        if os.environ.get('NETWORK_SPECS') and not os.path.isfile( specFile ):
             try:
                 data = download(specURL)
             except Exception, err:
@@ -254,8 +314,10 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
                     open(specFile,'w').write( data )
                 except IOError, err:
                     pass
-        else:
+        elif os.path.exists(specFile):
             data = open( specFile ).read()
+        else:
+            return Specification('')
         if 'Error 404' in data:
             log.info( """Spec 404: %s""", specURL)
             data = ''
