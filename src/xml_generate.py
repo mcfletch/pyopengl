@@ -30,8 +30,9 @@ def generate_for_file( filename ):
     for name,extension in registry.extension_set.items():
         print extension.name, extension.apis
         generator.module( extension )
-    base_name = os.path.splitext( os.path.basename( filename ))[0]
-    open( '%s_sizes.py'%base_name,'w' ).write( generator.group_sizes())
+    if os.path.basename( filename ) == 'gl.xml':
+        target = os.path.join( generator.rawTargetDirectory, 'GL','_glgets.py' )
+        open( target,'w' ).write( generator.group_sizes())
 
 #        for req in feature:
 #            if isinstance( req, xmlreg.Require ):
