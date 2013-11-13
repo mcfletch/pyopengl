@@ -3,7 +3,7 @@ from ctypes import *
 from OpenGL.raw.GL._types import *
 c_void = None
 void = None 
-Bool = c_u
+Bool = c_uint
 
 class struct___GLXcontextRec(Structure):
     __slots__ = [
