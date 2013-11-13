@@ -137,21 +137,20 @@ class BasePlatform( object ):
         if extension and not self.checkExtension( extension ):
             raise AttributeError( """Extension not available""" )
         argTypes = [ self.finalArgType( t ) for t in argTypes ]
-        if extension and not self.EXTENSIONS_USE_BASE_FUNCTIONS:
+        is_core = (not extension) or extension.split('_')[1] == 'VERSION'
+            
+        if (not is_core) and (not self.EXTENSIONS_USE_BASE_FUNCTIONS):
             # what about the VERSION values???
-            if self.checkExtension( extension ):
-                pointer = self.getExtensionProcedure( as_8_bit(functionName) )
-                if pointer:
-                    func = self.functionTypeFor( dll )(
-                        resultType,
-                        *argTypes
-                    )(
-                        pointer
-                    )
-                else:
-                    raise AttributeError( """Extension %r available, but no pointer for function %r"""%(extension,functionName))
+            pointer = self.getExtensionProcedure( as_8_bit(functionName) )
+            if pointer:
+                func = self.functionTypeFor( dll )(
+                    resultType,
+                    *argTypes
+                )(
+                    pointer
+                )
             else:
-                raise AttributeError( """No extension %r"""%(extension,))
+                raise AttributeError( """Extension %r available, but no pointer for function %r"""%(extension,functionName))
         else:
             func = ctypesloader.buildFunction(
                 self.functionTypeFor( dll )(
@@ -236,6 +235,9 @@ class BasePlatform( object ):
     def checkExtension( self, name ):
         """Check whether the given extension is supported by current context"""
         if not name or name in ('GL_VERSION_GL_1_0', 'GL_VERSION_GL_1_1'):
+            return True
+        if name.startswith( 'EGL_' ):
+            # EGL extensions are display-bound, as are versions, there's no 
             return True
         context = self.GetCurrentContext()
         if context:
