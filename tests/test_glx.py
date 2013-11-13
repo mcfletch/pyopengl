@@ -1,5 +1,6 @@
 from OpenGL.GL import *
 from OpenGL.GLX import *
+from OpenGL.GLX.EXT.texture_from_pixmap import *
 from pygamegltest import pygametest
 
 attributes = [
@@ -10,6 +11,9 @@ attributes = [
     GLX_Y_INVERTED_EXT, GLX_DONT_CARE,
     GL_NONE
 ]
+
+from OpenGL import platform
+import ctypes
 
 @pygametest()
 def main():
@@ -23,7 +27,20 @@ def main():
     )
     print '%s configs found'%( elements.value )
     for config in range( elements.value ):
-        glxpix = glXCreatePixmap(d, configs[config], pixmap, None)
+        print 'Config: %s %s'%(config,configs[config][0])
+        samples = ctypes.c_int()
+        for attribute in (
+            'GLX_FBCONFIG_ID','GLX_BUFFER_SIZE',
+            'GLX_LEVEL','GLX_DOUBLEBUFFER',
+            'GLX_STEREO',
+            'GLX_SAMPLES','GLX_SAMPLE_BUFFERS',
+            'GLX_DRAWABLE_TYPE',
+        ):
+            
+            glXGetFBConfigAttrib( d, configs[config][0], GLX_SAMPLES, samples )
+            print '%s -> %s'%( attribute, samples.value )
+        print 
     
+        
 if __name__ == "__main__":
     main()
