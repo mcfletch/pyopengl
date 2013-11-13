@@ -201,6 +201,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
             else:
                 log.error( """Unable to parse module name: %s""", name )
                 raise
+        self.dll = '_p.%s'%(self.prefix,)
         if self.module[0].isdigit():
             self.module = '%s_%s'%(self.prefix,self.module,)
         self.camelModule = "".join([x.title() for x in self.module.split('_')])
