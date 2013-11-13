@@ -1,7 +1,7 @@
 """Data-type definitions for EGL/GLES"""
 import ctypes
 from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls
-pointer = ctypes.pointer
+from OpenGL import platform as _p
 
 EGLBoolean = ctypes.c_uint32
 EGLenum = ctypes.c_uint32
@@ -45,4 +45,59 @@ NativeDisplayType = EGLNativeDisplayType
 NativePixmapType = EGLNativePixmapType
 NativeWindowType = EGLNativeWindowType
 
-    
+# Callback types, this is a hack to avoid making the 
+# khr module depend on the platform or needing to change generator for now...
+CALLBACK_TYPE = _p.PLATFORM.functionTypeFor( _p.PLATFORM.EGL )
+EGLSetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, EGLsizeiANDROID, ctypes.c_voidp, EGLsizeiANDROID )
+EGLGetBlobFuncANDROID = CALLBACK_TYPE( ctypes.c_voidp, EGLsizeiANDROID, ctypes.c_voidp, EGLsizeiANDROID )
+
+EGL_DEFAULT_DISPLAY = EGLNativeDisplayType()
+EGL_NO_CONTEXT = EGLContext()
+EGL_NO_DISPLAY = EGLDisplay()
+EGL_NO_SURFACE = EGLSurface()
+EGL_DONT_CARE = -1
+
+raw_eglQueryString = _p.EGL.eglQueryString
+raw_eglQueryString.restype = ctypes.c_char_p
+raw_eglQueryString.__doc__ = """Raw version of eglQueryString that does not check for availability"""
+
+_VERSION_PREFIX = 'EGL_VERSION_EGL_'
+
+
+[
+    'EGLBoolean',
+    'EGLClientBuffer',
+    'EGLClientPixmapHI',
+    'EGLConfig',
+    'EGLContext',
+    'EGLDisplay',
+    'EGLGetBlobFuncANDROID',
+    'EGLImageKHR',
+    'EGLModeMESA',
+    'EGLNativeDisplayType',
+    'EGLNativeFileDescriptorKHR',
+    'EGLNativePixmapType',
+    'EGLNativeWindowType',
+    'EGLScreenMESA',
+    'EGLSetBlobFuncANDROID',
+    'EGLStreamKHR',
+    'EGLSurface',
+    'EGLSyncKHR',
+    'EGLSyncNV',
+    'EGLTimeKHR',
+    'EGLTimeNV',
+    'EGL_DEFAULT_DISPLAY',
+    'EGL_DONT_CARE',
+    'EGL_NO_CONTEXT',
+    'EGL_NO_DISPLAY',
+    'EGL_NO_SURFACE',
+    'EGLenum',
+    'EGLint',
+    'EGLsizeiANDROID',
+    'EGLuint64KHR',
+    'EGLuint64NV',
+    'NativeDisplayType',
+    'NativePixmapType',
+    'NativeWindowType',
+    'wl_display',
+]
