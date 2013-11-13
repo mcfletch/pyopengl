@@ -96,7 +96,7 @@ GLint64 = GLint64EXT = _defineType('GLint64', ctypes.c_int64, long )
 
 # ptrdiff_t, actually...
 GLsizeiptrARB = GLsizeiptr = GLsizei
-GLvdpauSurfaceNV = GLintptrARB = GLintptr = GLint
+GLvdpauSurfaceNV = GLintptrARB = GLintptr = GLsizei
 size_t = ctypes.c_size_t
 
 void = None
