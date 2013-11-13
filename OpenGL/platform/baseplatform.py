@@ -69,7 +69,7 @@ class BasePlatform( object ):
     EXPORTED_NAMES = [
         'GetCurrentContext','CurrentContextIsValid','safeGetError',
         'createBaseFunction', 'createExtensionFunction', 'copyBaseFunction',
-        'GL','GLU','GLUT','GLE','OpenGL','EGL',
+        'GL','GLU','GLUT','GLE','OpenGL','EGL','GLX','WGL','GLES1','GLES2','GLES3',
         'getGLUTFontPointer',
         'GLUT_GUARD_CALLBACKS',
     ]
@@ -236,8 +236,8 @@ class BasePlatform( object ):
         """Check whether the given extension is supported by current context"""
         if not name or name in ('GL_VERSION_GL_1_0', 'GL_VERSION_GL_1_1'):
             return True
-        if name.startswith( 'EGL_' ):
-            # EGL extensions are display-bound, as are versions, there's no 
+        if name.startswith( 'EGL_' ) or name.startswith( 'GLX_' ) or name.startswith( 'WGL_' ):
+            # we can't check these extensions, have to rely on the function resolution
             return True
         context = self.GetCurrentContext()
         if context:
