@@ -6,12 +6,6 @@ import ctypetopytype
 
 KHRONOS_URL = 'https://cvs.khronos.org/svn/repos/ogl/trunk/doc/registry/public/api/'
 KHRONOS_API = os.path.join( os.path.dirname(__file__), '..','..','khronosapi' )
-DEFAULT_FILES = [
-    'gl.xml',
-    'glx.xml',
-    'wgl.xml',
-    'egl.xml',
-]
 
 def get_khronos( khronosapi ):
     if not os.path.exists( khronosapi ):
@@ -39,17 +33,6 @@ def generate_for_file( filename ):
     if os.path.basename( filename ) == 'gl.xml':
         target = os.path.join( generator.rawTargetDirectory, 'GL','_glgets.py' )
         open( target,'w' ).write( generator.group_sizes())
-
-#        for req in feature:
-#            if isinstance( req, xmlreg.Require ):
-#                if req.profile:
-#                    print 'Profile:', req.profile
-#                for component in req:
-#                    if isinstance( component, xmlreg.Command ):
-#                        generator.function( component )
-#            else:
-#                print 'component', component
-
 
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
