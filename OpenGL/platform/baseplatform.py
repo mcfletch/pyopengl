@@ -256,7 +256,8 @@ class BasePlatform( object ):
                 return result
             return current
         else:
-            return False
+            from OpenGL import extensions
+            return extensions.ExtensionQuerier.hasExtension( name )
     createExtensionFunction = createBaseFunction
 
     def copyBaseFunction( self, original ):
