@@ -234,25 +234,24 @@ class BasePlatform( object ):
         return result
     def checkExtension( self, name ):
         """Check whether the given extension is supported by current context"""
-        if not name or name in ('GL_VERSION_GL_1_0', 'GL_VERSION_GL_1_1'):
-            return True
-        if name.startswith( 'EGL_' ) or name.startswith( 'GLX_' ) or name.startswith( 'WGL_' ):
-            # we can't check these extensions, have to rely on the function resolution
-            return True
+#        if not name or name in ('GL_VERSION_GL_1_0', 'GL_VERSION_GL_1_1'):
+#            return True
+#        if name.startswith( 'EGL_' ) or name.startswith( 'GLX_' ) or name.startswith( 'WGL_' ):
+#            # we can't check these extensions, have to rely on the function resolution
+#            return True
         context = self.GetCurrentContext()
         if context:
             from OpenGL import contextdata
-            from OpenGL.raw.GL.VERSION.GL_1_1 import GL_EXTENSIONS
-            set = contextdata.getValue( GL_EXTENSIONS, context=context )
+            set = contextdata.getValue( 'extensions', context=context )
             if set is None:
                 set = {}
                 contextdata.setValue( 
-                    GL_EXTENSIONS, set, context=context, weak=False 
+                    'extensions', set, context=context, weak=False 
                 )
             current = set.get( name )
             if current is None:
                 from OpenGL import extensions
-                result = extensions.hasGLExtension( name )
+                result = extensions.ExtensionQuerier.hasExtension( name )
                 set[name] = result 
                 return result
             return current

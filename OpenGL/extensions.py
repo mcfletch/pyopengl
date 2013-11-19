@@ -80,83 +80,118 @@ VERSION_EXTENSIONS = [
     ]),
 ]
 
-def getGLVersion( ):
-    """Retrieve 2-int declaration of major/minor GL version
+class ExtensionQuerier( object ):
+    prefix = None
+    version_prefix = None
+    assumed_version = [1,0]
+    
+    version = extensions = None
+    version_string = extensions_string = None
+    
+    registered = []
+    def __init__( self ):
+        self.registered.append( self )
+    
+    @classmethod 
+    def hasExtension( self, specifier ):
+        for registered in self.registered:
+            result = registered( specifier )
+            if result:
+                return result 
+        return False
+    
+    def __call__( self, specifier ):
+        specifier = as_8_bit(specifier).replace(as_8_bit('.'),as_8_bit('_'))
+        if not specifier.startswith( self.prefix ):
+            return None 
+        
+        if specifier.startswith( self.version_prefix ):
+            specifier = [
+                int(x)
+                for x in specifier[ len(self.version_prefix):].split(as_8_bit('_'))
+            ]
+            if specifier[:2] <= self.assumed_version:
+                return True
+            version = self.getVersion()
+            if not version:
+                return version
+            return specifier <= version
+        else:
+            return specifier in self.getExtensions()
+    def getVersion( self ):
+        if not self.version:
+            self.version = self.pullVersion()
+        return self.version 
+    def getExtensions( self ):
+        if not self.extensions:
+            self.extensions = self.pullExtensions()
+        return self.extensions
 
-    returns [int(major),int(minor)] or False if not loaded
-    """
-    global CURRENT_GL_VERSION
-    if not CURRENT_GL_VERSION:
+class _GLQuerier( ExtensionQuerier ):
+    prefix = 'GL_'
+    version_prefix = 'GL_VERSION_GL_'
+    assumed_version = [1,1]
+    def pullVersion( self ):
+        """Retrieve 2-int declaration of major/minor GL version
+
+        returns [int(major),int(minor)] or False if not loaded
+        """
         from OpenGL.GL import glGetString, GL_VERSION
         new = glGetString( GL_VERSION )
-        log.info( 'OpenGL Version: %s', new )
+        self.version_string = new
         if new:
-            CURRENT_GL_VERSION = [
+            return [
                 int(x) for x in new.split(as_8_bit(' '),1)[0].split( as_8_bit('.') )
             ]
         else:
             return False # not yet loaded/supported
-    return CURRENT_GL_VERSION
-
-
-def hasGLExtension( specifier ):
-    """Given a string specifier, check for extension being available"""
-    global AVAILABLE_GL_EXTENSIONS
-    specifier = as_8_bit(specifier).replace(as_8_bit('.'),as_8_bit('_'))
-    if specifier.startswith( VERSION_PREFIX ):
-        specifier = [
-            int(x)
-            for x in specifier[ len(VERSION_PREFIX):].split(as_8_bit('_'))
-        ]
-        if specifier[:2] <= [1,1]:
-            return True
-        version = getGLVersion()
-        if not version:
-            return version
-        return specifier <= version
-    else:
+    def pullExtensions( self ):
         from OpenGL.GL import glGetString, GL_EXTENSIONS
         from OpenGL import error
-        if not AVAILABLE_GL_EXTENSIONS:
-            try:
-                AVAILABLE_GL_EXTENSIONS[:] = glGetString( GL_EXTENSIONS ).split()
-            except (AttributeError, error.GLError) as err:
-                # OpenGL 3.0 deprecates glGetString( GL_EXTENSIONS )
-                from OpenGL.GL.VERSION.GL_3_0 import GL_NUM_EXTENSIONS, glGetStringi
-                from OpenGL.GL import glGetIntegerv
-                count = glGetIntegerv( GL_NUM_EXTENSIONS )
-                for i in range( count ):
-                    extension = glGetStringi( GL_EXTENSIONS, i )
-                    AVAILABLE_GL_EXTENSIONS.append(
-                        extension
-                    )
-            # Add included-by-reference extensions...
-            version = getGLVersion()
-            if not version:
-                # should not be possible?
-                return version 
-            check = tuple( version[:2] )
-            for (v,v_exts) in VERSION_EXTENSIONS:
-                if v <= check:
-                    for v_ext in v_exts:
-                        if v_ext not in AVAILABLE_GL_EXTENSIONS:
-                            AVAILABLE_GL_EXTENSIONS.append( as_8_bit(v_ext) )
-                else:
-                    break
-        result = specifier in AVAILABLE_GL_EXTENSIONS
-        log.info(
-            'GL Extension %s %s',
-            specifier,
-            ['unavailable','available'][bool(result)]
-        )
-        return result
+        try:
+            extensions = glGetString( GL_EXTENSIONS ).split()
+        except (AttributeError, error.GLError) as err:
+            # OpenGL 3.0 deprecates glGetString( GL_EXTENSIONS )
+            from OpenGL.GL.VERSION.GL_3_0 import GL_NUM_EXTENSIONS, glGetStringi
+            from OpenGL.GL import glGetIntegerv
+            count = glGetIntegerv( GL_NUM_EXTENSIONS )
+            extensions = []
+            for i in range( count ):
+                extension = glGetStringi( GL_EXTENSIONS, i )
+                extensions.append(
+                    extension
+                )
+        # Add included-by-reference extensions...
+        version = self.getVersion()
+        if not version:
+            # should not be possible?
+            return version 
+        check = tuple( version[:2] )
+        for (v,v_exts) in VERSION_EXTENSIONS:
+            if v <= check:
+                for v_ext in v_exts:
+                    if v_ext not in extensions:
+                        extensions.append( as_8_bit(v_ext) )
+            else:
+                break
+        return extensions
+GLQuerier = _GLQuerier()
+class _GLUQuerier( ExtensionQuerier ):
+    prefix = 'GLU_'
+    version_prefix = 'GLU_VERSION_GL_'
+    def pullVersion( self ):
+        from OpenGL.GLU import gluGetString,GLU_VERSION
+        return [
+            int(x) for x in gluGetString( GLU_VERSION ).split('_')
+            if x.isdigit()
+        ]
+    def pullExtensions( self ):
+        from OpenGL.GLU import gluGetString,GLU_VERSION
+        return gluGetString( GLU_EXTENSIONS ).split()
+GLUQuerier = _GLUQuerier()
 
-def hasGLUExtension( specifier ):
-    """Given a string specifier, check for extension being available"""
-    from OpenGL.GLU import gluGetString, GLU_EXTENSIONS
-    if not AVAILABLE_GLU_EXTENSIONS:
-        AVAILABLE_GLU_EXTENSIONS[:] = gluGetString( GLU_EXTENSIONS )
-    return specifier.replace(as_8_bit('.'),as_8_bit('_')) in AVAILABLE_GLU_EXTENSIONS
+def hasGLExtension( specifier ):
+    return ExtensionQuerier.hasExtension( specifier )
 
 class _Alternate( LateBind ):
     def __init__( self, name, *alternates ):
