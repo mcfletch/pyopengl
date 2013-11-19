@@ -63,7 +63,8 @@ def main():
                 glXGetFBConfigAttrib( dsp, configs[config], globals()[attribute], samples )
                 print '%s -> %s'%( attribute, samples.value )
             print 
-    
+    from OpenGL.raw.GLX import _types
+    print 'Extension List', _types.GLXQuerier.getExtensions()
         
 if __name__ == "__main__":
     main()
