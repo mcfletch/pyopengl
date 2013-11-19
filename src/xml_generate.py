@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 """Generate python PyOpenGL api from xml registry documents (using xmlreg)"""
 import os, sys, logging, subprocess, glob
-import xmlreg, generatecode
+import xmlreg, codegenerator
 import ctypetopytype
 
 KHRONOS_URL = 'https://cvs.khronos.org/svn/repos/ogl/trunk/doc/registry/public/api/'
@@ -20,7 +20,7 @@ def main(khronosapi=None):
 
 def generate_for_file( filename ):
     registry = xmlreg.parse( filename )
-    generator = generatecode.Generator(
+    generator = codegenerator.Generator(
         registry,
         ctypetopytype.ctype_to_pytype
     )
