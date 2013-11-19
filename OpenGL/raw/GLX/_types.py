@@ -85,6 +85,8 @@ GLXFBConfigID = XID 	# /usr/include/GL/glx.h:183
 GLXContextID = XID 	# /usr/include/GL/glx.h:184
 GLXWindow = XID 	# /usr/include/GL/glx.h:185
 GLXPbuffer = XID 	# /usr/include/GL/glx.h:186
+GLXPbufferSGIX = XID
+GLXVideoSourceSGIX = XID
 
 class struct_anon_103(Structure):
     __slots__ = [
@@ -247,3 +249,11 @@ struct___GLXEvent._fields_ = [
 ]
 
 GLXEvent = struct___GLXEvent 	# /usr/include/GL/glx.h:520
+
+class GLXHyperpipeConfigSGIX( Structure ):
+    _fields_ = [
+        ('pipeName', c_char * 80),
+        ('channel',c_int),
+        ('participationType',c_uint),
+        ('timeSlice',c_int),
+    ]
