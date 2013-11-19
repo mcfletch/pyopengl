@@ -117,7 +117,8 @@ class ExtensionQuerier( object ):
                 return version
             return specifier <= version
         else:
-            return specifier in self.getExtensions()
+            extensions = self.getExtensions()
+            return extensions and specifier in extensions
     def getVersion( self ):
         if not self.version:
             self.version = self.pullVersion()
