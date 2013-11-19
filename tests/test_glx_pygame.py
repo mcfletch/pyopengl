@@ -14,76 +14,39 @@ attributes = [
 #    GLX_Y_INVERTED_EXT, GLX_DONT_CARE,
     GL_NONE
 ]
-attributes = (GLint * len(attributes))( * attributes )
 
 from OpenGL import platform
 import ctypes
 from OpenGL.platform import ctypesloader
 
 X11 = ctypesloader.loadLibrary( ctypes.cdll, 'X11' )
-
 XDefaultScreen = X11.XDefaultScreen
 XDefaultScreen.argtypes = [ctypes.POINTER(Display)]
-
 XOpenDisplay = X11.XOpenDisplay 
 XOpenDisplay.restype = ctypes.POINTER(Display)
 
-XRootWindow = X11.XRootWindow
-XRootWindow.restyle = ctypes.POINTER( Window )
-
-XCreateWindow = X11.XCreateWindow
-XCreateWindow.restyle = ctypes.POINTER( Window )
-XCreateWindow.argtypes = [
-    ctypes.POINTER(Display),ctypes.POINTER(Window),
-    GLint,GLint,GLuint,GLuint,GLuint,GLint,GLuint,
-    ctypes.POINTER(Visual),
-    ctypes.c_ulong,ctypes.c_void_p,
-]
-AllocNone = 0
-
-#@pygametest()
+@pygametest()
 def main():
-    display = XOpenDisplay( os.environ.get( 'DISPLAY' ))
-    screen = XDefaultScreen( display )
-    print 'X Display %s Screen %s'%( display, screen )
+    dsp = XOpenDisplay( os.environ.get( 'DISPLAY' ))
+    screen = XDefaultScreen( dsp )
+    print 'X Display %s Screen %s'%( dsp, screen )
     major,minor = GLint(),GLint()
-    glXQueryVersion(display, major, minor)
+    glXQueryVersion(dsp, major, minor)
     version = (major.value,minor.value)
     print 'glX Version: %s.%s'%version
-    
-    # get a visual with 1.0 functionality...
-    vis = glXChooseVisual(display, screen, attributes)
-    
-    root = XRootWindow(display,vis.screen)
-    window = XCreateWindow( 
-        display, root, 
-        0,0, #x,y
-        300,300, #w,h,
-        1, # border width
-        vis.depth,
-        1, # InputOutput Class
-        vis.visual,
-        0,
-        ctypes.c_void_p(0),
-    )
-        
-    context = glXCreateContext(display,visual,0,GL_TRUE)
-    
     if version >= (1,1):
-        print glXQueryExtensionsString(display,screen)
-#        if version >= (1,2):
-#            d = glXGetCurrentDisplay()[0]
-#            print 'Current display', d
-#        else:
-    
-    
-    
+        print glXQueryExtensionsString(dsp,screen)
+        if version >= (1,2):
+            d = glXGetCurrentDisplay()[0]
+            print 'Current display', d
+        else:
+            d = dsp
     if version >= (1,3):
         elements = GLint(0)
         configs = glXChooseFBConfig(
-            display, 
+            dsp, 
             screen, 
-            attributes, 
+            (GLint * len(attributes))( * attributes ), 
             elements
         )
         print '%s configs found'%( elements.value )
@@ -97,7 +60,7 @@ def main():
                 'GLX_SAMPLES','GLX_SAMPLE_BUFFERS',
                 'GLX_DRAWABLE_TYPE',
             ):
-                glXGetFBConfigAttrib( display, configs[config], globals()[attribute], samples )
+                glXGetFBConfigAttrib( dsp, configs[config], globals()[attribute], samples )
                 print '%s -> %s'%( attribute, samples.value )
             print 
     
