@@ -67,6 +67,8 @@ def main():
         print 'Unable to create pbuffer surface'
     else:
         print 'created pbuffer surface'
+    
+    print 'Available EGL extensions', EGLQuerier.getExtensions()
 
 if __name__ == "__main__":
     main()

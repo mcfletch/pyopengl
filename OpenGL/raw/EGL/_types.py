@@ -22,7 +22,7 @@ class _EGLQuerier( extensions.ExtensionQuerier ):
         return eglQueryString( self.getDisplay(), EGL_VERSION )
     def pullExtensions( self ):
         from OpenGL.EGL import eglQueryString, EGL_EXTENSIONS
-        return eglQueryString( self.getDisplay(), EGL_VERSION )
+        return eglQueryString( self.getDisplay(), EGL_EXTENSIONS )
 EGLQuerier=_EGLQuerier()
 
 EGLBoolean = ctypes.c_uint32
