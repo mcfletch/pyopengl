@@ -72,7 +72,7 @@ def ctype_to_pytype( base ):
             return 'arrays.GLvoidpArray'
         elif new in CTYPE_TO_ARRAY_TYPE:
             return 'arrays.%s'%(CTYPE_TO_ARRAY_TYPE[new])
-        elif new in ( 'arrays.GLcharArray','arrays.GLcharARBArray'):
+        elif new in ( 'arrays.GLcharArray','arrays.GLcharARBArray','arrays.GLbyteArray'):
             # can't have a pointer to these...
             return 'ctypes.POINTER( ctypes.POINTER( _cs.GLchar ))'
         elif new in ( '_cs.GLcharARB',):
