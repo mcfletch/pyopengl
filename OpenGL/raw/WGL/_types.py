@@ -48,6 +48,8 @@ HANDLE.final = True
 HGLRC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:62
 HDC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:63
 PROC = CFUNCTYPE(INT_PTR) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:65
+HPBUFFERARB = HANDLE
+HPBUFFEREXT = HANDLE
 
 class struct__POINTFLOAT(Structure):
     __slots__ = [
