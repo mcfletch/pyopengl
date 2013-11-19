@@ -1,9 +1,10 @@
 #! /usr/bin/env python
 """Generate python PyOpenGL api from xml registry documents (using xmlreg)"""
-import os, sys, logging
+import os, sys, logging, subprocess, glob
 import xmlreg, generatecode
 import ctypetopytype
 
+KHRONOS_URL = 'https://cvs.khronos.org/svn/repos/ogl/trunk/doc/registry/public/api/'
 KHRONOS_API = os.path.join( os.path.dirname(__file__), '..','..','khronosapi' )
 DEFAULT_FILES = [
     'gl.xml',
@@ -12,9 +13,14 @@ DEFAULT_FILES = [
     'egl.xml',
 ]
 
+def get_khronos( khronosapi ):
+    if not os.path.exists( khronosapi ):
+        subprocess.check_call(['svn','co', KHRONOS_URL, khronosapi ])
+
 def main(khronosapi=None):
     khronosapi = khronosapi or KHRONOS_API
-    files = [ os.path.join( khronosapi, f ) for f in DEFAULT_FILES ]
+    
+    files = sorted( glob.glob( os.path.join( khronosapi, '*.xml' ) ))
     for file in files:
         generate_for_file( file )
 
