@@ -1,6 +1,30 @@
 from ctypes import *
+from OpenGL import extensions
 from OpenGL.raw.GL._types import *
 c_void = None
+
+class _WGLQuerier( extensions.ExtensionQuerier ):
+    prefix = 'WGL_'
+    assumed_version = [1,0]
+    version_prefix = 'WGL_VERSION_WGL_'
+    def pullVersion( self ):
+        # only one version...
+        return [1,0]
+    def pullExtensions( self ):
+        from OpenGL.platform import PLATFORM
+        try:
+            wglGetExtensionsStringARB = PLATFORM.OpenGL.wglGetExtensionsStringARB
+        except AttributeError as err:
+            return []
+        else:
+            wglGetExtensionsStringARB.restype = c_char_p
+            wglGetExtensionsStringARB.argtypes = [ HDC ]
+            
+            wglGetCurrentDC = PLATFORM.OpenGL.wglGetCurrentDC
+            wglGetCurrentDC.restyle = HDC
+
+            return wglGetExtensionsStringARB(wglGetCurrentDC()).split()
+WGLQuerier=_WGLQuerier()
 
 INT8 = c_char 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:35
 PINT8 = c_char_p 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:35
