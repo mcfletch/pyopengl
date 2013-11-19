@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 """Do a lot of hacking about to find glGet-able constants..."""
 from OpenGL import constant, error
-from OpenGL.raw import GL
+from OpenGL import GL
+from OpenGL.raw.GL.VERSION.GL_1_0 import glGetIntegerv
 from OpenGLContext import testingcontext
 BaseContext = testingcontext.getInteractive()
 from OpenGLContext import arrays
@@ -16,17 +17,20 @@ class TestContext( BaseContext ):
         for name in dir( GL ):
             value = getattr( GL, name )
             if isinstance( value, constant.Constant ):
-                if value in glget.GL_GET_SIZES:
-                    continue
+                original_ord = glget.GL_GET_SIZES.get( value )
+#                if value in glget.GL_GET_SIZES:
+#                    print '# done', value
+#                    continue
                 data[:] = weird_value
                 try:
-                    GL.glGetIntegerv(
+                    glGetIntegerv(
                         value,
                         data 
                     )
                 except error.GLError, err:
                     if err.err == 1280:
-                        print '# No: %s'%( value.name, )
+                        #print '# No: %s'%( value.name, )
+                        pass
                     else:
                         print 'simple.%s: (1,), # TODO: Check size!'%( value.name, )
                 else:
@@ -37,7 +41,11 @@ class TestContext( BaseContext ):
                         ordinality = (4,4)
                     else:
                         ordinality = (ordinality,)
-                    print 'simple.%s: %s,'%(value.name,ordinality)
+                    if original_ord != ordinality:
+                        
+                        print 'simple.%s: %s, # %s'%(value.name,ordinality,original_ord)
+                    else:
+                        pass
         sys.exit( 0)
 
 if __name__ == "__main__":
