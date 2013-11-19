@@ -9,6 +9,12 @@ callgrind.out*
 documentation/pydoc/*.html
 src/glext.h
 OpenGL/GL/*/*.txt
+OpenGL/WGL/*/*.txt
+OpenGL/GLX/*/*.txt
+OpenGL/EGL/*/*.txt
+OpenGL/GLES1/*/*.txt
+OpenGL/GLES2/*/*.txt
+OpenGL/GLES3/*/*.txt
 OpenGL/Tk/togl*
 arraydatatype.so
 errorchecker.so
