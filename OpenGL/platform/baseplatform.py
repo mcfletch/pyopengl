@@ -105,7 +105,11 @@ class BasePlatform( object ):
         return func
     def wrapContextCheck( self, func, dll ):
         """Wrap function with context-checking if appropriate"""
-        if _configflags.CONTEXT_CHECKING and dll is not self.GLUT:
+        if _configflags.CONTEXT_CHECKING and dll is self.GL and func.__name__ not in (
+            'glGetString',
+            'glGetStringi',
+            'glGetIntegerv',
+        ):
             return _CheckContext( func, self.CurrentContextIsValid )
         return func 
     def wrapLogging( self, func ):
