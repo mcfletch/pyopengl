@@ -159,7 +159,7 @@ class _GLQuerier( ExtensionQuerier ):
             from OpenGL.raw.GL.VERSION.GL_3_0 import GL_NUM_EXTENSIONS, glGetStringi
             from OpenGL.raw.GL.VERSION.GL_1_0 import glGetIntegerv
             count = GLint()
-            count = glGetIntegerv( GL_NUM_EXTENSIONS, count )
+            glGetIntegerv( GL_NUM_EXTENSIONS, count )
             extensions = []
             for i in range( count.value ):
                 extension = glGetStringi( GL_EXTENSIONS, i )
