@@ -191,12 +191,13 @@ class _GLUQuerier( ExtensionQuerier ):
             if x.isdigit()
         ]
     def pullExtensions( self ):
-        from OpenGL.GLU import gluGetString,GLU_VERSION
+        from OpenGL.GLU import gluGetString,GLU_EXTENSIONS
         return gluGetString( GLU_EXTENSIONS ).split()
 GLUQuerier = _GLUQuerier()
 
-def hasGLExtension( specifier ):
+def hasExtension( specifier ):
     return ExtensionQuerier.hasExtension( specifier )
+hasGLExtension = hasGLUExtension = hasExtension
 
 class _Alternate( LateBind ):
     def __init__( self, name, *alternates ):
