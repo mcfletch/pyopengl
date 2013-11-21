@@ -137,7 +137,8 @@ class _GLQuerier( ExtensionQuerier ):
 
         returns [int(major),int(minor)] or False if not loaded
         """
-        from OpenGL.GL import glGetString, GL_VERSION
+        from OpenGL.raw.GL.VERSION.GL_1_0 import glGetString 
+        from OpenGL.raw.GL.VERSION.GL_1_1 import GL_VERSION
         new = glGetString( GL_VERSION )
         self.version_string = new
         if new:
@@ -147,17 +148,20 @@ class _GLQuerier( ExtensionQuerier ):
         else:
             return False # not yet loaded/supported
     def pullExtensions( self ):
-        from OpenGL.GL import glGetString, GL_EXTENSIONS
+        from OpenGL.raw.GL._types import GLint
+        from OpenGL.raw.GL.VERSION.GL_1_0 import glGetString 
+        from OpenGL.raw.GL.VERSION.GL_1_1 import GL_EXTENSIONS
         from OpenGL import error
         try:
             extensions = glGetString( GL_EXTENSIONS ).split()
         except (AttributeError, error.GLError) as err:
             # OpenGL 3.0 deprecates glGetString( GL_EXTENSIONS )
-            from OpenGL.GL.VERSION.GL_3_0 import GL_NUM_EXTENSIONS, glGetStringi
-            from OpenGL.GL import glGetIntegerv
-            count = glGetIntegerv( GL_NUM_EXTENSIONS )
+            from OpenGL.raw.GL.VERSION.GL_3_0 import GL_NUM_EXTENSIONS, glGetStringi
+            from OpenGL.raw.GL.VERSION.GL_1_0 import glGetIntegerv
+            count = GLint()
+            count = glGetIntegerv( GL_NUM_EXTENSIONS, count )
             extensions = []
-            for i in range( count ):
+            for i in range( count.value ):
                 extension = glGetStringi( GL_EXTENSIONS, i )
                 extensions.append(
                     extension
