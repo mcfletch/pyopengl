@@ -96,9 +96,12 @@ cdef class HandlerRegistry:
         
     def registerReturn( self, handler ):
         """Register this handler as the default return-type handler"""
-        self.preferredOutput = handler 
-        self.output_handler = None
-    
+        if isinstance( handler, (str,unicode)):
+            self.preferredOutput = handler 
+            self.output_handler = None
+        else:
+            self.preferredOutput = None 
+            self.output_handler = handler
 
 cdef HandlerRegistry GLOBAL_REGISTRY = HandlerRegistry(plugins.FormatHandler.match)
 

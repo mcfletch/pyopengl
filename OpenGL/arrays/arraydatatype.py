@@ -56,10 +56,13 @@ if ADT is None:
         
         def handler_by_plugin_name( self, name ):
             plugin = plugins.FormatHandler.by_name( name )
-            try:
-                return plugin.load()
-            except ImportError as err:
-                return None
+            if plugin:
+                try:
+                    return plugin.load()
+                except ImportError as err:
+                    return None
+            else:
+                raise RuntimeError( 'No handler of name %s found'%(name,))
         
         def get_output_handler( self ):
             """Fast-path lookup for output handler object"""
@@ -88,8 +91,12 @@ if ADT is None:
             
         def registerReturn( self, handler ):
             """Register this handler as the default return-type handler"""
-            self.preferredOutput = handler 
-            self.output_handler = None
+            if isinstance( handler, (str,unicode)):
+                self.preferredOutput = handler 
+                self.output_handler = None
+            else:
+                self.preferredOutput = None 
+                self.output_handler = handler 
     
     GLOBAL_REGISTRY = HandlerRegistry( plugins.FormatHandler.match)
     formathandler.FormatHandler.TYPE_REGISTRY = GLOBAL_REGISTRY
