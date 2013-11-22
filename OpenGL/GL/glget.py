@@ -9,7 +9,7 @@ For comparison, here's what a straightforward implementation looks like:
         result = platform.OpenGL.glGetDoublev( pname, byref(result) )
         return Numeric.array( result )
 """
-from OpenGL import platform, arrays, error, wrapper, converters
+from OpenGL import wrapper
 from OpenGL.raw.GL.VERSION import GL_1_1 as simple
 from OpenGL.raw.GL import _glgets
 import ctypes

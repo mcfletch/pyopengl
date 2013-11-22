@@ -1,12 +1,10 @@
 """Exceptional cases that need some extra wrapping"""
-from OpenGL.platform import GL,GLU,createBaseFunction
-from OpenGL import arrays, error, wrapper
-from OpenGL.arrays.arraydatatype import GLfloatArray, GLdoubleArray
+from OpenGL import arrays, error
+from OpenGL.arrays.arraydatatype import GLfloatArray
 from OpenGL.lazywrapper import lazy
 from OpenGL.GL.VERSION import GL_1_1 as full
 from OpenGL.raw.GL import _types
-from OpenGL._bytes import bytes,unicode,as_8_bit
-import OpenGL
+from OpenGL._bytes import bytes
 from OpenGL import _configflags
 import ctypes
 

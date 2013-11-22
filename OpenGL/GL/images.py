@@ -13,8 +13,8 @@
         glCompressedTexSubImage1D
 """
 from OpenGL.raw.GL.VERSION import GL_1_1,GL_1_2, GL_3_0
-from OpenGL import images, arrays, wrapper, platform
-from OpenGL._bytes import bytes,unicode,as_8_bit,integer_types
+from OpenGL import images, arrays, wrapper
+from OpenGL._bytes import bytes,integer_types
 import ctypes
 
 def asInt( value ):

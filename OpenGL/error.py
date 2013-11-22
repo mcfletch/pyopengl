@@ -7,7 +7,7 @@ ErrorChecker is an _ErrorChecker instance that allows you
 to register a new error-checking function for use 
 throughout the system.
 """
-import OpenGL, logging
+import logging
 log = logging.getLogger( 'OpenGL.error' )
 from OpenGL import platform, _configflags
 __all__ = (
