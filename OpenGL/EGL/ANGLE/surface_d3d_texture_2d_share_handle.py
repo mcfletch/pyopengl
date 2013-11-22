@@ -7,10 +7,11 @@ Python-friendly API
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ANGLE/surface_d3d_texture_2d_share_handle.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.EGL import _types
 from OpenGL.raw.EGL.ANGLE.surface_d3d_texture_2d_share_handle import *
 
 def glInitSurfaceD3DTexture2DShareHandleANGLE():

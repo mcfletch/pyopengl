@@ -2,8 +2,9 @@
 """
 REGISTRY_NAME = 'ctypespointers'
 import ctypes, _ctypes
-
-from OpenGL import constants, constant
+from OpenGL.raw.GL import _types 
+from OpenGL.arrays import _arrayconstants as GL_1_1
+from OpenGL import constant
 from OpenGL.arrays import formathandler
 import operator
 
@@ -54,26 +55,26 @@ class CtypesPointerHandler( formathandler.FormatHandler ):
 
 
 ARRAY_TO_GL_TYPE_MAPPING = {
-    constants.GLdouble: constants.GL_DOUBLE,
-    constants.GLfloat: constants.GL_FLOAT,
-    constants.GLint: constants.GL_INT,
-    constants.GLuint: constants.GL_UNSIGNED_INT,
-    constants.GLshort: constants.GL_SHORT,
-    constants.GLushort: constants.GL_UNSIGNED_SHORT,
+    _types.GLdouble: GL_1_1.GL_DOUBLE,
+    _types.GLfloat: GL_1_1.GL_FLOAT,
+    _types.GLint: GL_1_1.GL_INT,
+    _types.GLuint: GL_1_1.GL_UNSIGNED_INT,
+    _types.GLshort: GL_1_1.GL_SHORT,
+    _types.GLushort: GL_1_1.GL_UNSIGNED_SHORT,
         
-    constants.GLchar: constants.GL_CHAR,
-    constants.GLbyte: constants.GL_BYTE,
-    constants.GLubyte: constants.GL_UNSIGNED_BYTE,
+    _types.GLchar: GL_1_1.GL_CHAR,
+    _types.GLbyte: GL_1_1.GL_BYTE,
+    _types.GLubyte: GL_1_1.GL_UNSIGNED_BYTE,
 }
 GL_TYPE_TO_ARRAY_MAPPING = {
-    constants.GL_DOUBLE: constants.GLdouble,
-    constants.GL_FLOAT: constants.GLfloat,
-    constants.GL_INT: constants.GLint,
-    constants.GL_UNSIGNED_INT: constants.GLuint,
-    constants.GL_SHORT: constants.GLshort,
-    constants.GL_UNSIGNED_SHORT: constants.GLushort,
+    GL_1_1.GL_DOUBLE: _types.GLdouble,
+    GL_1_1.GL_FLOAT: _types.GLfloat,
+    GL_1_1.GL_INT: _types.GLint,
+    GL_1_1.GL_UNSIGNED_INT: _types.GLuint,
+    GL_1_1.GL_SHORT: _types.GLshort,
+    GL_1_1.GL_UNSIGNED_SHORT: _types.GLushort,
         
-    constants.GL_CHAR: constants.GLchar,
-    constants.GL_BYTE: constants.GLbyte,
-    constants.GL_UNSIGNED_BYTE: constants.GLubyte,
+    GL_1_1.GL_CHAR: _types.GLchar,
+    GL_1_1.GL_BYTE: _types.GLbyte,
+    GL_1_1.GL_UNSIGNED_BYTE: _types.GLubyte,
 }

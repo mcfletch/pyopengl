@@ -8,17 +8,19 @@ from OpenGL.raw.GLU.constants import *
 from ctypes import *
 from OpenGL import platform, arrays
 from OpenGL.constant import Constant
-from OpenGL import constants as GLconstants
-GLvoid = GLconstants.GLvoid
+from OpenGL.raw.GL import _types as GL_types
+GLvoid = GL_types.GLvoid
 
 FUNCTION_TYPE = platform.PLATFORM.functionTypeFor( platform.GLU )
-from OpenGL.constants import GLint
-from OpenGL.constants import GLenum
-from OpenGL.constants import GLsizei
-from OpenGL.constants import GLboolean
-from OpenGL.constants import GLubyte
-from OpenGL.constants import GLdouble
-from OpenGL.constants import GLfloat
+from OpenGL.raw.GL._types import (
+    GLint,
+    GLenum,
+    GLsizei,
+    GLboolean,
+    GLubyte,
+    GLdouble,
+    GLfloat,
+)
 
 
 class GLUnurbs(Structure):

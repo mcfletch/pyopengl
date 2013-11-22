@@ -4,20 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.shader_integer_mix to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	GLSL 1.30 (and GLSL ES 3.00) expanded the mix() built-in function to
-	operate on a boolean third argument that does not interpolate but
-	selects. This extension extends mix() to select between int, uint,
-	and bool components.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/shader_integer_mix.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.shader_integer_mix import *
 
 def glInitShaderIntegerMixEXT():

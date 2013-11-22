@@ -4,24 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ATI.vertex_streams to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension adds the ability to handle sets of auxilliary
-	vertex and normal coordinates. These sets of auxilliary
-	coordinates are termed streams, and can be routed selectively
-	into the blend stages provided by the vertex blending extension.
-	This functionality enables software animation techniques such
-	as keyframe vertex morphing.
-	
-	
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ATI/vertex_streams.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ATI.vertex_streams import *
 
 def glInitVertexStreamsATI():

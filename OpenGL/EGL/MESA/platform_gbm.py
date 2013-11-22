@@ -7,10 +7,11 @@ Python-friendly API
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/MESA/platform_gbm.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.EGL import _types
 from OpenGL.raw.EGL.MESA.platform_gbm import *
 
 def glInitPlatformGbmMESA():

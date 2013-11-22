@@ -4,29 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.texture_compression_latc to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension introduces four new block-based texture compression
-	formats suited for unsigned and signed luminance and luminance-alpha
-	textures (hence the name "latc" for Luminance-Alpha Texture
-	Compression).
-	
-	These formats are designed to reduce the storage requirements and
-	memory bandwidth required for luminance and luminance-alpha textures
-	by a factor of 2-to-1 over conventional uncompressed luminance and
-	luminance-alpha textures with 8-bit components (GL_LUMINANCE8 and
-	GL_LUMINANCE8_ALPHA8).
-	
-	The compressed signed luminance-alpha format is reasonably suited
-	for storing compressed normal maps.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/texture_compression_latc.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.texture_compression_latc import *
 
 def glInitTextureCompressionLatcEXT():

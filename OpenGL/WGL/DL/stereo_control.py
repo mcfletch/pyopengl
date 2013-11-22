@@ -4,19 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.WGL.DL.stereo_control to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	The stereo extension provides an interface for manipulating the 
-	emitter signal from the video adapter used to drive lcd shutter 
-	glasses used for stereoscopic viewing.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/DL/stereo_control.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.WGL import _types
 from OpenGL.raw.WGL.DL.stereo_control import *
 
 def glInitStereoControlDL():

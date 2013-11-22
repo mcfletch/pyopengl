@@ -4,20 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.INTEL.swap_event to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension adds a new event type, GLX_BUFFER_SWAP_COMPLETE_INTEL,
-	which is sent to the client via the X11 event stream and
-	selected/consumed by the normal GLX event mask mechanisms, to indicate
-	when a previously queued swap has completed.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/INTEL/swap_event.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GLX import _types
 from OpenGL.raw.GLX.INTEL.swap_event import *
 
 def glInitSwapEventINTEL():

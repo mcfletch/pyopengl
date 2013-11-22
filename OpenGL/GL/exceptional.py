@@ -1,11 +1,10 @@
 """Exceptional cases that need some extra wrapping"""
 from OpenGL.platform import GL,GLU,createBaseFunction
-from OpenGL import arrays, error, wrapper, constants
+from OpenGL import arrays, error, wrapper
 from OpenGL.arrays.arraydatatype import GLfloatArray, GLdoubleArray
-from OpenGL import constants as data_types
 from OpenGL.lazywrapper import lazy
-from OpenGL.raw.GL.VERSION import GL_1_1 as simple
 from OpenGL.GL.VERSION import GL_1_1 as full
+from OpenGL.raw.GL import _types
 from OpenGL._bytes import bytes,unicode,as_8_bit
 import OpenGL
 from OpenGL import _configflags
@@ -185,7 +184,7 @@ def glGenTextures( baseFunction, count, textures=None ):
     elif count == 1 and _configflags.SIZE_1_ARRAY_UNPACK:
         # this traditionally returned a single int/long, so we'll continue to
         # do so, even though it would be easier not to bother.
-        textures = constants.GLuint( 0 )
+        textures = _types.GLuint( 0 )
         baseFunction( count, textures)
         return textures.value
     else:

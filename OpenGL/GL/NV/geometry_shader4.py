@@ -4,27 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.geometry_shader4 to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension builds upon the EXT_geometry_shader4 specification to
-	provide two additional capabilities:
-	
-	    * Support for QUADS, QUAD_STRIP, and POLYGON primitive types when
-	      geometry shaders are enabled.  Such primitives will be tessellated
-	      into individual triangles.
-	
-	    * Setting the value of GEOMETRY_VERTICES_OUT_EXT will take effect
-	      immediately.  It is not necessary to link the program object in
-	      order for this change to take effect, as is the case in the EXT
-	      version of this extension.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/geometry_shader4.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.NV.geometry_shader4 import *
 
 def glInitGeometryShader4NV():

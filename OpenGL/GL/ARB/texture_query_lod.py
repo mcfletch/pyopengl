@@ -4,20 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.texture_query_lod to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension provides a new set of fragment shader texture
-	functions (textureLOD) that return the results of automatic
-	level-of-detail computations that would be performed if a texture
-	lookup were performed.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/texture_query_lod.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ARB.texture_query_lod import *
 
 def glInitTextureQueryLodARB():

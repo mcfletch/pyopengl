@@ -9,8 +9,14 @@ from ctypes import *
 from OpenGL._bytes import unicode
 from OpenGL import platform, arrays
 from OpenGL.constant import Constant
-from OpenGL import constants as GLconstants
-GLvoid = GLconstants.GLvoid
+from OpenGL.raw.GL import _types as GL_types
+GLvoid = GL_types.GLvoid
+from OpenGL.raw.GL._types import (
+    GLint,
+    GLenum,
+    GLdouble,
+    GLfloat,
+)
 
 if hasattr( platform.PLATFORM, 'GLUT_CALLBACK_TYPE' ):
     # it's *always* CFUNCTYPE, AFAICT
@@ -24,10 +30,6 @@ class STRING( c_char_p ):
         if isinstance( value, unicode ):
             value = value.encode( 'utf-8' )
         return super( STRING, cls ).from_param( value )
-from OpenGL.constants import GLenum
-from OpenGL.constants import GLfloat
-from OpenGL.constants import GLdouble
-from OpenGL.constants import GLint
 
 
 

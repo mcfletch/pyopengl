@@ -4,18 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SUN.convolution_border_modes to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension provides an additional border mode for the
-	EXT_convolution extension.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SUN/convolution_border_modes.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.SUN.convolution_border_modes import *
 
 def glInitConvolutionBorderModesSUN():

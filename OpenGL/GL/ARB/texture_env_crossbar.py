@@ -4,22 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.texture_env_crossbar to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension adds the capability to use the texture color from
-	other texture units as sources to the COMBINE_ARB enviornment
-	function. The ARB_texture_env_combine extension defined texture 
-	enviornment functions which could use the color from the 
-	current texture unit as a source. This extension adds
-	the ability to use the color from any texture unit as a source.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/texture_env_crossbar.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ARB.texture_env_crossbar import *
 
 def glInitTextureEnvCrossbarARB():

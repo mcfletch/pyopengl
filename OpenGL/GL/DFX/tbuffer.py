@@ -4,19 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.DFX.tbuffer to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension allows a write mask to be defined for the fragment
-	mask which is created during multisample rendering. This can be used
-	to create effects such as motion blur and depth of field.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/DFX/tbuffer.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.DFX.tbuffer import *
 
 def glInitTbufferDFX():

@@ -4,20 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.misc_attribute to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	EXT_misc_attribute extends the list of attribute groups. It provides
-	a miscellaneous group, controlled by the MISC_BIT_EXT bit, that contains
-	the attribute state of extensions that don't logically fit in any other
-	group. 
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/misc_attribute.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.misc_attribute import *
 
 def glInitMiscAttributeEXT():

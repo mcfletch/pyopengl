@@ -4,9 +4,8 @@ import OpenGL
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from OpenGL.constants import GLdouble
+from OpenGL.GL import GLdouble
 from OpenGL.arrays import arraydatatype
-from OpenGL.constants import GLdouble
 handler = arraydatatype.ArrayDatatype.getHandler( GLdouble * 16 )
 handler.registerReturn( )
 

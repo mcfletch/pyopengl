@@ -4,21 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.WGL.NV.render_texture_rectangle to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension allows a color buffer with non-power-of-two dimensions to
-	be used for both rendering and texturing.  It is built upon the
-	ARB_render_texture extension; the only addition in this extension is the
-	ability to bind a texture to a texture rectangle target, as provided
-	through the NV_texture_rectangle extension.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/render_texture_rectangle.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.WGL import _types
 from OpenGL.raw.WGL.NV.render_texture_rectangle import *
 
 def glInitRenderTextureRectangleNV():

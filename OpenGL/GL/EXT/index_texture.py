@@ -4,24 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.index_texture to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extends the definition of texturing so that it is supported
-	in color index mode.  This extension builds on the notion of
-	texture images which have color index internal formats which was
-	introduced in EXT_paletted_texture.
-	
-	This extension also introduces a new texture environment function
-	ADD which is useful for combining lighting and texturing in
-	color index mode.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/index_texture.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.index_texture import *
 
 def glInitIndexTextureEXT():

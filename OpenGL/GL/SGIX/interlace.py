@@ -4,23 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.interlace to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension provides a way to interlace rows of pixels when
-	rasterizing pixel rectangles, and loading texture images.  In this
-	context, interlacing means skiping over rows of pixels or texels
-	in the destination.  This is useful for dealing with video data
-	since a single frame of video is typically composed from two images
-	or fields: one image specifying the data for even rows of the frame
-	and the other image specifying the data for odd rows of the frame.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/interlace.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.SGIX.interlace import *
 
 def glInitInterlaceSGIX():

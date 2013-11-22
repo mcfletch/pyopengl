@@ -4,28 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.flush_raster to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extensions provides a way to ensure that all raster operations 
-	currently in the pipeline will be completed before the next 
-	raster operation begins. We define a raster operation as an operation
-	that involves the rasterization stage of the OpenGL pipeline.
-	The implementation is free to decide what consitutes flushing the
-	raster subsystem.
-	
-	The motivation is to allow accurate instrumentation by 
-	including this call before stopping rasterization measurements.
-	There are cases where Finish() is used, but a FlushRaster()
-	would suffice, so this extension is deliberately kept independent 
-	of the instruments extension.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/flush_raster.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.SGIX.flush_raster import *
 
 def glInitFlushRasterSGIX():

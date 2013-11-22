@@ -4,31 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.texture_lod_bias to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	OpenGL computes a texture level-of-detail parameter, called lambda
-	in the GL specification, that determines which mipmap levels and
-	their relative mipmap weights for use in mipmapped texture filtering.
-	
-	This extension provides a means to bias the lambda computation
-	by a constant (signed) value.  This bias can provide a way to blur
-	or pseudo-sharpen OpenGL's standard texture filtering.
-	
-	This blurring or pseudo-sharpening may be useful for special effects
-	(such as depth-of-field effects) or image processing techniques
-	(where the mipmap levels act as pre-downsampled image versions).
-	On some implementations, increasing the texture lod bias may improve
-	texture filtering performance (at the cost of texture bluriness).
-	
-	The extension mimics functionality found in Direct3D.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/texture_lod_bias.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.texture_lod_bias import *
 
 def glInitTextureLodBiasEXT():

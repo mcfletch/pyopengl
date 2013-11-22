@@ -7,10 +7,11 @@ Python-friendly API
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/AMD/gpu_association.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.WGL import _types
 from OpenGL.raw.WGL.AMD.gpu_association import *
 
 def glInitGpuAssociationAMD():

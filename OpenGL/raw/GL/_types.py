@@ -154,5 +154,3 @@ GLDEBUGPROCAMD = _FUNCTION_TYPE(
 
 GLeglImageOES = GLvoidp 
 c_int = ctypes.c_int
-
-from OpenGL.khr import *

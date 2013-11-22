@@ -4,22 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.stencil_two_side to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension provides two-sided stencil testing where the
-	stencil-related state (stencil operations, reference value, compare
-	mask, and write mask) may be different for front- and back-facing
-	polygons.  Two-sided stencil testing may improve the performance
-	of stenciled shadow volume and Constructive Solid Geometry (CSG)
-	rendering algorithms.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/stencil_two_side.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.stencil_two_side import *
 
 def glInitStencilTwoSideEXT():

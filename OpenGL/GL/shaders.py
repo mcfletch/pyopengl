@@ -133,7 +133,7 @@ class ShaderProgram( int ):
         
         returns (format,binaryData) for the shader program
         """
-        from OpenGL.constants import GLint,GLenum 
+        from OpenGL.raw.GL._types import GLint,GLenum 
         from OpenGL.arrays import GLbyteArray
         size = GLint()
         glGetProgramiv( self, get_program_binary.GL_PROGRAM_BINARY_LENGTH, size )

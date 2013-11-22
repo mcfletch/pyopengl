@@ -4,18 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.pixel_transform_color_table to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension defines a color table that is applied immediately
-	after the pixel transformation operation.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/pixel_transform_color_table.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.pixel_transform_color_table import *
 
 def glInitPixelTransformColorTableEXT():

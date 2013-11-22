@@ -34,7 +34,8 @@ from OpenGL import GL
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.GL.ARB import vertex_buffer_object
-from OpenGL import constants, error
+from OpenGL.raw.GL import _types 
+from OpenGL import error
 from OpenGL._bytes import bytes,unicode,as_8_bit
 import ctypes,logging
 log = logging.getLogger( 'OpenGL.arrays.vbo' )
@@ -77,7 +78,7 @@ class Implementation( object ):
         # these values are stored here to avoid them being cleaned up 
         # to non during module deletion and causing errors to be raised
         nfe = error.NullFunctionError
-        gluint = constants.GLuint
+        gluint = _types.GLuint
         def doBufferDeletion( *args, **named ):
             while buffers:
                 try:

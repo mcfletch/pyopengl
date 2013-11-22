@@ -7,10 +7,11 @@ Python-friendly API
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/VERSION/GL_4_3.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.VERSION.GL_4_3 import *
 
 def glInitGl43VERSION():
@@ -27,10 +28,11 @@ from OpenGL.GL.ARB.ES3_compatibility import *
 from OpenGL.GL.ARB.clear_buffer_object import *
 from OpenGL.GL.ARB.compute_shader import *
 from OpenGL.GL.ARB.copy_image import *
-from OpenGL.GL.ARB.debug_group import *
-from OpenGL.GL.ARB.debug_label import *
+# Extension registry no longer defines these extensions?
+#from OpenGL.GL.ARB.debug_group import *
+#from OpenGL.GL.ARB.debug_label import *
+#from OpenGL.GL.ARB.debug_output2 import *
 from OpenGL.GL.KHR.debug import *
-from OpenGL.GL.ARB.debug_output2 import *
 from OpenGL.GL.ARB.explicit_uniform_location import *
 from OpenGL.GL.ARB.framebuffer_no_attachments import *
 from OpenGL.GL.ARB.internalformat_query2 import *

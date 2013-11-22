@@ -4,22 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.tag_sample_buffer to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	The extensions defines a special purpose fast multisample clear.
-	This clear can be used with some restrictions as a significantly
-	faster alternative to Clear(DEPTH_BUFFER_BIT).
-	
-	The extension is based on the RealityEngine architecture and will
-	probably never be supported by any other architecture.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/tag_sample_buffer.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.SGIX.tag_sample_buffer import *
 
 def glInitTagSampleBufferSGIX():

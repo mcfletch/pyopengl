@@ -4,26 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ATI.texture_mirror_once to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	ATI_texture_mirror_once extends the set of texture wrap modes to 
-	include two modes (GL_MIRROR_CLAMP_ATI, GL_MIRROR_CLAMP_TO_EDGE_ATI) 
-	that effectively use a texture map twice as large as the original image 
-	in which the additional half of the new image is a mirror image of the 
-	original image.
-	
-	This new mode relaxes the need to generate images whose opposite edges
-	match by using the original image to generate a matching "mirror image".
-	This mode allows the texture to be mirrored only once in the negative
-	s, t, and r directions.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ATI/texture_mirror_once.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ATI.texture_mirror_once import *
 
 def glInitTextureMirrorOnceATI():

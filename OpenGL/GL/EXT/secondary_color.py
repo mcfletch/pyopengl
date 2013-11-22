@@ -4,20 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.secondary_color to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension allows specifying the RGB components of the secondary
-	color used in the Color Sum stage, instead of using the default
-	(0,0,0,0) color. It applies only in RGBA mode and when LIGHTING is
-	disabled.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/secondary_color.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.secondary_color import *
 
 def glInitSecondaryColorEXT():

@@ -4,21 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.shadow to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension defines two new operations to be performed on texture
-	values before they are passed on to the filtering subsystem.  These
-	operations perform either a <= or >= test on the value from texture
-	memory and the iterated R value, and return 1.0 or 0.0 if the test
-	passes or fails, respectively.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/shadow.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.SGIX.shadow import *
 
 def glInitShadowSGIX():

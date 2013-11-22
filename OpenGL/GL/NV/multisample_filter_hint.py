@@ -4,28 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.multisample_filter_hint to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	OpenGL multisampling typically assumes that the samples of a given
-	pixel are weighted uniformly and averaged to compute the pixel's
-	resolved color.  This extension provides a hint that permits
-	implementations to provide an alternative method of resolving the
-	color of multisampled pixels.
-	
-	As an example of such an alternative method, NVIDIA's GeForce3 GPU
-	provides a technique known as Quincunx filtering.  This technique
-	is used in two-sample multisampling, but it blends the pixel's two
-	samples and three additional samples from adjacent pixels.  The sample
-	pattern is analogous to the 5 pattern on a die.  The quality of this
-	technique is widely regarded as comparable to 4 sample multisampling.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/multisample_filter_hint.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.NV.multisample_filter_hint import *
 
 def glInitMultisampleFilterHintNV():

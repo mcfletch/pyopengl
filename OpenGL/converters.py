@@ -273,9 +273,10 @@ class StringLengths( CConverter ):
     __slots__ = ()
     def __call__( self, pyArgs, index, baseOperation ):
         """Get array of length integers for string contents"""
-        from OpenGL import arrays,constants
+        from OpenGL import arrays
+        from OpenGL.raw.GL import _types
         tmp = [len(x) for x in pyArgs[self.index]]
-        a_type = constants.GLint * len(tmp)
+        a_type = _types.GLint * len(tmp)
         return a_type( *tmp )
     def totalCount( self, pyArgs, index, baseOperation ):
         """Get array of length integers for string contents"""

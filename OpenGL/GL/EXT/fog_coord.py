@@ -4,19 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.fog_coord to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension allows specifying an explicit per-vertex fog
-	coordinate to be used in fog computations, rather than using a
-	fragment depth-based fog equation.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/fog_coord.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.fog_coord import *
 
 def glInitFogCoordEXT():

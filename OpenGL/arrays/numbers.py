@@ -1,7 +1,8 @@
 """Numbers passed as array handling code for PyOpenGL
 """
 REGISTRY_NAME = 'numbers'
-from OpenGL import constants
+from OpenGL.raw.GL import _types 
+from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL.arrays import formathandler
 import ctypes
 from OpenGL._bytes import long, integer_types
@@ -10,14 +11,14 @@ class NumberHandler( formathandler.FormatHandler ):
     """Allows the user to pass a bald Python float,int, etceteras as an array-of-1"""
     HANDLED_TYPES = integer_types + (
         float,
-        constants.GLdouble,
-        constants.GLfloat,
-        constants.GLint,
-        constants.GLshort,
-        constants.GLuint,
-        constants.GLushort,
-        constants.GLclampf,
-        constants.GLclampd,
+        _types.GLdouble,
+        _types.GLfloat,
+        _types.GLint,
+        _types.GLshort,
+        _types.GLuint,
+        _types.GLushort,
+        _types.GLclampf,
+        _types.GLclampd,
     )
     def from_param( self, value, typeCode=None  ):
         """If it's a ctypes value, pass on, otherwise do asArray"""
@@ -69,26 +70,26 @@ class NumberHandler( formathandler.FormatHandler ):
             TARGET_TYPE_TUPLE = TARGET_TYPE_TUPLE + (base,)
 
 DEFAULT_TYPES = {
-    float: (constants.GLdouble,constants.GL_DOUBLE),
-    int: (constants.GLint,constants.GL_INT),
-    long: (constants.GLint,constants.GL_INT),
+    float: (_types.GLdouble,GL_1_1.GL_DOUBLE),
+    int: (_types.GLint,GL_1_1.GL_INT),
+    long: (_types.GLint,GL_1_1.GL_INT),
 }
 TARGET_TYPES = dict([
-    (getattr( constants,n),c)
-    for (n,c) in constants.ARRAY_TYPE_TO_CONSTANT
+    (getattr( _types,n),c)
+    for (n,c) in _types.ARRAY_TYPE_TO_CONSTANT
 ])
 TARGET_TYPE_TUPLE = tuple([
-    getattr(constants,n)
-    for (n,c) in constants.ARRAY_TYPE_TO_CONSTANT
+    getattr(_types,n)
+    for (n,c) in _types.ARRAY_TYPE_TO_CONSTANT
 ])
 CONSTANT_TO_TYPE = dict([
-    (c,getattr( constants, n))
-    for (n,c) in constants.ARRAY_TYPE_TO_CONSTANT
+    (c,getattr( _types, n))
+    for (n,c) in _types.ARRAY_TYPE_TO_CONSTANT
 ])
 
 BYTE_SIZES = dict([
-    ( c, ctypes.sizeof( getattr( constants, n) ) )
-    for (n,c) in constants.ARRAY_TYPE_TO_CONSTANT
+    ( c, ctypes.sizeof( getattr( _types, n) ) )
+    for (n,c) in _types.ARRAY_TYPE_TO_CONSTANT
 ])
 
 try:

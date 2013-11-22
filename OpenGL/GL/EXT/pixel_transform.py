@@ -4,23 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.pixel_transform to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension provides support for scaling, rotation, translation and
-	shearing of two-dimensional pixel rectangles in the pixel rasterizer.
-	The transformation is defined via a 4x4 matrix, where only those entries
-	which apply as a 2D affine transformation will be accepted and used.
-	These matrices can be manipulated using the same functions as the other 
-	OpenGL matrix stacks.
-	
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/pixel_transform.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.pixel_transform import *
 
 def glInitPixelTransformEXT():

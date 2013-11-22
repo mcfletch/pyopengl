@@ -7,10 +7,11 @@ Python-friendly API
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/VERSION/GLES2_2_0.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GLES2 import _types
 from OpenGL.raw.GLES2.VERSION.GLES2_2_0 import *
 
 def glInitGles220VERSION():

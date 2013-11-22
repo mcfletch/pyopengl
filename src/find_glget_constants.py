@@ -2,7 +2,7 @@
 """Do a lot of hacking about to find glGet-able constants..."""
 from OpenGL import constant, error
 from OpenGL import GL
-from OpenGL.raw.GL.VERSION.GL_1_0 import glGetIntegerv
+from OpenGL.raw.GL.VERSION.GL_1_1 import glGetIntegerv
 from OpenGLContext import testingcontext
 BaseContext = testingcontext.getInteractive()
 from OpenGLContext import arrays

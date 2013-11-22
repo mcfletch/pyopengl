@@ -4,27 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.half_float_vertex to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension extends the usage of the half-precision (16-bit) floating-
-	point quantities introduced in ARB_half_float_pixel for usage in specifying
-	vertex array data.
-	
-	This extension allows applications to use half-precision floating point data
-	when specifying vertices.  This can allow applications to reduce their
-	memory footprint, as well as the memory bandwidth required for vertex data.
-	
-	This extension extends the existing vertex array commands to accept the new
-	data type.
-	
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/half_float_vertex.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ARB.half_float_vertex import *
 
 def glInitHalfFloatVertexARB():

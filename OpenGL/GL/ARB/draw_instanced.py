@@ -4,34 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.draw_instanced to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	A common use case in GL for some applications is to be able to
-	draw the same object, or groups of similar objects that share
-	vertex data, primitive count and type, multiple times.  This 
-	extension provides a means of accelerating such use cases while 
-	restricting the number of API calls, and keeping the amount of 
-	duplicate data to a minimum.
-	
-	This extension introduces two draw calls which are conceptually
-	equivalent to a series of draw calls.  Each conceptual call in
-	this series is considered an "instance" of the actual draw call.
-	
-	This extension also introduces a read-only built-in variable to
-	GLSL which contains the "instance ID."  This variable initially
-	contains 0, but increases by one after each conceptual draw call.
-	
-	By using the instance ID or multiples thereof as an index into
-	a uniform array containing transform data, vertex shaders can 
-	draw multiple instances of an object with a single draw call.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/draw_instanced.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ARB.draw_instanced import *
 
 def glInitDrawInstancedARB():

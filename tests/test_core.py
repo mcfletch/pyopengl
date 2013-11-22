@@ -30,7 +30,7 @@ except error.NoContext as err:
 else:
     print 'WARNING: Failed to catch invalid context'
     #raise RuntimeError( """Did not catch invalid context!""" )
-from OpenGL import constants, error
+from OpenGL import error
 from OpenGL.GLU import *
 from OpenGL.arrays import arraydatatype
 import OpenGL
@@ -113,8 +113,8 @@ class Tests( unittest.TestCase ):
     def test_nurbs_raw( self ):
         """Test nurbs rendering using raw API calls"""
         from OpenGL.raw import GLU 
-        knots = (constants.GLfloat* 8) ( 0,0,0,0,1,1,1,1 )
-        ctlpoints = (constants.GLfloat*(3*4*4))( -3., -3., -3.,
+        knots = (GLfloat* 8) ( 0,0,0,0,1,1,1,1 )
+        ctlpoints = (GLfloat*(3*4*4))( -3., -3., -3.,
             -3., -1., -3.,
             -3.,  1., -3.,
             -3.,  3., -3.,
@@ -278,7 +278,7 @@ class Tests( unittest.TestCase ):
     if not OpenGL.ERROR_ON_COPY:
         def test_pointers( self ):
             """Test that basic pointer functions work"""
-            vertex = constants.GLdouble * 3
+            vertex = GLdouble * 3
             vArray =  vertex * 2
             glVertexPointerd( [[2,3,4,5],[2,3,4,5]] )
             glVertexPointeri( ([2,3,4,5],[2,3,4,5]) )
@@ -289,7 +289,7 @@ class Tests( unittest.TestCase ):
                 3,
                 GL_DOUBLE,
                 0,
-                ctypes.cast( myVector, ctypes.POINTER(constants.GLdouble)) 
+                ctypes.cast( myVector, ctypes.POINTER(GLdouble)) 
             )
             
             repr(glVertexPointerb( [[2,3],[4,5]] ))
@@ -720,7 +720,7 @@ class Tests( unittest.TestCase ):
                 print('No multi_draw_arrays support')
     def test_glDrawBuffers_list( self ):
         """Test that glDrawBuffers with list argument doesn't crash"""
-        a_type = constants.GLenum*2
+        a_type = GLenum*2
         args = a_type(
             GL_COLOR_ATTACHMENT0,
             GL_COLOR_ATTACHMENT1,
@@ -756,7 +756,7 @@ class Tests( unittest.TestCase ):
                 GL_COLOR_ATTACHMENT1, 
                 GL_TEXTURE_2D, img2, 0
             )
-            a_type = constants.GLenum*2
+            a_type = GLenum*2
             drawingBuffers = a_type(
                 GL_COLOR_ATTACHMENT0, 
                 GL_COLOR_ATTACHMENT1,
@@ -999,7 +999,7 @@ class Tests( unittest.TestCase ):
             from functools import reduce
         structures = [
             (b'this and that',13,1,True,1,b'B',[13],[1]),
-            ((constants.GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
+            ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
         ]
         if sys.version_info[:2] >= (3,0):
             # only supports buffer protocol in 3.x

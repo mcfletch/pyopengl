@@ -7,8 +7,8 @@ from OpenGL.raw import GLU as raw
 from ctypes import *
 from OpenGL import platform, arrays
 from OpenGL.constant import Constant
-from OpenGL import constants as GLconstants
-GLvoid = GLconstants.GLvoid
+from OpenGL.raw.GL import _types as GL_types
+GLvoid = GL_types.GLvoid
 
 
 

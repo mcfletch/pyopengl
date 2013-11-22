@@ -4,20 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.draw_buffers to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension extends ARB_fragment_program and ARB_fragment_shader
-	to allow multiple output colors, and provides a mechanism for
-	directing those outputs to multiple color buffers.
-	
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/draw_buffers.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ARB.draw_buffers import *
 
 def glInitDrawBuffersARB():

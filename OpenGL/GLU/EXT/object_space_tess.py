@@ -1,6 +1,6 @@
 '''GLU extension EXT.object_space_tess
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 

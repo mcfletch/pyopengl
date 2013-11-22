@@ -4,23 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.SGIX.swap_group to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension provides the capability to synchronize the buffer swaps
-	of a group of GLX drawables.  A swap group is created, and drawables are 
-	added as members to the swap group.  Buffer swaps to members of the swap 
-	group will then take place concurrently.
-	
-	This extension extends the set of conditions that must be met before
-	a buffer swap can take place. 
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/swap_group.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GLX import _types
 from OpenGL.raw.GLX.SGIX.swap_group import *
 
 def glInitSwapGroupSGIX():

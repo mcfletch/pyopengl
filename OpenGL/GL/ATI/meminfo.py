@@ -4,23 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ATI.meminfo to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	Traditionally, OpenGL has treated resource management as a task of hardware
-	virtualization hidden from applications. While providing great portability,
-	this shielding of information can prevent applications from making
-	intelligent decisions on the management of resources they create. For
-	instance, an application may be better served by choosing a different
-	rendering method if there is not sufficient resources to efficiently
-	utilize its preferred method.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ATI/meminfo.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ATI.meminfo import *
 
 def glInitMeminfoATI():

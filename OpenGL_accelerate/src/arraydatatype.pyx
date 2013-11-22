@@ -1,7 +1,7 @@
 """Cython-coded Array-handling accelerator module"""
 import ctypes
 import OpenGL
-from OpenGL import constants, plugins
+from OpenGL import plugins
 from OpenGL import logs
 log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
 from OpenGL_accelerate.wrapper cimport cArgConverter, pyArgConverter, returnConverter
@@ -393,7 +393,7 @@ cdef class AsArrayTypedSizeChecked( AsArrayTyped ):
     cdef int size 
     def __init__( self, arrayType=None, size=None ):
         super(AsArrayTypedSizeChecked,self).__init__( 'pointer', arrayType )
-        baseSize = constants.sizeof( arrayType.baseType )
+        baseSize = ctypes.sizeof( arrayType.baseType )
         self.size = size * baseSize
     cdef object c_call( self, object incoming, object function, tuple arguments ):
         """Get the arg as an array of the appropriate type"""

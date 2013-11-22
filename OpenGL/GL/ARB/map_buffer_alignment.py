@@ -4,20 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.map_buffer_alignment to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension adds a requirement to the pointer returned by MapBuffer
-	and MapBufferRange that they provide a minimum of 64 byte alignment to
-	support processing of the data directly with special CPU instructions
-	like SSE and AVX.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/map_buffer_alignment.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ARB.map_buffer_alignment import *
 
 def glInitMapBufferAlignmentARB():

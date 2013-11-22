@@ -4,27 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.SGIX.swap_barrier to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension provides the capability to sychronize the buffer
-	swaps of different swap groups.
-	
-	A swap group is bound to a _swap_barrier_.  The buffer swaps of each 
-	swap group using that barrier will wait until every swap group using 
-	that barrier is ready to swap (where readiness is defined below), after
-	which time all buffer swaps of all groups using that barrier will
-	take place concurrently.
-	
-	This extension extends the set of conditions that must be met before
-	a buffer swap can take place. 
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/swap_barrier.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GLX import _types
 from OpenGL.raw.GLX.SGIX.swap_barrier import *
 
 def glInitSwapBarrierSGIX():

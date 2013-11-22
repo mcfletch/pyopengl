@@ -13,7 +13,7 @@
         glCompressedTexSubImage1D
 """
 from OpenGL.raw.GL.VERSION import GL_1_1,GL_1_2, GL_3_0
-from OpenGL import images, arrays, wrapper, platform, constants
+from OpenGL import images, arrays, wrapper, platform
 from OpenGL._bytes import bytes,unicode,as_8_bit,integer_types
 import ctypes
 
@@ -224,14 +224,14 @@ __all__ = (
 )
 
 for suffix,type in [
-    ('b',constants.GL_BYTE),
-    ('d',constants.GL_DOUBLE),
-    ('f',constants.GL_FLOAT),
-    ('i',constants.GL_INT),
-    ('s',constants.GL_SHORT),
-    ('ub',constants.GL_UNSIGNED_BYTE),
-    ('ui',constants.GL_UNSIGNED_INT),
-    ('us',constants.GL_UNSIGNED_SHORT),
+    ('b',GL_1_1.GL_BYTE),
+    ('d',GL_1_1.GL_DOUBLE),
+    ('f',GL_1_1.GL_FLOAT),
+    ('i',GL_1_1.GL_INT),
+    ('s',GL_1_1.GL_SHORT),
+    ('ub',GL_1_1.GL_UNSIGNED_BYTE),
+    ('ui',GL_1_1.GL_UNSIGNED_INT),
+    ('us',GL_1_1.GL_UNSIGNED_SHORT),
 ]:
     def glReadPixels( x,y,width,height,format,type=type, array=None, outputType=bytes ):
         """Read specified pixels from the current display buffer
@@ -570,13 +570,13 @@ def compressedImageFunction( baseFunction ):
         return baseFunction
 
 for suffix,arrayConstant in [
-    ('b', constants.GL_BYTE),
-    ('f', constants.GL_FLOAT),
-    ('i', constants.GL_INT),
-    ('s', constants.GL_SHORT),
-    ('ub', constants.GL_UNSIGNED_BYTE),
-    ('ui', constants.GL_UNSIGNED_INT),
-    ('us', constants.GL_UNSIGNED_SHORT),
+    ('b', GL_1_1.GL_BYTE),
+    ('f', GL_1_1.GL_FLOAT),
+    ('i', GL_1_1.GL_INT),
+    ('s', GL_1_1.GL_SHORT),
+    ('ub', GL_1_1.GL_UNSIGNED_BYTE),
+    ('ui', GL_1_1.GL_UNSIGNED_INT),
+    ('us', GL_1_1.GL_UNSIGNED_SHORT),
 ]:
     for functionName in (
         'glTexImage1D','glTexImage2D',

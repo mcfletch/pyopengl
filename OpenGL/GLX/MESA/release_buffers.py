@@ -4,24 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.MESA.release_buffers to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	Mesa's implementation of GLX is entirely implemented on the client side.
-	Therefore, Mesa cannot immediately detect when an X window or pixmap is
-	destroyed in order to free any ancilliary data associated with the window
-	or pixmap.
-	
-	The glxMesaReleaseBuffers() function can be used to explicitly indicate
-	when the back color buffer, depth buffer, stencil buffer, and/or accum-
-	ulation buffer associated with a drawable can be freed.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/MESA/release_buffers.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GLX import _types
 from OpenGL.raw.GLX.MESA.release_buffers import *
 
 def glInitReleaseBuffersMESA():

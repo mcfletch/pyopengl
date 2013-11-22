@@ -4,23 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.SGIX.video_source to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension provides the capability to source pixel data from a
-	video stream.  A new type of GLXDrawable (GLXVideoSourceSGIX) is
-	introduced which represents the drain node of a Video Library (VL)
-	path.  A GLXVideoSourceSGIX may be specified as the <read> parameter
-	to glXMakeCurrentReadSGI to indicate that pixel data should be read
-	from the specified video source instead of from the framebuffer.  A
-	GLXVideoSourceSGIX may only be specified as a <read> drawable.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/video_source.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GLX import _types
 from OpenGL.raw.GLX.SGIX.video_source import *
 
 def glInitVideoSourceSGIX():

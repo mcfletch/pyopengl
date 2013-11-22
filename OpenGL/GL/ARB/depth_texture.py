@@ -4,27 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.depth_texture to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This is a clarification of the GL_SGIX_depth_texture extension.  The
-	original overview follows:
-	
-	This extension defines a new depth texture format.  An important
-	application of depth texture images is shadow casting, but separating
-	this from the shadow extension allows for the potential use of depth
-	textures in other applications such as image-based rendering or
-	displacement mapping.  This extension does not define new depth-texture
-	environment functions, such as filtering or applying the depth values
-	computed from a texture but leaves this to other extensions, such as
-	the shadow extension.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/depth_texture.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.ARB.depth_texture import *
 
 def glInitDepthTextureARB():

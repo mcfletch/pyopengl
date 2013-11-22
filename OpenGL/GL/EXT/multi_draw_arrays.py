@@ -4,21 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.multi_draw_arrays to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	These functions behave identically to the standard OpenGL 1.1 functions
-	glDrawArrays() and glDrawElements() except they handle multiple lists of
-	vertices in one call. Their main purpose is to allow one function call
-	to render more than one primitive such as triangle strip, triangle fan,
-	etc.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/multi_draw_arrays.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.EXT.multi_draw_arrays import *
 
 def glInitMultiDrawArraysEXT():
