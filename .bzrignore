@@ -45,3 +45,4 @@ src/glext.h*
 OpenGL_accelerate/*.so
 src/glut-*-bin*
 __pycache__
+src/khronosapi
