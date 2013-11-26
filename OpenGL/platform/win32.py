@@ -62,7 +62,9 @@ class Win32Platform( baseplatform.BasePlatform ):
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.WINFUNCTYPE )
     # Win32 GLUT uses different types for callbacks and functions...
     GLUT_CALLBACK_TYPE = staticmethod( ctypes.CFUNCTYPE )
-    WGL = ctypes.windll.gdi32
+    GDI32 = ctypes.windll.gdi32
+    WGL = OpenGL
+    default_dll = GDI32
     wglGetProcAddress = OpenGL.wglGetProcAddress
     wglGetProcAddress.restype = ctypes.c_void_p
     getExtensionProcedure = staticmethod( wglGetProcAddress )

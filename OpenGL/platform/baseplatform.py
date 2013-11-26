@@ -223,6 +223,15 @@ class BasePlatform( object ):
                     extension = extension,
                 )
         except AttributeError as err:
+            if hasattr( self, 'default_dll' ) and dll is not self.default_dll:
+                return self.createBaseFunction(
+                    functionName, dll=self.default_dll,
+                    resultType=resultType, 
+                    argTypes=argTypes,
+                    doc = doc, argNames = argNames,
+                    extension = extension,
+                    deprecated = deprecated,
+                )
             result = self.nullFunction( 
                 functionName, dll=dll,
                 resultType=resultType, 
