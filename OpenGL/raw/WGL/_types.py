@@ -1,6 +1,7 @@
 from ctypes import *
 from OpenGL import extensions
 from OpenGL.raw.GL._types import *
+from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls
 c_void = None
 
 class _WGLQuerier( extensions.ExtensionQuerier ):
@@ -12,18 +13,19 @@ class _WGLQuerier( extensions.ExtensionQuerier ):
         return [1,0]
     def pullExtensions( self ):
         from OpenGL.platform import PLATFORM
+        wglGetCurrentDC = PLATFORM.OpenGL.wglGetCurrentDC
+        wglGetCurrentDC.restyle = HDC
         try:
-            wglGetExtensionsStringARB = PLATFORM.OpenGL.wglGetExtensionsStringARB
+            dc = wglGetCurrentDC()
+            proc_address = PLATFORM.wglGetProcAddress( 'wglGetExtensionsStringARB' )
+            wglGetExtensionStringARB = PLATFORM.functionTypeFor( PLATFORM.WGL )(
+                c_char_p,
+                HDC,
+            )( proc_address )
         except AttributeError as err:
             return []
         else:
-            wglGetExtensionsStringARB.restype = c_char_p
-            wglGetExtensionsStringARB.argtypes = [ HDC ]
-            
-            wglGetCurrentDC = PLATFORM.OpenGL.wglGetCurrentDC
-            wglGetCurrentDC.restyle = HDC
-
-            return wglGetExtensionsStringARB(wglGetCurrentDC()).split()
+            return wglGetExtensionsStringARB(dc).split()
 WGLQuerier=_WGLQuerier()
 
 INT8 = c_char 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:35
@@ -197,3 +199,36 @@ RECT = struct_tagRECT 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:202
 PRECT = POINTER(struct_tagRECT) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:202
 NPRECT = POINTER(struct_tagRECT) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:202
 LPRECT = POINTER(struct_tagRECT) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:202
+
+class PIXELFORMATDESCRIPTOR(Structure):
+    _fields_ = [
+        ('nSize',WORD),
+        ('nVersion',WORD),
+        ('dwFlags',DWORD),
+        ('iPixelType',BYTE),
+        ('cColorBits',BYTE),
+        ('cRedBits',BYTE),
+        ('cRedShift',BYTE),
+        ('cGreenBits',BYTE),
+        ('cGreenShift',BYTE),
+        ('cBlueBits',BYTE),
+        ('cBlueShift',BYTE),
+        ('cAlphaBits',BYTE),
+        ('cAlphaShift',BYTE),
+        ('cAccumBits',BYTE),
+        ('cAccumRedBits',BYTE),
+        ('cAccumGreenBits',BYTE),
+        ('cAccumBlueBits',BYTE),
+        ('cAccumAlphaBits',BYTE),
+        ('cAccumDepthBits',BYTE),
+        ('cAccumStencilBits',BYTE),
+        ('cAuxBuffers',BYTE),
+        ('iLayerType',BYTE),
+        ('bReserved',BYTE),
+        ('dwLayerMask',DWORD),
+        ('dwVisibleMask',DWORD),
+        ('dwDamageMask',DWORD),
+    ]
+
+# TODO: This is *not* a working definition, calling any function with this will segfault
+HENHMETAFILE = _opaque_pointer_cls( 'HENHMETAFILE' )
