@@ -111,8 +111,10 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
                         function, coords, vertex_data, weight, args, str(err),
                     )
                 )
+            print 'combined'
             outP = ctypes.c_void_p(self.noteObject(result))
-            outData.contents.value = outP.value
+            outData.value = outP.value
+            print 'combine finish'
             return None
         return wrap
     def dataWrapper( self, function ):

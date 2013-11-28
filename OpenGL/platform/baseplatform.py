@@ -131,6 +131,7 @@ class BasePlatform( object ):
         extension = None,
         deprecated = False,
         module = None,
+        force_extension = False,
     ):
         """Core operation to create a new base ctypes function
         
@@ -143,7 +144,7 @@ class BasePlatform( object ):
         argTypes = [ self.finalArgType( t ) for t in argTypes ]
         is_core = (not extension) or extension.split('_')[1] == 'VERSION'
             
-        if (not is_core) and (not self.EXTENSIONS_USE_BASE_FUNCTIONS):
+        if force_extension or ((not is_core) and (not self.EXTENSIONS_USE_BASE_FUNCTIONS)):
             # what about the VERSION values???
             pointer = self.getExtensionProcedure( as_8_bit(functionName) )
             if pointer:
@@ -223,15 +224,6 @@ class BasePlatform( object ):
                     extension = extension,
                 )
         except AttributeError as err:
-            if hasattr( self, 'default_dll' ) and dll is not self.default_dll:
-                return self.createBaseFunction(
-                    functionName, dll=self.default_dll,
-                    resultType=resultType, 
-                    argTypes=argTypes,
-                    doc = doc, argNames = argNames,
-                    extension = extension,
-                    deprecated = deprecated,
-                )
             result = self.nullFunction( 
                 functionName, dll=dll,
                 resultType=resultType, 

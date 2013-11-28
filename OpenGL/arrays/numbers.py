@@ -16,6 +16,7 @@ class NumberHandler( formathandler.FormatHandler ):
         _types.GLint,
         _types.GLshort,
         _types.GLuint,
+        _types.GLulong,
         _types.GLushort,
         _types.GLclampf,
         _types.GLclampd,

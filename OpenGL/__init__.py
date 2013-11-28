@@ -235,6 +235,7 @@ FormatHandler(
         'ctypes.c_int',
         'ctypes.c_float',
         'ctypes.c_double',
+        'ctypes.c_ulong',
         'ctypes.c_long',
         'ctypes.c_longlong',
     ],
