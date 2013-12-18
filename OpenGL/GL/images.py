@@ -264,20 +264,47 @@ for suffix,type in [
         else:
             return array
     globals()["glReadPixels%s"%(suffix,)] = glReadPixels
-    def glGetTexImage( target, level,format,type=type ):
-        """Get a texture-level as an image"""
+    def glGetTexImage( target, level,format,type=type, array=None, outputType=bytes ):
+        """Get a texture-level as an image
+        
+        target -- enum constant for the texture engine to be read
+        level -- the mip-map level to read
+        format -- image format to read out the data
+        type -- data-type into which to read the data
+        array -- optional array/offset into which to store the value
+
+        outputType -- default (bytes) provides string output of the
+            results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+            and type == GL_UNSIGNED_BYTE.  Any other value will cause
+            output in the default array output format.
+
+        returns the pixel data array in the format defined by the
+        format, type and outputType
+        """
         from OpenGL.GL import glget
-        dims = [glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_WIDTH )]
-        if target != GL_1_1.GL_TEXTURE_1D:
-            dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
-            if target != GL_1_1.GL_TEXTURE_2D:
-                dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_2.GL_TEXTURE_DEPTH ) )
-        array = images.SetupPixelRead( format, tuple(dims), type )
         arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
+        if array is None:
+            dims = [glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_WIDTH )]
+            if target != GL_1_1.GL_TEXTURE_1D:
+                dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
+                if target != GL_1_1.GL_TEXTURE_2D:
+                    dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_2.GL_TEXTURE_DEPTH ) )
+            array = imageData = images.SetupPixelRead( format, tuple(dims), type )
+            owned = True
+        else:
+            if isinstance( array, integer_types):
+                imageData = ctypes.c_void_p( array )
+            else:
+                array = arrayType.asArray( array )
+                imageData = arrayType.voidDataPointer( array )
+            owned = False
         GL_1_1.glGetTexImage(
-            target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array))
+            target, level, format, type, imageData
         )
-        return array
+        if owned and outputType is bytes:
+            return images.returnFormat( array, type )
+        else:
+            return array
     globals()["glGetTexImage%s"%(suffix,)] = glGetTexImage
 ##	def glGetTexSubImage( target, level,format,type ):
 ##		"""Get a texture-level as an image"""
@@ -339,13 +366,14 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=bytes ):
     else:
         return array
 
-def glGetTexImage( target, level,format,type, outputType=bytes ):
+def glGetTexImage( target, level,format,type, array=None, outputType=bytes ):
     """Get a texture-level as an image
 
     target -- enum constant for the texture engine to be read
     level -- the mip-map level to read
     format -- image format to read out the data
     type -- data-type into which to read the data
+    array -- optional array/offset into which to store the value
 
     outputType -- default (bytes) provides string output of the
         results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
@@ -356,15 +384,24 @@ def glGetTexImage( target, level,format,type, outputType=bytes ):
     format, type and outputType
     """
     from OpenGL.GL import glget
-    dims = [glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_WIDTH )]
-    if target != GL_1_1.GL_TEXTURE_1D:
-        dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
-        if target != GL_1_1.GL_TEXTURE_2D:
-            dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_2.GL_TEXTURE_DEPTH ) )
-    array = images.SetupPixelRead( format, tuple(dims), type )
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ images.TYPE_TO_ARRAYTYPE.get(type,type) ]
+    if array is None:
+        dims = [glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_WIDTH )]
+        if target != GL_1_1.GL_TEXTURE_1D:
+            dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT ) )
+            if target != GL_1_1.GL_TEXTURE_2D:
+                dims.append( glget.glGetTexLevelParameteriv( target, level, GL_1_2.GL_TEXTURE_DEPTH ) )
+        array = imageData = images.SetupPixelRead( format, tuple(dims), type )
+        owned = True
+    else:
+        if isinstance( array, integer_types):
+            imageData = ctypes.c_void_p( array )
+        else:
+            array = arrayType.asArray( array )
+            imageData = arrayType.voidDataPointer( array )
+        owned = False
     GL_1_1.glGetTexImage(
-        target, level, format, type, ctypes.c_void_p( arrayType.dataPointer(array))
+        target, level, format, type, imageData
     )
     if outputType is bytes:
         return images.returnFormat( array, type )

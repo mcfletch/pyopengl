@@ -20,6 +20,7 @@ if os.environ.get( 'TEST_NO_ACCELERATE' ):
     OpenGL.USE_ACCELERATE = False
 OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
+OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING = True
 from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode
 from OpenGL.GL import *
 try:
@@ -385,6 +386,11 @@ class Tests( unittest.TestCase ):
                     Image.open( os.path.join( HERE, 'yingyang.png') )
                 )
                 ourTexture()
+                
+                result = glGetTexImageub( GL_TEXTURE_2D,0,GL_RGBA )
+                assert isinstance( result, bytes ), type(result)
+                result = glGetTexImage( GL_TEXTURE_2D,0,GL_RGBA, GL_UNSIGNED_BYTE )
+                assert isinstance( result, bytes ), type(result)
                 
                 glEnable( GL_LIGHTING )
                 glEnable( GL_LIGHT0 )
