@@ -198,24 +198,30 @@ PlatformPlugin( 'posix', 'OpenGL.platform.glx.GLXPlatform' )
 PlatformPlugin( 'osmesa', 'OpenGL.platform.osmesa.OSMesaPlatform')
 PlatformPlugin( 'egl', 'OpenGL.platform.egl.EGLPlatform')
 
-FormatHandler( 'none', 'OpenGL.arrays.nones.NoneHandler', ['__builtin__.NoneType'],isOutput=False )
-
 import sys
 if sys.version_info[0] < 3:
-    FormatHandler( 'str', 'OpenGL.arrays.strings.StringHandler',['__builtin__.str'], isOutput=False )
-    FormatHandler( 'unicode', 'OpenGL.arrays.strings.UnicodeHandler',['__builtin__.unicode'], isOutput=False )
+    # Python 3.x renames the built-in module
+    _bi = '__builtin__'
 else:
-    FormatHandler( 'bytes', 'OpenGL.arrays.strings.StringHandler',['__builtin__.bytes'], isOutput=False )
-    FormatHandler( 'str', 'OpenGL.arrays.strings.UnicodeHandler',['__builtin__.str'], isOutput=False )
+    _bi = 'builtins'
+
+FormatHandler( 'none', 'OpenGL.arrays.nones.NoneHandler', [ _bi+'.NoneType'],isOutput=False )
+
+if sys.version_info[0] < 3:
+    FormatHandler( 'str', 'OpenGL.arrays.strings.StringHandler',[_bi+'.str'], isOutput=False )
+    FormatHandler( 'unicode', 'OpenGL.arrays.strings.UnicodeHandler',[_bi+'.unicode'], isOutput=False )
+else:
+    FormatHandler( 'bytes', 'OpenGL.arrays.strings.StringHandler',[_bi+'.bytes'], isOutput=False )
+    FormatHandler( 'str', 'OpenGL.arrays.strings.UnicodeHandler',[_bi+'.str'], isOutput=False )
     
 FormatHandler( 'list', 'OpenGL.arrays.lists.ListHandler', [
-    '__builtin__.list',
-    '__builtin__.tuple',
+    _bi+'.list',
+    _bi+'.tuple',
 ], isOutput=False )
 FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler', [
-    '__builtin__.int',
-    '__builtin__.float',
-    '__builtin__.long',
+    _bi+'.int',
+    _bi+'.float',
+    _bi+'.long',
 ], isOutput=False )
 FormatHandler(
     'ctypesarray', 'OpenGL.arrays.ctypesarrays.CtypesArrayHandler',
@@ -230,7 +236,7 @@ FormatHandler(
     'ctypesparameter',
     'OpenGL.arrays.ctypesparameters.CtypesParameterHandler',
     [
-        '__builtin__.CArgObject',
+        _bi+'.CArgObject',
         'ctypes.c_uint',
         'ctypes.c_int',
         'ctypes.c_float',
@@ -252,8 +258,8 @@ FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', [
 ],isOutput=True )
 FormatHandler( 'buffer', 'OpenGL.arrays.buffers.BufferHandler', [
     'OpenGL.arrays._buffers.Py_buffer',
-    '__builtin__.memoryview', # only available in Python 2.7+
-    '__builtin__.bytearray',
+    _bi+'.memoryview',
+    _bi+'.bytearray',
 ],isOutput=True )
 FormatHandler( 'vbo', 'OpenGL.arrays.vbo.VBOHandler', ['OpenGL.arrays.vbo.VBO','OpenGL_accelerate.vbo.VBO'],isOutput=False )
 FormatHandler( 'vbooffset', 'OpenGL.arrays.vbo.VBOOffsetHandler', ['OpenGL.arrays.vbo.VBOOffset','OpenGL_accelerate.vbo.VBOOffset'],isOutput=False )
