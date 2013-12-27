@@ -28,7 +28,7 @@ class _CheckContext( object ):
     def __call__( self, *args, **named ):
         if not self.ccisvalid():
             from OpenGL import error
-            raise error.NoContext( self.func, args, named )
+            raise error.NoContext( self.func.__name__, args, named )
         return self.func( *args, **named )
 
 def _find_module( exclude = (__name__,)):
@@ -109,7 +109,7 @@ class BasePlatform( object ):
             'glGetString',
             'glGetStringi',
             'glGetIntegerv',
-        ):
+        ) and not func.__name__.startswith( 'glX' ):
             return _CheckContext( func, self.CurrentContextIsValid )
         return func 
     def wrapLogging( self, func ):
