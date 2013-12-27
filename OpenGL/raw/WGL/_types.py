@@ -22,10 +22,12 @@ class _WGLQuerier( extensions.ExtensionQuerier ):
                 c_char_p,
                 HDC,
             )( proc_address )
+        except TypeError as err:
+            return None
         except AttributeError as err:
             return []
         else:
-            return wglGetExtensionsStringARB(dc).split()
+            return wglGetExtensionStringARB(dc).split()
 WGLQuerier=_WGLQuerier()
 
 INT8 = c_char 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:35
