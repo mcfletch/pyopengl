@@ -29,7 +29,7 @@ except error.NoContext as err:
     # good, should have got this error 
     pass
 else:
-    print 'WARNING: Failed to catch invalid context'
+    print( 'WARNING: Failed to catch invalid context' )
     #raise RuntimeError( """Did not catch invalid context!""" )
 from OpenGL import error
 from OpenGL.GLU import *
@@ -1004,13 +1004,17 @@ class Tests( unittest.TestCase ):
             from functools import reduce
         structures = [
             (b'this and that',13,1,True,1,b'B',[13],[1]),
-            ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<l',[3],None),
         ]
         if sys.version_info[:2] >= (3,0):
             # only supports buffer protocol in 3.x
-            structures.append(
+            structures.extend([
+                ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
                 (silly_array.array('I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
-            )
+            ])
+        else:
+            structures.extend([
+                ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<l',[3],None),
+            ])
         try:
             structures.append( (memoryview(b'this'),4,1,True,1,b'B',[4],[1]) )
         except NameError as err:
