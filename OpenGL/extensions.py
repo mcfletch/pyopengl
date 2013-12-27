@@ -129,8 +129,8 @@ class ExtensionQuerier( object ):
         return self.extensions
 
 class _GLQuerier( ExtensionQuerier ):
-    prefix = 'GL_'
-    version_prefix = 'GL_VERSION_GL_'
+    prefix = as_8_bit('GL_')
+    version_prefix = as_8_bit('GL_VERSION_GL_')
     assumed_version = [1,1]
     def pullVersion( self ):
         """Retrieve 2-int declaration of major/minor GL version
@@ -186,8 +186,8 @@ class _GLQuerier( ExtensionQuerier ):
         return extensions
 GLQuerier = _GLQuerier()
 class _GLUQuerier( ExtensionQuerier ):
-    prefix = 'GLU_'
-    version_prefix = 'GLU_VERSION_GL_'
+    prefix = as_8_bit('GLU_')
+    version_prefix = as_8_bit('GLU_VERSION_GL_')
     def pullVersion( self ):
         from OpenGL.GLU import gluGetString,GLU_VERSION
         return [

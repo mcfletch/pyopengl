@@ -1,14 +1,15 @@
 from OpenGL import platform, constant, extensions
 from ctypes import *
 from OpenGL.raw.GL._types import *
+from OpenGL._bytes import as_8_bit
 c_void = None
 void = None 
 Bool = c_uint
 
 class _GLXQuerier( extensions.ExtensionQuerier ):
-    prefix = 'GLX_'
+    prefix = as_8_bit('GLX_')
     assumed_version = [1,1]
-    version_prefix = 'GLX_VERSION_GLX_'
+    version_prefix = as_8_bit('GLX_VERSION_GLX_')
     def getDisplay( self ):
         from OpenGL.raw.GLX import _types
         from OpenGL.platform import ctypesloader
