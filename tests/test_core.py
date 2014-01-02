@@ -851,10 +851,10 @@ class Tests( unittest.TestCase ):
         gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ABS_GEQ_TWO)
         gluTessCallback(tess, GLU_TESS_BEGIN, start)
         gluTessCallback(tess, GLU_TESS_END, stop)
-        gluTessCallback(tess, GLU_TESS_COMBINE, tesscombine)
         gluTessCallback(tess, GLU_TESS_EDGE_FLAG, tessedge)	# no strips
         gluTessCallback(tess, GLU_TESS_VERTEX, tessvertex)
         gluTessCallback(tess, GLU_TESS_ERROR, tesserr )
+        gluTessCallback(tess, GLU_TESS_COMBINE, tesscombine)
 
         gluTessBeginPolygon(tess, all_vertices)
         try:
@@ -1011,10 +1011,16 @@ class Tests( unittest.TestCase ):
                 ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
                 (silly_array.array('I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
             ])
+        if sys.maxint > 2**31-1:
+            structures.extend([
+                ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
+            ])
         else:
             structures.extend([
                 ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<l',[3],None),
             ])
+            
+            
         try:
             structures.append( (memoryview(b'this'),4,1,True,1,b'B',[4],[1]) )
         except NameError as err:
@@ -1058,7 +1064,10 @@ class Tests( unittest.TestCase ):
         color = bytearray( b'\000'*12 )
         mem = memoryview( color )
         glColor3fv( mem )
-
+    
+    def test_glGenTextures( self ):
+        texture = glGenTextures(1)
+        
         
 if __name__ == "__main__":
     unittest.main()
