@@ -1004,23 +1004,13 @@ class Tests( unittest.TestCase ):
             from functools import reduce
         structures = [
             (b'this and that',13,1,True,1,b'B',[13],[1]),
+            ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
         ]
         if sys.version_info[:2] >= (3,0):
             # only supports buffer protocol in 3.x
             structures.extend([
-                ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
                 (silly_array.array('I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
             ])
-        if sys.maxint > 2**31-1:
-            structures.extend([
-                ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
-            ])
-        else:
-            structures.extend([
-                ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<l',[3],None),
-            ])
-            
-            
         try:
             structures.append( (memoryview(b'this'),4,1,True,1,b'B',[4],[1]) )
         except NameError as err:
@@ -1043,7 +1033,10 @@ class Tests( unittest.TestCase ):
                 assert buf.itemsize == itemsize, (object,itemsize,buf.itemsize)
                 assert buf.readonly == readonly, (object,readonly,buf.readonly)
                 assert buf.ndim == ndim, (object,ndim,buf.ndim)
-                assert buf.format == format, (object,format,buf.format)
+                if isinstance( format, list):
+                    assert buf.format in format, (object,format,buf.format)
+                else:
+                    assert buf.format == format, (object,format,buf.format)
                 assert buf.shape[:buf.ndim] == shape, (object, shape, buf.shape[:buf.ndim])
                 assert buf.dims == shape, (object, shape, buf.dims )
                 assert buf.buf 
