@@ -6,7 +6,7 @@ Note:
     C-level code there.  This implementation is required to allow
     for usage without numpy installed.
 """
-REGISTRY_NAME = 'ctypesarrays'
+REGISTRY_NAME = 'lists'
 import ctypes, _ctypes
 from OpenGL.raw.GL import _types 
 from OpenGL.arrays import _arrayconstants as GL_1_1
@@ -56,15 +56,18 @@ class ListHandler( formathandler.FormatHandler ):
     HANDLED_TYPES = HANDLED_TYPES 
     isOutput = True
     @err_on_copy
+    @classmethod
     def voidDataPointer( cls, value ):
         """Given value in a known data-pointer type, return void_p for pointer"""
         return ctypes.byref( value )
-    def zeros( self, dims, typeCode ):
+    @classmethod
+    def zeros( cls, dims, typeCode ):
         """Return array of zeros in given size"""
         type = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
         for dim in dims:
             type *= dim 
         return type() # should expicitly set to 0s
+    @classmethod
     def dimsOf( cls, x ):
         """Calculate total dimension-set of the elements in x
         
@@ -87,9 +90,9 @@ class ListHandler( formathandler.FormatHandler ):
                                 newDimension, childDimension,
                             ), x
                         )
-    dimsOf = classmethod( dimsOf )
 
-    def arrayToGLType( self, value ):
+    @classmethod
+    def arrayToGLType( cls, value ):
         """Given a value, guess OpenGL type of the corresponding pointer"""
 
         result = ARRAY_TO_GL_TYPE_MAPPING.get( value._type_ )
@@ -100,15 +103,17 @@ class ListHandler( formathandler.FormatHandler ):
                 value._type_, list(ARRAY_TO_GL_TYPE_MAPPING.keys()), value,
             )
         )
-    def arraySize( self, value, typeCode = None ):
+    @classmethod
+    def arraySize( cls, value, typeCode = None ):
         """Given a data-value, calculate dimensions for the array"""
         dims = 1
-        for base in self.types( value ):
+        for base in cls.types( value ):
             length = getattr( base, '_length_', None)
             if length is not None:
                 dims *= length
         return dims 
-    def types( self, value ):
+    @classmethod
+    def types( cls, value ):
         """Produce iterable producing all composite types"""
         dimObject = value
         while dimObject is not None:
@@ -116,14 +121,16 @@ class ListHandler( formathandler.FormatHandler ):
             dimObject = getattr( dimObject, '_type_', None )
             if isinstance( dimObject, (bytes,unicode)):
                 dimObject = None 
-    def dims( self, value ):
+    @classmethod
+    def dims( cls, value ):
         """Produce iterable of all dimensions"""
-        for base in self.types( value ):
+        for base in cls.types( value ):
             length = getattr( base, '_length_', None)
             if length is not None:
                 yield length
     @err_on_copy
-    def asArray( self, value, typeCode=None ):
+    @classmethod
+    def asArray( cls, value, typeCode=None ):
         """Convert given value to a ctypes array value of given typeCode
         
         This does a *lot* of work just to get the data into the correct
@@ -135,11 +142,11 @@ class ListHandler( formathandler.FormatHandler ):
         arrayType = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
         if isinstance( value, (list,tuple)):
             subItems = [
-                self.asArray( item, typeCode )
+                cls.asArray( item, typeCode )
                 for item in value
             ]
             if subItems:
-                for dim in self.dimensions( subItems[0] )[::-1]:
+                for dim in cls.dimensions( subItems[0] )[::-1]:
                     arrayType *= dim
                 arrayType *= len( subItems )
                 result = arrayType()
@@ -148,14 +155,17 @@ class ListHandler( formathandler.FormatHandler ):
         else:
             return arrayType( value )
     @err_on_copy
-    def unitSize( self, value, typeCode=None ):
+    @classmethod
+    def unitSize( cls, value, typeCode=None ):
         """Determine unit size of an array (if possible)"""
-        return tuple(self.dims(value))[-1]
+        return tuple(cls.dims(value))[-1]
     @err_on_copy
-    def dimensions( self, value, typeCode=None ):
+    @classmethod
+    def dimensions( cls, value, typeCode=None ):
         """Determine dimensions of the passed array value (if possible)"""
-        return tuple( self.dims(value) )
-    def arrayByteCount( self, value, typeCode = None ):
+        return tuple( cls.dims(value) )
+    @classmethod
+    def arrayByteCount( cls, value, typeCode = None ):
         """Given a data-value, calculate number of bytes required to represent"""
         return ctypes.sizeof( value )
 
