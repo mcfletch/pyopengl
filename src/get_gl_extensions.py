@@ -109,7 +109,7 @@ Python-friendly API
 %(overview)sThe official definition of this extension is available here:
 %(root)s%(owner)s/%(module)s.txt
 '''
-from OpenGL import platform, constants, constant, arrays
+from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 from OpenGL.GL import glget
 import ctypes

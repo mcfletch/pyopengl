@@ -15,7 +15,9 @@ except ImportError as err:
 import OpenGL
 import ctypes
 from OpenGL._bytes import long, integer_types
-from OpenGL import constants, constant, error
+from OpenGL.raw.GL import _types 
+from OpenGL.raw.GL.VERSION import GL_1_1
+from OpenGL import constant, error
 from OpenGL.arrays import formathandler
 c_void_p = ctypes.c_void_p
 from OpenGL import acceleratesupport
@@ -201,27 +203,27 @@ def lookupDtype( char ):
     return numpy.zeros( (1,), dtype=char ).dtype
 
 ARRAY_TO_GL_TYPE_MAPPING = {
-    lookupDtype('d'): constants.GL_DOUBLE,
-    lookupDtype('f'): constants.GL_FLOAT,
-    lookupDtype('i'): constants.GL_INT,
-    lookupDtype(SHORT_TYPE): constants.GL_SHORT,
-    lookupDtype(USHORT_TYPE): constants.GL_UNSIGNED_SHORT,
-    lookupDtype('B'): constants.GL_UNSIGNED_BYTE,
-    lookupDtype('c'): constants.GL_UNSIGNED_BYTE,
-    lookupDtype('b'): constants.GL_BYTE,
-    lookupDtype('I'): constants.GL_UNSIGNED_INT,
-    #lookupDtype('P'), constants.GL_VOID_P, # normally duplicates another type (e.g. 'I')
+    lookupDtype('d'): GL_1_1.GL_DOUBLE,
+    lookupDtype('f'): GL_1_1.GL_FLOAT,
+    lookupDtype('i'): GL_1_1.GL_INT,
+    lookupDtype(SHORT_TYPE): GL_1_1.GL_SHORT,
+    lookupDtype(USHORT_TYPE): GL_1_1.GL_UNSIGNED_SHORT,
+    lookupDtype('B'): GL_1_1.GL_UNSIGNED_BYTE,
+    lookupDtype('c'): GL_1_1.GL_UNSIGNED_BYTE,
+    lookupDtype('b'): GL_1_1.GL_BYTE,
+    lookupDtype('I'): GL_1_1.GL_UNSIGNED_INT,
+    #lookupDtype('P'), _types.GL_VOID_P, # normally duplicates another type (e.g. 'I')
     None: None,
 }
 GL_TYPE_TO_ARRAY_MAPPING = {
-    constants.GL_DOUBLE: lookupDtype('d'),
-    constants.GL_FLOAT:lookupDtype('f'),
-    constants.GL_INT: lookupDtype('i'),
-    constants.GL_BYTE: lookupDtype('b'),
-    constants.GL_SHORT: lookupDtype(SHORT_TYPE),
-    constants.GL_UNSIGNED_INT: lookupDtype('I'),
-    constants.GL_UNSIGNED_BYTE: lookupDtype('B'),
-    constants.GL_UNSIGNED_SHORT: lookupDtype(USHORT_TYPE),
-    constants.GL_VOID_P: lookupDtype('P'),
+    GL_1_1.GL_DOUBLE: lookupDtype('d'),
+    GL_1_1.GL_FLOAT:lookupDtype('f'),
+    GL_1_1.GL_INT: lookupDtype('i'),
+    GL_1_1.GL_BYTE: lookupDtype('b'),
+    GL_1_1.GL_SHORT: lookupDtype(SHORT_TYPE),
+    GL_1_1.GL_UNSIGNED_INT: lookupDtype('I'),
+    GL_1_1.GL_UNSIGNED_BYTE: lookupDtype('B'),
+    GL_1_1.GL_UNSIGNED_SHORT: lookupDtype(USHORT_TYPE),
+    _types.GL_VOID_P: lookupDtype('P'),
     None: None,
 }

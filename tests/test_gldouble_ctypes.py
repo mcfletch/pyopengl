@@ -1,28 +1,33 @@
 """Test simple functions (i.e. no pointers involved)"""
+import OpenGL 
+#OpenGL.USE_ACCELERATE = False
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from OpenGL.constants import GLdouble
+from OpenGL.GL import GLdouble
 from OpenGL.arrays import arraydatatype
-from OpenGL.constants import GLdouble
 handler = arraydatatype.ArrayDatatype.getHandler( GLdouble * 16 )
 handler.registerReturn( )
 
-import time
+import time,traceback
 start = time.time()
 
 window = None
 
 def display():
-    glutSetWindow(window);
-    glClearColor (0.0, 0.0, (time.time()%1.0)/1.0, 0.0)
-    glClear (GL_COLOR_BUFFER_BIT)
-    glMatrixMode(GL_PROJECTION);
-    # For some reason the GL_PROJECTION_MATRIX is overflowing with a single push!
-    # glPushMatrix()
-    matrix = glGetDoublev( GL_PROJECTION_MATRIX)
-    print 'matrix', type(matrix), matrix
-    glutSwapBuffers()
+    try:
+        glutSetWindow(window);
+        glClearColor (0.0, 0.0, (time.time()%1.0)/1.0, 0.0)
+        glClear (GL_COLOR_BUFFER_BIT)
+        glMatrixMode(GL_PROJECTION);
+        # For some reason the GL_PROJECTION_MATRIX is overflowing with a single push!
+        # glPushMatrix()
+        matrix = glGetDoublev( GL_PROJECTION_MATRIX)
+        print 'matrix', type(matrix), matrix[:][:]
+        glutSwapBuffers()
+    except Exception as err:
+        traceback.print_exc()
+        sys.exit(0)
 
 size = (250,250)
 

@@ -9,8 +9,9 @@ For comparison, here's what a straightforward implementation looks like:
         result = platform.OpenGL.glGetDoublev( pname, byref(result) )
         return Numeric.array( result )
 """
-from OpenGL import platform, arrays, error, wrapper, converters
+from OpenGL import wrapper
 from OpenGL.raw.GL.VERSION import GL_1_1 as simple
+from OpenGL.raw.GL import _glgets
 import ctypes
 GLenum = ctypes.c_uint
 GLsize = GLsizei = ctypes.c_int
@@ -35,18 +36,19 @@ glGetString = simple.glGetString
 glGetString.restype = ctypes.c_char_p
 glGetString.__doc__ = """glGetString( constant ) -> Current string value"""
 
-GL_GET_SIZES = simple._GLGET_CONSTANTS
+GL_GET_SIZES = _glgets._glget_size_mapping
 def addGLGetConstant( constant, arraySize ):
     """Add a glGet* constant to return an output array of correct size"""
     GL_GET_SIZES[ constant ] = arraySize
+
 glGetDouble = glGetDoublev = wrapper.wrapper(simple.glGetDoublev).setOutput(
-    "params",GL_GET_SIZES, "pname",
+    "data",GL_GET_SIZES, "pname",
 )
 glGetFloat = glGetFloatv = wrapper.wrapper(simple.glGetFloatv).setOutput(
-    "params",GL_GET_SIZES, "pname",
+    "data",GL_GET_SIZES, "pname",
 )
 glGetBoolean = glGetBooleanv = glGetInteger = glGetIntegerv = wrapper.wrapper(simple.glGetIntegerv).setOutput(
-    "params",GL_GET_SIZES, "pname",
+    "data",GL_GET_SIZES, "pname",
 )
 
 GL_GET_LIGHT_SIZES = {

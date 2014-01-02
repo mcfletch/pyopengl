@@ -31,7 +31,7 @@ class OpenGLGenerator( codegenerator.Generator ):
 from OpenGL import platform, arrays
 from OpenGL.constant import Constant
 from OpenGL import constants as GLconstants
-GLvoid = GLconstants.GLvoid
+GLvoid = GL_types.GLvoid
 """
     def defaultEmitters( cls ):
         """Produce the set of default emitter classes
@@ -142,14 +142,14 @@ class OpenGLFunction( codegenerator.Function ):
             generator.type_name(func.returns),
         ))
     SUFFIX_TO_ARRAY_DATATYPE = [
-        ('ub','GLconstants.GL_UNSIGNED_BYTE'),
-        ('us','GLconstants.GL_UNSIGNED_SHORT'),
-        ('ui','GLconstants.GL_UNSIGNED_INT'),
-        ('f','GLconstants.GL_FLOAT'),
-        ('d','GLconstants.GL_DOUBLE'),
-        ('i','GLconstants.GL_INT'),
-        ('s','GLconstants.GL_SHORT'),
-        ('b','GLconstants.GL_BYTE'),
+        ('ub','GLGL_1_0.GL_UNSIGNED_BYTE'),
+        ('us','GLGL_1_0.GL_UNSIGNED_SHORT'),
+        ('ui','GLGL_1_0.GL_UNSIGNED_INT'),
+        ('f','GLGL_1_0.GL_FLOAT'),
+        ('d','GLGL_1_0.GL_DOUBLE'),
+        ('i','GLGL_1_0.GL_INT'),
+        ('s','GLGL_1_0.GL_SHORT'),
+        ('b','GLGL_1_0.GL_BYTE'),
     ]
     CTYPE_TO_ARRAY_TYPE = {
         'GLfloat': 'GLfloatArray',

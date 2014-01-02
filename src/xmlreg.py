@@ -7,11 +7,13 @@ class Registry( object ):
     def __init__( self ):
         self.type_set = {}
         self.enum_namespaces = {}
+        self.enum_groups = {}
         self.enumeration_set = {}
         self.command_set = {}
         self.apis = {}
         self.feature_set = {}
         self.extension_set = {}
+        
     def load( self, tree ):
         """Load an lxml.etree structure into our internal descriptions"""
         self.dispatch( tree, None )
@@ -75,13 +77,20 @@ class Registry( object ):
             assert return_type, 'No return type in command: %s'%(ET.tostring( element))
             arg_names = []
             arg_types = []
+            lengths = {}
+            groups = {}
             for param in [x for x in element if x.tag == 'param']:
-                arg_names.append( param.find( 'name' ).text)
+                pname = param.find( 'name' ).text
+                arg_names.append( pname )
                 arg_types.append( self._type_decl( param ))
+                if param.get( 'len' ):
+                    lengths[pname] = param.get('len')
+                if param.get( 'group' ):
+                    groups[pname] = param.get('group')
             aliases = []
             for alias in [x for x in element if x.tag == 'alias']:
                 aliases.append( alias.get('name') )
-            command = Command( name, return_type, arg_names, arg_types, aliases )
+            command = Command( name, return_type, arg_names, arg_types, aliases, lengths,groups )
             self.command_set[name] = command
         elif isinstance( context, (Require,Remove)):
             context.append( self.command_set[element.get('name')])
@@ -113,12 +122,16 @@ class Registry( object ):
     def extension( self, element, context=None ):
         name,apis,require = [element.get(x) for x in ['name','supported','protect']]
         extension = Extension( name, apis.split('|'),require)
+        self.extension_set[name] = extension
         self.dispatch( element, extension )
     def unused( self, element, context=None):
         pass
     def group( self, element, context=None):
-        group = EnumGroup( element.get('name'))
-        self.dispatch( element, group )
+        name = element.get('name')
+        current = self.enum_groups.get( name )
+        if current is None:
+            current = self.enum_groups[name] = EnumGroup( name )
+        self.dispatch( element, current )
     
     def require( self, element, context ):
         if isinstance( context, (Feature,Extension)):
@@ -152,12 +165,14 @@ class Enum( object ):
         return '%s = %s'%( self.name, self.value )
 
 class Command( object ):
-    def __init__( self, name, returnType, argNames, argTypes, aliases=None ):
+    def __init__( self, name, returnType, argNames, argTypes, aliases=None, lengths=None, groups=None ):
         self.name =name 
         self.returnType = returnType 
         self.argNames = argNames 
         self.argTypes = argTypes
         self.aliases = aliases or []
+        self.lengths = lengths or {}
+        self.groups = groups or {}
     def __repr__( self ):
         return '%s %s( %s )'%( 
             self.returnType, 
@@ -167,6 +182,20 @@ class Command( object ):
                 for (typ,name) in zip( self.argTypes,self.argNames )
             ])
         )
+    def size_dependencies( self ):
+        result = []
+        for target,definition in self.lengths.items():
+            sources = []
+            if definition.startswith( 'COMPSIZE' ):
+                definition = definition[8:]
+            from_params = definition.strip('()').split(',')
+            for source in from_params:
+                group = self.groups.get(source)
+                if group is not None:
+                    sources.append( (source,group) )
+            if sources:
+                result.append( (target,sources))
+        return result
 
 # The order-dependent set of require/remove holding features/extensions
 class Module( list ):
@@ -174,6 +203,22 @@ class Module( list ):
     feature = False
     def __init__( self, name ):
         self.name = name 
+    def members( self, of_type=None ):
+        members = []
+        for req in self:
+            if req.require:
+                for item in req:
+                    if of_type is not None:
+                        if isinstance( item, of_type ):
+                            members.append( item )
+                    else:
+                        members.append( item )
+        return members
+    def enums( self ):
+        return self.members( Enum )
+    def commands( self ):
+        return self.members( Command )
+
 
 class Feature( Module ):
     feature = True

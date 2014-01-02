@@ -313,7 +313,7 @@ def glutInit( *args ):
         args = []
     args = [as_8_bit(x) for x in args]
     if not count:
-        count, args = 1, ['foo']
+        count, args = 1, [as_8_bit('foo')]
     holder = (ctypes.c_char_p * len(args))()
     for i,arg in enumerate(args):
         holder[i] = arg

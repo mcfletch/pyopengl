@@ -2,7 +2,7 @@
 import OpenGL
 OpenGL.FORWARD_COMPATIBLE_ONLY = True
 OpenGL.ERROR_CHECKING = True
-OpenGL.USE_ACCELERATE = False
+#OpenGL.USE_ACCELERATE = False
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -77,7 +77,7 @@ def printFunction( name ):
 if __name__ == "__main__":
     import sys
     newArgv = glutInit(sys.argv)
-    glutInitContextVersion(3, 2)
+    glutInitContextVersion(3, 1)
     glutInitContextFlags(GLUT_FORWARD_COMPATIBLE)
     glutInitContextProfile(GLUT_CORE_PROFILE)
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH )
@@ -86,9 +86,6 @@ if __name__ == "__main__":
         GLUT_ACTION_ON_WINDOW_CLOSE,
         GLUT_ACTION_GLUTMAINLOOP_RETURNS
     );
-    
-    print glGetString( GL_EXTENSIONS )
-    
     glutInitWindowSize(250, 250)
     glutInitWindowPosition(100, 100)
     window = glutCreateWindow("hello")

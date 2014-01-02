@@ -6,7 +6,8 @@ under 2.6 (in terms of the common object types).
 """
 import ctypes,sys,operator,logging,traceback
 from OpenGL.arrays import _buffers
-from OpenGL import constants
+from OpenGL.raw.GL import _types
+from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL.arrays import formathandler
 from OpenGL import _configflags
 from OpenGL import acceleratesupport
@@ -84,29 +85,29 @@ if not BufferHandler:
             return value.dims
 
 BYTE_SIZES = {
-    constants.GL_DOUBLE: ctypes.sizeof( constants.GLdouble ),
-    constants.GL_FLOAT: ctypes.sizeof( constants.GLfloat ),
-    constants.GL_INT: ctypes.sizeof( constants.GLint ),
-    constants.GL_SHORT: ctypes.sizeof( constants.GLshort ),
-    constants.GL_UNSIGNED_BYTE: ctypes.sizeof( constants.GLubyte ),
-    constants.GL_UNSIGNED_SHORT: ctypes.sizeof( constants.GLshort ),
-    constants.GL_BYTE: ctypes.sizeof( constants.GLbyte ),
-    constants.GL_UNSIGNED_INT: ctypes.sizeof( constants.GLuint ),
+    GL_1_1.GL_DOUBLE: ctypes.sizeof( _types.GLdouble ),
+    GL_1_1.GL_FLOAT: ctypes.sizeof( _types.GLfloat ),
+    GL_1_1.GL_INT: ctypes.sizeof( _types.GLint ),
+    GL_1_1.GL_SHORT: ctypes.sizeof( _types.GLshort ),
+    GL_1_1.GL_UNSIGNED_BYTE: ctypes.sizeof( _types.GLubyte ),
+    GL_1_1.GL_UNSIGNED_SHORT: ctypes.sizeof( _types.GLshort ),
+    GL_1_1.GL_BYTE: ctypes.sizeof( _types.GLbyte ),
+    GL_1_1.GL_UNSIGNED_INT: ctypes.sizeof( _types.GLuint ),
 }
 
 ARRAY_TO_GL_TYPE_MAPPING = {
-    'h': constants.GL_SHORT,
-    'H': constants.GL_UNSIGNED_SHORT,
-    'B': constants.GL_UNSIGNED_BYTE,
-    'c': constants.GL_UNSIGNED_BYTE,
-    'b': constants.GL_BYTE,
-    'i': constants.GL_INT,
-    'I': constants.GL_UNSIGNED_INT,
-    'l': constants.GL_INT,
-    'L': constants.GL_UNSIGNED_INT,
-    '?': constants.GL_INT, # Boolean
-    'f': constants.GL_FLOAT,
-    'd': constants.GL_DOUBLE,
+    'h': GL_1_1.GL_SHORT,
+    'H': GL_1_1.GL_UNSIGNED_SHORT,
+    'B': GL_1_1.GL_UNSIGNED_BYTE,
+    'c': GL_1_1.GL_UNSIGNED_BYTE,
+    'b': GL_1_1.GL_BYTE,
+    'i': GL_1_1.GL_INT,
+    'I': GL_1_1.GL_UNSIGNED_INT,
+    'l': GL_1_1.GL_INT,
+    'L': GL_1_1.GL_UNSIGNED_INT,
+    '?': GL_1_1.GL_INT, # Boolean
+    'f': GL_1_1.GL_FLOAT,
+    'd': GL_1_1.GL_DOUBLE,
     
     None: None,
 }

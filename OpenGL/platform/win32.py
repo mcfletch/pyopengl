@@ -62,7 +62,8 @@ class Win32Platform( baseplatform.BasePlatform ):
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.WINFUNCTYPE )
     # Win32 GLUT uses different types for callbacks and functions...
     GLUT_CALLBACK_TYPE = staticmethod( ctypes.CFUNCTYPE )
-    WGL = ctypes.windll.gdi32
+    GDI32 = ctypes.windll.gdi32
+    WGL = OpenGL
     wglGetProcAddress = OpenGL.wglGetProcAddress
     wglGetProcAddress.restype = ctypes.c_void_p
     getExtensionProcedure = staticmethod( wglGetProcAddress )
@@ -115,5 +116,46 @@ class Win32Platform( baseplatform.BasePlatform ):
         if self.CurrentContextIsValid():
             return glGetError()
         return None
+
+    def constructFunction(
+        self,
+        functionName, dll, 
+        resultType=ctypes.c_int, argTypes=(),
+        doc = None, argNames = (),
+        extension = None,
+        deprecated = False,
+        module = None,
+    ):
+        """Override construct function to do win32-specific hacks to find entry points"""
+        try:
+            return super( Win32Platform, self ).constructFunction(
+                functionName, dll,
+                resultType, argTypes,
+                doc, argNames,
+                extension,
+                deprecated,
+                module
+            )
+        except AttributeError as err:
+            try:
+                return super( Win32Platform, self ).constructFunction(
+                    functionName, self.GDI32,
+                    resultType, argTypes,
+                    doc, argNames,
+                    extension,
+                    deprecated,
+                    module
+                )
+            except AttributeError as err:
+                return super( Win32Platform, self ).constructFunction(
+                    functionName, dll,
+                    resultType, argTypes,
+                    doc, argNames,
+                    extension,
+                    deprecated,
+                    module,
+                    force_extension = True,
+                )
+            
 
 glGetError = Win32Platform.OpenGL.glGetError

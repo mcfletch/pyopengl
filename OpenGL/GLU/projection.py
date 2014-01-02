@@ -1,7 +1,6 @@
 """glu[Un]Project[4] convenience wrappers"""
-from OpenGL.platform import GL
 from OpenGL.raw import GLU as simple
-from OpenGL import GL, arrays
+from OpenGL import GL
 from OpenGL.lazywrapper import lazy
 import ctypes 
 POINTER = ctypes.POINTER

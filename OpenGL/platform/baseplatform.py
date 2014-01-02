@@ -28,7 +28,7 @@ class _CheckContext( object ):
     def __call__( self, *args, **named ):
         if not self.ccisvalid():
             from OpenGL import error
-            raise error.NoContext( self.func, args, named )
+            raise error.NoContext( self.func.__name__, args, named )
         return self.func( *args, **named )
 
 def _find_module( exclude = (__name__,)):
@@ -69,7 +69,7 @@ class BasePlatform( object ):
     EXPORTED_NAMES = [
         'GetCurrentContext','CurrentContextIsValid','safeGetError',
         'createBaseFunction', 'createExtensionFunction', 'copyBaseFunction',
-        'GL','GLU','GLUT','GLE','OpenGL','EGL',
+        'GL','GLU','GLUT','GLE','OpenGL','EGL','GLX','WGL','GLES1','GLES2','GLES3',
         'getGLUTFontPointer',
         'GLUT_GUARD_CALLBACKS',
     ]
@@ -105,7 +105,11 @@ class BasePlatform( object ):
         return func
     def wrapContextCheck( self, func, dll ):
         """Wrap function with context-checking if appropriate"""
-        if _configflags.CONTEXT_CHECKING and dll is not self.GLUT:
+        if _configflags.CONTEXT_CHECKING and dll is self.GL and func.__name__ not in (
+            'glGetString',
+            'glGetStringi',
+            'glGetIntegerv',
+        ) and not func.__name__.startswith( 'glX' ):
             return _CheckContext( func, self.CurrentContextIsValid )
         return func 
     def wrapLogging( self, func ):
@@ -127,6 +131,7 @@ class BasePlatform( object ):
         extension = None,
         deprecated = False,
         module = None,
+        force_extension = False,
     ):
         """Core operation to create a new base ctypes function
         
@@ -137,21 +142,20 @@ class BasePlatform( object ):
         if extension and not self.checkExtension( extension ):
             raise AttributeError( """Extension not available""" )
         argTypes = [ self.finalArgType( t ) for t in argTypes ]
-        if extension and not self.EXTENSIONS_USE_BASE_FUNCTIONS:
+        is_core = (not extension) or extension.split('_')[1] == 'VERSION'
+            
+        if force_extension or ((not is_core) and (not self.EXTENSIONS_USE_BASE_FUNCTIONS)):
             # what about the VERSION values???
-            if self.checkExtension( extension ):
-                pointer = self.getExtensionProcedure( as_8_bit(functionName) )
-                if pointer:
-                    func = self.functionTypeFor( dll )(
-                        resultType,
-                        *argTypes
-                    )(
-                        pointer
-                    )
-                else:
-                    raise AttributeError( """Extension %r available, but no pointer for function %r"""%(extension,functionName))
+            pointer = self.getExtensionProcedure( as_8_bit(functionName) )
+            if pointer:
+                func = self.functionTypeFor( dll )(
+                    resultType,
+                    *argTypes
+                )(
+                    pointer
+                )
             else:
-                raise AttributeError( """No extension %r"""%(extension,))
+                raise AttributeError( """Extension %r available, but no pointer for function %r"""%(extension,functionName))
         else:
             func = ctypesloader.buildFunction(
                 self.functionTypeFor( dll )(
@@ -235,27 +239,30 @@ class BasePlatform( object ):
         return result
     def checkExtension( self, name ):
         """Check whether the given extension is supported by current context"""
-        if not name or name == 'GL_VERSION_GL_1_1':
-            return True
+#        if not name or name in ('GL_VERSION_GL_1_0', 'GL_VERSION_GL_1_1'):
+#            return True
+#        if name.startswith( 'EGL_' ) or name.startswith( 'GLX_' ) or name.startswith( 'WGL_' ):
+#            # we can't check these extensions, have to rely on the function resolution
+#            return True
         context = self.GetCurrentContext()
         if context:
             from OpenGL import contextdata
-            from OpenGL.raw.GL.VERSION.GL_1_1 import GL_EXTENSIONS
-            set = contextdata.getValue( GL_EXTENSIONS, context=context )
+            set = contextdata.getValue( 'extensions', context=context )
             if set is None:
                 set = {}
                 contextdata.setValue( 
-                    GL_EXTENSIONS, set, context=context, weak=False 
+                    'extensions', set, context=context, weak=False 
                 )
             current = set.get( name )
             if current is None:
                 from OpenGL import extensions
-                result = extensions.hasGLExtension( name )
+                result = extensions.ExtensionQuerier.hasExtension( name )
                 set[name] = result 
                 return result
             return current
         else:
-            return False
+            from OpenGL import extensions
+            return extensions.ExtensionQuerier.hasExtension( name )
     createExtensionFunction = createBaseFunction
 
     def copyBaseFunction( self, original ):

@@ -19,6 +19,7 @@ setting:
 before importing OpenGL functionality.
 """
 from OpenGL import platform
+import weakref
 storedPointers = {
     # map from contextID: { constant: value }
 }

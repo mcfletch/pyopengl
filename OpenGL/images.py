@@ -42,7 +42,6 @@ the tables described above!
 """
 from OpenGL.raw.GL.VERSION import GL_1_1 as simple
 from OpenGL import arrays
-import OpenGL
 from OpenGL import _configflags
 import ctypes
 

@@ -6,10 +6,10 @@ these entry points will also retrieve the entry points with this module.
 """
 # flags 'freeglut_ext.xml -l /usr/lib64/libglut.so -o freeglut_ext.py -v -kf'
 from OpenGL import platform, arrays
-from OpenGL.constants import *
 from OpenGL import constant
 FUNCTION_TYPE = platform.PLATFORM.functionTypeFor( platform.GLUT )
 from OpenGL.GLUT import special
+from OpenGL.raw.GL._types import *
 
 import ctypes
 c_int = ctypes.c_int 

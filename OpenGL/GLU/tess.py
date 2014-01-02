@@ -1,8 +1,9 @@
 """Wrapper/Implementation of the GLU tessellator objects for PyOpenGL"""
 from OpenGL.raw import GLU as simple
+from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL.platform import GLU,createBaseFunction
 from OpenGL.GLU import glustruct
-from OpenGL import arrays, constants
+from OpenGL import arrays
 from OpenGL.platform import PLATFORM
 from OpenGL.lazywrapper import lazy
 import ctypes
@@ -63,7 +64,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
         if vertexCache is None:
             self.vertexCache = []
             vertexCache = self.vertexCache
-        location = arrays.GLdoubleArray.asArray( location, constants.GL_DOUBLE )
+        location = arrays.GLdoubleArray.asArray( location, GL_1_1.GL_DOUBLE )
         if arrays.GLdoubleArray.arraySize( location ) != 3:
             raise ValueError( """Require 3 doubles for array location, got: %s"""%(location,))
         oorValue = self.noteObject(data)
@@ -111,7 +112,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
                     )
                 )
             outP = ctypes.c_void_p(self.noteObject(result))
-            outData.contents.value = outP.value
+            outData[0] = outP
             return None
         return wrap
     def dataWrapper( self, function ):

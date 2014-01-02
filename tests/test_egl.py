@@ -5,9 +5,13 @@
 
 Basically just to check if the EGL code works...
 """
+import os 
+if not os.environ.get( 'PYOPENGL_PLATFORM' ):
+    os.environ['PYOPENGL_PLATFORM'] = 'egl'
+
 import OpenGL,ctypes
 OpenGL.USE_ACCELERATE = False
-from OpenGL.egl import *
+from OpenGL.EGL import *
 
 def describe_config( display, config ):
     """Describe the given configuration"""
@@ -63,6 +67,8 @@ def main():
         print 'Unable to create pbuffer surface'
     else:
         print 'created pbuffer surface'
+    
+    print 'Available EGL extensions', EGLQuerier.getExtensions()
 
 if __name__ == "__main__":
     main()

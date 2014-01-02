@@ -1,6 +1,7 @@
 import unittest, numpy, ctypes
 from OpenGL_accelerate import numpy_formathandler as npf
-from OpenGL import error, constants
+from OpenGL import error
+from OpenGL import GL
 from OpenGL._bytes import integer_types
 from OpenGL._configflags import ERROR_ON_COPY
 
@@ -34,11 +35,11 @@ class TestAccelNumpy( unittest.TestCase ):
             self.failUnlessRaises(
                 error.CopyError,
                 self.handler.asArray,
-                    self.array, constants.GL_DOUBLE 
+                    self.array, GL.GL_DOUBLE 
             )
     else:
         def test_asArrayConvert( self ):
-            p = self.handler.asArray( self.array, constants.GL_DOUBLE )
+            p = self.handler.asArray( self.array, GL.GL_DOUBLE )
             assert p is not self.array 
             assert p.dtype == numpy.float64
             p = self.handler.asArray( self.array, 'd' )
@@ -61,14 +62,14 @@ class TestAccelNumpy( unittest.TestCase ):
     
     def test_arrayToGLType( self ):
         p = self.handler.arrayToGLType( self.array )
-        assert p == constants.GL_FLOAT
+        assert p == GL.GL_FLOAT
         
     def test_zeros( self ):
-        z = self.handler.zeros( (2,3,4), constants.GL_FLOAT)
+        z = self.handler.zeros( (2,3,4), GL.GL_FLOAT)
         assert z.shape == (2,3,4)
         assert z.dtype == numpy.float32
     
     def test_downconvert( self ):
-        p = self.handler.asArray( numpy.array( [1,2,3],'d'), constants.GL_FLOAT )
+        p = self.handler.asArray( numpy.array( [1,2,3],'d'), GL.GL_FLOAT )
         assert p.dtype == numpy.float32
         

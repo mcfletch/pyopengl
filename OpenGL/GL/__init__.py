@@ -6,7 +6,6 @@ from OpenGL.GL.pointers import *
 from OpenGL.GL.images import *
 
 from OpenGL.GL.exceptional import *
-from OpenGL.error import *
 
 from OpenGL.GL.glget import *
 
@@ -25,8 +24,7 @@ from OpenGL.GL.VERSION.GL_4_1 import *
 from OpenGL.GL.VERSION.GL_4_2 import *
 from OpenGL.GL.VERSION.GL_4_3 import *
 
-from OpenGL.constants import *
-
+from OpenGL.error import *
 GLerror = GLError
 
 # Now the aliases...

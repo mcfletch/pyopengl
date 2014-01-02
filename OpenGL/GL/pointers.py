@@ -20,7 +20,6 @@ def glVertexPointerd( array ):
 from OpenGL import platform, arrays, error, wrapper, contextdata, converters, constant
 from OpenGL.raw.GL.VERSION import GL_1_1 as simple
 import ctypes
-import weakref
 
 GLsizei = ctypes.c_int
 GLenum = ctypes.c_uint

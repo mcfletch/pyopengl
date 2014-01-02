@@ -1,6 +1,7 @@
 """String-array-handling code for PyOpenGL
 """
-from OpenGL import constants
+from OpenGL.raw.GL import _types 
+from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL.arrays import formathandler
 import ctypes
 from OpenGL import _bytes
@@ -71,12 +72,12 @@ class UnicodeHandler( StringHandler ):
 
 
 BYTE_SIZES = {
-    constants.GL_DOUBLE: ctypes.sizeof( constants.GLdouble ),
-    constants.GL_FLOAT: ctypes.sizeof( constants.GLfloat ),
-    constants.GL_INT: ctypes.sizeof( constants.GLint ),
-    constants.GL_SHORT: ctypes.sizeof( constants.GLshort ),
-    constants.GL_UNSIGNED_BYTE: ctypes.sizeof( constants.GLubyte ),
-    constants.GL_UNSIGNED_SHORT: ctypes.sizeof( constants.GLshort ),
-    constants.GL_BYTE: ctypes.sizeof( constants.GLbyte ),
-    constants.GL_UNSIGNED_INT: ctypes.sizeof( constants.GLuint ),
+    GL_1_1.GL_DOUBLE: ctypes.sizeof( _types.GLdouble ),
+    GL_1_1.GL_FLOAT: ctypes.sizeof( _types.GLfloat ),
+    GL_1_1.GL_INT: ctypes.sizeof( _types.GLint ),
+    GL_1_1.GL_SHORT: ctypes.sizeof( _types.GLshort ),
+    GL_1_1.GL_UNSIGNED_BYTE: ctypes.sizeof( _types.GLubyte ),
+    GL_1_1.GL_UNSIGNED_SHORT: ctypes.sizeof( _types.GLshort ),
+    GL_1_1.GL_BYTE: ctypes.sizeof( _types.GLbyte ),
+    GL_1_1.GL_UNSIGNED_INT: ctypes.sizeof( _types.GLuint ),
 }

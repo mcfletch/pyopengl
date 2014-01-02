@@ -49,6 +49,10 @@ CTYPE_TO_ARRAY_TYPE = {
     '_cs.EGLNativeWindowType': 'GLvoidpArray',
     '_cs.EGLNativePixmapType': 'GLvoidpArray',
     '_cs.EGLTimeKHR': 'GLuint64Array',
+    
+}
+SPECIAL_TYPES = {
+    '__eglMustCastToProperFunctionPointerType': 'ctypes.c_void_p',
 }
 
 
@@ -62,13 +66,13 @@ def ctype_to_pytype( base ):
             return ctype_to_pytype( base[len(strip):] )
     if base.endswith( '*' ):
         new = ctype_to_pytype( base[:-1] )
-        if new == '_cs.GLvoid':
+        if new in ('_cs.GLvoid','_cs.void','_cs.c_void'):
             return 'ctypes.c_void_p'
         elif new == 'ctypes.c_void_p':
             return 'arrays.GLvoidpArray'
         elif new in CTYPE_TO_ARRAY_TYPE:
             return 'arrays.%s'%(CTYPE_TO_ARRAY_TYPE[new])
-        elif new in ( 'arrays.GLcharArray','arrays.GLcharARBArray'):
+        elif new in ( 'arrays.GLcharArray','arrays.GLcharARBArray','arrays.GLbyteArray'):
             # can't have a pointer to these...
             return 'ctypes.POINTER( ctypes.POINTER( _cs.GLchar ))'
         elif new in ( '_cs.GLcharARB',):
@@ -76,7 +80,18 @@ def ctype_to_pytype( base ):
         else:
             log.debug( 'Unconverted pointer type: %r', new )
             return 'ctypes.POINTER(%s)'%(new)
+    elif base in SPECIAL_TYPES:
+        return SPECIAL_TYPES.get( base )
     else:
         if base == 'int':
             base = 'c_int'
+        elif ' ' in base:
+            components = base.split()
+            if components[0] == 'unsigned':
+                if len(components) == 2:
+                    base = 'c_u'+components[1]
+                else:
+                    raise ValueError( base )
+            else:
+                raise ValueError( base )
         return '_cs.%s'%(base,)

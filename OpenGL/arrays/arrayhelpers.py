@@ -4,8 +4,9 @@ These are functions intended to be used in wrapping
 GL functions that deal with OpenGL array data-types.
 """
 import OpenGL
+import ctypes
 from OpenGL import _configflags
-from OpenGL import contextdata, error, wrapper, constants, converters
+from OpenGL import contextdata, error, wrapper, converters
 from OpenGL.arrays import arraydatatype
 from OpenGL._bytes import bytes,unicode
 import logging
@@ -108,7 +109,7 @@ else:
             asArray = typ.asArray
             dataType = typ.typeConstant
             arraySize = typ.arraySize
-            expectedBytes = constants.sizeof( typ.baseType ) * size
+            expectedBytes = ctypes.sizeof( typ.baseType ) * size
             def asArraySize( incoming, function, args ):
                 handler = typ.getHandler( incoming )
                 result = handler.asArray( incoming, dataType )
