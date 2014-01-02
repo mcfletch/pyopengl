@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-"""OpenGL-ctypes setup script (setuptools-based)
+"""PyOpenGL setup script (setuptools-based)
 """
 import sys, os
 extra_commands = {}
@@ -9,7 +9,28 @@ except ImportError:
     from distutils.core import setup
 
 sys.path.insert(0, '.' )
-import metadata
+metadata = dict(
+    version = [
+        (line.split('=')[1]).strip().strip('"').strip("'")
+        for line in open(os.path.join('OpenGL','version.py'))
+        if line.startswith( '__version__' )
+    ][0],
+    author = 'Mike C. Fletcher',
+    author_email = 'mcfletch@vrplumber.com',
+    url = 'http://pyopengl.sourceforge.net',
+    license = 'BSD',
+    download_url = "http://sourceforge.net/projects/pyopengl/files/PyOpenGL/",
+    keywords = 'Graphics,3D,OpenGL,GLU,GLUT,GLE,GLX,EXT,ARB,Mesa,ctypes',
+    classifiers = [
+        """License :: OSI Approved :: BSD License""",
+        """Programming Language :: Python""",
+        """Programming Language :: Python :: 3""",
+        """Topic :: Multimedia :: Graphics :: 3D Rendering""",
+        """Topic :: Software Development :: Libraries :: Python Modules""",
+        """Intended Audience :: Developers""",
+    ],
+)
+
 def is_package( path ):
     return os.path.isfile( os.path.join( path, '__init__.py' ))
 def find_packages( root ):
@@ -61,5 +82,5 @@ if __name__ == "__main__":
         },
         data_files = datafiles,
         cmdclass = extra_commands,
-        **metadata.metadata
+        **metadata
     )
