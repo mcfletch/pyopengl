@@ -224,7 +224,7 @@ FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler', [
     _bi+'.long',
 ], isOutput=False )
 FormatHandler(
-    'ctypesarray', 'OpenGL.arrays.ctypesarrays.CtypesArrayHandler',
+    'ctypesarrays', 'OpenGL.arrays.ctypesarrays.CtypesArrayHandler',
     [
         '_ctypes.ArrayType',
         '_ctypes.PyCArrayType',
