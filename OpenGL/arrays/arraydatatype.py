@@ -49,8 +49,8 @@ if ADT is None:
                                 handler.registerEquivalent( typ, base )
                             return handler
                 raise TypeError(
-                    """No array-type handler for type %r (value: %s) registered"""%(
-                        typ, repr(value)[:50]
+                    """No array-type handler for type %s.%s (value: %s) registered"""%(
+                        typ.__module__, type.__name__, repr(value)[:50]
                     )
                 )
             return handler
