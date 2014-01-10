@@ -6,6 +6,8 @@ from OpenGL.GLX.EXT.texture_from_pixmap import *
 from pygamegltest import pygametest
 import os
 
+print 'Not yet working'
+raise SystemExit(1)
 attributes = [
 #    GLX_BIND_TO_TEXTURE_RGBA_EXT, 1,
 #    GLX_DRAWABLE_TYPE, GLX_PIXMAP_BIT,
