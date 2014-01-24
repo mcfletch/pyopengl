@@ -140,10 +140,10 @@ class GLError( Error ):
                 ]
             ))
         r = repr( value )
-        if len(r) < 40:
+        if len(r) < 120:
             return r
         else:
-            return r[:37] + '...'
+            return r[:117] + '...'
     def format_baseOperation( self, property, value ):
         """Format a baseOperation reference for display"""
         if hasattr( value, '__name__' ):
