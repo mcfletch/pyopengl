@@ -137,9 +137,13 @@ class _GLQuerier( ExtensionQuerier ):
 
         returns [int(major),int(minor)] or False if not loaded
         """
+        from OpenGL import platform
+        if not platform.PLATFORM.CurrentContextIsValid():
+            return False
         from OpenGL.raw.GL.VERSION.GL_1_1 import glGetString 
         from OpenGL.raw.GL.VERSION.GL_1_1 import GL_VERSION
         new = glGetString( GL_VERSION )
+        
         self.version_string = new
         if new:
             return [
@@ -148,6 +152,9 @@ class _GLQuerier( ExtensionQuerier ):
         else:
             return False # not yet loaded/supported
     def pullExtensions( self ):
+        from OpenGL import platform
+        if not platform.PLATFORM.CurrentContextIsValid():
+            return False
         from OpenGL.raw.GL._types import GLint
         from OpenGL.raw.GL.VERSION.GL_1_1 import glGetString 
         from OpenGL.raw.GL.VERSION.GL_1_1 import GL_EXTENSIONS

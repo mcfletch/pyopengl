@@ -40,6 +40,7 @@ else:
         ('smalltable',ctypes.c_size_t*2),
         ('internal',ctypes.c_void_p),
     ] )
+
 class Py_buffer(ctypes.Structure):
     """Wrapper around the Python buffer structure..."""
     @classmethod 
