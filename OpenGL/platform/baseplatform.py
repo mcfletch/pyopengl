@@ -138,8 +138,6 @@ class BasePlatform( object ):
         raises AttributeError if can't find the procedure...
         """
         is_core = (not extension) or extension.split('_')[1] == 'VERSION'
-        if is_core:
-            extension = None
         if (not is_core) and not self.checkExtension( extension ):
             raise AttributeError( """Extension not available""" )
         argTypes = [ self.finalArgType( t ) for t in argTypes ]
