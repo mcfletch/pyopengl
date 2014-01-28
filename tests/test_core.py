@@ -1060,7 +1060,11 @@ class Tests( unittest.TestCase ):
     
     def test_glGenTextures( self ):
         texture = glGenTextures(1)
-        
+    
+    def test_void_dp_for_void_dp_is_self( self ):
+        array = ctypes.c_voidp( 12 )
+        translated = ArrayDatatype.voidDataPointer( array )
+        assert translated.value == array.value, translated
         
 if __name__ == "__main__":
     unittest.main()

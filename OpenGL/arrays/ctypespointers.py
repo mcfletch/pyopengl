@@ -18,7 +18,9 @@ class CtypesPointerHandler( formathandler.FormatHandler ):
     @classmethod
     def from_param( cls, value, typeCode=None  ):
         return value
-    dataPointer = staticmethod( ctypes.addressof )
+    @classmethod
+    def dataPointer( cls, value ):
+        return value.value
     HANDLED_TYPES = (ctypes._Pointer, )
     isOutput=False
     def voidDataPointer( cls, value ):
