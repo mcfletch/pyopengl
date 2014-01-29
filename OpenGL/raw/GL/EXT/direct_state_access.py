@@ -24,8 +24,8 @@ def glCheckNamedFramebufferStatusEXT(framebuffer,target):pass
 def glClearNamedBufferDataEXT(buffer,internalformat,format,type,data):pass
 # Calculate length of data from format:PixelFormat, type:PixelType
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizeiptr,_cs.GLsizeiptr,ctypes.c_void_p)
-def glClearNamedBufferSubDataEXT(buffer,internalformat,format,type,offset,size,data):pass
+@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLsizeiptr,_cs.GLsizeiptr,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
+def glClearNamedBufferSubDataEXT(buffer,internalformat,offset,size,format,type,data):pass
 # Calculate length of data from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLbitfield)

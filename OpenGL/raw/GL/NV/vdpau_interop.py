@@ -24,7 +24,7 @@ def glVDPAUGetSurfaceivNV(surface,pname,bufSize,length,values):pass
 @_p.types(None,ctypes.c_void_p,ctypes.c_void_p)
 def glVDPAUInitNV(vdpDevice,getProcAddress):pass
 @_f
-@_p.types(None,_cs.GLvdpauSurfaceNV)
+@_p.types(_cs.GLboolean,_cs.GLvdpauSurfaceNV)
 def glVDPAUIsSurfaceNV(surface):pass
 @_f
 @_p.types(None,_cs.GLsizei,ctypes.POINTER(_cs.GLvdpauSurfaceNV))

@@ -36,7 +36,7 @@ GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY=_C('GL_UNSIGNED_INT_SAMPLER_2D_MULT
 def glGetMultisamplefv(pname,index,val):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLbitfield)
-def glSampleMaski(index,mask):pass
+def glSampleMaski(maskNumber,mask):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
 def glTexImage2DMultisample(target,samples,internalformat,width,height,fixedsamplelocations):pass

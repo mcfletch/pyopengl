@@ -7,8 +7,8 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_KHR_image_pixmap'
+EXTENSION_NAME = 'EGL_EXT_protected_surface'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_KHR_image_pixmap')
-EGL_NATIVE_PIXMAP_KHR=_C('EGL_NATIVE_PIXMAP_KHR',0x30B0)
+    return _p.createFunction( function,_p.EGL,'EGL_EXT_protected_surface')
+EGL_PROTECTED_CONTENT_EXT=_C('EGL_PROTECTED_CONTENT_EXT',0x32C0)
 

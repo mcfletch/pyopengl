@@ -125,7 +125,7 @@ def glMultiDrawElementsBaseVertex(mode,count,type,indices,drawcount,basevertex):
 def glProvokingVertex(mode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLbitfield)
-def glSampleMaski(index,mask):pass
+def glSampleMaski(maskNumber,mask):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
 def glTexImage2DMultisample(target,samples,internalformat,width,height,fixedsamplelocations):pass
