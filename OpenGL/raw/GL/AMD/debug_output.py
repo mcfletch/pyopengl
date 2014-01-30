@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_debug_output'
+_EXTENSION_NAME = 'GL_AMD_debug_output'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_debug_output')
 GL_DEBUG_CATEGORY_API_ERROR_AMD=_C('GL_DEBUG_CATEGORY_API_ERROR_AMD',0x9149)

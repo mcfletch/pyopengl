@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_texture_mirrored_repeat'
+_EXTENSION_NAME = 'GL_ARB_texture_mirrored_repeat'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_texture_mirrored_repeat')
 GL_MIRRORED_REPEAT_ARB=_C('GL_MIRRORED_REPEAT_ARB',0x8370)

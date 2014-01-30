@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_occlusion_query'
+_EXTENSION_NAME = 'GL_ARB_occlusion_query'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_occlusion_query')
 GL_CURRENT_QUERY_ARB=_C('GL_CURRENT_QUERY_ARB',0x8865)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_DFX_texture_compression_FXT1'
+_EXTENSION_NAME = 'GL_DFX_texture_compression_FXT1'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_DFX_texture_compression_FXT1')
 GL_COMPRESSED_RGBA_FXT1_3DFX=_C('GL_COMPRESSED_RGBA_FXT1_3DFX',0x86B1)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ATI_vertex_array_object'
+_EXTENSION_NAME = 'GL_ATI_vertex_array_object'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ATI_vertex_array_object')
 GL_ARRAY_OBJECT_BUFFER_ATI=_C('GL_ARRAY_OBJECT_BUFFER_ATI',0x8766)

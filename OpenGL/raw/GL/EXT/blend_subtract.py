@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_blend_subtract'
+_EXTENSION_NAME = 'GL_EXT_blend_subtract'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_blend_subtract')
 GL_FUNC_REVERSE_SUBTRACT_EXT=_C('GL_FUNC_REVERSE_SUBTRACT_EXT',0x800B)

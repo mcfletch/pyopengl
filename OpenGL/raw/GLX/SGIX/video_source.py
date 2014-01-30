@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_SGIX_video_source'
+_EXTENSION_NAME = 'GLX_SGIX_video_source'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_SGIX_video_source')
 

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_HP_convolution_border_modes'
+_EXTENSION_NAME = 'GL_HP_convolution_border_modes'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_HP_convolution_border_modes')
 GL_CONSTANT_BORDER_HP=_C('GL_CONSTANT_BORDER_HP',0x8151)

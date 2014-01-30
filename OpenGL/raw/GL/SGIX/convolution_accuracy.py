@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_convolution_accuracy'
+_EXTENSION_NAME = 'GL_SGIX_convolution_accuracy'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_convolution_accuracy')
 GL_CONVOLUTION_HINT_SGIX=_C('GL_CONVOLUTION_HINT_SGIX',0x8316)

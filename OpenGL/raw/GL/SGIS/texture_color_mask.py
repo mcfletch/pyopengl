@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIS_texture_color_mask'
+_EXTENSION_NAME = 'GL_SGIS_texture_color_mask'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIS_texture_color_mask')
 GL_TEXTURE_COLOR_WRITEMASK_SGIS=_C('GL_TEXTURE_COLOR_WRITEMASK_SGIS',0x81EF)

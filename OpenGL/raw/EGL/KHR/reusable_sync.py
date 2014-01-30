@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_KHR_reusable_sync'
+_EXTENSION_NAME = 'EGL_KHR_reusable_sync'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_KHR_reusable_sync')
 EGL_CONDITION_SATISFIED_KHR=_C('EGL_CONDITION_SATISFIED_KHR',0x30F6)

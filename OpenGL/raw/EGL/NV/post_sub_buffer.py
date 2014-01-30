@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_NV_post_sub_buffer'
+_EXTENSION_NAME = 'EGL_NV_post_sub_buffer'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_NV_post_sub_buffer')
 EGL_POST_SUB_BUFFER_SUPPORTED_NV=_C('EGL_POST_SUB_BUFFER_SUPPORTED_NV',0x30BE)

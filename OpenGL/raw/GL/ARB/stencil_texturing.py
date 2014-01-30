@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_stencil_texturing'
+_EXTENSION_NAME = 'GL_ARB_stencil_texturing'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_stencil_texturing')
 GL_DEPTH_STENCIL_TEXTURE_MODE=_C('GL_DEPTH_STENCIL_TEXTURE_MODE',0x90EA)

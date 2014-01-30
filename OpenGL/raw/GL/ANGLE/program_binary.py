@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ANGLE_program_binary'
+_EXTENSION_NAME = 'GL_ANGLE_program_binary'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ANGLE_program_binary')
 GL_PROGRAM_BINARY_ANGLE=_C('GL_PROGRAM_BINARY_ANGLE',0x93A6)

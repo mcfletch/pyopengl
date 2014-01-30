@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_ARB_pixel_format_float'
+_EXTENSION_NAME = 'WGL_ARB_pixel_format_float'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_ARB_pixel_format_float')
 WGL_TYPE_RGBA_FLOAT_ARB=_C('WGL_TYPE_RGBA_FLOAT_ARB',0x21A0)

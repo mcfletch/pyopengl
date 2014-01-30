@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_texgen_reflection'
+_EXTENSION_NAME = 'GL_NV_texgen_reflection'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_texgen_reflection')
 GL_NORMAL_MAP_NV=_C('GL_NORMAL_MAP_NV',0x8511)

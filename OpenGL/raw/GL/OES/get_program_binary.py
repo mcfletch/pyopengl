@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OES_get_program_binary'
+_EXTENSION_NAME = 'GL_OES_get_program_binary'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OES_get_program_binary')
 GL_NUM_PROGRAM_BINARY_FORMATS_OES=_C('GL_NUM_PROGRAM_BINARY_FORMATS_OES',0x87FE)

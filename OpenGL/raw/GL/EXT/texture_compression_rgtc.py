@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_compression_rgtc'
+_EXTENSION_NAME = 'GL_EXT_texture_compression_rgtc'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_compression_rgtc')
 GL_COMPRESSED_RED_GREEN_RGTC2_EXT=_C('GL_COMPRESSED_RED_GREEN_RGTC2_EXT',0x8DBD)

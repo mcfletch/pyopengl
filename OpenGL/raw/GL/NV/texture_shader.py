@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_texture_shader'
+_EXTENSION_NAME = 'GL_NV_texture_shader'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_texture_shader')
 GL_CONST_EYE_NV=_C('GL_CONST_EYE_NV',0x86E5)

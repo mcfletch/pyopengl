@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_timer_query'
+_EXTENSION_NAME = 'GL_EXT_timer_query'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_timer_query')
 GL_TIME_ELAPSED_EXT=_C('GL_TIME_ELAPSED_EXT',0x88BF)

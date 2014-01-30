@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_texture_view'
+_EXTENSION_NAME = 'GL_ARB_texture_view'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_texture_view')
 GL_TEXTURE_IMMUTABLE_LEVELS=_C('GL_TEXTURE_IMMUTABLE_LEVELS',0x82DF)

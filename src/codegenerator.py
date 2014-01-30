@@ -158,7 +158,7 @@ from OpenGL.raw.%(prefix)s._types import *
 from OpenGL.constant import Constant as _C
 %(extra_imports)s
 import ctypes
-EXTENSION_NAME = %(constantModule)r
+_EXTENSION_NAME = %(constantModule)r
 def _f( function ):
     return _p.createFunction( function,%(dll)s,%(constantModule)r)
 %(constants)s
@@ -169,7 +169,7 @@ def _f( function ):
 def glInit%(camelModule)s%(owner)s():
     '''Return boolean indicating whether this extension is available'''
     from OpenGL import extensions
-    return extensions.hasGLExtension( EXTENSION_NAME )
+    return extensions.hasGLExtension( _EXTENSION_NAME )
 """
     FINAL_MODULE_TEMPLATE = """'''OpenGL extension %(owner)s.%(module)s
 
@@ -186,6 +186,7 @@ from OpenGL.GL import glget
 import ctypes
 from OpenGL.raw.%(prefix)s import _types
 from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
+from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
 %(init_function)s
 """
     dll = '_p.GL'

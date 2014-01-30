@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_SGIS_shared_multisample'
+_EXTENSION_NAME = 'GLX_SGIS_shared_multisample'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_SGIS_shared_multisample')
 GLX_MULTISAMPLE_SUB_RECT_HEIGHT_SGIS=_C('GLX_MULTISAMPLE_SUB_RECT_HEIGHT_SGIS',0x8027)

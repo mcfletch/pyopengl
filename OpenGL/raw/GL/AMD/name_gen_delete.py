@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_name_gen_delete'
+_EXTENSION_NAME = 'GL_AMD_name_gen_delete'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_name_gen_delete')
 GL_DATA_BUFFER_AMD=_C('GL_DATA_BUFFER_AMD',0x9151)

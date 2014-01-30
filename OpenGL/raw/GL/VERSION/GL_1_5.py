@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_1_5'
+_EXTENSION_NAME = 'GL_VERSION_GL_1_5'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_5')
 GL_ARRAY_BUFFER=_C('GL_ARRAY_BUFFER',0x8892)

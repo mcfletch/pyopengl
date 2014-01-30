@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_interleaved_elements'
+_EXTENSION_NAME = 'GL_AMD_interleaved_elements'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_interleaved_elements')
 GL_ALPHA=_C('GL_ALPHA',0x1906)

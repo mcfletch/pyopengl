@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_ARB_make_current_read'
+_EXTENSION_NAME = 'WGL_ARB_make_current_read'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_ARB_make_current_read')
 ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB=_C('ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB',0x2054)

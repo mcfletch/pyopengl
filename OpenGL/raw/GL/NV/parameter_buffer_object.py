@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_parameter_buffer_object'
+_EXTENSION_NAME = 'GL_NV_parameter_buffer_object'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_parameter_buffer_object')
 GL_FRAGMENT_PROGRAM_PARAMETER_BUFFER_NV=_C('GL_FRAGMENT_PROGRAM_PARAMETER_BUFFER_NV',0x8DA4)

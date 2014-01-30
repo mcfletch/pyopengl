@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_texture_multi_buffer'
+_EXTENSION_NAME = 'GL_SGIX_texture_multi_buffer'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_texture_multi_buffer')
 GL_TEXTURE_MULTI_BUFFER_HINT_SGIX=_C('GL_TEXTURE_MULTI_BUFFER_HINT_SGIX',0x812E)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_mirror_clamp'
+_EXTENSION_NAME = 'GL_EXT_texture_mirror_clamp'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_mirror_clamp')
 GL_MIRROR_CLAMP_EXT=_C('GL_MIRROR_CLAMP_EXT',0x8742)

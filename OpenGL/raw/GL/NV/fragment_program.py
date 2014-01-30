@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_fragment_program'
+_EXTENSION_NAME = 'GL_NV_fragment_program'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_fragment_program')
 GL_FRAGMENT_PROGRAM_BINDING_NV=_C('GL_FRAGMENT_PROGRAM_BINDING_NV',0x8873)

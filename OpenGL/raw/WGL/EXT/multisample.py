@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_EXT_multisample'
+_EXTENSION_NAME = 'WGL_EXT_multisample'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_EXT_multisample')
 WGL_SAMPLES_EXT=_C('WGL_SAMPLES_EXT',0x2042)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ATI_separate_stencil'
+_EXTENSION_NAME = 'GL_ATI_separate_stencil'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ATI_separate_stencil')
 GL_STENCIL_BACK_FAIL_ATI=_C('GL_STENCIL_BACK_FAIL_ATI',0x8801)

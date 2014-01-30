@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_unpack_subimage'
+_EXTENSION_NAME = 'GL_EXT_unpack_subimage'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_unpack_subimage')
 GL_UNPACK_ROW_LENGTH_EXT=_C('GL_UNPACK_ROW_LENGTH_EXT',0x0CF2)

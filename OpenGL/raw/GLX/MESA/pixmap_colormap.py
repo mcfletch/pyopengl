@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_MESA_pixmap_colormap'
+_EXTENSION_NAME = 'GLX_MESA_pixmap_colormap'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_MESA_pixmap_colormap')
 

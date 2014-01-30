@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ANGLE_framebuffer_blit'
+_EXTENSION_NAME = 'GL_ANGLE_framebuffer_blit'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ANGLE_framebuffer_blit')
 GL_DRAW_FRAMEBUFFER_ANGLE=_C('GL_DRAW_FRAMEBUFFER_ANGLE',0x8CA9)

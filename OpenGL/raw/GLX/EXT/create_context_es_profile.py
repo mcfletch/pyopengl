@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_EXT_create_context_es_profile'
+_EXTENSION_NAME = 'GLX_EXT_create_context_es_profile'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_EXT_create_context_es_profile')
 GLX_CONTEXT_ES_PROFILE_BIT_EXT=_C('GLX_CONTEXT_ES_PROFILE_BIT_EXT',0x00000004)

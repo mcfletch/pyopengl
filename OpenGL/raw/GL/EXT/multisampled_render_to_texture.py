@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_multisampled_render_to_texture'
+_EXTENSION_NAME = 'GL_EXT_multisampled_render_to_texture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_multisampled_render_to_texture')
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT=_C('GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT',0x8D6C)

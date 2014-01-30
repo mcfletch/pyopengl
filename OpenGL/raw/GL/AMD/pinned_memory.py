@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_pinned_memory'
+_EXTENSION_NAME = 'GL_AMD_pinned_memory'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_pinned_memory')
 GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD=_C('GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD',0x9160)

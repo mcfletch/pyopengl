@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_depth_clamp'
+_EXTENSION_NAME = 'GL_ARB_depth_clamp'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_depth_clamp')
 GL_DEPTH_CLAMP=_C('GL_DEPTH_CLAMP',0x864F)

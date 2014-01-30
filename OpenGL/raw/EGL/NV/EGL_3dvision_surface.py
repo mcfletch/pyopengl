@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_NV_EGL_3dvision_surface'
+_EXTENSION_NAME = 'EGL_NV_EGL_3dvision_surface'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_NV_EGL_3dvision_surface')
 EGL_AUTO_STEREO_NV=_C('EGL_AUTO_STEREO_NV',0x3136)

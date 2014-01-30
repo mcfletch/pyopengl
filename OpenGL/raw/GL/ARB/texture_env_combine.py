@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_texture_env_combine'
+_EXTENSION_NAME = 'GL_ARB_texture_env_combine'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_texture_env_combine')
 GL_ADD_SIGNED_ARB=_C('GL_ADD_SIGNED_ARB',0x8574)

@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_MESA_copy_sub_buffer'
+_EXTENSION_NAME = 'GLX_MESA_copy_sub_buffer'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_MESA_copy_sub_buffer')
 

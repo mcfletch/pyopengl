@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_IBM_vertex_array_lists'
+_EXTENSION_NAME = 'GL_IBM_vertex_array_lists'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_IBM_vertex_array_lists')
 GL_COLOR_ARRAY_LIST_IBM=_C('GL_COLOR_ARRAY_LIST_IBM',103072)

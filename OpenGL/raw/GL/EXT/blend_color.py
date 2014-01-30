@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_blend_color'
+_EXTENSION_NAME = 'GL_EXT_blend_color'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_blend_color')
 GL_BLEND_COLOR_EXT=_C('GL_BLEND_COLOR_EXT',0x8005)

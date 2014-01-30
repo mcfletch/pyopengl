@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_gpu_shader5'
+_EXTENSION_NAME = 'GL_ARB_gpu_shader5'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_gpu_shader5')
 GL_FRAGMENT_INTERPOLATION_OFFSET_BITS=_C('GL_FRAGMENT_INTERPOLATION_OFFSET_BITS',0x8E5D)

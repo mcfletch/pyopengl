@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SUNX_constant_data'
+_EXTENSION_NAME = 'GL_SUNX_constant_data'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SUNX_constant_data')
 GL_TEXTURE_CONSTANT_DATA_SUNX=_C('GL_TEXTURE_CONSTANT_DATA_SUNX',0x81D6)

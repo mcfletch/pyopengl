@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_REND_screen_coordinates'
+_EXTENSION_NAME = 'GL_REND_screen_coordinates'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_REND_screen_coordinates')
 GL_INVERTED_SCREEN_W_REND=_C('GL_INVERTED_SCREEN_W_REND',0x8491)

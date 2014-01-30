@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_vertex_weighting'
+_EXTENSION_NAME = 'GL_EXT_vertex_weighting'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_vertex_weighting')
 GL_CURRENT_VERTEX_WEIGHT_EXT=_C('GL_CURRENT_VERTEX_WEIGHT_EXT',0x850B)

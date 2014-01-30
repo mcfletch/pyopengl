@@ -18,7 +18,7 @@ def glVertexPointerd( array ):
     return arg4
 """
 from OpenGL import platform, arrays, error, wrapper, contextdata, converters, constant
-from OpenGL.raw.GL.VERSION import GL_1_1 as simple
+from OpenGL.raw.GL.VERSION import GL_1_1 as _simple
 import ctypes
 
 GLsizei = ctypes.c_int
@@ -60,43 +60,43 @@ __all__ = (
 # calling it
 
 POINTER_FUNCTION_DATA = [
-    ('glColorPointerd',  simple.glColorPointer, simple.GL_DOUBLE, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
-    ('glColorPointerf',  simple.glColorPointer, simple.GL_FLOAT, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
-    ('glColorPointeri',  simple.glColorPointer, simple.GL_INT, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
-    ('glColorPointers',  simple.glColorPointer, simple.GL_SHORT, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
-    ('glColorPointerub', simple.glColorPointer, simple.GL_UNSIGNED_BYTE, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
+    ('glColorPointerd',  _simple.glColorPointer, _simple.GL_DOUBLE, _simple.GL_COLOR_ARRAY_POINTER, 0, 3),
+    ('glColorPointerf',  _simple.glColorPointer, _simple.GL_FLOAT, _simple.GL_COLOR_ARRAY_POINTER, 0, 3),
+    ('glColorPointeri',  _simple.glColorPointer, _simple.GL_INT, _simple.GL_COLOR_ARRAY_POINTER, 0, 3),
+    ('glColorPointers',  _simple.glColorPointer, _simple.GL_SHORT, _simple.GL_COLOR_ARRAY_POINTER, 0, 3),
+    ('glColorPointerub', _simple.glColorPointer, _simple.GL_UNSIGNED_BYTE, _simple.GL_COLOR_ARRAY_POINTER, 0, 3),
     # these data-types are mapped from diff Numeric types
-    ('glColorPointerb',  simple.glColorPointer, simple.GL_BYTE, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
-    ('glColorPointerui', simple.glColorPointer, simple.GL_UNSIGNED_INT, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
-    ('glColorPointerus', simple.glColorPointer, simple.GL_UNSIGNED_SHORT, simple.GL_COLOR_ARRAY_POINTER, 0, 3),
+    ('glColorPointerb',  _simple.glColorPointer, _simple.GL_BYTE, _simple.GL_COLOR_ARRAY_POINTER, 0, 3),
+    ('glColorPointerui', _simple.glColorPointer, _simple.GL_UNSIGNED_INT, _simple.GL_COLOR_ARRAY_POINTER, 0, 3),
+    ('glColorPointerus', _simple.glColorPointer, _simple.GL_UNSIGNED_SHORT, _simple.GL_COLOR_ARRAY_POINTER, 0, 3),
 
-    ('glEdgeFlagPointerb', simple.glEdgeFlagPointer, simple.GL_BYTE, simple.GL_EDGE_FLAG_ARRAY_POINTER, 2, None),
+    ('glEdgeFlagPointerb', _simple.glEdgeFlagPointer, _simple.GL_BYTE, _simple.GL_EDGE_FLAG_ARRAY_POINTER, 2, None),
 
-    ('glIndexPointerd',  simple.glIndexPointer, simple.GL_DOUBLE, simple.GL_INDEX_ARRAY_POINTER, 1, None),
-    ('glIndexPointerf',  simple.glIndexPointer, simple.GL_FLOAT, simple.GL_INDEX_ARRAY_POINTER, 1, None),
-    ('glIndexPointeri',  simple.glIndexPointer, simple.GL_INT, simple.GL_INDEX_ARRAY_POINTER, 1, None),
-    ('glIndexPointerub', simple.glIndexPointer, simple.GL_UNSIGNED_BYTE, simple.GL_INDEX_ARRAY_POINTER, 1, None),
-    ('glIndexPointers',  simple.glIndexPointer, simple.GL_SHORT, simple.GL_INDEX_ARRAY_POINTER, 1, None),
+    ('glIndexPointerd',  _simple.glIndexPointer, _simple.GL_DOUBLE, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
+    ('glIndexPointerf',  _simple.glIndexPointer, _simple.GL_FLOAT, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
+    ('glIndexPointeri',  _simple.glIndexPointer, _simple.GL_INT, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
+    ('glIndexPointerub', _simple.glIndexPointer, _simple.GL_UNSIGNED_BYTE, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
+    ('glIndexPointers',  _simple.glIndexPointer, _simple.GL_SHORT, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
     # these data-types are mapped from diff Numeric types
-    ('glIndexPointerb',  simple.glIndexPointer, simple.GL_BYTE, simple.GL_INDEX_ARRAY_POINTER, 1, None),
+    ('glIndexPointerb',  _simple.glIndexPointer, _simple.GL_BYTE, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
 
-    ('glNormalPointerd',  simple.glNormalPointer, simple.GL_DOUBLE, simple.GL_NORMAL_ARRAY_POINTER, 1, None),
-    ('glNormalPointerf',  simple.glNormalPointer, simple.GL_FLOAT, simple.GL_NORMAL_ARRAY_POINTER, 1, None),
-    ('glNormalPointeri',  simple.glNormalPointer, simple.GL_INT, simple.GL_NORMAL_ARRAY_POINTER, 1, None),
-    ('glNormalPointerb',  simple.glNormalPointer, simple.GL_BYTE, simple.GL_NORMAL_ARRAY_POINTER, 1, None),
-    ('glNormalPointers',  simple.glNormalPointer, simple.GL_SHORT, simple.GL_NORMAL_ARRAY_POINTER, 1, None),
+    ('glNormalPointerd',  _simple.glNormalPointer, _simple.GL_DOUBLE, _simple.GL_NORMAL_ARRAY_POINTER, 1, None),
+    ('glNormalPointerf',  _simple.glNormalPointer, _simple.GL_FLOAT, _simple.GL_NORMAL_ARRAY_POINTER, 1, None),
+    ('glNormalPointeri',  _simple.glNormalPointer, _simple.GL_INT, _simple.GL_NORMAL_ARRAY_POINTER, 1, None),
+    ('glNormalPointerb',  _simple.glNormalPointer, _simple.GL_BYTE, _simple.GL_NORMAL_ARRAY_POINTER, 1, None),
+    ('glNormalPointers',  _simple.glNormalPointer, _simple.GL_SHORT, _simple.GL_NORMAL_ARRAY_POINTER, 1, None),
 
-    ('glTexCoordPointerd',  simple.glTexCoordPointer, simple.GL_DOUBLE, simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
-    ('glTexCoordPointerf',  simple.glTexCoordPointer, simple.GL_FLOAT, simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
-    ('glTexCoordPointeri',  simple.glTexCoordPointer, simple.GL_INT, simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
-    ('glTexCoordPointerb',  simple.glTexCoordPointer, simple.GL_BYTE, simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
-    ('glTexCoordPointers',  simple.glTexCoordPointer, simple.GL_SHORT, simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
+    ('glTexCoordPointerd',  _simple.glTexCoordPointer, _simple.GL_DOUBLE, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
+    ('glTexCoordPointerf',  _simple.glTexCoordPointer, _simple.GL_FLOAT, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
+    ('glTexCoordPointeri',  _simple.glTexCoordPointer, _simple.GL_INT, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
+    ('glTexCoordPointerb',  _simple.glTexCoordPointer, _simple.GL_BYTE, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
+    ('glTexCoordPointers',  _simple.glTexCoordPointer, _simple.GL_SHORT, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
 
-    ('glVertexPointerd', simple.glVertexPointer, simple.GL_DOUBLE, simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
-    ('glVertexPointerf', simple.glVertexPointer, simple.GL_FLOAT, simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
-    ('glVertexPointeri', simple.glVertexPointer, simple.GL_INT, simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
-    ('glVertexPointerb', simple.glVertexPointer, simple.GL_INT, simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
-    ('glVertexPointers', simple.glVertexPointer, simple.GL_SHORT, simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
+    ('glVertexPointerd', _simple.glVertexPointer, _simple.GL_DOUBLE, _simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
+    ('glVertexPointerf', _simple.glVertexPointer, _simple.GL_FLOAT, _simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
+    ('glVertexPointeri', _simple.glVertexPointer, _simple.GL_INT, _simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
+    ('glVertexPointerb', _simple.glVertexPointer, _simple.GL_INT, _simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
+    ('glVertexPointers', _simple.glVertexPointer, _simple.GL_SHORT, _simple.GL_VERTEX_ARRAY_POINTER, 0, 3),
 ]
 def wrapPointerFunction( name, baseFunction, glType, arrayType,startArgs, defaultSize ):
     """Wrap the given pointer-setting function"""
@@ -137,57 +137,57 @@ try:
 except NameError as err:
     pass
 
-glVertexPointer = wrapper.wrapper( simple.glVertexPointer ).setPyConverter(
+glVertexPointer = wrapper.wrapper( _simple.glVertexPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', simple.GL_VERTEX_ARRAY_POINTER )
+    arrays.storePointerType( 'pointer', _simple.GL_VERTEX_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
-glTexCoordPointer = wrapper.wrapper( simple.glTexCoordPointer ).setPyConverter(
+glTexCoordPointer = wrapper.wrapper( _simple.glTexCoordPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', simple.GL_TEXTURE_COORD_ARRAY_POINTER )
+    arrays.storePointerType( 'pointer', _simple.GL_TEXTURE_COORD_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
-glNormalPointer = wrapper.wrapper( simple.glNormalPointer ).setPyConverter(
+glNormalPointer = wrapper.wrapper( _simple.glNormalPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', simple.GL_NORMAL_ARRAY_POINTER )
+    arrays.storePointerType( 'pointer', _simple.GL_NORMAL_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
-glIndexPointer = wrapper.wrapper( simple.glIndexPointer ).setPyConverter(
+glIndexPointer = wrapper.wrapper( _simple.glIndexPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', simple.GL_INDEX_ARRAY_POINTER )
+    arrays.storePointerType( 'pointer', _simple.GL_INDEX_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
-glEdgeFlagPointer = wrapper.wrapper( simple.glEdgeFlagPointer ).setPyConverter(
+glEdgeFlagPointer = wrapper.wrapper( _simple.glEdgeFlagPointer ).setPyConverter(
     # XXX type is wrong!
     'pointer', arrays.AsArrayTyped( 'pointer', arrays.GLushortArray ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', simple.GL_EDGE_FLAG_ARRAY_POINTER )
+    arrays.storePointerType( 'pointer', _simple.GL_EDGE_FLAG_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
-glColorPointer = wrapper.wrapper( simple.glColorPointer ).setPyConverter(
+glColorPointer = wrapper.wrapper( _simple.glColorPointer ).setPyConverter(
     'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', simple.GL_COLOR_ARRAY_POINTER )
+    arrays.storePointerType( 'pointer', _simple.GL_COLOR_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
-glInterleavedArrays = wrapper.wrapper( simple.glInterleavedArrays ).setStoreValues(
+glInterleavedArrays = wrapper.wrapper( _simple.glInterleavedArrays ).setStoreValues(
     arrays.storePointerType( 'pointer', GL_INTERLEAVED_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
 
 
-glDrawElements = wrapper.wrapper( simple.glDrawElements ).setPyConverter(
+glDrawElements = wrapper.wrapper( _simple.glDrawElements ).setPyConverter(
     'indices', arrays.AsArrayOfType( 'indices', 'type' ),
 ).setReturnValues(
     wrapper.returnPyArgument( 'indices' )
@@ -196,7 +196,7 @@ glDrawElements = wrapper.wrapper( simple.glDrawElements ).setPyConverter(
 def glDrawElementsTyped( type, suffix ):
     arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ type ]
     function = wrapper.wrapper(
-        simple.glDrawElements
+        _simple.glDrawElements
     ).setPyConverter('type').setCConverter(
         'type', type
     ).setPyConverter('count').setCConverter(
@@ -207,7 +207,7 @@ def glDrawElementsTyped( type, suffix ):
         wrapper.returnPyArgument( 'indices' )
     )
     return function
-for type,suffix in ((simple.GL_UNSIGNED_BYTE,'ub'),(simple.GL_UNSIGNED_INT,'ui'),(simple.GL_UNSIGNED_SHORT,'us')):
+for type,suffix in ((_simple.GL_UNSIGNED_BYTE,'ub'),(_simple.GL_UNSIGNED_INT,'ui'),(_simple.GL_UNSIGNED_SHORT,'us')):
     globals()['glDrawElements%(suffix)s'%globals()] = glDrawElementsTyped( type,suffix )
 try:
     del type,suffix,glDrawElementsTyped
@@ -222,16 +222,16 @@ def glSelectBuffer( size, buffer = None ):
     """
     if buffer is None:
         buffer = arrays.GLuintArray.zeros( (size,) )
-    simple.glSelectBuffer( size, buffer )
-    contextdata.setValue( simple.GL_SELECTION_BUFFER_POINTER, buffer )
+    _simple.glSelectBuffer( size, buffer )
+    contextdata.setValue( _simple.GL_SELECTION_BUFFER_POINTER, buffer )
     return buffer
 def glFeedbackBuffer( size, type, buffer = None ):
     """Create a selection buffer of the given size
     """
     if buffer is None:
         buffer = arrays.GLfloatArray.zeros( (size,) )
-    simple.glFeedbackBuffer( size, type, buffer )
-    contextdata.setValue( simple.GL_FEEDBACK_BUFFER_POINTER, buffer )
+    _simple.glFeedbackBuffer( size, type, buffer )
+    contextdata.setValue( _simple.GL_FEEDBACK_BUFFER_POINTER, buffer )
     contextdata.setValue( "GL_FEEDBACK_BUFFER_TYPE", type )
     return buffer
 
@@ -244,31 +244,31 @@ def glRenderMode( newMode ):
     # must get the current mode to determine operation...
     from OpenGL.GL import glGetIntegerv
     from OpenGL.GL import selection, feedback
-    currentMode = glGetIntegerv( simple.GL_RENDER_MODE )
+    currentMode = glGetIntegerv( _simple.GL_RENDER_MODE )
     try:
         currentMode = currentMode[0]
     except (TypeError,ValueError,IndexError) as err:
         pass
-    if currentMode in (simple.GL_RENDER,0):
+    if currentMode in (_simple.GL_RENDER,0):
         # no array needs to be returned...
-        return simple.glRenderMode( newMode )
-    result = simple.glRenderMode( newMode )
+        return _simple.glRenderMode( newMode )
+    result = _simple.glRenderMode( newMode )
     # result is now an integer telling us how many elements were copied...
 
     if result < 0:
-        if currentMode == simple.GL_SELECT:
+        if currentMode == _simple.GL_SELECT:
             raise error.GLError(
-                simple.GL_STACK_OVERFLOW,
+                _simple.GL_STACK_OVERFLOW,
                 "glSelectBuffer too small to hold selection results",
             )
-        elif currentMode == simple.GL_FEEDBACK:
+        elif currentMode == _simple.GL_FEEDBACK:
             raise error.GLError(
-                simple.GL_STACK_OVERFLOW,
+                _simple.GL_STACK_OVERFLOW,
                 "glFeedbackBuffer too small to hold selection results",
             )
         else:
             raise error.GLError(
-                simple.GL_STACK_OVERFLOW,
+                _simple.GL_STACK_OVERFLOW,
                 "Unknown glRenderMode buffer (%s) too small to hold selection results"%(
                     currentMode,
                 ),
@@ -281,8 +281,8 @@ def glRenderMode( newMode ):
             """Returning from glRenderMode without a valid context!"""
         )
     arrayConstant, wrapperFunction = {
-        simple.GL_FEEDBACK: (simple.GL_FEEDBACK_BUFFER_POINTER,feedback.parseFeedback),
-        simple.GL_SELECT: (simple.GL_SELECTION_BUFFER_POINTER, selection.GLSelectRecord.fromArray),
+        _simple.GL_FEEDBACK: (_simple.GL_FEEDBACK_BUFFER_POINTER,feedback.parseFeedback),
+        _simple.GL_SELECT: (_simple.GL_SELECTION_BUFFER_POINTER, selection.GLSelectRecord.fromArray),
     }[ currentMode ]
     current = contextdata.getValue( arrayConstant )
     # XXX check to see if it's the *same* array we set currently!
@@ -299,7 +299,7 @@ def glGetPointerv( constant ):
     # do we have a cached version of the pointer?
     # get the base pointer from the underlying operation
     vp = ctypes.voidp()
-    simple.glGetPointerv( constant, ctypes.byref(vp) )
+    _simple.glGetPointerv( constant, ctypes.byref(vp) )
     current = contextdata.getValue( constant )
     if current is not None:
         if arrays.ArrayDatatype.dataPointer( current ) == vp.value:

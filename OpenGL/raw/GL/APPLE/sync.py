@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_APPLE_sync'
+_EXTENSION_NAME = 'GL_APPLE_sync'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_APPLE_sync')
 GL_ALREADY_SIGNALED_APPLE=_C('GL_ALREADY_SIGNALED_APPLE',0x911A)

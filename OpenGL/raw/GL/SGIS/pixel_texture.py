@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIS_pixel_texture'
+_EXTENSION_NAME = 'GL_SGIS_pixel_texture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIS_pixel_texture')
 GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS=_C('GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS',0x8355)

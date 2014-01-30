@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OES_texture_float'
+_EXTENSION_NAME = 'GL_OES_texture_float'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OES_texture_float')
 GL_FLOAT=_C('GL_FLOAT',0x1406)

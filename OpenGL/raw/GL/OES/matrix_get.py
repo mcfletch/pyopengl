@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OES_matrix_get'
+_EXTENSION_NAME = 'GL_OES_matrix_get'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OES_matrix_get')
 GL_MODELVIEW_MATRIX_FLOAT_AS_INT_BITS_OES=_C('GL_MODELVIEW_MATRIX_FLOAT_AS_INT_BITS_OES',0x898D)

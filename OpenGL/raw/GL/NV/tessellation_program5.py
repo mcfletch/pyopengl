@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_tessellation_program5'
+_EXTENSION_NAME = 'GL_NV_tessellation_program5'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_tessellation_program5')
 GL_MAX_PROGRAM_PATCH_ATTRIBS_NV=_C('GL_MAX_PROGRAM_PATCH_ATTRIBS_NV',0x86D8)

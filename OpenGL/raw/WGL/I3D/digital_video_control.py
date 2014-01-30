@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_I3D_digital_video_control'
+_EXTENSION_NAME = 'WGL_I3D_digital_video_control'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_I3D_digital_video_control')
 WGL_DIGITAL_VIDEO_CURSOR_ALPHA_FRAMEBUFFER_I3D=_C('WGL_DIGITAL_VIDEO_CURSOR_ALPHA_FRAMEBUFFER_I3D',0x2050)

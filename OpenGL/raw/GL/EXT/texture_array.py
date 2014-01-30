@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_array'
+_EXTENSION_NAME = 'GL_EXT_texture_array'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_array')
 GL_COMPARE_REF_DEPTH_TO_TEXTURE_EXT=_C('GL_COMPARE_REF_DEPTH_TO_TEXTURE_EXT',0x884E)

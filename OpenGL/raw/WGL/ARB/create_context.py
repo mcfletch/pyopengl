@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_ARB_create_context'
+_EXTENSION_NAME = 'WGL_ARB_create_context'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_ARB_create_context')
 ERROR_INVALID_VERSION_ARB=_C('ERROR_INVALID_VERSION_ARB',0x2095)

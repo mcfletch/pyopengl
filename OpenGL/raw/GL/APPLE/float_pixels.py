@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_APPLE_float_pixels'
+_EXTENSION_NAME = 'GL_APPLE_float_pixels'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_APPLE_float_pixels')
 GL_ALPHA_FLOAT16_APPLE=_C('GL_ALPHA_FLOAT16_APPLE',0x881C)

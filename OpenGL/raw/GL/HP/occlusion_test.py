@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_HP_occlusion_test'
+_EXTENSION_NAME = 'GL_HP_occlusion_test'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_HP_occlusion_test')
 GL_OCCLUSION_TEST_HP=_C('GL_OCCLUSION_TEST_HP',0x8165)

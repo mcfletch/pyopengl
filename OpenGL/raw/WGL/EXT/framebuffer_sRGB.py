@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_EXT_framebuffer_sRGB'
+_EXTENSION_NAME = 'WGL_EXT_framebuffer_sRGB'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_EXT_framebuffer_sRGB')
 WGL_FRAMEBUFFER_SRGB_CAPABLE_EXT=_C('WGL_FRAMEBUFFER_SRGB_CAPABLE_EXT',0x20A9)

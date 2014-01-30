@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_EXT_framebuffer_sRGB'
+_EXTENSION_NAME = 'GLX_EXT_framebuffer_sRGB'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_EXT_framebuffer_sRGB')
 GLX_FRAMEBUFFER_SRGB_CAPABLE_EXT=_C('GLX_FRAMEBUFFER_SRGB_CAPABLE_EXT',0x20B2)

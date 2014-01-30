@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_KHR_lock_surface3'
+_EXTENSION_NAME = 'EGL_KHR_lock_surface3'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_KHR_lock_surface3')
 EGL_BITMAP_ORIGIN_KHR=_C('EGL_BITMAP_ORIGIN_KHR',0x30C8)

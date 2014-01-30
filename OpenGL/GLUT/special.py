@@ -22,11 +22,11 @@ platform module *not* in the module here!
 """
 from OpenGL.platform import GLUT, CurrentContextIsValid, GLUT_GUARD_CALLBACKS
 from OpenGL import contextdata, error, platform, logs
-from OpenGL.raw import GLUT as simple
+from OpenGL.raw import GLUT as _simple
 from OpenGL._bytes import bytes, unicode,as_8_bit
 import ctypes, os, sys, traceback
 PLATFORM = platform.PLATFORM
-FUNCTION_TYPE = simple.CALLBACK_FUNCTION_TYPE
+FUNCTION_TYPE = _simple.CALLBACK_FUNCTION_TYPE
 from OpenGL._bytes import long, integer_types
 
 _log = logs.getLog( 'OpenGL.GLUT.special' )
@@ -180,7 +180,7 @@ class GLUTMenuCallback( object ):
         return menuID (small integer)
         """
         cCallback = cls.callbackType( func )
-        menu = simple.glutCreateMenu( cCallback )
+        menu = _simple.glutCreateMenu( cCallback )
         contextdata.setValue( ('menucallback',menu), (cCallback,func) )
         return menu
     glutCreateMenu.argNames = [ 'func' ]
@@ -192,16 +192,16 @@ class GLUTMenuCallback( object ):
         
         returns None
         """
-        result = simple.glutDestroyMenu( menu )
+        result = _simple.glutDestroyMenu( menu )
         contextdata.delValue( ('menucallback',menu) )
         return result
     glutDestroyMenu.argNames = [ 'menu' ]
     glutDestroyMenu = classmethod( glutDestroyMenu )
 
 glutCreateMenu = GLUTMenuCallback.glutCreateMenu
-#glutCreateMenu.wrappedOperation = simple.glutCreateMenu
+#glutCreateMenu.wrappedOperation = _simple.glutCreateMenu
 glutDestroyMenu = GLUTMenuCallback.glutDestroyMenu
-#glutDestroyMenu.wrappedOperation = simple.glutDestroyMenu
+#glutDestroyMenu.wrappedOperation = _simple.glutDestroyMenu
 
 glutButtonBoxFunc = GLUTCallback(
     'ButtonBox', (ctypes.c_int,ctypes.c_int), ('button','state'),
@@ -328,7 +328,7 @@ def glutInit( *args ):
     return [
         holder[i] for i in range( count.value )
     ]
-glutInit.wrappedOperation = simple.glutInit
+glutInit.wrappedOperation = _simple.glutInit
 
 def glutDestroyWindow( window ):
     """Want to destroy the window, we need to do some cleanup..."""
@@ -341,4 +341,4 @@ def glutDestroyWindow( window ):
     except Exception as err:
         _log.error( """Error attempting to clean up context data for GLUT window %s: %s""", window, result )
     return _base_glutDestroyWindow( window )
-glutDestroyWindow.wrappedOperation = simple.glutDestroyWindow
+glutDestroyWindow.wrappedOperation = _simple.glutDestroyWindow

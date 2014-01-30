@@ -1,14 +1,14 @@
 """Wrapper/Implementation of the GLU quadrics object for PyOpenGL"""
-from OpenGL.raw import GLU as simple
+from OpenGL.raw import GLU as _simple
 from OpenGL.platform import GLU,createBaseFunction, PLATFORM
 import ctypes
 
-class GLUQuadric( simple.GLUquadric ):
+class GLUQuadric( _simple.GLUquadric ):
     """Implementation class for GLUQuadric classes in PyOpenGL"""
     FUNCTION_TYPE = PLATFORM.functionTypeFor(PLATFORM.GLU)
     CALLBACK_TYPES = {
         # mapping from "which" GLU enumeration to a ctypes function type
-        simple.GLU_ERROR : FUNCTION_TYPE( None, simple.GLenum )
+        _simple.GLU_ERROR : FUNCTION_TYPE( None, _simple.GLenum )
     }
     def addCallback( self, which, function ):
         """Register a callback for the quadric object
@@ -35,7 +35,7 @@ class GLUQuadric( simple.GLUquadric ):
         return cCallback
 GLUquadric = GLUQuadric
 
-def gluQuadricCallback( quadric, which=simple.GLU_ERROR, function=None ):
+def gluQuadricCallback( quadric, which=_simple.GLU_ERROR, function=None ):
     """Set the GLU error callback function"""
     return quadric.addCallback( which, function )
 

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_depth_buffer_float'
+_EXTENSION_NAME = 'GL_NV_depth_buffer_float'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_depth_buffer_float')
 GL_DEPTH32F_STENCIL8_NV=_C('GL_DEPTH32F_STENCIL8_NV',0x8DAC)

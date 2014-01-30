@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_ARB_robustness_application_isolation'
+_EXTENSION_NAME = 'GLX_ARB_robustness_application_isolation'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_ARB_robustness_application_isolation')
 GLX_CONTEXT_RESET_ISOLATION_BIT_ARB=_C('GLX_CONTEXT_RESET_ISOLATION_BIT_ARB',0x00000008)

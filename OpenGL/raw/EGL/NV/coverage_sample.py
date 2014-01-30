@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_NV_coverage_sample'
+_EXTENSION_NAME = 'EGL_NV_coverage_sample'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_NV_coverage_sample')
 EGL_COVERAGE_BUFFERS_NV=_C('EGL_COVERAGE_BUFFERS_NV',0x30E0)

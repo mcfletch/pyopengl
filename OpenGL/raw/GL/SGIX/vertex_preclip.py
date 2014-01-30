@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_vertex_preclip'
+_EXTENSION_NAME = 'GL_SGIX_vertex_preclip'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_vertex_preclip')
 GL_VERTEX_PRECLIP_HINT_SGIX=_C('GL_VERTEX_PRECLIP_HINT_SGIX',0x83EF)

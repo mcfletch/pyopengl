@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_HI_clientpixmap'
+_EXTENSION_NAME = 'EGL_HI_clientpixmap'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_HI_clientpixmap')
 EGL_CLIENT_PIXMAP_POINTER_HI=_C('EGL_CLIENT_PIXMAP_POINTER_HI',0x8F74)

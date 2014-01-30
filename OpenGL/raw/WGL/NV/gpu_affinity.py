@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_NV_gpu_affinity'
+_EXTENSION_NAME = 'WGL_NV_gpu_affinity'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_NV_gpu_affinity')
 ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV=_C('ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV',0x20D0)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_gpu_program5'
+_EXTENSION_NAME = 'GL_NV_gpu_program5'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_gpu_program5')
 GL_FRAGMENT_PROGRAM_INTERPOLATION_OFFSET_BITS_NV=_C('GL_FRAGMENT_PROGRAM_INTERPOLATION_OFFSET_BITS_NV',0x8E5D)

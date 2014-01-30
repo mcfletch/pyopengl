@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_1_3'
+_EXTENSION_NAME = 'GL_VERSION_GL_1_3'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_3')
 GL_ACTIVE_TEXTURE=_C('GL_ACTIVE_TEXTURE',0x84E0)

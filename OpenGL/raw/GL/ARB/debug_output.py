@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_debug_output'
+_EXTENSION_NAME = 'GL_ARB_debug_output'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_debug_output')
 GL_DEBUG_CALLBACK_FUNCTION_ARB=_C('GL_DEBUG_CALLBACK_FUNCTION_ARB',0x8244)

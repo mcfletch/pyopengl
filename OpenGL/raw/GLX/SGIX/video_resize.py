@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_SGIX_video_resize'
+_EXTENSION_NAME = 'GLX_SGIX_video_resize'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_SGIX_video_resize')
 GLX_SYNC_FRAME_SGIX=_C('GLX_SYNC_FRAME_SGIX',0x00000000)

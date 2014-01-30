@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_APPLE_element_array'
+_EXTENSION_NAME = 'GL_APPLE_element_array'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_APPLE_element_array')
 GL_ELEMENT_ARRAY_APPLE=_C('GL_ELEMENT_ARRAY_APPLE',0x8A0C)

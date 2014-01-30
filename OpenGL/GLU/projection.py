@@ -1,11 +1,11 @@
 """glu[Un]Project[4] convenience wrappers"""
-from OpenGL.raw import GLU as simple
+from OpenGL.raw import GLU as _simple
 from OpenGL import GL
 from OpenGL.lazywrapper import lazy as _lazy
 import ctypes 
 POINTER = ctypes.POINTER
 
-@_lazy( simple.gluProject )
+@_lazy( _simple.gluProject )
 def gluProject( baseFunction, objX, objY, objZ, model=None, proj=None, view=None ):
     """Convenience wrapper for gluProject
     
@@ -20,9 +20,9 @@ def gluProject( baseFunction, objX, objY, objZ, model=None, proj=None, view=None
         proj = GL.glGetDoublev( GL.GL_PROJECTION_MATRIX )
     if view is None:
         view = GL.glGetIntegerv( GL.GL_VIEWPORT )
-    winX = simple.GLdouble( 0.0 )
-    winY = simple.GLdouble( 0.0 )
-    winZ = simple.GLdouble( 0.0 )
+    winX = _simple.GLdouble( 0.0 )
+    winY = _simple.GLdouble( 0.0 )
+    winZ = _simple.GLdouble( 0.0 )
     result = baseFunction( 
         objX,objY,objZ,
         model,proj,view,
@@ -30,11 +30,11 @@ def gluProject( baseFunction, objX, objY, objZ, model=None, proj=None, view=None
     )
     # On Ubuntu 9.10 we see a None come out of baseFunction,
     # despite it having a return-type specified of GLint!
-    if result is not None and result != simple.GLU_TRUE:
+    if result is not None and result != _simple.GLU_TRUE:
         raise ValueError( """Projection failed!""" )
     return winX.value, winY.value, winZ.value 
 
-@_lazy( simple.gluUnProject )
+@_lazy( _simple.gluUnProject )
 def gluUnProject( baseFunction, winX, winY, winZ, model=None, proj=None, view=None ):
     """Convenience wrapper for gluUnProject
     
@@ -49,9 +49,9 @@ def gluUnProject( baseFunction, winX, winY, winZ, model=None, proj=None, view=No
         proj = GL.glGetDoublev( GL.GL_PROJECTION_MATRIX )
     if view is None:
         view = GL.glGetIntegerv( GL.GL_VIEWPORT )
-    objX = simple.GLdouble( 0.0 )
-    objY = simple.GLdouble( 0.0 )
-    objZ = simple.GLdouble( 0.0 )
+    objX = _simple.GLdouble( 0.0 )
+    objY = _simple.GLdouble( 0.0 )
+    objZ = _simple.GLdouble( 0.0 )
     result = baseFunction( 
         winX,winY,winZ,
         model,proj,view,
@@ -60,7 +60,7 @@ def gluUnProject( baseFunction, winX, winY, winZ, model=None, proj=None, view=No
     if not result:
         raise ValueError( """Projection failed!""" )
     return objX.value, objY.value, objZ.value 
-@_lazy( simple.gluUnProject4 )
+@_lazy( _simple.gluUnProject4 )
 def gluUnProject4(
     baseFunction,
     winX, winY, winZ, clipW, 
@@ -80,10 +80,10 @@ def gluUnProject4(
         proj = GL.glGetDoublev( GL.GL_PROJECTION_MATRIX )
     if view is None:
         view = GL.glGetIntegerv( GL.GL_VIEWPORT )
-    objX = simple.GLdouble( 0.0 )
-    objY = simple.GLdouble( 0.0 )
-    objZ = simple.GLdouble( 0.0 )
-    objW = simple.GLdouble( 0.0 )
+    objX = _simple.GLdouble( 0.0 )
+    objY = _simple.GLdouble( 0.0 )
+    objZ = _simple.GLdouble( 0.0 )
+    objW = _simple.GLdouble( 0.0 )
     result = baseFunction( 
         winX,winY,winZ,
         model,proj,view,

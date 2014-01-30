@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_shader_objects'
+_EXTENSION_NAME = 'GL_ARB_shader_objects'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_shader_objects')
 GL_BOOL_ARB=_C('GL_BOOL_ARB',0x8B56)

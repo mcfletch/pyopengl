@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_sample_shading'
+_EXTENSION_NAME = 'GL_ARB_sample_shading'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_sample_shading')
 GL_MIN_SAMPLE_SHADING_VALUE_ARB=_C('GL_MIN_SAMPLE_SHADING_VALUE_ARB',0x8C37)

@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_KHR_gl_renderbuffer_image'
+_EXTENSION_NAME = 'EGL_KHR_gl_renderbuffer_image'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_KHR_gl_renderbuffer_image')
 EGL_GL_RENDERBUFFER_KHR=_C('EGL_GL_RENDERBUFFER_KHR',0x30B9)

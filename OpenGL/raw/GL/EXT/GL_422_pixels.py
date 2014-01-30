@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_GL_422_pixels'
+_EXTENSION_NAME = 'GL_EXT_GL_422_pixels'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_GL_422_pixels')
 GL_422_AVERAGE_EXT=_C('GL_422_AVERAGE_EXT',0x80CE)

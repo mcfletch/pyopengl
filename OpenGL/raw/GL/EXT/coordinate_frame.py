@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_coordinate_frame'
+_EXTENSION_NAME = 'GL_EXT_coordinate_frame'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_coordinate_frame')
 GL_BINORMAL_ARRAY_EXT=_C('GL_BINORMAL_ARRAY_EXT',0x843A)

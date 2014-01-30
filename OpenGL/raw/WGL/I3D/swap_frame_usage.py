@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_I3D_swap_frame_usage'
+_EXTENSION_NAME = 'WGL_I3D_swap_frame_usage'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_I3D_swap_frame_usage')
 

@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_EXT_swap_control'
+_EXTENSION_NAME = 'GLX_EXT_swap_control'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_EXT_swap_control')
 GLX_MAX_SWAP_INTERVAL_EXT=_C('GLX_MAX_SWAP_INTERVAL_EXT',0x20F2)

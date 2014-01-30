@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_I3D_image_buffer'
+_EXTENSION_NAME = 'WGL_I3D_image_buffer'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_I3D_image_buffer')
 WGL_IMAGE_BUFFER_LOCK_I3D=_C('WGL_IMAGE_BUFFER_LOCK_I3D',0x00000002)

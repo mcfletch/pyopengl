@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_draw_range_elements'
+_EXTENSION_NAME = 'GL_EXT_draw_range_elements'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_draw_range_elements')
 GL_MAX_ELEMENTS_INDICES_EXT=_C('GL_MAX_ELEMENTS_INDICES_EXT',0x80E9)

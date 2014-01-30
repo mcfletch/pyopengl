@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_snorm'
+_EXTENSION_NAME = 'GL_EXT_texture_snorm'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_snorm')
 GL_ALPHA16_SNORM=_C('GL_ALPHA16_SNORM',0x9018)

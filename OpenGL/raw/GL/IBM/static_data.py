@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_IBM_static_data'
+_EXTENSION_NAME = 'GL_IBM_static_data'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_IBM_static_data')
 GL_ALL_STATIC_DATA_IBM=_C('GL_ALL_STATIC_DATA_IBM',103060)

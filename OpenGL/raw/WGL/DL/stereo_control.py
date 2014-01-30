@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_DL_stereo_control'
+_EXTENSION_NAME = 'WGL_DL_stereo_control'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_DL_stereo_control')
 WGL_STEREO_EMITTER_DISABLE_3DL=_C('WGL_STEREO_EMITTER_DISABLE_3DL',0x2056)

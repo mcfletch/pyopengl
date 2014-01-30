@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_KHR_stream_fifo'
+_EXTENSION_NAME = 'EGL_KHR_stream_fifo'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_KHR_stream_fifo')
 EGL_STREAM_FIFO_LENGTH_KHR=_C('EGL_STREAM_FIFO_LENGTH_KHR',0x31FC)

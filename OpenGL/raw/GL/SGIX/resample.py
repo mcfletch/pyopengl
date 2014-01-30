@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_resample'
+_EXTENSION_NAME = 'GL_SGIX_resample'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_resample')
 GL_PACK_RESAMPLE_SGIX=_C('GL_PACK_RESAMPLE_SGIX',0x842C)

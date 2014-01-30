@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_sRGB_decode'
+_EXTENSION_NAME = 'GL_EXT_texture_sRGB_decode'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_sRGB_decode')
 GL_DECODE_EXT=_C('GL_DECODE_EXT',0x8A49)

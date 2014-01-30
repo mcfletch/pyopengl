@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_QCOM_tiled_rendering'
+_EXTENSION_NAME = 'GL_QCOM_tiled_rendering'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_QCOM_tiled_rendering')
 GL_COLOR_BUFFER_BIT0_QCOM=_C('GL_COLOR_BUFFER_BIT0_QCOM',0x00000001)

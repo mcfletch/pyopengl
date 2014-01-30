@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIS_sharpen_texture'
+_EXTENSION_NAME = 'GL_SGIS_sharpen_texture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIS_sharpen_texture')
 GL_LINEAR_SHARPEN_ALPHA_SGIS=_C('GL_LINEAR_SHARPEN_ALPHA_SGIS',0x80AE)

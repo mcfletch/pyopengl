@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_packed_depth_stencil'
+_EXTENSION_NAME = 'GL_NV_packed_depth_stencil'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_packed_depth_stencil')
 GL_DEPTH_STENCIL_NV=_C('GL_DEPTH_STENCIL_NV',0x84F9)

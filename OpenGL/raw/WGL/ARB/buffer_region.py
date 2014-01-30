@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_ARB_buffer_region'
+_EXTENSION_NAME = 'WGL_ARB_buffer_region'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_ARB_buffer_region')
 WGL_BACK_COLOR_BUFFER_BIT_ARB=_C('WGL_BACK_COLOR_BUFFER_BIT_ARB',0x00000002)

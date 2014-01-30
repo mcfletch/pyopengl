@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_WIN_phong_shading'
+_EXTENSION_NAME = 'GL_WIN_phong_shading'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_WIN_phong_shading')
 GL_PHONG_HINT_WIN=_C('GL_PHONG_HINT_WIN',0x80EB)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_APPLE_rgb_422'
+_EXTENSION_NAME = 'GL_APPLE_rgb_422'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_APPLE_rgb_422')
 GL_RGB_422_APPLE=_C('GL_RGB_422_APPLE',0x8A1F)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIS_fog_function'
+_EXTENSION_NAME = 'GL_SGIS_fog_function'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIS_fog_function')
 GL_FOG_FUNC_POINTS_SGIS=_C('GL_FOG_FUNC_POINTS_SGIS',0x812B)

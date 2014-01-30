@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_EXT_texture_from_pixmap'
+_EXTENSION_NAME = 'GLX_EXT_texture_from_pixmap'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_EXT_texture_from_pixmap')
 GLX_AUX0_EXT=_C('GLX_AUX0_EXT',0x20E2)

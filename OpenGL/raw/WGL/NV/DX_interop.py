@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_NV_DX_interop'
+_EXTENSION_NAME = 'WGL_NV_DX_interop'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_NV_DX_interop')
 WGL_ACCESS_READ_ONLY_NV=_C('WGL_ACCESS_READ_ONLY_NV',0x00000000)

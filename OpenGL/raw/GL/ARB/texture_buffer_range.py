@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_texture_buffer_range'
+_EXTENSION_NAME = 'GL_ARB_texture_buffer_range'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_texture_buffer_range')
 GL_TEXTURE_BUFFER_OFFSET=_C('GL_TEXTURE_BUFFER_OFFSET',0x919D)

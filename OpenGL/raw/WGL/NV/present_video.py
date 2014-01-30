@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_NV_present_video'
+_EXTENSION_NAME = 'WGL_NV_present_video'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_NV_present_video')
 WGL_NUM_VIDEO_SLOTS_NV=_C('WGL_NUM_VIDEO_SLOTS_NV',0x20F0)

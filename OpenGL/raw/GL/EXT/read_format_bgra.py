@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_read_format_bgra'
+_EXTENSION_NAME = 'GL_EXT_read_format_bgra'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_read_format_bgra')
 GL_BGRA_EXT=_C('GL_BGRA_EXT',0x80E1)

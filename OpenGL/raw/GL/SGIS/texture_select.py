@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIS_texture_select'
+_EXTENSION_NAME = 'GL_SGIS_texture_select'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIS_texture_select')
 GL_DUAL_ALPHA12_SGIS=_C('GL_DUAL_ALPHA12_SGIS',0x8112)

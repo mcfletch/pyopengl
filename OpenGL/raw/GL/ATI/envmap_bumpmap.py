@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ATI_envmap_bumpmap'
+_EXTENSION_NAME = 'GL_ATI_envmap_bumpmap'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ATI_envmap_bumpmap')
 GL_BUMP_ENVMAP_ATI=_C('GL_BUMP_ENVMAP_ATI',0x877B)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_shader_buffer_load'
+_EXTENSION_NAME = 'GL_NV_shader_buffer_load'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_shader_buffer_load')
 GL_BUFFER_GPU_ADDRESS_NV=_C('GL_BUFFER_GPU_ADDRESS_NV',0x8F1D)

@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_MESA_drm_image'
+_EXTENSION_NAME = 'EGL_MESA_drm_image'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_MESA_drm_image')
 EGL_DRM_BUFFER_FORMAT_ARGB32_MESA=_C('EGL_DRM_BUFFER_FORMAT_ARGB32_MESA',0x31D2)

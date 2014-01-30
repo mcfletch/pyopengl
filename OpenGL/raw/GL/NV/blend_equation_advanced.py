@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_blend_equation_advanced'
+_EXTENSION_NAME = 'GL_NV_blend_equation_advanced'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_blend_equation_advanced')
 GL_BLEND_OVERLAP_NV=_C('GL_BLEND_OVERLAP_NV',0x9281)

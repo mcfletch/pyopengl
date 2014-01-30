@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_ES3_compatibility'
+_EXTENSION_NAME = 'GL_ARB_ES3_compatibility'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_ES3_compatibility')
 GL_ANY_SAMPLES_PASSED_CONSERVATIVE=_C('GL_ANY_SAMPLES_PASSED_CONSERVATIVE',0x8D6A)

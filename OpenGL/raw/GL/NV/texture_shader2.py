@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_texture_shader2'
+_EXTENSION_NAME = 'GL_NV_texture_shader2'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_texture_shader2')
 GL_DOT_PRODUCT_TEXTURE_3D_NV=_C('GL_DOT_PRODUCT_TEXTURE_3D_NV',0x86EF)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_gpu_shader5'
+_EXTENSION_NAME = 'GL_NV_gpu_shader5'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_gpu_shader5')
 GL_FLOAT16_NV=_C('GL_FLOAT16_NV',0x8FF8)

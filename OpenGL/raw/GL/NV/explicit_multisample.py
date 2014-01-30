@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_explicit_multisample'
+_EXTENSION_NAME = 'GL_NV_explicit_multisample'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_explicit_multisample')
 GL_INT_SAMPLER_RENDERBUFFER_NV=_C('GL_INT_SAMPLER_RENDERBUFFER_NV',0x8E57)

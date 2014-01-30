@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_ARB_multisample'
+_EXTENSION_NAME = 'GLX_ARB_multisample'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_ARB_multisample')
 GLX_SAMPLES_ARB=_C('GLX_SAMPLES_ARB',100001)

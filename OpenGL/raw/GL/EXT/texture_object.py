@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_object'
+_EXTENSION_NAME = 'GL_EXT_texture_object'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_object')
 GL_TEXTURE_1D_BINDING_EXT=_C('GL_TEXTURE_1D_BINDING_EXT',0x8068)

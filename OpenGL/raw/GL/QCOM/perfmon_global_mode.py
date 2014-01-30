@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_QCOM_perfmon_global_mode'
+_EXTENSION_NAME = 'GL_QCOM_perfmon_global_mode'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_QCOM_perfmon_global_mode')
 GL_PERFMON_GLOBAL_MODE_QCOM=_C('GL_PERFMON_GLOBAL_MODE_QCOM',0x8FA0)

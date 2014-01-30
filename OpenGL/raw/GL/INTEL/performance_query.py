@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_INTEL_performance_query'
+_EXTENSION_NAME = 'GL_INTEL_performance_query'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_INTEL_performance_query')
 GL_PERFQUERY_COUNTER_DATA_BOOL32_INTEL=_C('GL_PERFQUERY_COUNTER_DATA_BOOL32_INTEL',0x94FC)

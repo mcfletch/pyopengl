@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_async_histogram'
+_EXTENSION_NAME = 'GL_SGIX_async_histogram'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_async_histogram')
 GL_ASYNC_HISTOGRAM_SGIX=_C('GL_ASYNC_HISTOGRAM_SGIX',0x832C)

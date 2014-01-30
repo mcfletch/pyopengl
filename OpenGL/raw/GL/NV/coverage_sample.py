@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_coverage_sample'
+_EXTENSION_NAME = 'GL_NV_coverage_sample'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_coverage_sample')
 GL_COVERAGE_ALL_FRAGMENTS_NV=_C('GL_COVERAGE_ALL_FRAGMENTS_NV',0x8ED5)

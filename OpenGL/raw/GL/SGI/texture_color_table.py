@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGI_texture_color_table'
+_EXTENSION_NAME = 'GL_SGI_texture_color_table'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGI_texture_color_table')
 GL_PROXY_TEXTURE_COLOR_TABLE_SGI=_C('GL_PROXY_TEXTURE_COLOR_TABLE_SGI',0x80BD)

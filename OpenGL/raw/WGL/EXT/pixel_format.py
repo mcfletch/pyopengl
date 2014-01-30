@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_EXT_pixel_format'
+_EXTENSION_NAME = 'WGL_EXT_pixel_format'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_EXT_pixel_format')
 WGL_ACCELERATION_EXT=_C('WGL_ACCELERATION_EXT',0x2003)

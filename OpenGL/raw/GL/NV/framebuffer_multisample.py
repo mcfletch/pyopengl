@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_framebuffer_multisample'
+_EXTENSION_NAME = 'GL_NV_framebuffer_multisample'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_framebuffer_multisample')
 GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV=_C('GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV',0x8D56)

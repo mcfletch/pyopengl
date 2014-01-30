@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_IMG_multisampled_render_to_texture'
+_EXTENSION_NAME = 'GL_IMG_multisampled_render_to_texture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_IMG_multisampled_render_to_texture')
 GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_IMG=_C('GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_IMG',0x9134)

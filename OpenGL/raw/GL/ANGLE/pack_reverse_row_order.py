@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ANGLE_pack_reverse_row_order'
+_EXTENSION_NAME = 'GL_ANGLE_pack_reverse_row_order'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ANGLE_pack_reverse_row_order')
 GL_PACK_REVERSE_ROW_ORDER_ANGLE=_C('GL_PACK_REVERSE_ROW_ORDER_ANGLE',0x93A4)

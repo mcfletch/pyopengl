@@ -4,7 +4,7 @@ Same basic pattern as seen with the gluTess* functions, just need to
 add some bookkeeping to the structure class so that we can keep the
 Python function references alive during the calling process.
 """
-from OpenGL.raw import GLU as simple
+from OpenGL.raw import GLU as _simple
 from OpenGL import platform, converters, wrapper
 from OpenGL.GLU import glustruct
 from OpenGL.lazywrapper import lazy as _lazy
@@ -27,7 +27,7 @@ __all__ = (
 )
 
 # /usr/include/GL/glu.h 242
-class GLUnurbs(glustruct.GLUStruct, simple.GLUnurbs):
+class GLUnurbs(glustruct.GLUStruct, _simple.GLUnurbs):
     """GLU Nurbs structure with oor and callback storage support
 
     IMPORTANT NOTE: the texture coordinate callback receives a raw ctypes
@@ -44,60 +44,60 @@ class GLUnurbs(glustruct.GLUStruct, simple.GLUnurbs):
     }
     CALLBACK_TYPES = {
         # mapping from "which" GLU enumeration to a ctypes function type
-        simple.GLU_NURBS_BEGIN: FUNCTION_TYPE(
-            None, simple.GLenum
+        _simple.GLU_NURBS_BEGIN: FUNCTION_TYPE(
+            None, _simple.GLenum
         ),
-        simple.GLU_NURBS_BEGIN_DATA: FUNCTION_TYPE(
-            None, simple.GLenum, ctypes.POINTER(simple.GLvoid)
+        _simple.GLU_NURBS_BEGIN_DATA: FUNCTION_TYPE(
+            None, _simple.GLenum, ctypes.POINTER(_simple.GLvoid)
         ),
-        simple.GLU_NURBS_VERTEX: FUNCTION_TYPE(
-            None, ctypes.POINTER(simple.GLfloat)
+        _simple.GLU_NURBS_VERTEX: FUNCTION_TYPE(
+            None, ctypes.POINTER(_simple.GLfloat)
         ),
-        simple.GLU_NURBS_VERTEX_DATA: FUNCTION_TYPE(
-            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid)
+        _simple.GLU_NURBS_VERTEX_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(_simple.GLfloat), ctypes.POINTER(_simple.GLvoid)
         ),
-        simple.GLU_NURBS_NORMAL: FUNCTION_TYPE(
-            None, ctypes.POINTER(simple.GLfloat)
+        _simple.GLU_NURBS_NORMAL: FUNCTION_TYPE(
+            None, ctypes.POINTER(_simple.GLfloat)
         ),
-        simple.GLU_NURBS_NORMAL_DATA: FUNCTION_TYPE(
-            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid)
+        _simple.GLU_NURBS_NORMAL_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(_simple.GLfloat), ctypes.POINTER(_simple.GLvoid)
         ),
-        simple.GLU_NURBS_COLOR: FUNCTION_TYPE(
-            None, ctypes.POINTER(simple.GLfloat)
+        _simple.GLU_NURBS_COLOR: FUNCTION_TYPE(
+            None, ctypes.POINTER(_simple.GLfloat)
         ),
-        simple.GLU_NURBS_COLOR_DATA: FUNCTION_TYPE(
-            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid)
+        _simple.GLU_NURBS_COLOR_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(_simple.GLfloat), ctypes.POINTER(_simple.GLvoid)
         ),
-        simple.GLU_NURBS_TEXTURE_COORD: FUNCTION_TYPE(
-            None, ctypes.POINTER(simple.GLfloat)
+        _simple.GLU_NURBS_TEXTURE_COORD: FUNCTION_TYPE(
+            None, ctypes.POINTER(_simple.GLfloat)
         ),
-        simple.GLU_NURBS_TEXTURE_COORD_DATA: FUNCTION_TYPE(
-            None, ctypes.POINTER(simple.GLfloat), ctypes.POINTER(simple.GLvoid)
+        _simple.GLU_NURBS_TEXTURE_COORD_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(_simple.GLfloat), ctypes.POINTER(_simple.GLvoid)
         ),
-        simple.GLU_NURBS_END:FUNCTION_TYPE(
+        _simple.GLU_NURBS_END:FUNCTION_TYPE(
             None
         ),
-        simple.GLU_NURBS_END_DATA: FUNCTION_TYPE(
-            None, ctypes.POINTER(simple.GLvoid)
+        _simple.GLU_NURBS_END_DATA: FUNCTION_TYPE(
+            None, ctypes.POINTER(_simple.GLvoid)
         ),
-        simple.GLU_NURBS_ERROR:FUNCTION_TYPE(
-            None, simple.GLenum,
+        _simple.GLU_NURBS_ERROR:FUNCTION_TYPE(
+            None, _simple.GLenum,
         ),
     }
     WRAPPER_METHODS = {
-        simple.GLU_NURBS_BEGIN: None,
-        simple.GLU_NURBS_BEGIN_DATA: '_justOOR',
-        simple.GLU_NURBS_VERTEX: '_vec3',
-        simple.GLU_NURBS_VERTEX_DATA: '_vec3',
-        simple.GLU_NURBS_NORMAL: '_vec3',
-        simple.GLU_NURBS_NORMAL_DATA: '_vec3',
-        simple.GLU_NURBS_COLOR: '_vec4',
-        simple.GLU_NURBS_COLOR_DATA: '_vec4',
-        simple.GLU_NURBS_TEXTURE_COORD: '_tex',
-        simple.GLU_NURBS_TEXTURE_COORD_DATA: '_tex',
-        simple.GLU_NURBS_END: None,
-        simple.GLU_NURBS_END_DATA: '_justOOR',
-        simple.GLU_NURBS_ERROR: None,
+        _simple.GLU_NURBS_BEGIN: None,
+        _simple.GLU_NURBS_BEGIN_DATA: '_justOOR',
+        _simple.GLU_NURBS_VERTEX: '_vec3',
+        _simple.GLU_NURBS_VERTEX_DATA: '_vec3',
+        _simple.GLU_NURBS_NORMAL: '_vec3',
+        _simple.GLU_NURBS_NORMAL_DATA: '_vec3',
+        _simple.GLU_NURBS_COLOR: '_vec4',
+        _simple.GLU_NURBS_COLOR_DATA: '_vec4',
+        _simple.GLU_NURBS_TEXTURE_COORD: '_tex',
+        _simple.GLU_NURBS_TEXTURE_COORD_DATA: '_tex',
+        _simple.GLU_NURBS_END: None,
+        _simple.GLU_NURBS_END_DATA: '_justOOR',
+        _simple.GLU_NURBS_ERROR: None,
     }
     def _justOOR( self, function ):
         """Just do OOR on the last argument..."""
@@ -134,14 +134,14 @@ class GLUnurbs(glustruct.GLUStruct, simple.GLUnurbs):
         return oor
 
 # XXX yes, this is a side-effect...
-simple.gluNewNurbsRenderer.restype = ctypes.POINTER( GLUnurbs )
+_simple.gluNewNurbsRenderer.restype = ctypes.POINTER( GLUnurbs )
 
 def _callbackWithType( funcType ):
     """Get gluNurbsCallback function with set last arg-type"""
     result =  platform.copyBaseFunction(
-        simple.gluNurbsCallback
+        _simple.gluNurbsCallback
     )
-    result.argtypes = [ctypes.POINTER(GLUnurbs), simple.GLenum, funcType]
+    result.argtypes = [ctypes.POINTER(GLUnurbs), _simple.GLenum, funcType]
     assert result.argtypes[-1] == funcType
     return result
 
@@ -159,7 +159,7 @@ def gluNurbsCallback( nurb, which, CallBackFunc ):
     """Dispatch to the nurb's addCallback operation"""
     return nurb.addCallback( which, CallBackFunc )
 
-@_lazy( simple.gluNewNurbsRenderer )
+@_lazy( _simple.gluNewNurbsRenderer )
 def gluNewNurbsRenderer( baseFunction ):
     """Return a new nurbs renderer for the system (dereferences pointer)"""
     newSet = baseFunction()
@@ -167,7 +167,7 @@ def gluNewNurbsRenderer( baseFunction ):
     #new.__class__ = GLUnurbs # yes, I know, ick
     return new
 
-@_lazy( simple.gluNurbsCallbackData )
+@_lazy( _simple.gluNurbsCallbackData )
 def gluNurbsCallbackData( baseFunction, nurb, userData ):
     """Note the Python object for use as userData by the nurb"""
     return baseFunction(
@@ -199,14 +199,14 @@ def checkKnots( knots, name ):
                     """%s has decreasing knot %s after %s"""%( name, next, knot )
                 )
 
-@_lazy( simple.gluNurbsCallbackDataEXT )
+@_lazy( _simple.gluNurbsCallbackDataEXT )
 def gluNurbsCallbackDataEXT( baseFunction,nurb, userData ):
     """Note the Python object for use as userData by the nurb"""
     return baseFunction(
         nurb, nurb.noteObject( userData )
     )
 
-@_lazy( simple.gluNurbsCurve )
+@_lazy( _simple.gluNurbsCurve )
 def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
     """Pythonic version of gluNurbsCurve
 
@@ -227,7 +227,7 @@ def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
         nurb, knotCount, knots, step, control, order, type,
     )
 
-@_lazy( simple.gluNurbsSurface )
+@_lazy( _simple.gluNurbsSurface )
 def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
     """Pythonic version of gluNurbsSurface
 
@@ -269,7 +269,7 @@ def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
     )
     return result
 
-@_lazy( simple.gluPwlCurve )
+@_lazy( _simple.gluPwlCurve )
 def gluPwlCurve( baseFunction, nurb, data, type ):
     """gluPwlCurve -- piece-wise linear curve within GLU context
 
@@ -277,9 +277,9 @@ def gluPwlCurve( baseFunction, nurb, data, type ):
     type -- determines number of elements/data-point
     """
     data = arrays.GLfloatArray.asArray( data )
-    if type == simple.GLU_MAP1_TRIM_2:
+    if type == _simple.GLU_MAP1_TRIM_2:
         divisor = 2
-    elif type == simple.GLU_MAP_TRIM_3:
+    elif type == _simple.GLU_MAP_TRIM_3:
         divisor = 3
     else:
         raise ValueError( """Unrecognised type constant: %s"""%(type))

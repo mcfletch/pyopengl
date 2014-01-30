@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_KHR_gl_texture_cubemap_image'
+_EXTENSION_NAME = 'EGL_KHR_gl_texture_cubemap_image'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_KHR_gl_texture_cubemap_image')
 EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_X_KHR=_C('EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_X_KHR',0x30B4)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_shared_exponent'
+_EXTENSION_NAME = 'GL_EXT_texture_shared_exponent'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_shared_exponent')
 GL_RGB9_E5_EXT=_C('GL_RGB9_E5_EXT',0x8C3D)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_index_material'
+_EXTENSION_NAME = 'GL_EXT_index_material'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_index_material')
 GL_INDEX_MATERIAL_EXT=_C('GL_INDEX_MATERIAL_EXT',0x81B8)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_3_2'
+_EXTENSION_NAME = 'GL_VERSION_GL_3_2'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_3_2')
 GL_ALREADY_SIGNALED=_C('GL_ALREADY_SIGNALED',0x911A)

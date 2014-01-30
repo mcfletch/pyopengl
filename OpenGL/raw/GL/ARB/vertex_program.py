@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_vertex_program'
+_EXTENSION_NAME = 'GL_ARB_vertex_program'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_vertex_program')
 GL_COLOR_SUM_ARB=_C('GL_COLOR_SUM_ARB',0x8458)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_INTEL_map_texture'
+_EXTENSION_NAME = 'GL_INTEL_map_texture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_INTEL_map_texture')
 GL_LAYOUT_DEFAULT_INTEL=_C('GL_LAYOUT_DEFAULT_INTEL',0)

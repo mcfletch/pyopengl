@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_vdpau_interop'
+_EXTENSION_NAME = 'GL_NV_vdpau_interop'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_vdpau_interop')
 GL_SURFACE_MAPPED_NV=_C('GL_SURFACE_MAPPED_NV',0x8700)

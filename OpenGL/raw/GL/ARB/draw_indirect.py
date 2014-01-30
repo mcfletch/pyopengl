@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_draw_indirect'
+_EXTENSION_NAME = 'GL_ARB_draw_indirect'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_draw_indirect')
 GL_DRAW_INDIRECT_BUFFER=_C('GL_DRAW_INDIRECT_BUFFER',0x8F3F)

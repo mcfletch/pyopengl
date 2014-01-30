@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OES_EGL_image_external'
+_EXTENSION_NAME = 'GL_OES_EGL_image_external'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OES_EGL_image_external')
 GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES=_C('GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES',0x8D68)

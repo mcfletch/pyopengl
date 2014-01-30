@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_primitive_restart'
+_EXTENSION_NAME = 'GL_NV_primitive_restart'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_primitive_restart')
 GL_PRIMITIVE_RESTART_INDEX_NV=_C('GL_PRIMITIVE_RESTART_INDEX_NV',0x8559)

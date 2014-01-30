@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_copy_depth_to_color'
+_EXTENSION_NAME = 'GL_NV_copy_depth_to_color'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_copy_depth_to_color')
 GL_DEPTH_STENCIL_TO_BGRA_NV=_C('GL_DEPTH_STENCIL_TO_BGRA_NV',0x886F)

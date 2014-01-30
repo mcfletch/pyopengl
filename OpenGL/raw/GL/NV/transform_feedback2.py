@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_transform_feedback2'
+_EXTENSION_NAME = 'GL_NV_transform_feedback2'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_transform_feedback2')
 GL_TRANSFORM_FEEDBACK_BINDING_NV=_C('GL_TRANSFORM_FEEDBACK_BINDING_NV',0x8E25)

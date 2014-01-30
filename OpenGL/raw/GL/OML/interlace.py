@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OML_interlace'
+_EXTENSION_NAME = 'GL_OML_interlace'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OML_interlace')
 GL_INTERLACE_OML=_C('GL_INTERLACE_OML',0x8980)

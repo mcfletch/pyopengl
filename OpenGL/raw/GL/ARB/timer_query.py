@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_timer_query'
+_EXTENSION_NAME = 'GL_ARB_timer_query'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_timer_query')
 GL_TIMESTAMP=_C('GL_TIMESTAMP',0x8E28)

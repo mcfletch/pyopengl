@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_depth_texture'
+_EXTENSION_NAME = 'GL_ARB_depth_texture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_depth_texture')
 GL_DEPTH_COMPONENT16_ARB=_C('GL_DEPTH_COMPONENT16_ARB',0x81A5)

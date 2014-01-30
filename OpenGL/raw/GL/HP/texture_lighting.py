@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_HP_texture_lighting'
+_EXTENSION_NAME = 'GL_HP_texture_lighting'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_HP_texture_lighting')
 GL_TEXTURE_LIGHTING_MODE_HP=_C('GL_TEXTURE_LIGHTING_MODE_HP',0x8167)

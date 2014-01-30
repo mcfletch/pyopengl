@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_integer'
+_EXTENSION_NAME = 'GL_EXT_texture_integer'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_integer')
 GL_ALPHA16I_EXT=_C('GL_ALPHA16I_EXT',0x8D8A)

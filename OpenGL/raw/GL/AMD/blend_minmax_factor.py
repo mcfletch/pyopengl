@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_blend_minmax_factor'
+_EXTENSION_NAME = 'GL_AMD_blend_minmax_factor'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_blend_minmax_factor')
 GL_FACTOR_MAX_AMD=_C('GL_FACTOR_MAX_AMD',0x901D)

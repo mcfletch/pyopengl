@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_IMG_user_clip_plane'
+_EXTENSION_NAME = 'GL_IMG_user_clip_plane'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_IMG_user_clip_plane')
 GL_CLIP_PLANE0_IMG=_C('GL_CLIP_PLANE0_IMG',0x3000)

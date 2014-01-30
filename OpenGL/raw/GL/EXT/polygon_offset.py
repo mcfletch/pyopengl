@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_polygon_offset'
+_EXTENSION_NAME = 'GL_EXT_polygon_offset'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_polygon_offset')
 GL_POLYGON_OFFSET_BIAS_EXT=_C('GL_POLYGON_OFFSET_BIAS_EXT',0x8039)

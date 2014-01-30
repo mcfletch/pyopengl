@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_scalebias_hint'
+_EXTENSION_NAME = 'GL_SGIX_scalebias_hint'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_scalebias_hint')
 GL_SCALEBIAS_HINT_SGIX=_C('GL_SCALEBIAS_HINT_SGIX',0x8322)

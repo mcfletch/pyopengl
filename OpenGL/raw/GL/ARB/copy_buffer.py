@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_copy_buffer'
+_EXTENSION_NAME = 'GL_ARB_copy_buffer'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_copy_buffer')
 GL_COPY_READ_BUFFER=_C('GL_COPY_READ_BUFFER',0x8F36)

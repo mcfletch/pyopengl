@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_sample_positions'
+_EXTENSION_NAME = 'GL_AMD_sample_positions'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_sample_positions')
 GL_SUBSAMPLE_DISTANCE_AMD=_C('GL_SUBSAMPLE_DISTANCE_AMD',0x883F)

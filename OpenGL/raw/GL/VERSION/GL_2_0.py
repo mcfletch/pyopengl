@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_2_0'
+_EXTENSION_NAME = 'GL_VERSION_GL_2_0'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_2_0')
 GL_ACTIVE_ATTRIBUTES=_C('GL_ACTIVE_ATTRIBUTES',0x8B89)

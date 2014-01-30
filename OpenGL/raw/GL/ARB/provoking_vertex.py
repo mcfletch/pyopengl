@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_provoking_vertex'
+_EXTENSION_NAME = 'GL_ARB_provoking_vertex'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_provoking_vertex')
 GL_FIRST_VERTEX_CONVENTION=_C('GL_FIRST_VERTEX_CONVENTION',0x8E4D)

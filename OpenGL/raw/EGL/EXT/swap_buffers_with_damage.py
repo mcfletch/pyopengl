@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_EXT_swap_buffers_with_damage'
+_EXTENSION_NAME = 'EGL_EXT_swap_buffers_with_damage'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_EXT_swap_buffers_with_damage')
 

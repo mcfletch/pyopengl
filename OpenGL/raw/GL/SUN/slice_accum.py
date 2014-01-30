@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SUN_slice_accum'
+_EXTENSION_NAME = 'GL_SUN_slice_accum'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SUN_slice_accum')
 GL_SLICE_ACCUM_SUN=_C('GL_SLICE_ACCUM_SUN',0x85CC)

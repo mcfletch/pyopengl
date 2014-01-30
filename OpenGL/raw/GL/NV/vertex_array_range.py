@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_vertex_array_range'
+_EXTENSION_NAME = 'GL_NV_vertex_array_range'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_vertex_array_range')
 GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV=_C('GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV',0x8520)

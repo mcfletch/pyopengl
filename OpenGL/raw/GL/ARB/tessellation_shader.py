@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_tessellation_shader'
+_EXTENSION_NAME = 'GL_ARB_tessellation_shader'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_tessellation_shader')
 GL_CCW=_C('GL_CCW',0x0901)

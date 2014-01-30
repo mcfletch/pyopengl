@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_ARB_get_proc_address'
+_EXTENSION_NAME = 'GLX_ARB_get_proc_address'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_ARB_get_proc_address')
 

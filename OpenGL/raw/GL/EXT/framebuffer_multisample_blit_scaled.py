@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_framebuffer_multisample_blit_scaled'
+_EXTENSION_NAME = 'GL_EXT_framebuffer_multisample_blit_scaled'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_framebuffer_multisample_blit_scaled')
 GL_SCALED_RESOLVE_FASTEST_EXT=_C('GL_SCALED_RESOLVE_FASTEST_EXT',0x90BA)

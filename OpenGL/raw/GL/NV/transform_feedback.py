@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_transform_feedback'
+_EXTENSION_NAME = 'GL_NV_transform_feedback'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_transform_feedback')
 GL_ACTIVE_VARYINGS_NV=_C('GL_ACTIVE_VARYINGS_NV',0x8C81)

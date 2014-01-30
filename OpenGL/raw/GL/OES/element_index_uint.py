@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OES_element_index_uint'
+_EXTENSION_NAME = 'GL_OES_element_index_uint'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OES_element_index_uint')
 GL_UNSIGNED_INT=_C('GL_UNSIGNED_INT',0x1405)

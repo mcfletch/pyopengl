@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIS_texture_lod'
+_EXTENSION_NAME = 'GL_SGIS_texture_lod'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIS_texture_lod')
 GL_TEXTURE_BASE_LEVEL_SGIS=_C('GL_TEXTURE_BASE_LEVEL_SGIS',0x813C)

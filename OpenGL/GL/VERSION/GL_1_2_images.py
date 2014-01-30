@@ -9,7 +9,7 @@ if functionName to see if the function is available at run-time.
 """
 from OpenGL import wrapper, constants, arrays
 from OpenGL.raw.GL.ARB import imaging
-from OpenGL.raw.GL.VERSION import GL_1_2 as simple
+from OpenGL.raw.GL.VERSION import GL_1_2 as _simple
 from OpenGL.GL.ARB.imaging import *
 
 from OpenGL.GL import images
@@ -29,7 +29,7 @@ for suffix,arrayConstant in [
         'glTexSubImage3D', # extension/1.2 standard
     ):
         functionName, function = images.typedImageFunction(
-            suffix, arrayConstant, getattr(simple, functionName),
+            suffix, arrayConstant, getattr(_simple, functionName),
         )
         globals()[functionName] = function
         try:
@@ -43,13 +43,13 @@ for suffix,arrayConstant in [
 
 glTexImage3D = images.setDimensionsAsInts(
     images.setImageInput(
-        simple.glTexImage3D,
+        _simple.glTexImage3D,
         typeName = 'type',
     )
 )
 glTexSubImage3D = images.setDimensionsAsInts(
     images.setImageInput(
-        simple.glTexSubImage3D,
+        _simple.glTexSubImage3D,
         typeName = 'type',
     )
 )

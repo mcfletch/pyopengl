@@ -1,6 +1,6 @@
 """Utility module to parse a Feedback buffer"""
 from OpenGL import contextdata
-from OpenGL.raw.GL.VERSION import GL_1_1 as simple
+from OpenGL.raw.GL.VERSION import GL_1_1 as _simple
 from OpenGL.GL import glget
 
 def parseFeedback( buffer, entryCount ):
@@ -22,11 +22,11 @@ def parseFeedback( buffer, entryCount ):
                 Vertex(*vData),
                 Vertex(*vData2),
             ) )
-        elif token == simple.GL_PASS_THROUGH_TOKEN:
-            result.append( (simple.GL_PASS_THROUGH_TOKEN, buffer[bufferIndex]))
+        elif token == _simple.GL_PASS_THROUGH_TOKEN:
+            result.append( (_simple.GL_PASS_THROUGH_TOKEN, buffer[bufferIndex]))
             bufferIndex += 1
-        elif token == simple.GL_POLYGON_TOKEN:
-            temp = [simple.GL_POLYGON_TOKEN]
+        elif token == _simple.GL_POLYGON_TOKEN:
+            temp = [_simple.GL_POLYGON_TOKEN]
             count = int(buffer[bufferIndex])
             bufferIndex += 1
             for item in range(count):
@@ -40,14 +40,14 @@ def parseFeedback( buffer, entryCount ):
     return result
 
 SINGLE_VERTEX_TOKENS = {
-    simple.GL_BITMAP_TOKEN: simple.GL_BITMAP_TOKEN,
-    simple.GL_COPY_PIXEL_TOKEN: simple.GL_COPY_PIXEL_TOKEN,
-    simple.GL_DRAW_PIXEL_TOKEN: simple.GL_DRAW_PIXEL_TOKEN,
-    simple.GL_POINT_TOKEN: simple.GL_POINT_TOKEN,
+    _simple.GL_BITMAP_TOKEN: _simple.GL_BITMAP_TOKEN,
+    _simple.GL_COPY_PIXEL_TOKEN: _simple.GL_COPY_PIXEL_TOKEN,
+    _simple.GL_DRAW_PIXEL_TOKEN: _simple.GL_DRAW_PIXEL_TOKEN,
+    _simple.GL_POINT_TOKEN: _simple.GL_POINT_TOKEN,
 }
 DOUBLE_VERTEX_TOKENS = {
-    simple.GL_LINE_TOKEN: simple.GL_LINE_TOKEN,
-    simple.GL_LINE_RESET_TOKEN: simple.GL_LINE_RESET_TOKEN,
+    _simple.GL_LINE_TOKEN: _simple.GL_LINE_TOKEN,
+    _simple.GL_LINE_RESET_TOKEN: _simple.GL_LINE_RESET_TOKEN,
 }
 class Vertex( object ):
     """Simplistic holder for vertex data from a feedback buffer"""
@@ -59,23 +59,23 @@ class Vertex( object ):
         self.texture = texture 
 def createGetVertex( ):
     mode = contextdata.getValue( "GL_FEEDBACK_BUFFER_TYPE" )
-    indexMode = glget.glGetBoolean( simple.GL_INDEX_MODE )
+    indexMode = glget.glGetBoolean( _simple.GL_INDEX_MODE )
     colorSize = [ 4,1 ][ int(indexMode) ]
-    if mode in (simple.GL_2D,simple.GL_3D):
-        if mode == simple.GL_2D:
+    if mode in (_simple.GL_2D,_simple.GL_3D):
+        if mode == _simple.GL_2D:
             size = 2
         else:
             size = 3
         def getVertex( buffer, bufferIndex ):
             end = bufferIndex+size
             return (buffer[bufferIndex:end],None,None),end 
-    elif mode == simple.GL_3D_COLOR:
+    elif mode == _simple.GL_3D_COLOR:
         def getVertex( buffer, bufferIndex ):
             end = bufferIndex+3
             colorEnd = end + colorSize
             return (buffer[bufferIndex:end],buffer[end:colorEnd],None),colorEnd 
     else:
-        if mode == simple.GL_3D_COLOR_TEXTURE:
+        if mode == _simple.GL_3D_COLOR_TEXTURE:
             size = 3
         else:
             size = 4

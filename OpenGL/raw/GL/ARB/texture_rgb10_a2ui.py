@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_texture_rgb10_a2ui'
+_EXTENSION_NAME = 'GL_ARB_texture_rgb10_a2ui'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_texture_rgb10_a2ui')
 GL_RGB10_A2UI=_C('GL_RGB10_A2UI',0x906F)

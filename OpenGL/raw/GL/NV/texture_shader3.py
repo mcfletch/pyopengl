@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_texture_shader3'
+_EXTENSION_NAME = 'GL_NV_texture_shader3'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_texture_shader3')
 GL_DEPENDENT_HILO_TEXTURE_2D_NV=_C('GL_DEPENDENT_HILO_TEXTURE_2D_NV',0x8858)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_texture_multisample'
+_EXTENSION_NAME = 'GL_ARB_texture_multisample'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_texture_multisample')
 GL_INT_SAMPLER_2D_MULTISAMPLE=_C('GL_INT_SAMPLER_2D_MULTISAMPLE',0x9109)

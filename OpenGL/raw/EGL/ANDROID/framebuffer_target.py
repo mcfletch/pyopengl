@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_ANDROID_framebuffer_target'
+_EXTENSION_NAME = 'EGL_ANDROID_framebuffer_target'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_ANDROID_framebuffer_target')
 EGL_FRAMEBUFFER_TARGET_ANDROID=_C('EGL_FRAMEBUFFER_TARGET_ANDROID',0x3147)

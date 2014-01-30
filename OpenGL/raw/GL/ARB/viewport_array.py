@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_viewport_array'
+_EXTENSION_NAME = 'GL_ARB_viewport_array'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_viewport_array')
 GL_DEPTH_RANGE=_C('GL_DEPTH_RANGE',0x0B70)

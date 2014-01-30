@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_packed_pixels'
+_EXTENSION_NAME = 'GL_EXT_packed_pixels'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_packed_pixels')
 GL_UNSIGNED_BYTE_3_3_2_EXT=_C('GL_UNSIGNED_BYTE_3_3_2_EXT',0x8032)

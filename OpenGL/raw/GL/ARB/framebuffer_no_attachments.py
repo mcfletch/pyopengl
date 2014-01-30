@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_framebuffer_no_attachments'
+_EXTENSION_NAME = 'GL_ARB_framebuffer_no_attachments'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_framebuffer_no_attachments')
 GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS=_C('GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS',0x9314)

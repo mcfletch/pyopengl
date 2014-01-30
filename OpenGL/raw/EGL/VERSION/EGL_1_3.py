@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_VERSION_EGL_1_3'
+_EXTENSION_NAME = 'EGL_VERSION_EGL_1_3'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_VERSION_EGL_1_3')
 EGL_CONFORMANT=_C('EGL_CONFORMANT',0x3042)

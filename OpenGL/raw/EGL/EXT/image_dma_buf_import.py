@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_EXT_image_dma_buf_import'
+_EXTENSION_NAME = 'EGL_EXT_image_dma_buf_import'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_EXT_image_dma_buf_import')
 EGL_DMA_BUF_PLANE0_FD_EXT=_C('EGL_DMA_BUF_PLANE0_FD_EXT',0x3272)

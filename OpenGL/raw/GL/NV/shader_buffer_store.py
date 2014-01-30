@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_shader_buffer_store'
+_EXTENSION_NAME = 'GL_NV_shader_buffer_store'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_shader_buffer_store')
 GL_READ_WRITE=_C('GL_READ_WRITE',0x88BA)

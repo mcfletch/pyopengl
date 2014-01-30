@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIS_texture_filter4'
+_EXTENSION_NAME = 'GL_SGIS_texture_filter4'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIS_texture_filter4')
 GL_FILTER4_SGIS=_C('GL_FILTER4_SGIS',0x8146)

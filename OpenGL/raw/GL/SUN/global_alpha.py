@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SUN_global_alpha'
+_EXTENSION_NAME = 'GL_SUN_global_alpha'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SUN_global_alpha')
 GL_GLOBAL_ALPHA_FACTOR_SUN=_C('GL_GLOBAL_ALPHA_FACTOR_SUN',0x81DA)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_map_buffer_range'
+_EXTENSION_NAME = 'GL_EXT_map_buffer_range'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_map_buffer_range')
 GL_MAP_FLUSH_EXPLICIT_BIT_EXT=_C('GL_MAP_FLUSH_EXPLICIT_BIT_EXT',0x0010)

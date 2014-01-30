@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OES_point_size_array'
+_EXTENSION_NAME = 'GL_OES_point_size_array'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OES_point_size_array')
 GL_POINT_SIZE_ARRAY_BUFFER_BINDING_OES=_C('GL_POINT_SIZE_ARRAY_BUFFER_BINDING_OES',0x8B9F)

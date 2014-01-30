@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_video_capture'
+_EXTENSION_NAME = 'GL_NV_video_capture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_video_capture')
 GL_FAILURE_NV=_C('GL_FAILURE_NV',0x9030)

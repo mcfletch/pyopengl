@@ -1,5 +1,5 @@
 """Wrapper/Implementation of the GLU tessellator objects for PyOpenGL"""
-from OpenGL.raw import GLU as simple
+from OpenGL.raw import GLU as _simple
 from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL.platform import GLU,createBaseFunction
 from OpenGL.GLU import glustruct
@@ -8,55 +8,55 @@ from OpenGL.platform import PLATFORM
 from OpenGL.lazywrapper import lazy as _lazy
 import ctypes
 
-class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
+class GLUtesselator( glustruct.GLUStruct, _simple.GLUtesselator):
     """Implementation class for GLUTessellator structures in OpenGL-ctypes"""
     FUNCTION_TYPE = PLATFORM.functionTypeFor(PLATFORM.GLU)
     CALLBACK_TYPES = {
         # mapping from "which" GLU enumeration to a ctypes function type
-        simple.GLU_TESS_BEGIN: FUNCTION_TYPE( None, simple.GLenum ),
-        simple.GLU_TESS_BEGIN_DATA: FUNCTION_TYPE(
-            None, simple.GLenum, ctypes.c_void_p
+        _simple.GLU_TESS_BEGIN: FUNCTION_TYPE( None, _simple.GLenum ),
+        _simple.GLU_TESS_BEGIN_DATA: FUNCTION_TYPE(
+            None, _simple.GLenum, ctypes.c_void_p
         ),
-        simple.GLU_TESS_EDGE_FLAG: FUNCTION_TYPE( None, simple.GLboolean),
-        simple.GLU_TESS_EDGE_FLAG_DATA: FUNCTION_TYPE(
-            None, simple.GLboolean, ctypes.c_void_p
+        _simple.GLU_TESS_EDGE_FLAG: FUNCTION_TYPE( None, _simple.GLboolean),
+        _simple.GLU_TESS_EDGE_FLAG_DATA: FUNCTION_TYPE(
+            None, _simple.GLboolean, ctypes.c_void_p
         ),
-        simple.GLU_TESS_VERTEX: FUNCTION_TYPE( None, ctypes.c_void_p ),
-        simple.GLU_TESS_VERTEX_DATA: FUNCTION_TYPE(
+        _simple.GLU_TESS_VERTEX: FUNCTION_TYPE( None, ctypes.c_void_p ),
+        _simple.GLU_TESS_VERTEX_DATA: FUNCTION_TYPE(
             None, ctypes.c_void_p, ctypes.c_void_p
         ),
-        simple.GLU_TESS_END: FUNCTION_TYPE( None ),
-        simple.GLU_TESS_END_DATA: FUNCTION_TYPE( None, ctypes.c_void_p),
-        simple.GLU_TESS_COMBINE: FUNCTION_TYPE(
+        _simple.GLU_TESS_END: FUNCTION_TYPE( None ),
+        _simple.GLU_TESS_END_DATA: FUNCTION_TYPE( None, ctypes.c_void_p),
+        _simple.GLU_TESS_COMBINE: FUNCTION_TYPE(
             None,
-            ctypes.POINTER(simple.GLdouble),
+            ctypes.POINTER(_simple.GLdouble),
             ctypes.POINTER(ctypes.c_void_p),
-            ctypes.POINTER(simple.GLfloat),
+            ctypes.POINTER(_simple.GLfloat),
             ctypes.POINTER(ctypes.c_void_p)
         ),
-        simple.GLU_TESS_COMBINE_DATA: FUNCTION_TYPE(
+        _simple.GLU_TESS_COMBINE_DATA: FUNCTION_TYPE(
             None,
-            ctypes.POINTER(simple.GLdouble),
+            ctypes.POINTER(_simple.GLdouble),
             ctypes.POINTER(ctypes.c_void_p),
-            ctypes.POINTER(simple.GLfloat),
+            ctypes.POINTER(_simple.GLfloat),
             ctypes.POINTER(ctypes.c_void_p),
             ctypes.c_void_p,
         ),
-        simple.GLU_TESS_ERROR: FUNCTION_TYPE( None, simple.GLenum),
-        simple.GLU_TESS_ERROR_DATA: FUNCTION_TYPE(
-            None, simple.GLenum, ctypes.c_void_p
+        _simple.GLU_TESS_ERROR: FUNCTION_TYPE( None, _simple.GLenum),
+        _simple.GLU_TESS_ERROR_DATA: FUNCTION_TYPE(
+            None, _simple.GLenum, ctypes.c_void_p
         ),
-        simple.GLU_ERROR : FUNCTION_TYPE( None, simple.GLenum )
+        _simple.GLU_ERROR : FUNCTION_TYPE( None, _simple.GLenum )
     }
     WRAPPER_METHODS = {
-        simple.GLU_TESS_BEGIN_DATA: 'dataWrapper',
-        simple.GLU_TESS_EDGE_FLAG_DATA: 'dataWrapper',
-        simple.GLU_TESS_VERTEX: 'vertexWrapper',
-        simple.GLU_TESS_VERTEX_DATA: 'vertexWrapper',
-        simple.GLU_TESS_END_DATA: 'dataWrapper',
-        simple.GLU_TESS_COMBINE: 'combineWrapper',
-        simple.GLU_TESS_COMBINE_DATA: 'combineWrapper',
-        simple.GLU_TESS_ERROR_DATA: 'dataWrapper',
+        _simple.GLU_TESS_BEGIN_DATA: 'dataWrapper',
+        _simple.GLU_TESS_EDGE_FLAG_DATA: 'dataWrapper',
+        _simple.GLU_TESS_VERTEX: 'vertexWrapper',
+        _simple.GLU_TESS_VERTEX_DATA: 'vertexWrapper',
+        _simple.GLU_TESS_END_DATA: 'dataWrapper',
+        _simple.GLU_TESS_COMBINE: 'combineWrapper',
+        _simple.GLU_TESS_COMBINE_DATA: 'combineWrapper',
+        _simple.GLU_TESS_ERROR_DATA: 'dataWrapper',
     }
     def gluTessVertex( self, location, data=None ):
         """Add a vertex to this tessellator, storing data for later lookup"""
@@ -73,7 +73,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
         return gluTessVertexBase( self, location, vp )
     def gluTessBeginPolygon( self, data ):
         """Note the object pointer to return it as a Python object"""
-        return simple.gluTessBeginPolygon(
+        return _simple.gluTessBeginPolygon(
             self, ctypes.c_void_p(self.noteObject( data ))
         )
     def combineWrapper( self, function ):
@@ -162,7 +162,7 @@ class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
 GLUtesselator.CALLBACK_FUNCTION_REGISTRARS = dict([
     (c,createBaseFunction(
         'gluTessCallback', dll=GLU, resultType=None,
-        argTypes=[ctypes.POINTER(GLUtesselator), simple.GLenum,funcType],
+        argTypes=[ctypes.POINTER(GLUtesselator), _simple.GLenum,funcType],
         doc='gluTessCallback( POINTER(GLUtesselator)(tess), GLenum(which), _GLUfuncptr(CallBackFunc) ) -> None',
         argNames=('tess', 'which', 'CallBackFunc'),
     ))
@@ -194,18 +194,18 @@ def gluNewTess( baseFunction ):
     """Get a new tessellator object (just unpacks the pointer for you)"""
     return baseFunction()[0]
 
-@_lazy( simple.gluGetTessProperty )
+@_lazy( _simple.gluGetTessProperty )
 def gluGetTessProperty( baseFunction, tess, which, data=None ):
     """Retrieve single double for a tessellator property"""
     if data is None:
-        data = simple.GLdouble( 0.0 )
+        data = _simple.GLdouble( 0.0 )
         baseFunction( tess, which, data )
         return data.value
     else:
         return baseFunction( tess, which, data )
 
 gluTessVertexBase = arrays.setInputArraySizeType(
-    simple.gluTessVertex,
+    _simple.gluTessVertex,
     3,
     arrays.GLdoubleArray,
     'location',

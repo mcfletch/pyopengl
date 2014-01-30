@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ANGLE_translated_shader_source'
+_EXTENSION_NAME = 'GL_ANGLE_translated_shader_source'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ANGLE_translated_shader_source')
 GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE=_C('GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE',0x93A0)

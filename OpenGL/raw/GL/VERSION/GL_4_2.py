@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_4_2'
+_EXTENSION_NAME = 'GL_VERSION_GL_4_2'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_4_2')
 GL_ACTIVE_ATOMIC_COUNTER_BUFFERS=_C('GL_ACTIVE_ATOMIC_COUNTER_BUFFERS',0x92D9)

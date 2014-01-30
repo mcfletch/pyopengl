@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_transpose_matrix'
+_EXTENSION_NAME = 'GL_ARB_transpose_matrix'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_transpose_matrix')
 GL_TRANSPOSE_COLOR_MATRIX_ARB=_C('GL_TRANSPOSE_COLOR_MATRIX_ARB',0x84E6)

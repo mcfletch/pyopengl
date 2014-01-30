@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_NV_stream_sync'
+_EXTENSION_NAME = 'EGL_NV_stream_sync'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_NV_stream_sync')
 EGL_SYNC_NEW_FRAME_NV=_C('EGL_SYNC_NEW_FRAME_NV',0x321F)

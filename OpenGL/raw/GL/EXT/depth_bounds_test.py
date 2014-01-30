@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_depth_bounds_test'
+_EXTENSION_NAME = 'GL_EXT_depth_bounds_test'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_depth_bounds_test')
 GL_DEPTH_BOUNDS_EXT=_C('GL_DEPTH_BOUNDS_EXT',0x8891)

@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_EXT_visual_info'
+_EXTENSION_NAME = 'GLX_EXT_visual_info'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_EXT_visual_info')
 GLX_DIRECT_COLOR_EXT=_C('GLX_DIRECT_COLOR_EXT',0x8003)

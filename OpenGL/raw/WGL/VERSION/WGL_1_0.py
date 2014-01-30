@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_VERSION_WGL_1_0'
+_EXTENSION_NAME = 'WGL_VERSION_WGL_1_0'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_VERSION_WGL_1_0')
 WGL_FONT_LINES=_C('WGL_FONT_LINES',0)

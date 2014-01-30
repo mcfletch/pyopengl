@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_pixel_texture'
+_EXTENSION_NAME = 'GL_SGIX_pixel_texture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_pixel_texture')
 GL_PIXEL_TEX_GEN_MODE_SGIX=_C('GL_PIXEL_TEX_GEN_MODE_SGIX',0x832B)

@@ -32,7 +32,7 @@ class TestContext( BaseContext ):
                         #print '# No: %s'%( value.name, )
                         pass
                     else:
-                        print 'simple.%s: (1,), # TODO: Check size!'%( value.name, )
+                        print '_simple.%s: (1,), # TODO: Check size!'%( value.name, )
                 else:
                     ordinality = 256 - arrays.sum( 
                         (data == weird_value)
@@ -43,7 +43,7 @@ class TestContext( BaseContext ):
                         ordinality = (ordinality,)
                     if original_ord != ordinality:
                         
-                        print 'simple.%s: %s, # %s'%(value.name,ordinality,original_ord)
+                        print '_simple.%s: %s, # %s'%(value.name,ordinality,original_ord)
                     else:
                         pass
         sys.exit( 0)

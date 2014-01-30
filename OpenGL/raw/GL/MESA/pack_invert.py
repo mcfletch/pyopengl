@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_MESA_pack_invert'
+_EXTENSION_NAME = 'GL_MESA_pack_invert'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_MESA_pack_invert')
 GL_PACK_INVERT_MESA=_C('GL_PACK_INVERT_MESA',0x8758)

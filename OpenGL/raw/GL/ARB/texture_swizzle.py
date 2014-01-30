@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_texture_swizzle'
+_EXTENSION_NAME = 'GL_ARB_texture_swizzle'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_texture_swizzle')
 GL_TEXTURE_SWIZZLE_A=_C('GL_TEXTURE_SWIZZLE_A',0x8E45)

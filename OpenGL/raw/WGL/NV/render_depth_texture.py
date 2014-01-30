@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_NV_render_depth_texture'
+_EXTENSION_NAME = 'WGL_NV_render_depth_texture'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_NV_render_depth_texture')
 WGL_BIND_TO_TEXTURE_DEPTH_NV=_C('WGL_BIND_TO_TEXTURE_DEPTH_NV',0x20A3)

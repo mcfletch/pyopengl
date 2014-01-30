@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_IBM_rasterpos_clip'
+_EXTENSION_NAME = 'GL_IBM_rasterpos_clip'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_IBM_rasterpos_clip')
 GL_RASTER_POSITION_UNCLIPPED_IBM=_C('GL_RASTER_POSITION_UNCLIPPED_IBM',0x19262)

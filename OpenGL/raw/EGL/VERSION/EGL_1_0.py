@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_VERSION_EGL_1_0'
+_EXTENSION_NAME = 'EGL_VERSION_EGL_1_0'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_VERSION_EGL_1_0')
 EGL_ALPHA_SIZE=_C('EGL_ALPHA_SIZE',0x3021)

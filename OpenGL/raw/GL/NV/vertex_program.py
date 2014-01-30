@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_vertex_program'
+_EXTENSION_NAME = 'GL_NV_vertex_program'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_vertex_program')
 GL_ATTRIB_ARRAY_POINTER_NV=_C('GL_ATTRIB_ARRAY_POINTER_NV',0x8645)

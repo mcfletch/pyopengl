@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_ANDROID_native_fence_sync'
+_EXTENSION_NAME = 'EGL_ANDROID_native_fence_sync'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_ANDROID_native_fence_sync')
 EGL_NO_NATIVE_FENCE_FD_ANDROID=_C('EGL_NO_NATIVE_FENCE_FD_ANDROID',-1)

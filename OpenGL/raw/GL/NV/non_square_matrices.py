@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_non_square_matrices'
+_EXTENSION_NAME = 'GL_NV_non_square_matrices'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_non_square_matrices')
 GL_FLOAT_MAT2x3_NV=_C('GL_FLOAT_MAT2x3_NV',0x8B65)

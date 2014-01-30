@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_vertex_program3'
+_EXTENSION_NAME = 'GL_NV_vertex_program3'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_vertex_program3')
 GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB=_C('GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB',0x8B4C)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_filter_anisotropic'
+_EXTENSION_NAME = 'GL_EXT_texture_filter_anisotropic'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_filter_anisotropic')
 GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT=_C('GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT',0x84FF)

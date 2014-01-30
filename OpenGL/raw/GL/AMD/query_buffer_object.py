@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_query_buffer_object'
+_EXTENSION_NAME = 'GL_AMD_query_buffer_object'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_query_buffer_object')
 GL_QUERY_BUFFER_AMD=_C('GL_QUERY_BUFFER_AMD',0x9192)

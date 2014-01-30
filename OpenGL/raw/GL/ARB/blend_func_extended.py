@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_blend_func_extended'
+_EXTENSION_NAME = 'GL_ARB_blend_func_extended'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_blend_func_extended')
 GL_MAX_DUAL_SOURCE_DRAW_BUFFERS=_C('GL_MAX_DUAL_SOURCE_DRAW_BUFFERS',0x88FC)

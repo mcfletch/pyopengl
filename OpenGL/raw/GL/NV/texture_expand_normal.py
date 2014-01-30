@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_texture_expand_normal'
+_EXTENSION_NAME = 'GL_NV_texture_expand_normal'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_texture_expand_normal')
 GL_TEXTURE_UNSIGNED_REMAP_MODE_NV=_C('GL_TEXTURE_UNSIGNED_REMAP_MODE_NV',0x888F)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ATI_vertex_streams'
+_EXTENSION_NAME = 'GL_ATI_vertex_streams'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ATI_vertex_streams')
 GL_MAX_VERTEX_STREAMS_ATI=_C('GL_MAX_VERTEX_STREAMS_ATI',0x876B)

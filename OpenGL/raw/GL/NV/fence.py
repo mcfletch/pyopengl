@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_fence'
+_EXTENSION_NAME = 'GL_NV_fence'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_fence')
 GL_ALL_COMPLETED_NV=_C('GL_ALL_COMPLETED_NV',0x84F2)

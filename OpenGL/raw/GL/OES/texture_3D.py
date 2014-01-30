@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OES_texture_3D'
+_EXTENSION_NAME = 'GL_OES_texture_3D'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OES_texture_3D')
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES=_C('GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES',0x8CD4)

@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_INTEL_swap_event'
+_EXTENSION_NAME = 'GLX_INTEL_swap_event'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_INTEL_swap_event')
 GLX_BUFFER_SWAP_COMPLETE_INTEL_MASK=_C('GLX_BUFFER_SWAP_COMPLETE_INTEL_MASK',0x04000000)

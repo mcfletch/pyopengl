@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_1_4'
+_EXTENSION_NAME = 'GL_VERSION_GL_1_4'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_4')
 GL_BLEND_DST_ALPHA=_C('GL_BLEND_DST_ALPHA',0x80CA)

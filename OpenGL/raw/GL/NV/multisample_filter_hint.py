@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_multisample_filter_hint'
+_EXTENSION_NAME = 'GL_NV_multisample_filter_hint'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_multisample_filter_hint')
 GL_MULTISAMPLE_FILTER_HINT_NV=_C('GL_MULTISAMPLE_FILTER_HINT_NV',0x8534)

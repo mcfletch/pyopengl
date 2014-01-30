@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_seamless_cube_map'
+_EXTENSION_NAME = 'GL_ARB_seamless_cube_map'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_seamless_cube_map')
 GL_TEXTURE_CUBE_MAP_SEAMLESS=_C('GL_TEXTURE_CUBE_MAP_SEAMLESS',0x884F)

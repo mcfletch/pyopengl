@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_clear_texture'
+_EXTENSION_NAME = 'GL_ARB_clear_texture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_clear_texture')
 GL_CLEAR_TEXTURE=_C('GL_CLEAR_TEXTURE',0x9365)

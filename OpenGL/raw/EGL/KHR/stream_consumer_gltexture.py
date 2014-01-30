@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_KHR_stream_consumer_gltexture'
+_EXTENSION_NAME = 'EGL_KHR_stream_consumer_gltexture'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_KHR_stream_consumer_gltexture')
 EGL_CONSUMER_ACQUIRE_TIMEOUT_USEC_KHR=_C('EGL_CONSUMER_ACQUIRE_TIMEOUT_USEC_KHR',0x321E)

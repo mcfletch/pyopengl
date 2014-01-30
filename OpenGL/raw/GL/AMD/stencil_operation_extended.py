@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_stencil_operation_extended'
+_EXTENSION_NAME = 'GL_AMD_stencil_operation_extended'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_stencil_operation_extended')
 GL_REPLACE_VALUE_AMD=_C('GL_REPLACE_VALUE_AMD',0x874B)

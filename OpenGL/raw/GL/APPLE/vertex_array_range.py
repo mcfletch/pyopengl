@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_APPLE_vertex_array_range'
+_EXTENSION_NAME = 'GL_APPLE_vertex_array_range'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_APPLE_vertex_array_range')
 GL_STORAGE_CACHED_APPLE=_C('GL_STORAGE_CACHED_APPLE',0x85BE)

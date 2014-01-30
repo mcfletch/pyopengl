@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_FJ_shader_binary_GCCSO'
+_EXTENSION_NAME = 'GL_FJ_shader_binary_GCCSO'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_FJ_shader_binary_GCCSO')
 GL_GCCSO_SHADER_BINARY_FJ=_C('GL_GCCSO_SHADER_BINARY_FJ',0x9260)

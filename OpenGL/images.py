@@ -40,7 +40,7 @@ the tables described above!
     XXX Should be an API to handle that instead of direct modification.
 
 """
-from OpenGL.raw.GL.VERSION import GL_1_1 as simple
+from OpenGL.raw.GL.VERSION import GL_1_1 as _simple
 from OpenGL import arrays
 from OpenGL import _configflags
 import ctypes
@@ -66,8 +66,8 @@ def setupDefaultTransferMode( ):
     seldom matters in image data).  These assumptions are normally correct 
     when dealing with Python libraries which expose byte-arrays.
     """
-    simple.glPixelStorei(simple.GL_PACK_SWAP_BYTES, 0)
-    simple.glPixelStorei(simple.GL_PACK_LSB_FIRST, 0)
+    _simple.glPixelStorei(_simple.GL_PACK_SWAP_BYTES, 0)
+    _simple.glPixelStorei(_simple.GL_PACK_LSB_FIRST, 0)
 def rankPacking( rank ):
     """Set the pixel-transfer modes for a given image "rank" (# of dims)
     
@@ -132,7 +132,7 @@ def returnFormat( data, type ):
     conversions.
     """
     if _configflags.UNSIGNED_BYTE_IMAGES_AS_STRING:
-        if type == simple.GL_UNSIGNED_BYTE:
+        if type == _simple.GL_UNSIGNED_BYTE:
             if hasattr( data, 'tostring' ):
                 return data.tostring()
             elif hasattr( data, 'raw' ):

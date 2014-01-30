@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_APPLE_aux_depth_stencil'
+_EXTENSION_NAME = 'GL_APPLE_aux_depth_stencil'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_APPLE_aux_depth_stencil')
 GL_AUX_DEPTH_STENCIL_APPLE=_C('GL_AUX_DEPTH_STENCIL_APPLE',0x8A14)

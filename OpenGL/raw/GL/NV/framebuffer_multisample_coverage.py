@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_framebuffer_multisample_coverage'
+_EXTENSION_NAME = 'GL_NV_framebuffer_multisample_coverage'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_framebuffer_multisample_coverage')
 GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV=_C('GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV',0x8E11)

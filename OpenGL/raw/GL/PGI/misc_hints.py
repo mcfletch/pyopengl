@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_PGI_misc_hints'
+_EXTENSION_NAME = 'GL_PGI_misc_hints'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_PGI_misc_hints')
 GL_ALLOW_DRAW_FRG_HINT_PGI=_C('GL_ALLOW_DRAW_FRG_HINT_PGI',0x1A210)

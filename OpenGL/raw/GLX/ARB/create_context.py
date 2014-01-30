@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_ARB_create_context'
+_EXTENSION_NAME = 'GLX_ARB_create_context'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_ARB_create_context')
 GLX_CONTEXT_DEBUG_BIT_ARB=_C('GLX_CONTEXT_DEBUG_BIT_ARB',0x00000001)

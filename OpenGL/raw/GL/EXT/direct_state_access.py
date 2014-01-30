@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_direct_state_access'
+_EXTENSION_NAME = 'GL_EXT_direct_state_access'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_direct_state_access')
 GL_PROGRAM_MATRIX_EXT=_C('GL_PROGRAM_MATRIX_EXT',0x8E2D)

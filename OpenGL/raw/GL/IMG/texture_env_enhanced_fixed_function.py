@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_IMG_texture_env_enhanced_fixed_function'
+_EXTENSION_NAME = 'GL_IMG_texture_env_enhanced_fixed_function'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_IMG_texture_env_enhanced_fixed_function')
 GL_ADD_BLEND_IMG=_C('GL_ADD_BLEND_IMG',0x8C09)

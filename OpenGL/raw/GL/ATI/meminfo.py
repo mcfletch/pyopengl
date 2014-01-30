@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ATI_meminfo'
+_EXTENSION_NAME = 'GL_ATI_meminfo'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ATI_meminfo')
 GL_RENDERBUFFER_FREE_MEMORY_ATI=_C('GL_RENDERBUFFER_FREE_MEMORY_ATI',0x87FD)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_depth_clamp_separate'
+_EXTENSION_NAME = 'GL_AMD_depth_clamp_separate'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_depth_clamp_separate')
 GL_DEPTH_CLAMP_FAR_AMD=_C('GL_DEPTH_CLAMP_FAR_AMD',0x901F)

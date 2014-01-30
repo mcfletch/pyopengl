@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_shader_bit_encoding'
+_EXTENSION_NAME = 'GL_ARB_shader_bit_encoding'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_shader_bit_encoding')
 

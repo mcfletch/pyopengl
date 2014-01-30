@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_multisample'
+_EXTENSION_NAME = 'GL_EXT_multisample'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_multisample')
 GL_1PASS_EXT=_C('GL_1PASS_EXT',0x80A1)

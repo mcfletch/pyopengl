@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_QCOM_alpha_test'
+_EXTENSION_NAME = 'GL_QCOM_alpha_test'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_QCOM_alpha_test')
 GL_ALPHA_TEST_FUNC_QCOM=_C('GL_ALPHA_TEST_FUNC_QCOM',0x0BC1)

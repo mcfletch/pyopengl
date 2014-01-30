@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_AMD_gpu_association'
+_EXTENSION_NAME = 'WGL_AMD_gpu_association'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_AMD_gpu_association')
 WGL_GPU_CLOCK_AMD=_C('WGL_GPU_CLOCK_AMD',0x21A4)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_half_float_pixel'
+_EXTENSION_NAME = 'GL_ARB_half_float_pixel'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_half_float_pixel')
 GL_HALF_FLOAT_ARB=_C('GL_HALF_FLOAT_ARB',0x140B)

@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_HI_colorformats'
+_EXTENSION_NAME = 'EGL_HI_colorformats'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_HI_colorformats')
 EGL_COLOR_ARGB_HI=_C('EGL_COLOR_ARGB_HI',0x8F73)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_draw_buffers'
+_EXTENSION_NAME = 'GL_EXT_draw_buffers'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_draw_buffers')
 GL_COLOR_ATTACHMENT0_EXT=_C('GL_COLOR_ATTACHMENT0_EXT',0x8CE0)

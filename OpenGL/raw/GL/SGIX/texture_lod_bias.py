@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_texture_lod_bias'
+_EXTENSION_NAME = 'GL_SGIX_texture_lod_bias'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_texture_lod_bias')
 GL_TEXTURE_LOD_BIAS_R_SGIX=_C('GL_TEXTURE_LOD_BIAS_R_SGIX',0x8190)

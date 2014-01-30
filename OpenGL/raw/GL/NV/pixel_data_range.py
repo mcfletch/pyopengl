@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_pixel_data_range'
+_EXTENSION_NAME = 'GL_NV_pixel_data_range'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_pixel_data_range')
 GL_READ_PIXEL_DATA_RANGE_LENGTH_NV=_C('GL_READ_PIXEL_DATA_RANGE_LENGTH_NV',0x887B)

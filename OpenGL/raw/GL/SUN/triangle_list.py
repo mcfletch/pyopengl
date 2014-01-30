@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SUN_triangle_list'
+_EXTENSION_NAME = 'GL_SUN_triangle_list'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SUN_triangle_list')
 GL_R1UI_C3F_V3F_SUN=_C('GL_R1UI_C3F_V3F_SUN',0x85C6)

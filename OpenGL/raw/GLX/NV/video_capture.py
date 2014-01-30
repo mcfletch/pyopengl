@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_NV_video_capture'
+_EXTENSION_NAME = 'GLX_NV_video_capture'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_NV_video_capture')
 GLX_DEVICE_ID_NV=_C('GLX_DEVICE_ID_NV',0x20CD)

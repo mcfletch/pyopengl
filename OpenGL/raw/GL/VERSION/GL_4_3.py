@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_4_3'
+_EXTENSION_NAME = 'GL_VERSION_GL_4_3'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_4_3')
 GL_ACTIVE_RESOURCES=_C('GL_ACTIVE_RESOURCES',0x92F5)

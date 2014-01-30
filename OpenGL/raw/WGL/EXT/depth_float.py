@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_EXT_depth_float'
+_EXTENSION_NAME = 'WGL_EXT_depth_float'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_EXT_depth_float')
 WGL_DEPTH_FLOAT_EXT=_C('WGL_DEPTH_FLOAT_EXT',0x2040)

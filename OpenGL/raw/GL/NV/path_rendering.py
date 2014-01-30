@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_path_rendering'
+_EXTENSION_NAME = 'GL_NV_path_rendering'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_path_rendering')
 GL_ACCUM_ADJACENT_PAIRS_NV=_C('GL_ACCUM_ADJACENT_PAIRS_NV',0x90AD)

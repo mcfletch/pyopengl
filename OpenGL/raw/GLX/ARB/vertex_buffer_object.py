@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_ARB_vertex_buffer_object'
+_EXTENSION_NAME = 'GLX_ARB_vertex_buffer_object'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_ARB_vertex_buffer_object')
 GLX_CONTEXT_ALLOW_BUFFER_BYTE_ORDER_MISMATCH_ARB=_C('GLX_CONTEXT_ALLOW_BUFFER_BYTE_ORDER_MISMATCH_ARB',0x2095)

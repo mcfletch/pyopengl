@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_shadow_samplers_cube'
+_EXTENSION_NAME = 'GL_NV_shadow_samplers_cube'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_shadow_samplers_cube')
 GL_SAMPLER_CUBE_SHADOW_NV=_C('GL_SAMPLER_CUBE_SHADOW_NV',0x8DC5)

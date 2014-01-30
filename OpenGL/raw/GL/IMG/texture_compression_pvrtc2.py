@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_IMG_texture_compression_pvrtc2'
+_EXTENSION_NAME = 'GL_IMG_texture_compression_pvrtc2'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_IMG_texture_compression_pvrtc2')
 GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG=_C('GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG',0x9137)

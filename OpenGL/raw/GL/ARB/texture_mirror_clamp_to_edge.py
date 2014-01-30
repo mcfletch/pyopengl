@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_texture_mirror_clamp_to_edge'
+_EXTENSION_NAME = 'GL_ARB_texture_mirror_clamp_to_edge'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_texture_mirror_clamp_to_edge')
 GL_MIRROR_CLAMP_TO_EDGE=_C('GL_MIRROR_CLAMP_TO_EDGE',0x8743)

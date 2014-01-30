@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_blend_equation_advanced_coherent'
+_EXTENSION_NAME = 'GL_NV_blend_equation_advanced_coherent'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_blend_equation_advanced_coherent')
 GL_BLEND_ADVANCED_COHERENT_NV=_C('GL_BLEND_ADVANCED_COHERENT_NV',0x9285)

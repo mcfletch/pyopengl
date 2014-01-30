@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_INGR_interlace_read'
+_EXTENSION_NAME = 'GL_INGR_interlace_read'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_INGR_interlace_read')
 GL_INTERLACE_READ_INGR=_C('GL_INTERLACE_READ_INGR',0x8568)

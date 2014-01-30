@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_SGI_make_current_read'
+_EXTENSION_NAME = 'GLX_SGI_make_current_read'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_SGI_make_current_read')
 

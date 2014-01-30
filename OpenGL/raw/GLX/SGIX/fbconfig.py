@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_SGIX_fbconfig'
+_EXTENSION_NAME = 'GLX_SGIX_fbconfig'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_SGIX_fbconfig')
 GLX_COLOR_INDEX_BIT_SGIX=_C('GLX_COLOR_INDEX_BIT_SGIX',0x00000002)

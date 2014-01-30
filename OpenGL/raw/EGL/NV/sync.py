@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_NV_sync'
+_EXTENSION_NAME = 'EGL_NV_sync'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_NV_sync')
 EGL_ALREADY_SIGNALED_NV=_C('EGL_ALREADY_SIGNALED_NV',0x30EA)

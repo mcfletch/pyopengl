@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_PGI_vertex_hints'
+_EXTENSION_NAME = 'GL_PGI_vertex_hints'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_PGI_vertex_hints')
 GL_COLOR3_BIT_PGI=_C('GL_COLOR3_BIT_PGI',0x00010000)

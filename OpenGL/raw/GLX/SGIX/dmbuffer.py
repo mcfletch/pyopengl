@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_SGIX_dmbuffer'
+_EXTENSION_NAME = 'GLX_SGIX_dmbuffer'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_SGIX_dmbuffer')
 GLX_DIGITAL_MEDIA_PBUFFER_SGIX=_C('GLX_DIGITAL_MEDIA_PBUFFER_SGIX',0x8024)

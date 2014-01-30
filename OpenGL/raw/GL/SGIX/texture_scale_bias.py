@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_texture_scale_bias'
+_EXTENSION_NAME = 'GL_SGIX_texture_scale_bias'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_texture_scale_bias')
 GL_POST_TEXTURE_FILTER_BIAS_RANGE_SGIX=_C('GL_POST_TEXTURE_FILTER_BIAS_RANGE_SGIX',0x817B)

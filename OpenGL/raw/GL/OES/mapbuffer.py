@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OES_mapbuffer'
+_EXTENSION_NAME = 'GL_OES_mapbuffer'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OES_mapbuffer')
 GL_BUFFER_ACCESS_OES=_C('GL_BUFFER_ACCESS_OES',0x88BB)

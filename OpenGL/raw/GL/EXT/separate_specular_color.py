@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_separate_specular_color'
+_EXTENSION_NAME = 'GL_EXT_separate_specular_color'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_separate_specular_color')
 GL_LIGHT_MODEL_COLOR_CONTROL_EXT=_C('GL_LIGHT_MODEL_COLOR_CONTROL_EXT',0x81F8)

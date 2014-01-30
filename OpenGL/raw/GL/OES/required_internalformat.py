@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OES_required_internalformat'
+_EXTENSION_NAME = 'GL_OES_required_internalformat'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OES_required_internalformat')
 GL_ALPHA8_OES=_C('GL_ALPHA8_OES',0x803C)

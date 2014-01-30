@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_1_2'
+_EXTENSION_NAME = 'GL_VERSION_GL_1_2'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_2')
 GL_ALIASED_LINE_WIDTH_RANGE=_C('GL_ALIASED_LINE_WIDTH_RANGE',0x846E)

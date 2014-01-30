@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_async_pixel'
+_EXTENSION_NAME = 'GL_SGIX_async_pixel'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_async_pixel')
 GL_ASYNC_DRAW_PIXELS_SGIX=_C('GL_ASYNC_DRAW_PIXELS_SGIX',0x835D)

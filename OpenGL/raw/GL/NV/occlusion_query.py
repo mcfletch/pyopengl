@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_occlusion_query'
+_EXTENSION_NAME = 'GL_NV_occlusion_query'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_occlusion_query')
 GL_CURRENT_OCCLUSION_QUERY_ID_NV=_C('GL_CURRENT_OCCLUSION_QUERY_ID_NV',0x8865)

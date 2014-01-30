@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_light_texture'
+_EXTENSION_NAME = 'GL_EXT_light_texture'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_light_texture')
 GL_ATTENUATION_EXT=_C('GL_ATTENUATION_EXT',0x834D)

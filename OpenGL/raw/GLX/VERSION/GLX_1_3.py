@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_VERSION_GLX_1_3'
+_EXTENSION_NAME = 'GLX_VERSION_GLX_1_3'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_VERSION_GLX_1_3')
 GLX_ACCUM_BUFFER_BIT=_C('GLX_ACCUM_BUFFER_BIT',0x00000080)

@@ -8,7 +8,7 @@ from OpenGL.constant import Constant as _C
 # Spec mixes constants from 1.0 and 1.1
 from OpenGL.raw.GL.VERSION.GL_1_0 import *
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_1_1'
+_EXTENSION_NAME = 'GL_VERSION_GL_1_1'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_1')
 GL_2D=_C('GL_2D',0x0600)

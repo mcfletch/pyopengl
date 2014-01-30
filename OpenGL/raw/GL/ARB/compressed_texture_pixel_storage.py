@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_compressed_texture_pixel_storage'
+_EXTENSION_NAME = 'GL_ARB_compressed_texture_pixel_storage'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_compressed_texture_pixel_storage')
 GL_PACK_COMPRESSED_BLOCK_DEPTH=_C('GL_PACK_COMPRESSED_BLOCK_DEPTH',0x912D)

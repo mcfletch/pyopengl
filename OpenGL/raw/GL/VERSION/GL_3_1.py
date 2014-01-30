@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_VERSION_GL_3_1'
+_EXTENSION_NAME = 'GL_VERSION_GL_3_1'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_VERSION_GL_3_1')
 GL_ACTIVE_UNIFORM_BLOCKS=_C('GL_ACTIVE_UNIFORM_BLOCKS',0x8A36)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_vertex_shader_tessellator'
+_EXTENSION_NAME = 'GL_AMD_vertex_shader_tessellator'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_vertex_shader_tessellator')
 GL_CONTINUOUS_AMD=_C('GL_CONTINUOUS_AMD',0x9007)

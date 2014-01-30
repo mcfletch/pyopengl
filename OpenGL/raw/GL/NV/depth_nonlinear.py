@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_depth_nonlinear'
+_EXTENSION_NAME = 'GL_NV_depth_nonlinear'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_depth_nonlinear')
 GL_DEPTH_COMPONENT16_NONLINEAR_NV=_C('GL_DEPTH_COMPONENT16_NONLINEAR_NV',0x8E2C)

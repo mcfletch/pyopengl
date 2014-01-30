@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_NV_multisample_coverage'
+_EXTENSION_NAME = 'GLX_NV_multisample_coverage'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_NV_multisample_coverage')
 GLX_COLOR_SAMPLES_NV=_C('GLX_COLOR_SAMPLES_NV',0x20B3)

@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_I3D_genlock'
+_EXTENSION_NAME = 'WGL_I3D_genlock'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_I3D_genlock')
 WGL_GENLOCK_SOURCE_DIGITAL_FIELD_I3D=_C('WGL_GENLOCK_SOURCE_DIGITAL_FIELD_I3D',0x2049)

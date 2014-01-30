@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_instanced_arrays'
+_EXTENSION_NAME = 'GL_EXT_instanced_arrays'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_instanced_arrays')
 GL_VERTEX_ATTRIB_ARRAY_DIVISOR_EXT=_C('GL_VERTEX_ATTRIB_ARRAY_DIVISOR_EXT',0x88FE)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_x11_sync_object'
+_EXTENSION_NAME = 'GL_EXT_x11_sync_object'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_x11_sync_object')
 GL_SYNC_X11_FENCE_EXT=_C('GL_SYNC_X11_FENCE_EXT',0x90E1)

@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_SGIX_hyperpipe'
+_EXTENSION_NAME = 'GLX_SGIX_hyperpipe'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_SGIX_hyperpipe')
 GLX_BAD_HYPERPIPE_CONFIG_SGIX=_C('GLX_BAD_HYPERPIPE_CONFIG_SGIX',91)

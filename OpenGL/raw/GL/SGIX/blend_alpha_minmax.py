@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_blend_alpha_minmax'
+_EXTENSION_NAME = 'GL_SGIX_blend_alpha_minmax'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_blend_alpha_minmax')
 GL_ALPHA_MAX_SGIX=_C('GL_ALPHA_MAX_SGIX',0x8321)

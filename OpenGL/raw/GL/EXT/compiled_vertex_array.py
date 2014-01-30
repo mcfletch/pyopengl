@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_compiled_vertex_array'
+_EXTENSION_NAME = 'GL_EXT_compiled_vertex_array'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_compiled_vertex_array')
 GL_ARRAY_ELEMENT_LOCK_COUNT_EXT=_C('GL_ARRAY_ELEMENT_LOCK_COUNT_EXT',0x81A9)

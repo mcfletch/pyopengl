@@ -24,7 +24,9 @@ GL_CHAR = bytes
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
 GL_VOID_P = object()
 
-ctypes_version = [int(i) for i in ctypes.__version__.split('.')[:3]]
+def _get_ctypes_version():
+    return [int(i) for i in ctypes.__version__.split('.')[:3]]
+ctypes_version = _get_ctypes_version()
 
 # Basic OpenGL data-types as ctypes declarations...
 def _defineType( name, baseType, convertFunc = long ):

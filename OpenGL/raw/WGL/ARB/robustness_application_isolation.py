@@ -7,7 +7,7 @@ from OpenGL.raw.WGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'WGL_ARB_robustness_application_isolation'
+_EXTENSION_NAME = 'WGL_ARB_robustness_application_isolation'
 def _f( function ):
     return _p.createFunction( function,_p.WGL,'WGL_ARB_robustness_application_isolation')
 WGL_CONTEXT_RESET_ISOLATION_BIT_ARB=_C('WGL_CONTEXT_RESET_ISOLATION_BIT_ARB',0x00000008)

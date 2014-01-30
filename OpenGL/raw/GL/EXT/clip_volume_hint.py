@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_clip_volume_hint'
+_EXTENSION_NAME = 'GL_EXT_clip_volume_hint'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_clip_volume_hint')
 GL_CLIP_VOLUME_CLIPPING_HINT_EXT=_C('GL_CLIP_VOLUME_CLIPPING_HINT_EXT',0x80F0)

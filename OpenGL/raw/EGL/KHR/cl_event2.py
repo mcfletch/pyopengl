@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_KHR_cl_event2'
+_EXTENSION_NAME = 'EGL_KHR_cl_event2'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_KHR_cl_event2')
 EGL_CL_EVENT_HANDLE_KHR=_C('EGL_CL_EVENT_HANDLE_KHR',0x309C)

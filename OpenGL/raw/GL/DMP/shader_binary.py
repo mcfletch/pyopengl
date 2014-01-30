@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_DMP_shader_binary'
+_EXTENSION_NAME = 'GL_DMP_shader_binary'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_DMP_shader_binary')
 GL_SHADER_BINARY_DMP=_C('GL_SHADER_BINARY_DMP',0x9250)

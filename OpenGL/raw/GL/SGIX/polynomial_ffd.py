@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_polynomial_ffd'
+_EXTENSION_NAME = 'GL_SGIX_polynomial_ffd'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_polynomial_ffd')
 GL_DEFORMATIONS_MASK_SGIX=_C('GL_DEFORMATIONS_MASK_SGIX',0x8196)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_OML_subsample'
+_EXTENSION_NAME = 'GL_OML_subsample'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_OML_subsample')
 GL_FORMAT_SUBSAMPLE_244_244_OML=_C('GL_FORMAT_SUBSAMPLE_244_244_OML',0x8983)

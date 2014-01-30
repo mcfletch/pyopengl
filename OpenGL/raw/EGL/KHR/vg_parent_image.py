@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_KHR_vg_parent_image'
+_EXTENSION_NAME = 'EGL_KHR_vg_parent_image'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_KHR_vg_parent_image')
 EGL_VG_PARENT_IMAGE_KHR=_C('EGL_VG_PARENT_IMAGE_KHR',0x30BA)

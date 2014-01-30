@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_pvrtc_sRGB'
+_EXTENSION_NAME = 'GL_EXT_pvrtc_sRGB'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_pvrtc_sRGB')
 GL_COMPRESSED_SRGB_ALPHA_PVRTC_2BPPV1_EXT=_C('GL_COMPRESSED_SRGB_ALPHA_PVRTC_2BPPV1_EXT',0x8A56)

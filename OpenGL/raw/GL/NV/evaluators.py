@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_NV_evaluators'
+_EXTENSION_NAME = 'GL_NV_evaluators'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_NV_evaluators')
 GL_EVAL_2D_NV=_C('GL_EVAL_2D_NV',0x86C0)

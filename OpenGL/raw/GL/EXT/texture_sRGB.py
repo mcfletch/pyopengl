@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_texture_sRGB'
+_EXTENSION_NAME = 'GL_EXT_texture_sRGB'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_texture_sRGB')
 GL_COMPRESSED_SLUMINANCE_ALPHA_EXT=_C('GL_COMPRESSED_SLUMINANCE_ALPHA_EXT',0x8C4B)

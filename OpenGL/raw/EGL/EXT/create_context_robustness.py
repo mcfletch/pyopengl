@@ -7,7 +7,7 @@ from OpenGL.raw.EGL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'EGL_EXT_create_context_robustness'
+_EXTENSION_NAME = 'EGL_EXT_create_context_robustness'
 def _f( function ):
     return _p.createFunction( function,_p.EGL,'EGL_EXT_create_context_robustness')
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY_EXT=_C('EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY_EXT',0x3138)

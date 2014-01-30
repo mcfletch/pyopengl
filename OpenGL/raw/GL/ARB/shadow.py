@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_shadow'
+_EXTENSION_NAME = 'GL_ARB_shadow'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_shadow')
 GL_COMPARE_R_TO_TEXTURE_ARB=_C('GL_COMPARE_R_TO_TEXTURE_ARB',0x884E)

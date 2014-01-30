@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_APPLE_specular_vector'
+_EXTENSION_NAME = 'GL_APPLE_specular_vector'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_APPLE_specular_vector')
 GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE=_C('GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE',0x85B0)

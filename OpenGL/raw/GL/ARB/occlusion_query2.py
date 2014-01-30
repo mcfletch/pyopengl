@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_occlusion_query2'
+_EXTENSION_NAME = 'GL_ARB_occlusion_query2'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_occlusion_query2')
 GL_ANY_SAMPLES_PASSED=_C('GL_ANY_SAMPLES_PASSED',0x8C2F)

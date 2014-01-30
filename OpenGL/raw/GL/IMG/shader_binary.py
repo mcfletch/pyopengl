@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_IMG_shader_binary'
+_EXTENSION_NAME = 'GL_IMG_shader_binary'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_IMG_shader_binary')
 GL_SGX_BINARY_IMG=_C('GL_SGX_BINARY_IMG',0x8C0A)

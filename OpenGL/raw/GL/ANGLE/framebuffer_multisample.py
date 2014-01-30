@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ANGLE_framebuffer_multisample'
+_EXTENSION_NAME = 'GL_ANGLE_framebuffer_multisample'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ANGLE_framebuffer_multisample')
 GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE=_C('GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE',0x8D56)

@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_AMD_occlusion_query_event'
+_EXTENSION_NAME = 'GL_AMD_occlusion_query_event'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_AMD_occlusion_query_event')
 GL_OCCLUSION_QUERY_EVENT_MASK_AMD=_C('GL_OCCLUSION_QUERY_EVENT_MASK_AMD',0x874F)

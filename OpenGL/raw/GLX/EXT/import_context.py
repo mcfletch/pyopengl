@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_EXT_import_context'
+_EXTENSION_NAME = 'GLX_EXT_import_context'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_EXT_import_context')
 GLX_SCREEN_EXT=_C('GLX_SCREEN_EXT',0x800C)

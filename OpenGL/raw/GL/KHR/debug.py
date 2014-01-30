@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_KHR_debug'
+_EXTENSION_NAME = 'GL_KHR_debug'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_KHR_debug')
 GL_BUFFER=_C('GL_BUFFER',0x82E0)

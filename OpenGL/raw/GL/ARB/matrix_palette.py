@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_ARB_matrix_palette'
+_EXTENSION_NAME = 'GL_ARB_matrix_palette'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_ARB_matrix_palette')
 GL_CURRENT_MATRIX_INDEX_ARB=_C('GL_CURRENT_MATRIX_INDEX_ARB',0x8845)

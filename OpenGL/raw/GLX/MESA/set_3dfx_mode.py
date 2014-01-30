@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_MESA_set_3dfx_mode'
+_EXTENSION_NAME = 'GLX_MESA_set_3dfx_mode'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_MESA_set_3dfx_mode')
 GLX_3DFX_FULLSCREEN_MODE_MESA=_C('GLX_3DFX_FULLSCREEN_MODE_MESA',0x2)

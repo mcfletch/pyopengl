@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_OML_swap_method'
+_EXTENSION_NAME = 'GLX_OML_swap_method'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_OML_swap_method')
 GLX_SWAP_COPY_OML=_C('GLX_SWAP_COPY_OML',0x8062)

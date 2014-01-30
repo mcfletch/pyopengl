@@ -7,7 +7,7 @@ from OpenGL.raw.GLX._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GLX_VERSION_GLX_1_4'
+_EXTENSION_NAME = 'GLX_VERSION_GLX_1_4'
 def _f( function ):
     return _p.createFunction( function,_p.GLX,'GLX_VERSION_GLX_1_4')
 GLX_SAMPLES=_C('GLX_SAMPLES',100001)

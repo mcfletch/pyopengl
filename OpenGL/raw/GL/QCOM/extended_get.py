@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_QCOM_extended_get'
+_EXTENSION_NAME = 'GL_QCOM_extended_get'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_QCOM_extended_get')
 GL_STATE_RESTORE=_C('GL_STATE_RESTORE',0x8BDC)

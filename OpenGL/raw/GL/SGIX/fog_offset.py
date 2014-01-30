@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_SGIX_fog_offset'
+_EXTENSION_NAME = 'GL_SGIX_fog_offset'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_SGIX_fog_offset')
 GL_FOG_OFFSET_SGIX=_C('GL_FOG_OFFSET_SGIX',0x8198)

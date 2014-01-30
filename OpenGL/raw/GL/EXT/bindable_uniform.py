@@ -7,7 +7,7 @@ from OpenGL.raw.GL._types import *
 from OpenGL.constant import Constant as _C
 
 import ctypes
-EXTENSION_NAME = 'GL_EXT_bindable_uniform'
+_EXTENSION_NAME = 'GL_EXT_bindable_uniform'
 def _f( function ):
     return _p.createFunction( function,_p.GL,'GL_EXT_bindable_uniform')
 GL_MAX_BINDABLE_UNIFORM_SIZE_EXT=_C('GL_MAX_BINDABLE_UNIFORM_SIZE_EXT',0x8DED)
