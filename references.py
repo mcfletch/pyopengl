@@ -135,7 +135,6 @@ def loadData():
             projectName = 'OpenGLContext',
             urlTemplate = LOGGERHEAD,
         ),
-        
         SampleSource(
             os.path.join(SAMPLES,'PyOpenGL-Demo'),
             #baseURL = 'http://pyopengl.cvs.sourceforge.net/pyopengl/Demo/PyOpenGL-Demo',
@@ -235,6 +234,12 @@ def loadData():
             baseURL = 'http://code.google.com/p/visvis',
             projectName = 'Visvis',
             urlTemplate = GOOGLECODE_HG,
+        ),
+        SampleSource(
+            os.path.join(SAMPLES,'programmable'),
+            baseURL = 'https://bitbucket.org/rndblnch/opengl-programmable/src',
+            projectName = '{GPL3} OpenGL-Programmable',
+            urlTemplate = BITBUCKET,
         ),
     ]:
         generate_tokens_dir( s.localDir, processFunction = s.processEntry)

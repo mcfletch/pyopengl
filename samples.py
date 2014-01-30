@@ -145,6 +145,10 @@ checkouts = [
         'git://github.com/tito/pymt.git',
         dirname = 'pymt',
     ),
+    GITSource(
+        'git://github.com/rossant/galry.git',
+        dirname = 'galry',
+    ),
     SVNSource(
         'http://svn.gnome.org/svn/gnome-games/trunk/glchess',
         dirname = 'glchess',
@@ -181,6 +185,10 @@ checkouts = [
         'https://code.google.com/p/visvis/',
         dirname = 'visvis',
     ),
+    HgSource(
+        'https://bitbucket.org/rndblnch/opengl-programmable/',
+        dirname = 'programmable',
+    )
     # pymol # not pyopengl AFAICS
     # {LGPL} mirra # no online view of code AFAICS
     # soccerbots http://soccerbots.googlecode.com/svn/
