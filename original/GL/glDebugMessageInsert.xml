@@ -1,12 +1,12 @@
 
 <refentry id="glDebugMessageInsert">
+    <refentryinfo>
+        <copyright>
+            <year>2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>2012</year>
-                <holder>Khronos Group</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glDebugMessageInsert</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -88,9 +88,9 @@
             use by the GL implementation. <parameter>type</parameter> indicates the type of the message
             to be inserted and may be one of <constant>GL_DEBUG_TYPE_ERROR</constant>, <constant>GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR</constant>,
             <constant>GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR</constant>, <constant>GL_DEBUG_TYPE_PORTABILITY</constant>,
-            <constant>GL_DEBUG_TYPE_PERFORMANCE</constant>, or <constant>GL_DEBUG_TYPE_OTHER</constant>.
+            <constant>GL_DEBUG_TYPE_PERFORMANCE</constant>, <constant>GL_DEBUG_TYPE_MARKER</constant>, <constant>GL_DEBUG_TYPE_PUSH_GROUP</constant>, <constant>GL_DEBUG_TYPE_POP_GROUP</constant>, or <constant>GL_DEBUG_TYPE_OTHER</constant>.
             <parameter>severity</parameter> indicates the severity of the message and may be <constant>GL_DEBUG_SEVERITY_LOW</constant>,
-            <constant>GL_DEBUG_SEVERITY_MEDIUM</constant>, or <constant>GL_DEBUG_SEVERITY_HIGH</constant>.
+            <constant>GL_DEBUG_SEVERITY_MEDIUM</constant>, <constant>GL_DEBUG_SEVERITY_HIGH</constant> or <constant>GL_DEBUG_SEVERITY_NOTIFICATION</constant>.
             <parameter>id</parameter> is available for application defined use and may be any value. This value
             will be recorded and used to identify the message.
         </para>
@@ -100,6 +100,12 @@
             is negative then <parameter>message</parameter> is treated as a null-terminated string.
             The length of the message, whether specified explicitly or implicitly, must be less than
             or equal to the implementation defined constant <constant>GL_MAX_DEBUG_MESSAGE_LENGTH</constant>.
+        </para>
+    </refsect1>
+    <refsect1 id="notes"><title>Notes</title>
+        <para>
+            <constant>GL_DEBUG_TYPE_MARKER</constant>, <constant>GL_DEBUG_TYPE_PUSH_GROUP</constant>, <constant>GL_DEBUG_TYPE_POP_GROUP</constant>, and <constant>GL_DEBUG_SEVERITY_NOTIFICATION</constant>
+            are available only if the GL version is 4.3 or higher.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
@@ -121,8 +127,8 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2012 Khronos Group. 
-            This material may be distributed subject to the terms and conditions set forth in 
+            Copyright <trademark class="copyright"></trademark> 2013 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
         </para>

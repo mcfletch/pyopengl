@@ -1,12 +1,16 @@
 
 <refentry id="glClearColor">
+    <refentryinfo>
+        <copyright>
+            <year>1991-2006</year>
+            <holder>Silicon Graphics, Inc.</holder>
+        </copyright>
+        <copyright>
+            <year>2010-2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>1991-2006</year>
-                <holder>Silicon Graphics, Inc.</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glClearColor</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -48,7 +52,7 @@
             green,
             blue,
             and alpha values used by <citerefentry><refentrytitle>glClear</refentrytitle></citerefentry> to clear the color buffers.
-            Values specified by <function>glClearColor</function> are clamped to the range 
+            Values specified by <function>glClearColor</function> are clamped to the range
             <inlineequation><mml:math>
                 <!-- eqn: [0,1]: -->
                 <mml:mfenced open="[" close="]">
@@ -82,9 +86,10 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. This document is licensed under the SGI
-            Free Software B License. For details, see
+            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
         </para>
     </refsect1>

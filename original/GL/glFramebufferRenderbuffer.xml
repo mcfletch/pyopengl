@@ -1,12 +1,12 @@
 
 <refentry id="glFramebufferRenderbuffer">
+    <refentryinfo>
+        <copyright>
+            <year>2010-2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>2010</year>
-                <holder>Khronos Group</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glFramebufferRenderbuffer</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -17,7 +17,7 @@
     <refsynopsisdiv><title>C Specification</title>
         <funcsynopsis>
             <funcprototype>
-                <funcdef>GLsync <function>glFramebufferRenderbuffer</function></funcdef>
+                <funcdef>void <function>glFramebufferRenderbuffer</function></funcdef>
                 <paramdef>GLenum <parameter>target</parameter></paramdef>
                 <paramdef>GLenum <parameter>attachment</parameter></paramdef>
                 <paramdef>GLenum <parameter>renderbuffertarget</parameter></paramdef>
@@ -25,7 +25,6 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <!-- eqn: ignoring delim $$ -->
     <refsect1 id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
@@ -116,8 +115,8 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010 Khronos Group. 
-            This material may be distributed subject to the terms and conditions set forth in 
+            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
         </para>

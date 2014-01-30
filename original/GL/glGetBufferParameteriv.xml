@@ -23,14 +23,6 @@
                 <paramdef>GLint * <parameter>data</parameter></paramdef>
             </funcprototype>
         </funcsynopsis>
-        <funcsynopsis>
-            <funcprototype>
-                <funcdef>void <function>glGetBufferParameteri64v</function></funcdef>
-                <paramdef>GLenum <parameter>target</parameter></paramdef>
-                <paramdef>GLenum <parameter>value</parameter></paramdef>
-                <paramdef>GLint64 * <parameter>data</parameter></paramdef>
-            </funcprototype>
-        </funcsynopsis>
     </refsynopsisdiv>
     <refsect1 id="parameters"><title>Parameters</title>
         <variablelist>
@@ -118,6 +110,13 @@
             If an error is generated,
             no change is made to the contents of <parameter>data</parameter>.
         </para>
+        <para>
+            <function>glGetBufferParameteriv</function> is available only if the GL version is 1.5 or greater.
+        </para>
+        <para>
+            Targets <constant>GL_PIXEL_PACK_BUFFER</constant> and <constant>GL_PIXEL_UNPACK_BUFFER</constant> are available 
+            only if the GL version is 2.1 or greater.
+        </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
         <para>
@@ -126,6 +125,11 @@
         </para>
         <para>
             <constant>GL_INVALID_OPERATION</constant> is generated if the reserved buffer object name 0 is bound to <parameter>target</parameter>.
+        </para>
+        <para>
+            <constant>GL_INVALID_OPERATION</constant> is generated if <function>glGetBufferParameteriv</function>
+            is executed between the execution of <citerefentry><refentrytitle>glBegin</refentrytitle></citerefentry>
+            and the corresponding execution of <citerefentry><refentrytitle>glEnd</refentrytitle></citerefentry>.
         </para>
     </refsect1>
     <refsect1 id="seealso"><title>See Also</title>

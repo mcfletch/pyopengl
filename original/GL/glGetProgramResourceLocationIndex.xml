@@ -1,12 +1,12 @@
 
 <refentry id="glGetProgramResourceLocationIndex">
+    <refentryinfo>
+        <copyright>
+            <year>2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>2012</year>
-                <holder>Khronos Group</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glGetProgramResourceLocationIndex</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -54,11 +54,13 @@
     </refsect1>
     <refsect1 id="description"><title>Description</title>
         <para>
-            <function>glGetProgramResourceLocation</function> returns the fragment color index assigned
+            <function>glGetProgramResourceLocationIndex</function> returns the fragment color index assigned
             to the variable named <parameter>name</parameter> in interface <parameter>programInterface</parameter> of program
             object <parameter>program</parameter>.  <parameter>program</parameter> must be the name of a program that has been
             linked successfully. <parameter>programInterface</parameter> must
-            be one of <constant>PROGRAM_OUTPUT</constant>.
+            be <constant>GL_PROGRAM_OUTPUT</constant>.
+        </para>
+        <para>
             The value -1 will be returned if an error occurs, if <parameter>name</parameter> does not identify an active variable on
             <parameter>programInterface</parameter>, or if <parameter>name</parameter> identifies an active variable that does
             not have a valid location assigned, as described above.  The locations
@@ -126,8 +128,8 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2012 Khronos Group. 
-            This material may be distributed subject to the terms and conditions set forth in 
+            Copyright <trademark class="copyright"></trademark> 2013 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
         </para>
