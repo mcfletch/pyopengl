@@ -10,7 +10,7 @@ from OpenGL import contextdata, error, wrapper, converters
 from OpenGL.arrays import arraydatatype
 from OpenGL._bytes import bytes,unicode
 import logging
-log = logging.getLogger( 'OpenGL.arrays.arrayhelpers' )
+_log = logging.getLogger( 'OpenGL.arrays.arrayhelpers' )
 from OpenGL import acceleratesupport
 AsArrayTypedSizeChecked = None
 if acceleratesupport.ACCELERATE_AVAILABLE:
@@ -21,7 +21,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             AsArrayOfType,AsArrayTyped,AsArrayTypedSize
         )
     except ImportError as err:
-        log.warn(
+        _log.warn(
             "Unable to load arrayhelpers accelerator from OpenGL_accelerate"
         )
 if AsArrayTypedSizeChecked is None:

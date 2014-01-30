@@ -7,7 +7,7 @@ type as well.
 REGISTRY_NAME = 'numpy'
 import operator,logging
 from OpenGL import _configflags
-log = logging.getLogger( __name__ )
+_log = logging.getLogger( __name__ )
 try:
     import numpy
 except ImportError as err:
@@ -26,7 +26,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.numpy_formathandler import NumpyHandler
     except ImportError as err:
-        log.warn(
+        _log.warn(
             "Unable to load numpy_formathandler accelerator from OpenGL_accelerate"
         )
 if NumpyHandler is None:

@@ -8,7 +8,7 @@ from OpenGL._bytes import bytes,unicode,as_8_bit
 import OpenGL as root
 import sys
 import logging
-log = logging.getLogger( 'OpenGL.extensions' )
+_log = logging.getLogger( 'OpenGL.extensions' )
 VERSION_PREFIX = as_8_bit('GL_VERSION_GL_')
 CURRENT_GL_VERSION = None
 AVAILABLE_GL_EXTENSIONS = []
@@ -230,7 +230,7 @@ class _Alternate( LateBind ):
         """Call, doing a late lookup and bind to find an implementation"""
         for alternate in self._alternatives:
             if alternate:
-                log.info(
+                _log.info(
                     """Chose alternate: %s from %s""",
                     alternate.__name__,
                     ", ".join([x.__name__ for x in self._alternatives])

@@ -2,8 +2,6 @@
 import ctypes
 import OpenGL
 from OpenGL import plugins
-from OpenGL import logs
-log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
 from OpenGL_accelerate.wrapper cimport cArgConverter, pyArgConverter, returnConverter
 from OpenGL_accelerate.formathandler cimport FormatHandler
 

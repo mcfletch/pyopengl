@@ -29,10 +29,10 @@ PLATFORM = platform.PLATFORM
 FUNCTION_TYPE = simple.CALLBACK_FUNCTION_TYPE
 from OpenGL._bytes import long, integer_types
 
-log = logs.getLog( 'OpenGL.GLUT.special' )
+_log = logs.getLog( 'OpenGL.GLUT.special' )
 
 if os.name == "nt":
-    log.info( """Using NT-specific GLUT calls with exit callbacks""" )
+    _log.info( """Using NT-specific GLUT calls with exit callbacks""" )
     _exitfunctype = FUNCTION_TYPE( None, ctypes.c_int )
     __glutInitWithExit = platform.createBaseFunction(
         '__glutInitWithExit', dll=platform.GLUT, resultType=None,
@@ -337,8 +337,8 @@ def glutDestroyWindow( window ):
         GLUT.glutSetWindow(window)
         context = contextdata.getContext()
         result = contextdata.cleanupContext( context )
-        log.info( """Cleaning up context data for window %s: %s""", window, result )
+        _log.info( """Cleaning up context data for window %s: %s""", window, result )
     except Exception as err:
-        log.error( """Error attempting to clean up context data for GLUT window %s: %s""", window, result )
+        _log.error( """Error attempting to clean up context data for GLUT window %s: %s""", window, result )
     return _base_glutDestroyWindow( window )
 glutDestroyWindow.wrappedOperation = simple.glutDestroyWindow

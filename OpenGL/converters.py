@@ -1,7 +1,7 @@
 """Implementations for common converter types"""
 import ctypes,logging
 from OpenGL._bytes import bytes, unicode, as_8_bit
-log = logging.getLogger( 'OpenGL.converters' )
+_log = logging.getLogger( 'OpenGL.converters' )
 
 class Converter( object ):
     """Base class for Converter types
@@ -119,7 +119,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             returnCArgument, returnPyArgument,
         )
     except ImportError as err:
-        log.warn(
+        _log.warn(
             "Unable to load converters accelerators (wrapper, arraydatatype) from OpenGL_accelerate"
         )
         CallFuncPyConverter = None

@@ -1,7 +1,7 @@
 """Load font "constants" (actually void *s) from the GLUT DLL"""
 from OpenGL import platform
 import logging
-log = logging.getLogger( 'OpenGL.GLUT.fonts' )
+_log = logging.getLogger( 'OpenGL.GLUT.fonts' )
 
 for name in [
     'GLUT_STROKE_ROMAN',
@@ -20,7 +20,7 @@ for name in [
         p = platform.getGLUTFontPointer( name )
     except (ValueError,AttributeError) as err:
         if platform.GLUT:
-            log.warn( '''Unable to load font: %s''', name )
+            _log.warn( '''Unable to load font: %s''', name )
         globals()[name] = None
     else:
         globals()[name] = p

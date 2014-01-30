@@ -2,7 +2,7 @@
 """
 REGISTRY_NAME = 'nones'
 import logging
-log = logging.getLogger( 'OpenGL.arrays.nones' )
+_log = logging.getLogger( 'OpenGL.arrays.nones' )
 
 from OpenGL import acceleratesupport
 NoneHandler = None
@@ -10,7 +10,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.nones_formathandler import NoneHandler
     except ImportError as err:
-        log.warn(
+        _log.warn(
             "Unable to load nones_formathandler accelerator from OpenGL_accelerate"
         )
 if NoneHandler is None:

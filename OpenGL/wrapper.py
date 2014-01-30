@@ -7,7 +7,7 @@ from OpenGL import converters
 from OpenGL.converters import DefaultCConverter
 from OpenGL.converters import returnCArgument,returnPyArgument
 from OpenGL.latebind import LateBind
-log = logging.getLogger( 'OpenGL.wrapper' )
+_log = logging.getLogger( 'OpenGL.wrapper' )
 
 from OpenGL import acceleratesupport
 cWrapper = None
@@ -21,12 +21,12 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             CArgumentCalculator,
         )
     except ImportError as err:
-        log.warn( """OpenGL_accelerate seems to be installed, but unable to import expected wrapper entry points!""" )
+        _log.warn( """OpenGL_accelerate seems to be installed, but unable to import expected wrapper entry points!""" )
 NULL = object()
 
 if not STORE_POINTERS:
     if not ERROR_ON_COPY:
-        log.error( """You've specified (not STORE_POINTERS) yet ERROR_ON_COPY is False, this would cause segfaults, so (not STORE_POINTERS) is being ignored""" )
+        _log.error( """You've specified (not STORE_POINTERS) yet ERROR_ON_COPY is False, this would cause segfaults, so (not STORE_POINTERS) is being ignored""" )
         STORE_POINTERS = True
 
 

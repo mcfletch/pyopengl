@@ -38,7 +38,7 @@ from OpenGL.raw.GL import _types
 from OpenGL import error
 from OpenGL._bytes import bytes,unicode,as_8_bit
 import ctypes,logging
-log = logging.getLogger( 'OpenGL.arrays.vbo' )
+_log = logging.getLogger( 'OpenGL.arrays.vbo' )
 from OpenGL._bytes import long, integer_types
 
 import weakref
@@ -122,7 +122,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             VBO,VBOOffset,VBOHandler,VBOOffsetHandler,
         )
     except ImportError as err:
-        log.warn(
+        _log.warn(
             "Unable to load VBO accelerator from OpenGL_accelerate"
         )
 if VBO is None:

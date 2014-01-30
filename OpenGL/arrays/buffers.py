@@ -11,7 +11,7 @@ from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL.arrays import formathandler
 from OpenGL import _configflags
 from OpenGL import acceleratesupport
-log = logging.getLogger( __name__ )
+_log = logging.getLogger( __name__ )
 try:
     reduce 
 except NameError as err:
@@ -26,7 +26,7 @@ if sys.version_info[:2] > (2,6):
             from OpenGL_accelerate.buffers_formathandler import MemoryviewHandler
         except ImportError as err:
             traceback.print_exc()
-            log.warn(
+            _log.warn(
                 "Unable to load buffers_formathandler accelerator from OpenGL_accelerate"
             )
         else:

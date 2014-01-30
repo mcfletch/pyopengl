@@ -8,7 +8,7 @@ to register a new error-checking function for use
 throughout the system.
 """
 import logging
-log = logging.getLogger( 'OpenGL.error' )
+_log = logging.getLogger( 'OpenGL.error' )
 from OpenGL import platform, _configflags
 __all__ = (
     "Error",'GLError','GLUError','GLUTError','glCheckError',
@@ -165,7 +165,7 @@ if _configflags.ERROR_CHECKING:
         try:
             from OpenGL_accelerate.errorchecker import _ErrorChecker
         except ImportError as err:
-            log.warn( """OpenGL_accelerate seems to be installed, but unable to import error checking entry point!""" )
+            _log.warn( """OpenGL_accelerate seems to be installed, but unable to import error checking entry point!""" )
     if _ErrorChecker is None:
         class _ErrorChecker( object ):
             """Global error-checking object

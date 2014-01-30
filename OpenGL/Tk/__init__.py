@@ -24,7 +24,7 @@ The Togl project is located here:
 # Department of Chemistry
 # University of York, UK
 import os,sys, logging
-log = logging.getLogger( 'OpenGL.Tk' )
+_log = logging.getLogger( 'OpenGL.Tk' )
 from OpenGL.GL import *
 from OpenGL.GLU import *
 try:
@@ -37,7 +37,7 @@ except ImportError as err:
         from Tkinter import *
         import Dialog as dialog
     except ImportError as err:
-        log.error( """Unable to import Tkinter, likely need to install a separate package (python-tk) to have Tkinter support.  You likely also want to run the src/togl.py script in the PyOpenGL source distribution to install the Togl widget""" )
+        _log.error( """Unable to import Tkinter, likely need to install a separate package (python-tk) to have Tkinter support.  You likely also want to run the src/togl.py script in the PyOpenGL source distribution to install the Togl widget""" )
         raise
 import math
 
@@ -113,14 +113,14 @@ except NameError as err:
     TOGL_DLL_PATH = ""
 
 if not os.path.isdir( TOGL_DLL_PATH ):
-    log.warn( 'Expected Tk Togl installation in %s', TOGL_DLL_PATH )
-log.info( 'Loading Togl from: %s', TOGL_DLL_PATH )
+    _log.warn( 'Expected Tk Togl installation in %s', TOGL_DLL_PATH )
+_log.info( 'Loading Togl from: %s', TOGL_DLL_PATH )
 _default_root.tk.call('lappend', 'auto_path', TOGL_DLL_PATH)
 _default_root.tk.call('package', 'require', 'Togl')
 try:
     _default_root.tk.eval('load {} Togl')
 except TclError as err:
-    log.error( """Failure loading Togl package: %s""", err )
+    _log.error( """Failure loading Togl package: %s""", err )
     raise
 
 # This code is needed to avoid faults on sys.exit()

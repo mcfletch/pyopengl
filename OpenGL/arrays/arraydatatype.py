@@ -5,7 +5,7 @@ from OpenGL.raw.GL import _types
 from OpenGL import plugins
 from OpenGL.arrays import formathandler, _arrayconstants as GL_1_1
 from OpenGL import logs
-log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
+_log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
 
 
 from OpenGL import acceleratesupport
@@ -14,7 +14,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.arraydatatype import ArrayDatatype as ADT
     except ImportError as err:
-        log.warn(
+        _log.warn(
             "Unable to load ArrayDatatype accelerator from OpenGL_accelerate"
         )
 if ADT is None:
@@ -121,17 +121,17 @@ if ADT is None:
         def from_param( cls, value ):
             """Given a value in a known data-pointer type, convert to a ctypes pointer"""
             return cls.getHandler(value).from_param( value, cls.typeConstant )
-        from_param = classmethod( logs.logOnFail( from_param, log ) )
+        from_param = classmethod( logs.logOnFail( from_param, _log ) )
         def dataPointer( cls, value ):
             """Given a value in a known data-pointer type, return long for pointer"""
             try:
                 return cls.getHandler(value).dataPointer( value )
             except Exception as err:
-                log.warn(
+                _log.warn(
                     """Failure in dataPointer for %s instance %s""", type(value), value,
                 )
                 raise
-        dataPointer = classmethod( logs.logOnFail( dataPointer, log ) )
+        dataPointer = classmethod( logs.logOnFail( dataPointer, _log ) )
         def voidDataPointer( cls, value ):
             """Given value in a known data-pointer type, return void_p for pointer"""
             pointer = cls.dataPointer( value )
@@ -139,7 +139,7 @@ if ADT is None:
                 return ctypes.c_void_p(pointer)
             except TypeError as err:
                 return pointer
-        voidDataPointer = classmethod( logs.logOnFail( voidDataPointer, log ) )
+        voidDataPointer = classmethod( logs.logOnFail( voidDataPointer, _log ) )
         def typedPointer( cls, value ):
             """Return a pointer-to-base-type pointer for given value"""
             return ctypes.cast( cls.dataPointer(value), ctypes.POINTER( cls.baseType ))
@@ -147,7 +147,7 @@ if ADT is None:
         def asArray( cls, value, typeCode=None ):
             """Given a value, convert to preferred array representation"""
             return cls.getHandler(value).asArray( value, typeCode or cls.typeConstant )
-        asArray = classmethod( logs.logOnFail( asArray, log ) )
+        asArray = classmethod( logs.logOnFail( asArray, _log ) )
         def arrayToGLType( cls, value ):
             """Given a data-value, guess the OpenGL type of the corresponding pointer
             
@@ -155,26 +155,26 @@ if ADT is None:
             eventually.
             """
             return cls.getHandler(value).arrayToGLType( value )
-        arrayToGLType = classmethod( logs.logOnFail( arrayToGLType, log ) )
+        arrayToGLType = classmethod( logs.logOnFail( arrayToGLType, _log ) )
         def arraySize( cls, value, typeCode = None ):
             """Given a data-value, calculate dimensions for the array (number-of-units)"""
             return cls.getHandler(value).arraySize( value, typeCode or cls.typeConstant )
-        arraySize = classmethod( logs.logOnFail( arraySize, log ) )
+        arraySize = classmethod( logs.logOnFail( arraySize, _log ) )
         def unitSize( cls, value, typeCode=None ):
             """Determine unit size of an array (if possible)
             
             Uses our local type if defined, otherwise asks the handler to guess...
             """
             return cls.getHandler(value).unitSize( value, typeCode or cls.typeConstant )
-        unitSize = classmethod( logs.logOnFail( unitSize, log ) )
+        unitSize = classmethod( logs.logOnFail( unitSize, _log ) )
         def zeros( cls, dims, typeCode=None ):
             """Allocate a return array of the given dimensions filled with zeros"""
             return cls.returnHandler().zeros( dims, typeCode or cls.typeConstant )
-        zeros = classmethod( logs.logOnFail( zeros, log ) )
+        zeros = classmethod( logs.logOnFail( zeros, _log ) )
         def dimensions( cls, value ):
             """Given a data-value, get the dimensions (assumes full structure info)"""
             return cls.getHandler(value).dimensions( value )
-        dimensions = classmethod( logs.logOnFail( dimensions, log ) )
+        dimensions = classmethod( logs.logOnFail( dimensions, _log ) )
         
         def arrayByteCount( cls, value ):
             """Given a data-value, try to determine number of bytes it's final form occupies
@@ -182,7 +182,7 @@ if ADT is None:
             For most data-types this is arraySize() * atomic-unit-size
             """
             return cls.getHandler(value).arrayByteCount( value )
-        arrayByteCount = classmethod( logs.logOnFail( arrayByteCount, log ) )
+        arrayByteCount = classmethod( logs.logOnFail( arrayByteCount, _log ) )
             
 
     # the final array data-type classes...
@@ -267,7 +267,7 @@ if ADT is None:
         typeConstant = _types.GL_VOID_P
 else:
     # Cython-coded array handler
-    log.info( 'Using accelerated ArrayDatatype' )
+    _log.info( 'Using accelerated ArrayDatatype' )
     ArrayDatatype = ADT( None, None )
     GLclampdArray = ADT( GL_1_1.GL_DOUBLE, _types.GLclampd )
     GLclampfArray = ADT( GL_1_1.GL_FLOAT, _types.GLclampf )

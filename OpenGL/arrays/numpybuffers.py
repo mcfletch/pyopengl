@@ -7,8 +7,7 @@ ctypes version *might* show some performance benefits, but it's not going
 to be fast no matter what we do without C-level code.
 """
 REGISTRY_NAME = 'numpybuffers'
-import operator,logging
-log = logging.getLogger( __name__ )
+import operator
 try:
     import numpy
 except ImportError as err:
