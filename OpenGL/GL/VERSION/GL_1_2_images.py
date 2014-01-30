@@ -8,7 +8,6 @@ guarded by if simple.functionName checks, so that you can use
 if functionName to see if the function is available at run-time.
 """
 from OpenGL import wrapper, constants, arrays
-from OpenGL.lazywrapper import lazy
 from OpenGL.raw.GL.ARB import imaging
 from OpenGL.raw.GL.VERSION import GL_1_2 as simple
 from OpenGL.GL.ARB.imaging import *

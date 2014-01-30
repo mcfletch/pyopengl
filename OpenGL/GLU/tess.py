@@ -5,7 +5,7 @@ from OpenGL.platform import GLU,createBaseFunction
 from OpenGL.GLU import glustruct
 from OpenGL import arrays
 from OpenGL.platform import PLATFORM
-from OpenGL.lazywrapper import lazy
+from OpenGL.lazywrapper import lazy as _lazy
 import ctypes
 
 class GLUtesselator( glustruct.GLUStruct, simple.GLUtesselator):
@@ -184,7 +184,7 @@ def gluTessVertex( tess, location, data=None ):
     return tess.gluTessVertex( location, data )
 
 # /usr/include/GL/glu.h 293
-@lazy(
+@_lazy(
     createBaseFunction(
         'gluNewTess', dll=GLU, resultType=ctypes.POINTER(GLUtesselator),
         doc='gluNewTess(  ) -> POINTER(GLUtesselator)',
@@ -194,7 +194,7 @@ def gluNewTess( baseFunction ):
     """Get a new tessellator object (just unpacks the pointer for you)"""
     return baseFunction()[0]
 
-@lazy( simple.gluGetTessProperty )
+@_lazy( simple.gluGetTessProperty )
 def gluGetTessProperty( baseFunction, tess, which, data=None ):
     """Retrieve single double for a tessellator property"""
     if data is None:

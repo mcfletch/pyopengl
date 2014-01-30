@@ -1,7 +1,7 @@
 """Exceptional cases that need some extra wrapping"""
 from OpenGL import arrays, error
 from OpenGL.arrays.arraydatatype import GLfloatArray
-from OpenGL.lazywrapper import lazy
+from OpenGL.lazywrapper import lazy as _lazy
 from OpenGL.GL.VERSION import GL_1_1 as full
 from OpenGL.raw.GL import _types
 from OpenGL._bytes import bytes
@@ -43,12 +43,12 @@ glRasterPosDispatch = {
 }
 
 if _configflags.ERROR_CHECKING:
-    @lazy( full.glBegin )
+    @_lazy( full.glBegin )
     def glBegin( baseFunction, mode ):
         """Begin GL geometry-definition mode, disable automatic error checking"""
         error.onBegin( )
         return baseFunction( mode )
-    @lazy( full.glEnd )
+    @_lazy( full.glEnd )
     def glEnd( baseFunction ):
         """Finish GL geometry-definition mode, re-enable automatic error checking"""
         error.onEnd( )
@@ -57,7 +57,7 @@ else:
     glBegin = full.glBegin
     glEnd = full.glEnd
 
-@lazy( full.glDeleteTextures )
+@_lazy( full.glDeleteTextures )
 def glDeleteTextures( baseFunction, array ):
     """Delete specified set of textures"""
     ptr = arrays.GLuintArray.asArray( array )
@@ -136,7 +136,7 @@ def glVertex( *args ):
         args = args[0]
     return glVertexDispatch[ len(args) ]( *args )
 
-@lazy( full.glCallLists )
+@_lazy( full.glCallLists )
 def glCallLists( baseFunction, lists, *args ):
     """glCallLists( bytes( lists ) or lists[] ) -> None
 
@@ -169,7 +169,7 @@ def glTexParameter( target, pname, parameter ):
         value = GLfloatArray.asArray( parameter, full.GL_FLOAT )
         return full.glTexParameterfv( target, pname, value )
 
-@lazy( full.glGenTextures )
+@_lazy( full.glGenTextures )
 def glGenTextures( baseFunction, count, textures=None ):
     """Generate count new texture names
 
@@ -306,7 +306,7 @@ glTexGenfv = arrays.setInputArraySizeType(
 )
 
 #'glAreTexturesResident',
-@lazy( full.glAreTexturesResident )
+@_lazy( full.glAreTexturesResident )
 def glAreTexturesResident( baseFunction, *args ):
     """Allow both Pythonic and C-style calls to glAreTexturesResident
 

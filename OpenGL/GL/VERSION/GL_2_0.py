@@ -28,7 +28,7 @@ from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_LINK_STATUS_ARB as GL_OBJ
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_ACTIVE_UNIFORMS_ARB as GL_OBJECT_ACTIVE_UNIFORMS
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB as GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH
 from OpenGL.GL.ARB.shader_objects import glGetInfoLogARB as glGetInfoLog
-from OpenGL.lazywrapper import lazy
+from OpenGL.lazywrapper import lazy as _lazy
 
 from OpenGL import converters, error, contextdata
 from OpenGL.arrays.arraydatatype import ArrayDatatype, GLenumArray
@@ -84,7 +84,7 @@ for size in (1,2,3,4):
     except NameError as err:
         pass
 
-@lazy( glGetShaderiv )
+@_lazy( glGetShaderiv )
 def glGetShaderiv( baseOperation, shader, pname, status=None ):
     """Retrieve the integer parameter for the given shader
 
@@ -109,7 +109,7 @@ def glGetShaderiv( baseOperation, shader, pname, status=None ):
             shader, pname, status
         )
         return status
-@lazy( glGetProgramiv )
+@_lazy( glGetProgramiv )
 def glGetProgramiv( baseOperation, program, pname, params=None ):
     """Will automatically allocate params if not provided"""
     if params is None:
@@ -154,7 +154,7 @@ if _configflags.ERROR_CHECKING:
 ##if glValidateProgram and OpenGL.ERROR_CHECKING:
 ##	glValidateProgram.errcheck = _afterCheck( GL_OBJECT_VALIDATE_STATUS )
 
-@lazy( glGetShaderInfoLog )
+@_lazy( glGetShaderInfoLog )
 def glGetShaderInfoLog( baseOperation, obj ):
     """Retrieve the shader's error messages as a Python string
 
@@ -166,7 +166,7 @@ def glGetShaderInfoLog( baseOperation, obj ):
         baseOperation(obj, length, None, log)
         return log.value.strip(_NULL_8_BYTE) # null-termination
     return ''
-@lazy( glGetProgramInfoLog )
+@_lazy( glGetProgramInfoLog )
 def glGetProgramInfoLog( baseOperation, obj ):
     """Retrieve the shader program's error messages as a Python string
 
@@ -179,7 +179,7 @@ def glGetProgramInfoLog( baseOperation, obj ):
         return log.value.strip(_NULL_8_BYTE) # null-termination
     return ''
 
-@lazy( glGetAttachedShaders )
+@_lazy( glGetAttachedShaders )
 def glGetAttachedShaders( baseOperation, obj ):
     """Retrieve the attached objects as an array of GLhandle instances"""
     length= glGetProgramiv( obj, GL_ATTACHED_SHADERS )
@@ -190,7 +190,7 @@ def glGetAttachedShaders( baseOperation, obj ):
     return arrays.GLuintArray.zeros( (0,))
 
 
-@lazy( glGetShaderSource )
+@_lazy( glGetShaderSource )
 def glGetShaderSource( baseOperation, obj ):
     """Retrieve the program/shader's source code as a Python string
 
@@ -203,7 +203,7 @@ def glGetShaderSource( baseOperation, obj ):
         return source.value.strip(_NULL_8_BYTE) # null-termination
     return ''
 
-@lazy( glGetActiveUniform )
+@_lazy( glGetActiveUniform )
 def glGetActiveUniform(baseOperation,program, index):
     """Retrieve the name, size and type of the uniform of the index in the program"""
     max_index = int(glGetProgramiv( program, GL_OBJECT_ACTIVE_UNIFORMS ))
@@ -219,7 +219,7 @@ def glGetActiveUniform(baseOperation,program, index):
         raise ValueError( """No currently specified uniform names""" )
     raise IndexError( 'Index %s out of range 0 to %i' % (index, max_index - 1, ) )
 
-@lazy( glGetUniformLocation )
+@_lazy( glGetUniformLocation )
 def glGetUniformLocation( baseOperation, program, name ):
     """Check that name is a string with a null byte at the end of it"""
     if not name:
@@ -228,7 +228,7 @@ def glGetUniformLocation( baseOperation, program, name ):
     if name[-1] != _NULL_8_BYTE:
         name = name + _NULL_8_BYTE
     return baseOperation( program, name )
-@lazy( glGetAttribLocation )
+@_lazy( glGetAttribLocation )
 def glGetAttribLocation( baseOperation, program, name ):
     """Check that name is a string with a null byte at the end of it"""
     if not name:
@@ -239,7 +239,7 @@ def glGetAttribLocation( baseOperation, program, name ):
         name = name + _NULL_8_BYTE
     return baseOperation( program, name )
 
-@lazy( glVertexAttribPointer )
+@_lazy( glVertexAttribPointer )
 def glVertexAttribPointer(
     baseOperation, index, size, type,
     normalized, stride, pointer,
@@ -273,7 +273,7 @@ def glVertexAttribPointer(
         ArrayDatatype.voidDataPointer( array )
     )
 
-@lazy( glDrawBuffers )
+@_lazy( glDrawBuffers )
 def glDrawBuffers( baseOperation, n=None, bufs=None ):
     """glDrawBuffers( bufs ) -> bufs
 

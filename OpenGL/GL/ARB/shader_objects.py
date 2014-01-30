@@ -23,7 +23,7 @@ def glInitShaderObjectsARB():
 EXTENSION_NAME = 'GL_ARB_shader_objects'
 import OpenGL
 from OpenGL._bytes import bytes, _NULL_8_BYTE, as_8_bit
-from OpenGL.lazywrapper import lazy
+from OpenGL.lazywrapper import lazy as _lazy
 from OpenGL import converters, error
 GL_INFO_LOG_LENGTH_ARB = constant.Constant( 'GL_INFO_LOG_LENGTH_ARB', 0x8B84 )
 
@@ -77,7 +77,7 @@ for size in (1,2,3,4):
     except NameError as err:
         pass
 
-@lazy( glGetObjectParameterivARB )
+@_lazy( glGetObjectParameterivARB )
 def glGetObjectParameterivARB( baseOperation, shader, pname ):
     """Retrieve the integer parameter for the given shader"""
     status = arrays.GLintArray.zeros( (1,))
@@ -87,7 +87,7 @@ def glGetObjectParameterivARB( baseOperation, shader, pname ):
     )
     return status[0]
 
-@lazy( glGetObjectParameterfvARB )
+@_lazy( glGetObjectParameterfvARB )
 def glGetObjectParameterfvARB( baseOperation, shader, pname ):
     """Retrieve the float parameter for the given shader"""
     status = arrays.GLfloatArray.zeros( (1,))
@@ -125,7 +125,7 @@ if OpenGL.ERROR_CHECKING:
 ##if glValidateProgramARB and OpenGL.ERROR_CHECKING:
 ##	glValidateProgramARB.errcheck = _afterCheck( GL_OBJECT_VALIDATE_STATUS_ARB )
 
-@lazy( glGetInfoLogARB )
+@_lazy( glGetInfoLogARB )
 def glGetInfoLogARB( baseOperation, obj ):
     """Retrieve the program/shader's error messages as a Python string
 
@@ -138,7 +138,7 @@ def glGetInfoLogARB( baseOperation, obj ):
         return log.value.strip(_NULL_8_BYTE) # null-termination
     return ''
 
-@lazy( glGetAttachedObjectsARB )
+@_lazy( glGetAttachedObjectsARB )
 def glGetAttachedObjectsARB( baseOperation, obj ):
     """Retrieve the attached objects as an array of GLhandleARB instances"""
     length= glGetObjectParameterivARB( obj, GL_OBJECT_ATTACHED_OBJECTS_ARB )
@@ -148,7 +148,7 @@ def glGetAttachedObjectsARB( baseOperation, obj ):
         return storage
     return arrays.GLuintArray.zeros( (0,))
 
-@lazy( glGetShaderSourceARB )
+@_lazy( glGetShaderSourceARB )
 def glGetShaderSourceARB( baseOperation, obj ):
     """Retrieve the program/shader's source code as a Python string
 
@@ -161,7 +161,7 @@ def glGetShaderSourceARB( baseOperation, obj ):
         return source.value.strip(_NULL_8_BYTE) # null-termination
     return ''
 
-@lazy( glGetActiveUniformARB )
+@_lazy( glGetActiveUniformARB )
 def glGetActiveUniformARB(baseOperation, program, index):
     """Retrieve the name, size and type of the uniform of the index in the program"""
     max_index = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_UNIFORMS_ARB ))
@@ -177,7 +177,7 @@ def glGetActiveUniformARB(baseOperation, program, index):
         raise ValueError( """No currently specified uniform names""" )
     raise IndexError('Index %s out of range 0 to %i' % (index, max_index - 1, ))
 
-@lazy( glGetUniformLocationARB )
+@_lazy( glGetUniformLocationARB )
 def glGetUniformLocationARB( baseOperation, program, name ):
     """Check that name is a string with a null byte at the end of it"""
     if not name:

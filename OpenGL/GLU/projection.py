@@ -1,11 +1,11 @@
 """glu[Un]Project[4] convenience wrappers"""
 from OpenGL.raw import GLU as simple
 from OpenGL import GL
-from OpenGL.lazywrapper import lazy
+from OpenGL.lazywrapper import lazy as _lazy
 import ctypes 
 POINTER = ctypes.POINTER
 
-@lazy( simple.gluProject )
+@_lazy( simple.gluProject )
 def gluProject( baseFunction, objX, objY, objZ, model=None, proj=None, view=None ):
     """Convenience wrapper for gluProject
     
@@ -34,7 +34,7 @@ def gluProject( baseFunction, objX, objY, objZ, model=None, proj=None, view=None
         raise ValueError( """Projection failed!""" )
     return winX.value, winY.value, winZ.value 
 
-@lazy( simple.gluUnProject )
+@_lazy( simple.gluUnProject )
 def gluUnProject( baseFunction, winX, winY, winZ, model=None, proj=None, view=None ):
     """Convenience wrapper for gluUnProject
     
@@ -60,7 +60,7 @@ def gluUnProject( baseFunction, winX, winY, winZ, model=None, proj=None, view=No
     if not result:
         raise ValueError( """Projection failed!""" )
     return objX.value, objY.value, objZ.value 
-@lazy( simple.gluUnProject4 )
+@_lazy( simple.gluUnProject4 )
 def gluUnProject4(
     baseFunction,
     winX, winY, winZ, clipW, 

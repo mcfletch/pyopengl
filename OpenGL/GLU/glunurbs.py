@@ -7,7 +7,7 @@ Python function references alive during the calling process.
 from OpenGL.raw import GLU as simple
 from OpenGL import platform, converters, wrapper
 from OpenGL.GLU import glustruct
-from OpenGL.lazywrapper import lazy
+from OpenGL.lazywrapper import lazy as _lazy
 from OpenGL import arrays, error
 import ctypes
 import weakref
@@ -159,7 +159,7 @@ def gluNurbsCallback( nurb, which, CallBackFunc ):
     """Dispatch to the nurb's addCallback operation"""
     return nurb.addCallback( which, CallBackFunc )
 
-@lazy( simple.gluNewNurbsRenderer )
+@_lazy( simple.gluNewNurbsRenderer )
 def gluNewNurbsRenderer( baseFunction ):
     """Return a new nurbs renderer for the system (dereferences pointer)"""
     newSet = baseFunction()
@@ -167,7 +167,7 @@ def gluNewNurbsRenderer( baseFunction ):
     #new.__class__ = GLUnurbs # yes, I know, ick
     return new
 
-@lazy( simple.gluNurbsCallbackData )
+@_lazy( simple.gluNurbsCallbackData )
 def gluNurbsCallbackData( baseFunction, nurb, userData ):
     """Note the Python object for use as userData by the nurb"""
     return baseFunction(
@@ -199,14 +199,14 @@ def checkKnots( knots, name ):
                     """%s has decreasing knot %s after %s"""%( name, next, knot )
                 )
 
-@lazy( simple.gluNurbsCallbackDataEXT )
+@_lazy( simple.gluNurbsCallbackDataEXT )
 def gluNurbsCallbackDataEXT( baseFunction,nurb, userData ):
     """Note the Python object for use as userData by the nurb"""
     return baseFunction(
         nurb, nurb.noteObject( userData )
     )
 
-@lazy( simple.gluNurbsCurve )
+@_lazy( simple.gluNurbsCurve )
 def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
     """Pythonic version of gluNurbsCurve
 
@@ -227,7 +227,7 @@ def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
         nurb, knotCount, knots, step, control, order, type,
     )
 
-@lazy( simple.gluNurbsSurface )
+@_lazy( simple.gluNurbsSurface )
 def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
     """Pythonic version of gluNurbsSurface
 
@@ -269,7 +269,7 @@ def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
     )
     return result
 
-@lazy( simple.gluPwlCurve )
+@_lazy( simple.gluPwlCurve )
 def gluPwlCurve( baseFunction, nurb, data, type ):
     """gluPwlCurve -- piece-wise linear curve within GLU context
 
