@@ -1,4 +1,4 @@
-import logging, os, urllib, traceback, textwrap
+import logging, os, urllib, traceback, textwrap, keyword
 import xmlreg
 HERE = os.path.join( os.path.dirname(__file__))
 log = logging.getLogger( __name__ )
@@ -70,6 +70,10 @@ _glget_size_mapping = _m = {}
         except ValueError as err:
             comment = '# '
         return '%s%s=_C(%r,%s)'%(comment, enum.name,enum.name,enum.value)
+    def safe_name( self, name ):
+        if keyword.iskeyword( name ):
+            return name + '_'
+        return name
     def function( self, function ):
         """Produce a declaration for this function in ctypes format"""
         returnType = self.type_translator( function.returnType )
@@ -80,11 +84,11 @@ _glget_size_mapping = _m = {}
         else:
             argTypes = ''
         if function.argNames:
-            argNames = ','.join(function.argNames)
+            argNames = ','.join([self.safe_name(n) for n in function.argNames])
         else:
             argNames = ''
         arguments = ', '.join([
-            '%s %s'%(t,n)
+            '%s %s'%(t,self.safe_name(n))
             for (t,n) in zip( function.argTypes,function.argNames )
         ])
         name = function.name 
