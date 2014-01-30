@@ -1,12 +1,16 @@
 
 <refentry id="glDepthRange">
+    <refentryinfo>
+        <copyright>
+            <year>1991-2006</year>
+            <holder>Silicon Graphics, Inc.</holder>
+        </copyright>
+        <copyright>
+            <year>2010-2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>1991-2006</year>
-                <holder>Silicon Graphics, Inc.</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glDepthRange</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -28,7 +32,6 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <!-- eqn: ignoring delim $$ -->
     <refsect1 id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
@@ -54,7 +57,7 @@
     <refsect1 id="description"><title>Description</title>
         <para>
             After clipping and division by <emphasis>w</emphasis>,
-            depth coordinates range from 
+            depth coordinates range from
             <inlineequation><mml:math>
                 <!-- eqn: -1: -->
                 <mml:mn>-1</mml:mn>
@@ -80,7 +83,7 @@
     <refsect1 id="notes"><title>Notes</title>
         <para>
             It is not necessary that <parameter>nearVal</parameter> be less than <parameter>farVal</parameter>.
-            Reverse mappings such as 
+            Reverse mappings such as
             <inlineequation><mml:math>
                 <!-- eqn: nearVal  =  1: -->
                 <mml:mrow>
@@ -89,7 +92,7 @@
                     <mml:mn>1</mml:mn>
                 </mml:mrow>
             </mml:math></inlineequation>,
-            and 
+            and
             <inlineequation><mml:math>
                 <!-- eqn: farVal  =  0: -->
                 <mml:mrow>
@@ -126,9 +129,10 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. This document is licensed under the SGI
-            Free Software B License. For details, see
+            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
         </para>
     </refsect1>

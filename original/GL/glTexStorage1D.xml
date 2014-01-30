@@ -1,12 +1,12 @@
 
 <refentry id="glTexStorage1D">
+    <refentryinfo>
+        <copyright>
+            <year>2011-2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>2011</year>
-                <holder>Khronos Group</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glTexStorage1D</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -75,11 +75,10 @@
             Calling <function>glTexStorage1D</function> is equivalent, assuming no errors are generated,
             to executing the following pseudo-code:
         </para>
-<programlisting><![CDATA[    for (i = 0; i < levels; i++)
-    {
+<programlisting>    for (i = 0; i &lt; levels; i++) {
         glTexImage1D(target, i, internalformat, width, 0, format, type, NULL);
         width = max(1, (width / 2));
-    }]]></programlisting>
+    }</programlisting>
         <para>
             Since no texture data is actually provided, the values used in the pseudo-code
             for <parameter>format</parameter> and <parameter>type</parameter> are
@@ -87,8 +86,9 @@
             chosen <parameter>internalformat</parameter> enumerant. <parameter>internalformat</parameter>
             must be one of the sized internal formats given in Table 1 below, one of the sized depth-component
             formats <constant>GL_DEPTH_COMPONENT32F</constant>, <constant>GL_DEPTH_COMPONENT24</constant>, or
-            <constant>GL_DEPTH_COMPONENT16</constant>, or one of the combined depth-stencil formats,
-            <constant>GL_DEPTH32F_STENCIL8</constant>, or <constant>GL_DEPTH24_STENCIL8</constant>. Upon success,
+            <constant>GL_DEPTH_COMPONENT16</constant>, one of the combined depth-stencil formats,
+            <constant>GL_DEPTH32F_STENCIL8</constant>, or <constant>GL_DEPTH24_STENCIL8</constant>, or the
+            stencil-only format, <constant>GL_STENCIL_INDEX8</constant>. Upon success,
             the value of <constant>GL_TEXTURE_IMMUTABLE_FORMAT</constant> becomes
             <constant>GL_TRUE</constant>. The value of <constant>GL_TEXTURE_IMMUTABLE_FORMAT</constant>
             may be discovered by calling <citerefentry><refentrytitle>glGetTexParameter</refentrytitle></citerefentry>
@@ -102,6 +102,12 @@
         </para>
         <para>
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="internalformattable.xml" />
+        </para>
+    </refsect1>
+    <refsect1 id="notes"><title>Notes</title>
+        <para>
+            <constant>GL_STENCIL_INDEX8</constant> is accepted for <parameter>internalformat</parameter>
+            only if the GL version is 4.4 or higher.
         </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
@@ -118,23 +124,26 @@
             are less than 1.
         </para>
         <para>
-            <constant>GL_INVALID_OPERATION</constant> is generated if <parameter>levels</parameter> is greater than <mml:math>
-  <mml:mrow>
-    <mml:mfenced open = '&lfloor;' close = '&rfloor;'>
-      <mml:mrow>
-        <mml:msub>
-          <mml:mi>log</mml:mi>
-          <mml:mn>2</mml:mn>
-        </mml:msub>
-        <mml:mfenced open = '(' close = ')'>
-          <mml:mi>width</mml:mi>
-        </mml:mfenced>
-      </mml:mrow>
-    </mml:mfenced>
-    <mml:mo>+</mml:mo>
-    <mml:mn>1</mml:mn>
-  </mml:mrow>
-</mml:math>.
+            <constant>GL_INVALID_OPERATION</constant> is generated if <parameter>levels</parameter> is greater than
+            <inlineequation>
+                <mml:math>
+                  <mml:mrow>
+                    <mml:mfenced open = '&lfloor;' close = '&rfloor;'>
+                      <mml:mrow>
+                        <mml:msub>
+                          <mml:mi>log</mml:mi>
+                          <mml:mn>2</mml:mn>
+                        </mml:msub>
+                        <mml:mfenced open = '(' close = ')'>
+                          <mml:mi>width</mml:mi>
+                        </mml:mfenced>
+                      </mml:mrow>
+                    </mml:mfenced>
+                    <mml:mo>+</mml:mo>
+                    <mml:mn>1</mml:mn>
+                  </mml:mrow>
+                </mml:math>
+            </inlineequation>.
         </para>
     </refsect1>
     <refsect1 id="seealso"><title>See Also</title>
@@ -146,8 +155,8 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2011 Khronos Group. 
-            This material may be distributed subject to the terms and conditions set forth in 
+            Copyright <trademark class="copyright"></trademark> 2011-2013 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
         </para>

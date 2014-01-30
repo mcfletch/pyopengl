@@ -1,12 +1,16 @@
 
 <refentry id="glPointSize">
+    <refentryinfo>
+        <copyright>
+            <year>1991-2006</year>
+            <holder>Silicon Graphics, Inc.</holder>
+        </copyright>
+        <copyright>
+            <year>2010-2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>1991-2006</year>
-                <holder>Silicon Graphics, Inc.</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glPointSize</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -22,7 +26,6 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <!-- eqn: ignoring delim $$ -->
     <refsect1 id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
@@ -66,12 +69,6 @@
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_POINT_SIZE</constant>
         </para>
         <para>
-            <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_POINT_SIZE_MIN</constant>
-        </para>
-        <para>
-            <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_POINT_SIZE_MAX</constant>
-        </para>
-        <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_POINT_FADE_THRESHOLD_SIZE</constant>
         </para>
         <para>
@@ -86,9 +83,10 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. This document is licensed under the SGI
-            Free Software B License. For details, see
+            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
         </para>
     </refsect1>

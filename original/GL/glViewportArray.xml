@@ -1,12 +1,12 @@
 
 <refentry id="glViewportArray">
+    <refentryinfo>
+        <copyright>
+            <year>2010-2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>2010</year>
-                <holder>Khronos Group</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glViewportArray</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -24,7 +24,6 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <!-- eqn: ignoring delim $$ -->
     <refsect1 id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
@@ -74,13 +73,13 @@
             <inlineequation><mml:math><mml:mi mathvariant="italic">w</mml:mi></mml:math></inlineequation>
             and <inlineequation><mml:math><mml:mi mathvariant="italic">h</mml:mi></mml:math></inlineequation>
             give the width and height of the viewport, respectively.
-            The viewport specifies the affine transformation of 
+            The viewport specifies the affine transformation of
             <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
-            and 
+            and
             <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
             from
             normalized device coordinates to window coordinates.
-            Let 
+            Let
             <inlineequation><mml:math>
                 <!-- eqn: (x sub nd, y sub nd): -->
                 <mml:mfenced open="(" close=")">
@@ -93,7 +92,7 @@
                 </mml:mfenced>
             </mml:math></inlineequation>
             be normalized device coordinates.
-            Then the window coordinates 
+            Then the window coordinates
             <inlineequation><mml:math>
                 <!-- eqn: (x sub w, y sub w): -->
                 <mml:mfenced open="(" close=")">
@@ -222,8 +221,8 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010 Khronos Group. 
-            This material may be distributed subject to the terms and conditions set forth in 
+            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
         </para>

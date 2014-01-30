@@ -1,12 +1,12 @@
 
 <refentry id="glMemoryBarrier">
+    <refentryinfo>
+        <copyright>
+            <year>2011-2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>2011</year>
-                <holder>Khronos Group</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glMemoryBarrier</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -203,6 +203,18 @@
                     </para>
                     </listitem>
                 </varlistentry>
+                <varlistentry>
+                    <term><constant>GL_QUERY_BUFFER_BARRIER_BIT</constant></term>
+                    <listitem>
+                    <para>
+                        Writes of buffer objects via the <constant>GL_QUERY_BUFFER</constant>
+                        binding after the barrier will reflect data written
+                        by shaders prior to the barrier. Additionally, buffer object writes
+                        issued after the barrier will wait on the completion of all shader
+                        writes initiated prior to the barrier.
+                    </para>
+                    </listitem>
+                </varlistentry>
             </variablelist>
         </para>
         <para>
@@ -279,11 +291,14 @@
         <para>
             <constant>GL_SHADER_STORAGE_BARRIER_BIT</constant> is available only if the GL version is 4.3 or higher.
         </para>
+        <para>
+            <constant>GL_QUERY_BUFFER_BARRIER_BIT</constant> is available only if the GL version is 4.4 or higher.
+        </para>
     </refsect1>
     <refsect1 id="errors"><title>Errors</title>
         <para>
-            <constant>GL_INVALID_VALUE</constant> is generated if <parameter>barriers</parameter> contains any bits
-            other than those listed above, or is not the special value <constant>GL_ALL_BARRIER_BITS</constant>.
+            <constant>GL_INVALID_VALUE</constant> is generated if <parameter>barriers</parameter> contains any unsupported
+            bits, or is not the special value <constant>GL_ALL_BARRIER_BITS</constant>.
         </para>
     </refsect1>
     <refsect1 id="seealso"><title>See Also</title>
@@ -297,8 +312,8 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2011 Khronos Group. 
-            This material may be distributed subject to the terms and conditions set forth in 
+            Copyright <trademark class="copyright"></trademark> 2011-2013 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
         </para>

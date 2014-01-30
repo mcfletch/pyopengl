@@ -1,12 +1,16 @@
 
 <refentry id="glGetString">
+    <refentryinfo>
+        <copyright>
+            <year>1991-2006</year>
+            <holder>Silicon Graphics, Inc.</holder>
+        </copyright>
+        <copyright>
+            <year>2010-2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>1991-2006</year>
-                <holder>Silicon Graphics, Inc.</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glGetString</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -21,8 +25,6 @@
                 <paramdef>GLenum <parameter>name</parameter></paramdef>
             </funcprototype>
         </funcsynopsis>
-    </refsynopsisdiv>
-    <refsynopsisdiv><title>C Specification</title>
         <funcsynopsis>
             <funcprototype>
                 <funcdef>const GLubyte* <function>glGetStringi</function></funcdef>
@@ -65,8 +67,6 @@
                 <term><constant>GL_VENDOR</constant></term>
                 <listitem>
                     <para>
-                    </para>
-                    <para>
                         Returns the company responsible for this GL implementation.
                         This name does not change from release to release.
                     </para>
@@ -75,8 +75,6 @@
             <varlistentry>
                 <term><constant>GL_RENDERER</constant></term>
                 <listitem>
-                    <para>
-                    </para>
                     <para>
                         Returns the name of the renderer.
                         This name is typically specific to a particular configuration of a hardware
@@ -89,8 +87,6 @@
                 <term><constant>GL_VERSION</constant></term>
                 <listitem>
                     <para>
-                    </para>
-                    <para>
                         Returns a version or release number.
                     </para>
                 </listitem>
@@ -98,8 +94,6 @@
             <varlistentry>
                 <term><constant>GL_SHADING_LANGUAGE_VERSION</constant></term>
                 <listitem>
-                    <para>
-                    </para>
                     <para>
                         Returns a version or release number for the shading language.
                     </para>
@@ -115,8 +109,6 @@
             <varlistentry>
                 <term><constant>GL_EXTENSIONS</constant></term>
                 <listitem>
-                    <para>
-                    </para>
                     <para>
                         For <function>glGetStringi</function> only, returns the extension string
                         supported by the implementation at <parameter>index</parameter>.
@@ -169,9 +161,9 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. Copyright <trademark class="copyright"></trademark> 2010
-            Khronos Group. This document is licensed under the SGI
+            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            This document is licensed under the SGI
             Free Software B License. For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
         </para>

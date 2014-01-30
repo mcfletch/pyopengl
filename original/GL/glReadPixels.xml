@@ -1,12 +1,16 @@
 
 <refentry id="glReadPixels">
+    <refentryinfo>
+        <copyright>
+            <year>1991-2006</year>
+            <holder>Silicon Graphics, Inc.</holder>
+        </copyright>
+        <copyright>
+            <year>2010-2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>1991-2006</year>
-                <holder>Silicon Graphics, Inc.</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glReadPixels</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -28,7 +32,6 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <!-- eqn: ignoring delim $$ -->
     <refsect1 id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
@@ -127,7 +130,7 @@
             but not all of the parameters specified by these three commands.
         </para>
         <para>
-            If a non-zero named buffer object is bound to the <constant>GL_PIXEL_PACK_BUFFER</constant> target 
+            If a non-zero named buffer object is bound to the <constant>GL_PIXEL_PACK_BUFFER</constant> target
             (see <citerefentry><refentrytitle>glBindBuffer</refentrytitle></citerefentry>) while a block of pixels is
             requested, <parameter>data</parameter> is treated as a byte offset into the buffer object's data store
             rather than a pointer to client memory.
@@ -149,7 +152,7 @@
                     </mml:mrow>
                 </mml:mfenced>
             </mml:math></inlineequation>
-            for 
+            for
             <inlineequation><mml:math>
                 <!-- eqn: 0 <= i < width: -->
                 <mml:mrow>
@@ -171,9 +174,9 @@
                     <mml:mi mathvariant="italic">height</mml:mi>
                 </mml:mrow>
             </mml:math></inlineequation>.
-            This pixel is said to be the 
+            This pixel is said to be the
             <inlineequation><mml:math><mml:mi mathvariant="italic">i</mml:mi></mml:math></inlineequation>th
-            pixel in the 
+            pixel in the
             <inlineequation><mml:math><mml:mi mathvariant="italic">j</mml:mi></mml:math></inlineequation>th
             row.
             Pixels are returned in row order from the lowest to the highest row,
@@ -189,11 +192,6 @@
                 <listitem>
                     <para>
                         Stencil values are read from the stencil buffer.
-                        Each index is converted to fixed point,
-                        shifted left or right depending on the value and sign of <constant>GL_INDEX_SHIFT</constant>,
-                        and added to <constant>GL_INDEX_OFFSET</constant>.
-                        If <constant>GL_MAP_STENCIL</constant> is <constant>GL_TRUE</constant>,
-                        indices are replaced by their mappings in the table <constant>GL_PIXEL_MAP_S_TO_S</constant>.
                     </para>
                 </listitem>
             </varlistentry>
@@ -204,9 +202,7 @@
                         Depth values are read from the depth buffer.
                         Each component is converted to floating point such that the minimum depth
                         value maps to 0 and the maximum value maps to 1.
-                        Each component is then multiplied by <constant>GL_DEPTH_SCALE</constant>,
-                        added to <constant>GL_DEPTH_BIAS</constant>,
-                        and finally clamped to the range 
+                        Each component is clamped to the range
                         <inlineequation><mml:math>
                             <!-- eqn: [0,1]: -->
                             <mml:mfenced open="[" close="]">
@@ -227,38 +223,15 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term><constant>GL_RED</constant></term>
+                <term><constant>GL_RED</constant>,
+                      <constant>GL_GREEN</constant>,
+                      <constant>GL_BLUE</constant>,
+                      <constant>GL_RGB</constant>,
+                      <constant>GL_BGR</constant>,
+                      <constant>GL_RGBA</constant>,
+                      <constant>GL_BGRA</constant></term>
                 <listitem>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term><constant>GL_GREEN</constant></term>
-                <listitem>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term><constant>GL_BLUE</constant></term>
-                <listitem>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term><constant>GL_RGB</constant></term>
-                <listitem>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term><constant>GL_BGR</constant></term>
-                <listitem>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term><constant>GL_RGBA</constant></term>
-                <listitem>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term><constant>GL_BGRA</constant></term>
-                <listitem>
+                    <para>Color values are taken from the color buffer.</para>
                 </listitem>
             </varlistentry>
         </variablelist>
@@ -288,30 +261,30 @@
         </para>
         <para>
         </para>
-        <informaltable frame="topbot">
-            <tgroup cols="3" align="left">
-                <colspec/>
-                <colspec align="center"/>
-                <colspec align="center"/>
+        <informaltable>
+            <tgroup cols="3">
+                <colspec align="left" />
+                <colspec align="center" />
+                <colspec align="center" />
                 <thead>
                     <row>
-                        <entry rowsep="1" align="left">
-                        <parameter>type</parameter>
+                        <entry> 
+                            <parameter>type</parameter> 
                         </entry>
-                        <entry rowsep="1" align="center"><emphasis role="bold">
-                        Index Mask
-                        </emphasis></entry>
-                        <entry rowsep="1" align="center"><emphasis role="bold">
-                        Component Conversion
-                        </emphasis></entry>
+                        <entry>
+                            <emphasis role="bold"> Index Mask </emphasis>
+                        </entry>
+                        <entry>
+                            <emphasis role="bold"> Component Conversion </emphasis>
+                        </entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_BYTE</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup 8 - 1: -->
                             <mml:mrow>
@@ -323,7 +296,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup 8 - 1) c: -->
                             <mml:mrow>
@@ -343,10 +316,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_BYTE</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup 7 - 1: -->
                             <mml:mrow>
@@ -358,7 +331,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: {(2 sup 8 - 1) c - 1} / 2: -->
                             <mml:mfrac>
@@ -385,10 +358,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_SHORT</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup 16 - 1: -->
                             <mml:mrow>
@@ -400,7 +373,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup 16 - 1) c: -->
                             <mml:mrow>
@@ -420,10 +393,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_SHORT</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup 15 - 1: -->
                             <mml:mrow>
@@ -435,7 +408,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: {(2 sup 16 - 1) c - 1} / 2: -->
                             <mml:mfrac>
@@ -462,10 +435,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_INT</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup 32 - 1: -->
                             <mml:mrow>
@@ -477,7 +450,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup 32 - 1) c: -->
                             <mml:mrow>
@@ -497,10 +470,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_INT</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup 31 - 1: -->
                             <mml:mrow>
@@ -512,7 +485,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: {(2 sup 32 - 1) c - 1} / 2: -->
                             <mml:mfrac>
@@ -539,32 +512,32 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_HALF_FLOAT</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         none
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math><mml:mi mathvariant="italic">c</mml:mi></mml:math></inlineequation>
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_FLOAT</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         none
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math><mml:mi mathvariant="italic">c</mml:mi></mml:math></inlineequation>
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_BYTE_3_3_2</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -576,7 +549,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -596,10 +569,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_BYTE_2_3_3_REV</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -611,7 +584,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -631,10 +604,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_SHORT_5_6_5</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -646,7 +619,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -666,10 +639,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_SHORT_5_6_5_REV</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -681,7 +654,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -701,10 +674,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_SHORT_4_4_4_4</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -716,7 +689,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -736,10 +709,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_SHORT_4_4_4_4_REV</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -751,7 +724,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -771,10 +744,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_SHORT_5_5_5_1</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -786,7 +759,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -806,10 +779,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_SHORT_1_5_5_5_REV</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -821,7 +794,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -841,10 +814,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_INT_8_8_8_8</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -856,7 +829,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -876,10 +849,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_INT_8_8_8_8_REV</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -891,7 +864,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -911,10 +884,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_INT_10_10_10_2</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -926,7 +899,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -946,10 +919,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_INT_2_10_10_10_REV</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -961,7 +934,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -981,10 +954,10 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_INT_24_8</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: 2 sup N - 1: -->
                             <mml:mrow>
@@ -996,7 +969,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math>
                             <!-- eqn: (2 sup N - 1) c: -->
                             <mml:mrow>
@@ -1016,35 +989,35 @@
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_INT_10F_11F_11F_REV</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         --
                         </entry>
-                        <entry align="left">
+                        <entry>
                         Special
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_UNSIGNED_INT_5_9_9_9_REV</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         --
                         </entry>
-                        <entry align="left">
+                        <entry>
                         Special
                         </entry>
                     </row>
                     <row>
-                        <entry align="left">
+                        <entry>
                         <constant>GL_FLOAT_32_UNSIGNED_INT_24_8_REV</constant>
                         </entry>
-                        <entry align="center">
+                        <entry>
                         none
                         </entry>
-                        <entry align="center">
+                        <entry>
                         <inlineequation><mml:math><mml:mi mathvariant="italic">c</mml:mi></mml:math></inlineequation> (Depth Only)
                         </entry>
                     </row>
@@ -1059,12 +1032,12 @@
             <constant>GL_RED</constant>,
             <constant>GL_GREEN</constant>, or
             <constant>GL_BLUE</constant>,
-            a single value is returned and the data for the 
+            a single value is returned and the data for the
             <inlineequation><mml:math><mml:mi mathvariant="italic">i</mml:mi></mml:math></inlineequation>th
-            pixel in the 
+            pixel in the
             <inlineequation><mml:math><mml:mi mathvariant="italic">j</mml:mi></mml:math></inlineequation>th
             row
-            is placed in location 
+            is placed in location
             <inlineequation><mml:math>
                 <!-- eqn: (j) width + i: -->
                 <mml:mrow>
@@ -1147,12 +1120,12 @@
         </para>
         <para>
             <constant>GL_INVALID_OPERATION</constant> is generated if a non-zero buffer object name is bound to the
-            <constant>GL_PIXEL_PACK_BUFFER</constant> target and the data would be packed to the buffer 
+            <constant>GL_PIXEL_PACK_BUFFER</constant> target and the data would be packed to the buffer
             object such that the memory writes required would exceed the data store size.
         </para>
         <para>
             <constant>GL_INVALID_OPERATION</constant> is generated if a non-zero buffer object name is bound to the
-            <constant>GL_PIXEL_PACK_BUFFER</constant> target and <parameter>data</parameter> is not evenly divisible 
+            <constant>GL_PIXEL_PACK_BUFFER</constant> target and <parameter>data</parameter> is not evenly divisible
             into the number of bytes needed to store in memory a datum indicated by <parameter>type</parameter>.
         </para>
         <para>
@@ -1162,9 +1135,6 @@
         </para>
     </refsect1>
     <refsect1 id="associatedgets"><title>Associated Gets</title>
-        <para>
-            <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_INDEX_MODE</constant>
-        </para>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_PIXEL_PACK_BUFFER_BINDING</constant>
         </para>
@@ -1177,9 +1147,10 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. This document is licensed under the SGI
-            Free Software B License. For details, see
+            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
             <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
         </para>
     </refsect1>

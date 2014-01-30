@@ -1,12 +1,12 @@
 
 <refentry id="glGetProgramResourceName">
+    <refentryinfo>
+        <copyright>
+            <year>2013</year>
+            <holder>Khronos Group</holder>
+        </copyright>
+    </refentryinfo>
     <refmeta>
-        <refmetainfo>
-            <copyright>
-                <year>2012</year>
-                <holder>Khronos Group</holder>
-            </copyright>
-        </refmetainfo>
         <refentrytitle>glGetProgramResourceName</refentrytitle>
         <manvolnum>3G</manvolnum>
     </refmeta>
@@ -17,7 +17,7 @@
     <refsynopsisdiv><title>C Specification</title>
         <funcsynopsis>
             <funcprototype>
-                <funcdef>GLuint <function>glGetProgramResourceName</function></funcdef>
+                <funcdef>void <function>glGetProgramResourceName</function></funcdef>
                 <paramdef>GLuint <parameter>program</parameter></paramdef>
                 <paramdef>GLenum <parameter>programInterface</parameter></paramdef>
                 <paramdef>GLuint <parameter>index</parameter></paramdef>
@@ -130,11 +130,11 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term><constant>GL_VERTEX_SUBROUTINE</constant></term>,
-                <term><constant>GL_TESS_CONTROL_SUBROUTINE</constant></term>,
-                <term><constant>GL_TESS_EVALUATION_SUBROUTINE</constant></term>,
-                <term><constant>GL_GEOMETRY_SUBROUTINE</constant></term>,
-                <term><constant>GL_FRAGMENT_SUBROUTINE</constant></term>,
+                <term><constant>GL_VERTEX_SUBROUTINE</constant></term>
+                <term><constant>GL_TESS_CONTROL_SUBROUTINE</constant></term>
+                <term><constant>GL_TESS_EVALUATION_SUBROUTINE</constant></term>
+                <term><constant>GL_GEOMETRY_SUBROUTINE</constant></term>
+                <term><constant>GL_FRAGMENT_SUBROUTINE</constant></term>
                 <term><constant>GL_COMPUTE_SUBROUTINE</constant></term>
                 <listitem>
                     <para>
@@ -144,11 +144,11 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term><constant>GL_VERTEX_SUBROUTINE_UNIFORM</constant></term>,
-                <term><constant>GL_TESS_CONTROL_SUBROUTINE_UNIFORM</constant></term>,
-                <term><constant>GL_TESS_EVALUATION_SUBROUTINE_UNIFORM</constant></term>,
-                <term><constant>GL_GEOMETRY_SUBROUTINE_UNIFORM</constant></term>,
-                <term><constant>GL_FRAGMENT_SUBROUTINE_UNIFORM</constant></term>,
+                <term><constant>GL_VERTEX_SUBROUTINE_UNIFORM</constant></term>
+                <term><constant>GL_TESS_CONTROL_SUBROUTINE_UNIFORM</constant></term>
+                <term><constant>GL_TESS_EVALUATION_SUBROUTINE_UNIFORM</constant></term>
+                <term><constant>GL_GEOMETRY_SUBROUTINE_UNIFORM</constant></term>
+                <term><constant>GL_FRAGMENT_SUBROUTINE_UNIFORM</constant></term>
                 <term><constant>GL_COMPUTE_SUBROUTINE_UNIFORM</constant></term>
                 <listitem>
                     <para>
@@ -213,6 +213,11 @@
             than or equal to the number of entries in the active resource list for
             <parameter>programInterface</parameter>.
         </para>
+        <para>
+            <constant>GL_INVALID_ENUM</constant> is generated if <parameter>programInterface</parameter> is
+            <constant>GL_ATOMIC_COUNTER_BUFFER</constant> or <constant>GL_TRANSFORM_FEEDBACK_BUFFER</constant>, since active atomic
+            counter and transform feedback buffer resources are not assigned name strings.
+        </para>
     </refsect1>
     <refsect1 id="seealso"><title>See Also</title>
         <para>
@@ -224,8 +229,8 @@
     </refsect1>
     <refsect1 id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2012 Khronos Group. 
-            This material may be distributed subject to the terms and conditions set forth in 
+            Copyright <trademark class="copyright"></trademark> 2013 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
             <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
         </para>
