@@ -229,6 +229,7 @@ FormatHandler(
         '_ctypes.ArrayType',
         '_ctypes.PyCArrayType',
         '_ctypes.Array',
+        '_ctypes.array.Array',
     ],
     isOutput=True,
 )
