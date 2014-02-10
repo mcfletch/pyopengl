@@ -29,9 +29,7 @@ class STRING( c_char_p ):
     def from_param( cls, value ):
         if isinstance( value, unicode ):
             value = value.encode( 'utf-8' )
-        return super( STRING, cls ).from_param( value )
-
-
+        return c_char_p.from_param( value )
 
 
 # /usr/include/GL/freeglut_std.h 445
