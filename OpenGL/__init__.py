@@ -252,6 +252,7 @@ FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandl
     'ctypes.c_void_p',
     '_ctypes._Pointer',
     'ctypes.c_char_p',
+    '_ctypes.pointer._Pointer',
 ],isOutput=False )
 FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', [
     'numpy.ndarray',
