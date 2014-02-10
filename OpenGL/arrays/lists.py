@@ -47,7 +47,7 @@ class ListHandler( formathandler.FormatHandler ):
     def from_param( self, instance, typeCode=None ):
         try:
             return ctypes.byref( instance )
-        except TypeError as err:
+        except (TypeError,AttributeError) as err:
             array = self.asArray( instance, typeCode )
             pp = ctypes.c_void_p( ctypes.addressof( array ) )
             pp._temporary_array_ = (array,)
