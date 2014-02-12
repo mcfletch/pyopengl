@@ -50,8 +50,11 @@ extensions.extend([
     cython_extension( 'vbo' ),
     cython_extension( 'nones_formathandler' ),
     cython_extension( 'latebind' ),
-    cython_extension( 'buffers_formathandler' ),
 ])
+if sys.version_info[:2] >= (2,7):
+    extensions.extend([
+        cython_extension( 'buffers_formathandler' ),
+    ])
 
 try:
     import numpy
