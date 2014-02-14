@@ -21,7 +21,14 @@ class EGLPlatform( baseplatform.BasePlatform ):
     except OSError as err:
         GLES2 = None
     GLUT = None
-    OpenGL = GL = GLES2
+    try:
+        GL = OpenGL = ctypesloader.loadLibrary(
+            ctypes.cdll,
+            'GL', 
+            mode=ctypes.RTLD_GLOBAL 
+        )
+    except OSError as err:
+        OpenGL = GL = GLES2
     try:
         EGL = ctypesloader.loadLibrary(
             ctypes.cdll,
