@@ -14,8 +14,6 @@ import OpenGL
 
 DLL_DIRECTORY = os.path.join( os.path.dirname( OpenGL.__file__ ), 'DLLS' )
 
-
-
 def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
     """Load a given library by name with the given mode
     
@@ -30,12 +28,6 @@ def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
     
     returns the ctypes C-module object
     """
-    if ctypes_version <= [0,9,9,3]:
-        raise RuntimeError(
-            """Unsupported ctypes version (%s), please upgrade to ctypes 1.x or above"""%(
-                ".".join( [str(x) for x in ctypes_version] ),
-            )
-        )
     if isinstance( dllType, ctypes.LibraryLoader ):
         dllType = dllType._dlltype
     fullName = None
@@ -57,10 +49,4 @@ def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
 
 def buildFunction( functionType, name, dll ):
     """Abstract away the ctypes function-creation operation"""
-    if ctypes_version <= [0,9,9,3]:
-        raise RuntimeError(
-            """Unsupported ctypes version (%s), please upgrade to 1.x or above"""%(
-                ".".join( [str(x) for x in ctypes_version] ),
-            )
-        )
     return functionType( (name, dll), )
