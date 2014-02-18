@@ -237,7 +237,7 @@ def loadData():
         ),
         SampleSource(
             os.path.join(SAMPLES,'programmable'),
-            baseURL = 'https://bitbucket.org/rndblnch/opengl-programmable/src',
+            baseURL = 'https://bitbucket.org/rndblnch/opengl-programmable/',
             projectName = '{GPL3} OpenGL-Programmable',
             urlTemplate = BITBUCKET,
         ),
