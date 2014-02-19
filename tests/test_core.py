@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 import unittest, pygame, pygame.display, time, traceback, os, sys
 import logging 
-logging.basicConfig()
+logging.basicConfig(level=logging.INFO)
 HERE = os.path.dirname( __file__ )
 import pickle
 try:
@@ -21,7 +21,7 @@ if os.environ.get( 'TEST_NO_ACCELERATE' ):
 OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
 OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING = True
-from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode
+from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode, long
 from OpenGL.GL import *
 try:
     glGetError()
@@ -1065,8 +1065,16 @@ class Tests( unittest.TestCase ):
         array = ctypes.c_voidp( 12 )
         translated = ArrayDatatype.voidDataPointer( array )
         assert translated.value == array.value, translated
+    
+    def test_orinput_handling( self ):
+        x = glGenVertexArrays(1)
+        x = int(x) # check that we got x as an integer-compatible value
+        x2 = GLuint()
+        r_value = glGenVertexArrays( 1, x2 )
+        assert x2.value, x2.value
         
 if __name__ == "__main__":
+    logging.basicConfig( level=logging.INFO )
     unittest.main()
     pygame.display.quit()
     pygame.quit()
