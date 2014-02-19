@@ -116,6 +116,7 @@ cdef class PyArgCalculatorElement:
 			else:
 				if self.converter is None:
 					return args[self.index]
+                    
 				return self.converter( 
 					args[self.index], self.wrapper, args 
 				)
@@ -139,7 +140,7 @@ cdef class PyArgCalculator:
 			PyArgCalculatorElement(self,i,converter)
 			for (i,converter) in enumerate( pyConverters )
 		]
-		self.length = len(pyConverters)
+		self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])
 		
 	def __call__( self, tuple args ):
 		return self.c_call( args )
