@@ -1,6 +1,7 @@
 """Cython-coded Array-handling accelerator module"""
 import ctypes
 import OpenGL
+from OpenGL._null import NULL as _NULL
 from OpenGL import plugins
 from OpenGL_accelerate.wrapper cimport cArgConverter, pyArgConverter, returnConverter
 from OpenGL_accelerate.formathandler cimport FormatHandler
@@ -304,6 +305,12 @@ cdef class Output(cArgConverter):
                 return result
         else:
             return result
+cdef class OutputOrInput( Output ):
+    cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+        """Return pyArgs[ self.index ]"""
+        if pyArgs[index] not in DO_OUTPUT:
+            return self.arrayType.asArray( pyArgs[index] )
+        return self.arrayType.c_zeros( self.c_getSize(pyArgs), self.arrayType.typeConstant )
 
 cdef class SizedOutput( Output ):
     """Output class that looks up output size via a callable function
@@ -337,6 +344,14 @@ cdef class SizedOutput( Output ):
                 return result
             except KeyError as err:
                 raise KeyError( """Unknown specifier %s (lookup = %s)"""%( specifier, self.lookup ))
+DO_OUTPUT = (None,_NULL)
+cdef class SizedOutputOrInput( SizedOutput ):
+    cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+        """Return pyArgs[ self.index ]"""
+        if pyArgs[index] not in DO_OUTPUT:
+            return self.arrayType.asArray( pyArgs[index] )
+        return self.arrayType.c_zeros( self.c_getSize(pyArgs), self.arrayType.typeConstant )
+    
 
 cdef class AsArrayOfType(pyArgConverter):
     """Given arrayName and typeName coerce arrayName to array of type typeName
