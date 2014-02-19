@@ -23,7 +23,7 @@ if __name__ == "__main__":
     window = glutCreateWindow("hello")
     glutDisplayFunc(display)
     for name in (GL_VENDOR,GL_RENDERER,GL_SHADING_LANGUAGE_VERSION,GL_EXTENSIONS):
-        print name,glGetString(name)
+        print( '%s = %r'%( name,glGetString(name)))
     
     glutMainLoop()
     
