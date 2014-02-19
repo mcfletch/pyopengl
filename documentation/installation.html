@@ -1,172 +1,161 @@
 <!DOCTYPE html>
-<html><head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Installing PyOpenGL</title><link rel="stylesheet" type="text/css" href="tutorial.css">
-  <meta name="author" content="Mike C. Fletcher"></head>
-<body>
-<h1>Installing <a href="/">PyOpenGL</a></h1>
-
-<p>Most users of PyOpenGL should use <a href="http://pypi.python.org/pypi/pip">pip</a> 
-to install PyOpenGL automatically.  It can be installed either to the system Python or a 
-<a href="http://pypi.python.org/pypi/virtualenv">Virtualenv</a>.</p>
-<pre>$ pip install PyOpenGL PyOpenGL_accelerate</pre>
-
-<h2>Manual Installation</h2>
-<p>If you cannot, or would prefer not to, use <code>pip</code>, 
-you can download the package from the 
-    <a href="http://pypi.python.org/pypi/PyOpenGL">PyOpenGL PyPI page</a>.
-The package uses <a href="http://pypi.python.org/pypi/distribute">Distribute</a> 
-for its installation.</p>
-<pre>$ tar -zxvf PyOpenGL-3.0.2.tar.gz
-$ cd PyOpenGL-3.0.2
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Installing PyOpenGL</title>
+    <link rel="stylesheet" type="text/css" href="tutorial.css">
+    <meta name="author" content="Mike C. Fletcher">
+  </head>
+  <body>
+    <h1>Installing <a href="/">PyOpenGL</a></h1>
+    <p>Most users of PyOpenGL should use <a href="http://pypi.python.org/pypi/pip">pip</a>
+      to install PyOpenGL automatically. It can be installed either to the
+      system Python or a <a href="http://pypi.python.org/pypi/virtualenv">Virtualenv</a>.</p>
+    <pre>$ pip install PyOpenGL PyOpenGL_accelerate</pre>
+    <h2>Manual Installation</h2>
+    <p>If you cannot, or would prefer not to, use <code>pip</code>, you can
+      download the package from the <a href="http://pypi.python.org/pypi/PyOpenGL">PyOpenGL
+        PyPI page</a>.
+      The package uses <a href="http://pypi.python.org/pypi/distribute">Distribute</a>
+      for its installation.</p>
+    <pre>$ tar -zxvf PyOpenGL-3.1.0.tar.gz
+$ cd PyOpenGL-3.1.0
 $ python setup.py install</pre>
-<p>If you would like the (optional) PyOpenGL-accelerate package, download it from 
-the <a href="http://pypi.python.org/pypi/PyOpenGL-accelerate">PyOpenGL_accelerate PyPI page</a>
-and follow the same basic steps:</p>
-<p class="technical">Note that you will require a working C compiler to compile the 
-PyOpenGL-accelerate package.  Pre-built packages are available for 
-MS Windows 32 and MS Windows 64 users.</p>
-<pre>$ tar -zxvf PyOpenGL-accelerate-3.0.2.tar.gz
-$ cd PyOpenGL-accelerate-3.0.2
+    <p>If you would like the (optional) PyOpenGL-accelerate package, download it
+      from the <a href="http://pypi.python.org/pypi/PyOpenGL-accelerate">PyOpenGL_accelerate
+        PyPI page</a>
+      and follow the same basic steps:</p>
+    <p class="technical">Note that you will require a working C compiler to
+      compile the PyOpenGL-accelerate package. Pre-built packages are available
+      for MS Windows 32 and MS Windows 64 users.</p>
+    <pre>$ tar -zxvf PyOpenGL-accelerate-3.1.0.tar.gz
+$ cd PyOpenGL-accelerate-3.1.0
 $ python setup.py install</pre>
-
-<h2>Recommended Enhancements for PyOpenGL</h2>
-<ul>
-  <li><a href="http://numpy.scipy.org/">Numpy</a></li>
-  <li><a href="http://www.opengl.org/resources/libraries/">GLUT</a> or <a href="http://freeglut.sourceforge.net/">FreeGLUT</a>
+    <h2>Recommended Enhancements for PyOpenGL</h2>
+    <ul>
+      <li><a href="http://numpy.scipy.org/">Numpy</a></li>
+      <li><a href="http://www.opengl.org/resources/libraries/">GLUT</a> or <a href="http://freeglut.sourceforge.net/">FreeGLUT</a>
+        <ul>
+          <li>Available as an rpm/deb/ebuild for most modern Linux machines</li>
+          <li>The Win32 and Win64 binary installers for PyOpenGL include a copy
+            of GLUT</li>
+        </ul>
+      </li>
+      <li><a href="http://www.pythonware.com/products/pil/index.htm">Python
+          Imaging Library</a> (PIL) any recent version&nbsp;</li>
+      <li><a href="http://www.linas.org/gle">GLE</a></li>
       <ul>
-        <li>Available as an rpm/deb/ebuild for most modern Linux machines</li>
-        <li>The Win32 and Win64 binary installers for PyOpenGL include a copy of GLUT</li>
+        <li>The GL Extrusion library, available on most Linux distributions
+          (libgle3)</li>
+        <li>The Win32 package of PyOpenGL includes a copy of GLE compiled as a
+          DLL</li>
       </ul>
-  </li>
-  <li><a href="http://www.pythonware.com/products/pil/index.htm">Python
-Imaging Library</a> (PIL) any recent version&nbsp;</li>
-  <li><a href="http://www.linas.org/gle">GLE</a></li>
-  <ul>
-    <li>The GL Extrusion library, available on most Linux distributions (libgle3)</li>
-    <li>The Win32 package of PyOpenGL includes a copy of GLE compiled as a DLL</li>
-  </ul>
-</ul>
-<p class="technical">Note that Togl support is deprecated,
-it's there for legacy code (once you compile Togl), but you should
-choose a GUI library that has OpenGL support built-in for any
-new development. &nbsp;Togl support has been dropped due to the
-complexity of compilation and the headache of maintenance. &nbsp;There
-are projects which attempt to provide Togl support, feel free to
-install those into your Python's Tk installation if you need Togl under
-Python.</p>
-
-<h2>OpenGLContext Dependencies</h2>
-
-<ul>
-  <li>PyOpenGL</li>
-  <li><a href="http://numpy.scipy.org/">Numpy</a> (Required, normally a binary distribution is desirable)</li>
-  <li><a href="http://www.pythonware.com/products/pil/index.htm">Python
-Imaging Library</a> (PIL) any recent version (Required, normally a binary distribution is desirable)</li>
-  <li><a href="http://pydispatcher.sourceforge.net/">PyDispatcher</a></li>
-</ul>
-<p>Once you have the dependencies, you can install OpenGLContext itself</p>
-<pre>$ pip install PyDispatcher PyVRML97 OpenGLContext</pre>
-<p>Recommended Enhancements for OpenGLContext </p>
-<ul>
-  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=55673">SimpleParse</a>
-2.1</li>
-  <ul>
-    <li>Provides the VRML97 parser, strongly recommended</li>
-  </ul>
-
-  <li><a href="http://sourceforge.net/projects/ttfquery/">TTFQuery</a>
-and<br>
-
-
-  </li>
-
-  <li><a href="http://sourceforge.net/projects/ttfquery/">FontTools (for Numpy)</a><br>
-
-
-  </li>
-
-  
-  <ul>
-
-    <li>Provide access to TrueType fonts stored in the file system,
-used by the "toolsfont" and "pygamefont" modules in the scenegraph/text
-package.&nbsp; Without these modules, you will not have access to
-extruded fonts (toolsfont) or antialiased bitmap fonts (pygamefont)</li>
-    <li>This FontTools is patched to support using Numpy, unlike the <a href="http://sourceforge.net/projects/fonttools/">core project</a><br>
-
-
-    </li>
-
-  
-  </ul>
-
-  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=10718">wxPython</a>
-and/or&nbsp;</li>
-
-  <li><a href="http://www.pygame.org/download.shtml">PyGame</a>&nbsp;</li>
-
-  
-  <ul>
-
-    <li>Additional contexts/windowing environments, only GLUT contexts
-are available otherwise.</li>
-
-    <li>PyGame also provides antialiased bitmap fonts, while wxPython
-can provide aliased bitmap fonts if necessary</li>
-
-  
-  </ul>
-
-  <li><a href="http://starship.python.net/crew/mhammond/win32/Downloads.html">win32all</a>&nbsp;</li>
-
-  
-  <ul>
-
-    <li>win32ui and win32con provide support for WGL-based polygonal
-text, only available for Win32 systems of course.&nbsp; The WGL
-polygonal text is not used by the scenegraph engine, so it is not
-required for anything save playing with the WGL polygonal text
-demonstration module.</li>
-  </ul>
-
-</ul>
-
-
-<h2>BZR (Developer) Install</h2>
-
-<p>If you would like to contribute to PyOpenGL development or just need
-to ride the bleeding edge, you will likely want to work with a
-source-code checkout. &nbsp;You will need the&nbsp;<a href="http://bazaar-vcs.org/">Bazaar</a> (bzr) tool to work with the repository:</p>
-<pre>$ bzr branch lp:pyopengl
+    </ul>
+    <p class="technical">Note that Togl support is deprecated,
+      it's there for legacy code (once you compile Togl), but you should
+      choose a GUI library that has OpenGL support built-in for any
+      new development. &nbsp;Togl support has been dropped due to the
+      complexity of compilation and the headache of maintenance. &nbsp;There
+      are projects which attempt to provide Togl support, feel free to
+      install those into your Python's Tk installation if you need Togl under
+      Python.</p>
+    <h2>OpenGLContext Dependencies</h2>
+    <ul>
+      <li>PyOpenGL</li>
+      <li><a href="http://numpy.scipy.org/">Numpy</a> (Required, normally a
+        binary distribution is desirable)</li>
+      <li><a href="http://www.pythonware.com/products/pil/index.htm">Python
+          Imaging Library</a> (PIL) any recent version (Required, normally a
+        binary distribution is desirable)</li>
+      <li><a href="http://pydispatcher.sourceforge.net/">PyDispatcher</a></li>
+    </ul>
+    <p>Once you have the dependencies, you can install OpenGLContext itself</p>
+    <pre>$ pip install PyDispatcher PyVRML97 OpenGLContext</pre>
+    <p>Recommended Enhancements for OpenGLContext </p>
+    <ul>
+      <li><a href="http://sourceforge.net/project/showfiles.php?group_id=55673">SimpleParse</a>
+        2.1</li>
+      <ul>
+        <li>Provides the VRML97 parser, strongly recommended</li>
+      </ul>
+      <li><a href="http://sourceforge.net/projects/ttfquery/">TTFQuery</a>
+        and<br>
+      </li>
+      <li><a href="http://sourceforge.net/projects/ttfquery/">FontTools (for
+          Numpy)</a><br>
+      </li>
+      <ul>
+        <li>Provide access to TrueType fonts stored in the file system,
+          used by the "toolsfont" and "pygamefont" modules in the
+          scenegraph/text
+          package.&nbsp; Without these modules, you will not have access to
+          extruded fonts (toolsfont) or antialiased bitmap fonts (pygamefont)</li>
+        <li>This FontTools is patched to support using Numpy, unlike the <a href="http://sourceforge.net/projects/fonttools/">core
+            project</a><br>
+        </li>
+      </ul>
+      <li><a href="http://sourceforge.net/project/showfiles.php?group_id=10718">wxPython</a>
+        and/or&nbsp;</li>
+      <li><a href="http://www.pygame.org/download.shtml">PyGame</a>&nbsp;</li>
+      <ul>
+        <li>Additional contexts/windowing environments, only GLUT contexts
+          are available otherwise.</li>
+        <li>PyGame also provides antialiased bitmap fonts, while wxPython
+          can provide aliased bitmap fonts if necessary</li>
+      </ul>
+      <li><a href="http://starship.python.net/crew/mhammond/win32/Downloads.html">win32all</a>&nbsp;</li>
+      <ul>
+        <li>win32ui and win32con provide support for WGL-based polygonal
+          text, only available for Win32 systems of course.&nbsp; The WGL
+          polygonal text is not used by the scenegraph engine, so it is not
+          required for anything save playing with the WGL polygonal text
+          demonstration module.</li>
+      </ul>
+    </ul>
+    <h2>BZR (Developer) Install</h2>
+    <p>If you would like to contribute to PyOpenGL development or just need
+      to ride the bleeding edge, you will likely want to work with a
+      source-code checkout. &nbsp;You will need the&nbsp;<a href="http://bazaar-vcs.org/">Bazaar</a>
+      (bzr) tool to work with the repository:</p>
+    <pre>$ bzr branch lp:pyopengl
 $ cd pyopengl
 $ python setup.py develop --user
 $ cd OpenGL_accelerate
 $ python setup.py develop --user
 $ cd ../../</pre>
-<p>To contribute to OpenGLContext development (or to run the tests, for instance):</p>
-<pre>$ bzr branch lp:pyvrml97
+    <p>To contribute to OpenGLContext development (or to run the tests, for
+      instance):</p>
+    <pre>$ bzr branch lp:pyvrml97
 $ cd pyvrml97 
 $ python setup.py develop --user
 $ cd ../
 $ bzr branch lp:openglcontext
 $ cd openglcontext
 $ python setup.py develop --user</pre>
-<p>To contribute your changes back, either publish
-your branch publicly (for instance on LaunchPad) or create a "merge
-directive" to send to pyopengl-devel@lists.sourceforge.net:</p><pre>bzr send -o my-changes.diff<br></pre><p>Note that you'll need to subscribe to <a href="https://lists.sourceforge.net/lists/listinfo/pyopengl-devel">pyopengl-devel</a> to post changes to it. &nbsp;If you prefer you can send them to <a href="mailto:mcfletch@vrplumber.com">Mike Fletcher</a> instead.</p><h3>Building Documentation</h3>
-
-
-<p>The documentation build system is completely rewritten for PyOpenGL
-3.x and is far easier to use and faster &nbsp;(at least a couple of
-orders of magnitude) than the old Java-based docbook processor.</p><pre>bzr branch lp:~mcfletch/pyopengl/directdocs<br>cd directdocs<br>./samples.py<br>./references.py<br>./generate.py<br>./upload.py</pre><p>The
-last command will not work unless you happen to be me. You need the
-lxml.etree and kid packages installed to run the generator (also bzr,
-svn, PyOpenGL, cvs, etceteras).</p>
-
-<p class="footer"><a href="index.html"><img src="../images/doc_logo_icon.gif" title="" alt="Documentation" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>&nbsp;<a href="http://pyopengl.sourceforge.net/"><img alt="PyOpenGL" src="../images/icon2.jpg" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>
-A
-SourceForge Open-Source project: <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1" style="border: 0px solid ; width: 88px; height: 31px;" alt="SourceForge" title="" align="middle"></a></p>
-
-
-</body></html>
+    <p>To contribute your changes back, either publish
+      your branch publicly (for instance on LaunchPad) or create a "merge
+      directive" to send to pyopengl-devel@lists.sourceforge.net:</p>
+    <pre>bzr send -o my-changes.diff</pre>
+    <p>Note that you'll need to subscribe to <a href="https://lists.sourceforge.net/lists/listinfo/pyopengl-devel">pyopengl-devel</a>
+      to post changes to it. &nbsp;If you prefer you can send them to <a href="mailto:mcfletch@vrplumber.com">Mike
+        Fletcher</a> instead.</p>
+    <h3>Building Documentation</h3>
+    <p>The documentation build system is completely rewritten for PyOpenGL
+      3.x and is far easier to use and faster &nbsp;(at least a couple of
+      orders of magnitude) than the old Java-based docbook processor.</p>
+    <pre>bzr branch lp:~mcfletch/pyopengl/directdocs<br>cd directdocs<br>./samples.py<br>./references.py<br>./generate.py<br>./upload.py</pre>
+    <p>The
+      last command will not work unless you happen to be me. You need the
+      lxml.etree and kid packages installed to run the generator (also bzr,
+      svn, PyOpenGL, cvs, etceteras).</p>
+    <p class="footer"><a href="index.html"><img src="../images/doc_logo_icon.gif"
+          title="" alt="Documentation" style="border: 0px solid ; width: 32px; height: 32px;"
+          align="middle"></a>&nbsp;<a href="http://pyopengl.sourceforge.net/"><img
+          alt="PyOpenGL" src="../images/icon2.jpg" style="border: 0px solid ; width: 32px; height: 32px;"
+          align="middle"></a>
+      A
+      SourceForge Open-Source project: <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1"
+          style="border: 0px solid ; width: 88px; height: 31px;" alt="SourceForge"
+          title="" align="middle"></a></p>
+  </body>
+</html>
