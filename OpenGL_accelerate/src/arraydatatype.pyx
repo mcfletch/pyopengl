@@ -35,7 +35,7 @@ cdef class HandlerRegistry:
         cdef object typ, handler,base
         try:
             typ = value.__class__
-        except AttributeError, err:
+        except AttributeError as err:
             typ = PyObject_Type(value)
         handler = self.registry.get( typ )
         if not handler:
@@ -157,7 +157,7 @@ cdef class ArrayDatatype:
         pointer = self.dataPointer( value )
         try:
             return ctypes.c_void_p(pointer)
-        except TypeError, err:
+        except TypeError as err:
             return pointer
     def typedPointer( self, value ):
         """Return a pointer-to-base-type pointer for given value"""
@@ -300,7 +300,7 @@ cdef class Output(cArgConverter):
         if thisSize == (1,):
             try:
                 return result[0]
-            except TypeError, err:
+            except TypeError as err:
                 return result
         else:
             return result
@@ -327,7 +327,7 @@ cdef class SizedOutput( Output ):
         """Retrieve the array size for this argument"""
         try:
             specifier = pyArgs[ self.index ]
-        except AttributeError, err:
+        except AttributeError as err:
             raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
         else:
             try:
@@ -335,7 +335,7 @@ cdef class SizedOutput( Output ):
                 if not isinstance( result, tuple ):
                     result = (result,)
                 return result
-            except KeyError, err:
+            except KeyError as err:
                 raise KeyError( """Unknown specifier %s (lookup = %s)"""%( specifier, self.lookup ))
 
 cdef class AsArrayOfType(pyArgConverter):
