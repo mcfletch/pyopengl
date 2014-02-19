@@ -1,6 +1,7 @@
 """Implementations for common converter types"""
 import ctypes,logging
 from OpenGL._bytes import bytes, unicode, as_8_bit
+from OpenGL._null import NULL
 _log = logging.getLogger( 'OpenGL.converters' )
 
 class Converter( object ):
@@ -113,7 +114,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             CallFuncPyConverter, DefaultCConverter, getPyArgsName,
         )
         from OpenGL_accelerate.arraydatatype import (
-            Output,SizedOutput
+            Output,SizedOutput,OutputOrInput,SizedOutputOrInput
         )
         from OpenGL_accelerate.wrapper import (
             returnCArgument, returnPyArgument,
@@ -207,6 +208,13 @@ if CallFuncPyConverter is None:
                     return result
             else:
                 return result
+    class OutputOrInput( Output ):
+        DO_OUTPUT = (None,NULL)
+        def __call__( self, pyArgs, index, baseOperation ):
+            if pyArgs[index] in self.DO_OUTPUT:
+                return super( OutputOrInput,self ).__call__( pyArgs, index, baseOperation )
+            else:
+                return self.arrayType.asArray( pyArgs[index] )
 
     class SizedOutput( Output ):
         """Output generating dynamically-sized typed output arrays
@@ -232,6 +240,13 @@ if CallFuncPyConverter is None:
                     return self.lookup( specifier )
                 except KeyError as err:
                     raise KeyError( """Unknown specifier %s"""%( specifier ))
+    class SizedOutputOrInput( SizedOutput ):
+        DO_OUTPUT = (None,NULL)
+        def __call__( self, pyArgs, index, baseOperation ):
+            if pyArgs[index] in self.DO_OUTPUT:
+                return super( SizedOutputOrInput,self ).__call__( pyArgs, index, baseOperation )
+            else:
+                return self.arrayType.asArray( pyArgs[index] )
     class returnCArgument( ReturnValues ):
         """ReturnValues returning the named cArgs value"""
         argNames = ('name',)

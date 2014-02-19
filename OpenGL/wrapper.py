@@ -36,8 +36,8 @@ def asList( o ):
         return list(o)
     return o
 
-def none_or_pass( value=None ):
-    return value
+def none_or_pass( incoming, function, arguments ):
+    return incoming
 none_or_pass.optional=True
 
 class Wrapper( LateBind ):
@@ -143,7 +143,11 @@ class Wrapper( LateBind ):
             arrayType = self.wrappedOperation.argtypes[ index ]
         if pnameArg is None:
             assert not hasattr(size,'__call__' )
-            conv = converters.Output(
+            if orPassIn:
+                cls = converters.OutputOrInput
+            else:
+                cls = converters.Output 
+            conv = cls(
                 name=outArg,
                 size=size,
                 arrayType=arrayType,
@@ -155,7 +159,11 @@ class Wrapper( LateBind ):
             else:
                 setattr( self, '%s_FROM_%s'%(outArg,pnameArg), size )
             assert hasattr( size, '__call__' )
-            conv = converters.SizedOutput(
+            if orPassIn:
+                cls = converters.SizedOutputOrInput
+            else:
+                cls = converters.SizedOutput
+            conv = cls(
                 name=outArg,
                 specifier=pnameArg,
                 lookup=size,
