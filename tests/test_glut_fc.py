@@ -19,14 +19,14 @@ def display():
         glClear (GL_COLOR_BUFFER_BIT)
         try:
             glGetString( GL_EXTENSIONS )
-        except GLError, err:
+        except GLError as err:
             pass 
         else:
             print('Egads, glGetString should not have worked!')
         assert bool( glGenVertexArrays ), "Should have vertex array support in 3.2"
         glFlush ()
         glutSwapBuffers()
-    except Exception, err:
+    except Exception as err:
         glutDestroyWindow( window )
         raise
 

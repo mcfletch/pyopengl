@@ -11,7 +11,7 @@ def test_createTargetArray():
     
     try:
         images.createTargetArray( gl.GL_RGBA, size, gl.GL_UNSIGNED_BYTE_3_3_2 )
-    except ValueError, err:
+    except ValueError as err:
         pass 
     else:
         raise RuntimeError( """Should have failed with insufficient components in the type to hold the format""" )

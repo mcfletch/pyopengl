@@ -1,7 +1,7 @@
 import ctypes
 try:
     from ctypes.util import find_library
-except ImportError, err:
+except ImportError as err:
     from ctypes.util import findLib 
     def find_library( string ):
         return findLib( string )[0]
