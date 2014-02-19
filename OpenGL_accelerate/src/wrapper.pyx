@@ -1,6 +1,7 @@
 """Cython-coded implementation of wrapper module"""
 import ctypes
 from OpenGL import error
+from OpenGL._null import NULL as _NULL
 
 cdef extern from "Python.h":
 	cdef object PyObject_Type( object )
@@ -116,7 +117,8 @@ cdef class PyArgCalculatorElement:
 			else:
 				if self.converter is None:
 					return args[self.index]
-                    
+				if len(args) <= self.index:
+					return _NULL
 				return self.converter( 
 					args[self.index], self.wrapper, args 
 				)
@@ -145,7 +147,7 @@ cdef class PyArgCalculator:
 	def __call__( self, tuple args ):
 		return self.c_call( args )
 	cdef list c_call( self, tuple args ):
-		if self.length != len(args):
+		if self.length > len(args):
 			raise ValueError(
 				"""%s requires %r arguments (%s), received %s: %r"""%(
 					self.wrapper.wrappedOperation.__name__,

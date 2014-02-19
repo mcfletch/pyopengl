@@ -32,3 +32,8 @@ from OpenGL.GL.ARB.map_buffer_range import *
 
 GL_DEPTH_BUFFER = constant.Constant( 'GL_DEPTH_BUFFER', 0x8223 )
 GL_STENCIL_BUFFER = constant.Constant( 'GL_STENCIL_BUFFER', 0x8224 )
+
+glGenVertexArrays = wrapper.wrapper(glGenVertexArrays).setOutput(
+    'arrays', lambda n: (n,), 'n', arrayType = arrays.GLuintArray,
+    orPassIn=True,
+)

@@ -7,6 +7,7 @@ from OpenGL import converters
 from OpenGL.converters import DefaultCConverter
 from OpenGL.converters import returnCArgument,returnPyArgument
 from OpenGL.latebind import LateBind
+from OpenGL._null import NULL
 _log = logging.getLogger( 'OpenGL.wrapper' )
 
 from OpenGL import acceleratesupport
@@ -22,7 +23,6 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
         )
     except ImportError as err:
         _log.warn( """OpenGL_accelerate seems to be installed, but unable to import expected wrapper entry points!""" )
-NULL = object()
 
 if not STORE_POINTERS:
     if not ERROR_ON_COPY:
@@ -35,6 +35,10 @@ def asList( o ):
     if not isinstance( o, list ):
         return list(o)
     return o
+
+def none_or_pass( value=None ):
+    return value
+none_or_pass.optional=True
 
 class Wrapper( LateBind ):
     """Wrapper around a ctypes cFunction object providing SWIG-like hooks
@@ -163,7 +167,7 @@ class Wrapper( LateBind ):
             returnObject = converters.returnCArgument( outArg )
         if orPassIn:
             self.setPyConverter(
-                outArg, None
+                outArg, none_or_pass
             )
         else:
             self.setPyConverter( outArg )
@@ -336,9 +340,9 @@ class Wrapper( LateBind ):
                     (i,converter,(converter is None))
                     for (i,converter) in enumerate( pyConverters )
                 ]
-                pyConverters_length = len(pyConverters)
+                pyConverters_length = len([p for p in pyConverters if not getattr( p, 'optional', False)])
                 def calculate_pyArgs( args ):
-                    if pyConverters_length != len(args):
+                    if pyConverters_length > len(args):
                         raise ValueError(
                             """%s requires %r arguments (%s), received %s: %r"""%(
                                 wrappedOperation.__name__,
@@ -354,6 +358,8 @@ class Wrapper( LateBind ):
                         else:
                             try:
                                 yield converter(args[index], self, args)
+                            except IndexError as err:
+                                yield NULL
                             except Exception as err:
                                 if hasattr( err, 'args' ):
                                     err.args += ( converter, )
