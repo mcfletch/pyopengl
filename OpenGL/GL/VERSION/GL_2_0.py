@@ -28,7 +28,6 @@ from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_COMPILE_STATUS_ARB as GL_
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_LINK_STATUS_ARB as GL_OBJECT_LINK_STATUS
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_ACTIVE_UNIFORMS_ARB as GL_OBJECT_ACTIVE_UNIFORMS
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB as GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH
-from OpenGL.GL.ARB.shader_objects import glGetInfoLogARB as glGetInfoLog
 from OpenGL.lazywrapper import lazy as _lazy
 
 from OpenGL import converters, error, contextdata
@@ -142,7 +141,7 @@ def _afterCheck( key ):
                 result = result,
                 baseOperation = baseOperation,
                 cArguments = cArguments,
-                description= glGetInfoLog( cArguments[0] )
+                description= glGetShaderInfoLog( cArguments[0] )
             )
         return result
     return GLSLCheckError
