@@ -55,7 +55,7 @@ def reshape( *args ):
     display()
 
 def ontimer( *args ):
-    print('timer', args, '@time', time.time()-start)
+    print(('timer', args, '@time', time.time()-start))
     glutTimerFunc( 1000, ontimer, 24 )
 
 def idle():
@@ -85,7 +85,7 @@ def idle():
 
 def printFunction( name ):
     def onevent( *args ):
-        print('%s -> %s'%(name, ", ".join( [str(a) for a in args ])))
+        print(('%s -> %s'%(name, ", ".join( [str(a) for a in args ]))))
     return onevent
 
 

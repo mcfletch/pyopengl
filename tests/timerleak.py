@@ -7,7 +7,7 @@ count = 0
 def timerCallback(value):
     global count
     count += 1
-    if count % 2000 == 0: print count
+    if count % 2000 == 0: print(count)
     glutTimerFunc( delay, timerCallback, value+1 )
 
 if __name__ == "__main__":

@@ -22,7 +22,7 @@ def display():
         except GLError, err:
             pass 
         else:
-            print 'Egads, glGetString should not have worked!'
+            print('Egads, glGetString should not have worked!')
         assert bool( glGenVertexArrays ), "Should have vertex array support in 3.2"
         glFlush ()
         glutSwapBuffers()
@@ -63,13 +63,13 @@ def idle():
         glutPostRedisplay()
     else:
         glutDestroyWindow( window )
-        print 'window destroyed'
+        print('window destroyed')
         import sys
         sys.exit( 0 )
 
 def printFunction( name ):
     def onevent( *args ):
-        print '%s -> %s'%(name, ", ".join( [str(a) for a in args ]))
+        print('%s -> %s'%(name, ", ".join( [str(a) for a in args ])))
     return onevent
 
 
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     glutInitWindowSize(250, 250)
     glutInitWindowPosition(100, 100)
     window = glutCreateWindow("hello")
-    print 'window', repr(window)
+    print('window', repr(window))
     glutDisplayFunc(display)
     glutReshapeFunc(reshape)
     glutMouseFunc(printFunction( 'Mouse' ))

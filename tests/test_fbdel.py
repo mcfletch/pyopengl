@@ -13,10 +13,10 @@ def main():
 
     for i in range( 200 ):
         fbo = EXT.glGenFramebuffersEXT(1)
-        print "FBO = ", fbo
+        print("FBO = ", fbo)
         EXT.glDeleteFramebuffersEXT (int(fbo))
         fbo = ARB.glGenFramebuffers(1)
-        print "FBO = ", fbo
+        print("FBO = ", fbo)
         ARB.glDeleteFramebuffers(int(fbo))
         glFlush()
 

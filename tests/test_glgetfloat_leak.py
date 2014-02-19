@@ -18,8 +18,8 @@ def main():
         for i in range(0,50000):
             modelview_matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
             if not i % 500:
-                print '.',
-        print
+                print('.', end=' ')
+        print()
         pygame.display.flip()
 
         eventlist = pygame.event.get()

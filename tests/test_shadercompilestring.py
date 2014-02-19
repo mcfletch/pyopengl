@@ -13,7 +13,7 @@ def test_compile_string( ):
     GL.glShaderSource(shader, SAMPLE_SHADER)
     GL.glCompileShader(shader)
     if not bool(GL.glGetShaderiv(shader, GL.GL_COMPILE_STATUS)) == True:
-        print 'Info log:'
-        print GL.glGetShaderInfoLog(shader)
+        print('Info log:')
+        print(GL.glGetShaderInfoLog(shader))
         assert False, """Failed to compile"""
     

@@ -23,7 +23,7 @@ def display():
         # For some reason the GL_PROJECTION_MATRIX is overflowing with a single push!
         # glPushMatrix()
         matrix = glGetDoublev( GL_PROJECTION_MATRIX)
-        print 'matrix', type(matrix), matrix[:][:]
+        print('matrix', type(matrix), matrix[:][:])
         glutSwapBuffers()
     except Exception as err:
         traceback.print_exc()
@@ -38,7 +38,7 @@ def reshape( *args ):
     display()
 
 def ontimer( *args ):
-    print 'timer', args, '@time', time.time()-start
+    print('timer', args, '@time', time.time()-start)
     glutTimerFunc( 1000, ontimer, 24 )
 
 def idle():
@@ -62,13 +62,13 @@ def idle():
         glutPostRedisplay()
     else:
         glutDestroyWindow( window )
-        print 'window destroyed'
+        print('window destroyed')
         import sys
         sys.exit( 0 )
 
 def printFunction( name ):
     def onevent( *args ):
-        print '%s -> %s'%(name, ", ".join( [str(a) for a in args ]))
+        print('%s -> %s'%(name, ", ".join( [str(a) for a in args ])))
     return onevent
 
 
@@ -76,12 +76,12 @@ def printFunction( name ):
 if __name__ == "__main__":
     import sys
     newArgv = glutInit(sys.argv)
-    print 'newArguments', newArgv
+    print('newArguments', newArgv)
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB )
     glutInitWindowSize(250, 250)
     glutInitWindowPosition(100, 100)
     window = glutCreateWindow("hello")
-    print 'window', repr(window)
+    print('window', repr(window))
     glutDisplayFunc(display)
     glutReshapeFunc(reshape)
     glutMouseFunc(printFunction( 'Mouse' ))

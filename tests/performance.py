@@ -72,14 +72,14 @@ def display( ):
                 glVertexPointer(  3, GL_DOUBLE, 0, v )
                 draw_with_array( v, count )
             t2 = time.time()
-            print 'Count: %s Total Time for %s iterations: %s  MTri/s: %s'%(
+            print('Count: %s Total Time for %s iterations: %s  MTri/s: %s'%(
                 count, len(repeat), t2-t1, (count*len(repeat)/(t2-t1)/1000000)
-            )
+            ))
         PROFILER.runcall( x )
     dump()
     import sys
     sys.exit(1)
-    print 'should not get here'
+    print('should not get here')
 
 if __name__ == "__main__":
     import sys

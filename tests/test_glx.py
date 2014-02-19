@@ -6,7 +6,7 @@ from OpenGL.GLX.EXT.texture_from_pixmap import *
 from pygamegltest import pygametest
 import os
 
-print 'Not yet working'
+print('Not yet working')
 raise SystemExit(1)
 attributes = [
 #    GLX_BIND_TO_TEXTURE_RGBA_EXT, 1,
@@ -47,11 +47,11 @@ AllocNone = 0
 def main():
     display = XOpenDisplay( os.environ.get( 'DISPLAY' ))
     screen = XDefaultScreen( display )
-    print 'X Display %s Screen %s'%( display, screen )
+    print('X Display %s Screen %s'%( display, screen ))
     major,minor = GLint(),GLint()
     glXQueryVersion(display, major, minor)
     version = (major.value,minor.value)
-    print 'glX Version: %s.%s'%version
+    print('glX Version: %s.%s'%version)
     
     # get a visual with 1.0 functionality...
     vis = glXChooseVisual(display, screen, attributes)
@@ -72,7 +72,7 @@ def main():
     context = glXCreateContext(display,visual,0,GL_TRUE)
     
     if version >= (1,1):
-        print glXQueryExtensionsString(display,screen)
+        print(glXQueryExtensionsString(display,screen))
 #        if version >= (1,2):
 #            d = glXGetCurrentDisplay()[0]
 #            print 'Current display', d
@@ -88,9 +88,9 @@ def main():
             attributes, 
             elements
         )
-        print '%s configs found'%( elements.value )
+        print('%s configs found'%( elements.value ))
         for config in range( elements.value ):
-            print 'Config: %s %s'%(config,configs[config][0])
+            print('Config: %s %s'%(config,configs[config][0]))
             samples = ctypes.c_int()
             for attribute in (
                 'GLX_FBCONFIG_ID','GLX_BUFFER_SIZE',
@@ -100,8 +100,8 @@ def main():
                 'GLX_DRAWABLE_TYPE',
             ):
                 glXGetFBConfigAttrib( display, configs[config], globals()[attribute], samples )
-                print '%s -> %s'%( attribute, samples.value )
-            print 
+                print('%s -> %s'%( attribute, samples.value ))
+            print() 
     
         
 if __name__ == "__main__":

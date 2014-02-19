@@ -23,6 +23,6 @@ program = compileProgram(
 nu = glGetProgramiv(program, GL_ACTIVE_UNIFORMS)
 for i in range(nu):
     name, size, type = glGetActiveUniform(program, i)
-    print 'CORE - ', name, size, type
+    print('CORE - ', name, size, type)
     glGetActiveUniformARB( program, i )
-    print 'ARB  - ', name, size, type
+    print('ARB  - ', name, size, type)

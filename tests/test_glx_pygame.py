@@ -29,16 +29,16 @@ XOpenDisplay.restype = ctypes.POINTER(Display)
 def main():
     dsp = XOpenDisplay( os.environ.get( 'DISPLAY' ))
     screen = XDefaultScreen( dsp )
-    print 'X Display %s Screen %s'%( dsp, screen )
+    print('X Display %s Screen %s'%( dsp, screen ))
     major,minor = GLint(),GLint()
     glXQueryVersion(dsp, major, minor)
     version = (major.value,minor.value)
-    print 'glX Version: %s.%s'%version
+    print('glX Version: %s.%s'%version)
     if version >= (1,1):
-        print glXQueryExtensionsString(dsp,screen)
+        print(glXQueryExtensionsString(dsp,screen))
         if version >= (1,2):
             d = glXGetCurrentDisplay()[0]
-            print 'Current display', d
+            print('Current display', d)
         else:
             d = dsp
     if version >= (1,3):
@@ -49,9 +49,9 @@ def main():
             (GLint * len(attributes))( * attributes ), 
             elements
         )
-        print '%s configs found'%( elements.value )
+        print('%s configs found'%( elements.value ))
         for config in range( elements.value ):
-            print 'Config: %s %s'%(config,configs[config][0])
+            print('Config: %s %s'%(config,configs[config][0]))
             samples = ctypes.c_int()
             for attribute in (
                 'GLX_FBCONFIG_ID','GLX_BUFFER_SIZE',
@@ -61,10 +61,10 @@ def main():
                 'GLX_DRAWABLE_TYPE',
             ):
                 glXGetFBConfigAttrib( dsp, configs[config], globals()[attribute], samples )
-                print '%s -> %s'%( attribute, samples.value )
-            print 
+                print('%s -> %s'%( attribute, samples.value ))
+            print() 
     from OpenGL.raw.GLX import _types
-    print 'Extension List', _types.GLXQuerier.getExtensions()
+    print('Extension List', _types.GLXQuerier.getExtensions())
         
 if __name__ == "__main__":
     main()

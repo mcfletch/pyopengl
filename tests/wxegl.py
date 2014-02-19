@@ -10,10 +10,10 @@ class TestFrame( wx.Frame ):
         display = eglGetDisplay(EGL_DEFAULT_DISPLAY)
         if not display:
             raise RuntimeError( "Unable to retrive display" )
-        print 'display', display
+        print('display', display)
         if not eglInitialize( display, major, minor):
-            print 'Unable to initialize'
-        print 'EGL version %s.%s'%(major.value,minor.value)
+            print('Unable to initialize')
+        print('EGL version %s.%s'%(major.value,minor.value))
     
         num_configs = ctypes.c_long()
         eglGetConfigs(display, None, 0, num_configs)

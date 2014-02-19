@@ -8,5 +8,5 @@ if __name__ == "__main__":
     except Exception, err:
         raise
     else:
-        print 'accepted 0 arguments, as desired'
+        print('accepted 0 arguments, as desired')
     

@@ -21,11 +21,11 @@ def detect():
     )
     
     for function in functions:
-        print function.__name__, bool(function)
+        print(function.__name__, bool(function))
     
     any = alternate( *functions )
     
-    print any, bool(any)
+    print(any, bool(any))
     
 
 if __name__ == "__main__":

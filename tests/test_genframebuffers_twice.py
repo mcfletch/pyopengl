@@ -10,9 +10,9 @@ def main():
     glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE|GLUT_DEPTH)
     glutCreateWindow('test')
     framebuffer = glGenFramebuffersEXT(1)
-    print type(framebuffer)
+    print(type(framebuffer))
     cow = glGenFramebuffersEXT(1)
-    print cow
+    print(cow)
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, framebuffer)
 
 if __name__ == "__main__":
