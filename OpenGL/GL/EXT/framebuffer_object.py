@@ -26,12 +26,12 @@ from OpenGL.lazywrapper import lazy as _lazy
 glGenFramebuffersEXT = wrapper.wrapper(glGenFramebuffersEXT).setOutput(
                 'framebuffers', 
                 lambda x: (x,), 
-                'n')
+                'n', orPassIn=True)
                 
 glGenRenderbuffersEXT = wrapper.wrapper(glGenRenderbuffersEXT).setOutput(
                 'renderbuffers', 
                 lambda x: (x,), 
-                'n')
+                'n', orPassIn=True)
 
 @_lazy( glDeleteFramebuffersEXT )
 def glDeleteFramebuffersEXT( baseOperation, n, framebuffers=None ):

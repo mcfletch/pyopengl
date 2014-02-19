@@ -33,7 +33,7 @@ glDeleteBuffersARB = arrays.setInputArraySizeType(
 )
 
 glGenBuffersARB = wrapper.wrapper( glGenBuffersARB ).setOutput(
-    'buffers', lambda n: (n,), 'n',
+    'buffers', lambda n: (n,), 'n', orPassIn=True
 )
 
 def _sizeOfArrayInput( pyArgs, index, wrapper ):

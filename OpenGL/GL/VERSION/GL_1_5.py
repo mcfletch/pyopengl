@@ -33,7 +33,7 @@ glDeleteBuffers = arrays.setInputArraySizeType(
 )
 
 glGenBuffers = wrapper.wrapper( glGenBuffers ).setOutput(
-    'buffers', lambda n: (n,), 'n',
+    'buffers', lambda n: (n,), 'n', orPassIn=True
 )
 
 def _sizeOfArrayInput( pyArgs, index, wrapper ):
@@ -102,7 +102,7 @@ def glBufferSubData( baseOperation, target, offset, size=None, data=None ):
     return baseOperation( target, offset, size, data )
 
 glGetBufferParameteriv = wrapper.wrapper(glGetBufferParameteriv).setOutput(
-    "params",(1,),
+    "params",(1,), orPassIn=True
 )
 @_lazy( glGetBufferPointerv )
 def glGetBufferPointerv( baseOperation, target, pname, params=None ):
@@ -140,7 +140,7 @@ for func in (
     'glGetQueryiv','glGetQueryObjectiv','glGetQueryObjectuiv',
 ):
     globals()[func] = wrapper.wrapper(globals()[func]).setOutput(
-        "params", (1,)
+        "params", (1,), orPassIn=True
     )
 try:
     del func, glget

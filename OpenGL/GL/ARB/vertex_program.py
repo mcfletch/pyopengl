@@ -28,22 +28,22 @@ from OpenGL.arrays.arraydatatype import ArrayDatatype
 # Note: sizes here are == the only documented sizes I could find,
 # may need a lookup table some day...
 glGetProgramivARB = wrapper.wrapper(glGetProgramivARB).setOutput(
-    'params', (1,),
+    'params', (1,), orPassIn=True
 )
 glGetProgramEnvParameterdvARB = wrapper.wrapper(glGetProgramEnvParameterdvARB).setOutput(
-    'params',(4,),
+    'params',(4,), orPassIn=True
 )
 glGetProgramEnvParameterfvARB = wrapper.wrapper(glGetProgramEnvParameterfvARB).setOutput(
-    'params',(4,),
+    'params',(4,), orPassIn=True
 )
 glGetProgramLocalParameterdvARB = wrapper.wrapper(glGetProgramLocalParameterdvARB).setOutput(
-    'params',(4,),
+    'params',(4,), orPassIn=True
 )
 glGetProgramLocalParameterfvARB = wrapper.wrapper(glGetProgramLocalParameterfvARB).setOutput(
-    'params',(4,),
+    'params',(4,), orPassIn=True
 )
 glGetVertexAttribdvARB = wrapper.wrapper(glGetVertexAttribdvARB).setOutput(
-    'params',(1,),
+    'params',(1,), orPassIn=True
 )
 
 ##glGetVertexAttribPointervARB = wrapper.wrapper(glGetVertexAttribPointervARB).setOutput(

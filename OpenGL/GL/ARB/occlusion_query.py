@@ -54,7 +54,7 @@ for func in (
     'glGetQueryivARB','glGetQueryObjectivARB','glGetQueryObjectuivARB',
 ):
     globals()[func] = wrapper.wrapper(globals()[func]).setOutput(
-        "params", (1,)
+        "params", (1,), orPassIn=True
     )
 try:
     del func, glget

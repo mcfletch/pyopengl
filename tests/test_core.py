@@ -1073,6 +1073,12 @@ class Tests( unittest.TestCase ):
         r_value = glGenVertexArrays( 1, x2 )
         assert x2.value, x2.value
         
+        color = glGetFloatv( GL_FOG_COLOR )
+        color2 = (GLfloat *4)()
+        glGetFloatv( GL_FOG_COLOR, color2 )
+        for a,b in zip( color,color2 ):
+            assert a==b, (color,color2)
+        
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
     unittest.main()
