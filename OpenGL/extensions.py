@@ -156,11 +156,13 @@ class _GLQuerier( ExtensionQuerier ):
         if not platform.PLATFORM.CurrentContextIsValid():
             return False
         from OpenGL.raw.GL._types import GLint
-        from OpenGL.raw.GL.VERSION.GL_1_1 import glGetString 
+        from OpenGL.raw.GL.VERSION.GL_1_1 import glGetString, glGetError
         from OpenGL.raw.GL.VERSION.GL_1_1 import GL_EXTENSIONS
         from OpenGL import error
         try:
             extensions = glGetString( GL_EXTENSIONS )
+            if glGetError():
+                raise error.GLError()
             if extensions:
                 extensions = extensions.split()
             else:
