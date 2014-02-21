@@ -113,6 +113,10 @@ def get_implementation( *args ):
     if IMPLEMENTATION is None:
         IMPLEMENTATION = Implementation()
     return IMPLEMENTATION
+def set_implementation( implementation ):
+    """Set implementation to use explicitly"""
+    global IMPLEMENTATION
+    IMPLEMENTATION = implementation
 
 from OpenGL import acceleratesupport
 VBO = None
