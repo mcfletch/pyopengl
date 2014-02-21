@@ -2,7 +2,6 @@
 import ctypes, logging
 from OpenGL import platform, error
 from OpenGL._configflags import STORE_POINTERS, ERROR_ON_COPY, SIZE_1_ARRAY_UNPACK
-glGetError = platform.OpenGL.glGetError
 from OpenGL import converters
 from OpenGL.converters import DefaultCConverter
 from OpenGL.converters import returnCArgument,returnPyArgument
