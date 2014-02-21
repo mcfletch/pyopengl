@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_vertex_attrib_64bit'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_vertex_attrib_64bit')
+    return _p.createFunction( function,_p.GL,'GL_EXT_vertex_attrib_64bit',error_checker=_errors._error_checker)
 GL_DOUBLE=_C('GL_DOUBLE',0x140A)
 GL_DOUBLE_MAT2_EXT=_C('GL_DOUBLE_MAT2_EXT',0x8F46)
 GL_DOUBLE_MAT2x3_EXT=_C('GL_DOUBLE_MAT2x3_EXT',0x8F49)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_IBM_multimode_draw_arrays'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_IBM_multimode_draw_arrays')
+    return _p.createFunction( function,_p.GL,'GL_IBM_multimode_draw_arrays',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(None,arrays.GLuintArray,arrays.GLintArray,arrays.GLsizeiArray,_cs.GLsizei,_cs.GLint)

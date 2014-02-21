@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_OES_mapbuffer'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_mapbuffer')
+    return _p.createFunction( function,_p.GL,'GL_OES_mapbuffer',error_checker=_errors._error_checker)
 GL_BUFFER_ACCESS_OES=_C('GL_BUFFER_ACCESS_OES',0x88BB)
 GL_BUFFER_MAPPED_OES=_C('GL_BUFFER_MAPPED_OES',0x88BC)
 GL_BUFFER_MAP_POINTER_OES=_C('GL_BUFFER_MAP_POINTER_OES',0x88BD)

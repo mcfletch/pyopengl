@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_texture_rectangle'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_texture_rectangle')
+    return _p.createFunction( function,_p.GL,'GL_ARB_texture_rectangle',error_checker=_errors._error_checker)
 GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB=_C('GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB',0x84F8)
 GL_PROXY_TEXTURE_RECTANGLE_ARB=_C('GL_PROXY_TEXTURE_RECTANGLE_ARB',0x84F7)
 GL_TEXTURE_BINDING_RECTANGLE_ARB=_C('GL_TEXTURE_BINDING_RECTANGLE_ARB',0x84F6)

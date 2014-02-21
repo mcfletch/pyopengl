@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_SGIS_generate_mipmap'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIS_generate_mipmap')
+    return _p.createFunction( function,_p.GL,'GL_SGIS_generate_mipmap',error_checker=_errors._error_checker)
 GL_GENERATE_MIPMAP_HINT_SGIS=_C('GL_GENERATE_MIPMAP_HINT_SGIS',0x8192)
 GL_GENERATE_MIPMAP_SGIS=_C('GL_GENERATE_MIPMAP_SGIS',0x8191)
 

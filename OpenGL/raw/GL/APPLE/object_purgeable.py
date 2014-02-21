@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_object_purgeable'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_object_purgeable')
+    return _p.createFunction( function,_p.GL,'GL_APPLE_object_purgeable',error_checker=_errors._error_checker)
 GL_BUFFER_OBJECT_APPLE=_C('GL_BUFFER_OBJECT_APPLE',0x85B3)
 GL_PURGEABLE_APPLE=_C('GL_PURGEABLE_APPLE',0x8A1D)
 GL_RELEASED_APPLE=_C('GL_RELEASED_APPLE',0x8A19)

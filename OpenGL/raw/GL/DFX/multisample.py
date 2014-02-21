@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_DFX_multisample'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_DFX_multisample')
+    return _p.createFunction( function,_p.GL,'GL_DFX_multisample',error_checker=_errors._error_checker)
 GL_MULTISAMPLE_3DFX=_C('GL_MULTISAMPLE_3DFX',0x86B2)
 GL_MULTISAMPLE_BIT_3DFX=_C('GL_MULTISAMPLE_BIT_3DFX',0x20000000)
 GL_SAMPLES_3DFX=_C('GL_SAMPLES_3DFX',0x86B4)

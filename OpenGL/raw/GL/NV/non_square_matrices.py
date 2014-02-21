@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_non_square_matrices'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_non_square_matrices')
+    return _p.createFunction( function,_p.GL,'GL_NV_non_square_matrices',error_checker=_errors._error_checker)
 GL_FLOAT_MAT2x3_NV=_C('GL_FLOAT_MAT2x3_NV',0x8B65)
 GL_FLOAT_MAT2x4_NV=_C('GL_FLOAT_MAT2x4_NV',0x8B66)
 GL_FLOAT_MAT3x2_NV=_C('GL_FLOAT_MAT3x2_NV',0x8B67)

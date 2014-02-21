@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_multitexture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_multitexture')
+    return _p.createFunction( function,_p.GL,'GL_ARB_multitexture',error_checker=_errors._error_checker)
 GL_ACTIVE_TEXTURE_ARB=_C('GL_ACTIVE_TEXTURE_ARB',0x84E0)
 GL_CLIENT_ACTIVE_TEXTURE_ARB=_C('GL_CLIENT_ACTIVE_TEXTURE_ARB',0x84E1)
 GL_MAX_TEXTURE_UNITS_ARB=_C('GL_MAX_TEXTURE_UNITS_ARB',0x84E2)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_gpu_shader5'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_gpu_shader5')
+    return _p.createFunction( function,_p.GL,'GL_ARB_gpu_shader5',error_checker=_errors._error_checker)
 GL_FRAGMENT_INTERPOLATION_OFFSET_BITS=_C('GL_FRAGMENT_INTERPOLATION_OFFSET_BITS',0x8E5D)
 GL_GEOMETRY_SHADER_INVOCATIONS=_C('GL_GEOMETRY_SHADER_INVOCATIONS',0x887F)
 GL_MAX_FRAGMENT_INTERPOLATION_OFFSET=_C('GL_MAX_FRAGMENT_INTERPOLATION_OFFSET',0x8E5C)

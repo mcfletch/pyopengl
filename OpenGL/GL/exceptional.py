@@ -1,9 +1,9 @@
 """Exceptional cases that need some extra wrapping"""
-from OpenGL import arrays, error
+from OpenGL import arrays
 from OpenGL.arrays.arraydatatype import GLfloatArray
 from OpenGL.lazywrapper import lazy as _lazy
 from OpenGL.GL.VERSION import GL_1_1 as full
-from OpenGL.raw.GL import _types
+from OpenGL.raw.GL import _types, _errors
 from OpenGL._bytes import bytes
 from OpenGL import _configflags
 import ctypes
@@ -46,12 +46,12 @@ if _configflags.ERROR_CHECKING:
     @_lazy( full.glBegin )
     def glBegin( baseFunction, mode ):
         """Begin GL geometry-definition mode, disable automatic error checking"""
-        error.onBegin( )
+        _errors._error_checker.onBegin( )
         return baseFunction( mode )
     @_lazy( full.glEnd )
     def glEnd( baseFunction ):
         """Finish GL geometry-definition mode, re-enable automatic error checking"""
-        error.onEnd( )
+        _errors._error_checker.onEnd( )
         return baseFunction( )
 else:
     glBegin = full.glBegin

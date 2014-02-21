@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_HP_convolution_border_modes'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_HP_convolution_border_modes')
+    return _p.createFunction( function,_p.GL,'GL_HP_convolution_border_modes',error_checker=_errors._error_checker)
 GL_CONSTANT_BORDER_HP=_C('GL_CONSTANT_BORDER_HP',0x8151)
 GL_CONVOLUTION_BORDER_COLOR_HP=_C('GL_CONVOLUTION_BORDER_COLOR_HP',0x8154)
 GL_IGNORE_BORDER_HP=_C('GL_IGNORE_BORDER_HP',0x8150)

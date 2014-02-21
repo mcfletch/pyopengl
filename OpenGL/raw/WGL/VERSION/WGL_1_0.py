@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.WGL import _types as _cs
 # End users want this...
 from OpenGL.raw.WGL._types import *
+from OpenGL.raw.WGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'WGL_VERSION_WGL_1_0'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_VERSION_WGL_1_0')
+    return _p.createFunction( function,_p.WGL,'WGL_VERSION_WGL_1_0',error_checker=_errors._error_checker)
 WGL_FONT_LINES=_C('WGL_FONT_LINES',0)
 WGL_FONT_POLYGONS=_C('WGL_FONT_POLYGONS',1)
 WGL_SWAP_MAIN_PLANE=_C('WGL_SWAP_MAIN_PLANE',0x00000001)

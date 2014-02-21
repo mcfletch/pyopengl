@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_transform_feedback2'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_transform_feedback2')
+    return _p.createFunction( function,_p.GL,'GL_ARB_transform_feedback2',error_checker=_errors._error_checker)
 GL_TRANSFORM_FEEDBACK=_C('GL_TRANSFORM_FEEDBACK',0x8E22)
 GL_TRANSFORM_FEEDBACK_ACTIVE=_C('GL_TRANSFORM_FEEDBACK_ACTIVE',0x8E24)
 GL_TRANSFORM_FEEDBACK_BINDING=_C('GL_TRANSFORM_FEEDBACK_BINDING',0x8E25)

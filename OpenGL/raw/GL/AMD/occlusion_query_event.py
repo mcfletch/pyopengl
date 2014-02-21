@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_AMD_occlusion_query_event'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_AMD_occlusion_query_event')
+    return _p.createFunction( function,_p.GL,'GL_AMD_occlusion_query_event',error_checker=_errors._error_checker)
 GL_OCCLUSION_QUERY_EVENT_MASK_AMD=_C('GL_OCCLUSION_QUERY_EVENT_MASK_AMD',0x874F)
 GL_QUERY_ALL_EVENT_BITS_AMD=_C('GL_QUERY_ALL_EVENT_BITS_AMD',0xFFFFFFFF)
 GL_QUERY_DEPTH_BOUNDS_FAIL_EVENT_BIT_AMD=_C('GL_QUERY_DEPTH_BOUNDS_FAIL_EVENT_BIT_AMD',0x00000008)

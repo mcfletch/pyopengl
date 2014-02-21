@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_blend_func_extended'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_blend_func_extended')
+    return _p.createFunction( function,_p.GL,'GL_ARB_blend_func_extended',error_checker=_errors._error_checker)
 GL_MAX_DUAL_SOURCE_DRAW_BUFFERS=_C('GL_MAX_DUAL_SOURCE_DRAW_BUFFERS',0x88FC)
 GL_ONE_MINUS_SRC1_ALPHA=_C('GL_ONE_MINUS_SRC1_ALPHA',0x88FB)
 GL_ONE_MINUS_SRC1_COLOR=_C('GL_ONE_MINUS_SRC1_COLOR',0x88FA)

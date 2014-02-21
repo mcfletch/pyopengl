@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GLES3 import _types as _cs
 # End users want this...
 from OpenGL.raw.GLES3._types import *
+from OpenGL.raw.GLES3 import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GLES3_VERSION_GLES3_3_0'
 def _f( function ):
-    return _p.createFunction( function,_p.GLES3,'GLES3_VERSION_GLES3_3_0')
+    return _p.createFunction( function,_p.GLES3,'GLES3_VERSION_GLES3_3_0',error_checker=_errors._error_checker)
 GL_ACTIVE_UNIFORM_BLOCKS=_C('GL_ACTIVE_UNIFORM_BLOCKS',0x8A36)
 GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH=_C('GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH',0x8A35)
 GL_ALREADY_SIGNALED=_C('GL_ALREADY_SIGNALED',0x911A)

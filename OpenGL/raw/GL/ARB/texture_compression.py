@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_texture_compression'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_texture_compression')
+    return _p.createFunction( function,_p.GL,'GL_ARB_texture_compression',error_checker=_errors._error_checker)
 GL_COMPRESSED_ALPHA_ARB=_C('GL_COMPRESSED_ALPHA_ARB',0x84E9)
 GL_COMPRESSED_INTENSITY_ARB=_C('GL_COMPRESSED_INTENSITY_ARB',0x84EC)
 GL_COMPRESSED_LUMINANCE_ALPHA_ARB=_C('GL_COMPRESSED_LUMINANCE_ALPHA_ARB',0x84EB)

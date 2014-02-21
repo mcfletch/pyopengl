@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_KHR_texture_compression_astc_hdr'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_KHR_texture_compression_astc_hdr')
+    return _p.createFunction( function,_p.GL,'GL_KHR_texture_compression_astc_hdr',error_checker=_errors._error_checker)
 GL_COMPRESSED_RGBA_ASTC_10x10_KHR=_C('GL_COMPRESSED_RGBA_ASTC_10x10_KHR',0x93BB)
 GL_COMPRESSED_RGBA_ASTC_10x5_KHR=_C('GL_COMPRESSED_RGBA_ASTC_10x5_KHR',0x93B8)
 GL_COMPRESSED_RGBA_ASTC_10x6_KHR=_C('GL_COMPRESSED_RGBA_ASTC_10x6_KHR',0x93B9)

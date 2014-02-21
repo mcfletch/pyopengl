@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_geometry_program4'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_geometry_program4')
+    return _p.createFunction( function,_p.GL,'GL_NV_geometry_program4',error_checker=_errors._error_checker)
 GL_FRAMEBUFFER_ATTACHMENT_LAYERED_EXT=_C('GL_FRAMEBUFFER_ATTACHMENT_LAYERED_EXT',0x8DA7)
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT=_C('GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT',0x8CD4)
 GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT=_C('GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT',0x8DA9)

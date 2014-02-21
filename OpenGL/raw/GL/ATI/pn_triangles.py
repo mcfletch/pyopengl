@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_pn_triangles'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_pn_triangles')
+    return _p.createFunction( function,_p.GL,'GL_ATI_pn_triangles',error_checker=_errors._error_checker)
 GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATI=_C('GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATI',0x87F1)
 GL_PN_TRIANGLES_ATI=_C('GL_PN_TRIANGLES_ATI',0x87F0)
 GL_PN_TRIANGLES_NORMAL_MODE_ATI=_C('GL_PN_TRIANGLES_NORMAL_MODE_ATI',0x87F3)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_texture_snorm'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_texture_snorm')
+    return _p.createFunction( function,_p.GL,'GL_EXT_texture_snorm',error_checker=_errors._error_checker)
 GL_ALPHA16_SNORM=_C('GL_ALPHA16_SNORM',0x9018)
 GL_ALPHA8_SNORM=_C('GL_ALPHA8_SNORM',0x9014)
 GL_ALPHA_SNORM=_C('GL_ALPHA_SNORM',0x9010)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_OES_matrix_palette'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_matrix_palette')
+    return _p.createFunction( function,_p.GL,'GL_OES_matrix_palette',error_checker=_errors._error_checker)
 GL_CURRENT_PALETTE_MATRIX_OES=_C('GL_CURRENT_PALETTE_MATRIX_OES',0x8843)
 GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES=_C('GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES',0x8B9E)
 GL_MATRIX_INDEX_ARRAY_OES=_C('GL_MATRIX_INDEX_ARRAY_OES',0x8844)

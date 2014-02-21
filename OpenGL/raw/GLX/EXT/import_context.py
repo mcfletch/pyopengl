@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GLX import _types as _cs
 # End users want this...
 from OpenGL.raw.GLX._types import *
+from OpenGL.raw.GLX import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GLX_EXT_import_context'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_EXT_import_context')
+    return _p.createFunction( function,_p.GLX,'GLX_EXT_import_context',error_checker=_errors._error_checker)
 GLX_SCREEN_EXT=_C('GLX_SCREEN_EXT',0x800C)
 GLX_SHARE_CONTEXT_EXT=_C('GLX_SHARE_CONTEXT_EXT',0x800A)
 GLX_VISUAL_ID_EXT=_C('GLX_VISUAL_ID_EXT',0x800B)

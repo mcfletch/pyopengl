@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_SGI_color_table'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGI_color_table')
+    return _p.createFunction( function,_p.GL,'GL_SGI_color_table',error_checker=_errors._error_checker)
 GL_COLOR_TABLE_ALPHA_SIZE_SGI=_C('GL_COLOR_TABLE_ALPHA_SIZE_SGI',0x80DD)
 GL_COLOR_TABLE_BIAS_SGI=_C('GL_COLOR_TABLE_BIAS_SGI',0x80D7)
 GL_COLOR_TABLE_BLUE_SIZE_SGI=_C('GL_COLOR_TABLE_BLUE_SIZE_SGI',0x80DC)

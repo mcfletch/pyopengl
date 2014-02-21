@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_1_3'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_3')
+    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_3',error_checker=_errors._error_checker)
 GL_ACTIVE_TEXTURE=_C('GL_ACTIVE_TEXTURE',0x84E0)
 GL_ADD_SIGNED=_C('GL_ADD_SIGNED',0x8574)
 GL_CLAMP_TO_BORDER=_C('GL_CLAMP_TO_BORDER',0x812D)

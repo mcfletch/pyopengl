@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.EGL import _types as _cs
 # End users want this...
 from OpenGL.raw.EGL._types import *
+from OpenGL.raw.EGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'EGL_KHR_config_attribs'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_KHR_config_attribs')
+    return _p.createFunction( function,_p.EGL,'EGL_KHR_config_attribs',error_checker=_errors._error_checker)
 EGL_CONFORMANT_KHR=_C('EGL_CONFORMANT_KHR',0x3042)
 EGL_VG_ALPHA_FORMAT_PRE_BIT_KHR=_C('EGL_VG_ALPHA_FORMAT_PRE_BIT_KHR',0x0040)
 EGL_VG_COLORSPACE_LINEAR_BIT_KHR=_C('EGL_VG_COLORSPACE_LINEAR_BIT_KHR',0x0020)

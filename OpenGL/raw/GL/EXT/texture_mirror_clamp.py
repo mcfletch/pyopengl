@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_texture_mirror_clamp'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_texture_mirror_clamp')
+    return _p.createFunction( function,_p.GL,'GL_EXT_texture_mirror_clamp',error_checker=_errors._error_checker)
 GL_MIRROR_CLAMP_EXT=_C('GL_MIRROR_CLAMP_EXT',0x8742)
 GL_MIRROR_CLAMP_TO_BORDER_EXT=_C('GL_MIRROR_CLAMP_TO_BORDER_EXT',0x8912)
 GL_MIRROR_CLAMP_TO_EDGE_EXT=_C('GL_MIRROR_CLAMP_TO_EDGE_EXT',0x8743)

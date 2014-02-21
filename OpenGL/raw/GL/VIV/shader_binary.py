@@ -4,11 +4,12 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_VIV_shader_binary'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VIV_shader_binary')
+    return _p.createFunction( function,_p.GL,'GL_VIV_shader_binary',error_checker=_errors._error_checker)
 GL_SHADER_BINARY_VIV=_C('GL_SHADER_BINARY_VIV',0x8FC4)
 

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_framebuffer_no_attachments'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_framebuffer_no_attachments')
+    return _p.createFunction( function,_p.GL,'GL_ARB_framebuffer_no_attachments',error_checker=_errors._error_checker)
 GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS=_C('GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS',0x9314)
 GL_FRAMEBUFFER_DEFAULT_HEIGHT=_C('GL_FRAMEBUFFER_DEFAULT_HEIGHT',0x9311)
 GL_FRAMEBUFFER_DEFAULT_LAYERS=_C('GL_FRAMEBUFFER_DEFAULT_LAYERS',0x9312)

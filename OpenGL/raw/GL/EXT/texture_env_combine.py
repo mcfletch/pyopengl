@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_texture_env_combine'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_texture_env_combine')
+    return _p.createFunction( function,_p.GL,'GL_EXT_texture_env_combine',error_checker=_errors._error_checker)
 GL_ADD_SIGNED_EXT=_C('GL_ADD_SIGNED_EXT',0x8574)
 GL_COMBINE_ALPHA_EXT=_C('GL_COMBINE_ALPHA_EXT',0x8572)
 GL_COMBINE_EXT=_C('GL_COMBINE_EXT',0x8570)

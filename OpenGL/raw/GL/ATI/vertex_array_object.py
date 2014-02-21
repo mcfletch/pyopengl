@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_vertex_array_object'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_vertex_array_object')
+    return _p.createFunction( function,_p.GL,'GL_ATI_vertex_array_object',error_checker=_errors._error_checker)
 GL_ARRAY_OBJECT_BUFFER_ATI=_C('GL_ARRAY_OBJECT_BUFFER_ATI',0x8766)
 GL_ARRAY_OBJECT_OFFSET_ATI=_C('GL_ARRAY_OBJECT_OFFSET_ATI',0x8767)
 GL_DISCARD_ATI=_C('GL_DISCARD_ATI',0x8763)

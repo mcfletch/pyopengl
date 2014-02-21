@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_pixel_transform'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_pixel_transform')
+    return _p.createFunction( function,_p.GL,'GL_EXT_pixel_transform',error_checker=_errors._error_checker)
 GL_AVERAGE_EXT=_C('GL_AVERAGE_EXT',0x8335)
 GL_CUBIC_EXT=_C('GL_CUBIC_EXT',0x8334)
 GL_MAX_PIXEL_TRANSFORM_2D_STACK_DEPTH_EXT=_C('GL_MAX_PIXEL_TRANSFORM_2D_STACK_DEPTH_EXT',0x8337)

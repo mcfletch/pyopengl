@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_AMD_name_gen_delete'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_AMD_name_gen_delete')
+    return _p.createFunction( function,_p.GL,'GL_AMD_name_gen_delete',error_checker=_errors._error_checker)
 GL_DATA_BUFFER_AMD=_C('GL_DATA_BUFFER_AMD',0x9151)
 GL_PERFORMANCE_MONITOR_AMD=_C('GL_PERFORMANCE_MONITOR_AMD',0x9152)
 GL_QUERY_OBJECT_AMD=_C('GL_QUERY_OBJECT_AMD',0x9153)

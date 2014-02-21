@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_IBM_vertex_array_lists'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_IBM_vertex_array_lists')
+    return _p.createFunction( function,_p.GL,'GL_IBM_vertex_array_lists',error_checker=_errors._error_checker)
 GL_COLOR_ARRAY_LIST_IBM=_C('GL_COLOR_ARRAY_LIST_IBM',103072)
 GL_COLOR_ARRAY_LIST_STRIDE_IBM=_C('GL_COLOR_ARRAY_LIST_STRIDE_IBM',103082)
 GL_EDGE_FLAG_ARRAY_LIST_IBM=_C('GL_EDGE_FLAG_ARRAY_LIST_IBM',103075)

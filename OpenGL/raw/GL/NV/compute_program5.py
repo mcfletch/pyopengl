@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_compute_program5'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_compute_program5')
+    return _p.createFunction( function,_p.GL,'GL_NV_compute_program5',error_checker=_errors._error_checker)
 GL_COMPUTE_PROGRAM_NV=_C('GL_COMPUTE_PROGRAM_NV',0x90FB)
 GL_COMPUTE_PROGRAM_PARAMETER_BUFFER_NV=_C('GL_COMPUTE_PROGRAM_PARAMETER_BUFFER_NV',0x90FC)
 

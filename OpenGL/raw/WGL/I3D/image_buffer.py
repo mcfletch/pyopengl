@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.WGL import _types as _cs
 # End users want this...
 from OpenGL.raw.WGL._types import *
+from OpenGL.raw.WGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'WGL_I3D_image_buffer'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_I3D_image_buffer')
+    return _p.createFunction( function,_p.WGL,'WGL_I3D_image_buffer',error_checker=_errors._error_checker)
 WGL_IMAGE_BUFFER_LOCK_I3D=_C('WGL_IMAGE_BUFFER_LOCK_I3D',0x00000002)
 WGL_IMAGE_BUFFER_MIN_ACCESS_I3D=_C('WGL_IMAGE_BUFFER_MIN_ACCESS_I3D',0x00000001)
 @_f

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_map_object_buffer'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_map_object_buffer')
+    return _p.createFunction( function,_p.GL,'GL_ATI_map_object_buffer',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(ctypes.c_void_p,_cs.GLuint)

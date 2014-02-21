@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_WIN_phong_shading'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_WIN_phong_shading')
+    return _p.createFunction( function,_p.GL,'GL_WIN_phong_shading',error_checker=_errors._error_checker)
 GL_PHONG_HINT_WIN=_C('GL_PHONG_HINT_WIN',0x80EB)
 GL_PHONG_WIN=_C('GL_PHONG_WIN',0x80EA)
 

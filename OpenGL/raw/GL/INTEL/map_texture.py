@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_INTEL_map_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_INTEL_map_texture')
+    return _p.createFunction( function,_p.GL,'GL_INTEL_map_texture',error_checker=_errors._error_checker)
 GL_LAYOUT_DEFAULT_INTEL=_C('GL_LAYOUT_DEFAULT_INTEL',0)
 GL_LAYOUT_LINEAR_CPU_CACHED_INTEL=_C('GL_LAYOUT_LINEAR_CPU_CACHED_INTEL',2)
 GL_LAYOUT_LINEAR_INTEL=_C('GL_LAYOUT_LINEAR_INTEL',1)

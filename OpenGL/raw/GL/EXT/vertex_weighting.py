@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_vertex_weighting'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_vertex_weighting')
+    return _p.createFunction( function,_p.GL,'GL_EXT_vertex_weighting',error_checker=_errors._error_checker)
 GL_CURRENT_VERTEX_WEIGHT_EXT=_C('GL_CURRENT_VERTEX_WEIGHT_EXT',0x850B)
 GL_MODELVIEW0_EXT=_C('GL_MODELVIEW0_EXT',0x1700)
 GL_MODELVIEW0_MATRIX_EXT=_C('GL_MODELVIEW0_MATRIX_EXT',0x0BA6)

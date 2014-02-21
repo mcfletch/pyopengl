@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_vdpau_interop'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_vdpau_interop')
+    return _p.createFunction( function,_p.GL,'GL_NV_vdpau_interop',error_checker=_errors._error_checker)
 GL_SURFACE_MAPPED_NV=_C('GL_SURFACE_MAPPED_NV',0x8700)
 GL_SURFACE_REGISTERED_NV=_C('GL_SURFACE_REGISTERED_NV',0x86FD)
 GL_SURFACE_STATE_NV=_C('GL_SURFACE_STATE_NV',0x86EB)

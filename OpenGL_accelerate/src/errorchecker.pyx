@@ -61,3 +61,6 @@ cdef class _ErrorChecker:
     def onEnd( self, target=None ):
         """Called by glEnd to record the fact that glGetError will work"""
         self.doChecks = bool( _configflags.ERROR_CHECKING and self._getErrors )
+
+    def check( self ):
+        return self.glCheckError( None, self._getErrors, [] )

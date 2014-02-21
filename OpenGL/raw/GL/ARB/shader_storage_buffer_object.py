@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_shader_storage_buffer_object'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_shader_storage_buffer_object')
+    return _p.createFunction( function,_p.GL,'GL_ARB_shader_storage_buffer_object',error_checker=_errors._error_checker)
 GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS=_C('GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS',0x8F39)
 GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES=_C('GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES',0x8F39)
 GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS=_C('GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS',0x90DC)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_OES_point_size_array'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_point_size_array')
+    return _p.createFunction( function,_p.GL,'GL_OES_point_size_array',error_checker=_errors._error_checker)
 GL_POINT_SIZE_ARRAY_BUFFER_BINDING_OES=_C('GL_POINT_SIZE_ARRAY_BUFFER_BINDING_OES',0x8B9F)
 GL_POINT_SIZE_ARRAY_OES=_C('GL_POINT_SIZE_ARRAY_OES',0x8B9C)
 GL_POINT_SIZE_ARRAY_POINTER_OES=_C('GL_POINT_SIZE_ARRAY_POINTER_OES',0x898C)

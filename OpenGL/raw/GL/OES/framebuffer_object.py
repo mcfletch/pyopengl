@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_OES_framebuffer_object'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_framebuffer_object')
+    return _p.createFunction( function,_p.GL,'GL_OES_framebuffer_object',error_checker=_errors._error_checker)
 GL_COLOR_ATTACHMENT0_OES=_C('GL_COLOR_ATTACHMENT0_OES',0x8CE0)
 GL_DEPTH_ATTACHMENT_OES=_C('GL_DEPTH_ATTACHMENT_OES',0x8D00)
 GL_DEPTH_COMPONENT16_OES=_C('GL_DEPTH_COMPONENT16_OES',0x81A5)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_texture_rg'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_texture_rg')
+    return _p.createFunction( function,_p.GL,'GL_ARB_texture_rg',error_checker=_errors._error_checker)
 GL_R16=_C('GL_R16',0x822A)
 GL_R16F=_C('GL_R16F',0x822D)
 GL_R16I=_C('GL_R16I',0x8233)

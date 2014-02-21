@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GLX import _types as _cs
 # End users want this...
 from OpenGL.raw.GLX._types import *
+from OpenGL.raw.GLX import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GLX_SGIX_hyperpipe'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_SGIX_hyperpipe')
+    return _p.createFunction( function,_p.GLX,'GLX_SGIX_hyperpipe',error_checker=_errors._error_checker)
 GLX_BAD_HYPERPIPE_CONFIG_SGIX=_C('GLX_BAD_HYPERPIPE_CONFIG_SGIX',91)
 GLX_BAD_HYPERPIPE_SGIX=_C('GLX_BAD_HYPERPIPE_SGIX',92)
 GLX_HYPERPIPE_DISPLAY_PIPE_SGIX=_C('GLX_HYPERPIPE_DISPLAY_PIPE_SGIX',0x00000001)

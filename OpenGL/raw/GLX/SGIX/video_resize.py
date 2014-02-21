@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GLX import _types as _cs
 # End users want this...
 from OpenGL.raw.GLX._types import *
+from OpenGL.raw.GLX import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GLX_SGIX_video_resize'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_SGIX_video_resize')
+    return _p.createFunction( function,_p.GLX,'GLX_SGIX_video_resize',error_checker=_errors._error_checker)
 GLX_SYNC_FRAME_SGIX=_C('GLX_SYNC_FRAME_SGIX',0x00000000)
 GLX_SYNC_SWAP_SGIX=_C('GLX_SYNC_SWAP_SGIX',0x00000001)
 @_f

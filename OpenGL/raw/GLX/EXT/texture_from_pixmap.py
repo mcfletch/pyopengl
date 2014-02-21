@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GLX import _types as _cs
 # End users want this...
 from OpenGL.raw.GLX._types import *
+from OpenGL.raw.GLX import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GLX_EXT_texture_from_pixmap'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_EXT_texture_from_pixmap')
+    return _p.createFunction( function,_p.GLX,'GLX_EXT_texture_from_pixmap',error_checker=_errors._error_checker)
 GLX_AUX0_EXT=_C('GLX_AUX0_EXT',0x20E2)
 GLX_AUX1_EXT=_C('GLX_AUX1_EXT',0x20E3)
 GLX_AUX2_EXT=_C('GLX_AUX2_EXT',0x20E4)

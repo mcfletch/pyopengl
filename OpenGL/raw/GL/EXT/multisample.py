@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_multisample'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_multisample')
+    return _p.createFunction( function,_p.GL,'GL_EXT_multisample',error_checker=_errors._error_checker)
 GL_1PASS_EXT=_C('GL_1PASS_EXT',0x80A1)
 GL_2PASS_0_EXT=_C('GL_2PASS_0_EXT',0x80A2)
 GL_2PASS_1_EXT=_C('GL_2PASS_1_EXT',0x80A3)

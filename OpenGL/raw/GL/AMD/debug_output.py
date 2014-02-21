@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_AMD_debug_output'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_AMD_debug_output')
+    return _p.createFunction( function,_p.GL,'GL_AMD_debug_output',error_checker=_errors._error_checker)
 GL_DEBUG_CATEGORY_API_ERROR_AMD=_C('GL_DEBUG_CATEGORY_API_ERROR_AMD',0x9149)
 GL_DEBUG_CATEGORY_APPLICATION_AMD=_C('GL_DEBUG_CATEGORY_APPLICATION_AMD',0x914F)
 GL_DEBUG_CATEGORY_DEPRECATION_AMD=_C('GL_DEBUG_CATEGORY_DEPRECATION_AMD',0x914B)

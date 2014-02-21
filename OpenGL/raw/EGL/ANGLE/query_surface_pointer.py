@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.EGL import _types as _cs
 # End users want this...
 from OpenGL.raw.EGL._types import *
+from OpenGL.raw.EGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'EGL_ANGLE_query_surface_pointer'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_ANGLE_query_surface_pointer')
+    return _p.createFunction( function,_p.EGL,'EGL_ANGLE_query_surface_pointer',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,_cs.EGLint,arrays.GLvoidpArray)

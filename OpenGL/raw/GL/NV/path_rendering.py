@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_path_rendering'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_path_rendering')
+    return _p.createFunction( function,_p.GL,'GL_NV_path_rendering',error_checker=_errors._error_checker)
 GL_ACCUM_ADJACENT_PAIRS_NV=_C('GL_ACCUM_ADJACENT_PAIRS_NV',0x90AD)
 GL_ADJACENT_PAIRS_NV=_C('GL_ADJACENT_PAIRS_NV',0x90AE)
 GL_AFFINE_2D_NV=_C('GL_AFFINE_2D_NV',0x9092)

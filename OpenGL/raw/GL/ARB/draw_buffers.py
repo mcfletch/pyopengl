@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_draw_buffers'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_draw_buffers')
+    return _p.createFunction( function,_p.GL,'GL_ARB_draw_buffers',error_checker=_errors._error_checker)
 GL_DRAW_BUFFER0_ARB=_C('GL_DRAW_BUFFER0_ARB',0x8825)
 GL_DRAW_BUFFER10_ARB=_C('GL_DRAW_BUFFER10_ARB',0x882F)
 GL_DRAW_BUFFER11_ARB=_C('GL_DRAW_BUFFER11_ARB',0x8830)

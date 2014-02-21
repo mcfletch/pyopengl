@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_PGI_vertex_hints'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_PGI_vertex_hints')
+    return _p.createFunction( function,_p.GL,'GL_PGI_vertex_hints',error_checker=_errors._error_checker)
 GL_COLOR3_BIT_PGI=_C('GL_COLOR3_BIT_PGI',0x00010000)
 GL_COLOR4_BIT_PGI=_C('GL_COLOR4_BIT_PGI',0x00020000)
 GL_EDGEFLAG_BIT_PGI=_C('GL_EDGEFLAG_BIT_PGI',0x00040000)

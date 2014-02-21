@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.WGL import _types as _cs
 # End users want this...
 from OpenGL.raw.WGL._types import *
+from OpenGL.raw.WGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'WGL_ARB_buffer_region'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_ARB_buffer_region')
+    return _p.createFunction( function,_p.WGL,'WGL_ARB_buffer_region',error_checker=_errors._error_checker)
 WGL_BACK_COLOR_BUFFER_BIT_ARB=_C('WGL_BACK_COLOR_BUFFER_BIT_ARB',0x00000002)
 WGL_DEPTH_BUFFER_BIT_ARB=_C('WGL_DEPTH_BUFFER_BIT_ARB',0x00000004)
 WGL_FRONT_COLOR_BUFFER_BIT_ARB=_C('WGL_FRONT_COLOR_BUFFER_BIT_ARB',0x00000001)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_disjoint_timer_query'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_disjoint_timer_query')
+    return _p.createFunction( function,_p.GL,'GL_EXT_disjoint_timer_query',error_checker=_errors._error_checker)
 GL_CURRENT_QUERY_EXT=_C('GL_CURRENT_QUERY_EXT',0x8865)
 GL_GPU_DISJOINT_EXT=_C('GL_GPU_DISJOINT_EXT',0x8FBB)
 GL_QUERY_COUNTER_BITS_EXT=_C('GL_QUERY_COUNTER_BITS_EXT',0x8864)

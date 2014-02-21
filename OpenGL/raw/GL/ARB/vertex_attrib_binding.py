@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_vertex_attrib_binding'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_vertex_attrib_binding')
+    return _p.createFunction( function,_p.GL,'GL_ARB_vertex_attrib_binding',error_checker=_errors._error_checker)
 GL_MAX_VERTEX_ATTRIB_BINDINGS=_C('GL_MAX_VERTEX_ATTRIB_BINDINGS',0x82DA)
 GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET=_C('GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET',0x82D9)
 GL_VERTEX_ATTRIB_BINDING=_C('GL_VERTEX_ATTRIB_BINDING',0x82D4)

@@ -96,12 +96,11 @@ class BasePlatform( object ):
     def errorChecking( self, func, dll, error_checker=None ):
         """Add error checking to the function if appropriate"""
         from OpenGL import error
-        if _configflags.ERROR_CHECKING:
-            if dll not in (self.GLUT,):
-                #GLUT spec says error-checking is basically undefined...
-                # there *may* be GL errors on GLUT calls that e.g. render 
-                # geometry, but that's all basically "maybe" stuff...
-                func.errcheck = error.glCheckError
+        if error_checker and _configflags.ERROR_CHECKING:
+            #GLUT spec says error-checking is basically undefined...
+            # there *may* be GL errors on GLUT calls that e.g. render 
+            # geometry, but that's all basically "maybe" stuff...
+            func.errcheck = error_checker.glCheckError
         return func
     def wrapContextCheck( self, func, dll ):
         """Wrap function with context-checking if appropriate"""
@@ -172,7 +171,7 @@ class BasePlatform( object ):
         func.deprecated = deprecated
         func = self.wrapLogging( 
             self.wrapContextCheck(
-                self.errorChecking( func, dll ),
+                self.errorChecking( func, dll, error_checker=error_checker ),
                 dll,
             )
         )
@@ -247,6 +246,8 @@ class BasePlatform( object ):
 #        if name.startswith( 'EGL_' ) or name.startswith( 'GLX_' ) or name.startswith( 'WGL_' ):
 #            # we can't check these extensions, have to rely on the function resolution
 #            return True
+        if not name:
+            return True
         context = self.GetCurrentContext()
         if context:
             from OpenGL import contextdata
@@ -295,7 +296,7 @@ class BasePlatform( object ):
             doc = original.__doc__, argNames = original.argNames,
             extension = original.extension,
             deprecated = original.deprecated,
-            error_checker = original.error_checker,
+            error_checker = original.errcheck,
         )
     def nullFunction( 
         self,
@@ -344,7 +345,11 @@ class BasePlatform( object ):
 
 class _NullFunctionPointer( object ):
     """Function-pointer-like object for undefined functions"""
-    def __init__( self, name, dll, resultType, argTypes, argNames, extension=None, doc=None, deprecated=False ):
+    def __init__( 
+        self, name, dll, resultType, argTypes, argNames, 
+        extension=None, doc=None, deprecated=False,
+        error_checker = None,
+    ):
         from OpenGL import error
         self.__name__ = name
         self.DLL = dll
@@ -355,6 +360,7 @@ class _NullFunctionPointer( object ):
         self.extension = extension
         self.doc = doc
         self.deprecated = deprecated
+        self.error_checker = error_checker
     resolved = False
     def __nonzero__( self ):
         """Make this object appear to be NULL"""
@@ -375,6 +381,7 @@ class _NullFunctionPointer( object ):
                 doc = self.doc, 
                 argNames = self.argNames,
                 extension = self.extension,
+                error_checker = self.error_checker,
             )
         except AttributeError as err:
             return None 
@@ -385,6 +392,9 @@ class _NullFunctionPointer( object ):
             return func
         return None
     def __call__( self, *args, **named ):
+        if self.__name__ == 'gluPerspective':
+            import pdb
+            pdb.set_trace()
         if self.load():
             return self( *args, **named )
         else:

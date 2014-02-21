@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.WGL import _types as _cs
 # End users want this...
 from OpenGL.raw.WGL._types import *
+from OpenGL.raw.WGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'WGL_NV_DX_interop'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_NV_DX_interop')
+    return _p.createFunction( function,_p.WGL,'WGL_NV_DX_interop',error_checker=_errors._error_checker)
 WGL_ACCESS_READ_ONLY_NV=_C('WGL_ACCESS_READ_ONLY_NV',0x00000000)
 WGL_ACCESS_READ_WRITE_NV=_C('WGL_ACCESS_READ_WRITE_NV',0x00000001)
 WGL_ACCESS_WRITE_DISCARD_NV=_C('WGL_ACCESS_WRITE_DISCARD_NV',0x00000002)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GLX import _types as _cs
 # End users want this...
 from OpenGL.raw.GLX._types import *
+from OpenGL.raw.GLX import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GLX_SGIX_video_source'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_SGIX_video_source')
+    return _p.createFunction( function,_p.GLX,'GLX_SGIX_video_source',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(_cs.GLXVideoSourceSGIX,ctypes.POINTER(_cs.Display),_cs.c_int,_cs.VLServer,_cs.VLPath,_cs.c_int,_cs.VLNode)

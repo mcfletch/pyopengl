@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_texture_float'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_texture_float')
+    return _p.createFunction( function,_p.GL,'GL_ATI_texture_float',error_checker=_errors._error_checker)
 GL_ALPHA_FLOAT16_ATI=_C('GL_ALPHA_FLOAT16_ATI',0x881C)
 GL_ALPHA_FLOAT32_ATI=_C('GL_ALPHA_FLOAT32_ATI',0x8816)
 GL_INTENSITY_FLOAT16_ATI=_C('GL_INTENSITY_FLOAT16_ATI',0x881D)

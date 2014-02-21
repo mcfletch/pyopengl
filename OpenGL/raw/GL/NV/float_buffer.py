@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_float_buffer'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_float_buffer')
+    return _p.createFunction( function,_p.GL,'GL_NV_float_buffer',error_checker=_errors._error_checker)
 GL_FLOAT_CLEAR_COLOR_VALUE_NV=_C('GL_FLOAT_CLEAR_COLOR_VALUE_NV',0x888D)
 GL_FLOAT_R16_NV=_C('GL_FLOAT_R16_NV',0x8884)
 GL_FLOAT_R32_NV=_C('GL_FLOAT_R32_NV',0x8885)

@@ -29,6 +29,7 @@ from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_LINK_STATUS_ARB as GL_OBJ
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_ACTIVE_UNIFORMS_ARB as GL_OBJECT_ACTIVE_UNIFORMS
 from OpenGL.raw.GL.ARB.shader_objects import GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB as GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH
 from OpenGL.lazywrapper import lazy as _lazy
+from OpenGL.raw.GL import _errors
 
 from OpenGL import converters, error, contextdata
 from OpenGL.arrays.arraydatatype import ArrayDatatype, GLenumArray
@@ -132,7 +133,7 @@ def _afterCheck( key ):
         cArguments=None,
         *args
     ):
-        result = error.glCheckError( result, baseOperation, cArguments, *args )
+        result = _errors._error_checker.glCheckError( result, baseOperation, cArguments, *args )
         status = ctypes.c_int()
         getter( cArguments[0], key, ctypes.byref(status))
         status = status.value

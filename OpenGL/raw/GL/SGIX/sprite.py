@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_sprite'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_sprite')
+    return _p.createFunction( function,_p.GL,'GL_SGIX_sprite',error_checker=_errors._error_checker)
 GL_SPRITE_AXIAL_SGIX=_C('GL_SPRITE_AXIAL_SGIX',0x814C)
 GL_SPRITE_AXIS_SGIX=_C('GL_SPRITE_AXIS_SGIX',0x814A)
 GL_SPRITE_EYE_ALIGNED_SGIX=_C('GL_SPRITE_EYE_ALIGNED_SGIX',0x814E)

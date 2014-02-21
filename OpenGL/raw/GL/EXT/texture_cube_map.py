@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_texture_cube_map'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_texture_cube_map')
+    return _p.createFunction( function,_p.GL,'GL_EXT_texture_cube_map',error_checker=_errors._error_checker)
 GL_MAX_CUBE_MAP_TEXTURE_SIZE_EXT=_C('GL_MAX_CUBE_MAP_TEXTURE_SIZE_EXT',0x851C)
 GL_NORMAL_MAP_EXT=_C('GL_NORMAL_MAP_EXT',0x8511)
 GL_PROXY_TEXTURE_CUBE_MAP_EXT=_C('GL_PROXY_TEXTURE_CUBE_MAP_EXT',0x851B)

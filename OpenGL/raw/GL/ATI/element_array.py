@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_element_array'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_element_array')
+    return _p.createFunction( function,_p.GL,'GL_ATI_element_array',error_checker=_errors._error_checker)
 GL_ELEMENT_ARRAY_ATI=_C('GL_ELEMENT_ARRAY_ATI',0x8768)
 GL_ELEMENT_ARRAY_POINTER_ATI=_C('GL_ELEMENT_ARRAY_POINTER_ATI',0x876A)
 GL_ELEMENT_ARRAY_TYPE_ATI=_C('GL_ELEMENT_ARRAY_TYPE_ATI',0x8769)

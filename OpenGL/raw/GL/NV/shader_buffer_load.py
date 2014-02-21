@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_shader_buffer_load'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_shader_buffer_load')
+    return _p.createFunction( function,_p.GL,'GL_NV_shader_buffer_load',error_checker=_errors._error_checker)
 GL_BUFFER_GPU_ADDRESS_NV=_C('GL_BUFFER_GPU_ADDRESS_NV',0x8F1D)
 GL_GPU_ADDRESS_NV=_C('GL_GPU_ADDRESS_NV',0x8F34)
 GL_MAX_SHADER_BUFFER_ADDRESS_NV=_C('GL_MAX_SHADER_BUFFER_ADDRESS_NV',0x8F35)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_AMD_vertex_shader_tessellator'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_AMD_vertex_shader_tessellator')
+    return _p.createFunction( function,_p.GL,'GL_AMD_vertex_shader_tessellator',error_checker=_errors._error_checker)
 GL_CONTINUOUS_AMD=_C('GL_CONTINUOUS_AMD',0x9007)
 GL_DISCRETE_AMD=_C('GL_DISCRETE_AMD',0x9006)
 GL_INT_SAMPLER_BUFFER_AMD=_C('GL_INT_SAMPLER_BUFFER_AMD',0x9002)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_PGI_misc_hints'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_PGI_misc_hints')
+    return _p.createFunction( function,_p.GL,'GL_PGI_misc_hints',error_checker=_errors._error_checker)
 GL_ALLOW_DRAW_FRG_HINT_PGI=_C('GL_ALLOW_DRAW_FRG_HINT_PGI',0x1A210)
 GL_ALLOW_DRAW_MEM_HINT_PGI=_C('GL_ALLOW_DRAW_MEM_HINT_PGI',0x1A211)
 GL_ALLOW_DRAW_OBJ_HINT_PGI=_C('GL_ALLOW_DRAW_OBJ_HINT_PGI',0x1A20E)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_clipmap'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_clipmap')
+    return _p.createFunction( function,_p.GL,'GL_SGIX_clipmap',error_checker=_errors._error_checker)
 GL_LINEAR_CLIPMAP_LINEAR_SGIX=_C('GL_LINEAR_CLIPMAP_LINEAR_SGIX',0x8170)
 GL_LINEAR_CLIPMAP_NEAREST_SGIX=_C('GL_LINEAR_CLIPMAP_NEAREST_SGIX',0x844F)
 GL_MAX_CLIPMAP_DEPTH_SGIX=_C('GL_MAX_CLIPMAP_DEPTH_SGIX',0x8177)

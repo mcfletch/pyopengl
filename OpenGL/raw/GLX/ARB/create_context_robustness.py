@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GLX import _types as _cs
 # End users want this...
 from OpenGL.raw.GLX._types import *
+from OpenGL.raw.GLX import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GLX_ARB_create_context_robustness'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_ARB_create_context_robustness')
+    return _p.createFunction( function,_p.GLX,'GLX_ARB_create_context_robustness',error_checker=_errors._error_checker)
 GLX_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB=_C('GLX_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB',0x8256)
 GLX_CONTEXT_ROBUST_ACCESS_BIT_ARB=_C('GLX_CONTEXT_ROBUST_ACCESS_BIT_ARB',0x00000004)
 GLX_LOSE_CONTEXT_ON_RESET_ARB=_C('GLX_LOSE_CONTEXT_ON_RESET_ARB',0x8252)

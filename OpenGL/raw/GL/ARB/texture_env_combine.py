@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_texture_env_combine'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_texture_env_combine')
+    return _p.createFunction( function,_p.GL,'GL_ARB_texture_env_combine',error_checker=_errors._error_checker)
 GL_ADD_SIGNED_ARB=_C('GL_ADD_SIGNED_ARB',0x8574)
 GL_COMBINE_ALPHA_ARB=_C('GL_COMBINE_ALPHA_ARB',0x8572)
 GL_COMBINE_ARB=_C('GL_COMBINE_ARB',0x8570)

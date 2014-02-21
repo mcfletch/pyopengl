@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.WGL import _types as _cs
 # End users want this...
 from OpenGL.raw.WGL._types import *
+from OpenGL.raw.WGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'WGL_ARB_pixel_format'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_ARB_pixel_format')
+    return _p.createFunction( function,_p.WGL,'WGL_ARB_pixel_format',error_checker=_errors._error_checker)
 WGL_ACCELERATION_ARB=_C('WGL_ACCELERATION_ARB',0x2003)
 WGL_ACCUM_ALPHA_BITS_ARB=_C('WGL_ACCUM_ALPHA_BITS_ARB',0x2021)
 WGL_ACCUM_BITS_ARB=_C('WGL_ACCUM_BITS_ARB',0x201D)

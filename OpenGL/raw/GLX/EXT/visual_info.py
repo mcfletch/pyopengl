@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GLX import _types as _cs
 # End users want this...
 from OpenGL.raw.GLX._types import *
+from OpenGL.raw.GLX import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GLX_EXT_visual_info'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_EXT_visual_info')
+    return _p.createFunction( function,_p.GLX,'GLX_EXT_visual_info',error_checker=_errors._error_checker)
 GLX_DIRECT_COLOR_EXT=_C('GLX_DIRECT_COLOR_EXT',0x8003)
 GLX_GRAY_SCALE_EXT=_C('GLX_GRAY_SCALE_EXT',0x8006)
 GLX_NONE_EXT=_C('GLX_NONE_EXT',0x8000)

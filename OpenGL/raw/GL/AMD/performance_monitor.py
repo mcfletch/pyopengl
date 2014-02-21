@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_AMD_performance_monitor'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_AMD_performance_monitor')
+    return _p.createFunction( function,_p.GL,'GL_AMD_performance_monitor',error_checker=_errors._error_checker)
 GL_COUNTER_RANGE_AMD=_C('GL_COUNTER_RANGE_AMD',0x8BC1)
 GL_COUNTER_TYPE_AMD=_C('GL_COUNTER_TYPE_AMD',0x8BC0)
 GL_PERCENTAGE_AMD=_C('GL_PERCENTAGE_AMD',0x8BC3)

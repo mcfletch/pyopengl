@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.EGL import _types as _cs
 # End users want this...
 from OpenGL.raw.EGL._types import *
+from OpenGL.raw.EGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'EGL_KHR_reusable_sync'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_KHR_reusable_sync')
+    return _p.createFunction( function,_p.EGL,'EGL_KHR_reusable_sync',error_checker=_errors._error_checker)
 EGL_CONDITION_SATISFIED_KHR=_C('EGL_CONDITION_SATISFIED_KHR',0x30F6)
 EGL_FOREVER_KHR=_C('EGL_FOREVER_KHR',0xFFFFFFFFFFFFFFFF)
 # EGL_NO_SYNC_KHR=_C('EGL_NO_SYNC_KHR',((EGLSyncKHR)0))

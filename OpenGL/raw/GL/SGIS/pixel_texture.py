@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_SGIS_pixel_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIS_pixel_texture')
+    return _p.createFunction( function,_p.GL,'GL_SGIS_pixel_texture',error_checker=_errors._error_checker)
 GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS=_C('GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS',0x8355)
 GL_PIXEL_FRAGMENT_RGB_SOURCE_SGIS=_C('GL_PIXEL_FRAGMENT_RGB_SOURCE_SGIS',0x8354)
 GL_PIXEL_GROUP_COLOR_SGIS=_C('GL_PIXEL_GROUP_COLOR_SGIS',0x8356)

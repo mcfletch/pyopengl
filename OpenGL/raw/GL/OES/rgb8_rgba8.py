@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_OES_rgb8_rgba8'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_rgb8_rgba8')
+    return _p.createFunction( function,_p.GL,'GL_OES_rgb8_rgba8',error_checker=_errors._error_checker)
 GL_RGB8_OES=_C('GL_RGB8_OES',0x8051)
 GL_RGBA8_OES=_C('GL_RGBA8_OES',0x8058)
 

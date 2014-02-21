@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_QCOM_extended_get'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_QCOM_extended_get')
+    return _p.createFunction( function,_p.GL,'GL_QCOM_extended_get',error_checker=_errors._error_checker)
 GL_STATE_RESTORE=_C('GL_STATE_RESTORE',0x8BDC)
 GL_TEXTURE_DEPTH_QCOM=_C('GL_TEXTURE_DEPTH_QCOM',0x8BD4)
 GL_TEXTURE_FORMAT_QCOM=_C('GL_TEXTURE_FORMAT_QCOM',0x8BD6)

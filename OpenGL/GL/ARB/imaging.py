@@ -71,8 +71,6 @@ glConvolutionFilter2D = images.setDimensionsAsInts(
 @_lazy( glGetConvolutionFilter )
 def glGetConvolutionFilter( baseFunction, target, format, type ):
     """Retrieve 1 or 2D convolution parameter "kernels" as pixel data"""
-    from OpenGL.error import glCheckError
-    glCheckError(None)
     dims = (
         glGetConvolutionParameteriv( target, GL_CONVOLUTION_WIDTH )[0],
     )

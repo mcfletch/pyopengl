@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_ES2_compatibility'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_ES2_compatibility')
+    return _p.createFunction( function,_p.GL,'GL_ARB_ES2_compatibility',error_checker=_errors._error_checker)
 GL_FIXED=_C('GL_FIXED',0x140C)
 GL_HIGH_FLOAT=_C('GL_HIGH_FLOAT',0x8DF2)
 GL_HIGH_INT=_C('GL_HIGH_INT',0x8DF5)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_SUN_triangle_list'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SUN_triangle_list')
+    return _p.createFunction( function,_p.GL,'GL_SUN_triangle_list',error_checker=_errors._error_checker)
 GL_R1UI_C3F_V3F_SUN=_C('GL_R1UI_C3F_V3F_SUN',0x85C6)
 GL_R1UI_C4F_N3F_V3F_SUN=_C('GL_R1UI_C4F_N3F_V3F_SUN',0x85C8)
 GL_R1UI_C4UB_V3F_SUN=_C('GL_R1UI_C4UB_V3F_SUN',0x85C5)

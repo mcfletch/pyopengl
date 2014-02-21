@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_vertex_program'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_vertex_program')
+    return _p.createFunction( function,_p.GL,'GL_ARB_vertex_program',error_checker=_errors._error_checker)
 GL_COLOR_SUM_ARB=_C('GL_COLOR_SUM_ARB',0x8458)
 GL_CURRENT_MATRIX_ARB=_C('GL_CURRENT_MATRIX_ARB',0x8641)
 GL_CURRENT_MATRIX_STACK_DEPTH_ARB=_C('GL_CURRENT_MATRIX_STACK_DEPTH_ARB',0x8640)

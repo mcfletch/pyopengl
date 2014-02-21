@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_fog_coord'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_fog_coord')
+    return _p.createFunction( function,_p.GL,'GL_EXT_fog_coord',error_checker=_errors._error_checker)
 GL_CURRENT_FOG_COORDINATE_EXT=_C('GL_CURRENT_FOG_COORDINATE_EXT',0x8453)
 GL_FOG_COORDINATE_ARRAY_EXT=_C('GL_FOG_COORDINATE_ARRAY_EXT',0x8457)
 GL_FOG_COORDINATE_ARRAY_POINTER_EXT=_C('GL_FOG_COORDINATE_ARRAY_POINTER_EXT',0x8456)

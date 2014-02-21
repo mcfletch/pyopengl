@@ -11,7 +11,7 @@ import logging
 _log = logging.getLogger( 'OpenGL.error' )
 from OpenGL import platform, _configflags
 __all__ = (
-    "Error",'GLError','GLUError','GLUTError','glCheckError',
+    "Error",'GLError','GLUError','GLUTError',
     'GLerror','GLUerror','GLUTerror',
 )
 
@@ -176,16 +176,16 @@ if _configflags.ERROR_CHECKING:
                 safeGetError -- platform safeGetError function as callable method
                 _currentChecker -- currently active checking function
             """
-            baseOperation = None
+            _getErrors = None
             def __init__( self, platform, baseOperation=None ):
                 """Initialize from a platform module/reference"""
                 self._isValid = platform.CurrentContextIsValid
-                self.baseOperation = baseOperation
-                if baseOperation:
+                self._getErrors = baseOperation
+                if _getErrors:
                     if _configflags.CONTEXT_CHECKING:
                         self._registeredChecker = self.safeGetError 
                     else:
-                        self._registeredChecker = baseOperation
+                        self._registeredChecker = _getErrors
                 else:
                     self._registeredChecker = self.nullGetError
             def __bool__( self ):
@@ -196,7 +196,7 @@ if _configflags.ERROR_CHECKING:
             def safeGetError( self ):
                 """Check for error, testing for context before operation"""
                 if self._isValid():
-                    return self.baseOperation()
+                    return self._getErrors()
                 return None 
             def nullGetError( self ):
                 """Used as error-checker when no error checking should be done"""
@@ -239,17 +239,6 @@ if _configflags.ERROR_CHECKING:
             def onEnd( self ):
                 """Called by glEnd to record the fact that glGetError will work"""
                 self._currentChecker = self._registeredChecker
-        
-        ErrorChecker = _ErrorChecker()
-        
-    else:
-        ErrorChecker = _ErrorChecker( platform )
-    
-    glCheckError = ErrorChecker.glCheckError
-    onBegin = ErrorChecker.onBegin
-    onEnd = ErrorChecker.onEnd
-else:
-    glCheckError = platform.safeGetError
 
 # Compatibility with PyOpenGL 2.x series
 GLUerror = GLUError

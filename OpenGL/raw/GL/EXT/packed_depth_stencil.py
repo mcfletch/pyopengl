@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_packed_depth_stencil'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_packed_depth_stencil')
+    return _p.createFunction( function,_p.GL,'GL_EXT_packed_depth_stencil',error_checker=_errors._error_checker)
 GL_DEPTH24_STENCIL8_EXT=_C('GL_DEPTH24_STENCIL8_EXT',0x88F0)
 GL_DEPTH_STENCIL_EXT=_C('GL_DEPTH_STENCIL_EXT',0x84F9)
 GL_TEXTURE_STENCIL_SIZE_EXT=_C('GL_TEXTURE_STENCIL_SIZE_EXT',0x88F1)

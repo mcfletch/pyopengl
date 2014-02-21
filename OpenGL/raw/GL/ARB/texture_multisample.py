@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_texture_multisample'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_texture_multisample')
+    return _p.createFunction( function,_p.GL,'GL_ARB_texture_multisample',error_checker=_errors._error_checker)
 GL_INT_SAMPLER_2D_MULTISAMPLE=_C('GL_INT_SAMPLER_2D_MULTISAMPLE',0x9109)
 GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY=_C('GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY',0x910C)
 GL_MAX_COLOR_TEXTURE_SAMPLES=_C('GL_MAX_COLOR_TEXTURE_SAMPLES',0x910E)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_2_1'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_2_1')
+    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_2_1',error_checker=_errors._error_checker)
 GL_COMPRESSED_SLUMINANCE=_C('GL_COMPRESSED_SLUMINANCE',0x8C4A)
 GL_COMPRESSED_SLUMINANCE_ALPHA=_C('GL_COMPRESSED_SLUMINANCE_ALPHA',0x8C4B)
 GL_COMPRESSED_SRGB=_C('GL_COMPRESSED_SRGB',0x8C48)

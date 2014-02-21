@@ -21,6 +21,7 @@ if os.environ.get( 'TEST_NO_ACCELERATE' ):
 OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
 OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING = True
+
 from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode, long
 from OpenGL.GL import *
 try:
@@ -507,7 +508,7 @@ class Tests( unittest.TestCase ):
             residents.append(
                 glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_RESIDENT )
             )
-        error.glCheckError(None)
+        glGetError()
         result = glAreTexturesResident( textures)
         assert len(result) == 2
         for (tex,expected,found) in zip( textures, residents, result ):

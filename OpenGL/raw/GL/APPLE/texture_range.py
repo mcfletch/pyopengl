@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_texture_range'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_texture_range')
+    return _p.createFunction( function,_p.GL,'GL_APPLE_texture_range',error_checker=_errors._error_checker)
 GL_STORAGE_CACHED_APPLE=_C('GL_STORAGE_CACHED_APPLE',0x85BE)
 GL_STORAGE_PRIVATE_APPLE=_C('GL_STORAGE_PRIVATE_APPLE',0x85BD)
 GL_STORAGE_SHARED_APPLE=_C('GL_STORAGE_SHARED_APPLE',0x85BF)

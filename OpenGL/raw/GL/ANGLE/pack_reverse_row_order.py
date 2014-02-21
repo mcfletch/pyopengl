@@ -4,11 +4,12 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ANGLE_pack_reverse_row_order'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ANGLE_pack_reverse_row_order')
+    return _p.createFunction( function,_p.GL,'GL_ANGLE_pack_reverse_row_order',error_checker=_errors._error_checker)
 GL_PACK_REVERSE_ROW_ORDER_ANGLE=_C('GL_PACK_REVERSE_ROW_ORDER_ANGLE',0x93A4)
 

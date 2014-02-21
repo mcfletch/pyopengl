@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_AMD_interleaved_elements'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_AMD_interleaved_elements')
+    return _p.createFunction( function,_p.GL,'GL_AMD_interleaved_elements',error_checker=_errors._error_checker)
 GL_ALPHA=_C('GL_ALPHA',0x1906)
 GL_BLUE=_C('GL_BLUE',0x1905)
 GL_GREEN=_C('GL_GREEN',0x1904)

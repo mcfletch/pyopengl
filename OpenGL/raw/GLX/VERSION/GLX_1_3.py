@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GLX import _types as _cs
 # End users want this...
 from OpenGL.raw.GLX._types import *
+from OpenGL.raw.GLX import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GLX_VERSION_GLX_1_3'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_VERSION_GLX_1_3')
+    return _p.createFunction( function,_p.GLX,'GLX_VERSION_GLX_1_3',error_checker=_errors._error_checker)
 GLX_ACCUM_BUFFER_BIT=_C('GLX_ACCUM_BUFFER_BIT',0x00000080)
 GLX_AUX_BUFFERS_BIT=_C('GLX_AUX_BUFFERS_BIT',0x00000010)
 GLX_BACK_LEFT_BUFFER_BIT=_C('GLX_BACK_LEFT_BUFFER_BIT',0x00000004)

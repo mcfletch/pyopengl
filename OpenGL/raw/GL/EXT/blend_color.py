@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_blend_color'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_blend_color')
+    return _p.createFunction( function,_p.GL,'GL_EXT_blend_color',error_checker=_errors._error_checker)
 GL_BLEND_COLOR_EXT=_C('GL_BLEND_COLOR_EXT',0x8005)
 GL_CONSTANT_ALPHA_EXT=_C('GL_CONSTANT_ALPHA_EXT',0x8003)
 GL_CONSTANT_COLOR_EXT=_C('GL_CONSTANT_COLOR_EXT',0x8001)

@@ -55,7 +55,7 @@ def unpack_constants( constants, namespace ):
             name,value = line.split()
             namespace[name] = Constant( name, int(value,16) )
 
-def createFunction( function, dll,extension,deprecated=False ):
+def createFunction( function, dll,extension,deprecated=False, error_checker=None ):
     """Allows the more compact declaration format to use the old-style constructor"""
     return createExtensionFunction(
         function.__name__,
@@ -66,4 +66,5 @@ def createFunction( function, dll,extension,deprecated=False ):
         extension = extension,
         deprecated = deprecated,
         module = function.__module__,
+        error_checker = error_checker,
     )

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_unpack_subimage'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_unpack_subimage')
+    return _p.createFunction( function,_p.GL,'GL_EXT_unpack_subimage',error_checker=_errors._error_checker)
 GL_UNPACK_ROW_LENGTH_EXT=_C('GL_UNPACK_ROW_LENGTH_EXT',0x0CF2)
 GL_UNPACK_SKIP_PIXELS_EXT=_C('GL_UNPACK_SKIP_PIXELS_EXT',0x0CF4)
 GL_UNPACK_SKIP_ROWS_EXT=_C('GL_UNPACK_SKIP_ROWS_EXT',0x0CF3)

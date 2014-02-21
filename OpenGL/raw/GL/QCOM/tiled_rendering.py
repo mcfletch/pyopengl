@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_QCOM_tiled_rendering'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_QCOM_tiled_rendering')
+    return _p.createFunction( function,_p.GL,'GL_QCOM_tiled_rendering',error_checker=_errors._error_checker)
 GL_COLOR_BUFFER_BIT0_QCOM=_C('GL_COLOR_BUFFER_BIT0_QCOM',0x00000001)
 GL_COLOR_BUFFER_BIT1_QCOM=_C('GL_COLOR_BUFFER_BIT1_QCOM',0x00000002)
 GL_COLOR_BUFFER_BIT2_QCOM=_C('GL_COLOR_BUFFER_BIT2_QCOM',0x00000004)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_texture_shader'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_texture_shader')
+    return _p.createFunction( function,_p.GL,'GL_NV_texture_shader',error_checker=_errors._error_checker)
 GL_CONST_EYE_NV=_C('GL_CONST_EYE_NV',0x86E5)
 GL_CULL_FRAGMENT_NV=_C('GL_CULL_FRAGMENT_NV',0x86E7)
 GL_CULL_MODES_NV=_C('GL_CULL_MODES_NV',0x86E0)

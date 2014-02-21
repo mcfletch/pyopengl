@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_separate_stencil'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_separate_stencil')
+    return _p.createFunction( function,_p.GL,'GL_ATI_separate_stencil',error_checker=_errors._error_checker)
 GL_STENCIL_BACK_FAIL_ATI=_C('GL_STENCIL_BACK_FAIL_ATI',0x8801)
 GL_STENCIL_BACK_FUNC_ATI=_C('GL_STENCIL_BACK_FUNC_ATI',0x8800)
 GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI=_C('GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI',0x8802)

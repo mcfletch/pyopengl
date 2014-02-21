@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.WGL import _types as _cs
 # End users want this...
 from OpenGL.raw.WGL._types import *
+from OpenGL.raw.WGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'WGL_EXT_make_current_read'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_EXT_make_current_read')
+    return _p.createFunction( function,_p.WGL,'WGL_EXT_make_current_read',error_checker=_errors._error_checker)
 ERROR_INVALID_PIXEL_TYPE_EXT=_C('ERROR_INVALID_PIXEL_TYPE_EXT',0x2043)
 @_f
 @_p.types(_cs.HDC,)

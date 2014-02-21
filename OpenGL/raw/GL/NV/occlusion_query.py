@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_occlusion_query'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_occlusion_query')
+    return _p.createFunction( function,_p.GL,'GL_NV_occlusion_query',error_checker=_errors._error_checker)
 GL_CURRENT_OCCLUSION_QUERY_ID_NV=_C('GL_CURRENT_OCCLUSION_QUERY_ID_NV',0x8865)
 GL_PIXEL_COUNTER_BITS_NV=_C('GL_PIXEL_COUNTER_BITS_NV',0x8864)
 GL_PIXEL_COUNT_AVAILABLE_NV=_C('GL_PIXEL_COUNT_AVAILABLE_NV',0x8867)

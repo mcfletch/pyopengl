@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_OES_depth_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_depth_texture')
+    return _p.createFunction( function,_p.GL,'GL_OES_depth_texture',error_checker=_errors._error_checker)
 GL_DEPTH_COMPONENT=_C('GL_DEPTH_COMPONENT',0x1902)
 GL_UNSIGNED_INT=_C('GL_UNSIGNED_INT',0x1405)
 GL_UNSIGNED_SHORT=_C('GL_UNSIGNED_SHORT',0x1403)

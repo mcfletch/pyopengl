@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_enhanced_layouts'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_enhanced_layouts')
+    return _p.createFunction( function,_p.GL,'GL_ARB_enhanced_layouts',error_checker=_errors._error_checker)
 GL_LOCATION_COMPONENT=_C('GL_LOCATION_COMPONENT',0x934A)
 GL_TRANSFORM_FEEDBACK_BUFFER=_C('GL_TRANSFORM_FEEDBACK_BUFFER',0x8C8E)
 GL_TRANSFORM_FEEDBACK_BUFFER_INDEX=_C('GL_TRANSFORM_FEEDBACK_BUFFER_INDEX',0x934B)

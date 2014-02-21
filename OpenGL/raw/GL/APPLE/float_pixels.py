@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_float_pixels'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_float_pixels')
+    return _p.createFunction( function,_p.GL,'GL_APPLE_float_pixels',error_checker=_errors._error_checker)
 GL_ALPHA_FLOAT16_APPLE=_C('GL_ALPHA_FLOAT16_APPLE',0x881C)
 GL_ALPHA_FLOAT32_APPLE=_C('GL_ALPHA_FLOAT32_APPLE',0x8816)
 GL_COLOR_FLOAT_APPLE=_C('GL_COLOR_FLOAT_APPLE',0x8A0F)

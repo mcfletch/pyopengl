@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_point_parameters'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_point_parameters')
+    return _p.createFunction( function,_p.GL,'GL_ARB_point_parameters',error_checker=_errors._error_checker)
 GL_POINT_DISTANCE_ATTENUATION_ARB=_C('GL_POINT_DISTANCE_ATTENUATION_ARB',0x8129)
 GL_POINT_FADE_THRESHOLD_SIZE_ARB=_C('GL_POINT_FADE_THRESHOLD_SIZE_ARB',0x8128)
 GL_POINT_SIZE_MAX_ARB=_C('GL_POINT_SIZE_MAX_ARB',0x8127)

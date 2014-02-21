@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_framezoom'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_framezoom')
+    return _p.createFunction( function,_p.GL,'GL_SGIX_framezoom',error_checker=_errors._error_checker)
 GL_FRAMEZOOM_FACTOR_SGIX=_C('GL_FRAMEZOOM_FACTOR_SGIX',0x818C)
 GL_FRAMEZOOM_SGIX=_C('GL_FRAMEZOOM_SGIX',0x818B)
 GL_MAX_FRAMEZOOM_FACTOR_SGIX=_C('GL_MAX_FRAMEZOOM_FACTOR_SGIX',0x818D)

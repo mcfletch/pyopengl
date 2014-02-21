@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_SGIS_texture4D'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIS_texture4D')
+    return _p.createFunction( function,_p.GL,'GL_SGIS_texture4D',error_checker=_errors._error_checker)
 GL_MAX_4D_TEXTURE_SIZE_SGIS=_C('GL_MAX_4D_TEXTURE_SIZE_SGIS',0x8138)
 GL_PACK_IMAGE_DEPTH_SGIS=_C('GL_PACK_IMAGE_DEPTH_SGIS',0x8131)
 GL_PACK_SKIP_VOLUMES_SGIS=_C('GL_PACK_SKIP_VOLUMES_SGIS',0x8130)

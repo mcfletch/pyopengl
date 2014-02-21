@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_vertex_buffer_unified_memory'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_vertex_buffer_unified_memory')
+    return _p.createFunction( function,_p.GL,'GL_NV_vertex_buffer_unified_memory',error_checker=_errors._error_checker)
 GL_COLOR_ARRAY_ADDRESS_NV=_C('GL_COLOR_ARRAY_ADDRESS_NV',0x8F23)
 GL_COLOR_ARRAY_LENGTH_NV=_C('GL_COLOR_ARRAY_LENGTH_NV',0x8F2D)
 GL_DRAW_INDIRECT_ADDRESS_NV=_C('GL_DRAW_INDIRECT_ADDRESS_NV',0x8F41)

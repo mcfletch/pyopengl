@@ -4,11 +4,12 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.EGL import _types as _cs
 # End users want this...
 from OpenGL.raw.EGL._types import *
+from OpenGL.raw.EGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'EGL_EXT_client_extensions'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_EXT_client_extensions')
+    return _p.createFunction( function,_p.EGL,'EGL_EXT_client_extensions',error_checker=_errors._error_checker)
 
 

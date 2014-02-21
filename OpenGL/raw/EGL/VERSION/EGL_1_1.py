@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.EGL import _types as _cs
 # End users want this...
 from OpenGL.raw.EGL._types import *
+from OpenGL.raw.EGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'EGL_VERSION_EGL_1_1'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_VERSION_EGL_1_1')
+    return _p.createFunction( function,_p.EGL,'EGL_VERSION_EGL_1_1',error_checker=_errors._error_checker)
 EGL_BACK_BUFFER=_C('EGL_BACK_BUFFER',0x3084)
 EGL_BIND_TO_TEXTURE_RGB=_C('EGL_BIND_TO_TEXTURE_RGB',0x3039)
 EGL_BIND_TO_TEXTURE_RGBA=_C('EGL_BIND_TO_TEXTURE_RGBA',0x303A)

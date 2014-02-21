@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.WGL import _types as _cs
 # End users want this...
 from OpenGL.raw.WGL._types import *
+from OpenGL.raw.WGL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'WGL_I3D_genlock'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_I3D_genlock')
+    return _p.createFunction( function,_p.WGL,'WGL_I3D_genlock',error_checker=_errors._error_checker)
 WGL_GENLOCK_SOURCE_DIGITAL_FIELD_I3D=_C('WGL_GENLOCK_SOURCE_DIGITAL_FIELD_I3D',0x2049)
 WGL_GENLOCK_SOURCE_DIGITAL_SYNC_I3D=_C('WGL_GENLOCK_SOURCE_DIGITAL_SYNC_I3D',0x2048)
 WGL_GENLOCK_SOURCE_EDGE_BOTH_I3D=_C('WGL_GENLOCK_SOURCE_EDGE_BOTH_I3D',0x204C)

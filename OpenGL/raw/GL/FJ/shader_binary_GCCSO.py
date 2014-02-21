@@ -4,11 +4,12 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_FJ_shader_binary_GCCSO'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_FJ_shader_binary_GCCSO')
+    return _p.createFunction( function,_p.GL,'GL_FJ_shader_binary_GCCSO',error_checker=_errors._error_checker)
 GL_GCCSO_SHADER_BINARY_FJ=_C('GL_GCCSO_SHADER_BINARY_FJ',0x9260)
 

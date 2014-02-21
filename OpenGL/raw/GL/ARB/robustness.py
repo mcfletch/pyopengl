@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_robustness'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_robustness')
+    return _p.createFunction( function,_p.GL,'GL_ARB_robustness',error_checker=_errors._error_checker)
 GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB=_C('GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB',0x00000004)
 GL_GUILTY_CONTEXT_RESET_ARB=_C('GL_GUILTY_CONTEXT_RESET_ARB',0x8253)
 GL_INNOCENT_CONTEXT_RESET_ARB=_C('GL_INNOCENT_CONTEXT_RESET_ARB',0x8254)

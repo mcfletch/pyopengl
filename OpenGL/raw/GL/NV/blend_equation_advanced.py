@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_NV_blend_equation_advanced'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_blend_equation_advanced')
+    return _p.createFunction( function,_p.GL,'GL_NV_blend_equation_advanced',error_checker=_errors._error_checker)
 GL_BLEND_OVERLAP_NV=_C('GL_BLEND_OVERLAP_NV',0x9281)
 GL_BLEND_PREMULTIPLIED_SRC_NV=_C('GL_BLEND_PREMULTIPLIED_SRC_NV',0x9280)
 GL_BLUE_NV=_C('GL_BLUE_NV',0x1905)

@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_transform_feedback'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_transform_feedback')
+    return _p.createFunction( function,_p.GL,'GL_EXT_transform_feedback',error_checker=_errors._error_checker)
 GL_INTERLEAVED_ATTRIBS_EXT=_C('GL_INTERLEAVED_ATTRIBS_EXT',0x8C8C)
 GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_EXT=_C('GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_EXT',0x8C8A)
 GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_EXT=_C('GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_EXT',0x8C8B)

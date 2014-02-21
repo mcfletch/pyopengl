@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_gpu_shader_fp64'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_gpu_shader_fp64')
+    return _p.createFunction( function,_p.GL,'GL_ARB_gpu_shader_fp64',error_checker=_errors._error_checker)
 GL_DOUBLE=_C('GL_DOUBLE',0x140A)
 GL_DOUBLE_MAT2=_C('GL_DOUBLE_MAT2',0x8F46)
 GL_DOUBLE_MAT2x3=_C('GL_DOUBLE_MAT2x3',0x8F49)

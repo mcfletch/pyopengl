@@ -4,12 +4,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.GL import _types as _cs
 # End users want this...
 from OpenGL.raw.GL._types import *
+from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_gpu_shader4'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_gpu_shader4')
+    return _p.createFunction( function,_p.GL,'GL_EXT_gpu_shader4',error_checker=_errors._error_checker)
 GL_INT_SAMPLER_1D_ARRAY_EXT=_C('GL_INT_SAMPLER_1D_ARRAY_EXT',0x8DCE)
 GL_INT_SAMPLER_1D_EXT=_C('GL_INT_SAMPLER_1D_EXT',0x8DC9)
 GL_INT_SAMPLER_2D_ARRAY_EXT=_C('GL_INT_SAMPLER_2D_ARRAY_EXT',0x8DCF)
