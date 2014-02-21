@@ -181,11 +181,11 @@ if _configflags.ERROR_CHECKING:
                 """Initialize from a platform module/reference"""
                 self._isValid = platform.CurrentContextIsValid
                 self._getErrors = baseOperation
-                if _getErrors:
+                if self._getErrors:
                     if _configflags.CONTEXT_CHECKING:
                         self._registeredChecker = self.safeGetError 
                     else:
-                        self._registeredChecker = _getErrors
+                        self._registeredChecker = self._getErrors
                 else:
                     self._registeredChecker = self.nullGetError
             def __bool__( self ):
