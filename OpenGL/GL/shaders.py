@@ -9,8 +9,7 @@ There are also two utility methods compileProgram and compileShader
 which make it easy to create demos which are shader-using.
 """
 import logging
-logging.basicConfig()
-log = logging.getLogger( 'OpenGL.GL.shaders' )
+log = logging.getLogger( __name__ )
 from OpenGL import GL
 from OpenGL.GL.ARB import (
     shader_objects, fragment_shader, vertex_shader, vertex_program,
