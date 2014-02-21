@@ -93,7 +93,7 @@ class BasePlatform( object ):
         else:
             return self.DEFAULT_FUNCTION_TYPE
     
-    def errorChecking( self, func, dll ):
+    def errorChecking( self, func, dll, error_checker=None ):
         """Add error checking to the function if appropriate"""
         from OpenGL import error
         if _configflags.ERROR_CHECKING:
@@ -132,6 +132,7 @@ class BasePlatform( object ):
         deprecated = False,
         module = None,
         force_extension = False,
+        error_checker = None,
     ):
         """Core operation to create a new base ctypes function
         
@@ -190,6 +191,7 @@ class BasePlatform( object ):
         extension = None,
         deprecated = False,
         module = None,
+        error_checker = None,
     ):
         """Create a base function for given name
         
@@ -213,6 +215,7 @@ class BasePlatform( object ):
                     doc = doc, argNames = argNames,
                     extension = extension,
                     deprecated = deprecated,
+                    error_checker = error_checker,
                 )
             else:
                 result = self.constructFunction(
@@ -220,6 +223,7 @@ class BasePlatform( object ):
                     resultType=resultType, argTypes=argTypes,
                     doc = doc, argNames = argNames,
                     extension = extension,
+                    error_checker = error_checker,
                 )
         except AttributeError as err:
             result = self.nullFunction( 
@@ -228,6 +232,7 @@ class BasePlatform( object ):
                 argTypes=argTypes,
                 doc = doc, argNames = argNames,
                 extension = extension,
+                error_checker = error_checker,
             )
         if MODULE_ANNOTATIONS:
             if not module:
@@ -280,6 +285,7 @@ class BasePlatform( object ):
                 argNames = original.argNames,
                 extension = original.extension,
                 deprecated = original.deprecated,
+                error_checker = original.error_checker,
             )
         elif hasattr( original, 'originalFunction' ):
             original = original.originalFunction
@@ -289,6 +295,7 @@ class BasePlatform( object ):
             doc = original.__doc__, argNames = original.argNames,
             extension = original.extension,
             deprecated = original.deprecated,
+            error_checker = original.error_checker,
         )
     def nullFunction( 
         self,
@@ -299,6 +306,7 @@ class BasePlatform( object ):
         extension = None,
         deprecated = False,
         module = None,
+        error_checker = None,
     ):
         """Construct a "null" function pointer"""
         if deprecated:
@@ -316,6 +324,7 @@ class BasePlatform( object ):
                 cls.__module__ = module
         return cls(
             functionName, dll, resultType, argTypes, argNames, extension=extension, doc=doc,
+            error_checker = error_checker,
         )
     def GetCurrentContext( self ):
         """Retrieve opaque pointer for the current context"""
@@ -331,11 +340,6 @@ class BasePlatform( object ):
         """Retrieve a GLUT font pointer for this platform"""
         raise NotImplementedError( 
             """Platform does not define a GLUT font retrieval function""" 
-        )
-    def safeGetError( self ):
-        """Safety-checked version of glError() call (checks for valid context first)"""
-        raise NotImplementedError( 
-            """Platform does not define a safeGetError function""" 
         )
 
 class _NullFunctionPointer( object ):

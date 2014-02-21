@@ -155,12 +155,13 @@ from OpenGL import platform as _p, arrays
 from OpenGL.raw.%(prefix)s import _types as _cs
 # End users want this...
 from OpenGL.raw.%(prefix)s._types import *
+from OpenGL.raw.%(prefix)s import _errors
 from OpenGL.constant import Constant as _C
 %(extra_imports)s
 import ctypes
 _EXTENSION_NAME = %(constantModule)r
 def _f( function ):
-    return _p.createFunction( function,%(dll)s,%(constantModule)r)
+    return _p.createFunction( function,%(dll)s,%(constantModule)r,error_checker=_errors._error_checker)
 %(constants)s
 %(declarations)s
 """

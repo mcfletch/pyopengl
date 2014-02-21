@@ -258,3 +258,6 @@ class GLXHyperpipeConfigSGIX( Structure ):
         ('participationType',c_uint),
         ('timeSlice',c_int),
     ]
+
+_error_function = getattr(_p.GDI32,'GetLastError',None)
+

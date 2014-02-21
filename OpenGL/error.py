@@ -168,7 +168,7 @@ if _configflags.ERROR_CHECKING:
             _log.warn( """OpenGL_accelerate seems to be installed, but unable to import error checking entry point!""" )
     if _ErrorChecker is None:
         class _ErrorChecker( object ):
-            """Global error-checking object
+            """Per-API error-checking object
             
             Attributes:
                 _registeredChecker -- the checking function enabled when 
@@ -176,6 +176,31 @@ if _configflags.ERROR_CHECKING:
                 safeGetError -- platform safeGetError function as callable method
                 _currentChecker -- currently active checking function
             """
+            baseOperation = None
+            def __init__( self, platform, baseOperation=None ):
+                """Initialize from a platform module/reference"""
+                self._isValid = platform.CurrentContextIsValid
+                self.baseOperation = baseOperation
+                if baseOperation:
+                    if _configflags.CONTEXT_CHECKING:
+                        self._registeredChecker = self.safeGetError 
+                    else:
+                        self._registeredChecker = baseOperation
+                else:
+                    self._registeredChecker = self.nullGetError
+            def __bool__( self ):
+                """We are "true" if we actually do anything"""
+                if self._registeredChecker is self.nullGetError:
+                    return False 
+                return True
+            def safeGetError( self ):
+                """Check for error, testing for context before operation"""
+                if self._isValid():
+                    return self.baseOperation()
+                return None 
+            def nullGetError( self ):
+                """Used as error-checker when no error checking should be done"""
+                return None
             _currentChecker = _registeredChecker = safeGetError = staticmethod( 
                 platform.safeGetError 
             )
@@ -208,9 +233,6 @@ if _configflags.ERROR_CHECKING:
                         baseOperation = baseOperation,
                     )
                 return result
-            def nullGetError( self ):
-                """Used as error-checker when inside begin/end set"""
-                return None
             def onBegin( self ):
                 """Called by glBegin to record the fact that glGetError won't work"""
                 self._currentChecker = self.nullGetError
