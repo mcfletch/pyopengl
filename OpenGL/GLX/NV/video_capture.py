@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/NV/video_capture.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.GLX import _types
 from OpenGL.raw.GLX.NV.video_capture import *

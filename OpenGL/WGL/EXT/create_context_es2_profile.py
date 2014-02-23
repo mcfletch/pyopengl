@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/EXT/create_context_es2_profile.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.WGL import _types
 from OpenGL.raw.WGL.EXT.create_context_es2_profile import *

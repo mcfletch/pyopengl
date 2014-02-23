@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/NV/multisample_coverage.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.GLX import _types
 from OpenGL.raw.GLX.NV.multisample_coverage import *

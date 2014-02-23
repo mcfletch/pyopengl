@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/NV/DX_interop2.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.WGL import _types
 from OpenGL.raw.WGL.NV.DX_interop2 import *

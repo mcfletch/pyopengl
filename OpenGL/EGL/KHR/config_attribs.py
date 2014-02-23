@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/KHR/config_attribs.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.EGL import _types
 from OpenGL.raw.EGL.KHR.config_attribs import *

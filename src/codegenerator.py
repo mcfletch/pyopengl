@@ -183,7 +183,7 @@ Python-friendly API
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+%(glget_import)s
 import ctypes
 from OpenGL.raw.%(prefix)s import _types
 from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
@@ -270,6 +270,11 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                 return True
             log.warn( 'Not replacing %s (no AUTOGENERATION_SENTINEL_END found)', filename )
         return False
+    @property 
+    def glget_import( self ):
+        if self.prefix == 'GL':
+            return 'from OpenGL.GL import glget'
+        return ''
     
     def get_constants( self ):
         functions = self.registry.enums()

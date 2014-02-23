@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/EXT/client_extensions.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.EGL import _types
 from OpenGL.raw.EGL.EXT.client_extensions import *

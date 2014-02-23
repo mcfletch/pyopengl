@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/VERSION/GLES3_3_0.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.GLES3 import _types
 from OpenGL.raw.GLES3.VERSION.GLES3_3_0 import *

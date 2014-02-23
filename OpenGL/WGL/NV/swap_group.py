@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/NV/swap_group.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.WGL import _types
 from OpenGL.raw.WGL.NV.swap_group import *

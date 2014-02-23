@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/ARB/create_context_robustness.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.WGL import _types
 from OpenGL.raw.WGL.ARB.create_context_robustness import *

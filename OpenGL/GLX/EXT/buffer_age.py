@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/EXT/buffer_age.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.GLX import _types
 from OpenGL.raw.GLX.EXT.buffer_age import *

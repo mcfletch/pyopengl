@@ -9,7 +9,7 @@ http://www.opengl.org/registry/specs/IMG/context_priority.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
+
 import ctypes
 from OpenGL.raw.EGL import _types
 from OpenGL.raw.EGL.IMG.context_priority import *
