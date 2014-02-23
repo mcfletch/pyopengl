@@ -340,16 +340,17 @@ class BasePlatform( object ):
         raise NotImplementedError( 
             """Platform does not define a GetCurrentContext function""" 
         )
-    def CurrentContextIsValid( self ):
-        """Return boolean of whether current context is valid"""
-        raise NotImplementedError( 
-            """Platform does not define a CurrentContextIsValid function""" 
-        )
     def getGLUTFontPointer(self, constant ):
         """Retrieve a GLUT font pointer for this platform"""
         raise NotImplementedError( 
             """Platform does not define a GLUT font retrieval function""" 
         )
+    # names that are normally just references to other items...
+    @lazy_property
+    def CurrentContextIsValid( self ):
+        return self.GetCurrentContext
+    @lazy_property
+    def OpenGL(self): return self.GL
 
 class _NullFunctionPointer( object ):
     """Function-pointer-like object for undefined functions"""

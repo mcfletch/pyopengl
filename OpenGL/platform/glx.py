@@ -69,9 +69,6 @@ class GLXPlatform( baseplatform.BasePlatform ):
     @baseplatform.lazy_property
     def GetCurrentContext( self ):
         return self.GL.glXGetCurrentContext
-    @baseplatform.lazy_property
-    def CurrentContextIsValid( self ):
-        return self.GetCurrentContext
 
     def getGLUTFontPointer( self, constant ):
         """Platform specific function to retrieve a GLUT font pointer

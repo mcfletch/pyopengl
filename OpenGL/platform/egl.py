@@ -4,53 +4,67 @@ from OpenGL.platform import baseplatform, ctypesloader
 
 class EGLPlatform( baseplatform.BasePlatform ):
     """EGL platform for opengl-es only platforms"""
-    try:
-        GLES1 = ctypesloader.loadLibrary(
-            ctypes.cdll,
-            'GLESv1_CM', # ick
-            mode=ctypes.RTLD_GLOBAL 
-        )
-    except OSError as err:
-        GLES1 = None
-    try:
-        GLES2 = ctypesloader.loadLibrary(
-            ctypes.cdll,
-            'GLESv2', 
-            mode=ctypes.RTLD_GLOBAL 
-        )
-    except OSError as err:
-        GLES2 = None
+    @baseplatform.lazy_property
+    def GLES1(self):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'GLESv1_CM', # ick
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            return None
+    @baseplatform.lazy_property
+    def GLES2(self):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'GLESv2', 
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            return None
     GLUT = None
-    try:
-        GL = OpenGL = ctypesloader.loadLibrary(
-            ctypes.cdll,
-            'GL', 
-            mode=ctypes.RTLD_GLOBAL 
-        )
-    except OSError as err:
-        OpenGL = GL = GLES2
-    try:
-        EGL = ctypesloader.loadLibrary(
-            ctypes.cdll,
-            'EGL', 
-            mode=ctypes.RTLD_GLOBAL 
-        )
-    except OSError as err:
-        raise ImportError("Unable to load EGL library", *err.args)
-    eglGetProcAddress = EGL.eglGetProcAddress
-    eglGetProcAddress.restype = ctypes.c_void_p
-    getExtensionProcedure = staticmethod( eglGetProcAddress )
-    try:
-        GLE = ctypesloader.loadLibrary(
-            ctypes.cdll,
-            'gle', 
-            mode=ctypes.RTLD_GLOBAL 
-        )
-    except OSError as err:
-        GLE = None
+    @baseplatform.lazy_property
+    def GL(self):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'GL', 
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            return self.GLES2 or self.GLES1
+    @baseplatform.lazy_property
+    def OpenGL(self): return self.GL
+    
+    @baseplatform.lazy_property
+    def EGL(self):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'EGL', 
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            raise ImportError("Unable to load EGL library", *err.args)
+    @baseplatform.lazy_property
+    def getExtensionProcedure( self ):
+        eglGetProcAddress = self.EGL.eglGetProcAddress
+        eglGetProcAddress.restype = ctypes.c_void_p
+        return eglGetProcAddress
+    @baseplatform.lazy_property
+    def GLE( self ):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'gle', 
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            return None
 
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )
-
-    GetCurrentContext = CurrentContextIsValid = staticmethod(
-        EGL.eglGetCurrentContext
-    )
+    @baseplatform.lazy_property
+    def GetCurrentContext( self ):
+        return self.EGL.eglGetCurrentContext

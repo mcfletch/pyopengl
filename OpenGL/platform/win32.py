@@ -103,9 +103,6 @@ class Win32Platform( baseplatform.BasePlatform ):
         wglGetCurrentContext = GL.wglGetCurrentContext
         wglGetCurrentContext.restype = ctypes.c_void_p
         return wglGetCurrentContext
-    @baseplatform.lazy_property
-    def CurrentContextIsValid( self ):
-        return self.GetCurrentContext
 
     def constructFunction(
         self,

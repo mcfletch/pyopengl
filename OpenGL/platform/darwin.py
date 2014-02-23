@@ -43,8 +43,6 @@ class DarwinPlatform( baseplatform.BasePlatform ):
     def GLU(self): return self.GL
     @baseplatform.lazy_property
     def CGL(self): return self.GL
-    @baseplatform.lazy_property
-    def OpenGL(self): return self.GL
 
     @baseplatform.lazy_property
     def GLUT( self ):
@@ -59,17 +57,9 @@ class DarwinPlatform( baseplatform.BasePlatform ):
     @baseplatform.lazy_property
     def GLE(self): return self.GLUT
 
-    
-    GetCurrentContext = CurrentContextIsValid = staticmethod( 
-        CGL.CGLGetCurrentContext 
-    )
-    # This loads the GLX functions from the GL .so, not sure if that's
-    # really kosher...
     @baseplatform.lazy_property
     def GetCurrentContext( self ):
         return self.CGL.CGLGetCurrentContext 
-    @baseplatform.lazy_property
-    def CurrentContextIsValid( self ): return self.GetCurrentContext
 
     def getGLUTFontPointer( self, constant ):
         """Platform specific function to retrieve a GLUT font pointer
