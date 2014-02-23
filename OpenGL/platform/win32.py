@@ -101,22 +101,6 @@ class Win32Platform( baseplatform.BasePlatform ):
     )
 
 
-    def safeGetError( self ):
-        """Provide context-not-present-safe error-checking
-
-        Under OS-X an attempt to retrieve error without checking
-        context will bus-error.  Likely Windows will see the same.
-        This function checks for a valid context before running
-        glGetError
-
-        Note:
-            This is a likely candidate for rewriting in C, as it
-            is called for every almost function in the system!
-        """
-        if self.CurrentContextIsValid():
-            return glGetError()
-        return None
-
     def constructFunction(
         self,
         functionName, dll, 
