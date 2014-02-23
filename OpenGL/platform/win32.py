@@ -18,55 +18,59 @@ class Win32Platform( baseplatform.BasePlatform ):
     """Win32-specific platform implementation"""
 
     GLUT_GUARD_CALLBACKS = True
-    try:
-        GL = OpenGL = ctypesloader.loadLibrary(
-            ctypes.windll, 'opengl32', mode = ctypes.RTLD_GLOBAL
-        )
-    except OSError as err:
-        raise ImportError("Unable to load OpenGL library", *err.args)
-
-    try:
-        GLU = ctypesloader.loadLibrary(
-            ctypes.windll, 'glu32', mode = ctypes.RTLD_GLOBAL
-        )
-    except OSError as err:
-        GLU = None
-
-    GLUT = None
-    for possible in ('freeglut%s'%(size,),'freeglut', 'glut%s'%(size,)):
-        # Prefer FreeGLUT if the user has installed it, fallback to the included 
-        # GLUT if it is installed
+    @baseplatform.lazy_property
+    def GL(self):
         try:
-            GLUT = ctypesloader.loadLibrary(
-                ctypes.windll, possible, mode = ctypes.RTLD_GLOBAL
+            return ctypesloader.loadLibrary(
+                ctypes.windll, 'opengl32', mode = ctypes.RTLD_GLOBAL
+            ) 
+        except OSError as err:
+            raise ImportError("Unable to load OpenGL library", *err.args)
+    @baseplatform.lazy_property
+    def GLU(self):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.windll, 'glu32', mode = ctypes.RTLD_GLOBAL
             )
-        except WindowsError as err:
-            GLUT = None
-        else:
-            break
-    try:
-        del possible
-    except NameError as err:
-        pass
-
-    GLE = None
-    for libName in ('opengle%s.%s'%(size,vc,),'gle%s'%(size,)):
-        try:
-            GLE = ctypesloader.loadLibrary( ctypes.cdll, libName )
-            GLE.FunctionType = ctypes.CFUNCTYPE
-        except WindowsError as err:
-            pass
-        else:
-            break
+        except OSError as err:
+            return None
+    @baseplatform.lazy_property
+    def GLUT( self ):
+        for possible in ('freeglut%s'%(size,),'freeglut', 'glut%s'%(size,)):
+            # Prefer FreeGLUT if the user has installed it, fallback to the included 
+            # GLUT if it is installed
+            try:
+                return ctypesloader.loadLibrary(
+                    ctypes.windll, possible, mode = ctypes.RTLD_GLOBAL
+                )
+            except WindowsError as err:
+                pass
+        return None
+    @baseplatform.lazy_property
+    def GLE( self ):
+        for libName in ('opengle%s.%s'%(size,vc,),'gle%s'%(size,)):
+            try:
+                GLE = ctypesloader.loadLibrary( ctypes.cdll, libName )
+                GLE.FunctionType = ctypes.CFUNCTYPE
+                return GLE
+            except WindowsError as err:
+                pass
+            else:
+                break
+        return None
 
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.WINFUNCTYPE )
     # Win32 GLUT uses different types for callbacks and functions...
     GLUT_CALLBACK_TYPE = staticmethod( ctypes.CFUNCTYPE )
     GDI32 = ctypes.windll.gdi32
-    WGL = OpenGL
-    wglGetProcAddress = OpenGL.wglGetProcAddress
-    wglGetProcAddress.restype = ctypes.c_void_p
-    getExtensionProcedure = staticmethod( wglGetProcAddress )
+    @baseplatform.lazy_property
+    def WGL( self ):
+        return self.OpenGL
+    @baseplatform.lazy_property
+    def getExtensionProcedure( self ):
+        wglGetProcAddress = self.OpenGL.wglGetProcAddress
+        wglGetProcAddress.restype = ctypes.c_void_p
+        return wglGetProcAddress
 
     GLUT_FONT_CONSTANTS = {
         'GLUT_STROKE_ROMAN': ctypes.c_void_p( 0),
@@ -94,12 +98,14 @@ class Win32Platform( baseplatform.BasePlatform ):
         """
         return self.GLUT_FONT_CONSTANTS[ constant ]
 
-    wglGetCurrentContext = GL.wglGetCurrentContext
-    wglGetCurrentContext.restype = ctypes.c_void_p
-    GetCurrentContext = CurrentContextIsValid = staticmethod(
-        wglGetCurrentContext
-    )
-
+    @baseplatform.lazy_property
+    def GetCurrentContext( self ):
+        wglGetCurrentContext = GL.wglGetCurrentContext
+        wglGetCurrentContext.restype = ctypes.c_void_p
+        return wglGetCurrentContext
+    @baseplatform.lazy_property
+    def CurrentContextIsValid( self ):
+        return self.GetCurrentContext
 
     def constructFunction(
         self,
@@ -141,5 +147,3 @@ class Win32Platform( baseplatform.BasePlatform ):
                     force_extension = True,
                 )
             
-
-glGetError = Win32Platform.OpenGL.glGetError
