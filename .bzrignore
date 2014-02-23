@@ -47,3 +47,4 @@ src/glut-*-bin*
 __pycache__
 src/khronosapi
 .ropeproject
+tests/output.ppm
