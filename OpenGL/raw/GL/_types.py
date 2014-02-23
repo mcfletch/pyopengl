@@ -126,9 +126,8 @@ ARRAY_TYPE_TO_CONSTANT = [
 ]
 
 from OpenGL.platform import PLATFORM as _p
-_FUNCTION_TYPE = _p.functionTypeFor(_p.GL)
 
-GLDEBUGPROCARB = GLDEBUGPROCKHR = GLDEBUGPROC = _FUNCTION_TYPE(
+GLDEBUGPROCARB = GLDEBUGPROCKHR = GLDEBUGPROC = _p.DEFAULT_FUNCTION_TYPE(
     void, 
     GLenum,  # source,
     GLenum, #type,
@@ -144,7 +143,7 @@ class _cl_context( ctypes.Structure ):
 class _cl_event( ctypes.Structure ):
     """Placeholder/empty structure for _cl_event"""
     
-GLDEBUGPROCAMD = _FUNCTION_TYPE(
+GLDEBUGPROCAMD = _p.DEFAULT_FUNCTION_TYPE(
     void,
     GLuint,# id,
     GLenum,# category,
@@ -156,5 +155,4 @@ GLDEBUGPROCAMD = _FUNCTION_TYPE(
 
 GLeglImageOES = GLvoidp 
 c_int = ctypes.c_int
-
 
