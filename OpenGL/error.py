@@ -176,10 +176,11 @@ if _configflags.ERROR_CHECKING:
                 _currentChecker -- currently active checking function
             """
             _getErrors = None
-            def __init__( self, platform, baseOperation=None ):
+            def __init__( self, platform, baseOperation=None, noErrorResult=0 ):
                 """Initialize from a platform module/reference"""
                 self._isValid = platform.CurrentContextIsValid
                 self._getErrors = baseOperation
+                self._noErrorResult = noErrorResult
                 if self._getErrors:
                     if _configflags.CONTEXT_CHECKING:
                         self._registeredChecker = self.safeGetError 
@@ -222,7 +223,7 @@ if _configflags.ERROR_CHECKING:
                     should call onBegin and onEnd appropriately.
                 """
                 err = self._currentChecker()
-                if err: # GL_NO_ERROR's guaranteed value is 0
+                if err != self._noErrorResult:
                     raise GLError(
                         err,
                         result,
