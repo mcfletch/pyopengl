@@ -91,4 +91,3 @@ class DarwinPlatform( baseplatform.BasePlatform ):
     def glGetError( self ):
         return self.GL.glGetError
 
-glGetError = DarwinPlatform.OpenGL.glGetError
