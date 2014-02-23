@@ -28,8 +28,6 @@ class GLXPlatform( baseplatform.BasePlatform ):
             )
         except OSError as err:
             return None
-    # glut shouldn't need to be global, but just in case a dependent library makes
-    # the same assumption GLUT does...
     @baseplatform.lazy_property
     def GLUT( self ):
         try:
@@ -41,10 +39,12 @@ class GLXPlatform( baseplatform.BasePlatform ):
         except OSError as err:
             return None
     # GLX doesn't seem to have its own loadable module?
-    GLX = GL
+    @baseplatform.lazy_property
+    def GLX(self): return self.GL
+    
     @baseplatform.lazy_property
     def glXGetProcAddressARB(self):
-        base = self.GL.glXGetProcAddressARB
+        base = self.GLX.glXGetProcAddressARB
         base.restype = ctypes.c_void_p
         return base
     @baseplatform.lazy_property
