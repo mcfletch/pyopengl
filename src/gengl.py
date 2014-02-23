@@ -163,7 +163,7 @@ class GLWrapper(wrap.CtypesWrapper):
         }).lstrip()
 
     def libFromRequires( self, requires  ):
-        return self.library or 'platform.GL'
+        return self.library or 'platform.PLATFORM.GL'
 
     def handle_ctypes_function(self, name, restype, argtypes, filename, lineno, argnames):
         if self.does_emit(name, filename):

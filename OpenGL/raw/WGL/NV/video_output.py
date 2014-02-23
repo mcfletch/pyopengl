@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_NV_video_output'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_NV_video_output',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_NV_video_output',error_checker=_errors._error_checker)
 WGL_BIND_TO_VIDEO_RGBA_NV=_C('WGL_BIND_TO_VIDEO_RGBA_NV',0x20C1)
 WGL_BIND_TO_VIDEO_RGB_AND_DEPTH_NV=_C('WGL_BIND_TO_VIDEO_RGB_AND_DEPTH_NV',0x20C2)
 WGL_BIND_TO_VIDEO_RGB_NV=_C('WGL_BIND_TO_VIDEO_RGB_NV',0x20C0)

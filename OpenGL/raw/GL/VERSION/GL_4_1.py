@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_4_1'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_4_1',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_VERSION_GL_4_1',error_checker=_errors._error_checker)
 GL_ACTIVE_PROGRAM=_C('GL_ACTIVE_PROGRAM',0x8259)
 GL_ALL_SHADER_BITS=_C('GL_ALL_SHADER_BITS',0xFFFFFFFF)
 GL_FIXED=_C('GL_FIXED',0x140C)

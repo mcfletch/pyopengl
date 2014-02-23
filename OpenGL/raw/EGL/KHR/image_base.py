@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_KHR_image_base'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_KHR_image_base',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_KHR_image_base',error_checker=_errors._error_checker)
 EGL_IMAGE_PRESERVED_KHR=_C('EGL_IMAGE_PRESERVED_KHR',0x30D2)
 # EGL_NO_IMAGE_KHR=_C('EGL_NO_IMAGE_KHR',((EGLImageKHR)0))
 @_f

@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_transform_hint'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_transform_hint',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_APPLE_transform_hint',error_checker=_errors._error_checker)
 GL_TRANSFORM_HINT_APPLE=_C('GL_TRANSFORM_HINT_APPLE',0x85B1)
 

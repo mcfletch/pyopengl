@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIS_multisample'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIS_multisample',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIS_multisample',error_checker=_errors._error_checker)
 GL_1PASS_SGIS=_C('GL_1PASS_SGIS',0x80A1)
 GL_2PASS_0_SGIS=_C('GL_2PASS_0_SGIS',0x80A2)
 GL_2PASS_1_SGIS=_C('GL_2PASS_1_SGIS',0x80A3)

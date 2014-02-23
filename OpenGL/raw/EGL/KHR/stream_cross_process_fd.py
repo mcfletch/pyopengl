@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_KHR_stream_cross_process_fd'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_KHR_stream_cross_process_fd',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_KHR_stream_cross_process_fd',error_checker=_errors._error_checker)
 # EGL_NO_FILE_DESCRIPTOR_KHR=_C('EGL_NO_FILE_DESCRIPTOR_KHR',((EGLNativeFileDescriptorKHR)(-1)))
 @_f
 @_p.types(_cs.EGLStreamKHR,_cs.EGLDisplay,_cs.EGLNativeFileDescriptorKHR)

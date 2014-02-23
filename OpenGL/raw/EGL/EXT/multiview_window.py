@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_EXT_multiview_window'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_EXT_multiview_window',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_EXT_multiview_window',error_checker=_errors._error_checker)
 EGL_MULTIVIEW_VIEW_COUNT_EXT=_C('EGL_MULTIVIEW_VIEW_COUNT_EXT',0x3134)
 

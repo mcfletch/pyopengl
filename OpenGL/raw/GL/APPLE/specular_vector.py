@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_specular_vector'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_specular_vector',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_APPLE_specular_vector',error_checker=_errors._error_checker)
 GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE=_C('GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE',0x85B0)
 

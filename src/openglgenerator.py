@@ -60,13 +60,13 @@ GLvoid = GL_types.GLvoid
     def get_sharedlib(self, dllname, cc):
         """Override so that all references to shared libraries go through "platform" module"""
         if dllname in ('libGL','GL','libGL.so.1'):
-            return 'platform.GL'
+            return 'platform.PLATFORM.GL'
         elif dllname in ('libGLU','GLU','libGLU.so.1'):
-            return 'platform.GLU'
+            return 'platform.PLATFORM.GLU'
         elif dllname in ('libglut','glut','libglut.so.3'):
-            return 'platform.GLUT'
+            return 'platform.PLATFORM.GLUT'
         elif dllname in ('libgle','gle','libgle.so.3' ):
-            return 'platform.GLE'
+            return 'platform.PLATFORM.GLE'
         else:
             raise NotImplementedError( """Haven't done %s yet!"""%(dllname) )
     def cmpitems( self, a, b ):

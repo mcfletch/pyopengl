@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_transform_feedback2'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_transform_feedback2',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_transform_feedback2',error_checker=_errors._error_checker)
 GL_TRANSFORM_FEEDBACK_BINDING_NV=_C('GL_TRANSFORM_FEEDBACK_BINDING_NV',0x8E25)
 GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV=_C('GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV',0x8E24)
 GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV=_C('GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV',0x8E23)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_cmyka'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_cmyka',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_cmyka',error_checker=_errors._error_checker)
 GL_CMYKA_EXT=_C('GL_CMYKA_EXT',0x800D)
 GL_CMYK_EXT=_C('GL_CMYK_EXT',0x800C)
 GL_PACK_CMYK_HINT_EXT=_C('GL_PACK_CMYK_HINT_EXT',0x800E)

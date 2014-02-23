@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_bindless_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_bindless_texture',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_bindless_texture',error_checker=_errors._error_checker)
 GL_UNSIGNED_INT64_ARB=_C('GL_UNSIGNED_INT64_ARB',0x140F)
 @_f
 @_p.types(_cs.GLuint64,_cs.GLuint,_cs.GLint,_cs.GLboolean,_cs.GLint,_cs.GLenum)

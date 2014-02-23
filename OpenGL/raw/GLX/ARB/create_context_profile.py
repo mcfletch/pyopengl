@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_ARB_create_context_profile'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_ARB_create_context_profile',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_ARB_create_context_profile',error_checker=_errors._error_checker)
 GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB=_C('GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB',0x00000002)
 GLX_CONTEXT_CORE_PROFILE_BIT_ARB=_C('GLX_CONTEXT_CORE_PROFILE_BIT_ARB',0x00000001)
 GLX_CONTEXT_PROFILE_MASK_ARB=_C('GLX_CONTEXT_PROFILE_MASK_ARB',0x9126)

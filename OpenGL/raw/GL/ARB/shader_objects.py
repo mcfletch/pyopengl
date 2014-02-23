@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_shader_objects'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_shader_objects',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_shader_objects',error_checker=_errors._error_checker)
 GL_BOOL_ARB=_C('GL_BOOL_ARB',0x8B56)
 GL_BOOL_VEC2_ARB=_C('GL_BOOL_VEC2_ARB',0x8B57)
 GL_BOOL_VEC3_ARB=_C('GL_BOOL_VEC3_ARB',0x8B58)

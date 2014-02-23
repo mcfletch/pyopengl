@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_texture_storage'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_texture_storage',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_texture_storage',error_checker=_errors._error_checker)
 GL_ALPHA16F_EXT=_C('GL_ALPHA16F_EXT',0x881C)
 GL_ALPHA32F_EXT=_C('GL_ALPHA32F_EXT',0x8816)
 GL_ALPHA8_EXT=_C('GL_ALPHA8_EXT',0x803C)

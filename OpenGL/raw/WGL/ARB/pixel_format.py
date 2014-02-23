@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_ARB_pixel_format'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_ARB_pixel_format',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_ARB_pixel_format',error_checker=_errors._error_checker)
 WGL_ACCELERATION_ARB=_C('WGL_ACCELERATION_ARB',0x2003)
 WGL_ACCUM_ALPHA_BITS_ARB=_C('WGL_ACCUM_ALPHA_BITS_ARB',0x2021)
 WGL_ACCUM_BITS_ARB=_C('WGL_ACCUM_BITS_ARB',0x201D)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_texture_perturb_normal'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_texture_perturb_normal',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_texture_perturb_normal',error_checker=_errors._error_checker)
 GL_PERTURB_EXT=_C('GL_PERTURB_EXT',0x85AE)
 GL_TEXTURE_NORMAL_EXT=_C('GL_TEXTURE_NORMAL_EXT',0x85AF)
 @_f

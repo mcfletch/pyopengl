@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_1_5'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_5',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_VERSION_GL_1_5',error_checker=_errors._error_checker)
 GL_ARRAY_BUFFER=_C('GL_ARRAY_BUFFER',0x8892)
 GL_ARRAY_BUFFER_BINDING=_C('GL_ARRAY_BUFFER_BINDING',0x8894)
 GL_BUFFER_ACCESS=_C('GL_BUFFER_ACCESS',0x88BB)

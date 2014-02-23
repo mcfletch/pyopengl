@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_GREMEDY_frame_terminator'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_GREMEDY_frame_terminator',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_GREMEDY_frame_terminator',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(None,)

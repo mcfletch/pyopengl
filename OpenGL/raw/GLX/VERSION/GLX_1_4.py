@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_VERSION_GLX_1_4'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_VERSION_GLX_1_4',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_VERSION_GLX_1_4',error_checker=_errors._error_checker)
 GLX_SAMPLES=_C('GLX_SAMPLES',100001)
 GLX_SAMPLE_BUFFERS=_C('GLX_SAMPLE_BUFFERS',100000)
 @_f

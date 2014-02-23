@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_convolution_accuracy'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_convolution_accuracy',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_convolution_accuracy',error_checker=_errors._error_checker)
 GL_CONVOLUTION_HINT_SGIX=_C('GL_CONVOLUTION_HINT_SGIX',0x8316)
 

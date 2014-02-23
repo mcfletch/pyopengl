@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_texture_rectangle'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_texture_rectangle',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_texture_rectangle',error_checker=_errors._error_checker)
 GL_MAX_RECTANGLE_TEXTURE_SIZE_NV=_C('GL_MAX_RECTANGLE_TEXTURE_SIZE_NV',0x84F8)
 GL_PROXY_TEXTURE_RECTANGLE_NV=_C('GL_PROXY_TEXTURE_RECTANGLE_NV',0x84F7)
 GL_TEXTURE_BINDING_RECTANGLE_NV=_C('GL_TEXTURE_BINDING_RECTANGLE_NV',0x84F6)

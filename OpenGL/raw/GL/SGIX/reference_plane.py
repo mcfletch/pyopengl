@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_reference_plane'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_reference_plane',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_reference_plane',error_checker=_errors._error_checker)
 GL_REFERENCE_PLANE_EQUATION_SGIX=_C('GL_REFERENCE_PLANE_EQUATION_SGIX',0x817E)
 GL_REFERENCE_PLANE_SGIX=_C('GL_REFERENCE_PLANE_SGIX',0x817D)
 @_f

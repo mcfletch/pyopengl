@@ -36,7 +36,7 @@ from OpenGL.arrays.arraydatatype import ArrayDatatype, GLenumArray
 GL_INFO_LOG_LENGTH = constant.Constant( 'GL_INFO_LOG_LENGTH', 0x8B84 )
 
 glShaderSource = platform.createExtensionFunction(
-    'glShaderSource', dll=platform.GL,
+    'glShaderSource', dll=platform.PLATFORM.GL,
     resultType=None,
     argTypes=(_types.GLhandle, _types.GLsizei, ctypes.POINTER(ctypes.c_char_p), arrays.GLintArray,),
     doc = 'glShaderSource( GLhandle(shaderObj),[bytes(string),...]) -> None',

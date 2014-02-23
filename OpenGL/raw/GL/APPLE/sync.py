@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_sync'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_sync',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_APPLE_sync',error_checker=_errors._error_checker)
 GL_ALREADY_SIGNALED_APPLE=_C('GL_ALREADY_SIGNALED_APPLE',0x911A)
 GL_CONDITION_SATISFIED_APPLE=_C('GL_CONDITION_SATISFIED_APPLE',0x911C)
 GL_MAX_SERVER_WAIT_TIMEOUT_APPLE=_C('GL_MAX_SERVER_WAIT_TIMEOUT_APPLE',0x9111)

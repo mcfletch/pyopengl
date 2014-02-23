@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_ARM_pixmap_multisample_discard'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_ARM_pixmap_multisample_discard',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_ARM_pixmap_multisample_discard',error_checker=_errors._error_checker)
 EGL_DISCARD_SAMPLES_ARM=_C('EGL_DISCARD_SAMPLES_ARM',0x3286)
 

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_conditional_render'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_conditional_render',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_conditional_render',error_checker=_errors._error_checker)
 GL_QUERY_BY_REGION_NO_WAIT_NV=_C('GL_QUERY_BY_REGION_NO_WAIT_NV',0x8E16)
 GL_QUERY_BY_REGION_WAIT_NV=_C('GL_QUERY_BY_REGION_WAIT_NV',0x8E15)
 GL_QUERY_NO_WAIT_NV=_C('GL_QUERY_NO_WAIT_NV',0x8E14)

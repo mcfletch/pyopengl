@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_OES_extended_matrix_palette'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_extended_matrix_palette',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_OES_extended_matrix_palette',error_checker=_errors._error_checker)
 
 

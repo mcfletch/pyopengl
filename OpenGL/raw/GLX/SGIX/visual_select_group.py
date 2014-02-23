@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_SGIX_visual_select_group'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_SGIX_visual_select_group',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_SGIX_visual_select_group',error_checker=_errors._error_checker)
 GLX_VISUAL_SELECT_GROUP_SGIX=_C('GLX_VISUAL_SELECT_GROUP_SGIX',0x8028)
 

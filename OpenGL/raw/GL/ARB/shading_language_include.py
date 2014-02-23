@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_shading_language_include'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_shading_language_include',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_shading_language_include',error_checker=_errors._error_checker)
 GL_NAMED_STRING_LENGTH_ARB=_C('GL_NAMED_STRING_LENGTH_ARB',0x8DE9)
 GL_NAMED_STRING_TYPE_ARB=_C('GL_NAMED_STRING_TYPE_ARB',0x8DEA)
 GL_SHADER_INCLUDE_ARB=_C('GL_SHADER_INCLUDE_ARB',0x8DAE)

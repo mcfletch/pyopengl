@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_KHR_texture_compression_astc_ldr'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_KHR_texture_compression_astc_ldr',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_KHR_texture_compression_astc_ldr',error_checker=_errors._error_checker)
 GL_COMPRESSED_RGBA_ASTC_10x10_KHR=_C('GL_COMPRESSED_RGBA_ASTC_10x10_KHR',0x93BB)
 GL_COMPRESSED_RGBA_ASTC_10x5_KHR=_C('GL_COMPRESSED_RGBA_ASTC_10x5_KHR',0x93B8)
 GL_COMPRESSED_RGBA_ASTC_10x6_KHR=_C('GL_COMPRESSED_RGBA_ASTC_10x6_KHR',0x93B9)

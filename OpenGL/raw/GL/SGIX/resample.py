@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_resample'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_resample',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_resample',error_checker=_errors._error_checker)
 GL_PACK_RESAMPLE_SGIX=_C('GL_PACK_RESAMPLE_SGIX',0x842C)
 GL_RESAMPLE_DECIMATE_SGIX=_C('GL_RESAMPLE_DECIMATE_SGIX',0x8430)
 GL_RESAMPLE_REPLICATE_SGIX=_C('GL_RESAMPLE_REPLICATE_SGIX',0x842E)

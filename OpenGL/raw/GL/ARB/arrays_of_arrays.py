@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_arrays_of_arrays'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_arrays_of_arrays',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_arrays_of_arrays',error_checker=_errors._error_checker)
 
 

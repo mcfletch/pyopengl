@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_OES_point_size_array'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_point_size_array',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_OES_point_size_array',error_checker=_errors._error_checker)
 GL_POINT_SIZE_ARRAY_BUFFER_BINDING_OES=_C('GL_POINT_SIZE_ARRAY_BUFFER_BINDING_OES',0x8B9F)
 GL_POINT_SIZE_ARRAY_OES=_C('GL_POINT_SIZE_ARRAY_OES',0x8B9C)
 GL_POINT_SIZE_ARRAY_POINTER_OES=_C('GL_POINT_SIZE_ARRAY_POINTER_OES',0x898C)

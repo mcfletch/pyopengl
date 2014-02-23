@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ANGLE_texture_compression_dxt3'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ANGLE_texture_compression_dxt3',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ANGLE_texture_compression_dxt3',error_checker=_errors._error_checker)
 GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE=_C('GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE',0x83F2)
 

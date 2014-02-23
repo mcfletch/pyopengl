@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_EXT_visual_info'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_EXT_visual_info',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_EXT_visual_info',error_checker=_errors._error_checker)
 GLX_DIRECT_COLOR_EXT=_C('GLX_DIRECT_COLOR_EXT',0x8003)
 GLX_GRAY_SCALE_EXT=_C('GLX_GRAY_SCALE_EXT',0x8006)
 GLX_NONE_EXT=_C('GLX_NONE_EXT',0x8000)

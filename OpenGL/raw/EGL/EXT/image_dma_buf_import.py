@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_EXT_image_dma_buf_import'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_EXT_image_dma_buf_import',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_EXT_image_dma_buf_import',error_checker=_errors._error_checker)
 EGL_DMA_BUF_PLANE0_FD_EXT=_C('EGL_DMA_BUF_PLANE0_FD_EXT',0x3272)
 EGL_DMA_BUF_PLANE0_OFFSET_EXT=_C('EGL_DMA_BUF_PLANE0_OFFSET_EXT',0x3273)
 EGL_DMA_BUF_PLANE0_PITCH_EXT=_C('EGL_DMA_BUF_PLANE0_PITCH_EXT',0x3274)

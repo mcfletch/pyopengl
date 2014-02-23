@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_ARB_render_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_ARB_render_texture',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_ARB_render_texture',error_checker=_errors._error_checker)
 WGL_AUX0_ARB=_C('WGL_AUX0_ARB',0x2087)
 WGL_AUX1_ARB=_C('WGL_AUX1_ARB',0x2088)
 WGL_AUX2_ARB=_C('WGL_AUX2_ARB',0x2089)

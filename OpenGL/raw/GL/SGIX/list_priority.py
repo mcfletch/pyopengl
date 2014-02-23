@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_list_priority'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_list_priority',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_list_priority',error_checker=_errors._error_checker)
 GL_LIST_PRIORITY_SGIX=_C('GL_LIST_PRIORITY_SGIX',0x8182)
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)

@@ -11,7 +11,7 @@ from OpenGL.constant import Constant
 from OpenGL.raw.GL import _types as GL_types
 GLvoid = GL_types.GLvoid
 
-FUNCTION_TYPE = platform.PLATFORM.functionTypeFor( platform.GLU )
+FUNCTION_TYPE = platform.PLATFORM.functionTypeFor( platform.PLATFORM.GLU )
 from OpenGL.raw.GL._types import (
     GLint,
     GLenum,
@@ -46,7 +46,7 @@ GLUtriangulatorObj = GLUtesselator
 
 # /usr/include/GL/glu.h 276
 gluBeginCurve = platform.createBaseFunction( 
-    'gluBeginCurve', dll=platform.GLU, resultType=None, 
+    'gluBeginCurve', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs)],
     doc='gluBeginCurve( POINTER(GLUnurbs)(nurb) ) -> None', 
     argNames=('nurb',),
@@ -55,7 +55,7 @@ gluBeginCurve = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 277
 gluBeginPolygon = platform.createBaseFunction( 
-    'gluBeginPolygon', dll=platform.GLU, resultType=None, 
+    'gluBeginPolygon', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator)],
     doc='gluBeginPolygon( POINTER(GLUtesselator)(tess) ) -> None', 
     argNames=('tess',),
@@ -64,7 +64,7 @@ gluBeginPolygon = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 278
 gluBeginSurface = platform.createBaseFunction( 
-    'gluBeginSurface', dll=platform.GLU, resultType=None, 
+    'gluBeginSurface', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs)],
     doc='gluBeginSurface( POINTER(GLUnurbs)(nurb) ) -> None', 
     argNames=('nurb',),
@@ -73,7 +73,7 @@ gluBeginSurface = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 279
 gluBeginTrim = platform.createBaseFunction( 
-    'gluBeginTrim', dll=platform.GLU, resultType=None, 
+    'gluBeginTrim', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs)],
     doc='gluBeginTrim( POINTER(GLUnurbs)(nurb) ) -> None', 
     argNames=('nurb',),
@@ -82,7 +82,7 @@ gluBeginTrim = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 280
 gluBuild1DMipmapLevels = platform.createBaseFunction( 
-    'gluBuild1DMipmapLevels', dll=platform.GLU, resultType=GLint, 
+    'gluBuild1DMipmapLevels', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLenum,GLint,GLsizei,GLenum,GLenum,GLint,GLint,GLint,c_void_p],
     doc='gluBuild1DMipmapLevels( GLenum(target), GLint(internalFormat), GLsizei(width), GLenum(format), GLenum(type), GLint(level), GLint(base), GLint(max), c_void_p(data) ) -> GLint', 
     argNames=('target', 'internalFormat', 'width', 'format', 'type', 'level', 'base', 'max', 'data'),
@@ -91,7 +91,7 @@ gluBuild1DMipmapLevels = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 281
 gluBuild1DMipmaps = platform.createBaseFunction( 
-    'gluBuild1DMipmaps', dll=platform.GLU, resultType=GLint, 
+    'gluBuild1DMipmaps', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLenum,GLint,GLsizei,GLenum,GLenum,c_void_p],
     doc='gluBuild1DMipmaps( GLenum(target), GLint(internalFormat), GLsizei(width), GLenum(format), GLenum(type), c_void_p(data) ) -> GLint', 
     argNames=('target', 'internalFormat', 'width', 'format', 'type', 'data'),
@@ -100,7 +100,7 @@ gluBuild1DMipmaps = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 282
 gluBuild2DMipmapLevels = platform.createBaseFunction( 
-    'gluBuild2DMipmapLevels', dll=platform.GLU, resultType=GLint, 
+    'gluBuild2DMipmapLevels', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLenum,GLint,GLsizei,GLsizei,GLenum,GLenum,GLint,GLint,GLint,c_void_p],
     doc='gluBuild2DMipmapLevels( GLenum(target), GLint(internalFormat), GLsizei(width), GLsizei(height), GLenum(format), GLenum(type), GLint(level), GLint(base), GLint(max), c_void_p(data) ) -> GLint', 
     argNames=('target', 'internalFormat', 'width', 'height', 'format', 'type', 'level', 'base', 'max', 'data'),
@@ -109,7 +109,7 @@ gluBuild2DMipmapLevels = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 283
 gluBuild2DMipmaps = platform.createBaseFunction( 
-    'gluBuild2DMipmaps', dll=platform.GLU, resultType=GLint, 
+    'gluBuild2DMipmaps', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLenum,GLint,GLsizei,GLsizei,GLenum,GLenum,c_void_p],
     doc='gluBuild2DMipmaps( GLenum(target), GLint(internalFormat), GLsizei(width), GLsizei(height), GLenum(format), GLenum(type), c_void_p(data) ) -> GLint', 
     argNames=('target', 'internalFormat', 'width', 'height', 'format', 'type', 'data'),
@@ -118,7 +118,7 @@ gluBuild2DMipmaps = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 284
 gluBuild3DMipmapLevels = platform.createBaseFunction( 
-    'gluBuild3DMipmapLevels', dll=platform.GLU, resultType=GLint, 
+    'gluBuild3DMipmapLevels', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLenum,GLint,GLsizei,GLsizei,GLsizei,GLenum,GLenum,GLint,GLint,GLint,c_void_p],
     doc='gluBuild3DMipmapLevels( GLenum(target), GLint(internalFormat), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLenum(type), GLint(level), GLint(base), GLint(max), c_void_p(data) ) -> GLint', 
     argNames=('target', 'internalFormat', 'width', 'height', 'depth', 'format', 'type', 'level', 'base', 'max', 'data'),
@@ -127,7 +127,7 @@ gluBuild3DMipmapLevels = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 285
 gluBuild3DMipmaps = platform.createBaseFunction( 
-    'gluBuild3DMipmaps', dll=platform.GLU, resultType=GLint, 
+    'gluBuild3DMipmaps', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLenum,GLint,GLsizei,GLsizei,GLsizei,GLenum,GLenum,c_void_p],
     doc='gluBuild3DMipmaps( GLenum(target), GLint(internalFormat), GLsizei(width), GLsizei(height), GLsizei(depth), GLenum(format), GLenum(type), c_void_p(data) ) -> GLint', 
     argNames=('target', 'internalFormat', 'width', 'height', 'depth', 'format', 'type', 'data'),
@@ -136,7 +136,7 @@ gluBuild3DMipmaps = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 286
 gluCheckExtension = platform.createBaseFunction( 
-    'gluCheckExtension', dll=platform.GLU, resultType=GLboolean, 
+    'gluCheckExtension', dll=platform.PLATFORM.GLU, resultType=GLboolean, 
     argTypes=[arrays.GLubyteArray,arrays.GLubyteArray],
     doc='gluCheckExtension( arrays.GLubyteArray(extName), arrays.GLubyteArray(extString) ) -> GLboolean', 
     argNames=('extName', 'extString'),
@@ -145,7 +145,7 @@ gluCheckExtension = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 287
 gluCylinder = platform.createBaseFunction( 
-    'gluCylinder', dll=platform.GLU, resultType=None, 
+    'gluCylinder', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric),GLdouble,GLdouble,GLdouble,GLint,GLint],
     doc='gluCylinder( POINTER(GLUquadric)(quad), GLdouble(base), GLdouble(top), GLdouble(height), GLint(slices), GLint(stacks) ) -> None', 
     argNames=('quad', 'base', 'top', 'height', 'slices', 'stacks'),
@@ -154,7 +154,7 @@ gluCylinder = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 288
 gluDeleteNurbsRenderer = platform.createBaseFunction( 
-    'gluDeleteNurbsRenderer', dll=platform.GLU, resultType=None, 
+    'gluDeleteNurbsRenderer', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs)],
     doc='gluDeleteNurbsRenderer( POINTER(GLUnurbs)(nurb) ) -> None', 
     argNames=('nurb',),
@@ -163,7 +163,7 @@ gluDeleteNurbsRenderer = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 289
 gluDeleteQuadric = platform.createBaseFunction( 
-    'gluDeleteQuadric', dll=platform.GLU, resultType=None, 
+    'gluDeleteQuadric', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric)],
     doc='gluDeleteQuadric( POINTER(GLUquadric)(quad) ) -> None', 
     argNames=('quad',),
@@ -172,7 +172,7 @@ gluDeleteQuadric = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 290
 gluDeleteTess = platform.createBaseFunction( 
-    'gluDeleteTess', dll=platform.GLU, resultType=None, 
+    'gluDeleteTess', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator)],
     doc='gluDeleteTess( POINTER(GLUtesselator)(tess) ) -> None', 
     argNames=('tess',),
@@ -181,7 +181,7 @@ gluDeleteTess = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 291
 gluDisk = platform.createBaseFunction( 
-    'gluDisk', dll=platform.GLU, resultType=None, 
+    'gluDisk', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric),GLdouble,GLdouble,GLint,GLint],
     doc='gluDisk( POINTER(GLUquadric)(quad), GLdouble(inner), GLdouble(outer), GLint(slices), GLint(loops) ) -> None', 
     argNames=('quad', 'inner', 'outer', 'slices', 'loops'),
@@ -190,7 +190,7 @@ gluDisk = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 292
 gluEndCurve = platform.createBaseFunction( 
-    'gluEndCurve', dll=platform.GLU, resultType=None, 
+    'gluEndCurve', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs)],
     doc='gluEndCurve( POINTER(GLUnurbs)(nurb) ) -> None', 
     argNames=('nurb',),
@@ -199,7 +199,7 @@ gluEndCurve = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 293
 gluEndPolygon = platform.createBaseFunction( 
-    'gluEndPolygon', dll=platform.GLU, resultType=None, 
+    'gluEndPolygon', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator)],
     doc='gluEndPolygon( POINTER(GLUtesselator)(tess) ) -> None', 
     argNames=('tess',),
@@ -208,7 +208,7 @@ gluEndPolygon = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 294
 gluEndSurface = platform.createBaseFunction( 
-    'gluEndSurface', dll=platform.GLU, resultType=None, 
+    'gluEndSurface', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs)],
     doc='gluEndSurface( POINTER(GLUnurbs)(nurb) ) -> None', 
     argNames=('nurb',),
@@ -217,7 +217,7 @@ gluEndSurface = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 295
 gluEndTrim = platform.createBaseFunction( 
-    'gluEndTrim', dll=platform.GLU, resultType=None, 
+    'gluEndTrim', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs)],
     doc='gluEndTrim( POINTER(GLUnurbs)(nurb) ) -> None', 
     argNames=('nurb',),
@@ -226,7 +226,7 @@ gluEndTrim = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 296
 gluErrorString = platform.createBaseFunction( 
-    'gluErrorString', dll=platform.GLU, resultType=POINTER(GLubyte), 
+    'gluErrorString', dll=platform.PLATFORM.GLU, resultType=POINTER(GLubyte), 
     argTypes=[GLenum],
     doc='gluErrorString( GLenum(error) ) -> POINTER(GLubyte)', 
     argNames=('error',),
@@ -235,7 +235,7 @@ gluErrorString = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 297
 gluGetNurbsProperty = platform.createBaseFunction( 
-    'gluGetNurbsProperty', dll=platform.GLU, resultType=None, 
+    'gluGetNurbsProperty', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs),GLenum,arrays.GLfloatArray],
     doc='gluGetNurbsProperty( POINTER(GLUnurbs)(nurb), GLenum(property), arrays.GLfloatArray(data) ) -> None', 
     argNames=('nurb', 'property', 'data'),
@@ -244,7 +244,7 @@ gluGetNurbsProperty = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 298
 gluGetString = platform.createBaseFunction( 
-    'gluGetString', dll=platform.GLU, resultType=POINTER(GLubyte), 
+    'gluGetString', dll=platform.PLATFORM.GLU, resultType=POINTER(GLubyte), 
     argTypes=[GLenum],
     doc='gluGetString( GLenum(name) ) -> POINTER(GLubyte)', 
     argNames=('name',),
@@ -253,7 +253,7 @@ gluGetString = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 299
 gluGetTessProperty = platform.createBaseFunction( 
-    'gluGetTessProperty', dll=platform.GLU, resultType=None, 
+    'gluGetTessProperty', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator),GLenum,arrays.GLdoubleArray],
     doc='gluGetTessProperty( POINTER(GLUtesselator)(tess), GLenum(which), arrays.GLdoubleArray(data) ) -> None', 
     argNames=('tess', 'which', 'data'),
@@ -262,7 +262,7 @@ gluGetTessProperty = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 300
 gluLoadSamplingMatrices = platform.createBaseFunction( 
-    'gluLoadSamplingMatrices', dll=platform.GLU, resultType=None, 
+    'gluLoadSamplingMatrices', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs),arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLintArray],
     doc='gluLoadSamplingMatrices( POINTER(GLUnurbs)(nurb), arrays.GLfloatArray(model), arrays.GLfloatArray(perspective), arrays.GLintArray(view) ) -> None', 
     argNames=('nurb', 'model', 'perspective', 'view'),
@@ -271,7 +271,7 @@ gluLoadSamplingMatrices = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 301
 gluLookAt = platform.createBaseFunction( 
-    'gluLookAt', dll=platform.GLU, resultType=None, 
+    'gluLookAt', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[GLdouble,GLdouble,GLdouble,GLdouble,GLdouble,GLdouble,GLdouble,GLdouble,GLdouble],
     doc='gluLookAt( GLdouble(eyeX), GLdouble(eyeY), GLdouble(eyeZ), GLdouble(centerX), GLdouble(centerY), GLdouble(centerZ), GLdouble(upX), GLdouble(upY), GLdouble(upZ) ) -> None', 
     argNames=('eyeX', 'eyeY', 'eyeZ', 'centerX', 'centerY', 'centerZ', 'upX', 'upY', 'upZ'),
@@ -280,7 +280,7 @@ gluLookAt = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 302
 gluNewNurbsRenderer = platform.createBaseFunction( 
-    'gluNewNurbsRenderer', dll=platform.GLU, resultType=POINTER(GLUnurbs), 
+    'gluNewNurbsRenderer', dll=platform.PLATFORM.GLU, resultType=POINTER(GLUnurbs), 
     argTypes=[],
     doc='gluNewNurbsRenderer(  ) -> POINTER(GLUnurbs)', 
     argNames=(),
@@ -289,7 +289,7 @@ gluNewNurbsRenderer = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 303
 gluNewQuadric = platform.createBaseFunction( 
-    'gluNewQuadric', dll=platform.GLU, resultType=POINTER(GLUquadric), 
+    'gluNewQuadric', dll=platform.PLATFORM.GLU, resultType=POINTER(GLUquadric), 
     argTypes=[],
     doc='gluNewQuadric(  ) -> POINTER(GLUquadric)', 
     argNames=(),
@@ -298,7 +298,7 @@ gluNewQuadric = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 304
 gluNewTess = platform.createBaseFunction( 
-    'gluNewTess', dll=platform.GLU, resultType=POINTER(GLUtesselator), 
+    'gluNewTess', dll=platform.PLATFORM.GLU, resultType=POINTER(GLUtesselator), 
     argTypes=[],
     doc='gluNewTess(  ) -> POINTER(GLUtesselator)', 
     argNames=(),
@@ -307,7 +307,7 @@ gluNewTess = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 305
 gluNextContour = platform.createBaseFunction( 
-    'gluNextContour', dll=platform.GLU, resultType=None, 
+    'gluNextContour', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator),GLenum],
     doc='gluNextContour( POINTER(GLUtesselator)(tess), GLenum(type) ) -> None', 
     argNames=('tess', 'type'),
@@ -317,7 +317,7 @@ gluNextContour = platform.createBaseFunction(
 _GLUfuncptr = FUNCTION_TYPE(None)
 # /usr/include/GL/glu.h 306
 gluNurbsCallback = platform.createBaseFunction( 
-    'gluNurbsCallback', dll=platform.GLU, resultType=None, 
+    'gluNurbsCallback', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs),GLenum,_GLUfuncptr],
     doc='gluNurbsCallback( POINTER(GLUnurbs)(nurb), GLenum(which), _GLUfuncptr(CallBackFunc) ) -> None', 
     argNames=('nurb', 'which', 'CallBackFunc'),
@@ -326,7 +326,7 @@ gluNurbsCallback = platform.createBaseFunction(
 GLvoid = None
 # /usr/include/GL/glu.h 307
 gluNurbsCallbackData = platform.createBaseFunction( 
-    'gluNurbsCallbackData', dll=platform.GLU, resultType=None, 
+    'gluNurbsCallbackData', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs),POINTER(GLvoid)],
     doc='gluNurbsCallbackData( POINTER(GLUnurbs)(nurb), POINTER(GLvoid)(userData) ) -> None', 
     argNames=('nurb', 'userData'),
@@ -335,7 +335,7 @@ gluNurbsCallbackData = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 308
 gluNurbsCallbackDataEXT = platform.createBaseFunction( 
-    'gluNurbsCallbackDataEXT', dll=platform.GLU, resultType=None, 
+    'gluNurbsCallbackDataEXT', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs),POINTER(GLvoid)],
     doc='gluNurbsCallbackDataEXT( POINTER(GLUnurbs)(nurb), POINTER(GLvoid)(userData) ) -> None', 
     argNames=('nurb', 'userData'),
@@ -344,7 +344,7 @@ gluNurbsCallbackDataEXT = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 309
 gluNurbsCurve = platform.createBaseFunction( 
-    'gluNurbsCurve', dll=platform.GLU, resultType=None, 
+    'gluNurbsCurve', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs),GLint,arrays.GLfloatArray,GLint,arrays.GLfloatArray,GLint,GLenum],
     doc='gluNurbsCurve( POINTER(GLUnurbs)(nurb), GLint(knotCount), arrays.GLfloatArray(knots), GLint(stride), arrays.GLfloatArray(control), GLint(order), GLenum(type) ) -> None', 
     argNames=('nurb', 'knotCount', 'knots', 'stride', 'control', 'order', 'type'),
@@ -353,7 +353,7 @@ gluNurbsCurve = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 310
 gluNurbsProperty = platform.createBaseFunction( 
-    'gluNurbsProperty', dll=platform.GLU, resultType=None, 
+    'gluNurbsProperty', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs),GLenum,GLfloat],
     doc='gluNurbsProperty( POINTER(GLUnurbs)(nurb), GLenum(property), GLfloat(value) ) -> None', 
     argNames=('nurb', 'property', 'value'),
@@ -362,7 +362,7 @@ gluNurbsProperty = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 311
 gluNurbsSurface = platform.createBaseFunction( 
-    'gluNurbsSurface', dll=platform.GLU, resultType=None, 
+    'gluNurbsSurface', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs),GLint,arrays.GLfloatArray,GLint,arrays.GLfloatArray,GLint,GLint,arrays.GLfloatArray,GLint,GLint,GLenum],
     doc='gluNurbsSurface( POINTER(GLUnurbs)(nurb), GLint(sKnotCount), arrays.GLfloatArray(sKnots), GLint(tKnotCount), arrays.GLfloatArray(tKnots), GLint(sStride), GLint(tStride), arrays.GLfloatArray(control), GLint(sOrder), GLint(tOrder), GLenum(type) ) -> None', 
     argNames=('nurb', 'sKnotCount', 'sKnots', 'tKnotCount', 'tKnots', 'sStride', 'tStride', 'control', 'sOrder', 'tOrder', 'type'),
@@ -371,7 +371,7 @@ gluNurbsSurface = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 312
 gluOrtho2D = platform.createBaseFunction( 
-    'gluOrtho2D', dll=platform.GLU, resultType=None, 
+    'gluOrtho2D', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[GLdouble,GLdouble,GLdouble,GLdouble],
     doc='gluOrtho2D( GLdouble(left), GLdouble(right), GLdouble(bottom), GLdouble(top) ) -> None', 
     argNames=('left', 'right', 'bottom', 'top'),
@@ -380,7 +380,7 @@ gluOrtho2D = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 313
 gluPartialDisk = platform.createBaseFunction( 
-    'gluPartialDisk', dll=platform.GLU, resultType=None, 
+    'gluPartialDisk', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric),GLdouble,GLdouble,GLint,GLint,GLdouble,GLdouble],
     doc='gluPartialDisk( POINTER(GLUquadric)(quad), GLdouble(inner), GLdouble(outer), GLint(slices), GLint(loops), GLdouble(start), GLdouble(sweep) ) -> None', 
     argNames=('quad', 'inner', 'outer', 'slices', 'loops', 'start', 'sweep'),
@@ -389,7 +389,7 @@ gluPartialDisk = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 314
 gluPerspective = platform.createBaseFunction( 
-    'gluPerspective', dll=platform.GLU, resultType=None, 
+    'gluPerspective', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[GLdouble,GLdouble,GLdouble,GLdouble],
     doc='gluPerspective( GLdouble(fovy), GLdouble(aspect), GLdouble(zNear), GLdouble(zFar) ) -> None', 
     argNames=('fovy', 'aspect', 'zNear', 'zFar'),
@@ -398,7 +398,7 @@ gluPerspective = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 315
 gluPickMatrix = platform.createBaseFunction( 
-    'gluPickMatrix', dll=platform.GLU, resultType=None, 
+    'gluPickMatrix', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[GLdouble,GLdouble,GLdouble,GLdouble,arrays.GLintArray],
     doc='gluPickMatrix( GLdouble(x), GLdouble(y), GLdouble(delX), GLdouble(delY), arrays.GLintArray(viewport) ) -> None', 
     argNames=('x', 'y', 'delX', 'delY', 'viewport'),
@@ -407,7 +407,7 @@ gluPickMatrix = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 316
 gluProject = platform.createBaseFunction( 
-    'gluProject', dll=platform.GLU, resultType=GLint, 
+    'gluProject', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLdouble,GLdouble,GLdouble,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLintArray,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray],
     doc='gluProject( GLdouble(objX), GLdouble(objY), GLdouble(objZ), arrays.GLdoubleArray(model), arrays.GLdoubleArray(proj), arrays.GLintArray(view), arrays.GLdoubleArray(winX), arrays.GLdoubleArray(winY), arrays.GLdoubleArray(winZ) ) -> GLint', 
     argNames=('objX', 'objY', 'objZ', 'model', 'proj', 'view', 'winX', 'winY', 'winZ'),
@@ -416,7 +416,7 @@ gluProject = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 317
 gluPwlCurve = platform.createBaseFunction( 
-    'gluPwlCurve', dll=platform.GLU, resultType=None, 
+    'gluPwlCurve', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUnurbs),GLint,arrays.GLfloatArray,GLint,GLenum],
     doc='gluPwlCurve( POINTER(GLUnurbs)(nurb), GLint(count), arrays.GLfloatArray(data), GLint(stride), GLenum(type) ) -> None', 
     argNames=('nurb', 'count', 'data', 'stride', 'type'),
@@ -425,7 +425,7 @@ gluPwlCurve = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 318
 gluQuadricCallback = platform.createBaseFunction( 
-    'gluQuadricCallback', dll=platform.GLU, resultType=None, 
+    'gluQuadricCallback', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric),GLenum,_GLUfuncptr],
     doc='gluQuadricCallback( POINTER(GLUquadric)(quad), GLenum(which), _GLUfuncptr(CallBackFunc) ) -> None', 
     argNames=('quad', 'which', 'CallBackFunc'),
@@ -434,7 +434,7 @@ gluQuadricCallback = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 319
 gluQuadricDrawStyle = platform.createBaseFunction( 
-    'gluQuadricDrawStyle', dll=platform.GLU, resultType=None, 
+    'gluQuadricDrawStyle', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric),GLenum],
     doc='gluQuadricDrawStyle( POINTER(GLUquadric)(quad), GLenum(draw) ) -> None', 
     argNames=('quad', 'draw'),
@@ -443,7 +443,7 @@ gluQuadricDrawStyle = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 320
 gluQuadricNormals = platform.createBaseFunction( 
-    'gluQuadricNormals', dll=platform.GLU, resultType=None, 
+    'gluQuadricNormals', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric),GLenum],
     doc='gluQuadricNormals( POINTER(GLUquadric)(quad), GLenum(normal) ) -> None', 
     argNames=('quad', 'normal'),
@@ -452,7 +452,7 @@ gluQuadricNormals = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 321
 gluQuadricOrientation = platform.createBaseFunction( 
-    'gluQuadricOrientation', dll=platform.GLU, resultType=None, 
+    'gluQuadricOrientation', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric),GLenum],
     doc='gluQuadricOrientation( POINTER(GLUquadric)(quad), GLenum(orientation) ) -> None', 
     argNames=('quad', 'orientation'),
@@ -461,7 +461,7 @@ gluQuadricOrientation = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 322
 gluQuadricTexture = platform.createBaseFunction( 
-    'gluQuadricTexture', dll=platform.GLU, resultType=None, 
+    'gluQuadricTexture', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric),GLboolean],
     doc='gluQuadricTexture( POINTER(GLUquadric)(quad), GLboolean(texture) ) -> None', 
     argNames=('quad', 'texture'),
@@ -470,7 +470,7 @@ gluQuadricTexture = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 323
 gluScaleImage = platform.createBaseFunction( 
-    'gluScaleImage', dll=platform.GLU, resultType=GLint, 
+    'gluScaleImage', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLenum,GLsizei,GLsizei,GLenum,c_void_p,GLsizei,GLsizei,GLenum,POINTER(GLvoid)],
     doc='gluScaleImage( GLenum(format), GLsizei(wIn), GLsizei(hIn), GLenum(typeIn), c_void_p(dataIn), GLsizei(wOut), GLsizei(hOut), GLenum(typeOut), POINTER(GLvoid)(dataOut) ) -> GLint', 
     argNames=('format', 'wIn', 'hIn', 'typeIn', 'dataIn', 'wOut', 'hOut', 'typeOut', 'dataOut'),
@@ -479,7 +479,7 @@ gluScaleImage = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 324
 gluSphere = platform.createBaseFunction( 
-    'gluSphere', dll=platform.GLU, resultType=None, 
+    'gluSphere', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUquadric),GLdouble,GLint,GLint],
     doc='gluSphere( POINTER(GLUquadric)(quad), GLdouble(radius), GLint(slices), GLint(stacks) ) -> None', 
     argNames=('quad', 'radius', 'slices', 'stacks'),
@@ -488,7 +488,7 @@ gluSphere = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 325
 gluTessBeginContour = platform.createBaseFunction( 
-    'gluTessBeginContour', dll=platform.GLU, resultType=None, 
+    'gluTessBeginContour', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator)],
     doc='gluTessBeginContour( POINTER(GLUtesselator)(tess) ) -> None', 
     argNames=('tess',),
@@ -497,7 +497,7 @@ gluTessBeginContour = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 326
 gluTessBeginPolygon = platform.createBaseFunction( 
-    'gluTessBeginPolygon', dll=platform.GLU, resultType=None, 
+    'gluTessBeginPolygon', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator),POINTER(GLvoid)],
     doc='gluTessBeginPolygon( POINTER(GLUtesselator)(tess), POINTER(GLvoid)(data) ) -> None', 
     argNames=('tess', 'data'),
@@ -506,7 +506,7 @@ gluTessBeginPolygon = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 327
 gluTessCallback = platform.createBaseFunction( 
-    'gluTessCallback', dll=platform.GLU, resultType=None, 
+    'gluTessCallback', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator),GLenum,_GLUfuncptr],
     doc='gluTessCallback( POINTER(GLUtesselator)(tess), GLenum(which), _GLUfuncptr(CallBackFunc) ) -> None', 
     argNames=('tess', 'which', 'CallBackFunc'),
@@ -515,7 +515,7 @@ gluTessCallback = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 328
 gluTessEndContour = platform.createBaseFunction( 
-    'gluTessEndContour', dll=platform.GLU, resultType=None, 
+    'gluTessEndContour', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator)],
     doc='gluTessEndContour( POINTER(GLUtesselator)(tess) ) -> None', 
     argNames=('tess',),
@@ -524,7 +524,7 @@ gluTessEndContour = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 329
 gluTessEndPolygon = platform.createBaseFunction( 
-    'gluTessEndPolygon', dll=platform.GLU, resultType=None, 
+    'gluTessEndPolygon', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator)],
     doc='gluTessEndPolygon( POINTER(GLUtesselator)(tess) ) -> None', 
     argNames=('tess',),
@@ -533,7 +533,7 @@ gluTessEndPolygon = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 330
 gluTessNormal = platform.createBaseFunction( 
-    'gluTessNormal', dll=platform.GLU, resultType=None, 
+    'gluTessNormal', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator),GLdouble,GLdouble,GLdouble],
     doc='gluTessNormal( POINTER(GLUtesselator)(tess), GLdouble(valueX), GLdouble(valueY), GLdouble(valueZ) ) -> None', 
     argNames=('tess', 'valueX', 'valueY', 'valueZ'),
@@ -542,7 +542,7 @@ gluTessNormal = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 331
 gluTessProperty = platform.createBaseFunction( 
-    'gluTessProperty', dll=platform.GLU, resultType=None, 
+    'gluTessProperty', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator),GLenum,GLdouble],
     doc='gluTessProperty( POINTER(GLUtesselator)(tess), GLenum(which), GLdouble(data) ) -> None', 
     argNames=('tess', 'which', 'data'),
@@ -551,7 +551,7 @@ gluTessProperty = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 332
 gluTessVertex = platform.createBaseFunction( 
-    'gluTessVertex', dll=platform.GLU, resultType=None, 
+    'gluTessVertex', dll=platform.PLATFORM.GLU, resultType=None, 
     argTypes=[POINTER(GLUtesselator),arrays.GLdoubleArray,POINTER(GLvoid)],
     doc='gluTessVertex( POINTER(GLUtesselator)(tess), arrays.GLdoubleArray(location), POINTER(GLvoid)(data) ) -> None', 
     argNames=('tess', 'location', 'data'),
@@ -560,7 +560,7 @@ gluTessVertex = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 333
 gluUnProject = platform.createBaseFunction( 
-    'gluUnProject', dll=platform.GLU, resultType=GLint, 
+    'gluUnProject', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLdouble,GLdouble,GLdouble,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLintArray,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray],
     doc='gluUnProject( GLdouble(winX), GLdouble(winY), GLdouble(winZ), arrays.GLdoubleArray(model), arrays.GLdoubleArray(proj), arrays.GLintArray(view), arrays.GLdoubleArray(objX), arrays.GLdoubleArray(objY), arrays.GLdoubleArray(objZ) ) -> GLint', 
     argNames=('winX', 'winY', 'winZ', 'model', 'proj', 'view', 'objX', 'objY', 'objZ'),
@@ -569,7 +569,7 @@ gluUnProject = platform.createBaseFunction(
 
 # /usr/include/GL/glu.h 334
 gluUnProject4 = platform.createBaseFunction( 
-    'gluUnProject4', dll=platform.GLU, resultType=GLint, 
+    'gluUnProject4', dll=platform.PLATFORM.GLU, resultType=GLint, 
     argTypes=[GLdouble,GLdouble,GLdouble,GLdouble,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLintArray,GLdouble,GLdouble,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray],
     doc='gluUnProject4( GLdouble(winX), GLdouble(winY), GLdouble(winZ), GLdouble(clipW), arrays.GLdoubleArray(model), arrays.GLdoubleArray(proj), arrays.GLintArray(view), GLdouble(nearVal), GLdouble(farVal), arrays.GLdoubleArray(objX), arrays.GLdoubleArray(objY), arrays.GLdoubleArray(objZ), arrays.GLdoubleArray(objW) ) -> GLint', 
     argNames=('winX', 'winY', 'winZ', 'clipW', 'model', 'proj', 'view', 'nearVal', 'farVal', 'objX', 'objY', 'objZ', 'objW'),

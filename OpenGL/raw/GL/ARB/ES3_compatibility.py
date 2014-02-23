@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_ES3_compatibility'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_ES3_compatibility',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_ES3_compatibility',error_checker=_errors._error_checker)
 GL_ANY_SAMPLES_PASSED_CONSERVATIVE=_C('GL_ANY_SAMPLES_PASSED_CONSERVATIVE',0x8D6A)
 GL_COMPRESSED_R11_EAC=_C('GL_COMPRESSED_R11_EAC',0x9270)
 GL_COMPRESSED_RG11_EAC=_C('GL_COMPRESSED_RG11_EAC',0x9272)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_IMG_read_format'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_IMG_read_format',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_IMG_read_format',error_checker=_errors._error_checker)
 GL_BGRA_IMG=_C('GL_BGRA_IMG',0x80E1)
 GL_UNSIGNED_SHORT_4_4_4_4_REV_IMG=_C('GL_UNSIGNED_SHORT_4_4_4_4_REV_IMG',0x8365)
 

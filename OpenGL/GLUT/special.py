@@ -35,19 +35,19 @@ if os.name == "nt":
     _log.info( """Using NT-specific GLUT calls with exit callbacks""" )
     _exitfunctype = FUNCTION_TYPE( None, ctypes.c_int )
     __glutInitWithExit = platform.createBaseFunction(
-        '__glutInitWithExit', dll=platform.GLUT, resultType=None,
+        '__glutInitWithExit', dll=platform.PLATFORM.GLUT, resultType=None,
         argTypes=[ctypes.POINTER(ctypes.c_int),ctypes.POINTER(ctypes.c_char_p),_exitfunctype],
         doc='glutInit( POINTER(c_int)(pargc), POINTER(STRING)(argv) ) -> None',
         argNames=('pargc', 'argv'),
     )
     __glutCreateWindowWithExit = platform.createBaseFunction(
-        '__glutCreateWindowWithExit', dll=platform.GLUT, resultType=ctypes.c_int,
+        '__glutCreateWindowWithExit', dll=platform.PLATFORM.GLUT, resultType=ctypes.c_int,
         argTypes=[ctypes.c_char_p,_exitfunctype],
         doc='glutCreateWindow( STRING(title) ) -> c_int',
         argNames=('title',),
     )
     __glutCreateMenuWithExit = platform.createBaseFunction( 
-        '__glutCreateMenuWithExit', dll=platform.GLUT, resultType=ctypes.c_int, 
+        '__glutCreateMenuWithExit', dll=platform.PLATFORM.GLUT, resultType=ctypes.c_int, 
         argTypes=[FUNCTION_TYPE(None, ctypes.c_int),_exitfunctype],
         doc='glutCreateMenu( FUNCTION_TYPE(None, c_int)(callback) ) -> c_int', 
         argNames=('callback',),

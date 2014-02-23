@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_stencil_clear_tag'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_stencil_clear_tag',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_stencil_clear_tag',error_checker=_errors._error_checker)
 GL_STENCIL_CLEAR_TAG_VALUE_EXT=_C('GL_STENCIL_CLEAR_TAG_VALUE_EXT',0x88F3)
 GL_STENCIL_TAG_BITS_EXT=_C('GL_STENCIL_TAG_BITS_EXT',0x88F2)
 @_f

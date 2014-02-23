@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_texture_float'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_texture_float',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_texture_float',error_checker=_errors._error_checker)
 GL_ALPHA16F_ARB=_C('GL_ALPHA16F_ARB',0x881C)
 GL_ALPHA32F_ARB=_C('GL_ALPHA32F_ARB',0x8816)
 GL_INTENSITY16F_ARB=_C('GL_INTENSITY16F_ARB',0x881D)

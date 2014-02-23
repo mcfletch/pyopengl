@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_element_array'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_element_array',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_APPLE_element_array',error_checker=_errors._error_checker)
 GL_ELEMENT_ARRAY_APPLE=_C('GL_ELEMENT_ARRAY_APPLE',0x8A0C)
 GL_ELEMENT_ARRAY_POINTER_APPLE=_C('GL_ELEMENT_ARRAY_POINTER_APPLE',0x8A0E)
 GL_ELEMENT_ARRAY_TYPE_APPLE=_C('GL_ELEMENT_ARRAY_TYPE_APPLE',0x8A0D)

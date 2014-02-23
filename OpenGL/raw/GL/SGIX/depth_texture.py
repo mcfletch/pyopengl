@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_depth_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_depth_texture',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_depth_texture',error_checker=_errors._error_checker)
 GL_DEPTH_COMPONENT16_SGIX=_C('GL_DEPTH_COMPONENT16_SGIX',0x81A5)
 GL_DEPTH_COMPONENT24_SGIX=_C('GL_DEPTH_COMPONENT24_SGIX',0x81A6)
 GL_DEPTH_COMPONENT32_SGIX=_C('GL_DEPTH_COMPONENT32_SGIX',0x81A7)

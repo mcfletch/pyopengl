@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_fragment_shader'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_fragment_shader',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_fragment_shader',error_checker=_errors._error_checker)
 GL_FRAGMENT_SHADER_ARB=_C('GL_FRAGMENT_SHADER_ARB',0x8B30)
 GL_FRAGMENT_SHADER_DERIVATIVE_HINT_ARB=_C('GL_FRAGMENT_SHADER_DERIVATIVE_HINT_ARB',0x8B8B)
 GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB=_C('GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB',0x8B49)

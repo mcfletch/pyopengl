@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_IMG_texture_env_enhanced_fixed_function'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_IMG_texture_env_enhanced_fixed_function',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_IMG_texture_env_enhanced_fixed_function',error_checker=_errors._error_checker)
 GL_ADD_BLEND_IMG=_C('GL_ADD_BLEND_IMG',0x8C09)
 GL_DOT3_RGBA_IMG=_C('GL_DOT3_RGBA_IMG',0x86AF)
 GL_FACTOR_ALPHA_MODULATE_IMG=_C('GL_FACTOR_ALPHA_MODULATE_IMG',0x8C07)

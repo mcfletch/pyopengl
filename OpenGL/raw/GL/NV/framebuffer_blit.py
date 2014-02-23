@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_framebuffer_blit'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_framebuffer_blit',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_framebuffer_blit',error_checker=_errors._error_checker)
 GL_DRAW_FRAMEBUFFER_BINDING_NV=_C('GL_DRAW_FRAMEBUFFER_BINDING_NV',0x8CA6)
 GL_DRAW_FRAMEBUFFER_NV=_C('GL_DRAW_FRAMEBUFFER_NV',0x8CA9)
 GL_READ_FRAMEBUFFER_BINDING_NV=_C('GL_READ_FRAMEBUFFER_BINDING_NV',0x8CAA)

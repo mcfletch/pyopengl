@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_3_0'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_3_0',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_VERSION_GL_3_0',error_checker=_errors._error_checker)
 GL_ALPHA_INTEGER=_C('GL_ALPHA_INTEGER',0x8D97)
 GL_BGRA_INTEGER=_C('GL_BGRA_INTEGER',0x8D9B)
 GL_BGR_INTEGER=_C('GL_BGR_INTEGER',0x8D9A)

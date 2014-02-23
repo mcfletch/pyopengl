@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_KHR_stream_fifo'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_KHR_stream_fifo',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_KHR_stream_fifo',error_checker=_errors._error_checker)
 EGL_STREAM_FIFO_LENGTH_KHR=_C('EGL_STREAM_FIFO_LENGTH_KHR',0x31FC)
 EGL_STREAM_TIME_CONSUMER_KHR=_C('EGL_STREAM_TIME_CONSUMER_KHR',0x31FE)
 EGL_STREAM_TIME_NOW_KHR=_C('EGL_STREAM_TIME_NOW_KHR',0x31FD)

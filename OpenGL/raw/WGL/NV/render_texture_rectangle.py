@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_NV_render_texture_rectangle'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_NV_render_texture_rectangle',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_NV_render_texture_rectangle',error_checker=_errors._error_checker)
 WGL_BIND_TO_TEXTURE_RECTANGLE_RGBA_NV=_C('WGL_BIND_TO_TEXTURE_RECTANGLE_RGBA_NV',0x20A1)
 WGL_BIND_TO_TEXTURE_RECTANGLE_RGB_NV=_C('WGL_BIND_TO_TEXTURE_RECTANGLE_RGB_NV',0x20A0)
 WGL_TEXTURE_RECTANGLE_NV=_C('WGL_TEXTURE_RECTANGLE_NV',0x20A2)

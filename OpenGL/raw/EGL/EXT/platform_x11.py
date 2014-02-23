@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_EXT_platform_x11'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_EXT_platform_x11',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_EXT_platform_x11',error_checker=_errors._error_checker)
 EGL_PLATFORM_X11_EXT=_C('EGL_PLATFORM_X11_EXT',0x31D5)
 EGL_PLATFORM_X11_SCREEN_EXT=_C('EGL_PLATFORM_X11_SCREEN_EXT',0x31D6)
 

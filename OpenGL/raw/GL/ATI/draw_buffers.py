@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_draw_buffers'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_draw_buffers',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ATI_draw_buffers',error_checker=_errors._error_checker)
 GL_DRAW_BUFFER0_ATI=_C('GL_DRAW_BUFFER0_ATI',0x8825)
 GL_DRAW_BUFFER10_ATI=_C('GL_DRAW_BUFFER10_ATI',0x882F)
 GL_DRAW_BUFFER11_ATI=_C('GL_DRAW_BUFFER11_ATI',0x8830)

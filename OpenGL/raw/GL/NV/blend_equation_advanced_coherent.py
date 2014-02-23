@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_blend_equation_advanced_coherent'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_blend_equation_advanced_coherent',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_blend_equation_advanced_coherent',error_checker=_errors._error_checker)
 GL_BLEND_ADVANCED_COHERENT_NV=_C('GL_BLEND_ADVANCED_COHERENT_NV',0x9285)
 

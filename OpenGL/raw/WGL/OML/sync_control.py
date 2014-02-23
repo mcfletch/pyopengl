@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_OML_sync_control'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_OML_sync_control',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_OML_sync_control',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(_cs.BOOL,_cs.HDC,ctypes.POINTER(_cs.INT32),ctypes.POINTER(_cs.INT32))

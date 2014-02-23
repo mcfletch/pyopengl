@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_ARB_create_context'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_ARB_create_context',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_ARB_create_context',error_checker=_errors._error_checker)
 ERROR_INVALID_VERSION_ARB=_C('ERROR_INVALID_VERSION_ARB',0x2095)
 WGL_CONTEXT_DEBUG_BIT_ARB=_C('WGL_CONTEXT_DEBUG_BIT_ARB',0x00000001)
 WGL_CONTEXT_FLAGS_ARB=_C('WGL_CONTEXT_FLAGS_ARB',0x2094)

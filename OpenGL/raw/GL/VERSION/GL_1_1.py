@@ -11,7 +11,7 @@ from OpenGL.raw.GL.VERSION.GL_1_0 import *
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_1_1'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_1',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_VERSION_GL_1_1',error_checker=_errors._error_checker)
 GL_2D=_C('GL_2D',0x0600)
 GL_2_BYTES=_C('GL_2_BYTES',0x1407)
 GL_3D=_C('GL_3D',0x0601)

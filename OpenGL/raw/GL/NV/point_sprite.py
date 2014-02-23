@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_point_sprite'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_point_sprite',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_point_sprite',error_checker=_errors._error_checker)
 GL_COORD_REPLACE_NV=_C('GL_COORD_REPLACE_NV',0x8862)
 GL_POINT_SPRITE_NV=_C('GL_POINT_SPRITE_NV',0x8861)
 GL_POINT_SPRITE_R_MODE_NV=_C('GL_POINT_SPRITE_R_MODE_NV',0x8863)

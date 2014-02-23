@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_viewport_array'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_viewport_array',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_viewport_array',error_checker=_errors._error_checker)
 GL_DEPTH_RANGE=_C('GL_DEPTH_RANGE',0x0B70)
 GL_FIRST_VERTEX_CONVENTION=_C('GL_FIRST_VERTEX_CONVENTION',0x8E4D)
 GL_LAST_VERTEX_CONVENTION=_C('GL_LAST_VERTEX_CONVENTION',0x8E4E)

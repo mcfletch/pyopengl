@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_IMG_program_binary'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_IMG_program_binary',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_IMG_program_binary',error_checker=_errors._error_checker)
 GL_SGX_PROGRAM_BINARY_IMG=_C('GL_SGX_PROGRAM_BINARY_IMG',0x9130)
 

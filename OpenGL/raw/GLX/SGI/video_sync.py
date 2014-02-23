@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_SGI_video_sync'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_SGI_video_sync',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_SGI_video_sync',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(_cs.c_int,ctypes.POINTER(_cs.c_uint))

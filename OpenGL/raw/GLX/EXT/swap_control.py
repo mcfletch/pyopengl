@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_EXT_swap_control'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_EXT_swap_control',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_EXT_swap_control',error_checker=_errors._error_checker)
 GLX_MAX_SWAP_INTERVAL_EXT=_C('GLX_MAX_SWAP_INTERVAL_EXT',0x20F2)
 GLX_SWAP_INTERVAL_EXT=_C('GLX_SWAP_INTERVAL_EXT',0x20F1)
 @_f

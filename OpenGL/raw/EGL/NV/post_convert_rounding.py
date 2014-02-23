@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_NV_post_convert_rounding'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_NV_post_convert_rounding',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_NV_post_convert_rounding',error_checker=_errors._error_checker)
 
 

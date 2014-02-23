@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_SGIX_fbconfig'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_SGIX_fbconfig',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_SGIX_fbconfig',error_checker=_errors._error_checker)
 GLX_COLOR_INDEX_BIT_SGIX=_C('GLX_COLOR_INDEX_BIT_SGIX',0x00000002)
 GLX_COLOR_INDEX_TYPE_SGIX=_C('GLX_COLOR_INDEX_TYPE_SGIX',0x8015)
 GLX_DRAWABLE_TYPE_SGIX=_C('GLX_DRAWABLE_TYPE_SGIX',0x8010)

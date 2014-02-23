@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_pixel_buffer_object'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_pixel_buffer_object',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_pixel_buffer_object',error_checker=_errors._error_checker)
 GL_PIXEL_PACK_BUFFER_ARB=_C('GL_PIXEL_PACK_BUFFER_ARB',0x88EB)
 GL_PIXEL_PACK_BUFFER_BINDING_ARB=_C('GL_PIXEL_PACK_BUFFER_BINDING_ARB',0x88ED)
 GL_PIXEL_UNPACK_BUFFER_ARB=_C('GL_PIXEL_UNPACK_BUFFER_ARB',0x88EC)

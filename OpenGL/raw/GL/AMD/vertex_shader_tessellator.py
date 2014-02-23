@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_AMD_vertex_shader_tessellator'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_AMD_vertex_shader_tessellator',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_AMD_vertex_shader_tessellator',error_checker=_errors._error_checker)
 GL_CONTINUOUS_AMD=_C('GL_CONTINUOUS_AMD',0x9007)
 GL_DISCRETE_AMD=_C('GL_DISCRETE_AMD',0x9006)
 GL_INT_SAMPLER_BUFFER_AMD=_C('GL_INT_SAMPLER_BUFFER_AMD',0x9002)

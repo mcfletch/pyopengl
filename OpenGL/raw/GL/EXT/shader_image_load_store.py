@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_shader_image_load_store'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_shader_image_load_store',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_shader_image_load_store',error_checker=_errors._error_checker)
 GL_ALL_BARRIER_BITS_EXT=_C('GL_ALL_BARRIER_BITS_EXT',0xFFFFFFFF)
 GL_ATOMIC_COUNTER_BARRIER_BIT_EXT=_C('GL_ATOMIC_COUNTER_BARRIER_BIT_EXT',0x00001000)
 GL_BUFFER_UPDATE_BARRIER_BIT_EXT=_C('GL_BUFFER_UPDATE_BARRIER_BIT_EXT',0x00000200)

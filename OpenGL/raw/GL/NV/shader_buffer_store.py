@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_shader_buffer_store'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_shader_buffer_store',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_shader_buffer_store',error_checker=_errors._error_checker)
 GL_READ_WRITE=_C('GL_READ_WRITE',0x88BA)
 GL_SHADER_GLOBAL_ACCESS_BARRIER_BIT_NV=_C('GL_SHADER_GLOBAL_ACCESS_BARRIER_BIT_NV',0x00000010)
 GL_WRITE_ONLY=_C('GL_WRITE_ONLY',0x88B9)

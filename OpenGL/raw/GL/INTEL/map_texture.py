@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_INTEL_map_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_INTEL_map_texture',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_INTEL_map_texture',error_checker=_errors._error_checker)
 GL_LAYOUT_DEFAULT_INTEL=_C('GL_LAYOUT_DEFAULT_INTEL',0)
 GL_LAYOUT_LINEAR_CPU_CACHED_INTEL=_C('GL_LAYOUT_LINEAR_CPU_CACHED_INTEL',2)
 GL_LAYOUT_LINEAR_INTEL=_C('GL_LAYOUT_LINEAR_INTEL',1)

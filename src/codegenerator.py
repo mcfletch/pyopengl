@@ -17,7 +17,7 @@ class Generator( object ):
     targetDirectory = os.path.join( HERE, '..','OpenGL')
     rawTargetDirectory = os.path.join( HERE,'..','OpenGL','raw')
     prefix = 'GL'
-    dll = '_p.GL'
+    dll = '_p.PLATFORM.GL'
     includeOverviews = True
     
     def __init__( self, registry, type_translator ):
@@ -190,7 +190,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
 from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
 %(init_function)s
 """
-    dll = '_p.GL'
+    dll = '_p.PLATFORM.GL'
     def __init__( self, registry, overall ):
         self.registry = registry 
         self.overall = overall
@@ -213,7 +213,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             else:
                 log.error( """Unable to parse module name: %s""", name )
                 raise
-        self.dll = '_p.%s'%(self.prefix,)
+        self.dll = '_p.PLATFORM.%s'%(self.prefix,)
         if self.module[0].isdigit():
             self.module = '%s_%s'%(self.prefix,self.module,)
         self.camelModule = "".join([x.title() for x in self.module.split('_')])

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_color_buffer_half_float'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_color_buffer_half_float',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_color_buffer_half_float',error_checker=_errors._error_checker)
 GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT=_C('GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT',0x8211)
 GL_R16F_EXT=_C('GL_R16F_EXT',0x822D)
 GL_RG16F_EXT=_C('GL_RG16F_EXT',0x822F)

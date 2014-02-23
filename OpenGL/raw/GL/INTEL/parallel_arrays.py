@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_INTEL_parallel_arrays'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_INTEL_parallel_arrays',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_INTEL_parallel_arrays',error_checker=_errors._error_checker)
 GL_COLOR_ARRAY_PARALLEL_POINTERS_INTEL=_C('GL_COLOR_ARRAY_PARALLEL_POINTERS_INTEL',0x83F7)
 GL_NORMAL_ARRAY_PARALLEL_POINTERS_INTEL=_C('GL_NORMAL_ARRAY_PARALLEL_POINTERS_INTEL',0x83F6)
 GL_PARALLEL_ARRAYS_INTEL=_C('GL_PARALLEL_ARRAYS_INTEL',0x83F4)

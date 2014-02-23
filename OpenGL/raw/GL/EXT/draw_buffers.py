@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_draw_buffers'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_draw_buffers',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_draw_buffers',error_checker=_errors._error_checker)
 GL_COLOR_ATTACHMENT0_EXT=_C('GL_COLOR_ATTACHMENT0_EXT',0x8CE0)
 GL_COLOR_ATTACHMENT10_EXT=_C('GL_COLOR_ATTACHMENT10_EXT',0x8CEA)
 GL_COLOR_ATTACHMENT11_EXT=_C('GL_COLOR_ATTACHMENT11_EXT',0x8CEB)

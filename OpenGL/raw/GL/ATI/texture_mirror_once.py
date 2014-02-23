@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_texture_mirror_once'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_texture_mirror_once',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ATI_texture_mirror_once',error_checker=_errors._error_checker)
 GL_MIRROR_CLAMP_ATI=_C('GL_MIRROR_CLAMP_ATI',0x8742)
 GL_MIRROR_CLAMP_TO_EDGE_ATI=_C('GL_MIRROR_CLAMP_TO_EDGE_ATI',0x8743)
 

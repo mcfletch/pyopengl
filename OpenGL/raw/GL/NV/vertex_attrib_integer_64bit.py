@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_vertex_attrib_integer_64bit'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_vertex_attrib_integer_64bit',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_vertex_attrib_integer_64bit',error_checker=_errors._error_checker)
 GL_INT64_NV=_C('GL_INT64_NV',0x140E)
 GL_UNSIGNED_INT64_NV=_C('GL_UNSIGNED_INT64_NV',0x140F)
 @_f

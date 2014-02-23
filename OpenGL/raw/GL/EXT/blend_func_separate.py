@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_blend_func_separate'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_blend_func_separate',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_blend_func_separate',error_checker=_errors._error_checker)
 GL_BLEND_DST_ALPHA_EXT=_C('GL_BLEND_DST_ALPHA_EXT',0x80CA)
 GL_BLEND_DST_RGB_EXT=_C('GL_BLEND_DST_RGB_EXT',0x80C8)
 GL_BLEND_SRC_ALPHA_EXT=_C('GL_BLEND_SRC_ALPHA_EXT',0x80CB)

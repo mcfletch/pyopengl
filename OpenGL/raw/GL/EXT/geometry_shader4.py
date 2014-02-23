@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_geometry_shader4'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_geometry_shader4',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_geometry_shader4',error_checker=_errors._error_checker)
 GL_FRAMEBUFFER_ATTACHMENT_LAYERED_EXT=_C('GL_FRAMEBUFFER_ATTACHMENT_LAYERED_EXT',0x8DA7)
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT=_C('GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT',0x8CD4)
 GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT=_C('GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT',0x8DA9)

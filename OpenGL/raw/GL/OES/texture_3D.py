@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_OES_texture_3D'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_texture_3D',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_OES_texture_3D',error_checker=_errors._error_checker)
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES=_C('GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES',0x8CD4)
 GL_MAX_3D_TEXTURE_SIZE_OES=_C('GL_MAX_3D_TEXTURE_SIZE_OES',0x8073)
 GL_SAMPLER_3D_OES=_C('GL_SAMPLER_3D_OES',0x8B5F)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_video_capture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_video_capture',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_video_capture',error_checker=_errors._error_checker)
 GL_FAILURE_NV=_C('GL_FAILURE_NV',0x9030)
 GL_FIELD_LOWER_NV=_C('GL_FIELD_LOWER_NV',0x9023)
 GL_FIELD_UPPER_NV=_C('GL_FIELD_UPPER_NV',0x9022)

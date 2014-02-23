@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_seamless_cubemap_per_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_seamless_cubemap_per_texture',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_seamless_cubemap_per_texture',error_checker=_errors._error_checker)
 GL_TEXTURE_CUBE_MAP_SEAMLESS=_C('GL_TEXTURE_CUBE_MAP_SEAMLESS',0x884F)
 

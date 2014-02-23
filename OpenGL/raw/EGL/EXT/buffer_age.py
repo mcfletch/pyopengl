@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_EXT_buffer_age'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_EXT_buffer_age',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_EXT_buffer_age',error_checker=_errors._error_checker)
 EGL_BUFFER_AGE_EXT=_C('EGL_BUFFER_AGE_EXT',0x313D)
 

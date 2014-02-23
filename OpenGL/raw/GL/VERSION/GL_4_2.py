@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_4_2'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_4_2',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_VERSION_GL_4_2',error_checker=_errors._error_checker)
 GL_ACTIVE_ATOMIC_COUNTER_BUFFERS=_C('GL_ACTIVE_ATOMIC_COUNTER_BUFFERS',0x92D9)
 GL_ALL_BARRIER_BITS=_C('GL_ALL_BARRIER_BITS',0xFFFFFFFF)
 GL_ATOMIC_COUNTER_BARRIER_BIT=_C('GL_ATOMIC_COUNTER_BARRIER_BIT',0x00001000)

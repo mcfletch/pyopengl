@@ -6,7 +6,7 @@ For comparison, here's what a straightforward implementation looks like:
         "Natural writing of glGetDoublev using standard ctypes"
         output = c_double*sizes.get( pname )
         result = output()
-        result = platform.OpenGL.glGetDoublev( pname, byref(result) )
+        result = platform.PLATFORM.GL.glGetDoublev( pname, byref(result) )
         return Numeric.array( result )
 """
 from OpenGL import wrapper

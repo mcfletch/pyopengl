@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIS_texture_border_clamp'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIS_texture_border_clamp',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIS_texture_border_clamp',error_checker=_errors._error_checker)
 GL_CLAMP_TO_BORDER_SGIS=_C('GL_CLAMP_TO_BORDER_SGIS',0x812D)
 

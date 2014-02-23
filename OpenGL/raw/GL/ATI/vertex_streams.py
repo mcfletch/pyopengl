@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_vertex_streams'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_vertex_streams',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ATI_vertex_streams',error_checker=_errors._error_checker)
 GL_MAX_VERTEX_STREAMS_ATI=_C('GL_MAX_VERTEX_STREAMS_ATI',0x876B)
 GL_VERTEX_SOURCE_ATI=_C('GL_VERTEX_SOURCE_ATI',0x8774)
 GL_VERTEX_STREAM0_ATI=_C('GL_VERTEX_STREAM0_ATI',0x876C)

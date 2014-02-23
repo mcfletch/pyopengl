@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_compute_shader'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_compute_shader',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_compute_shader',error_checker=_errors._error_checker)
 GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER=_C('GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER',0x90ED)
 GL_COMPUTE_SHADER=_C('GL_COMPUTE_SHADER',0x91B9)
 GL_COMPUTE_SHADER_BIT=_C('GL_COMPUTE_SHADER_BIT',0x00000020)

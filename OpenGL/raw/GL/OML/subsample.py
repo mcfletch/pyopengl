@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_OML_subsample'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OML_subsample',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_OML_subsample',error_checker=_errors._error_checker)
 GL_FORMAT_SUBSAMPLE_244_244_OML=_C('GL_FORMAT_SUBSAMPLE_244_244_OML',0x8983)
 GL_FORMAT_SUBSAMPLE_24_24_OML=_C('GL_FORMAT_SUBSAMPLE_24_24_OML',0x8982)
 

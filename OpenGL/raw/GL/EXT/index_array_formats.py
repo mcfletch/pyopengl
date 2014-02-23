@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_index_array_formats'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_index_array_formats',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_index_array_formats',error_checker=_errors._error_checker)
 GL_IUI_N3F_V2F_EXT=_C('GL_IUI_N3F_V2F_EXT',0x81AF)
 GL_IUI_N3F_V3F_EXT=_C('GL_IUI_N3F_V3F_EXT',0x81B0)
 GL_IUI_V2F_EXT=_C('GL_IUI_V2F_EXT',0x81AD)

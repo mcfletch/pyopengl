@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SUN_mesh_array'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SUN_mesh_array',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SUN_mesh_array',error_checker=_errors._error_checker)
 GL_QUAD_MESH_SUN=_C('GL_QUAD_MESH_SUN',0x8614)
 GL_TRIANGLE_MESH_SUN=_C('GL_TRIANGLE_MESH_SUN',0x8615)
 @_f

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_discard_framebuffer'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_discard_framebuffer',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_discard_framebuffer',error_checker=_errors._error_checker)
 GL_COLOR_EXT=_C('GL_COLOR_EXT',0x1800)
 GL_DEPTH_EXT=_C('GL_DEPTH_EXT',0x1801)
 GL_STENCIL_EXT=_C('GL_STENCIL_EXT',0x1802)

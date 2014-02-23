@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_EXT_buffer_age'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_EXT_buffer_age',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_EXT_buffer_age',error_checker=_errors._error_checker)
 GLX_BACK_BUFFER_AGE_EXT=_C('GLX_BACK_BUFFER_AGE_EXT',0x20F4)
 

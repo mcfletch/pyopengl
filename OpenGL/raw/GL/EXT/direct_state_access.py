@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_direct_state_access'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_direct_state_access',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_direct_state_access',error_checker=_errors._error_checker)
 GL_PROGRAM_MATRIX_EXT=_C('GL_PROGRAM_MATRIX_EXT',0x8E2D)
 GL_PROGRAM_MATRIX_STACK_DEPTH_EXT=_C('GL_PROGRAM_MATRIX_STACK_DEPTH_EXT',0x8E2F)
 GL_TRANSPOSE_PROGRAM_MATRIX_EXT=_C('GL_TRANSPOSE_PROGRAM_MATRIX_EXT',0x8E2E)

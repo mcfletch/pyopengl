@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_abgr'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_abgr',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_abgr',error_checker=_errors._error_checker)
 GL_ABGR_EXT=_C('GL_ABGR_EXT',0x8000)
 

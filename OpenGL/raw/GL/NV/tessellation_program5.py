@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_tessellation_program5'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_tessellation_program5',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_tessellation_program5',error_checker=_errors._error_checker)
 GL_MAX_PROGRAM_PATCH_ATTRIBS_NV=_C('GL_MAX_PROGRAM_PATCH_ATTRIBS_NV',0x86D8)
 GL_TESS_CONTROL_PROGRAM_NV=_C('GL_TESS_CONTROL_PROGRAM_NV',0x891E)
 GL_TESS_CONTROL_PROGRAM_PARAMETER_BUFFER_NV=_C('GL_TESS_CONTROL_PROGRAM_PARAMETER_BUFFER_NV',0x8C74)

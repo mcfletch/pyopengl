@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_S3_s3tc'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_S3_s3tc',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_S3_s3tc',error_checker=_errors._error_checker)
 GL_RGB4_S3TC=_C('GL_RGB4_S3TC',0x83A1)
 GL_RGBA4_DXT5_S3TC=_C('GL_RGBA4_DXT5_S3TC',0x83A5)
 GL_RGBA4_S3TC=_C('GL_RGBA4_S3TC',0x83A3)

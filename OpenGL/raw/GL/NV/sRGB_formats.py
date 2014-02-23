@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_sRGB_formats'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_sRGB_formats',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_sRGB_formats',error_checker=_errors._error_checker)
 GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_NV=_C('GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_NV',0x8C4D)
 GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_NV=_C('GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_NV',0x8C4E)
 GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_NV=_C('GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_NV',0x8C4F)

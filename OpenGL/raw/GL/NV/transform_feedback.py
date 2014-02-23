@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_transform_feedback'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_transform_feedback',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_transform_feedback',error_checker=_errors._error_checker)
 GL_ACTIVE_VARYINGS_NV=_C('GL_ACTIVE_VARYINGS_NV',0x8C81)
 GL_ACTIVE_VARYING_MAX_LENGTH_NV=_C('GL_ACTIVE_VARYING_MAX_LENGTH_NV',0x8C82)
 GL_BACK_PRIMARY_COLOR_NV=_C('GL_BACK_PRIMARY_COLOR_NV',0x8C77)

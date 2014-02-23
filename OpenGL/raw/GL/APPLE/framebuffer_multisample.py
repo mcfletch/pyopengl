@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_framebuffer_multisample'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_framebuffer_multisample',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_APPLE_framebuffer_multisample',error_checker=_errors._error_checker)
 GL_DRAW_FRAMEBUFFER_APPLE=_C('GL_DRAW_FRAMEBUFFER_APPLE',0x8CA9)
 GL_DRAW_FRAMEBUFFER_BINDING_APPLE=_C('GL_DRAW_FRAMEBUFFER_BINDING_APPLE',0x8CA6)
 GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_APPLE=_C('GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_APPLE',0x8D56)

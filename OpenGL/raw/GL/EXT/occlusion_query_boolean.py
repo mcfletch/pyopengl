@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_occlusion_query_boolean'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_occlusion_query_boolean',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_occlusion_query_boolean',error_checker=_errors._error_checker)
 GL_ANY_SAMPLES_PASSED_CONSERVATIVE_EXT=_C('GL_ANY_SAMPLES_PASSED_CONSERVATIVE_EXT',0x8D6A)
 GL_ANY_SAMPLES_PASSED_EXT=_C('GL_ANY_SAMPLES_PASSED_EXT',0x8C2F)
 GL_CURRENT_QUERY_EXT=_C('GL_CURRENT_QUERY_EXT',0x8865)

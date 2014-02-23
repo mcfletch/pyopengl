@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_texture_border_clamp'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_texture_border_clamp',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_texture_border_clamp',error_checker=_errors._error_checker)
 GL_CLAMP_TO_BORDER_NV=_C('GL_CLAMP_TO_BORDER_NV',0x812D)
 GL_TEXTURE_BORDER_COLOR_NV=_C('GL_TEXTURE_BORDER_COLOR_NV',0x1004)
 

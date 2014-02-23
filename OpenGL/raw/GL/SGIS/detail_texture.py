@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIS_detail_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIS_detail_texture',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIS_detail_texture',error_checker=_errors._error_checker)
 GL_DETAIL_TEXTURE_2D_BINDING_SGIS=_C('GL_DETAIL_TEXTURE_2D_BINDING_SGIS',0x8096)
 GL_DETAIL_TEXTURE_2D_SGIS=_C('GL_DETAIL_TEXTURE_2D_SGIS',0x8095)
 GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS=_C('GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS',0x809C)

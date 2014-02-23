@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_NV_float_buffer'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_NV_float_buffer',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_NV_float_buffer',error_checker=_errors._error_checker)
 GLX_FLOAT_COMPONENTS_NV=_C('GLX_FLOAT_COMPONENTS_NV',0x20B0)
 

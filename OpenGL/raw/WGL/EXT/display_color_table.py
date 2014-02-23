@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_EXT_display_color_table'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_EXT_display_color_table',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_EXT_display_color_table',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(_cs.GLboolean,_cs.GLushort)

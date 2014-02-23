@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_HI_colorformats'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_HI_colorformats',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_HI_colorformats',error_checker=_errors._error_checker)
 EGL_COLOR_ARGB_HI=_C('EGL_COLOR_ARGB_HI',0x8F73)
 EGL_COLOR_FORMAT_HI=_C('EGL_COLOR_FORMAT_HI',0x8F70)
 EGL_COLOR_RGBA_HI=_C('EGL_COLOR_RGBA_HI',0x8F72)

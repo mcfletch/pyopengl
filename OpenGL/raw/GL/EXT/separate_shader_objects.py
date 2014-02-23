@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_separate_shader_objects'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_separate_shader_objects',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_separate_shader_objects',error_checker=_errors._error_checker)
 GL_ACTIVE_PROGRAM_EXT=_C('GL_ACTIVE_PROGRAM_EXT',0x8B8D)
 GL_ACTIVE_PROGRAM_EXT=_C('GL_ACTIVE_PROGRAM_EXT',0x8B8D)
 GL_ALL_SHADER_BITS_EXT=_C('GL_ALL_SHADER_BITS_EXT',0xFFFFFFFF)

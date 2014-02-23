@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_copy_buffer'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_copy_buffer',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_copy_buffer',error_checker=_errors._error_checker)
 GL_COPY_READ_BUFFER_NV=_C('GL_COPY_READ_BUFFER_NV',0x8F36)
 GL_COPY_WRITE_BUFFER_NV=_C('GL_COPY_WRITE_BUFFER_NV',0x8F37)
 @_f

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_async_histogram'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_async_histogram',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_async_histogram',error_checker=_errors._error_checker)
 GL_ASYNC_HISTOGRAM_SGIX=_C('GL_ASYNC_HISTOGRAM_SGIX',0x832C)
 GL_MAX_ASYNC_HISTOGRAM_SGIX=_C('GL_MAX_ASYNC_HISTOGRAM_SGIX',0x832D)
 

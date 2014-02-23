@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_NV_copy_image'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_NV_copy_image',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_NV_copy_image',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(None,ctypes.POINTER(_cs.Display),_cs.GLXContext,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLXContext,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei)

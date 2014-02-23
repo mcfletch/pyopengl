@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_fog_offset'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_fog_offset',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_fog_offset',error_checker=_errors._error_checker)
 GL_FOG_OFFSET_SGIX=_C('GL_FOG_OFFSET_SGIX',0x8198)
 GL_FOG_OFFSET_VALUE_SGIX=_C('GL_FOG_OFFSET_VALUE_SGIX',0x8199)
 

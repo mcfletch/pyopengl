@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_KHR_debug'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_KHR_debug',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_KHR_debug',error_checker=_errors._error_checker)
 GL_BUFFER=_C('GL_BUFFER',0x82E0)
 GL_BUFFER_KHR=_C('GL_BUFFER_KHR',0x82E0)
 GL_CONTEXT_FLAG_DEBUG_BIT=_C('GL_CONTEXT_FLAG_DEBUG_BIT',0x00000002)

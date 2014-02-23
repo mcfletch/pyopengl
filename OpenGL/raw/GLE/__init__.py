@@ -20,7 +20,7 @@ gleAffine = gleDouble * 3 * 2
 
 # /usr/include/GL/gle.h 136
 gleExtrusion = platform.createBaseFunction( 
-    'gleExtrusion', dll=platform.GLE, resultType=None, 
+    'gleExtrusion', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray,c_int,arrays.GLdoubleArray,arrays.GLfloatArray],
     doc='gleExtrusion( c_int(ncp), arrays.GLdoubleArray(contour), arrays.GLdoubleArray(cont_normal), arrays.GLdoubleArray(up), c_int(npoints), arrays.GLdoubleArray(point_array), arrays.GLfloatArray(color_array) ) -> None', 
     argNames=('ncp', 'contour', 'cont_normal', 'up', 'npoints', 'point_array', 'color_array'),
@@ -29,7 +29,7 @@ gleExtrusion = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 110
 gleGetJoinStyle = platform.createBaseFunction( 
-    'gleGetJoinStyle', dll=platform.GLE, resultType=c_int, 
+    'gleGetJoinStyle', dll=platform.PLATFORM.GLE, resultType=c_int, 
     argTypes=[],
     doc='gleGetJoinStyle(  ) -> c_int', 
     argNames=(),
@@ -38,7 +38,7 @@ gleGetJoinStyle = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 114
 gleGetNumSides = platform.createBaseFunction( 
-    'gleGetNumSides', dll=platform.GLE, resultType=c_int, 
+    'gleGetNumSides', dll=platform.PLATFORM.GLE, resultType=c_int, 
     argTypes=[],
     doc='gleGetNumSides(  ) -> c_int', 
     argNames=(),
@@ -47,7 +47,7 @@ gleGetNumSides = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 195
 gleHelicoid = platform.createBaseFunction( 
-    'gleHelicoid', dll=platform.GLE, resultType=None, 
+    'gleHelicoid', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[gleDouble,gleDouble,gleDouble,gleDouble,gleDouble,arrays.GLdoubleArray,arrays.GLdoubleArray,gleDouble,gleDouble],
     doc='gleHelicoid( gleDouble(rToroid), gleDouble(startRadius), gleDouble(drdTheta), gleDouble(startZ), gleDouble(dzdTheta), arrays.GLdoubleArray(startXform), arrays.GLdoubleArray(dXformdTheta), gleDouble(startTheta), gleDouble(sweepTheta) ) -> None', 
     argNames=('rToroid', 'startRadius', 'drdTheta', 'startZ', 'dzdTheta', 'startXform', 'dXformdTheta', 'startTheta', 'sweepTheta'),
@@ -56,7 +56,7 @@ gleHelicoid = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 184
 gleLathe = platform.createBaseFunction( 
-    'gleLathe', dll=platform.GLE, resultType=None, 
+    'gleLathe', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray,gleDouble,gleDouble,gleDouble,gleDouble,arrays.GLdoubleArray,arrays.GLdoubleArray,gleDouble,gleDouble],
     doc='gleLathe( c_int(ncp), arrays.GLdoubleArray(contour), arrays.GLdoubleArray(cont_normal), arrays.GLdoubleArray(up), gleDouble(startRadius), gleDouble(drdTheta), gleDouble(startZ), gleDouble(dzdTheta), arrays.GLdoubleArray(startXform), arrays.GLdoubleArray(dXformdTheta), gleDouble(startTheta), gleDouble(sweepTheta) ) -> None', 
     argNames=('ncp', 'contour', 'cont_normal', 'up', 'startRadius', 'drdTheta', 'startZ', 'dzdTheta', 'startXform', 'dXformdTheta', 'startTheta', 'sweepTheta'),
@@ -65,7 +65,7 @@ gleLathe = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 127
 glePolyCone = platform.createBaseFunction( 
-    'glePolyCone', dll=platform.GLE, resultType=None, 
+    'glePolyCone', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int,arrays.GLdoubleArray,arrays.GLfloatArray,arrays.GLdoubleArray],
     doc='glePolyCone( c_int(npoints), arrays.GLdoubleArray(point_array), arrays.GLfloatArray(color_array), arrays.GLdoubleArray(radius_array) ) -> None', 
     argNames=('npoints', 'point_array', 'color_array', 'radius_array'),
@@ -74,7 +74,7 @@ glePolyCone = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 121
 glePolyCylinder = platform.createBaseFunction( 
-    'glePolyCylinder', dll=platform.GLE, resultType=None, 
+    'glePolyCylinder', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int,arrays.GLdoubleArray,arrays.GLfloatArray,gleDouble],
     doc='glePolyCylinder( c_int(npoints), arrays.GLdoubleArray(point_array), arrays.GLfloatArray(color_array), gleDouble(radius) ) -> None', 
     argNames=('npoints', 'point_array', 'color_array', 'radius'),
@@ -83,7 +83,7 @@ glePolyCylinder = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 215
 gleScrew = platform.createBaseFunction( 
-    'gleScrew', dll=platform.GLE, resultType=None, 
+    'gleScrew', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray,gleDouble,gleDouble,gleDouble],
     doc='gleScrew( c_int(ncp), arrays.GLdoubleArray(contour), arrays.GLdoubleArray(cont_normal), arrays.GLdoubleArray(up), gleDouble(startz), gleDouble(endz), gleDouble(twist) ) -> None', 
     argNames=('ncp', 'contour', 'cont_normal', 'up', 'startz', 'endz', 'twist'),
@@ -91,7 +91,7 @@ gleScrew = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 111
 gleSetJoinStyle = platform.createBaseFunction( 
-    'gleSetJoinStyle', dll=platform.GLE, resultType=None, 
+    'gleSetJoinStyle', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int],
     doc='gleSetJoinStyle( c_int(style) ) -> None', 
     argNames=('style',),
@@ -100,7 +100,7 @@ gleSetJoinStyle = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 115
 gleSetNumSides = platform.createBaseFunction( 
-    'gleSetNumSides', dll=platform.GLE, resultType=None, 
+    'gleSetNumSides', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int],
     doc='gleSetNumSides( c_int(slices) ) -> None', 
     argNames=('slices',),
@@ -109,7 +109,7 @@ gleSetNumSides = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 170
 gleSpiral = platform.createBaseFunction( 
-    'gleSpiral', dll=platform.GLE, resultType=None, 
+    'gleSpiral', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray,gleDouble,gleDouble,gleDouble,gleDouble,arrays.GLdoubleArray,arrays.GLdoubleArray,gleDouble,gleDouble],
     doc='gleSpiral( c_int(ncp), arrays.GLdoubleArray(contour), arrays.GLdoubleArray(cont_normal), arrays.GLdoubleArray(up), gleDouble(startRadius), gleDouble(drdTheta), gleDouble(startZ), gleDouble(dzdTheta), arrays.GLdoubleArray(startXform), arrays.GLdoubleArray(dXformdTheta), gleDouble(startTheta), gleDouble(sweepTheta) ) -> None', 
     argNames=('ncp', 'contour', 'cont_normal', 'up', 'startRadius', 'drdTheta', 'startZ', 'dzdTheta', 'startXform', 'dXformdTheta', 'startTheta', 'sweepTheta'),
@@ -118,7 +118,7 @@ gleSpiral = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 156
 gleSuperExtrusion = platform.createBaseFunction( 
-    'gleSuperExtrusion', dll=platform.GLE, resultType=None, 
+    'gleSuperExtrusion', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray,c_int,arrays.GLdoubleArray,arrays.GLfloatArray,arrays.GLdoubleArray],
     doc='gleSuperExtrusion( c_int(ncp), arrays.GLdoubleArray(contour), arrays.GLdoubleArray(cont_normal), arrays.GLdoubleArray(up), c_int(npoints), arrays.GLdoubleArray(point_array), arrays.GLfloatArray(color_array), arrays.GLdoubleArray(xform_array) ) -> None', 
     argNames=('ncp', 'contour', 'cont_normal', 'up', 'npoints', 'point_array', 'color_array', 'xform_array'),
@@ -127,7 +127,7 @@ gleSuperExtrusion = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 217
 gleTextureMode = platform.createBaseFunction( 
-    'gleTextureMode', dll=platform.GLE, resultType=None, 
+    'gleTextureMode', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int],
     doc='gleTextureMode( c_int(mode) ) -> None', 
     argNames=('mode',),
@@ -136,7 +136,7 @@ gleTextureMode = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 206
 gleToroid = platform.createBaseFunction( 
-    'gleToroid', dll=platform.GLE, resultType=None, 
+    'gleToroid', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[gleDouble,gleDouble,gleDouble,gleDouble,gleDouble,arrays.GLdoubleArray,arrays.GLdoubleArray,gleDouble,gleDouble],
     doc='gleToroid( gleDouble(rToroid), gleDouble(startRadius), gleDouble(drdTheta), gleDouble(startZ), gleDouble(dzdTheta), arrays.GLdoubleArray(startXform), arrays.GLdoubleArray(dXformdTheta), gleDouble(startTheta), gleDouble(sweepTheta) ) -> None', 
     argNames=('rToroid', 'startRadius', 'drdTheta', 'startZ', 'dzdTheta', 'startXform', 'dXformdTheta', 'startTheta', 'sweepTheta'),
@@ -145,7 +145,7 @@ gleToroid = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 146
 gleTwistExtrusion = platform.createBaseFunction( 
-    'gleTwistExtrusion', dll=platform.GLE, resultType=None, 
+    'gleTwistExtrusion', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[c_int,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray,c_int,arrays.GLdoubleArray,arrays.GLfloatArray,arrays.GLdoubleArray],
     doc='gleTwistExtrusion( c_int(ncp), arrays.GLdoubleArray(contour), arrays.GLdoubleArray(cont_normal), arrays.GLdoubleArray(up), c_int(npoints), arrays.GLdoubleArray(point_array), arrays.GLfloatArray(color_array), arrays.GLdoubleArray(twist_array) ) -> None', 
     argNames=('ncp', 'contour', 'cont_normal', 'up', 'npoints', 'point_array', 'color_array', 'twist_array'),
@@ -154,7 +154,7 @@ gleTwistExtrusion = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 221
 rot_about_axis = platform.createBaseFunction( 
-    'rot_about_axis', dll=platform.GLE, resultType=None, 
+    'rot_about_axis', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[gleDouble,arrays.GLdoubleArray],
     doc='rot_about_axis( gleDouble(angle), arrays.GLdoubleArray(axis) ) -> None', 
     argNames=('angle', 'axis'),
@@ -163,7 +163,7 @@ rot_about_axis = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 220
 rot_axis = platform.createBaseFunction( 
-    'rot_axis', dll=platform.GLE, resultType=None, 
+    'rot_axis', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[gleDouble,arrays.GLdoubleArray],
     doc='rot_axis( gleDouble(omega), arrays.GLdoubleArray(axis) ) -> None', 
     argNames=('omega', 'axis'),
@@ -172,7 +172,7 @@ rot_axis = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 222
 rot_omega = platform.createBaseFunction( 
-    'rot_omega', dll=platform.GLE, resultType=None, 
+    'rot_omega', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[arrays.GLdoubleArray],
     doc='rot_omega( arrays.GLdoubleArray(axis) ) -> None', 
     argNames=('axis',),
@@ -181,7 +181,7 @@ rot_omega = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 223
 rot_prince = platform.createBaseFunction( 
-    'rot_prince', dll=platform.GLE, resultType=None, 
+    'rot_prince', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[gleDouble,c_char],
     doc='rot_prince( gleDouble(omega), c_char(axis) ) -> None', 
     argNames=('omega', 'axis'),
@@ -190,7 +190,7 @@ rot_prince = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 225
 urot_about_axis = platform.createBaseFunction( 
-    'urot_about_axis', dll=platform.GLE, resultType=None, 
+    'urot_about_axis', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[arrays.GLdoubleArray,gleDouble,arrays.GLdoubleArray],
     doc='urot_about_axis( arrays.GLdoubleArray(m), gleDouble(angle), arrays.GLdoubleArray(axis) ) -> None', 
     argNames=('m', 'angle', 'axis'),
@@ -199,7 +199,7 @@ urot_about_axis = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 224
 urot_axis = platform.createBaseFunction( 
-    'urot_axis', dll=platform.GLE, resultType=None, 
+    'urot_axis', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[arrays.GLdoubleArray,gleDouble,arrays.GLdoubleArray],
     doc='urot_axis( arrays.GLdoubleArray(m), gleDouble(omega), arrays.GLdoubleArray(axis) ) -> None', 
     argNames=('m', 'omega', 'axis'),
@@ -208,7 +208,7 @@ urot_axis = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 226
 urot_omega = platform.createBaseFunction( 
-    'urot_omega', dll=platform.GLE, resultType=None, 
+    'urot_omega', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[arrays.GLdoubleArray,arrays.GLdoubleArray],
     doc='urot_omega( arrays.GLdoubleArray(m), arrays.GLdoubleArray(axis) ) -> None', 
     argNames=('m', 'axis'),
@@ -217,7 +217,7 @@ urot_omega = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 227
 urot_prince = platform.createBaseFunction( 
-    'urot_prince', dll=platform.GLE, resultType=None, 
+    'urot_prince', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[arrays.GLdoubleArray,gleDouble,c_char],
     doc='urot_prince( arrays.GLdoubleArray(m), gleDouble(omega), c_char(axis) ) -> None', 
     argNames=('m', 'omega', 'axis'),
@@ -226,7 +226,7 @@ urot_prince = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 232
 uview_direction = platform.createBaseFunction( 
-    'uview_direction', dll=platform.GLE, resultType=None, 
+    'uview_direction', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray],
     doc='uview_direction( arrays.GLdoubleArray(m), arrays.GLdoubleArray(v21), arrays.GLdoubleArray(up) ) -> None', 
     argNames=('m', 'v21', 'up'),
@@ -235,7 +235,7 @@ uview_direction = platform.createBaseFunction(
 
 # /usr/include/GL/gle.h 237
 uviewpoint = platform.createBaseFunction( 
-    'uviewpoint', dll=platform.GLE, resultType=None, 
+    'uviewpoint', dll=platform.PLATFORM.GLE, resultType=None, 
     argTypes=[arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray,arrays.GLdoubleArray],
     doc='uviewpoint( arrays.GLdoubleArray(m), arrays.GLdoubleArray(v1), arrays.GLdoubleArray(v2), arrays.GLdoubleArray(up) ) -> None', 
     argNames=('m', 'v1', 'v2', 'up'),

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_EXT_visual_rating'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_EXT_visual_rating',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_EXT_visual_rating',error_checker=_errors._error_checker)
 GLX_NONE_EXT=_C('GLX_NONE_EXT',0x8000)
 GLX_NON_CONFORMANT_VISUAL_EXT=_C('GLX_NON_CONFORMANT_VISUAL_EXT',0x800D)
 GLX_SLOW_VISUAL_EXT=_C('GLX_SLOW_VISUAL_EXT',0x8001)

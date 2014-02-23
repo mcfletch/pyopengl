@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_texture_env_combine4'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_texture_env_combine4',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_texture_env_combine4',error_checker=_errors._error_checker)
 GL_COMBINE4_NV=_C('GL_COMBINE4_NV',0x8503)
 GL_OPERAND3_ALPHA_NV=_C('GL_OPERAND3_ALPHA_NV',0x859B)
 GL_OPERAND3_RGB_NV=_C('GL_OPERAND3_RGB_NV',0x8593)

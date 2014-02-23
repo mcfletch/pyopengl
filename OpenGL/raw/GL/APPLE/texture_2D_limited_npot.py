@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_texture_2D_limited_npot'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_texture_2D_limited_npot',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_APPLE_texture_2D_limited_npot',error_checker=_errors._error_checker)
 
 

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIX_ycrcba'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIX_ycrcba',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_ycrcba',error_checker=_errors._error_checker)
 GL_YCRCBA_SGIX=_C('GL_YCRCBA_SGIX',0x8319)
 GL_YCRCB_SGIX=_C('GL_YCRCB_SGIX',0x8318)
 

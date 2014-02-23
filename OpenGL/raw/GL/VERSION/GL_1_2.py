@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_1_2'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_1_2',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_VERSION_GL_1_2',error_checker=_errors._error_checker)
 GL_ALIASED_LINE_WIDTH_RANGE=_C('GL_ALIASED_LINE_WIDTH_RANGE',0x846E)
 GL_ALIASED_POINT_SIZE_RANGE=_C('GL_ALIASED_POINT_SIZE_RANGE',0x846D)
 GL_BGR=_C('GL_BGR',0x80E0)

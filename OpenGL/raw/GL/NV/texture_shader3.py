@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_texture_shader3'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_texture_shader3',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_texture_shader3',error_checker=_errors._error_checker)
 GL_DEPENDENT_HILO_TEXTURE_2D_NV=_C('GL_DEPENDENT_HILO_TEXTURE_2D_NV',0x8858)
 GL_DEPENDENT_RGB_TEXTURE_3D_NV=_C('GL_DEPENDENT_RGB_TEXTURE_3D_NV',0x8859)
 GL_DEPENDENT_RGB_TEXTURE_CUBE_MAP_NV=_C('GL_DEPENDENT_RGB_TEXTURE_CUBE_MAP_NV',0x885A)

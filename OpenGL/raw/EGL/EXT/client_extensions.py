@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_EXT_client_extensions'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_EXT_client_extensions',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_EXT_client_extensions',error_checker=_errors._error_checker)
 
 

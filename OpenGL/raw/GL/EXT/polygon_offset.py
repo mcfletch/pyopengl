@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_polygon_offset'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_polygon_offset',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_polygon_offset',error_checker=_errors._error_checker)
 GL_POLYGON_OFFSET_BIAS_EXT=_C('GL_POLYGON_OFFSET_BIAS_EXT',0x8039)
 GL_POLYGON_OFFSET_EXT=_C('GL_POLYGON_OFFSET_EXT',0x8037)
 GL_POLYGON_OFFSET_FACTOR_EXT=_C('GL_POLYGON_OFFSET_FACTOR_EXT',0x8038)

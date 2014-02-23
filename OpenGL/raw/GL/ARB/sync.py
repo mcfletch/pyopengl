@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_sync'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_sync',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_sync',error_checker=_errors._error_checker)
 GL_ALREADY_SIGNALED=_C('GL_ALREADY_SIGNALED',0x911A)
 GL_CONDITION_SATISFIED=_C('GL_CONDITION_SATISFIED',0x911C)
 GL_MAX_SERVER_WAIT_TIMEOUT=_C('GL_MAX_SERVER_WAIT_TIMEOUT',0x9111)

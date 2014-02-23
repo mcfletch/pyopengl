@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_texture_shader2'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_texture_shader2',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_texture_shader2',error_checker=_errors._error_checker)
 GL_DOT_PRODUCT_TEXTURE_3D_NV=_C('GL_DOT_PRODUCT_TEXTURE_3D_NV',0x86EF)
 

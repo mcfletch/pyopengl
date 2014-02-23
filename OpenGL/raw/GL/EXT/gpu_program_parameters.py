@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_gpu_program_parameters'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_gpu_program_parameters',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_gpu_program_parameters',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)

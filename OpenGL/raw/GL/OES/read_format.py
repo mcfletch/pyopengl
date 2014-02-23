@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_OES_read_format'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_read_format',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_OES_read_format',error_checker=_errors._error_checker)
 GL_IMPLEMENTATION_COLOR_READ_FORMAT_OES=_C('GL_IMPLEMENTATION_COLOR_READ_FORMAT_OES',0x8B9B)
 GL_IMPLEMENTATION_COLOR_READ_TYPE_OES=_C('GL_IMPLEMENTATION_COLOR_READ_TYPE_OES',0x8B9A)
 

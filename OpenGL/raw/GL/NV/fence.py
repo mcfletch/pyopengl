@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_fence'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_fence',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_fence',error_checker=_errors._error_checker)
 GL_ALL_COMPLETED_NV=_C('GL_ALL_COMPLETED_NV',0x84F2)
 GL_FENCE_CONDITION_NV=_C('GL_FENCE_CONDITION_NV',0x84F4)
 GL_FENCE_STATUS_NV=_C('GL_FENCE_STATUS_NV',0x84F3)

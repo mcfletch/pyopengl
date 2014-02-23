@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_AMD_gpu_association'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_AMD_gpu_association',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_AMD_gpu_association',error_checker=_errors._error_checker)
 GLX_GPU_CLOCK_AMD=_C('GLX_GPU_CLOCK_AMD',0x21A4)
 GLX_GPU_FASTEST_TARGET_GPUS_AMD=_C('GLX_GPU_FASTEST_TARGET_GPUS_AMD',0x21A2)
 GLX_GPU_NUM_PIPES_AMD=_C('GLX_GPU_NUM_PIPES_AMD',0x21A5)

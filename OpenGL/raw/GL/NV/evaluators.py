@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_evaluators'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_evaluators',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_evaluators',error_checker=_errors._error_checker)
 GL_EVAL_2D_NV=_C('GL_EVAL_2D_NV',0x86C0)
 GL_EVAL_FRACTIONAL_TESSELLATION_NV=_C('GL_EVAL_FRACTIONAL_TESSELLATION_NV',0x86C5)
 GL_EVAL_TRIANGULAR_2D_NV=_C('GL_EVAL_TRIANGULAR_2D_NV',0x86C1)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_transpose_matrix'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_transpose_matrix',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_transpose_matrix',error_checker=_errors._error_checker)
 GL_TRANSPOSE_COLOR_MATRIX_ARB=_C('GL_TRANSPOSE_COLOR_MATRIX_ARB',0x84E6)
 GL_TRANSPOSE_MODELVIEW_MATRIX_ARB=_C('GL_TRANSPOSE_MODELVIEW_MATRIX_ARB',0x84E3)
 GL_TRANSPOSE_PROJECTION_MATRIX_ARB=_C('GL_TRANSPOSE_PROJECTION_MATRIX_ARB',0x84E4)

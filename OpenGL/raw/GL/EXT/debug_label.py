@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_debug_label'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_debug_label',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_debug_label',error_checker=_errors._error_checker)
 GL_BUFFER_OBJECT_EXT=_C('GL_BUFFER_OBJECT_EXT',0x9151)
 GL_PROGRAM_OBJECT_EXT=_C('GL_PROGRAM_OBJECT_EXT',0x8B40)
 GL_PROGRAM_PIPELINE_OBJECT_EXT=_C('GL_PROGRAM_PIPELINE_OBJECT_EXT',0x8A4F)

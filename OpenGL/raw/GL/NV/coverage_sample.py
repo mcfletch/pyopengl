@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_coverage_sample'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_coverage_sample',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_coverage_sample',error_checker=_errors._error_checker)
 GL_COVERAGE_ALL_FRAGMENTS_NV=_C('GL_COVERAGE_ALL_FRAGMENTS_NV',0x8ED5)
 GL_COVERAGE_ATTACHMENT_NV=_C('GL_COVERAGE_ATTACHMENT_NV',0x8ED2)
 GL_COVERAGE_AUTOMATIC_NV=_C('GL_COVERAGE_AUTOMATIC_NV',0x8ED7)

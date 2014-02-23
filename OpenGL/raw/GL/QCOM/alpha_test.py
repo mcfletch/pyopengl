@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_QCOM_alpha_test'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_QCOM_alpha_test',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_QCOM_alpha_test',error_checker=_errors._error_checker)
 GL_ALPHA_TEST_FUNC_QCOM=_C('GL_ALPHA_TEST_FUNC_QCOM',0x0BC1)
 GL_ALPHA_TEST_QCOM=_C('GL_ALPHA_TEST_QCOM',0x0BC0)
 GL_ALPHA_TEST_REF_QCOM=_C('GL_ALPHA_TEST_REF_QCOM',0x0BC2)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_OES_texture_cube_map'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_texture_cube_map',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_OES_texture_cube_map',error_checker=_errors._error_checker)
 GL_MAX_CUBE_MAP_TEXTURE_SIZE_OES=_C('GL_MAX_CUBE_MAP_TEXTURE_SIZE_OES',0x851C)
 GL_NORMAL_MAP_OES=_C('GL_NORMAL_MAP_OES',0x8511)
 GL_REFLECTION_MAP_OES=_C('GL_REFLECTION_MAP_OES',0x8512)

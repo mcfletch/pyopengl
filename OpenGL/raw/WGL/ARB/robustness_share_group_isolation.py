@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_ARB_robustness_share_group_isolation'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_ARB_robustness_share_group_isolation',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_ARB_robustness_share_group_isolation',error_checker=_errors._error_checker)
 WGL_CONTEXT_RESET_ISOLATION_BIT_ARB=_C('WGL_CONTEXT_RESET_ISOLATION_BIT_ARB',0x00000008)
 

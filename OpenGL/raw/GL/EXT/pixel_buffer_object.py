@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_pixel_buffer_object'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_pixel_buffer_object',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_pixel_buffer_object',error_checker=_errors._error_checker)
 GL_PIXEL_PACK_BUFFER_BINDING_EXT=_C('GL_PIXEL_PACK_BUFFER_BINDING_EXT',0x88ED)
 GL_PIXEL_PACK_BUFFER_EXT=_C('GL_PIXEL_PACK_BUFFER_EXT',0x88EB)
 GL_PIXEL_UNPACK_BUFFER_BINDING_EXT=_C('GL_PIXEL_UNPACK_BUFFER_BINDING_EXT',0x88EF)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_GREMEDY_string_marker'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_GREMEDY_string_marker',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_GREMEDY_string_marker',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(None,_cs.GLsizei,ctypes.c_void_p)

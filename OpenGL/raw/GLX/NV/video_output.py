@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_NV_video_output'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_NV_video_output',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_NV_video_output',error_checker=_errors._error_checker)
 GLX_VIDEO_OUT_ALPHA_NV=_C('GLX_VIDEO_OUT_ALPHA_NV',0x20C4)
 GLX_VIDEO_OUT_COLOR_AND_ALPHA_NV=_C('GLX_VIDEO_OUT_COLOR_AND_ALPHA_NV',0x20C6)
 GLX_VIDEO_OUT_COLOR_AND_DEPTH_NV=_C('GLX_VIDEO_OUT_COLOR_AND_DEPTH_NV',0x20C7)

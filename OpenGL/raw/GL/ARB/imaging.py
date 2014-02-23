@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_imaging'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_imaging',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_imaging',error_checker=_errors._error_checker)
 GL_BLEND_COLOR=_C('GL_BLEND_COLOR',0x8005)
 GL_BLEND_EQUATION=_C('GL_BLEND_EQUATION',0x8009)
 GL_COLOR_MATRIX=_C('GL_COLOR_MATRIX',0x80B1)

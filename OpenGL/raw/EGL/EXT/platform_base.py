@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_EXT_platform_base'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_EXT_platform_base',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_EXT_platform_base',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,ctypes.c_void_p,arrays.GLintArray)

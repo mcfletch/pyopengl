@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_VERSION_EGL_1_3'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_VERSION_EGL_1_3',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_VERSION_EGL_1_3',error_checker=_errors._error_checker)
 EGL_CONFORMANT=_C('EGL_CONFORMANT',0x3042)
 EGL_CONTEXT_CLIENT_VERSION=_C('EGL_CONTEXT_CLIENT_VERSION',0x3098)
 EGL_MATCH_NATIVE_PIXMAP=_C('EGL_MATCH_NATIVE_PIXMAP',0x3041)

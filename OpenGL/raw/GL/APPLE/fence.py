@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_fence'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_fence',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_APPLE_fence',error_checker=_errors._error_checker)
 GL_DRAW_PIXELS_APPLE=_C('GL_DRAW_PIXELS_APPLE',0x8A0A)
 GL_FENCE_APPLE=_C('GL_FENCE_APPLE',0x8A0B)
 @_f

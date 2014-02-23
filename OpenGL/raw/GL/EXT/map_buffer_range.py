@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_map_buffer_range'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_map_buffer_range',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_map_buffer_range',error_checker=_errors._error_checker)
 GL_MAP_FLUSH_EXPLICIT_BIT_EXT=_C('GL_MAP_FLUSH_EXPLICIT_BIT_EXT',0x0010)
 GL_MAP_INVALIDATE_BUFFER_BIT_EXT=_C('GL_MAP_INVALIDATE_BUFFER_BIT_EXT',0x0008)
 GL_MAP_INVALIDATE_RANGE_BIT_EXT=_C('GL_MAP_INVALIDATE_RANGE_BIT_EXT',0x0004)

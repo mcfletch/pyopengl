@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_HP_texture_lighting'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_HP_texture_lighting',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_HP_texture_lighting',error_checker=_errors._error_checker)
 GL_TEXTURE_LIGHTING_MODE_HP=_C('GL_TEXTURE_LIGHTING_MODE_HP',0x8167)
 GL_TEXTURE_POST_SPECULAR_HP=_C('GL_TEXTURE_POST_SPECULAR_HP',0x8168)
 GL_TEXTURE_PRE_SPECULAR_HP=_C('GL_TEXTURE_PRE_SPECULAR_HP',0x8169)

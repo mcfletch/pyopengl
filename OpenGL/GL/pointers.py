@@ -11,7 +11,7 @@ def glVertexPointerd( array ):
     arg3 = 0 # stride
     arg4 = arrays.asArray(array, GL_DOUBLE)
     arg1 = arrays.arraySize( arg4, 'd' )
-    platform.OpenGL.glVertexPointer( arg1, arg2, arg3, arrays.ArrayDatatype.dataPointer(arg4) )
+    platform.PLATFORM.GL.glVertexPointer( arg1, arg2, arg3, arrays.ArrayDatatype.dataPointer(arg4) )
     # only store if we successfully set the value...
     storedPointers[ GL_VERTEX_ARRAY ] = arg4
     return arg4

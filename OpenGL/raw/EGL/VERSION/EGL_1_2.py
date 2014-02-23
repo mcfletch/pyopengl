@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_VERSION_EGL_1_2'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_VERSION_EGL_1_2',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_VERSION_EGL_1_2',error_checker=_errors._error_checker)
 EGL_ALPHA_FORMAT=_C('EGL_ALPHA_FORMAT',0x3088)
 EGL_ALPHA_FORMAT_NONPRE=_C('EGL_ALPHA_FORMAT_NONPRE',0x308B)
 EGL_ALPHA_FORMAT_PRE=_C('EGL_ALPHA_FORMAT_PRE',0x308C)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_VERSION_EGL_1_0'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_VERSION_EGL_1_0',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_VERSION_EGL_1_0',error_checker=_errors._error_checker)
 EGL_ALPHA_SIZE=_C('EGL_ALPHA_SIZE',0x3021)
 EGL_BAD_ACCESS=_C('EGL_BAD_ACCESS',0x3002)
 EGL_BAD_ALLOC=_C('EGL_BAD_ALLOC',0x3003)

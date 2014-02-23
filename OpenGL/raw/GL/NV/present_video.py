@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_present_video'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_present_video',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_present_video',error_checker=_errors._error_checker)
 GL_CURRENT_TIME_NV=_C('GL_CURRENT_TIME_NV',0x8E28)
 GL_FIELDS_NV=_C('GL_FIELDS_NV',0x8E27)
 GL_FRAME_NV=_C('GL_FRAME_NV',0x8E26)

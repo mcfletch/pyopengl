@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ANGLE_framebuffer_blit'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ANGLE_framebuffer_blit',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ANGLE_framebuffer_blit',error_checker=_errors._error_checker)
 GL_DRAW_FRAMEBUFFER_ANGLE=_C('GL_DRAW_FRAMEBUFFER_ANGLE',0x8CA9)
 GL_DRAW_FRAMEBUFFER_BINDING_ANGLE=_C('GL_DRAW_FRAMEBUFFER_BINDING_ANGLE',0x8CA6)
 GL_READ_FRAMEBUFFER_ANGLE=_C('GL_READ_FRAMEBUFFER_ANGLE',0x8CA8)

@@ -1,10 +1,11 @@
 """Wrapper/Implementation of the GLU tessellator objects for PyOpenGL"""
 from OpenGL.raw import GLU as _simple
 from OpenGL.raw.GL.VERSION import GL_1_1
-from OpenGL.platform import GLU,createBaseFunction
+from OpenGL.platform import createBaseFunction
 from OpenGL.GLU import glustruct
 from OpenGL import arrays
 from OpenGL.platform import PLATFORM
+GLU = PLATFORM.GLU
 from OpenGL.lazywrapper import lazy as _lazy
 import ctypes
 

@@ -77,7 +77,7 @@ class BasePlatform( object ):
     EXPORTED_NAMES = [
         'GetCurrentContext','CurrentContextIsValid',
         'createBaseFunction', 'createExtensionFunction', 'copyBaseFunction',
-        'GL','GLU','GLUT','GLE','OpenGL','EGL','GLX','WGL','GLES1','GLES2','GLES3',
+        #'GL','GLU','GLUT','GLE','OpenGL','EGL','GLX','WGL','GLES1','GLES2','GLES3',
         'getGLUTFontPointer',
         'GLUT_GUARD_CALLBACKS',
     ]

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_I3D_gamma'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_I3D_gamma',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_I3D_gamma',error_checker=_errors._error_checker)
 WGL_GAMMA_EXCLUDE_DESKTOP_I3D=_C('WGL_GAMMA_EXCLUDE_DESKTOP_I3D',0x204F)
 WGL_GAMMA_TABLE_SIZE_I3D=_C('WGL_GAMMA_TABLE_SIZE_I3D',0x204E)
 @_f

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_APPLE_vertex_array_range'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_APPLE_vertex_array_range',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_APPLE_vertex_array_range',error_checker=_errors._error_checker)
 GL_STORAGE_CACHED_APPLE=_C('GL_STORAGE_CACHED_APPLE',0x85BE)
 GL_STORAGE_CLIENT_APPLE=_C('GL_STORAGE_CLIENT_APPLE',0x85B4)
 GL_STORAGE_SHARED_APPLE=_C('GL_STORAGE_SHARED_APPLE',0x85BF)

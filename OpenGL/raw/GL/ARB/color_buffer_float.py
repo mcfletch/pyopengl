@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_color_buffer_float'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_color_buffer_float',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_color_buffer_float',error_checker=_errors._error_checker)
 GL_CLAMP_FRAGMENT_COLOR_ARB=_C('GL_CLAMP_FRAGMENT_COLOR_ARB',0x891B)
 GL_CLAMP_READ_COLOR_ARB=_C('GL_CLAMP_READ_COLOR_ARB',0x891C)
 GL_CLAMP_VERTEX_COLOR_ARB=_C('GL_CLAMP_VERTEX_COLOR_ARB',0x891A)

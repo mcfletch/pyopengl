@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_bindable_uniform'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_bindable_uniform',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_bindable_uniform',error_checker=_errors._error_checker)
 GL_MAX_BINDABLE_UNIFORM_SIZE_EXT=_C('GL_MAX_BINDABLE_UNIFORM_SIZE_EXT',0x8DED)
 GL_MAX_FRAGMENT_BINDABLE_UNIFORMS_EXT=_C('GL_MAX_FRAGMENT_BINDABLE_UNIFORMS_EXT',0x8DE3)
 GL_MAX_GEOMETRY_BINDABLE_UNIFORMS_EXT=_C('GL_MAX_GEOMETRY_BINDABLE_UNIFORMS_EXT',0x8DE4)

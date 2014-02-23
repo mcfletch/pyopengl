@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_IBM_static_data'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_IBM_static_data',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_IBM_static_data',error_checker=_errors._error_checker)
 GL_ALL_STATIC_DATA_IBM=_C('GL_ALL_STATIC_DATA_IBM',103060)
 GL_STATIC_VERTEX_ARRAY_IBM=_C('GL_STATIC_VERTEX_ARRAY_IBM',103061)
 @_f

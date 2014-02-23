@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_shadow_samplers'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_shadow_samplers',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_shadow_samplers',error_checker=_errors._error_checker)
 GL_COMPARE_REF_TO_TEXTURE_EXT=_C('GL_COMPARE_REF_TO_TEXTURE_EXT',0x884E)
 GL_SAMPLER_2D_SHADOW_EXT=_C('GL_SAMPLER_2D_SHADOW_EXT',0x8B62)
 GL_TEXTURE_COMPARE_FUNC_EXT=_C('GL_TEXTURE_COMPARE_FUNC_EXT',0x884D)

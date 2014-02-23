@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_VERSION_EGL_1_4'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_VERSION_EGL_1_4',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_VERSION_EGL_1_4',error_checker=_errors._error_checker)
 # EGL_DEFAULT_DISPLAY=_C('EGL_DEFAULT_DISPLAY',((EGLNativeDisplayType)0))
 EGL_MULTISAMPLE_RESOLVE=_C('EGL_MULTISAMPLE_RESOLVE',0x3099)
 EGL_MULTISAMPLE_RESOLVE_BOX=_C('EGL_MULTISAMPLE_RESOLVE_BOX',0x309B)

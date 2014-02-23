@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_AMD_compressed_3DC_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_AMD_compressed_3DC_texture',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_AMD_compressed_3DC_texture',error_checker=_errors._error_checker)
 GL_3DC_XY_AMD=_C('GL_3DC_XY_AMD',0x87FA)
 GL_3DC_X_AMD=_C('GL_3DC_X_AMD',0x87F9)
 

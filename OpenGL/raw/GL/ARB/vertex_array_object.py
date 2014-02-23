@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_vertex_array_object'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_vertex_array_object',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_vertex_array_object',error_checker=_errors._error_checker)
 GL_VERTEX_ARRAY_BINDING=_C('GL_VERTEX_ARRAY_BINDING',0x85B5)
 @_f
 @_p.types(None,_cs.GLuint)

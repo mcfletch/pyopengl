@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_MESA_ycbcr_texture'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_MESA_ycbcr_texture',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_MESA_ycbcr_texture',error_checker=_errors._error_checker)
 GL_UNSIGNED_SHORT_8_8_MESA=_C('GL_UNSIGNED_SHORT_8_8_MESA',0x85BA)
 GL_UNSIGNED_SHORT_8_8_REV_MESA=_C('GL_UNSIGNED_SHORT_8_8_REV_MESA',0x85BB)
 GL_YCBCR_MESA=_C('GL_YCBCR_MESA',0x8757)

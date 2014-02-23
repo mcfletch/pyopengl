@@ -19,7 +19,7 @@ for name in [
         # GLX has pointers to font structures...
         p = platform.getGLUTFontPointer( name )
     except (ValueError,AttributeError) as err:
-        if platform.GLUT:
+        if platform.PLATFORM.GLUT:
             _log.warn( '''Unable to load font: %s''', name )
         globals()[name] = None
     else:

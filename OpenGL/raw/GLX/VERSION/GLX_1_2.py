@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_VERSION_GLX_1_2'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_VERSION_GLX_1_2',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_VERSION_GLX_1_2',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(ctypes.POINTER(_cs.Display),)

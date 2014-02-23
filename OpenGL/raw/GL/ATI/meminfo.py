@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_meminfo'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_meminfo',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ATI_meminfo',error_checker=_errors._error_checker)
 GL_RENDERBUFFER_FREE_MEMORY_ATI=_C('GL_RENDERBUFFER_FREE_MEMORY_ATI',0x87FD)
 GL_TEXTURE_FREE_MEMORY_ATI=_C('GL_TEXTURE_FREE_MEMORY_ATI',0x87FC)
 GL_VBO_FREE_MEMORY_ATI=_C('GL_VBO_FREE_MEMORY_ATI',0x87FB)

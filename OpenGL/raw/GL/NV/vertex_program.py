@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_vertex_program'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_vertex_program',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_vertex_program',error_checker=_errors._error_checker)
 GL_ATTRIB_ARRAY_POINTER_NV=_C('GL_ATTRIB_ARRAY_POINTER_NV',0x8645)
 GL_ATTRIB_ARRAY_SIZE_NV=_C('GL_ATTRIB_ARRAY_SIZE_NV',0x8623)
 GL_ATTRIB_ARRAY_STRIDE_NV=_C('GL_ATTRIB_ARRAY_STRIDE_NV',0x8624)

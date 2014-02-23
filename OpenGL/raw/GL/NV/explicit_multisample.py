@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_explicit_multisample'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_explicit_multisample',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_explicit_multisample',error_checker=_errors._error_checker)
 GL_INT_SAMPLER_RENDERBUFFER_NV=_C('GL_INT_SAMPLER_RENDERBUFFER_NV',0x8E57)
 GL_MAX_SAMPLE_MASK_WORDS_NV=_C('GL_MAX_SAMPLE_MASK_WORDS_NV',0x8E59)
 GL_SAMPLER_RENDERBUFFER_NV=_C('GL_SAMPLER_RENDERBUFFER_NV',0x8E56)

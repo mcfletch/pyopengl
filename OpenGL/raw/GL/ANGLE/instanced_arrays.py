@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ANGLE_instanced_arrays'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ANGLE_instanced_arrays',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ANGLE_instanced_arrays',error_checker=_errors._error_checker)
 GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE=_C('GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE',0x88FE)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei,_cs.GLsizei)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_NV_coverage_sample_resolve'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_NV_coverage_sample_resolve',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_NV_coverage_sample_resolve',error_checker=_errors._error_checker)
 EGL_COVERAGE_SAMPLE_RESOLVE_DEFAULT_NV=_C('EGL_COVERAGE_SAMPLE_RESOLVE_DEFAULT_NV',0x3132)
 EGL_COVERAGE_SAMPLE_RESOLVE_NONE_NV=_C('EGL_COVERAGE_SAMPLE_RESOLVE_NONE_NV',0x3133)
 EGL_COVERAGE_SAMPLE_RESOLVE_NV=_C('EGL_COVERAGE_SAMPLE_RESOLVE_NV',0x3131)

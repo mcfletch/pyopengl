@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_compute_variable_group_size'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_compute_variable_group_size',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_compute_variable_group_size',error_checker=_errors._error_checker)
 GL_MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB=_C('GL_MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB',0x90EB)
 GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB=_C('GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB',0x91BF)
 GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB=_C('GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB',0x9344)

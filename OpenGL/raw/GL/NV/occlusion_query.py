@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_occlusion_query'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_occlusion_query',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_occlusion_query',error_checker=_errors._error_checker)
 GL_CURRENT_OCCLUSION_QUERY_ID_NV=_C('GL_CURRENT_OCCLUSION_QUERY_ID_NV',0x8865)
 GL_PIXEL_COUNTER_BITS_NV=_C('GL_PIXEL_COUNTER_BITS_NV',0x8864)
 GL_PIXEL_COUNT_AVAILABLE_NV=_C('GL_PIXEL_COUNT_AVAILABLE_NV',0x8867)

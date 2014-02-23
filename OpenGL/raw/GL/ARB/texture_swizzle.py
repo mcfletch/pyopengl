@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_texture_swizzle'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_texture_swizzle',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_texture_swizzle',error_checker=_errors._error_checker)
 GL_TEXTURE_SWIZZLE_A=_C('GL_TEXTURE_SWIZZLE_A',0x8E45)
 GL_TEXTURE_SWIZZLE_B=_C('GL_TEXTURE_SWIZZLE_B',0x8E44)
 GL_TEXTURE_SWIZZLE_G=_C('GL_TEXTURE_SWIZZLE_G',0x8E43)

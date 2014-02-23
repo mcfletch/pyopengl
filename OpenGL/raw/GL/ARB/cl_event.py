@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_cl_event'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_cl_event',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_cl_event',error_checker=_errors._error_checker)
 GL_SYNC_CL_EVENT_ARB=_C('GL_SYNC_CL_EVENT_ARB',0x8240)
 GL_SYNC_CL_EVENT_COMPLETE_ARB=_C('GL_SYNC_CL_EVENT_COMPLETE_ARB',0x8241)
 @_f

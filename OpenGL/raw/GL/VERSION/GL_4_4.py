@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_4_4'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_4_4',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_VERSION_GL_4_4',error_checker=_errors._error_checker)
 GL_BUFFER_IMMUTABLE_STORAGE=_C('GL_BUFFER_IMMUTABLE_STORAGE',0x821F)
 GL_BUFFER_STORAGE_FLAGS=_C('GL_BUFFER_STORAGE_FLAGS',0x8220)
 GL_CLEAR_TEXTURE=_C('GL_CLEAR_TEXTURE',0x9365)

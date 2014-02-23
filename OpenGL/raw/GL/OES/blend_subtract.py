@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_OES_blend_subtract'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_blend_subtract',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_OES_blend_subtract',error_checker=_errors._error_checker)
 GL_BLEND_EQUATION_OES=_C('GL_BLEND_EQUATION_OES',0x8009)
 GL_FUNC_ADD_OES=_C('GL_FUNC_ADD_OES',0x8006)
 GL_FUNC_REVERSE_SUBTRACT_OES=_C('GL_FUNC_REVERSE_SUBTRACT_OES',0x800B)

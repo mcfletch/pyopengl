@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_texture_array'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_texture_array',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_texture_array',error_checker=_errors._error_checker)
 GL_COMPARE_REF_DEPTH_TO_TEXTURE_EXT=_C('GL_COMPARE_REF_DEPTH_TO_TEXTURE_EXT',0x884E)
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT=_C('GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT',0x8CD4)
 GL_MAX_ARRAY_TEXTURE_LAYERS_EXT=_C('GL_MAX_ARRAY_TEXTURE_LAYERS_EXT',0x88FF)

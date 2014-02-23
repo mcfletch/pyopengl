@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_OES_query_matrix'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_query_matrix',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_OES_query_matrix',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(_cs.GLbitfield,ctypes.POINTER(_cs.GLfixed),arrays.GLintArray)

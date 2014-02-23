@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_ANGLE_query_surface_pointer'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_ANGLE_query_surface_pointer',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_ANGLE_query_surface_pointer',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSurface,_cs.EGLint,arrays.GLvoidpArray)

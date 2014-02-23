@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_ARB_pbuffer'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_ARB_pbuffer',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_ARB_pbuffer',error_checker=_errors._error_checker)
 WGL_DRAW_TO_PBUFFER_ARB=_C('WGL_DRAW_TO_PBUFFER_ARB',0x202D)
 WGL_MAX_PBUFFER_HEIGHT_ARB=_C('WGL_MAX_PBUFFER_HEIGHT_ARB',0x2030)
 WGL_MAX_PBUFFER_PIXELS_ARB=_C('WGL_MAX_PBUFFER_PIXELS_ARB',0x202E)

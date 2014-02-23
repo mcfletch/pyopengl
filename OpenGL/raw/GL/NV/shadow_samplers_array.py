@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_shadow_samplers_array'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_shadow_samplers_array',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_shadow_samplers_array',error_checker=_errors._error_checker)
 GL_SAMPLER_2D_ARRAY_SHADOW_NV=_C('GL_SAMPLER_2D_ARRAY_SHADOW_NV',0x8DC4)
 

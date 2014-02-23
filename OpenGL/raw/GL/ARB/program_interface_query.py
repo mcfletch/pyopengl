@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_program_interface_query'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_program_interface_query',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_program_interface_query',error_checker=_errors._error_checker)
 GL_ACTIVE_RESOURCES=_C('GL_ACTIVE_RESOURCES',0x92F5)
 GL_ACTIVE_VARIABLES=_C('GL_ACTIVE_VARIABLES',0x9305)
 GL_ARRAY_SIZE=_C('GL_ARRAY_SIZE',0x92FB)

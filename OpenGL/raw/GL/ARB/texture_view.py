@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ARB_texture_view'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ARB_texture_view',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_texture_view',error_checker=_errors._error_checker)
 GL_TEXTURE_IMMUTABLE_LEVELS=_C('GL_TEXTURE_IMMUTABLE_LEVELS',0x82DF)
 GL_TEXTURE_VIEW_MIN_LAYER=_C('GL_TEXTURE_VIEW_MIN_LAYER',0x82DD)
 GL_TEXTURE_VIEW_MIN_LEVEL=_C('GL_TEXTURE_VIEW_MIN_LEVEL',0x82DB)

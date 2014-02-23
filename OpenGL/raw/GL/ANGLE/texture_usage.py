@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ANGLE_texture_usage'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ANGLE_texture_usage',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ANGLE_texture_usage',error_checker=_errors._error_checker)
 GL_FRAMEBUFFER_ATTACHMENT_ANGLE=_C('GL_FRAMEBUFFER_ATTACHMENT_ANGLE',0x93A3)
 GL_TEXTURE_USAGE_ANGLE=_C('GL_TEXTURE_USAGE_ANGLE',0x93A2)
 

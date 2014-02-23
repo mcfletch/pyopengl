@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_SGI_make_current_read'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_SGI_make_current_read',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_SGI_make_current_read',error_checker=_errors._error_checker)
 
 @_f
 @_p.types(_cs.GLXDrawable,)

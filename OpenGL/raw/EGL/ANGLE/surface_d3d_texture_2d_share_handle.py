@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_ANGLE_surface_d3d_texture_2d_share_handle'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_ANGLE_surface_d3d_texture_2d_share_handle',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_ANGLE_surface_d3d_texture_2d_share_handle',error_checker=_errors._error_checker)
 EGL_D3D_TEXTURE_2D_SHARE_HANDLE_ANGLE=_C('EGL_D3D_TEXTURE_2D_SHARE_HANDLE_ANGLE',0x3200)
 

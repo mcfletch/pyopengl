@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_INTEL_swap_event'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_INTEL_swap_event',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_INTEL_swap_event',error_checker=_errors._error_checker)
 GLX_BUFFER_SWAP_COMPLETE_INTEL_MASK=_C('GLX_BUFFER_SWAP_COMPLETE_INTEL_MASK',0x04000000)
 GLX_COPY_COMPLETE_INTEL=_C('GLX_COPY_COMPLETE_INTEL',0x8181)
 GLX_EXCHANGE_COMPLETE_INTEL=_C('GLX_EXCHANGE_COMPLETE_INTEL',0x8180)

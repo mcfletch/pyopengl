@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_pixel_data_range'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_pixel_data_range',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_pixel_data_range',error_checker=_errors._error_checker)
 GL_READ_PIXEL_DATA_RANGE_LENGTH_NV=_C('GL_READ_PIXEL_DATA_RANGE_LENGTH_NV',0x887B)
 GL_READ_PIXEL_DATA_RANGE_NV=_C('GL_READ_PIXEL_DATA_RANGE_NV',0x8879)
 GL_READ_PIXEL_DATA_RANGE_POINTER_NV=_C('GL_READ_PIXEL_DATA_RANGE_POINTER_NV',0x887D)

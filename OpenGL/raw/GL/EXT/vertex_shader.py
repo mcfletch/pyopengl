@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_vertex_shader'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_vertex_shader',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_vertex_shader',error_checker=_errors._error_checker)
 GL_CURRENT_VERTEX_EXT=_C('GL_CURRENT_VERTEX_EXT',0x87E2)
 GL_FULL_RANGE_EXT=_C('GL_FULL_RANGE_EXT',0x87E1)
 GL_INVARIANT_DATATYPE_EXT=_C('GL_INVARIANT_DATATYPE_EXT',0x87EB)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'WGL_NV_multisample_coverage'
 def _f( function ):
-    return _p.createFunction( function,_p.WGL,'WGL_NV_multisample_coverage',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_NV_multisample_coverage',error_checker=_errors._error_checker)
 WGL_COLOR_SAMPLES_NV=_C('WGL_COLOR_SAMPLES_NV',0x20B9)
 WGL_COVERAGE_SAMPLES_NV=_C('WGL_COVERAGE_SAMPLES_NV',0x2042)
 

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'EGL_KHR_fence_sync'
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,'EGL_KHR_fence_sync',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.EGL,'EGL_KHR_fence_sync',error_checker=_errors._error_checker)
 EGL_SYNC_CONDITION_KHR=_C('EGL_SYNC_CONDITION_KHR',0x30F8)
 EGL_SYNC_FENCE_KHR=_C('EGL_SYNC_FENCE_KHR',0x30F9)
 EGL_SYNC_PRIOR_COMMANDS_COMPLETE_KHR=_C('EGL_SYNC_PRIOR_COMMANDS_COMPLETE_KHR',0x30F0)

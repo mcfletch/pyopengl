@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_SGIX_dmbuffer'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_SGIX_dmbuffer',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_SGIX_dmbuffer',error_checker=_errors._error_checker)
 GLX_DIGITAL_MEDIA_PBUFFER_SGIX=_C('GLX_DIGITAL_MEDIA_PBUFFER_SGIX',0x8024)
 @_f
 @_p.types(_cs.Bool,ctypes.POINTER(_cs.Display),_cs.GLXPbufferSGIX,ctypes.POINTER(_cs.DMparams),_cs.DMbuffer)

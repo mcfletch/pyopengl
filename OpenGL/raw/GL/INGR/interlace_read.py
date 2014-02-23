@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_INGR_interlace_read'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_INGR_interlace_read',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_INGR_interlace_read',error_checker=_errors._error_checker)
 GL_INTERLACE_READ_INGR=_C('GL_INTERLACE_READ_INGR',0x8568)
 

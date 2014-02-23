@@ -22,7 +22,7 @@ if hasattr( platform.PLATFORM, 'GLUT_CALLBACK_TYPE' ):
     # it's *always* CFUNCTYPE, AFAICT
     CALLBACK_FUNCTION_TYPE = platform.PLATFORM.GLUT_CALLBACK_TYPE
 else:
-    CALLBACK_FUNCTION_TYPE = platform.PLATFORM.functionTypeFor( platform.GLUT )
+    CALLBACK_FUNCTION_TYPE = platform.PLATFORM.functionTypeFor( platform.PLATFORM.GLUT )
 
 class STRING( c_char_p ):
     @classmethod
@@ -34,7 +34,7 @@ class STRING( c_char_p ):
 
 # /usr/include/GL/freeglut_std.h 445
 glutAddMenuEntry = platform.createBaseFunction( 
-    'glutAddMenuEntry', dll=platform.GLUT, resultType=None, 
+    'glutAddMenuEntry', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[STRING,c_int],
     doc='glutAddMenuEntry( STRING(label), c_int(value) ) -> None', 
     argNames=('label', 'value'),
@@ -43,7 +43,7 @@ glutAddMenuEntry = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 446
 glutAddSubMenu = platform.createBaseFunction( 
-    'glutAddSubMenu', dll=platform.GLUT, resultType=None, 
+    'glutAddSubMenu', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[STRING,c_int],
     doc='glutAddSubMenu( STRING(label), c_int(subMenu) ) -> None', 
     argNames=('label', 'subMenu'),
@@ -52,7 +52,7 @@ glutAddSubMenu = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 450
 glutAttachMenu = platform.createBaseFunction( 
-    'glutAttachMenu', dll=platform.GLUT, resultType=None, 
+    'glutAttachMenu', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutAttachMenu( c_int(button) ) -> None', 
     argNames=('button',),
@@ -61,7 +61,7 @@ glutAttachMenu = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 499
 glutBitmapCharacter = platform.createBaseFunction( 
-    'glutBitmapCharacter', dll=platform.GLUT, resultType=None, 
+    'glutBitmapCharacter', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_void_p,c_int],
     doc='glutBitmapCharacter( c_void_p(font), c_int(character) ) -> None', 
     argNames=('font', 'character'),
@@ -70,7 +70,7 @@ glutBitmapCharacter = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 503
 glutBitmapLength = platform.createBaseFunction( 
-    'glutBitmapLength', dll=platform.GLUT, resultType=c_int, 
+    'glutBitmapLength', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[c_void_p,POINTER(c_ubyte)],
     doc='glutBitmapLength( c_void_p(font), POINTER(c_ubyte)(string) ) -> c_int', 
     argNames=('font', 'string'),
@@ -79,7 +79,7 @@ glutBitmapLength = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 500
 glutBitmapWidth = platform.createBaseFunction( 
-    'glutBitmapWidth', dll=platform.GLUT, resultType=c_int, 
+    'glutBitmapWidth', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[c_void_p,c_int],
     doc='glutBitmapWidth( c_void_p(font), c_int(character) ) -> c_int', 
     argNames=('font', 'character'),
@@ -88,7 +88,7 @@ glutBitmapWidth = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 483
 glutButtonBoxFunc = platform.createBaseFunction( 
-    'glutButtonBoxFunc', dll=platform.GLUT, resultType=None, 
+    'glutButtonBoxFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int)],
     doc='glutButtonBoxFunc( FUNCTION_TYPE(None, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -97,7 +97,7 @@ glutButtonBoxFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 447
 glutChangeToMenuEntry = platform.createBaseFunction( 
-    'glutChangeToMenuEntry', dll=platform.GLUT, resultType=None, 
+    'glutChangeToMenuEntry', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,STRING,c_int],
     doc='glutChangeToMenuEntry( c_int(item), STRING(label), c_int(value) ) -> None', 
     argNames=('item', 'label', 'value'),
@@ -106,7 +106,7 @@ glutChangeToMenuEntry = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 448
 glutChangeToSubMenu = platform.createBaseFunction( 
-    'glutChangeToSubMenu', dll=platform.GLUT, resultType=None, 
+    'glutChangeToSubMenu', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,STRING,c_int],
     doc='glutChangeToSubMenu( c_int(item), STRING(label), c_int(value) ) -> None', 
     argNames=('item', 'label', 'value'),
@@ -115,7 +115,7 @@ glutChangeToSubMenu = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 555
 glutCopyColormap = platform.createBaseFunction( 
-    'glutCopyColormap', dll=platform.GLUT, resultType=None, 
+    'glutCopyColormap', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutCopyColormap( c_int(window) ) -> None', 
     argNames=('window',),
@@ -124,7 +124,7 @@ glutCopyColormap = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 441
 glutCreateMenu = platform.createBaseFunction( 
-    'glutCreateMenu', dll=platform.GLUT, resultType=c_int, 
+    'glutCreateMenu', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[CALLBACK_FUNCTION_TYPE(c_int, c_int)],
     doc='glutCreateMenu( FUNCTION_TYPE(c_int, c_int)(callback) ) -> c_int', 
     argNames=('callback',),
@@ -133,7 +133,7 @@ glutCreateMenu = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 399
 glutCreateSubWindow = platform.createBaseFunction( 
-    'glutCreateSubWindow', dll=platform.GLUT, resultType=c_int, 
+    'glutCreateSubWindow', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[c_int,c_int,c_int,c_int,c_int],
     doc='glutCreateSubWindow( c_int(window), c_int(x), c_int(y), c_int(width), c_int(height) ) -> c_int', 
     argNames=('window', 'x', 'y', 'width', 'height'),
@@ -142,7 +142,7 @@ glutCreateSubWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 398
 glutCreateWindow = platform.createBaseFunction( 
-    'glutCreateWindow', dll=platform.GLUT, resultType=c_int, 
+    'glutCreateWindow', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[STRING],
     doc='glutCreateWindow( STRING(title) ) -> c_int', 
     argNames=('title',),
@@ -151,7 +151,7 @@ glutCreateWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 442
 glutDestroyMenu = platform.createBaseFunction( 
-    'glutDestroyMenu', dll=platform.GLUT, resultType=None, 
+    'glutDestroyMenu', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutDestroyMenu( c_int(menu) ) -> None', 
     argNames=('menu',),
@@ -160,7 +160,7 @@ glutDestroyMenu = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 400
 glutDestroyWindow = platform.createBaseFunction( 
-    'glutDestroyWindow', dll=platform.GLUT, resultType=None, 
+    'glutDestroyWindow', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutDestroyWindow( c_int(window) ) -> None', 
     argNames=('window',),
@@ -169,7 +169,7 @@ glutDestroyWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 451
 glutDetachMenu = platform.createBaseFunction( 
-    'glutDetachMenu', dll=platform.GLUT, resultType=None, 
+    'glutDetachMenu', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutDetachMenu( c_int(button) ) -> None', 
     argNames=('button',),
@@ -178,7 +178,7 @@ glutDetachMenu = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 492
 glutDeviceGet = platform.createBaseFunction( 
-    'glutDeviceGet', dll=platform.GLUT, resultType=c_int, 
+    'glutDeviceGet', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[GLenum],
     doc='glutDeviceGet( GLenum(query) ) -> c_int', 
     argNames=('query',),
@@ -187,7 +187,7 @@ glutDeviceGet = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 484
 glutDialsFunc = platform.createBaseFunction( 
-    'glutDialsFunc', dll=platform.GLUT, resultType=None, 
+    'glutDialsFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int)],
     doc='glutDialsFunc( FUNCTION_TYPE(None, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -196,7 +196,7 @@ glutDialsFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 466
 glutDisplayFunc = platform.createBaseFunction( 
-    'glutDisplayFunc', dll=platform.GLUT, resultType=None, 
+    'glutDisplayFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None)],
     doc='glutDisplayFunc( FUNCTION_TYPE(None)(callback) ) -> None', 
     argNames=('callback',),
@@ -205,7 +205,7 @@ glutDisplayFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 537
 glutEnterGameMode = platform.createBaseFunction( 
-    'glutEnterGameMode', dll=platform.GLUT, resultType=c_int, 
+    'glutEnterGameMode', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[],
     doc='glutEnterGameMode(  ) -> c_int', 
     argNames=(),
@@ -214,7 +214,7 @@ glutEnterGameMode = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 470
 glutEntryFunc = platform.createBaseFunction( 
-    'glutEntryFunc', dll=platform.GLUT, resultType=None, 
+    'glutEntryFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int)],
     doc='glutEntryFunc( FUNCTION_TYPE(None, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -223,7 +223,7 @@ glutEntryFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 430
 glutEstablishOverlay = platform.createBaseFunction( 
-    'glutEstablishOverlay', dll=platform.GLUT, resultType=None, 
+    'glutEstablishOverlay', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutEstablishOverlay(  ) -> None', 
     argNames=(),
@@ -232,7 +232,7 @@ glutEstablishOverlay = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 567
 glutExtensionSupported = platform.createBaseFunction( 
-    'glutExtensionSupported', dll=platform.GLUT, resultType=c_int, 
+    'glutExtensionSupported', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[STRING],
     doc='glutExtensionSupported( STRING(extension) ) -> c_int', 
     argNames=('extension',),
@@ -241,7 +241,7 @@ glutExtensionSupported = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 562
 glutForceJoystickFunc = platform.createBaseFunction( 
-    'glutForceJoystickFunc', dll=platform.GLUT, resultType=None, 
+    'glutForceJoystickFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutForceJoystickFunc(  ) -> None', 
     argNames=(),
@@ -250,7 +250,7 @@ glutForceJoystickFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 412
 glutFullScreen = platform.createBaseFunction( 
-    'glutFullScreen', dll=platform.GLUT, resultType=None, 
+    'glutFullScreen', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutFullScreen(  ) -> None', 
     argNames=(),
@@ -259,7 +259,7 @@ glutFullScreen = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 539
 glutGameModeGet = platform.createBaseFunction( 
-    'glutGameModeGet', dll=platform.GLUT, resultType=c_int, 
+    'glutGameModeGet', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[GLenum],
     doc='glutGameModeGet( GLenum(query) ) -> c_int', 
     argNames=('query',),
@@ -268,7 +268,7 @@ glutGameModeGet = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 536
 glutGameModeString = platform.createBaseFunction( 
-    'glutGameModeString', dll=platform.GLUT, resultType=None, 
+    'glutGameModeString', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[STRING],
     doc='glutGameModeString( STRING(string) ) -> None', 
     argNames=('string',),
@@ -277,7 +277,7 @@ glutGameModeString = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 491
 glutGet = platform.createBaseFunction( 
-    'glutGet', dll=platform.GLUT, resultType=c_int, 
+    'glutGet', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[GLenum],
     doc='glutGet( GLenum(query) ) -> c_int', 
     argNames=('query',),
@@ -286,7 +286,7 @@ glutGet = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 554
 glutGetColor = platform.createBaseFunction( 
-    'glutGetColor', dll=platform.GLUT, resultType=GLfloat, 
+    'glutGetColor', dll=platform.PLATFORM.GLUT, resultType=GLfloat, 
     argTypes=[c_int,c_int],
     doc='glutGetColor( c_int(color), c_int(component) ) -> GLfloat', 
     argNames=('color', 'component'),
@@ -295,7 +295,7 @@ glutGetColor = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 443
 glutGetMenu = platform.createBaseFunction( 
-    'glutGetMenu', dll=platform.GLUT, resultType=c_int, 
+    'glutGetMenu', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[],
     doc='glutGetMenu(  ) -> c_int', 
     argNames=(),
@@ -304,7 +304,7 @@ glutGetMenu = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 493
 glutGetModifiers = platform.createBaseFunction( 
-    'glutGetModifiers', dll=platform.GLUT, resultType=c_int, 
+    'glutGetModifiers', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[],
     doc='glutGetModifiers(  ) -> c_int', 
     argNames=(),
@@ -313,7 +313,7 @@ glutGetModifiers = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 402
 glutGetWindow = platform.createBaseFunction( 
-    'glutGetWindow', dll=platform.GLUT, resultType=c_int, 
+    'glutGetWindow', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[],
     doc='glutGetWindow(  ) -> c_int', 
     argNames=(),
@@ -322,7 +322,7 @@ glutGetWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 436
 glutHideOverlay = platform.createBaseFunction( 
-    'glutHideOverlay', dll=platform.GLUT, resultType=None, 
+    'glutHideOverlay', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutHideOverlay(  ) -> None', 
     argNames=(),
@@ -331,7 +331,7 @@ glutHideOverlay = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 408
 glutHideWindow = platform.createBaseFunction( 
-    'glutHideWindow', dll=platform.GLUT, resultType=None, 
+    'glutHideWindow', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutHideWindow(  ) -> None', 
     argNames=(),
@@ -340,7 +340,7 @@ glutHideWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 409
 glutIconifyWindow = platform.createBaseFunction( 
-    'glutIconifyWindow', dll=platform.GLUT, resultType=None, 
+    'glutIconifyWindow', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutIconifyWindow(  ) -> None', 
     argNames=(),
@@ -349,7 +349,7 @@ glutIconifyWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 457
 glutIdleFunc = platform.createBaseFunction( 
-    'glutIdleFunc', dll=platform.GLUT, resultType=None, 
+    'glutIdleFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None)],
     doc='glutIdleFunc( FUNCTION_TYPE(None)(callback) ) -> None', 
     argNames=('callback',),
@@ -358,7 +358,7 @@ glutIdleFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 560
 glutIgnoreKeyRepeat = platform.createBaseFunction( 
-    'glutIgnoreKeyRepeat', dll=platform.GLUT, resultType=None, 
+    'glutIgnoreKeyRepeat', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutIgnoreKeyRepeat( c_int(ignore) ) -> None', 
     argNames=('ignore',),
@@ -367,7 +367,7 @@ glutIgnoreKeyRepeat = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 384
 glutInit = platform.createBaseFunction( 
-    'glutInit', dll=platform.GLUT, resultType=None, 
+    'glutInit', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[POINTER(c_int),POINTER(STRING)],
     doc='glutInit( POINTER(c_int)(pargc), POINTER(STRING)(argv) ) -> None', 
     argNames=('pargc', 'argv'),
@@ -376,7 +376,7 @@ glutInit = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 387
 glutInitDisplayMode = platform.createBaseFunction( 
-    'glutInitDisplayMode', dll=platform.GLUT, resultType=None, 
+    'glutInitDisplayMode', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_uint],
     doc='glutInitDisplayMode( c_uint(displayMode) ) -> None', 
     argNames=('displayMode',),
@@ -385,7 +385,7 @@ glutInitDisplayMode = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 388
 glutInitDisplayString = platform.createBaseFunction( 
-    'glutInitDisplayString', dll=platform.GLUT, resultType=None, 
+    'glutInitDisplayString', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[STRING],
     doc='glutInitDisplayString( STRING(displayMode) ) -> None', 
     argNames=('displayMode',),
@@ -394,7 +394,7 @@ glutInitDisplayString = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 385
 glutInitWindowPosition = platform.createBaseFunction( 
-    'glutInitWindowPosition', dll=platform.GLUT, resultType=None, 
+    'glutInitWindowPosition', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,c_int],
     doc='glutInitWindowPosition( c_int(x), c_int(y) ) -> None', 
     argNames=('x', 'y'),
@@ -403,7 +403,7 @@ glutInitWindowPosition = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 386
 glutInitWindowSize = platform.createBaseFunction( 
-    'glutInitWindowSize', dll=platform.GLUT, resultType=None, 
+    'glutInitWindowSize', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,c_int],
     doc='glutInitWindowSize( c_int(width), c_int(height) ) -> None', 
     argNames=('width', 'height'),
@@ -412,7 +412,7 @@ glutInitWindowSize = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 474
 glutJoystickFunc = platform.createBaseFunction( 
-    'glutJoystickFunc', dll=platform.GLUT, resultType=None, 
+    'glutJoystickFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_uint, c_int, c_int, c_int),c_int],
     doc='glutJoystickFunc( FUNCTION_TYPE(None, c_uint, c_int, c_int, c_int)(callback), c_int(pollInterval) ) -> None', 
     argNames=('callback', 'pollInterval'),
@@ -421,7 +421,7 @@ glutJoystickFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 462
 glutKeyboardFunc = platform.createBaseFunction( 
-    'glutKeyboardFunc', dll=platform.GLUT, resultType=None, 
+    'glutKeyboardFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_ubyte, c_int, c_int)],
     doc='glutKeyboardFunc( FUNCTION_TYPE(None, c_ubyte, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -430,7 +430,7 @@ glutKeyboardFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 472
 glutKeyboardUpFunc = platform.createBaseFunction( 
-    'glutKeyboardUpFunc', dll=platform.GLUT, resultType=None, 
+    'glutKeyboardUpFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_ubyte, c_int, c_int)],
     doc='glutKeyboardUpFunc( FUNCTION_TYPE(None, c_ubyte, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -439,7 +439,7 @@ glutKeyboardUpFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 494
 glutLayerGet = platform.createBaseFunction( 
-    'glutLayerGet', dll=platform.GLUT, resultType=c_int, 
+    'glutLayerGet', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[GLenum],
     doc='glutLayerGet( GLenum(query) ) -> c_int', 
     argNames=('query',),
@@ -448,7 +448,7 @@ glutLayerGet = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 538
 glutLeaveGameMode = platform.createBaseFunction( 
-    'glutLeaveGameMode', dll=platform.GLUT, resultType=None, 
+    'glutLeaveGameMode', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutLeaveGameMode(  ) -> None', 
     argNames=(),
@@ -457,7 +457,7 @@ glutLeaveGameMode = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 393
 glutMainLoop = platform.createBaseFunction( 
-    'glutMainLoop', dll=platform.GLUT, resultType=None, 
+    'glutMainLoop', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutMainLoop(  ) -> None', 
     argNames=(),
@@ -466,7 +466,7 @@ glutMainLoop = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 475
 glutMenuStateFunc = platform.createBaseFunction( 
-    'glutMenuStateFunc', dll=platform.GLUT, resultType=None, 
+    'glutMenuStateFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int)],
     doc='glutMenuStateFunc( FUNCTION_TYPE(None, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -475,7 +475,7 @@ glutMenuStateFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 476
 glutMenuStatusFunc = platform.createBaseFunction( 
-    'glutMenuStatusFunc', dll=platform.GLUT, resultType=None, 
+    'glutMenuStatusFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int, c_int)],
     doc='glutMenuStatusFunc( FUNCTION_TYPE(None, c_int, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -484,7 +484,7 @@ glutMenuStatusFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 468
 glutMotionFunc = platform.createBaseFunction( 
-    'glutMotionFunc', dll=platform.GLUT, resultType=None, 
+    'glutMotionFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int)],
     doc='glutMotionFunc( FUNCTION_TYPE(None, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -493,7 +493,7 @@ glutMotionFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 467
 glutMouseFunc = platform.createBaseFunction( 
-    'glutMouseFunc', dll=platform.GLUT, resultType=None, 
+    'glutMouseFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int, c_int, c_int)],
     doc='glutMouseFunc( FUNCTION_TYPE(None, c_int, c_int, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -502,7 +502,7 @@ glutMouseFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 477
 glutOverlayDisplayFunc = platform.createBaseFunction( 
-    'glutOverlayDisplayFunc', dll=platform.GLUT, resultType=None, 
+    'glutOverlayDisplayFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None)],
     doc='glutOverlayDisplayFunc( FUNCTION_TYPE(None)(callback) ) -> None', 
     argNames=('callback',),
@@ -511,7 +511,7 @@ glutOverlayDisplayFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 469
 glutPassiveMotionFunc = platform.createBaseFunction( 
-    'glutPassiveMotionFunc', dll=platform.GLUT, resultType=None, 
+    'glutPassiveMotionFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int)],
     doc='glutPassiveMotionFunc( FUNCTION_TYPE(None, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -520,7 +520,7 @@ glutPassiveMotionFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 411
 glutPopWindow = platform.createBaseFunction( 
-    'glutPopWindow', dll=platform.GLUT, resultType=None, 
+    'glutPopWindow', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutPopWindow(  ) -> None', 
     argNames=(),
@@ -529,7 +529,7 @@ glutPopWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 406
 glutPositionWindow = platform.createBaseFunction( 
-    'glutPositionWindow', dll=platform.GLUT, resultType=None, 
+    'glutPositionWindow', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,c_int],
     doc='glutPositionWindow( c_int(x), c_int(y) ) -> None', 
     argNames=('x', 'y'),
@@ -538,7 +538,7 @@ glutPositionWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 433
 glutPostOverlayRedisplay = platform.createBaseFunction( 
-    'glutPostOverlayRedisplay', dll=platform.GLUT, resultType=None, 
+    'glutPostOverlayRedisplay', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutPostOverlayRedisplay(  ) -> None', 
     argNames=(),
@@ -547,7 +547,7 @@ glutPostOverlayRedisplay = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 418
 glutPostRedisplay = platform.createBaseFunction( 
-    'glutPostRedisplay', dll=platform.GLUT, resultType=None, 
+    'glutPostRedisplay', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutPostRedisplay(  ) -> None', 
     argNames=(),
@@ -556,7 +556,7 @@ glutPostRedisplay = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 434
 glutPostWindowOverlayRedisplay = platform.createBaseFunction( 
-    'glutPostWindowOverlayRedisplay', dll=platform.GLUT, resultType=None, 
+    'glutPostWindowOverlayRedisplay', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutPostWindowOverlayRedisplay( c_int(window) ) -> None', 
     argNames=('window',),
@@ -565,7 +565,7 @@ glutPostWindowOverlayRedisplay = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 417
 glutPostWindowRedisplay = platform.createBaseFunction( 
-    'glutPostWindowRedisplay', dll=platform.GLUT, resultType=None, 
+    'glutPostWindowRedisplay', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutPostWindowRedisplay( c_int(window) ) -> None', 
     argNames=('window',),
@@ -574,7 +574,7 @@ glutPostWindowRedisplay = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 410
 glutPushWindow = platform.createBaseFunction( 
-    'glutPushWindow', dll=platform.GLUT, resultType=None, 
+    'glutPushWindow', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutPushWindow(  ) -> None', 
     argNames=(),
@@ -583,7 +583,7 @@ glutPushWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 449
 glutRemoveMenuItem = platform.createBaseFunction( 
-    'glutRemoveMenuItem', dll=platform.GLUT, resultType=None, 
+    'glutRemoveMenuItem', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutRemoveMenuItem( c_int(item) ) -> None', 
     argNames=('item',),
@@ -592,7 +592,7 @@ glutRemoveMenuItem = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 431
 glutRemoveOverlay = platform.createBaseFunction( 
-    'glutRemoveOverlay', dll=platform.GLUT, resultType=None, 
+    'glutRemoveOverlay', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutRemoveOverlay(  ) -> None', 
     argNames=(),
@@ -601,7 +601,7 @@ glutRemoveOverlay = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 568
 glutReportErrors = platform.createBaseFunction( 
-    'glutReportErrors', dll=platform.GLUT, resultType=None, 
+    'glutReportErrors', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutReportErrors(  ) -> None', 
     argNames=(),
@@ -610,7 +610,7 @@ glutReportErrors = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 464
 glutReshapeFunc = platform.createBaseFunction( 
-    'glutReshapeFunc', dll=platform.GLUT, resultType=None, 
+    'glutReshapeFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int)],
     doc='glutReshapeFunc( FUNCTION_TYPE(None, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -619,7 +619,7 @@ glutReshapeFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 405
 glutReshapeWindow = platform.createBaseFunction( 
-    'glutReshapeWindow', dll=platform.GLUT, resultType=None, 
+    'glutReshapeWindow', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,c_int],
     doc='glutReshapeWindow( c_int(width), c_int(height) ) -> None', 
     argNames=('width', 'height'),
@@ -628,7 +628,7 @@ glutReshapeWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 553
 glutSetColor = platform.createBaseFunction( 
-    'glutSetColor', dll=platform.GLUT, resultType=None, 
+    'glutSetColor', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,GLfloat,GLfloat,GLfloat],
     doc='glutSetColor( c_int(color), GLfloat(red), GLfloat(green), GLfloat(blue) ) -> None', 
     argNames=('color', 'red', 'green', 'blue'),
@@ -637,7 +637,7 @@ glutSetColor = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 425
 glutSetCursor = platform.createBaseFunction( 
-    'glutSetCursor', dll=platform.GLUT, resultType=None, 
+    'glutSetCursor', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutSetCursor( c_int(cursor) ) -> None', 
     argNames=('cursor',),
@@ -646,7 +646,7 @@ glutSetCursor = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 404
 glutSetIconTitle = platform.createBaseFunction( 
-    'glutSetIconTitle', dll=platform.GLUT, resultType=None, 
+    'glutSetIconTitle', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[STRING],
     doc='glutSetIconTitle( STRING(title) ) -> None', 
     argNames=('title',),
@@ -655,7 +655,7 @@ glutSetIconTitle = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 561
 glutSetKeyRepeat = platform.createBaseFunction( 
-    'glutSetKeyRepeat', dll=platform.GLUT, resultType=None, 
+    'glutSetKeyRepeat', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutSetKeyRepeat( c_int(repeatMode) ) -> None', 
     argNames=('repeatMode',),
@@ -664,7 +664,7 @@ glutSetKeyRepeat = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 444
 glutSetMenu = platform.createBaseFunction( 
-    'glutSetMenu', dll=platform.GLUT, resultType=None, 
+    'glutSetMenu', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutSetMenu( c_int(menu) ) -> None', 
     argNames=('menu',),
@@ -673,7 +673,7 @@ glutSetMenu = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 401
 glutSetWindow = platform.createBaseFunction( 
-    'glutSetWindow', dll=platform.GLUT, resultType=None, 
+    'glutSetWindow', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int],
     doc='glutSetWindow( c_int(window) ) -> None', 
     argNames=('window',),
@@ -682,7 +682,7 @@ glutSetWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 403
 glutSetWindowTitle = platform.createBaseFunction( 
-    'glutSetWindowTitle', dll=platform.GLUT, resultType=None, 
+    'glutSetWindowTitle', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[STRING],
     doc='glutSetWindowTitle( STRING(title) ) -> None', 
     argNames=('title',),
@@ -691,7 +691,7 @@ glutSetWindowTitle = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 545
 glutSetupVideoResizing = platform.createBaseFunction( 
-    'glutSetupVideoResizing', dll=platform.GLUT, resultType=None, 
+    'glutSetupVideoResizing', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutSetupVideoResizing(  ) -> None', 
     argNames=(),
@@ -700,7 +700,7 @@ glutSetupVideoResizing = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 435
 glutShowOverlay = platform.createBaseFunction( 
-    'glutShowOverlay', dll=platform.GLUT, resultType=None, 
+    'glutShowOverlay', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutShowOverlay(  ) -> None', 
     argNames=(),
@@ -709,7 +709,7 @@ glutShowOverlay = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 407
 glutShowWindow = platform.createBaseFunction( 
-    'glutShowWindow', dll=platform.GLUT, resultType=None, 
+    'glutShowWindow', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutShowWindow(  ) -> None', 
     argNames=(),
@@ -718,7 +718,7 @@ glutShowWindow = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 514
 glutSolidCone = platform.createBaseFunction( 
-    'glutSolidCone', dll=platform.GLUT, resultType=None, 
+    'glutSolidCone', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble,GLdouble,GLint,GLint],
     doc='glutSolidCone( GLdouble(base), GLdouble(height), GLint(slices), GLint(stacks) ) -> None', 
     argNames=('base', 'height', 'slices', 'stacks'),
@@ -727,7 +727,7 @@ glutSolidCone = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 510
 glutSolidCube = platform.createBaseFunction( 
-    'glutSolidCube', dll=platform.GLUT, resultType=None, 
+    'glutSolidCube', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble],
     doc='glutSolidCube( GLdouble(size) ) -> None', 
     argNames=('size',),
@@ -736,7 +736,7 @@ glutSolidCube = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 519
 glutSolidDodecahedron = platform.createBaseFunction( 
-    'glutSolidDodecahedron', dll=platform.GLUT, resultType=None, 
+    'glutSolidDodecahedron', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutSolidDodecahedron(  ) -> None', 
     argNames=(),
@@ -745,7 +745,7 @@ glutSolidDodecahedron = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 525
 glutSolidIcosahedron = platform.createBaseFunction( 
-    'glutSolidIcosahedron', dll=platform.GLUT, resultType=None, 
+    'glutSolidIcosahedron', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutSolidIcosahedron(  ) -> None', 
     argNames=(),
@@ -754,7 +754,7 @@ glutSolidIcosahedron = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 521
 glutSolidOctahedron = platform.createBaseFunction( 
-    'glutSolidOctahedron', dll=platform.GLUT, resultType=None, 
+    'glutSolidOctahedron', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutSolidOctahedron(  ) -> None', 
     argNames=(),
@@ -763,7 +763,7 @@ glutSolidOctahedron = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 512
 glutSolidSphere = platform.createBaseFunction( 
-    'glutSolidSphere', dll=platform.GLUT, resultType=None, 
+    'glutSolidSphere', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble,GLint,GLint],
     doc='glutSolidSphere( GLdouble(radius), GLint(slices), GLint(stacks) ) -> None', 
     argNames=('radius', 'slices', 'stacks'),
@@ -772,7 +772,7 @@ glutSolidSphere = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 531
 glutSolidTeapot = platform.createBaseFunction( 
-    'glutSolidTeapot', dll=platform.GLUT, resultType=None, 
+    'glutSolidTeapot', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble],
     doc='glutSolidTeapot( GLdouble(size) ) -> None', 
     argNames=('size',),
@@ -781,7 +781,7 @@ glutSolidTeapot = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 523
 glutSolidTetrahedron = platform.createBaseFunction( 
-    'glutSolidTetrahedron', dll=platform.GLUT, resultType=None, 
+    'glutSolidTetrahedron', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutSolidTetrahedron(  ) -> None', 
     argNames=(),
@@ -790,7 +790,7 @@ glutSolidTetrahedron = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 517
 glutSolidTorus = platform.createBaseFunction( 
-    'glutSolidTorus', dll=platform.GLUT, resultType=None, 
+    'glutSolidTorus', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble,GLdouble,GLint,GLint],
     doc='glutSolidTorus( GLdouble(innerRadius), GLdouble(outerRadius), GLint(sides), GLint(rings) ) -> None', 
     argNames=('innerRadius', 'outerRadius', 'sides', 'rings'),
@@ -799,7 +799,7 @@ glutSolidTorus = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 482
 glutSpaceballButtonFunc = platform.createBaseFunction( 
-    'glutSpaceballButtonFunc', dll=platform.GLUT, resultType=None, 
+    'glutSpaceballButtonFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int)],
     doc='glutSpaceballButtonFunc( FUNCTION_TYPE(None, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -808,7 +808,7 @@ glutSpaceballButtonFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 480
 glutSpaceballMotionFunc = platform.createBaseFunction( 
-    'glutSpaceballMotionFunc', dll=platform.GLUT, resultType=None, 
+    'glutSpaceballMotionFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int, c_int)],
     doc='glutSpaceballMotionFunc( FUNCTION_TYPE(None, c_int, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -817,7 +817,7 @@ glutSpaceballMotionFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 481
 glutSpaceballRotateFunc = platform.createBaseFunction( 
-    'glutSpaceballRotateFunc', dll=platform.GLUT, resultType=None, 
+    'glutSpaceballRotateFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int, c_int)],
     doc='glutSpaceballRotateFunc( FUNCTION_TYPE(None, c_int, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -826,7 +826,7 @@ glutSpaceballRotateFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 463
 glutSpecialFunc = platform.createBaseFunction( 
-    'glutSpecialFunc', dll=platform.GLUT, resultType=None, 
+    'glutSpecialFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int, c_int)],
     doc='glutSpecialFunc( FUNCTION_TYPE(None, c_int, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -835,7 +835,7 @@ glutSpecialFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 473
 glutSpecialUpFunc = platform.createBaseFunction( 
-    'glutSpecialUpFunc', dll=platform.GLUT, resultType=None, 
+    'glutSpecialUpFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int, c_int)],
     doc='glutSpecialUpFunc( FUNCTION_TYPE(None, c_int, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -844,7 +844,7 @@ glutSpecialUpFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 546
 glutStopVideoResizing = platform.createBaseFunction( 
-    'glutStopVideoResizing', dll=platform.GLUT, resultType=None, 
+    'glutStopVideoResizing', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutStopVideoResizing(  ) -> None', 
     argNames=(),
@@ -853,7 +853,7 @@ glutStopVideoResizing = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 501
 glutStrokeCharacter = platform.createBaseFunction( 
-    'glutStrokeCharacter', dll=platform.GLUT, resultType=None, 
+    'glutStrokeCharacter', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_void_p,c_int],
     doc='glutStrokeCharacter( c_void_p(font), c_int(character) ) -> None', 
     argNames=('font', 'character'),
@@ -862,7 +862,7 @@ glutStrokeCharacter = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 504
 glutStrokeLength = platform.createBaseFunction( 
-    'glutStrokeLength', dll=platform.GLUT, resultType=c_int, 
+    'glutStrokeLength', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[c_void_p,POINTER(c_ubyte)],
     doc='glutStrokeLength( c_void_p(font), POINTER(c_ubyte)(string) ) -> c_int', 
     argNames=('font', 'string'),
@@ -871,7 +871,7 @@ glutStrokeLength = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 502
 glutStrokeWidth = platform.createBaseFunction( 
-    'glutStrokeWidth', dll=platform.GLUT, resultType=c_int, 
+    'glutStrokeWidth', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[c_void_p,c_int],
     doc='glutStrokeWidth( c_void_p(font), c_int(character) ) -> c_int', 
     argNames=('font', 'character'),
@@ -880,7 +880,7 @@ glutStrokeWidth = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 419
 glutSwapBuffers = platform.createBaseFunction( 
-    'glutSwapBuffers', dll=platform.GLUT, resultType=None, 
+    'glutSwapBuffers', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutSwapBuffers(  ) -> None', 
     argNames=(),
@@ -889,7 +889,7 @@ glutSwapBuffers = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 486
 glutTabletButtonFunc = platform.createBaseFunction( 
-    'glutTabletButtonFunc', dll=platform.GLUT, resultType=None, 
+    'glutTabletButtonFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int, c_int, c_int)],
     doc='glutTabletButtonFunc( FUNCTION_TYPE(None, c_int, c_int, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -898,7 +898,7 @@ glutTabletButtonFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 485
 glutTabletMotionFunc = platform.createBaseFunction( 
-    'glutTabletMotionFunc', dll=platform.GLUT, resultType=None, 
+    'glutTabletMotionFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int, c_int)],
     doc='glutTabletMotionFunc( FUNCTION_TYPE(None, c_int, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -907,7 +907,7 @@ glutTabletMotionFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 456
 glutTimerFunc = platform.createBaseFunction( 
-    'glutTimerFunc', dll=platform.GLUT, resultType=None, 
+    'glutTimerFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_uint,CALLBACK_FUNCTION_TYPE(None, c_int),c_int],
     doc='glutTimerFunc( c_uint(time), FUNCTION_TYPE(None, c_int)(callback), c_int(value) ) -> None', 
     argNames=('time', 'callback', 'value'),
@@ -916,7 +916,7 @@ glutTimerFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 432
 glutUseLayer = platform.createBaseFunction( 
-    'glutUseLayer', dll=platform.GLUT, resultType=None, 
+    'glutUseLayer', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLenum],
     doc='glutUseLayer( GLenum(layer) ) -> None', 
     argNames=('layer',),
@@ -925,7 +925,7 @@ glutUseLayer = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 548
 glutVideoPan = platform.createBaseFunction( 
-    'glutVideoPan', dll=platform.GLUT, resultType=None, 
+    'glutVideoPan', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,c_int,c_int,c_int],
     doc='glutVideoPan( c_int(x), c_int(y), c_int(width), c_int(height) ) -> None', 
     argNames=('x', 'y', 'width', 'height'),
@@ -934,7 +934,7 @@ glutVideoPan = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 547
 glutVideoResize = platform.createBaseFunction( 
-    'glutVideoResize', dll=platform.GLUT, resultType=None, 
+    'glutVideoResize', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,c_int,c_int,c_int],
     doc='glutVideoResize( c_int(x), c_int(y), c_int(width), c_int(height) ) -> None', 
     argNames=('x', 'y', 'width', 'height'),
@@ -943,7 +943,7 @@ glutVideoResize = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 544
 glutVideoResizeGet = platform.createBaseFunction( 
-    'glutVideoResizeGet', dll=platform.GLUT, resultType=c_int, 
+    'glutVideoResizeGet', dll=platform.PLATFORM.GLUT, resultType=c_int, 
     argTypes=[GLenum],
     doc='glutVideoResizeGet( GLenum(query) ) -> c_int', 
     argNames=('query',),
@@ -952,7 +952,7 @@ glutVideoResizeGet = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 465
 glutVisibilityFunc = platform.createBaseFunction( 
-    'glutVisibilityFunc', dll=platform.GLUT, resultType=None, 
+    'glutVisibilityFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int)],
     doc='glutVisibilityFunc( FUNCTION_TYPE(None, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -961,7 +961,7 @@ glutVisibilityFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 424
 glutWarpPointer = platform.createBaseFunction( 
-    'glutWarpPointer', dll=platform.GLUT, resultType=None, 
+    'glutWarpPointer', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[c_int,c_int],
     doc='glutWarpPointer( c_int(x), c_int(y) ) -> None', 
     argNames=('x', 'y'),
@@ -970,7 +970,7 @@ glutWarpPointer = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 478
 glutWindowStatusFunc = platform.createBaseFunction( 
-    'glutWindowStatusFunc', dll=platform.GLUT, resultType=None, 
+    'glutWindowStatusFunc', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[CALLBACK_FUNCTION_TYPE(None, c_int)],
     doc='glutWindowStatusFunc( FUNCTION_TYPE(None, c_int)(callback) ) -> None', 
     argNames=('callback',),
@@ -979,7 +979,7 @@ glutWindowStatusFunc = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 513
 glutWireCone = platform.createBaseFunction( 
-    'glutWireCone', dll=platform.GLUT, resultType=None, 
+    'glutWireCone', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble,GLdouble,GLint,GLint],
     doc='glutWireCone( GLdouble(base), GLdouble(height), GLint(slices), GLint(stacks) ) -> None', 
     argNames=('base', 'height', 'slices', 'stacks'),
@@ -988,7 +988,7 @@ glutWireCone = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 509
 glutWireCube = platform.createBaseFunction( 
-    'glutWireCube', dll=platform.GLUT, resultType=None, 
+    'glutWireCube', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble],
     doc='glutWireCube( GLdouble(size) ) -> None', 
     argNames=('size',),
@@ -997,7 +997,7 @@ glutWireCube = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 518
 glutWireDodecahedron = platform.createBaseFunction( 
-    'glutWireDodecahedron', dll=platform.GLUT, resultType=None, 
+    'glutWireDodecahedron', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutWireDodecahedron(  ) -> None', 
     argNames=(),
@@ -1006,7 +1006,7 @@ glutWireDodecahedron = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 524
 glutWireIcosahedron = platform.createBaseFunction( 
-    'glutWireIcosahedron', dll=platform.GLUT, resultType=None, 
+    'glutWireIcosahedron', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutWireIcosahedron(  ) -> None', 
     argNames=(),
@@ -1015,7 +1015,7 @@ glutWireIcosahedron = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 520
 glutWireOctahedron = platform.createBaseFunction( 
-    'glutWireOctahedron', dll=platform.GLUT, resultType=None, 
+    'glutWireOctahedron', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutWireOctahedron(  ) -> None', 
     argNames=(),
@@ -1024,7 +1024,7 @@ glutWireOctahedron = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 511
 glutWireSphere = platform.createBaseFunction( 
-    'glutWireSphere', dll=platform.GLUT, resultType=None, 
+    'glutWireSphere', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble,GLint,GLint],
     doc='glutWireSphere( GLdouble(radius), GLint(slices), GLint(stacks) ) -> None', 
     argNames=('radius', 'slices', 'stacks'),
@@ -1033,7 +1033,7 @@ glutWireSphere = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 530
 glutWireTeapot = platform.createBaseFunction( 
-    'glutWireTeapot', dll=platform.GLUT, resultType=None, 
+    'glutWireTeapot', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble],
     doc='glutWireTeapot( GLdouble(size) ) -> None', 
     argNames=('size',),
@@ -1042,7 +1042,7 @@ glutWireTeapot = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 522
 glutWireTetrahedron = platform.createBaseFunction( 
-    'glutWireTetrahedron', dll=platform.GLUT, resultType=None, 
+    'glutWireTetrahedron', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[],
     doc='glutWireTetrahedron(  ) -> None', 
     argNames=(),
@@ -1051,7 +1051,7 @@ glutWireTetrahedron = platform.createBaseFunction(
 
 # /usr/include/GL/freeglut_std.h 516
 glutWireTorus = platform.createBaseFunction( 
-    'glutWireTorus', dll=platform.GLUT, resultType=None, 
+    'glutWireTorus', dll=platform.PLATFORM.GLUT, resultType=None, 
     argTypes=[GLdouble,GLdouble,GLint,GLint],
     doc='glutWireTorus( GLdouble(innerRadius), GLdouble(outerRadius), GLint(sides), GLint(rings) ) -> None', 
     argNames=('innerRadius', 'outerRadius', 'sides', 'rings'),

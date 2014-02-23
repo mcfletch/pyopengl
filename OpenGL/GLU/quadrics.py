@@ -1,6 +1,6 @@
 """Wrapper/Implementation of the GLU quadrics object for PyOpenGL"""
 from OpenGL.raw import GLU as _simple
-from OpenGL.platform import GLU,createBaseFunction, PLATFORM
+from OpenGL.platform import createBaseFunction, PLATFORM
 import ctypes
 
 class GLUQuadric( _simple.GLUquadric ):
@@ -27,7 +27,7 @@ class GLUQuadric( _simple.GLUquadric ):
             cCallback = callbackType( function )
         else:
             cCallback = function
-        GLU.gluQuadricCallback( self, which, cCallback )
+        PLATFORM.GLU.gluQuadricCallback( self, which, cCallback )
         # XXX catch errors!
         if getattr( self, 'callbacks', None ) is None:
             self.callbacks = {}
@@ -41,7 +41,7 @@ def gluQuadricCallback( quadric, which=_simple.GLU_ERROR, function=None ):
 
 # Override to produce instances of the sub-class...
 gluNewQuadric = createBaseFunction( 
-    'gluNewQuadric', dll=GLU, resultType=ctypes.POINTER(GLUQuadric), 
+    'gluNewQuadric', dll=PLATFORM.GLU, resultType=ctypes.POINTER(GLUQuadric), 
     argTypes=[],
     doc="""gluNewQuadric(  ) -> GLUQuadric
     

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLX_VERSION_GLX_1_0'
 def _f( function ):
-    return _p.createFunction( function,_p.GLX,'GLX_VERSION_GLX_1_0',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_VERSION_GLX_1_0',error_checker=_errors._error_checker)
 GLX_ACCUM_ALPHA_SIZE=_C('GLX_ACCUM_ALPHA_SIZE',17)
 GLX_ACCUM_BLUE_SIZE=_C('GLX_ACCUM_BLUE_SIZE',16)
 GLX_ACCUM_GREEN_SIZE=_C('GLX_ACCUM_GREEN_SIZE',15)

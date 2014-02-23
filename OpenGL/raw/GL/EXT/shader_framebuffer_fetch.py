@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_shader_framebuffer_fetch'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_shader_framebuffer_fetch',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_shader_framebuffer_fetch',error_checker=_errors._error_checker)
 GL_FRAGMENT_SHADER_DISCARDS_SAMPLES_EXT=_C('GL_FRAGMENT_SHADER_DISCARDS_SAMPLES_EXT',0x8A52)
 

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_blend_minmax'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_blend_minmax',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_blend_minmax',error_checker=_errors._error_checker)
 GL_BLEND_EQUATION_EXT=_C('GL_BLEND_EQUATION_EXT',0x8009)
 GL_FUNC_ADD_EXT=_C('GL_FUNC_ADD_EXT',0x8006)
 GL_MAX_EXT=_C('GL_MAX_EXT',0x8008)

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGI_color_matrix'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGI_color_matrix',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGI_color_matrix',error_checker=_errors._error_checker)
 GL_COLOR_MATRIX_SGI=_C('GL_COLOR_MATRIX_SGI',0x80B1)
 GL_COLOR_MATRIX_STACK_DEPTH_SGI=_C('GL_COLOR_MATRIX_STACK_DEPTH_SGI',0x80B2)
 GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI=_C('GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI',0x80B3)

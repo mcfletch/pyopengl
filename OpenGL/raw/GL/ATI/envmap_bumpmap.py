@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_ATI_envmap_bumpmap'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_ATI_envmap_bumpmap',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ATI_envmap_bumpmap',error_checker=_errors._error_checker)
 GL_BUMP_ENVMAP_ATI=_C('GL_BUMP_ENVMAP_ATI',0x877B)
 GL_BUMP_NUM_TEX_UNITS_ATI=_C('GL_BUMP_NUM_TEX_UNITS_ATI',0x8777)
 GL_BUMP_ROT_MATRIX_ATI=_C('GL_BUMP_ROT_MATRIX_ATI',0x8775)

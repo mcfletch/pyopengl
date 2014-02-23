@@ -10,6 +10,6 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_EXT_texture_format_BGRA8888'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_EXT_texture_format_BGRA8888',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_EXT_texture_format_BGRA8888',error_checker=_errors._error_checker)
 GL_BGRA_EXT=_C('GL_BGRA_EXT',0x80E1)
 

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_SGIS_point_line_texgen'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_SGIS_point_line_texgen',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIS_point_line_texgen',error_checker=_errors._error_checker)
 GL_EYE_DISTANCE_TO_LINE_SGIS=_C('GL_EYE_DISTANCE_TO_LINE_SGIS',0x81F2)
 GL_EYE_DISTANCE_TO_POINT_SGIS=_C('GL_EYE_DISTANCE_TO_POINT_SGIS',0x81F0)
 GL_EYE_LINE_SGIS=_C('GL_EYE_LINE_SGIS',0x81F6)

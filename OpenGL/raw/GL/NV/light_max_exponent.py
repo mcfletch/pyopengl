@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_light_max_exponent'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_light_max_exponent',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_light_max_exponent',error_checker=_errors._error_checker)
 GL_MAX_SHININESS_NV=_C('GL_MAX_SHININESS_NV',0x8504)
 GL_MAX_SPOT_EXPONENT_NV=_C('GL_MAX_SPOT_EXPONENT_NV',0x8505)
 

@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_INGR_color_clamp'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_INGR_color_clamp',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_INGR_color_clamp',error_checker=_errors._error_checker)
 GL_ALPHA_MAX_CLAMP_INGR=_C('GL_ALPHA_MAX_CLAMP_INGR',0x8567)
 GL_ALPHA_MIN_CLAMP_INGR=_C('GL_ALPHA_MIN_CLAMP_INGR',0x8563)
 GL_BLUE_MAX_CLAMP_INGR=_C('GL_BLUE_MAX_CLAMP_INGR',0x8566)

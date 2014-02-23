@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_NV_gpu_program4'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_NV_gpu_program4',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_gpu_program4',error_checker=_errors._error_checker)
 GL_MAX_PROGRAM_ATTRIB_COMPONENTS_NV=_C('GL_MAX_PROGRAM_ATTRIB_COMPONENTS_NV',0x8908)
 GL_MAX_PROGRAM_GENERIC_ATTRIBS_NV=_C('GL_MAX_PROGRAM_GENERIC_ATTRIBS_NV',0x8DA5)
 GL_MAX_PROGRAM_GENERIC_RESULTS_NV=_C('GL_MAX_PROGRAM_GENERIC_RESULTS_NV',0x8DA6)

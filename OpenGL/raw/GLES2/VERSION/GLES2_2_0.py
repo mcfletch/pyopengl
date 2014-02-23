@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GLES2_VERSION_GLES2_2_0'
 def _f( function ):
-    return _p.createFunction( function,_p.GLES2,'GLES2_VERSION_GLES2_2_0',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GLES2,'GLES2_VERSION_GLES2_2_0',error_checker=_errors._error_checker)
 GL_ACTIVE_ATTRIBUTES=_C('GL_ACTIVE_ATTRIBUTES',0x8B89)
 GL_ACTIVE_ATTRIBUTE_MAX_LENGTH=_C('GL_ACTIVE_ATTRIBUTE_MAX_LENGTH',0x8B8A)
 GL_ACTIVE_TEXTURE=_C('GL_ACTIVE_TEXTURE',0x84E0)

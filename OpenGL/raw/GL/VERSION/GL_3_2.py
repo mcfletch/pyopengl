@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_3_2'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_VERSION_GL_3_2',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_VERSION_GL_3_2',error_checker=_errors._error_checker)
 GL_ALREADY_SIGNALED=_C('GL_ALREADY_SIGNALED',0x911A)
 GL_CONDITION_SATISFIED=_C('GL_CONDITION_SATISFIED',0x911C)
 GL_CONTEXT_COMPATIBILITY_PROFILE_BIT=_C('GL_CONTEXT_COMPATIBILITY_PROFILE_BIT',0x00000002)

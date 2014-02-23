@@ -29,7 +29,7 @@ from OpenGL import converters, error
 GL_INFO_LOG_LENGTH_ARB = constant.Constant( 'GL_INFO_LOG_LENGTH_ARB', 0x8B84 )
 
 glShaderSourceARB = platform.createExtensionFunction(
-    'glShaderSourceARB', dll=platform.GL,
+    'glShaderSourceARB', dll=platform.PLATFORM.GL,
     resultType=None,
     argTypes=(_types.GLhandleARB, _types.GLsizei, ctypes.POINTER(ctypes.c_char_p), arrays.GLintArray,),
     doc = 'glShaderSourceARB( GLhandleARB(shaderObj), [bytes(string),...] ) -> None',

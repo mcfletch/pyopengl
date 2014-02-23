@@ -10,7 +10,7 @@ from OpenGL.constant import Constant as _C
 import ctypes
 _EXTENSION_NAME = 'GL_OES_required_internalformat'
 def _f( function ):
-    return _p.createFunction( function,_p.GL,'GL_OES_required_internalformat',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_OES_required_internalformat',error_checker=_errors._error_checker)
 GL_ALPHA8_OES=_C('GL_ALPHA8_OES',0x803C)
 GL_DEPTH24_STENCIL8_OES=_C('GL_DEPTH24_STENCIL8_OES',0x88F0)
 GL_DEPTH_COMPONENT16_OES=_C('GL_DEPTH_COMPONENT16_OES',0x81A5)
