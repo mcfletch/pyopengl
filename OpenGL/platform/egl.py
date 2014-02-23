@@ -54,5 +54,3 @@ class EGLPlatform( baseplatform.BasePlatform ):
     GetCurrentContext = CurrentContextIsValid = staticmethod(
         EGL.eglGetCurrentContext
     )
-    
-    safeGetError = staticmethod( OpenGL.glGetError )

@@ -28,34 +28,48 @@ class DarwinPlatform( baseplatform.BasePlatform ):
     """Darwin (OSX) platform implementation"""
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )
     EXTENSIONS_USE_BASE_FUNCTIONS = True
+
+    @baseplatform.lazy_property
+    def GL(self):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'OpenGL', 
+                mode=ctypes.RTLD_GLOBAL 
+            ) 
+        except OSError as err:
+            raise ImportError("Unable to load OpenGL library", *err.args)
+    @baseplatform.lazy_property
+    def GLU(self): return self.GL
+    @baseplatform.lazy_property
+    def CGL(self): return self.GL
+    @baseplatform.lazy_property
+    def OpenGL(self): return self.GL
+
+    @baseplatform.lazy_property
+    def GLUT( self ):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'GLUT', 
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            return None
+    @baseplatform.lazy_property
+    def GLE(self): return self.GLUT
+
     
-    # Get the pointers to the libraries...
-    try:
-        OpenGL = ctypesloader.loadLibrary(
-            ctypes.cdll,
-            'OpenGL', 
-            mode=ctypes.RTLD_GLOBAL 
-        )
-    except OSError as err:
-        raise ImportError("Unable to load OpenGL library", *err.args)
-    # CGL provides the windowing environment functionality
-    # but it is built into the GL libs.
-    GL = GLU = CGL = OpenGL
-
-    # glut shouldn't need to be global, but just in case a dependent library makes
-    # the same assumption GLUT does...
-    GLUT = ctypesloader.loadLibrary(
-        ctypes.cdll,
-        'GLUT', 
-        mode=ctypes.RTLD_GLOBAL 
-    )
-
-    # GLE is handled by GLUT under OS X
-    GLE = GLUT
-
     GetCurrentContext = CurrentContextIsValid = staticmethod( 
         CGL.CGLGetCurrentContext 
     )
+    # This loads the GLX functions from the GL .so, not sure if that's
+    # really kosher...
+    @baseplatform.lazy_property
+    def GetCurrentContext( self ):
+        return self.CGL.CGLGetCurrentContext 
+    @baseplatform.lazy_property
+    def CurrentContextIsValid( self ): return self.GetCurrentContext
 
     def getGLUTFontPointer( self, constant ):
         """Platform specific function to retrieve a GLUT font pointer
@@ -73,19 +87,8 @@ class DarwinPlatform( baseplatform.BasePlatform ):
         pointer = ctypes.c_void_p.in_dll( self.GLUT, internal )
         return ctypes.c_void_p(ctypes.addressof(pointer))
 
-    def safeGetError( self ):
-        """Provide context-not-present-safe error-checking
-        
-        Under OS-X an attempt to retrieve error without checking 
-        context will bus-error.  This function checks for a valid
-        context before running glGetError
-        
-        Note:
-            This is a likely candidate for rewriting in C, as it
-            is called for every almost function in the system!
-        """
-        if self.CurrentContextIsValid():
-            return glGetError()
-        return None
+    @baseplatform.lazy_property
+    def glGetError( self ):
+        return self.GL.glGetError
 
 glGetError = DarwinPlatform.OpenGL.glGetError

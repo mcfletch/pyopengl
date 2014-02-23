@@ -7,6 +7,14 @@ import sys
 from OpenGL import _configflags
 from OpenGL import logs, MODULE_ANNOTATIONS
 
+class lazy_property( object ):
+    def __init__( self, function ):
+        self.fget = function 
+    def __get__( self, obj, cls ):
+        value = self.fget( obj )
+        setattr( obj, self.fget.__name__, value)
+        return value 
+
 class _CheckContext( object ):
     def __init__( self, func, ccisvalid ):
         self.func = func 
@@ -67,7 +75,7 @@ class BasePlatform( object ):
     """
     
     EXPORTED_NAMES = [
-        'GetCurrentContext','CurrentContextIsValid','safeGetError',
+        'GetCurrentContext','CurrentContextIsValid',
         'createBaseFunction', 'createExtensionFunction', 'copyBaseFunction',
         'GL','GLU','GLUT','GLE','OpenGL','EGL','GLX','WGL','GLES1','GLES2','GLES3',
         'getGLUTFontPointer',

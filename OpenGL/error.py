@@ -173,7 +173,6 @@ if _configflags.ERROR_CHECKING:
             Attributes:
                 _registeredChecker -- the checking function enabled when 
                     not doing onBegin/onEnd processing
-                safeGetError -- platform safeGetError function as callable method
                 _currentChecker -- currently active checking function
             """
             _getErrors = None
@@ -188,6 +187,7 @@ if _configflags.ERROR_CHECKING:
                         self._registeredChecker = self._getErrors
                 else:
                     self._registeredChecker = self.nullGetError
+                self._currentChecker = self._registeredChecker
             def __bool__( self ):
                 """We are "true" if we actually do anything"""
                 if self._registeredChecker is self.nullGetError:
@@ -201,9 +201,6 @@ if _configflags.ERROR_CHECKING:
             def nullGetError( self ):
                 """Used as error-checker when no error checking should be done"""
                 return None
-            _currentChecker = _registeredChecker = safeGetError = staticmethod( 
-                platform.safeGetError 
-            )
             def glCheckError( 
                 self,
                 result,
