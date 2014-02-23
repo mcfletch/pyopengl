@@ -83,6 +83,7 @@ GLsizei = _defineType( 'GLsizei', ctypes.c_int, int )
 GLubyte = ctypes.c_ubyte
 GLubyte_3 = GLubyte * 3
 GLushort = _defineType( 'GLushort', ctypes.c_ushort, int )
+GLulong = _defineType( 'GLulong', ctypes.c_ulong, int )
 GLhandleARB = _defineType( 'GLhandleARB', ctypes.c_uint, long )
 GLhandle = _defineType( 'GLhandle', ctypes.c_uint, long )
 
