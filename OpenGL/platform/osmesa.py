@@ -170,5 +170,3 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
         internal = 'glut' + "".join( [x.title() for x in name] )
         pointer = ctypes.c_void_p.in_dll( self.GLUT, internal )
         return ctypes.c_void_p(ctypes.addressof(pointer))
-    
-    safeGetError = staticmethod( OpenGL.glGetError )
