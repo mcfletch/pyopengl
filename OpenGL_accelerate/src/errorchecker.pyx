@@ -12,6 +12,7 @@ cdef class _ErrorChecker:
     cdef public int checkContext
     cdef public object _isValid
     cdef public object _getErrors
+    cdef public int _noErrorResult 
     
     def __init__( self, platform, baseOperation, noErrorResult=0 ):
         """Initialize from a platform module/reference"""
@@ -55,7 +56,7 @@ cdef class _ErrorChecker:
                     cArguments = cArguments,
                     baseOperation = baseOperation,
                 )
-            return result
+        return result
     def onBegin( self, target=None ):
         """Called by glBegin to record the fact that glGetError won't work"""
         self.doChecks = False
