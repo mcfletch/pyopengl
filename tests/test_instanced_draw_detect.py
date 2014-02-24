@@ -3,7 +3,6 @@ from OpenGL.GLUT import *
 from OpenGL.extensions import alternate
 from OpenGL.GL.ARB.draw_instanced import *
 from OpenGL.GL.EXT.draw_instanced import *
-from OpenGL.GL.NV.draw_instanced import *
 import time
 
 def detect():
@@ -17,7 +16,7 @@ def detect():
         glDrawArraysInstanced, 
         glDrawArraysInstancedARB, 
         glDrawArraysInstancedEXT,
-        glDrawArraysInstancedNV,
+        #glDrawArraysInstancedNV, is GLES only
     )
     
     for function in functions:
