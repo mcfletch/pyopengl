@@ -237,7 +237,8 @@ if _configflags.ERROR_CHECKING:
             def onEnd( self ):
                 """Called by glEnd to record the fact that glGetError will work"""
                 self._currentChecker = self._registeredChecker
-
+else:
+    _ErrorChecker = None
 # Compatibility with PyOpenGL 2.x series
 GLUerror = GLUError
 GLerror = GLError 

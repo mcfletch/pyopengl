@@ -1,5 +1,6 @@
 """OpenGL.GL, the core GL library and extensions to it"""
 # early import of our modules to prevent import loops...
+from OpenGL import error as _error
 from OpenGL.GL.VERSION.GL_1_1 import *
 from OpenGL.GL.glget import *
 from OpenGL.GL.pointers import *
