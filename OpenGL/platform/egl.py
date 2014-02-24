@@ -26,14 +26,8 @@ class EGLPlatform( baseplatform.BasePlatform ):
             return None
     @baseplatform.lazy_property
     def GLES3(self):
-        try:
-            return ctypesloader.loadLibrary(
-                ctypes.cdll,
-                'GLESv3', 
-                mode=ctypes.RTLD_GLOBAL 
-            )
-        except OSError as err:
-            return None
+        # implementers guide says to use the same name for the DLL
+        return self.GLES2
     
     GLUT = None
     @baseplatform.lazy_property
