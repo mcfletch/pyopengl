@@ -4,7 +4,6 @@ import OpenGL
 OpenGL.USE_ACCELERATE = False
 from OpenGL.GL import *
 from OpenGL.GL.EXT.framebuffer_object import *
-from OpenGL.platform import safeGetError
 from OpenGL import error
 
 def draw ():
