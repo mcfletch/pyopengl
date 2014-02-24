@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import sys
 import pygame
 from pygame.locals import *
 from OpenGL.GL import *
@@ -18,7 +18,7 @@ def main():
         for i in range(0,50000):
             modelview_matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
             if not i % 500:
-                print('.', end=' ')
+                sys.stdout.write('.')
         print()
         pygame.display.flip()
 
