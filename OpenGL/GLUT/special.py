@@ -20,7 +20,8 @@ Note:
 XXX the platform-specific stuff should be getting done in the 
 platform module *not* in the module here!
 """
-from OpenGL.platform import GLUT, CurrentContextIsValid, GLUT_GUARD_CALLBACKS
+from OpenGL.platform import CurrentContextIsValid, GLUT_GUARD_CALLBACKS, PLATFORM
+GLUT = PLATFORM.GLUT
 from OpenGL import contextdata, error, platform, logs
 from OpenGL.raw import GLUT as _simple
 from OpenGL._bytes import bytes, unicode,as_8_bit
