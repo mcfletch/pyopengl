@@ -30,10 +30,8 @@ usage of VBO objects:
 This implementation will choose either the ARB or Core (OpenGL 1.5) 
 implementation of the VBO functions.
 """
-from OpenGL import GL
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
-from OpenGL.GL.ARB import vertex_buffer_object
 from OpenGL.raw.GL import _types 
 from OpenGL import error
 from OpenGL._bytes import bytes,unicode,as_8_bit
@@ -47,6 +45,43 @@ __all__ = ('VBO','VBOHandler','mapVBO')
 class Implementation( object ):
     """Abstraction point for the various implementations that can be used
     """
+    IMPLEMENTATION_CLASSES = []
+    CHOSEN = None
+    @classmethod
+    def register( cls ):
+        cls.IMPLEMENTATION_CLASSES.append( cls )
+    
+    @classmethod 
+    def get_implementation( cls, *args ):
+        if cls.CHOSEN is None:
+            for possible in cls.IMPLEMENTATION_CLASSES:
+                implementation = possible()
+                if possible:
+                    Implementation.CHOSEN = implementation
+                    break
+        return cls.CHOSEN
+
+    EXPORTED_NAMES = '''glGenBuffers
+    glBindBuffer 
+    glBufferData 
+    glBufferSubData 
+    glDeleteBuffers
+    glMapBuffer
+    glUnmapBuffer
+    GL_STATIC_DRAW
+    GL_STATIC_READ
+    GL_STATIC_COPY
+    GL_DYNAMIC_DRAW
+    GL_DYNAMIC_READ
+    GL_DYNAMIC_COPY
+    GL_STREAM_DRAW
+    GL_STREAM_READ
+    GL_STREAM_COPY
+    GL_ARRAY_BUFFER
+    GL_ELEMENT_ARRAY_BUFFER
+    GL_UNIFORM_BUFFER
+    GL_TEXTURE_BUFFER
+    GL_TRANSFORM_FEEDBACK_BUFFER'''.split()
     available = False
     def _arbname( self, name ):
         return (
@@ -60,16 +95,6 @@ class Implementation( object ):
             return name[:-3]
         else:
             return name
-    def __init__( self ):
-        names = [name for name in dir(vertex_buffer_object) if self._arbname( name )]
-        if GL.glBufferData:
-            for name in names:
-                setattr( self, self.basename(name), getattr( GL, self.basename(name) ))
-            self.available = True
-        elif vertex_buffer_object.glBufferDataARB:
-            for name in names:
-                setattr( self, self.basename(name), getattr( vertex_buffer_object, name ))
-            self.available = True
     def __nonzero__( self ):
         return self.available
     __bool__ = __nonzero__
@@ -100,23 +125,7 @@ class Implementation( object ):
         return doBufferDeletion
     _DELETERS_ = {}
 
-IMPLEMENTATION = None
-
-def get_implementation( *args ):
-    """Retrieve the appropriate implementation for this machine
-    
-    Note that this should be considered an internal API and not used 
-    by external code, as the whole "implementation" approach is likely 
-    to be revisited.
-    """
-    global IMPLEMENTATION
-    if IMPLEMENTATION is None:
-        IMPLEMENTATION = Implementation()
-    return IMPLEMENTATION
-def set_implementation( implementation ):
-    """Set implementation to use explicitly"""
-    global IMPLEMENTATION
-    IMPLEMENTATION = implementation
+get_implementation = Implementation.get_implementation
 
 from OpenGL import acceleratesupport
 VBO = None
@@ -434,7 +443,7 @@ def _cleaner( vbo ):
             vbo.implementation.glUnmapBuffer( vbo.target )
     return clean
 
-def mapVBO( vbo, access=GL.GL_READ_WRITE ):
+def mapVBO( vbo, access=0x88BA ): # GL_READ_WRITE
     """Map the given buffer into a numpy array...
 
     Method taken from:

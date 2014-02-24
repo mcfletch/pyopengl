@@ -35,3 +35,6 @@ glTexCoord = glTexCoord2d
 glScale = glScaled
 #glColor = glColor3f
 glNormal = glNormal3d
+
+from OpenGL.GL import vboimplementation as _core_implementation
+from OpenGL.GL.ARB import vboimplementation as _arb_implementation
