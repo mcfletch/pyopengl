@@ -101,7 +101,7 @@ EGL_NO_SURFACE = EGLSurface()
 EGL_DONT_CARE = -1
 
 def _f( function ):
-    return _p.createFunction( function,_p.EGL,None,False)
+    return _p.createFunction( function,_p.PLATFORM.EGL,None,False)
 '''
 EGL_SUFFIX = '''
 del ctypes 

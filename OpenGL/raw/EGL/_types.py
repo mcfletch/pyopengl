@@ -79,7 +79,7 @@ EGL_NO_DISPLAY = EGLDisplay()
 EGL_NO_SURFACE = EGLSurface()
 EGL_DONT_CARE = -1
 
-raw_eglQueryString = _p.EGL.eglQueryString
+raw_eglQueryString = _p.PLATFORM.EGL.eglQueryString
 raw_eglQueryString.restype = ctypes.c_char_p
 raw_eglQueryString.__doc__ = """Raw version of eglQueryString that does not check for availability"""
 
