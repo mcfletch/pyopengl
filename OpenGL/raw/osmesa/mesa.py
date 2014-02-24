@@ -6,7 +6,7 @@ import ctypes
 
 def _f( function ):
     return _p.createFunction( 
-        function,_p.OSMesa,
+        function,_p.PLATFORM.OSMesa,
         None,
         error_checker=None
     )
@@ -51,14 +51,14 @@ def OSMesaPixelStore( ctx, buffer, type,width,height ): pass
 
 def OSMesaGetIntegerv(pname):
     value = GLint()
-    _p.GL.OSMesaGetIntegerv(pname, ctypes.byref(value))
+    _p.PLATFORM.GL.OSMesaGetIntegerv(pname, ctypes.byref(value))
     return value.value
 
 def OSMesaGetDepthBuffer(c):
     width, height, bytesPerValue = GLint(), GLint(), GLint()
     buffer = ctypes.POINTER(GLint)()
 
-    if _p.GL.OSMesaGetDepthBuffer(c, ctypes.byref(width),
+    if _p.PLATFORM.GL.OSMesaGetDepthBuffer(c, ctypes.byref(width),
                                     ctypes.byref(height),
                                     ctypes.byref(bytesPerValue),
                                     ctypes.byref(buffer)):
