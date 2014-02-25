@@ -17,7 +17,7 @@ class _WGLQuerier( extensions.ExtensionQuerier ):
         wglGetCurrentDC.restyle = HDC
         try:
             dc = wglGetCurrentDC()
-            proc_address = PLATFORM.wglGetProcAddress( 'wglGetExtensionsStringARB' )
+            proc_address = PLATFORM.getExtensionProcedure( 'wglGetExtensionsStringARB' )
             wglGetExtensionStringARB = PLATFORM.functionTypeFor( PLATFORM.WGL )(
                 c_char_p,
                 HDC,
