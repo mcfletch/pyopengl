@@ -1005,7 +1005,7 @@ class Tests( unittest.TestCase ):
             from functools import reduce
         structures = [
             (b'this and that',13,1,True,1,b'B',[13],[1]),
-            ((GLint * 3)( 1,2,3 ),12,4,False,1,b'(3)<i',[3],None),
+            ((GLint * 3)( 1,2,3 ),12,4,False,1,[b'(3)<i',b'(3)<l'],[3],None),
         ]
         if sys.version_info[:2] >= (3,0):
             # only supports buffer protocol in 3.x
