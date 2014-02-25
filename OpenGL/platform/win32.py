@@ -100,7 +100,7 @@ class Win32Platform( baseplatform.BasePlatform ):
 
     @baseplatform.lazy_property
     def GetCurrentContext( self ):
-        wglGetCurrentContext = GL.wglGetCurrentContext
+        wglGetCurrentContext = self.GL.wglGetCurrentContext
         wglGetCurrentContext.restype = ctypes.c_void_p
         return wglGetCurrentContext
 
@@ -112,6 +112,7 @@ class Win32Platform( baseplatform.BasePlatform ):
         extension = None,
         deprecated = False,
         module = None,
+        error_checker=None,
     ):
         """Override construct function to do win32-specific hacks to find entry points"""
         try:
@@ -121,7 +122,8 @@ class Win32Platform( baseplatform.BasePlatform ):
                 doc, argNames,
                 extension,
                 deprecated,
-                module
+                module,
+                error_checker=error_checker,
             )
         except AttributeError as err:
             try:
@@ -131,7 +133,8 @@ class Win32Platform( baseplatform.BasePlatform ):
                     doc, argNames,
                     extension,
                     deprecated,
-                    module
+                    module,
+                    error_checker=error_checker,
                 )
             except AttributeError as err:
                 return super( Win32Platform, self ).constructFunction(
@@ -142,5 +145,6 @@ class Win32Platform( baseplatform.BasePlatform ):
                     deprecated,
                     module,
                     force_extension = True,
+                    error_checker=error_checker,
                 )
             
