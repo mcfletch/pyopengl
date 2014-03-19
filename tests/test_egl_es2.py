@@ -9,8 +9,6 @@ def test_gl( ):
     glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT )
     
     print 'pre-compile error', glGetError()
-    import pdb
-    pdb.set_trace()
     shader = shaders.compileProgram(
         shaders.compileShader( '''#version 130
     attribute vec3 position;

@@ -13,9 +13,6 @@ class Implementation( vbo.Implementation ):
                 source = name + '_ARB'
             else:
                 source = name + 'ARB'
-            if name == 'glGenBuffers':
-                import pdb
-                pdb.set_trace()
             found = False
             for source_extension in (
                 vertex_buffer_object,
