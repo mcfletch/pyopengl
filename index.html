@@ -74,6 +74,16 @@
           GLES2, GLES3, GLUT, GLU, GLE, WGL, EGL and GLX subpackages</li>
         <li>OpenGL_accelerate, a cython coded accelerator module for PyOpenGL,
           optional, but recommended where available</li>
+        <ul>
+          <li>the code for OpenGL_accelerate is in the core PyOpenGL repository,
+            but is distributed as a separate Python package and installs as
+            OpenGL_accelerate</li>
+        </ul>
+        <li>PyOpenGL-Demo, a collection of small stand-alone demos</li>
+        <ul>
+          <li>You normally want to run these from the source distribution, as
+            there's nothing installed by the package</li>
+        </ul>
         <li><a href="context/index.html">OpenGLContext</a>, a teaching and
           testing library built on top of PyOpenGL (and a lot of other
           libraries)</li>
@@ -104,7 +114,7 @@
       <p>You can work with latest version of PyOpenGL using the <a href="http://bazaar-vcs.org/">bzr</a>
         distributed source code control tool on the <a href="https://code.launchpad.net/pyopengl">LaunchPad</a>
         code-hosting platform:</p>
-      <pre>bzr branch lp:pyopengl<br>bzr branch lp:pyopengl-demo</pre>
+      <pre>bzr branch lp:pyopengl<br>bzr branch lp:pyopengl-demo<br>bzr branch lp:openglcontext</pre>
       <p>Contributions and patches are very welcome. &nbsp;You can either
         request a merge via LaunchPad or send a patch-set via email using "bzr
         send" to mcfletch@vrplumber.com.</p>
