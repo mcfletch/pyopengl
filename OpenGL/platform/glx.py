@@ -41,6 +41,31 @@ class GLXPlatform( baseplatform.BasePlatform ):
     # GLX doesn't seem to have its own loadable module?
     @baseplatform.lazy_property
     def GLX(self): return self.GL
+
+    @baseplatform.lazy_property
+    def GLES1(self):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'GLESv1_CM', # ick
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            return None
+    @baseplatform.lazy_property
+    def GLES2(self):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'GLESv2', 
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            return None
+    @baseplatform.lazy_property
+    def GLES3(self):
+        # implementers guide says to use the same name for the DLL
+        return self.GLES2
     
     @baseplatform.lazy_property
     def glXGetProcAddressARB(self):

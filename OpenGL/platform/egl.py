@@ -28,8 +28,6 @@ class EGLPlatform( baseplatform.BasePlatform ):
     def GLES3(self):
         # implementers guide says to use the same name for the DLL
         return self.GLES2
-    
-    GLUT = None
     @baseplatform.lazy_property
     def GL(self):
         try:
@@ -40,6 +38,26 @@ class EGLPlatform( baseplatform.BasePlatform ):
             )
         except OSError as err:
             return self.GLES2 or self.GLES1
+    @baseplatform.lazy_property
+    def GLU(self):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'GLU',
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            return None
+    @baseplatform.lazy_property
+    def GLUT( self ):
+        try:
+            return ctypesloader.loadLibrary(
+                ctypes.cdll,
+                'glut', 
+                mode=ctypes.RTLD_GLOBAL 
+            )
+        except OSError as err:
+            return None
     @baseplatform.lazy_property
     def OpenGL(self): return self.GL
     
