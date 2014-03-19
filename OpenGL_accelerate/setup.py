@@ -12,9 +12,12 @@ except ImportError:
 else:
     have_cython = True
 
+    
 
 import sys, os
 sys.path.insert(0, '.' )
+
+HERE = os.path.dirname( __file__ )
 
 version = None
 # get version from __init__.py
@@ -34,11 +37,15 @@ def cython_extension( name, include_dirs = (), ):
         "OpenGL_accelerate.%(name)s"%locals(),
         [
             os.path.join(
+                HERE,
                 'src',
                 filename
             ),
         ],
-        include_dirs = ['..','src']+ list(include_dirs)
+        include_dirs = [
+            os.path.join(HERE,'..'),
+            os.path.join(HERE,'src'),
+        ]+ list(include_dirs)
     )
 
 
