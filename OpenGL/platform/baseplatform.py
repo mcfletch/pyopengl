@@ -59,7 +59,7 @@ class BasePlatform( object ):
         EXPORTED_NAMES -- set of names exported via the platform 
             module's namespace...
     
-        GL, GLU, GLUT, GLE, OpenGL -- ctypes libraries
+        GL, GLU, GLUT, GLE, GLES1, GLES2, GLES3 -- ctypes libraries
     
         DEFAULT_FUNCTION_TYPE -- used as the default function 
             type for functions unless overridden on a per-DLL
@@ -77,8 +77,7 @@ class BasePlatform( object ):
     EXPORTED_NAMES = [
         'GetCurrentContext','CurrentContextIsValid',
         'createBaseFunction', 'createExtensionFunction', 'copyBaseFunction',
-        #'GL','GLU','GLUT','GLE','OpenGL','EGL','GLX','WGL','GLES1','GLES2','GLES3',
-        'getGLUTFontPointer',
+        'getGLUTFontPointer','nullFunction',
         'GLUT_GUARD_CALLBACKS',
     ]
 
