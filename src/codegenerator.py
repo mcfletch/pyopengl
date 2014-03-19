@@ -27,8 +27,9 @@ class Generator( object ):
     def module( self, module ):
         if hasattr( module, 'apis' ):
             for api in module.apis:
-                gen = ModuleGenerator(module,self, api)
-                gen.generate()
+                if api != 'glcore':
+                    gen = ModuleGenerator(module,self, api)
+                    gen.generate()
         else:
             gen = ModuleGenerator(module,self)
             gen.generate()
@@ -201,6 +202,9 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         self.registry = registry 
         self.overall = overall
         name = registry.name
+        if name in ('GL_ES_VERSION_3_1','GL_ES_VERSION_3_0'):
+            api = 'gles3'
+            name = 'GLES3'+name[5:]
         if api:
             self.prefix = api.upper()
         else:
