@@ -64,7 +64,7 @@ header a {
 
 pre {
     background-color: #ffffcc; 
-    margin-left: 60px;
+    margin-left: 4em;
 }
 
 footer {
@@ -80,4 +80,14 @@ footer {
     margin-left: 1em;;
     margin-right: 1em;
     color: #557755;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 1em;
+}
+ul li {
+    padding-left: 1.5em;
+    text-indent: -.5em;
+    margin-left: 0;
 }
