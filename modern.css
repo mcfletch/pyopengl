@@ -70,3 +70,14 @@ pre {
 footer {
     text-align: center;
 }
+
+.introduction {
+    margin-left: 1em;;
+    margin-right: 1em;
+    color: #555555;
+}
+.technical {
+    margin-left: 1em;;
+    margin-right: 1em;
+    color: #557755;
+}
