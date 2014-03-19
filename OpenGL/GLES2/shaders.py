@@ -150,7 +150,7 @@ def compileShader( source, shaderType ):
     glShaderSource( shader, source )
     glCompileShader( shader )
     result = glGetShaderiv( shader, GL_COMPILE_STATUS )
-    if not(result):
+    if result == GL_FALSE:
         # TODO: this will be wrong if the user has
         # disabled traditional unpacking array support.
         raise RuntimeError(
