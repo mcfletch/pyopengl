@@ -201,7 +201,7 @@ if _configflags.ERROR_CHECKING:
                 return None 
             def nullGetError( self ):
                 """Used as error-checker when no error checking should be done"""
-                return None
+                return self._noErrorResult
             def glCheckError( 
                 self,
                 result,
