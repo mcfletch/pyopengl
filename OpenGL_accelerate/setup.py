@@ -16,7 +16,7 @@ else:
 
 import sys, os
 
-HERE = os.path.dirname( __file__ )
+HERE = os.path.normpath(os.path.abspath(os.path.dirname( __file__ )))
 
 version = None
 # get version from __init__.py
@@ -44,7 +44,11 @@ def cython_extension( name, include_dirs = (), ):
         include_dirs = [
             os.path.join(HERE,'..'),
             os.path.join(HERE,'src'),
-        ]+ list(include_dirs)
+            HERE,
+        ]+ list(include_dirs),
+        define_macros = [
+#            ('NPY_NO_DEPRECATED_API','NPY_1_7_API_VERSION'),
+        ],
     )
 
 
