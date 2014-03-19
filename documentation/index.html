@@ -1,103 +1,25 @@
 <!DOCTYPE html>
 <html><head>
   <title>PyOpenGL Documentation</title>
-  <link rel="stylesheet" type="text/css" href="../sitestyle.css">
+  <link rel="stylesheet" type="text/css" href="../modern.css">
 </head>
 <body>
-<table style="width: 100%;" border="0" cellpadding="4">
-
-
-
-  <tbody>
-
-
-
-    <tr>
-
-
-
-      <th class="noback" rowspan="1" valign="middle">
-      
-      
-      
-      <p> <a href="../index.html"><img style="border: 0px solid ; width: 108px; height: 128px;" src="../images/doc_logo_transp.gif" alt="PyOpenGL Documentation Collection" title=""></a></p>
-
-
-
-      </th>
-
-
-
-      <th valign="middle">
-      
-      
-      
-      <h1><a href="../">PyOpenGL</a> Documentation</h1>
-
-
-
-      </th>
-
-
-
-    </tr>
-
-
-
-    <tr>
-
-
-
-      <th style="vertical-align: top;"><h2>General Background</h2></th>
-
-
-
-      <td style="vertical-align: top;">
-      
-      
-      
+    <header>
+    <h1><a href="../">PyOpenGL</a> Documentation</h1>
+    </header>
+    <section>
+        <h2>General Background</h2>
       <p> OpenGL under Python is largely the same as OpenGL under most
 other languages, so you can use much of             the documentation
 you'll find around the Internet, or in your local bookstore.&nbsp; This
 page primarily provides links to PyOpenGL-specific documentation.
 &nbsp;Users of OpenGLContext should also see the <a href="http://pyopengl.sourceforge.net/context/documentation.html">OpenGLContext
 documentation page</a>.</p>
-
-
-
-      </td>
-
-
-
-    </tr>
-
-
-
-    <tr>
-
-
-
-      <th valign="top" width="24%">
-      
-      
-      
+    </section>
+    <section>
       <h2>References</h2>
-      </th>
-
-
-
-      <td>
-      
-      
-      
       <p>These documents tend to focus on the particular APIs and
 details of operation for PyOpenGL (or OpenGL in general).</p>
-
-
-
-      
-      
-      
       <ul>
 
         <li><a href="installation.html">Installing PyOpenGL and
@@ -109,10 +31,10 @@ binary or source distributions</li>
         <li><a href="opengl_diffs.html">PyOpenGL for OpenGL Programmers</a>
 -- quick introduction to various features of PyOpenGL not normally found
 in OpenGL programming texts (e.g. strict exception handling, function
-aliases, array/pointer methods with Numpy)</li><li><a href="manual-3.0/index.xhtml">PyOpenGL 3.0 Reference</a>
+aliases, array/pointer methods with Numpy)</li><li><a href="manual-3.0/index.xhtml">PyOpenGL 3.x Reference</a>
 -- automatically
 generated versions of the OpenGL programming reference with
-Python-specific call-signature annotations for PyOpenGL 3.0 series.
+Python-specific call-signature annotations for PyOpenGL 3.x series.
 &nbsp;These are the OpenGL man-pages with PyOpenGL-specific
 annotations. &nbsp;The man pages also contain links to real-world
 PyOpenGL source-code which uses the described entry points.</li><ul><li><a href="manual-3.0/index.xhtml#GL">GL Reference</a></li><li><a href="manual-3.0/index.xhtml#GLU">GLU Reference</a></li><li><a href="manual-3.0/index.xhtml#GLUT">GLUT Reference</a></li><li><a href="manual-3.0/index.xhtml#GLE">GLE Reference</a></li></ul>
@@ -152,301 +74,129 @@ Handbook</a> -- Image handling library for Python </li>
 — description of deprecated functionality in OpenGL 3.1 and above.
 If you are not using solely Buffers, Textures and Shaders you probably want to read this.</li>
       </ul>
-      </td>
-    </tr>
-    <tr>
-      <th style="vertical-align: top;"><h2>Books</h2></th>
-
-
-
-      <td style="vertical-align: top;">
-      
-      
-      
+    </section>
+    <section>
+      <h2>Books</h2>
       <p>There
-are a large number of very good books on OpenGL available. &nbsp;Many
+are a large number of very good books on OpenGL available. Many
 of these books cover "legacy" OpenGL, rather than the
-shader/buffer/texture model of OpenGL 3.0. &nbsp;Still, they provide a
-good grounding that allows you to learn the basics of OpenGL.</p><h4>OpenGL Programming Guide: (The Red Book)</h4><p>Older versions of the official OpenGL Programming Guide, a.k.a
+shader/buffer/texture model of OpenGL 3.0. Still, they provide a
+good grounding that allows you to learn the basics of OpenGL.</p>
+<h4>OpenGL Programming Guide: (The Red Book)</h4><p>Older versions of the official OpenGL Programming Guide, a.k.a
 "The Red Book" are available online in <a href="http://www.google.ca/search?q=OpenGL+Programming+Guide">various
-places</a> (version 2.0 covers OpenGL 1.1). &nbsp;If you are serious about
+places</a> (version 2.0 covers OpenGL 1.1). If you are serious about
 learning OpenGL, the newer versions of the Red Book, (v3.0) is likely on
-the shelves of your local bookstore, and is quite readable.<br>
-
-
-
+the shelves of your local bookstore, and is quite readable.
       </p>
-
-
-
-      
-      
-      
       <p>You'll find versions of some of the Red Book tutorial code for
 Python included in the PyOpenGL-Demo/redbook directory of the PyOpenGL-Demo
-distribution. &nbsp;These versions are very close to the original source
-code. &nbsp;The OpenGLContext tests directory also has four of the
-tutorials converted, "alpha", "alpha3D", "surface" and "trim".<br>
-
-
-
+distribution. These versions are very close to the original source
+code. The OpenGLContext tests directory also has four of the
+tutorials converted, "alpha", "alpha3D", "surface" and "trim".
       </p>
-
-
-
-      
-      
-      
       <p> Addison-Wesley Pub Co; ISBN: 0201604582 ; 3rd edition (August
 6, 1999)</p><h4>OpenGL Shading Language: (The Orange Book)</h4><p>This
-book serves as a good introduction to shaders. &nbsp;The shaders
+book serves as a good introduction to shaders. The shaders
 described cover the gamut from the simplest 1-line shaders through code
 to emulate legacy operation to non-realistic shading to caustics and
-the like. &nbsp;You will generally have to adapt any code you take from
+the like. You will generally have to adapt any code you take from
 here to work with your real-world scenes, but the book offers a strong
 grounding.</p><p>Addison-Wesley Pub Co: ISBN: 978-0-321-33489-3; 2nd edition</p><h4>OpenGL Super-Bible</h4><p>This
 book is an all-round introduction, working up from OpenGL 1.0 era
-operations all the way to OpenGL 2.x era behaviours. &nbsp;Coverage of
+operations all the way to OpenGL 2.x era behaviours. Coverage of
 newer features tends to be somewhat sketchy, but coverage of older
-features is extensive. &nbsp;It is notable mainly for being somewhat
-up-to-date and having exhaustive coverage of what it covers. &nbsp;The
+features is extensive. It is notable mainly for being somewhat
+up-to-date and having exhaustive coverage of what it covers. The
 book also makes a great anchor for your average supertanker.</p><p>Sams Pub: ISBN 0-672-32601-9; 3rd edition</p>
-
-
-
-      </td>
-
-
-
-    </tr>
-
-
-
-    <tr>
-
-
-
-      <th><h2>NeHe Tutorials</h2></th>
-
-
-
-      <td>
-      
-      
-      
+    </section>
+    <section>
+      <h2>NeHe Tutorials</h2>
       <p>When people think of an "OpenGL tutorial", many will
 immediately think of the NeHe tutorials by Jeff Molofee, available at <a href="http://nehe.gamedev.net/">http://nehe.gamedev.net/</a>
 these
 tutorials range from the very simple (create an OpenGL window) through
 the advanced (particle systems, loading scenes from various formats,
-displaying video textures, text, morphing, multi-texturing). &nbsp;The
+displaying video textures, text, morphing, multi-texturing). The
 older tutorials tend to be legacy-mode operations, so you should keep
 in mind that they are describing old ways of working as you learn with
 them.</p>
-
-
-
-      
-      
-      
       <p>The NeHe tutorials are so popular that there are multiple
-Python translations available:<br>
-
-
-
+Python translations available:
       </p>
-
-
-
-      
-      
-      
       <ul>
-
-
-
-        <li>Included with PyOpenGL, in the Demo directory you'll find a
+        <li>Included in PyOpenGL-Demo you'll find a
 subdirectory NeHe, which includes translations of tutorials 1 through 6,
-with a multi-texturing version of tutorial 6 as well. &nbsp;These
+with a multi-texturing version of tutorial 6 as well. These
 translations are very close in their approach to the original tutorial's
-approach in terms of their structure and organization. &nbsp;As a
+approach in terms of their structure and organization. As a
 result, they can be somewhat hard to follow as Python code unless you
 are following along with the tutorial text and reading the reasoning
 behind the C code.</li>
-
-
-
         <li><a href="http://www.pygame.org/gamelets/#NEHE">PyGame-specific</a>
-versions by Paul Furber. &nbsp;These are tightly coded direct
+versions by Paul Furber. These are tightly coded direct
 translations of the NeHe code, idiomatic (function-oriented) Python.
-&nbsp;Tutorials 1 through 10 are available.</li>
-
-
-
+Tutorials 1 through 10 are available.</li>
         <li>Included with OpenGLContext, in the tests directory, you'll
 find a number of files named nehe*.py, these are, as you might expect,
-translations of the corresponding tutorials. &nbsp;These translations
+translations of the corresponding tutorials. These translations
 are results-focused, they do not follow the tutorial's structure,
 instead they use best (object-oriented) practices in Python programming,
 and particularly OpenGLContext programming without completely violating
-the idea of &nbsp;the tutorials (they try to keep the executed code in a
+the idea of the tutorials (they try to keep the executed code in a
 single file, with minimal external dependencies). Tutorials 1 through 8
 are translated, with the glprint.py test being a loose translation of
 tutorial 13 (bitmapped text). The OpenGLContext <a href="http://pyopengl.sourceforge.net/context/documentation.html">documentation
 collection</a> includes the source online, with brief discussions of the
 differences from the tutorial code.</li>
-
-
-
         <li>The NeHe tutorials themselves link to (very old)
 translations which very closely followed the original tutorial
-structure. &nbsp;These tutorials served as the base for the versions in
-the PyOpenGL distribution. &nbsp;I would not recommend using them for
+structure. These tutorials served as the base for the versions in
+the PyOpenGL distribution. I would not recommend using them for
 learning PyOpenGL.</li>
-
-
-
-      
-      
-      
       </ul>
-
-
-
-      </td>
-
-
-
-    </tr>
-
-
-
-    <tr><th><h2>PyOpenGL-Specific Tutorials</h2></th><td><p>If you have a PyOpenGL-specific tutorial you'd like added to this area, please post to the PyOpenGL-user's mailing list.</p><ul>
+      </section>
+      <section>
+        <h2>PyOpenGL-Specific Tutorials</h2>
+        <p>If you have a PyOpenGL-specific tutorial you'd like added to this area, please post to the PyOpenGL-user's mailing list.</p><ul>
         <li><a href="../context/tutorials/index.xhtml">OpenGLContext Tutorials</a> are a series of "annotated code" walk-throughs including some more advanced topics, such as shadow-casting, VBOs and GLSL shaders</li>
-    <li><a href="http://showmedo.com/videos/series?name=vXJsRwlBX">Developing emol</a> (ShowMeDo video tutorials) by Erik Thompson -- develops a molecular viewer using wxPython, PyOpenGL and bzr</li></ul></td></tr><tr>
-      <th valign="top" width="24%">
+    <li><a href="http://showmedo.com/videos/series?name=vXJsRwlBX">Developing emol</a> (ShowMeDo video tutorials) by Erik Thompson -- develops a molecular viewer using wxPython, PyOpenGL and bzr</li></ul>
+    </section>
+    <section>
       <h2>Resources and Links</h2>
-
-
-
-      </th>
-
-
-
-      <td>
-      
-      
-      
       <p class="typewriter">Here are some starting points for further
 exploration. </p>
-
-
-
-      
-      
-      
       <ul>
-
-
-
         <li><a href="http://www.opengl.org/">OpenGL.org</a> -- The
 official home of OpenGL on the World Wide Web, includes extensive links
 to documentation, specifications, and companies involved with OpenGL.</li>
-
-
-
         <li><a href="http://www.gametutorials.com/Tutorials/tutorials.htm">GameTutorials.com</a>
 -- introductory, slowly-building tutorials, similar to the NeHe tutorials</li>
-
-
-
         <li><a href="http://www.opengl.org/developers/code/tutorials.html">OpenGL.org</a>'s
-tutorials collection<br>
-
-
-
+tutorials collection
         </li>
-
-
-
         <li><a href="http://www.lighthouse3d.com/opengl/tutorials.shtml?&amp;start=0">LightHouse3D
 Tutorials</a> -- intermediate tutorials on various OpenGL-related
 subjects</li>
-
-
-
         <li><a href="http://www.gamasutra.com/">Gamasutra</a> --
 professional-level tutorials, often on "cutting edge" subjects,
 generally well-written and easily followed code, note that a free
 registration is required for much of the content, also see their
 publisher's site, <a href="http://www.gamedev.net/">Gamedev.net</a>,
 which has a decent resources section</li>
-
-
-
-      
-      
-      
       </ul>
-
-
-
-      </td>
-
-
-
-    </tr>
-
-
-
-    <tr>
-
-
-
-      <th valign="top" width="24%">
-      
-      
-      
+      </section>
+        <section>
       <h2>Support</h2>
-
-
-
-      </th>
-
-
-
-      <td>
-      
-      
-      
       <p> Bug reports and feature requests should use the <a href="http://sourceforge.net/projects/pyopengl/">SourceForge project
 page.</a> General questions, including most programming questions
 are best answered on the <a href="http://sourceforge.net/mail/?group_id=5988">PyOpenGL mailing list</a>.
 Questions regarding project administration, or development can use the <a href="http://sourceforge.net/mail/?group_id=5988">PyOpenGL-devel</a>
-mailing list.<br>
-
-
-
+mailing list.
       </p>
-
-
-
-      </td>
-
-
-
-    </tr>
-
-
-
-    <tr>
-
-
-
-      <th colspan="2" valign="top" width="24%">A SourceForge Open-Source Project:<br>
-      <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1" alt="SourceForge" border="0"><br>
-      </a> <a href="http://pyopengl.sourceforge.net/"><img src="../images/icon2.jpg" alt="PyOpenGL" border="0" height="32" width="32"></a></th>
-    </tr>
-  </tbody>
-</table>
+      </section>
+    <footer>
+      <div>A SourceForge Open-Source Project </div>
+      <div><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1"
+            border="0"></a></div>
+    </footer>
 </body></html>
