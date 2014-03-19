@@ -15,13 +15,12 @@ else:
     
 
 import sys, os
-sys.path.insert(0, '.' )
 
 HERE = os.path.dirname( __file__ )
 
 version = None
 # get version from __init__.py
-for line in open( '__init__.py' ):
+for line in open( os.path.join( HERE,'__init__.py') ):
     if line.startswith( '__version__' ):
         version = eval(line.split( '=' )[1].strip())
 assert version, """Couldn't determine version string!"""
