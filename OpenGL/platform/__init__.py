@@ -57,7 +57,7 @@ def unpack_constants( constants, namespace ):
 
 def createFunction( function, dll,extension,deprecated=False, error_checker=None ):
     """Allows the more compact declaration format to use the old-style constructor"""
-    return createExtensionFunction(
+    return nullFunction(
         function.__name__,
         dll or PLATFORM.GL,
         resultType = function.resultType,
