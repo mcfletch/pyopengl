@@ -379,8 +379,6 @@ class _NullFunctionPointer( object ):
     def load( self ):
         """Attempt to load the function again, presumably with a context this time"""
         from OpenGL import platform
-        if not platform.PLATFORM.checkExtension( self.extension ):
-            return None
         try:
             func = platform.PLATFORM.constructFunction(
                 self.__name__, self.DLL, 
@@ -400,9 +398,6 @@ class _NullFunctionPointer( object ):
             return func
         return None
     def __call__( self, *args, **named ):
-        if self.__name__ == 'gluPerspective':
-            import pdb
-            pdb.set_trace()
         if self.load():
             return self( *args, **named )
         else:
