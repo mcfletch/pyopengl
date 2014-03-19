@@ -3,180 +3,131 @@
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <title>PyOpenGL -- The Python OpenGL Binding</title>
-    <link rel="stylesheet" type="text/css" href="sitestyle.css">
-    <style type="text/css">
-    th, td {
-        vertical-align: top;
-    }
-    th > h2 {
-        font-size: 105%;
-        font-weight: bold;
-    }
-</style></head>
-  <body topmargin="0" leftmargin="0" bgcolor="#ffffff" text="#000000">
-    <div align="center">
-      <div align="left">
-        <table style="width: 100%;" border="0" cellpadding="4">
-          <tbody>
-            <tr>
-              <th class="noback"><img src="images/logo_t.gif" title="" alt="PyOpenGL Logo"
-                  style="width: 98px; height: 128px;"><br>
-              </th>
-              <th>
-                <h1>PyOpenGL 3.x</h1>
-                <p>The Python OpenGL Binding</p>
-              </th>
-            </tr>
-            <tr>
-              <th valign="top" width="24%">
-                <h2>About PyOpenGL</h2>
-              </th>
-              <td>
-                <p>PyOpenGL is the most common cross platform <a href="http://www.python.org/">Python</a>
-                  binding to <a href="http://www.opengl.org/">OpenGL</a> and
-                  related APIs. The binding is created using the standard ctypes
-                  library, and is provided under an extremely liberal BSD-style
-                  Open-Source license.</p>
-                <p>PyOpenGL 3.1 includes support for:</p>
-                <ul>
-                  <li> OpenGL v1.1 through 4.4</li>
-                  <li>GLU</li>
-                  <li>GLUT v3.7</li>
-                  <li>FreeGLUT</li>
-                  <li>GLE 3</li>
-                  <li>GLES 1 and 2</li>
-                  <li>EGL, WGL, GLX</li>
-                  <li>hundreds of extensions</li>
-                </ul>
-                <p>PyOpenGL is interoperable with a large number of
-                  external GUI libraries for Python including (but not limited
-                  to):</p>
-                <ul>
-                  <li><a href="http://wxpython.org/">wxPython</a></li>
-                  <li><a href="http://www.pygame.org/">PyGame</a></li>
-                  <li><a href="http://www.riverbankcomputing.co.uk/pyqt/index.php">PyQt</a>
-                    and <a href="http://qt-project.org/wiki/PySide">PySide</a></li>
-                  <li>PyGTK</li>
-                  <li>Tkinter (if you have installed the Togl widget for Tk)</li>
-                </ul>
-                <p>PyOpenGL 3.1 runs on:</p>
-                <ul>
-                  <li>Python 3.3+ (3.2 support is likely to work, but untested)</li>
-                  <li>Python 2.7 (recommended)</li>
-                  <li>Python 2.6 (for compatibility with older software and
-                    systems)</li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <h2>Sub-Packages</h2>
-              </th>
-              <td>
-                <p>The <a href="http://sourceforge.net/projects/pyopengl/">PyOpenGL
-                    project</a> has two sub-projects, the core library, PyOpenGL
-                  (known as the pyopengl module in bzr, and the OpenGL package
-                  when
-                  installed in Python), and a teaching and testing library, <a
-                    href="context/index.html">OpenGLContext</a> built on top of
-                  the core.&nbsp; You do <strong>not</strong>
-                  need OpenGLContext to work with PyOpenGL, it provides sample
-                  code for
-                  many common operations, but it is not part of the core
-                  library.</p>
-              </td>
-            </tr>
-            <tr>
-              <th valign="top" width="24%">
-                <h2> Documentation</h2>
-              </th>
-              <td>
-                <p>The <a href="documentation/index.html">documentation
-                    collection</a> provides reference documentation, support and
-                  feedback
-                  information and pointers to more in-depth documentation.</p>
-              </td>
-            </tr>
-            <tr>
-              <th valign="top" width="24%">
-                <h2>Downloading and Installation</h2>
-              </th>
-              <td>
-                <p>The easiest way to install PyOpenGL is using <a href="http://pypi.python.org/pypi/pip">pip</a></p>
-                <pre>$ pip install PyOpenGL PyOpenGL_accelerate</pre>
-                <p>You can also manually <a href="http://pypi.python.org/pypi/PyOpenGL">download
-                    PyOpenGL from PyPI</a> and run <code>python setup.py</code></p>
-                <p>If those fail, the <a href="documentation/installation.html">detailed
-                    installation instructions</a> are available.</p>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <h2>Source Code</h2>
-              </th>
-              <td>
-                <p>You can work with latest version of PyOpenGL using the <a href="http://bazaar-vcs.org/">bzr</a>
-                  distributed source code control tool on the <a href="https://code.launchpad.net/pyopengl">LaunchPad</a>
-                  code-hosting platform:</p>
-                <pre>bzr branch lp:pyopengl<br>bzr branch lp:pyopengl-demo</pre>
-                <p>Contributions
-                  and patches are very welcome. &nbsp;You can either request a
-                  merge via
-                  LaunchPad or send a patch-set via email using "bzr send" to
-                  mcfletch@vrplumber.com.</p>
-              </td>
-            </tr>
-            <tr>
-              <th width="24%">
-                <h2>Support</h2>
-              </th>
-              <td>
-                <p>Bugs and general questions are best reported and answered on
-                  the <a href="http://sourceforge.net/mail/?group_id=5988">PyOpenGL
-                    mailing list</a>.&nbsp; The list is fairly low-traffic.<br>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p align="center"><a href="http://www.opengl.org"><img src="images/ogl_sm.gif"
-                      border="0"></a></p>
-              </td>
-              <td>
-                <p><a href="http://www.opengl.org/">OpenGL.org</a> is the
-                  official home of OpenGL on the Web.</p>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <h2>Other Libraries</h2>
-                <br>
-              </th>
-              <td>
-                <p>There are quite a few 3D-related libraries available for use
-                  with Python, many of them either based on, or extensible with
-                  PyOpenGL.&nbsp; PyOpenGL's author collects pointers to them
-                  on <a href="http://www.vrplumber.com/py3d.py">his site</a>.
-                  &nbsp;There is another commonly used binding of OpenGL for
-                  Python which is part of the <a href="http://www.pyglet.org/">Pyglet</a>
-                  game development environment.<br>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <th colspan="2" width="24%">
-                <div style="text-align: center;">A SourceForge
-                  Open-Source Project<br>
-                </div>
-                <div style="text-align: center;"><a href="http://sourceforge.net"><img
-                      src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1"
-                      border="0"></a> <br>
-                </div>
-              </th>
-            </tr>
-          </tbody>
-        </table>
+    <link rel="stylesheet" type="text/css" href="modern.css">
+    <style>
+      #about-icon {
+        background-image: url('images/logo_transp.gif');
+        background-repeat: no-repeat;
+        background-position: 30px 0;
+        width: 128px;
+        height: 145px;
+        float:right;
+      }
+      #docs-icon {
+        background-image: url('images/doc_logo_transp.gif');
+        background-repeat: no-repeat;
+        background-position: 20px 0;
+        width: 128px;
+        height: 145px;
+        float:right;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>PyOpenGL 3.x</h1>
+      <p class="subheading">The Python OpenGL Binding</p>
+    </header>
+    <section id="about">
+      <div id="about-icon"><br>
       </div>
-    </div>
+      <h2>About PyOpenGL</h2>
+      <p>PyOpenGL is the most common cross platform <a href="http://www.python.org/">Python</a>
+        binding to <a href="http://www.opengl.org/">OpenGL</a> and related
+        APIs. The binding is created using the standard ctypes library, and is
+        provided under an extremely liberal BSD-style Open-Source license.</p>
+      <p>PyOpenGL 3.x includes support for:</p>
+      <ul>
+        <li> OpenGL v1.1+</li>
+        <li>GLU</li>
+        <li>GLUT, FreeGLUT</li>
+        <li>GLE 3 (GL Extrusion Library)</li>
+        <li>GLES 1+ (Experimental)</li>
+        <li>EGL, WGL, GLX</li>
+        <li>hundreds of extensions</li>
+      </ul>
+      <p>PyOpenGL is interoperable with a large number of external GUI libraries
+        for Python including (but not limited to):</p>
+      <ul>
+        <li><a href="http://wxpython.org/">wxPython</a></li>
+        <li><a href="http://www.pygame.org/">PyGame</a></li>
+        <li><a href="http://www.riverbankcomputing.co.uk/pyqt/index.php">PyQt</a>
+          and <a href="http://qt-project.org/wiki/PySide">PySide</a></li>
+        <li>PyGTK</li>
+        <li>Raw XLib</li>
+        <li>OSMesa</li>
+        <li>Raspberry Pi BCM</li>
+        <li>Tkinter (if you have installed the Togl widget for Tk)</li>
+      </ul>
+      <p>PyOpenGL 3.x runs on:</p>
+      <ul>
+        <li>Python 3.3+ (3.2 support is likely to work, but untested)</li>
+        <li>Python 2.7 (recommended)</li>
+        <li>Python 2.6 (for compatibility with older software and systems)</li>
+      </ul>
+    </section>
+    <section id="packages">
+      <h2>Sub-Packages</h2>
+      <p>The PyOpenGL project includes a number of sub-projects:</p>
+      <ul>
+        <li>PyOpenGL, the "OpenGL" package when installed, provides GL, GLES1,
+          GLES2, GLES3, GLUT, GLU, GLE, WGL, EGL and GLX subpackages</li>
+        <li>OpenGL_accelerate, a cython coded accelerator module for PyOpenGL,
+          optional, but recommended where available</li>
+        <li><a href="context/index.html">OpenGLContext</a>, a teaching and
+          testing library built on top of PyOpenGL (and a lot of other
+          libraries)</li>
+        <ul>
+          <li>You do <strong>NOT</strong> need OpenGLContext to use PyOpenGL</li>
+        </ul>
+      </ul>
+    </section>
+    <section id="installation">
+      <h2>Downloading and Installation</h2>
+      <p>The <a href="documentation/index.html">documentation collection</a>
+        provides reference documentation, support and feedback information and
+        pointers to more in-depth documentation.</p>
+    </section>
+    <section id="documentation">
+      <div id="docs-icon"><br>
+      </div>
+      <h2>Documentation</h2>
+      <p>The easiest way to install PyOpenGL is using <a href="http://pypi.python.org/pypi/pip">pip</a></p>
+      <pre>$ pip install PyOpenGL PyOpenGL_accelerate</pre>
+      <p>You can also manually <a href="http://pypi.python.org/pypi/PyOpenGL">download
+          PyOpenGL from PyPI</a> and run <code>python setup.py</code></p>
+      <p>If those fail, the <a href="documentation/installation.html">detailed
+          installation instructions</a> are available.</p>
+    </section>
+    <section id="source">
+      <h2>Source Code</h2>
+      <p>You can work with latest version of PyOpenGL using the <a href="http://bazaar-vcs.org/">bzr</a>
+        distributed source code control tool on the <a href="https://code.launchpad.net/pyopengl">LaunchPad</a>
+        code-hosting platform:</p>
+      <pre>bzr branch lp:pyopengl<br>bzr branch lp:pyopengl-demo</pre>
+      <p>Contributions and patches are very welcome. &nbsp;You can either
+        request a merge via LaunchPad or send a patch-set via email using "bzr
+        send" to mcfletch@vrplumber.com.</p>
+    </section>
+    <section id="support">
+      <h2>Support</h2>
+      <p>Bugs and general questions are best reported and answered on the <a href="http://sourceforge.net/mail/?group_id=5988">PyOpenGL
+          mailing list</a>.&nbsp; The list is fairly low-traffic. </p>
+    </section>
+    <section id="otherlibraries">
+      <h2>Other Libraries</h2>
+      <p>There are quite a few 3D-related libraries available for use with
+        Python, many of them either based on, or extensible with PyOpenGL.&nbsp;
+        PyOpenGL's author collects pointers to them on <a href="http://www.vrplumber.com/py3d.py">his
+          site</a>. &nbsp;There is another commonly used binding of OpenGL for
+        Python which is part of the <a href="http://www.pyglet.org/">Pyglet</a>
+        game development environment. </p>
+    </section>
+    <footer>
+      <div style="text-align: center;">A SourceForge Open-Source Project </div>
+      <div style="text-align: center;"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1"
+            border="0"></a> <br>
+      </div>
+    </footer>
   </body>
 </html>
