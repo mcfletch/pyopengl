@@ -20,6 +20,7 @@ import OpenGL,ctypes
 if os.environ.get( 'TEST_NO_ACCELERATE' ):
     OpenGL.USE_ACCELERATE = False
 from OpenGL.EGL import *
+from OpenGL.error import GLError
 log = logging.getLogger( __name__ )
 import sys
 import os
@@ -75,6 +76,12 @@ def main(displayfunc, api):
         describe_config( display, config_id )
     
     log.info( 'Attempting to bind and create contexts/apis' )
+    try:
+        eglBindAPI( 0x3333 ) # junk value 
+    except GLError as err:
+        pass 
+    else:
+        assert False, "Should have generated error on bind to non-existent api"
     eglBindAPI(api)
     
     # now need to get a raw X window handle...
