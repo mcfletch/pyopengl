@@ -1,19 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
   <head>
-    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
     <title>PyOpenGL for OpenGL Programmers</title>
-    <link rel="stylesheet" type="text/css" href="tutorial.css">
-    <meta name="author" content="Mike C. Fletcher">
+    <link rel="stylesheet" type="text/css" href="../modern.css">
   </head>
   <body>
-    <h1>PyOpenGL for OpenGL Programmers<br>
-    </h1>
-    <p class="introduction">This document describes those features of
+    <header>
+    <h1><a href="../">PyOpenGL</a> for OpenGL Programmers</h1>
+    </header>
+    <section class="introduction">
+    <p>This document describes those features of
       PyOpenGL which are likely to be unfamiliar to OpenGL programmers.
       It also explains various features of PyOpenGL which are not covered in
-      general OpenGL documentation.<br>
-    </p>
+      general OpenGL documentation.</p>
+    </section>
+    <section>
     <h2>Speed Concerns</h2>
     <p>PyOpenGL 3.x is far slower than PyOpenGL 2.x,
       and PyOpenGL 2.x was not fast. Out of the box PyOpenGL 3.x is
@@ -32,8 +33,9 @@
       the arrays are large and in native-format-compatible formats,
       PyOpenGL's overhead tends to be amortized over the size of the arrays
       being processed.</p>
-    <h2>Method Signatures vs. C OpenGL<br>
-    </h2>
+    </section>
+    <section>
+    <h2>Method Signatures vs. C OpenGL</h2>
     <p>Most of the functions which appear in PyOpenGL 3 are identical in
       calling method and functionality to that of the appropriate C
       specification. There are a few exceptions because of the
@@ -50,6 +52,8 @@
     <p>The following sections will document changes other than simple
       changes like the above examples.<br>
     </p>
+    </section>
+    <section>
     <h2>Errors raise Exceptions</h2>
     <p>PyOpenGL generally uses "strict" OpenGL operation, which is closer to
       the operation of Python itself, i.e. errors are raised as exceptions,
@@ -88,6 +92,8 @@
       <li>description -- textual OpenGL description of the error (normally
         pretty terse, useful primarily to look at the documentation)</li>
     </ul>
+    </section>
+    <section>
     <h2>Logging</h2>
     <p>By default, PyOpenGL will log errors to the Python
       logging module. You can disable this by setting a flag before
@@ -100,6 +106,8 @@
       PyOpenGL to trace the calls to OpenGL to the logging module:</p>
     <pre>import OpenGL<br>OpenGL.FULL_LOGGING = True<br>from OpenGL.GL import *<br>...</pre>
     <p>this is extremely slow, but often useful during the debugging process.</p>
+    </section>
+    <section>
     <h2>Wrapped Operations</h2>
     <p>Wrapped Python arguments may go through a number of possible wrapper
       operations in order to produce a final call from the Python
@@ -125,6 +133,8 @@
       operations are implemented by the OpenGL.wrapper.Wrapper class, which
       is the focus of most of theOpenGL_accelerate module's optimizations
       (for obvious reasons).</p>
+    </section>
+    <section>
     <h2>Array Handling</h2>
     <p>PyOpenGL 3.x supports a significant range of array-compatible data-types,
       among the default plug-ins are:</p>
@@ -205,6 +215,8 @@
       the "raw" version of array-handling functions, as these often have less
       processing applied than the "raw" version.
     </p>
+    </section>
+    <section>
     <h2>Image Routines</h2>
     <p>glDrawPixels and the other image/texturing functions have much the
       same decoration scheme as the array functions. For glDrawPixels there is
@@ -225,8 +237,9 @@
       packed data-structures and would potentially cause access errors when
       operating in standard OpenGL mode.<br>
     </p>
-    <h2>Extensions and Conditional Functionality<br>
-    </h2>
+    </section>
+    <section>
+    <h2>Extensions and Conditional Functionality</h2>
     <p>PyOpenGL has support for most OpenGL extensions. Extensions are
       available as "normal" function pointers by importing the constructed
       package name for the extension, for instance:</p>
@@ -249,8 +262,9 @@
     <p>If
       the first element is a string it will be used as the name of the
       alternate object, otherwise the name is taken from the first argument.</p>
-    <h2>Selection and Feedback Buffers<br>
-    </h2>
+    </section>
+    <section>
+    <h2>Selection and Feedback Buffers</h2>
     <p class="technical">Note that both selection and feedback buffers are
       deprecated in OpenGL 3.x. You should be replacing
       selection-buffer usage with either "unique color" selection rendering
@@ -278,6 +292,8 @@ by
     <p class="technical">Instead one must do:<br>
     </p>
     <pre>glSelectBuffer(SIZE) # allocate a selection buffer of SIZE elements<br>glRenderMode(GL_SELECT)<br># draw some stuff<br>buffer = glRenderMode(GL_RENDER)<br># do another selection<br>glSelectBuffer(SIZE) allocate a new selection buffer<br>glRenderMode(GL_SELECT)<br># draw some stuff<br>buffer = glRenderMode(GL_RENDER)</pre>
+    </section>
+    <section>
     <h2>Function Aliases</h2>
     <p>PyOpenGL has historically provided a number of aliases for
       functions.&nbsp; For backwards compatibility, these aliases continue to
@@ -390,13 +406,12 @@ by
         <li>glVertex</li>
       </ul>
     </ul>
-    <p class="footer"><a href="index.html"><img src="../images/doc_logo_icon.gif"
-          title="" alt="Documentation" style="border: 0px solid ; width: 32px; height: 32px;"
-          align="middle"></a>&nbsp;<a href="http://pyopengl.sourceforge.net/"><img
-          title="" alt="PyOpenGL" src="../images/icon2.jpg" style="border: 0px solid ; width: 32px; height: 32px;"
-          align="middle"></a> A
-      SourceForge Open-Source project: <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1"
-          style="border: 0px solid ; width: 88px; height: 31px;" alt="SourceForge"
-          title="" align="middle"></a></p>
+    </section>
+    
+    <footer>
+      <div><a href="../index.html">PyOpenGL</a> is a SourceForge Open-Source Project </div>
+      <div><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1"
+            border="0"></a></div>
+    </footer>
   </body>
 </html>
