@@ -1058,14 +1058,6 @@ class Tests( unittest.TestCase ):
         color = bytearray( b'\000'*12 )
         mem = memoryview( color )
         glColor3fv( mem )
-    try:
-        buffer 
-    except NameError as err:
-        pass 
-    else:
-        def test_buffer_support( self ):
-            color = buffer( b'\000'*12 )
-            glColor3fv( color )
     
     def test_glGenTextures( self ):
         texture = glGenTextures(1)

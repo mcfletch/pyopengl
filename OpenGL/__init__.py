@@ -262,7 +262,6 @@ FormatHandler( 'buffer', 'OpenGL.arrays.buffers.BufferHandler', [
     'OpenGL.arrays._buffers.Py_buffer',
     _bi+'.memoryview',
     _bi+'.bytearray',
-    _bi+'.buffer',
 ],isOutput=True )
 FormatHandler( 'vbo', 'OpenGL.arrays.vbo.VBOHandler', ['OpenGL.arrays.vbo.VBO','OpenGL_accelerate.vbo.VBO'],isOutput=False )
 FormatHandler( 'vbooffset', 'OpenGL.arrays.vbo.VBOOffsetHandler', ['OpenGL.arrays.vbo.VBOOffset','OpenGL_accelerate.vbo.VBOOffset'],isOutput=False )
