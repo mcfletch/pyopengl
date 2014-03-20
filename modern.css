@@ -91,3 +91,20 @@ ul li {
     text-indent: -.5em;
     margin-left: 0;
 }
+
+ul.menu {
+    font-size: smaller;
+    float: right;
+    padding: 0;
+    margin: .25em;
+}
+ul.menu li {
+    -webkit-border-radius: .3em;
+    -moz-border-radius: .3em;
+    border-radius: .3em;
+    display: inline-block;
+    padding: .5em;
+    margin: 0;
+    background-color: black;
+    text-indent: 0;
+}

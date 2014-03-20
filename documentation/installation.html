@@ -8,7 +8,14 @@
   </head>
   <body>
     <header>
-    <h1><a href="../">PyOpenGL</a> Installation</h1>
+      <nav>
+      <ul class="menu">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/documentation/index.html">Docs</a></li>
+        <li><a href="/documentation/installation.html">Install</a></li>
+      </ul>
+      </nav>
+    <h1>PyOpenGL Installation</h1>
     </header>
     <section>
     <p>Most users of <a href="../index.html">PyOpenGL</a> should use <a href="http://pypi.python.org/pypi/pip">pip</a>
@@ -19,9 +26,13 @@
     <section>
     <h2>Manual Installation</h2>
     <p>If you cannot, or would prefer not to, use <code>pip</code>, you can
-      download the package from the <a href="http://pypi.python.org/pypi/PyOpenGL">PyOpenGL
-        PyPI page</a>.
-      The package uses <a href="http://pypi.python.org/pypi/distribute">Distribute</a>
+      download the package from PyPI.</p>
+      <ul>
+        <li><a href="https://pypi.python.org/pypi/PyOpenGL">PyOpenGL</a></li>
+        <li><a href="https://pypi.python.org/pypi/PyOpenGL_accelerate">PyOpenGL_accelerate</a></li>
+        <li><a href="https://pypi.python.org/pypi/PyOpenGL-Demo">PyOpenGL Demo</a></li>
+      </ul>
+      <p>The package uses <a href="http://pypi.python.org/pypi/setuptools">Setuptools</a>
       for its installation.</p>
     <pre>$ tar -zxvf PyOpenGL-3.1.0.tar.gz
 $ cd PyOpenGL-3.1.0
@@ -68,25 +79,23 @@ $ python setup.py install</pre>
       Python.</p>
     </section>
     <section>
-    <h2>OpenGLContext Dependencies</h2>
-    <ul>
-      <li>PyOpenGL</li>
-      <li><a href="http://numpy.scipy.org/">Numpy</a> (Required, normally a
-        binary distribution is desirable)</li>
-      <li><a href="http://www.pythonware.com/products/pil/index.htm">Python
-          Imaging Library</a> (PIL) any recent version (Required, normally a
-        binary distribution is desirable)</li>
-      <li><a href="http://pydispatcher.sourceforge.net/">PyDispatcher</a></li>
-    </ul>
+    <h2>OpenGLContext Installation</h2>
+    <p class="introduction">
+        OpenGLContext is a very large package that depends on a large number
+        of other packages to function.  You do <strong>NOT</strong> need 
+        OpenGLContext to work with PyOpenGL.
+    </p>
+    <p>Basic installation of OpenGLContext is as follows (note that you must 
+    explicitly specify the OpenGLContext and PyVRML97 releases as they are not 
+    currently in final/production releases on PyPI):
+    <pre>$ virtualenv oglc-env
+$ source oglc-env/bin/activate
+(oglc-env)$ pip install PyOpenGL PyOpenGL_accelerate "PyVRML97==2.3.0a4" simpleparse numpy "OpenGLContext==2.2.0a3" pydispatcher pillow</pre>
+
     <p>Once you have the dependencies, you can install OpenGLContext itself</p>
     <pre>$ pip install PyDispatcher PyVRML97 OpenGLContext</pre>
     <p>Recommended Enhancements for OpenGLContext </p>
     <ul>
-      <li><a href="http://sourceforge.net/project/showfiles.php?group_id=55673">SimpleParse</a>
-        2.1</li>
-      <ul>
-        <li>Provides the VRML97 parser, strongly recommended</li>
-      </ul>
       <li><a href="http://sourceforge.net/projects/ttfquery/">TTFQuery</a>
         and<br>
       </li>
