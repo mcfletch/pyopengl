@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?python
 from genshi.input import ET
 def ref_name( docbook ):
@@ -8,17 +9,13 @@ def ref_name( docbook ):
         return docbook.text 
 need_math_render = []
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:py="http://genshi.edgewall.org/">
-<table py:def="nav_table()" width="100%"><tbody><tr><td align="left">
-<a id="nav-previous" py:if="section.previous" href="${ref.url(section.previous)}">Previous: ${section.previous.title}</a></td>
-<td align="center">
-<a id="nav-up" href="./index.xhtml#${section.package}">Table of Contents (${section.package})</a>
-</td>
-<td align="right">
-<a id="nav-next" py:if="section.next" href="${ref.url(section.next)}">Next: ${section.next.title}</a>
-</td>
-</tr></tbody></table>
-
+<html xmlns:py="http://genshi.edgewall.org/">
+<ul class="menu" py:def="nav_table()">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.xhtml#${section.package}">${section.package}</a></li>
+</ul>
 <div py:def="contents( docbook )" py:strip="">${docbook.text}<div py:for="x in docbook" py:strip="">${convert(x)}</div></div>
 <div py:def="convert( docbook )" py:strip="">
     <?python
@@ -123,23 +120,16 @@ if approach == 'copy':
 <head>
     <title>${section.title} : PyOpenGL ${version} ${section.package} Man Pages</title>
     <link rel="stylesheet" href="./manpage.css" type="text/css" />
+    <link rel="stylesheet" href="./modern.css" type="text/css" />
 </head>
 <body>
-${nav_table()}
-<h1>${section.title}</h1>
-<div class="content">
-    <div class="purpose">${ section.purpose }</div>
-    <div class="deprecation-warning" py:if="section.deprecated">
-        <h2>Deprecation Notice</h2>
-        <div class="deprecation-description">
-            Note that this function has been marked deprecated in the OpenGL 3.0 specification.
-            You should not be using this function in new code, though it will likely be supported
-	    by most implementations via the GL_ARB_compatibility extension.
-            For more information on OpenGL 3.x deprecations, see the 
-	    <a href="http://pyopengl.sourceforge.net/documentation/deprecations.html">deprecations page</a>.
-        </div>
-    </div>
-    <div class="signatures">
+<header>
+    ${nav_table()}
+    <h1>${section.title}</h1>
+</header>
+<main class="content">
+    <section class="purpose">${ section.purpose }</section>
+    <section class="signatures">
         <h2>Signature</h2>
         <div py:for="(name,function) in sorted( section.functions.items())" class="signature">
             ${csignature( function )}
@@ -160,32 +150,32 @@ ${nav_table()}
                 </tr>
             </tbody></table>
         </div>
-    </div>
-    <div class="section" py:for="subsect in section.discussions" id="${subsect.get('id')}">
+    </section>
+    <section class="section" py:for="subsect in section.discussions" id="${subsect.get('id')}">
         ${ convert(subsect) }
-    </div>
-    <div class="see-also" py:if="section.see_also">
+    </section>
+    <section class="see-also" py:if="section.see_also">
         <h2>See Also</h2>
         <span py:for="target in section.get_crossrefs( ref )" py:strip="">
             <a class="crossref" href="${ref.url(target)}">${target.name}</a>
         </span>
-    </div>
-    <div class="samples-section" py:if="section.samples">
+    </section>
+    <section class="samples-section" py:if="section.samples">
         <h2>Sample Code References</h2>
         <p>The following code samples have been found which appear to reference the 
         functions described here.  Take care that the code may be old, broken or not 
         even use PyOpenGL.</p>
         ${format_samples( section.samples ) }
-    </div>
-</div>
-<div class="copyright-notice">
+    </section>
+</main>
+<section class="copyright-notice">
     <h2>Copyright Notices</h2>
     <div py:if="section.package in ('GL','GLU')">
         This documentation is based on documentation licensed under the 
         <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
     </div>
-</div>
-<div class="mathjax-note" py:if="need_math_render">
+</section>
+<section class="mathjax-note" py:if="need_math_render">
     <h2>MathML Rendering</h2>
     <div><a href="http://www.mathjax.org/">
     <img title="Powered by MathJax"
@@ -193,7 +183,10 @@ ${nav_table()}
         border="0" alt="Powered by MathJax" /></a></div>
     <script py:if="need_math_render" type="text/javascript"
        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-</div>
+</section>
+<footer>
 ${nav_table()}
+<div class="clear-both"></div>
+</footer>
 </body>
 </html>
