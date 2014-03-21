@@ -10,19 +10,23 @@ from OpenGL.wrapper import Wrapper
 from OpenGL.constant import Constant
 from OpenGL.lazywrapper import _LazyWrapper as Lazy
 from ctypes import _CFuncPtr as CFunctionType
-from OpenGL.error import glCheckError
+from OpenGL.GL import glGetString
 from OpenGL.platform.baseplatform import _NullFunctionPointer as NullFunc
 from OpenGL import platform
 import dumbmarkup
 
-CythonMethod = type( glCheckError )
+CythonMethod = type( platform.PLATFORM.GL.glGetString )
 
-import types,os,textwrap,glob,logging,pickle,inspect
+import types,os,textwrap,glob,logging,pickle,inspect,shutil
 from genshi.template import TemplateLoader
-loader = TemplateLoader(['templates'])
+HERE = os.path.dirname( __file__ )
+loader = TemplateLoader([os.path.join(HERE,'templates')])
 log = logging.getLogger( 'dumbpydoc' )
 
 FUNCTION_MAPPING = pickle.load( open( '.pyfunc-urls.pkl' ))
+
+platform.PLATFORM.EGL = None 
+platform.PLATFORM.WGL = None
 
 
 class PyModule( object ):
@@ -271,10 +275,9 @@ def render( mod ):
     )
     output = stream.render()
     if output:
-        open( os.path.join('pydoc',mod.outfile), 'w').write( output )
+        open( os.path.join(HERE, 'pydoc',mod.outfile), 'w').write( output )
     for child in mod.modules:
         render( child )
-
 
 if __name__ == '__main__':
     logging.basicConfig( level=logging.DEBUG )
@@ -288,3 +291,6 @@ if __name__ == '__main__':
 #        'vrml',
     ]:
         render( mod )
+    for support in glob.glob( os.path.join( HERE, 'output', '*.css' )):
+        shutil.copy( support, os.path.join( HERE, 'pydoc' ))
+    
