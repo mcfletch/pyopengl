@@ -14,7 +14,7 @@ need_math_render = []
     <li><a href="/index.html">Home</a></li>
     <li><a href="/documentation/index.html">Docs</a></li>
     <li><a href="/documentation/installation.html">Install</a></li>
-    <li><a href="./index.xhtml#${section.package}">${section.package}</a></li>
+    <li><a href="./index.html#${section.package}">${section.package}</a></li>
 </ul>
 <div py:def="contents( docbook )" py:strip="">${docbook.text}<div py:for="x in docbook" py:strip="">${convert(x)}</div></div>
 <div py:def="convert( docbook )" py:strip="">
