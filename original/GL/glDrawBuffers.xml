@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glDrawBuffers">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glDrawBuffers">
+    <info>
         <copyright>
             <year>2003-2005</year>
             <holder>3Dlabs Inc. Ltd.</holder>
@@ -9,7 +12,7 @@
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glDrawBuffers</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -27,7 +30,7 @@
         </funcprototype>
     </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
     <variablelist>
         <varlistentry>
         <term><parameter>n</parameter></term>
@@ -46,7 +49,7 @@
         </varlistentry>
     </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
     <para><function>glDrawBuffers</function> defines an array of
     buffers into which outputs from the fragment shader data will
     be written. If a fragment shader writes a value
@@ -117,7 +120,7 @@
     <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry>
     with the argument <constant>GL_MAX_DRAW_BUFFERS</constant>.</para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
 
     <para>The symbolic constants <constant>GL_FRONT</constant>,
     <constant>GL_BACK</constant>, <constant>GL_LEFT</constant>,
@@ -133,7 +136,7 @@
     written into each of the buffers specified by
     <parameter>bufs</parameter>.</para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
     <para><constant>GL_INVALID_ENUM</constant> is generated if one of the
     values in <parameter>bufs</parameter> is not an accepted
     value.</para>
@@ -166,7 +169,7 @@
     <constant>GL_MAX_DRAW_BUFFERS</constant>.</para>
 
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
     <para><citerefentry><refentrytitle>glGet</refentrytitle></citerefentry>
     with argument <constant>GL_MAX_DRAW_BUFFERS</constant></para>
 
@@ -175,20 +178,20 @@
     <emphasis><code>i</code></emphasis> indicates the number of the draw buffer
     whose value is to be queried</para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
     <para> <citerefentry><refentrytitle>glBlendFunc</refentrytitle></citerefentry>,
     <citerefentry><refentrytitle>glColorMask</refentrytitle></citerefentry>,
     <citerefentry><refentrytitle>glDrawBuffers</refentrytitle></citerefentry>,
     <citerefentry><refentrytitle>glLogicOp</refentrytitle></citerefentry>,
     <citerefentry><refentrytitle>glReadBuffer</refentrytitle></citerefentry></para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2003-2005 3Dlabs Inc. Ltd.
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2003-2005 3Dlabs Inc. Ltd.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

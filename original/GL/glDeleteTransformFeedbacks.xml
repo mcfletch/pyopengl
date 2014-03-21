@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glDeleteTransformFeedbacks">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glDeleteTransformFeedbacks">
+    <info>
         <copyright>
             <year>2010-2013</year>
             <holder>Khronos Group.</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glDeleteTransformFeedbacks</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -23,7 +26,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>n</parameter></term>
@@ -43,7 +46,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glDeleteTransformFeedbacks</function> deletes the <parameter>n</parameter> transform feedback objects
             whose names are stored in the array <parameter>ids</parameter>. Unused names in <parameter>ids</parameter> are
@@ -52,12 +55,12 @@
             the underlying object is not deleted until it is no longer active.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_TRANSFORM_FEEDBACK_BINDING</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glGenTransformFeedbacks</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glBindTransformFeedback</refentrytitle></citerefentry>,
@@ -68,12 +71,12 @@
             <citerefentry><refentrytitle>glEndTransformFeedback</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glGenerateMipmap">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glGenerateMipmap">
+    <info>
         <copyright>
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glGenerateMipmap</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -22,7 +25,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -37,7 +40,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glGenerateMipmap</function> generates mipmaps for the texture attached
             to <parameter>target</parameter> of the active texture unit. For cube map textures,
@@ -46,7 +49,7 @@
         </para>
         <para>
             Mipmap generation replaces texel array levels
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: level sub base  +  1: -->
                 <mml:mrow>
                     <mml:msub>
@@ -58,13 +61,13 @@
                 </mml:mrow>
             </mml:math></inlineequation>
             through
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <mml:mrow>
                     <mml:mi mathvariant="italic">q</mml:mi>
                 </mml:mrow>
             </mml:math></inlineequation>
             with arrays derived from the
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: level sub base  +  1: -->
                 <mml:mrow>
                     <mml:msub>
@@ -75,7 +78,7 @@
             </mml:math></inlineequation>
             array, regardless of their previous contents. All other mimap arrays,
             including the
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: level sub base  +  1: -->
                 <mml:mrow>
                     <mml:msub>
@@ -88,7 +91,7 @@
         </para>
         <para>
             The internal formats of the derived mipmap arrays all match those of the
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: level sub base  +  1: -->
                 <mml:mrow>
                     <mml:msub>
@@ -99,7 +102,7 @@
             </mml:math></inlineequation>
             array. The contents of the derived arrays are computed by repeated, filtered
             reduction of the
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: level sub base  +  1: -->
                 <mml:mrow>
                     <mml:msub>
@@ -112,7 +115,7 @@
             independently.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not
             one of the accepted texture targets.
@@ -123,19 +126,19 @@
             target of the active texture unit is not cube complete.
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glTexImage2D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glBindTexture</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glGenTextures</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

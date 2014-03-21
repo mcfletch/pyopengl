@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glInvalidateTexImage">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glInvalidateTexImage">
+    <info>
         <copyright>
             <year>2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glInvalidateTexImage</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -23,7 +26,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>texture</parameter></term>
@@ -43,7 +46,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glInvalidateTexSubImage</function> invalidates all of
             a texture image. <parameter>texture</parameter> and <parameter>level</parameter> indicated
@@ -59,7 +62,7 @@
             <constant>GL_TEXTURE_2D_MULTISAMPLE_ARRAY</constant>, level must be zero.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_VALUE</constant> is generated if <parameter>level</parameter> is
             less than zero or if it is greater or equal to the base 2 logarithm of the maximum texture width, height, or depth.
@@ -74,12 +77,12 @@
             name of an existing texture object.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_MAX_TEXTURE_SIZE</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glInvalidateTexSubImage</refentrytitle></citerefentry>,,
             <citerefentry><refentrytitle>glInvalidateBufferSubData</refentrytitle></citerefentry>,
@@ -88,12 +91,12 @@
             <citerefentry><refentrytitle>glInvalidateSubFramebuffer</refentrytitle></citerefentry>.
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

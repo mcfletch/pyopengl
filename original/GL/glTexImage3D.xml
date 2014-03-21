@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glTexImage3D">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glTexImage3D">
+    <info>
         <copyright>
             <year>2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glTexImage3D</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -31,7 +34,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -50,9 +53,9 @@
                     Specifies the level-of-detail number.
                     Level 0 is the base image level.
                     Level
-                    <inlineequation><mml:math><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
+                    <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
                     is the
-                    <inlineequation><mml:math>
+                    <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                         <!-- eqn: n sup th: -->
                         <mml:msup><mml:mi mathvariant="italic">n</mml:mi>
                         <mml:mi mathvariant="italic">th</mml:mi>
@@ -173,7 +176,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             Texturing maps a portion of a specified texture image
             onto each graphical primitive for which texturing is enabled.
@@ -297,21 +300,21 @@
             Table 1, below
         </para>
         <para>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="baseformattable.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="baseformattable.xml"/>
         </para>
         <para>
             <parameter>internalFormat</parameter> may also be one of the sized internal formats
             shown in Table 2, below
         </para>
         <para>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="internalformattable.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="internalformattable.xml"/>
         </para>
         <para>
             Finally, <parameter>internalFormat</parameter> may also be one of the generic or compressed
             compressed texture formats shown in Table 3 below
         </para>
         <para>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="compressedformattable.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="compressedformattable.xml"/>
         </para>
         <para>
                 If the <parameter>internalFormat</parameter> parameter is one of the generic compressed formats,
@@ -325,13 +328,13 @@
                               <constant>GL_SRGB8</constant>,
                               <constant>GL_SRGB_ALPHA</constant>, or
                               <constant>GL_SRGB8_ALPHA8</constant>, the texture is treated as if the red, green, blue, or luminance components are encoded in the sRGB color space.    Any alpha component is left unchanged.  The conversion from the sRGB encoded component
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                     <mml:msub><mml:mi mathvariant="italic">c</mml:mi>
                     <mml:mi mathvariant="italic">s</mml:mi>
                     </mml:msub>
             </mml:math></inlineequation>
                         to a linear component
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                     <mml:msub><mml:mi mathvariant="italic">c</mml:mi>
                     <mml:mi mathvariant="italic">l</mml:mi>
                     </mml:msub>
@@ -339,7 +342,7 @@
             is:
                 </para>
                 <para>
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                         <mml:mrow>
                                 <mml:msub>
                                   <mml:mi mathvariant="italic">c</mml:mi>
@@ -417,7 +420,7 @@
                 </para>
                 <para>
                         Assume
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                                                                 <mml:msub><mml:mi mathvariant="italic">c</mml:mi>
                                                                 <mml:mi mathvariant="italic">s</mml:mi>
                                                                 </mml:msub>
@@ -439,7 +442,7 @@
             A four-component image uses all of the RGBA components.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             The <citerefentry><refentrytitle>glPixelStore</refentrytitle></citerefentry> mode affects texture images.
         </para>
@@ -462,7 +465,7 @@
             version is 4.4 or higher.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not <constant>GL_TEXTURE_3D</constant>
             or <constant>GL_PROXY_TEXTURE_3D</constant>.
@@ -480,7 +483,7 @@
         </para>
         <para>
             <constant>GL_INVALID_VALUE</constant> may be generated if <parameter>level</parameter> is greater than
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: log sub 2 (max): -->
                 <mml:mrow>
                     <mml:msub><mml:mi mathvariant="italic">log</mml:mi>
@@ -544,7 +547,7 @@
             into the number of bytes needed to store in memory a datum indicated by <parameter>type</parameter>.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGetTexImage</refentrytitle></citerefentry>
         </para>
@@ -552,7 +555,7 @@
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_PIXEL_UNPACK_BUFFER_BINDING</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glActiveTexture</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glCompressedTexImage1D</refentrytitle></citerefentry>,
@@ -576,13 +579,13 @@
             <citerefentry><refentrytitle>glTexParameter</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2011-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"/> 2011-2013 Khronos Group.
             This document is licensed under the SGI
             Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

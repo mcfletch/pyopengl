@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glCompressedTexImage3D">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glCompressedTexImage3D">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
@@ -9,7 +12,7 @@
             <year>2011-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glCompressedTexImage3D</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -34,7 +37,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -120,7 +123,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             Texturing allows elements of an image array to be read by shaders.
         </para>
@@ -162,33 +165,33 @@
             These pixel storage modes operate in the same way as they do for <citerefentry><refentrytitle>glTexImage1D</refentrytitle></citerefentry>.
             In the following description, denote by
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>s</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>s</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>,
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>,
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>h</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>h</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>, and
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>d</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>d</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>
             the values of pixel storage modes <constant>GL_UNPACK_COMPRESSED_BLOCK_SIZE</constant>,
             <constant>GL_UNPACK_COMPRESSED_BLOCK_WIDTH</constant>, <constant>GL_UNPACK_COMPRESSED_BLOCK_HEIGHT</constant>,
             and <constant>GL_UNPACK_COMPRESSED_BLOCK_DEPTH</constant>, respectively.
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>s</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>s</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>
             is the compressed block size in bytes;
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>,
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>h</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>h</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>,
             and
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>d</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>d</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>
             are the compressed block width, height, and depth in pixels.
         </para>
@@ -199,21 +202,21 @@
             are ignored for compressed images. To enable <constant>GL_UNPACK_SKIP_PIXELS</constant>
             and <constant>GL_UNPACK_ROW_LENGTH</constant>,
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>s</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>s</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>
             and
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>
             must both be non-zero.
             To also enable <constant>GL_UNPACK_SKIP_ROWS</constant> and <constant>GL_UNPACK_IMAGE_HEIGHT</constant>,
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>h</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>h</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>
             must be non-zero.
             To also enable <constant>GL_UNPACK_SKIP_IMAGES</constant>,
             <inlineequation>
-                <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>d</mml:mi></mml:msub></mml:mrow></mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>d</mml:mi></mml:msub></mml:mrow></mml:math>
             </inlineequation>
             must be non-zero. All parameters must be consistent with the compressed format to produce the desired results.
         </para>
@@ -224,7 +227,7 @@
                     <para>
                         the value of <constant>GL_UNPACK_SKIP_PIXELS</constant> must be a multiple of
                         <inlineequation>
-                            <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
+                            <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
                         </inlineequation>;
                     </para>
                 </listitem>
@@ -232,7 +235,7 @@
                     <para>
                         the value of <constant>GL_UNPACK_SKIP_ROWS</constant> must be a multiple of
                         <inlineequation>
-                            <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
+                            <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
                         </inlineequation>;
                     </para>
                 </listitem>
@@ -240,7 +243,7 @@
                     <para>
                         the value of <constant>GL_UNPACK_SKIP_IMAGES</constant> must be a multiple of
                         <inlineequation>
-                            <mml:math><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
+                            <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>w</mml:mi></mml:msub></mml:mrow></mml:math>
                         </inlineequation>.
                     </para>
                 </listitem>
@@ -251,14 +254,14 @@
         </para>
         <para>
             <inlineequation>
-                <mml:math display = 'block'>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" display="block" overflow="scroll">
                   <mml:mrow>
                     <mml:msub>
                       <mml:mi>b</mml:mi>
                       <mml:mi>s</mml:mi>
                     </mml:msub>
-                    <mml:mo lspace='2px' rspace='2px'>&times;</mml:mo>
-                    <mml:mfenced open = '&lceil;' close = '&rceil;'>
+                    <mml:mo lspace="2px" rspace="2px">&times;</mml:mo>
+                    <mml:mfenced open="&lceil;" close="&rceil;">
                       <mml:mfrac>
                         <mml:mi>width</mml:mi>
                         <mml:msub>
@@ -267,8 +270,8 @@
                         </mml:msub>
                       </mml:mfrac>
                     </mml:mfenced>
-                    <mml:mo lspace='2px' rspace='2px'>&times;</mml:mo>
-                    <mml:mfenced open = '&lceil;' close = '&rceil;'>
+                    <mml:mo lspace="2px" rspace="2px">&times;</mml:mo>
+                    <mml:mfenced open="&lceil;" close="&rceil;">
                       <mml:mfrac>
                         <mml:mi>height</mml:mi>
                         <mml:msub>
@@ -277,8 +280,8 @@
                         </mml:msub>
                       </mml:mfrac>
                     </mml:mfenced>
-                    <mml:mo lspace='2px' rspace='2px'>&times;</mml:mo>
-                    <mml:mfenced open = '&lceil;' close = '&rceil;'>
+                    <mml:mo lspace="2px" rspace="2px">&times;</mml:mo>
+                    <mml:mfenced open="&lceil;" close="&rceil;">
                       <mml:mfrac>
                         <mml:mi>depth</mml:mi>
                         <mml:msub>
@@ -292,7 +295,7 @@
             </inlineequation>
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
           <constant>GL_INVALID_ENUM</constant> is generated if <parameter>internalformat</parameter> is not one of the generic
           compressed internal formats:
@@ -328,7 +331,7 @@
             Undefined results, including abnormal program termination, are generated if <parameter>data</parameter> is not encoded in a manner consistent with the extension specification defining the internal compression format.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGetCompressedTexImage</refentrytitle></citerefentry>
         </para>
@@ -343,7 +346,7 @@
             and <constant>GL_TEXTURE_COMPRESSED_IMAGE_SIZE</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glActiveTexture</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glCompressedTexImage1D</refentrytitle></citerefentry>,
@@ -364,13 +367,13 @@
             <citerefentry><refentrytitle>glTexParameter</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2011-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"/> 2011-2013 Khronos Group.
             This document is licensed under the SGI
             Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

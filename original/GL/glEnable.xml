@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glEnable">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glEnable">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
@@ -9,7 +12,7 @@
             <year>2011-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glEnable</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -46,7 +49,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>cap</parameter></term>
@@ -68,7 +71,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glEnable</function> and <function>glDisable</function>
             enable and disable various capabilities. Use
@@ -175,7 +178,7 @@
                         If enabled,
                         the
                         <!-- - wc <= zc <= wc -->
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <mml:mo>-</mml:mo><mml:msub><mml:mi>w</mml:mi><mml:mi>c</mml:mi></mml:msub><mml:mo>&le;</mml:mo><mml:msub><mml:mi>z</mml:mi><mml:mi>c</mml:mi></mml:msub><mml:mo>&le;</mml:mo><mml:msub><mml:mi>w</mml:mi><mml:mi>c</mml:mi></mml:msub>
                         </mml:math></inlineequation>
                         plane equation is ignored by view volume clipping (effectively, there is no near or
@@ -326,7 +329,7 @@
                         draw commands which transfers a set of generic attribute array elements to the GL will
                         restart the primitive when the index of the vertex is equal to the fixed primitive
                         index for the specified index type. The fixed index is equal to
-                        <inlineequation><mml:math><mml:msup><mml:mn>2</mml:mn><mml:mi>n</mml:mi></mml:msup><mml:mo>&minus;</mml:mo><mml:mn>1</mml:mn></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:msup><mml:mn>2</mml:mn><mml:mi>n</mml:mi></mml:msup><mml:mo>&minus;</mml:mo><mml:mn>1</mml:mn></mml:math></inlineequation>
                         where <emphasis>n</emphasis> is equal to 8 for <constant>GL_UNSIGNED_BYTE</constant>,
                         16 for <constant>GL_UNSIGNED_SHORT</constant> and 32 for <constant>GL_UNSIGNED_INT</constant>.
                     </para>
@@ -462,7 +465,7 @@
             </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>cap</parameter> is not one of the values
             listed previously.
@@ -472,7 +475,7 @@
             if <parameter>index</parameter> is greater than or equal to the number of indexed capabilities for <parameter>cap</parameter>.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             <constant>GL_PRIMITIVE_RESTART</constant> is available only if the GL version is 3.1 or greater.
         </para>
@@ -495,7 +498,7 @@
             will enable or disable that capability for all indices, resepectively.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glIsEnabled</refentrytitle></citerefentry>
         </para>
@@ -503,7 +506,7 @@
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glActiveTexture</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glBlendFunc</refentrytitle></citerefentry>,
@@ -526,13 +529,13 @@
             <citerefentry><refentrytitle>glTexImage3D</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2011-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"/> 2011-2013 Khronos Group.
             This document is licensed under the SGI
             Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

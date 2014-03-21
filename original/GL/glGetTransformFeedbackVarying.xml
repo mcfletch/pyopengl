@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glGetTransformFeedbackVarying">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glGetTransformFeedbackVarying">
+    <info>
         <copyright>
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glGetTransformFeedbackVarying</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -28,7 +31,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>program</parameter></term>
@@ -89,7 +92,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             Information about the set of varying variables in a linked program that will be captured
             during transform feedback may be retrieved by calling <function>glGetTransformFeedbackVarying</function>.
@@ -124,7 +127,7 @@
             arise if <function>glGetTransformFeedbackVarying</function> is called after a failed link.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_VALUE</constant> is generated if <parameter>program</parameter> is not
             the name of a program object.
@@ -137,24 +140,24 @@
             <constant>GL_INVALID_OPERATION</constant> is generated <parameter>program</parameter> has not been linked.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGetProgram</refentrytitle></citerefentry> with argument <constant>GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH</constant>.
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glBeginTransformFeedback</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glEndTransformFeedback</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTransformFeedbackVaryings</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glGetProgram</refentrytitle></citerefentry>
         </para>
-    </refsect1>    <refsect1 id="Copyright"><title>Copyright</title>
+    </refsect1>    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

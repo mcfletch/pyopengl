@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glTexParameter">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glTexParameter">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glTexParameter</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -65,7 +68,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -133,7 +136,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glTexParameter</function> assigns the value or values in <parameter>params</parameter> to the texture parameter
             specified as <parameter>pname</parameter>.
@@ -151,9 +154,9 @@
                         must be one of <constant>GL_DEPTH_COMPONENT</constant> or <constant>GL_STENCIL_COMPONENT</constant>.
                         If the depth stencil mode is <constant>GL_DEPTH_COMPONENT</constant>, then reads from depth-stencil
                         format textures will return the depth component of the texel in
-                        <inlineequation><mml:math><mml:msub><mml:mi>R</mml:mi><mml:mi>t</mml:mi></mml:msub></mml:math></inlineequation> and the stencil component
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:msub><mml:mi>R</mml:mi><mml:mi>t</mml:mi></mml:msub></mml:math></inlineequation> and the stencil component
                         will be discarded. If the depth stencil mode is <constant>GL_STENCIL_COMPONENT</constant> then
-                        the stencil component is returned in <inlineequation><mml:math><mml:msub><mml:mi>R</mml:mi><mml:mi>t</mml:mi></mml:msub></mml:math></inlineequation>
+                        the stencil component is returned in <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:msub><mml:mi>R</mml:mi><mml:mi>t</mml:mi></mml:msub></mml:math></inlineequation>
                         and the depth component is discarded. The initial value is <constant>GL_DEPTH_COMPONENT</constant>.
                     </para>
                 </listitem>
@@ -183,7 +186,7 @@
                         texture's internal format and substituted for the non-existent texel data. If the texture contains depth
                         components, the first component of <constant>GL_TEXTURE_BORDER_COLOR</constant> is interpreted as a depth value.
                         The initial value is
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <mml:mrow>
                                 <mml:mfenced open="(" close=")">
                                     <mml:mrow>
@@ -204,7 +207,7 @@
                         or <function>glTexParameterIuiv</function>, the values are stored unmodified with an internal data type of
                         integer. If specified with <function>glTexParameteriv</function>, they are converted to floating point with the following
                         equation:
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">f</mml:mi>
                                 <mml:mo>=</mml:mo>
@@ -256,7 +259,7 @@
                                         <constant>GL_LEQUAL</constant>
                                         </entry>
                                         <entry>
-                                            <inlineequation><mml:math>
+                                            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                                                 <!-- eqn: result  =  left {   cpile {1.0 above 0.0}        lpile {r <= {D sub t} above r > {D sub t}}: -->
                                                 <mml:mrow>
                                                     <mml:mi mathvariant="italic">result</mml:mi>
@@ -307,7 +310,7 @@
                                         <constant>GL_GEQUAL</constant>
                                         </entry>
                                         <entry>
-                                            <inlineequation><mml:math>
+                                            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                                                 <!-- eqn: result  =  left {   cpile {1.0 above 0.0}        lpile {r <= {D sub t} above r > {D sub t}}: -->
                                                 <mml:mrow>
                                                     <mml:mi mathvariant="italic">result</mml:mi>
@@ -358,7 +361,7 @@
                                         <constant>GL_LESS</constant>
                                         </entry>
                                         <entry>
-                                            <inlineequation><mml:math>
+                                            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                                                 <!-- eqn: result  =  left {   cpile {1.0 above 0.0}        lpile {r <= {D sub t} above r > {D sub t}}: -->
                                                 <mml:mrow>
                                                     <mml:mi mathvariant="italic">result</mml:mi>
@@ -409,7 +412,7 @@
                                         <constant>GL_GREATER</constant>
                                         </entry>
                                         <entry>
-                                            <inlineequation><mml:math>
+                                            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                                                 <!-- eqn: result  =  left {   cpile {1.0 above 0.0}        lpile {r <= {D sub t} above r > {D sub t}}: -->
                                                 <mml:mrow>
                                                     <mml:mi mathvariant="italic">result</mml:mi>
@@ -460,7 +463,7 @@
                                         <constant>GL_EQUAL</constant>
                                         </entry>
                                         <entry>
-                                            <inlineequation><mml:math>
+                                            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                                                 <!-- eqn: result  =  left {   cpile {1.0 above 0.0}        lpile {r <= {D sub t} above r > {D sub t}}: -->
                                                 <mml:mrow>
                                                     <mml:mi mathvariant="italic">result</mml:mi>
@@ -511,7 +514,7 @@
                                         <constant>GL_NOTEQUAL</constant>
                                         </entry>
                                         <entry>
-                                            <inlineequation><mml:math>
+                                            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                                                 <!-- eqn: result  =  left {   cpile {1.0 above 0.0}        lpile {r <= {D sub t} above r > {D sub t}}: -->
                                                 <mml:mrow>
                                                     <mml:mi mathvariant="italic">result</mml:mi>
@@ -563,7 +566,7 @@
                                         </entry>
                                         <entry>
                                             <inlineequation>
-                                                <mml:math>
+                                                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                                                 <mml:mrow>
                                                     <mml:mi mathvariant="italic">result</mml:mi>
                                                     <mml:mo>=</mml:mo>
@@ -579,7 +582,7 @@
                                         </entry>
                                         <entry>
                                             <inlineequation>
-                                                <mml:math>
+                                                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                                                 <mml:mrow>
                                                     <mml:mi mathvariant="italic">result</mml:mi>
                                                     <mml:mo>=</mml:mo>
@@ -592,16 +595,16 @@
                                 </tbody>
                             </tgroup>
                         </informaltable>
-                        where <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>
+                        where <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>
                         is the current interpolated texture coordinate, and
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: D sub t: -->
                             <mml:msub><mml:mi mathvariant="italic">D</mml:mi>
                             <mml:mi mathvariant="italic">t</mml:mi>
                             </mml:msub>
                         </mml:math></inlineequation>
                         is the depth texture value sampled from the currently bound depth texture.
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">result</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">result</mml:mi></mml:math></inlineequation>
                         is assigned to the the red channel.
                     </para>
                 </listitem>
@@ -620,7 +623,7 @@
                                 <listitem>
                                     <para>
                                         Specifies that the interpolated and clamped
-                                        <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>
+                                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>
                                         texture coordinate should
                                         be compared to the value in the currently bound depth texture.  See the
                                         discussion of <constant>GL_TEXTURE_COMPARE_FUNC</constant> for details of how the comparison
@@ -648,7 +651,7 @@
                         <parameter>params</parameter> specifies a fixed bias value that is to be added to the level-of-detail
                         parameter for the texture before texture sampling. The specified value is added to the shader-supplied
                         bias value (if any) and subsequently clamped into the implementation-defined range
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <mml:mfenced open="[" close="]">
                                 <mml:mfenced open="" close="">
                                     <mml:mrow>
@@ -672,7 +675,7 @@
                             </mml:mfenced>
                         </mml:math></inlineequation>,
                         where
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <mml:mrow>
                                 <mml:msub><mml:mi mathvariant="italic">bias</mml:mi>
                                 <mml:mi mathvariant="italic">max</mml:mi>
@@ -698,7 +701,7 @@
                         A mipmap is an ordered set of arrays representing the same image
                         at progressively lower resolutions.
                         If the texture has dimensions
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: 2 sup n  times  2 sup m: -->
                             <mml:mrow>
                                 <mml:msup><mml:mn>2</mml:mn>
@@ -711,7 +714,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>,
                         there are
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: max ( n, m ) + 1: -->
                             <mml:mrow>
                                 <mml:mrow>
@@ -729,7 +732,7 @@
                         mipmaps.
                         The first mipmap is the original texture,
                         with dimensions
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: 2 sup n  times  2 sup m: -->
                             <mml:mrow>
                                 <mml:msup><mml:mn>2</mml:mn>
@@ -742,7 +745,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>.
                         Each subsequent mipmap has dimensions
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: 2 sup { k - 1 }  times  2 sup { l - 1 }: -->
                             <mml:mrow>
                                 <mml:msup><mml:mn>2</mml:mn>
@@ -767,7 +770,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>,
                         where
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: 2 sup k  times  2 sup l: -->
                             <mml:mrow>
                                 <mml:msup><mml:mn>2</mml:mn>
@@ -781,7 +784,7 @@
                         </mml:math></inlineequation>
                         are the dimensions of the previous mipmap,
                         until either
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: k  =  0: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">k</mml:mi>
@@ -790,7 +793,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         or
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: l = 0: -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">l</mml:mi>
@@ -800,7 +803,7 @@
                         </mml:math></inlineequation>.
                         At that point,
                         subsequent mipmaps have dimension
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: 1  times  2 sup { l - 1 }: -->
                             <mml:mrow>
                                 <mml:mn>1</mml:mn>
@@ -817,7 +820,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         or
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: 2 sup { k - 1}  times  1: -->
                             <mml:mrow>
                                 <mml:msup><mml:mn>2</mml:mn>
@@ -835,7 +838,7 @@
                         </mml:math></inlineequation>
                         until the final mipmap,
                         which has dimension
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: 1  times  1: -->
                             <mml:mrow>
                                 <mml:mn>1</mml:mn>
@@ -849,7 +852,7 @@
                         with the <emphasis>level</emphasis> argument indicating the order of the mipmaps.
                         Level 0 is the original texture;
                         level
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: max ( n, m ): -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">max</mml:mi>
@@ -861,7 +864,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         is the final
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: 1  times  1: -->
                             <mml:mrow>
                                 <mml:mn>1</mml:mn>
@@ -1050,28 +1053,28 @@
                 <term><constant>GL_TEXTURE_SWIZZLE_R</constant></term>
                 <listitem>
                     <para>
-                        Sets the swizzle that will be applied to the <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>
+                        Sets the swizzle that will be applied to the <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>
                         component of a texel before it is returned to the shader. Valid values for <parameter>param</parameter> are <constant>GL_RED</constant>,
                         <constant>GL_GREEN</constant>, <constant>GL_BLUE</constant>, <constant>GL_ALPHA</constant>, <constant>GL_ZERO</constant> and
                         <constant>GL_ONE</constant>.
                         If <constant>GL_TEXTURE_SWIZZLE_R</constant> is <constant>GL_RED</constant>, the value for
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be taken from the first
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be taken from the first
                         channel of the fetched texel.
                         If <constant>GL_TEXTURE_SWIZZLE_R</constant> is <constant>GL_GREEN</constant>, the value for
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be taken from the second
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be taken from the second
                         channel of the fetched texel.
                         If <constant>GL_TEXTURE_SWIZZLE_R</constant> is <constant>GL_BLUE</constant>, the value for
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be taken from the third
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be taken from the third
                         channel of the fetched texel.
                         If <constant>GL_TEXTURE_SWIZZLE_R</constant> is <constant>GL_ALPHA</constant>, the value for
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be taken from the fourth
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be taken from the fourth
                         channel of the fetched texel.
                         If <constant>GL_TEXTURE_SWIZZLE_R</constant> is <constant>GL_ZERO</constant>, the value for
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be subtituted with
-                        <inlineequation><mml:math><mml:mn>0.0</mml:mn></mml:math></inlineequation>.
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be subtituted with
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mn>0.0</mml:mn></mml:math></inlineequation>.
                         If <constant>GL_TEXTURE_SWIZZLE_R</constant> is <constant>GL_ONE</constant>, the value for
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be subtituted with
-                        <inlineequation><mml:math><mml:mn>1.0</mml:mn></mml:math></inlineequation>.
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation> will be subtituted with
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mn>1.0</mml:mn></mml:math></inlineequation>.
                         The initial value is <constant>GL_RED</constant>.
                     </para>
                 </listitem>
@@ -1084,7 +1087,7 @@
                 <term><constant>GL_TEXTURE_SWIZZLE_G</constant></term>
                 <listitem>
                     <para>
-                        Sets the swizzle that will be applied to the <inlineequation><mml:math><mml:mi mathvariant="italic">g</mml:mi></mml:math></inlineequation>
+                        Sets the swizzle that will be applied to the <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">g</mml:mi></mml:math></inlineequation>
                         component of a texel before it is returned to the shader. Valid values for <parameter>param</parameter> and their effects are similar to
                         those of <constant>GL_TEXTURE_SWIZZLE_R</constant>.
                         The initial value is <constant>GL_GREEN</constant>.
@@ -1099,7 +1102,7 @@
                 <term><constant>GL_TEXTURE_SWIZZLE_B</constant></term>
                 <listitem>
                     <para>
-                        Sets the swizzle that will be applied to the <inlineequation><mml:math><mml:mi mathvariant="italic">b</mml:mi></mml:math></inlineequation>
+                        Sets the swizzle that will be applied to the <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">b</mml:mi></mml:math></inlineequation>
                         component of a texel before it is returned to the shader. Valid values for <parameter>param</parameter> and their effects are similar to
                         those of <constant>GL_TEXTURE_SWIZZLE_R</constant>.
                         The initial value is <constant>GL_BLUE</constant>.
@@ -1114,7 +1117,7 @@
                 <term><constant>GL_TEXTURE_SWIZZLE_A</constant></term>
                 <listitem>
                     <para>
-                        Sets the swizzle that will be applied to the <inlineequation><mml:math><mml:mi mathvariant="italic">a</mml:mi></mml:math></inlineequation>
+                        Sets the swizzle that will be applied to the <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">a</mml:mi></mml:math></inlineequation>
                         component of a texel before it is returned to the shader. Valid values for <parameter>param</parameter> and their effects are similar to
                         those of <constant>GL_TEXTURE_SWIZZLE_R</constant>.
                         The initial value is <constant>GL_ALPHA</constant>.
@@ -1130,10 +1133,10 @@
                 <listitem>
                     <para>
                         Sets the swizzles that will be applied to the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>,
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">g</mml:mi></mml:math></inlineequation>,
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">b</mml:mi></mml:math></inlineequation>, and
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">a</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>,
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">g</mml:mi></mml:math></inlineequation>,
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">b</mml:mi></mml:math></inlineequation>, and
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">a</mml:mi></mml:math></inlineequation>
                         components of a texel before they are returned to the shader. Valid values for <parameter>params</parameter> and their effects are similar to
                         those of <constant>GL_TEXTURE_SWIZZLE_R</constant>, except that all channels are specified simultaneously.
                         Setting the value of <constant>GL_TEXTURE_SWIZZLE_RGBA</constant> is equivalent (assuming no errors are generated) to
@@ -1153,14 +1156,14 @@
                 <listitem>
                     <para>
                         Sets the wrap parameter for texture coordinate
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
                         to either <constant>GL_CLAMP_TO_EDGE</constant>, <constant>GL_CLAMP_TO_BORDER</constant>,
                         <constant>GL_MIRRORED_REPEAT</constant>,
                         <constant>GL_REPEAT</constant>, or <constant>GL_MIRROR_CLAMP_TO_EDGE</constant>. <constant>GL_CLAMP_TO_EDGE</constant> causes
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
                         coordinates to be clamped to the
                         range
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: left [ {1 over 2N}, 1 - {1 over 2N} right ]: -->
                             <mml:mfenced open="[" close="]">
                                 <mml:mfenced open="" close="">
@@ -1190,30 +1193,30 @@
                             </mml:mfenced>
                         </mml:math></inlineequation>,
                         where
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">N</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">N</mml:mi></mml:math></inlineequation>
                         is the size
                         of the texture in the direction of clamping.
-                        <constant>GL_CLAMP_TO_BORDER</constant> evaluates <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation> coordinates in a similar manner to <constant>GL_CLAMP_TO_EDGE</constant>.
+                        <constant>GL_CLAMP_TO_BORDER</constant> evaluates <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation> coordinates in a similar manner to <constant>GL_CLAMP_TO_EDGE</constant>.
                         However, in cases where clamping would have occurred in <constant>GL_CLAMP_TO_EDGE</constant> mode, the fetched texel data
                         is substituted with the values specified by <constant>GL_TEXTURE_BORDER_COLOR</constant>.
                         <constant>GL_REPEAT</constant> causes the
                         integer part of the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
                         coordinate to be ignored; the GL uses only the
                         fractional part, thereby creating a repeating pattern.
                         <constant>GL_MIRRORED_REPEAT</constant> causes the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
                         coordinate to be set to the
                         fractional part of the texture coordinate if the integer part of
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
                         is
                         even; if the integer part of
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
                         is odd, then the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
                         texture coordinate is
                         set to
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: 1 - frac(s): -->
                             <mml:mrow>
                                 <mml:mn>1</mml:mn>
@@ -1228,7 +1231,7 @@
                             </mml:mrow>
                         </mml:math></inlineequation>,
                         where
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: frac(s): -->
                             <mml:mrow>
                                 <mml:mi mathvariant="italic">frac</mml:mi>
@@ -1239,8 +1242,8 @@
                             </mml:mrow>
                         </mml:math></inlineequation>
                         represents the fractional part of
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>.
-                        <constant>GL_MIRROR_CLAMP_TO_EDGE</constant> causes the the <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>.
+                        <constant>GL_MIRROR_CLAMP_TO_EDGE</constant> causes the the <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
                         coordinate to be repeated as for <constant>GL_MIRRORED_REPEAT</constant> for one reptition of the texture,
                         at which point the coordinate to be clamped as in <constant>GL_CLAMP_TO_EDGE</constant>.
                         Initially, <constant>GL_TEXTURE_WRAP_S</constant> is set to <constant>GL_REPEAT</constant>.
@@ -1256,7 +1259,7 @@
                 <listitem>
                     <para>
                         Sets the wrap parameter for texture coordinate
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">t</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">t</mml:mi></mml:math></inlineequation>
                         to either <constant>GL_CLAMP_TO_EDGE</constant>, <constant>GL_CLAMP_TO_BORDER</constant>,
                         <constant>GL_MIRRORED_REPEAT</constant>, <constant>GL_REPEAT</constant>, or
                         <constant>GL_MIRROR_CLAMP_TO_EDGE</constant>. See the discussion under <constant>GL_TEXTURE_WRAP_S</constant>.
@@ -1273,7 +1276,7 @@
                 <listitem>
                     <para>
                         Sets the wrap parameter for texture coordinate
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">r</mml:mi></mml:math></inlineequation>
                         to either <constant>GL_CLAMP_TO_EDGE</constant>, <constant>GL_CLAMP_TO_BORDER</constant>,
                         <constant>GL_MIRRORED_REPEAT</constant>, <constant>GL_REPEAT</constant>, or
                         <constant>GL_MIRROR_CLAMP_TO_EDGE</constant>.  See the discussion under <constant>GL_TEXTURE_WRAP_S</constant>.
@@ -1283,7 +1286,7 @@
             </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             Suppose that a program attempts to sample from a texture and
             has set <constant>GL_TEXTURE_MIN_FILTER</constant> to one of the functions that requires a
@@ -1311,7 +1314,7 @@
             <constant>GL_MIRROR_CLAMP_TO_EDGE</constant> is available only if the GL version is 4.4 or greater.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> or <parameter>pname</parameter> is not
             one of the accepted defined values.
@@ -1321,7 +1324,7 @@
             constant value (based on the value of <parameter>pname</parameter>) and does not.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGetTexParameter</refentrytitle></citerefentry>
         </para>
@@ -1329,7 +1332,7 @@
             <citerefentry><refentrytitle>glGetTexLevelParameter</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glActiveTexture</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glBindTexture</refentrytitle></citerefentry>,
@@ -1348,14 +1351,14 @@
             <citerefentry><refentrytitle>glTexSubImage3D</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
+            Copyright <trademark class="copyright"/> 1991-2006
             Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2012-2013
+            Copyright <trademark class="copyright"/> 2012-2013
             Khronos Group. This document is licensed under the SGI
             Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

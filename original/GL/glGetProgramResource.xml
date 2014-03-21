@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glGetProgramResource">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glGetProgramResource">
+    <info>
         <copyright>
             <year>2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glGetProgramResource</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -29,7 +32,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>program</parameter></term>
@@ -49,7 +52,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glGetProgramResourceiv</function> returns values for multiple properties of a single active resource with an
             index of <parameter>index</parameter> in the interface <parameter>programInterface</parameter> of program object
@@ -390,7 +393,7 @@
             vertices written to the transform feedback buffer is written to <parameter>params</parameter>.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_VALUE</constant> is generated if <parameter>program</parameter> is
             not the name of an existing program object.
@@ -408,7 +411,7 @@
             is not one of the accepted tokens for the interface <parameter>programInterface</parameter>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glGetProgramResourceName</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glGetGetProgramResourceIndex</refentrytitle></citerefentry>,
@@ -416,12 +419,12 @@
             <citerefentry><refentrytitle>glGetProgramResourceLocationIndex</refentrytitle></citerefentry>.
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

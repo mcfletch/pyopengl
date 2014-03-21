@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glTexStorage2D">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glTexStorage2D">
+    <info>
         <copyright>
             <year>2011-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glTexStorage2D</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -26,7 +29,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -74,7 +77,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glTexStorage2D</function> specifies the storage requirements for all levels
             of a two-dimensional texture or one-dimensional texture array simultaneously. Once a texture is specified with this
@@ -136,16 +139,16 @@
             would not, in fact, alter the dimensions or format of the object.
         </para>
         <para>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="internalformattable.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="internalformattable.xml"/>
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             <constant>GL_STENCIL_INDEX8</constant> is accepted for <parameter>internalformat</parameter>
             only if the GL version is 4.4 or higher.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>internalformat</parameter> is not a
             valid sized internal format.
@@ -162,15 +165,15 @@
             <constant>GL_INVALID_OPERATION</constant> is generated if <parameter>target</parameter> is <constant>GL_TEXTURE_1D_ARRAY</constant>
             or <constant>GL_PROXY_TEXTURE_1D_ARRAY</constant> and <parameter>levels</parameter> is greater than
             <inlineequation>
-                <mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                   <mml:mrow>
-                    <mml:mfenced open = '&lfloor;' close = '&rfloor;'>
+                    <mml:mfenced open="&lfloor;" close="&rfloor;">
                       <mml:mrow>
                         <mml:msub>
                           <mml:mi>log</mml:mi>
                           <mml:mn>2</mml:mn>
                         </mml:msub>
-                        <mml:mfenced open = '(' close = ')'>
+                        <mml:mfenced open="(" close=")">
                           <mml:mi>width</mml:mi>
                         </mml:mfenced>
                       </mml:mrow>
@@ -185,22 +188,22 @@
             <constant>GL_INVALID_OPERATION</constant> is generated if <parameter>target</parameter> is not <constant>GL_TEXTURE_1D_ARRAY</constant>
             or <constant>GL_PROXY_TEXTURE_1D_ARRAY</constant> and <parameter>levels</parameter> is greater than
             <inlineequation>
-                <mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                   <mml:mrow>
-                    <mml:mfenced open = '&lfloor;' close = '&rfloor;'>
+                    <mml:mfenced open="&lfloor;" close="&rfloor;">
                       <mml:mrow>
                         <mml:msub>
                           <mml:mi>log</mml:mi>
                           <mml:mn>2</mml:mn>
                         </mml:msub>
-                        <mml:mfenced open = '(' close = ')'>
+                        <mml:mfenced open="(" close=")">
                           <mml:mrow>
                             <mml:mi>max</mml:mi>
-                            <mml:mfenced open = '(' close = ')'>
+                            <mml:mfenced open="(" close=")">
                               <mml:mrow>
                                 <mml:mi>width</mml:mi>
                                 <mml:mo>,</mml:mo>
-                                <mml:mtext fontfamily='Times New Roman'>&nbsp;</mml:mtext>
+                                <mml:mtext fontfamily="Times New Roman">&nbsp;</mml:mtext>
                                 <mml:mi>height</mml:mi>
                               </mml:mrow>
                             </mml:mfenced>
@@ -215,19 +218,19 @@
             </inlineequation>.
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glTexImage2D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexStorage1D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexStorage3D</refentrytitle></citerefentry>.
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2011-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2011-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

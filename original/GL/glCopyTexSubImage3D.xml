@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glCopyTexSubImage3D">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glCopyTexSubImage3D">
+    <info>
         <copyright>
             <year>2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glCopyTexSubImage3D</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -30,7 +33,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -103,7 +106,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glCopyTexSubImage3D</function> replaces a rectangular portion of a three-dimensional
             or two-dimensional array texture image with pixels from the current <constant>GL_READ_BUFFER</constant> (rather
@@ -114,7 +117,7 @@
             (<parameter>x</parameter>, <parameter>y</parameter>) and with
             width <parameter>width</parameter> and height <parameter>height</parameter> replaces the portion of the
             texture array with x indices <parameter>xoffset</parameter> through
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: xoffset  +  width  -  1: -->
                 <mml:mrow>
                     <mml:mi mathvariant="italic">xoffset</mml:mi>
@@ -125,7 +128,7 @@
                 </mml:mrow>
             </mml:math></inlineequation>,
             inclusive, and y indices <parameter>yoffset</parameter> through
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: yoffset  +  height  -  1: -->
                 <mml:mrow>
                     <mml:mi mathvariant="italic">yoffset</mml:mi>
@@ -142,7 +145,7 @@
             <citerefentry><refentrytitle>glReadPixels</refentrytitle></citerefentry> had been called, but the process stops just before
             final conversion.
             At this point, all pixel component values are clamped to the range
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: [0,1]: -->
                 <mml:mfenced open="[" close="]">
                     <mml:mn>0</mml:mn>
@@ -169,12 +172,12 @@
             array or to texel values outside the specified subregion.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             <citerefentry><refentrytitle>glPixelStore</refentrytitle></citerefentry> modes affect texture images.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if /<parameter>target</parameter> is not <constant>GL_TEXTURE_3D</constant>.
         </para>
@@ -187,7 +190,7 @@
         </para>
         <para>
             <constant>GL_INVALID_VALUE</constant> may be generated if
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: level  >  log sub 2(max): -->
                 <mml:mrow>
                     <mml:mi mathvariant="italic">level</mml:mi>
@@ -204,14 +207,14 @@
                 </mml:mrow>
             </mml:math></inlineequation>,
             where
-            <inlineequation><mml:math><mml:mi mathvariant="italic">max</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">max</mml:mi></mml:math></inlineequation>
             is the returned value of <constant>GL_MAX_3D_TEXTURE_SIZE</constant> if <parameter>target</parameter>
             is <constant>GL_TEXTURE_3D</constant> or the returned value of <constant>GL_MAX_ARRAY_TEXTURE_LAYERS</constant>
             if <parameter>target</parameter> is <constant>GL_TEXTURE_2D_ARRAY</constant>.
         </para>
         <para>
             <constant>GL_INVALID_VALUE</constant> is generated if
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: xoffset  <  -b: -->
                 <mml:mrow>
                     <mml:mi mathvariant="italic">xoffset</mml:mi>
@@ -219,7 +222,7 @@
                     <mml:mn>0</mml:mn>
                 </mml:mrow>
             </mml:math></inlineequation>,
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: (xoffset  +  width)  >  (w  - b): -->
                 <mml:mrow>
                     <mml:mfenced open="(" close=")">
@@ -233,7 +236,7 @@
                     <mml:mi mathvariant="italic">w</mml:mi>
                 </mml:mrow>
             </mml:math></inlineequation>,
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: yoffset  <   -b: -->
                 <mml:mrow>
                     <mml:mi mathvariant="italic">yoffset</mml:mi>
@@ -241,7 +244,7 @@
                     <mml:mn>0</mml:mn>
                 </mml:mrow>
             </mml:math></inlineequation>,
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: (yoffset  +  height)  >  (h  - b): -->
                 <mml:mrow>
                     <mml:mfenced open="(" close=")">
@@ -255,7 +258,7 @@
                     <mml:mi mathvariant="italic">h</mml:mi>
                 </mml:mrow>
             </mml:math></inlineequation>,
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: zoffset  <   -b: -->
                 <mml:mrow>
                     <mml:mi mathvariant="italic">zoffset</mml:mi>
@@ -264,7 +267,7 @@
                 </mml:mrow>
             </mml:math></inlineequation>,
             or
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: (zoffset  +  1)  >  (d  - b): -->
                 <mml:mrow>
                      <mml:mfenced open="(" close=")">
@@ -279,27 +282,27 @@
                 </mml:mrow>
             </mml:math></inlineequation>,
             where
-            <inlineequation><mml:math><mml:mi mathvariant="italic">w</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">w</mml:mi></mml:math></inlineequation>
             is the <constant>GL_TEXTURE_WIDTH</constant>,
-            <inlineequation><mml:math><mml:mi mathvariant="italic">h</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">h</mml:mi></mml:math></inlineequation>
             is the <constant>GL_TEXTURE_HEIGHT</constant>,
-            <inlineequation><mml:math><mml:mi mathvariant="italic">d</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">d</mml:mi></mml:math></inlineequation>
             is the <constant>GL_TEXTURE_DEPTH</constant> and
             of the texture image being modified.
             Note that
-            <inlineequation><mml:math><mml:mi mathvariant="italic">w</mml:mi></mml:math></inlineequation>,
-            <inlineequation><mml:math><mml:mi mathvariant="italic">h</mml:mi></mml:math></inlineequation>,
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">w</mml:mi></mml:math></inlineequation>,
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">h</mml:mi></mml:math></inlineequation>,
             and
-            <inlineequation><mml:math><mml:mi mathvariant="italic">d</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">d</mml:mi></mml:math></inlineequation>
             include twice the border width.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGetTexImage</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glCopyTexImage1D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glCopyTexImage2D</refentrytitle></citerefentry>,
@@ -316,14 +319,14 @@
             <citerefentry><refentrytitle>glTexSubImage3D</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
+            Copyright <trademark class="copyright"/> 1991-2006
             Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2012-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2012-2013 Khronos Group.
             This document is licensed under the SGI
             Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

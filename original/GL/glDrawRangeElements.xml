@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glDrawRangeElements">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glDrawRangeElements">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
@@ -9,7 +12,7 @@
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glDrawRangeElements</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -31,7 +34,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>mode</parameter></term>
@@ -98,7 +101,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glDrawRangeElements</function> is a restricted form of <citerefentry><refentrytitle>glDrawElements</refentrytitle></citerefentry>. <parameter>mode</parameter>, <parameter>start</parameter>, <parameter>end</parameter>,
             and <parameter>count</parameter> match the corresponding arguments to <citerefentry><refentrytitle>glDrawElements</refentrytitle></citerefentry>, with
@@ -111,7 +114,7 @@
             which may be queried by calling <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument
             <constant>GL_MAX_ELEMENTS_VERTICES</constant> and <constant>GL_MAX_ELEMENTS_INDICES</constant>.
             If
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: end  -  start  +  1: -->
                 <mml:mrow>
                     <mml:mi mathvariant="italic">end</mml:mi>
@@ -125,7 +128,7 @@
             <constant>GL_MAX_ELEMENTS_VERTICES</constant>, or if <parameter>count</parameter> is greater than the value of
             <constant>GL_MAX_ELEMENTS_INDICES</constant>, then the call may operate at reduced
             performance.  There is no requirement that all vertices in the range
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: [start, end]: -->
                 <mml:mfenced open="[" close="]">
                     <mml:mi mathvariant="italic">start</mml:mi>
@@ -149,7 +152,7 @@
             modified maintain their previous values.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             <constant>GL_LINE_STRIP_ADJACENCY</constant>,
             <constant>GL_LINES_ADJACENCY</constant>,
@@ -158,10 +161,10 @@
             are available only if the GL version is 3.2 or greater.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             It is an error for indices to lie outside the range
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: [start, end]: -->
                 <mml:mfenced open="[" close="]">
                     <mml:mi mathvariant="italic">start</mml:mi>
@@ -179,7 +182,7 @@
         </para>
         <para>
             <constant>GL_INVALID_VALUE</constant> is generated if
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: end < start: -->
                 <mml:mrow>
                     <mml:mi mathvariant="italic">end</mml:mi>
@@ -197,7 +200,7 @@
             enabled array or the element array and the buffer object's data store is currently mapped.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_MAX_ELEMENTS_VERTICES</constant>
         </para>
@@ -205,20 +208,20 @@
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_MAX_ELEMENTS_INDICES</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glDrawArrays</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glDrawElements</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glDrawElementsBaseVertex</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This document is licensed under the SGI Free Software B License.
             For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

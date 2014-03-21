@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glViewportIndexed">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glViewportIndexed">
+    <info>
         <copyright>
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glViewportIndexed</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -33,7 +36,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>index</parameter></term>
@@ -76,7 +79,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glViewportIndexedf</function> and <function>glViewportIndexedfv</function>
             specify the parameters for a single viewport.
@@ -88,24 +91,24 @@
             of the viewport in pixels, respectively.
             For <function>glViewportIndexedfv</function>, <parameter>v</parameter> contains the address of an array of floating
             point values specifying the
-            left (<inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>),
-            bottom (<inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>),
-            width (<inlineequation><mml:math><mml:mi mathvariant="italic">w</mml:mi></mml:math></inlineequation>),
-            and height (<inlineequation><mml:math><mml:mi mathvariant="italic">h</mml:mi></mml:math></inlineequation>)
-            of each viewport, in that order. <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
-            and <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation> give
+            left (<inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>),
+            bottom (<inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>),
+            width (<inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">w</mml:mi></mml:math></inlineequation>),
+            and height (<inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">h</mml:mi></mml:math></inlineequation>)
+            of each viewport, in that order. <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
+            and <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation> give
             the location of the viewport's lower left corner, and
-            <inlineequation><mml:math><mml:mi mathvariant="italic">w</mml:mi></mml:math></inlineequation>
-            and <inlineequation><mml:math><mml:mi mathvariant="italic">h</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">w</mml:mi></mml:math></inlineequation>
+            and <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">h</mml:mi></mml:math></inlineequation>
             give the width and height of the viewport, respectively.
             The viewport specifies the affine transformation of
-            <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
             and
-            <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
             from
             normalized device coordinates to window coordinates.
             Let
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: (x sub nd, y sub nd): -->
                 <mml:mfenced open="(" close=")">
                     <mml:msub><mml:mi mathvariant="italic">x</mml:mi>
@@ -118,7 +121,7 @@
             </mml:math></inlineequation>
             be normalized device coordinates.
             Then the window coordinates
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: (x sub w, y sub w): -->
                 <mml:mfenced open="(" close=")">
                     <mml:msub><mml:mi mathvariant="italic">x</mml:mi>
@@ -132,7 +135,7 @@
             are computed as follows:
         </para>
         <para>
-            <informalequation><mml:math>
+            <informalequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: x sub w  =  ( x sub nd  +  1 ) left ( width over 2 right )  +  x: -->
                 <mml:mrow>
                     <mml:msub><mml:mi mathvariant="italic">x</mml:mi>
@@ -163,7 +166,7 @@
             </mml:math></informalequation>
         </para>
         <para>
-            <informalequation><mml:math>
+            <informalequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: y sub w  =  ( y sub nd  +  1 ) left ( height over 2 right )  +  y: -->
                 <mml:mrow>
                     <mml:msub><mml:mi mathvariant="italic">y</mml:mi>
@@ -195,9 +198,9 @@
         </para>
         <para>
             The location of the viewport's bottom left corner, given by
-            (<inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>, <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>)
+            (<inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>, <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>)
             is clamped to be within the implementaiton-dependent viewport bounds range.
-            The viewport bounds range [<inlineequation><mml:math><mml:mi mathvariant="italic">min</mml:mi></mml:math></inlineequation>, <inlineequation><mml:math><mml:mi mathvariant="italic">max</mml:mi></mml:math></inlineequation>]
+            The viewport bounds range [<inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">min</mml:mi></mml:math></inlineequation>, <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">max</mml:mi></mml:math></inlineequation>]
             can be determined by calling <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument
             <constant>GL_VIEWPORT_BOUNDS_RANGE</constant>.
             Viewport width and height are silently clamped
@@ -220,7 +223,7 @@
         glViewportArrayv(index, 1, v);
     }</programlisting>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_VALUE</constant> is generated if <parameter>index</parameter> is greater than or equal to
             the value of <constant>GL_MAX_VIEWPORTS</constant>.
@@ -229,7 +232,7 @@
             <constant>GL_INVALID_VALUE</constant> is generated if either <parameter>width</parameter> or <parameter>height</parameter> is negative.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_VIEWPORT</constant>
         </para>
@@ -243,19 +246,19 @@
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_VIEWPORT_SUBPIXEL_BITS</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glDepthRange</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glViewport</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glViewportArray</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>
