@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.ES2_compatibility to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds support for features of OpenGL ES 2.0 that are
+	missing from OpenGL 3.x. Enabling these features will ease the process
+	of porting applications from OpenGL ES 2.0 to OpenGL.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/ES2_compatibility.txt
 '''

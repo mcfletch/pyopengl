@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIS.point_line_texgen to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds two texture coordinate generation modes, both
+	which generate a texture coordinate based on the minimum distance 
+	from a vertex to a specified line.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIS/point_line_texgen.txt
 '''

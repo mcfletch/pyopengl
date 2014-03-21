@@ -4,6 +4,17 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.shader_atomic_counters to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension builds upon the ARB_shader_atomic_counters and
+	NV_gpu_program5 extensions to provide assembly language support for
+	incrementing, decrementing, and querying the values of atomic counters
+	stored in buffer object memory.
+	
+	The extension uses the same set of atomic counter buffer binding points as
+	the ARB_shader_atomic_counters extension; applications using this
+	extension should use the APIs specified there to bind buffers.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/shader_atomic_counters.txt
 '''

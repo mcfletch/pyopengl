@@ -4,6 +4,19 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.EXT.visual_info to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows the user to request a particular X visual 
+	type to be associated with a GLX visual, and allows the user
+	to query the X visual type underlying a GLX visual.
+	
+	In addition, this extension provides a means to request a visual
+	with a transparent pixel and to query whether a visual supports a
+	transparent pixel value and the value of the transparent pixel.
+	Note that the notion of level and transparent pixels are orthogonal as
+	both layer 1 and layer 0 visuals may or may not have a transparent pixel
+	value.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/visual_info.txt
 '''

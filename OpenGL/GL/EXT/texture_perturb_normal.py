@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.texture_perturb_normal to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension defines a mechanism for using texture values to perturb
+	the fragment normal vector prior to fragment lighting.  It enables a
+	direct implementation of the original formulation of bump mapping by
+	Blinn.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/texture_perturb_normal.txt
 '''

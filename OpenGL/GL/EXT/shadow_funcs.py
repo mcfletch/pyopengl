@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.shadow_funcs to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension generalizes the GL_ARB_shadow extension to support all
+	eight binary texture comparison functions rather than just GL_LEQUAL
+	and GL_GEQUAL.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/shadow_funcs.txt
 '''

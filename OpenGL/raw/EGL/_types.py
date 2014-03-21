@@ -41,11 +41,12 @@ EGLModeMESA = ctypes.c_ulong
 
 EGLNativeFileDescriptorKHR = ctypes.c_int
 
-EGLSyncKHR = EGLSyncNV = _opaque_pointer_cls( 'EGLSync' )
-EGLTimeKHR = EGLTimeNV = ctypes.c_ulonglong
+EGLSyncKHR = EGLSyncNV = EGLSync = _opaque_pointer_cls( 'EGLSync' )
+EGLTimeKHR = EGLTimeNV = EGLTime = ctypes.c_ulonglong
 EGLuint64KHR = EGLuint64NV = ctypes.c_ulonglong
 EGLStreamKHR = _opaque_pointer_cls( 'EGLStream' )
 EGLsizeiANDROID = ctypes.c_size_t
+EGLAttribKHR = EGLAttrib = ctypes.POINTER( ctypes.c_int32 )
 
 class EGLClientPixmapHI( ctypes.Structure):
     _fields_ = [
@@ -87,6 +88,8 @@ _VERSION_PREFIX = 'EGL_VERSION_EGL_'
 
 
 [
+    'EGLAttrib',
+    'EGLAttribKHR',
     'EGLBoolean',
     'EGLClientBuffer',
     'EGLClientPixmapHI',
@@ -106,8 +109,10 @@ _VERSION_PREFIX = 'EGL_VERSION_EGL_'
     'EGLSurface',
     'EGLSyncKHR',
     'EGLSyncNV',
+    'EGLSync',
     'EGLTimeKHR',
     'EGLTimeNV',
+    'EGLTime',
     'EGL_DEFAULT_DISPLAY',
     'EGL_DONT_CARE',
     'EGL_NO_CONTEXT',

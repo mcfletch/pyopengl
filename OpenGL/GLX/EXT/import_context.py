@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.EXT.import_context to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows multiple X clients to share an indirect
+	rendering context.
+	
+	Additional convenience procedures to get the current Display*
+	bound to a context as well as other context information are
+	also added.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/import_context.txt
 '''

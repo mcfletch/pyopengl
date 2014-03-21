@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.WGL.NV.DX_interop to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows OpenGL to directly access DirectX buffers
+	and surfaces.  A DirectX vertex buffer may be shared as an OpenGL
+	buffer object and a DirectX surface may be shared as an OpenGL
+	texture or renderbuffer object.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/DX_interop.txt
 '''

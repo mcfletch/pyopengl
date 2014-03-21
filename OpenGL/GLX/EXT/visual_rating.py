@@ -4,6 +4,22 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.EXT.visual_rating to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows servers to identify a particular GLX visual as 
+	undesirable. A new visual attribute is introduced, providing a way
+	for servers to specify caveats (e.g., slow) for a visual. The attribute 
+	may be queried using glXGetConfig, and can therefore be used by 
+	application-specific visual selection routines. The new attribute is 
+	also used by glXChooseVisual to discriminate against visuals with
+	caveats.
+	
+	This extension allows servers to export visuals with improved features
+	or image quality, but lower performance or greater system burden,
+	without having to have these visuals selected preferentially.  It is
+	intended to insure that most applications get the "right" visual, not
+	that all applications do.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/visual_rating.txt
 '''

@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GL.HP.convolution_border_modes to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides some additional border modes for the
+	EXT_convolution extension.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/HP/convolution_border_modes.txt
 '''

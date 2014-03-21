@@ -4,6 +4,18 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.vertex_type_10f_11f_11f_rev to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds the following data format:
+	
+	A new vertex attribute data format: a packed 11.11.10 unsigned
+	float vertex data format.  This vertex data format can be used
+	to describe a compressed 3 component stream of values that can
+	be represented by 10- or 11-bit unsigned floating point values.
+	
+	The UNSIGNED_INT_10F_11F_11F_REV vertex attribute type is
+	equivalent to the R11F_G11F_B10F texture internal format.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/vertex_type_10f_11f_11f_rev.txt
 '''

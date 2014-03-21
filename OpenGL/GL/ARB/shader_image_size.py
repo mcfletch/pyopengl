@@ -4,6 +4,10 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.shader_image_size to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	This extension provides GLSL built-in functions allowing shaders to query
+	the size of an image.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/shader_image_size.txt
 '''

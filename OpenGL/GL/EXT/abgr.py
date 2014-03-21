@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.abgr to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	EXT_abgr extends the list of host-memory color formats.  Specifically,
+	it provides a reverse-order alternative to image format RGBA.  The ABGR
+	component order matches the cpack Iris GL format on big-endian machines.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/abgr.txt
 '''

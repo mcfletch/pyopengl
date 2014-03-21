@@ -4,6 +4,16 @@ This module customises the behaviour of the
 OpenGL.raw.GL.AMD.shader_trinary_minmax to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension introduces three new trinary built-in functions to the
+	OpenGL Shading Languages. These functions allow the minimum, maximum
+	or median of three inputs to be found with a single function call. These
+	operations may be useful for sorting and filtering operations, for example.
+	By explicitly performing a trinary operation with a single built-in
+	function, shader compilers and optimizers may be able to generate better
+	instruction sequences for perform sorting and other multi-input functions.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/AMD/shader_trinary_minmax.txt
 '''

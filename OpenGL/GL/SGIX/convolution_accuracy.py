@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.convolution_accuracy to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds an accuracy hint for convolution.  It
+	allows the program to trade off precision for speed.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/convolution_accuracy.txt
 '''

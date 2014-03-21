@@ -4,6 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.shader_bit_encoding to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension trivially adds built-in functions for getting/setting
+	the bit encoding for floating-point values in the OpenGL Shading Language.
+	
+	These functions are pulled out of ARB_gpu_shader5, since support for such
+	built-in functions exists in current hardware.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/shader_bit_encoding.txt
 '''

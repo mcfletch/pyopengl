@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.fog_coord to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows specifying an explicit per-vertex fog
+	coordinate to be used in fog computations, rather than using a
+	fragment depth-based fog equation.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/fog_coord.txt
 '''
