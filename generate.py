@@ -68,7 +68,7 @@ class Reference( model.Reference ):
             raise KeyError( 'Function %s referenced from %s not found'%(key, getattr(section,'title','Unknown') ))
     def url( self, target ):
         if isinstance( target, RefSect ):
-            return './%s.xhtml'%(target.title,)
+            return './%s.html'%(target.title,)
         elif isinstance( target, model.PyFunction ):
             return '%s#py-%s'%(self.url(target.section),target.name)
         elif isinstance( target, Function ):
@@ -93,6 +93,10 @@ class RefSect( model.RefSect ):
                 value = getattr( self, function )
                 processors[key ] = value
         self.id = tree[0].get('id')
+        if not self.id:
+            # newer files use a prefixed "id" attribute...
+            self.id = tree[0].get('{http://www.w3.org/XML/1998/namespace}id')
+        assert self.id
         self.title = self.name = tree[0].xpath(
             './/d:refmeta/d:refentrytitle',
             namespaces=self.query_namespace
@@ -115,14 +119,15 @@ class RefSect( model.RefSect ):
         processed_sections = {}
         for section in tree[0].xpath( './/d:refsect1', namespaces=self.query_namespace):
             id = section.get( 'id' )
-            if '-parameters' in id or id == 'parameters':
+            if id and '-parameters' in id or id == 'parameters':
                 for varlist in section.xpath( './d:variablelist',namespaces=self.query_namespace):
                     self.process_variablelist( varlist )
-            elif id.endswith( '-see_also' ):
+            elif id and id.endswith( '-see_also' ):
                 for entry in section.xpath( './/d:citerefentry',namespaces=self.query_namespace):
                     title,volume = entry[0].text, entry[1].text
                     self.see_also.append( (title,volume) )
             else:
+                log.warn( 'Found reference section without id' )
                 self.discussions.append( section )
             processed_sections[ id ] = True
         # global search for referenced constants...
@@ -227,6 +232,15 @@ def init_output( ):
             os.remove( dst )
         os.link( src, dst )
 
+        
+REDIRECT = '''<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="refresh" content="1;url=%(base)s" />
+</head>
+<body>
+    The content for this page has moved to <a href="%(base)s">HTML</a>.
+</body>
+</html>'''
 
 def main():
     init_output()
@@ -247,6 +261,9 @@ def main():
     ref = Reference()
     for package,path in files:
         log.info( 'Loading: %s', path )
+        if 'glActiveShaderProgram' in path:
+            import pdb
+            pdb.set_trace()
         #print 'loading', path
         try:
             tree = load_file( path )
@@ -270,10 +287,16 @@ def main():
         version=__version__,
         implementation_module_names = IMPLEMENTATION_MODULES,
     )
-    data = stream.render('xhtml')
-    open( os.path.join(OUTPUT_DIRECTORY,'index.xhtml'), 'w').write( data )
+    data = stream.render('html')
+    open( os.path.join(OUTPUT_DIRECTORY,'index.html'), 'w').write( data )
+    base = 'index.html'
+    old_file = os.path.join(OUTPUT_DIRECTORY,'index.xhtml')
+    open( old_file, 'w' ).write(REDIRECT%locals())
 
     for name,section in sorted(ref.sections.items()):
+        if not name or 'glActiveTexture' in name:
+            import pdb
+            pdb.set_trace()
         output_file = os.path.join( OUTPUT_DIRECTORY,ref.url(section))
         log.warn( 'Generating: %s -> %s',name, output_file )
         stream = loader.load(
@@ -284,10 +307,14 @@ def main():
             date=datetime.datetime.now().isoformat(),
             version=__version__,
         )
-        data = stream.render('xhtml')
+        data = stream.render('html')
         open(
             output_file, 'w'
         ).write( data )
+        old_file = os.path.splitext( output_file )[0] + '.xhtml'
+        base = ref.url( section )
+        open( old_file, 'w' ).write(REDIRECT%locals())
+        
 
     # Now store out references for things which want to do Python: refsect
     # lookups...

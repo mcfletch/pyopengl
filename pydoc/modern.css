@@ -4,11 +4,6 @@ body {
     margin: 0;
     background-color: #c0c0c0;
 }
-header {
-    padding: .25em;
-    background-color: white;
-    margin-bottom: .5em;
-}
 section {
     background-color: white;
     -webkit-border-radius: 3px;
@@ -21,10 +16,16 @@ header .subheading {
     padding: 0;
     font-size: small;
 }
-header {
+header, footer {
+    padding: .25em;
     color: white;
     background-color: #303030;
-    /* background-image: url(greypinstripe.png); */
+}
+header {
+    margin-bottom: .5em;
+}
+footer {
+    margin-top: .5em;
 }
 section {
     margin-top: .2em;

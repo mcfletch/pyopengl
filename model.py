@@ -22,7 +22,9 @@ class Reference( object ):
     def append( self, section ):
         """Add the given section to our tables"""
         if section.id != section.title:
-            if '.' in section.id and section.id.split('.')[0] == section.title and section.id.split('.')[1].startswith( '3' ):
+            if not section.id:
+                log.warn( 'Null section id in %s', section.title )
+            elif '.' in section.id and section.id.split('.')[0] == section.title and section.id.split('.')[1].startswith( '3' ):
                 pass
             else:
                 log.warn( "Unmatched id/title: %s (title) %s (id)", section.title, section.id )
