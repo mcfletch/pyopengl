@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glTexBuffer">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glTexBuffer">
+    <info>
         <copyright>
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glTexBuffer</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -24,7 +27,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -52,7 +55,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glTexBuffer</function> attaches the storage for the buffer object named <parameter>buffer</parameter> to the active
             buffer texture, and specifies the internal format for the texel array found in the attached buffer object. If <parameter>buffer</parameter>
@@ -60,7 +63,7 @@
             is non-zero, it must be the name of an existing buffer object. <parameter>target</parameter> must be <constant>GL_TEXTURE_BUFFER</constant>.
             <parameter>internalformat</parameter> specifies the storage format, and must be one of the following sized internal formats:
         </para>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="texboformattable.xml" />
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="texboformattable.xml"/>
         <para>
             When a buffer object is attached to a buffer texture, the buffer object's data store
             is taken as the texture's texel array.  The number of texels in the buffer texture's
@@ -68,8 +71,8 @@
         </para>
         <para>
             <inlineequation>
-                <mml:math>
-                    <mml:mfenced open = '&lfloor;' close = '&rfloor;'>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
+                    <mml:mfenced open="&lfloor;" close="&rfloor;">
                         <mml:mfrac>
                             <mml:mrow>
                                 <mml:mi>buffer_size</mml:mi>
@@ -95,7 +98,7 @@
             greater than or equal to the clamped number of texels in the texel array.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not <constant>GL_TEXTURE_BUFFER</constant>.
         </para>
@@ -106,12 +109,12 @@
             <constant>GL_INVALID_OPERATION</constant> is generated if <parameter>buffer</parameter> is not zero or the name of an existing buffer object.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             <function>glTexBuffer</function> is available only if the GL version is 3.1 or greater.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
     <para><citerefentry><refentrytitle>glGet</refentrytitle></citerefentry>
     with argument <constant>GL_MAX_TEXTURE_BUFFER_SIZE</constant></para>
     <para><citerefentry><refentrytitle>glGet</refentrytitle></citerefentry>
@@ -119,7 +122,7 @@
     <para><citerefentry><refentrytitle>glGetTexLevelParameter</refentrytitle></citerefentry>
     with argument <constant>GL_TEXTURE_BUFFER_DATA_STORE_BINDING</constant></para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glGenBuffers</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glBindBuffer</refentrytitle></citerefentry>,
@@ -130,12 +133,12 @@
             <citerefentry><refentrytitle>glDeleteTextures</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

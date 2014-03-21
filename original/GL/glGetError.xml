@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glGetError">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glGetError">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
@@ -9,7 +12,7 @@
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glGetError</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -26,7 +29,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glGetError</function> returns the value of the error flag.
             Each detectable error is assigned a numeric code and symbolic name.
@@ -148,14 +151,14 @@
             If <function>glGetError</function> itself generates an error, it returns 0.
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This document is licensed under the SGI
             This document is licensed under the SGI
             Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

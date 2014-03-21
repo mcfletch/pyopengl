@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glCopyTexImage2D">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glCopyTexImage2D">
+    <info>
         <copyright>
             <year>2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glCopyTexImage2D</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -29,7 +32,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -134,7 +137,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glCopyTexImage2D</function> defines a two-dimensional texture image, or cube-map texture image
             with pixels from the current
@@ -143,11 +146,11 @@
         <para>
             The screen-aligned pixel rectangle with lower left corner at (<parameter>x</parameter>,
             <parameter>y</parameter>) and with a width of
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <mml:mi mathvariant="italic">width</mml:mi>
             </mml:math></inlineequation>
             and a height of
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <mml:mi mathvariant="italic">height</mml:mi>
             </mml:math></inlineequation>
             defines the texture array
@@ -159,7 +162,7 @@
             <citerefentry><refentrytitle>glReadPixels</refentrytitle></citerefentry> had been called, but the process stops just before
             final conversion.
             At this point all pixel component values are clamped to the range
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: [0,1]: -->
                 <mml:mfenced open="[" close="]">
                     <mml:mn>0</mml:mn>
@@ -171,14 +174,14 @@
         </para>
         <para>
             Pixel ordering is such that lower
-            <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
             and
-            <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
             screen coordinates correspond to
             lower
-            <inlineequation><mml:math><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">s</mml:mi></mml:math></inlineequation>
             and
-            <inlineequation><mml:math><mml:mi mathvariant="italic">t</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">t</mml:mi></mml:math></inlineequation>
             texture coordinates.
         </para>
         <para>
@@ -190,7 +193,7 @@
             When <parameter>internalformat</parameter> is one of the sRGB  types, the GL does not automatically convert the source pixels to the sRGB color space.  In this case, the <function>glPixelMap</function> function can be used to accomplish the conversion.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             1, 2, 3, and 4 are not accepted values for <parameter>internalformat</parameter>.
         </para>
@@ -202,7 +205,7 @@
             if the GL version is 4.4 or higher.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not <constant>GL_TEXTURE_2D</constant>,
             <constant>GL_TEXTURE_CUBE_MAP_POSITIVE_X</constant>,
@@ -218,7 +221,7 @@
         <para>
             <constant>GL_INVALID_VALUE</constant> may be generated if <parameter>level</parameter> is greater
             than
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: log sub 2 max: -->
                 <mml:mrow>
                     <mml:msub><mml:mi mathvariant="italic">log</mml:mi>
@@ -229,7 +232,7 @@
                 </mml:mrow>
             </mml:math></inlineequation>,
             where
-            <inlineequation><mml:math><mml:mi mathvariant="italic">max</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">max</mml:mi></mml:math></inlineequation>
             is the returned value of <constant>GL_MAX_TEXTURE_SIZE</constant>.
         </para>
         <para>
@@ -251,12 +254,12 @@
             buffer.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGetTexImage</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glCopyTexImage1D</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glCopyTexSubImage1D</refentrytitle></citerefentry>,
@@ -269,14 +272,14 @@
             <citerefentry><refentrytitle>glTexParameter</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
+            Copyright <trademark class="copyright"/> 1991-2006
             Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2012-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2012-2013 Khronos Group.
             This document is licensed under the SGI
             Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

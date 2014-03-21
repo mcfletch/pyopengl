@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glBufferSubData">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glBufferSubData">
+    <info>
         <copyright>
             <year>2005</year>
             <holder>Sams Publishing</holder>
@@ -9,7 +12,7 @@
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glBufferSubData</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -29,7 +32,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -81,7 +84,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glBufferSubData</function> redefines some or all of the data store for the buffer object currently
             bound to <parameter>target</parameter>. Data starting at byte offset <parameter>offset</parameter> and
@@ -90,7 +93,7 @@
             together define a range beyond the bounds of the buffer object's data store.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             When replacing the entire data store, consider using <function>glBufferSubData</function> rather
             than completely recreating the data store with <function>glBufferData</function>.  This avoids the cost of
@@ -105,8 +108,8 @@
         <para>
             Clients must align data elements consistent with the requirements of the client
             platform, with an additional base-level requirement that an offset within a buffer to
-            a datum comprising <inlineequation><mml:math><mml:mi mathvariant="italic">N</mml:mi></mml:math></inlineequation> bytes be a
-            multiple of <inlineequation><mml:math><mml:mi mathvariant="italic">N</mml:mi></mml:math></inlineequation>.
+            a datum comprising <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">N</mml:mi></mml:math></inlineequation> bytes be a
+            multiple of <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">N</mml:mi></mml:math></inlineequation>.
         </para>
         <para>
             The <constant>GL_ATOMIC_COUNTER_BUFFER</constant> target is available only if the GL version
@@ -120,7 +123,7 @@
             The <constant>GL_QUERY_BUFFER</constant> target is available only if the GL version is 4.4 or greater.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not
             one of the accepted buffer targets.
@@ -137,12 +140,12 @@
             <constant>GL_INVALID_OPERATION</constant> is generated if the buffer object being updated is mapped.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGetBufferSubData</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glBindBuffer</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glBufferData</refentrytitle></citerefentry>,
@@ -150,13 +153,13 @@
             <citerefentry><refentrytitle>glUnmapBuffer</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2005 Addison-Wesley.
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2005 Addison-Wesley.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

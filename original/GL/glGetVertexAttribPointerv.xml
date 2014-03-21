@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glGetVertexAttribPointerv">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glGetVertexAttribPointerv">
+    <info>
         <copyright>
             <year>2003-2005</year>
             <holder>3Dlabs Inc. Ltd.</holder>
@@ -9,7 +12,7 @@
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glGetVertexAttribPointerv</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -28,7 +31,7 @@
         </funcprototype>
     </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
     <variablelist>
         <varlistentry>
         <term><parameter>index</parameter></term>
@@ -53,7 +56,7 @@
         </varlistentry>
     </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
     <para><function>glGetVertexAttribPointerv</function> returns
     pointer information. <parameter>index</parameter> is the generic
     vertex attribute to be queried, <parameter>pname</parameter> is
@@ -66,11 +69,11 @@
     (see <citerefentry><refentrytitle>glBindBuffer</refentrytitle></citerefentry>) when the desired pointer was previously specified.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
     <para>The state returned is retrieved from the currently bound vertex array object.</para>
     <para>The initial value for each pointer is 0.</para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
     <para><constant>GL_INVALID_OPERATION</constant> is generated if no vertex array object is currently bound.</para>
 
     <para><constant>GL_INVALID_VALUE</constant>
@@ -81,21 +84,21 @@
     is generated if <parameter>pname</parameter>
     is not an accepted value.</para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
     <para><citerefentry><refentrytitle>glGet</refentrytitle></citerefentry>
     with argument <constant>GL_MAX_VERTEX_ATTRIBS</constant></para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
     <para><citerefentry><refentrytitle>glGetVertexAttrib</refentrytitle></citerefentry>,
     <citerefentry><refentrytitle>glVertexAttribPointer</refentrytitle></citerefentry></para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2003-2005 3Dlabs Inc. Ltd.
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2003-2005 3Dlabs Inc. Ltd.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

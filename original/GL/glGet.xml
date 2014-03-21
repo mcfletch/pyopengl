@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glGet">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glGet">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
@@ -9,7 +12,7 @@
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glGet</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -95,7 +98,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>pname</parameter></term>
@@ -135,7 +138,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             These commands return values for simple state variables in GL.
             <parameter>pname</parameter> is a symbolic constant indicating the state variable to be returned,
@@ -156,7 +159,7 @@
             normals, however, are returned with a linear mapping that maps 1.0 to
             the most positive representable integer value
             and
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: -1.0: -->
                 <mml:mn>-1.0</mml:mn>
             </mml:math></inlineequation>
@@ -297,7 +300,7 @@
                         are linearly mapped from the internal floating-point representation such
                         that 1.0 returns the most positive representable integer value,
                         and
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: -1.0: -->
                             <mml:mn>-1.0</mml:mn>
                         </mml:math></inlineequation>
@@ -523,7 +526,7 @@
                         are linearly mapped from the internal floating-point representation such
                         that 1.0 returns the most positive representable integer value,
                         and
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: -1.0: -->
                             <mml:mn>-1.0</mml:mn>
                         </mml:math></inlineequation>
@@ -555,7 +558,7 @@
                         are linearly mapped from the internal floating-point representation such
                         that 1.0 returns the most positive representable integer value,
                         and
-                        <inlineequation><mml:math>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                             <!-- eqn: -1.0: -->
                             <mml:mn>-1.0</mml:mn>
                         </mml:math></inlineequation>
@@ -1986,15 +1989,15 @@
                     <para>
                         <parameter>data</parameter> returns four values:
                         the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
                         and
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
                         window coordinates of the scissor box,
                         followed by its width and height.
                         Initially the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
                         and
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
                         window coordinates are both 0 and the
                         width and height are set to the size of the window.
                         See <citerefentry><refentrytitle>glScissor</refentrytitle></citerefentry>.
@@ -2768,14 +2771,14 @@
                         When used with non-indexed variants of <function>glGet</function> (such as <function>glGetIntegerv</function>),
                         <parameter>data</parameter> returns four values:
                         the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
                         and
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
                         window coordinates of the viewport, followed by its width and height.
                         Initially the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
                         and
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
                         window coordinates are both set to 0,
                         and the width and height are set to the width and height of the window into
                         which the GL will do its rendering.
@@ -2785,14 +2788,14 @@
                         When used with indexed variants of <function>glGet</function> (such as <function>glGetIntegeri_v</function>),
                         <parameter>data</parameter> returns four values:
                         the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
                         and
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
                         window coordinates of the indexed viewport, followed by its width and height.
                         Initially the
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">x</mml:mi></mml:math></inlineequation>
                         and
-                        <inlineequation><mml:math><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
+                        <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">y</mml:mi></mml:math></inlineequation>
                         window coordinates are both set to 0,
                         and the width and height are set to the width and height of the window into
                         which the GL will do its rendering.
@@ -2851,7 +2854,7 @@
             <citerefentry><refentrytitle>glIsEnabled</refentrytitle></citerefentry>.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             The following parameters return the associated value for the active texture unit:
             <constant>GL_TEXTURE_1D</constant>, <constant>GL_TEXTURE_BINDING_1D</constant>,
@@ -2911,7 +2914,7 @@
             the GL version is 4.3 or greater.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>pname</parameter> is not an accepted value.
         </para>
@@ -2921,7 +2924,7 @@
             <parameter>index</parameter> is outside of the valid range for the indexed state <parameter>target</parameter>.
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glGetActiveUniform</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glGetAttachedShaders</refentrytitle></citerefentry>,
@@ -2949,12 +2952,12 @@
             <citerefentry><refentrytitle>glIsEnabled</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This document is licensed under the SGI Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

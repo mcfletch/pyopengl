@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glGetTexImage">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glGetTexImage">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
@@ -9,7 +12,7 @@
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glGetTexImage</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -30,7 +33,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -60,9 +63,9 @@
                     Specifies the level-of-detail number of the desired image.
                     Level 0 is the base image level.
                     Level
-                    <inlineequation><mml:math><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
+                    <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
                     is the
-                    <inlineequation><mml:math><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>th
+                    <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>th
                     mipmap reduction image.
                 </para>
             </listitem>
@@ -139,7 +142,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glGetTexImage</function> returns a texture image into <parameter>img</parameter>.
             <parameter>target</parameter> specifies whether the desired texture image is one specified by
@@ -201,7 +204,7 @@
             especially <constant>GL_PACK_ALIGNMENT</constant>.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             If an error is generated,
             no change is made to the contents of <parameter>img</parameter>.
@@ -214,7 +217,7 @@
             version is 4.4 or greater.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter>, <parameter>format</parameter>, or <parameter>type</parameter> is not
             an accepted value.
@@ -225,7 +228,7 @@
         <para>
             <constant>GL_INVALID_VALUE</constant> may be generated if <parameter>level</parameter> is greater
             than
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: log sub 2 (max): -->
                 <mml:mrow>
                     <mml:msub><mml:mi mathvariant="italic">log</mml:mi>
@@ -238,7 +241,7 @@
                 </mml:mrow>
             </mml:math></inlineequation>,
             where
-            <inlineequation><mml:math><mml:mi mathvariant="italic">max</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">max</mml:mi></mml:math></inlineequation>
             is the returned value of <constant>GL_MAX_TEXTURE_SIZE</constant>.
         </para>
         <para>
@@ -282,7 +285,7 @@
             into the number of bytes needed to store in memory a datum indicated by <parameter>type</parameter>.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGetTexLevelParameter</refentrytitle></citerefentry> with argument <constant>GL_TEXTURE_WIDTH</constant>
         </para>
@@ -299,7 +302,7 @@
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_PIXEL_PACK_BUFFER_BINDING</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glActiveTexture</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glReadPixels</refentrytitle></citerefentry>,
@@ -312,13 +315,13 @@
             <citerefentry><refentrytitle>glTexParameter</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This document is licensed under the SGI
             Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

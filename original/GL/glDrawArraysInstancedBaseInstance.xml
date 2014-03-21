@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glDrawArraysInstancedBaseInstance">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glDrawArraysInstancedBaseInstance">
+    <info>
         <copyright>
             <year>2011-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glDrawArraysInstancedBaseInstance</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -26,7 +29,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>mode</parameter></term>
@@ -75,7 +78,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glDrawArraysInstancedBaseInstance</function> behaves identically to <citerefentry><refentrytitle>glDrawArrays</refentrytitle></citerefentry>
             except that <parameter>primcount</parameter> instances of the range of elements are executed and the value of the internal counter
@@ -100,9 +103,9 @@
             supply per-instance vertex data to the vertex shader. The index of the vertex fetched from the enabled instanced vertex
             attribute arrays is calculated as:
             <inlineequation>
-                <mml:math>
+                <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                   <mml:mrow>
-                    <mml:mfenced open = '&lfloor;' close = '&rfloor;'>
+                    <mml:mfenced open="&lfloor;" close="&rfloor;">
                       <mml:mfrac>
                         <mml:mrow>
                           <mml:mi>gl</mml:mi>
@@ -112,7 +115,7 @@
                         <mml:mi>divisor</mml:mi>
                       </mml:mfrac>
                     </mml:mfenced>
-                    <mml:mo lspace='2px' rspace='2px'>&plus;</mml:mo>
+                    <mml:mo lspace="2px" rspace="2px">&plus;</mml:mo>
                     <mml:mi>baseInstance</mml:mi>
                   </mml:mrow>
                 </mml:math>
@@ -121,7 +124,7 @@
             <constant>gl_InstanceID</constant>.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>mode</parameter> is not one of
             the accepted values.
@@ -138,18 +141,18 @@
             enabled array and the buffer object's data store is currently mapped.
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glDrawArrays</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glDrawElementsInstanced</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2011-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2011-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

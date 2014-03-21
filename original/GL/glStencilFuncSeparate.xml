@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glStencilFuncSeparate">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glStencilFuncSeparate">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glStencilFuncSeparate</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -25,7 +28,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>face</parameter></term>
@@ -62,7 +65,7 @@
                 <para>
                     Specifies the reference value for the stencil test.
                     <parameter>ref</parameter> is clamped to the range
-                    <inlineequation><mml:math>
+                    <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                         <!-- eqn: [0, 2 sup n - 1]:-->
                         <mml:mfenced open="[" close="]">
                             <mml:mn>0</mml:mn>
@@ -76,7 +79,7 @@
                         </mml:mfenced>
                     </mml:math></inlineequation>,
                     where
-                    <inlineequation><mml:math><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
+                    <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
                     is the number of bitplanes in the stencil buffer. The
                     initial value is 0.
                 </para>
@@ -94,7 +97,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             Stenciling,
             like depth-buffering,
@@ -133,7 +136,7 @@
             shown in the following list.
             <parameter>ref</parameter> is an integer reference value that is used in the stencil comparison.
             It is clamped to the range
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: [0, 2 sup n - 1]:-->
                 <mml:mfenced open="[" close="]">
                     <mml:mn>0</mml:mn>
@@ -147,7 +150,7 @@
                 </mml:mfenced>
             </mml:math></inlineequation>,
             where
-            <inlineequation><mml:math><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
             is the number of bitplanes in the stencil buffer.
             <parameter>mask</parameter> is bitwise ANDed with both the reference value
             and the stored stencil value,
@@ -162,7 +165,7 @@
             to the next stage in the rasterization process
             (see <citerefentry><refentrytitle>glStencilOp</refentrytitle></citerefentry>).
             All tests treat <emphasis>stencil</emphasis> values as unsigned integers in the range
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: [0, 2 sup n - 1]:-->
                 <mml:mfenced open="[" close="]">
                     <mml:mn>0</mml:mn>
@@ -176,7 +179,7 @@
                 </mml:mfenced>
             </mml:math></inlineequation>,
             where
-            <inlineequation><mml:math><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
             is the number of bitplanes in the stencil buffer.
         </para>
         <para>
@@ -249,7 +252,7 @@
             </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             Initially, the stencil test is disabled.
             If there is no stencil buffer,
@@ -257,13 +260,13 @@
             the stencil test always passes.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>func</parameter> is not one of the eight
             accepted values.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument
             <constant>GL_STENCIL_FUNC</constant>, <constant>GL_STENCIL_VALUE_MASK</constant>,
@@ -275,7 +278,7 @@
             <citerefentry><refentrytitle>glIsEnabled</refentrytitle></citerefentry> with argument <constant>GL_STENCIL_TEST</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glBlendFunc</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glDepthFunc</refentrytitle></citerefentry>,
@@ -288,12 +291,12 @@
             <citerefentry><refentrytitle>glStencilOpSeparate</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2006 Khronos Group.
+            Copyright <trademark class="copyright"/> 2006 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

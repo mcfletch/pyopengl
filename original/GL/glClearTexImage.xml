@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glClearTexImage">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glClearTexImage">
+    <info>
         <copyright>
             <year>2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glClearTexImage</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -26,7 +29,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>texture</parameter></term>
@@ -70,7 +73,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glClearTexImage</function> fills all an image contained in a
             texture with an application supplied value. <parameter>texture</parameter> must be
@@ -97,12 +100,12 @@
             specified by data.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             <function>glClearTexImage</function> is available only if the GL version is 4.4 or greater.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_OPERATION</constant> is generated if <parameter>texture</parameter> is zero or not the
             name of an existing texture object.
@@ -142,12 +145,12 @@
             has not previously been defined by a call to <function>glTexImage*</function> or <function>glTexStorage*</function>.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGetTexImage</refentrytitle></citerefentry>, <citerefentry><refentrytitle>glGetInternalformat</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glClearTexSubImage</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glTexStorage1D</refentrytitle></citerefentry>,
@@ -158,12 +161,12 @@
             <citerefentry><refentrytitle>glTexImage3D</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

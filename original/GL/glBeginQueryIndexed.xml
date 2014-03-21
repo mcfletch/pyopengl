@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glBeginQueryIndexed">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glBeginQueryIndexed">
+    <info>
         <copyright>
             <year>2010-2013</year>
             <holder>Khronos Group.</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glBeginQueryIndexed, glEndQueryIndexed</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -31,7 +34,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters for <function>glBeginQueryIndexed</function></title>
+    <refsect1 xml:id="parameters"><title>Parameters for <function>glBeginQueryIndexed</function></title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -63,7 +66,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="parameters2"><title>Parameters for <function>glEndQueryIndexed</function></title>
+    <refsect1 xml:id="parameters2"><title>Parameters for <function>glEndQueryIndexed</function></title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -86,7 +89,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glBeginQueryIndexed</function> and <citerefentry><refentrytitle>glEndQueryIndexed</refentrytitle></citerefentry> delimit the
             boundaries of a query object.  <parameter>query</parameter> must be a name previously returned from a call to
@@ -164,7 +167,7 @@
             determine if the result is immediately available or if the rendering is not yet complete.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             If the query target's count exceeds the maximum value representable in the number of available bits, as reported by
             <citerefentry><refentrytitle>glGetQueryiv</refentrytitle></citerefentry> with <parameter>target</parameter> set to the
@@ -189,7 +192,7 @@
             <parameter>index</parameter> set to zero, respectively.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> is not one of the accepted tokens.
         </para>
@@ -216,7 +219,7 @@
             does not does not match <parameter>target</parameter>.
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glDeleteQueries</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glBeginQuery</refentrytitle></citerefentry>,
@@ -227,12 +230,12 @@
             <citerefentry><refentrytitle>glIsQuery</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

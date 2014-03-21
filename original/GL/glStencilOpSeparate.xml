@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glStencilOpSeparate">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glStencilOpSeparate">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glStencilOpSeparate</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -25,7 +28,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>face</parameter></term>
@@ -81,7 +84,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             Stenciling,
             like depth-buffering,
@@ -198,7 +201,7 @@
             Stencil buffer values are treated as unsigned integers.
             When incremented and decremented,
             values are clamped to 0 and
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: 2 sup n - 1:-->
                 <mml:mrow>
                     <mml:msup><mml:mn>2</mml:mn>
@@ -209,7 +212,7 @@
                 </mml:mrow>
             </mml:math></inlineequation>,
             where
-            <inlineequation><mml:math><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
             is the value returned by querying <constant>GL_STENCIL_BITS</constant>.
         </para>
         <para>
@@ -225,7 +228,7 @@
             respectively.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             Initially the stencil test is disabled.
             If there is no stencil buffer,
@@ -233,7 +236,7 @@
             and it is as if the stencil test always passes.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>face</parameter> is any value
             other than <constant>GL_FRONT</constant>, <constant>GL_BACK</constant>, or <constant>GL_FRONT_AND_BACK</constant>.
@@ -243,7 +246,7 @@
             <parameter>dpfail</parameter>, or <parameter>dppass</parameter> is any value other than the eight defined constant values.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument
             <constant>GL_STENCIL_FAIL</constant>, <constant>GL_STENCIL_PASS_DEPTH_PASS</constant>,
@@ -255,7 +258,7 @@
             <citerefentry><refentrytitle>glIsEnabled</refentrytitle></citerefentry> with argument <constant>GL_STENCIL_TEST</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glBlendFunc</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glDepthFunc</refentrytitle></citerefentry>,
@@ -268,12 +271,12 @@
             <citerefentry><refentrytitle>glStencilOp</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2006 Khronos Group.
+            Copyright <trademark class="copyright"/> 2006 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

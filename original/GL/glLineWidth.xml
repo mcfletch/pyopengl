@@ -1,6 +1,9 @@
+ %mathent; ]>
 
-<refentry id="glLineWidth">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glLineWidth">
+    <info>
         <copyright>
             <year>1991-2006</year>
             <holder>Silicon Graphics, Inc.</holder>
@@ -9,7 +12,7 @@
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glLineWidth</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -26,7 +29,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>width</parameter></term>
@@ -39,7 +42,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glLineWidth</function> specifies the rasterized width of both aliased and antialiased
             lines.
@@ -57,7 +60,7 @@
             (If the rounding results in the value 0,
             it is as if the line width were 1.)
             If
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: | DELTA x |  >=  | DELTA y |:-->
                 <!-- Use Unicode for &Delta; = &#x394; and &VerticalBar; = &#x02223; -->
                 <mml:mrow>
@@ -104,7 +107,7 @@
             <constant>GL_SMOOTH_LINE_WIDTH_RANGE</constant>, and <constant>GL_SMOOTH_LINE_WIDTH_GRANULARITY</constant>.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             The line width specified by <function>glLineWidth</function> is always returned when <constant>GL_LINE_WIDTH</constant>
             is queried.
@@ -118,12 +121,12 @@
             <constant>GL_SMOOTH_LINE_WIDTH_RANGE</constant>, and <constant>GL_SMOOTH_LINE_WIDTH_GRANULARITY</constant>.  The old names are retained for backward compatibility, but should not be used in new code.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_VALUE</constant> is generated if <parameter>width</parameter> is less than or equal to 0.
         </para>
     </refsect1>
-    <refsect1 id="associatedgets"><title>Associated Gets</title>
+    <refsect1 xml:id="associatedgets"><title>Associated Gets</title>
         <para>
             <citerefentry><refentrytitle>glGet</refentrytitle></citerefentry> with argument <constant>GL_LINE_WIDTH</constant>
         </para>
@@ -140,18 +143,18 @@
             <citerefentry><refentrytitle>glIsEnabled</refentrytitle></citerefentry> with argument <constant>GL_LINE_SMOOTH</constant>
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glEnable</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006 Silicon Graphics, Inc.
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 1991-2006 Silicon Graphics, Inc.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This document is licensed under the SGI Free Software B License.
             For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

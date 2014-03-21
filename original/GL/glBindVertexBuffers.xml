@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glBindVertexBuffers">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glBindVertexBuffers">
+    <info>
         <copyright>
             <year>2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glBindVertexBuffers</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -26,7 +29,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>first</parameter></term>
@@ -70,7 +73,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glBindVertexBuffers</function> binds storage from an array of existing buffer objects to a specified
             number of consecutive vertex buffer binding points units. <parameter>count</parameter> specifies the number of buffer
@@ -111,12 +114,12 @@
         be updated.
     </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             <function>glBindVertexBuffers</function> is available only if the GL version is 4.4 or higher.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_OPERATION</constant> is generated if <parameter>first</parameter> + <parameter>count</parameter> is greater
             than the value of <constant>GL_MAX_VERTEX_ATTRIB_BINDINGS</constant>.
@@ -130,7 +133,7 @@
             is negative, or if a value is <parameter>stride</parameter> is greater than the value of <constant>GL_MAX_VERTEX_ATTRIB_STRIDE</constant>.
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glGenBuffers</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glBindBuffer</refentrytitle></citerefentry>,
@@ -138,12 +141,12 @@
             <citerefentry><refentrytitle>glDeleteTextures</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

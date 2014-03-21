@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glBeginTransformFeedback">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glBeginTransformFeedback">
+    <info>
         <copyright>
             <year>2010-2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glBeginTransformFeedback</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -28,7 +31,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters for <function>glBeginTransformFeedback</function></title>
+    <refsect1 xml:id="parameters"><title>Parameters for <function>glBeginTransformFeedback</function></title>
         <variablelist>
         <varlistentry>
             <term><parameter>primitiveMode</parameter></term>
@@ -41,7 +44,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             Transform feedback mode captures the values of varying variables written by the vertex shader (or, if active, the geometry shader).
             Transform feedback is said to be active after a call to <function>glBeginTransformFeedback</function>
@@ -55,8 +58,8 @@
         </para>
         <informaltable>
             <tgroup cols="2" align="left">
-                <colspec colwidth="1.1*" />
-                <colspec colwidth="1*" />
+                <colspec colwidth="1.1*"/>
+                <colspec colwidth="1*"/>
                 <thead>
                     <row>
                         <entry>
@@ -107,8 +110,8 @@
         </para>
         <informaltable>
             <tgroup cols="2" align="left">
-                <colspec colwidth="1.1*" />
-                <colspec colwidth="1*" />
+                <colspec colwidth="1.1*"/>
+                <colspec colwidth="1*"/>
                 <thead>
                     <row>
                         <entry>
@@ -140,14 +143,14 @@
             </tgroup>
         </informaltable>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             Geometry shaders, and the <constant>GL_TRIANGLES_ADJACENCY</constant>, <constant>GL_TRIANGLE_STRIP_ADJACENCY</constant>,
             <constant>GL_LINES_ADJACENCY</constant> and <constant>GL_LINE_STRIP_ADJACENCY</constant> primtive modes are available
             only if the GL version is 3.2 or greater.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_OPERATION</constant> is generated if <function>glBeginTransformFeedback</function> is executed
             while transform feedback is active.
@@ -175,12 +178,12 @@
             no varying variables to record.
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>

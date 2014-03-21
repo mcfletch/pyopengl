@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glGetTexLevelParameter">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glGetTexLevelParameter">
+    <info>
         <copyright>
             <year>2013</year>
             <holder>Khronos Group</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glGetTexLevelParameter</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -34,7 +37,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -76,9 +79,9 @@
                     Specifies the level-of-detail number of the desired image.
                     Level 0 is the base image level.
                     Level
-                    <inlineequation><mml:math><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
+                    <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>
                     is the
-                    <inlineequation><mml:math><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>th
+                    <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"><mml:mi mathvariant="italic">n</mml:mi></mml:math></inlineequation>th
                     mipmap reduction image.
                 </para>
             </listitem>
@@ -114,7 +117,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glGetTexLevelParameter</function> returns in <parameter>params</parameter> texture parameter values for a specific
             level-of-detail value,
@@ -277,7 +280,7 @@
             </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             If an error is generated,
             no change is made to the contents of <parameter>params</parameter>.
@@ -290,7 +293,7 @@
             if the GL version is 4.3 or greater.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> or <parameter>pname</parameter> is not an
             accepted value.
@@ -301,7 +304,7 @@
         <para>
             <constant>GL_INVALID_VALUE</constant> may be generated if <parameter>level</parameter> is greater
             than
-            <inlineequation><mml:math>
+            <inlineequation><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll">
                 <!-- eqn: log sub 2: -->
                 <mml:msub><mml:mi mathvariant="italic">log</mml:mi>
                 <mml:mn>2</mml:mn>
@@ -320,7 +323,7 @@
             uncompressed internal format or on proxy targets.
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glActiveTexture</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glGetTexParameter</refentrytitle></citerefentry>,
@@ -338,13 +341,13 @@
             <citerefentry><refentrytitle>glTexParameter</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 1991-2006
-            Silicon Graphics, Inc. Copyright <trademark class="copyright"></trademark> 2010-2013
+            Copyright <trademark class="copyright"/> 1991-2006
+            Silicon Graphics, Inc. Copyright <trademark class="copyright"/> 2010-2013
             Khronos Group. This document is licensed under the SGI
             Free Software B License. For details, see
-            <ulink url="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</link>.
         </para>
     </refsect1>
 </refentry>

@@ -1,11 +1,14 @@
+ %mathent; ]>
 
-<refentry id="glGetQueryIndexed">
-    <refentryinfo>
+<!-- Converted by db4-upgrade version 1.1 -->
+
+<refentry xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glGetQueryIndexed">
+    <info>
         <copyright>
             <year>2010-2013</year>
             <holder>Khronos Group.</holder>
         </copyright>
-    </refentryinfo>
+    </info>
     <refmeta>
         <refentrytitle>glGetQueryIndexediv</refentrytitle>
         <manvolnum>3G</manvolnum>
@@ -25,7 +28,7 @@
             </funcprototype>
         </funcsynopsis>
     </refsynopsisdiv>
-    <refsect1 id="parameters"><title>Parameters</title>
+    <refsect1 xml:id="parameters"><title>Parameters</title>
         <variablelist>
         <varlistentry>
             <term><parameter>target</parameter></term>
@@ -65,7 +68,7 @@
         </varlistentry>
         </variablelist>
     </refsect1>
-    <refsect1 id="description"><title>Description</title>
+    <refsect1 xml:id="description"><title>Description</title>
         <para>
             <function>glGetQueryIndexediv</function> returns in <parameter>params</parameter> a selected parameter of the indexed query object target
             specified by <parameter>target</parameter> and <parameter>index</parameter>. <parameter>index</parameter> specifies the index of the
@@ -79,7 +82,7 @@
             of bits used to hold the result of queries for <parameter>target</parameter> is returned in <parameter>params</parameter>.
         </para>
     </refsect1>
-    <refsect1 id="notes"><title>Notes</title>
+    <refsect1 xml:id="notes"><title>Notes</title>
         <para>
             The target <constant>GL_ANY_SAMPLES_PASSED_CONSERVATIVE</constant> is available only if the GL version is 4.3 or greater.
         </para>
@@ -92,7 +95,7 @@
             <function>glGetQueryIndexediv</function> with <parameter>index</parameter> set to zero.
         </para>
     </refsect1>
-    <refsect1 id="errors"><title>Errors</title>
+    <refsect1 xml:id="errors"><title>Errors</title>
         <para>
             <constant>GL_INVALID_ENUM</constant> is generated if <parameter>target</parameter> or <parameter>pname</parameter> is not an
             accepted value.
@@ -102,18 +105,18 @@
             <parameter>target</parameter>-specific maximum.
         </para>
     </refsect1>
-    <refsect1 id="seealso"><title>See Also</title>
+    <refsect1 xml:id="seealso"><title>See Also</title>
         <para>
             <citerefentry><refentrytitle>glGetQueryObject</refentrytitle></citerefentry>,
             <citerefentry><refentrytitle>glIsQuery</refentrytitle></citerefentry>
         </para>
     </refsect1>
-    <refsect1 id="Copyright"><title>Copyright</title>
+    <refsect1 xml:id="Copyright"><title>Copyright</title>
         <para>
-            Copyright <trademark class="copyright"></trademark> 2010-2013 Khronos Group.
+            Copyright <trademark class="copyright"/> 2010-2013 Khronos Group.
             This material may be distributed subject to the terms and conditions set forth in
             the Open Publication License, v 1.0, 8 June 1999.
-            <ulink url="http://opencontent.org/openpub/">http://opencontent.org/openpub/</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opencontent.org/openpub/">http://opencontent.org/openpub/</link>.
         </para>
     </refsect1>
 </refentry>
