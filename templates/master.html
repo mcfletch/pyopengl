@@ -1,25 +1,23 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:py="http://genshi.edgewall.org/"
+<!DOCTYPE html>
+<html xmlns:py="http://genshi.edgewall.org/"
       xmlns:xi="http://www.w3.org/2001/XInclude"
       py:strip="">
 <?python
 from dumbpydoc import Alternate
 from dumbmarkup import format_docstring
 ?>
-<table py:def="nav_table(context)" width="100%">
+<ul class="menu" py:def="nav_table(context)">
     <?python
         previous = getattr( context, 'previous', None)
         next = getattr( context,'next',None)
     ?>
-<tbody><tr><td align="left">
-        <a id="nav-previous" py:if="previous" href="${previous.name}.html">Previous: ${previous.name}</a></td>
-    <td align="center">
-        ${breadcrumbs( module )}
-    </td>
-    <td align="right">
-        <a id="nav-next" py:if="next" href="${next.name}.html">Next: ${next.name}</a>
-    </td>
-</tr></tbody></table>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <div py:for="parent in module.parents" py:strip="">
+        <li py:if="parent is not module"><a class="parent-link" href="${parent.name}.html">${parent.basename}</a></li>
+    </div>
+</ul>
 <span py:def="breadcrumbs( module )">
     <span py:for="parent in module.parents">
         <span py:if="parent is not module" py:strip=""><a class="parent-link" href="${parent.name}.html">${parent.basename}</a>.</span>
