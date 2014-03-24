@@ -47,6 +47,23 @@ class TutorialPath( Grouping ):
                 next = first[i+1]
             generate( first[i], next=next,prev=prev, path=self )
 
+REDIRECT = '''<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="refresh" content="1;url=%(base)s" />
+</head>
+<body>
+    The content for this page has moved to <a href="%(base)s">HTML</a>.
+</body>
+</html>'''
+
+def redirect( newfile, old_file=None ):
+    if old_file is None:
+        old_file = os.path.splitext( newfile )[0] + '.xhtml'
+    base = os.path.basename( newfile )
+    open( old_file, 'w' ).write(REDIRECT%locals())
+    
+
+            
 class Tutorial( Grouping ):
     html_tag = 'body'
     html_class = 'tutorial'
@@ -64,9 +81,9 @@ class Tutorial( Grouping ):
         self.filename = base
         root = os.path.splitext( base )[0]
         self.html_file = os.path.join(
-            OUTPUT_DIRECTORY, '%s.xhtml'%(root)
+            OUTPUT_DIRECTORY, '%s.html'%(root)
         )
-        self.relative_link = '%s.xhtml'%( root, )
+        self.relative_link = '%s.html'%( root, )
 
 def generate_index( paths ):
     """Generate index file for given paths"""
@@ -82,11 +99,11 @@ def generate_index( paths ):
         date=datetime.datetime.now().strftime( '%Y-%m-%d' ),
         version = OpenGLContext.__version__,
     )
-    data = stream.render( 'xhtml' )
-    html_file = os.path.join( OUTPUT_DIRECTORY, 'index.xhtml' )
+    data = stream.render( 'html' )
+    html_file = os.path.join( OUTPUT_DIRECTORY, 'index.html' )
     print 'writing', html_file
     open( html_file, 'w').write( data )
-
+    redirect( html_file )
 
 def generate( tutorial, prev=None, next=None, path=None ):
     stream = loader.load(
@@ -98,9 +115,10 @@ def generate( tutorial, prev=None, next=None, path=None ):
         prev=prev,
         next=next,
     )
-    data = stream.render( 'xhtml' )
+    data = stream.render( 'html' )
     print 'writing', tutorial.html_file
     open( tutorial.html_file, 'w').write( data )
+    redirect( tutorial.html_file )
 
 def parse_file( filename ):
     text = open( filename ).read().replace( '\r\n','\n' )
