@@ -111,7 +111,7 @@ class PyModule( object ):
         if self._inspected:
             return
         self._inspected = True
-        for key,value in sorted( self.mod.__dict__.items()):
+        for key,value in sorted( self.mod.__dict__.items(), key=lambda x: x[0].lower()):
             if self.interesting( value ):
                 for attr,types in self.FT_MAP:
                     if isinstance( value, types ):
@@ -225,7 +225,7 @@ class Class( object ):
 
     def inspect( self ):
         """Introspect to find methods, properties, etceteras"""
-        for key,value in sorted(self.cls.__dict__.items()):
+        for key,value in sorted(self.cls.__dict__.items(), key=lambda x: x[0].lower()):
             if isinstance( value, (
                 types.FunctionType,
                 types.MethodType,
@@ -286,9 +286,13 @@ if __name__ == '__main__':
 #        'OpenGL.GL.ARB.sync',
 #        'OpenGL.GL.selection',
 #        'OpenGL.arrays.vbo',
-#        'OpenGL_accelerate',
-#        'OpenGLContext',
-#        'vrml',
+        'OpenGL_accelerate',
+        'OpenGLContext',
+        'OpenGLContext_qt',
+        'vrml',
+        'vrml_accelerate',
+        'pydispatch',
+        'ttfquery',
     ]:
         render( mod )
     for support in glob.glob( os.path.join( HERE, 'output', '*.css' )):
