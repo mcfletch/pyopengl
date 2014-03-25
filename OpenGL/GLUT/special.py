@@ -79,7 +79,14 @@ if __glutInitWithExit:
         """
         return __glutCreateMenuWithExit(callback, _exitfunc)
 else:
-    _base_glutInit = getattr(GLUT, 'glutInit', None)
+    _base_glutInit = platform.nullFunction( 
+        'glutInit', GLUT,
+        resultType=None, 
+        argTypes=(ctypes.POINTER(ctypes.c_int),ctypes.POINTER( ctypes.c_char_p )),
+        doc = 'Initialize the GLUT library', argNames = ('argcp','argv'),
+        module = __name__,
+        error_checker = None,
+    )
 ##_base_glutDisplayFunc = GLUT.glutDisplayFunc
 ##_base_glutIdleFunc = GLUT.glutIdleFunc
 ##_base_glutEntryFunc = GLUT.glutEntryFunc
