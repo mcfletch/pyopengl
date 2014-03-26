@@ -12,8 +12,6 @@ except ImportError:
 else:
     have_cython = True
 
-    
-
 import sys, os
 
 HERE = os.path.normpath(os.path.abspath(os.path.dirname( __file__ )))
@@ -90,6 +88,18 @@ else:
     ) )
 
 if __name__ == "__main__":
+    # Workaround for Broken apple Python build params echoed in distutils
+    # Approach taken from the PyMongo driver. OS-X Python builds were created with 
+    # non-existent flag, and distutils passes those flags to the extension 
+    # build, newer clangs now treat those flags as errors rather than warnings.
+    import platform, sys
+    if sys.platform == 'darwin' and 'clang' in platform.python_compiler().lower():
+        from distutils.sysconfig import get_config_vars
+        res = get_config_vars()
+        for key in ('CFLAGS', 'PY_CFLAGS'):
+            if key in res:
+                res[key] = res[key].replace('-mno-fused-madd', '')
+    
     extraArguments = {
         'classifiers': [
             """License :: OSI Approved :: BSD License""",
