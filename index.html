@@ -20,6 +20,22 @@
         height: 145px;
         float:right;
       }
+    #introduction {
+        position: relative;
+        padding-right: 50%;
+    }
+    
+    #introduction .screenshot {
+        position: absolute;
+        text-align: center;
+        right: 1em;
+        top: 1em;
+        bottom: 1em;
+        left: 50%;
+    }
+    .screenshot .screenshot-link {
+        font-size: .5em;
+    }
     </style>
   </head>
   <body>
@@ -33,15 +49,21 @@
       </nav>
       <h1>PyOpenGL 3.x <span class="subheading">The Python OpenGL Binding</span></h1>
     </header>
-    <section id="about">
-      <div id="about-icon"><br>
-      </div>
+    <section >
       <h2>About PyOpenGL</h2>
       <p>PyOpenGL is the most common cross platform <a href="http://www.python.org/">Python</a>
         binding to <a href="http://www.opengl.org/">OpenGL</a> and related
         APIs. The binding is created using the standard ctypes library, and is
         provided under an extremely liberal BSD-style Open-Source license.</p>
-      <p>PyOpenGL 3.x includes support for:</p>
+    </section>
+    <section id="introduction">
+        <div class="screenshot">
+            <div class="screenshot-caption"><a class="screenshot-link description"></a></div>
+            <div class="image-holder"></div>
+            <div class="clear-both"><br></div>
+        </div>
+        <div class="screenshot-preload"></div>
+        <h2>PyOpenGL Supports</h2>
       <ul>
         <li>OpenGL v1.1 to 4.4</li>
         <li>GLES 1 to 3.1 (Experimental)</li>
@@ -70,6 +92,7 @@
         <li>Python 2.7 (recommended)</li>
         <li>Python 2.6 (for compatibility with older software and systems)</li>
       </ul>
+      <div class="clear-both"><br></div>
     </section>
     <section id="packages">
       <h2>Sub-Packages</h2>
@@ -152,5 +175,132 @@
       <div><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1"
             border="0"></a></div>
     </footer>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="scripts/screenshots.js"></script>
+    <script type="text/javascript">
+$(document).ready(function(){
+  $.screenshots( [
+    {
+        'url': 'http://geometrian.com/data/programming/projects/glLib/glLib%20Reloaded%200.5.8sb/glLib.png',
+        'link': 'http://geometrian.com/programming/projects/index.php?project=glLib',
+        'description': 'A PyOpenGL rendering library showing some of its features'
+    },
+    {
+        'url': 'http://geometrian.com/data/programming/projects/Realtime%20CPU%20Cloth/2/ClothDemo2.png',
+        'link': 'http://geometrian.com/programming/projects/index.php?project=Realtime%20CPU%20Cloth',
+        'description': 'A cloth simulation visualized through PyOpenGL'
+    },
+    {
+        'url':'http://geometrian.com/data/programming/projects/Mandelbrot%20Set/Viewer%205.00/mandelviewer5.png',
+        'link': 'http://geometrian.com/programming/projects/index.php?project=Mandelbrot%20Set',
+        'description': 'A Mandelbrot Set fractal rendered in realtime using GLSL shaders through PyOpenGL'
+    },
+    {
+        'url':'https://lh5.googleusercontent.com/-aaYepjfdvYg/UydcaFD93hI/AAAAAAAAChk/PJu_e01vPpo/w759-h603/FabriCAD_067.png',
+        'link': 'https://launchpad.net/pycad',
+        'description': '2D CAD program in PyOpenGL'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/twitch-viewer-screen-0001.png',
+        'link': 'http://launchpad.net/twitch',
+        'description': 'Twitch BSP (Quake III(TM) Map File) loader'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/glelathe.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext GLE Tubing/Extrusion Demo'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/shader_instanced.py-screen-0001.png',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext shader_instanced tutorial'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/shaderobjects.py-screen-0001.png',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext shader objct-graph demo'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/shadow_2.py-screen-0001.png',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext depth-map shadow tutorial'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_cyber.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_secondplatform.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_showroom.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/lorentz_dots.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext demonstration of dynamic pointset generation'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_wallworld.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/truetype3d.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext demonstration of 3D TrueType rendering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_office.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/alternateatlas.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_boardroom.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_egypt_exterior_wide.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_egypt_exterior.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_egypt_interior.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_baths.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    },
+    {
+        'url': 'http://pyopengl.sourceforge.net/screenshots/context/h_baths_frigid.jpg',
+        'link': 'http://pyopengl.sourceforge.net/context',
+        'description': 'OpenGLContext VRML97 renderering'
+    }
+ ],
+    $( '.screenshot' ),
+    $( '.screenshot-preload' )
+ );
+});
+    </script>
+    
   </body>
 </html>
