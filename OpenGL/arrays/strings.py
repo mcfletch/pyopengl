@@ -55,7 +55,7 @@ class StringHandler( formathandler.FormatHandler ):
 class UnicodeHandler( StringHandler ):
     HANDLED_TYPES = (_bytes.unicode,)
     @classmethod
-    def from_param( cls, value ):
+    def from_param( cls, value, typeCode=None ):
         # TODO: raise CopyError if the flag is set!
         converted = _bytes.as_8_bit( value )
         result = StringHandler.from_param( converted )

@@ -118,7 +118,7 @@ if ADT is None:
         def getRegistry( cls ):
             """Get our handler registry"""
             return cls.handler 
-        def from_param( cls, value ):
+        def from_param( cls, value, typeConstant=None ):
             """Given a value in a known data-pointer type, convert to a ctypes pointer"""
             return cls.getHandler(value).from_param( value, cls.typeConstant )
         from_param = classmethod( logs.logOnFail( from_param, _log ) )

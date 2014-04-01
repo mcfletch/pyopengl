@@ -132,14 +132,14 @@ cdef class ArrayDatatype:
         """
         return self.handler.c_lookup( value )
     
-    def from_param( self, object value ):
+    def from_param( self, object value, object typeConstant=None ):
         """Given a value in a known data-pointer type, convert to a ctypes pointer"""
         handler = self.handler.c_lookup( value )
         if isinstance( handler, FormatHandler ):
             return (<FormatHandler>handler).c_from_param( 
-                value, self.typeConstant 
+                value, typeConstant or self.typeConstant 
             )
-        return handler.from_param( value, self.typeConstant )
+        return handler.from_param( value, typeConstant or self.typeConstant )
     
     def __call__( self, object value ):
         """We cannot simply reference from_param as under Python 2.7 that makes us non-callable"""
