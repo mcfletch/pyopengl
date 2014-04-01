@@ -58,7 +58,7 @@ class UnicodeHandler( StringHandler ):
     def from_param( cls, value ):
         # TODO: raise CopyError if the flag is set!
         converted = _bytes.as_8_bit( value )
-        result = StringHandler.from_param(  )
+        result = StringHandler.from_param( converted )
         if converted is not value:
             if ERROR_ON_COPY:
                 raise error.CopyError(

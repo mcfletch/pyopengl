@@ -1079,6 +1079,15 @@ class Tests( unittest.TestCase ):
         glGetFloatv( GL_FOG_COLOR, color2 )
         for a,b in zip( color,color2 ):
             assert a==b, (color,color2)
+    
+    def test_params_python3_strings( self ):
+        try:
+            glGetUniformBlockIndex( 0, "Moo" )
+        except TypeError as err:
+            raise
+        except GLError as err:
+            # expected error, as we don't have a shader there...
+            pass 
         
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
