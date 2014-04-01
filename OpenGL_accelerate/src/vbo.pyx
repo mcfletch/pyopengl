@@ -150,9 +150,7 @@ cdef class VBO:
             stop = max((stop,0))
         self.data[ slice ] = data
         if self.copied and self.created:
-            if start-stop != len(data):
-                self.copied = False
-            elif start-stop == len(self.data):
+            if start-stop == len(self.data):
                 # re-copy the whole data-set
                 self.copied = False
             elif len(data):
@@ -163,7 +161,7 @@ cdef class VBO:
                 # multiple mappings to copy into the memory area...
 
                 # find the step size from the dimensions and base size...
-                size = self.arrayType.arrayByteCount( data ) / len(array)
+                size = self.arrayType.arrayByteCount( self.data[0] )
                 #baseSize = self.arrayType.unitSize( data )
                 # now create the start and distance values...
                 start *= size

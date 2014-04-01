@@ -237,6 +237,7 @@ if VBO is None:
                 raise NotImplemented( """Don't know how to map stepped arrays yet""" )
             # TODO: handle e.g. mapping character data into an integer data-set
             data = ArrayDatatype.asArray( array )
+            data_length = ArrayDatatype.arrayByteCount( array )
             start = (slice.start or 0)
             stop = (slice.stop or len(self.data))
             if start < 0:
@@ -247,9 +248,7 @@ if VBO is None:
                 stop = max((stop,0))
             self.data[ slice ] = data
             if self.copied and self.buffers:
-                if start-stop != len(data):
-                    self.copied = False
-                elif start-stop == len(self.data):
+                if start-stop == len(self.data):
                     # re-copy the whole data-set
                     self.copied = False
                 elif len(data):
@@ -260,7 +259,7 @@ if VBO is None:
                     # multiple mappings to copy into the memory area...
 
                     # find the step size from the dimensions and base size...
-                    size = ArrayDatatype.arrayByteCount( data ) / len(array)
+                    size = ArrayDatatype.arrayByteCount( self.data[0] )
                     #baseSize = ArrayDatatype.unitSize( data )
                     # now create the start and distance values...
                     start *= size
