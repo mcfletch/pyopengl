@@ -1082,7 +1082,7 @@ class Tests( unittest.TestCase ):
     
     def test_params_python3_strings( self ):
         try:
-            glGetUniformBlockIndex( 0, "Moo" )
+            glGetUniformBlockIndex( 0, unicode("Moo") )
         except TypeError as err:
             raise
         except GLError as err:
