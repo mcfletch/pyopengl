@@ -1087,7 +1087,7 @@ class Tests( unittest.TestCase ):
             raise
         except GLError as err:
             # expected error, as we don't have a shader there...
-            pass 
+            pass
         
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
