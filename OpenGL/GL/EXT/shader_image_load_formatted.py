@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GL.EXT.shader_image_load_formatted to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	ARB_shader_image_load_store (and OpenGL 4.2) added support for
+	random access load and store from/to texture images, but due to 
+	hardware limitations, loads were required to declare the image
+	format in the shader source. This extension relaxes that 
+	requirement, and the return values from imageLoad can be format-
+	converted based on the format of the image binding.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/shader_image_load_formatted.txt
 '''

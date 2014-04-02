@@ -4,6 +4,23 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.shader_thread_shuffle to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Implementations of the OpenGL Shading Language may, but are not required, 
+	to run multiple shader threads for a single stage as a SIMD thread group, 
+	where individual execution threads are assigned to thread groups in an 
+	undefined, implementation-dependent order.  This extension provides a set 
+	of new features to the OpenGL Shading Language to share data between 
+	multiple threads within a thread group. 
+	
+	Shaders using the new functionalities provided by this extension should 
+	enable this functionality via the construct
+	
+	    #extension GL_NV_shader_thread_shuffle : require     (or enable)
+	
+	This extension also specifies some modifications to the program assembly
+	language to support the thread data sharing functionalities.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/shader_thread_shuffle.txt
 '''
