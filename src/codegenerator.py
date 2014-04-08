@@ -62,7 +62,8 @@ _glget_size_mapping = _m = {}
             else:
                 size = ''.join( size )
             if value is None:
-                log.error( 'Unrecognized constant: %s in GLGet section', enum_name )
+                # common in cases where GL and GLES constants are updated together...
+                log.debug( 'Unrecognized constant: %s in GLGet section', enum_name )
             else:
                 value = value.value
                 result.append( 
@@ -141,6 +142,11 @@ def %(name)s(%(argNames)s):pass"""
                     ]
                     if value:
                         table[line[0].strip('"')] = value
+        # now make sure everything registered in the xml file is present...
+        for name in self.registry.enum_groups.get('GetPName',[]):
+            if name not in table:
+                log.info( 'New Get PName: %r', name )
+                table[name] = ''
         return table
     def saveGLGetSizes( self ):
         """Save out sorted list of glGet sizes to disk"""
@@ -248,9 +254,6 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                         indent( section.replace('\xd4','O').replace('\xd5','O').decode( 'ascii', 'ignore' ).encode( 'ascii', 'ignore' ) )
                     )
                     break
-        for name,value in specification.glGetConstants().items():
-            if name not in self.overall.glGetSizes:
-                self.overall.glGetSizes[name] = []
     def __getitem__( self, key ):
         try:
             return getattr( self, key )

@@ -3,7 +3,7 @@
 We keep rewriting functions as the main entry points change,
 so let's just localise the changes here...
 """
-import ctypes, logging, os
+import ctypes, logging, os, sys
 _log = logging.getLogger( 'OpenGL.platform.ctypesloader' )
 #_log.setLevel( logging.DEBUG )
 ctypes_version = [
