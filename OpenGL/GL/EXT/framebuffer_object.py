@@ -122,27 +122,3 @@ def glDeleteFramebuffersEXT( baseOperation, n, framebuffers=None ):
         framebuffers = arrays.GLuintArray.asArray( n )
         n = arrays.GLuintArray.arraySize( framebuffers )
     return baseOperation( n, framebuffers )
-
-#glBindRenderbufferEXT # doesn't require wrapping
-#glBindFramebufferEXT  # doesn't require wrapping
-#glBindRenderbufferEXT # doesn't require wrapping
-#glCheckFramebufferStatusEXT
-#glDeleteFramebuffersEXT # should be wrapped to eliminate 'length'
-#glDeleteRenderbuffersEXT # should be wrapped to eliminate 'length'
-#glFramebufferRenderbufferEXT
-#glFramebufferTexture1DEXT
-#glFramebufferTexture2DEXT
-#glFramebufferTexture3DEXT
-#glGenFramebuffersEXT  # wrapped
-#glGenRenderbuffersEXT # wrapped
-#glGenerateMipmapEXT
-#glGetFramebufferAttachmentParameterivEXT
-#glGetRenderbufferParameterivEXT
-#glInitFramebufferObjectEXT
-#glIsFramebufferEXT
-#glIsRenderbufferEXT
-#glRenderbufferStorageEXT # doesn't require wrapping                                          
-#glget.addGLGetConstant( GL_MAX_COLOR_ATTACHMENTS_EXT, (1,))
-#glget.addGLGetConstant( GL_FRAMEBUFFER_BINDING_EXT, (1,))
-#glget.addGLGetConstant( GL_RENDERBUFFER_BINDING_EXT, (1,))
-#glget.addGLGetConstant( GL_MAX_RENDERBUFFER_SIZE_EXT, (1,))

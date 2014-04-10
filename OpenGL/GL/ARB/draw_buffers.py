@@ -43,7 +43,3 @@ def glDrawBuffersARB( baseOperation, n=None, bufs=None ):
     if n is None:
         n = arrays.GLenumArray.arraySize( bufs )
     return baseOperation( n,bufs )
-
-from OpenGL.GL import glget
-glget.addGLGetConstant( GL_MAX_DRAW_BUFFERS_ARB, (1,) )
-# Should have output arrays for the buffers too???

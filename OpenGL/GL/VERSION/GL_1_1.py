@@ -27,6 +27,14 @@ GL_MODELVIEW0_MATRIX_EXT = GL_MODELVIEW_MATRIX # alias
 GL_MODELVIEW0_STACK_DEPTH_EXT = GL_MODELVIEW_STACK_DEPTH # alias
 GL_TEXTURE_COMPONENTS = GL_TEXTURE_INTERNAL_FORMAT # alias
 
+# See: http://lists.freedesktop.org/archives/mesa-dev/2011-October/013095.html
+# basically these names were present for a while in the .spec files but were not 
+# actually used officially, the mapped values here are what is supposed to get 
+# used instead.
+GL_DEPTH_BUFFER = GL_DEPTH
+GL_STENCIL_BUFFER = GL_STENCIL
+
+
 glAreTexturesResident = arrays.setInputArraySizeType(
     glAreTexturesResident,
     None, # XXX Could not determine size of argument textures for glAreTexturesResident arrays.GLuintArray

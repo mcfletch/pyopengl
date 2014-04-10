@@ -29,12 +29,6 @@ GL_POINT_SIZE_RANGE = GL_SMOOTH_POINT_SIZE_RANGE # alias
 GL_LINE_WIDTH_GRANULARITY = GL_SMOOTH_LINE_WIDTH_GRANULARITY # alias
 GL_LINE_WIDTH_RANGE = GL_SMOOTH_LINE_WIDTH_RANGE # alias
 
-glget.addGLGetTexParameterConstant(GL_TEXTURE_MIN_LOD,(1,))
-glget.addGLGetTexParameterConstant(GL_TEXTURE_MAX_LOD,(1,))
-glget.addGLGetTexParameterConstant(GL_TEXTURE_BASE_LEVEL,(1,))
-glget.addGLGetTexParameterConstant(GL_TEXTURE_MAX_LEVEL,(1,))
-glget.addGLGetTexParameterConstant(GL_TEXTURE_WRAP_R,(1,))
-
 glDrawRangeElements = wrapper.wrapper( glDrawRangeElements ).setPyConverter(
     'indices', arrays.AsArrayOfType( 'indices', 'type' ),
 ).setReturnValues(
