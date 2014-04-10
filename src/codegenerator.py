@@ -290,6 +290,8 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
     def glget_import( self ):
         if self.prefix == 'GL':
             return 'from OpenGL.GL import glget'
+#        elif self.prefix.startswith( 'GLES' ):
+#            return 'from OpenGL.%s import glget'%( self.prefix, )
         return ''
     
     def get_constants( self ):
@@ -384,6 +386,10 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             fh = open( self.rawPathName, 'w')
             fh.write( toWrite )
             fh.close()
+        if isinstance( self.registry, xmlreg.Feature ):
+            # this is a core feature...
+            target = os.path.join( self.overall.rawTargetDirectory, self.prefix,'_glgets.py' )
+            open( target,'w' ).write( self.overall.group_sizes())
         if self.shouldReplace( ):
             # now the final module with any included custom code...
             toWrite = self.FINAL_MODULE_TEMPLATE % self

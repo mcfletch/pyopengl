@@ -33,9 +33,6 @@ def generate_for_file( filename ):
     for name,extension in registry.extension_set.items():
         print extension.name, extension.apis
         generator.module( extension )
-    if os.path.basename( filename ) == 'gl.xml':
-        target = os.path.join( generator.rawTargetDirectory, 'GL','_glgets.py' )
-        open( target,'w' ).write( generator.group_sizes())
 
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
