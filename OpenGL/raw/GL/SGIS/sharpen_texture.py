@@ -18,7 +18,6 @@ GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS=_C('GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS',0x8
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glGetSharpenTexFuncSGIS(target,points):pass
-# Calculate length of points from target:TextureTarget
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLfloatArray)
 def glSharpenTexFuncSGIS(target,n,points):pass

@@ -78,7 +78,6 @@ def glDrawArraysInstanced(mode,first,count,instancecount):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
 def glDrawElementsInstanced(mode,count,type,indices,instancecount):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
 def glGetActiveUniformBlockName(program,uniformBlockIndex,bufSize,length,uniformBlockName):pass

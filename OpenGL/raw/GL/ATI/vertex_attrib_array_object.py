@@ -15,11 +15,9 @@ def _f( function ):
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glGetVertexAttribArrayObjectfvATI(index,pname,params):pass
-# Calculate length of params from pname:ArrayObjectPNameATI
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetVertexAttribArrayObjectivATI(index,pname,params):pass
-# Calculate length of params from pname:ArrayObjectPNameATI
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLsizei,_cs.GLuint,_cs.GLuint)
 def glVertexAttribArrayObjectATI(index,size,type,normalized,stride,buffer,offset):pass

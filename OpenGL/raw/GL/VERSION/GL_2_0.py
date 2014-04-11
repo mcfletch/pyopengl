@@ -374,4 +374,3 @@ def glVertexAttrib4usv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLsizei,ctypes.c_void_p)
 def glVertexAttribPointer(index,size,type,normalized,stride,pointer):pass
-# Calculate length of pointer from type:VertexAttribPointerType

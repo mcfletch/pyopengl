@@ -59,7 +59,6 @@ def glVertexBlendARB(count):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glWeightPointerARB(size,type,stride,pointer):pass
-# Calculate length of pointer from type:WeightPointerTypeARB
 @_f
 @_p.types(None,_cs.GLint,arrays.GLbyteArray)
 def glWeightbvARB(size,weights):pass

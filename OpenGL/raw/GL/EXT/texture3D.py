@@ -23,8 +23,6 @@ GL_UNPACK_SKIP_IMAGES_EXT=_C('GL_UNPACK_SKIP_IMAGES_EXT',0x806D)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexImage3DEXT(target,level,internalformat,width,height,depth,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexSubImage3DEXT(target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType

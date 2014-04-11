@@ -70,11 +70,9 @@ def glBindBuffer(target,buffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizeiptr,ctypes.c_void_p,_cs.GLenum)
 def glBufferData(target,size,data,usage):pass
-# Calculate length of data from size:BufferSize
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,ctypes.c_void_p)
 def glBufferSubData(target,offset,size,data):pass
-# Calculate length of data from size:BufferSize
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
 def glDeleteBuffers(n,buffers):pass
@@ -93,14 +91,12 @@ def glGenQueries(n,ids):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetBufferParameteriv(target,pname,params):pass
-# Calculate length of params from pname:BufferPNameARB
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLvoidpArray)
 def glGetBufferPointerv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,ctypes.c_void_p)
 def glGetBufferSubData(target,offset,size,data):pass
-# Calculate length of data from size:BufferSize
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetQueryObjectiv(id,pname,params):pass

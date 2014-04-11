@@ -222,9 +222,8 @@ http://www.opengl.org/registry/specs/EXT/direct_state_access.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
-from OpenGL.GL import glget
 import ctypes
-from OpenGL.raw.GL import _types
+from OpenGL.raw.GL import _types, _glgets
 from OpenGL.raw.GL.EXT.direct_state_access import *
 from OpenGL.raw.GL.EXT.direct_state_access import _EXTENSION_NAME
 
@@ -233,4 +232,108 @@ def glInitDirectStateAccessEXT():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
+# COMPSIZE(target,level,format,type) glGetTextureImageEXT=wrapper.wrapper(glGetTextureImageEXT)
+glGetTextureParameterfvEXT=wrapper.wrapper(glGetTextureParameterfvEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetTextureParameterivEXT=wrapper.wrapper(glGetTextureParameterivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetTextureLevelParameterfvEXT=wrapper.wrapper(glGetTextureLevelParameterfvEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetTextureLevelParameterivEXT=wrapper.wrapper(glGetTextureLevelParameterivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexEnvfvEXT=wrapper.wrapper(glGetMultiTexEnvfvEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexEnvivEXT=wrapper.wrapper(glGetMultiTexEnvivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexGendvEXT=wrapper.wrapper(glGetMultiTexGendvEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexGenfvEXT=wrapper.wrapper(glGetMultiTexGenfvEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexGenivEXT=wrapper.wrapper(glGetMultiTexGenivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+# COMPSIZE(target,level,format,type) glGetMultiTexImageEXT=wrapper.wrapper(glGetMultiTexImageEXT)
+glGetMultiTexParameterfvEXT=wrapper.wrapper(glGetMultiTexParameterfvEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexParameterivEXT=wrapper.wrapper(glGetMultiTexParameterivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexLevelParameterfvEXT=wrapper.wrapper(glGetMultiTexLevelParameterfvEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexLevelParameterivEXT=wrapper.wrapper(glGetMultiTexLevelParameterivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetFloatIndexedvEXT=wrapper.wrapper(glGetFloatIndexedvEXT).setOutput(#
+    'data',size=_glgets._glget_size_mapping,pnameArg='target',orPassIn=True
+)
+glGetDoubleIndexedvEXT=wrapper.wrapper(glGetDoubleIndexedvEXT).setOutput(#
+    'data',size=_glgets._glget_size_mapping,pnameArg='target',orPassIn=True
+)
+glGetPointerIndexedvEXT=wrapper.wrapper(glGetPointerIndexedvEXT).setOutput(#
+    'data',size=(1,),orPassIn=True
+)
+glGetIntegerIndexedvEXT=wrapper.wrapper(glGetIntegerIndexedvEXT).setOutput(#
+    'data',size=_glgets._glget_size_mapping,pnameArg='target',orPassIn=True
+)
+glGetBooleanIndexedvEXT=wrapper.wrapper(glGetBooleanIndexedvEXT).setOutput(#
+    'data',size=_glgets._glget_size_mapping,pnameArg='target',orPassIn=True
+)
+# COMPSIZE(target,lod) glGetCompressedTextureImageEXT=wrapper.wrapper(glGetCompressedTextureImageEXT)
+# COMPSIZE(target,lod) glGetCompressedMultiTexImageEXT=wrapper.wrapper(glGetCompressedMultiTexImageEXT)
+glGetNamedBufferParameterivEXT=wrapper.wrapper(glGetNamedBufferParameterivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetNamedBufferPointervEXT=wrapper.wrapper(glGetNamedBufferPointervEXT).setOutput(#
+    'params',size=(1,),orPassIn=True
+)
+glGetNamedBufferSubDataEXT=wrapper.wrapper(glGetNamedBufferSubDataEXT).setOutput(#
+    'data',size=_glgets._glget_size_mapping,pnameArg='size',orPassIn=True
+)
+glGetTextureParameterIivEXT=wrapper.wrapper(glGetTextureParameterIivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetTextureParameterIuivEXT=wrapper.wrapper(glGetTextureParameterIuivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexParameterIivEXT=wrapper.wrapper(glGetMultiTexParameterIivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetMultiTexParameterIuivEXT=wrapper.wrapper(glGetMultiTexParameterIuivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetNamedProgramLocalParameterIivEXT=wrapper.wrapper(glGetNamedProgramLocalParameterIivEXT).setOutput(#
+    'params',size=(4,),orPassIn=True
+)
+glGetNamedProgramLocalParameterIuivEXT=wrapper.wrapper(glGetNamedProgramLocalParameterIuivEXT).setOutput(#
+    'params',size=(4,),orPassIn=True
+)
+glGetNamedProgramLocalParameterdvEXT=wrapper.wrapper(glGetNamedProgramLocalParameterdvEXT).setOutput(#
+    'params',size=(4,),orPassIn=True
+)
+glGetNamedProgramLocalParameterfvEXT=wrapper.wrapper(glGetNamedProgramLocalParameterfvEXT).setOutput(#
+    'params',size=(4,),orPassIn=True
+)
+glGetNamedProgramivEXT=wrapper.wrapper(glGetNamedProgramivEXT).setOutput(#
+    'params',size=(1,),orPassIn=True
+)
+# COMPSIZE(program,pname) glGetNamedProgramStringEXT=wrapper.wrapper(glGetNamedProgramStringEXT)
+glGetNamedRenderbufferParameterivEXT=wrapper.wrapper(glGetNamedRenderbufferParameterivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetNamedFramebufferAttachmentParameterivEXT=wrapper.wrapper(glGetNamedFramebufferAttachmentParameterivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
+glGetFramebufferParameterivEXT=wrapper.wrapper(glGetFramebufferParameterivEXT).setOutput(#
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
+)
 ### END AUTOGENERATED SECTION

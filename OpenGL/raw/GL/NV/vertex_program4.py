@@ -81,4 +81,3 @@ def glVertexAttribI4usvEXT(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glVertexAttribIPointerEXT(index,size,type,stride,pointer):pass
-# Calculate length of pointer from type:VertexAttribEnum

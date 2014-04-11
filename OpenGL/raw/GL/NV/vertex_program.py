@@ -118,7 +118,6 @@ def glGetProgramParameterfvNV(target,index,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLubyteArray)
 def glGetProgramStringNV(id,pname,program):pass
-# Calculate length of program from pname:VertexAttribEnumNV
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetProgramivNV(id,pname,params):pass
@@ -248,7 +247,6 @@ def glVertexAttrib4ubvNV(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glVertexAttribPointerNV(index,fsize,type,stride,pointer):pass
-# Calculate length of pointer from type:VertexAttribEnumNV
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLdoubleArray)
 def glVertexAttribs1dvNV(index,count,v):pass

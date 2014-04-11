@@ -24,8 +24,6 @@ GL_UNPACK_SKIP_VOLUMES_SGIS=_C('GL_UNPACK_SKIP_VOLUMES_SGIS',0x8132)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexImage4DSGIS(target,level,internalformat,width,height,depth,size4d,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexSubImage4DSGIS(target,level,xoffset,yoffset,zoffset,woffset,width,height,depth,size4d,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType

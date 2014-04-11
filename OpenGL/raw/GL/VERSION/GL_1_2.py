@@ -58,12 +58,9 @@ def glCopyTexSubImage3D(target,level,xoffset,yoffset,zoffset,x,y,width,height):p
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glDrawRangeElements(mode,start,end,count,type,indices):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexImage3D(target,level,internalformat,width,height,depth,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexSubImage3D(target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType

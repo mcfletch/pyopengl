@@ -40,58 +40,48 @@ def glFragmentLightModelfSGIX(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glFragmentLightModelfvSGIX(pname,params):pass
-# Calculate length of params from pname:FragmentLightModelParameterSGIX
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
 def glFragmentLightModeliSGIX(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glFragmentLightModelivSGIX(pname,params):pass
-# Calculate length of params from pname:FragmentLightModelParameterSGIX
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glFragmentLightfSGIX(light,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glFragmentLightfvSGIX(light,pname,params):pass
-# Calculate length of params from pname:FragmentLightParameterSGIX
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glFragmentLightiSGIX(light,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glFragmentLightivSGIX(light,pname,params):pass
-# Calculate length of params from pname:FragmentLightParameterSGIX
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glFragmentMaterialfSGIX(face,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glFragmentMaterialfvSGIX(face,pname,params):pass
-# Calculate length of params from pname:MaterialParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glFragmentMaterialiSGIX(face,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glFragmentMaterialivSGIX(face,pname,params):pass
-# Calculate length of params from pname:MaterialParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetFragmentLightfvSGIX(light,pname,params):pass
-# Calculate length of params from pname:FragmentLightParameterSGIX
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetFragmentLightivSGIX(light,pname,params):pass
-# Calculate length of params from pname:FragmentLightParameterSGIX
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetFragmentMaterialfvSGIX(face,pname,params):pass
-# Calculate length of params from pname:MaterialParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetFragmentMaterialivSGIX(face,pname,params):pass
-# Calculate length of params from pname:MaterialParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
 def glLightEnviSGIX(pname,param):pass

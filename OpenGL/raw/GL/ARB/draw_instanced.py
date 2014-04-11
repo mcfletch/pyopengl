@@ -18,4 +18,3 @@ def glDrawArraysInstancedARB(mode,first,count,primcount):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
 def glDrawElementsInstancedARB(mode,count,type,indices,primcount):pass
-# Calculate length of indices from type:DrawElementsType

@@ -67,16 +67,12 @@ def glClearColorIuiEXT(red,green,blue,alpha):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTexParameterIivEXT(target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
 def glGetTexParameterIuivEXT(target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glTexParameterIivEXT(target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
 def glTexParameterIuivEXT(target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName

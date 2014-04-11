@@ -36,7 +36,6 @@ def glGetDoublei_v(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
 def glGetFloati_v(target,index,data):pass
-# Calculate length of data from target:TypeEnum
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLintArray)
 def glScissorArrayv(first,count,v):pass

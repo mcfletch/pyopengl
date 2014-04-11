@@ -22,16 +22,12 @@ GL_DUDV_ATI=_C('GL_DUDV_ATI',0x8779)
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glGetTexBumpParameterfvATI(pname,param):pass
-# Calculate length of param from pname:GetTexBumpParameterATI
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glGetTexBumpParameterivATI(pname,param):pass
-# Calculate length of param from pname:GetTexBumpParameterATI
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glTexBumpParameterfvATI(pname,param):pass
-# Calculate length of param from pname:TexBumpParameterATI
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glTexBumpParameterivATI(pname,param):pass
-# Calculate length of param from pname:TexBumpParameterATI

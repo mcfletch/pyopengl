@@ -552,7 +552,6 @@ def glBindTexture(target,texture):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glColorPointer(size,type,stride,pointer):pass
-# Calculate length of pointer from type:ColorPointerType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLint)
 def glCopyTexImage1D(target,level,internalformat,x,y,width,border):pass
@@ -577,7 +576,6 @@ def glDrawArrays(mode,first,count):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glDrawElements(mode,count,type,indices):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLsizei,ctypes.c_void_p)
 def glEdgeFlagPointer(stride,pointer):pass
@@ -593,7 +591,6 @@ def glGetPointerv(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glIndexPointer(type,stride,pointer):pass
-# Calculate length of pointer from type:IndexPointerType
 @_f
 @_p.types(None,_cs.GLubyte)
 def glIndexub(c):pass
@@ -603,14 +600,12 @@ def glIndexubv(c):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glInterleavedArrays(format,stride,pointer):pass
-# Calculate length of pointer from format:InterleavedArrayFormat
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
 def glIsTexture(texture):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glNormalPointer(type,stride,pointer):pass
-# Calculate length of pointer from type:NormalPointerType
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat)
 def glPolygonOffset(factor,units):pass
@@ -626,16 +621,12 @@ def glPushClientAttrib(mask):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glTexCoordPointer(size,type,stride,pointer):pass
-# Calculate length of pointer from type:TexCoordPointerType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexSubImage1D(target,level,xoffset,width,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexSubImage2D(target,level,xoffset,yoffset,width,height,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glVertexPointer(size,type,stride,pointer):pass
-# Calculate length of pointer from type:VertexPointerType

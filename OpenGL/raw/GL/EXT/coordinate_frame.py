@@ -58,7 +58,6 @@ def glBinormal3svEXT(v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glBinormalPointerEXT(type,stride,pointer):pass
-# Calculate length of pointer from type:BinormalPointerTypeEXT
 @_f
 @_p.types(None,_cs.GLbyte,_cs.GLbyte,_cs.GLbyte)
 def glTangent3bEXT(tx,ty,tz):pass
@@ -92,4 +91,3 @@ def glTangent3svEXT(v):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glTangentPointerEXT(type,stride,pointer):pass
-# Calculate length of pointer from type:TangentPointerTypeEXT

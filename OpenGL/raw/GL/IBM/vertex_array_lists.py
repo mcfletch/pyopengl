@@ -30,31 +30,24 @@ GL_VERTEX_ARRAY_LIST_STRIDE_IBM=_C('GL_VERTEX_ARRAY_LIST_STRIDE_IBM',103080)
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
 def glColorPointerListIBM(size,type,stride,pointer,ptrstride):pass
-# Calculate length of pointer from type:ColorPointerType
 @_f
 @_p.types(None,_cs.GLint,arrays.GLbooleanArray,_cs.GLint)
 def glEdgeFlagPointerListIBM(stride,pointer,ptrstride):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
 def glFogCoordPointerListIBM(type,stride,pointer,ptrstride):pass
-# Calculate length of pointer from type:FogPointerTypeIBM
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
 def glIndexPointerListIBM(type,stride,pointer,ptrstride):pass
-# Calculate length of pointer from type:IndexPointerType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
 def glNormalPointerListIBM(type,stride,pointer,ptrstride):pass
-# Calculate length of pointer from type:NormalPointerType
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
 def glSecondaryColorPointerListIBM(size,type,stride,pointer,ptrstride):pass
-# Calculate length of pointer from type:SecondaryColorPointerTypeIBM
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
 def glTexCoordPointerListIBM(size,type,stride,pointer,ptrstride):pass
-# Calculate length of pointer from type:TexCoordPointerType
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLint,arrays.GLvoidpArray,_cs.GLint)
 def glVertexPointerListIBM(size,type,stride,pointer,ptrstride):pass
-# Calculate length of pointer from type:VertexPointerType

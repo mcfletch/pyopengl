@@ -24,11 +24,9 @@ def glSpriteParameterfSGIX(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glSpriteParameterfvSGIX(pname,params):pass
-# Calculate length of params from pname:SpriteParameterNameSGIX
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
 def glSpriteParameteriSGIX(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glSpriteParameterivSGIX(pname,params):pass
-# Calculate length of params from pname:SpriteParameterNameSGIX

@@ -18,22 +18,18 @@ GL_PIXEL_TEXTURE_SGIS=_C('GL_PIXEL_TEXTURE_SGIS',0x8353)
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glGetPixelTexGenParameterfvSGIS(pname,params):pass
-# Calculate length of params from pname:PixelTexGenParameterNameSGIS
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glGetPixelTexGenParameterivSGIS(pname,params):pass
-# Calculate length of params from pname:PixelTexGenParameterNameSGIS
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
 def glPixelTexGenParameterfSGIS(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glPixelTexGenParameterfvSGIS(pname,params):pass
-# Calculate length of params from pname:PixelTexGenParameterNameSGIS
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
 def glPixelTexGenParameteriSGIS(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glPixelTexGenParameterivSGIS(pname,params):pass
-# Calculate length of params from pname:PixelTexGenParameterNameSGIS

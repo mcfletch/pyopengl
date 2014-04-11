@@ -134,7 +134,6 @@ def glCompressedTexSubImage3D(target,level,xoffset,yoffset,zoffset,width,height,
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,ctypes.c_void_p)
 def glGetCompressedTexImage(target,level,img):pass
-# Calculate length of img from target:TextureTarget, level:CheckedInt32
 @_f
 @_p.types(None,arrays.GLdoubleArray)
 def glLoadTransposeMatrixd(m):pass

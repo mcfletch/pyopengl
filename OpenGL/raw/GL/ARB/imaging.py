@@ -95,41 +95,33 @@ def glBlendEquation(mode):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glColorSubTable(target,start,count,format,type,data):pass
-# Calculate length of data from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glColorTable(target,internalformat,width,format,type,table):pass
-# Calculate length of table from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glColorTableParameterfv(target,pname,params):pass
-# Calculate length of params from pname:ColorTableParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glColorTableParameteriv(target,pname,params):pass
-# Calculate length of params from pname:ColorTableParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glConvolutionFilter1D(target,internalformat,width,format,type,image):pass
-# Calculate length of image from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glConvolutionFilter2D(target,internalformat,width,height,format,type,image):pass
-# Calculate length of image from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glConvolutionParameterf(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glConvolutionParameterfv(target,pname,params):pass
-# Calculate length of params from pname:ConvolutionParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glConvolutionParameteri(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glConvolutionParameteriv(target,pname,params):pass
-# Calculate length of params from pname:ConvolutionParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLint,_cs.GLint,_cs.GLsizei)
 def glCopyColorSubTable(target,start,x,y,width):pass
@@ -145,57 +137,42 @@ def glCopyConvolutionFilter2D(target,internalformat,x,y,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetColorTable(target,format,type,table):pass
-# Calculate length of table from target:ColorTableTarget, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetColorTableParameterfv(target,pname,params):pass
-# Calculate length of params from pname:GetColorTableParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetColorTableParameteriv(target,pname,params):pass
-# Calculate length of params from pname:GetColorTableParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetConvolutionFilter(target,format,type,image):pass
-# Calculate length of image from target:ConvolutionTarget, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetConvolutionParameterfv(target,pname,params):pass
-# Calculate length of params from pname:GetConvolutionParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetConvolutionParameteriv(target,pname,params):pass
-# Calculate length of params from pname:GetConvolutionParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetHistogram(target,reset,format,type,values):pass
-# Calculate length of values from target:HistogramTarget, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetHistogramParameterfv(target,pname,params):pass
-# Calculate length of params from pname:GetHistogramParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetHistogramParameteriv(target,pname,params):pass
-# Calculate length of params from pname:GetHistogramParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetMinmax(target,reset,format,type,values):pass
-# Calculate length of values from target:MinmaxTarget, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetMinmaxParameterfv(target,pname,params):pass
-# Calculate length of params from pname:GetMinmaxParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetMinmaxParameteriv(target,pname,params):pass
-# Calculate length of params from pname:GetMinmaxParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p,ctypes.c_void_p,ctypes.c_void_p)
 def glGetSeparableFilter(target,format,type,row,column,span):pass
-# Calculate length of column from target:SeparableTarget, format:PixelFormat, type:PixelType
-# Calculate length of span from target:SeparableTarget, format:PixelFormat, type:PixelType
-# Calculate length of row from target:SeparableTarget, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLboolean)
 def glHistogram(target,width,internalformat,sink):pass
@@ -211,5 +188,3 @@ def glResetMinmax(target):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p,ctypes.c_void_p)
 def glSeparableFilter2D(target,internalformat,width,height,format,type,row,column):pass
-# Calculate length of column from target:SeparableTarget, format:PixelFormat, type:PixelType
-# Calculate length of row from target:SeparableTarget, format:PixelFormat, type:PixelType

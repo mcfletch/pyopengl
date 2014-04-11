@@ -71,7 +71,6 @@ def glBlendFuncSeparate(sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glFogCoordPointer(type,stride,pointer):pass
-# Calculate length of pointer from type:FogPointerTypeEXT
 @_f
 @_p.types(None,_cs.GLdouble)
 def glFogCoordd(coord):pass
@@ -96,14 +95,12 @@ def glPointParameterf(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glPointParameterfv(pname,params):pass
-# Calculate length of params from pname:PointParameterNameARB
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
 def glPointParameteri(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glPointParameteriv(pname,params):pass
-# Calculate length of params from pname:PointParameterNameARB
 @_f
 @_p.types(None,_cs.GLbyte,_cs.GLbyte,_cs.GLbyte)
 def glSecondaryColor3b(red,green,blue):pass
@@ -155,7 +152,6 @@ def glSecondaryColor3usv(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glSecondaryColorPointer(size,type,stride,pointer):pass
-# Calculate length of pointer from type:ColorPointerType
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble)
 def glWindowPos2d(x,y):pass

@@ -30,11 +30,9 @@ def glGenOcclusionQueriesNV(n,ids):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetOcclusionQueryivNV(id,pname,params):pass
-# Calculate length of params from pname:OcclusionQueryParameterNameNV
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuintArray)
 def glGetOcclusionQueryuivNV(id,pname,params):pass
-# Calculate length of params from pname:OcclusionQueryParameterNameNV
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
 def glIsOcclusionQueryNV(id):pass

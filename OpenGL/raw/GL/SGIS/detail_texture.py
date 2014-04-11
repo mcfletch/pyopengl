@@ -25,4 +25,3 @@ def glDetailTexFuncSGIS(target,n,points):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glGetDetailTexFuncSGIS(target,points):pass
-# Calculate length of points from target:TextureTarget

@@ -29,22 +29,18 @@ GL_PROXY_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP=_C('GL_PROXY_POST_IMAGE_TRANSFORM_C
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetImageTransformParameterfvHP(target,pname,params):pass
-# Calculate length of params from pname:ImageTransformPNameHP
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetImageTransformParameterivHP(target,pname,params):pass
-# Calculate length of params from pname:ImageTransformPNameHP
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glImageTransformParameterfHP(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glImageTransformParameterfvHP(target,pname,params):pass
-# Calculate length of params from pname:ImageTransformPNameHP
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glImageTransformParameteriHP(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glImageTransformParameterivHP(target,pname,params):pass
-# Calculate length of params from pname:ImageTransformPNameHP

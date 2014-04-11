@@ -84,15 +84,12 @@ def glDeleteSync(sync):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLint)
 def glDrawElementsBaseVertex(mode,count,type,indices,basevertex):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei,_cs.GLint)
 def glDrawElementsInstancedBaseVertex(mode,count,type,indices,instancecount,basevertex):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLint)
 def glDrawRangeElementsBaseVertex(mode,start,end,count,type,indices,basevertex):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(_cs.GLsync,_cs.GLenum,_cs.GLbitfield)
 def glFenceSync(condition,flags):pass
@@ -102,7 +99,6 @@ def glFramebufferTexture(target,attachment,texture,level):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLint64Array)
 def glGetBufferParameteri64v(target,pname,params):pass
-# Calculate length of params from pname:BufferPNameARB
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLint64Array)
 def glGetInteger64i_v(target,index,data):pass

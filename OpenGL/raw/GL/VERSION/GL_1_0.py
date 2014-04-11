@@ -33,7 +33,6 @@ def glCallList(list):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glCallLists(n,type,lists):pass
-# Calculate length of lists from type:ListNameType
 @_f
 @_p.types(None,_cs.GLbitfield)
 def glClear(mask):pass
@@ -184,7 +183,6 @@ def glDrawBuffer(mode):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glDrawPixels(width,height,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLboolean)
 def glEdgeFlag(flag):pass
@@ -251,14 +249,12 @@ def glFogf(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glFogfv(pname,params):pass
-# Calculate length of params from pname:FogParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
 def glFogi(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glFogiv(pname,params):pass
-# Calculate length of params from pname:FogParameter
 @_f
 @_p.types(None,_cs.GLenum)
 def glFrontFace(mode):pass
@@ -271,65 +267,51 @@ def glGenLists(range):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLbooleanArray)
 def glGetBooleanv(pname,data):pass
-# Calculate length of data from pname:GetPName
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
 def glGetClipPlane(plane,equation):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
 def glGetDoublev(pname,data):pass
-# Calculate length of data from pname:GetPName
 @_f
 @_p.types(_cs.GLenum,)
 def glGetError():pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glGetFloatv(pname,data):pass
-# Calculate length of data from pname:GetPName
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glGetIntegerv(pname,data):pass
-# Calculate length of data from pname:GetPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetLightfv(light,pname,params):pass
-# Calculate length of params from pname:LightParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetLightiv(light,pname,params):pass
-# Calculate length of params from pname:LightParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLdoubleArray)
 def glGetMapdv(target,query,v):pass
-# Calculate length of v from target:MapTarget, query:GetMapQuery
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetMapfv(target,query,v):pass
-# Calculate length of v from target:MapTarget, query:GetMapQuery
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetMapiv(target,query,v):pass
-# Calculate length of v from target:MapTarget, query:GetMapQuery
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetMaterialfv(face,pname,params):pass
-# Calculate length of params from pname:MaterialParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetMaterialiv(face,pname,params):pass
-# Calculate length of params from pname:MaterialParameter
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glGetPixelMapfv(map,values):pass
-# Calculate length of values from map:PixelMap
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLuintArray)
 def glGetPixelMapuiv(map,values):pass
-# Calculate length of values from map:PixelMap
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLushortArray)
 def glGetPixelMapusv(map,values):pass
-# Calculate length of values from map:PixelMap
 @_f
 @_p.types(None,arrays.GLubyteArray)
 def glGetPolygonStipple(mask):pass
@@ -339,43 +321,33 @@ def glGetString(name):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetTexEnvfv(target,pname,params):pass
-# Calculate length of params from pname:TextureEnvParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTexEnviv(target,pname,params):pass
-# Calculate length of params from pname:TextureEnvParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLdoubleArray)
 def glGetTexGendv(coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetTexGenfv(coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTexGeniv(coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetTexImage(target,level,format,type,pixels):pass
-# Calculate length of pixels from target:TextureTarget, level:CheckedInt32, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,arrays.GLfloatArray)
 def glGetTexLevelParameterfv(target,level,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,arrays.GLintArray)
 def glGetTexLevelParameteriv(target,level,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetTexParameterfv(target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTexParameteriv(target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
 def glHint(target,mode):pass
@@ -421,28 +393,24 @@ def glLightModelf(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glLightModelfv(pname,params):pass
-# Calculate length of params from pname:LightModelParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
 def glLightModeli(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glLightModeliv(pname,params):pass
-# Calculate length of params from pname:LightModelParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glLightf(light,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glLightfv(light,pname,params):pass
-# Calculate length of params from pname:LightParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glLighti(light,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glLightiv(light,pname,params):pass
-# Calculate length of params from pname:LightParameter
 @_f
 @_p.types(None,_cs.GLint,_cs.GLushort)
 def glLineStipple(factor,pattern):pass
@@ -470,19 +438,15 @@ def glLogicOp(opcode):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,arrays.GLdoubleArray)
 def glMap1d(target,u1,u2,stride,order,points):pass
-# Calculate length of points from target:MapTarget, order:CheckedInt32
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,arrays.GLfloatArray)
 def glMap1f(target,u1,u2,stride,order,points):pass
-# Calculate length of points from target:MapTarget, order:CheckedInt32
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,arrays.GLdoubleArray)
 def glMap2d(target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points):pass
-# Calculate length of points from target:MapTarget, uorder:CheckedInt32, vorder:CheckedInt32
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,arrays.GLfloatArray)
 def glMap2f(target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points):pass
-# Calculate length of points from target:MapTarget, uorder:CheckedInt32, vorder:CheckedInt32
 @_f
 @_p.types(None,_cs.GLint,_cs.GLdouble,_cs.GLdouble)
 def glMapGrid1d(un,u1,u2):pass
@@ -501,14 +465,12 @@ def glMaterialf(face,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glMaterialfv(face,pname,params):pass
-# Calculate length of params from pname:MaterialParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glMateriali(face,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glMaterialiv(face,pname,params):pass
-# Calculate length of params from pname:MaterialParameter
 @_f
 @_p.types(None,_cs.GLenum)
 def glMatrixMode(mode):pass
@@ -560,15 +522,12 @@ def glPassThrough(token):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLfloatArray)
 def glPixelMapfv(map,mapsize,values):pass
-# Calculate length of values from mapsize:CheckedInt32
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLuintArray)
 def glPixelMapuiv(map,mapsize,values):pass
-# Calculate length of values from mapsize:CheckedInt32
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLushortArray)
 def glPixelMapusv(map,mapsize,values):pass
-# Calculate length of values from mapsize:CheckedInt32
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat)
 def glPixelStoref(pname,param):pass
@@ -689,7 +648,6 @@ def glReadBuffer(mode):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glReadPixels(x,y,width,height,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
 def glRectd(x1,y1,x2,y2):pass
@@ -849,57 +807,48 @@ def glTexEnvf(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glTexEnvfv(target,pname,params):pass
-# Calculate length of params from pname:TextureEnvParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glTexEnvi(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glTexEnviv(target,pname,params):pass
-# Calculate length of params from pname:TextureEnvParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLdouble)
 def glTexGend(coord,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLdoubleArray)
 def glTexGendv(coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glTexGenf(coord,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glTexGenfv(coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glTexGeni(coord,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glTexGeniv(coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexImage1D(target,level,internalformat,width,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexImage2D(target,level,internalformat,width,height,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glTexParameterf(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glTexParameterfv(target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glTexParameteri(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glTexParameteriv(target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
 def glTranslated(x,y,z):pass

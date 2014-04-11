@@ -15,8 +15,6 @@ GL_PER_STAGE_CONSTANTS_NV=_C('GL_PER_STAGE_CONSTANTS_NV',0x8535)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glCombinerStageParameterfvNV(stage,pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetCombinerStageParameterfvNV(stage,pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV

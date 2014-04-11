@@ -30,27 +30,21 @@ GL_PROXY_POST_CONVOLUTION_COLOR_TABLE_SGI=_C('GL_PROXY_POST_CONVOLUTION_COLOR_TA
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glColorTableParameterfvSGI(target,pname,params):pass
-# Calculate length of params from pname:ColorTableParameterPNameSGI
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glColorTableParameterivSGI(target,pname,params):pass
-# Calculate length of params from pname:ColorTableParameterPNameSGI
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glColorTableSGI(target,internalformat,width,format,type,table):pass
-# Calculate length of table from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei)
 def glCopyColorTableSGI(target,internalformat,x,y,width):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetColorTableParameterfvSGI(target,pname,params):pass
-# Calculate length of params from pname:GetColorTableParameterPNameSGI
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetColorTableParameterivSGI(target,pname,params):pass
-# Calculate length of params from pname:GetColorTableParameterPNameSGI
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetColorTableSGI(target,format,type,table):pass
-# Calculate length of table from target:ColorTableTargetSGI, format:PixelFormat, type:PixelType

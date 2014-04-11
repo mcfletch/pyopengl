@@ -21,16 +21,12 @@ GL_TEXTURE_INDEX_SIZE_EXT=_C('GL_TEXTURE_INDEX_SIZE_EXT',0x80ED)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glColorTableEXT(target,internalFormat,width,format,type,table):pass
-# Calculate length of table from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetColorTableEXT(target,format,type,data):pass
-# Calculate length of data from target:ColorTableTarget, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetColorTableParameterfvEXT(target,pname,params):pass
-# Calculate length of params from pname:GetColorTableParameterPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetColorTableParameterivEXT(target,pname,params):pass
-# Calculate length of params from pname:GetColorTableParameterPName

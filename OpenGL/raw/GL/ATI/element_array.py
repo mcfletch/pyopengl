@@ -23,4 +23,3 @@ def glDrawRangeElementArrayATI(mode,start,end,count):pass
 @_f
 @_p.types(None,_cs.GLenum,ctypes.c_void_p)
 def glElementPointerATI(type,pointer):pass
-# Calculate length of pointer from type:ElementPointerTypeATI

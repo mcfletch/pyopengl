@@ -27,7 +27,6 @@ def glCurrentPaletteMatrixARB(index):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glMatrixIndexPointerARB(size,type,stride,pointer):pass
-# Calculate length of pointer from type:MatrixIndexPointerTypeARB
 @_f
 @_p.types(None,_cs.GLint,arrays.GLubyteArray)
 def glMatrixIndexubvARB(size,indices):pass

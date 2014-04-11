@@ -147,16 +147,12 @@ def glCopyPathNV(resultPath,srcPath):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glCoverFillPathInstancedNV(numPaths,pathNameType,paths,pathBase,coverMode,transformType,transformValues):pass
-# Calculate length of paths from pathNameType:PathElementType, paths:PathElement
-# Calculate length of transformValues from transformType:PathTransformType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
 def glCoverFillPathNV(path,coverMode):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glCoverStrokePathInstancedNV(numPaths,pathNameType,paths,pathBase,coverMode,transformType,transformValues):pass
-# Calculate length of paths from pathNameType:PathElementType, paths:PathElement
-# Calculate length of transformValues from transformType:PathTransformType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
 def glCoverStrokePathNV(path,coverMode):pass
@@ -169,35 +165,27 @@ def glGenPathsNV(range):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetPathColorGenfvNV(color,pname,value):pass
-# Calculate length of value from pname:PathGenMode
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetPathColorGenivNV(color,pname,value):pass
-# Calculate length of value from pname:PathGenMode
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLubyteArray)
 def glGetPathCommandsNV(path,commands):pass
-# Calculate length of commands from path:Path
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
 def glGetPathCoordsNV(path,coords):pass
-# Calculate length of coords from path:Path
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLfloatArray)
 def glGetPathDashArrayNV(path,dashArray):pass
-# Calculate length of dashArray from path:Path
 @_f
 @_p.types(_cs.GLfloat,_cs.GLuint,_cs.GLsizei,_cs.GLsizei)
 def glGetPathLengthNV(path,startSegment,numSegments):pass
 @_f
 @_p.types(None,_cs.GLbitfield,_cs.GLuint,_cs.GLsizei,_cs.GLsizei,arrays.GLfloatArray)
 def glGetPathMetricRangeNV(metricQueryMask,firstPathName,numPaths,stride,metrics):pass
-# Calculate length of metrics from metricQueryMask:PathMetricMask
 @_f
 @_p.types(None,_cs.GLbitfield,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLsizei,arrays.GLfloatArray)
 def glGetPathMetricsNV(metricQueryMask,numPaths,pathNameType,paths,pathBase,stride,metrics):pass
-# Calculate length of metrics from metricQueryMask:PathMetricMask
-# Calculate length of paths from pathNameType:PathElementType, paths:PathElement
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glGetPathParameterfvNV(path,pname,value):pass
@@ -207,16 +195,12 @@ def glGetPathParameterivNV(path,pname,value):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLenum,arrays.GLfloatArray)
 def glGetPathSpacingNV(pathListMode,numPaths,pathNameType,paths,pathBase,advanceScale,kerningScale,transformType,returnedSpacing):pass
-# Calculate length of paths from pathNameType:PathElementType, paths:PathElement
-# Calculate length of returnedSpacing from pathListMode:PathListMode
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetPathTexGenfvNV(texCoordSet,pname,value):pass
-# Calculate length of value from pname:PathGenMode
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetPathTexGenivNV(texCoordSet,pname,value):pass
-# Calculate length of value from pname:PathGenMode
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLfloat)
 def glInterpolatePathsNV(resultPath,pathA,pathB,weight):pass
@@ -232,15 +216,12 @@ def glIsPointInStrokePathNV(path,x,y):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glPathColorGenNV(color,genMode,colorFormat,coeffs):pass
-# Calculate length of coeffs from genMode:PathGenMode, colorFormat:PathColorFormat
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLubyteArray,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glPathCommandsNV(path,numCommands,commands,numCoords,coordType,coords):pass
-# Calculate length of coords from coordType:PathCoordType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glPathCoordsNV(path,numCoords,coordType,coords):pass
-# Calculate length of coords from coordType:PathCoordType
 @_f
 @_p.types(None,_cs.GLenum)
 def glPathCoverDepthFuncNV(func):pass
@@ -253,26 +234,21 @@ def glPathFogGenNV(genMode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLuint,_cs.GLsizei,_cs.GLenum,_cs.GLuint,_cs.GLfloat)
 def glPathGlyphRangeNV(firstPathName,fontTarget,fontName,fontStyle,firstGlyph,numGlyphs,handleMissingGlyphs,pathParameterTemplate,emScale):pass
-# Calculate length of fontName from fontTarget:PathFontTarget
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLenum,_cs.GLuint,_cs.GLfloat)
 def glPathGlyphsNV(firstPathName,fontTarget,fontName,fontStyle,numGlyphs,type,charcodes,handleMissingGlyphs,pathParameterTemplate,emScale):pass
-# Calculate length of fontName from fontTarget:PathFontTarget
-# Calculate length of charcodes from type:PathElementType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLfloat)
 def glPathParameterfNV(path,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glPathParameterfvNV(path,pname,value):pass
-# Calculate length of value from pname:PathParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
 def glPathParameteriNV(path,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glPathParameterivNV(path,pname,value):pass
-# Calculate length of value from pname:PathParameter
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat)
 def glPathStencilDepthOffsetNV(factor,units):pass
@@ -285,38 +261,30 @@ def glPathStringNV(path,format,length,pathString):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,arrays.GLubyteArray,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glPathSubCommandsNV(path,commandStart,commandsToDelete,numCommands,commands,numCoords,coordType,coords):pass
-# Calculate length of coords from coordType:PathCoordType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glPathSubCoordsNV(path,coordStart,numCoords,coordType,coords):pass
-# Calculate length of coords from coordType:PathCoordType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,arrays.GLfloatArray)
 def glPathTexGenNV(texCoordSet,genMode,components,coeffs):pass
-# Calculate length of coeffs from genMode:PathGenMode
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint,_cs.GLsizei,_cs.GLsizei,_cs.GLfloat,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
 def glPointAlongPathNV(path,startSegment,numSegments,distance,x,y,tangentX,tangentY):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glStencilFillPathInstancedNV(numPaths,pathNameType,paths,pathBase,fillMode,mask,transformType,transformValues):pass
-# Calculate length of paths from pathNameType:PathElementType, paths:PathElement
-# Calculate length of transformValues from transformType:PathTransformType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint)
 def glStencilFillPathNV(path,fillMode,mask):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLint,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glStencilStrokePathInstancedNV(numPaths,pathNameType,paths,pathBase,reference,mask,transformType,transformValues):pass
-# Calculate length of paths from pathNameType:PathElementType, paths:PathElement
-# Calculate length of transformValues from transformType:PathTransformType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLuint)
 def glStencilStrokePathNV(path,reference,mask):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glTransformPathNV(resultPath,srcPath,transformType,transformValues):pass
-# Calculate length of transformValues from transformType:PathTransformType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,arrays.GLfloatArray)
 def glWeightPathsNV(resultPath,numPaths,paths,weights):pass

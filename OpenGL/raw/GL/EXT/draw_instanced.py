@@ -18,4 +18,3 @@ def glDrawArraysInstancedEXT(mode,start,count,primcount):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
 def glDrawElementsInstancedEXT(mode,count,type,indices,primcount):pass
-# Calculate length of indices from type:DrawElementsType

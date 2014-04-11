@@ -48,11 +48,9 @@ def glBindBufferARB(target,buffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizeiptrARB,ctypes.c_void_p,_cs.GLenum)
 def glBufferDataARB(target,size,data,usage):pass
-# Calculate length of data from size:BufferSizeARB
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptrARB,_cs.GLsizeiptrARB,ctypes.c_void_p)
 def glBufferSubDataARB(target,offset,size,data):pass
-# Calculate length of data from size:BufferSizeARB
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
 def glDeleteBuffersARB(n,buffers):pass
@@ -62,14 +60,12 @@ def glGenBuffersARB(n,buffers):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetBufferParameterivARB(target,pname,params):pass
-# Calculate length of params from pname:BufferPNameARB
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLvoidpArray)
 def glGetBufferPointervARB(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptrARB,_cs.GLsizeiptrARB,ctypes.c_void_p)
 def glGetBufferSubDataARB(target,offset,size,data):pass
-# Calculate length of data from size:BufferSizeARB
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
 def glIsBufferARB(buffer):pass

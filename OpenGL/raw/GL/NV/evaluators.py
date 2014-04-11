@@ -41,32 +41,24 @@ def glEvalMapsNV(target,mode):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glGetMapAttribParameterfvNV(target,index,pname,params):pass
-# Calculate length of params from pname:MapAttribParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetMapAttribParameterivNV(target,index,pname,params):pass
-# Calculate length of params from pname:MapAttribParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean,ctypes.c_void_p)
 def glGetMapControlPointsNV(target,index,type,ustride,vstride,packed,points):pass
-# Calculate length of points from target:EvalTargetNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetMapParameterfvNV(target,pname,params):pass
-# Calculate length of params from target:EvalTargetNV, pname:MapParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetMapParameterivNV(target,pname,params):pass
-# Calculate length of params from target:EvalTargetNV, pname:MapParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLint,_cs.GLboolean,ctypes.c_void_p)
 def glMapControlPointsNV(target,index,type,ustride,vstride,uorder,vorder,packed,points):pass
-# Calculate length of points from target:EvalTargetNV, uorder:CheckedInt32, vorder:CheckedInt32
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glMapParameterfvNV(target,pname,params):pass
-# Calculate length of params from target:EvalTargetNV, pname:MapParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glMapParameterivNV(target,pname,params):pass
-# Calculate length of params from target:EvalTargetNV, pname:MapParameterNV

@@ -352,11 +352,9 @@ def glGetStringi(name,index):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTexParameterIiv(target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
 def glGetTexParameterIuiv(target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLsizeiArray,arrays.GLuintArray,arrays.GLcharArray)
 def glGetTransformFeedbackVarying(program,index,bufSize,length,size,type,name):pass
@@ -393,11 +391,9 @@ def glRenderbufferStorageMultisample(target,samples,internalformat,width,height)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glTexParameterIiv(target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
 def glTexParameterIuiv(target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.POINTER( ctypes.POINTER( _cs.GLchar )),_cs.GLenum)
 def glTransformFeedbackVaryings(program,count,varyings,bufferMode):pass
@@ -488,4 +484,3 @@ def glVertexAttribI4usv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glVertexAttribIPointer(index,size,type,stride,pointer):pass
-# Calculate length of pointer from type:VertexAttribEnum

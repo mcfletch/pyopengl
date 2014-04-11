@@ -15,22 +15,18 @@ GL_LIST_PRIORITY_SGIX=_C('GL_LIST_PRIORITY_SGIX',0x8182)
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glGetListParameterfvSGIX(list,pname,params):pass
-# Calculate length of params from pname:ListParameterName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetListParameterivSGIX(list,pname,params):pass
-# Calculate length of params from pname:ListParameterName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLfloat)
 def glListParameterfSGIX(list,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glListParameterfvSGIX(list,pname,params):pass
-# Calculate length of params from pname:ListParameterName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
 def glListParameteriSGIX(list,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glListParameterivSGIX(list,pname,params):pass
-# Calculate length of params from pname:ListParameterName

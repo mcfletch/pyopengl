@@ -113,7 +113,6 @@ def glGetProgramLocalParameterfvARB(target,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetProgramStringARB(target,pname,string):pass
-# Calculate length of string from target:ProgramTargetARB, pname:ProgramStringPropertyARB
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetProgramivARB(target,pname,params):pass

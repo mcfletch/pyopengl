@@ -2,7 +2,6 @@
 # early import of our modules to prevent import loops...
 from OpenGL import error as _error
 from OpenGL.GL.VERSION.GL_1_1 import *
-from OpenGL.GL.glget import *
 from OpenGL.GL.pointers import *
 from OpenGL.GL.images import *
 
@@ -37,6 +36,12 @@ glTexCoord = glTexCoord2d
 glScale = glScaled
 #glColor = glColor3f
 glNormal = glNormal3d
+
+glGetBoolean = glGetBooleanv
+glGetDouble = glGetDoublev
+glGetFloat = glGetFloatv
+glGetInteger = glGetIntegerv 
+glGetPolygonStippleub = glGetPolygonStipple
 
 from OpenGL.GL import vboimplementation as _core_implementation
 from OpenGL.GL.ARB import vboimplementation as _arb_implementation

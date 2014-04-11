@@ -33,16 +33,12 @@ def glIsVertexAttribEnabledAPPLE(index,pname):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,arrays.GLdoubleArray)
 def glMapVertexAttrib1dAPPLE(index,size,u1,u2,stride,order,points):pass
-# Calculate length of points from order:CheckedInt32
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,arrays.GLfloatArray)
 def glMapVertexAttrib1fAPPLE(index,size,u1,u2,stride,order,points):pass
-# Calculate length of points from order:CheckedInt32
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,arrays.GLdoubleArray)
 def glMapVertexAttrib2dAPPLE(index,size,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points):pass
-# Calculate length of points from uorder:CheckedInt32, vorder:CheckedInt32
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,arrays.GLfloatArray)
 def glMapVertexAttrib2fAPPLE(index,size,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points):pass
-# Calculate length of points from uorder:CheckedInt32, vorder:CheckedInt32

@@ -23,7 +23,6 @@ def glGetIntegerui64vNV(value,result):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLuint64Array)
 def glGetNamedBufferParameterui64vNV(buffer,pname,params):pass
-# Calculate length of params from pname:VertexBufferObjectParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,arrays.GLuint64Array)
 def glGetUniformui64vNV(program,location,params):pass

@@ -532,8 +532,8 @@ class Tests( unittest.TestCase ):
 
             # the following glMultMatrixf call ignored this transpose
             t = t.T
-
-            glMultMatrixf( t )
+            
+            glMultMatrixd( t )
 
             m = glGetFloatv( GL_MODELVIEW_MATRIX )
             assert numpy.allclose( m[-1], [0,0,0,1] ), m

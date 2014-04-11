@@ -49,7 +49,6 @@ def glArrayElementEXT(i):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,ctypes.c_void_p)
 def glColorPointerEXT(size,type,stride,count,pointer):pass
-# Calculate length of pointer from type:ColorPointerType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLsizei)
 def glDrawArraysEXT(mode,first,count):pass
@@ -62,16 +61,12 @@ def glGetPointervEXT(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,ctypes.c_void_p)
 def glIndexPointerEXT(type,stride,count,pointer):pass
-# Calculate length of pointer from type:IndexPointerType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,ctypes.c_void_p)
 def glNormalPointerEXT(type,stride,count,pointer):pass
-# Calculate length of pointer from type:NormalPointerType
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,ctypes.c_void_p)
 def glTexCoordPointerEXT(size,type,stride,count,pointer):pass
-# Calculate length of pointer from type:TexCoordPointerType
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,ctypes.c_void_p)
 def glVertexPointerEXT(size,type,stride,count,pointer):pass
-# Calculate length of pointer from type:VertexPointerType

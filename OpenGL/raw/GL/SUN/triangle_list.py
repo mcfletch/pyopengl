@@ -31,7 +31,6 @@ GL_TRIANGLE_LIST_SUN=_C('GL_TRIANGLE_LIST_SUN',0x81D7)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,arrays.GLvoidpArray)
 def glReplacementCodePointerSUN(type,stride,pointer):pass
-# Calculate length of pointer from type:ReplacementCodeTypeSUN
 @_f
 @_p.types(None,_cs.GLubyte)
 def glReplacementCodeubSUN(code):pass

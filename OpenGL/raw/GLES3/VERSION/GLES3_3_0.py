@@ -391,11 +391,9 @@ def glDrawBuffers(n,bufs):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
 def glDrawElementsInstanced(mode,count,type,indices,instancecount):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glDrawRangeElements(mode,start,end,count,type,indices):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLenum)
 def glEndQuery(target):pass
@@ -435,7 +433,6 @@ def glGetActiveUniformsiv(program,uniformCount,uniformIndices,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLint64Array)
 def glGetBufferParameteri64v(target,pname,params):pass
-# Calculate length of params from pname:BufferPNameARB
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLvoidpArray)
 def glGetBufferPointerv(target,pname,params):pass
@@ -550,7 +547,6 @@ def glSamplerParameteriv(sampler,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexImage3D(target,level,internalformat,width,height,depth,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei)
 def glTexStorage2D(target,levels,internalformat,width,height):pass
@@ -560,7 +556,6 @@ def glTexStorage3D(target,levels,internalformat,width,height,depth):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexSubImage3D(target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.POINTER( ctypes.POINTER( _cs.GLchar )),_cs.GLenum)
 def glTransformFeedbackVaryings(program,count,varyings,bufferMode):pass
@@ -630,7 +625,6 @@ def glVertexAttribI4uiv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glVertexAttribIPointer(index,size,type,stride,pointer):pass
-# Calculate length of pointer from type:VertexAttribEnum
 @_f
 @_p.types(None,_cs.GLsync,_cs.GLbitfield,_cs.GLuint64)
 def glWaitSync(sync,flags,timeout):pass

@@ -21,4 +21,3 @@ def glPointParameterfSGIS(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glPointParameterfvSGIS(pname,params):pass
-# Calculate length of params from pname:PointParameterNameARB

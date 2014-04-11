@@ -351,11 +351,9 @@ def glBlendFuncSeparate(sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizeiptr,ctypes.c_void_p,_cs.GLenum)
 def glBufferData(target,size,data,usage):pass
-# Calculate length of data from size:BufferSize
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,ctypes.c_void_p)
 def glBufferSubData(target,offset,size,data):pass
-# Calculate length of data from size:BufferSize
 @_f
 @_p.types(_cs.GLenum,_cs.GLenum)
 def glCheckFramebufferStatus(target):pass
@@ -440,7 +438,6 @@ def glDrawArrays(mode,first,count):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glDrawElements(mode,count,type,indices):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLenum)
 def glEnable(cap):pass
@@ -492,25 +489,21 @@ def glGetAttribLocation(program,name):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLbooleanArray)
 def glGetBooleanv(pname,data):pass
-# Calculate length of data from pname:GetPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetBufferParameteriv(target,pname,params):pass
-# Calculate length of params from pname:BufferPNameARB
 @_f
 @_p.types(_cs.GLenum,)
 def glGetError():pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glGetFloatv(pname,data):pass
-# Calculate length of data from pname:GetPName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetFramebufferAttachmentParameteriv(target,attachment,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glGetIntegerv(pname,data):pass
-# Calculate length of data from pname:GetPName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
 def glGetProgramInfoLog(program,bufSize,length,infoLog):pass
@@ -538,11 +531,9 @@ def glGetString(name):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetTexParameterfv(target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTexParameteriv(target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(_cs.GLint,_cs.GLuint,arrays.GLcharArray)
 def glGetUniformLocation(program,name):pass
@@ -600,7 +591,6 @@ def glPolygonOffset(factor,units):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glReadPixels(x,y,width,height,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,)
 def glReleaseShaderCompiler():pass
@@ -640,25 +630,21 @@ def glStencilOpSeparate(face,sfail,dpfail,dppass):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexImage2D(target,level,internalformat,width,height,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glTexParameterf(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glTexParameterfv(target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glTexParameteri(target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glTexParameteriv(target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTexSubImage2D(target,level,xoffset,yoffset,width,height,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLint,_cs.GLfloat)
 def glUniform1f(location,v0):pass
@@ -749,7 +735,6 @@ def glVertexAttrib4fv(index,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLboolean,_cs.GLsizei,ctypes.c_void_p)
 def glVertexAttribPointer(index,size,type,normalized,stride,pointer):pass
-# Calculate length of pointer from type:VertexAttribPointerType
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei)
 def glViewport(x,y,width,height):pass

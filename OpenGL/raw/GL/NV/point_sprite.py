@@ -20,4 +20,3 @@ def glPointParameteriNV(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glPointParameterivNV(pname,params):pass
-# Calculate length of params from pname:PointParameterNameARB

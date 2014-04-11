@@ -23,11 +23,9 @@ def glDeformSGIX(mask):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,_cs.GLdouble,_cs.GLdouble,_cs.GLint,_cs.GLint,arrays.GLdoubleArray)
 def glDeformationMap3dSGIX(target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,w1,w2,wstride,worder,points):pass
-# Calculate length of points from target:FfdTargetSGIX, uorder:CheckedInt32, vorder:CheckedInt32, worder:CheckedInt32
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,_cs.GLfloat,_cs.GLfloat,_cs.GLint,_cs.GLint,arrays.GLfloatArray)
 def glDeformationMap3fSGIX(target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,w1,w2,wstride,worder,points):pass
-# Calculate length of points from target:FfdTargetSGIX, uorder:CheckedInt32, vorder:CheckedInt32, worder:CheckedInt32
 @_f
 @_p.types(None,_cs.GLbitfield)
 def glLoadIdentityDeformationMapSGIX(mask):pass

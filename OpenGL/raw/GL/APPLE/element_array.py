@@ -23,7 +23,6 @@ def glDrawRangeElementArrayAPPLE(mode,start,end,first,count):pass
 @_f
 @_p.types(None,_cs.GLenum,ctypes.c_void_p)
 def glElementPointerAPPLE(type,pointer):pass
-# Calculate length of pointer from type:ElementPointerTypeATI
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray,arrays.GLsizeiArray,_cs.GLsizei)
 def glMultiDrawElementArrayAPPLE(mode,first,count,primcount):pass

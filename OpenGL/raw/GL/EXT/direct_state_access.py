@@ -23,11 +23,9 @@ def glCheckNamedFramebufferStatusEXT(framebuffer,target):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glClearNamedBufferDataEXT(buffer,internalformat,format,type,data):pass
-# Calculate length of data from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLsizeiptr,_cs.GLsizeiptr,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glClearNamedBufferSubDataEXT(buffer,internalformat,offset,size,format,type,data):pass
-# Calculate length of data from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLbitfield)
 def glClientAttribDefaultEXT(mask):pass
@@ -151,84 +149,66 @@ def glGetBooleanIndexedvEXT(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,ctypes.c_void_p)
 def glGetCompressedMultiTexImageEXT(texunit,target,lod,img):pass
-# Calculate length of img from target:TextureTarget, lod:CheckedInt32
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,ctypes.c_void_p)
 def glGetCompressedTextureImageEXT(texture,target,lod,img):pass
-# Calculate length of img from target:TextureTarget, lod:CheckedInt32
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLdoubleArray)
 def glGetDoubleIndexedvEXT(target,index,data):pass
-# Calculate length of data from target:TypeEnum
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLdoubleArray)
 def glGetDoublei_vEXT(pname,index,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
 def glGetFloatIndexedvEXT(target,index,data):pass
-# Calculate length of data from target:TypeEnum
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLfloatArray)
 def glGetFloati_vEXT(pname,index,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetFramebufferParameterivEXT(framebuffer,pname,params):pass
-# Calculate length of params from pname:GetFramebufferParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
 def glGetIntegerIndexedvEXT(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetMultiTexEnvfvEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:TextureEnvParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetMultiTexEnvivEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:TextureEnvParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLdoubleArray)
 def glGetMultiTexGendvEXT(texunit,coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetMultiTexGenfvEXT(texunit,coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetMultiTexGenivEXT(texunit,coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetMultiTexImageEXT(texunit,target,level,format,type,pixels):pass
-# Calculate length of pixels from target:TextureTarget, level:CheckedInt32, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLenum,arrays.GLfloatArray)
 def glGetMultiTexLevelParameterfvEXT(texunit,target,level,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLenum,arrays.GLintArray)
 def glGetMultiTexLevelParameterivEXT(texunit,target,level,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetMultiTexParameterIivEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
 def glGetMultiTexParameterIuivEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetMultiTexParameterfvEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetMultiTexParameterivEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetNamedBufferParameterivEXT(buffer,pname,params):pass
-# Calculate length of params from pname:VertexBufferObjectParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLvoidpArray)
 def glGetNamedBufferPointervEXT(buffer,pname,params):pass
@@ -238,11 +218,9 @@ def glGetNamedBufferSubDataEXT(buffer,offset,size,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetNamedFramebufferAttachmentParameterivEXT(framebuffer,attachment,pname,params):pass
-# Calculate length of params from pname:FramebufferAttachmentParameterName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetNamedFramebufferParameterivEXT(framebuffer,pname,params):pass
-# Calculate length of params from pname:GetFramebufferParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
 def glGetNamedProgramLocalParameterIivEXT(program,target,index,params):pass
@@ -258,14 +236,12 @@ def glGetNamedProgramLocalParameterfvEXT(program,target,index,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetNamedProgramStringEXT(program,target,pname,string):pass
-# Calculate length of string from pname:ProgramStringProperty
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetNamedProgramivEXT(program,target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetNamedRenderbufferParameterivEXT(renderbuffer,pname,params):pass
-# Calculate length of params from pname:RenderbufferParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLvoidpArray)
 def glGetPointerIndexedvEXT(target,index,data):pass
@@ -275,31 +251,24 @@ def glGetPointeri_vEXT(pname,index,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetTextureImageEXT(texture,target,level,format,type,pixels):pass
-# Calculate length of pixels from target:TextureTarget, level:CheckedInt32, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLenum,arrays.GLfloatArray)
 def glGetTextureLevelParameterfvEXT(texture,target,level,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLenum,arrays.GLintArray)
 def glGetTextureLevelParameterivEXT(texture,target,level,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTextureParameterIivEXT(texture,target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
 def glGetTextureParameterIuivEXT(texture,target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetTextureParameterfvEXT(texture,target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTextureParameterivEXT(texture,target,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetVertexArrayIntegeri_vEXT(vaobj,index,pname,param):pass
@@ -384,91 +353,75 @@ def glMultiTexBufferEXT(texunit,target,internalformat,buffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glMultiTexCoordPointerEXT(texunit,size,type,stride,pointer):pass
-# Calculate length of pointer from type:TexCoordPointerType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glMultiTexEnvfEXT(texunit,target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glMultiTexEnvfvEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:TextureEnvParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glMultiTexEnviEXT(texunit,target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glMultiTexEnvivEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:TextureEnvParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLdouble)
 def glMultiTexGendEXT(texunit,coord,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLdoubleArray)
 def glMultiTexGendvEXT(texunit,coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glMultiTexGenfEXT(texunit,coord,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glMultiTexGenfvEXT(texunit,coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glMultiTexGeniEXT(texunit,coord,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glMultiTexGenivEXT(texunit,coord,pname,params):pass
-# Calculate length of params from pname:TextureGenParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glMultiTexImage1DEXT(texunit,target,level,internalformat,width,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glMultiTexImage2DEXT(texunit,target,level,internalformat,width,height,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glMultiTexImage3DEXT(texunit,target,level,internalformat,width,height,depth,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glMultiTexParameterIivEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
 def glMultiTexParameterIuivEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glMultiTexParameterfEXT(texunit,target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glMultiTexParameterfvEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glMultiTexParameteriEXT(texunit,target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glMultiTexParameterivEXT(texunit,target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint)
 def glMultiTexRenderbufferEXT(texunit,target,renderbuffer):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glMultiTexSubImage1DEXT(texunit,target,level,xoffset,width,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glMultiTexSubImage2DEXT(texunit,target,level,xoffset,yoffset,width,height,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glMultiTexSubImage3DEXT(texunit,target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizeiptr,ctypes.c_void_p,_cs.GLenum)
 def glNamedBufferDataEXT(buffer,size,data,usage):pass
@@ -712,40 +665,33 @@ def glTextureBufferRangeEXT(texture,target,internalformat,buffer,offset,size):pa
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTextureImage1DEXT(texture,target,level,internalformat,width,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTextureImage2DEXT(texture,target,level,internalformat,width,height,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTextureImage3DEXT(texture,target,level,internalformat,width,height,depth,border,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
 def glTexturePageCommitmentEXT(texture,level,xoffset,yoffset,zoffset,width,height,depth,resident):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glTextureParameterIivEXT(texture,target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLuintArray)
 def glTextureParameterIuivEXT(texture,target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glTextureParameterfEXT(texture,target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glTextureParameterfvEXT(texture,target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glTextureParameteriEXT(texture,target,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glTextureParameterivEXT(texture,target,pname,params):pass
-# Calculate length of params from pname:TextureParameterName
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint)
 def glTextureRenderbufferEXT(texture,target,renderbuffer):pass
@@ -767,15 +713,12 @@ def glTextureStorage3DMultisampleEXT(texture,target,samples,internalformat,width
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTextureSubImage1DEXT(texture,target,level,xoffset,width,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTextureSubImage2DEXT(texture,target,level,xoffset,yoffset,width,height,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glTextureSubImage3DEXT(texture,target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels):pass
-# Calculate length of pixels from format:PixelFormat, type:PixelType
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
 def glUnmapNamedBufferEXT(buffer):pass

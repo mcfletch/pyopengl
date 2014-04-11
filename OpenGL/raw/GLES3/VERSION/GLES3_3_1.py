@@ -257,11 +257,9 @@ def glGetProgramResourceiv(program,programInterface,index,propCount,props,bufSiz
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,arrays.GLfloatArray)
 def glGetTexLevelParameterfv(target,level,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,arrays.GLintArray)
 def glGetTexLevelParameteriv(target,level,pname,params):pass
-# Calculate length of params from pname:GetTextureParameter
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
 def glIsProgramPipeline(pipeline):pass

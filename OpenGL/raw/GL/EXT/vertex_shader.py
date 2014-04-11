@@ -202,11 +202,9 @@ def glIsVariantEnabledEXT(id,cap):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p)
 def glSetInvariantEXT(id,type,addr):pass
-# Calculate length of addr from type:ScalarType
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p)
 def glSetLocalConstantEXT(id,type,addr):pass
-# Calculate length of addr from type:ScalarType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint)
 def glShaderOp1EXT(op,res,arg1):pass
@@ -222,7 +220,6 @@ def glSwizzleEXT(res,in_,outX,outY,outZ,outW):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,ctypes.c_void_p)
 def glVariantPointerEXT(id,type,stride,addr):pass
-# Calculate length of addr from type:ScalarType
 @_f
 @_p.types(None,_cs.GLuint,arrays.GLbyteArray)
 def glVariantbvEXT(id,addr):pass

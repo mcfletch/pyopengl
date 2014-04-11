@@ -69,4 +69,3 @@ def glSecondaryColor3usvEXT(v):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glSecondaryColorPointerEXT(size,type,stride,pointer):pass
-# Calculate length of pointer from type:ColorPointerType

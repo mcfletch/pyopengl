@@ -79,38 +79,30 @@ def glCombinerParameterfNV(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glCombinerParameterfvNV(pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint)
 def glCombinerParameteriNV(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLintArray)
 def glCombinerParameterivNV(pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum)
 def glFinalCombinerInputNV(variable,input,mapping,componentUsage):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetCombinerInputParameterfvNV(stage,portion,variable,pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetCombinerInputParameterivNV(stage,portion,variable,pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetCombinerOutputParameterfvNV(stage,portion,pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetCombinerOutputParameterivNV(stage,portion,pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetFinalCombinerInputParameterfvNV(variable,pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetFinalCombinerInputParameterivNV(variable,pname,params):pass
-# Calculate length of params from pname:CombinerParameterNV

@@ -16,4 +16,3 @@ GL_MAX_ELEMENTS_VERTICES_EXT=_C('GL_MAX_ELEMENTS_VERTICES_EXT',0x80E8)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p)
 def glDrawRangeElementsEXT(mode,start,end,count,type,indices):pass
-# Calculate length of indices from type:DrawElementsType

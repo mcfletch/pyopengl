@@ -22,7 +22,6 @@ GL_FRAGMENT_DEPTH_EXT=_C('GL_FRAGMENT_DEPTH_EXT',0x8452)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glFogCoordPointerEXT(type,stride,pointer):pass
-# Calculate length of pointer from type:FogPointerTypeEXT
 @_f
 @_p.types(None,_cs.GLdouble)
 def glFogCoorddEXT(coord):pass

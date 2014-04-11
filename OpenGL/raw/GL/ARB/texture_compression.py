@@ -43,4 +43,3 @@ def glCompressedTexSubImage3DARB(target,level,xoffset,yoffset,zoffset,width,heig
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,ctypes.c_void_p)
 def glGetCompressedTexImageARB(target,level,img):pass
-# Calculate length of img from target:TextureTarget, level:CheckedInt32

@@ -28,27 +28,21 @@ GL_TABLE_TOO_LARGE_EXT=_C('GL_TABLE_TOO_LARGE_EXT',0x8031)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetHistogramEXT(target,reset,format,type,values):pass
-# Calculate length of values from target:HistogramTargetEXT, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetHistogramParameterfvEXT(target,pname,params):pass
-# Calculate length of params from pname:GetHistogramParameterPNameEXT
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetHistogramParameterivEXT(target,pname,params):pass
-# Calculate length of params from pname:GetHistogramParameterPNameEXT
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLboolean,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetMinmaxEXT(target,reset,format,type,values):pass
-# Calculate length of values from target:MinmaxTargetEXT, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetMinmaxParameterfvEXT(target,pname,params):pass
-# Calculate length of params from pname:GetMinmaxParameterPNameEXT
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetMinmaxParameterivEXT(target,pname,params):pass
-# Calculate length of params from pname:GetMinmaxParameterPNameEXT
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLboolean)
 def glHistogramEXT(target,width,internalformat,sink):pass

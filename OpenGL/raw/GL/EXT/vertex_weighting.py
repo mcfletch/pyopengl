@@ -27,7 +27,6 @@ GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT=_C('GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT',0x850E)
 @_f
 @_p.types(None,_cs.GLint,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glVertexWeightPointerEXT(size,type,stride,pointer):pass
-# Calculate length of pointer from type:VertexWeightPointerTypeEXT
 @_f
 @_p.types(None,_cs.GLfloat)
 def glVertexWeightfEXT(weight):pass

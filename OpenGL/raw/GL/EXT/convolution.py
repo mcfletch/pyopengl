@@ -34,25 +34,21 @@ GL_SEPARABLE_2D_EXT=_C('GL_SEPARABLE_2D_EXT',0x8012)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glConvolutionFilter1DEXT(target,internalformat,width,format,type,image):pass
-# Calculate length of image from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glConvolutionFilter2DEXT(target,internalformat,width,height,format,type,image):pass
-# Calculate length of image from format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
 def glConvolutionParameterfEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glConvolutionParameterfvEXT(target,pname,params):pass
-# Calculate length of params from pname:ConvolutionParameterEXT
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
 def glConvolutionParameteriEXT(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glConvolutionParameterivEXT(target,pname,params):pass
-# Calculate length of params from pname:ConvolutionParameterEXT
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei)
 def glCopyConvolutionFilter1DEXT(target,internalformat,x,y,width):pass
@@ -62,23 +58,15 @@ def glCopyConvolutionFilter2DEXT(target,internalformat,x,y,width,height):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glGetConvolutionFilterEXT(target,format,type,image):pass
-# Calculate length of image from target:ConvolutionTargetEXT, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetConvolutionParameterfvEXT(target,pname,params):pass
-# Calculate length of params from pname:ConvolutionParameterEXT
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetConvolutionParameterivEXT(target,pname,params):pass
-# Calculate length of params from pname:ConvolutionParameterEXT
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p,ctypes.c_void_p,ctypes.c_void_p)
 def glGetSeparableFilterEXT(target,format,type,row,column,span):pass
-# Calculate length of column from target:SeparableTargetEXT, format:PixelFormat, type:PixelType
-# Calculate length of span from target:SeparableTargetEXT, format:PixelFormat, type:PixelType
-# Calculate length of row from target:SeparableTargetEXT, format:PixelFormat, type:PixelType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p,ctypes.c_void_p)
 def glSeparableFilter2DEXT(target,internalformat,width,height,format,type,row,column):pass
-# Calculate length of column from target:SeparableTargetEXT, format:PixelFormat, type:PixelType
-# Calculate length of row from target:SeparableTargetEXT, format:PixelFormat, type:PixelType

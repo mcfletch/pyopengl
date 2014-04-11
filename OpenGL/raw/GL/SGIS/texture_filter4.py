@@ -16,7 +16,6 @@ GL_TEXTURE_FILTER4_SIZE_SGIS=_C('GL_TEXTURE_FILTER4_SIZE_SGIS',0x8147)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetTexFilterFuncSGIS(target,filter,weights):pass
-# Calculate length of weights from target:TextureTarget, filter:TextureFilterSGIS
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLfloatArray)
 def glTexFilterFuncSGIS(target,filter,n,weights):pass

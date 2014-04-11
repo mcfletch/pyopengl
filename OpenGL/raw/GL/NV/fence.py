@@ -26,7 +26,6 @@ def glGenFencesNV(n,fences):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetFenceivNV(fence,pname,params):pass
-# Calculate length of params from pname:FenceParameterNameNV
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)
 def glIsFenceNV(fence):pass

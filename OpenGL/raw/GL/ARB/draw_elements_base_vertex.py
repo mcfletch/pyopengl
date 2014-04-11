@@ -15,15 +15,12 @@ def _f( function ):
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLint)
 def glDrawElementsBaseVertex(mode,count,type,indices,basevertex):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei,_cs.GLint)
 def glDrawElementsInstancedBaseVertex(mode,count,type,indices,instancecount,basevertex):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLint)
 def glDrawRangeElementsBaseVertex(mode,start,end,count,type,indices,basevertex):pass
-# Calculate length of indices from type:DrawElementsType
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLsizeiArray,_cs.GLenum,arrays.GLvoidpArray,_cs.GLsizei,arrays.GLintArray)
 def glMultiDrawElementsBaseVertex(mode,count,type,indices,drawcount,basevertex):pass
