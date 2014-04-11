@@ -46,6 +46,6 @@ def glInitTexture4DSGIS():
 
 from OpenGL.GL import images as _i
 _i.images.RANK_PACKINGS.setdefault(4,[]).extend([
-    (glPixelStorei,GL_PACK_SKIP_VOLUMES_SGIS, 0),
-    (glPixelStorei,GL_PACK_IMAGE_DEPTH_SGIS, 0),
+    (_i.GL_1_1.glPixelStorei,GL_PACK_SKIP_VOLUMES_SGIS, 0),
+    (_i.GL_1_1.glPixelStorei,GL_PACK_IMAGE_DEPTH_SGIS, 0),
 ])
