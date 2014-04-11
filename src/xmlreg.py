@@ -2,7 +2,15 @@
 """Registry for loading Khronos API definitions from XML files"""
 from lxml import etree as ET
 import os, sys, time, json
+from OpenGL._bytes import as_8_bit
 HERE = os.path.dirname( __file__ )
+
+LENGTH_OVERRIDES={
+    'glGetPolygonStipple': {
+        'mask': str(32*32/8), # 32x32 bits
+    },
+}
+
 
 class Registry( object ):
     def __init__( self ):
@@ -35,14 +43,14 @@ class Registry( object ):
         name = element.get('name')
         if not name:
             name = element.find('name').text 
-        self.type_set[name] = element 
+        self.type_set[as_8_bit(name)] = element 
     
     def debug_types( self ):
         for name,type in self.types.items():
             print name, type
     
     def enums( self, element, context=None ):
-        name = element.get('namespace')
+        name = as_8_bit(element.get('namespace'))
         if name not in self.enum_namespaces:
             namespace = EnumNamespace(name)
             self.enum_namespaces[name] = namespace
@@ -52,7 +60,7 @@ class Registry( object ):
     
     def enum( self, element, context=None ):
         if isinstance( context, EnumNamespace ):
-            name,value = element.get('name'),element.get('value')
+            name,value = as_8_bit(element.get('name')),element.get('value')
             enum = Enum( name, value )
             context.append( enum )
             self.enumeration_set[name] = enum
@@ -61,7 +69,7 @@ class Registry( object ):
         elif isinstance( context, EnumGroup ):
             name = element.get('name')
             assert name, 'No name on %s'%ET.tostring(element)
-            context.append( name )
+            context.append( as_8_bit(name) )
     
     def debug_enums( self ):
         for name,namespace in self.enum_namespaces.items():
@@ -73,7 +81,7 @@ class Registry( object ):
         """Parse command definition into structured format"""
         proto = element.find( 'proto' )
         if proto is not None:
-            name = proto.find('name').text
+            name = as_8_bit(proto.find('name').text)
             assert name, 'No name in command: %s'%(ET.tostring( element))
             return_type = self._type_decl( proto )
             assert return_type, 'No return type in command: %s'%(ET.tostring( element))
@@ -82,11 +90,13 @@ class Registry( object ):
             lengths = {}
             groups = {}
             for param in [x for x in element if x.tag == 'param']:
-                pname = param.find( 'name' ).text
+                pname = as_8_bit(param.find( 'name' ).text)
                 arg_names.append( pname )
                 arg_types.append( self._type_decl( param ))
                 if param.get( 'len' ):
-                    lengths[pname] = param.get('len')
+                    length = param.get('len')
+                    length = LENGTH_OVERRIDES.get(name,{}).get(pname,length)
+                    lengths[pname] = length 
                 if param.get( 'group' ):
                     groups[pname] = param.get('group')
             aliases = []
@@ -189,20 +199,30 @@ class Command( object ):
         )
     def size_dependencies( self ):
         result = []
-        for target,definition in self.lengths.items():
-            if target in self.outputs:
-                if definition.startswith( 'COMPSIZE' ):
-                    variables = definition[8:].strip('()').split(',')
-                    result.append( (target,Compsize( variables )))
-                elif definition.isdigit():
-                    result.append( (target,Staticsize( int(definition,10))))
-                elif '*' in definition:
-                    var,multiple = definition.split('*')
-                    result.append( (target,Multiple( var, int(multiple,10))))
-                else:
-                    result.append( (target,Dynamicsize( definition )))
+        for target in self.outputs.keys():
+            definition = self.lengths.get( target )
+            if definition is None:
+                if target not in self.argNames:
+                    # may be a discrepency between .spec and xml registry file...
+                    if target == 'params' and 'data' in self.argNames:
+                        target = 'data'
+                        definition = self.lengths.get( 'data' )
+            
+            if definition is None:
+                result.append( (target, Output() ))
+            elif definition.startswith( 'COMPSIZE' ):
+                variables = definition[8:].strip('()').split(',')
+                result.append( (target,Compsize( variables )))
+            elif definition.isdigit():
+                result.append( (target,Staticsize( int(definition,10))))
+            elif '*' in definition:
+                var,multiple = definition.split('*')
+                result.append( (target,Multiple( var, int(multiple,10))))
+            else:
+                result.append( (target,Dynamicsize( definition )))
         return dict(result)
-
+class Output( object ):
+    """Unsized output parameter"""
 class Compsize( list ):
     """Compute size based on other variables"""
 class Staticsize( int ):
