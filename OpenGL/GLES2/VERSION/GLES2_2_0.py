@@ -79,12 +79,8 @@ glGetTexParameterfv=wrapper.wrapper(glGetTexParameterfv).setOutput(#
 glGetTexParameteriv=wrapper.wrapper(glGetTexParameteriv).setOutput(#
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-glGetUniformfv=wrapper.wrapper(glGetUniformfv).setOutput(#
-    'params',size=_glgets._glget_size_mapping,pnameArg='location',orPassIn=True
-)
-glGetUniformiv=wrapper.wrapper(glGetUniformiv).setOutput(#
-    'params',size=_glgets._glget_size_mapping,pnameArg='location',orPassIn=True
-)
+# OUTPUT glGetUniformfv=wrapper.wrapper(glGetUniformfv)
+# OUTPUT glGetUniformiv=wrapper.wrapper(glGetUniformiv)
 glGetVertexAttribfv=wrapper.wrapper(glGetVertexAttribfv).setOutput(#
     'params',size=(4,),orPassIn=True
 )

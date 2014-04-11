@@ -9,6 +9,12 @@ LENGTH_OVERRIDES={
     'glGetPolygonStipple': {
         'mask': str(32*32/8), # 32x32 bits
     },
+    'glGetUniformfv': {
+        'params': None,
+    },
+    'glGetUniformiv': {
+        'params': None,
+    },
 }
 
 
