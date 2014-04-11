@@ -107,9 +107,6 @@ _glget_size_mapping = _m = {}
         doc = '%(name)s(%(arguments)s) -> %(pyReturn)s'%locals()
 #        log.info( '%s', doc )
         formatted=  self.FUNCTION_TEMPLATE%locals()
-        for target, sources in function.size_dependencies():
-            sources = ', '.join( ['%s:%s'%(param,group) for param,group in sources] )
-            formatted += '\n# Calculate length of %(target)s from %(sources)s'%locals()
         return formatted
     FUNCTION_TEMPLATE = """@_f
 @_p.types(%(returnType)s,%(argTypes)s)
@@ -198,10 +195,11 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 %(glget_import)s
 import ctypes
-from OpenGL.raw.%(prefix)s import _types
+from OpenGL.raw.%(prefix)s import _types, _glgets
 from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import *
 from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
 %(init_function)s
+%(output_wrapping)s
 """
     dll = '_p.PLATFORM.GL'
     def __init__( self, registry, overall, api=None ):
@@ -293,6 +291,34 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
 #        elif self.prefix.startswith( 'GLES' ):
 #            return 'from OpenGL.%s import glget'%( self.prefix, )
         return ''
+    @property
+    def output_wrapping( self ):
+        """Generate output wrapping statements for our various functions"""
+        try:
+            statements = []
+            for function in self.registry.commands():
+                dependencies = function.size_dependencies()
+                if dependencies and len(dependencies) == 1: # temporarily just do single-output functions...
+                    base = ['%s=wrapper.wrapper(%s)'%(function.name,function.name)]
+                    for param,dependency in dependencies.items():
+                        if isinstance( dependency, xmlreg.Staticsize ):
+                            base.append( '.setOutput(#\n    %(param)r,size=(%(dependency)r,),orPassIn=True\n)'%locals())
+                        elif isinstance( dependency, xmlreg.Dynamicsize ):
+                            base.append( '.setOutput(#\n    %(param)r,size=lambda x:(x,),pnameArg=%(dependency)r,orPassIn=True\n)'%locals())
+                        elif isinstance( dependency, xmlreg.Multiple ):
+                            pname,multiple = dependency
+                            base.append( '.setOutput(#\n    %(param)r,size=lambda x:(x,%(multiple)s),pnameArg=%(pname)r,orPassIn=True\n)'%locals())
+                        elif isinstance( dependency, xmlreg.Compsize ):
+                            if len(dependency) == 1:
+                                pname = dependency[0]
+                                base.append( '.setOutput(#\n    %(param)r,size=_glgets._glget_size_mapping,pnameArg=%(pname)r,orPassIn=True\n)'%locals())
+                            else:
+                                base.insert(0,'#')
+                    statements.append( ''.join(base ))
+            return '\n'.join( statements )
+        except Exception as err:
+            import ipdb 
+            ipdb.set_trace()
     
     def get_constants( self ):
         functions = self.registry.enums()

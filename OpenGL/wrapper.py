@@ -131,7 +131,7 @@ class Wrapper( LateBind ):
             a function taking pname to produce such a value.
         arrayType -- array data-type used to generate the output
             array using the zeros class method...
-        pname -- optional argument passed into size function, that
+        pnameArg -- optional argument passed into size function, that
             is, the name of the argument whose *value* will be passed
             to the size function, often the name of an input argument
             to be "sized" to match the output argument.
@@ -140,6 +140,12 @@ class Wrapper( LateBind ):
             # figure out from self.wrappedOperation's argtypes
             index = self.cArgIndex( outArg )
             arrayType = self.wrappedOperation.argtypes[ index ]
+            if not hasattr( arrayType, 'asArray' ):
+                if arrayType == ctypes.c_void_p:
+                    from OpenGL.arrays import GLubyteArray
+                    arrayType = GLubyteArray
+                else:   
+                    raise TypeError( "Should only have array types for output parameters" )
         if pnameArg is None:
             assert not hasattr(size,'__call__' )
             if orPassIn:

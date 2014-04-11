@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 """Registry for loading Khronos API definitions from XML files"""
 from lxml import etree as ET
-import os, sys, time
+import os, sys, time, json
+HERE = os.path.dirname( __file__ )
 
 class Registry( object ):
     def __init__( self ):
@@ -13,6 +14,7 @@ class Registry( object ):
         self.apis = {}
         self.feature_set = {}
         self.extension_set = {}
+        self.output_mapping = json.loads( open( os.path.join( HERE, 'gl_out_parameters.json' )).read())
         
     def load( self, tree ):
         """Load an lxml.etree structure into our internal descriptions"""
@@ -90,7 +92,9 @@ class Registry( object ):
             aliases = []
             for alias in [x for x in element if x.tag == 'alias']:
                 aliases.append( alias.get('name') )
-            command = Command( name, return_type, arg_names, arg_types, aliases, lengths,groups )
+            # Process lengths to look for output parameters
+            outputs = self.output_mapping.get( name )
+            command = Command( name, return_type, arg_names, arg_types, aliases, lengths,groups, outputs=outputs )
             self.command_set[name] = command
         elif isinstance( context, (Require,Remove)):
             context.append( self.command_set[element.get('name')])
@@ -165,7 +169,7 @@ class Enum( object ):
         return '%s = %s'%( self.name, self.value )
 
 class Command( object ):
-    def __init__( self, name, returnType, argNames, argTypes, aliases=None, lengths=None, groups=None ):
+    def __init__( self, name, returnType, argNames, argTypes, aliases=None, lengths=None, groups=None, outputs=None ):
         self.name =name 
         self.returnType = returnType 
         self.argNames = argNames 
@@ -173,6 +177,7 @@ class Command( object ):
         self.aliases = aliases or []
         self.lengths = lengths or {}
         self.groups = groups or {}
+        self.outputs = outputs or {}
     def __repr__( self ):
         return '%s %s( %s )'%( 
             self.returnType, 
@@ -185,17 +190,27 @@ class Command( object ):
     def size_dependencies( self ):
         result = []
         for target,definition in self.lengths.items():
-            sources = []
-            if definition.startswith( 'COMPSIZE' ):
-                definition = definition[8:]
-            from_params = definition.strip('()').split(',')
-            for source in from_params:
-                group = self.groups.get(source)
-                if group is not None:
-                    sources.append( (source,group) )
-            if sources:
-                result.append( (target,sources))
-        return result
+            if target in self.outputs:
+                if definition.startswith( 'COMPSIZE' ):
+                    variables = definition[8:].strip('()').split(',')
+                    result.append( (target,Compsize( variables )))
+                elif definition.isdigit():
+                    result.append( (target,Staticsize( int(definition,10))))
+                elif '*' in definition:
+                    var,multiple = definition.split('*')
+                    result.append( (target,Multiple( var, int(multiple,10))))
+                else:
+                    result.append( (target,Dynamicsize( definition )))
+        return dict(result)
+
+class Compsize( list ):
+    """Compute size based on other variables"""
+class Staticsize( int ):
+    """Static output array size"""
+class Dynamicsize( str ):
+    """Sized by the value in dynamic variable"""
+class Multiple( list ):
+    """Variable * static size for array"""
 
 # The order-dependent set of require/remove holding features/extensions
 class Module( list ):
