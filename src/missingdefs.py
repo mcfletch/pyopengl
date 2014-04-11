@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """Quick script to check for all entry points being defined"""
-import re,pprint,logging
+import re,pprint,logging, json
 lmatch= re.compile( r'^\w+[ \t]*\([^)]+\)' )
 comment = re.compile( r'([ \t]*\#.*)|passthru\:' )
 param = re.compile( r'[ \t]+(?P<type>[^ \t]+)[ \t]+(?P<name>[^ \t]+)([ \t]+(?P<details>.*))?' )
@@ -25,9 +25,10 @@ def main():
         line = line.rstrip( '\n' ).rstrip( '\r' )
         if lmatch.match( line ):
             current = {
-                '': line.strip()
+                '': line.strip(),
+                'name': line.strip().split('(')[0],
             }
-            functions[line.strip()] = current
+            functions[current['name']] = current
         elif not current:
             pass
         elif comment.match( line ):
@@ -38,6 +39,7 @@ def main():
                 current.setdefault(match.group('type'),[]).append(
                     (match.group('name'),match.group('details'))
                 )
+    OUT_MAPPING = {}
     categories = {}
     for key,func in functions.items():
         assert 'category' in func, func
@@ -45,6 +47,10 @@ def main():
             func['category'][0][0],
             [] 
         ).append( func )
+        out_params = dict([x for x in func.get('param',[]) if 'out' in x[1].split()])
+        if out_params:
+            OUT_MAPPING['gl'+key] = out_params
+    open( 'gl_out_parameters.json','w').write( json.dumps(OUT_MAPPING, indent=2) )
     for category,funcs in sorted(categories.items()):
         try:
             module = module_for_category( category )
@@ -53,7 +59,7 @@ def main():
         else:
             log.info( 'Checking category: %s', category )
             for func in funcs:
-                funcname = func[''].split('(')[0]
+                funcname = func['name']
                 funcname = 'gl'+funcname
                 if not hasattr( module, funcname ):
                     log.error(
