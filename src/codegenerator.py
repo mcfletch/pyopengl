@@ -298,16 +298,16 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                         if isinstance( dependency, xmlreg.Output ):
                             base.insert(0,'# OUTPUT ' )
                         if isinstance( dependency, xmlreg.Staticsize ):
-                            base.append( '.setOutput(#\n    %(param)r,size=(%(dependency)r,),orPassIn=True\n)'%locals())
+                            base.append( '.setOutput(%(param)r,size=(%(dependency)r,),orPassIn=True)'%locals())
                         elif isinstance( dependency, xmlreg.Dynamicsize ):
-                            base.append( '.setOutput(#\n    %(param)r,size=lambda x:(x,),pnameArg=%(dependency)r,orPassIn=True\n)'%locals())
+                            base.append( '.setOutput(%(param)r,size=lambda x:(x,),pnameArg=%(dependency)r,orPassIn=True)'%locals())
                         elif isinstance( dependency, xmlreg.Multiple ):
                             pname,multiple = dependency
-                            base.append( '.setOutput(#\n    %(param)r,size=lambda x:(x,%(multiple)s),pnameArg=%(pname)r,orPassIn=True\n)'%locals())
+                            base.append( '.setOutput(%(param)r,size=lambda x:(x,%(multiple)s),pnameArg=%(pname)r,orPassIn=True)'%locals())
                         elif isinstance( dependency, xmlreg.Compsize ):
                             if len(dependency) == 1:
                                 pname = dependency[0]
-                                base.append( '.setOutput(#\n    %(param)r,size=_glgets._glget_size_mapping,pnameArg=%(pname)r,orPassIn=True\n)'%locals())
+                                base.append( '.setOutput(#\n    %(param)r,size=_glgets._glget_size_mapping,pnameArg=%(pname)r,orPassIn=True)'%locals())
                             else:
                                 base.insert(0,'# COMPSIZE(%s) '%(','.join(dependency)))
                     statements.append( ''.join(base ))
@@ -316,6 +316,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                         statements.append( '# OUTPUT MULTIPLE %s'%(function.name, ))
             return '\n'.join( statements )
         except Exception as err:
+            traceback.print_exc()
             import pdb 
             pdb.set_trace()
     

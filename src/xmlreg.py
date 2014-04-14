@@ -205,6 +205,7 @@ class Command( object ):
         )
     def size_dependencies( self ):
         result = []
+        other_lengths = self.lengths.copy()
         for target in self.outputs.keys():
             definition = self.lengths.get( target )
             if definition is None:
@@ -213,7 +214,9 @@ class Command( object ):
                     if target == 'params' and 'data' in self.argNames:
                         target = 'data'
                         definition = self.lengths.get( 'data' )
-            
+            if target in other_lengths:
+                del other_lengths[target]
+        
             if definition is None:
                 result.append( (target, Output() ))
             elif definition.startswith( 'COMPSIZE' ):
@@ -226,7 +229,36 @@ class Command( object ):
                 result.append( (target,Multiple( var, int(multiple,10))))
             else:
                 result.append( (target,Dynamicsize( definition )))
+        for (target,length) in other_lengths.items():
+            if length.isdigit():
+                result.append( (target,StaticInput( int(length,10))))
+            elif length.startswith( 'COMPSIZE' ):
+                result.append( (target,Input(length[9:-1])))
+            elif length in self.argNames:
+                result.append( (target,DynamicInput(length)))
+            elif '*' in length:
+                params = length.split('*')
+                in_set = [x for x in params if x in self.argNames]
+                if params == in_set:
+                    result.append( (target,MultipleInput(params)))
+                else:
+                    result.append( (target, Input()))
+            else:
+                raise RuntimeError( (target,length))
         return dict(result)
+class IsInput(object):
+    pass
+class Input( IsInput, object ):
+    """Unsize Input Parameter"""
+    def __init__( self, value=None ):
+        self.value = value
+class StaticInput( IsInput,int ):
+    """Statically sized input parameter"""
+class DynamicInput( IsInput,str ):
+    """Dynamically sized based on other parameter"""
+class MultipleInput( IsInput,list ):
+    """Size depends on multiple elements being multiplied"""
+        
 class Output( object ):
     """Unsized output parameter"""
 class Compsize( list ):
