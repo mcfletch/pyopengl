@@ -1088,6 +1088,9 @@ class Tests( unittest.TestCase ):
         except GLError as err:
             # expected error, as we don't have a shader there...
             pass
+    
+    def test_get_read_fb_binding( self ):
+        glGetInteger(GL_READ_FRAMEBUFFER_BINDING)
         
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
