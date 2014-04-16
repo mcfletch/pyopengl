@@ -172,21 +172,31 @@ import occurs the flags should no longer be changed.
         Default: False
 """
 from OpenGL.version import __version__
+import os
+def environ_key( name, default ):
+    composed = 'PYOPENGL_%s'%name.upper()
+    if composed in os.environ:
+        value = os.environ[composed]
+        if value.lower() in ('1','true'):
+            return True 
+        else:
+            return False
+    return os.environ.get( composed, default )
 
-ERROR_CHECKING = True
-ERROR_LOGGING = False
-ERROR_ON_COPY = False
-ARRAY_SIZE_CHECKING = True
-STORE_POINTERS = True
+ERROR_CHECKING = environ_key( 'ERROR_CHECKING', True)
+ERROR_LOGGING = environ_key( 'ERROR_LOGGING', False )
+ERROR_ON_COPY = environ_key( 'ERROR_ON_COPY', False )
+ARRAY_SIZE_CHECKING = environ_key( 'ARRAY_SIZE_CHECKING', True )
+STORE_POINTERS = environ_key( 'STORE_POINTERS', True )
 WARN_ON_FORMAT_UNAVAILABLE = False
 FORWARD_COMPATIBLE_ONLY = False
 SIZE_1_ARRAY_UNPACK = True
-USE_ACCELERATE = True
-CONTEXT_CHECKING = False
+USE_ACCELERATE = environ_key( 'USE_ACCELERATE', True )
+CONTEXT_CHECKING = environ_key( 'CONTEXT_CHECKING', False )
 
-FULL_LOGGING = False
-ALLOW_NUMPY_SCALARS = False
-UNSIGNED_BYTE_IMAGES_AS_STRING = True
+FULL_LOGGING = environ_key( 'FULL_LOGGING', False )
+ALLOW_NUMPY_SCALARS = environ_key( 'ALLOW_NUMPY_SCALARS', False )
+UNSIGNED_BYTE_IMAGES_AS_STRING = environ_key( 'UNSIGNED_BYTE_IMAGES_AS_STRING', True )
 MODULE_ANNOTATIONS = False
 
 # Declarations of plugins provided by PyOpenGL itself
