@@ -182,7 +182,7 @@ class Tests( unittest.TestCase ):
             """Test nurbs rendering"""
             from OpenGL.raw import GLU 
             def buildControlPoints( ):
-                ctlpoints = zeros( (4,4,3), 'd')
+                ctlpoints = zeros( (4,4,3), 'f')
                 for u in range( 4 ):
                     for v in range( 4):
                         ctlpoints[u][v][0] = 2.0*(u - 1.5)
@@ -197,7 +197,7 @@ class Tests( unittest.TestCase ):
             #theNurb = gluNewNurbsRenderer();
             gluNurbsProperty(theNurb, GLU_SAMPLING_TOLERANCE, 25.0);
             gluNurbsProperty(theNurb, GLU_DISPLAY_MODE, GLU_FILL);
-            knots= array ([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0], "d")
+            knots= array ([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0], "f")
             glPushMatrix();
             try:
                 glRotatef(330.0, 1.,0.,0.);
@@ -222,7 +222,7 @@ class Tests( unittest.TestCase ):
         except Exception as err:
             assert err.err == 1281, ("""Expected invalid value (1281)""", err.err)
         else:
-            raise RuntimeError( """No error on invalid glClear""" )
+            assert not OpenGL.ERROR_CHECKING, """No error on invalid glClear"""
         try:
             glColorPointer(GL_INVALID_VALUE,GL_BYTE,0,None)
         except Exception as err:
@@ -231,13 +231,13 @@ class Tests( unittest.TestCase ):
             assert err.pyArgs == (GL_INVALID_VALUE, GL_BYTE, 0, None), err.pyArgs
             assert err.cArgs == (GL_INVALID_VALUE, GL_BYTE, 0, None), err.cArgs
         else:
-            raise RuntimeError( """No error on invalid glColorPointer""" )
+            assert not OpenGL.ERROR_CHECKING, """No error on invalid glColorPointer"""
         try:
             glBitmap(-1,-1,0,0,0,0,"")
         except Exception as err:
             assert err.err in (1281,1282), ("""Expected invalid value (1281) or invalid operation (1282)""", err.err)
         else:
-            raise RuntimeError( """No error on invalid glBitmap""" )
+            assert not OpenGL.ERROR_CHECKING, """No error on invalid glBitmap"""
     def test_quadrics( self ):
         """Test for rendering quadric objects"""
         quad = gluNewQuadric()
@@ -256,14 +256,12 @@ class Tests( unittest.TestCase ):
                 glVertex3fv( [-1,0,0] )
                 glVertex3dv( [1,0,0] )
                 try:
-                    glVertex3dv( [1,0] )
+                    glVertex3dv( [1,0,4,5] )
                 except ValueError as err:
                     #Got expected value error (good)
-                    pass
+                    assert OpenGL.ARRAY_SIZE_CHECKING, """Should have raised ValueError when doing array size checking"""
                 else:
-                    raise RuntimeError(
-                        """Should have raised a value error on passing 2-element array to 3-element function!""",
-                    )
+                    assert not OpenGL.ARRAY_SIZE_CHECKING, """Should not have raised ValueError when not doing array size checking"""
             finally:
                 glEnd()
             a = glGenTextures( 1 )
@@ -409,12 +407,9 @@ class Tests( unittest.TestCase ):
                     try:
                         glVertex3dv( [1,0] )
                     except ValueError as err:
-                        #Got expected value error (good)
-                        pass
+                        assert OpenGL.ARRAY_SIZE_CHECKING, """Should have raised ValueError when doing array size checking"""
                     else:
-                        raise RuntimeError(
-                            """Should have raised a value error on passing 2-element array to 3-element function!""",
-                        )
+                        assert not OpenGL.ARRAY_SIZE_CHECKING, """Should not have raised ValueError when not doing array size checking"""
                 finally:
                     glEnd()
     if array:
@@ -532,6 +527,8 @@ class Tests( unittest.TestCase ):
 
             # the following glMultMatrixf call ignored this transpose
             t = t.T
+            if OpenGL.ERROR_ON_COPY:
+                t = ascontiguousarray( t )
             
             glMultMatrixd( t )
 
@@ -595,7 +592,7 @@ class Tests( unittest.TestCase ):
             ], dtype='d')
             indices = numpy.array(
                 range(len(array)),
-                'i',
+                ['i','I'][bool(OpenGL.ERROR_ON_COPY)], # test coercion if we can
             )
             d = vbo.VBO(array)
             glDisable( GL_CULL_FACE )
@@ -711,6 +708,8 @@ class Tests( unittest.TestCase ):
                 index_pointers[0] = arrays.GLbyteArray.dataPointer( indices )
                 index_pointers[1] = arrays.GLbyteArray.dataPointer( indices[1] )
                 counts = [ len(x) for x in indices ]
+                if OpenGL.ERROR_ON_COPY:
+                    counts = (GLuint*len(counts))(*counts)
                 glEnableClientState( GL_VERTEX_ARRAY )
                 glDisableClientState( GL_COLOR_ARRAY )
                 glDisableClientState( GL_NORMAL_ARRAY )
@@ -794,27 +793,28 @@ class Tests( unittest.TestCase ):
             """Test that gluNurbsCurve raises error on invalid arguments"""
             nurb = gluNewNurbsRenderer()
             gluBeginCurve( nurb )
-            self.assertRaises( error.GLUerror,
-                gluNurbsCurve,
-                    nurb, 
-                    [0, 1.0],
-                    [[0,0,0],[1,0,0],[1,1,0]],
-                    GL_MAP1_VERTEX_3,
-            )
-            self.assertRaises( error.GLUerror,
-                gluNurbsCurve,
-                    nurb, 
-                    [],
-                    [[0,0,0],[1,0,0],[1,1,0]],
-                    GL_MAP1_VERTEX_3,
-            )
-            self.assertRaises( error.GLUerror,
-                gluNurbsCurve,
-                    nurb, 
-                    [],
-                    [],
-                    GL_MAP1_VERTEX_3,
-            )
+            if OpenGL.ERROR_CHECKING:
+                self.assertRaises( error.GLUerror,
+                    gluNurbsCurve,
+                        nurb, 
+                        [0, 1.0],
+                        [[0,0,0],[1,0,0],[1,1,0]],
+                        GL_MAP1_VERTEX_3,
+                )
+                self.assertRaises( error.GLUerror,
+                    gluNurbsCurve,
+                        nurb, 
+                        [],
+                        [[0,0,0],[1,0,0],[1,1,0]],
+                        GL_MAP1_VERTEX_3,
+                )
+                self.assertRaises( error.GLUerror,
+                    gluNurbsCurve,
+                        nurb, 
+                        [],
+                        [],
+                        GL_MAP1_VERTEX_3,
+                )
     def test_get_version( self ):
         from OpenGL.extensions import hasGLExtension
         if hasGLExtension( 'GL_VERSION_GL_2_0' ):
@@ -869,7 +869,10 @@ class Tests( unittest.TestCase ):
                 gluTessBeginContour(tess)
                 try:
                     for point in contour:
-                        point = array( point, 'f' )
+                        if OpenGL.ERROR_ON_COPY:
+                            point = array( point, 'd' )
+                        else:
+                            point = array( point, 'f' )
                         gluTessVertex( tess, point, (False,point))
                 finally:
                     gluTessEndContour(tess)
@@ -966,7 +969,12 @@ class Tests( unittest.TestCase ):
 
         glNewList(first, GL_COMPILE_AND_EXECUTE)
         glInitNames ()
-        glCallLists([second]) # replace with gCallList(2)
+        if not OpenGL.ERROR_ON_COPY:
+            glCallLists([second]) # replace with gCallList(2)
+        else:
+            lists = (GLuint * 1)()
+            lists[0] = second
+            glCallLists(lists)
         #glCallList(second)
         glEndList ()
 
@@ -1083,6 +1091,8 @@ class Tests( unittest.TestCase ):
     def test_params_python3_strings( self ):
         try:
             glGetUniformBlockIndex( 0, unicode("Moo") )
+        except ArgumentError as err:
+            assert OpenGL.ERROR_ON_COPY, """Shouldn't have raised error on copy for unicode"""
         except TypeError as err:
             raise
         except GLError as err:
