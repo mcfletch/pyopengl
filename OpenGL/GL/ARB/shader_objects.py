@@ -55,8 +55,11 @@ def glInitShaderObjectsARB():
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
 # INPUT glShaderSourceARB.length size not checked against count
+# INPUT glShaderSourceARB.string size not checked against count
 glShaderSourceARB=wrapper.wrapper(glShaderSourceARB).setInputArraySize(
     'length', None
+).setInputArraySize(
+    'string', None
 )
 # INPUT glUniform1fvARB.value size not checked against count
 glUniform1fvARB=wrapper.wrapper(glUniform1fvARB).setInputArraySize(

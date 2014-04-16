@@ -84,8 +84,11 @@ glGetVertexAttribPointerv=wrapper.wrapper(glGetVertexAttribPointerv).setOutput(
     'pointer',size=(1,),orPassIn=True
 )
 # INPUT glShaderSource.length size not checked against count
+# INPUT glShaderSource.string size not checked against count
 glShaderSource=wrapper.wrapper(glShaderSource).setInputArraySize(
     'length', None
+).setInputArraySize(
+    'string', None
 )
 # INPUT glUniform1fv.value size not checked against count
 glUniform1fv=wrapper.wrapper(glUniform1fv).setInputArraySize(
@@ -273,16 +276,6 @@ def glGetShaderiv( baseOperation, shader, pname, status=None ):
             shader, pname, status
         )
         return status
-@_lazy( glGetProgramiv )
-def glGetProgramiv( baseOperation, program, pname, params=None ):
-    """Will automatically allocate params if not provided"""
-    if params is None:
-        params = arrays.GLintArray.zeros( (1,))
-        baseOperation( program, pname, params )
-        return params[0]
-    else:
-        baseOperation( program,pname, params )
-        return params
 
 def _afterCheck( key ):
     """Generate an error-checking function for compilation operations"""

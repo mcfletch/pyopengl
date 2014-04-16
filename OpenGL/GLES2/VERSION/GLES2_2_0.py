@@ -162,8 +162,11 @@ glShaderBinary=wrapper.wrapper(glShaderBinary).setInputArraySize(
     'shaders', None
 )
 # INPUT glShaderSource.length size not checked against count
+# INPUT glShaderSource.string size not checked against count
 glShaderSource=wrapper.wrapper(glShaderSource).setInputArraySize(
     'length', None
+).setInputArraySize(
+    'string', None
 )
 # INPUT glTexImage2D.pixels size not checked against 'format,type,width,height'
 glTexImage2D=wrapper.wrapper(glTexImage2D).setInputArraySize(

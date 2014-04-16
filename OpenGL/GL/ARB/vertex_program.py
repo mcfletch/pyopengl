@@ -199,44 +199,6 @@ from OpenGL import converters, error, contextdata
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 # Note: sizes here are == the only documented sizes I could find,
 # may need a lookup table some day...
-glGetProgramivARB = wrapper.wrapper(glGetProgramivARB).setOutput(
-    'params', (1,), orPassIn=True
-)
-glGetProgramEnvParameterdvARB = wrapper.wrapper(glGetProgramEnvParameterdvARB).setOutput(
-    'params',(4,), orPassIn=True
-)
-glGetProgramEnvParameterfvARB = wrapper.wrapper(glGetProgramEnvParameterfvARB).setOutput(
-    'params',(4,), orPassIn=True
-)
-glGetProgramLocalParameterdvARB = wrapper.wrapper(glGetProgramLocalParameterdvARB).setOutput(
-    'params',(4,), orPassIn=True
-)
-glGetProgramLocalParameterfvARB = wrapper.wrapper(glGetProgramLocalParameterfvARB).setOutput(
-    'params',(4,), orPassIn=True
-)
-glGetVertexAttribdvARB = wrapper.wrapper(glGetVertexAttribdvARB).setOutput(
-    'params',(1,), orPassIn=True
-)
-
-##glGetVertexAttribPointervARB = wrapper.wrapper(glGetVertexAttribPointervARB).setOutput(
-##	'pointer',(1,),
-##)
-##
-##_base_glGetVertexAttribPointervARB
-##def glGetVertexAttribPointervARB( index, pname=GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB ):
-##	"""Retrieve named attribute vector
-##	
-##	XXX Needs logic checking, I don't think I got the number of
-##	levels of indirection correct... i.e. I believe it's just going
-##	to rewrite the temporary void_p's value, rather than writing
-##	into the numpy array.
-##	
-##	returns 4-element double array...
-##	"""
-##	output = arrays.GLdoubleArray.zeros( (4,) )
-##	pointer = arrays.GLdoubleArray.voidDataPointer( output )
-##	_base_glGetVertexAttribPointervARB( index, pname, pointer )
-##	return output
 
 @_lazy( glVertexAttribPointerARB )
 def glVertexAttribPointerARB( 
