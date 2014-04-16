@@ -1,6 +1,6 @@
 """Exceptional cases that need some extra wrapping"""
 from OpenGL import arrays
-from OpenGL.arrays.arraydatatype import GLfloatArray
+from OpenGL.arrays.arraydatatype import GLfloatArray, GLdoubleArray
 from OpenGL.lazywrapper import lazy as _lazy
 from OpenGL.GL.VERSION import GL_1_1 as full
 from OpenGL.raw.GL import _types, _errors
@@ -113,7 +113,8 @@ def glRasterPos( *args ):
     if len(args) == 1:
         # v form...
         args = args[0]
-    return glRasterPosDispatch[ len(args) ]( *args )
+    function = glRasterPosDispatch[ len(args) ]
+    return function( *args )
 
 glVertexDispatch = {
     2: full.glVertex2d,
