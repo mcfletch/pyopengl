@@ -200,7 +200,10 @@ if CallFuncPyConverter is None:
         def oldStyleReturn( self, result, baseOperation, pyArgs, cArgs ):
             """Retrieve cArgs[ self.index ]"""
             result = cArgs[ self.outIndex ]
-            thisSize = self.getSize(pyArgs)
+            try:
+                thisSize = self.getSize(pyArgs)
+            except KeyError as err:
+                return result 
             if thisSize == (1,):
                 try:
                     return result[0]
