@@ -246,10 +246,10 @@ if CallFuncPyConverter is None:
     class SizedOutputOrInput( SizedOutput ):
         DO_OUTPUT = (None,NULL)
         def __call__( self, pyArgs, index, baseOperation ):
-            if pyArgs[index] in self.DO_OUTPUT:
-                return super( SizedOutputOrInput,self ).__call__( pyArgs, index, baseOperation )
-            else:
-                return self.arrayType.asArray( pyArgs[index] )
+            for do_output in self.DO_OUTPUT:
+                if pyArgs[index] is do_output:
+                    return super( SizedOutputOrInput,self ).__call__( pyArgs, index, baseOperation )
+            return self.arrayType.asArray( pyArgs[index] )
     class returnCArgument( ReturnValues ):
         """ReturnValues returning the named cArgs value"""
         argNames = ('name',)
