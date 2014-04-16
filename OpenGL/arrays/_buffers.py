@@ -17,19 +17,21 @@ PyBUF_FORMAT = 0x0004
 _fields_ = [
     ('buf',ctypes.c_void_p),
     ('obj',ctypes.c_void_p),
-    ('len',ctypes.c_size_t),
-    ('itemsize',ctypes.c_size_t),
+    ('len',ctypes.c_ssize_t),
+    ('itemsize',ctypes.c_ssize_t),
 
     ('readonly',ctypes.c_int),
     ('ndim',ctypes.c_int),
     ('format',ctypes.c_char_p),
-    ('shape',ctypes.POINTER(ctypes.c_size_t)),
-    ('strides',ctypes.POINTER(ctypes.c_size_t)),
-    ('suboffsets',ctypes.POINTER(ctypes.c_size_t)),
+    ('shape',ctypes.POINTER(ctypes.c_ssize_t)),
+    ('strides',ctypes.POINTER(ctypes.c_ssize_t)),
+    ('suboffsets',ctypes.POINTER(ctypes.c_ssize_t)),
 ]
-if sys.version_info[:2] < (2,7):
+
+
+if sys.version_info[:2] < (2,7) or sys.version_info[:2] >= (3,3):
     # 2.7.5 documentation is incorrect about the structure, it is actually 
-    # the Python 3.x version of the struct, so only 2.6 needs the different 
+    # the Python 3.[1/2] version of the struct, so only 2.6 needs the different 
     # form
     _fields_.extend( [
         ('internal',ctypes.c_void_p),
@@ -67,12 +69,14 @@ class Py_buffer(ctypes.Structure):
         if self.strides:
             return self.strides[:self.ndim]
         return None
-    
     def __enter__(self):
         pass 
-    def __exit__( self, exc_type=None, exc_value=None, traceback=None):
+    def __exit__( self, exc_type=None, exc_value=None, traceback=None):    
+        pass
+    def __del__( self ):
+        print( 'deleting' )
         ReleaseBuffer( self )
-
+    
 BUFFER_POINTER = ctypes.POINTER( Py_buffer )
 
 
