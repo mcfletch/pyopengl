@@ -72,10 +72,11 @@ class Py_buffer(ctypes.Structure):
     def __enter__(self):
         pass 
     def __exit__( self, exc_type=None, exc_value=None, traceback=None):    
-        pass
+        if self.obj:
+            ReleaseBuffer( self )
     def __del__( self ):
-        print( 'deleting' )
-        ReleaseBuffer( self )
+        if self.obj:
+            ReleaseBuffer( self )
     
 BUFFER_POINTER = ctypes.POINTER( Py_buffer )
 
