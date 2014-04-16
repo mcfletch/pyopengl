@@ -1060,7 +1060,9 @@ class Tests( unittest.TestCase ):
         color = b'\000'*12
         glColor3fv( color )
     def test_bytearray_support( self ):
-        color = bytearray( b'\000'*12 )
+        import struct 
+        data = struct.pack( 'fff', .5, .4, .3 )
+        color = bytearray( data )
         glColor3fv( color )
     def test_memoryview_support( self ):
         color = bytearray( b'\000'*12 )
