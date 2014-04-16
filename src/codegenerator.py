@@ -291,29 +291,39 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             statements = []
             for function in self.registry.commands():
                 dependencies = function.size_dependencies()
-                if dependencies and len(dependencies) == 1: # temporarily just do single-output functions...
-                    base = ['%s=wrapper.wrapper(%s)'%(function.name,function.name)]
+                if dependencies: # temporarily just do single-output functions...
+                    base = []
                     for param,dependency in dependencies.items():
                         param = as_8_bit( param )
                         if isinstance( dependency, xmlreg.Output ):
-                            base.insert(0,'# OUTPUT ' )
+                            statements.append( '# %s.%s is OUTPUT without known output size'%(
+                                function.name,param,
+                            ))
                         if isinstance( dependency, xmlreg.Staticsize ):
-                            base.append( '.setOutput(%(param)r,size=(%(dependency)r,),orPassIn=True)'%locals())
+                            base.append( '.setOutput(\n    %(param)r,size=(%(dependency)r,),orPassIn=True\n)'%locals())
                         elif isinstance( dependency, xmlreg.Dynamicsize ):
-                            base.append( '.setOutput(%(param)r,size=lambda x:(x,),pnameArg=%(dependency)r,orPassIn=True)'%locals())
+                            base.append( '.setOutput(\n    %(param)r,size=lambda x:(x,),pnameArg=%(dependency)r,orPassIn=True\n)'%locals())
                         elif isinstance( dependency, xmlreg.Multiple ):
                             pname,multiple = dependency
-                            base.append( '.setOutput(%(param)r,size=lambda x:(x,%(multiple)s),pnameArg=%(pname)r,orPassIn=True)'%locals())
+                            base.append( '.setOutput(\n    %(param)r,size=lambda x:(x,%(multiple)s),pnameArg=%(pname)r,orPassIn=True\n)'%locals())
                         elif isinstance( dependency, xmlreg.Compsize ):
                             if len(dependency) == 1:
                                 pname = dependency[0]
-                                base.append( '.setOutput(#\n    %(param)r,size=_glgets._glget_size_mapping,pnameArg=%(pname)r,orPassIn=True)'%locals())
+                                base.append( '.setOutput(\n    %(param)r,size=_glgets._glget_size_mapping,pnameArg=%(pname)r,orPassIn=True\n)'%locals())
                             else:
-                                base.insert(0,'# COMPSIZE(%s) '%(','.join(dependency)))
-                    statements.append( ''.join(base ))
-                elif dependencies:
-                    for dependency in dependencies:
-                        statements.append( '# OUTPUT MULTIPLE %s'%(function.name, ))
+                                statements.append('# OUTPUT %s.%s COMPSIZE(%s) '%(function.name,param,','.join(dependency)) )
+                        elif isinstance( dependency, xmlreg.StaticInput ):
+                            base.append( '.setInputArraySize(\n    %(param)r, %(dependency)s\n)'%locals())
+                        elif isinstance( dependency, (xmlreg.DynamicInput, xmlreg.MultipleInput, xmlreg.Input) ):
+                            statements.append( '# INPUT %s.%s size not checked against %s'%(
+                                function.name, 
+                                param,
+                                dependency
+                            ))
+                            base.append( '.setInputArraySize(\n    %(param)r, None\n)'%locals())
+                    if base:
+                        base.insert(0, '%s=wrapper.wrapper(%s)'%(function.name,function.name) )
+                        statements.append( ''.join(base ))
             return '\n'.join( statements )
         except Exception as err:
             traceback.print_exc()

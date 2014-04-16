@@ -6,7 +6,7 @@ GL functions that deal with OpenGL array data-types.
 import OpenGL
 import ctypes
 from OpenGL import _configflags
-from OpenGL import contextdata, error, wrapper, converters
+from OpenGL import contextdata, error, converters
 from OpenGL.arrays import arraydatatype
 from OpenGL._bytes import bytes,unicode
 import logging
@@ -84,8 +84,6 @@ if AsArrayTypedSizeChecked is None:
 else:
     returnPointer = returnPyArgumentIndex( 0 )
 
-
-
 if not _configflags.ERROR_ON_COPY:
     def asArrayType( typ, size=None ):
         """Create PyConverter to get first argument as array of type"""
@@ -158,55 +156,19 @@ class storePointerType( object ):
         contextdata.setValue( self.constant, pyArgs[self.pointerIndex] )
 
 
-if not _configflags.ERROR_ON_COPY:
-    def setInputArraySizeType( baseOperation, size, type, argName=0 ):
-        """Decorate function with vector-handling code for a single argument
-        
-        if OpenGL.ERROR_ON_COPY is False, then we return the 
-        named argument, converting to the passed array type,
-        optionally checking that the array matches size.
-        
-        if OpenGL.ERROR_ON_COPY is True, then we will dramatically 
-        simplify this function, only wrapping if size is True, i.e.
-        only wrapping if we intend to do a size check on the array.
-        """
-        function = wrapper.wrapper( baseOperation )
-        if not hasattr( function, 'returnValues' ):
-            if isinstance( argName, (bytes,unicode)):
-                function.setReturnValues( converters.returnPyArgument(argName) )
-            else:
-                raise TypeError( 
-                    """Argname should be a string/unicode: %s"""%(type(argName))
-                )
-        if size is not None:
-            function.setPyConverter( argName, asArrayTypeSize(type, size) )
-        else:
-            function.setPyConverter( argName, asArrayType(type) )
-        function.setCConverter( argName, converters.getPyArgsName( argName ) )
-        return function
-else:
-    def setInputArraySizeType( baseOperation, size, type, argName=0 ):
-        """Decorate function with vector-handling code for a single argument
-        
-        if OpenGL.ERROR_ON_COPY is False, then we return the 
-        named argument, converting to the passed array type,
-        optionally checking that the array matches size.
-        
-        if OpenGL.ERROR_ON_COPY is True, then we will dramatically 
-        simplify this function, only wrapping if size is True, i.e.
-        only wrapping if we intend to do a size check on the array.
-        """
-        if size is not None:
-            function = wrapper.wrapper( baseOperation )
-            # return value is always the source array...
-            function.setPyConverter( argName, asArrayTypeSize(type, size) )
-            function.setCConverter( argName, 
-                converters.getPyArgsName( argName ) 
-            )
-        else:
-            function = baseOperation
-        return function
+def setInputArraySizeType( baseOperation, size, type, argName=0 ):
+    """Decorate function with vector-handling code for a single argument
     
+    if OpenGL.ERROR_ON_COPY is False, then we return the 
+    named argument, converting to the passed array type,
+    optionally checking that the array matches size.
+    
+    if OpenGL.ERROR_ON_COPY is True, then we will dramatically 
+    simplify this function, only wrapping if size is True, i.e.
+    only wrapping if we intend to do a size check on the array.
+    """
+    from OpenGL import wrapper
+    return wrapper.wrapper( baseOperation ).setInputArraySize( argName, size )
 
 def arraySizeOfFirstType( typ, default ):
     unitSize = typ.unitSize

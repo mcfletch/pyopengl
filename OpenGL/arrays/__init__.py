@@ -17,5 +17,5 @@ Possible data types:
 import ctypes
 import OpenGL
 from OpenGL.arrays.arraydatatype import *
-from OpenGL.arrays.arrayhelpers import *
 from OpenGL.arrays import formathandler
+from OpenGL.arrays.arrayhelpers import *

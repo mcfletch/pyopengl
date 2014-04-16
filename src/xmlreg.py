@@ -15,6 +15,12 @@ LENGTH_OVERRIDES={
     'glGetUniformiv': {
         'params': None,
     },
+#    'glShaderSourceARB': {
+#        'string': None,
+#    },
+#    'glShaderSource': {
+#        'string': None,
+#    },
 }
 
 
@@ -230,6 +236,9 @@ class Command( object ):
             else:
                 result.append( (target,Dynamicsize( definition )))
         for (target,length) in other_lengths.items():
+            if length is None:
+                # length/array-conversion suppressed
+                continue 
             if length.isdigit():
                 result.append( (target,StaticInput( int(length,10))))
             elif length.startswith( 'COMPSIZE' ):
@@ -249,9 +258,11 @@ class Command( object ):
 class IsInput(object):
     pass
 class Input( IsInput, object ):
-    """Unsize Input Parameter"""
+    """Unsized Input Parameter"""
     def __init__( self, value=None ):
         self.value = value
+    def __repr__( self ):
+        return repr(self.value)
 class StaticInput( IsInput,int ):
     """Statically sized input parameter"""
 class DynamicInput( IsInput,str ):

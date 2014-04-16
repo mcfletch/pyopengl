@@ -16,7 +16,8 @@ def glVertexPointerd( array ):
     storedPointers[ GL_VERTEX_ARRAY ] = arg4
     return arg4
 """
-from OpenGL import platform, arrays, error, wrapper, contextdata, converters, constant
+from OpenGL import platform, error, wrapper, contextdata, converters, constant
+from OpenGL.arrays import arrayhelpers, arraydatatype
 from OpenGL.raw.GL.VERSION import GL_1_1 as _simple
 import ctypes
 
@@ -106,21 +107,21 @@ def wrapPointerFunction( name, baseFunction, glType, arrayType,startArgs, defaul
         pointer_name = 'pointer'
     assert not getattr( function, 'pyConverters', None ), """Reusing wrappers?"""
     if arrayType:
-        arrayModuleType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ glType ]
-        function.setPyConverter( pointer_name, arrays.asArrayType(arrayModuleType) )
+        arrayModuleType = arraydatatype.GL_CONSTANT_TO_ARRAY_TYPE[ glType ]
+        function.setPyConverter( pointer_name, arrayhelpers.asArrayType(arrayModuleType) )
     else:
-        function.setPyConverter( pointer_name, arrays.AsArrayOfType(pointer_name,'type') )
+        function.setPyConverter( pointer_name, arrayhelpers.AsArrayOfType(pointer_name,'type') )
     function.setCConverter( pointer_name, converters.getPyArgsName( pointer_name ) )
     if 'size' in function.argNames:
         function.setPyConverter( 'size' )
-        function.setCConverter( 'size', arrays.arraySizeOfFirstType(arrayModuleType,defaultSize) )
+        function.setCConverter( 'size', arrayhelpers.arraySizeOfFirstType(arrayModuleType,defaultSize) )
     if 'type' in function.argNames:
         function.setPyConverter( 'type' )
         function.setCConverter( 'type', glType )
     if 'stride' in function.argNames:
         function.setPyConverter( 'stride' )
         function.setCConverter( 'stride', 0 )
-    function.setStoreValues( arrays.storePointerType( pointer_name, arrayType ) )
+    function.setStoreValues( arrayhelpers.storePointerType( pointer_name, arrayType ) )
     function.setReturnValues( wrapper.returnPyArgument( pointer_name ) )
     return name,function
 
@@ -137,71 +138,71 @@ except NameError as err:
     pass
 
 glVertexPointer = wrapper.wrapper( _simple.glVertexPointer ).setPyConverter(
-    'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
+    'pointer', arrayhelpers.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', _simple.GL_VERTEX_ARRAY_POINTER )
+    arrayhelpers.storePointerType( 'pointer', _simple.GL_VERTEX_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
 glTexCoordPointer = wrapper.wrapper( _simple.glTexCoordPointer ).setPyConverter(
-    'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
+    'pointer', arrayhelpers.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', _simple.GL_TEXTURE_COORD_ARRAY_POINTER )
+    arrayhelpers.storePointerType( 'pointer', _simple.GL_TEXTURE_COORD_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
 glNormalPointer = wrapper.wrapper( _simple.glNormalPointer ).setPyConverter(
-    'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
+    'pointer', arrayhelpers.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', _simple.GL_NORMAL_ARRAY_POINTER )
+    arrayhelpers.storePointerType( 'pointer', _simple.GL_NORMAL_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
 glIndexPointer = wrapper.wrapper( _simple.glIndexPointer ).setPyConverter(
-    'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
+    'pointer', arrayhelpers.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', _simple.GL_INDEX_ARRAY_POINTER )
+    arrayhelpers.storePointerType( 'pointer', _simple.GL_INDEX_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
 glEdgeFlagPointer = wrapper.wrapper( _simple.glEdgeFlagPointer ).setPyConverter(
     # XXX type is wrong!
-    'pointer', arrays.AsArrayTyped( 'pointer', arrays.GLushortArray ),
+    'pointer', arrayhelpers.AsArrayTyped( 'pointer', arraydatatype.GLushortArray ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', _simple.GL_EDGE_FLAG_ARRAY_POINTER )
+    arrayhelpers.storePointerType( 'pointer', _simple.GL_EDGE_FLAG_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
 glColorPointer = wrapper.wrapper( _simple.glColorPointer ).setPyConverter(
-    'pointer', arrays.AsArrayOfType( 'pointer', 'type' ),
+    'pointer', arrayhelpers.AsArrayOfType( 'pointer', 'type' ),
 ).setStoreValues(
-    arrays.storePointerType( 'pointer', _simple.GL_COLOR_ARRAY_POINTER )
+    arrayhelpers.storePointerType( 'pointer', _simple.GL_COLOR_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
 glInterleavedArrays = wrapper.wrapper( _simple.glInterleavedArrays ).setStoreValues(
-    arrays.storePointerType( 'pointer', GL_INTERLEAVED_ARRAY_POINTER )
+    arrayhelpers.storePointerType( 'pointer', GL_INTERLEAVED_ARRAY_POINTER )
 ).setReturnValues(
     wrapper.returnPyArgument( 'pointer' )
 )
 
 
 glDrawElements = wrapper.wrapper( _simple.glDrawElements ).setPyConverter(
-    'indices', arrays.AsArrayOfType( 'indices', 'type' ),
+    'indices', arrayhelpers.AsArrayOfType( 'indices', 'type' ),
 ).setReturnValues(
     wrapper.returnPyArgument( 'indices' )
 )
 
 def glDrawElementsTyped( type, suffix ):
-    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ type ]
+    arrayType = arraydatatype.GL_CONSTANT_TO_ARRAY_TYPE[ type ]
     function = wrapper.wrapper(
         _simple.glDrawElements
     ).setPyConverter('type').setCConverter(
         'type', type
     ).setPyConverter('count').setCConverter(
-        'count', arrays.AsArrayTypedSize( 'indices', arrayType ),
+        'count', arrayhelpers.AsArrayTypedSize( 'indices', arrayType ),
     ).setPyConverter(
-        'indices', arrays.AsArrayTyped( 'indices', arrayType ),
+        'indices', arrayhelpers.AsArrayTyped( 'indices', arrayType ),
     ).setReturnValues(
         wrapper.returnPyArgument( 'indices' )
     )
@@ -220,7 +221,7 @@ def glSelectBuffer( size, buffer = None ):
     """Create a selection buffer of the given size
     """
     if buffer is None:
-        buffer = arrays.GLuintArray.zeros( (size,) )
+        buffer = arraydatatype.GLuintArray.zeros( (size,) )
     _simple.glSelectBuffer( size, buffer )
     contextdata.setValue( _simple.GL_SELECTION_BUFFER_POINTER, buffer )
     return buffer
@@ -228,7 +229,7 @@ def glFeedbackBuffer( size, type, buffer = None ):
     """Create a selection buffer of the given size
     """
     if buffer is None:
-        buffer = arrays.GLfloatArray.zeros( (size,) )
+        buffer = arraydatatype.GLfloatArray.zeros( (size,) )
     _simple.glFeedbackBuffer( size, type, buffer )
     contextdata.setValue( _simple.GL_FEEDBACK_BUFFER_POINTER, buffer )
     contextdata.setValue( "GL_FEEDBACK_BUFFER_TYPE", type )
@@ -301,7 +302,7 @@ def glGetPointerv( constant ):
     _simple.glGetPointerv( constant, ctypes.byref(vp) )
     current = contextdata.getValue( constant )
     if current is not None:
-        if arrays.ArrayDatatype.dataPointer( current ) == vp.value:
+        if arraydatatype.ArrayDatatype.dataPointer( current ) == vp.value:
             return current
     # XXX should be coercing to the proper type and converting to an array
     return vp

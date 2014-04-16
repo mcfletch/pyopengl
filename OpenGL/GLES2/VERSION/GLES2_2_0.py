@@ -19,78 +19,228 @@ def glInitGles220VERSION():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-glGenBuffers=wrapper.wrapper(glGenBuffers).setOutput(#
+# INPUT glBufferData.data size not checked against size
+glBufferData=wrapper.wrapper(glBufferData).setInputArraySize(
+    'data', None
+)
+# INPUT glBufferSubData.data size not checked against size
+glBufferSubData=wrapper.wrapper(glBufferSubData).setInputArraySize(
+    'data', None
+)
+# INPUT glCompressedTexImage2D.data size not checked against imageSize
+glCompressedTexImage2D=wrapper.wrapper(glCompressedTexImage2D).setInputArraySize(
+    'data', None
+)
+# INPUT glCompressedTexSubImage2D.data size not checked against imageSize
+glCompressedTexSubImage2D=wrapper.wrapper(glCompressedTexSubImage2D).setInputArraySize(
+    'data', None
+)
+# INPUT glDeleteBuffers.buffers size not checked against n
+glDeleteBuffers=wrapper.wrapper(glDeleteBuffers).setInputArraySize(
+    'buffers', None
+)
+# INPUT glDeleteFramebuffers.framebuffers size not checked against n
+glDeleteFramebuffers=wrapper.wrapper(glDeleteFramebuffers).setInputArraySize(
+    'framebuffers', None
+)
+# INPUT glDeleteRenderbuffers.renderbuffers size not checked against n
+glDeleteRenderbuffers=wrapper.wrapper(glDeleteRenderbuffers).setInputArraySize(
+    'renderbuffers', None
+)
+# INPUT glDeleteTextures.textures size not checked against n
+glDeleteTextures=wrapper.wrapper(glDeleteTextures).setInputArraySize(
+    'textures', None
+)
+# INPUT glDrawElements.indices size not checked against 'count,type'
+glDrawElements=wrapper.wrapper(glDrawElements).setInputArraySize(
+    'indices', None
+)
+glGenBuffers=wrapper.wrapper(glGenBuffers).setOutput(
     'buffers',size=lambda x:(x,),pnameArg='n',orPassIn=True
 )
-glGenFramebuffers=wrapper.wrapper(glGenFramebuffers).setOutput(#
+glGenFramebuffers=wrapper.wrapper(glGenFramebuffers).setOutput(
     'framebuffers',size=lambda x:(x,),pnameArg='n',orPassIn=True
 )
-glGenRenderbuffers=wrapper.wrapper(glGenRenderbuffers).setOutput(#
+glGenRenderbuffers=wrapper.wrapper(glGenRenderbuffers).setOutput(
     'renderbuffers',size=lambda x:(x,),pnameArg='n',orPassIn=True
 )
-glGenTextures=wrapper.wrapper(glGenTextures).setOutput(#
+glGenTextures=wrapper.wrapper(glGenTextures).setOutput(
     'textures',size=lambda x:(x,),pnameArg='n',orPassIn=True
 )
-# OUTPUT MULTIPLE glGetActiveAttrib
-# OUTPUT MULTIPLE glGetActiveAttrib
-# OUTPUT MULTIPLE glGetActiveAttrib
-# OUTPUT MULTIPLE glGetActiveAttrib
-# OUTPUT MULTIPLE glGetActiveUniform
-# OUTPUT MULTIPLE glGetActiveUniform
-# OUTPUT MULTIPLE glGetActiveUniform
-# OUTPUT MULTIPLE glGetActiveUniform
-# OUTPUT MULTIPLE glGetAttachedShaders
-# OUTPUT MULTIPLE glGetAttachedShaders
-glGetBooleanv=wrapper.wrapper(glGetBooleanv).setOutput(#
+glGetActiveAttrib=wrapper.wrapper(glGetActiveAttrib).setOutput(
+    'length',size=(1,),orPassIn=True
+).setOutput(
+    'type',size=(1,),orPassIn=True
+).setOutput(
+    'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'size',size=(1,),orPassIn=True
+)
+glGetActiveUniform=wrapper.wrapper(glGetActiveUniform).setOutput(
+    'length',size=(1,),orPassIn=True
+).setOutput(
+    'type',size=(1,),orPassIn=True
+).setOutput(
+    'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'size',size=(1,),orPassIn=True
+)
+# glGetAttachedShaders.obj is OUTPUT without known output size
+# INPUT glGetAttachedShaders.shaders size not checked against maxCount
+glGetAttachedShaders=wrapper.wrapper(glGetAttachedShaders).setOutput(
+    'count',size=(1,),orPassIn=True
+).setInputArraySize(
+    'shaders', None
+)
+glGetBooleanv=wrapper.wrapper(glGetBooleanv).setOutput(
     'data',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-glGetBufferParameteriv=wrapper.wrapper(glGetBufferParameteriv).setOutput(#
+glGetBufferParameteriv=wrapper.wrapper(glGetBufferParameteriv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-glGetFloatv=wrapper.wrapper(glGetFloatv).setOutput(#
+glGetFloatv=wrapper.wrapper(glGetFloatv).setOutput(
     'data',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-glGetFramebufferAttachmentParameteriv=wrapper.wrapper(glGetFramebufferAttachmentParameteriv).setOutput(#
+glGetFramebufferAttachmentParameteriv=wrapper.wrapper(glGetFramebufferAttachmentParameteriv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-glGetIntegerv=wrapper.wrapper(glGetIntegerv).setOutput(#
+glGetIntegerv=wrapper.wrapper(glGetIntegerv).setOutput(
     'data',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-glGetProgramiv=wrapper.wrapper(glGetProgramiv).setOutput(#
+glGetProgramiv=wrapper.wrapper(glGetProgramiv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT MULTIPLE glGetProgramInfoLog
-# OUTPUT MULTIPLE glGetProgramInfoLog
-glGetRenderbufferParameteriv=wrapper.wrapper(glGetRenderbufferParameteriv).setOutput(#
+glGetProgramInfoLog=wrapper.wrapper(glGetProgramInfoLog).setOutput(
+    'length',size=(1,),orPassIn=True
+).setOutput(
+    'infoLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+)
+glGetRenderbufferParameteriv=wrapper.wrapper(glGetRenderbufferParameteriv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-glGetShaderiv=wrapper.wrapper(glGetShaderiv).setOutput(#
+glGetShaderiv=wrapper.wrapper(glGetShaderiv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT MULTIPLE glGetShaderInfoLog
-# OUTPUT MULTIPLE glGetShaderInfoLog
-# OUTPUT MULTIPLE glGetShaderPrecisionFormat
-# OUTPUT MULTIPLE glGetShaderPrecisionFormat
-# OUTPUT MULTIPLE glGetShaderSource
-# OUTPUT MULTIPLE glGetShaderSource
-glGetTexParameterfv=wrapper.wrapper(glGetTexParameterfv).setOutput(#
+glGetShaderInfoLog=wrapper.wrapper(glGetShaderInfoLog).setOutput(
+    'length',size=(1,),orPassIn=True
+).setOutput(
+    'infoLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+)
+glGetShaderPrecisionFormat=wrapper.wrapper(glGetShaderPrecisionFormat).setOutput(
+    'range',size=(2,),orPassIn=True
+).setOutput(
+    'precision',size=(2,),orPassIn=True
+)
+glGetShaderSource=wrapper.wrapper(glGetShaderSource).setOutput(
+    'source',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
+)
+glGetTexParameterfv=wrapper.wrapper(glGetTexParameterfv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-glGetTexParameteriv=wrapper.wrapper(glGetTexParameteriv).setOutput(#
+glGetTexParameteriv=wrapper.wrapper(glGetTexParameteriv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT glGetUniformfv=wrapper.wrapper(glGetUniformfv)
-# OUTPUT glGetUniformiv=wrapper.wrapper(glGetUniformiv)
-glGetVertexAttribfv=wrapper.wrapper(glGetVertexAttribfv).setOutput(#
+# glGetUniformfv.params is OUTPUT without known output size
+# glGetUniformiv.params is OUTPUT without known output size
+glGetVertexAttribfv=wrapper.wrapper(glGetVertexAttribfv).setOutput(
     'params',size=(4,),orPassIn=True
 )
-glGetVertexAttribiv=wrapper.wrapper(glGetVertexAttribiv).setOutput(#
+glGetVertexAttribiv=wrapper.wrapper(glGetVertexAttribiv).setOutput(
     'params',size=(4,),orPassIn=True
 )
-glGetVertexAttribPointerv=wrapper.wrapper(glGetVertexAttribPointerv).setOutput(#
+glGetVertexAttribPointerv=wrapper.wrapper(glGetVertexAttribPointerv).setOutput(
     'pointer',size=(1,),orPassIn=True
 )
-# COMPSIZE(format,type,width,height) glReadPixels=wrapper.wrapper(glReadPixels)
+# OUTPUT glReadPixels.pixels COMPSIZE(format,type,width,height) 
+# INPUT glShaderBinary.binary size not checked against length
+# INPUT glShaderBinary.shaders size not checked against count
+glShaderBinary=wrapper.wrapper(glShaderBinary).setInputArraySize(
+    'binary', None
+).setInputArraySize(
+    'shaders', None
+)
+# INPUT glShaderSource.length size not checked against count
+glShaderSource=wrapper.wrapper(glShaderSource).setInputArraySize(
+    'length', None
+)
+# INPUT glTexImage2D.pixels size not checked against 'format,type,width,height'
+glTexImage2D=wrapper.wrapper(glTexImage2D).setInputArraySize(
+    'pixels', None
+)
+# INPUT glTexParameterfv.params size not checked against 'pname'
+glTexParameterfv=wrapper.wrapper(glTexParameterfv).setInputArraySize(
+    'params', None
+)
+# INPUT glTexParameteriv.params size not checked against 'pname'
+glTexParameteriv=wrapper.wrapper(glTexParameteriv).setInputArraySize(
+    'params', None
+)
+# INPUT glTexSubImage2D.pixels size not checked against 'format,type,width,height'
+glTexSubImage2D=wrapper.wrapper(glTexSubImage2D).setInputArraySize(
+    'pixels', None
+)
+# INPUT glUniform1fv.value size not checked against count
+glUniform1fv=wrapper.wrapper(glUniform1fv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniform1iv.value size not checked against count
+glUniform1iv=wrapper.wrapper(glUniform1iv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniform2fv.value size not checked against count
+glUniform2fv=wrapper.wrapper(glUniform2fv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniform2iv.value size not checked against count
+glUniform2iv=wrapper.wrapper(glUniform2iv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniform3fv.value size not checked against count
+glUniform3fv=wrapper.wrapper(glUniform3fv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniform3iv.value size not checked against count
+glUniform3iv=wrapper.wrapper(glUniform3iv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniform4fv.value size not checked against count
+glUniform4fv=wrapper.wrapper(glUniform4fv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniform4iv.value size not checked against count
+glUniform4iv=wrapper.wrapper(glUniform4iv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniformMatrix2fv.value size not checked against count
+glUniformMatrix2fv=wrapper.wrapper(glUniformMatrix2fv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniformMatrix3fv.value size not checked against count
+glUniformMatrix3fv=wrapper.wrapper(glUniformMatrix3fv).setInputArraySize(
+    'value', None
+)
+# INPUT glUniformMatrix4fv.value size not checked against count
+glUniformMatrix4fv=wrapper.wrapper(glUniformMatrix4fv).setInputArraySize(
+    'value', None
+)
+glVertexAttrib1fv=wrapper.wrapper(glVertexAttrib1fv).setInputArraySize(
+    'v', 1
+)
+glVertexAttrib2fv=wrapper.wrapper(glVertexAttrib2fv).setInputArraySize(
+    'v', 2
+)
+glVertexAttrib3fv=wrapper.wrapper(glVertexAttrib3fv).setInputArraySize(
+    'v', 3
+)
+glVertexAttrib4fv=wrapper.wrapper(glVertexAttrib4fv).setInputArraySize(
+    'v', 4
+)
+# INPUT glVertexAttribPointer.pointer size not checked against 'size,type,stride'
+glVertexAttribPointer=wrapper.wrapper(glVertexAttribPointer).setInputArraySize(
+    'pointer', None
+)
 ### END AUTOGENERATED SECTION
 from OpenGL import converters
 from OpenGL.lazywrapper import lazy as _lazy

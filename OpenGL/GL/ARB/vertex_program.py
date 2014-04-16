@@ -68,35 +68,128 @@ def glInitVertexProgramARB():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-glGenProgramsARB=wrapper.wrapper(glGenProgramsARB).setOutput(#
+glVertexAttrib1dvARB=wrapper.wrapper(glVertexAttrib1dvARB).setInputArraySize(
+    'v', 1
+)
+glVertexAttrib1fvARB=wrapper.wrapper(glVertexAttrib1fvARB).setInputArraySize(
+    'v', 1
+)
+glVertexAttrib1svARB=wrapper.wrapper(glVertexAttrib1svARB).setInputArraySize(
+    'v', 1
+)
+glVertexAttrib2dvARB=wrapper.wrapper(glVertexAttrib2dvARB).setInputArraySize(
+    'v', 2
+)
+glVertexAttrib2fvARB=wrapper.wrapper(glVertexAttrib2fvARB).setInputArraySize(
+    'v', 2
+)
+glVertexAttrib2svARB=wrapper.wrapper(glVertexAttrib2svARB).setInputArraySize(
+    'v', 2
+)
+glVertexAttrib3dvARB=wrapper.wrapper(glVertexAttrib3dvARB).setInputArraySize(
+    'v', 3
+)
+glVertexAttrib3fvARB=wrapper.wrapper(glVertexAttrib3fvARB).setInputArraySize(
+    'v', 3
+)
+glVertexAttrib3svARB=wrapper.wrapper(glVertexAttrib3svARB).setInputArraySize(
+    'v', 3
+)
+glVertexAttrib4NbvARB=wrapper.wrapper(glVertexAttrib4NbvARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4NivARB=wrapper.wrapper(glVertexAttrib4NivARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4NsvARB=wrapper.wrapper(glVertexAttrib4NsvARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4NubvARB=wrapper.wrapper(glVertexAttrib4NubvARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4NuivARB=wrapper.wrapper(glVertexAttrib4NuivARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4NusvARB=wrapper.wrapper(glVertexAttrib4NusvARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4bvARB=wrapper.wrapper(glVertexAttrib4bvARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4dvARB=wrapper.wrapper(glVertexAttrib4dvARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4fvARB=wrapper.wrapper(glVertexAttrib4fvARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4ivARB=wrapper.wrapper(glVertexAttrib4ivARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4svARB=wrapper.wrapper(glVertexAttrib4svARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4ubvARB=wrapper.wrapper(glVertexAttrib4ubvARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4uivARB=wrapper.wrapper(glVertexAttrib4uivARB).setInputArraySize(
+    'v', 4
+)
+glVertexAttrib4usvARB=wrapper.wrapper(glVertexAttrib4usvARB).setInputArraySize(
+    'v', 4
+)
+# INPUT glVertexAttribPointerARB.pointer size not checked against 'size,type,stride'
+glVertexAttribPointerARB=wrapper.wrapper(glVertexAttribPointerARB).setInputArraySize(
+    'pointer', None
+)
+# INPUT glProgramStringARB.string size not checked against len
+glProgramStringARB=wrapper.wrapper(glProgramStringARB).setInputArraySize(
+    'string', None
+)
+# INPUT glDeleteProgramsARB.programs size not checked against n
+glDeleteProgramsARB=wrapper.wrapper(glDeleteProgramsARB).setInputArraySize(
+    'programs', None
+)
+glGenProgramsARB=wrapper.wrapper(glGenProgramsARB).setOutput(
     'programs',size=lambda x:(x,),pnameArg='n',orPassIn=True
 )
-glGetProgramEnvParameterdvARB=wrapper.wrapper(glGetProgramEnvParameterdvARB).setOutput(#
+glProgramEnvParameter4dvARB=wrapper.wrapper(glProgramEnvParameter4dvARB).setInputArraySize(
+    'params', 4
+)
+glProgramEnvParameter4fvARB=wrapper.wrapper(glProgramEnvParameter4fvARB).setInputArraySize(
+    'params', 4
+)
+glProgramLocalParameter4dvARB=wrapper.wrapper(glProgramLocalParameter4dvARB).setInputArraySize(
+    'params', 4
+)
+glProgramLocalParameter4fvARB=wrapper.wrapper(glProgramLocalParameter4fvARB).setInputArraySize(
+    'params', 4
+)
+glGetProgramEnvParameterdvARB=wrapper.wrapper(glGetProgramEnvParameterdvARB).setOutput(
     'params',size=(4,),orPassIn=True
 )
-glGetProgramEnvParameterfvARB=wrapper.wrapper(glGetProgramEnvParameterfvARB).setOutput(#
+glGetProgramEnvParameterfvARB=wrapper.wrapper(glGetProgramEnvParameterfvARB).setOutput(
     'params',size=(4,),orPassIn=True
 )
-glGetProgramLocalParameterdvARB=wrapper.wrapper(glGetProgramLocalParameterdvARB).setOutput(#
+glGetProgramLocalParameterdvARB=wrapper.wrapper(glGetProgramLocalParameterdvARB).setOutput(
     'params',size=(4,),orPassIn=True
 )
-glGetProgramLocalParameterfvARB=wrapper.wrapper(glGetProgramLocalParameterfvARB).setOutput(#
+glGetProgramLocalParameterfvARB=wrapper.wrapper(glGetProgramLocalParameterfvARB).setOutput(
     'params',size=(4,),orPassIn=True
 )
-glGetProgramivARB=wrapper.wrapper(glGetProgramivARB).setOutput(#
+glGetProgramivARB=wrapper.wrapper(glGetProgramivARB).setOutput(
     'params',size=(1,),orPassIn=True
 )
-# COMPSIZE(target,pname) glGetProgramStringARB=wrapper.wrapper(glGetProgramStringARB)
-glGetVertexAttribdvARB=wrapper.wrapper(glGetVertexAttribdvARB).setOutput(#
+# OUTPUT glGetProgramStringARB.string COMPSIZE(target,pname) 
+glGetVertexAttribdvARB=wrapper.wrapper(glGetVertexAttribdvARB).setOutput(
     'params',size=(4,),orPassIn=True
 )
-glGetVertexAttribfvARB=wrapper.wrapper(glGetVertexAttribfvARB).setOutput(#
+glGetVertexAttribfvARB=wrapper.wrapper(glGetVertexAttribfvARB).setOutput(
     'params',size=(4,),orPassIn=True
 )
-glGetVertexAttribivARB=wrapper.wrapper(glGetVertexAttribivARB).setOutput(#
+glGetVertexAttribivARB=wrapper.wrapper(glGetVertexAttribivARB).setOutput(
     'params',size=(4,),orPassIn=True
 )
-glGetVertexAttribPointervARB=wrapper.wrapper(glGetVertexAttribPointervARB).setOutput(#
+glGetVertexAttribPointervARB=wrapper.wrapper(glGetVertexAttribPointervARB).setOutput(
     'pointer',size=(1,),orPassIn=True
 )
 ### END AUTOGENERATED SECTION

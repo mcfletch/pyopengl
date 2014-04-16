@@ -386,5 +386,161 @@ def glInitPathRenderingNV():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-
+# INPUT glPathCommandsNV.commands size not checked against numCommands
+# INPUT glPathCommandsNV.coords size not checked against 'numCoords,coordType'
+glPathCommandsNV=wrapper.wrapper(glPathCommandsNV).setInputArraySize(
+    'commands', None
+).setInputArraySize(
+    'coords', None
+)
+# INPUT glPathCoordsNV.coords size not checked against 'numCoords,coordType'
+glPathCoordsNV=wrapper.wrapper(glPathCoordsNV).setInputArraySize(
+    'coords', None
+)
+# INPUT glPathSubCommandsNV.commands size not checked against numCommands
+# INPUT glPathSubCommandsNV.coords size not checked against 'numCoords,coordType'
+glPathSubCommandsNV=wrapper.wrapper(glPathSubCommandsNV).setInputArraySize(
+    'commands', None
+).setInputArraySize(
+    'coords', None
+)
+# INPUT glPathSubCoordsNV.coords size not checked against 'numCoords,coordType'
+glPathSubCoordsNV=wrapper.wrapper(glPathSubCoordsNV).setInputArraySize(
+    'coords', None
+)
+# INPUT glPathStringNV.pathString size not checked against length
+glPathStringNV=wrapper.wrapper(glPathStringNV).setInputArraySize(
+    'pathString', None
+)
+# INPUT glPathGlyphsNV.fontName size not checked against 'fontTarget,fontName'
+# INPUT glPathGlyphsNV.charcodes size not checked against 'numGlyphs,type,charcodes'
+glPathGlyphsNV=wrapper.wrapper(glPathGlyphsNV).setInputArraySize(
+    'fontName', None
+).setInputArraySize(
+    'charcodes', None
+)
+# INPUT glPathGlyphRangeNV.fontName size not checked against 'fontTarget,fontName'
+glPathGlyphRangeNV=wrapper.wrapper(glPathGlyphRangeNV).setInputArraySize(
+    'fontName', None
+)
+# INPUT glWeightPathsNV.paths size not checked against numPaths
+# INPUT glWeightPathsNV.weights size not checked against numPaths
+glWeightPathsNV=wrapper.wrapper(glWeightPathsNV).setInputArraySize(
+    'paths', None
+).setInputArraySize(
+    'weights', None
+)
+# INPUT glTransformPathNV.transformValues size not checked against 'transformType'
+glTransformPathNV=wrapper.wrapper(glTransformPathNV).setInputArraySize(
+    'transformValues', None
+)
+# INPUT glPathParameterivNV.value size not checked against 'pname'
+glPathParameterivNV=wrapper.wrapper(glPathParameterivNV).setInputArraySize(
+    'value', None
+)
+# INPUT glPathParameterfvNV.value size not checked against 'pname'
+glPathParameterfvNV=wrapper.wrapper(glPathParameterfvNV).setInputArraySize(
+    'value', None
+)
+# INPUT glPathDashArrayNV.dashArray size not checked against dashCount
+glPathDashArrayNV=wrapper.wrapper(glPathDashArrayNV).setInputArraySize(
+    'dashArray', None
+)
+# INPUT glStencilFillPathInstancedNV.paths size not checked against 'numPaths,pathNameType,paths'
+# INPUT glStencilFillPathInstancedNV.transformValues size not checked against 'numPaths,transformType'
+glStencilFillPathInstancedNV=wrapper.wrapper(glStencilFillPathInstancedNV).setInputArraySize(
+    'paths', None
+).setInputArraySize(
+    'transformValues', None
+)
+# INPUT glStencilStrokePathInstancedNV.paths size not checked against 'numPaths,pathNameType,paths'
+# INPUT glStencilStrokePathInstancedNV.transformValues size not checked against 'numPaths,transformType'
+glStencilStrokePathInstancedNV=wrapper.wrapper(glStencilStrokePathInstancedNV).setInputArraySize(
+    'paths', None
+).setInputArraySize(
+    'transformValues', None
+)
+# INPUT glPathColorGenNV.coeffs size not checked against 'genMode,colorFormat'
+glPathColorGenNV=wrapper.wrapper(glPathColorGenNV).setInputArraySize(
+    'coeffs', None
+)
+# INPUT glPathTexGenNV.coeffs size not checked against 'genMode,components'
+glPathTexGenNV=wrapper.wrapper(glPathTexGenNV).setInputArraySize(
+    'coeffs', None
+)
+# INPUT glCoverFillPathInstancedNV.paths size not checked against 'numPaths,pathNameType,paths'
+# INPUT glCoverFillPathInstancedNV.transformValues size not checked against 'numPaths,transformType'
+glCoverFillPathInstancedNV=wrapper.wrapper(glCoverFillPathInstancedNV).setInputArraySize(
+    'paths', None
+).setInputArraySize(
+    'transformValues', None
+)
+# INPUT glCoverStrokePathInstancedNV.paths size not checked against 'numPaths,pathNameType,paths'
+# INPUT glCoverStrokePathInstancedNV.transformValues size not checked against 'numPaths,transformType'
+glCoverStrokePathInstancedNV=wrapper.wrapper(glCoverStrokePathInstancedNV).setInputArraySize(
+    'paths', None
+).setInputArraySize(
+    'transformValues', None
+)
+glGetPathParameterivNV=wrapper.wrapper(glGetPathParameterivNV).setInputArraySize(
+    'value', 4
+)
+glGetPathParameterfvNV=wrapper.wrapper(glGetPathParameterfvNV).setInputArraySize(
+    'value', 4
+)
+# INPUT glGetPathCommandsNV.commands size not checked against 'path'
+glGetPathCommandsNV=wrapper.wrapper(glGetPathCommandsNV).setInputArraySize(
+    'commands', None
+)
+# INPUT glGetPathCoordsNV.coords size not checked against 'path'
+glGetPathCoordsNV=wrapper.wrapper(glGetPathCoordsNV).setInputArraySize(
+    'coords', None
+)
+# INPUT glGetPathDashArrayNV.dashArray size not checked against 'path'
+glGetPathDashArrayNV=wrapper.wrapper(glGetPathDashArrayNV).setInputArraySize(
+    'dashArray', None
+)
+# INPUT glGetPathMetricsNV.metrics size not checked against 'metricQueryMask,numPaths,stride'
+# INPUT glGetPathMetricsNV.paths size not checked against 'numPaths,pathNameType,paths'
+glGetPathMetricsNV=wrapper.wrapper(glGetPathMetricsNV).setInputArraySize(
+    'metrics', None
+).setInputArraySize(
+    'paths', None
+)
+# INPUT glGetPathMetricRangeNV.metrics size not checked against 'metricQueryMask,numPaths,stride'
+glGetPathMetricRangeNV=wrapper.wrapper(glGetPathMetricRangeNV).setInputArraySize(
+    'metrics', None
+)
+# INPUT glGetPathSpacingNV.paths size not checked against 'numPaths,pathNameType,paths'
+# INPUT glGetPathSpacingNV.returnedSpacing size not checked against 'pathListMode,numPaths'
+glGetPathSpacingNV=wrapper.wrapper(glGetPathSpacingNV).setInputArraySize(
+    'paths', None
+).setInputArraySize(
+    'returnedSpacing', None
+)
+# INPUT glGetPathColorGenivNV.value size not checked against 'pname'
+glGetPathColorGenivNV=wrapper.wrapper(glGetPathColorGenivNV).setInputArraySize(
+    'value', None
+)
+# INPUT glGetPathColorGenfvNV.value size not checked against 'pname'
+glGetPathColorGenfvNV=wrapper.wrapper(glGetPathColorGenfvNV).setInputArraySize(
+    'value', None
+)
+# INPUT glGetPathTexGenivNV.value size not checked against 'pname'
+glGetPathTexGenivNV=wrapper.wrapper(glGetPathTexGenivNV).setInputArraySize(
+    'value', None
+)
+# INPUT glGetPathTexGenfvNV.value size not checked against 'pname'
+glGetPathTexGenfvNV=wrapper.wrapper(glGetPathTexGenfvNV).setInputArraySize(
+    'value', None
+)
+glPointAlongPathNV=wrapper.wrapper(glPointAlongPathNV).setInputArraySize(
+    'y', 1
+).setInputArraySize(
+    'x', 1
+).setInputArraySize(
+    'tangentY', 1
+).setInputArraySize(
+    'tangentX', 1
+)
 ### END AUTOGENERATED SECTION

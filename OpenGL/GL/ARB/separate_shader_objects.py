@@ -94,12 +94,137 @@ def glInitSeparateShaderObjectsARB():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-glGenProgramPipelines=wrapper.wrapper(glGenProgramPipelines).setOutput(#
+# INPUT glCreateShaderProgramv.strings size not checked against count
+glCreateShaderProgramv=wrapper.wrapper(glCreateShaderProgramv).setInputArraySize(
+    'strings', None
+)
+# INPUT glDeleteProgramPipelines.pipelines size not checked against n
+glDeleteProgramPipelines=wrapper.wrapper(glDeleteProgramPipelines).setInputArraySize(
+    'pipelines', None
+)
+glGenProgramPipelines=wrapper.wrapper(glGenProgramPipelines).setOutput(
     'pipelines',size=lambda x:(x,),pnameArg='n',orPassIn=True
 )
-glGetProgramPipelineiv=wrapper.wrapper(glGetProgramPipelineiv).setOutput(#
+glGetProgramPipelineiv=wrapper.wrapper(glGetProgramPipelineiv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT MULTIPLE glGetProgramPipelineInfoLog
-# OUTPUT MULTIPLE glGetProgramPipelineInfoLog
+glProgramUniform1iv=wrapper.wrapper(glProgramUniform1iv).setInputArraySize(
+    'value', 1
+)
+glProgramUniform1fv=wrapper.wrapper(glProgramUniform1fv).setInputArraySize(
+    'value', 1
+)
+glProgramUniform1dv=wrapper.wrapper(glProgramUniform1dv).setInputArraySize(
+    'value', 1
+)
+glProgramUniform1uiv=wrapper.wrapper(glProgramUniform1uiv).setInputArraySize(
+    'value', 1
+)
+glProgramUniform2iv=wrapper.wrapper(glProgramUniform2iv).setInputArraySize(
+    'value', 2
+)
+glProgramUniform2fv=wrapper.wrapper(glProgramUniform2fv).setInputArraySize(
+    'value', 2
+)
+glProgramUniform2dv=wrapper.wrapper(glProgramUniform2dv).setInputArraySize(
+    'value', 2
+)
+glProgramUniform2uiv=wrapper.wrapper(glProgramUniform2uiv).setInputArraySize(
+    'value', 2
+)
+glProgramUniform3iv=wrapper.wrapper(glProgramUniform3iv).setInputArraySize(
+    'value', 3
+)
+glProgramUniform3fv=wrapper.wrapper(glProgramUniform3fv).setInputArraySize(
+    'value', 3
+)
+glProgramUniform3dv=wrapper.wrapper(glProgramUniform3dv).setInputArraySize(
+    'value', 3
+)
+glProgramUniform3uiv=wrapper.wrapper(glProgramUniform3uiv).setInputArraySize(
+    'value', 3
+)
+glProgramUniform4iv=wrapper.wrapper(glProgramUniform4iv).setInputArraySize(
+    'value', 4
+)
+glProgramUniform4fv=wrapper.wrapper(glProgramUniform4fv).setInputArraySize(
+    'value', 4
+)
+glProgramUniform4dv=wrapper.wrapper(glProgramUniform4dv).setInputArraySize(
+    'value', 4
+)
+glProgramUniform4uiv=wrapper.wrapper(glProgramUniform4uiv).setInputArraySize(
+    'value', 4
+)
+glProgramUniformMatrix2fv=wrapper.wrapper(glProgramUniformMatrix2fv).setInputArraySize(
+    'value', 2
+)
+glProgramUniformMatrix3fv=wrapper.wrapper(glProgramUniformMatrix3fv).setInputArraySize(
+    'value', 3
+)
+glProgramUniformMatrix4fv=wrapper.wrapper(glProgramUniformMatrix4fv).setInputArraySize(
+    'value', 4
+)
+glProgramUniformMatrix2dv=wrapper.wrapper(glProgramUniformMatrix2dv).setInputArraySize(
+    'value', 2
+)
+glProgramUniformMatrix3dv=wrapper.wrapper(glProgramUniformMatrix3dv).setInputArraySize(
+    'value', 3
+)
+glProgramUniformMatrix4dv=wrapper.wrapper(glProgramUniformMatrix4dv).setInputArraySize(
+    'value', 4
+)
+# INPUT glProgramUniformMatrix2x3fv.value size not checked against count
+glProgramUniformMatrix2x3fv=wrapper.wrapper(glProgramUniformMatrix2x3fv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix3x2fv.value size not checked against count
+glProgramUniformMatrix3x2fv=wrapper.wrapper(glProgramUniformMatrix3x2fv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix2x4fv.value size not checked against count
+glProgramUniformMatrix2x4fv=wrapper.wrapper(glProgramUniformMatrix2x4fv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix4x2fv.value size not checked against count
+glProgramUniformMatrix4x2fv=wrapper.wrapper(glProgramUniformMatrix4x2fv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix3x4fv.value size not checked against count
+glProgramUniformMatrix3x4fv=wrapper.wrapper(glProgramUniformMatrix3x4fv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix4x3fv.value size not checked against count
+glProgramUniformMatrix4x3fv=wrapper.wrapper(glProgramUniformMatrix4x3fv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix2x3dv.value size not checked against count
+glProgramUniformMatrix2x3dv=wrapper.wrapper(glProgramUniformMatrix2x3dv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix3x2dv.value size not checked against count
+glProgramUniformMatrix3x2dv=wrapper.wrapper(glProgramUniformMatrix3x2dv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix2x4dv.value size not checked against count
+glProgramUniformMatrix2x4dv=wrapper.wrapper(glProgramUniformMatrix2x4dv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix4x2dv.value size not checked against count
+glProgramUniformMatrix4x2dv=wrapper.wrapper(glProgramUniformMatrix4x2dv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix3x4dv.value size not checked against count
+glProgramUniformMatrix3x4dv=wrapper.wrapper(glProgramUniformMatrix3x4dv).setInputArraySize(
+    'value', None
+)
+# INPUT glProgramUniformMatrix4x3dv.value size not checked against count
+glProgramUniformMatrix4x3dv=wrapper.wrapper(glProgramUniformMatrix4x3dv).setInputArraySize(
+    'value', None
+)
+glGetProgramPipelineInfoLog=wrapper.wrapper(glGetProgramPipelineInfoLog).setOutput(
+    'length',size=(1,),orPassIn=True
+).setOutput(
+    'infoLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+)
 ### END AUTOGENERATED SECTION

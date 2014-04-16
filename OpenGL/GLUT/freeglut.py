@@ -9,6 +9,7 @@ from OpenGL import platform, arrays
 from OpenGL import constant
 FUNCTION_TYPE = platform.PLATFORM.functionTypeFor( platform.PLATFORM.GLUT )
 from OpenGL.GLUT import special
+from OpenGL import wrapper as _wrapper
 from OpenGL.raw.GL._types import *
 
 import ctypes
@@ -181,18 +182,6 @@ glutBitmapString = platform.createBaseFunction(
     doc='glutBitmapString( c_void_p(font), POINTER(c_ubyte)(string) ) -> None', 
     argNames=('font', 'string'),
 )
-##glutBitmapString = platform.createBaseFunction( 
-##	'glutBitmapString', dll=platform.PLATFORM.GLUT, resultType=None, 
-##	argTypes=[c_void_p, arrays.GLubyteArray],
-##	doc='glutBitmapString( c_void_p(font), POINTER(c_ubyte)(string) ) -> None', 
-##	argNames=('font', 'string'),
-##)
-##glutBitmapString = arrays.setInputArraySizeType(
-##	glutBitmapString,
-##	None, 
-##	arrays.GLubyteArray, 
-##	'string',
-##)
 
 # /usr/include/GL/freeglut_ext.h 91
 glutStrokeString = platform.createBaseFunction( 
@@ -201,18 +190,6 @@ glutStrokeString = platform.createBaseFunction(
     doc='glutStrokeString( c_void_p(font), POINTER(c_ubyte)(string) ) -> None', 
     argNames=('font', 'string'),
 )
-##glutStrokeString = platform.createBaseFunction( 
-##	'glutStrokeString', dll=platform.PLATFORM.GLUT, resultType=None, 
-##	argTypes=[c_void_p, arrays.GLubyteArray],
-##	doc='glutStrokeString( c_void_p(font), POINTER(c_ubyte)(string) ) -> None', 
-##	argNames=('font', 'string'),
-##)
-##glutStrokeString = arrays.setInputArraySizeType(
-##	glutStrokeString,
-##	None, 
-##	arrays.GLubyteArray, 
-##	'string',
-##)
 
 # /usr/include/GL/freeglut_ext.h 96
 glutWireRhombicDodecahedron = platform.createBaseFunction( 
@@ -238,10 +215,7 @@ glutWireSierpinskiSponge = platform.createBaseFunction(
     argNames=('num_levels', 'offset', 'scale'),
 )
 
-glutWireSierpinskiSponge = arrays.setInputArraySizeType(
-    glutWireSierpinskiSponge,
-    None, # XXX Could not determine size of argument offset for glutWireSierpinskiSponge arrays.GLdoubleArray
-    arrays.GLdoubleArray, 
+glutWireSierpinskiSponge = _wrapper.wrapper( glutWireSierpinskiSponge ).setInputArraySize(
     'offset',
 )
 
@@ -253,10 +227,7 @@ glutSolidSierpinskiSponge = platform.createBaseFunction(
     argNames=('num_levels', 'offset', 'scale'),
 )
 
-glutSolidSierpinskiSponge = arrays.setInputArraySizeType(
-    glutSolidSierpinskiSponge,
-    None, # XXX Could not determine size of argument offset for glutSolidSierpinskiSponge arrays.GLdoubleArray
-    arrays.GLdoubleArray, 
+glutSolidSierpinskiSponge = _wrapper.wrapper( glutSolidSierpinskiSponge ).setInputArraySize(
     'offset',
 )
 

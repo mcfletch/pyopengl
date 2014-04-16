@@ -3,7 +3,7 @@ from OpenGL.raw import GLU as _simple
 from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL.platform import createBaseFunction
 from OpenGL.GLU import glustruct
-from OpenGL import arrays
+from OpenGL import arrays, wrapper
 from OpenGL.platform import PLATFORM
 GLU = PLATFORM.GLU
 from OpenGL.lazywrapper import lazy as _lazy
@@ -208,11 +208,9 @@ def gluGetTessProperty( baseFunction, tess, which, data=None ):
     else:
         return baseFunction( tess, which, data )
 
-gluTessVertexBase = arrays.setInputArraySizeType(
-    _simple.gluTessVertex,
-    3,
-    arrays.GLdoubleArray,
+gluTessVertexBase = wrapper.wrapper( _simple.gluTessVertex ).setInputArraySize(
     'location',
+    3,
 )
 
 __all__ = (
