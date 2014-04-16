@@ -296,8 +296,12 @@ cdef class Output(cArgConverter):
     def oldStyleReturn( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
         """Retrieve cArgs[ self.index ]"""
         #TODO: make this a c_api-bearing value, not a Python function call
+        cdef tuple thisSize
         result = cArgs[ self.outIndex ]
-        cdef tuple thisSize = self.c_getSize(pyArgs)
+        try:
+            thisSize = self.c_getSize(pyArgs)
+        except KeyError as err:
+            return result
         if thisSize == (1,):
             try:
                 return result[0]
