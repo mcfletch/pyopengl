@@ -227,7 +227,6 @@ cdef class ArrayDatatype:
             return (<FormatHandler>handler).c_zeros( 
                 dims, typeCode 
             )
-        print 'handler', handler
         return handler.zeros( 
             dims, typeCode
         )
