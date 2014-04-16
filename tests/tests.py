@@ -29,8 +29,8 @@ def have_python( python ):
     
 
 def main():
-    for python in [p for p in PYTHONS if have_python(p)]:
-        for flag in FLAGS:
+    for flag in FLAGS:
+        for python in [p for p in PYTHONS if have_python(p)]:
             for b in [True,False]:
                 env = os.environ.copy()
                 env['PYOPENGL_'+ flag] = str(b)
