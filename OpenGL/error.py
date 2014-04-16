@@ -10,9 +10,10 @@ throughout the system.
 import logging
 _log = logging.getLogger( 'OpenGL.error' )
 from OpenGL import platform, _configflags
+from ctypes import ArgumentError
 __all__ = (
     "Error",'GLError','GLUError','GLUTError',
-    'GLerror','GLUerror','GLUTerror',
+    'GLerror','GLUerror','GLUTerror','ArgumentError',
 )
 
 class Error( Exception ):
