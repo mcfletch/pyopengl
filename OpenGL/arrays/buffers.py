@@ -36,12 +36,22 @@ if not BufferHandler:
         """Buffer-protocol data-type handler for OpenGL"""
         isOutput=False
         ERROR_ON_COPY = _configflags.ERROR_ON_COPY
-        @classmethod
-        def from_param( cls, value, typeCode=None ):
-            if not isinstance( value, _buffers.Py_buffer ):
-                value = cls.asArray( value )
-                #raise TypeError( """Can't convert value to py-buffer in from_param""" )
-            return value
+        if sys.version_info[:2] >= (3,0):
+            @classmethod
+            def from_param( cls, value, typeCode=None ):
+                if not isinstance( value, _buffers.Py_buffer ):
+                    value = cls.asArray( value )
+                    #raise TypeError( """Can't convert value to py-buffer in from_param""" )
+                return value
+        else:
+            # Not sure *why* 2.7 segfaults with the "use a buffer as the buffer"
+            # version above, but it works fine with the value.buf here
+            @classmethod
+            def from_param( cls, value, typeCode=None ):
+                if not isinstance( value, _buffers.Py_buffer ):
+                    value = cls.asArray( value )
+                    #raise TypeError( """Can't convert value to py-buffer in from_param""" )
+                return value.buf
         def dataPointer( value ):
             if not isinstance( value, _buffers.Py_buffer ):
                 value = _buffers.Py_buffer.from_object( value )
