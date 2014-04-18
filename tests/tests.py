@@ -3,10 +3,12 @@
 import os,sys,subprocess,logging 
 log = logging.getLogger( 'overallrunner' )
 PYTHONS = [
-    'python2.6', 
     'python2.7',
-    'python3.3', # Don't have pygame for python3.3 on Ubuntu
+    'python3.3',
     'python3.4',
+    # python2.6 support is less important than the above at this point,
+    # and doing a --user install clobbers 2.7's version of the packages
+    #'python2.6', 
 ]
 FLAGS = [
     'USE_ACCELERATE',
@@ -34,8 +36,11 @@ def main():
             for b in [True,False]:
                 env = os.environ.copy()
                 env['PYOPENGL_'+ flag] = str(b)
-                log.info( 'Starting PYOPENGL_%s=%s %s test_core.py -f',flag, b, python)
-                subprocess.check_call( [python,'test_core.py','-f'], env=env)
+                command = [python,'test_core.py']
+                if python != 'python2.6':
+                    command.append( '-f')
+                log.info( 'Starting PYOPENGL_%s=%s %s',flag, b, ' '.join(command))
+                subprocess.check_call( command, env=env)
 
 if __name__ == "__main__":
     logging.basicConfig( level = logging.INFO )
