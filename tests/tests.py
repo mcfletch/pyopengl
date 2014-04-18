@@ -3,11 +3,13 @@
 import os,sys,subprocess,logging 
 log = logging.getLogger( 'overallrunner' )
 PYTHONS = [
+    # order is so that most-important platforms are checked first
     'python2.7',
-    'python3.3',
     'python3.4',
+    'python3.3',
     # python2.6 support is less important than the above at this point,
     # and doing a --user install clobbers 2.7's version of the packages
+    # should use a virtualenv for all of them, really...
     #'python2.6', 
 ]
 FLAGS = [

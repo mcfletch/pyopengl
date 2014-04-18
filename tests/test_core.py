@@ -22,7 +22,7 @@ OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
 OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING = True
 
-from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode, long
+from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode, long, as_8_bit
 from OpenGL.GL import *
 try:
     glGetError()
@@ -233,7 +233,7 @@ class Tests( unittest.TestCase ):
         else:
             assert not OpenGL.ERROR_CHECKING, """No error on invalid glColorPointer"""
         try:
-            glBitmap(-1,-1,0,0,0,0,"")
+            glBitmap(-1,-1,0,0,0,0,as_8_bit(""))
         except Exception as err:
             assert err.err in (1281,1282), ("""Expected invalid value (1281) or invalid operation (1282)""", err.err)
         else:
