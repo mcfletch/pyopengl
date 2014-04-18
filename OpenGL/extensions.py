@@ -232,11 +232,11 @@ class _Alternate( LateBind ):
         """Call, doing a late lookup and bind to find an implementation"""
         for alternate in self._alternatives:
             if alternate:
-                _log.info(
-                    """Chose alternate: %s from %s""",
-                    alternate.__name__,
-                    ", ".join([x.__name__ for x in self._alternatives])
-                )
+#                _log.info(
+#                    """Chose alternate: %s from %s""",
+#                    alternate.__name__,
+#                    ", ".join([x.__name__ for x in self._alternatives])
+#                )
                 return alternate
         from OpenGL import error
         raise error.NullFunctionError(
