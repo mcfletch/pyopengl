@@ -41,7 +41,7 @@ if not BufferHandler:
             if not isinstance( value, _buffers.Py_buffer ):
                 value = cls.asArray( value )
                 #raise TypeError( """Can't convert value to py-buffer in from_param""" )
-            return value.buf
+            return value
         def dataPointer( value ):
             if not isinstance( value, _buffers.Py_buffer ):
                 value = _buffers.Py_buffer.from_object( value )

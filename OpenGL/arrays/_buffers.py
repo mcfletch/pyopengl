@@ -29,10 +29,9 @@ _fields_ = [
 ]
 
 
-if sys.version_info[:2] < (2,7) or sys.version_info[:2] >= (3,3):
-    # 2.7.5 documentation is incorrect about the structure, it is actually 
-    # the Python 3.[1/2] version of the struct, so only 2.6 needs the different 
-    # form
+if sys.version_info[:2] <= (2,6) or sys.version_info[:2] >= (3,3):
+    # Original structure was eventually restored in 3.3, so just 
+    # 2.7 through 3.2 uses the "enhanced" structure below
     _fields_.extend( [
         ('internal',ctypes.c_void_p),
     ] )
