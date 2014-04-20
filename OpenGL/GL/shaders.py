@@ -103,7 +103,7 @@ class ShaderProgram( int ):
         validation = glGetProgramiv( self, GL_VALIDATE_STATUS )
         if validation == GL_FALSE:
             raise RuntimeError(
-                """Validation failure (%s): %s"""%(
+                """Validation failure (%r): %s"""%(
                 validation,
                 glGetProgramInfoLog( self ),
             ))
