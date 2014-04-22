@@ -1108,12 +1108,22 @@ class Tests( unittest.TestCase ):
         shader = glCreateShader(GL_VERTEX_SHADER)
         SAMPLE_SHADER = '''#version 330
         void main() { gl_Position = vec4(0,0,0,0);}'''
+        if OpenGL.ERROR_ON_COPY:
+            SAMPLE_SHADER = as_8_bit( SAMPLE_SHADER )
         glShaderSource(shader, SAMPLE_SHADER)
         glCompileShader(shader)
         if not bool(glGetShaderiv(shader, GL_COMPILE_STATUS)) == True:
             print('Info log:')
             print(glGetShaderInfoLog(shader))
             assert False, """Failed to compile"""
+    
+    def test_gen_framebuffers_twice( self ):
+        framebuffer = glGenFramebuffersEXT(1)
+        f1 = glGenFramebuffersEXT(1)
+        f2 = glGenFramebuffersEXT(1)
+        assert f1 != f2, (f1,f2)
+        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, f2)
+        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0)
         
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
