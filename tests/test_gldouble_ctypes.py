@@ -64,9 +64,9 @@ def idle():
         glutDestroyWindow( window )
         print('window destroyed')
         try:
-            fgDeinitialize(False)
+            if fgDeinitialize: fgDeinitialize(False)
         except NameError as err:
-            pass
+            pass # Older PyOpenGL, you may see a seg-fault here...
         import sys
         sys.exit( 0 )
 

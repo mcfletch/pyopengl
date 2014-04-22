@@ -9,4 +9,8 @@ if __name__ == "__main__":
         raise
     else:
         print('accepted 0 arguments, as desired')
+        try:
+            if fgDeinitialize: fgDeinitialize(False)
+        except NameError as err:
+            pass # Older PyOpenGL, you may see a seg-fault here...
     

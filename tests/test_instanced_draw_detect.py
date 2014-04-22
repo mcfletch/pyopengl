@@ -25,6 +25,10 @@ def detect():
     any = alternate( *functions )
     
     print(any, bool(any))
+    try:
+        if fgDeinitialize: fgDeinitialize(False)
+    except NameError as err:
+        pass # Older PyOpenGL, you may see a seg-fault here...
     
 
 if __name__ == "__main__":

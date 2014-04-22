@@ -7,3 +7,7 @@ if __name__ == "__main__":
     window = glutCreateWindow("hello")
     glutDisplayFunc( lambda *args: 1 )
     #glutMainLoop()
+    try:
+        if fgDeinitialize: fgDeinitialize(False)
+    except NameError as err:
+        pass # Older PyOpenGL, you may see a seg-fault here...

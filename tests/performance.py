@@ -77,6 +77,10 @@ def display( ):
             ))
         PROFILER.runcall( x )
     dump()
+    try:
+        if fgDeinitialize: fgDeinitialize(False)
+    except NameError as err:
+        pass # Older PyOpenGL, you may see a seg-fault here...
     import sys
     sys.exit(1)
     print('should not get here')
@@ -90,3 +94,4 @@ if __name__ == "__main__":
     window = glutCreateWindow("hello")
     glutDisplayFunc(display)
     glutMainLoop()
+    
