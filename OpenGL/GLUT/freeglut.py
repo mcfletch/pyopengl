@@ -288,3 +288,17 @@ glutGetModeValues = platform.createBaseFunction(
     doc='glutInitContextVersion( GLenum(mode), POINTER(GLint)(size) ) -> POINTER(GLint)',
     argNames = ('mode','size'),
 )
+
+fgDeinitialize = platform.createBaseFunction(
+    'fgDeinitialize', dll=platform.PLATFORM.GLUT, resultType = None,
+    argTypes=[GLint],
+    doc ='''fgDeinitialize () -> None
+    
+Exposed to allow client code to work around an AMD/FGLRX bug on 
+GLX platforms. FGLRX and FreeGLUT both register cleanup functions 
+that unless registered in the correct order, will cause seg-faults.
+
+To work around this, call fgDeinitialize(False) before doing a 
+sys.exit() or similar call that terminates your GLUT mainloop.
+''',
+)
