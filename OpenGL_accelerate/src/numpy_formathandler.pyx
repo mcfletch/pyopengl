@@ -74,7 +74,7 @@ cdef class NumpyHandler(FormatHandler):
 		cdef np.ndarray c_dims
 		try:
 			c_dims = PyArray_ContiguousFromAny( 
-				dims, np.NPY_INTP, 1,1 
+				[int(x) for x in dims], np.NPY_INTP, 1,1 
 			)
 		except (ValueError,TypeError), err:
 			dims = (int(dims),)
