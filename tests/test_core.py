@@ -1103,6 +1103,17 @@ class Tests( unittest.TestCase ):
     
     def test_get_read_fb_binding( self ):
         glGetInteger(GL_READ_FRAMEBUFFER_BINDING)
+    
+    def test_shader_compile_string( self ):
+        shader = glCreateShader(GL_VERTEX_SHADER)
+        SAMPLE_SHADER = '''#version 330
+        void main() { gl_Position = vec4(0,0,0,0);}'''
+        glShaderSource(shader, SAMPLE_SHADER)
+        glCompileShader(shader)
+        if not bool(glGetShaderiv(shader, GL_COMPILE_STATUS)) == True:
+            print('Info log:')
+            print(glGetShaderInfoLog(shader))
+            assert False, """Failed to compile"""
         
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
