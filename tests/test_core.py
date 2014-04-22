@@ -834,7 +834,7 @@ class Tests( unittest.TestCase ):
         """Test that we can run glGet... on registered constants without crashing..."""
         from OpenGL.raw.GL import _glgets
         for key,value in _glgets._glget_size_mapping.items():
-            print( 'Trying glGetFloatv( 0x%x )'%(key,))
+            #print( 'Trying glGetFloatv( 0x%x )'%(key,))
             try:
                 result = glGetFloatv( key )
             except error.GLError as err:
