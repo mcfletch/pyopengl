@@ -63,6 +63,10 @@ def idle():
     else:
         glutDestroyWindow( window )
         print('window destroyed')
+        try:
+            fgDeinitialize(False)
+        except NameError as err:
+            pass
         import sys
         sys.exit( 0 )
 
