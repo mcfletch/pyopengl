@@ -823,6 +823,34 @@ class Tests( unittest.TestCase ):
         else:
             assert not glShaderSource
             assert not glUniform1f
+    
+    def test_lookupint( self ):
+        from OpenGL.raw.GL import _lookupint 
+        l = _lookupint.LookupInt( GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLint )
+        result = int(l)
+        assert result, "No compressed textures on this platform? that seems unlikely"
+    
+    def test_glget( self ):
+        """Test that we can run glGet... on registered constants without crashing..."""
+        from OpenGL.raw.GL import _glgets
+        for key,value in _glgets._glget_size_mapping.items():
+            print( 'Trying glGetFloatv( 0x%x )'%(key,))
+            try:
+                result = glGetFloatv( key )
+            except error.GLError as err:
+                if err.err == GL_INVALID_ENUM:
+                    pass
+                elif err.err == GL_INVALID_OPERATION:
+                    if key == 0x882d: # gl draw buffer 
+                        pass
+                else:
+                    raise 
+            else:
+                if value == (1,) and OpenGL.SIZE_1_ARRAY_UNPACK:
+                    result = float(result)
+                else:
+                    assert ArrayDatatype.dimensions( result ) == value, result
+    
     def test_tess_collection( self ):
         """SF#2354596 tessellation combine results collected"""
         all_vertices = []
