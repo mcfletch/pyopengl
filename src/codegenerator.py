@@ -147,10 +147,15 @@ def %(name)s(%(argNames)s):pass"""
                     if value:
                         table[line[0].strip('"')] = value
         # now make sure everything registered in the xml file is present...
-        for name in self.registry.enum_groups.get('GetPName',[]):
-            if name not in table:
-                log.info( 'New Get PName: %r', name )
-                table[name] = ''
+        output_group_names = {}
+        for function in self.registry.command_set.values():
+            output_group_names.update( function.output_groups )
+        for output_group in output_group_names.keys():
+            log.debug( 'Output parameter group: %s', output_group )
+            for name in self.registry.enum_groups.get(output_group,[]):
+                if name not in table:
+                    log.info( 'New %s value: %r', output_group, name )
+                    table[name] = ''
         return table
     def saveGLGetSizes( self ):
         """Save out sorted list of glGet sizes to disk"""
@@ -296,7 +301,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         try:
             statements = []
             for function in self.registry.commands():
-                dependencies = function.size_dependencies()
+                dependencies = function.size_dependencies
                 if dependencies: # temporarily just do single-output functions...
                     base = []
                     for param,dependency in dependencies.items():

@@ -1,8 +1,9 @@
 #! /usr/bin/env python
 """Registry for loading Khronos API definitions from XML files"""
 from lxml import etree as ET
-import os, sys, time, json
+import os, sys, time, json, logging
 from OpenGL._bytes import as_8_bit
+log = logging.getLogger( __name__ )
 HERE = os.path.dirname( __file__ )
 
 LENGTH_OVERRIDES={
@@ -35,6 +36,7 @@ class Registry( object ):
         self.feature_set = {}
         self.extension_set = {}
         self.output_mapping = json.loads( open( os.path.join( HERE, 'gl_out_parameters.json' )).read())
+        self.output_enum_groups = {}
         
     def load( self, tree ):
         """Load an lxml.etree structure into our internal descriptions"""
@@ -200,6 +202,8 @@ class Command( object ):
         self.lengths = lengths or {}
         self.groups = groups or {}
         self.outputs = outputs or {}
+        self.output_groups = {}
+        self.size_dependencies = self.calculate_sizes()
     def __repr__( self ):
         return '%s %s( %s )'%( 
             self.returnType, 
@@ -209,7 +213,7 @@ class Command( object ):
                 for (typ,name) in zip( self.argTypes,self.argNames )
             ])
         )
-    def size_dependencies( self ):
+    def calculate_sizes( self ):
         result = []
         other_lengths = self.lengths.copy()
         for target in self.outputs.keys():
@@ -227,7 +231,14 @@ class Command( object ):
                 result.append( (target, Output() ))
             elif definition.startswith( 'COMPSIZE' ):
                 variables = definition[8:].strip('()').split(',')
-                result.append( (target,Compsize( variables )))
+                output_groups = {}
+                if len(variables) == 1:
+                    # for now we only support automated single-dependency wrapping...
+                    for var in variables:
+                        if var in self.groups:
+                            output_groups.setdefault( self.groups[var], []).append( target )
+                    self.output_groups.update( output_groups )
+                result.append( (target,Compsize( variables, output_groups )))
             elif definition.isdigit():
                 result.append( (target,Staticsize( int(definition,10))))
             elif '*' in definition:
@@ -274,6 +285,10 @@ class Output( object ):
     """Unsized output parameter"""
 class Compsize( list ):
     """Compute size based on other variables"""
+    def __init__( self, iterable, groups=None ):
+        super( Compsize,self ).__init__( iterable )
+        self.groups = groups
+
 class Staticsize( int ):
     """Static output array size"""
 class Dynamicsize( str ):
