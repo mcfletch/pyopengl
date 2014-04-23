@@ -49,3 +49,4 @@ src/khronosapi
 .ropeproject
 tests/output.ppm
 mmap-test-data.dat
+src/regal
