@@ -145,7 +145,7 @@ def %(name)s(%(argNames)s):pass"""
                         if v
                     ]
                     if value:
-                        table[line[0].strip('"')] = value
+                        table[line[0].strip('"').strip()] = value
         # now make sure everything registered in the xml file is present...
         output_group_names = {}
         for function in self.registry.command_set.values():
