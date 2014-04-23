@@ -1,13 +1,21 @@
 #! /usr/bin/env python
 """Script to check our glgetsizes against regal's..."""
-import os, sys, logging 
+import os, sys, logging, subprocess
 import codegenerator, ctypetopytype, xmlreg
 log = logging.getLogger( __name__ )
 HERE = os.path.dirname( __file__ )
-regal_file = os.path.join( HERE, '..','..','regal', 'src','apitrace','wrappers','regaltrace.cpp' )
+REGAL = os.path.join( HERE, 'regal' )
+def update_regal():
+    if not os.path.exists( REGAL ):
+        command= 'git clone http://git.chromium.org/external/p3/regal.git regal'
+    else:
+        command= 'cd %s && git pull'%(REGAL,)
+    log.info( 'Running: %s', command )
+    subprocess.check_call( command, shell=True )
+    return os.path.join( REGAL,'src','apitrace','wrappers','regaltrace.cpp' )
 
 def load_chromium():
-    content = open( regal_file ).read()
+    content = open( update_regal() ).read()
     content = content[content.index('_gl_param_size('):]
     content = content.splitlines()[1:]
     mapping = {}
