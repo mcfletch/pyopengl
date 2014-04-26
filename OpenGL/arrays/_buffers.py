@@ -98,3 +98,30 @@ GetBuffer.restype = ctypes.c_int
 ReleaseBuffer = ctypes.pythonapi.PyBuffer_Release
 ReleaseBuffer.argtypes = [ BUFFER_POINTER ]
 ReleaseBuffer.restype = None
+
+BYTE_SIZES = {
+    0x1400: 1,#GL_BYTE
+    0x1401: 1,#GL_UNSIGNED_BYTE
+    0x1402: 2,#GL_SHORT
+    0x1403: 2,#GL_UNSIGNED_SHORT
+    0x1404: 4,#GL_INT
+    0x1405: 4,#GL_UNSIGNED_INT
+    0x1406: 4,#GL_FLOAT
+    0x140a: 8,#GL_DOUBLE
+}
+
+ARRAY_TO_GL_TYPE_MAPPING = {
+    'c': 0x1401,#GL_UNSIGNED_BYTE
+    'f': 0x1406,#GL_FLOAT
+    'b': 0x1400,#GL_BYTE
+    'i': 0x1404,#GL_INT
+    'l': 0x1404,#GL_INT
+    '?': 0x1404,#GL_INT # Boolean 
+    'd': 0x140a,#GL_DOUBLE
+    'L': 0x1405,#GL_UNSIGNED_INT
+    'h': 0x1402,#GL_SHORT
+    'H': 0x1403,#GL_UNSIGNED_SHORT
+    'B': 0x1401,#GL_UNSIGNED_BYTE
+    'I': 0x1405,#GL_UNSIGNED_INT    
+    None: None,
+}

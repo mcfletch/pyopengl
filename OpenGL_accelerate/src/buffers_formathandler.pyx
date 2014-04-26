@@ -47,25 +47,20 @@ cdef extern from "Python.h":
     bint PyMemoryView_Check(object obj)
     Py_buffer *PyMemoryView_GET_BUFFER(object obj)
 
-
 cdef class MemoryviewHandler(FormatHandler):
     cdef public dict array_to_gl_constant
     cdef public dict gl_constant_to_array
     isOutput = True
     
-    def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):
+    def __init__( self, ERROR_ON_COPY=None, a_to_gl=None ):
         if ERROR_ON_COPY is None:
             from OpenGL import _configflags
             ERROR_ON_COPY = _configflags.ERROR_ON_COPY
         if a_to_gl is None:
-            from OpenGL.arrays.numpymodule import ARRAY_TO_GL_TYPE_MAPPING
+            from OpenGL.arrays._buffers import ARRAY_TO_GL_TYPE_MAPPING
             a_to_gl = ARRAY_TO_GL_TYPE_MAPPING
-        if gl_to_a is None:
-            from OpenGL.arrays.numpymodule import GL_TYPE_TO_ARRAY_MAPPING
-            gl_to_a = GL_TYPE_TO_ARRAY_MAPPING
         self.ERROR_ON_COPY = ERROR_ON_COPY
         self.array_to_gl_constant = a_to_gl
-        self.gl_constant_to_array = gl_to_a
 
     cdef object c_as_memoryview( self, object instance ):
         """Ensure instance is a memory view instance or make it one"""
