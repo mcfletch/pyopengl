@@ -148,9 +148,8 @@ class Tests( unittest.TestCase ):
         def test_nurbs_raw_arrays( self ):
             """Test nurbs rendering using raw API calls with arrays"""
             from OpenGL.raw import GLU 
-            import numpy
-            knots = numpy.array( ( 0,0,0,0,1,1,1,1 ), 'f' )
-            ctlpoints = numpy.array( [[[-3., -3., -3.],
+            knots = array( ( 0,0,0,0,1,1,1,1 ), 'f' )
+            ctlpoints = array( [[[-3., -3., -3.],
                 [-3., -1., -3.],
                 [-3.,  1., -3.],
                 [-3.,  3., -3.]],
@@ -415,8 +414,7 @@ class Tests( unittest.TestCase ):
     if array:
         def test_numpyConversion( self ):
             """Test that we can run a numpy conversion from double to float for glColorArray"""
-            import numpy
-            a = numpy.arange( 0,1.2, .1, 'd' ).reshape( (-1,3 ))
+            a = arange( 0,1.2, .1, 'd' ).reshape( (-1,3 ))
             glEnableClientState(GL_VERTEX_ARRAY)
             try:
                 glColorPointerf( a )
@@ -436,8 +434,7 @@ class Tests( unittest.TestCase ):
             glMatrixMode(GL_MODELVIEW)
             glPushMatrix( )
             try:
-                import numpy
-                transf = numpy.identity(4, dtype=numpy.float32)
+                transf = identity(4, dtype=float32)
                 # some arbitrary transformation...
                 transf[0,3] = 2.5
                 transf[2,3] = -80
@@ -458,7 +455,7 @@ class Tests( unittest.TestCase ):
                 #glMultMatrixf(transf.transpose().copy())
                 transposed = glGetFloatv(GL_MODELVIEW_MATRIX)
 
-                assert not numpy.allclose( transposed, untransposed ), (transposed, untransposed)
+                assert not allclose( transposed, untransposed ), (transposed, untransposed)
                 
                 t2 = transf.transpose()
                 # This doesn't work:
@@ -468,7 +465,7 @@ class Tests( unittest.TestCase ):
                 #glMultMatrixf(transf.transpose().copy())
                 transposed = glGetFloatv(GL_MODELVIEW_MATRIX)
                 
-                assert not numpy.allclose( transposed, untransposed ), (transposed, untransposed)
+                assert not allclose( transposed, untransposed ), (transposed, untransposed)
             finally:
                 glMatrixMode(GL_MODELVIEW)
                 glPopMatrix()
@@ -488,33 +485,10 @@ class Tests( unittest.TestCase ):
                 if not shouldWork:
                     raise RuntimeError( """Expected failure for non-float value %s, succeeded"""%( notFloat, ))
     someData = [ (0,255,0)]
-    def test_glAreTexturesResident( self ):
-        """Test that PyOpenGL api for glAreTexturesResident is working
-        
-        Note: not currently working on AMD64 Linux for some reason
-        """
-        import numpy
+    def test_passBackResults( self ):
+        """Test ALLOW_NUMPY_SCALARS to allow numpy scalars to be passed in"""
         textures = glGenTextures(2)
-        residents = []
-        data = numpy.array( self.someData,'i' )
-        for texture in textures:
-            glBindTexture( GL_TEXTURE_2D,int(texture) )
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 1, 1, 0, GL_RGB, GL_INT, data)
-            residents.append(
-                glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_RESIDENT )
-            )
-        glGetError()
-        result = glAreTexturesResident( textures)
-        assert len(result) == 2
-        for (tex,expected,found) in zip( textures, residents, result ):
-            if expected != found:
-                print(('Warning: texture %s residence expected %s got %s'%( tex, expected, found )))
-        
-    if OpenGL.ALLOW_NUMPY_SCALARS:
-        def test_passBackResults( self ):
-            """Test ALLOW_NUMPY_SCALARS to allow numpy scalars to be passed in"""
-            textures = glGenTextures(2)
-            glBindTexture( GL_TEXTURE_2D, textures[0] )
+        glBindTexture( GL_TEXTURE_2D, textures[0] )
     if array:
         def test_arrayTranspose( self ):
             import numpy
@@ -533,7 +507,27 @@ class Tests( unittest.TestCase ):
             glMultMatrixd( t )
 
             m = glGetFloatv( GL_MODELVIEW_MATRIX )
-            assert numpy.allclose( m[-1], [0,0,0,1] ), m
+            assert allclose( m[-1], [0,0,0,1] ), m
+        def test_glAreTexturesResident( self ):
+            """Test that PyOpenGL api for glAreTexturesResident is working
+            
+            Note: not currently working on AMD64 Linux for some reason
+            """
+            textures = glGenTextures(2)
+            residents = []
+            data = array( self.someData,'i' )
+            for texture in textures:
+                glBindTexture( GL_TEXTURE_2D,int(texture) )
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 1, 1, 0, GL_RGB, GL_INT, data)
+                residents.append(
+                    glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_RESIDENT )
+                )
+            glGetError()
+            result = glAreTexturesResident( textures)
+            assert len(result) == 2
+            for (tex,expected,found) in zip( textures, residents, result ):
+                if expected != found:
+                    print(('Warning: texture %s residence expected %s got %s'%( tex, expected, found )))
     def test_glreadpixelsf( self ):
         """Issue #1979002 crash due to mis-calculation of resulting array size"""
         width,height = self.width, self.height
@@ -566,7 +560,7 @@ class Tests( unittest.TestCase ):
             fh.write( _NULL_8_BYTE*(32*32*3+1))
             fh.flush()
             fh.close()
-            # using numpy.memmap here...
+            # using memmap here...
             data = memmap( 'mmap-test-data.dat' )
             for i in range( 0,255,2 ):
                 glDrawPixels( 32,32, GL_RGB, GL_UNSIGNED_BYTE, data, )
@@ -578,11 +572,10 @@ class Tests( unittest.TestCase ):
     if array:
         def test_vbo( self ):
             """Test utility vbo wrapper"""
-            import numpy
             from OpenGL.arrays import vbo
             assert vbo.get_implementation()
             dt = arraydatatype.GLdoubleArray
-            array = numpy.array( [
+            points = array( [
                 [0,0,0],
                 [0,1,0],
                 [1,.5,0],
@@ -590,11 +583,11 @@ class Tests( unittest.TestCase ):
                 [1.5,.5,0],
                 [1.5,0,0],
             ], dtype='d')
-            indices = numpy.array(
-                range(len(array)),
+            indices = array(
+                range(len(points)),
                 ['i','I'][bool(OpenGL.ERROR_ON_COPY)], # test coercion if we can
             )
-            d = vbo.VBO(array)
+            d = vbo.VBO(points)
             glDisable( GL_CULL_FACE )
             glNormal3f( 0,0,1 )
             glColor3f( 1,1,1 )
@@ -607,7 +600,7 @@ class Tests( unittest.TestCase ):
                         glDrawElements( GL_LINE_LOOP, len(indices), GL_UNSIGNED_INT, indices )
                     finally:
                         d.unbind()
-                    lastPoint = numpy.array( [[1.5,(1/255.) * float(x),0]] )
+                    lastPoint = array( [[1.5,(1/255.) * float(x),0]] )
                     d[-2:-1] = lastPoint
                     glFlush()
                     pygame.display.flip()
@@ -1030,9 +1023,7 @@ class Tests( unittest.TestCase ):
     def test_get_max_tex_units( self ):
         """SF#2895081 glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )"""
         units = glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )
-    
     def test_buffer_api_basic(self):
-        import numpy
         import array as silly_array
         import operator
         try:
@@ -1054,10 +1045,11 @@ class Tests( unittest.TestCase ):
             # Python 2.6 doesn't have memory view 
             pass
         try:
-            structures.extend( [
-                (numpy.arange(0,9,dtype='I').reshape((3,3)),36,4,False,2,b'I',[3,3],[12,4]),
-                (numpy.arange(0,9,dtype='I').reshape((3,3))[:,1],12,4,False,1,b'I',[3],[12]),
-            ])
+            if array:
+                structures.extend( [
+                    (arange(0,9,dtype='I').reshape((3,3)),36,4,False,2,b'I',[3,3],[12,4]),
+                    (arange(0,9,dtype='I').reshape((3,3))[:,1],12,4,False,1,b'I',[3],[12]),
+                ])
         except NameError as err:
             # Don't have numpy installed...
             pass
