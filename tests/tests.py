@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """Overall test runner to test matrix of system options..."""
-import os,sys,subprocess,logging, glob
+import os,sys,subprocess,logging, glob, shutil
 log = logging.getLogger( 'overallrunner' )
 HERE = os.path.abspath(os.path.dirname( __file__ ))
 TEST_ENVS = os.path.join( HERE, '.test-envs' )
@@ -29,12 +29,61 @@ FLAGS = [
     'UNSIGNED_BYTE_IMAGES_AS_STRING',
 ]
 
+def short_name( python ):
+    if python.startswith( 'python' ):
+        return 'cp' + python[6:].replace('.','')
+    raise ValueError( "Don't know wheel format for %s"%(python,))
+def have_wheel( package,python ):
+    """Do we have this wheel built for the given package and python?"""
+    current = os.listdir( WHEEL_DIR )
+    short = short_name( python )
+    for item in current:
+        split = item.split('-')
+        if package in item and short in item:
+            return True 
+    return False
+
 def get_pygame():
     if os.path.exists( PYGAME_SOURCE ):
         subprocess.check_call( 'cd .pygame && hg pull && hg update', shell=True )
     else:
         subprocess.check_call( 'hg clone https://bitbucket.org/pygame/pygame .pygame', shell=True )
     return PYGAME_SOURCE
+def build_pygame(pythons=PYTHONS):
+    get_pygame()
+    cwd = os.path.join( HERE, '.pygame' )
+    
+    for python in [p for p in pythons if have_python(p)]:
+        for path in [
+            os.path.join(cwd, 'Setup' ),
+            os.path.join(cwd, 'build' ),
+        ]:
+            if os.path.isdir( path ):
+                shutil.rmtree( path )
+            elif os.path.exists( path ):
+                os.remove( path )
+        subprocess.check_call( [python,'config.py'], cwd=cwd )
+        if python == 'python2.6':
+            prefix = ['pip2.6']
+        else:
+            prefix = [
+                python, '-m', 'pip'
+            ]
+        subprocess.check_call( prefix + [
+            'install','--user','--upgrade','pip',
+        ], cwd=cwd )
+        subprocess.check_call( prefix + [
+            'install', '--upgrade','--user','wheel',
+        ], cwd=cwd )
+        
+        if not have_wheel( 'pygame', python ):
+            subprocess.check_call( prefix + [
+                'wheel','--wheel-dir',WHEEL_DIR, '.pygame',
+            ], cwd=HERE )
+        if not have_wheel( 'numpy', python ):
+            subprocess.check_call( prefix + [
+                'wheel','--wheel-dir',WHEEL_DIR, '.numpy',
+            ], cwd=HERE )
 
 def have_python( python ):
     try:
