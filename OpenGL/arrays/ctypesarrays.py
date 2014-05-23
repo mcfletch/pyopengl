@@ -30,7 +30,7 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
         """Return Numpy array of zeros in given size"""
         type = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
         for dim in dims:
-            type *= dim 
+            type *= int(dim)
         return type() # should expicitly set to 0s
     @classmethod
     def ones( cls, dims, typeCode='d' ):

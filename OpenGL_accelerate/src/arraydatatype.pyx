@@ -80,7 +80,8 @@ cdef class HandlerRegistry:
         plugin = plugins.FormatHandler.by_name( name )
         try:
             handler = plugin.load()
-            return handler()
+            if handler:
+                return handler()
         except ImportError as err:
             return None
     

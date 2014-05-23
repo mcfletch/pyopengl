@@ -428,7 +428,7 @@ class Tests( unittest.TestCase ):
             assert v == GL_VERTEX_ARRAY, (v,GL_VERTEX_ARRAY)
             assert v.name == GL_VERTEX_ARRAY.name, v.name 
     
-    if not OpenGL.ERROR_ON_COPY:
+    if array and not OpenGL.ERROR_ON_COPY:
         def test_copyNonContiguous( self ):
             """Test that a non-contiguous (transposed) array gets applied as a copy"""
             glMatrixMode(GL_MODELVIEW)
@@ -890,10 +890,13 @@ class Tests( unittest.TestCase ):
                 gluTessBeginContour(tess)
                 try:
                     for point in contour:
-                        if OpenGL.ERROR_ON_COPY:
-                            point = array( point, 'd' )
-                        else:
-                            point = array( point, 'f' )
+                        if array:
+                            if OpenGL.ERROR_ON_COPY:
+                                point = array( point, 'd' )
+                            else:
+                                point = array( point, 'f' )
+                        else: 
+                            point = (GLdouble*3)(*point)
                         gluTessVertex( tess, point, (False,point))
                 finally:
                     gluTessEndContour(tess)
@@ -959,7 +962,10 @@ class Tests( unittest.TestCase ):
             gluTessBeginContour( self.tess )
             try:
                 for (x,y) in outline:
-                    vertex = array((x/scale,y/scale,0.0),'d')
+                    if array:
+                        vertex = array((x/scale,y/scale,0.0),'d')
+                    else:
+                        vertex = (GLdouble*3)(x/scale,y/scale,0.0)
                     gluTessVertex(self.tess, vertex, vertex)
             finally:
                 gluTessEndContour( self.tess )
@@ -1008,13 +1014,13 @@ class Tests( unittest.TestCase ):
         glCallList( second )
         glPopName()
         depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
-        assert depth == (0,), depth # have popped, but even then, were' not in the mode...
+        assert depth in (0,(0,)), depth # have popped, but even then, were' not in the mode...
 
         glSelectBuffer (100)
         glRenderMode (GL_SELECT)
         glCallList(1)
         depth = glGetIntegerv( GL_NAME_STACK_DEPTH )
-        assert depth == (1,), depth # should have a single record
+        assert depth in (1,(1,)), depth # should have a single record
         glPopName()
         records = glRenderMode (GL_RENDER)
         # reporter says sees two records, Linux sees none, Win32 sees 1 :(
@@ -1023,71 +1029,79 @@ class Tests( unittest.TestCase ):
     def test_get_max_tex_units( self ):
         """SF#2895081 glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )"""
         units = glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )
-    def test_buffer_api_basic(self):
-        import array as silly_array
-        import operator
-        try:
-            reduce
-        except NameError as err:
-            from functools import reduce
-        structures = [
-            (b'this and that',13,1,True,1,b'B',[13],[1]),
-            ((GLint * 3)( 1,2,3 ),12,4,False,1,[b'(3)<i',b'(3)<l'],[3],None),
-        ]
-        if sys.version_info[:2] >= (3,0):
-            # only supports buffer protocol in 3.x
-            structures.extend([
-                (silly_array.array('I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
-            ])
-        try:
-            structures.append( (memoryview(b'this'),4,1,True,1,b'B',[4],[1]) )
-        except NameError as err:
-            # Python 2.6 doesn't have memory view 
-            pass
-        try:
-            if array:
-                structures.extend( [
-                    (arange(0,9,dtype='I').reshape((3,3)),36,4,False,2,b'I',[3,3],[12,4]),
-                    (arange(0,9,dtype='I').reshape((3,3))[:,1],12,4,False,1,b'I',[3],[12]),
-                ])
-        except NameError as err:
-            # Don't have numpy installed...
-            pass
-        
-        from OpenGL.arrays import _buffers
-        for object,length,itemsize,readonly,ndim,format,shape,strides in structures:
-            buf = _buffers.Py_buffer.from_object( object, _buffers.PyBUF_STRIDES|_buffers.PyBUF_FORMAT )
-            with buf:
-                assert buf.len == length, (object,length,buf.len)
-                assert buf.itemsize == itemsize, (object,itemsize,buf.itemsize)
-                assert buf.readonly == readonly, (object,readonly,buf.readonly)
-                assert buf.ndim == ndim, (object,ndim,buf.ndim)
-                if isinstance( format, list):
-                    assert buf.format in format, (object,format,buf.format)
-                else:
-                    assert buf.format == format, (object,format,buf.format)
-                assert buf.shape[:buf.ndim] == shape, (object, shape, buf.shape[:buf.ndim])
-                assert buf.dims == shape, (object, shape, buf.dims )
-                assert buf.buf 
-                if strides is None:
-                    assert not buf.strides 
-                else:
-                    assert buf.strides[:buf.ndim] == strides, (object, strides, buf.strides[:buf.ndim])
-            assert buf.obj == None, buf.obj
-            del buf
     
     def test_bytes_array_support( self ):
         color = b'\000'*12
         glColor3fv( color )
-    def test_bytearray_support( self ):
-        import struct 
-        data = struct.pack( 'fff', .5, .4, .3 )
-        color = bytearray( data )
-        glColor3fv( color )
-    def test_memoryview_support( self ):
-        color = bytearray( b'\000'*12 )
-        mem = memoryview( color )
-        glColor3fv( mem )
+    if (OpenGL.USE_ACCELERATE) or (sys.version_info[:2] < (3,0)):
+        # ctypes based buffer api does not work on Python 3.x
+        def test_bytearray_support( self ):
+            import struct 
+            data = struct.pack( 'fff', .5, .4, .3 )
+            color = bytearray( data )
+            glColor3fv( color )
+        if sys.version_info[:2] > (2,6):
+            # no memory view object...
+            def test_memoryview_support( self ):
+                color = bytearray( b'\000'*12 )
+                mem = memoryview( color )
+                glColor3fv( mem )
+        def test_buffer_api_basic(self):
+            import array as silly_array
+            import operator
+            try:
+                reduce
+            except NameError as err:
+                from functools import reduce
+            structures = [
+                (b'this and that',13,1,True,1,b'B',[13],[1]),
+            ]
+            if sys.version_info[:2] >= (2,7):
+                structures.append(
+                    ((GLint * 3)( 1,2,3 ),12,4,False,1,[b'(3)<i',b'(3)<l'],[3],None),
+                )
+            
+            if sys.version_info[:2] >= (3,0):
+                # only supports buffer protocol in 3.x
+                structures.extend([
+                    (silly_array.array('I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
+                ])
+            try:
+                structures.append( (memoryview(b'this'),4,1,True,1,b'B',[4],[1]) )
+            except NameError as err:
+                # Python 2.6 doesn't have memory view 
+                pass
+            try:
+                if array:
+                    structures.extend( [
+                        (arange(0,9,dtype='I').reshape((3,3)),36,4,False,2,b'I',[3,3],[12,4]),
+                        (arange(0,9,dtype='I').reshape((3,3))[:,1],12,4,False,1,b'I',[3],[12]),
+                    ])
+            except NameError as err:
+                # Don't have numpy installed...
+                pass
+            
+            from OpenGL.arrays import _buffers
+            for object,length,itemsize,readonly,ndim,format,shape,strides in structures:
+                buf = _buffers.Py_buffer.from_object( object, _buffers.PyBUF_STRIDES|_buffers.PyBUF_FORMAT )
+                with buf:
+                    assert buf.len == length, (object,length,buf.len)
+                    assert buf.itemsize == itemsize, (object,itemsize,buf.itemsize)
+                    assert buf.readonly == readonly, (object,readonly,buf.readonly)
+                    assert buf.ndim == ndim, (object,ndim,buf.ndim)
+                    if isinstance( format, list):
+                        assert buf.format in format, (object,format,buf.format)
+                    else:
+                        assert buf.format == format, (object,format,buf.format)
+                    assert buf.shape[:buf.ndim] == shape, (object, shape, buf.shape[:buf.ndim])
+                    assert buf.dims == shape, (object, shape, buf.dims )
+                    assert buf.buf 
+                    if strides is None:
+                        assert not buf.strides 
+                    else:
+                        assert buf.strides[:buf.ndim] == strides, (object, strides, buf.strides[:buf.ndim])
+                assert buf.obj == None, buf.obj
+                del buf
     
     def test_glGenTextures( self ):
         texture = glGenTextures(1)

@@ -4,6 +4,7 @@
 import ctypes,sys
 if sys.version_info[:2] < (2,6):
     raise ImportError( 'Buffer interface only usable on Python 2.6+' )
+from ._arrayconstants import *
 
 PyBUF_SIMPLE = 0
 PyBUF_WRITABLE = PyBUF_WRITEABLE = 0x0001
@@ -13,19 +14,22 @@ PyBUF_CONTIG = (PyBUF_ND | PyBUF_WRITABLE)
 PyBUF_CONTIG_RO = (PyBUF_ND)
 PyBUF_C_CONTIGUOUS = (0x0020 | PyBUF_STRIDES)
 PyBUF_FORMAT = 0x0004
+
+# Python 2.6 doesn't define this...
+c_ssize_t = getattr( ctypes, 'c_ssize_t',ctypes.c_ulong)
     
 _fields_ = [
     ('buf',ctypes.c_void_p),
     ('obj',ctypes.c_void_p),
-    ('len',ctypes.c_ssize_t),
-    ('itemsize',ctypes.c_ssize_t),
+    ('len',c_ssize_t),
+    ('itemsize',c_ssize_t),
 
     ('readonly',ctypes.c_int),
     ('ndim',ctypes.c_int),
     ('format',ctypes.c_char_p),
-    ('shape',ctypes.POINTER(ctypes.c_ssize_t)),
-    ('strides',ctypes.POINTER(ctypes.c_ssize_t)),
-    ('suboffsets',ctypes.POINTER(ctypes.c_ssize_t)),
+    ('shape',ctypes.POINTER(c_ssize_t)),
+    ('strides',ctypes.POINTER(c_ssize_t)),
+    ('suboffsets',ctypes.POINTER(c_ssize_t)),
 ]
 
 
@@ -99,29 +103,3 @@ ReleaseBuffer = ctypes.pythonapi.PyBuffer_Release
 ReleaseBuffer.argtypes = [ BUFFER_POINTER ]
 ReleaseBuffer.restype = None
 
-BYTE_SIZES = {
-    0x1400: 1,#GL_BYTE
-    0x1401: 1,#GL_UNSIGNED_BYTE
-    0x1402: 2,#GL_SHORT
-    0x1403: 2,#GL_UNSIGNED_SHORT
-    0x1404: 4,#GL_INT
-    0x1405: 4,#GL_UNSIGNED_INT
-    0x1406: 4,#GL_FLOAT
-    0x140a: 8,#GL_DOUBLE
-}
-
-ARRAY_TO_GL_TYPE_MAPPING = {
-    'c': 0x1401,#GL_UNSIGNED_BYTE
-    'f': 0x1406,#GL_FLOAT
-    'b': 0x1400,#GL_BYTE
-    'i': 0x1404,#GL_INT
-    'l': 0x1404,#GL_INT
-    '?': 0x1404,#GL_INT # Boolean 
-    'd': 0x140a,#GL_DOUBLE
-    'L': 0x1405,#GL_UNSIGNED_INT
-    'h': 0x1402,#GL_SHORT
-    'H': 0x1403,#GL_UNSIGNED_SHORT
-    'B': 0x1401,#GL_UNSIGNED_BYTE
-    'I': 0x1405,#GL_UNSIGNED_INT    
-    None: None,
-}

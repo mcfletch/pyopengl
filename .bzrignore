@@ -50,3 +50,7 @@ src/khronosapi
 tests/output.ppm
 mmap-test-data.dat
 src/regal
+tests/.numpy
+tests/.pygame
+tests/.test-envs
+tests/.wheels

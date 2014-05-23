@@ -8,6 +8,7 @@ Note:
 """
 REGISTRY_NAME = 'lists'
 import ctypes, _ctypes
+# Note: these are the same definitions as for GLES, so we are not cross-polluting
 from OpenGL.raw.GL import _types 
 from OpenGL.arrays import _arrayconstants as GL_1_1
 from OpenGL import constant, error

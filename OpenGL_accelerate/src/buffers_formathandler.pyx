@@ -57,7 +57,10 @@ cdef class MemoryviewHandler(FormatHandler):
             from OpenGL import _configflags
             ERROR_ON_COPY = _configflags.ERROR_ON_COPY
         if a_to_gl is None:
-            from OpenGL.arrays._buffers import ARRAY_TO_GL_TYPE_MAPPING
+            try:
+                from OpenGL.arrays._arrayconstants import ARRAY_TO_GL_TYPE_MAPPING
+            except ImportError as err:
+                raise RuntimeError( "Unable to load array constants" )
             a_to_gl = ARRAY_TO_GL_TYPE_MAPPING
         self.ERROR_ON_COPY = ERROR_ON_COPY
         self.array_to_gl_constant = a_to_gl

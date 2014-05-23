@@ -18,3 +18,32 @@ GL_DOUBLE = Constant( 'GL_DOUBLE', 0x140a )
 GL_CHAR = bytes
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
 GL_VOID_P = object()
+
+BYTE_SIZES = {
+    GL_BYTE: 1,
+    GL_CHAR: 1,
+    GL_UNSIGNED_BYTE: 1,
+    GL_SHORT: 2,
+    GL_UNSIGNED_SHORT: 2,
+    GL_INT: 4,
+    GL_UNSIGNED_INT: 4,
+    GL_UNSIGNED_INT64: 8,
+    GL_FLOAT: 4,
+    GL_DOUBLE: 8,
+}
+
+ARRAY_TO_GL_TYPE_MAPPING = {
+    'c': GL_UNSIGNED_BYTE,
+    'f': GL_FLOAT,
+    'b': GL_BYTE,
+    'i': GL_INT,
+    'l': GL_INT,
+    '?': GL_INT,# Boolean 
+    'd': GL_DOUBLE,
+    'L': GL_UNSIGNED_INT,
+    'h': GL_SHORT,
+    'H': GL_UNSIGNED_SHORT,
+    'B': GL_UNSIGNED_BYTE,
+    'I': GL_UNSIGNED_INT,
+    None: None,
+}

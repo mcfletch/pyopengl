@@ -12,7 +12,10 @@ class Plugin( object ):
         self.__dict__.update( named )
     def load( self ):
         """Attempt to load and return our entry point"""
-        return importByName( self.import_path )
+        try:
+            return importByName( self.import_path )
+        except ImportError as err:
+            return None
     @classmethod
     def match( cls, *args ):
         """Match to return the plugin which is appropriate to load"""
