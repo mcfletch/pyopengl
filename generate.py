@@ -21,6 +21,7 @@ PACKAGES = ['GL','GLU','GLUT','GLE','GLX']
 
 DOCBOOK_NS = 'http://docbook.org/ns/docbook'
 MML_NS = "http://www.w3.org/1998/Math/MathML"
+XML_NS = "http://www.w3.org/XML/1998/namespace"
 
 WRAPPER = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book SYSTEM "test" [ <!ENTITY nbsp " "> ]>
@@ -118,7 +119,7 @@ class RefSect( model.RefSect ):
             self.process_funcprototype( func_prototype )
         processed_sections = {}
         for section in tree[0].xpath( './/d:refsect1', namespaces=self.query_namespace):
-            id = section.get( 'id' )
+            id = section.get( 'id' ) or section.get( '{%s}id'%(XML_NS))
             if id and '-parameters' in id or id == 'parameters':
                 for varlist in section.xpath( './d:variablelist',namespaces=self.query_namespace):
                     self.process_variablelist( varlist )
@@ -126,9 +127,10 @@ class RefSect( model.RefSect ):
                 for entry in section.xpath( './/d:citerefentry',namespaces=self.query_namespace):
                     title,volume = entry[0].text, entry[1].text
                     self.see_also.append( (title,volume) )
-            else:
-                log.warn( 'Found reference section without id' )
+            elif not id:
+                log.warn( 'Found reference section without id: %s', section.items() )
                 self.discussions.append( section )
+                continue
             processed_sections[ id ] = True
         # global search for referenced constants...
         for item in tree[0].xpath( './/d:constant', namespaces=self.query_namespace ):
