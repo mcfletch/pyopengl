@@ -73,7 +73,7 @@ class HgSource( CVSSource ):
     @property
     def update_command( self ):
         """Note: requires enabling the fetch extension (sigh)"""
-        return 'hg fetch'
+        return 'hg pull && hg update'
 
 class GITSource( CVSSource ):
     @property
@@ -149,10 +149,10 @@ checkouts = [
         'git://github.com/rossant/galry.git',
         dirname = 'galry',
     ),
-    SVNSource(
-        'http://svn.gnome.org/svn/gnome-games/trunk/glchess',
-        dirname = 'glchess',
-    ),
+#    SVNSource(
+#        'http://svn.gnome.org/svn/gnome-games/trunk/glchess',
+#        dirname = 'glchess',
+#    ),
     SVNSource(
         'https://kamaelia.svn.sourceforge.net/svnroot/kamaelia/trunk',
         dirname = 'kamaelia',
