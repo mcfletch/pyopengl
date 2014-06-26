@@ -261,9 +261,6 @@ def main():
     ref = Reference()
     for package,path in files:
         log.info( 'Loading: %s', path )
-        if 'glActiveShaderProgram' in path:
-            import pdb
-            pdb.set_trace()
         #print 'loading', path
         try:
             tree = load_file( path )
