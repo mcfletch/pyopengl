@@ -827,7 +827,9 @@ class Tests( unittest.TestCase ):
         """Test that we can run glGet... on registered constants without crashing..."""
         from OpenGL.raw.GL import _glgets
         for key,value in _glgets._glget_size_mapping.items():
-            #print( 'Trying glGetFloatv( 0x%x )'%(key,))
+            print( 'Trying glGetFloatv( 0x%x )'%(key,))
+            if key == 0x92c1: # GL_ATOMIC_COUNTER_BUFFER_BINDING crashes intel hardware... sigh...
+                continue
             try:
                 result = glGetFloatv( key )
             except error.GLError as err:
@@ -1140,6 +1142,14 @@ class Tests( unittest.TestCase ):
     
     def test_shader_compile_string( self ):
         shader = glCreateShader(GL_VERTEX_SHADER)
+        
+        def glsl_version():
+            """Parse GL_SHADING_LANGUAGE_VERSION into [int(major),int(minor)]"""
+            version = glGetString( GL_SHADING_LANGUAGE_VERSION )
+            version = [int(x) for x in version.split('.')[:2]]
+            return version 
+        if glsl_version() < [3,3]:
+            return
         SAMPLE_SHADER = '''#version 330
         void main() { gl_Position = vec4(0,0,0,0);}'''
         if OpenGL.ERROR_ON_COPY:
