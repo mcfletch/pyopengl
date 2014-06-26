@@ -168,6 +168,15 @@ if __name__ == "__main__":
             ]
         ]
     )
+    matrices = TutorialPath(
+        "Transformations and Matrices",
+        children =[
+            parse_file( os.path.join( test_dir,name ))
+            for name in [
+                'transforms_1.py',
+            ]
+        ]
+    )
     effects = TutorialPath(
         "Depth-map Shadows",
         children =[
@@ -209,7 +218,7 @@ if __name__ == "__main__":
             ]
         ]
     )
-    paths = [shaders,nodes,effects,nehe]
+    paths = [shaders,matrices,nodes,effects,nehe]
     generate_index( paths = paths )
     for path in paths:
         path.generate_children()
