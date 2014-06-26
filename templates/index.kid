@@ -4,6 +4,7 @@
     <title>PyOpenGL ${version} Function Reference</title>
     <link rel="stylesheet" href="./manpage.css" type="text/css" />
     <link rel="stylesheet" href="./modern.css" type="text/css" />
+    <meta charset="utf-8" /> 
 </head>
 <body>
 <header>
