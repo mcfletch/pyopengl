@@ -58,6 +58,7 @@ from dumbmarkup import format_docstring
 <div py:def="node_content(node)" py:strip="">${node.text}${children(node)}</div>
 <div py:def="convert( node )" py:strip="">
 	<h1 py:if="node.html_tag == 'h1'" class="${node.html_class}">${node_content(node)}</h1>
+	<h2 py:if="node.html_tag == 'h2'" class="${node.html_class}">${node_content(node)}</h2>
 	<div py:if="node.html_tag == 'div'" class="${node.html_class}">${node_content(node)}</div>
 	<ul py:if="node.html_tag == 'ul'" class="${node.html_class}">${node_content(node)}</ul>
 	<li py:if="node.html_tag == 'li'" class="${node.html_class}">${node_content(node)}</li>
