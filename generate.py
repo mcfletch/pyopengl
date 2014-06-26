@@ -294,9 +294,6 @@ def main():
     open( old_file, 'w' ).write(REDIRECT%locals())
 
     for name,section in sorted(ref.sections.items()):
-        if not name or 'glActiveTexture' in name:
-            import pdb
-            pdb.set_trace()
         output_file = os.path.join( OUTPUT_DIRECTORY,ref.url(section))
         log.warn( 'Generating: %s -> %s',name, output_file )
         stream = loader.load(
@@ -308,6 +305,7 @@ def main():
             version=__version__,
         )
         data = stream.render('html')
+        data = data.encode('utf-8')
         open(
             output_file, 'w'
         ).write( data )
