@@ -114,9 +114,7 @@ if __name__ == "__main__":
         'long_description' : """Acceleration code for PyOpenGL
 
 This set of C (Cython) extensions provides acceleration of common operations
-for slow points in PyOpenGL 3.x.  For code which uses large arrays extensively
-speed-up is around 10% compared to unaccelerated code.
-""",
+for slow points in PyOpenGL 3.x.""",
         'platforms': ['Win32','Linux','OS-X','Posix'],
     }
     ### Now the actual set up call
