@@ -181,12 +181,12 @@ def loadData():
             projectName='{LGPL} PyMT',
             urlTemplate = GITHUB,
         ),
-        SampleSource(
-            os.path.join( SAMPLES, 'glchess' ),
-            baseURL ='http://svn.gnome.org/viewvc/gnome-games/trunk/glchess',
-            projectName='{GPL} GLChess',
-            urlTemplate = VIEWSVN,
-        ),
+#        SampleSource(
+#            os.path.join( SAMPLES, 'glchess' ),
+#            baseURL ='http://svn.gnome.org/viewvc/gnome-games/trunk/glchess',
+#            projectName='{GPL} GLChess',
+#            urlTemplate = VIEWSVN,
+#        ),
         SampleSource(
             os.path.join( SAMPLES, 'pyggel' ),
             baseURL ='http://code.google.com/p/pyggel',
