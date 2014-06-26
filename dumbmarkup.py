@@ -155,6 +155,10 @@ class Commentary( Grouping ):
                             dd.append( line )
             elif block.startswith( '=' ) and block.endswith( '=' ):
                 self.append( Title( block.strip( '=' ).strip(), cls=cls ))
+            elif block.startswith( '_' ) and block.endswith( '_' ):
+                title = Title( block.strip( '_' ).strip(), cls=cls )
+                title.html_tag= 'h2'
+                self.append( title )
             else:
                 self.append( Paragraph( block,cls=cls ))
 
