@@ -34,7 +34,6 @@ def cython_extension( name, include_dirs = (), ):
         "OpenGL_accelerate.%(name)s"%locals(),
         [
             os.path.join(
-                HERE,
                 'src',
                 filename
             ),
