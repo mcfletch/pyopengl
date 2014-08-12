@@ -525,7 +525,7 @@ def glProgramBinary(program,binaryFormat,binary,length):pass
 def glProgramParameteri(program,pname,value):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glReadBuffer(mode):pass
+def glReadBuffer(src):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,_cs.GLsizei)
 def glRenderbufferStorageMultisample(target,samples,internalformat,width,height):pass

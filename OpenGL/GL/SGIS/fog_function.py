@@ -29,7 +29,7 @@ def glInitFogFunctionSGIS():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glFogFuncSGIS.points size not checked against None
+# INPUT glFogFuncSGIS.points size not checked against n*2
 glFogFuncSGIS=wrapper.wrapper(glFogFuncSGIS).setInputArraySize(
     'points', None
 )

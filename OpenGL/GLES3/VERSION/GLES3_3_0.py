@@ -59,23 +59,29 @@ glGetBufferPointerv=wrapper.wrapper(glGetBufferPointerv).setOutput(
 glDrawBuffers=wrapper.wrapper(glDrawBuffers).setInputArraySize(
     'bufs', None
 )
+# INPUT glUniformMatrix2x3fv.value size not checked against count*6
 glUniformMatrix2x3fv=wrapper.wrapper(glUniformMatrix2x3fv).setInputArraySize(
-    'value', 6
+    'value', None
 )
+# INPUT glUniformMatrix3x2fv.value size not checked against count*6
 glUniformMatrix3x2fv=wrapper.wrapper(glUniformMatrix3x2fv).setInputArraySize(
-    'value', 6
+    'value', None
 )
+# INPUT glUniformMatrix2x4fv.value size not checked against count*8
 glUniformMatrix2x4fv=wrapper.wrapper(glUniformMatrix2x4fv).setInputArraySize(
-    'value', 8
+    'value', None
 )
+# INPUT glUniformMatrix4x2fv.value size not checked against count*8
 glUniformMatrix4x2fv=wrapper.wrapper(glUniformMatrix4x2fv).setInputArraySize(
-    'value', 8
+    'value', None
 )
+# INPUT glUniformMatrix3x4fv.value size not checked against count*12
 glUniformMatrix3x4fv=wrapper.wrapper(glUniformMatrix3x4fv).setInputArraySize(
-    'value', 12
+    'value', None
 )
+# INPUT glUniformMatrix4x3fv.value size not checked against count*12
 glUniformMatrix4x3fv=wrapper.wrapper(glUniformMatrix4x3fv).setInputArraySize(
-    'value', 12
+    'value', None
 )
 # INPUT glDeleteVertexArrays.arrays size not checked against n
 glDeleteVertexArrays=wrapper.wrapper(glDeleteVertexArrays).setInputArraySize(
@@ -125,15 +131,15 @@ glGetFragDataLocation=wrapper.wrapper(glGetFragDataLocation).setInputArraySize(
 glUniform1uiv=wrapper.wrapper(glUniform1uiv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform2uiv.value size not checked against None
+# INPUT glUniform2uiv.value size not checked against count*2
 glUniform2uiv=wrapper.wrapper(glUniform2uiv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform3uiv.value size not checked against None
+# INPUT glUniform3uiv.value size not checked against count*3
 glUniform3uiv=wrapper.wrapper(glUniform3uiv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform4uiv.value size not checked against None
+# INPUT glUniform4uiv.value size not checked against count*4
 glUniform4uiv=wrapper.wrapper(glUniform4uiv).setInputArraySize(
     'value', None
 )
@@ -155,19 +161,16 @@ glGetUniformIndices=wrapper.wrapper(glGetUniformIndices).setOutput(
 ).setInputArraySize(
     'uniformNames', None
 )
-# INPUT glGetActiveUniformsiv.uniformIndices size not checked against 'uniformCount'
+# INPUT glGetActiveUniformsiv.uniformIndices size not checked against uniformCount
+# OUTPUT glGetActiveUniformsiv.params COMPSIZE(uniformCount, pname) 
 glGetActiveUniformsiv=wrapper.wrapper(glGetActiveUniformsiv).setInputArraySize(
     'uniformIndices', None
-).setOutput(
-    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 # INPUT glGetUniformBlockIndex.uniformBlockName size not checked against ''
 glGetUniformBlockIndex=wrapper.wrapper(glGetUniformBlockIndex).setInputArraySize(
     'uniformBlockName', None
 )
-glGetActiveUniformBlockiv=wrapper.wrapper(glGetActiveUniformBlockiv).setOutput(
-    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
-)
+# OUTPUT glGetActiveUniformBlockiv.params COMPSIZE(program, uniformBlockIndex, pname) 
 glGetActiveUniformBlockName=wrapper.wrapper(glGetActiveUniformBlockName).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(

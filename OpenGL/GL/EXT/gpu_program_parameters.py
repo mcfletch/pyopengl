@@ -33,11 +33,11 @@ def glInitGpuProgramParametersEXT():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glProgramEnvParameters4fvEXT.params size not checked against None
+# INPUT glProgramEnvParameters4fvEXT.params size not checked against count*4
 glProgramEnvParameters4fvEXT=wrapper.wrapper(glProgramEnvParameters4fvEXT).setInputArraySize(
     'params', None
 )
-# INPUT glProgramLocalParameters4fvEXT.params size not checked against None
+# INPUT glProgramLocalParameters4fvEXT.params size not checked against count*4
 glProgramLocalParameters4fvEXT=wrapper.wrapper(glProgramLocalParameters4fvEXT).setInputArraySize(
     'params', None
 )

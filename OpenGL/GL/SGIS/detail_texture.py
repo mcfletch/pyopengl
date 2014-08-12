@@ -34,7 +34,7 @@ def glInitDetailTextureSGIS():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glDetailTexFuncSGIS.points size not checked against None
+# INPUT glDetailTexFuncSGIS.points size not checked against n*2
 glDetailTexFuncSGIS=wrapper.wrapper(glDetailTexFuncSGIS).setInputArraySize(
     'points', None
 )

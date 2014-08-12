@@ -11,7 +11,6 @@ import ctypes
 _EXTENSION_NAME = 'GLES2_KHR_blend_equation_advanced'
 def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.GLES2,'GLES2_KHR_blend_equation_advanced',error_checker=_errors._error_checker)
-GL_BLEND_ADVANCED_COHERENT_KHR=_C('GL_BLEND_ADVANCED_COHERENT_KHR',0x9285)
 GL_COLORBURN_KHR=_C('GL_COLORBURN_KHR',0x929A)
 GL_COLORDODGE_KHR=_C('GL_COLORDODGE_KHR',0x9299)
 GL_DARKEN_KHR=_C('GL_DARKEN_KHR',0x9297)

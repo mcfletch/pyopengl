@@ -26,7 +26,7 @@ def glInitSharpenTextureSGIS():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glSharpenTexFuncSGIS.points size not checked against None
+# INPUT glSharpenTexFuncSGIS.points size not checked against n*2
 glSharpenTexFuncSGIS=wrapper.wrapper(glSharpenTexFuncSGIS).setInputArraySize(
     'points', None
 )

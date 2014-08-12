@@ -11,6 +11,9 @@ import ctypes
 _EXTENSION_NAME = 'GL_NV_path_rendering'
 def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_path_rendering',error_checker=_errors._error_checker)
+GL_2_BYTES_NV=_C('GL_2_BYTES_NV',0x1407)
+GL_3_BYTES_NV=_C('GL_3_BYTES_NV',0x1408)
+GL_4_BYTES_NV=_C('GL_4_BYTES_NV',0x1409)
 GL_ACCUM_ADJACENT_PAIRS_NV=_C('GL_ACCUM_ADJACENT_PAIRS_NV',0x90AD)
 GL_ADJACENT_PAIRS_NV=_C('GL_ADJACENT_PAIRS_NV',0x90AE)
 GL_AFFINE_2D_NV=_C('GL_AFFINE_2D_NV',0x9092)
@@ -24,27 +27,36 @@ GL_CIRCULAR_CCW_ARC_TO_NV=_C('GL_CIRCULAR_CCW_ARC_TO_NV',0xF8)
 GL_CIRCULAR_CW_ARC_TO_NV=_C('GL_CIRCULAR_CW_ARC_TO_NV',0xFA)
 GL_CIRCULAR_TANGENT_ARC_TO_NV=_C('GL_CIRCULAR_TANGENT_ARC_TO_NV',0xFC)
 GL_CLOSE_PATH_NV=_C('GL_CLOSE_PATH_NV',0x00)
+GL_CONIC_CURVE_TO_NV=_C('GL_CONIC_CURVE_TO_NV',0x1A)
+GL_CONSTANT_NV=_C('GL_CONSTANT_NV',0x8576)
 GL_CONVEX_HULL_NV=_C('GL_CONVEX_HULL_NV',0x908B)
 GL_COUNT_DOWN_NV=_C('GL_COUNT_DOWN_NV',0x9089)
 GL_COUNT_UP_NV=_C('GL_COUNT_UP_NV',0x9088)
 GL_CUBIC_CURVE_TO_NV=_C('GL_CUBIC_CURVE_TO_NV',0x0C)
 GL_DUP_FIRST_CUBIC_CURVE_TO_NV=_C('GL_DUP_FIRST_CUBIC_CURVE_TO_NV',0xF2)
 GL_DUP_LAST_CUBIC_CURVE_TO_NV=_C('GL_DUP_LAST_CUBIC_CURVE_TO_NV',0xF4)
+GL_EYE_LINEAR_NV=_C('GL_EYE_LINEAR_NV',0x2400)
 GL_FILE_NAME_NV=_C('GL_FILE_NAME_NV',0x9074)
 GL_FIRST_TO_REST_NV=_C('GL_FIRST_TO_REST_NV',0x90AF)
 GL_FONT_ASCENDER_BIT_NV=_C('GL_FONT_ASCENDER_BIT_NV',0x00200000)
 GL_FONT_DESCENDER_BIT_NV=_C('GL_FONT_DESCENDER_BIT_NV',0x00400000)
+GL_FONT_GLYPHS_AVAILABLE_NV=_C('GL_FONT_GLYPHS_AVAILABLE_NV',0x9368)
 GL_FONT_HAS_KERNING_BIT_NV=_C('GL_FONT_HAS_KERNING_BIT_NV',0x10000000)
 GL_FONT_HEIGHT_BIT_NV=_C('GL_FONT_HEIGHT_BIT_NV',0x00800000)
 GL_FONT_MAX_ADVANCE_HEIGHT_BIT_NV=_C('GL_FONT_MAX_ADVANCE_HEIGHT_BIT_NV',0x02000000)
 GL_FONT_MAX_ADVANCE_WIDTH_BIT_NV=_C('GL_FONT_MAX_ADVANCE_WIDTH_BIT_NV',0x01000000)
+GL_FONT_NUM_GLYPH_INDICES_BIT_NV=_C('GL_FONT_NUM_GLYPH_INDICES_BIT_NV',0x20000000)
+GL_FONT_TARGET_UNAVAILABLE_NV=_C('GL_FONT_TARGET_UNAVAILABLE_NV',0x9369)
+GL_FONT_UNAVAILABLE_NV=_C('GL_FONT_UNAVAILABLE_NV',0x936A)
 GL_FONT_UNDERLINE_POSITION_BIT_NV=_C('GL_FONT_UNDERLINE_POSITION_BIT_NV',0x04000000)
 GL_FONT_UNDERLINE_THICKNESS_BIT_NV=_C('GL_FONT_UNDERLINE_THICKNESS_BIT_NV',0x08000000)
+GL_FONT_UNINTELLIGIBLE_NV=_C('GL_FONT_UNINTELLIGIBLE_NV',0x936B)
 GL_FONT_UNITS_PER_EM_BIT_NV=_C('GL_FONT_UNITS_PER_EM_BIT_NV',0x00100000)
 GL_FONT_X_MAX_BOUNDS_BIT_NV=_C('GL_FONT_X_MAX_BOUNDS_BIT_NV',0x00040000)
 GL_FONT_X_MIN_BOUNDS_BIT_NV=_C('GL_FONT_X_MIN_BOUNDS_BIT_NV',0x00010000)
 GL_FONT_Y_MAX_BOUNDS_BIT_NV=_C('GL_FONT_Y_MAX_BOUNDS_BIT_NV',0x00080000)
 GL_FONT_Y_MIN_BOUNDS_BIT_NV=_C('GL_FONT_Y_MIN_BOUNDS_BIT_NV',0x00020000)
+GL_FRAGMENT_INPUT_NV=_C('GL_FRAGMENT_INPUT_NV',0x936D)
 GL_GLYPH_HAS_KERNING_BIT_NV=_C('GL_GLYPH_HAS_KERNING_BIT_NV',0x100)
 GL_GLYPH_HEIGHT_BIT_NV=_C('GL_GLYPH_HEIGHT_BIT_NV',0x02)
 GL_GLYPH_HORIZONTAL_BEARING_ADVANCE_BIT_NV=_C('GL_GLYPH_HORIZONTAL_BEARING_ADVANCE_BIT_NV',0x10)
@@ -64,6 +76,7 @@ GL_MITER_TRUNCATE_NV=_C('GL_MITER_TRUNCATE_NV',0x90A8)
 GL_MOVE_TO_CONTINUES_NV=_C('GL_MOVE_TO_CONTINUES_NV',0x90B6)
 GL_MOVE_TO_NV=_C('GL_MOVE_TO_NV',0x02)
 GL_MOVE_TO_RESETS_NV=_C('GL_MOVE_TO_RESETS_NV',0x90B5)
+GL_OBJECT_LINEAR_NV=_C('GL_OBJECT_LINEAR_NV',0x2401)
 GL_PATH_CLIENT_LENGTH_NV=_C('GL_PATH_CLIENT_LENGTH_NV',0x907F)
 GL_PATH_COMMAND_COUNT_NV=_C('GL_PATH_COMMAND_COUNT_NV',0x909D)
 GL_PATH_COMPUTED_LENGTH_NV=_C('GL_PATH_COMPUTED_LENGTH_NV',0x90A0)
@@ -89,8 +102,16 @@ GL_PATH_GEN_MODE_NV=_C('GL_PATH_GEN_MODE_NV',0x90B0)
 GL_PATH_INITIAL_DASH_CAP_NV=_C('GL_PATH_INITIAL_DASH_CAP_NV',0x907C)
 GL_PATH_INITIAL_END_CAP_NV=_C('GL_PATH_INITIAL_END_CAP_NV',0x9077)
 GL_PATH_JOIN_STYLE_NV=_C('GL_PATH_JOIN_STYLE_NV',0x9079)
+GL_PATH_MAX_MODELVIEW_STACK_DEPTH_NV=_C('GL_PATH_MAX_MODELVIEW_STACK_DEPTH_NV',0x0D36)
+GL_PATH_MAX_PROJECTION_STACK_DEPTH_NV=_C('GL_PATH_MAX_PROJECTION_STACK_DEPTH_NV',0x0D38)
 GL_PATH_MITER_LIMIT_NV=_C('GL_PATH_MITER_LIMIT_NV',0x907A)
+GL_PATH_MODELVIEW_MATRIX_NV=_C('GL_PATH_MODELVIEW_MATRIX_NV',0x0BA6)
+GL_PATH_MODELVIEW_NV=_C('GL_PATH_MODELVIEW_NV',0x1700)
+GL_PATH_MODELVIEW_STACK_DEPTH_NV=_C('GL_PATH_MODELVIEW_STACK_DEPTH_NV',0x0BA3)
 GL_PATH_OBJECT_BOUNDING_BOX_NV=_C('GL_PATH_OBJECT_BOUNDING_BOX_NV',0x908A)
+GL_PATH_PROJECTION_MATRIX_NV=_C('GL_PATH_PROJECTION_MATRIX_NV',0x0BA7)
+GL_PATH_PROJECTION_NV=_C('GL_PATH_PROJECTION_NV',0x1701)
+GL_PATH_PROJECTION_STACK_DEPTH_NV=_C('GL_PATH_PROJECTION_STACK_DEPTH_NV',0x0BA4)
 GL_PATH_STENCIL_DEPTH_OFFSET_FACTOR_NV=_C('GL_PATH_STENCIL_DEPTH_OFFSET_FACTOR_NV',0x90BD)
 GL_PATH_STENCIL_DEPTH_OFFSET_UNITS_NV=_C('GL_PATH_STENCIL_DEPTH_OFFSET_UNITS_NV',0x90BE)
 GL_PATH_STENCIL_FUNC_NV=_C('GL_PATH_STENCIL_FUNC_NV',0x90B7)
@@ -102,11 +123,14 @@ GL_PATH_STROKE_MASK_NV=_C('GL_PATH_STROKE_MASK_NV',0x9084)
 GL_PATH_STROKE_WIDTH_NV=_C('GL_PATH_STROKE_WIDTH_NV',0x9075)
 GL_PATH_TERMINAL_DASH_CAP_NV=_C('GL_PATH_TERMINAL_DASH_CAP_NV',0x907D)
 GL_PATH_TERMINAL_END_CAP_NV=_C('GL_PATH_TERMINAL_END_CAP_NV',0x9078)
+GL_PATH_TRANSPOSE_MODELVIEW_MATRIX_NV=_C('GL_PATH_TRANSPOSE_MODELVIEW_MATRIX_NV',0x84E3)
+GL_PATH_TRANSPOSE_PROJECTION_MATRIX_NV=_C('GL_PATH_TRANSPOSE_PROJECTION_MATRIX_NV',0x84E4)
 GL_PRIMARY_COLOR=_C('GL_PRIMARY_COLOR',0x8577)
 GL_PRIMARY_COLOR_NV=_C('GL_PRIMARY_COLOR_NV',0x852C)
 GL_QUADRATIC_CURVE_TO_NV=_C('GL_QUADRATIC_CURVE_TO_NV',0x0A)
 GL_RECT_NV=_C('GL_RECT_NV',0xF6)
 GL_RELATIVE_ARC_TO_NV=_C('GL_RELATIVE_ARC_TO_NV',0xFF)
+GL_RELATIVE_CONIC_CURVE_TO_NV=_C('GL_RELATIVE_CONIC_CURVE_TO_NV',0x1B)
 GL_RELATIVE_CUBIC_CURVE_TO_NV=_C('GL_RELATIVE_CUBIC_CURVE_TO_NV',0x0D)
 GL_RELATIVE_HORIZONTAL_LINE_TO_NV=_C('GL_RELATIVE_HORIZONTAL_LINE_TO_NV',0x07)
 GL_RELATIVE_LARGE_CCW_ARC_TO_NV=_C('GL_RELATIVE_LARGE_CCW_ARC_TO_NV',0x17)
@@ -114,12 +138,21 @@ GL_RELATIVE_LARGE_CW_ARC_TO_NV=_C('GL_RELATIVE_LARGE_CW_ARC_TO_NV',0x19)
 GL_RELATIVE_LINE_TO_NV=_C('GL_RELATIVE_LINE_TO_NV',0x05)
 GL_RELATIVE_MOVE_TO_NV=_C('GL_RELATIVE_MOVE_TO_NV',0x03)
 GL_RELATIVE_QUADRATIC_CURVE_TO_NV=_C('GL_RELATIVE_QUADRATIC_CURVE_TO_NV',0x0B)
+GL_RELATIVE_RECT_NV=_C('GL_RELATIVE_RECT_NV',0xF7)
+GL_RELATIVE_ROUNDED_RECT2_NV=_C('GL_RELATIVE_ROUNDED_RECT2_NV',0xEB)
+GL_RELATIVE_ROUNDED_RECT4_NV=_C('GL_RELATIVE_ROUNDED_RECT4_NV',0xED)
+GL_RELATIVE_ROUNDED_RECT8_NV=_C('GL_RELATIVE_ROUNDED_RECT8_NV',0xEF)
+GL_RELATIVE_ROUNDED_RECT_NV=_C('GL_RELATIVE_ROUNDED_RECT_NV',0xE9)
 GL_RELATIVE_SMALL_CCW_ARC_TO_NV=_C('GL_RELATIVE_SMALL_CCW_ARC_TO_NV',0x13)
 GL_RELATIVE_SMALL_CW_ARC_TO_NV=_C('GL_RELATIVE_SMALL_CW_ARC_TO_NV',0x15)
 GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV=_C('GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV',0x11)
 GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV=_C('GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV',0x0F)
 GL_RELATIVE_VERTICAL_LINE_TO_NV=_C('GL_RELATIVE_VERTICAL_LINE_TO_NV',0x09)
 GL_RESTART_PATH_NV=_C('GL_RESTART_PATH_NV',0xF0)
+GL_ROUNDED_RECT2_NV=_C('GL_ROUNDED_RECT2_NV',0xEA)
+GL_ROUNDED_RECT4_NV=_C('GL_ROUNDED_RECT4_NV',0xEC)
+GL_ROUNDED_RECT8_NV=_C('GL_ROUNDED_RECT8_NV',0xEE)
+GL_ROUNDED_RECT_NV=_C('GL_ROUNDED_RECT_NV',0xE8)
 GL_ROUND_NV=_C('GL_ROUND_NV',0x90A4)
 GL_SECONDARY_COLOR_NV=_C('GL_SECONDARY_COLOR_NV',0x852D)
 GL_SKIP_MISSING_GLYPH_NV=_C('GL_SKIP_MISSING_GLYPH_NV',0x90A9)
@@ -128,6 +161,7 @@ GL_SMALL_CW_ARC_TO_NV=_C('GL_SMALL_CW_ARC_TO_NV',0x14)
 GL_SMOOTH_CUBIC_CURVE_TO_NV=_C('GL_SMOOTH_CUBIC_CURVE_TO_NV',0x10)
 GL_SMOOTH_QUADRATIC_CURVE_TO_NV=_C('GL_SMOOTH_QUADRATIC_CURVE_TO_NV',0x0E)
 GL_SQUARE_NV=_C('GL_SQUARE_NV',0x90A3)
+GL_STANDARD_FONT_FORMAT_NV=_C('GL_STANDARD_FONT_FORMAT_NV',0x936C)
 GL_STANDARD_FONT_NAME_NV=_C('GL_STANDARD_FONT_NAME_NV',0x9072)
 GL_SYSTEM_FONT_NAME_NV=_C('GL_SYSTEM_FONT_NAME_NV',0x9073)
 GL_TRANSLATE_2D_NV=_C('GL_TRANSLATE_2D_NV',0x9090)
@@ -202,6 +236,9 @@ def glGetPathTexGenfvNV(texCoordSet,pname,value):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetPathTexGenivNV(texCoordSet,pname,value):pass
 @_f
+@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLfloatArray)
+def glGetProgramResourcefvNV(program,programInterface,index,propCount,props,bufSize,length,params):pass
+@_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLfloat)
 def glInterpolatePathsNV(resultPath,pathA,pathB,weight):pass
 @_f
@@ -213,6 +250,24 @@ def glIsPointInFillPathNV(path,mask,x,y):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint,_cs.GLfloat,_cs.GLfloat)
 def glIsPointInStrokePathNV(path,x,y):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixLoad3x2fNV(matrixMode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixLoad3x3fNV(matrixMode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixLoadTranspose3x3fNV(matrixMode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixMult3x2fNV(matrixMode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixMult3x3fNV(matrixMode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixMultTranspose3x3fNV(matrixMode,m):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glPathColorGenNV(color,genMode,colorFormat,coeffs):pass
@@ -232,11 +287,20 @@ def glPathDashArrayNV(path,dashCount,dashArray):pass
 @_p.types(None,_cs.GLenum)
 def glPathFogGenNV(genMode):pass
 @_f
+@_p.types(_cs.GLenum,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLuint,_cs.GLsizei,_cs.GLuint,_cs.GLfloat)
+def glPathGlyphIndexArrayNV(firstPathName,fontTarget,fontName,fontStyle,firstGlyphIndex,numGlyphs,pathParameterTemplate,emScale):pass
+@_f
+@_p.types(_cs.GLenum,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLuint,_cs.GLfloat,_cs.GLuint)
+def glPathGlyphIndexRangeNV(fontTarget,fontName,fontStyle,pathParameterTemplate,emScale,baseAndCount):pass
+@_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLuint,_cs.GLsizei,_cs.GLenum,_cs.GLuint,_cs.GLfloat)
 def glPathGlyphRangeNV(firstPathName,fontTarget,fontName,fontStyle,firstGlyph,numGlyphs,handleMissingGlyphs,pathParameterTemplate,emScale):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLenum,_cs.GLuint,_cs.GLfloat)
 def glPathGlyphsNV(firstPathName,fontTarget,fontName,fontStyle,numGlyphs,type,charcodes,handleMissingGlyphs,pathParameterTemplate,emScale):pass
+@_f
+@_p.types(_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLsizeiptr,ctypes.c_void_p,_cs.GLsizei,_cs.GLuint,_cs.GLsizei,_cs.GLuint,_cs.GLfloat)
+def glPathMemoryGlyphIndexArrayNV(firstPathName,fontTarget,fontSize,fontData,faceIndex,firstGlyphIndex,numGlyphs,pathParameterTemplate,emScale):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLfloat)
 def glPathParameterfNV(path,pname,value):pass
@@ -271,6 +335,9 @@ def glPathTexGenNV(texCoordSet,genMode,components,coeffs):pass
 @_p.types(_cs.GLboolean,_cs.GLuint,_cs.GLsizei,_cs.GLsizei,_cs.GLfloat,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray,arrays.GLfloatArray)
 def glPointAlongPathNV(path,startSegment,numSegments,distance,x,y,tangentX,tangentY):pass
 @_f
+@_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLint,arrays.GLfloatArray)
+def glProgramPathFragmentInputGenNV(program,location,genMode,components,coeffs):pass
+@_f
 @_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glStencilFillPathInstancedNV(numPaths,pathNameType,paths,pathBase,fillMode,mask,transformType,transformValues):pass
 @_f
@@ -282,6 +349,18 @@ def glStencilStrokePathInstancedNV(numPaths,pathNameType,paths,pathBase,referenc
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLuint)
 def glStencilStrokePathNV(path,reference,mask):pass
+@_f
+@_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
+def glStencilThenCoverFillPathInstancedNV(numPaths,pathNameType,paths,pathBase,fillMode,mask,coverMode,transformType,transformValues):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum)
+def glStencilThenCoverFillPathNV(path,fillMode,mask,coverMode):pass
+@_f
+@_p.types(None,_cs.GLsizei,_cs.GLenum,ctypes.c_void_p,_cs.GLuint,_cs.GLint,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
+def glStencilThenCoverStrokePathInstancedNV(numPaths,pathNameType,paths,pathBase,reference,mask,coverMode,transformType,transformValues):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLuint,_cs.GLenum)
+def glStencilThenCoverStrokePathNV(path,reference,mask,coverMode):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,arrays.GLfloatArray)
 def glTransformPathNV(resultPath,srcPath,transformType,transformValues):pass

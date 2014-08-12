@@ -94,15 +94,15 @@ glShaderSource=wrapper.wrapper(glShaderSource).setInputArraySize(
 glUniform1fv=wrapper.wrapper(glUniform1fv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform2fv.value size not checked against count
+# INPUT glUniform2fv.value size not checked against count*2
 glUniform2fv=wrapper.wrapper(glUniform2fv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform3fv.value size not checked against count
+# INPUT glUniform3fv.value size not checked against count*3
 glUniform3fv=wrapper.wrapper(glUniform3fv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform4fv.value size not checked against count
+# INPUT glUniform4fv.value size not checked against count*4
 glUniform4fv=wrapper.wrapper(glUniform4fv).setInputArraySize(
     'value', None
 )
@@ -110,27 +110,27 @@ glUniform4fv=wrapper.wrapper(glUniform4fv).setInputArraySize(
 glUniform1iv=wrapper.wrapper(glUniform1iv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform2iv.value size not checked against count
+# INPUT glUniform2iv.value size not checked against count*2
 glUniform2iv=wrapper.wrapper(glUniform2iv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform3iv.value size not checked against count
+# INPUT glUniform3iv.value size not checked against count*3
 glUniform3iv=wrapper.wrapper(glUniform3iv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform4iv.value size not checked against count
+# INPUT glUniform4iv.value size not checked against count*4
 glUniform4iv=wrapper.wrapper(glUniform4iv).setInputArraySize(
     'value', None
 )
-# INPUT glUniformMatrix2fv.value size not checked against count
+# INPUT glUniformMatrix2fv.value size not checked against count*4
 glUniformMatrix2fv=wrapper.wrapper(glUniformMatrix2fv).setInputArraySize(
     'value', None
 )
-# INPUT glUniformMatrix3fv.value size not checked against count
+# INPUT glUniformMatrix3fv.value size not checked against count*9
 glUniformMatrix3fv=wrapper.wrapper(glUniformMatrix3fv).setInputArraySize(
     'value', None
 )
-# INPUT glUniformMatrix4fv.value size not checked against count
+# INPUT glUniformMatrix4fv.value size not checked against count*16
 glUniformMatrix4fv=wrapper.wrapper(glUniformMatrix4fv).setInputArraySize(
     'value', None
 )

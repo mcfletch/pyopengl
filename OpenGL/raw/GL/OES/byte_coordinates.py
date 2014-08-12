@@ -11,7 +11,7 @@ import ctypes
 _EXTENSION_NAME = 'GL_OES_byte_coordinates'
 def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.GL,'GL_OES_byte_coordinates',error_checker=_errors._error_checker)
-
+GL_BYTE=_C('GL_BYTE',0x1400)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLbyte)
 def glMultiTexCoord1bOES(texture,s):pass
@@ -61,20 +61,20 @@ def glTexCoord4bOES(s,t,r,q):pass
 @_p.types(None,arrays.GLbyteArray)
 def glTexCoord4bvOES(coords):pass
 @_f
-@_p.types(None,_cs.GLbyte)
-def glVertex2bOES(x):pass
+@_p.types(None,_cs.GLbyte,_cs.GLbyte)
+def glVertex2bOES(x,y):pass
 @_f
 @_p.types(None,arrays.GLbyteArray)
 def glVertex2bvOES(coords):pass
 @_f
-@_p.types(None,_cs.GLbyte,_cs.GLbyte)
-def glVertex3bOES(x,y):pass
+@_p.types(None,_cs.GLbyte,_cs.GLbyte,_cs.GLbyte)
+def glVertex3bOES(x,y,z):pass
 @_f
 @_p.types(None,arrays.GLbyteArray)
 def glVertex3bvOES(coords):pass
 @_f
-@_p.types(None,_cs.GLbyte,_cs.GLbyte,_cs.GLbyte)
-def glVertex4bOES(x,y,z):pass
+@_p.types(None,_cs.GLbyte,_cs.GLbyte,_cs.GLbyte,_cs.GLbyte)
+def glVertex4bOES(x,y,z,w):pass
 @_f
 @_p.types(None,arrays.GLbyteArray)
 def glVertex4bvOES(coords):pass

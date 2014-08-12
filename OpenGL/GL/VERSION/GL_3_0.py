@@ -97,15 +97,15 @@ glGetFragDataLocation=wrapper.wrapper(glGetFragDataLocation).setInputArraySize(
 glUniform1uiv=wrapper.wrapper(glUniform1uiv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform2uiv.value size not checked against None
+# INPUT glUniform2uiv.value size not checked against count*2
 glUniform2uiv=wrapper.wrapper(glUniform2uiv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform3uiv.value size not checked against None
+# INPUT glUniform3uiv.value size not checked against count*3
 glUniform3uiv=wrapper.wrapper(glUniform3uiv).setInputArraySize(
     'value', None
 )
-# INPUT glUniform4uiv.value size not checked against None
+# INPUT glUniform4uiv.value size not checked against count*4
 glUniform4uiv=wrapper.wrapper(glUniform4uiv).setInputArraySize(
     'value', None
 )

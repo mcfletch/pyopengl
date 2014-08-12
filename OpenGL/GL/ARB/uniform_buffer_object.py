@@ -129,11 +129,10 @@ glGetUniformIndices=wrapper.wrapper(glGetUniformIndices).setOutput(
 ).setInputArraySize(
     'uniformNames', None
 )
-# INPUT glGetActiveUniformsiv.uniformIndices size not checked against 'uniformCount'
+# INPUT glGetActiveUniformsiv.uniformIndices size not checked against uniformCount
+# OUTPUT glGetActiveUniformsiv.params COMPSIZE(uniformCount, pname) 
 glGetActiveUniformsiv=wrapper.wrapper(glGetActiveUniformsiv).setInputArraySize(
     'uniformIndices', None
-).setOutput(
-    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 glGetActiveUniformName=wrapper.wrapper(glGetActiveUniformName).setOutput(
     'length',size=(1,),orPassIn=True
@@ -144,9 +143,7 @@ glGetActiveUniformName=wrapper.wrapper(glGetActiveUniformName).setOutput(
 glGetUniformBlockIndex=wrapper.wrapper(glGetUniformBlockIndex).setInputArraySize(
     'uniformBlockName', None
 )
-glGetActiveUniformBlockiv=wrapper.wrapper(glGetActiveUniformBlockiv).setOutput(
-    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
-)
+# OUTPUT glGetActiveUniformBlockiv.params COMPSIZE(program, uniformBlockIndex, pname) 
 glGetActiveUniformBlockName=wrapper.wrapper(glGetActiveUniformBlockName).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(

@@ -471,15 +471,15 @@ glGetNamedBufferSubDataEXT=wrapper.wrapper(glGetNamedBufferSubDataEXT).setOutput
 glProgramUniform1fvEXT=wrapper.wrapper(glProgramUniform1fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform2fvEXT.value size not checked against None
+# INPUT glProgramUniform2fvEXT.value size not checked against count*2
 glProgramUniform2fvEXT=wrapper.wrapper(glProgramUniform2fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform3fvEXT.value size not checked against None
+# INPUT glProgramUniform3fvEXT.value size not checked against count*3
 glProgramUniform3fvEXT=wrapper.wrapper(glProgramUniform3fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform4fvEXT.value size not checked against None
+# INPUT glProgramUniform4fvEXT.value size not checked against count*4
 glProgramUniform4fvEXT=wrapper.wrapper(glProgramUniform4fvEXT).setInputArraySize(
     'value', None
 )
@@ -487,51 +487,51 @@ glProgramUniform4fvEXT=wrapper.wrapper(glProgramUniform4fvEXT).setInputArraySize
 glProgramUniform1ivEXT=wrapper.wrapper(glProgramUniform1ivEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform2ivEXT.value size not checked against None
+# INPUT glProgramUniform2ivEXT.value size not checked against count*2
 glProgramUniform2ivEXT=wrapper.wrapper(glProgramUniform2ivEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform3ivEXT.value size not checked against None
+# INPUT glProgramUniform3ivEXT.value size not checked against count*3
 glProgramUniform3ivEXT=wrapper.wrapper(glProgramUniform3ivEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform4ivEXT.value size not checked against None
+# INPUT glProgramUniform4ivEXT.value size not checked against count*4
 glProgramUniform4ivEXT=wrapper.wrapper(glProgramUniform4ivEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix2fvEXT.value size not checked against None
+# INPUT glProgramUniformMatrix2fvEXT.value size not checked against count*4
 glProgramUniformMatrix2fvEXT=wrapper.wrapper(glProgramUniformMatrix2fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix3fvEXT.value size not checked against None
+# INPUT glProgramUniformMatrix3fvEXT.value size not checked against count*9
 glProgramUniformMatrix3fvEXT=wrapper.wrapper(glProgramUniformMatrix3fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix4fvEXT.value size not checked against None
+# INPUT glProgramUniformMatrix4fvEXT.value size not checked against count*16
 glProgramUniformMatrix4fvEXT=wrapper.wrapper(glProgramUniformMatrix4fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix2x3fvEXT.value size not checked against None
+# INPUT glProgramUniformMatrix2x3fvEXT.value size not checked against count*6
 glProgramUniformMatrix2x3fvEXT=wrapper.wrapper(glProgramUniformMatrix2x3fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix3x2fvEXT.value size not checked against None
+# INPUT glProgramUniformMatrix3x2fvEXT.value size not checked against count*6
 glProgramUniformMatrix3x2fvEXT=wrapper.wrapper(glProgramUniformMatrix3x2fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix2x4fvEXT.value size not checked against None
+# INPUT glProgramUniformMatrix2x4fvEXT.value size not checked against count*8
 glProgramUniformMatrix2x4fvEXT=wrapper.wrapper(glProgramUniformMatrix2x4fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix4x2fvEXT.value size not checked against None
+# INPUT glProgramUniformMatrix4x2fvEXT.value size not checked against count*8
 glProgramUniformMatrix4x2fvEXT=wrapper.wrapper(glProgramUniformMatrix4x2fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix3x4fvEXT.value size not checked against None
+# INPUT glProgramUniformMatrix3x4fvEXT.value size not checked against count*12
 glProgramUniformMatrix3x4fvEXT=wrapper.wrapper(glProgramUniformMatrix3x4fvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix4x3fvEXT.value size not checked against None
+# INPUT glProgramUniformMatrix4x3fvEXT.value size not checked against count*12
 glProgramUniformMatrix4x3fvEXT=wrapper.wrapper(glProgramUniformMatrix4x3fvEXT).setInputArraySize(
     'value', None
 )
@@ -567,33 +567,33 @@ glGetMultiTexParameterIuivEXT=wrapper.wrapper(glGetMultiTexParameterIuivEXT).set
 glProgramUniform1uivEXT=wrapper.wrapper(glProgramUniform1uivEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform2uivEXT.value size not checked against None
+# INPUT glProgramUniform2uivEXT.value size not checked against count*2
 glProgramUniform2uivEXT=wrapper.wrapper(glProgramUniform2uivEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform3uivEXT.value size not checked against None
+# INPUT glProgramUniform3uivEXT.value size not checked against count*3
 glProgramUniform3uivEXT=wrapper.wrapper(glProgramUniform3uivEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform4uivEXT.value size not checked against None
+# INPUT glProgramUniform4uivEXT.value size not checked against count*4
 glProgramUniform4uivEXT=wrapper.wrapper(glProgramUniform4uivEXT).setInputArraySize(
     'value', None
 )
-# INPUT glNamedProgramLocalParameters4fvEXT.params size not checked against None
+# INPUT glNamedProgramLocalParameters4fvEXT.params size not checked against count*4
 glNamedProgramLocalParameters4fvEXT=wrapper.wrapper(glNamedProgramLocalParameters4fvEXT).setInputArraySize(
     'params', None
 )
 glNamedProgramLocalParameterI4ivEXT=wrapper.wrapper(glNamedProgramLocalParameterI4ivEXT).setInputArraySize(
     'params', 4
 )
-# INPUT glNamedProgramLocalParametersI4ivEXT.params size not checked against None
+# INPUT glNamedProgramLocalParametersI4ivEXT.params size not checked against count*4
 glNamedProgramLocalParametersI4ivEXT=wrapper.wrapper(glNamedProgramLocalParametersI4ivEXT).setInputArraySize(
     'params', None
 )
 glNamedProgramLocalParameterI4uivEXT=wrapper.wrapper(glNamedProgramLocalParameterI4uivEXT).setInputArraySize(
     'params', 4
 )
-# INPUT glNamedProgramLocalParametersI4uivEXT.params size not checked against None
+# INPUT glNamedProgramLocalParametersI4uivEXT.params size not checked against count*4
 glNamedProgramLocalParametersI4uivEXT=wrapper.wrapper(glNamedProgramLocalParametersI4uivEXT).setInputArraySize(
     'params', None
 )

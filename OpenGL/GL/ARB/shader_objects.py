@@ -65,15 +65,15 @@ glShaderSourceARB=wrapper.wrapper(glShaderSourceARB).setInputArraySize(
 glUniform1fvARB=wrapper.wrapper(glUniform1fvARB).setInputArraySize(
     'value', None
 )
-# INPUT glUniform2fvARB.value size not checked against count
+# INPUT glUniform2fvARB.value size not checked against count*2
 glUniform2fvARB=wrapper.wrapper(glUniform2fvARB).setInputArraySize(
     'value', None
 )
-# INPUT glUniform3fvARB.value size not checked against count
+# INPUT glUniform3fvARB.value size not checked against count*3
 glUniform3fvARB=wrapper.wrapper(glUniform3fvARB).setInputArraySize(
     'value', None
 )
-# INPUT glUniform4fvARB.value size not checked against count
+# INPUT glUniform4fvARB.value size not checked against count*4
 glUniform4fvARB=wrapper.wrapper(glUniform4fvARB).setInputArraySize(
     'value', None
 )
@@ -81,27 +81,27 @@ glUniform4fvARB=wrapper.wrapper(glUniform4fvARB).setInputArraySize(
 glUniform1ivARB=wrapper.wrapper(glUniform1ivARB).setInputArraySize(
     'value', None
 )
-# INPUT glUniform2ivARB.value size not checked against count
+# INPUT glUniform2ivARB.value size not checked against count*2
 glUniform2ivARB=wrapper.wrapper(glUniform2ivARB).setInputArraySize(
     'value', None
 )
-# INPUT glUniform3ivARB.value size not checked against count
+# INPUT glUniform3ivARB.value size not checked against count*3
 glUniform3ivARB=wrapper.wrapper(glUniform3ivARB).setInputArraySize(
     'value', None
 )
-# INPUT glUniform4ivARB.value size not checked against count
+# INPUT glUniform4ivARB.value size not checked against count*4
 glUniform4ivARB=wrapper.wrapper(glUniform4ivARB).setInputArraySize(
     'value', None
 )
-# INPUT glUniformMatrix2fvARB.value size not checked against count
+# INPUT glUniformMatrix2fvARB.value size not checked against count*4
 glUniformMatrix2fvARB=wrapper.wrapper(glUniformMatrix2fvARB).setInputArraySize(
     'value', None
 )
-# INPUT glUniformMatrix3fvARB.value size not checked against count
+# INPUT glUniformMatrix3fvARB.value size not checked against count*9
 glUniformMatrix3fvARB=wrapper.wrapper(glUniformMatrix3fvARB).setInputArraySize(
     'value', None
 )
-# INPUT glUniformMatrix4fvARB.value size not checked against count
+# INPUT glUniformMatrix4fvARB.value size not checked against count*16
 glUniformMatrix4fvARB=wrapper.wrapper(glUniformMatrix4fvARB).setInputArraySize(
     'value', None
 )
@@ -130,12 +130,8 @@ glGetActiveUniformARB=wrapper.wrapper(glGetActiveUniformARB).setOutput(
 ).setOutput(
     'size',size=(1,),orPassIn=True
 )
-glGetUniformfvARB=wrapper.wrapper(glGetUniformfvARB).setOutput(
-    'params',size=_glgets._glget_size_mapping,pnameArg='location',orPassIn=True
-)
-glGetUniformivARB=wrapper.wrapper(glGetUniformivARB).setOutput(
-    'params',size=_glgets._glget_size_mapping,pnameArg='location',orPassIn=True
-)
+# OUTPUT glGetUniformfvARB.params COMPSIZE(program, location) 
+# OUTPUT glGetUniformivARB.params COMPSIZE(program, location) 
 glGetShaderSourceARB=wrapper.wrapper(glGetShaderSourceARB).setOutput(
     'source',size=lambda x:(x,),pnameArg='maxLength',orPassIn=True
 ).setOutput(

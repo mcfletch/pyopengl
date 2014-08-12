@@ -119,11 +119,11 @@ glProgramParameter4dvNV=wrapper.wrapper(glProgramParameter4dvNV).setInputArraySi
 glProgramParameter4fvNV=wrapper.wrapper(glProgramParameter4fvNV).setInputArraySize(
     'v', 4
 )
-# INPUT glProgramParameters4dvNV.v size not checked against None
+# INPUT glProgramParameters4dvNV.v size not checked against count*4
 glProgramParameters4dvNV=wrapper.wrapper(glProgramParameters4dvNV).setInputArraySize(
     'v', None
 )
-# INPUT glProgramParameters4fvNV.v size not checked against None
+# INPUT glProgramParameters4fvNV.v size not checked against count*4
 glProgramParameters4fvNV=wrapper.wrapper(glProgramParameters4fvNV).setInputArraySize(
     'v', None
 )
@@ -186,43 +186,43 @@ glVertexAttribs1fvNV=wrapper.wrapper(glVertexAttribs1fvNV).setInputArraySize(
 glVertexAttribs1svNV=wrapper.wrapper(glVertexAttribs1svNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs2dvNV.v size not checked against None
+# INPUT glVertexAttribs2dvNV.v size not checked against count*2
 glVertexAttribs2dvNV=wrapper.wrapper(glVertexAttribs2dvNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs2fvNV.v size not checked against None
+# INPUT glVertexAttribs2fvNV.v size not checked against count*2
 glVertexAttribs2fvNV=wrapper.wrapper(glVertexAttribs2fvNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs2svNV.v size not checked against None
+# INPUT glVertexAttribs2svNV.v size not checked against count*2
 glVertexAttribs2svNV=wrapper.wrapper(glVertexAttribs2svNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs3dvNV.v size not checked against None
+# INPUT glVertexAttribs3dvNV.v size not checked against count*3
 glVertexAttribs3dvNV=wrapper.wrapper(glVertexAttribs3dvNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs3fvNV.v size not checked against None
+# INPUT glVertexAttribs3fvNV.v size not checked against count*3
 glVertexAttribs3fvNV=wrapper.wrapper(glVertexAttribs3fvNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs3svNV.v size not checked against None
+# INPUT glVertexAttribs3svNV.v size not checked against count*3
 glVertexAttribs3svNV=wrapper.wrapper(glVertexAttribs3svNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs4dvNV.v size not checked against None
+# INPUT glVertexAttribs4dvNV.v size not checked against count*4
 glVertexAttribs4dvNV=wrapper.wrapper(glVertexAttribs4dvNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs4fvNV.v size not checked against None
+# INPUT glVertexAttribs4fvNV.v size not checked against count*4
 glVertexAttribs4fvNV=wrapper.wrapper(glVertexAttribs4fvNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs4svNV.v size not checked against None
+# INPUT glVertexAttribs4svNV.v size not checked against count*4
 glVertexAttribs4svNV=wrapper.wrapper(glVertexAttribs4svNV).setInputArraySize(
     'v', None
 )
-# INPUT glVertexAttribs4ubvNV.v size not checked against None
+# INPUT glVertexAttribs4ubvNV.v size not checked against count*4
 glVertexAttribs4ubvNV=wrapper.wrapper(glVertexAttribs4ubvNV).setInputArraySize(
     'v', None
 )

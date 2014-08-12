@@ -70,7 +70,7 @@ def glGetTransformFeedbackVaryingNV(program,index,location):pass
 @_p.types(_cs.GLint,_cs.GLuint,arrays.GLcharArray)
 def glGetVaryingLocationNV(program,name):pass
 @_f
-@_p.types(None,_cs.GLuint,arrays.GLintArray,_cs.GLenum)
+@_p.types(None,_cs.GLsizei,arrays.GLintArray,_cs.GLenum)
 def glTransformFeedbackAttribsNV(count,attribs,bufferMode):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLintArray,_cs.GLsizei,arrays.GLintArray,_cs.GLenum)

@@ -23,15 +23,15 @@ def glInitGpuShaderInt64AMD():
 glUniform1i64vNV=wrapper.wrapper(glUniform1i64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glUniform2i64vNV.value size not checked against None
+# INPUT glUniform2i64vNV.value size not checked against count*2
 glUniform2i64vNV=wrapper.wrapper(glUniform2i64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glUniform3i64vNV.value size not checked against None
+# INPUT glUniform3i64vNV.value size not checked against count*3
 glUniform3i64vNV=wrapper.wrapper(glUniform3i64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glUniform4i64vNV.value size not checked against None
+# INPUT glUniform4i64vNV.value size not checked against count*4
 glUniform4i64vNV=wrapper.wrapper(glUniform4i64vNV).setInputArraySize(
     'value', None
 )
@@ -39,35 +39,33 @@ glUniform4i64vNV=wrapper.wrapper(glUniform4i64vNV).setInputArraySize(
 glUniform1ui64vNV=wrapper.wrapper(glUniform1ui64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glUniform2ui64vNV.value size not checked against None
+# INPUT glUniform2ui64vNV.value size not checked against count*2
 glUniform2ui64vNV=wrapper.wrapper(glUniform2ui64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glUniform3ui64vNV.value size not checked against None
+# INPUT glUniform3ui64vNV.value size not checked against count*3
 glUniform3ui64vNV=wrapper.wrapper(glUniform3ui64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glUniform4ui64vNV.value size not checked against None
+# INPUT glUniform4ui64vNV.value size not checked against count*4
 glUniform4ui64vNV=wrapper.wrapper(glUniform4ui64vNV).setInputArraySize(
     'value', None
 )
-glGetUniformi64vNV=wrapper.wrapper(glGetUniformi64vNV).setOutput(
-    'params',size=_glgets._glget_size_mapping,pnameArg='location',orPassIn=True
-)
+# OUTPUT glGetUniformi64vNV.params COMPSIZE(program, location) 
 # OUTPUT glGetUniformui64vNV.params COMPSIZE(program,location) 
 # INPUT glProgramUniform1i64vNV.value size not checked against count
 glProgramUniform1i64vNV=wrapper.wrapper(glProgramUniform1i64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform2i64vNV.value size not checked against None
+# INPUT glProgramUniform2i64vNV.value size not checked against count*2
 glProgramUniform2i64vNV=wrapper.wrapper(glProgramUniform2i64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform3i64vNV.value size not checked against None
+# INPUT glProgramUniform3i64vNV.value size not checked against count*3
 glProgramUniform3i64vNV=wrapper.wrapper(glProgramUniform3i64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform4i64vNV.value size not checked against None
+# INPUT glProgramUniform4i64vNV.value size not checked against count*4
 glProgramUniform4i64vNV=wrapper.wrapper(glProgramUniform4i64vNV).setInputArraySize(
     'value', None
 )
@@ -75,15 +73,15 @@ glProgramUniform4i64vNV=wrapper.wrapper(glProgramUniform4i64vNV).setInputArraySi
 glProgramUniform1ui64vNV=wrapper.wrapper(glProgramUniform1ui64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform2ui64vNV.value size not checked against None
+# INPUT glProgramUniform2ui64vNV.value size not checked against count*2
 glProgramUniform2ui64vNV=wrapper.wrapper(glProgramUniform2ui64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform3ui64vNV.value size not checked against None
+# INPUT glProgramUniform3ui64vNV.value size not checked against count*3
 glProgramUniform3ui64vNV=wrapper.wrapper(glProgramUniform3ui64vNV).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform4ui64vNV.value size not checked against None
+# INPUT glProgramUniform4ui64vNV.value size not checked against count*4
 glProgramUniform4ui64vNV=wrapper.wrapper(glProgramUniform4ui64vNV).setInputArraySize(
     'value', None
 )

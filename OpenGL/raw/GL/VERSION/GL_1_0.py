@@ -179,7 +179,7 @@ def glDepthRange(near,far):pass
 def glDisable(cap):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glDrawBuffer(mode):pass
+def glDrawBuffer(buf):pass
 @_f
 @_p.types(None,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glDrawPixels(width,height,format,type,pixels):pass
@@ -644,7 +644,7 @@ def glRasterPos4s(x,y,z,w):pass
 def glRasterPos4sv(v):pass
 @_f
 @_p.types(None,_cs.GLenum)
-def glReadBuffer(mode):pass
+def glReadBuffer(src):pass
 @_f
 @_p.types(None,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glReadPixels(x,y,width,height,format,type,pixels):pass

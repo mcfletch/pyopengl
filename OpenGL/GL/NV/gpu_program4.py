@@ -60,28 +60,28 @@ def glInitGpuProgram4NV():
 glProgramLocalParameterI4ivNV=wrapper.wrapper(glProgramLocalParameterI4ivNV).setInputArraySize(
     'params', 4
 )
-# INPUT glProgramLocalParametersI4ivNV.params size not checked against None
+# INPUT glProgramLocalParametersI4ivNV.params size not checked against count*4
 glProgramLocalParametersI4ivNV=wrapper.wrapper(glProgramLocalParametersI4ivNV).setInputArraySize(
     'params', None
 )
 glProgramLocalParameterI4uivNV=wrapper.wrapper(glProgramLocalParameterI4uivNV).setInputArraySize(
     'params', 4
 )
-# INPUT glProgramLocalParametersI4uivNV.params size not checked against None
+# INPUT glProgramLocalParametersI4uivNV.params size not checked against count*4
 glProgramLocalParametersI4uivNV=wrapper.wrapper(glProgramLocalParametersI4uivNV).setInputArraySize(
     'params', None
 )
 glProgramEnvParameterI4ivNV=wrapper.wrapper(glProgramEnvParameterI4ivNV).setInputArraySize(
     'params', 4
 )
-# INPUT glProgramEnvParametersI4ivNV.params size not checked against None
+# INPUT glProgramEnvParametersI4ivNV.params size not checked against count*4
 glProgramEnvParametersI4ivNV=wrapper.wrapper(glProgramEnvParametersI4ivNV).setInputArraySize(
     'params', None
 )
 glProgramEnvParameterI4uivNV=wrapper.wrapper(glProgramEnvParameterI4uivNV).setInputArraySize(
     'params', 4
 )
-# INPUT glProgramEnvParametersI4uivNV.params size not checked against None
+# INPUT glProgramEnvParametersI4uivNV.params size not checked against count*4
 glProgramEnvParametersI4uivNV=wrapper.wrapper(glProgramEnvParametersI4uivNV).setInputArraySize(
     'params', None
 )
