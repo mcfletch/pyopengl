@@ -109,6 +109,8 @@ class Registry( object ):
                 arg_types.append( self._type_decl( param ))
                 if param.get( 'len' ):
                     length = param.get('len')
+                    while length.endswith( '*1' ):
+                        length = length[:-2]
                     length = LENGTH_OVERRIDES.get(name,{}).get(pname,length)
                     lengths[pname] = length 
                 if param.get( 'group' ):
@@ -259,10 +261,10 @@ class Command( object ):
             elif '*' in length:
                 params = length.split('*')
                 in_set = [x for x in params if x in self.argNames]
-                if params == in_set:
-                    result.append( (target,MultipleInput(params)))
-                else:
-                    result.append( (target, Input()))
+#                if params == in_set:
+                result.append( (target,MultipleInput(params)))
+#                else:
+#                    result.append( (target, Input()))
             else:
                 raise RuntimeError( (target,length))
         return dict(result)
@@ -280,6 +282,8 @@ class DynamicInput( IsInput,str ):
     """Dynamically sized based on other parameter"""
 class MultipleInput( IsInput,list ):
     """Size depends on multiple elements being multiplied"""
+    def __str__( self ):
+        return '*'.join( self )
         
 class Output( object ):
     """Unsized output parameter"""

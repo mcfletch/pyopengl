@@ -326,6 +326,8 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                         elif isinstance( dependency, xmlreg.StaticInput ):
                             base.append( '.setInputArraySize(\n    %(param)r, %(dependency)s\n)'%locals())
                         elif isinstance( dependency, (xmlreg.DynamicInput, xmlreg.MultipleInput, xmlreg.Input) ):
+                            if dependency is None:
+                                continue 
                             statements.append( '# INPUT %s.%s size not checked against %s'%(
                                 function.name, 
                                 param,
