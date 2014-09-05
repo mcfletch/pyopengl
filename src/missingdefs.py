@@ -50,7 +50,10 @@ def main():
         out_params = dict([x for x in func.get('param',[]) if 'out' in x[1].split()])
         if out_params:
             OUT_MAPPING['gl'+key] = out_params
-    open( 'gl_out_parameters.json','w').write( json.dumps(OUT_MAPPING, indent=2) )
+    open( 'gl_out_parameters.json','w').write( json.dumps(
+        OUT_MAPPING, indent=2,
+        sort_keys=True,
+    ) )
     for category,funcs in sorted(categories.items()):
         try:
             module = module_for_category( category )
