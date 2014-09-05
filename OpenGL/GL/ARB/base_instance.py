@@ -14,14 +14,14 @@ Overview (from the spec)
 	divisors are non-zero are fetched from enabled vertex arrays per-instance
 	rather than per-vertex. However, in unextended OpenGL, there is no way to
 	define the offset into those arrays from which the attributes are fetched.
-	This extension adds that offset in the form of a <basevertex> parameter
+	This extension adds that offset in the form of a <baseinstance> parameter
 	to several new procedures.
 	
-	The <basevertex> parameter is added to the index of the array element, after
-	division by the vertex attribute divisor. This allows several sets of
+	The <baseinstance> parameter is added to the index of the array element,
+	after division by the vertex attribute divisor. This allows several sets of
 	instanced vertex attribute data to be stored in a single vertex array, and
 	the base offset of that data to be specified for each draw. Further, this
-	extension exposes the <basevertex> parameter as the final and previously
+	extension exposes the <baseinstance> parameter as the final and previously
 	undefined structure member of the draw-indirect data structure.
 
 The official definition of this extension is available here:

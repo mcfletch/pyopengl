@@ -92,8 +92,8 @@ glMapParameterfvNV=wrapper.wrapper(glMapParameterfvNV).setInputArraySize(
 glGetMapControlPointsNV=wrapper.wrapper(glGetMapControlPointsNV).setOutput(
     'points',size=_glgets._glget_size_mapping,pnameArg='target',orPassIn=True
 )
-# OUTPUT glGetMapParameterivNV.params COMPSIZE(target,pname) 
-# OUTPUT glGetMapParameterfvNV.params COMPSIZE(target,pname) 
+# OUTPUT glGetMapParameterivNV.params COMPSIZE(target, pname) 
+# OUTPUT glGetMapParameterfvNV.params COMPSIZE(target, pname) 
 glGetMapAttribParameterivNV=wrapper.wrapper(glGetMapAttribParameterivNV).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )

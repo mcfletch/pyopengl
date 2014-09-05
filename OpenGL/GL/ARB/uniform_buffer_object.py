@@ -129,8 +129,8 @@ glGetUniformIndices=wrapper.wrapper(glGetUniformIndices).setOutput(
 ).setInputArraySize(
     'uniformNames', None
 )
-# INPUT glGetActiveUniformsiv.uniformIndices size not checked against uniformCount
 # OUTPUT glGetActiveUniformsiv.params COMPSIZE(uniformCount, pname) 
+# INPUT glGetActiveUniformsiv.uniformIndices size not checked against uniformCount
 glGetActiveUniformsiv=wrapper.wrapper(glGetActiveUniformsiv).setInputArraySize(
     'uniformIndices', None
 )

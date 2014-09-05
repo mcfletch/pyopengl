@@ -69,13 +69,13 @@ glActiveVaryingNV=wrapper.wrapper(glActiveVaryingNV).setInputArraySize(
 glGetVaryingLocationNV=wrapper.wrapper(glGetVaryingLocationNV).setInputArraySize(
     'name', None
 )
-# OUTPUT glGetActiveVaryingNV.name COMPSIZE(program,index,bufSize) 
+# OUTPUT glGetActiveVaryingNV.name COMPSIZE(program, index, bufSize) 
 glGetActiveVaryingNV=wrapper.wrapper(glGetActiveVaryingNV).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'type',size=(1,),orPassIn=True
-).setOutput(
     'size',size=(1,),orPassIn=True
+).setOutput(
+    'type',size=(1,),orPassIn=True
 )
 glGetTransformFeedbackVaryingNV=wrapper.wrapper(glGetTransformFeedbackVaryingNV).setOutput(
     'location',size=(1,),orPassIn=True

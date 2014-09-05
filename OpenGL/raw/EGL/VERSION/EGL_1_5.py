@@ -39,7 +39,9 @@ EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Y=_C('EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Y',0x30B
 EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Z=_C('EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Z',0x30B7)
 EGL_GL_TEXTURE_LEVEL=_C('EGL_GL_TEXTURE_LEVEL',0x30BC)
 EGL_GL_TEXTURE_ZOFFSET=_C('EGL_GL_TEXTURE_ZOFFSET',0x30BD)
+EGL_IMAGE_PRESERVED=_C('EGL_IMAGE_PRESERVED',0x30D2)
 EGL_LOSE_CONTEXT_ON_RESET=_C('EGL_LOSE_CONTEXT_ON_RESET',0x31BF)
+# EGL_NO_IMAGE=_C('EGL_NO_IMAGE',((EGLImage)0))
 EGL_NO_RESET_NOTIFICATION=_C('EGL_NO_RESET_NOTIFICATION',0x31BE)
 # EGL_NO_SYNC=_C('EGL_NO_SYNC',((EGLSync)0))
 EGL_OPENGL_ES3_BIT=_C('EGL_OPENGL_ES3_BIT',0x00000040)
@@ -58,6 +60,9 @@ EGL_UNSIGNALED=_C('EGL_UNSIGNALED',0x30F3)
 @_p.types(_cs.EGLint,_cs.EGLDisplay,_cs.EGLSync,_cs.EGLint,_cs.EGLTime)
 def eglClientWaitSync(dpy,sync,flags,timeout):pass
 @_f
+@_p.types(_cs.EGLImage,_cs.EGLDisplay,_cs.EGLContext,_cs.EGLenum,_cs.EGLClientBuffer,arrays.GLintArray)
+def eglCreateImage(dpy,ctx,target,buffer,attrib_list):pass
+@_f
 @_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,ctypes.c_void_p,ctypes.POINTER(_cs.EGLAttrib))
 def eglCreatePlatformPixmapSurface(dpy,config,native_pixmap,attrib_list):pass
 @_f
@@ -66,6 +71,9 @@ def eglCreatePlatformWindowSurface(dpy,config,native_window,attrib_list):pass
 @_f
 @_p.types(_cs.EGLSync,_cs.EGLDisplay,_cs.EGLenum,ctypes.POINTER(_cs.EGLAttrib))
 def eglCreateSync(dpy,type,attrib_list):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLImage)
+def eglDestroyImage(dpy,image):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSync)
 def eglDestroySync(dpy,sync):pass

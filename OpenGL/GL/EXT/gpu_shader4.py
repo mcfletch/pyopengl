@@ -119,7 +119,7 @@ def glInitGpuShader4EXT():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# OUTPUT glGetUniformuivEXT.params COMPSIZE(program,location) 
+# OUTPUT glGetUniformuivEXT.params COMPSIZE(program, location) 
 # INPUT glBindFragDataLocationEXT.name size not checked against 'name'
 glBindFragDataLocationEXT=wrapper.wrapper(glBindFragDataLocationEXT).setInputArraySize(
     'name', None

@@ -4,6 +4,36 @@ This module customises the behaviour of the
 OpenGL.raw.GL.AMD.gpu_shader_int64 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension was developed based on the NV_gpu_shader5 extension to
+	allow implementations supporting 64-bit integers to expose the feature
+	without the additional requirements that are present in NV_gpu_shader5.
+	
+	The extension introduces the following features for all shader types:
+	
+	  * support for 64-bit scalar and vector integer data types, including
+	    uniform API, uniform buffer object, transform feedback, and shader
+	    input and output support;
+	
+	  * new built-in functions to pack and unpack 64-bit integer types into a
+	    two-component 32-bit integer vector;
+	
+	  * new built-in functions to convert double-precision floating-point
+	    values to or from their 64-bit integer bit encodings;
+	
+	  * vector relational functions supporting comparisons of vectors of
+	    64-bit integer types; and
+	
+	  * common functions abs, sign, min, max, clamp, and mix supporting
+	    arguments of 64-bit integer types.
+	
+	This extension is designed to be a functional superset of the 64-bit
+	integer support introduced by NV_gpu_shader5 and to be source code
+	compatible with that, thus the new procedures, functions, and tokens
+	are identical to those found in that extension.
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/AMD/gpu_shader_int64.txt
 '''
@@ -52,7 +82,7 @@ glUniform4ui64vNV=wrapper.wrapper(glUniform4ui64vNV).setInputArraySize(
     'value', None
 )
 # OUTPUT glGetUniformi64vNV.params COMPSIZE(program, location) 
-# OUTPUT glGetUniformui64vNV.params COMPSIZE(program,location) 
+# OUTPUT glGetUniformui64vNV.params COMPSIZE(program, location) 
 # INPUT glProgramUniform1i64vNV.value size not checked against count
 glProgramUniform1i64vNV=wrapper.wrapper(glProgramUniform1i64vNV).setInputArraySize(
     'value', None

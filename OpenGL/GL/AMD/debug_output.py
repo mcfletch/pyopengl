@@ -75,13 +75,13 @@ glDebugMessageInsertAMD=wrapper.wrapper(glDebugMessageInsertAMD).setInputArraySi
 )
 # glDebugMessageCallbackAMD.userParam is OUTPUT without known output size
 glGetDebugMessageLogAMD=wrapper.wrapper(glGetDebugMessageLogAMD).setOutput(
-    'lengths',size=lambda x:(x,),pnameArg='count',orPassIn=True
-).setOutput(
-    'message',size=lambda x:(x,),pnameArg='bufsize',orPassIn=True
+    'categories',size=lambda x:(x,),pnameArg='count',orPassIn=True
 ).setOutput(
     'ids',size=lambda x:(x,),pnameArg='count',orPassIn=True
 ).setOutput(
-    'categories',size=lambda x:(x,),pnameArg='count',orPassIn=True
+    'lengths',size=lambda x:(x,),pnameArg='count',orPassIn=True
+).setOutput(
+    'message',size=lambda x:(x,),pnameArg='bufsize',orPassIn=True
 ).setOutput(
     'severities',size=lambda x:(x,),pnameArg='count',orPassIn=True
 )

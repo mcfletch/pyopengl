@@ -43,7 +43,7 @@ glCompressedTexSubImage2D=wrapper.wrapper(glCompressedTexSubImage2D).setInputArr
 glCompressedTexSubImage1D=wrapper.wrapper(glCompressedTexSubImage1D).setInputArraySize(
     'data', None
 )
-# OUTPUT glGetCompressedTexImage.img COMPSIZE(target,level) 
+# OUTPUT glGetCompressedTexImage.img COMPSIZE(target, level) 
 glMultiTexCoord1dv=wrapper.wrapper(glMultiTexCoord1dv).setInputArraySize(
     'v', 1
 )

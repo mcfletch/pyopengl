@@ -268,7 +268,7 @@ glTextureSubImage1DEXT=wrapper.wrapper(glTextureSubImage1DEXT).setInputArraySize
 glTextureSubImage2DEXT=wrapper.wrapper(glTextureSubImage2DEXT).setInputArraySize(
     'pixels', None
 )
-# OUTPUT glGetTextureImageEXT.pixels COMPSIZE(target,level,format,type) 
+# OUTPUT glGetTextureImageEXT.pixels COMPSIZE(target, level, format, type) 
 glGetTextureParameterfvEXT=wrapper.wrapper(glGetTextureParameterfvEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
@@ -352,7 +352,7 @@ glMultiTexSubImage1DEXT=wrapper.wrapper(glMultiTexSubImage1DEXT).setInputArraySi
 glMultiTexSubImage2DEXT=wrapper.wrapper(glMultiTexSubImage2DEXT).setInputArraySize(
     'pixels', None
 )
-# OUTPUT glGetMultiTexImageEXT.pixels COMPSIZE(target,level,format,type) 
+# OUTPUT glGetMultiTexImageEXT.pixels COMPSIZE(target, level, format, type) 
 glGetMultiTexParameterfvEXT=wrapper.wrapper(glGetMultiTexParameterfvEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
@@ -412,7 +412,7 @@ glCompressedTextureSubImage2DEXT=wrapper.wrapper(glCompressedTextureSubImage2DEX
 glCompressedTextureSubImage1DEXT=wrapper.wrapper(glCompressedTextureSubImage1DEXT).setInputArraySize(
     'bits', None
 )
-# OUTPUT glGetCompressedTextureImageEXT.img COMPSIZE(target,lod) 
+# OUTPUT glGetCompressedTextureImageEXT.img COMPSIZE(target, lod) 
 # INPUT glCompressedMultiTexImage3DEXT.bits size not checked against imageSize
 glCompressedMultiTexImage3DEXT=wrapper.wrapper(glCompressedMultiTexImage3DEXT).setInputArraySize(
     'bits', None
@@ -437,7 +437,7 @@ glCompressedMultiTexSubImage2DEXT=wrapper.wrapper(glCompressedMultiTexSubImage2D
 glCompressedMultiTexSubImage1DEXT=wrapper.wrapper(glCompressedMultiTexSubImage1DEXT).setInputArraySize(
     'bits', None
 )
-# OUTPUT glGetCompressedMultiTexImageEXT.img COMPSIZE(target,lod) 
+# OUTPUT glGetCompressedMultiTexImageEXT.img COMPSIZE(target, lod) 
 glMatrixLoadTransposefEXT=wrapper.wrapper(glMatrixLoadTransposefEXT).setInputArraySize(
     'm', 16
 )
@@ -603,11 +603,11 @@ glGetNamedProgramLocalParameterIivEXT=wrapper.wrapper(glGetNamedProgramLocalPara
 glGetNamedProgramLocalParameterIuivEXT=wrapper.wrapper(glGetNamedProgramLocalParameterIuivEXT).setOutput(
     'params',size=(4,),orPassIn=True
 )
-# INPUT glGetFloati_vEXT.params size not checked against 'target'
+# INPUT glGetFloati_vEXT.params size not checked against 'pname'
 glGetFloati_vEXT=wrapper.wrapper(glGetFloati_vEXT).setInputArraySize(
     'params', None
 )
-# INPUT glGetDoublei_vEXT.params size not checked against 'target'
+# INPUT glGetDoublei_vEXT.params size not checked against 'pname'
 glGetDoublei_vEXT=wrapper.wrapper(glGetDoublei_vEXT).setInputArraySize(
     'params', None
 )
@@ -633,7 +633,7 @@ glGetNamedProgramLocalParameterfvEXT=wrapper.wrapper(glGetNamedProgramLocalParam
 glGetNamedProgramivEXT=wrapper.wrapper(glGetNamedProgramivEXT).setOutput(
     'params',size=(1,),orPassIn=True
 )
-# OUTPUT glGetNamedProgramStringEXT.string COMPSIZE(program,pname) 
+# OUTPUT glGetNamedProgramStringEXT.string COMPSIZE(program, pname) 
 glGetNamedRenderbufferParameterivEXT=wrapper.wrapper(glGetNamedRenderbufferParameterivEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
@@ -662,9 +662,8 @@ glClearNamedBufferDataEXT=wrapper.wrapper(glClearNamedBufferDataEXT).setInputArr
 glClearNamedBufferSubDataEXT=wrapper.wrapper(glClearNamedBufferSubDataEXT).setInputArraySize(
     'data', None
 )
-# INPUT glGetNamedFramebufferParameterivEXT.params size not checked against 'pname'
-glGetNamedFramebufferParameterivEXT=wrapper.wrapper(glGetNamedFramebufferParameterivEXT).setInputArraySize(
-    'params', None
+glGetNamedFramebufferParameterivEXT=wrapper.wrapper(glGetNamedFramebufferParameterivEXT).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 # INPUT glProgramUniform1dvEXT.value size not checked against count
 glProgramUniform1dvEXT=wrapper.wrapper(glProgramUniform1dvEXT).setInputArraySize(

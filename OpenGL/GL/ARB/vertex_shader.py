@@ -109,11 +109,11 @@ glVertexAttribPointerARB=wrapper.wrapper(glVertexAttribPointerARB).setInputArray
 glGetActiveAttribARB=wrapper.wrapper(glGetActiveAttribARB).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'type',size=(1,),orPassIn=True
-).setOutput(
     'name',size=lambda x:(x,),pnameArg='maxLength',orPassIn=True
 ).setOutput(
     'size',size=(1,),orPassIn=True
+).setOutput(
+    'type',size=(1,),orPassIn=True
 )
 glGetVertexAttribdvARB=wrapper.wrapper(glGetVertexAttribdvARB).setOutput(
     'params',size=(4,),orPassIn=True

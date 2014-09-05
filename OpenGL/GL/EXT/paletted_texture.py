@@ -64,7 +64,7 @@ def glInitPalettedTextureEXT():
 glColorTableEXT=wrapper.wrapper(glColorTableEXT).setInputArraySize(
     'table', None
 )
-# OUTPUT glGetColorTableEXT.data COMPSIZE(target,format,type) 
+# OUTPUT glGetColorTableEXT.data COMPSIZE(target, format, type) 
 glGetColorTableParameterivEXT=wrapper.wrapper(glGetColorTableParameterivEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )

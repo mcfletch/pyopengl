@@ -27,16 +27,16 @@ glShaderBinary=wrapper.wrapper(glShaderBinary).setInputArraySize(
     'shaders', None
 )
 glGetShaderPrecisionFormat=wrapper.wrapper(glGetShaderPrecisionFormat).setOutput(
-    'range',size=(2,),orPassIn=True
-).setOutput(
     'precision',size=(2,),orPassIn=True
+).setOutput(
+    'range',size=(2,),orPassIn=True
 )
 glGetProgramBinary=wrapper.wrapper(glGetProgramBinary).setOutput(
     'binary',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
     'binaryFormat',size=(1,),orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
 )
 # INPUT glProgramBinary.binary size not checked against length
 glProgramBinary=wrapper.wrapper(glProgramBinary).setInputArraySize(
@@ -171,9 +171,9 @@ glProgramUniformMatrix4x3dv=wrapper.wrapper(glProgramUniformMatrix4x3dv).setInpu
     'value', None
 )
 glGetProgramPipelineInfoLog=wrapper.wrapper(glGetProgramPipelineInfoLog).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
     'infoLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
 )
 glVertexAttribL1dv=wrapper.wrapper(glVertexAttribL1dv).setInputArraySize(
     'v', 1

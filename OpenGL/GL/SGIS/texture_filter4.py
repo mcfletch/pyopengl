@@ -28,7 +28,7 @@ def glInitTextureFilter4SGIS():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# OUTPUT glGetTexFilterFuncSGIS.weights COMPSIZE(target,filter) 
+# OUTPUT glGetTexFilterFuncSGIS.weights COMPSIZE(target, filter) 
 # INPUT glTexFilterFuncSGIS.weights size not checked against n
 glTexFilterFuncSGIS=wrapper.wrapper(glTexFilterFuncSGIS).setInputArraySize(
     'weights', None

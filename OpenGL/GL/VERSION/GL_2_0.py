@@ -26,20 +26,20 @@ glDrawBuffers=wrapper.wrapper(glDrawBuffers).setInputArraySize(
 glGetActiveAttrib=wrapper.wrapper(glGetActiveAttrib).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'type',size=(1,),orPassIn=True
-).setOutput(
     'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setOutput(
     'size',size=(1,),orPassIn=True
+).setOutput(
+    'type',size=(1,),orPassIn=True
 )
 glGetActiveUniform=wrapper.wrapper(glGetActiveUniform).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'type',size=(1,),orPassIn=True
-).setOutput(
     'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setOutput(
     'size',size=(1,),orPassIn=True
+).setOutput(
+    'type',size=(1,),orPassIn=True
 )
 # glGetAttachedShaders.obj is OUTPUT without known output size
 # INPUT glGetAttachedShaders.shaders size not checked against maxCount
@@ -52,22 +52,22 @@ glGetProgramiv=wrapper.wrapper(glGetProgramiv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 glGetProgramInfoLog=wrapper.wrapper(glGetProgramInfoLog).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
     'infoLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
 )
 glGetShaderiv=wrapper.wrapper(glGetShaderiv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 glGetShaderInfoLog=wrapper.wrapper(glGetShaderInfoLog).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
     'infoLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
 )
 glGetShaderSource=wrapper.wrapper(glGetShaderSource).setOutput(
-    'source',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
-).setOutput(
     'length',size=(1,),orPassIn=True
+).setOutput(
+    'source',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 )
 # glGetUniformfv.params is OUTPUT without known output size
 # glGetUniformiv.params is OUTPUT without known output size

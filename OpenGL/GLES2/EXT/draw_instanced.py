@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.draw_instanced to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides the means to render multiple instances of
+	an object with a single draw call, and an "instance ID" variable
+	which can be used by the vertex program to compute per-instance
+	values, typically an object's transform.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/draw_instanced.txt
 '''

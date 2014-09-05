@@ -165,9 +165,9 @@ glGetnConvolutionFilterARB=wrapper.wrapper(glGetnConvolutionFilterARB).setOutput
 glGetnSeparableFilterARB=wrapper.wrapper(glGetnSeparableFilterARB).setOutput(
     'column',size=lambda x:(x,),pnameArg='columnBufSize',orPassIn=True
 ).setOutput(
-    'span',size=(0,),orPassIn=True
-).setOutput(
     'row',size=lambda x:(x,),pnameArg='rowBufSize',orPassIn=True
+).setOutput(
+    'span',size=(0,),orPassIn=True
 )
 glGetnHistogramARB=wrapper.wrapper(glGetnHistogramARB).setOutput(
     'values',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True

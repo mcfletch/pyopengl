@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.shader_texture_image_samples to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides GLSL built-in functions allowing shaders to query
+	the number of samples of a texture.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/shader_texture_image_samples.txt
 '''

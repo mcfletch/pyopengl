@@ -179,7 +179,7 @@ glGetProgramLocalParameterfvARB=wrapper.wrapper(glGetProgramLocalParameterfvARB)
 glGetProgramivARB=wrapper.wrapper(glGetProgramivARB).setOutput(
     'params',size=(1,),orPassIn=True
 )
-# OUTPUT glGetProgramStringARB.string COMPSIZE(target,pname) 
+# OUTPUT glGetProgramStringARB.string COMPSIZE(target, pname) 
 glGetVertexAttribdvARB=wrapper.wrapper(glGetVertexAttribdvARB).setOutput(
     'params',size=(4,),orPassIn=True
 )

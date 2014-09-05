@@ -45,9 +45,9 @@ def glInitGetProgramBinaryARB():
 glGetProgramBinary=wrapper.wrapper(glGetProgramBinary).setOutput(
     'binary',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
     'binaryFormat',size=(1,),orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
 )
 # INPUT glProgramBinary.binary size not checked against length
 glProgramBinary=wrapper.wrapper(glProgramBinary).setInputArraySize(

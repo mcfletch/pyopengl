@@ -244,7 +244,7 @@ Overview (from the spec)
 	                   GL_SYSTEM_FONT_NAME_NV, "Helvetica", GL_BOLD_BIT_NV,
 	                   wordLen, GL_UNSIGNED_BYTE, word,
 	                   GL_SKIP_MISSING_GLYPH_NV, ~0, emScale);
-	    glPathGlyphsNV(glyphBase, 
+	    glPathGlyphsNV(glyphBase,
 	                   GL_SYSTEM_FONT_NAME_NV, "Arial", GL_BOLD_BIT_NV,
 	                   wordLen, GL_UNSIGNED_BYTE, word,
 	                   GL_SKIP_MISSING_GLYPH_NV, ~0, emScale);
@@ -287,7 +287,7 @@ Overview (from the spec)
 	word's bounds to the [-1..1] clip space cube:
 	
 	    glMatrixLoadIdentityEXT(GL_PROJECTION);
-	    glMatrixOrthoEXT(GL_MODELVIEW, 
+	    glMatrixOrthoEXT(GL_MODELVIEW,
 	                     0, xtranslate[6], yMinMax[0], yMinMax[1],
 	                     -1, 1);
 	
@@ -337,7 +337,7 @@ Overview (from the spec)
 	                       GL_SYSTEM_FONT_NAME_NV, "Helvetica", GL_BOLD_BIT_NV,
 	                       0, numChars,
 	                       GL_SKIP_MISSING_GLYPH_NV, ~0, emScale);
-	    glPathGlyphRangeNV(glyphBase, 
+	    glPathGlyphRangeNV(glyphBase,
 	                       GL_SYSTEM_FONT_NAME_NV, "Arial", GL_BOLD_BIT_NV,
 	                       0, numChars,
 	                       GL_SKIP_MISSING_GLYPH_NV, ~0, emScale);
@@ -412,12 +412,12 @@ glPathSubCoordsNV=wrapper.wrapper(glPathSubCoordsNV).setInputArraySize(
 glPathStringNV=wrapper.wrapper(glPathStringNV).setInputArraySize(
     'pathString', None
 )
-# INPUT glPathGlyphsNV.fontName size not checked against 'fontTarget,fontName'
 # INPUT glPathGlyphsNV.charcodes size not checked against 'numGlyphs,type,charcodes'
+# INPUT glPathGlyphsNV.fontName size not checked against 'fontTarget,fontName'
 glPathGlyphsNV=wrapper.wrapper(glPathGlyphsNV).setInputArraySize(
-    'fontName', None
-).setInputArraySize(
     'charcodes', None
+).setInputArraySize(
+    'fontName', None
 )
 # INPUT glPathGlyphRangeNV.fontName size not checked against 'fontTarget,fontName'
 glPathGlyphRangeNV=wrapper.wrapper(glPathGlyphRangeNV).setInputArraySize(
@@ -482,65 +482,51 @@ glCoverStrokePathInstancedNV=wrapper.wrapper(glCoverStrokePathInstancedNV).setIn
 ).setInputArraySize(
     'transformValues', None
 )
-glGetPathParameterivNV=wrapper.wrapper(glGetPathParameterivNV).setInputArraySize(
-    'value', 4
+glGetPathParameterivNV=wrapper.wrapper(glGetPathParameterivNV).setOutput(
+    'value',size=(4,),orPassIn=True
 )
-glGetPathParameterfvNV=wrapper.wrapper(glGetPathParameterfvNV).setInputArraySize(
-    'value', 4
+glGetPathParameterfvNV=wrapper.wrapper(glGetPathParameterfvNV).setOutput(
+    'value',size=(4,),orPassIn=True
 )
-# INPUT glGetPathCommandsNV.commands size not checked against 'path'
-glGetPathCommandsNV=wrapper.wrapper(glGetPathCommandsNV).setInputArraySize(
-    'commands', None
+glGetPathCommandsNV=wrapper.wrapper(glGetPathCommandsNV).setOutput(
+    'commands',size=_glgets._glget_size_mapping,pnameArg='path',orPassIn=True
 )
-# INPUT glGetPathCoordsNV.coords size not checked against 'path'
-glGetPathCoordsNV=wrapper.wrapper(glGetPathCoordsNV).setInputArraySize(
-    'coords', None
+glGetPathCoordsNV=wrapper.wrapper(glGetPathCoordsNV).setOutput(
+    'coords',size=_glgets._glget_size_mapping,pnameArg='path',orPassIn=True
 )
-# INPUT glGetPathDashArrayNV.dashArray size not checked against 'path'
-glGetPathDashArrayNV=wrapper.wrapper(glGetPathDashArrayNV).setInputArraySize(
-    'dashArray', None
+glGetPathDashArrayNV=wrapper.wrapper(glGetPathDashArrayNV).setOutput(
+    'dashArray',size=_glgets._glget_size_mapping,pnameArg='path',orPassIn=True
 )
-# INPUT glGetPathMetricsNV.metrics size not checked against 'metricQueryMask,numPaths,stride'
+# OUTPUT glGetPathMetricsNV.metrics COMPSIZE(metricQueryMask, numPaths, stride) 
 # INPUT glGetPathMetricsNV.paths size not checked against 'numPaths,pathNameType,paths'
 glGetPathMetricsNV=wrapper.wrapper(glGetPathMetricsNV).setInputArraySize(
-    'metrics', None
-).setInputArraySize(
     'paths', None
 )
-# INPUT glGetPathMetricRangeNV.metrics size not checked against 'metricQueryMask,numPaths,stride'
-glGetPathMetricRangeNV=wrapper.wrapper(glGetPathMetricRangeNV).setInputArraySize(
-    'metrics', None
-)
+# OUTPUT glGetPathMetricRangeNV.metrics COMPSIZE(metricQueryMask, numPaths, stride) 
 # INPUT glGetPathSpacingNV.paths size not checked against 'numPaths,pathNameType,paths'
-# INPUT glGetPathSpacingNV.returnedSpacing size not checked against 'pathListMode,numPaths'
+# OUTPUT glGetPathSpacingNV.returnedSpacing COMPSIZE(pathListMode, numPaths) 
 glGetPathSpacingNV=wrapper.wrapper(glGetPathSpacingNV).setInputArraySize(
     'paths', None
-).setInputArraySize(
-    'returnedSpacing', None
 )
-# INPUT glGetPathColorGenivNV.value size not checked against 'pname'
-glGetPathColorGenivNV=wrapper.wrapper(glGetPathColorGenivNV).setInputArraySize(
-    'value', None
+glGetPathColorGenivNV=wrapper.wrapper(glGetPathColorGenivNV).setOutput(
+    'value',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetPathColorGenfvNV.value size not checked against 'pname'
-glGetPathColorGenfvNV=wrapper.wrapper(glGetPathColorGenfvNV).setInputArraySize(
-    'value', None
+glGetPathColorGenfvNV=wrapper.wrapper(glGetPathColorGenfvNV).setOutput(
+    'value',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetPathTexGenivNV.value size not checked against 'pname'
-glGetPathTexGenivNV=wrapper.wrapper(glGetPathTexGenivNV).setInputArraySize(
-    'value', None
+glGetPathTexGenivNV=wrapper.wrapper(glGetPathTexGenivNV).setOutput(
+    'value',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetPathTexGenfvNV.value size not checked against 'pname'
-glGetPathTexGenfvNV=wrapper.wrapper(glGetPathTexGenfvNV).setInputArraySize(
-    'value', None
+glGetPathTexGenfvNV=wrapper.wrapper(glGetPathTexGenfvNV).setOutput(
+    'value',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-glPointAlongPathNV=wrapper.wrapper(glPointAlongPathNV).setInputArraySize(
-    'y', 1
-).setInputArraySize(
-    'x', 1
-).setInputArraySize(
-    'tangentY', 1
-).setInputArraySize(
-    'tangentX', 1
+glPointAlongPathNV=wrapper.wrapper(glPointAlongPathNV).setOutput(
+    'tangentX',size=(1,),orPassIn=True
+).setOutput(
+    'tangentY',size=(1,),orPassIn=True
+).setOutput(
+    'x',size=(1,),orPassIn=True
+).setOutput(
+    'y',size=(1,),orPassIn=True
 )
 ### END AUTOGENERATED SECTION

@@ -28,14 +28,14 @@ def glInitHistogramEXT():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# OUTPUT glGetHistogramEXT.values COMPSIZE(target,format,type) 
+# OUTPUT glGetHistogramEXT.values COMPSIZE(target, format, type) 
 glGetHistogramParameterfvEXT=wrapper.wrapper(glGetHistogramParameterfvEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 glGetHistogramParameterivEXT=wrapper.wrapper(glGetHistogramParameterivEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT glGetMinmaxEXT.values COMPSIZE(target,format,type) 
+# OUTPUT glGetMinmaxEXT.values COMPSIZE(target, format, type) 
 glGetMinmaxParameterfvEXT=wrapper.wrapper(glGetMinmaxParameterfvEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )

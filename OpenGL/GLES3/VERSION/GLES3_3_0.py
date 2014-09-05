@@ -100,11 +100,11 @@ glTransformFeedbackVaryings=wrapper.wrapper(glTransformFeedbackVaryings).setInpu
 glGetTransformFeedbackVarying=wrapper.wrapper(glGetTransformFeedbackVarying).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'type',size=(1,),orPassIn=True
-).setOutput(
     'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setOutput(
     'size',size=(1,),orPassIn=True
+).setOutput(
+    'type',size=(1,),orPassIn=True
 )
 # INPUT glVertexAttribIPointer.pointer size not checked against 'size,type,stride'
 glVertexAttribIPointer=wrapper.wrapper(glVertexAttribIPointer).setInputArraySize(
@@ -122,7 +122,7 @@ glVertexAttribI4iv=wrapper.wrapper(glVertexAttribI4iv).setInputArraySize(
 glVertexAttribI4uiv=wrapper.wrapper(glVertexAttribI4uiv).setInputArraySize(
     'v', 4
 )
-# OUTPUT glGetUniformuiv.params COMPSIZE(program,location) 
+# OUTPUT glGetUniformuiv.params COMPSIZE(program, location) 
 # INPUT glGetFragDataLocation.name size not checked against 'name'
 glGetFragDataLocation=wrapper.wrapper(glGetFragDataLocation).setInputArraySize(
     'name', None
@@ -161,8 +161,8 @@ glGetUniformIndices=wrapper.wrapper(glGetUniformIndices).setOutput(
 ).setInputArraySize(
     'uniformNames', None
 )
-# INPUT glGetActiveUniformsiv.uniformIndices size not checked against uniformCount
 # OUTPUT glGetActiveUniformsiv.params COMPSIZE(uniformCount, pname) 
+# INPUT glGetActiveUniformsiv.uniformIndices size not checked against uniformCount
 glGetActiveUniformsiv=wrapper.wrapper(glGetActiveUniformsiv).setInputArraySize(
     'uniformIndices', None
 )
@@ -225,9 +225,9 @@ glGenTransformFeedbacks=wrapper.wrapper(glGenTransformFeedbacks).setOutput(
 glGetProgramBinary=wrapper.wrapper(glGetProgramBinary).setOutput(
     'binary',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
     'binaryFormat',size=(1,),orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
 )
 # INPUT glProgramBinary.binary size not checked against length
 glProgramBinary=wrapper.wrapper(glProgramBinary).setInputArraySize(

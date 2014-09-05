@@ -27,13 +27,11 @@ glClearBufferData=wrapper.wrapper(glClearBufferData).setInputArraySize(
 glClearBufferSubData=wrapper.wrapper(glClearBufferSubData).setInputArraySize(
     'data', None
 )
-# INPUT glGetFramebufferParameteriv.params size not checked against 'pname'
-glGetFramebufferParameteriv=wrapper.wrapper(glGetFramebufferParameteriv).setInputArraySize(
-    'params', None
+glGetFramebufferParameteriv=wrapper.wrapper(glGetFramebufferParameteriv).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetInternalformati64v.params size not checked against bufSize
-glGetInternalformati64v=wrapper.wrapper(glGetInternalformati64v).setInputArraySize(
-    'params', None
+glGetInternalformati64v=wrapper.wrapper(glGetInternalformati64v).setOutput(
+    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 )
 # INPUT glInvalidateFramebuffer.attachments size not checked against numAttachments
 glInvalidateFramebuffer=wrapper.wrapper(glInvalidateFramebuffer).setInputArraySize(
@@ -51,26 +49,23 @@ glMultiDrawArraysIndirect=wrapper.wrapper(glMultiDrawArraysIndirect).setInputArr
 glMultiDrawElementsIndirect=wrapper.wrapper(glMultiDrawElementsIndirect).setInputArraySize(
     'indirect', None
 )
-# INPUT glGetProgramInterfaceiv.params size not checked against 'pname'
-glGetProgramInterfaceiv=wrapper.wrapper(glGetProgramInterfaceiv).setInputArraySize(
-    'params', None
+glGetProgramInterfaceiv=wrapper.wrapper(glGetProgramInterfaceiv).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 # INPUT glGetProgramResourceIndex.name size not checked against 'name'
 glGetProgramResourceIndex=wrapper.wrapper(glGetProgramResourceIndex).setInputArraySize(
     'name', None
 )
-# INPUT glGetProgramResourceName.name size not checked against bufSize
-glGetProgramResourceName=wrapper.wrapper(glGetProgramResourceName).setInputArraySize(
-    'length', 1
-).setInputArraySize(
-    'name', None
+glGetProgramResourceName=wrapper.wrapper(glGetProgramResourceName).setOutput(
+    'length',size=(1,),orPassIn=True
+).setOutput(
+    'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 )
-# INPUT glGetProgramResourceiv.params size not checked against bufSize
 # INPUT glGetProgramResourceiv.props size not checked against propCount
-glGetProgramResourceiv=wrapper.wrapper(glGetProgramResourceiv).setInputArraySize(
-    'length', 1
-).setInputArraySize(
-    'params', None
+glGetProgramResourceiv=wrapper.wrapper(glGetProgramResourceiv).setOutput(
+    'length',size=(1,),orPassIn=True
+).setOutput(
+    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setInputArraySize(
     'props', None
 )
@@ -90,24 +85,18 @@ glDebugMessageControl=wrapper.wrapper(glDebugMessageControl).setInputArraySize(
 glDebugMessageInsert=wrapper.wrapper(glDebugMessageInsert).setInputArraySize(
     'buf', None
 )
-# INPUT glGetDebugMessageLog.lengths size not checked against count
-# INPUT glGetDebugMessageLog.ids size not checked against count
-# INPUT glGetDebugMessageLog.severities size not checked against count
-# INPUT glGetDebugMessageLog.sources size not checked against count
-# INPUT glGetDebugMessageLog.messageLog size not checked against bufSize
-# INPUT glGetDebugMessageLog.types size not checked against count
-glGetDebugMessageLog=wrapper.wrapper(glGetDebugMessageLog).setInputArraySize(
-    'lengths', None
-).setInputArraySize(
-    'ids', None
-).setInputArraySize(
-    'severities', None
-).setInputArraySize(
-    'sources', None
-).setInputArraySize(
-    'messageLog', None
-).setInputArraySize(
-    'types', None
+glGetDebugMessageLog=wrapper.wrapper(glGetDebugMessageLog).setOutput(
+    'ids',size=lambda x:(x,),pnameArg='count',orPassIn=True
+).setOutput(
+    'lengths',size=lambda x:(x,),pnameArg='count',orPassIn=True
+).setOutput(
+    'messageLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'severities',size=lambda x:(x,),pnameArg='count',orPassIn=True
+).setOutput(
+    'sources',size=lambda x:(x,),pnameArg='count',orPassIn=True
+).setOutput(
+    'types',size=lambda x:(x,),pnameArg='count',orPassIn=True
 )
 # INPUT glPushDebugGroup.message size not checked against 'message,length'
 glPushDebugGroup=wrapper.wrapper(glPushDebugGroup).setInputArraySize(
@@ -117,21 +106,19 @@ glPushDebugGroup=wrapper.wrapper(glPushDebugGroup).setInputArraySize(
 glObjectLabel=wrapper.wrapper(glObjectLabel).setInputArraySize(
     'label', None
 )
-# INPUT glGetObjectLabel.label size not checked against bufSize
-glGetObjectLabel=wrapper.wrapper(glGetObjectLabel).setInputArraySize(
-    'length', 1
-).setInputArraySize(
-    'label', None
+glGetObjectLabel=wrapper.wrapper(glGetObjectLabel).setOutput(
+    'label',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
 )
 # INPUT glObjectPtrLabel.label size not checked against 'label,length'
 glObjectPtrLabel=wrapper.wrapper(glObjectPtrLabel).setInputArraySize(
     'label', None
 )
-# INPUT glGetObjectPtrLabel.label size not checked against bufSize
-glGetObjectPtrLabel=wrapper.wrapper(glGetObjectPtrLabel).setInputArraySize(
-    'length', 1
-).setInputArraySize(
-    'label', None
+glGetObjectPtrLabel=wrapper.wrapper(glGetObjectPtrLabel).setOutput(
+    'label',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
 )
 glGetPointerv=wrapper.wrapper(glGetPointerv).setOutput(
     'params',size=(1,),orPassIn=True

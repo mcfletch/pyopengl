@@ -26,20 +26,17 @@ glClipPlanexOES=wrapper.wrapper(glClipPlanexOES).setInputArraySize(
 glFogxvOES=wrapper.wrapper(glFogxvOES).setInputArraySize(
     'param', None
 )
-glGetClipPlanexOES=wrapper.wrapper(glGetClipPlanexOES).setInputArraySize(
-    'equation', 4
+glGetClipPlanexOES=wrapper.wrapper(glGetClipPlanexOES).setOutput(
+    'equation',size=(4,),orPassIn=True
 )
-# INPUT glGetFixedvOES.params size not checked against 'pname'
-glGetFixedvOES=wrapper.wrapper(glGetFixedvOES).setInputArraySize(
-    'params', None
+glGetFixedvOES=wrapper.wrapper(glGetFixedvOES).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetTexEnvxvOES.params size not checked against 'pname'
-glGetTexEnvxvOES=wrapper.wrapper(glGetTexEnvxvOES).setInputArraySize(
-    'params', None
+glGetTexEnvxvOES=wrapper.wrapper(glGetTexEnvxvOES).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetTexParameterxvOES.params size not checked against 'pname'
-glGetTexParameterxvOES=wrapper.wrapper(glGetTexParameterxvOES).setInputArraySize(
-    'params', None
+glGetTexParameterxvOES=wrapper.wrapper(glGetTexParameterxvOES).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 # INPUT glLightModelxvOES.param size not checked against 'pname'
 glLightModelxvOES=wrapper.wrapper(glLightModelxvOES).setInputArraySize(
@@ -103,33 +100,26 @@ glEvalCoord2xvOES=wrapper.wrapper(glEvalCoord2xvOES).setInputArraySize(
 glFeedbackBufferxOES=wrapper.wrapper(glFeedbackBufferxOES).setInputArraySize(
     'buffer', None
 )
-# INPUT glGetConvolutionParameterxvOES.params size not checked against 'pname'
-glGetConvolutionParameterxvOES=wrapper.wrapper(glGetConvolutionParameterxvOES).setInputArraySize(
-    'params', None
+glGetConvolutionParameterxvOES=wrapper.wrapper(glGetConvolutionParameterxvOES).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetHistogramParameterxvOES.params size not checked against 'pname'
-glGetHistogramParameterxvOES=wrapper.wrapper(glGetHistogramParameterxvOES).setInputArraySize(
-    'params', None
+glGetHistogramParameterxvOES=wrapper.wrapper(glGetHistogramParameterxvOES).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetLightxOES.params size not checked against 'pname'
-glGetLightxOES=wrapper.wrapper(glGetLightxOES).setInputArraySize(
-    'params', None
+glGetLightxOES=wrapper.wrapper(glGetLightxOES).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetMapxvOES.v size not checked against 'query'
-glGetMapxvOES=wrapper.wrapper(glGetMapxvOES).setInputArraySize(
-    'v', None
+glGetMapxvOES=wrapper.wrapper(glGetMapxvOES).setOutput(
+    'v',size=_glgets._glget_size_mapping,pnameArg='query',orPassIn=True
 )
-# INPUT glGetPixelMapxv.values size not checked against size
-glGetPixelMapxv=wrapper.wrapper(glGetPixelMapxv).setInputArraySize(
-    'values', None
+glGetPixelMapxv=wrapper.wrapper(glGetPixelMapxv).setOutput(
+    'values',size=lambda x:(x,),pnameArg='size',orPassIn=True
 )
-# INPUT glGetTexGenxvOES.params size not checked against 'pname'
-glGetTexGenxvOES=wrapper.wrapper(glGetTexGenxvOES).setInputArraySize(
-    'params', None
+glGetTexGenxvOES=wrapper.wrapper(glGetTexGenxvOES).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetTexLevelParameterxvOES.params size not checked against 'pname'
-glGetTexLevelParameterxvOES=wrapper.wrapper(glGetTexLevelParameterxvOES).setInputArraySize(
-    'params', None
+glGetTexLevelParameterxvOES=wrapper.wrapper(glGetTexLevelParameterxvOES).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 glIndexxvOES=wrapper.wrapper(glIndexxvOES).setInputArraySize(
     'component', 1
@@ -159,12 +149,12 @@ glNormal3xvOES=wrapper.wrapper(glNormal3xvOES).setInputArraySize(
 glPixelMapx=wrapper.wrapper(glPixelMapx).setInputArraySize(
     'values', None
 )
-# INPUT glPrioritizeTexturesxOES.textures size not checked against n
 # INPUT glPrioritizeTexturesxOES.priorities size not checked against n
+# INPUT glPrioritizeTexturesxOES.textures size not checked against n
 glPrioritizeTexturesxOES=wrapper.wrapper(glPrioritizeTexturesxOES).setInputArraySize(
-    'textures', None
-).setInputArraySize(
     'priorities', None
+).setInputArraySize(
+    'textures', None
 )
 glRasterPos2xvOES=wrapper.wrapper(glRasterPos2xvOES).setInputArraySize(
     'coords', 2

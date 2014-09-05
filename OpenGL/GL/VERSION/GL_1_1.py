@@ -70,17 +70,17 @@ glVertexPointer=wrapper.wrapper(glVertexPointer).setInputArraySize(
     'pointer', None
 )
 # INPUT glAreTexturesResident.textures size not checked against n
-glAreTexturesResident=wrapper.wrapper(glAreTexturesResident).setInputArraySize(
-    'textures', None
-).setOutput(
+glAreTexturesResident=wrapper.wrapper(glAreTexturesResident).setOutput(
     'residences',size=lambda x:(x,),pnameArg='n',orPassIn=True
-)
-# INPUT glPrioritizeTextures.textures size not checked against n
-# INPUT glPrioritizeTextures.priorities size not checked against n
-glPrioritizeTextures=wrapper.wrapper(glPrioritizeTextures).setInputArraySize(
-    'textures', None
 ).setInputArraySize(
+    'textures', None
+)
+# INPUT glPrioritizeTextures.priorities size not checked against n
+# INPUT glPrioritizeTextures.textures size not checked against n
+glPrioritizeTextures=wrapper.wrapper(glPrioritizeTextures).setInputArraySize(
     'priorities', None
+).setInputArraySize(
+    'textures', None
 )
 glIndexubv=wrapper.wrapper(glIndexubv).setInputArraySize(
     'c', 1

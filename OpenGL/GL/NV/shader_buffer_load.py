@@ -127,7 +127,7 @@ glGetIntegerui64vNV=wrapper.wrapper(glGetIntegerui64vNV).setOutput(
 glUniformui64vNV=wrapper.wrapper(glUniformui64vNV).setInputArraySize(
     'value', None
 )
-# OUTPUT glGetUniformui64vNV.params COMPSIZE(program,location) 
+# OUTPUT glGetUniformui64vNV.params COMPSIZE(program, location) 
 # INPUT glProgramUniformui64vNV.value size not checked against count
 glProgramUniformui64vNV=wrapper.wrapper(glProgramUniformui64vNV).setInputArraySize(
     'value', None

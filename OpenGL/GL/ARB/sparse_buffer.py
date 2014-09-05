@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.sparse_buffer to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	The ARB_sparse_texture extension adds to GL a mechanism to decouple the
+	virtual and physical storage requirements of textures and allows an
+	application to create partially populated textures that would
+	over-subscribe available graphics memory if made fully resident. This
+	extension provides like functionality for buffer objects, allowing
+	applications to manage buffer object storage in a similar manner.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/sparse_buffer.txt
 '''

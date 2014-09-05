@@ -34,13 +34,12 @@ def glInitVdpauInteropNV():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# glVDPAURegisterVideoSurfaceNV.vdpSurface is OUTPUT without known output size
 # INPUT glVDPAURegisterVideoSurfaceNV.textureNames size not checked against numTextureNames
 glVDPAURegisterVideoSurfaceNV=wrapper.wrapper(glVDPAURegisterVideoSurfaceNV).setInputArraySize(
     'textureNames', None
 )
-# glVDPAURegisterOutputSurfaceNV.vdpSurface is OUTPUT without known output size
 # INPUT glVDPAURegisterOutputSurfaceNV.textureNames size not checked against numTextureNames
+# glVDPAURegisterOutputSurfaceNV.vdpSurface is OUTPUT without known output size
 glVDPAURegisterOutputSurfaceNV=wrapper.wrapper(glVDPAURegisterOutputSurfaceNV).setInputArraySize(
     'textureNames', None
 )

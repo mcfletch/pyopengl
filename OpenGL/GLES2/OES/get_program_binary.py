@@ -23,9 +23,9 @@ def glInitGetProgramBinaryOES():
 glGetProgramBinaryOES=wrapper.wrapper(glGetProgramBinaryOES).setInputArraySize(
     'binary', None
 ).setInputArraySize(
-    'length', 1
-).setInputArraySize(
     'binaryFormat', 1
+).setInputArraySize(
+    'length', 1
 )
 # INPUT glProgramBinaryOES.binary size not checked against length
 glProgramBinaryOES=wrapper.wrapper(glProgramBinaryOES).setInputArraySize(

@@ -35,7 +35,7 @@ glTexImage1D=wrapper.wrapper(glTexImage1D).setInputArraySize(
 glTexImage2D=wrapper.wrapper(glTexImage2D).setInputArraySize(
     'pixels', None
 )
-# OUTPUT glReadPixels.pixels COMPSIZE(format,type,width,height) 
+# OUTPUT glReadPixels.pixels COMPSIZE(format, type, width, height) 
 glGetBooleanv=wrapper.wrapper(glGetBooleanv).setOutput(
     'data',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
@@ -48,7 +48,7 @@ glGetFloatv=wrapper.wrapper(glGetFloatv).setOutput(
 glGetIntegerv=wrapper.wrapper(glGetIntegerv).setOutput(
     'data',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT glGetTexImage.pixels COMPSIZE(target,level,format,type) 
+# OUTPUT glGetTexImage.pixels COMPSIZE(target, level, format, type) 
 glGetTexParameterfv=wrapper.wrapper(glGetTexParameterfv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
@@ -405,9 +405,9 @@ glGetLightfv=wrapper.wrapper(glGetLightfv).setOutput(
 glGetLightiv=wrapper.wrapper(glGetLightiv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT glGetMapdv.v COMPSIZE(target,query) 
-# OUTPUT glGetMapfv.v COMPSIZE(target,query) 
-# OUTPUT glGetMapiv.v COMPSIZE(target,query) 
+# OUTPUT glGetMapdv.v COMPSIZE(target, query) 
+# OUTPUT glGetMapfv.v COMPSIZE(target, query) 
+# OUTPUT glGetMapiv.v COMPSIZE(target, query) 
 glGetMaterialfv=wrapper.wrapper(glGetMaterialfv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )

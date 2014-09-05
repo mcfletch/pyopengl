@@ -4,6 +4,17 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.texture_compression_s3tc to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides additional texture compression functionality
+	specific to S3's S3TC format (called DXTC in Microsoft's DirectX API),
+	subject to all the requirements and limitations described by the extension
+	GL_ARB_texture_compression.
+	
+	This extension supports DXT1, DXT3, and DXT5 texture compression formats.
+	For the DXT1 image format, this specification supports an RGB-only mode
+	and a special RGBA mode with single-bit "transparent" alpha.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/texture_compression_s3tc.txt
 '''

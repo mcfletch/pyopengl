@@ -4,6 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.multi_draw_arrays to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	These functions behave identically to the standard OpenGL 1.1 functions
+	glDrawArrays() and glDrawElements() except they handle multiple lists of
+	vertices in one call. Their main purpose is to allow one function call
+	to render more than one primitive such as triangle strip, triangle fan,
+	etc.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/multi_draw_arrays.txt
 '''

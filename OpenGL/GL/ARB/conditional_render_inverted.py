@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.conditional_render_inverted to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds new modes to BeginConditionalRender which invert
+	the condition used to determine whether to draw or not.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/conditional_render_inverted.txt
 '''

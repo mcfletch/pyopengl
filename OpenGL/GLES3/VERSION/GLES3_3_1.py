@@ -19,30 +19,26 @@ def glInitGles331VERSION():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glGetFramebufferParameteriv.params size not checked against 'pname'
-glGetFramebufferParameteriv=wrapper.wrapper(glGetFramebufferParameteriv).setInputArraySize(
-    'params', None
+glGetFramebufferParameteriv=wrapper.wrapper(glGetFramebufferParameteriv).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# INPUT glGetProgramInterfaceiv.params size not checked against 'pname'
-glGetProgramInterfaceiv=wrapper.wrapper(glGetProgramInterfaceiv).setInputArraySize(
-    'params', None
+glGetProgramInterfaceiv=wrapper.wrapper(glGetProgramInterfaceiv).setOutput(
+    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 # INPUT glGetProgramResourceIndex.name size not checked against 'name'
 glGetProgramResourceIndex=wrapper.wrapper(glGetProgramResourceIndex).setInputArraySize(
     'name', None
 )
-# INPUT glGetProgramResourceName.name size not checked against bufSize
-glGetProgramResourceName=wrapper.wrapper(glGetProgramResourceName).setInputArraySize(
-    'length', 1
-).setInputArraySize(
-    'name', None
+glGetProgramResourceName=wrapper.wrapper(glGetProgramResourceName).setOutput(
+    'length',size=(1,),orPassIn=True
+).setOutput(
+    'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 )
-# INPUT glGetProgramResourceiv.params size not checked against bufSize
 # INPUT glGetProgramResourceiv.props size not checked against propCount
-glGetProgramResourceiv=wrapper.wrapper(glGetProgramResourceiv).setInputArraySize(
-    'length', 1
-).setInputArraySize(
-    'params', None
+glGetProgramResourceiv=wrapper.wrapper(glGetProgramResourceiv).setOutput(
+    'length',size=(1,),orPassIn=True
+).setOutput(
+    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setInputArraySize(
     'props', None
 )
@@ -134,9 +130,9 @@ glProgramUniformMatrix4x3fv=wrapper.wrapper(glProgramUniformMatrix4x3fv).setInpu
     'value', None
 )
 glGetProgramPipelineInfoLog=wrapper.wrapper(glGetProgramPipelineInfoLog).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
     'infoLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+).setOutput(
+    'length',size=(1,),orPassIn=True
 )
 glGetBooleani_v=wrapper.wrapper(glGetBooleani_v).setOutput(
     'data',size=_glgets._glget_size_mapping,pnameArg='target',orPassIn=True

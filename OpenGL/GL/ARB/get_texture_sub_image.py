@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.get_texture_sub_image to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds a new function to get sub-regions of texture
+	images.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/get_texture_sub_image.txt
 '''

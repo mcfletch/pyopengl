@@ -47,7 +47,7 @@ glColorTableParameterfvSGI=wrapper.wrapper(glColorTableParameterfvSGI).setInputA
 glColorTableParameterivSGI=wrapper.wrapper(glColorTableParameterivSGI).setInputArraySize(
     'params', None
 )
-# OUTPUT glGetColorTableSGI.table COMPSIZE(target,format,type) 
+# OUTPUT glGetColorTableSGI.table COMPSIZE(target, format, type) 
 glGetColorTableParameterfvSGI=wrapper.wrapper(glGetColorTableParameterfvSGI).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )

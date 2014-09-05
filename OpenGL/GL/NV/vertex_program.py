@@ -69,10 +69,10 @@ def glInitVertexProgramNV():
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
 # INPUT glAreProgramsResidentNV.programs size not checked against n
-glAreProgramsResidentNV=wrapper.wrapper(glAreProgramsResidentNV).setOutput(
-    'residences',size=lambda x:(x,),pnameArg='n',orPassIn=True
-).setInputArraySize(
+glAreProgramsResidentNV=wrapper.wrapper(glAreProgramsResidentNV).setInputArraySize(
     'programs', None
+).setOutput(
+    'residences',size=lambda x:(x,),pnameArg='n',orPassIn=True
 )
 # INPUT glDeleteProgramsNV.programs size not checked against n
 glDeleteProgramsNV=wrapper.wrapper(glDeleteProgramsNV).setInputArraySize(
@@ -93,7 +93,7 @@ glGetProgramParameterfvNV=wrapper.wrapper(glGetProgramParameterfvNV).setOutput(
 glGetProgramivNV=wrapper.wrapper(glGetProgramivNV).setOutput(
     'params',size=(4,),orPassIn=True
 )
-# OUTPUT glGetProgramStringNV.program COMPSIZE(id,pname) 
+# OUTPUT glGetProgramStringNV.program COMPSIZE(id, pname) 
 glGetTrackMatrixivNV=wrapper.wrapper(glGetTrackMatrixivNV).setOutput(
     'params',size=(1,),orPassIn=True
 )

@@ -47,16 +47,16 @@ glConvolutionParameterfvEXT=wrapper.wrapper(glConvolutionParameterfvEXT).setInpu
 glConvolutionParameterivEXT=wrapper.wrapper(glConvolutionParameterivEXT).setInputArraySize(
     'params', None
 )
-# OUTPUT glGetConvolutionFilterEXT.image COMPSIZE(target,format,type) 
+# OUTPUT glGetConvolutionFilterEXT.image COMPSIZE(target, format, type) 
 glGetConvolutionParameterfvEXT=wrapper.wrapper(glGetConvolutionParameterfvEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 glGetConvolutionParameterivEXT=wrapper.wrapper(glGetConvolutionParameterivEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT glGetSeparableFilterEXT.column COMPSIZE(target,format,type) 
-# OUTPUT glGetSeparableFilterEXT.span COMPSIZE(target,format,type) 
-# OUTPUT glGetSeparableFilterEXT.row COMPSIZE(target,format,type) 
+# OUTPUT glGetSeparableFilterEXT.column COMPSIZE(target, format, type) 
+# OUTPUT glGetSeparableFilterEXT.row COMPSIZE(target, format, type) 
+# OUTPUT glGetSeparableFilterEXT.span COMPSIZE(target, format, type) 
 # INPUT glSeparableFilter2DEXT.column size not checked against 'target,format,type,height'
 # INPUT glSeparableFilter2DEXT.row size not checked against 'target,format,type,width'
 glSeparableFilter2DEXT=wrapper.wrapper(glSeparableFilter2DEXT).setInputArraySize(

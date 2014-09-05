@@ -4,6 +4,24 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.pipeline_statistics_query to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension introduces new query types that allow applications to get
+	statistics information about different parts of the pipeline:
+	
+	  * Number of vertices and primitives issued to the GL;
+	
+	  * Number of times a vertex shader, tessellation evaluation shader,
+	    geometry shader, fragment shader, and compute shader was invoked;
+	
+	  * Number of patches processed by the tessellation control shader stage;
+	
+	  * Number of primitives emitted by a geometry shader;
+	
+	  * Number of primitives that entered the primitive clipping stage;
+	
+	  * Number of primitives that are output by the primitive clipping stage;
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/pipeline_statistics_query.txt
 '''

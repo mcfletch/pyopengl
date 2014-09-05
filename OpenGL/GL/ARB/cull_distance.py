@@ -4,6 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.cull_distance to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds a new GLSL gl_CullDistance shader output, similar
+	to gl_ClipDistance, but used for whole primitive culling.
+	
+	This new stage in the pipeline is added as part of the primitive clipping
+	stage.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/cull_distance.txt
 '''

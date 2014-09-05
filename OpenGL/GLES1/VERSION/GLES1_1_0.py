@@ -182,7 +182,7 @@ glNormalPointer=wrapper.wrapper(glNormalPointer).setInputArraySize(
 glPointParameterxv=wrapper.wrapper(glPointParameterxv).setInputArraySize(
     'params', None
 )
-# OUTPUT glReadPixels.pixels COMPSIZE(format,type,width,height) 
+# OUTPUT glReadPixels.pixels COMPSIZE(format, type, width, height) 
 # INPUT glTexCoordPointer.pointer size not checked against 'size,type,stride'
 glTexCoordPointer=wrapper.wrapper(glTexCoordPointer).setInputArraySize(
     'pointer', None

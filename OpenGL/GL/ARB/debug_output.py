@@ -101,15 +101,15 @@ glDebugMessageCallbackARB=wrapper.wrapper(glDebugMessageCallbackARB).setInputArr
     'userParam', None
 )
 glGetDebugMessageLogARB=wrapper.wrapper(glGetDebugMessageLogARB).setOutput(
+    'ids',size=lambda x:(x,),pnameArg='count',orPassIn=True
+).setOutput(
     'lengths',size=lambda x:(x,),pnameArg='count',orPassIn=True
 ).setOutput(
-    'ids',size=lambda x:(x,),pnameArg='count',orPassIn=True
+    'messageLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setOutput(
     'severities',size=lambda x:(x,),pnameArg='count',orPassIn=True
 ).setOutput(
     'sources',size=lambda x:(x,),pnameArg='count',orPassIn=True
-).setOutput(
-    'messageLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setOutput(
     'types',size=lambda x:(x,),pnameArg='count',orPassIn=True
 )

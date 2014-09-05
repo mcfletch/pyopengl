@@ -31,7 +31,7 @@ glColorTableParameterfv=wrapper.wrapper(glColorTableParameterfv).setInputArraySi
 glColorTableParameteriv=wrapper.wrapper(glColorTableParameteriv).setInputArraySize(
     'params', None
 )
-# OUTPUT glGetColorTable.table COMPSIZE(target,format,type) 
+# OUTPUT glGetColorTable.table COMPSIZE(target, format, type) 
 glGetColorTableParameterfv=wrapper.wrapper(glGetColorTableParameterfv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
@@ -58,16 +58,16 @@ glConvolutionParameterfv=wrapper.wrapper(glConvolutionParameterfv).setInputArray
 glConvolutionParameteriv=wrapper.wrapper(glConvolutionParameteriv).setInputArraySize(
     'params', None
 )
-# OUTPUT glGetConvolutionFilter.image COMPSIZE(target,format,type) 
+# OUTPUT glGetConvolutionFilter.image COMPSIZE(target, format, type) 
 glGetConvolutionParameterfv=wrapper.wrapper(glGetConvolutionParameterfv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 glGetConvolutionParameteriv=wrapper.wrapper(glGetConvolutionParameteriv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT glGetSeparableFilter.column COMPSIZE(target,format,type) 
-# OUTPUT glGetSeparableFilter.span COMPSIZE(target,format,type) 
-# OUTPUT glGetSeparableFilter.row COMPSIZE(target,format,type) 
+# OUTPUT glGetSeparableFilter.column COMPSIZE(target, format, type) 
+# OUTPUT glGetSeparableFilter.row COMPSIZE(target, format, type) 
+# OUTPUT glGetSeparableFilter.span COMPSIZE(target, format, type) 
 # INPUT glSeparableFilter2D.column size not checked against 'target,format,type,height'
 # INPUT glSeparableFilter2D.row size not checked against 'target,format,type,width'
 glSeparableFilter2D=wrapper.wrapper(glSeparableFilter2D).setInputArraySize(
@@ -75,14 +75,14 @@ glSeparableFilter2D=wrapper.wrapper(glSeparableFilter2D).setInputArraySize(
 ).setInputArraySize(
     'row', None
 )
-# OUTPUT glGetHistogram.values COMPSIZE(target,format,type) 
+# OUTPUT glGetHistogram.values COMPSIZE(target, format, type) 
 glGetHistogramParameterfv=wrapper.wrapper(glGetHistogramParameterfv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 glGetHistogramParameteriv=wrapper.wrapper(glGetHistogramParameteriv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
-# OUTPUT glGetMinmax.values COMPSIZE(target,format,type) 
+# OUTPUT glGetMinmax.values COMPSIZE(target, format, type) 
 glGetMinmaxParameterfv=wrapper.wrapper(glGetMinmaxParameterfv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )

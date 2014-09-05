@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.transform_feedback_overflow_query to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds new query types which can be used to detect overflow
+	of transform feedback buffers. The new query types are also accepted by
+	conditional rendering commands.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/transform_feedback_overflow_query.txt
 '''

@@ -21,9 +21,9 @@ def glInitExtendedGetQCOM():
 
 # INPUT glExtGetBuffersQCOM.buffers size not checked against maxBuffers
 glExtGetBuffersQCOM=wrapper.wrapper(glExtGetBuffersQCOM).setInputArraySize(
-    'numBuffers', 1
-).setInputArraySize(
     'buffers', None
+).setInputArraySize(
+    'numBuffers', 1
 )
 # INPUT glExtGetRenderbuffersQCOM.renderbuffers size not checked against maxRenderbuffers
 glExtGetRenderbuffersQCOM=wrapper.wrapper(glExtGetRenderbuffersQCOM).setInputArraySize(

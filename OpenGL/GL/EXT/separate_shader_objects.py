@@ -83,9 +83,9 @@ glGenProgramPipelinesEXT=wrapper.wrapper(glGenProgramPipelinesEXT).setInputArray
 )
 # INPUT glGetProgramPipelineInfoLogEXT.infoLog size not checked against bufSize
 glGetProgramPipelineInfoLogEXT=wrapper.wrapper(glGetProgramPipelineInfoLogEXT).setInputArraySize(
-    'length', 1
-).setInputArraySize(
     'infoLog', None
+).setInputArraySize(
+    'length', 1
 )
 # INPUT glProgramUniform1fvEXT.value size not checked against count
 glProgramUniform1fvEXT=wrapper.wrapper(glProgramUniform1fvEXT).setInputArraySize(

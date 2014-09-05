@@ -4,6 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GL.AMD.gcn_shader to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension exposes miscellaneous features of the AMD "Graphics Core
+	Next" shader architecture that do not cleanly fit into other extensions
+	and are not significant enough alone to warrant their own extensions.
+	This includes cross-SIMD lane ballots, cube map query functions and
+	a functionality to query the elapsed shader core time.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/AMD/gcn_shader.txt
 '''

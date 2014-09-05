@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.shader_atomic_int64 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides additional GLSL built-in functions and assembly
+	opcodes allowing shaders to perform additional atomic read-modify-write
+	operations on 64-bit signed and unsigned integers stored in buffer object
+	memory.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/shader_atomic_int64.txt
 '''
