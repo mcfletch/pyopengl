@@ -304,7 +304,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                 dependencies = function.size_dependencies
                 if dependencies: # temporarily just do single-output functions...
                     base = []
-                    for param,dependency in dependencies.items():
+                    for param,dependency in sorted(dependencies.items()):
                         param = as_8_bit( param )
                         if isinstance( dependency, xmlreg.Output ):
                             statements.append( '# %s.%s is OUTPUT without known output size'%(
@@ -322,7 +322,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                                 pname = dependency[0]
                                 base.append( '.setOutput(\n    %(param)r,size=_glgets._glget_size_mapping,pnameArg=%(pname)r,orPassIn=True\n)'%locals())
                             else:
-                                statements.append('# OUTPUT %s.%s COMPSIZE(%s) '%(function.name,param,','.join(dependency)) )
+                                statements.append('# OUTPUT %s.%s COMPSIZE(%s) '%(function.name,param,', '.join(dependency)) )
                         elif isinstance( dependency, xmlreg.StaticInput ):
                             base.append( '.setInputArraySize(\n    %(param)r, %(dependency)s\n)'%locals())
                         elif isinstance( dependency, (xmlreg.DynamicInput, xmlreg.MultipleInput, xmlreg.Input) ):
