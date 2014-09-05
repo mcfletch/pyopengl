@@ -77,6 +77,8 @@ GLbyte = ctypes.c_byte
 GLshort = _defineType( 'GLshort', ctypes.c_short, int )
 GLint = _defineType( 'GLint', ctypes.c_int, int )
 GLuint = _defineType( 'GLuint', ctypes.c_uint, long )
+GLfixed = _defineType('GLfixed', ctypes.c_int32, int )
+GLclampx = _defineType('GLclampx', ctypes.c_int32, int )
 
 GLsizei = _defineType( 'GLsizei', ctypes.c_int, int )
 
