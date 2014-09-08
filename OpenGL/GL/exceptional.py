@@ -15,7 +15,7 @@ __all__ = [
     #'glColorTableParameterfv',
     'glDeleteTextures',
     'glEnd',
-    'glGenTextures',
+    #'glGenTextures',
     'glMap1d',
     'glMap1f',
     'glMap2d',
@@ -160,27 +160,6 @@ def glTexParameter( target, pname, parameter ):
     else:
         value = GLfloatArray.asArray( parameter, full.GL_FLOAT )
         return full.glTexParameterfv( target, pname, value )
-
-@_lazy( full.glGenTextures )
-def glGenTextures( baseFunction, count, textures=None ):
-    """Generate count new texture names
-
-    Note: for compatibility with PyOpenGL 2.x and below,
-    a count of 1 will return a single integer, rather than
-    an array of integers.
-    """
-    if count <= 0:
-        raise ValueError( """Can't generate 0 or fewer textures""" )
-    elif count == 1 and _configflags.SIZE_1_ARRAY_UNPACK:
-        # this traditionally returned a single int/long, so we'll continue to
-        # do so, even though it would be easier not to bother.
-        textures = _types.GLuint( 0 )
-        baseFunction( count, textures)
-        return textures.value
-    else:
-        textures = arrays.GLuintArray.zeros( (count,))
-        baseFunction( count, textures)
-        return textures
 
 def glMaterial( faces, constant, *args ):
     """glMaterial -- convenience function to dispatch on argument type
