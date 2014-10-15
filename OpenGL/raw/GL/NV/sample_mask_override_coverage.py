@@ -8,10 +8,8 @@ from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
-_EXTENSION_NAME = 'GL_ARB_ES3_1_compatibility'
+_EXTENSION_NAME = 'GL_NV_sample_mask_override_coverage'
 def _f( function ):
-    return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_ES3_1_compatibility',error_checker=_errors._error_checker)
-GL_BACK=_C('GL_BACK',0x0405)
-@_f
-@_p.types(None,_cs.GLbitfield)
-def glMemoryBarrierByRegion(barriers):pass
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_NV_sample_mask_override_coverage',error_checker=_errors._error_checker)
+
+

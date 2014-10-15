@@ -21,4 +21,30 @@ GLX_GPU_OPENGL_VERSION_STRING_AMD=_C('GLX_GPU_OPENGL_VERSION_STRING_AMD',0x1F02)
 GLX_GPU_RAM_AMD=_C('GLX_GPU_RAM_AMD',0x21A3)
 GLX_GPU_RENDERER_STRING_AMD=_C('GLX_GPU_RENDERER_STRING_AMD',0x1F01)
 GLX_GPU_VENDOR_AMD=_C('GLX_GPU_VENDOR_AMD',0x1F00)
-
+@_f
+@_p.types(None,_cs.GLXContext,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLbitfield,_cs.GLenum)
+def glXBlitContextFramebufferAMD(dstCtx,srcX0,srcY0,srcX1,srcY1,dstX0,dstY0,dstX1,dstY1,mask,filter):pass
+@_f
+@_p.types(_cs.GLXContext,_cs.c_uint,_cs.GLXContext)
+def glXCreateAssociatedContextAMD(id,share_list):pass
+@_f
+@_p.types(_cs.GLXContext,_cs.c_uint,_cs.GLXContext,ctypes.POINTER(_cs.c_int))
+def glXCreateAssociatedContextAttribsAMD(id,share_context,attribList):pass
+@_f
+@_p.types(_cs.Bool,_cs.GLXContext)
+def glXDeleteAssociatedContextAMD(ctx):pass
+@_f
+@_p.types(_cs.c_uint,_cs.GLXContext)
+def glXGetContextGPUIDAMD(ctx):pass
+@_f
+@_p.types(_cs.GLXContext,)
+def glXGetCurrentAssociatedContextAMD():pass
+@_f
+@_p.types(_cs.c_uint,_cs.c_uint,ctypes.POINTER(_cs.c_uint))
+def glXGetGPUIDsAMD(maxCount,ids):pass
+@_f
+@_p.types(_cs.c_int,_cs.c_uint,_cs.c_int,_cs.GLenum,_cs.c_uint,ctypes.c_void_p)
+def glXGetGPUInfoAMD(id,property,dataType,size,data):pass
+@_f
+@_p.types(_cs.Bool,_cs.GLXContext)
+def glXMakeAssociatedContextCurrentAMD(ctx):pass

@@ -12,9 +12,7 @@ _EXTENSION_NAME = 'GL_ARB_copy_buffer'
 def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_copy_buffer',error_checker=_errors._error_checker)
 GL_COPY_READ_BUFFER=_C('GL_COPY_READ_BUFFER',0x8F36)
-GL_COPY_READ_BUFFER_BINDING=_C('GL_COPY_READ_BUFFER_BINDING',0x8F36)
 GL_COPY_WRITE_BUFFER=_C('GL_COPY_WRITE_BUFFER',0x8F37)
-GL_COPY_WRITE_BUFFER_BINDING=_C('GL_COPY_WRITE_BUFFER_BINDING',0x8F37)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLintptr,_cs.GLintptr,_cs.GLsizeiptr)
 def glCopyBufferSubData(readTarget,writeTarget,readOffset,writeOffset,size):pass

@@ -14,11 +14,11 @@ def _f( function ):
 GL_SPARSE_BUFFER_PAGE_SIZE_ARB=_C('GL_SPARSE_BUFFER_PAGE_SIZE_ARB',0x82F8)
 GL_SPARSE_STORAGE_BIT_ARB=_C('GL_SPARSE_STORAGE_BIT_ARB',0x0400)
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLsizei,_cs.GLboolean)
+@_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,_cs.GLboolean)
 def glBufferPageCommitmentARB(target,offset,size,commit):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizei,_cs.GLboolean)
+@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr,_cs.GLboolean)
 def glNamedBufferPageCommitmentARB(buffer,offset,size,commit):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizei,_cs.GLboolean)
+@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr,_cs.GLboolean)
 def glNamedBufferPageCommitmentEXT(buffer,offset,size,commit):pass

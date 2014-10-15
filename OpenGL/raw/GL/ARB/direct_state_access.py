@@ -137,6 +137,18 @@ def glGetNamedFramebufferParameteriv(framebuffer,pname,param):pass
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetNamedRenderbufferParameteriv(renderbuffer,pname,params):pass
 @_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLintptr)
+def glGetQueryBufferObjecti64v(id,buffer,pname,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLintptr)
+def glGetQueryBufferObjectiv(id,buffer,pname,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLintptr)
+def glGetQueryBufferObjectui64v(id,buffer,pname,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLintptr)
+def glGetQueryBufferObjectuiv(id,buffer,pname,offset):pass
+@_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glGetTextureImage(texture,level,format,type,bufSize,pixels):pass
 @_f

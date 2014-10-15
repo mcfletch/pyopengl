@@ -11,6 +11,7 @@ import ctypes
 _EXTENSION_NAME = 'GL_VERSION_GL_4_5'
 def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.GL,'GL_VERSION_GL_4_5',error_checker=_errors._error_checker)
+GL_BACK=_C('GL_BACK',0x0405)
 GL_CLIP_DEPTH_MODE=_C('GL_CLIP_DEPTH_MODE',0x935D)
 GL_CLIP_ORIGIN=_C('GL_CLIP_ORIGIN',0x935C)
 GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT=_C('GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT',0x00000004)
@@ -170,6 +171,18 @@ def glGetNamedFramebufferParameteriv(framebuffer,pname,param):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetNamedRenderbufferParameteriv(renderbuffer,pname,params):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLintptr)
+def glGetQueryBufferObjecti64v(id,buffer,pname,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLintptr)
+def glGetQueryBufferObjectiv(id,buffer,pname,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLintptr)
+def glGetQueryBufferObjectui64v(id,buffer,pname,offset):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLenum,_cs.GLintptr)
+def glGetQueryBufferObjectuiv(id,buffer,pname,offset):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLenum,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glGetTextureImage(texture,level,format,type,bufSize,pixels):pass
