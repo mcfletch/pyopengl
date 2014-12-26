@@ -15,6 +15,9 @@ class _opaque_pointer( ctypes.POINTER( _Opaque ) ):
     @property 
     def as_voidp( self ):
         return ctypes.c_voidp( self.address )
+    def __hash__(self):
+        """Allow these pointers to be used as keys in dictionaries"""
+        return self.address
 def opaque_pointer_cls( name ):
     """Create an Opaque pointer class for the given name"""
     typ = type( name, (_Opaque,), {} )

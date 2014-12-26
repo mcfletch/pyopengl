@@ -5,6 +5,7 @@ from math import pi, sin, cos
 import OpenGL
 OpenGL.USE_ACCELERATE = False
 from OpenGL.GL import *
+from OpenGL.GL.ARB.fragment_program import glGenProgramsARB
 from OpenGL.GLU import *
 from OpenGL.osmesa import *
 
@@ -133,6 +134,9 @@ if __name__ == '__main__':
     assert(OSMesaMakeCurrent(ctx, buf, GL_UNSIGNED_BYTE, width, height))
 
     assert(OSMesaGetCurrentContext())
+    
+    program = glGenProgramsARB(1)
+    assert(program)
 
     z = glGetIntegerv(GL_DEPTH_BITS)
     s = glGetIntegerv(GL_STENCIL_BITS)
