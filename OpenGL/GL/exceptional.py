@@ -1,21 +1,20 @@
 """Exceptional cases that need some extra wrapping"""
 from OpenGL import arrays
-from OpenGL.arrays.arraydatatype import GLfloatArray, GLdoubleArray
+from OpenGL.arrays.arraydatatype import GLfloatArray
 from OpenGL.lazywrapper import lazy as _lazy
 from OpenGL.GL.VERSION import GL_1_1 as full
-from OpenGL.raw.GL import _types, _errors
+from OpenGL.raw.GL import _errors
 from OpenGL._bytes import bytes
 from OpenGL import _configflags
+from OpenGL._null import NULL as _NULL
 import ctypes
 
 __all__ = [
     'glBegin',
     'glCallLists',
     'glColor',
-    #'glColorTableParameterfv',
     'glDeleteTextures',
     'glEnd',
-    #'glGenTextures',
     'glMap1d',
     'glMap1f',
     'glMap2d',
@@ -49,10 +48,18 @@ else:
     glEnd = full.glEnd
 
 @_lazy( full.glDeleteTextures )
-def glDeleteTextures( baseFunction, array ):
-    """Delete specified set of textures"""
-    ptr = arrays.GLuintArray.asArray( array )
-    size = arrays.GLuintArray.arraySize( ptr )
+def glDeleteTextures( baseFunction, size, array=_NULL ):
+    """Delete specified set of textures
+    
+    If array is *not* passed then `size` must be a `GLuintArray`
+    compatible object which can be sized using `arraySize`, the 
+    result of which will be used as size.
+    """
+    if array is _NULL:
+        ptr = arrays.GLuintArray.asArray( size )
+        size = arrays.GLuintArray.arraySize( ptr )
+    else:
+        ptr = array
     return baseFunction( size, ptr )
 
 
@@ -229,7 +236,7 @@ def glAreTexturesResident( baseFunction, *args ):
     elif len(args) == 2:
         try:
             n = int( args[0] )
-        except TypeError as err:
+        except TypeError:
             textures = args[0]
             textures = arrays.GLuintArray.asArray( textures )
 
