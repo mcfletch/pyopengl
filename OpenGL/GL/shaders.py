@@ -85,6 +85,7 @@ GL_TRUE = GL.GL_TRUE
 
 class ShaderProgram( int ):
     """Integer sub-class with context-manager operation"""
+    validated = False
     def __enter__( self ):
         """Start use of the program"""
         glUseProgram( self )
@@ -107,6 +108,7 @@ class ShaderProgram( int ):
                 validation,
                 glGetProgramInfoLog( self ),
             ))
+        self.validated = True
         return self
 
     def check_linked( self ):
@@ -141,13 +143,14 @@ class ShaderProgram( int ):
         format = GLenum()
         get_program_binary.glGetProgramBinary( self, size.value, size2, format, result )
         return format.value, result 
-    def load( self, format, binary ):
+    def load( self, format, binary, validate=True ):
         """Attempt to load binary-format for a pre-compiled shader
         
         See notes in retrieve
         """
         get_program_binary.glProgramBinary( self, format, binary, len(binary))
-        self.check_validate() # On AMD Linux we see this fail, despite logging "validation successful"
+        if validate:
+            self.check_validate()
         self.check_linked()
         return self
 
@@ -162,6 +165,12 @@ def compileProgram(*shaders, **named):
     retrievable (keyword only) -- set the retrievable flag to 
         allow retrieval of the program binary representation, (see 
         glProgramBinary, glGetProgramBinary)
+    validate (keyword only) -- if False, suppress automatic 
+        validation against current GL state. In advanced usage 
+        the validation can produce spurious errors. Note: this 
+        function is *not* really intended for advanced usage,
+        if you're finding yourself specifying this flag you 
+        likely should be using your own shader management code.
 
     This convenience function is *not* standard OpenGL,
     but it does wind up being fairly useful for demos
@@ -193,7 +202,8 @@ def compileProgram(*shaders, **named):
         glAttachShader(program, shader)
     program = ShaderProgram( program )
     glLinkProgram(program)
-    program.check_validate()
+    if named.get('validate', True):
+        program.check_validate()
     program.check_linked()
     for shader in shaders:
         glDeleteShader(shader)
