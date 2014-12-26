@@ -22,5 +22,5 @@ GL_MAX_CLIP_PLANES_IMG=_C('GL_MAX_CLIP_PLANES_IMG',0x0D32)
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glClipPlanefIMG(p,eqn):pass
 @_f
-@_p.types(None,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,arrays.GLfixedArray)
 def glClipPlanexIMG(p,eqn):pass

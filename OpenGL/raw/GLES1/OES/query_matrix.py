@@ -13,5 +13,5 @@ def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.GLES1,'GLES1_OES_query_matrix',error_checker=_errors._error_checker)
 
 @_f
-@_p.types(_cs.GLbitfield,ctypes.POINTER(_cs.GLfixed),arrays.GLintArray)
+@_p.types(_cs.GLbitfield,arrays.GLfixedArray,arrays.GLintArray)
 def glQueryMatrixxOES(mantissa,exponent):pass

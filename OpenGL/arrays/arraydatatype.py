@@ -265,6 +265,11 @@ if ADT is None:
         """Array datatype for GLenum types"""
         baseType = _types.GLvoidp
         typeConstant = _types.GL_VOID_P
+    
+    class GLfixedArray(ArrayDatatype, ctypes.POINTER(_types.GLfixed)):
+        baseType = _types.GLfixed 
+        typeConstant = _types.GL_FIXED
+    
 else:
     # Cython-coded array handler
     _log.info( 'Using accelerated ArrayDatatype' )
@@ -285,6 +290,7 @@ else:
     GLenumArray = ADT( GL_1_1.GL_UNSIGNED_INT, _types.GLenum )
     GLsizeiArray = ADT( GL_1_1.GL_INT, _types.GLsizei )
     GLvoidpArray = ADT( _types.GL_VOID_P, _types.GLvoidp )
+    GLfixedArray = ADT( _types.GL_FIXED, _types.GLfixed )
 
 GL_CONSTANT_TO_ARRAY_TYPE = {
     GL_1_1.GL_DOUBLE : GLclampdArray,
@@ -297,5 +303,6 @@ GL_CONSTANT_TO_ARRAY_TYPE = {
     GL_1_1.GL_UNSIGNED_BYTE : GLubyteArray,
     GL_1_1.GL_UNSIGNED_SHORT : GLushortArray,
     GL_1_1.GL_UNSIGNED_INT : GLuintArray,
+    _types.GL_FIXED: GLfixedArray, 
     #GL_1_1.GL_UNSIGNED_INT : GLenumArray,
 }

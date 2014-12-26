@@ -22,6 +22,7 @@ GL_FLOAT = Constant( 'GL_FLOAT', 0x1406 )
 GL_DOUBLE = Constant( 'GL_DOUBLE', 0x140a )
 GL_CHAR = bytes
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
+GL_FIXED=Constant('GL_FIXED',0x140C)
 GL_VOID_P = object()
 
 def _get_ctypes_version():

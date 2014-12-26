@@ -393,7 +393,7 @@ def glClientActiveTexture(texture):pass
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glClipPlanef(p,eqn):pass
 @_f
-@_p.types(None,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,arrays.GLfixedArray)
 def glClipPlanex(plane,equation):pass
 @_f
 @_p.types(None,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
@@ -477,7 +477,7 @@ def glFogfv(pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLfixed)
 def glFogx(pname,param):pass
 @_f
-@_p.types(None,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,arrays.GLfixedArray)
 def glFogxv(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum)
@@ -504,13 +504,13 @@ def glGetBufferParameteriv(target,pname,params):pass
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glGetClipPlanef(plane,equation):pass
 @_f
-@_p.types(None,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,arrays.GLfixedArray)
 def glGetClipPlanex(plane,equation):pass
 @_f
 @_p.types(_cs.GLenum,)
 def glGetError():pass
 @_f
-@_p.types(None,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,arrays.GLfixedArray)
 def glGetFixedv(pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
@@ -522,13 +522,13 @@ def glGetIntegerv(pname,data):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetLightfv(light,pname,params):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glGetLightxv(light,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glGetMaterialfv(face,pname,params):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glGetMaterialxv(face,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLvoidpArray)
@@ -543,7 +543,7 @@ def glGetTexEnvfv(target,pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTexEnviv(target,pname,params):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glGetTexEnvxv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
@@ -552,7 +552,7 @@ def glGetTexParameterfv(target,pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTexParameteriv(target,pname,params):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glGetTexParameterxv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum)
@@ -576,7 +576,7 @@ def glLightModelfv(pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLfixed)
 def glLightModelx(pname,param):pass
 @_f
-@_p.types(None,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,arrays.GLfixedArray)
 def glLightModelxv(pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
@@ -588,7 +588,7 @@ def glLightfv(light,pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfixed)
 def glLightx(light,pname,param):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glLightxv(light,pname,params):pass
 @_f
 @_p.types(None,_cs.GLfloat)
@@ -603,7 +603,7 @@ def glLoadIdentity():pass
 @_p.types(None,arrays.GLfloatArray)
 def glLoadMatrixf(m):pass
 @_f
-@_p.types(None,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,arrays.GLfixedArray)
 def glLoadMatrixx(m):pass
 @_f
 @_p.types(None,_cs.GLenum)
@@ -618,7 +618,7 @@ def glMaterialfv(face,pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfixed)
 def glMaterialx(face,pname,param):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glMaterialxv(face,pname,param):pass
 @_f
 @_p.types(None,_cs.GLenum)
@@ -627,7 +627,7 @@ def glMatrixMode(mode):pass
 @_p.types(None,arrays.GLfloatArray)
 def glMultMatrixf(m):pass
 @_f
-@_p.types(None,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,arrays.GLfixedArray)
 def glMultMatrixx(m):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
@@ -663,7 +663,7 @@ def glPointParameterfv(pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLfixed)
 def glPointParameterx(pname,param):pass
 @_f
-@_p.types(None,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,arrays.GLfixedArray)
 def glPointParameterxv(pname,params):pass
 @_f
 @_p.types(None,_cs.GLfloat)
@@ -738,7 +738,7 @@ def glTexEnviv(target,pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfixed)
 def glTexEnvx(target,pname,param):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glTexEnvxv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLint,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
@@ -759,7 +759,7 @@ def glTexParameteriv(target,pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfixed)
 def glTexParameterx(target,pname,param):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glTexParameterxv(target,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)

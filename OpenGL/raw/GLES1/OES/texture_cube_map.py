@@ -31,7 +31,7 @@ def glGetTexGenfvOES(coord,pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetTexGenivOES(coord,pname,params):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glGetTexGenxvOES(coord,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfloat)
@@ -49,5 +49,5 @@ def glTexGenivOES(coord,pname,params):pass
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLfixed)
 def glTexGenxOES(coord,pname,param):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLfixedArray)
 def glTexGenxvOES(coord,pname,params):pass

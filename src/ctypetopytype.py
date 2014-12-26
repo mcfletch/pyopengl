@@ -50,6 +50,7 @@ CTYPE_TO_ARRAY_TYPE = {
     '_cs.EGLNativePixmapType': 'GLvoidpArray',
     '_cs.EGLTimeKHR': 'GLuint64Array',
     
+    '_cs.GLfixed':'GLfixedArray', 
 }
 SPECIAL_TYPES = {
     '__eglMustCastToProperFunctionPointerType': 'ctypes.c_void_p',

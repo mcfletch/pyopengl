@@ -34,5 +34,5 @@ def glDrawTexsvOES(coords):pass
 @_p.types(None,_cs.GLfixed,_cs.GLfixed,_cs.GLfixed,_cs.GLfixed,_cs.GLfixed)
 def glDrawTexxOES(x,y,z,width,height):pass
 @_f
-@_p.types(None,ctypes.POINTER(_cs.GLfixed))
+@_p.types(None,arrays.GLfixedArray)
 def glDrawTexxvOES(coords):pass
