@@ -146,7 +146,9 @@ class Wrapper( LateBind ):
                     from OpenGL.arrays import GLubyteArray
                     arrayType = GLubyteArray
                 else:   
-                    raise TypeError( "Should only have array types for output parameters" )
+                    raise TypeError( "Should only have array types for output parameters %s on %s is %r"%(
+                        outArg, self.wrappedOperation.__name__, arrayType, 
+                    ) )
         if pnameArg is None:
             assert not hasattr(size,'__call__' )
             if orPassIn:
