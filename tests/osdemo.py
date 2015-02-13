@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import os
 if not os.environ.get( 'PYOPENGL_PLATFORM' ):
     os.environ['PYOPENGL_PLATFORM'] = 'osmesa'
