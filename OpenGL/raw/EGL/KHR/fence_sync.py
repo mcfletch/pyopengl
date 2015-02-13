@@ -14,4 +14,15 @@ def _f( function ):
 EGL_SYNC_CONDITION_KHR=_C('EGL_SYNC_CONDITION_KHR',0x30F8)
 EGL_SYNC_FENCE_KHR=_C('EGL_SYNC_FENCE_KHR',0x30F9)
 EGL_SYNC_PRIOR_COMMANDS_COMPLETE_KHR=_C('EGL_SYNC_PRIOR_COMMANDS_COMPLETE_KHR',0x30F0)
-
+@_f
+@_p.types(_cs.EGLint,_cs.EGLDisplay,_cs.EGLSyncKHR,_cs.EGLint,_cs.EGLTimeKHR)
+def eglClientWaitSyncKHR(dpy,sync,flags,timeout):pass
+@_f
+@_p.types(_cs.EGLSyncKHR,_cs.EGLDisplay,_cs.EGLenum,arrays.GLintArray)
+def eglCreateSyncKHR(dpy,type,attrib_list):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSyncKHR)
+def eglDestroySyncKHR(dpy,sync):pass
+@_f
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSyncKHR,_cs.EGLint,arrays.GLintArray)
+def eglGetSyncAttribKHR(dpy,sync,attribute,value):pass

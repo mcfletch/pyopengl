@@ -15,7 +15,7 @@ EGL_BAD_DEVICE_EXT=_C('EGL_BAD_DEVICE_EXT',0x322B)
 EGL_DEVICE_EXT=_C('EGL_DEVICE_EXT',0x322C)
 # EGL_NO_DEVICE_EXT=_C('EGL_NO_DEVICE_EXT',((EGLDeviceEXT)(0)))
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDeviceEXT,_cs.EGLint,ctypes.POINTER(_cs.EGLAttrib))
+@_p.types(_cs.EGLBoolean,_cs.EGLDeviceEXT,_cs.EGLint,arrays.EGLAttribArray)
 def eglQueryDeviceAttribEXT(device,attribute,value):pass
 @_f
 @_p.types(ctypes.c_char_p,_cs.EGLDeviceEXT,_cs.EGLint)
@@ -24,5 +24,5 @@ def eglQueryDeviceStringEXT(device,name):pass
 @_p.types(_cs.EGLBoolean,_cs.EGLint,ctypes.POINTER(_cs.EGLDeviceEXT),arrays.GLintArray)
 def eglQueryDevicesEXT(max_devices,devices,num_devices):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLint,ctypes.POINTER(_cs.EGLAttrib))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLint,arrays.EGLAttribArray)
 def eglQueryDisplayAttribEXT(dpy,attribute,value):pass

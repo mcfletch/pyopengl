@@ -60,16 +60,16 @@ EGL_UNSIGNALED=_C('EGL_UNSIGNALED',0x30F3)
 @_p.types(_cs.EGLint,_cs.EGLDisplay,_cs.EGLSync,_cs.EGLint,_cs.EGLTime)
 def eglClientWaitSync(dpy,sync,flags,timeout):pass
 @_f
-@_p.types(_cs.EGLImage,_cs.EGLDisplay,_cs.EGLContext,_cs.EGLenum,_cs.EGLClientBuffer,arrays.GLintArray)
+@_p.types(_cs.EGLImage,_cs.EGLDisplay,_cs.EGLContext,_cs.EGLenum,_cs.EGLClientBuffer,arrays.EGLAttribArray)
 def eglCreateImage(dpy,ctx,target,buffer,attrib_list):pass
 @_f
-@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,ctypes.c_void_p,ctypes.POINTER(_cs.EGLAttrib))
+@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,ctypes.c_void_p,arrays.EGLAttribArray)
 def eglCreatePlatformPixmapSurface(dpy,config,native_pixmap,attrib_list):pass
 @_f
-@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,ctypes.c_void_p,ctypes.POINTER(_cs.EGLAttrib))
+@_p.types(_cs.EGLSurface,_cs.EGLDisplay,_cs.EGLConfig,ctypes.c_void_p,arrays.EGLAttribArray)
 def eglCreatePlatformWindowSurface(dpy,config,native_window,attrib_list):pass
 @_f
-@_p.types(_cs.EGLSync,_cs.EGLDisplay,_cs.EGLenum,ctypes.POINTER(_cs.EGLAttrib))
+@_p.types(_cs.EGLSync,_cs.EGLDisplay,_cs.EGLenum,arrays.EGLAttribArray)
 def eglCreateSync(dpy,type,attrib_list):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLImage)
@@ -78,10 +78,10 @@ def eglDestroyImage(dpy,image):pass
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSync)
 def eglDestroySync(dpy,sync):pass
 @_f
-@_p.types(_cs.EGLDisplay,_cs.EGLenum,ctypes.c_void_p,ctypes.POINTER(_cs.EGLAttrib))
+@_p.types(_cs.EGLDisplay,_cs.EGLenum,ctypes.c_void_p,arrays.EGLAttribArray)
 def eglGetPlatformDisplay(platform,native_display,attrib_list):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSync,_cs.EGLint,ctypes.POINTER(_cs.EGLAttrib))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSync,_cs.EGLint,arrays.EGLAttribArray)
 def eglGetSyncAttrib(dpy,sync,attribute,value):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLSync,_cs.EGLint)

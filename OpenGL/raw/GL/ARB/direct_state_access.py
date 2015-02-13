@@ -12,7 +12,6 @@ _EXTENSION_NAME = 'GL_ARB_direct_state_access'
 def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.GL,'GL_ARB_direct_state_access',error_checker=_errors._error_checker)
 GL_QUERY_TARGET=_C('GL_QUERY_TARGET',0x82EA)
-GL_TEXTURE_BINDING=_C('GL_TEXTURE_BINDING',0x82EB)
 GL_TEXTURE_BINDING_1D=_C('GL_TEXTURE_BINDING_1D',0x8068)
 GL_TEXTURE_BINDING_1D_ARRAY=_C('GL_TEXTURE_BINDING_1D_ARRAY',0x8C1C)
 GL_TEXTURE_BINDING_2D=_C('GL_TEXTURE_BINDING_2D',0x8069)
@@ -38,7 +37,7 @@ def glCheckNamedFramebufferStatus(framebuffer,target):pass
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glClearNamedBufferData(buffer,internalformat,format,type,data):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLintptr,_cs.GLsizei,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
+@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glClearNamedBufferSubData(buffer,internalformat,offset,size,format,type,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLfloat,_cs.GLint)
@@ -62,7 +61,7 @@ def glCompressedTextureSubImage2D(texture,level,xoffset,yoffset,width,height,for
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,ctypes.c_void_p)
 def glCompressedTextureSubImage3D(texture,level,xoffset,yoffset,zoffset,width,height,depth,format,imageSize,data):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLintptr,_cs.GLsizei)
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLintptr,_cs.GLsizeiptr)
 def glCopyNamedBufferSubData(readBuffer,writeBuffer,readOffset,writeOffset,size):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei)
@@ -107,7 +106,7 @@ def glDisableVertexArrayAttrib(vaobj,index):pass
 @_p.types(None,_cs.GLuint,_cs.GLuint)
 def glEnableVertexArrayAttrib(vaobj,index):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizei)
+@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
 def glFlushMappedNamedBufferRange(buffer,offset,length):pass
 @_f
 @_p.types(None,_cs.GLuint)
@@ -125,7 +124,7 @@ def glGetNamedBufferParameteriv(buffer,pname,params):pass
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLvoidpArray)
 def glGetNamedBufferPointerv(buffer,pname,params):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizei,ctypes.c_void_p)
+@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr,ctypes.c_void_p)
 def glGetNamedBufferSubData(buffer,offset,size,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
@@ -197,16 +196,16 @@ def glInvalidateNamedFramebufferSubData(framebuffer,numAttachments,attachments,x
 @_p.types(ctypes.c_void_p,_cs.GLuint,_cs.GLenum)
 def glMapNamedBuffer(buffer,access):pass
 @_f
-@_p.types(ctypes.c_void_p,_cs.GLuint,_cs.GLintptr,_cs.GLsizei,_cs.GLbitfield)
+@_p.types(ctypes.c_void_p,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr,_cs.GLbitfield)
 def glMapNamedBufferRange(buffer,offset,length,access):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.c_void_p,_cs.GLenum)
+@_p.types(None,_cs.GLuint,_cs.GLsizeiptr,ctypes.c_void_p,_cs.GLenum)
 def glNamedBufferData(buffer,size,data,usage):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.c_void_p,_cs.GLbitfield)
+@_p.types(None,_cs.GLuint,_cs.GLsizeiptr,ctypes.c_void_p,_cs.GLbitfield)
 def glNamedBufferStorage(buffer,size,data,flags):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizei,ctypes.c_void_p)
+@_p.types(None,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr,ctypes.c_void_p)
 def glNamedBufferSubData(buffer,offset,size,data):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum)
@@ -239,7 +238,7 @@ def glNamedRenderbufferStorageMultisample(renderbuffer,samples,internalformat,wi
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint)
 def glTextureBuffer(texture,internalformat,buffer):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLintptr,_cs.GLsizei)
+@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
 def glTextureBufferRange(texture,internalformat,buffer,offset,size):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
@@ -287,7 +286,7 @@ def glTextureSubImage3D(texture,level,xoffset,yoffset,zoffset,width,height,depth
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint)
 def glTransformFeedbackBufferBase(xfb,index,buffer):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLsizei)
+@_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
 def glTransformFeedbackBufferRange(xfb,index,buffer,offset,size):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLuint)

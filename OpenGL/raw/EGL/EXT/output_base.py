@@ -17,10 +17,10 @@ EGL_BAD_OUTPUT_PORT_EXT=_C('EGL_BAD_OUTPUT_PORT_EXT',0x322E)
 # EGL_NO_OUTPUT_PORT_EXT=_C('EGL_NO_OUTPUT_PORT_EXT',((EGLOutputPortEXT)0))
 EGL_SWAP_INTERVAL_EXT=_C('EGL_SWAP_INTERVAL_EXT',0x322F)
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,ctypes.POINTER(_cs.EGLAttrib),ctypes.POINTER(_cs.EGLOutputLayerEXT),_cs.EGLint,arrays.GLintArray)
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,arrays.EGLAttribArray,ctypes.POINTER(_cs.EGLOutputLayerEXT),_cs.EGLint,arrays.GLintArray)
 def eglGetOutputLayersEXT(dpy,attrib_list,layers,max_layers,num_layers):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,ctypes.POINTER(_cs.EGLAttrib),ctypes.POINTER(_cs.EGLOutputPortEXT),_cs.EGLint,arrays.GLintArray)
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,arrays.EGLAttribArray,ctypes.POINTER(_cs.EGLOutputPortEXT),_cs.EGLint,arrays.GLintArray)
 def eglGetOutputPortsEXT(dpy,attrib_list,ports,max_ports,num_ports):pass
 @_f
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLOutputLayerEXT,_cs.EGLint,_cs.EGLAttrib)
@@ -29,13 +29,13 @@ def eglOutputLayerAttribEXT(dpy,layer,attribute,value):pass
 @_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLOutputPortEXT,_cs.EGLint,_cs.EGLAttrib)
 def eglOutputPortAttribEXT(dpy,port,attribute,value):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLOutputLayerEXT,_cs.EGLint,ctypes.POINTER(_cs.EGLAttrib))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLOutputLayerEXT,_cs.EGLint,arrays.EGLAttribArray)
 def eglQueryOutputLayerAttribEXT(dpy,layer,attribute,value):pass
 @_f
 @_p.types(ctypes.c_char_p,_cs.EGLDisplay,_cs.EGLOutputLayerEXT,_cs.EGLint)
 def eglQueryOutputLayerStringEXT(dpy,layer,name):pass
 @_f
-@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLOutputPortEXT,_cs.EGLint,ctypes.POINTER(_cs.EGLAttrib))
+@_p.types(_cs.EGLBoolean,_cs.EGLDisplay,_cs.EGLOutputPortEXT,_cs.EGLint,arrays.EGLAttribArray)
 def eglQueryOutputPortAttribEXT(dpy,port,attribute,value):pass
 @_f
 @_p.types(ctypes.c_char_p,_cs.EGLDisplay,_cs.EGLOutputPortEXT,_cs.EGLint)
