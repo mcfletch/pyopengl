@@ -1,6 +1,5 @@
 import logging, os, urllib, traceback, textwrap, keyword
 import xmlreg
-import subprocess
 from OpenGL._bytes import as_8_bit
 HERE = os.path.join( os.path.dirname(__file__))
 log = logging.getLogger( __name__ )
@@ -81,8 +80,8 @@ _glget_size_mapping = _m = {}
     def enum( self, enum ):
         comment = ''
         try:
-            value = int( enum.value, 0 )
-        except ValueError as err:
+            int( enum.value, 0 )
+        except ValueError:
             comment = '# '
         return '%s%s=_C(%r,%s)'%(comment, enum.name,enum.name,enum.value)
     def safe_name( self, name ):
@@ -133,7 +132,7 @@ def %(name)s(%(argNames)s):pass"""
                 line.split('\t')
                 for line in open( os.path.join( HERE, 'glgetsizes.csv') ).read().splitlines()
             ]
-        except IOError, err:
+        except IOError:
             pass 
         else:
             for line in lines:
@@ -266,7 +265,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
     def __getitem__( self, key ):
         try:
             return getattr( self, key )
-        except AttributeError as err:
+        except AttributeError:
             raise KeyError( key )
     def __getattr__( self, key ):
         if key not in ('registry',):
@@ -357,7 +356,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             for function in self.get_constants():
                 result.append( self.overall.enum( function ) )
             return '\n'.join( result )
-        except Exception as err:
+        except Exception:
             traceback.print_exc()
             raise
     @property
