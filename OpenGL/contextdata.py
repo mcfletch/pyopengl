@@ -75,7 +75,6 @@ def setValue( constant, value, context=None, weak=False ):
         # XXX potential for failure here if a non-weakref-able objects
         # is being stored with weak == True
         current[ constant ] = value 
-##	print 'previous', previous, value, constant
     return previous
 def delValue( constant, context=None ):
     """Delete the specified value for the given context

@@ -36,7 +36,7 @@ def display():
             print('Egads, glGetString should not have worked!')
         assert bool( glGenVertexArrays ), "Should have vertex array support in 3.2"
         for message in get_debug_messages():
-            print message
+            print(message)
         glFlush ()
         glutSwapBuffers()
     except Exception as err:

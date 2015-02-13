@@ -52,14 +52,14 @@ def main():
     for key,value in generator.glGetSizes.items():
         if not value:
             if key in chromium:
-                print 'Updating %s should be %s'%( key, chromium[key] )
+                print('Updating %s should be %s'%( key, chromium[key] ))
                 generator.glGetSizes[key] = [str(chromium[key]).replace(' ','')]
         try:
             chromium.pop(key)
         except KeyError:
             pass 
     for key,value in chromium.items():
-        print 'New constant from chromium:', (key,value)
+        print('New constant from chromium:', (key,value))
         generator.glGetSizes[key] = [str(chromium[key]).replace(' ','')]
     generator.saveGLGetSizes()
     

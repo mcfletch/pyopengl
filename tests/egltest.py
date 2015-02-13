@@ -61,10 +61,10 @@ def egltest( size=(300,300), name=None, api='es2', attributes=DESIRED_ATTRIBUTES
                 EGL_CONFORMANT, API_BITS[api.lower()],
                 EGL_NONE,
             ])
-            print 'local_attributes', local_attributes
+            print('local_attributes', local_attributes)
             local_attributes= arrays.GLintArray.asArray( local_attributes )
             eglChooseConfig(display, local_attributes, configs, 2, num_configs)
-            print 'API', api_constant
+            print('API', api_constant)
             eglBindAPI(api_constant)
             
             # now need to get a raw X window handle...

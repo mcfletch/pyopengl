@@ -9,7 +9,7 @@ def test_gl( ):
     glClearColor( 1,0,0, 0 )
     glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT )
     
-    print 'pre-compile error', glGetError()
+    print('pre-compile error', glGetError())
     shader = shaders.compileProgram(
         shaders.compileShader( '''#version 130
     attribute vec3 position;

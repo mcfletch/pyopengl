@@ -28,10 +28,10 @@ def generate_for_file( filename ):
         ctypetopytype.ctype_to_pytype
     )
     for name,feature in registry.feature_set.items():
-        print feature.name, feature.api
+        print(feature.name, feature.api)
         generator.module( feature )
     for name,extension in registry.extension_set.items():
-        print extension.name, extension.apis
+        print(extension.name, extension.apis)
         generator.module( extension )
 
 if __name__ == "__main__":
