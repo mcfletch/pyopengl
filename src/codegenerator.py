@@ -254,6 +254,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         
         self.constantModule = '%(prefix)s_%(owner)s_%(rawModule)s'%self
         specification = self.getSpecification()
+        self.constantsFromSpec()
         self.overview = ''
         if self.overall.includeOverviews:
             for title,section in specification.blocks( specification.source ):
@@ -276,7 +277,32 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             # spec files have not properly separated out these two...
             return '# Spec mixes constants from 1.0 and 1.1\nfrom OpenGL.raw.GL.VERSION.GL_1_0 import *'
         return ''
-            
+    
+    def constantsFromSpec(self, spec=None):
+        """Examine spec text looking for new constants..."""
+        spec = spec or self.getSpecification()
+        if spec.source:
+            table = self.overall.glGetSizes
+            extras = spec.glGetConstants()
+            changed = False
+            for key, value in extras.items():
+                if key not in table:
+                    if key == 'GL_BUFFER_ACCESS_ARB':
+                        import ipdb;ipdb.set_trace()
+                    try:
+                        value = int(value, 16)
+                    except ValueError:
+                        continue 
+                    short_key = '_'.join(key.split("_")[:-1])
+                    if short_key in table:
+                        short_def = self.overall.registry.enumeration_set.get(short_key)
+                        if short_def and int(short_def.value, 16) == value:
+                            key = short_def.name 
+                    if not key in table:
+                        table[key] = ['(1,)', '#TODO Review %s'%(self.specURL())]
+                        changed = True
+            if changed:
+                self.overall.saveGLGetSizes()
     def shouldReplace( self ):
         """Should we replace the given filename?"""
         filename = self.pathName
@@ -351,11 +377,11 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         return self.INIT_TEMPLATE%self
     @property
     def constants( self ):
+        result = []
         try:
-            result = []
             for function in self.get_constants():
                 result.append( self.overall.enum( function ) )
-            return '\n'.join( result )
+            return '\n'.join(result)
         except Exception:
             traceback.print_exc()
             raise
@@ -374,6 +400,18 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         #'EXT/texture_cube_map': 'http://oss.sgi.com/projects/ogl-sample/registry/ARB/texture_cube_map.txt',
         'SGIS/fog_function': 'http://oss.sgi.com/projects/ogl-sample/registry/SGIS/fog_func.txt',
     }
+    def specFile(self):
+        return os.path.splitext( self.pathName )[0] + '.txt'
+    def specURL(self):
+        specURLFragment = nameToPathMinusGL(self.name)
+        if specURLFragment in self.SPEC_EXCEPTIONS:
+            specURL = self.SPEC_EXCEPTIONS[ specURLFragment ]
+        else:
+            specURL = '%s/%s.txt'%( 
+                self.ROOT_EXTENSION_SOURCE, 
+                specURLFragment,
+            )
+        return specURL
     def getSpecification( self ):
         """Retrieve our specification document...
         
@@ -383,15 +421,8 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         """
         if self.registry.feature:
             return Specification('')
-        specFile = os.path.splitext( self.pathName )[0] + '.txt'
-        specURLFragment = nameToPathMinusGL(self.name)
-        if specURLFragment in self.SPEC_EXCEPTIONS:
-            specURL = self.SPEC_EXCEPTIONS[ specURLFragment ]
-        else:
-            specURL = '%s/%s.txt'%( 
-                self.ROOT_EXTENSION_SOURCE, 
-                specURLFragment,
-            )
+        specFile = self.specFile()
+        specURL = self.specURL()
         if os.environ.get('NETWORK_SPECS') and not os.path.isfile( specFile ):
             try:
                 data = download(specURL)
@@ -503,13 +534,15 @@ class Specification( object ):
         for block in self.constantBlocks():
             for title, section in self.blocks( block ):
                 for possible in (
-                    'GetBooleanv','GetIntegerv','<pname> of Get'
+                    'GetBooleanv','GetIntegerv','<pname> of Get', 
+                    '<pname> parameter of Get', 
                 ):
                     if possible in title:
                         for line in section.splitlines():
                             line = line.strip().split()
                             if len(line) == 2:
                                 constant,value = line 
+                                constant = constant.strip(':')
                                 table['GL_%s'%(constant,)] = value 
                         break
         return table
