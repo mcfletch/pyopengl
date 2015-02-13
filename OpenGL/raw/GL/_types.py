@@ -81,7 +81,12 @@ GLuint = _defineType( 'GLuint', ctypes.c_uint, long )
 GLfixed = _defineType('GLfixed', ctypes.c_int32, int )
 GLclampx = _defineType('GLclampx', ctypes.c_int32, int )
 
-GLsizei = _defineType( 'GLsizei', ctypes.c_int, int )
+if hasattr(ctypes, 'c_ptrdiff_t'): # maybe some day...
+    GLsizei = _defineType( 'GLsizei', ctypes.c_ptrdiff_t, int )
+elif hasattr(ctypes, 'c_ssize_t'): # 2.7+ should have this
+    GLsizei = _defineType( 'GLsizei', ctypes.c_ssize_t, int )
+else: # really old, likely never hit these days
+    GLsizei = _defineType( 'GLsizei', ctypes.c_long, int )
 
 GLubyte = ctypes.c_ubyte
 GLubyte_3 = GLubyte * 3
