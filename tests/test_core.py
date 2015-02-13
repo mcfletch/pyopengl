@@ -845,6 +845,10 @@ class Tests( unittest.TestCase ):
                     result = float(result)
                 else:
                     assert ArrayDatatype.dimensions( result ) == value, result
+    def test_max_compute_work_group_invocations(self):
+        from OpenGL.extensions import hasGLExtension
+        if hasGLExtension( 'GL_ARB_compute_shader' ):
+            assert glGetIntegerv( GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS )
     
     def test_tess_collection( self ):
         """SF#2354596 tessellation combine results collected"""
