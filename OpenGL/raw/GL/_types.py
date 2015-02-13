@@ -6,6 +6,8 @@ uses (note, doesn't include the OpenGL-ES types!)
 import ctypes
 from OpenGL.constant import Constant
 from OpenGL._bytes import bytes,unicode,as_8_bit, long
+assert unicode
+assert as_8_bit
 from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls
 
 sizeof = ctypes.sizeof
@@ -52,7 +54,7 @@ def _defineType( name, baseType, convertFunc = long ):
                 except TypeError as err:
                     try:
                         return original( convertFunc(x) )
-                    except TypeError as err2:
+                    except TypeError:
                         raise err
             from_param = staticmethod( from_param )
             setattr( baseType, 'from_param', from_param )
