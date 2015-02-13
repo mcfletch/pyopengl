@@ -3,11 +3,17 @@ GL_ACCUM_BLUE_BITS	(1,)
 GL_ACCUM_CLEAR_VALUE	(4,)
 GL_ACCUM_GREEN_BITS	(1,)
 GL_ACCUM_RED_BITS	(1,)
+GL_ACTIVE_ATOMIC_COUNTER_BUFFERS	(1,)
 GL_ACTIVE_ATTRIBUTES	(1,)
 GL_ACTIVE_ATTRIBUTE_MAX_LENGTH	(1,)
 GL_ACTIVE_PROGRAM	(1,)
 GL_ACTIVE_RESOURCES	(1,)
 GL_ACTIVE_STENCIL_FACE_EXT	(1,)
+GL_ACTIVE_SUBROUTINES	(1,)
+GL_ACTIVE_SUBROUTINE_MAX_LENGTH	(1,)
+GL_ACTIVE_SUBROUTINE_UNIFORMS	(1,)
+GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS	(1,)
+GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH	(1,)
 GL_ACTIVE_TEXTURE	(1,)
 GL_ACTIVE_TEXTURE_ARB	(1,)
 GL_ACTIVE_UNIFORMS	(1,)
@@ -35,6 +41,8 @@ GL_ARRAY_BUFFER_BINDING	(1,)
 GL_ARRAY_BUFFER_BINDING_ARB	(1,)
 GL_ARRAY_ELEMENT_LOCK_COUNT_EXT	(1,)
 GL_ARRAY_ELEMENT_LOCK_FIRST_EXT	(1,)
+GL_ARRAY_OBJECT_BUFFER_ATI	(1,)
+GL_ARRAY_OBJECT_OFFSET_ATI	(1,)
 GL_ARRAY_SIZE	(1,)
 GL_ARRAY_STRIDE	(1,)
 GL_ASYNC_DRAW_PIXELS_SGIX	(1,)
@@ -42,10 +50,26 @@ GL_ASYNC_HISTOGRAM_SGIX	(1,)
 GL_ASYNC_MARKER_SGIX	(1,)
 GL_ASYNC_READ_PIXELS_SGIX	(1,)
 GL_ASYNC_TEX_IMAGE_SGIX	(1,)
+GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS	(1,)
+GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
 GL_ATOMIC_COUNTER_BUFFER_BINDING	(1,)
+GL_ATOMIC_COUNTER_BUFFER_DATA_SIZE	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
 GL_ATOMIC_COUNTER_BUFFER_INDEX	(1,)
+GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
+GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
+GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
+GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
+GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
+GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
+GL_ATOMIC_COUNTER_BUFFER_SIZE	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
+GL_ATOMIC_COUNTER_BUFFER_START	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
 GL_ATTACHED_SHADERS	(1,)
+GL_ATTRIB_ARRAY_POINTER_NV	(1,)
+GL_ATTRIB_ARRAY_SIZE_NV	(1,)
+GL_ATTRIB_ARRAY_STRIDE_NV	(1,)
+GL_ATTRIB_ARRAY_TYPE_NV	(1,)
 GL_ATTRIB_STACK_DEPTH	(1,)
+GL_AUTO_GENERATE_MIPMAP	(1,)
 GL_AUTO_NORMAL	(1,)
 GL_AUX_BUFFERS	(1,)
 GL_BINORMAL_ARRAY_EXT	(1,)
@@ -53,6 +77,8 @@ GL_BINORMAL_ARRAY_POINTER_EXT	(1,)
 GL_BINORMAL_ARRAY_STRIDE_EXT	(1,)
 GL_BINORMAL_ARRAY_TYPE_EXT	(1,)
 GL_BLEND	(1,)
+GL_BLEND_ADVANCED_COHERENT_KHR	(1,)	#TODO Review http://www.opengl.org/registry/specs//KHR/blend_equation_advanced.txt
+GL_BLEND_ADVANCED_COHERENT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/blend_equation_advanced.txt
 GL_BLEND_COLOR	(4,)
 GL_BLEND_COLOR_EXT	(4,)
 GL_BLEND_DST	(1,)
@@ -65,6 +91,8 @@ GL_BLEND_EQUATION_ALPHA	(1,)
 GL_BLEND_EQUATION_ALPHA_EXT	(1,)
 GL_BLEND_EQUATION_EXT	(1,)
 GL_BLEND_EQUATION_RGB	(1,)
+GL_BLEND_OVERLAP_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/blend_equation_advanced.txt
+GL_BLEND_PREMULTIPLIED_SRC_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/blend_equation_advanced.txt
 GL_BLEND_SRC	(1,)
 GL_BLEND_SRC_ALPHA	(1,)
 GL_BLEND_SRC_ALPHA_EXT	(1,)
@@ -77,15 +105,23 @@ GL_BLUE_MAX_CLAMP_INGR	(1,)
 GL_BLUE_MIN_CLAMP_INGR	(1,)
 GL_BLUE_SCALE	(1,)
 GL_BUFFER_ACCESS	(1,)
+GL_BUFFER_ACCESS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/vertex_buffer_object.txt
 GL_BUFFER_ACCESS_FLAGS	(1,)
 GL_BUFFER_BINDING	(1,)
 GL_BUFFER_DATA_SIZE	(1,)
+GL_BUFFER_GPU_ADDRESS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/shader_buffer_load.txt
+GL_BUFFER_IMMUTABLE_STORAGE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/buffer_storage.txt
 GL_BUFFER_MAPPED	(1,)
+GL_BUFFER_MAPPED_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/vertex_buffer_object.txt
 GL_BUFFER_MAP_LENGTH	(1,)
 GL_BUFFER_MAP_OFFSET	(1,)
 GL_BUFFER_MAP_POINTER	(1,)
+GL_BUFFER_MAP_POINTER_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/vertex_buffer_object.txt
 GL_BUFFER_SIZE	(1,)
+GL_BUFFER_SIZE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/vertex_buffer_object.txt
+GL_BUFFER_STORAGE_FLAGS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/buffer_storage.txt
 GL_BUFFER_USAGE	(1,)
+GL_BUFFER_USAGE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/vertex_buffer_object.txt
 GL_BUMP_TARGET_ATI	(1,)
 GL_CALLIGRAPHIC_FRAGMENT_SGIX	(1,)
 GL_CLAMP_FRAGMENT_COLOR	(1,)
@@ -94,9 +130,11 @@ GL_CLAMP_READ_COLOR	(1,)
 GL_CLAMP_READ_COLOR_ARB	(1,)
 GL_CLAMP_VERTEX_COLOR	(1,)
 GL_CLAMP_VERTEX_COLOR_ARB	(1,)
+GL_CLEAR_BUFFER	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_CLIENT_ACTIVE_TEXTURE	(1,)
 GL_CLIENT_ACTIVE_TEXTURE_ARB	(1,)
 GL_CLIENT_ATTRIB_STACK_DEPTH	(1,)
+GL_CLIP_DEPTH_MODE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/clip_control.txt
 GL_CLIP_DISTANCE0	(1,)
 GL_CLIP_DISTANCE1	(1,)
 GL_CLIP_DISTANCE2	(1,)
@@ -105,6 +143,7 @@ GL_CLIP_DISTANCE4	(1,)
 GL_CLIP_DISTANCE5	(1,)
 GL_CLIP_DISTANCE6	(1,)
 GL_CLIP_DISTANCE7	(1,)
+GL_CLIP_ORIGIN	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/clip_control.txt
 GL_CLIP_PLANE0	(1,)
 GL_CLIP_PLANE1	(1,)
 GL_CLIP_PLANE2	(1,)
@@ -119,6 +158,7 @@ GL_COLOR_ARRAY_BUFFER_BINDING_ARB	(1,)
 GL_COLOR_ARRAY_COUNT_EXT	(1,)
 GL_COLOR_ARRAY_EXT	(1,)
 GL_COLOR_ARRAY_LENGTH_NV	(1,)
+GL_COLOR_ARRAY_PARALLEL_POINTERS_INTEL	(1,)	#TODO Review http://www.opengl.org/registry/specs//INTEL/parallel_arrays.txt
 GL_COLOR_ARRAY_POINTER	(1,)
 GL_COLOR_ARRAY_SIZE	(1,)
 GL_COLOR_ARRAY_SIZE_EXT	(1,)
@@ -128,6 +168,8 @@ GL_COLOR_ARRAY_TYPE	(1,)
 GL_COLOR_ARRAY_TYPE_EXT	(1,)
 GL_COLOR_CLEAR_UNCLAMPED_VALUE_ATI	(4,)
 GL_COLOR_CLEAR_VALUE	(4,)
+GL_COLOR_COMPONENTS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_COLOR_ENCODING	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_COLOR_FLOAT_APPLE	(1,)
 GL_COLOR_INDEXES	(3,)
 GL_COLOR_LOGIC_OP	(1,)
@@ -138,6 +180,7 @@ GL_COLOR_MATRIX	(4,4)
 GL_COLOR_MATRIX_SGI	(4,4)
 GL_COLOR_MATRIX_STACK_DEPTH	(1,)
 GL_COLOR_MATRIX_STACK_DEPTH_SGI	(1,)
+GL_COLOR_RENDERABLE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_COLOR_SAMPLES_NV	(1,)
 GL_COLOR_SUM	(1,)
 GL_COLOR_SUM_ARB	(1,)
@@ -166,13 +209,27 @@ GL_COLOR_TABLE_SGI	(1,)
 GL_COLOR_TABLE_WIDTH	(1,)
 GL_COLOR_TABLE_WIDTH_SGI	(1,)
 GL_COLOR_WRITEMASK	(4,)
+GL_COMBINER_AB_DOT_PRODUCT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_AB_OUTPUT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_BIAS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_CD_DOT_PRODUCT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_CD_OUTPUT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_COMPONENT_USAGE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_INPUT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_MAPPING_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_MUX_SUM_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_SCALE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
+GL_COMBINER_SUM_OUTPUT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/register_combiners.txt
 GL_COMBINE_ALPHA	(1,)
 GL_COMBINE_RGB	(1,)
 GL_COMPATIBLE_SUBROUTINES	(1,)
 GL_COMPILE_STATUS	(1,)
 GL_COMPRESSED_TEXTURE_FORMATS	(_L(0x86A2),)
 GL_COMPRESSED_TEXTURE_FORMATS_ARB	(_L(0x86A2),)
+GL_COMPUTE_PROGRAM_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/compute_program5.txt
 GL_COMPUTE_SHADER	(1,)
+GL_COMPUTE_TEXTURE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_COMPUTE_WORK_GROUP_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/compute_shader.txt
 GL_CONSTANT_ATTENUATION	(1,)
 GL_CONSTANT_COLOR0_NV	(4,)
 GL_CONSTANT_COLOR1_NV	(4,)
@@ -181,6 +238,7 @@ GL_CONTEXT_FLAGS	(1,)
 GL_CONTEXT_FLAG_DEBUG_BIT	(1,)
 GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB	(1,)
 GL_CONTEXT_PROFILE_MASK	(1,)
+GL_CONTEXT_ROBUST_ACCESS	(1,)	#TODO Review http://www.opengl.org/registry/specs//KHR/robustness.txt
 GL_CONVOLUTION_1D	(1,)
 GL_CONVOLUTION_1D_EXT	(1,)
 GL_CONVOLUTION_2D	(1,)
@@ -205,7 +263,9 @@ GL_CULL_FACE_MODE	(1,)
 GL_CULL_MODES_NV	(4,)
 GL_CULL_VERTEX_EXT	(1,)
 GL_CULL_VERTEX_EYE_POSITION_EXT	(1,)
+GL_CULL_VERTEX_IBM	(1,)	#TODO Review http://www.opengl.org/registry/specs//IBM/cull_vertex.txt
 GL_CULL_VERTEX_OBJECT_POSITION_EXT	(1,)
+GL_CURRENT_ATTRIB_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/vertex_program.txt
 GL_CURRENT_BINORMAL_EXT	(1,)
 GL_CURRENT_COLOR	(4,)
 GL_CURRENT_FOG_COORD	(1,)
@@ -233,6 +293,7 @@ GL_CURRENT_SECONDARY_COLOR	(4,)
 GL_CURRENT_SECONDARY_COLOR_EXT	(1,)
 GL_CURRENT_TANGENT_EXT	(1,)
 GL_CURRENT_TEXTURE_COORDS	(4,)
+GL_CURRENT_TIME_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/present_video.txt
 GL_CURRENT_VERTEX_ATTRIB	(4,)
 GL_CURRENT_VERTEX_WEIGHT_EXT	(1,)
 GL_CURRENT_WEIGHT_ARB	(1,)
@@ -258,18 +319,16 @@ GL_DEPTH_CLAMP_FAR_AMD	(1,)
 GL_DEPTH_CLAMP_NEAR_AMD	(1,)
 GL_DEPTH_CLAMP_NV	(1,)
 GL_DEPTH_CLEAR_VALUE	(1,)
+GL_DEPTH_COMPONENTS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_DEPTH_FUNC	(1,)
 GL_DEPTH_RANGE	(2,)
+GL_DEPTH_RENDERABLE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_DEPTH_SCALE	(1,)
 GL_DEPTH_STENCIL_TEXTURE_MODE	(1,)
 GL_DEPTH_TEST	(1,)
 GL_DEPTH_TEXTURE_MODE	(1,)
 GL_DEPTH_WRITEMASK	(1,)
 GL_DETAIL_TEXTURE_2D_BINDING_SGIS	(1,)
-GL_DETAIL_TEXTURE_2D_SGIS	
-GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS	
-GL_DETAIL_TEXTURE_LEVEL_SGIS	
-GL_DETAIL_TEXTURE_MODE_SGIS	
 GL_DIFFUSE	(4,)
 GL_DISPATCH_INDIRECT_BUFFER_BINDING	(1,)
 GL_DISTANCE_ATTENUATION_SGIS	(3,)
@@ -332,7 +391,6 @@ GL_DS_BIAS_NV	(1,)
 GL_DS_SCALE_NV	(1,)
 GL_DT_BIAS_NV	(1,)
 GL_DT_SCALE_NV	(1,)
-GL_DUAL_TEXTURE_SELECT_SGIS	
 GL_EDGE_FLAG	(1,)
 GL_EDGE_FLAG_ARRAY	(1,)
 GL_EDGE_FLAG_ARRAY_BUFFER_BINDING	(1,)
@@ -346,6 +404,7 @@ GL_EDGE_FLAG_ARRAY_STRIDE_EXT	(1,)
 GL_ELEMENT_ARRAY_BUFFER_BINDING	(1,)
 GL_ELEMENT_ARRAY_BUFFER_BINDING_ARB	(1,)
 GL_ELEMENT_ARRAY_LENGTH_NV	(1,)
+GL_ELEMENT_ARRAY_POINTER_APPLE	(1,)	#TODO Review http://www.opengl.org/registry/specs//APPLE/element_array.txt
 GL_ELEMENT_ARRAY_TYPE_APPLE	(1,)
 GL_ELEMENT_ARRAY_TYPE_ATI	(1,)
 GL_EMISSION	(4,)
@@ -373,11 +432,15 @@ GL_EYE_POINT_SGIS	(4,)
 GL_FEEDBACK_BUFFER_POINTER	(1,)
 GL_FEEDBACK_BUFFER_SIZE	(1,)
 GL_FEEDBACK_BUFFER_TYPE	(1,)
+GL_FENCE_CONDITION_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/fence.txt
+GL_FENCE_STATUS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/fence.txt
+GL_FILTER	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_FLOAT_CLEAR_COLOR_VALUE_NV	(4,)
 GL_FLOAT_RGBA_MODE_NV	(1,)
 GL_FOG	(1,)
 GL_FOG_COLOR	(4,)
 GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING_ARB	(1,)
+GL_FOG_COORDINATE_ARRAY_POINTER_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/fog_coord.txt
 GL_FOG_COORDINATE_ARRAY_STRIDE_EXT	(1,)
 GL_FOG_COORDINATE_ARRAY_TYPE_EXT	(1,)
 GL_FOG_COORD_ARRAY	(1,)
@@ -399,6 +462,7 @@ GL_FOG_START	(1,)
 GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX	(1,)
 GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_SGIX	(1,)
 GL_FRAGMENT_COLOR_MATERIAL_SGIX	(1,)
+GL_FRAGMENT_INTERPOLATION_OFFSET_BITS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/gpu_shader5.txt
 GL_FRAGMENT_LIGHT0_SGIX	(1,)
 GL_FRAGMENT_LIGHTING_SGIX	(1,)
 GL_FRAGMENT_LIGHT_MODEL_AMBIENT_SGIX	(4,)
@@ -407,11 +471,14 @@ GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_SGIX	(1,)
 GL_FRAGMENT_LIGHT_MODEL_TWO_SIDE_SGIX	(1,)
 GL_FRAGMENT_PROGRAM_ARB	(1,)
 GL_FRAGMENT_PROGRAM_BINDING_NV	(1,)
+GL_FRAGMENT_PROGRAM_INTERPOLATION_OFFSET_BITS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/gpu_program5.txt
 GL_FRAGMENT_PROGRAM_NV	(1,)
+GL_FRAGMENT_PROGRAM_PARAMETER_BUFFER_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/parameter_buffer_object.txt
 GL_FRAGMENT_SHADER	(1,)
 GL_FRAGMENT_SHADER_ATI	(1,)
 GL_FRAGMENT_SHADER_DERIVATIVE_HINT	(1,)
 GL_FRAGMENT_SHADER_DERIVATIVE_HINT_ARB	(1,)
+GL_FRAGMENT_TEXTURE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE	(1,)
 GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE	(1,)
 GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING	(1,)
@@ -427,11 +494,14 @@ GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE	(1,)
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER	(1,)
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL	(1,)
 GL_FRAMEBUFFER_BINDING_EXT	(1,)
+GL_FRAMEBUFFER_BLEND	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS	(1,)
 GL_FRAMEBUFFER_DEFAULT_HEIGHT	(1,)
 GL_FRAMEBUFFER_DEFAULT_LAYERS	(1,)
 GL_FRAMEBUFFER_DEFAULT_SAMPLES	(1,)
 GL_FRAMEBUFFER_DEFAULT_WIDTH	(1,)
+GL_FRAMEBUFFER_RENDERABLE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_FRAMEBUFFER_RENDERABLE_LAYERED	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_FRAMEBUFFER_SRGB	(1,)
 GL_FRAMEBUFFER_SRGB_CAPABLE_EXT	(1,)
 GL_FRAMEBUFFER_SRGB_EXT	(1,)
@@ -441,12 +511,24 @@ GL_FRONT_FACE	(1,)
 GL_GENERATE_MIPMAP	(1,)
 GL_GENERATE_MIPMAP_HINT	(1,)
 GL_GENERATE_MIPMAP_HINT_SGIS	(1,)
-GL_GENERATE_MIPMAP_SGIS	
 GL_GEOMETRY_INPUT_TYPE_ARB	(1,)
+GL_GEOMETRY_INPUT_TYPE_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/geometry_program4.txt
 GL_GEOMETRY_OUTPUT_TYPE_ARB	(1,)
+GL_GEOMETRY_OUTPUT_TYPE_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/geometry_program4.txt
+GL_GEOMETRY_PROGRAM_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/geometry_program4.txt
+GL_GEOMETRY_PROGRAM_PARAMETER_BUFFER_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/parameter_buffer_object.txt
 GL_GEOMETRY_SHADER	(1,)
+GL_GEOMETRY_SHADER_INVOCATIONS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/gpu_shader5.txt
+GL_GEOMETRY_TEXTURE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_GEOMETRY_VERTICES_OUT_ARB	(1,)
+GL_GEOMETRY_VERTICES_OUT_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/geometry_program4.txt
+GL_GET_TEXTURE_IMAGE_FORMAT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_GET_TEXTURE_IMAGE_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_GLOBAL_ALPHA_FACTOR_SUN	(1,)
+GL_GL_CONTEXT_RELEASE_BEHAVIOR	(1,)	#TODO Review http://www.opengl.org/registry/specs//KHR/context_flush_control.txt
+GL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH	(1,)	#TODO Review http://www.opengl.org/registry/specs//KHR/context_flush_control.txt
+GL_GL_NATIVE_GRAPHICS_HANDLE_PGI	(1,)	#TODO Review http://www.opengl.org/registry/specs//PGI/misc_hints.txt
+GL_GL_NONE	(1,)	#TODO Review http://www.opengl.org/registry/specs//KHR/context_flush_control.txt
 GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX	(1,)
 GL_GPU_MEMORY_INFO_DEDICATED_VIDMEM_NVX	(1,)
 GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX	(1,)
@@ -477,6 +559,11 @@ GL_HISTOGRAM_WIDTH	(1,)
 GL_HISTOGRAM_WIDTH_EXT	(1,)
 GL_HI_BIAS_NV	(1,)
 GL_HI_SCALE_NV	(1,)
+GL_IMAGE_COMPATIBILITY_CLASS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_IMAGE_FORMAT_COMPATIBILITY_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_IMAGE_PIXEL_FORMAT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_IMAGE_PIXEL_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_IMAGE_TEXEL_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_IMPLEMENTATION_COLOR_READ_FORMAT	(1,)
 GL_IMPLEMENTATION_COLOR_READ_TYPE	(1,)
 GL_INDEX_ARRAY	(1,)
@@ -503,6 +590,21 @@ GL_INTERLACE_OML	(1,)
 GL_INTERLACE_READ_INGR	(1,)
 GL_INTERLACE_READ_OML	(1,)
 GL_INTERLACE_SGIX	(1,)
+GL_INTERNALFORMAT_ALPHA_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_ALPHA_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_BLUE_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_BLUE_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_DEPTH_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_DEPTH_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_GREEN_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_GREEN_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_PREFERRED	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_RED_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_RED_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_SHARED_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_STENCIL_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_STENCIL_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_INTERNALFORMAT_SUPPORTED	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_IR_INSTRUMENT1_SGIX	(1,)
 GL_IS_PER_PATCH	(1,)
 GL_IS_ROW_MAJOR	(1,)
@@ -535,17 +637,18 @@ GL_LINK_STATUS	(1,)
 GL_LIST_BASE	(1,)
 GL_LIST_INDEX	(1,)
 GL_LIST_MODE	(1,)
-GL_LIST_PRIORITY_SGIX	
 GL_LOCATION	(1,)
 GL_LOCATION_INDEX	(1,)
 GL_LOGIC_OP	(1,)
 GL_LOGIC_OP_MODE	(1,)
+GL_LOSE_CONTEXT_ON_RESET	(1,)	#TODO Review http://www.opengl.org/registry/specs//KHR/robustness.txt
 GL_LOSE_CONTEXT_ON_RESET_ARB	(1,)
 GL_LO_BIAS_NV	(1,)
 GL_LO_SCALE_NV	(1,)
 GL_MAGNITUDE_BIAS_NV	(1,)
 GL_MAGNITUDE_SCALE_NV	(1,)
 GL_MAJOR_VERSION	(1,)
+GL_MANUAL_GENERATE_MIPMAP	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_MAP1_COLOR_4	(1,)
 GL_MAP1_GRID_DOMAIN	(2,)
 GL_MAP1_GRID_SEGMENTS	(1,)
@@ -600,6 +703,8 @@ GL_MAP2_VERTEX_ATTRIB6_4_NV	(4,)
 GL_MAP2_VERTEX_ATTRIB7_4_NV	(4,)
 GL_MAP2_VERTEX_ATTRIB8_4_NV	(4,)
 GL_MAP2_VERTEX_ATTRIB9_4_NV	(4,)
+GL_MAP_ATTRIB_U_ORDER_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/evaluators.txt
+GL_MAP_ATTRIB_V_ORDER_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/evaluators.txt
 GL_MAP_COLOR	(1,)
 GL_MAP_STENCIL	(1,)
 GL_MATRIX_INDEX_ARRAY_ARB	(1,)
@@ -636,7 +741,9 @@ GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI	(1,)
 GL_MAX_COLOR_TEXTURE_SAMPLES	(1,)
 GL_MAX_COMBINED_ATOMIC_COUNTERS	(1,)
 GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS	(1,)
+GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/cull_distance.txt
 GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS	(1,)
+GL_MAX_COMBINED_DIMENSIONS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS	(1,)
 GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS	(1,)
 GL_MAX_COMBINED_IMAGE_UNIFORMS	(1,)
@@ -658,12 +765,16 @@ GL_MAX_COMPUTE_SHARED_MEMORY_SIZE	(1,)
 GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS	(1,)
 GL_MAX_COMPUTE_UNIFORM_BLOCKS	(1,)
 GL_MAX_COMPUTE_UNIFORM_COMPONENTS	(1,)
+GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/compute_variable_group_size.txt
+GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/compute_variable_group_size.txt
 GL_MAX_COMPUTE_WORK_GROUP_COUNT	(3,)
+GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/compute_shader.txt
 GL_MAX_COMPUTE_WORK_GROUP_SIZE	(3,)
 GL_MAX_CONVOLUTION_HEIGHT	(1,)
 GL_MAX_CONVOLUTION_WIDTH	(1,)
 GL_MAX_CUBE_MAP_TEXTURE_SIZE	(1,)
 GL_MAX_CUBE_MAP_TEXTURE_SIZE_ARB	(1,)
+GL_MAX_CULL_DISTANCES	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/cull_distance.txt
 GL_MAX_DEBUG_GROUP_STACK_DEPTH	(1,)
 GL_MAX_DEBUG_LOGGED_MESSAGES	(1,)
 GL_MAX_DEBUG_LOGGED_MESSAGES_AMD	(1,)
@@ -673,6 +784,7 @@ GL_MAX_DEBUG_MESSAGE_LENGTH_AMD	(1,)
 GL_MAX_DEBUG_MESSAGE_LENGTH_ARB	(1,)
 GL_MAX_DEEP_3D_TEXTURE_DEPTH_NV	(1,)
 GL_MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV	(2,)
+GL_MAX_DEPTH	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_MAX_DEPTH_TEXTURE_SAMPLES	(1,)
 GL_MAX_DRAW_BUFFERS	(1,)
 GL_MAX_DRAW_BUFFERS_ARB	(1,)
@@ -724,12 +836,14 @@ GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_ARB	(1,)
 GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_EXT	(1,)
 GL_MAX_GEOMETRY_VARYING_COMPONENTS_ARB	(1,)
 GL_MAX_GEOMETRY_VARYING_COMPONENTS_EXT	(1,)
+GL_MAX_HEIGHT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_MAX_IMAGE_SAMPLES	(1,)
 GL_MAX_IMAGE_SAMPLES_EXT	(1,)
 GL_MAX_IMAGE_UNITS	(1,)
 GL_MAX_IMAGE_UNITS_EXT	(1,)
 GL_MAX_INTEGER_SAMPLES	(1,)
 GL_MAX_LABEL_LENGTH	(1,)
+GL_MAX_LAYERS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_MAX_LIGHTS	(1,)
 GL_MAX_LIST_NESTING	(1,)
 GL_MAX_MAP_TESSELLATION_NV	(1,)
@@ -740,6 +854,7 @@ GL_MAX_NAME_LENGTH	(1,)
 GL_MAX_NAME_STACK_DEPTH	(1,)
 GL_MAX_NUM_ACTIVE_VARIABLES	(1,)
 GL_MAX_NUM_COMPATIBLE_SUBROUTINES	(1,)
+GL_MAX_OPTIMIZED_VERTEX_SHADER_INARIANTS_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/vertex_shader.txt
 GL_MAX_OPTIMIZED_VERTEX_SHADER_INSTRUCTIONS_EXT	(1,)
 GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCALS_EXT	(1,)
 GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCAL_CONSTANTS_EXT	(1,)
@@ -752,9 +867,12 @@ GL_MAX_PN_TRIANGLES_TESSELATION_LEVEL_ATI	(1,)
 GL_MAX_PROGRAM_ADDRESS_REGISTERS_ARB	(1,)
 GL_MAX_PROGRAM_ALU_INSTRUCTIONS_ARB	(1,)
 GL_MAX_PROGRAM_ATTRIBS_ARB	(1,)
+GL_MAX_PROGRAM_ATTRIB_COMPONENTS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/gpu_program4.txt
 GL_MAX_PROGRAM_CALL_DEPTH_NV	(1,)
 GL_MAX_PROGRAM_ENV_PARAMETERS_ARB	(1,)
 GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV	(1,)
+GL_MAX_PROGRAM_GENERIC_ATTRIBS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/gpu_program4.txt
+GL_MAX_PROGRAM_GENERIC_RESULTS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/gpu_program4.txt
 GL_MAX_PROGRAM_IF_DEPTH_NV	(1,)
 GL_MAX_PROGRAM_INSTRUCTIONS_ARB	(1,)
 GL_MAX_PROGRAM_LOCAL_PARAMETERS_ARB	(1,)
@@ -772,6 +890,10 @@ GL_MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB	(1,)
 GL_MAX_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB	(1,)
 GL_MAX_PROGRAM_OUTPUT_VERTICES_NV	(1,)
 GL_MAX_PROGRAM_PARAMETERS_ARB	(1,)
+GL_MAX_PROGRAM_PARAMETER_BUFFER_BINDINGS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/parameter_buffer_object.txt
+GL_MAX_PROGRAM_PARAMETER_BUFFER_SIZE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/parameter_buffer_object.txt
+GL_MAX_PROGRAM_PATCH_ATTRIBS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/tessellation_program5.txt
+GL_MAX_PROGRAM_RESULT_COMPONENTS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/gpu_program4.txt
 GL_MAX_PROGRAM_TEMPORARIES_ARB	(1,)
 GL_MAX_PROGRAM_TEXEL_OFFSET	(1,)
 GL_MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB	(1,)
@@ -795,7 +917,11 @@ GL_MAX_SERVER_WAIT_TIMEOUT	(1,)
 GL_MAX_SHADER_STORAGE_BLOCK_SIZE	(1,)
 GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS	(1,)
 GL_MAX_SHININESS_NV	(1,)
+GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD	(1,)	#TODO Review http://www.opengl.org/registry/specs//AMD/sparse_texture.txt
+GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sparse_texture.txt
 GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS	(1,)
+GL_MAX_SPARSE_TEXTURE_SIZE_AMD	(1,)	#TODO Review http://www.opengl.org/registry/specs//AMD/sparse_texture.txt
+GL_MAX_SPARSE_TEXTURE_SIZE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sparse_texture.txt
 GL_MAX_SPOT_EXPONENT_NV	(1,)
 GL_MAX_SUBROUTINES	(1,)
 GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS	(1,)
@@ -875,6 +1001,7 @@ GL_MAX_VERTEX_VARYING_COMPONENTS_ARB	(1,)
 GL_MAX_VERTEX_VARYING_COMPONENTS_EXT	(1,)
 GL_MAX_VIEWPORTS	(1,)
 GL_MAX_VIEWPORT_DIMS	(2,)
+GL_MAX_WIDTH	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_MINMAX	(1,)
 GL_MINMAX_EXT	(1,)
 GL_MINMAX_FORMAT	(1,)
@@ -882,7 +1009,15 @@ GL_MINMAX_FORMAT_EXT	(1,)
 GL_MINMAX_SINK	(1,)
 GL_MINMAX_SINK_EXT	(1,)
 GL_MINOR_VERSION	(1,)
+GL_MIN_FRAGMENT_INTERPOLATION_OFFSET	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/gpu_shader5.txt
+GL_MIN_FRAGMENT_INTERPOLATION_OFFSET_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/gpu_program5.txt
+GL_MIN_MAP_BUFFER_ALIGNMENT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/map_buffer_alignment.txt
 GL_MIN_PROGRAM_TEXEL_OFFSET	(1,)
+GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/texture_gather.txt
+GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/gpu_program5.txt
+GL_MIN_SAMPLE_SHADING_VALUE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sample_shading.txt
+GL_MIN_SPARSE_LEVEL_AMD	(1,)	#TODO Review http://www.opengl.org/registry/specs//AMD/sparse_texture.txt
+GL_MIPMAP	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_MODELVIEW0_MATRIX_EXT	(4,4)
 GL_MODELVIEW0_STACK_DEPTH_EXT	(1,)
 GL_MODELVIEW10_ARB	(4,4)
@@ -895,6 +1030,7 @@ GL_MODELVIEW16_ARB	(4,4)
 GL_MODELVIEW17_ARB	(4,4)
 GL_MODELVIEW18_ARB	(4,4)
 GL_MODELVIEW19_ARB	(4,4)
+GL_MODELVIEW1_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/vertex_blend.txt
 GL_MODELVIEW1_MATRIX_EXT	(4,4)
 GL_MODELVIEW1_STACK_DEPTH_EXT	(1,)
 GL_MODELVIEW20_ARB	(4,4)
@@ -922,12 +1058,15 @@ GL_MODELVIEW_STACK_DEPTH	(1,)
 GL_MULTISAMPLE	(1,)
 GL_MULTISAMPLE_3DFX	(1,)
 GL_MULTISAMPLE_ARB	(1,)
+GL_MULTISAMPLE_COVERAGE_MODES_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/framebuffer_multisample_coverage.txt
 GL_MULTISAMPLE_EXT	(1,)
 GL_MULTISAMPLE_FILTER_HINT_NV	(1,)
 GL_MULTISAMPLE_SGIS	(1,)
+GL_NAMED_STRING_LENGTH_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shading_language_include.txt
 GL_NAMED_STRING_TYPE_ARB	(1,)
 GL_NAME_LENGTH	(1,)
 GL_NAME_STACK_DEPTH	(1,)
+GL_NEXT_VIDEO_CAPTURE_BUFFER_STATUS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/video_capture.txt
 GL_NORMALIZE	(1,)
 GL_NORMAL_ARRAY	(1,)
 GL_NORMAL_ARRAY_BUFFER_BINDING	(1,)
@@ -935,17 +1074,20 @@ GL_NORMAL_ARRAY_BUFFER_BINDING_ARB	(1,)
 GL_NORMAL_ARRAY_COUNT_EXT	(1,)
 GL_NORMAL_ARRAY_EXT	(1,)
 GL_NORMAL_ARRAY_LENGTH_NV	(1,)
+GL_NORMAL_ARRAY_PARALLEL_POINTERS_INTEL	(1,)	#TODO Review http://www.opengl.org/registry/specs//INTEL/parallel_arrays.txt
 GL_NORMAL_ARRAY_POINTER	(1,)
 GL_NORMAL_ARRAY_STRIDE	(1,)
 GL_NORMAL_ARRAY_STRIDE_EXT	(1,)
 GL_NORMAL_ARRAY_TYPE	(1,)
 GL_NORMAL_ARRAY_TYPE_EXT	(1,)
+GL_NO_RESET_NOTIFICATION	(1,)	#TODO Review http://www.opengl.org/registry/specs//KHR/robustness.txt
 GL_NO_RESET_NOTIFICATION_ARB	(1,)
 GL_NUM_ACTIVE_VARIABLES	(1,)
 GL_NUM_COMPATIBLE_SUBROUTINES	(1,)
 GL_NUM_COMPRESSED_TEXTURE_FORMATS	(1,)
 GL_NUM_COMPRESSED_TEXTURE_FORMATS_ARB	(1,)
 GL_NUM_EXTENSIONS	(1,)
+GL_NUM_FILL_STREAMS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/present_video.txt
 GL_NUM_FRAGMENT_CONSTANTS_ATI	(1,)
 GL_NUM_FRAGMENT_REGISTERS_ATI	(1,)
 GL_NUM_GENERAL_COMBINERS_NV	(1,)
@@ -955,11 +1097,27 @@ GL_NUM_INSTRUCTIONS_TOTAL_ATI	(1,)
 GL_NUM_LOOPBACK_COMPONENTS_ATI	(1,)
 GL_NUM_PASSES_ATI	(1,)
 GL_NUM_PROGRAM_BINARY_FORMATS	(1,)
+GL_NUM_SAMPLE_COUNTS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query.txt
 GL_NUM_SHADER_BINARY_FORMATS	(1,)
+GL_NUM_SPARSE_LEVELS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sparse_texture.txt
+GL_NUM_VIDEO_CAPTURE_STREAMS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/video_capture.txt
+GL_OBJECT_ACTIVE_UNIFORMS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
+GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
+GL_OBJECT_ATTACHED_OBJECTS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
+GL_OBJECT_BUFFER_SIZE_ATI	(1,)
+GL_OBJECT_BUFFER_USAGE_ATI	(4,)
+GL_OBJECT_COMPILE_STATUS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
+GL_OBJECT_DELETE_STATUS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
+GL_OBJECT_INFO_LOG_LENGTH_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
 GL_OBJECT_LINE_SGIS	(7,)
+GL_OBJECT_LINK_STATUS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
 GL_OBJECT_PLANE	(4,)
 GL_OBJECT_POINT_SGIS	(4,)
+GL_OBJECT_SHADER_SOURCE_LENGTH_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
+GL_OBJECT_SUBTYPE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
+GL_OBJECT_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sync.txt
 GL_OBJECT_TYPE_ARB	(1,)
+GL_OBJECT_VALIDATE_STATUS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
 GL_OCCLUSION_TEST_HP	(1,)
 GL_OCCLUSION_TEST_RESULT_HP	(1,)
 GL_OFFSET	(1,)
@@ -994,21 +1152,42 @@ GL_PACK_SKIP_IMAGES_EXT	(1,)
 GL_PACK_SKIP_PIXELS	(1,)
 GL_PACK_SKIP_ROWS	(1,)
 GL_PACK_SKIP_VOLUMES_SGIS	(1,)
-GL_PACK_SUBSAMPLE_RATE_SGIX	
 GL_PACK_SWAP_BYTES	(1,)
 GL_PARALLEL_ARRAYS_INTEL	(1,)
+GL_PARAMETER_BUFFER_BINDING_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/indirect_parameters.txt
 GL_PATCH_DEFAULT_INNER_LEVEL	(1,)
 GL_PATCH_DEFAULT_OUTER_LEVEL	(1,)
 GL_PATCH_VERTICES	(1,)
+GL_PATH_COMMAND_COUNT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PATH_COMPUTED_LENGTH_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PATH_COORD_COUNT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PATH_COVER_DEPTH_FUNC_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PATH_DASH_ARRAY_COUNT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PATH_ERROR_POSITION_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PATH_FILL_BOUNDING_BOX_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
 GL_PATH_FOG_GEN_MODE_NV	(1,)
+GL_PATH_GEN_COEFF_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PATH_GEN_COLOR_FORMAT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PATH_GEN_COMPONENTS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PATH_GEN_MODE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
 GL_PATH_STENCIL_DEPTH_OFFSET_FACTOR_NV	(1,)
 GL_PATH_STENCIL_DEPTH_OFFSET_UNITS_NV	(1,)
 GL_PATH_STENCIL_FUNC_NV	(1,)
 GL_PATH_STENCIL_REF_NV	(1,)
 GL_PATH_STENCIL_VALUE_MASK_NV	(1,)
+GL_PATH_STROKE_BOUNDING_BOX_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
+GL_PERFMON_RESULT_AMD	(1,)	#TODO Review http://www.opengl.org/registry/specs//AMD/performance_monitor.txt
+GL_PERFMON_RESULT_AVAILABLE_AMD	(1,)	#TODO Review http://www.opengl.org/registry/specs//AMD/performance_monitor.txt
+GL_PERFMON_RESULT_SIZE_AMD	(1,)	#TODO Review http://www.opengl.org/registry/specs//AMD/performance_monitor.txt
+GL_PERFQUERY_COUNTER_DESC_LENGTH_MAX_INTEL	(1,)	#TODO Review http://www.opengl.org/registry/specs//INTEL/performance_query.txt
+GL_PERFQUERY_COUNTER_NAME_LENGTH_MAX_INTEL	(1,)	#TODO Review http://www.opengl.org/registry/specs//INTEL/performance_query.txt
+GL_PERFQUERY_GPA_EXTENDED_COUNTERS_INTEL	(1,)	#TODO Review http://www.opengl.org/registry/specs//INTEL/performance_query.txt
+GL_PERFQUERY_QUERY_NAME_LENGTH_MAX_INTEL	(1,)	#TODO Review http://www.opengl.org/registry/specs//INTEL/performance_query.txt
 GL_PERSPECTIVE_CORRECTION_HINT	(1,)
 GL_PER_STAGE_CONSTANTS_NV	(1,)
 GL_PIXEL_COUNTER_BITS_NV	(1,)
+GL_PIXEL_COUNT_AVAILABLE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/occlusion_query.txt
+GL_PIXEL_COUNT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/occlusion_query.txt
 GL_PIXEL_FRAGMENT_ALPHA_SOURCE_SGIS	(1,)
 GL_PIXEL_FRAGMENT_RGB_SOURCE_SGIS	(1,)
 GL_PIXEL_GROUP_COLOR_SGIS	(1,)
@@ -1046,6 +1225,7 @@ GL_PIXEL_TILE_GRID_HEIGHT_SGIX	(1,)
 GL_PIXEL_TILE_GRID_WIDTH_SGIX	(1,)
 GL_PIXEL_TILE_HEIGHT_SGIX	(1,)
 GL_PIXEL_TILE_WIDTH_SGIX	(1,)
+GL_PIXEL_TRANSFORM_2D_MATRIX_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/pixel_transform.txt
 GL_PIXEL_TRANSFORM_2D_STACK_DEPTH_EXT	(1,)
 GL_PIXEL_UNPACK_BUFFER_BINDING	(1,)
 GL_PIXEL_UNPACK_BUFFER_BINDING_ARB	(1,)
@@ -1136,6 +1316,8 @@ GL_PRIMITIVE_RESTART_NV	(1,)
 GL_PROGRAM_ADDRESS_REGISTERS_ARB	(1,)
 GL_PROGRAM_ALU_INSTRUCTIONS_ARB	(1,)
 GL_PROGRAM_ATTRIBS_ARB	(1,)
+GL_PROGRAM_ATTRIB_COMPONENTS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/gpu_program4.txt
+GL_PROGRAM_BINARY_FORMATS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/get_program_binary.txt
 GL_PROGRAM_BINARY_LENGTH	(1,)
 GL_PROGRAM_BINDING_ARB	(1,)
 GL_PROGRAM_ERROR_POSITION_ARB	(1,)
@@ -1144,6 +1326,9 @@ GL_PROGRAM_ERROR_STRING_ARB	(1,)
 GL_PROGRAM_FORMAT_ARB	(1,)
 GL_PROGRAM_INSTRUCTIONS_ARB	(1,)
 GL_PROGRAM_LENGTH_ARB	(1,)
+GL_PROGRAM_LENGTH_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/vertex_program.txt
+GL_PROGRAM_MATRIX_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/direct_state_access.txt
+GL_PROGRAM_MATRIX_STACK_DEPTH_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/direct_state_access.txt
 GL_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB	(1,)
 GL_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB	(1,)
 GL_PROGRAM_NATIVE_ATTRIBS_ARB	(1,)
@@ -1154,12 +1339,15 @@ GL_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB	(1,)
 GL_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB	(1,)
 GL_PROGRAM_OBJECT_ARB	(1,)
 GL_PROGRAM_PARAMETERS_ARB	(1,)
+GL_PROGRAM_PARAMETER_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/vertex_program.txt
 GL_PROGRAM_PIPELINE_BINDING	(1,)
 GL_PROGRAM_POINT_SIZE	(1,)
 GL_PROGRAM_POINT_SIZE_ARB	(1,)
 GL_PROGRAM_POINT_SIZE_EXT	(1,)
 GL_PROGRAM_RESIDENT_NV	(1,)
+GL_PROGRAM_RESULT_COMPONENTS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/gpu_program4.txt
 GL_PROGRAM_STRING_ARB	(1,)
+GL_PROGRAM_STRING_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/vertex_program.txt
 GL_PROGRAM_TARGET_NV	(1,)
 GL_PROGRAM_TEMPORARIES_ARB	(1,)
 GL_PROGRAM_TEX_INDIRECTIONS_ARB	(1,)
@@ -1169,22 +1357,17 @@ GL_PROJECTION_MATRIX	(4, 4)
 GL_PROJECTION_STACK_DEPTH	(1,)
 GL_PROVOKING_VERTEX	(1,)
 GL_PROVOKING_VERTEX_EXT	(1,)
-GL_PROXY_TEXTURE_1D	
-GL_PROXY_TEXTURE_1D_EXT	
-GL_PROXY_TEXTURE_2D	
-GL_PROXY_TEXTURE_2D_EXT	
-GL_PROXY_TEXTURE_3D	
-GL_PROXY_TEXTURE_3D_EXT	
-GL_PROXY_TEXTURE_4D_SGIS	
 GL_QUADRATIC_ATTENUATION	(1,)
 GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION	(1,)
 GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT	(1,)
-GL_QUAD_TEXTURE_SELECT_SGIS	
+GL_QUERY_BUFFER_BINDING	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/query_buffer_object.txt
 GL_QUERY_BUFFER_BINDING_AMD	(1,)
 GL_QUERY_COUNTER_BITS	(1,)
 GL_QUERY_COUNTER_BITS_ARB	(1,)
 GL_QUERY_RESULT	(1,)
 GL_QUERY_RESULT_AVAILABLE	(1,)
+GL_QUERY_RESULT_NO_WAIT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/query_buffer_object.txt
+GL_QUERY_TARGET	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/direct_state_access.txt
 GL_RASTERIZER_DISCARD	(1,)
 GL_RASTER_POSITION_UNCLIPPED_IBM	(1,)
 GL_READ_BUFFER	(1,)
@@ -1192,7 +1375,11 @@ GL_READ_BUFFER_EXT	(1,)
 GL_READ_BUFFER_NV	(1,)
 GL_READ_FRAMEBUFFER	(1,)
 GL_READ_FRAMEBUFFER_BINDING	(1,)
+GL_READ_PIXELS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_READ_PIXELS_FORMAT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_READ_PIXELS_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_READ_PIXEL_DATA_RANGE_LENGTH_NV	(1,)
+GL_READ_PIXEL_DATA_RANGE_POINTER_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/pixel_data_range.txt
 GL_RED_BIAS	(1,)
 GL_RED_BITS	(1,)
 GL_RED_MAX_CLAMP_INGR	(1,)
@@ -1211,6 +1398,8 @@ GL_RENDERBUFFER_ALPHA_SIZE	(1,)
 GL_RENDERBUFFER_BINDING	(1,)
 GL_RENDERBUFFER_BINDING_EXT	(1,)
 GL_RENDERBUFFER_BLUE_SIZE	(1,)
+GL_RENDERBUFFER_COLOR_SAMPLES_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/framebuffer_multisample_coverage.txt
+GL_RENDERBUFFER_COVERAGE_SAMPLES_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/framebuffer_multisample_coverage.txt
 GL_RENDERBUFFER_DEPTH_SIZE	(1,)
 GL_RENDERBUFFER_FREE_MEMORY_ATI	(1,)
 GL_RENDERBUFFER_GREEN_SIZE	(1,)
@@ -1227,6 +1416,7 @@ GL_REPLACEMENT_CODE_ARRAY_TYPE_SUN	(1,)
 GL_REPLACEMENT_CODE_SUN	(1,)
 GL_RESCALE_NORMAL	(1,)
 GL_RESCALE_NORMAL_EXT	(1,)
+GL_RESET_NOTIFICATION_STRATEGY	(1,)	#TODO Review http://www.opengl.org/registry/specs//KHR/robustness.txt
 GL_RESET_NOTIFICATION_STRATEGY_ARB	(1,)
 GL_RGBA_FLOAT_MODE_ARB	(1,)
 GL_RGBA_FLOAT_MODE_ATI	(1,)
@@ -1275,6 +1465,7 @@ GL_SECONDARY_COLOR_ARRAY	(1,)
 GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING	(1,)
 GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING_ARB	(1,)
 GL_SECONDARY_COLOR_ARRAY_LENGTH_NV	(1,)
+GL_SECONDARY_COLOR_ARRAY_POINTER_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/secondary_color.txt
 GL_SECONDARY_COLOR_ARRAY_SIZE	(1,)
 GL_SECONDARY_COLOR_ARRAY_SIZE_EXT	(1,)
 GL_SECONDARY_COLOR_ARRAY_STRIDE	(1,)
@@ -1285,7 +1476,11 @@ GL_SELECTION_BUFFER_POINTER	(1,)
 GL_SELECTION_BUFFER_SIZE	(1,)
 GL_SEPARABLE_2D	(1,)
 GL_SEPARABLE_2D_EXT	(1,)
+GL_SHADER_BINARY_FORMATS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/ES2_compatibility.txt
 GL_SHADER_COMPILER	(1,)
+GL_SHADER_IMAGE_ATOMIC	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_SHADER_IMAGE_LOAD	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_SHADER_IMAGE_STORE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_SHADER_OPERATION_NV	(1,)
 GL_SHADER_SOURCE_LENGTH	(1,)
 GL_SHADER_STORAGE_BUFFER	(1,)
@@ -1296,16 +1491,20 @@ GL_SHADER_STORAGE_BUFFER_START	(1,)
 GL_SHADER_TYPE	(1,)
 GL_SHADE_MODEL	(1,)
 GL_SHADING_LANGUAGE_VERSION	(1,)
-GL_SHADOW_AMBIENT_SGIX	
-GL_SHARED_TEXTURE_PALETTE_EXT	
-GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS	
 GL_SHININESS	(1,)
+GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_TEST	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_WRITE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_TEST	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_WRITE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_SMOOTH_LINE_WIDTH_GRANULARITY	(1,)
 GL_SMOOTH_LINE_WIDTH_RANGE	(2,)
 GL_SMOOTH_POINT_SIZE_GRANULARITY	(1,)
 GL_SMOOTH_POINT_SIZE_RANGE	(2,)
+GL_SM_COUNT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/shader_thread_group.txt
 GL_SOURCE3_ALPHA_NV	(1,)
 GL_SOURCE3_RGB_NV	(1,)
+GL_SPARSE_BUFFER_PAGE_SIZE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sparse_buffer.txt
+GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sparse_texture.txt
 GL_SPECULAR	(4,)
 GL_SPOT_CUTOFF	(1,)
 GL_SPOT_DIRECTION	(3,)
@@ -1320,6 +1519,9 @@ GL_SRC1_ALPHA	(1,)
 GL_SRC1_RGB	(1,)
 GL_SRC2_ALPHA	(1,)
 GL_SRC2_RGB	(1,)
+GL_SRGB_DECODE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_SRGB_READ	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_SRGB_WRITE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_STENCIL_BACK_FAIL	(1,)
 GL_STENCIL_BACK_FAIL_ATI	(1,)
 GL_STENCIL_BACK_FUNC	(1,)
@@ -1335,12 +1537,14 @@ GL_STENCIL_BACK_WRITEMASK	(1,)
 GL_STENCIL_BITS	(1,)
 GL_STENCIL_CLEAR_TAG_VALUE_EXT	(1,)
 GL_STENCIL_CLEAR_VALUE	(1,)
+GL_STENCIL_COMPONENTS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_STENCIL_FAIL	(1,)
 GL_STENCIL_FUNC	(1,)
 GL_STENCIL_OP_VALUE_AMD	(1,)
 GL_STENCIL_PASS_DEPTH_FAIL	(1,)
 GL_STENCIL_PASS_DEPTH_PASS	(1,)
 GL_STENCIL_REF	(1,)
+GL_STENCIL_RENDERABLE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_STENCIL_TAG_BITS_EXT	(1,)
 GL_STENCIL_TEST	(1,)
 GL_STENCIL_TEST_TWO_SIDE_EXT	(1,)
@@ -1348,13 +1552,22 @@ GL_STENCIL_VALUE_MASK	(1,)
 GL_STENCIL_WRITEMASK	(1,)
 GL_STEREO	(1,)
 GL_SUBPIXEL_BITS	(1,)
+GL_SUBSAMPLE_DISTANCE_AMD	(1,)	#TODO Review http://www.opengl.org/registry/specs//AMD/sample_positions.txt
+GL_SYNC_CONDITION	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sync.txt
+GL_SYNC_FLAGS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sync.txt
+GL_SYNC_STATUS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sync.txt
 GL_TANGENT_ARRAY_EXT	(1,)
 GL_TANGENT_ARRAY_POINTER_EXT	(1,)
 GL_TANGENT_ARRAY_STRIDE_EXT	(1,)
 GL_TANGENT_ARRAY_TYPE_EXT	(1,)
 GL_TESSELLATION_MODE_AMD	(1,)
+GL_TESS_CONTROL_OUTPUT_VERTICES	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/tessellation_shader.txt
+GL_TESS_CONTROL_PROGRAM_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/tessellation_program5.txt
 GL_TESS_CONTROL_SHADER	(1,)
+GL_TESS_CONTROL_TEXTURE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_TESS_EVALUATION_PROGRAM_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/tessellation_program5.txt
 GL_TESS_EVALUATION_SHADER	(1,)
+GL_TESS_EVALUATION_TEXTURE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_TESS_GEN_MODE	(1,)
 GL_TESS_GEN_POINT_MODE	(1,)
 GL_TESS_GEN_SPACING	(1,)
@@ -1371,7 +1584,6 @@ GL_TEXTURE_3D	(1,)
 GL_TEXTURE_3D_BINDING_EXT	(1,)
 GL_TEXTURE_3D_EXT	(1,)
 GL_TEXTURE_3D_OES	(1,)
-GL_TEXTURE_4DSIZE_SGIS	
 GL_TEXTURE_4D_BINDING_SGIS	(1,)
 GL_TEXTURE_4D_SGIS	(1,)
 GL_TEXTURE_ALPHA_SIZE	(1,)
@@ -1379,6 +1591,7 @@ GL_TEXTURE_ALPHA_TYPE	(1,)
 GL_TEXTURE_APPLICATION_MODE_EXT	(1,)
 GL_TEXTURE_BASE_LEVEL	(1,)
 GL_TEXTURE_BASE_LEVEL_SGIS	(1,)
+GL_TEXTURE_BINDING	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/direct_state_access.txt
 GL_TEXTURE_BINDING_1D	(1,)
 GL_TEXTURE_BINDING_1D_ARRAY	(1,)
 GL_TEXTURE_BINDING_1D_ARRAY_EXT	(1,)
@@ -1419,9 +1632,9 @@ GL_TEXTURE_BUFFER_SIZE	(1,)
 GL_TEXTURE_CLIPMAP_CENTER_SGIX	(2,)
 GL_TEXTURE_CLIPMAP_DEPTH_SGIX	(1,)
 GL_TEXTURE_CLIPMAP_FRAME_SGIX	(1,)
-GL_TEXTURE_CLIPMAP_LOD_OFFSET_SGIX	
 GL_TEXTURE_CLIPMAP_OFFSET_SGIX	(2,)
 GL_TEXTURE_CLIPMAP_VIRTUAL_DEPTH_SGIX	(3,)
+GL_TEXTURE_COLOR_SAMPLES_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/texture_multisample.txt
 GL_TEXTURE_COLOR_TABLE_SGI	(1,)
 GL_TEXTURE_COLOR_WRITEMASK_SGIS	(4,)
 GL_TEXTURE_COMPARE_FAIL_VALUE_ARB	(1,)
@@ -1429,8 +1642,10 @@ GL_TEXTURE_COMPARE_FUNC	(1,)
 GL_TEXTURE_COMPARE_MODE	(1,)
 GL_TEXTURE_COMPARE_OPERATOR_SGIX	(1,)
 GL_TEXTURE_COMPARE_SGIX	(1,)
-GL_TEXTURE_COMPONENTS	
 GL_TEXTURE_COMPRESSED	(1,)
+GL_TEXTURE_COMPRESSED_BLOCK_HEIGHT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_TEXTURE_COMPRESSED_BLOCK_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_TEXTURE_COMPRESSED_BLOCK_WIDTH	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_TEXTURE_COMPRESSED_IMAGE_SIZE	(1,)
 GL_TEXTURE_COMPRESSION_HINT	(1,)
 GL_TEXTURE_COMPRESSION_HINT_ARB	(1,)
@@ -1439,6 +1654,7 @@ GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING	(1,)
 GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING_ARB	(1,)
 GL_TEXTURE_COORD_ARRAY_COUNT_EXT	(1,)
 GL_TEXTURE_COORD_ARRAY_EXT	(1,)
+GL_TEXTURE_COORD_ARRAY_PARALLEL_POINTERS_INTEL	(1,)	#TODO Review http://www.opengl.org/registry/specs//INTEL/parallel_arrays.txt
 GL_TEXTURE_COORD_ARRAY_POINTER	(1,)
 GL_TEXTURE_COORD_ARRAY_SIZE	(1,)
 GL_TEXTURE_COORD_ARRAY_SIZE_EXT	(1,)
@@ -1446,6 +1662,7 @@ GL_TEXTURE_COORD_ARRAY_STRIDE	(1,)
 GL_TEXTURE_COORD_ARRAY_STRIDE_EXT	(1,)
 GL_TEXTURE_COORD_ARRAY_TYPE	(1,)
 GL_TEXTURE_COORD_ARRAY_TYPE_EXT	(1,)
+GL_TEXTURE_COVERAGE_SAMPLES_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/texture_multisample.txt
 GL_TEXTURE_CROP_RECT_OES	(4,)
 GL_TEXTURE_CUBE_MAP	(1,)
 GL_TEXTURE_CUBE_MAP_ARB	(1,)
@@ -1455,35 +1672,42 @@ GL_TEXTURE_DEPTH	(1,)
 GL_TEXTURE_DEPTH_EXT	(1,)
 GL_TEXTURE_DEPTH_SIZE	(1,)
 GL_TEXTURE_DEPTH_TYPE	(1,)
+GL_TEXTURE_DS_SIZE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/texture_shader.txt
+GL_TEXTURE_DT_SIZE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/texture_shader.txt
 GL_TEXTURE_ENV_COLOR	(4,)
 GL_TEXTURE_ENV_MODE	(1,)
-GL_TEXTURE_FILTER4_SIZE_SGIS	
 GL_TEXTURE_FIXED_SAMPLE_LOCATIONS	(1,)
+GL_TEXTURE_FLOAT_COMPONENTS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/float_buffer.txt
 GL_TEXTURE_FREE_MEMORY_ATI	(1,)
+GL_TEXTURE_GATHER	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_TEXTURE_GATHER_SHADOW	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_TEXTURE_GEN_MODE	(1,)
 GL_TEXTURE_GEN_Q	(1,)
 GL_TEXTURE_GEN_R	(1,)
 GL_TEXTURE_GEN_S	(1,)
 GL_TEXTURE_GEN_T	(1,)
-GL_TEXTURE_GEQUAL_R_SGIX	
 GL_TEXTURE_GREEN_SIZE	(1,)
 GL_TEXTURE_GREEN_TYPE	(1,)
 GL_TEXTURE_HEIGHT	(1,)
+GL_TEXTURE_HI_SIZE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/texture_shader.txt
+GL_TEXTURE_IMAGE_FORMAT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_TEXTURE_IMAGE_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_TEXTURE_IMMUTABLE_FORMAT	(1,)
 GL_TEXTURE_IMMUTABLE_LEVELS	(1,)
 GL_TEXTURE_INDEX_SIZE_EXT	(1,)
 GL_TEXTURE_INTENSITY_SIZE	(1,)
 GL_TEXTURE_INTENSITY_TYPE	(1,)
 GL_TEXTURE_INTERNAL_FORMAT	(1,)
-GL_TEXTURE_LEQUAL_R_SGIX	
 GL_TEXTURE_LIGHT_EXT	(1,)
 GL_TEXTURE_LOD_BIAS	(1,)
 GL_TEXTURE_LOD_BIAS_R_SGIX	(1,)
 GL_TEXTURE_LOD_BIAS_S_SGIX	(1,)
 GL_TEXTURE_LOD_BIAS_T_SGIX	(1,)
+GL_TEXTURE_LO_SIZE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/texture_shader.txt
 GL_TEXTURE_LUMINANCE_SIZE	(1,)
 GL_TEXTURE_LUMINANCE_TYPE	(1,)
 GL_TEXTURE_MAG_FILTER	(1,)
+GL_TEXTURE_MAG_SIZE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/texture_shader.txt
 GL_TEXTURE_MATERIAL_FACE_EXT	(1,)
 GL_TEXTURE_MATERIAL_PARAMETER_EXT	(1,)
 GL_TEXTURE_MATRIX	(4, 4)
@@ -1509,6 +1733,8 @@ GL_TEXTURE_RENDERBUFFER_DATA_STORE_BINDING_NV	(1,)
 GL_TEXTURE_RESIDENT	(1,)
 GL_TEXTURE_SAMPLES	(1,)
 GL_TEXTURE_SHADER_NV	(1,)
+GL_TEXTURE_SHADOW	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_TEXTURE_SHARED_SIZE_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/texture_shared_exponent.txt
 GL_TEXTURE_SRGB_DECODE_EXT	(1,)
 GL_TEXTURE_STACK_DEPTH	(1,)
 GL_TEXTURE_STENCIL_SIZE	(1,)
@@ -1518,7 +1744,9 @@ GL_TEXTURE_SWIZZLE_B	(1,)
 GL_TEXTURE_SWIZZLE_G	(1,)
 GL_TEXTURE_SWIZZLE_R	(1,)
 GL_TEXTURE_SWIZZLE_RGBA	(4,)
+GL_TEXTURE_TARGET	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/direct_state_access.txt
 GL_TEXTURE_UNSIGNED_REMAP_MODE_NV	(1,)
+GL_TEXTURE_VIEW	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_TEXTURE_VIEW_MIN_LAYER	(1,)
 GL_TEXTURE_VIEW_MIN_LEVEL	(1,)
 GL_TEXTURE_VIEW_NUM_LAYERS	(1,)
@@ -1533,21 +1761,27 @@ GL_TEXT_FRAGMENT_SHADER_ATI	(1,)
 GL_TIMESTAMP	(1,)
 GL_TOP_LEVEL_ARRAY_SIZE	(1,)
 GL_TOP_LEVEL_ARRAY_STRIDE	(1,)
+GL_TRACK_MATRIX_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/vertex_program.txt
+GL_TRACK_MATRIX_TRANSFORM_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/vertex_program.txt
 GL_TRANSFORM_FEEDBACK_BINDING	(1,)
 GL_TRANSFORM_FEEDBACK_BINDING_NV	(1,)
 GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE	(1,)
 GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV	(1,)
 GL_TRANSFORM_FEEDBACK_BUFFER_BINDING	(1,)
+GL_TRANSFORM_FEEDBACK_BUFFER_MODE_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/transform_feedback.txt
 GL_TRANSFORM_FEEDBACK_BUFFER_MODE_NV	(1,)
 GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED	(1,)
 GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV	(1,)
 GL_TRANSFORM_FEEDBACK_BUFFER_SIZE	(1,)
 GL_TRANSFORM_FEEDBACK_BUFFER_START	(1,)
+GL_TRANSFORM_FEEDBACK_VARYINGS_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/transform_feedback.txt
+GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/transform_feedback.txt
 GL_TRANSPOSE_COLOR_MATRIX	(4,4)
 GL_TRANSPOSE_COLOR_MATRIX_ARB	(4,4)
 GL_TRANSPOSE_CURRENT_MATRIX_ARB	(4, 4)
 GL_TRANSPOSE_MODELVIEW_MATRIX	(4,4)
 GL_TRANSPOSE_MODELVIEW_MATRIX_ARB	(4,4)
+GL_TRANSPOSE_PROGRAM_MATRIX_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/direct_state_access.txt
 GL_TRANSPOSE_PROJECTION_MATRIX	(4,4)
 GL_TRANSPOSE_PROJECTION_MATRIX_ARB	(4,4)
 GL_TRANSPOSE_TEXTURE_MATRIX	(4,4)
@@ -1555,12 +1789,14 @@ GL_TRANSPOSE_TEXTURE_MATRIX_ARB	(4,4)
 GL_TYPE	(1,)
 GL_TYPE_RGBA_FLOAT_ATI	(1,)
 GL_UNIFORM_ARRAY_STRIDE	(1,)
+GL_UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_atomic_counters.txt
 GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS	(1,)
 GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES	(1,)
 GL_UNIFORM_BLOCK_BINDING	(1,)
 GL_UNIFORM_BLOCK_DATA_SIZE	(1,)
 GL_UNIFORM_BLOCK_INDEX	(1,)
 GL_UNIFORM_BLOCK_NAME_LENGTH	(1,)
+GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/compute_shader.txt
 GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER	(1,)
 GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER	(1,)
 GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER	(1,)
@@ -1597,9 +1833,9 @@ GL_UNPACK_SKIP_IMAGES_EXT	(1,)
 GL_UNPACK_SKIP_PIXELS	(1,)
 GL_UNPACK_SKIP_ROWS	(1,)
 GL_UNPACK_SKIP_VOLUMES_SGIS	(1,)
-GL_UNPACK_SUBSAMPLE_RATE_SGIX	
 GL_UNPACK_SWAP_BYTES	(1,)
 GL_VALIDATE_STATUS	(1,)
+GL_VARIANT_ARRAY_POINTER_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/vertex_shader.txt
 GL_VARIANT_ARRAY_TYPE_EXT	(1,)
 GL_VBO_FREE_MEMORY_ATI	(1,)
 GL_VENDOR	(1,)
@@ -1612,6 +1848,7 @@ GL_VERTEX_ARRAY_BUFFER_BINDING_ARB	(1,)
 GL_VERTEX_ARRAY_COUNT_EXT	(1,)
 GL_VERTEX_ARRAY_EXT	(1,)
 GL_VERTEX_ARRAY_LENGTH_NV	(1,)
+GL_VERTEX_ARRAY_PARALLEL_POINTERS_INTEL	(1,)	#TODO Review http://www.opengl.org/registry/specs//INTEL/parallel_arrays.txt
 GL_VERTEX_ARRAY_POINTER	(1,)
 GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE	(1,)
 GL_VERTEX_ARRAY_RANGE_LENGTH_NV	(1,)
@@ -1641,6 +1878,7 @@ GL_VERTEX_ATTRIB_ARRAY7_NV	(1,)
 GL_VERTEX_ATTRIB_ARRAY8_NV	(1,)
 GL_VERTEX_ATTRIB_ARRAY9_NV	(1,)
 GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING	(1,)
+GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/vertex_buffer_object.txt
 GL_VERTEX_ATTRIB_ARRAY_DIVISOR	(1,)
 GL_VERTEX_ATTRIB_ARRAY_ENABLED	(1,)
 GL_VERTEX_ATTRIB_ARRAY_INTEGER	(1,)
@@ -1676,6 +1914,7 @@ GL_VERTEX_SHADER_LOCALS_EXT	(1,)
 GL_VERTEX_SHADER_LOCAL_CONSTANTS_EXT	(1,)
 GL_VERTEX_SHADER_OPTIMIZED_EXT	(1,)
 GL_VERTEX_SHADER_VARIANTS_EXT	(1,)
+GL_VERTEX_TEXTURE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_VERTEX_WEIGHT_ARRAY_EXT	(1,)
 GL_VERTEX_WEIGHT_ARRAY_POINTER_EXT	(1,)
 GL_VERTEX_WEIGHT_ARRAY_SIZE_EXT	(1,)
@@ -1688,6 +1927,9 @@ GL_VIEWPORT	(4,)
 GL_VIEWPORT_BOUNDS_RANGE	(2,)
 GL_VIEWPORT_INDEX_PROVOKING_VERTEX	(1,)
 GL_VIEWPORT_SUBPIXEL_BITS	(1,)
+GL_VIEW_COMPATIBILITY_CLASS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_WARPS_PER_SM_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/shader_thread_group.txt
+GL_WARP_SIZE_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/shader_thread_group.txt
 GL_WEIGHT_ARRAY_ARB	(1,)
 GL_WEIGHT_ARRAY_BUFFER_BINDING	(1,)
 GL_WEIGHT_ARRAY_BUFFER_BINDING_ARB	(1,)
@@ -1697,5 +1939,6 @@ GL_WEIGHT_ARRAY_STRIDE_ARB	(1,)
 GL_WEIGHT_ARRAY_TYPE_ARB	(1,)
 GL_WEIGHT_SUM_UNITY_ARB	(1,)
 GL_WRITE_PIXEL_DATA_RANGE_LENGTH_NV	(1,)
+GL_WRITE_PIXEL_DATA_RANGE_POINTER_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/pixel_data_range.txt
 GL_ZOOM_X	(1,)
 GL_ZOOM_Y	(1,)
