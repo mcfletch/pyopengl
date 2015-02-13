@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import egltest
 import numpy
 from OpenGL.GLES2 import *
