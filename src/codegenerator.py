@@ -287,8 +287,6 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             changed = False
             for key, value in extras.items():
                 if key not in table:
-                    if key == 'GL_BUFFER_ACCESS_ARB':
-                        import ipdb;ipdb.set_trace()
                     try:
                         value = int(value, 16)
                     except ValueError:
