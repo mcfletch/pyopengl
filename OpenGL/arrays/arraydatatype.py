@@ -292,6 +292,8 @@ else:
     GLvoidpArray = ADT( _types.GL_VOID_P, _types.GLvoidp )
     GLfixedArray = ADT( _types.GL_FIXED, _types.GLfixed )
 
+EGLAttribArray = GLintArray
+
 GL_CONSTANT_TO_ARRAY_TYPE = {
     GL_1_1.GL_DOUBLE : GLclampdArray,
     GL_1_1.GL_FLOAT : GLclampfArray,

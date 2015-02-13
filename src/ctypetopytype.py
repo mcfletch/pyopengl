@@ -51,6 +51,7 @@ CTYPE_TO_ARRAY_TYPE = {
     '_cs.EGLTimeKHR': 'GLuint64Array',
     
     '_cs.GLfixed':'GLfixedArray', 
+    '_cs.EGLAttrib':'EGLAttribArray', 
 }
 SPECIAL_TYPES = {
     '__eglMustCastToProperFunctionPointerType': 'ctypes.c_void_p',
