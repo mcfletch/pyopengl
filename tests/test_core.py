@@ -1054,17 +1054,13 @@ class Tests( unittest.TestCase ):
                 glColor3fv( mem )
         def test_buffer_api_basic(self):
             import array as silly_array
-            import operator
-            try:
-                reduce
-            except NameError as err:
-                from functools import reduce
             structures = [
                 (b'this and that',13,1,True,1,b'B',[13],[1]),
             ]
             if sys.version_info[:2] >= (2,7):
                 structures.append(
-                    ((GLint * 3)( 1,2,3 ),12,4,False,1,[b'(3)<i',b'(3)<l'],[3],None),
+                    # on Python 3.4 we do *not* get the (3) prefix :(
+                    ((GLint * 3)( 1,2,3 ),12,4,False,1,[b'(3)<i',b'(3)<l',b'<i'],[3],None),
                 )
             
             if sys.version_info[:2] >= (3,0):
@@ -1074,7 +1070,7 @@ class Tests( unittest.TestCase ):
                 ])
             try:
                 structures.append( (memoryview(b'this'),4,1,True,1,b'B',[4],[1]) )
-            except NameError as err:
+            except NameError:
                 # Python 2.6 doesn't have memory view 
                 pass
             try:
@@ -1083,7 +1079,7 @@ class Tests( unittest.TestCase ):
                         (arange(0,9,dtype='I').reshape((3,3)),36,4,False,2,b'I',[3,3],[12,4]),
                         (arange(0,9,dtype='I').reshape((3,3))[:,1],12,4,False,1,b'I',[3],[12]),
                     ])
-            except NameError as err:
+            except NameError:
                 # Don't have numpy installed...
                 pass
             
@@ -1150,7 +1146,7 @@ class Tests( unittest.TestCase ):
         def glsl_version():
             """Parse GL_SHADING_LANGUAGE_VERSION into [int(major),int(minor)]"""
             version = glGetString( GL_SHADING_LANGUAGE_VERSION )
-            version = [int(x) for x in version.split('.')[:2]]
+            version = [int(x) for x in version.split(as_8_bit('.'))[:2]]
             return version 
         if glsl_version() < [3,3]:
             return
