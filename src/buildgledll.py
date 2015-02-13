@@ -65,7 +65,7 @@ def build():
         subprocess.check_call( 'link  /LIBPATH:"C:\Program Files\Microsoft Platform SDK\Lib" %(exports)s /DLL /OUT:%(outfile)s opengl32.lib glu32.lib *.obj'%locals() )
 
         shutil.copyfile( outfile, target )
-        print 'Created file %(target)s'%locals()
+        print('Created file %(target)s'%locals())
         
     finally:
         os.chdir( current )
