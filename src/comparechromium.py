@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """Script to check our glgetsizes against regal's..."""
-import os, sys, logging, subprocess
+import os, logging, subprocess
 import codegenerator, ctypetopytype, xmlreg
 log = logging.getLogger( __name__ )
 HERE = os.path.dirname( __file__ )
@@ -32,7 +32,7 @@ def load_chromium():
                 rvalue = rvalue[6:].strip()
             try:
                 rvalue = int( rvalue )
-            except ValueError as err:
+            except ValueError:
                 log.warn( 'Complex return for: %s', rvalue )
                 continue 
             else:
@@ -56,7 +56,7 @@ def main():
                 generator.glGetSizes[key] = [str(chromium[key]).replace(' ','')]
         try:
             chromium.pop(key)
-        except KeyError as err:
+        except KeyError:
             pass 
     for key,value in chromium.items():
         print 'New constant from chromium:', (key,value)
