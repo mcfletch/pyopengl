@@ -7,7 +7,7 @@ try:
     import OpenGL_accelerate
     if _configflags.USE_ACCELERATE:
         if OpenGL_accelerate.__version_tuple__ <  needed_version:
-            _log.warn( """Incompatible version of OpenGL_accelerate found, need at least %s found %s""", needed_version, OpenGL_accelerate.__version_tuple__)
+            _log.warning( """Incompatible version of OpenGL_accelerate found, need at least %s found %s""", needed_version, OpenGL_accelerate.__version_tuple__)
             raise ImportError( """Old version of OpenGL_accelerate""" )
         ACCELERATE_AVAILABLE = True
         _log.info( """OpenGL_accelerate module loaded""" )

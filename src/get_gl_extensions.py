@@ -216,7 +216,7 @@ class Module( Helper ):
                     signature = signatureFinder.search( segment ).group(1)
                     result.append( Function( returnType, name, signature ))
                 except AttributeError:
-                    log.warn( 
+                    log.warning( 
                         "Couldn't find signature for function %s %s",
                         returnType,name,
                     )
@@ -290,7 +290,7 @@ class Module( Helper ):
                             if len(current) == 2:
                                 set[current[0]] = current[1]
                             else:
-                                log.warn( 
+                                log.warning( 
                                     """Incorrect format for glGet constant %s (unevent set of values)""",
                                     name,
                                 )
@@ -340,7 +340,7 @@ class Module( Helper ):
             try:
                 data = download(specURL)
             except Exception, err:
-                log.warn( """Failure downloading specification %s: %s""", specURL, err )
+                log.warning( """Failure downloading specification %s: %s""", specURL, err )
                 data = ""
             else:
                 try:
@@ -396,7 +396,7 @@ class Module( Helper ):
             try:
                 fh = open( self.pathName, 'w')
             except IOError, err:
-                log.warn( "Unable to create module for %r %s", self.name, err )
+                log.warning( "Unable to create module for %r %s", self.name, err )
                 return False
             else:
                 fh.write( toWrite )

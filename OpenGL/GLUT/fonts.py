@@ -20,7 +20,7 @@ for name in [
         p = platform.getGLUTFontPointer( name )
     except (ValueError,AttributeError) as err:
         if platform.PLATFORM.GLUT:
-            _log.warn( '''Unable to load font: %s''', name )
+            _log.warning( '''Unable to load font: %s''', name )
         globals()[name] = None
     else:
         globals()[name] = p

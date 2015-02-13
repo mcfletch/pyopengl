@@ -26,7 +26,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.numpy_formathandler import NumpyHandler
     except ImportError as err:
-        _log.warn(
+        _log.warning(
             "Unable to load numpy_formathandler accelerator from OpenGL_accelerate"
         )
 if NumpyHandler is None:

@@ -316,7 +316,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                 hasLines = 1
             if not hasLines:
                 return True
-            log.warn( 'Not replacing %s (no AUTOGENERATION_SENTINEL_END found)', filename )
+            log.warning( 'Not replacing %s (no AUTOGENERATION_SENTINEL_END found)', filename )
         return False
     @property
     def output_wrapping( self ):
@@ -425,7 +425,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             try:
                 data = download(specURL)
             except Exception, err:
-                log.warn( """Failure downloading specification %s: %s""", specURL, err )
+                log.warning( """Failure downloading specification %s: %s""", specURL, err )
                 data = ""
             else:
                 try:
@@ -445,7 +445,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         for target in (self.rawPathName,self.pathName):
             directory = os.path.dirname( target )
             if not os.path.exists( directory ):
-                log.warn( 'Creating target directory: %s', directory )
+                log.warning( 'Creating target directory: %s', directory )
                 os.makedirs( directory )
             if not os.path.isfile( os.path.join(directory, '__init__.py')):
                 open( os.path.join(directory, '__init__.py'),'w').write( 
@@ -488,7 +488,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             try:
                 fh = open( self.pathName, 'w')
             except IOError, err:
-                log.warn( "Unable to create module for %r %s", self.name, err )
+                log.warning( "Unable to create module for %r %s", self.name, err )
                 return False
             else:
                 fh.write( toWrite )

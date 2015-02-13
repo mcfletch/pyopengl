@@ -33,7 +33,7 @@ def load_chromium():
             try:
                 rvalue = int( rvalue )
             except ValueError:
-                log.warn( 'Complex return for: %s', rvalue )
+                log.warning( 'Complex return for: %s', rvalue )
                 continue 
             else:
                 if rvalue == 16:

@@ -10,7 +10,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.nones_formathandler import NoneHandler
     except ImportError as err:
-        _log.warn(
+        _log.warning(
             "Unable to load nones_formathandler accelerator from OpenGL_accelerate"
         )
 if NoneHandler is None:

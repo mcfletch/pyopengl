@@ -26,7 +26,7 @@ if sys.version_info[:2] > (2,6):
             from OpenGL_accelerate.buffers_formathandler import MemoryviewHandler
         except ImportError as err:
             traceback.print_exc()
-            _log.warn(
+            _log.warning(
                 "Unable to load buffers_formathandler accelerator from OpenGL_accelerate"
             )
         else:

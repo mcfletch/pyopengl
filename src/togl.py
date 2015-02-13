@@ -59,7 +59,7 @@ def setup( key=None, force=False ):
     filename,headers = urllib.urlretrieve( url )
     log.info( 'Downloaded to: %s', filename )
     if not os.path.isdir( target_directory ):
-        log.warn( 'Creating directory: %s', target_directory )
+        log.warning( 'Creating directory: %s', target_directory )
         try:
             os.makedirs( target_directory )
         except OSError, err:

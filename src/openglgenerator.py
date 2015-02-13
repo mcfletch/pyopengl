@@ -107,7 +107,7 @@ class OpenGLFunction( codegenerator.Function ):
             result.append( self.TEMPLATE %locals() )
             return result
         elif not func.name.startswith( '__builtin_' ):
-            log.warn( """Could not find DLL name for function: %r""", func.name )
+            log.warning( """Could not find DLL name for function: %r""", func.name )
             return ''
 
     def arrayTypeName( self, generator, argType ):
@@ -122,7 +122,7 @@ class OpenGLFunction( codegenerator.Function ):
                 # normal to not have pointers to it...
                 log.info( 'GLvoid pointer %r, using POINTER(%s)', typeName, typeName )
             else:
-                log.warn( 'No mapping for %r, using POINTER(%s)', typeName, typeName )
+                log.warning( 'No mapping for %r, using POINTER(%s)', typeName, typeName )
         return None
     def getArgs( self, generator, func ):
         """Retrieve arg type-names for all arguments in function typedef"""

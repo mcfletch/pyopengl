@@ -135,7 +135,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             VBO,VBOOffset,VBOHandler,VBOOffsetHandler,
         )
     except ImportError as err:
-        _log.warn(
+        _log.warning(
             "Unable to load VBO accelerator from OpenGL_accelerate"
         )
 if VBO is None:

@@ -113,7 +113,7 @@ except NameError as err:
     TOGL_DLL_PATH = ""
 
 if not os.path.isdir( TOGL_DLL_PATH ):
-    _log.warn( 'Expected Tk Togl installation in %s', TOGL_DLL_PATH )
+    _log.warning( 'Expected Tk Togl installation in %s', TOGL_DLL_PATH )
 _log.info( 'Loading Togl from: %s', TOGL_DLL_PATH )
 _default_root.tk.call('lappend', 'auto_path', TOGL_DLL_PATH)
 _default_root.tk.call('package', 'require', 'Togl')

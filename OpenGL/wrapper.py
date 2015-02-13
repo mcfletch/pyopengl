@@ -22,7 +22,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             CArgumentCalculator,
         )
     except ImportError as err:
-        _log.warn( """OpenGL_accelerate seems to be installed, but unable to import expected wrapper entry points!""" )
+        _log.warning( """OpenGL_accelerate seems to be installed, but unable to import expected wrapper entry points!""" )
 
 if not STORE_POINTERS:
     if not ERROR_ON_COPY:

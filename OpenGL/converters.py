@@ -120,7 +120,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             returnCArgument, returnPyArgument,
         )
     except ImportError as err:
-        _log.warn(
+        _log.warning(
             "Unable to load converters accelerators (wrapper, arraydatatype) from OpenGL_accelerate"
         )
         CallFuncPyConverter = None

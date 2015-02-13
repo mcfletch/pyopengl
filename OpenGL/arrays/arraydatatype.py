@@ -14,7 +14,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.arraydatatype import ArrayDatatype as ADT
     except ImportError as err:
-        _log.warn(
+        _log.warning(
             "Unable to load ArrayDatatype accelerator from OpenGL_accelerate"
         )
 if ADT is None:
@@ -127,7 +127,7 @@ if ADT is None:
             try:
                 return cls.getHandler(value).dataPointer( value )
             except Exception as err:
-                _log.warn(
+                _log.warning(
                     """Failure in dataPointer for %s instance %s""", type(value), value,
                 )
                 raise

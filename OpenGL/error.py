@@ -166,7 +166,7 @@ if _configflags.ERROR_CHECKING:
         try:
             from OpenGL_accelerate.errorchecker import _ErrorChecker
         except ImportError as err:
-            _log.warn( """OpenGL_accelerate seems to be installed, but unable to import error checking entry point!""" )
+            _log.warning( """OpenGL_accelerate seems to be installed, but unable to import error checking entry point!""" )
     if _ErrorChecker is None:
         class _ErrorChecker( object ):
             """Per-API error-checking object

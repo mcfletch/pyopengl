@@ -55,7 +55,7 @@ class _FullLoggedFunction( _LoggedFunction ):
         try:
             return function( *args, **named )
         except Exception as err:
-            self.log.warn(
+            self.log.warning(
                 """Failure on %s: %s""", function.__name__, self.log.getException( err )
             )
             raise
@@ -66,7 +66,7 @@ class _ErrorLoggedFunction ( _LoggedFunction ):
         try:
             return function( *args, **named )
         except Exception as err:
-            self.log.warn(
+            self.log.warning(
                 """Failure on %s: %s""", function.__name__, self.log.getException( err )
             )
             raise
