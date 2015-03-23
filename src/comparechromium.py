@@ -7,7 +7,7 @@ HERE = os.path.dirname( __file__ )
 REGAL = os.path.join( HERE, 'regal' )
 def update_regal():
     if not os.path.exists( REGAL ):
-        command= 'git clone http://git.chromium.org/external/p3/regal.git regal'
+        command= 'git clone git@github.com:p3/regal.git'
     else:
         command= 'cd %s && git pull'%(REGAL,)
     log.info( 'Running: %s', command )
