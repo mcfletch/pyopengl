@@ -1162,12 +1162,29 @@ class Tests( unittest.TestCase ):
             assert False, """Failed to compile"""
     
     def test_gen_framebuffers_twice( self ):
-        framebuffer = glGenFramebuffersEXT(1)
+        glGenFramebuffersEXT(1)
         f1 = glGenFramebuffersEXT(1)
         f2 = glGenFramebuffersEXT(1)
         assert f1 != f2, (f1,f2)
         glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, f2)
         glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0)
+    
+    def test_compressed_data(self):
+        from OpenGL.extensions import hasGLExtension
+        if hasGLExtension( 'GL_EXT_texture_compression_s3tc' ):
+            from OpenGL.GL.EXT import texture_compression_s3tc as s3tc
+            texture = glGenTextures(1)
+            glEnable( GL_TEXTURE_2D )
+            image_type = GLubyte *256*256
+            image = image_type()
+            glCompressedTexImage2D(
+                GL_TEXTURE_2D, 0, 
+                s3tc.GL_COMPRESSED_RGBA_S3TC_DXT5_EXT, 
+                256, 256, 0, 
+                image
+            )
+            assert texture
+        
         
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
