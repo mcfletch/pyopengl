@@ -265,9 +265,6 @@ def glRectxvOES(v1,v2):pass
 @_p.types(None,_cs.GLfixed,_cs.GLfixed,_cs.GLfixed,_cs.GLfixed)
 def glRotatexOES(angle,x,y,z):pass
 @_f
-@_p.types(None,_cs.GLfixed,_cs.GLboolean)
-def glSampleCoverageOES(value,invert):pass
-@_f
 @_p.types(None,_cs.GLclampx,_cs.GLboolean)
 def glSampleCoveragexOES(value,invert):pass
 @_f

@@ -673,7 +673,7 @@ def glTextureImage2DEXT(texture,target,level,internalformat,width,height,border,
 def glTextureImage3DEXT(texture,target,level,internalformat,width,height,depth,border,format,type,pixels):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
-def glTexturePageCommitmentEXT(texture,level,xoffset,yoffset,zoffset,width,height,depth,resident):pass
+def glTexturePageCommitmentEXT(texture,level,xoffset,yoffset,zoffset,width,height,depth,commit):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glTextureParameterIivEXT(texture,target,pname,params):pass

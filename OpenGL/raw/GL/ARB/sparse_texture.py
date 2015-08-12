@@ -24,4 +24,4 @@ GL_VIRTUAL_PAGE_SIZE_Y_ARB=_C('GL_VIRTUAL_PAGE_SIZE_Y_ARB',0x9196)
 GL_VIRTUAL_PAGE_SIZE_Z_ARB=_C('GL_VIRTUAL_PAGE_SIZE_Z_ARB',0x9197)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLint,_cs.GLsizei,_cs.GLsizei,_cs.GLsizei,_cs.GLboolean)
-def glTexPageCommitmentARB(target,level,xoffset,yoffset,zoffset,width,height,depth,resident):pass
+def glTexPageCommitmentARB(target,level,xoffset,yoffset,zoffset,width,height,depth,commit):pass

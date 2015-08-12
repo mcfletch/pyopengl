@@ -45,6 +45,12 @@ GL_UNIFORM_OFFSET=_C('GL_UNIFORM_OFFSET',0x8A3B)
 GL_UNIFORM_SIZE=_C('GL_UNIFORM_SIZE',0x8A38)
 GL_UNIFORM_TYPE=_C('GL_UNIFORM_TYPE',0x8A37)
 @_f
+@_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint)
+def glBindBufferBase(target,index,buffer):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
+def glBindBufferRange(target,index,buffer,offset,size):pass
+@_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
 def glGetActiveUniformBlockName(program,uniformBlockIndex,bufSize,length,uniformBlockName):pass
 @_f
@@ -56,6 +62,9 @@ def glGetActiveUniformName(program,uniformIndex,bufSize,length,uniformName):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,_cs.GLenum,arrays.GLintArray)
 def glGetActiveUniformsiv(program,uniformCount,uniformIndices,pname,params):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
+def glGetIntegeri_v(target,index,data):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint,arrays.GLcharArray)
 def glGetUniformBlockIndex(program,uniformBlockName):pass

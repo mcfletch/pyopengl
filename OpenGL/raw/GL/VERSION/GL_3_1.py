@@ -73,6 +73,12 @@ GL_UNIFORM_TYPE=_C('GL_UNIFORM_TYPE',0x8A37)
 GL_UNSIGNED_INT_SAMPLER_2D_RECT=_C('GL_UNSIGNED_INT_SAMPLER_2D_RECT',0x8DD5)
 GL_UNSIGNED_INT_SAMPLER_BUFFER=_C('GL_UNSIGNED_INT_SAMPLER_BUFFER',0x8DD8)
 @_f
+@_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint)
+def glBindBufferBase(target,index,buffer):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLuint,_cs.GLuint,_cs.GLintptr,_cs.GLsizeiptr)
+def glBindBufferRange(target,index,buffer,offset,size):pass
+@_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLintptr,_cs.GLintptr,_cs.GLsizeiptr)
 def glCopyBufferSubData(readTarget,writeTarget,readOffset,writeOffset,size):pass
 @_f
@@ -93,6 +99,9 @@ def glGetActiveUniformName(program,uniformIndex,bufSize,length,uniformName):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,_cs.GLenum,arrays.GLintArray)
 def glGetActiveUniformsiv(program,uniformCount,uniformIndices,pname,params):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLintArray)
+def glGetIntegeri_v(target,index,data):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint,arrays.GLcharArray)
 def glGetUniformBlockIndex(program,uniformBlockName):pass
