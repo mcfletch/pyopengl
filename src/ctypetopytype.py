@@ -55,7 +55,6 @@ CTYPE_TO_ARRAY_TYPE = {
 }
 SPECIAL_TYPES = {
     '__eglMustCastToProperFunctionPointerType': 'ctypes.c_void_p',
-    'float': 'ctypes.c_float',
 }
 
 
@@ -88,6 +87,8 @@ def ctype_to_pytype( base ):
     else:
         if base == 'int':
             base = 'c_int'
+        elif base == 'float':
+            return 'ctypes.c_float'
         elif ' ' in base:
             components = base.split()
             if components[0] == 'unsigned':
