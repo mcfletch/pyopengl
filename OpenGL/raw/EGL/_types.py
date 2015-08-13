@@ -35,6 +35,9 @@ EGLDisplay = _opaque_pointer_cls( 'EGLDisplay' )
 EGLSurface = _opaque_pointer_cls( 'EGLSurface' )
 EGLClientBuffer = _opaque_pointer_cls( 'EGLClientBuffer' )
 EGLImageKHR = EGLImage = _opaque_pointer_cls( 'EGLImageKHR' )
+EGLDeviceEXT = _opaque_pointer_cls( 'EGLDeviceEXT' )
+EGLOutputLayerEXT = _opaque_pointer_cls( 'EGLOutputLayerEXT' )
+EGLOutputPortEXT = _opaque_pointer_cls( 'EGLOutputPortEXT' )
 
 EGLScreenMESA = ctypes.c_ulong
 EGLModeMESA = ctypes.c_ulong
