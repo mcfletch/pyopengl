@@ -111,6 +111,9 @@ GLint64 = GLint64EXT = _defineType('GLint64', ctypes.c_int64, long )
 GLsizeiptrARB = GLsizeiptr = GLsizei
 GLvdpauSurfaceNV = GLintptrARB = GLintptr = GLsizei
 size_t = ctypes.c_size_t
+int32_t = ctypes.c_int32
+int64_t = ctypes.c_int64
+float = ctypes.c_float
 
 void = None
 
