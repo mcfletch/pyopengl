@@ -19,11 +19,11 @@ if not os.environ.get( 'PYOPENGL_PLATFORM' ):
 import OpenGL,ctypes
 if os.environ.get( 'TEST_NO_ACCELERATE' ):
     OpenGL.USE_ACCELERATE = False
+from OpenGL._bytes import as_str
 from OpenGL.EGL import *
 from OpenGL.error import GLError
 log = logging.getLogger( __name__ )
 import sys
-import os
 from OpenGL.arrays.vbo import VBO
 
 def describe_config( display, config ):
@@ -78,7 +78,7 @@ def main(displayfunc, api):
     log.info( 'Attempting to bind and create contexts/apis' )
     try:
         eglBindAPI( 0x3333 ) # junk value 
-    except GLError as err:
+    except GLError:
         pass 
     else:
         assert False, "Should have generated error on bind to non-existent api"
@@ -106,7 +106,10 @@ def main(displayfunc, api):
         log.error( 'Unable to create pbuffer surface' )
     else:
         log.info( 'created pbuffer surface' )
-    log.info( 'Available EGL extensions:\n%s', "\n".join(EGLQuerier.getExtensions().split()))
+    log.info( 'Available EGL extensions:\n  %s', "\n  ".join([
+        as_str(ext) for ext in 
+        EGLQuerier.getExtensions().split()
+    ]))
 
 def displayfunc_gl( display, surface, ctx ):
     from OpenGL import GL

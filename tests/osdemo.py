@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+from __future__ import print_function
 import os
 if not os.environ.get( 'PYOPENGL_PLATFORM' ):
     os.environ['PYOPENGL_PLATFORM'] = 'osmesa'
@@ -113,10 +114,10 @@ def write_ppm(buf, filename):
     f = open(filename, "w")
     if f:
         h, w, c = buf.shape
-        print >>f, "P3"
-        print >>f, "# ascii ppm file created by osmesa"
-        print >>f, "%i %i" % (w, h)
-        print >>f, "255"
+        print( "P3", file=f)
+        print( "# ascii ppm file created by osmesa",file=f)
+        print( "%i %i" % (w, h),file=f)
+        print("255",file=f)
         for y in range(h - 1, -1, -1):
             for x in range(w):
                 pixel = buf[y, x]
@@ -142,10 +143,10 @@ if __name__ == '__main__':
     z = glGetIntegerv(GL_DEPTH_BITS)
     s = glGetIntegerv(GL_STENCIL_BITS)
     a = glGetIntegerv(GL_ACCUM_RED_BITS)
-    print "Depth=%d Stencil=%d Accum=%d" % (z, s, a)
+    print("Depth=%d Stencil=%d Accum=%d" % (z, s, a))
 
-    print "Width=%d Height=%d" % (OSMesaGetIntegerv(OSMESA_WIDTH),
-                                  OSMesaGetIntegerv(OSMESA_HEIGHT))
+    print("Width=%d Height=%d" % (OSMesaGetIntegerv(OSMESA_WIDTH),
+                                  OSMesaGetIntegerv(OSMESA_HEIGHT)))
     #OSMesaPixelStore(OSMESA_Y_UP, 0)
 
     render_image()
