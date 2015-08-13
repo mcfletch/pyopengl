@@ -40,6 +40,14 @@ if sys.version_info[:2] < (3,0):
             return x.encode( encoding )
         return bytes( x )
     integer_types = int,long
+    def as_str( x, encoding='utf-8'):
+        """Produce a native string (i.e. different on python 2 and 3)"""
+        if isinstance(x,bytes):
+            return x
+        elif isinstance(x,unicode):
+            return x.encode(encoding)
+        else:
+            return str(x)
 else:
     # new setup, str is now unicode...
     STR_IS_BYTES = False
@@ -55,6 +63,14 @@ else:
         return str(x).encode( encoding )
     unicode = str
     integer_types = int,
+    def as_str( x, encoding='utf-8'):
+        """Produce a native string (i.e. different on python 2 and 3)"""
+        if isinstance(x,unicode):
+            return x
+        elif isinstance(x,bytes):
+            return x.decode(encoding)
+        else:
+            return str(x)
 
 STR_IS_UNICODE = not STR_IS_BYTES
 if hasattr( sys, 'maxsize' ):
