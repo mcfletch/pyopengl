@@ -5,6 +5,7 @@ log = logging.getLogger( __name__ )
 CTYPE_TO_ARRAY_TYPE = {
     '_cs.GLfloat': 'GLfloatArray',
     '_cs.float': 'GLfloatArray',
+    'ctypes.c_float':'GLfloatArray',
     '_cs.GLclampf': 'GLclampfArray',
     '_cs.GLdouble': 'GLdoubleArray',
     '_cs.double': 'GLdoubleArray',
