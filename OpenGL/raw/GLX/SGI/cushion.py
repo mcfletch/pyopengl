@@ -13,5 +13,5 @@ def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.GLX,'GLX_SGI_cushion',error_checker=_errors._error_checker)
 
 @_f
-@_p.types(None,ctypes.POINTER(_cs.Display),_cs.Window,_cs.float)
+@_p.types(None,ctypes.POINTER(_cs.Display),_cs.Window,ctypes.c_float)
 def glXCushionSGI(dpy,window,cushion):pass
