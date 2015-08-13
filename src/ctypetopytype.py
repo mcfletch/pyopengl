@@ -55,6 +55,7 @@ CTYPE_TO_ARRAY_TYPE = {
 }
 SPECIAL_TYPES = {
     '__eglMustCastToProperFunctionPointerType': 'ctypes.c_void_p',
+    'float': 'ctypes.c_float',
 }
 
 
