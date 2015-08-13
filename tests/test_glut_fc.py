@@ -1,4 +1,5 @@
 """Test GLUT forward-compatible mode..."""
+from __future__ import print_function
 import OpenGL
 OpenGL.FORWARD_COMPATIBLE_ONLY = True
 OpenGL.ERROR_CHECKING = True
@@ -6,7 +7,7 @@ OpenGL.ERROR_CHECKING = True
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from OpenGL.GL import shaders
+#from OpenGL.GL import shaders
 import time
 start = time.time()
 
@@ -19,14 +20,14 @@ def display():
         glClear (GL_COLOR_BUFFER_BIT)
         try:
             glGetString( GL_EXTENSIONS )
-        except GLError as err:
+        except GLError:
             pass 
         else:
             print('Egads, glGetString should not have worked!')
         assert bool( glGenVertexArrays ), "Should have vertex array support in 3.2"
         glFlush ()
         glutSwapBuffers()
-    except Exception as err:
+    except Exception:
         glutDestroyWindow( window )
         raise
 
@@ -66,7 +67,7 @@ def idle():
         print('window destroyed')
         try:
             if fgDeinitialize: fgDeinitialize(False)
-        except NameError as err:
+        except NameError:
             pass # Older PyOpenGL, you may see a seg-fault here...
         import sys
         sys.exit( 0 )

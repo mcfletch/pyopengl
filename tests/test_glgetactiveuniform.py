@@ -1,5 +1,5 @@
-import sys, pygame
-from math import sin
+from __future__ import print_function
+import pygame
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GL.shaders import *

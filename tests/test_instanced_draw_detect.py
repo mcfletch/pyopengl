@@ -1,16 +1,16 @@
+from __future__ import print_function
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.extensions import alternate
 from OpenGL.GL.ARB.draw_instanced import *
 from OpenGL.GL.EXT.draw_instanced import *
-import time
 
 def detect():
     glutInit([])
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
     glutInitWindowSize(200,200)
 
-    window = glutCreateWindow("Detection")
+    glutCreateWindow("Detection")
     
     functions = (
         glDrawArraysInstanced, 
@@ -27,7 +27,7 @@ def detect():
     print(any, bool(any))
     try:
         if fgDeinitialize: fgDeinitialize(False)
-    except NameError as err:
+    except NameError:
         pass # Older PyOpenGL, you may see a seg-fault here...
     
 

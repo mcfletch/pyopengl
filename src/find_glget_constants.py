@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 """Do a lot of hacking about to find glGet-able constants..."""
+from __future__ import print_function
 from OpenGL import constant, error
 from OpenGL import GL
 from OpenGL.raw.GL.VERSION.GL_1_1 import glGetIntegerv

@@ -1,10 +1,10 @@
 """EGL Pygame test framework"""
+from __future__ import print_function
 import ctypes
 import pygame.display 
 import pygame 
 import os 
 import logging
-import numpy
 import OpenGL
 from functools import wraps
 

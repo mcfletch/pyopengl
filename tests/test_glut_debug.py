@@ -1,4 +1,5 @@
 """Test GLUT forward-compatible mode..."""
+from __future__ import print_function
 import OpenGL
 OpenGL.FORWARD_COMPATIBLE_ONLY = True
 OpenGL.ERROR_CHECKING = True
@@ -30,7 +31,7 @@ def display():
         glClear (GL_COLOR_BUFFER_BIT)
         try:
             glGetString( GL_EXTENSIONS )
-        except GLError as err:
+        except GLError:
             pass 
         else:
             print('Egads, glGetString should not have worked!')
@@ -39,7 +40,7 @@ def display():
             print(message)
         glFlush ()
         glutSwapBuffers()
-    except Exception as err:
+    except Exception:
         glutDestroyWindow( window )
         raise
 
@@ -47,7 +48,6 @@ def get_debug_messages():
     messages = []
     count = glGetIntegerv( GL_DEBUG_LOGGED_MESSAGES )
     max_size = int(glGetIntegerv( GL_MAX_DEBUG_MESSAGE_LENGTH ))
-    curr_size = GLint()
     source = GLenum()
     type = GLenum()
     id = GLenum()

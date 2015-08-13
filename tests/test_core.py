@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+from __future__ import print_function
 import unittest, pygame, pygame.display, time, traceback, os, sys
 import logging 
 logging.basicConfig(level=logging.INFO)

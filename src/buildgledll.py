@@ -15,6 +15,7 @@ Note: the name "opengle" is required because someone issues DMCA takedown orders
 despite the name GLE referring to the GLE project for a very long time (they took PyOpenGL offline for a while
 due to such a takedown notice).
 """
+from __future__ import print_function
 import sys, os, subprocess, requests, logging, platform, shutil, glob
 log = logging.getLogger( 'buildgle' )
 

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *

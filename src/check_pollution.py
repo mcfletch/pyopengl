@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 """Check for namespace polution..."""
+from __future__ import print_function
 
 current = set(dir())
 from OpenGL.GL import *

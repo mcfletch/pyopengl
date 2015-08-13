@@ -10,8 +10,9 @@ Porting note:
     of the Python string.  Python implementations where id( a )
     is *not* the memory address of the string will not work!
 """
+from __future__ import print_function
 import ctypes
-from OpenGL._bytes import bytes,unicode
+from OpenGL._bytes import bytes
 PI_DIGITS = '31415926535897931'
 
 def calculateOffset( ):

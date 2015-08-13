@@ -1,8 +1,9 @@
 """Test simple functions (i.e. no pointers involved)"""
+from __future__ import print_function
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from OpenGL._bytes import bytes,unicode,as_8_bit
+from OpenGL._bytes import as_8_bit
 import time
 start = time.time()
 
@@ -82,7 +83,7 @@ def idle():
         print('window destroyed')
         try:
             if fgDeinitialize: fgDeinitialize(False)
-        except NameError as err:
+        except NameError:
             pass # Older PyOpenGL, you may see a seg-fault here...
         import sys
         sys.exit( 0 )

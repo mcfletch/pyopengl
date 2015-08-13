@@ -1,5 +1,6 @@
 """Test simple functions (i.e. no pointers involved)"""
-import OpenGL 
+from __future__ import print_function
+#import OpenGL 
 #OpenGL.USE_ACCELERATE = False
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -25,7 +26,7 @@ def display():
         matrix = glGetDoublev( GL_PROJECTION_MATRIX)
         print('matrix', type(matrix), matrix[:][:])
         glutSwapBuffers()
-    except Exception as err:
+    except Exception:
         traceback.print_exc()
         sys.exit(0)
 
@@ -65,7 +66,7 @@ def idle():
         print('window destroyed')
         try:
             if fgDeinitialize: fgDeinitialize(False)
-        except NameError as err:
+        except NameError:
             pass # Older PyOpenGL, you may see a seg-fault here...
         import sys
         sys.exit( 0 )

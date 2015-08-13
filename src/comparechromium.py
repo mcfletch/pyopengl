@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 """Script to check our glgetsizes against regal's..."""
+from __future__ import print_function
 import os, logging, subprocess
 import codegenerator, ctypetopytype, xmlreg
 log = logging.getLogger( __name__ )

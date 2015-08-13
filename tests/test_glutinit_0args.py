@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 """Test that GLUT.glutInit accepts 0 arguments"""
+from __future__ import print_function
 from OpenGL import GLUT
 
 if __name__ == "__main__":

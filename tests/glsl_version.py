@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+from __future__ import print_function
 import pygamegltest
 from OpenGL.GL import glGetString, GL_SHADING_LANGUAGE_VERSION
 

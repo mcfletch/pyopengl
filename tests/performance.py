@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 """This script is intended to give me an idea of current performance with various drawing strategies"""
+from __future__ import print_function
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -79,7 +80,7 @@ def display( ):
     dump()
     try:
         if fgDeinitialize: fgDeinitialize(False)
-    except NameError as err:
+    except NameError:
         pass # Older PyOpenGL, you may see a seg-fault here...
     import sys
     sys.exit(1)

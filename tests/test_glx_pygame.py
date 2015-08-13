@@ -1,4 +1,5 @@
-import OpenGL
+from __future__ import print_function
+#import OpenGL
 #OpenGL.USE_ACCELERATE=False
 from OpenGL.GL import *
 from OpenGL.GLX import *
@@ -15,7 +16,7 @@ attributes = [
     GL_NONE
 ]
 
-from OpenGL import platform
+#from OpenGL import platform
 import ctypes
 from OpenGL.platform import ctypesloader
 

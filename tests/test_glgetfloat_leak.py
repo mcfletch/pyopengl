@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from __future__ import print_function
 import sys
 import pygame
 from pygame.locals import *
@@ -17,6 +18,7 @@ def main():
     while not done:
         for i in range(0,50000):
             modelview_matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
+            assert modelview_matrix is not None
             if not i % 500:
                 sys.stdout.write('.')
         print()

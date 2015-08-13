@@ -1,3 +1,4 @@
+from __future__ import print_function
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 import sys
@@ -9,7 +10,7 @@ def main():
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)	
     glutInitWindowSize(640, 480)	
     glutInitWindowPosition(0, 0)	
-    window = glutCreateWindow("Framebuffer bug demo")
+    glutCreateWindow("Framebuffer bug demo")
 
     for i in range( 200 ):
         fbo = EXT.glGenFramebuffersEXT(1)
@@ -21,7 +22,7 @@ def main():
         glFlush()
     try:
         if fgDeinitialize: fgDeinitialize(False)
-    except NameError as err:
+    except NameError:
         pass # Older PyOpenGL, you may see a seg-fault here...
 
 # Print message to console, and kick off the main to get it rolling.

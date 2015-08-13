@@ -1,6 +1,6 @@
 #! /usr/bin/env python
+from __future__ import print_function
 import egltest
-import numpy
 from OpenGL.GLES2 import *
 from OpenGL.GLES2 import shaders
 
