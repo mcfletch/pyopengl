@@ -167,7 +167,7 @@ class _GLQuerier( ExtensionQuerier ):
                 extensions = extensions.split()
             else:
                 return False
-        except (AttributeError, error.GLError) as err:
+        except (AttributeError, error.GLError):
             # OpenGL 3.0 deprecates glGetString( GL_EXTENSIONS )
             from OpenGL.raw.GL.VERSION.GL_3_0 import GL_NUM_EXTENSIONS, glGetStringi
             from OpenGL.raw.GL.VERSION.GL_1_1 import glGetIntegerv
@@ -200,7 +200,7 @@ class _GLUQuerier( ExtensionQuerier ):
     def pullVersion( self ):
         from OpenGL.GLU import gluGetString,GLU_VERSION
         return [
-            int(x) for x in gluGetString( GLU_VERSION ).split('_')
+            int(x) for x in gluGetString( GLU_VERSION ).split(as_8_bit('_'))
             if x.isdigit()
         ]
     def pullExtensions( self ):
