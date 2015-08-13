@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """Generate python PyOpenGL api from xml registry documents (using xmlreg)"""
-import os, sys, logging, subprocess, glob
+import os, logging, subprocess, glob
 import xmlreg, codegenerator
 import ctypetopytype
 log = logging.getLogger( 'xml-generate' )
