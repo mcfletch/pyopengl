@@ -12,7 +12,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
                 'GLESv1_CM', # ick
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
     @baseplatform.lazy_property
     def GLES2(self):
@@ -22,7 +22,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
                 'GLESv2', 
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
     @baseplatform.lazy_property
     def GLES3(self):
@@ -36,7 +36,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
                 'GL', 
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return self.GLES2 or self.GLES1
     @baseplatform.lazy_property
     def GLU(self):
@@ -46,7 +46,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
                 'GLU',
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
     @baseplatform.lazy_property
     def GLUT( self ):
@@ -56,7 +56,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
                 'glut', 
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
     @baseplatform.lazy_property
     def OpenGL(self): return self.GL
@@ -84,7 +84,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
                 'gle', 
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
 
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )
