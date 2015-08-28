@@ -63,6 +63,15 @@ class EGLPlatform( baseplatform.BasePlatform ):
     
     @baseplatform.lazy_property
     def EGL(self):
+        # TODO: the raspberry pi crashes on trying to load EGL module 
+        # because the EGL library requires a structure from GLES2 without 
+        # linking to that library... Github issue is here:
+        #   https://github.com/raspberrypi/firmware/issues/110
+        import os
+        if os.path.exists('/proc/cpuinfo'):
+            info = open('/proc/cpuinfo').read()
+            if 'BCM2708' in info or 'BCM2709' in info:
+                assert self.GLES2
         try:
             return ctypesloader.loadLibrary(
                 ctypes.cdll,
