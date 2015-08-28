@@ -77,3 +77,12 @@ if hasattr( sys, 'maxsize' ):
     maxsize = sys.maxsize 
 else:
     maxsize = sys.maxint
+
+def as_unicode(x,encoding='utf-8'):
+    """Ensure is a unicode object given default encoding"""
+    if isinstance(x,unicode):
+        return x
+    elif isinstance(x,bytes):
+        return x.decode(encoding)
+    else:
+        return unicode(x)
