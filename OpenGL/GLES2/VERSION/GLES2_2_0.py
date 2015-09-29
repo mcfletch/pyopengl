@@ -329,7 +329,7 @@ def glGetShaderSource( baseOperation, obj ):
 
     returns string which is '' if no source code
     """
-    length = int(glGetShaderiv(obj, GL_OBJECT_SHADER_SOURCE_LENGTH))
+    length = int(glGetShaderiv(obj, GL_SHADER_SOURCE_LENGTH))
     if length > 0:
         source = ctypes.create_string_buffer(length)
         baseOperation(obj, length, None, source)
