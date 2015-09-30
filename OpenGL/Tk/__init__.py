@@ -98,7 +98,6 @@ if _default_root is None:
 # but that a different build is required for 64-bit Python.
 # Thus the directory structure is *not* the same as the 
 # original PyOpenGL versions.
-import sys 
 if sys.maxint > 2**32:
     suffix = '-64'
 else:
@@ -116,11 +115,13 @@ if not os.path.isdir( TOGL_DLL_PATH ):
     _log.warning( 'Expected Tk Togl installation in %s', TOGL_DLL_PATH )
 _log.info( 'Loading Togl from: %s', TOGL_DLL_PATH )
 _default_root.tk.call('lappend', 'auto_path', TOGL_DLL_PATH)
-_default_root.tk.call('package', 'require', 'Togl')
 try:
+    _default_root.tk.call('package', 'require', 'Togl')
     _default_root.tk.eval('load {} Togl')
 except TclError as err:
     _log.error( """Failure loading Togl package: %s""", err )
+    if _default_root:
+        _default_root.destroy()
     raise
 
 # This code is needed to avoid faults on sys.exit()
@@ -129,11 +130,11 @@ import atexit
 def cleanup():
     try:
         import tkinter 
-    except ImportError as err:
+    except ImportError:
         import Tkinter as tkinter
     try: 
         if tkinter._default_root: tkinter._default_root.destroy()
-    except (TclError,AttributeError) as err:
+    except (TclError,AttributeError):
         pass
     tkinter._default_root = None
 atexit.register( cleanup )
@@ -323,8 +324,7 @@ http://www.yorvic.york.ac.uk/~mjh/
     def help(self):
         """Help for the widget."""
 
-        import Dialog
-        d = Dialog.Dialog(None, {'title': 'Viewer help',
+        d = dialog.Dialog(None, {'title': 'Viewer help',
                                  'text': 'Button-1: Translate\n'
                                          'Button-2: Rotate\n'
                                          'Button-3: Zoom\n'
@@ -332,7 +332,7 @@ http://www.yorvic.york.ac.uk/~mjh/
                                  'bitmap': 'questhead',
                                  'default': 0,
                                  'strings': ('Done', 'Ok')})
-
+        assert d
 
     def activate(self):
         """Cause this Opengl widget to be the current destination for drawing."""
@@ -448,7 +448,6 @@ http://www.yorvic.york.ac.uk/~mjh/
 
 
     def do_AutoSpin(self):
-        s = 0.5
         self.activate()
 
         glRotateScene(0.5, self.xcenter, self.ycenter, self.zcenter, self.yspin, self.xspin, 0, 0)
