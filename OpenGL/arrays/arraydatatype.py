@@ -1,6 +1,7 @@
 """Array data-type implementations (abstraction points for GL array types"""
 import ctypes
 import OpenGL
+assert OpenGL
 from OpenGL.raw.GL import _types
 from OpenGL import plugins
 from OpenGL.arrays import formathandler, _arrayconstants as GL_1_1
@@ -30,7 +31,7 @@ if ADT is None:
             """Lookup of handler for given value"""
             try:
                 typ = value.__class__
-            except AttributeError as err:
+            except AttributeError:
                 typ = type(value)
             handler = self.get( typ )
             if not handler:
@@ -48,9 +49,10 @@ if ADT is None:
                             if hasattr( handler, 'registerEquivalent' ):
                                 handler.registerEquivalent( typ, base )
                             return handler
+                print(self.keys())
                 raise TypeError(
                     """No array-type handler for type %s.%s (value: %s) registered"""%(
-                        typ.__module__, type.__name__, repr(value)[:50]
+                        typ.__module__, typ.__name__, repr(value)[:50]
                     )
                 )
             return handler
@@ -60,7 +62,7 @@ if ADT is None:
             if plugin:
                 try:
                     return plugin.load()
-                except ImportError as err:
+                except ImportError:
                     return None
             else:
                 raise RuntimeError( 'No handler of name %s found'%(name,))
@@ -126,7 +128,7 @@ if ADT is None:
             """Given a value in a known data-pointer type, return long for pointer"""
             try:
                 return cls.getHandler(value).dataPointer( value )
-            except Exception as err:
+            except Exception:
                 _log.warning(
                     """Failure in dataPointer for %s instance %s""", type(value), value,
                 )
@@ -137,7 +139,7 @@ if ADT is None:
             pointer = cls.dataPointer( value )
             try:
                 return ctypes.c_void_p(pointer)
-            except TypeError as err:
+            except TypeError:
                 return pointer
         voidDataPointer = classmethod( logs.logOnFail( voidDataPointer, _log ) )
         def typedPointer( cls, value ):
