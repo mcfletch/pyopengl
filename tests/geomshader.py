@@ -36,6 +36,12 @@ def main():
         shaders.compileShader([vertex_shader], GL_VERTEX_SHADER), 
         shaders.compileShader([geometry_shader], GL_GEOMETRY_SHADER)
     )
+    
+    # test that we can describe the attributes in the shader
+    for i in range( glGetProgramiv( program, GL_ACTIVE_ATTRIBUTES )):
+        result = glGetActiveAttrib( program, i )
+        name,size,type = result
+        print( 'Arribute %s(%i) -> %s %s'%(name,i,size,type))
 
     buff = (ctypes.c_char_p * 1)( as_8_bit("outValue\000") )
     c_text = ctypes.cast(ctypes.pointer(buff), ctypes.POINTER(ctypes.POINTER(GLchar)))
