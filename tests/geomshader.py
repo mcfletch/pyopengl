@@ -7,9 +7,10 @@ from OpenGL.GL import shaders
 vertex_shader = """#version 150 core
     in float inValue;
     out float geoValue;
+    uniform float junk; // Just here for the introspection test
 
     void main() {
-        geoValue = sqrt(inValue);
+        geoValue = sqrt(inValue) + junk;
     }
 """
 
@@ -42,6 +43,11 @@ def main():
         result = glGetActiveAttrib( program, i )
         name,size,type = result
         print( 'Arribute %s(%i) -> %s %s'%(name,i,size,type))
+    for i in range( glGetProgramiv( program, GL_ACTIVE_UNIFORMS )):
+        result = glGetActiveUniform( program, i )
+        name,size,type = result
+        print( 'Uniform %s(%i) -> %s %s'%(name,i,size,type))
+        
 
     buff = (ctypes.c_char_p * 1)( as_8_bit("outValue\000") )
     c_text = ctypes.cast(ctypes.pointer(buff), ctypes.POINTER(ctypes.POINTER(GLchar)))
