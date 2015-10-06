@@ -23,7 +23,7 @@ OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
 OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING = True
 
-from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode, long, as_8_bit
+from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode, as_8_bit
 from OpenGL.GL import *
 try:
     glGetError()
@@ -251,13 +251,13 @@ class Tests( unittest.TestCase ):
             try:
                 try:
                     glVertex3f( 0.,1.,0. )
-                except Exception as err:
+                except Exception:
                     traceback.print_exc()
                 glVertex3fv( [-1,0,0] )
                 glVertex3dv( [1,0,0] )
                 try:
                     glVertex3dv( [1,0,4,5] )
-                except ValueError as err:
+                except ValueError:
                     #Got expected value error (good)
                     assert OpenGL.ARRAY_SIZE_CHECKING, """Should have raised ValueError when doing array size checking"""
                 else:
@@ -317,7 +317,7 @@ class Tests( unittest.TestCase ):
             # string data-types...
             import struct
             s = struct.pack( '>iiii', 2,3,4,5 ) * 2
-            result = glVertexPointer( 4,GL_INT,0,s )
+            glVertexPointer( 4,GL_INT,0,s )
         TESS_TEST_SHAPE = [
                 [191,   0],
                 [ 191, 1480],
@@ -377,9 +377,10 @@ class Tests( unittest.TestCase ):
                 from OpenGLContext import texture
                 import Image 
                 from OpenGL.GLUT import glutSolidTeapot
-            except ImportError as err:
+            except ImportError:
                 pass
             else:
+                assert glutSolidTeapot
                 glEnable( GL_TEXTURE_2D )
                 ourTexture = texture.Texture(
                     Image.open( os.path.join( HERE, 'yingyang.png') )
@@ -398,7 +399,7 @@ class Tests( unittest.TestCase ):
                     try:
                         glTexCoord2f( .5, 1 )
                         glVertex3f( 0.,1.,0. )
-                    except Exception as err:
+                    except Exception:
                         traceback.print_exc()
                     glTexCoord2f( 0, 0 )
                     glVertex3fv( [-1,0,0] )
@@ -406,7 +407,7 @@ class Tests( unittest.TestCase ):
                     glVertex3dv( [1,0,0] )
                     try:
                         glVertex3dv( [1,0] )
-                    except ValueError as err:
+                    except ValueError:
                         assert OpenGL.ARRAY_SIZE_CHECKING, """Should have raised ValueError when doing array size checking"""
                     else:
                         assert not OpenGL.ARRAY_SIZE_CHECKING, """Should not have raised ValueError when not doing array size checking"""
@@ -479,7 +480,7 @@ class Tests( unittest.TestCase ):
         for notFloat,shouldWork in ((0,True), (object(),False), (object,False)):
             try:
                 glColor4f( 0,1,1,notFloat )
-            except Exception as err:
+            except Exception:
                 if shouldWork:
                     raise 
             else:
@@ -492,7 +493,6 @@ class Tests( unittest.TestCase ):
         glBindTexture( GL_TEXTURE_2D, textures[0] )
     if array:
         def test_arrayTranspose( self ):
-            import numpy
             m = glGetFloatv( GL_MODELVIEW_MATRIX )
             glMatrixMode( GL_MODELVIEW )
             glLoadIdentity()
@@ -533,7 +533,9 @@ class Tests( unittest.TestCase ):
         """Issue #1979002 crash due to mis-calculation of resulting array size"""
         width,height = self.width, self.height
         readback_image1 = glReadPixelsub(0,0,width,height,GL_RGB)
+        assert readback_image1 is not None
         readback_image2 = glReadPixelsf(0,0,width,height,GL_RGB)
+        assert readback_image2 is not None
     def test_glreadpixels_is_string( self ):
         """Issue #1959860 incompatable change to returning arrays reversed"""
         width,height = self.width, self.height
@@ -548,6 +550,7 @@ class Tests( unittest.TestCase ):
             width,height = self.width, self.height
             data = zeros( (width,height,3), 'B' )
             image1 = glReadPixelsub(0,0,width,height,GL_RGB,array=data)
+            assert image1 is not None
         
         # currently crashes in py_buffer operation, so reverted to raw numpy 
         # api
@@ -575,7 +578,6 @@ class Tests( unittest.TestCase ):
             """Test utility vbo wrapper"""
             from OpenGL.arrays import vbo
             assert vbo.get_implementation()
-            dt = arraydatatype.GLdoubleArray
             points = array( [
                 [0,0,0],
                 [0,1,0],
@@ -764,7 +766,7 @@ class Tests( unittest.TestCase ):
             glDrawBuffers(2, drawingBuffers )
             try:
                 checkFramebufferStatus()
-            except error.GLError as err:
+            except error.GLError:
                 pass
             else:
                 glReadBuffer( GL_COLOR_ATTACHMENT1 )
@@ -908,7 +910,7 @@ class Tests( unittest.TestCase ):
                 finally:
                     gluTessEndContour(tess)
         finally:
-            result = gluTessEndPolygon(tess)
+            gluTessEndPolygon(tess)
 
         # Show collected triangle vertices :-
         # Original input vertices are marked as False.
@@ -1039,6 +1041,7 @@ class Tests( unittest.TestCase ):
     def test_get_max_tex_units( self ):
         """SF#2895081 glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )"""
         units = glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS )
+        assert units
     
     def test_bytes_array_support( self ):
         color = b'\000'*12
@@ -1111,6 +1114,7 @@ class Tests( unittest.TestCase ):
     
     def test_glGenTextures( self ):
         texture = glGenTextures(1)
+        assert texture
     
     def test_void_dp_for_void_dp_is_self( self ):
         array = ctypes.c_voidp( 12 )
@@ -1123,6 +1127,7 @@ class Tests( unittest.TestCase ):
         x2 = GLuint()
         r_value = glGenVertexArrays( 1, x2 )
         assert x2.value, x2.value
+        assert r_value
         
         color = glGetFloatv( GL_FOG_COLOR )
         color2 = (GLfloat *4)()
@@ -1133,11 +1138,11 @@ class Tests( unittest.TestCase ):
     def test_params_python3_strings( self ):
         try:
             glGetUniformBlockIndex( 0, unicode("Moo") )
-        except ArgumentError as err:
+        except ArgumentError:
             assert OpenGL.ERROR_ON_COPY, """Shouldn't have raised error on copy for unicode"""
-        except TypeError as err:
+        except TypeError:
             raise
-        except GLError as err:
+        except GLError:
             # expected error, as we don't have a shader there...
             pass
     
