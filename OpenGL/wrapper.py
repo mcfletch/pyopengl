@@ -1,6 +1,7 @@
 """The wrapping code for providing natural ctypes-based OpenGL interface"""
 import ctypes, logging
 from OpenGL import platform, error
+assert platform
 from OpenGL._configflags import STORE_POINTERS, ERROR_ON_COPY, SIZE_1_ARRAY_UNPACK
 from OpenGL import converters
 from OpenGL.converters import DefaultCConverter
@@ -20,6 +21,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
             CArgCalculator,
             PyArgCalculator,
             CArgumentCalculator,
+            MultiReturn,
         )
     except ImportError as err:
         _log.warning( """OpenGL_accelerate seems to be installed, but unable to import expected wrapper entry points!""" )
@@ -108,7 +110,7 @@ class Wrapper( LateBind ):
             argNames = self.wrappedOperation.argNames
         try:
             return asList( argNames ).index( argName )
-        except (ValueError,IndexError) as err:
+        except (ValueError,IndexError):
             raise KeyError( """No argument %r in argument list %r"""%(
                 argName, argNames
             ))
@@ -117,7 +119,7 @@ class Wrapper( LateBind ):
         argNames = self.wrappedOperation.argNames
         try:
             return asList( argNames ).index( argName )
-        except (ValueError,IndexError) as err:
+        except (ValueError,IndexError):
             raise KeyError( """No argument %r in argument list %r"""%(
                 argName, argNames
             ))
@@ -341,7 +343,7 @@ class Wrapper( LateBind ):
         if function is NULL or ERROR_ON_COPY and not STORE_POINTERS:
             try:
                 del self.storeValues
-            except Exception as err:
+            except Exception:
                 pass
         else:
             self.storeValues = function
@@ -351,10 +353,16 @@ class Wrapper( LateBind ):
         if function is NULL:
             try:
                 del self.returnValues
-            except Exception as err:
+            except Exception:
                 pass
         else:
-            self.returnValues = function
+            if hasattr(self,'returnValues'):
+                if isinstance(self.returnValues,MultiReturn):
+                    self.returnValues.append( function )
+                else:
+                    self.returnValues = MultiReturn( self.returnValues, function )
+            else:
+                self.returnValues = function
         return self
     
     def finalise( self ):
@@ -1467,6 +1475,21 @@ class Wrapper( LateBind ):
             )
         else:
             return result
+
+class MultiReturn(object):
+    def __init__(self,*children):
+        self.children = list(children)
+    def append(self, child ):
+        self.children.append( child )
+    def __call__(self,*args,**named):
+        result = []
+        for child in self.children:
+            try:
+                result.append( child(*args,**named) )
+            except Exception as err:
+                err.args += ( child, args, named )
+                raise
+        return result
 
 def wrapper( wrappedOperation ):
     """Create a Wrapper sub-class instance for the given wrappedOperation

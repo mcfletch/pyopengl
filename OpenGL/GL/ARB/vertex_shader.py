@@ -132,19 +132,19 @@ from OpenGL._bytes import bytes, _NULL_8_BYTE, as_8_bit
 from OpenGL.lazywrapper import lazy as _lazy
 from OpenGL.GL.ARB.shader_objects import glGetObjectParameterivARB
 
-base_glGetActiveAttribARB = glGetActiveAttribARB
-def glGetActiveAttribARB(program, index):
+@_lazy( glGetActiveAttribARB )
+def glGetActiveAttribARB(baseOperation, program, index):
     """Retrieve the name, size and type of the uniform of the index in the program"""
     max_index = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_ATTRIBUTES_ARB ))
     length = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB))
     if index < max_index and index >= 0 and length > 0:
-        name = ctypes.create_string_buffer(length)
-        size = arrays.GLintArray.zeros( (1,))
-        gl_type = arrays.GLuintArray.zeros( (1,))
-        base_glGetActiveAttribARB(program, index, length, None, size, gl_type, name)
-        return name.value, size[0], gl_type[0]
+        length,name,size,type = baseOperation( program, index )
+        if hasattr(name,'tostring'):
+            name = name.tostring().rstrip(b'\000')
+        elif hasattr(name,'value'):
+            name = name.value
+        return name,size,type
     raise IndexError('index out of range from zero to %i' % (max_index - 1, ))
-glGetActiveAttribARB.wrappedOperation = base_glGetActiveAttribARB
 
 @_lazy( glGetAttribLocationARB )
 def glGetAttribLocationARB( baseOperation, program, name ):

@@ -241,20 +241,19 @@ def glGetShaderSourceARB( baseOperation, obj ):
     return ''
 
 @_lazy( glGetActiveUniformARB )
-def glGetActiveUniformARB(baseOperation, program, index):
+def glGetActiveUniformARB(baseOperation,program, index,bufSize=None):
     """Retrieve the name, size and type of the uniform of the index in the program"""
     max_index = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_UNIFORMS_ARB ))
-    length = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB))
+    if bufSize is None:
+        bufSize = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB))
     if index < max_index and index >= 0:
-        if length > 0:
-            name = ctypes.create_string_buffer(length)
-            namelen = arrays.GLsizeiArray.zeros( (1,))
-            size = arrays.GLintArray.zeros( (1,))
-            gl_type = arrays.GLenumArray.zeros( (1,))
-            baseOperation(program, index, length,namelen,size, gl_type, name)
-            return name.value[:int(namelen[0])], size[0], gl_type[0]
-        raise ValueError( """No currently specified uniform names""" )
-    raise IndexError('Index %s out of range 0 to %i' % (index, max_index - 1, ))
+        length,name,size,type = baseOperation( program, index, bufSize )
+        if hasattr(name,'tostring'):
+            name = name.tostring().rstrip('\000')
+        elif hasattr(name,'value'):
+            name = name.value
+        return name,size,type
+    raise IndexError( 'Index %s out of range 0 to %i' % (index, max_index - 1, ) )
 
 @_lazy( glGetUniformLocationARB )
 def glGetUniformLocationARB( baseOperation, program, name ):
