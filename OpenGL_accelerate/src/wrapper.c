@@ -464,6 +464,7 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_getPyArgsName;
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnPyArgument;
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnPyArgumentIndex;
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnCArgument;
+struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn;
 
 /* "OpenGL_accelerate/wrapper.pxd":2
  * """Importable Cython declarations for wrapper module"""
@@ -519,8 +520,8 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnConverter {
  * 
  * 
  * cdef class CArgCalculatorElement:             # <<<<<<<<<<<<<<
- * 	cdef object wrapper
- * 	cdef long index
+ *     cdef object wrapper
+ *     cdef long index
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgCalculatorElement {
   PyObject_HEAD
@@ -535,11 +536,11 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgCalculatorElement {
 
 
 /* "src/wrapper.pyx":72
- * 		return self.converter
+ *         return self.converter
  * 
  * cdef class CArgCalculator:             # <<<<<<<<<<<<<<
- * 	"""C-coded version of the c-arg calculator pattern"""
- * 	cdef list mapping
+ *     """C-coded version of the c-arg calculator pattern"""
+ *     cdef list mapping
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgCalculator {
   PyObject_HEAD
@@ -552,8 +553,8 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgCalculator {
  * 
  * 
  * cdef class PyArgCalculatorElement:             # <<<<<<<<<<<<<<
- * 	cdef object wrapper
- * 	cdef long index
+ *     cdef object wrapper
+ *     cdef long index
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_PyArgCalculatorElement {
   PyObject_HEAD
@@ -567,11 +568,11 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_PyArgCalculatorElement {
 
 
 /* "src/wrapper.pyx":130
- * 			raise
+ *             raise
  * 
  * cdef class PyArgCalculator:             # <<<<<<<<<<<<<<
- * 	"""C-coded version of the py-arg calculator pattern"""
- * 	cdef list mapping
+ *     """C-coded version of the py-arg calculator pattern"""
+ *     cdef list mapping
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_PyArgCalculator {
   PyObject_HEAD
@@ -583,11 +584,11 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_PyArgCalculator {
 
 
 /* "src/wrapper.pyx":165
- * 		]
+ *         ]
  * 
  * cdef class CArgumentCalculator:             # <<<<<<<<<<<<<<
- * 	cdef list cResolvers
- * 	cdef int resolver_length
+ *     cdef list cResolvers
+ *     cdef int resolver_length
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgumentCalculator {
   PyObject_HEAD
@@ -598,11 +599,11 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgumentCalculator {
 
 
 /* "src/wrapper.pyx":204
- * 		return result
+ *         return result
  * 
  * cdef class CallFuncPyConverter( pyArgConverter ):             # <<<<<<<<<<<<<<
- * 	"""PyConverter that takes a callable and calls it on incoming"""
- * 	cdef object function
+ *     """PyConverter that takes a callable and calls it on incoming"""
+ *     cdef object function
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_CallFuncPyConverter {
   struct __pyx_obj_17OpenGL_accelerate_7wrapper_pyArgConverter __pyx_base;
@@ -611,11 +612,11 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_CallFuncPyConverter {
 
 
 /* "src/wrapper.pyx":219
- * 			self.function,
- * 		)
+ *             self.function,
+ *         )
  * cdef class DefaultCConverter(cArgConverter):             # <<<<<<<<<<<<<<
- * 	cdef int index
- * 	def __init__( self, index ):
+ *     cdef int index
+ *     def __init__( self, index ):
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_DefaultCConverter {
   struct __pyx_obj_17OpenGL_accelerate_7wrapper_cArgConverter __pyx_base;
@@ -624,10 +625,10 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_DefaultCConverter {
 
 
 /* "src/wrapper.pyx":239
- * 		)
+ *         )
  * 
  * cdef class Wrapper:             # <<<<<<<<<<<<<<
- * 	"""C-coded most-generic form of the wrapper's core function
+ *     """C-coded most-generic form of the wrapper's core function
  * 
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_Wrapper {
@@ -652,7 +653,7 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_Wrapper {
  * 
  * 
  * cdef class getPyArgsName(cArgConverter):             # <<<<<<<<<<<<<<
- * 	"""CConverter returning named Python argument
+ *     """CConverter returning named Python argument
  * 
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_getPyArgsName {
@@ -663,11 +664,11 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_getPyArgsName {
 
 
 /* "src/wrapper.pyx":363
- * 		)
+ *         )
  * 
  * cdef class returnPyArgument(returnConverter):             # <<<<<<<<<<<<<<
- * 	"""ReturnValues returning the named pyArgs value"""
- * 	cdef public unsigned int index
+ *     """ReturnValues returning the named pyArgs value"""
+ *     cdef public unsigned int index
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnPyArgument {
   struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnConverter __pyx_base;
@@ -677,11 +678,11 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnPyArgument {
 
 
 /* "src/wrapper.pyx":379
- * 			self.name,
- * 		)
+ *             self.name,
+ *         )
  * cdef class returnPyArgumentIndex(returnConverter):             # <<<<<<<<<<<<<<
- * 	cdef public unsigned int index
- * 	def __init__( self, int index ):
+ *     cdef public unsigned int index
+ *     def __init__( self, int index ):
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnPyArgumentIndex {
   struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnConverter __pyx_base;
@@ -690,11 +691,11 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnPyArgumentIndex {
 
 
 /* "src/wrapper.pyx":393
- * 			self.index,
- * 		)
+ *             self.index,
+ *         )
  * cdef class returnCArgument(returnConverter):             # <<<<<<<<<<<<<<
- * 	"""ReturnValues returning the named pyArgs value"""
- * 	cdef public unsigned int index
+ *     """ReturnValues returning the named pyArgs value"""
+ *     cdef public unsigned int index
  */
 struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnCArgument {
   struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnConverter __pyx_base;
@@ -703,13 +704,26 @@ struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnCArgument {
 };
 
 
+/* "src/wrapper.pyx":410
+ *         )
+ * 
+ * cdef class MultiReturn(object):             # <<<<<<<<<<<<<<
+ *     cdef public list children
+ *     def __init__(self,*children):
+ */
+struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn {
+  PyObject_HEAD
+  PyObject *children;
+};
+
+
 
 /* "src/wrapper.pyx":10
- * 	cdef object PyDict_GetItem( object, object )
+ *     cdef object PyDict_GetItem( object, object )
  * 
  * cdef class cArgConverter:             # <<<<<<<<<<<<<<
- * 	"""C-level API definition for cConverter objects"""
- * 	def __call__( self, tuple pyArgs, int index, object wrapper ):
+ *     """C-level API definition for cConverter objects"""
+ *     def __call__( self, tuple pyArgs, int index, object wrapper ):
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_cArgConverter {
@@ -719,11 +733,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_cArgConverter *__pyx
 
 
 /* "src/wrapper.pyx":17
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		"""Implementation of the converter"""
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         """Implementation of the converter"""
  * cdef class pyArgConverter:             # <<<<<<<<<<<<<<
- * 	"""C-level API definition for pyArg converter objects"""
- * 	def __call__( self, object incoming, object function, tuple arguments ):
+ *     """C-level API definition for pyArg converter objects"""
+ *     def __call__( self, object incoming, object function, tuple arguments ):
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_pyArgConverter {
@@ -733,11 +747,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_pyArgConverter *__py
 
 
 /* "src/wrapper.pyx":24
- * 	cdef object c_call( self, object incoming, object function, tuple arguments ):
- * 		"""Implementation would do something here"""
+ *     cdef object c_call( self, object incoming, object function, tuple arguments ):
+ *         """Implementation would do something here"""
  * cdef class cArgumentConverter:             # <<<<<<<<<<<<<<
- * 	"""C-level API definition for cArgument convert objects"""
- * 	def __call__( self, object element  ):
+ *     """C-level API definition for cArgument convert objects"""
+ *     def __call__( self, object element  ):
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_cArgumentConverter {
@@ -747,11 +761,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_cArgumentConverter *
 
 
 /* "src/wrapper.pyx":31
- * 	cdef object c_call( self, object incoming ):
- * 		"""Implementation would do something here"""
+ *     cdef object c_call( self, object incoming ):
+ *         """Implementation would do something here"""
  * cdef class returnConverter:             # <<<<<<<<<<<<<<
- * 	"""C-level API definition for cArgument convert objects"""
- * 	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *     """C-level API definition for cArgument convert objects"""
+ *     def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_returnConverter {
@@ -764,8 +778,8 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_returnConverter *__p
  * 
  * 
  * cdef class CArgCalculatorElement:             # <<<<<<<<<<<<<<
- * 	cdef object wrapper
- * 	cdef long index
+ *     cdef object wrapper
+ *     cdef long index
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgCalculatorElement {
@@ -775,11 +789,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgCalculatorElemen
 
 
 /* "src/wrapper.pyx":72
- * 		return self.converter
+ *         return self.converter
  * 
  * cdef class CArgCalculator:             # <<<<<<<<<<<<<<
- * 	"""C-coded version of the c-arg calculator pattern"""
- * 	cdef list mapping
+ *     """C-coded version of the c-arg calculator pattern"""
+ *     cdef list mapping
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgCalculator {
@@ -792,8 +806,8 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgCalculator *__py
  * 
  * 
  * cdef class PyArgCalculatorElement:             # <<<<<<<<<<<<<<
- * 	cdef object wrapper
- * 	cdef long index
+ *     cdef object wrapper
+ *     cdef long index
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_PyArgCalculatorElement {
@@ -803,11 +817,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_PyArgCalculatorEleme
 
 
 /* "src/wrapper.pyx":130
- * 			raise
+ *             raise
  * 
  * cdef class PyArgCalculator:             # <<<<<<<<<<<<<<
- * 	"""C-coded version of the py-arg calculator pattern"""
- * 	cdef list mapping
+ *     """C-coded version of the py-arg calculator pattern"""
+ *     cdef list mapping
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_PyArgCalculator {
@@ -817,11 +831,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_PyArgCalculator *__p
 
 
 /* "src/wrapper.pyx":165
- * 		]
+ *         ]
  * 
  * cdef class CArgumentCalculator:             # <<<<<<<<<<<<<<
- * 	cdef list cResolvers
- * 	cdef int resolver_length
+ *     cdef list cResolvers
+ *     cdef int resolver_length
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgumentCalculator {
@@ -831,11 +845,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgumentCalculator 
 
 
 /* "src/wrapper.pyx":204
- * 		return result
+ *         return result
  * 
  * cdef class CallFuncPyConverter( pyArgConverter ):             # <<<<<<<<<<<<<<
- * 	"""PyConverter that takes a callable and calls it on incoming"""
- * 	cdef object function
+ *     """PyConverter that takes a callable and calls it on incoming"""
+ *     cdef object function
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CallFuncPyConverter {
@@ -845,11 +859,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CallFuncPyConverter 
 
 
 /* "src/wrapper.pyx":219
- * 			self.function,
- * 		)
+ *             self.function,
+ *         )
  * cdef class DefaultCConverter(cArgConverter):             # <<<<<<<<<<<<<<
- * 	cdef int index
- * 	def __init__( self, index ):
+ *     cdef int index
+ *     def __init__( self, index ):
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_DefaultCConverter {
@@ -862,7 +876,7 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_DefaultCConverter *_
  * 
  * 
  * cdef class getPyArgsName(cArgConverter):             # <<<<<<<<<<<<<<
- * 	"""CConverter returning named Python argument
+ *     """CConverter returning named Python argument
  * 
  */
 
@@ -873,11 +887,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_getPyArgsName *__pyx
 
 
 /* "src/wrapper.pyx":363
- * 		)
+ *         )
  * 
  * cdef class returnPyArgument(returnConverter):             # <<<<<<<<<<<<<<
- * 	"""ReturnValues returning the named pyArgs value"""
- * 	cdef public unsigned int index
+ *     """ReturnValues returning the named pyArgs value"""
+ *     cdef public unsigned int index
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_returnPyArgument {
@@ -887,11 +901,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_returnPyArgument *__
 
 
 /* "src/wrapper.pyx":379
- * 			self.name,
- * 		)
+ *             self.name,
+ *         )
  * cdef class returnPyArgumentIndex(returnConverter):             # <<<<<<<<<<<<<<
- * 	cdef public unsigned int index
- * 	def __init__( self, int index ):
+ *     cdef public unsigned int index
+ *     def __init__( self, int index ):
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_returnPyArgumentIndex {
@@ -901,11 +915,11 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_returnPyArgumentInde
 
 
 /* "src/wrapper.pyx":393
- * 			self.index,
- * 		)
+ *             self.index,
+ *         )
  * cdef class returnCArgument(returnConverter):             # <<<<<<<<<<<<<<
- * 	"""ReturnValues returning the named pyArgs value"""
- * 	cdef public unsigned int index
+ *     """ReturnValues returning the named pyArgs value"""
+ *     cdef public unsigned int index
  */
 
 struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_returnCArgument {
@@ -1124,6 +1138,22 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 
 static CYTHON_INLINE int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name, int kw_allowed);
 
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
+    PyListObject* L = (PyListObject*) list;
+    Py_ssize_t len = Py_SIZE(list);
+    if (likely(L->allocated > len) & likely(len > (L->allocated >> 1))) {
+        Py_INCREF(x);
+        PyList_SET_ITEM(list, len, x);
+        Py_SIZE(list) = len+1;
+        return 0;
+    }
+    return PyList_Append(list, x);
+}
+#else
+#define __Pyx_PyList_Append(L,x) PyList_Append(L,x)
+#endif
+
 static int __Pyx_call_next_tp_traverse(PyObject* obj, visitproc v, void *a, traverseproc current_tp_traverse);
 
 static void __Pyx_call_next_tp_clear(PyObject* obj, inquiry current_tp_dealloc);
@@ -1200,6 +1230,7 @@ static PyTypeObject *__pyx_ptype_17OpenGL_accelerate_7wrapper_getPyArgsName = 0;
 static PyTypeObject *__pyx_ptype_17OpenGL_accelerate_7wrapper_returnPyArgument = 0;
 static PyTypeObject *__pyx_ptype_17OpenGL_accelerate_7wrapper_returnPyArgumentIndex = 0;
 static PyTypeObject *__pyx_ptype_17OpenGL_accelerate_7wrapper_returnCArgument = 0;
+static PyTypeObject *__pyx_ptype_17OpenGL_accelerate_7wrapper_MultiReturn = 0;
 #define __Pyx_MODULE_NAME "OpenGL_accelerate.wrapper"
 int __pyx_module_is_main_OpenGL_accelerate__wrapper = 0;
 
@@ -1378,6 +1409,12 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_5index_2__set
 static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_4name___get__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnCArgument *__pyx_v_self); /* proto */
 static int __pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_4name_2__set__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnCArgument *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_4name_4__del__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnCArgument *__pyx_v_self); /* proto */
+static int __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn___init__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self, PyObject *__pyx_v_children); /* proto */
+static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_2append(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self, PyObject *__pyx_v_child); /* proto */
+static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_4__call__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self, PyObject *__pyx_v_args, PyObject *__pyx_v_named); /* proto */
+static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_8children___get__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self); /* proto */
+static int __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_2__set__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static int __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_4__del__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self); /* proto */
 static PyObject *__pyx_tp_new_17OpenGL_accelerate_7wrapper_cArgConverter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_17OpenGL_accelerate_7wrapper_pyArgConverter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_17OpenGL_accelerate_7wrapper_cArgumentConverter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -1394,15 +1431,16 @@ static PyObject *__pyx_tp_new_17OpenGL_accelerate_7wrapper_getPyArgsName(PyTypeO
 static PyObject *__pyx_tp_new_17OpenGL_accelerate_7wrapper_returnPyArgument(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_17OpenGL_accelerate_7wrapper_returnPyArgumentIndex(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_17OpenGL_accelerate_7wrapper_returnCArgument(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_17OpenGL_accelerate_7wrapper_MultiReturn(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 
 /* "src/wrapper.pyx":12
  * cdef class cArgConverter:
- * 	"""C-level API definition for cConverter objects"""
- * 	def __call__( self, tuple pyArgs, int index, object wrapper ):             # <<<<<<<<<<<<<<
- * 		"""Return pyArgs[self.index] or raise a ValueError"""
- * 		return self.c_call( pyArgs, index, wrapper )
+ *     """C-level API definition for cConverter objects"""
+ *     def __call__( self, tuple pyArgs, int index, object wrapper ):             # <<<<<<<<<<<<<<
+ *         """Return pyArgs[self.index] or raise a ValueError"""
+ *         return self.c_call( pyArgs, index, wrapper )
  */
 
 /* Python wrapper */
@@ -1494,11 +1532,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13cArgConverter___call__(
   __Pyx_RefNannySetupContext("__call__", 0);
 
   /* "src/wrapper.pyx":14
- * 	def __call__( self, tuple pyArgs, int index, object wrapper ):
- * 		"""Return pyArgs[self.index] or raise a ValueError"""
- * 		return self.c_call( pyArgs, index, wrapper )             # <<<<<<<<<<<<<<
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		"""Implementation of the converter"""
+ *     def __call__( self, tuple pyArgs, int index, object wrapper ):
+ *         """Return pyArgs[self.index] or raise a ValueError"""
+ *         return self.c_call( pyArgs, index, wrapper )             # <<<<<<<<<<<<<<
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         """Implementation of the converter"""
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_cArgConverter *)__pyx_v_self->__pyx_vtab)->c_call(__pyx_v_self, __pyx_v_pyArgs, __pyx_v_index, __pyx_v_wrapper); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1509,10 +1547,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13cArgConverter___call__(
 
   /* "src/wrapper.pyx":12
  * cdef class cArgConverter:
- * 	"""C-level API definition for cConverter objects"""
- * 	def __call__( self, tuple pyArgs, int index, object wrapper ):             # <<<<<<<<<<<<<<
- * 		"""Return pyArgs[self.index] or raise a ValueError"""
- * 		return self.c_call( pyArgs, index, wrapper )
+ *     """C-level API definition for cConverter objects"""
+ *     def __call__( self, tuple pyArgs, int index, object wrapper ):             # <<<<<<<<<<<<<<
+ *         """Return pyArgs[self.index] or raise a ValueError"""
+ *         return self.c_call( pyArgs, index, wrapper )
  */
 
   /* function exit code */
@@ -1527,10 +1565,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13cArgConverter___call__(
 }
 
 /* "src/wrapper.pyx":15
- * 		"""Return pyArgs[self.index] or raise a ValueError"""
- * 		return self.c_call( pyArgs, index, wrapper )
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
- * 		"""Implementation of the converter"""
+ *         """Return pyArgs[self.index] or raise a ValueError"""
+ *         return self.c_call( pyArgs, index, wrapper )
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
+ *         """Implementation of the converter"""
  * cdef class pyArgConverter:
  */
 
@@ -1548,10 +1586,10 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_13cArgConverter_c_call(CYT
 
 /* "src/wrapper.pyx":19
  * cdef class pyArgConverter:
- * 	"""C-level API definition for pyArg converter objects"""
- * 	def __call__( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
- * 		"""Call our function on incoming"""
- * 		return self.c_call( incoming, function, arguments )
+ *     """C-level API definition for pyArg converter objects"""
+ *     def __call__( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
+ *         """Call our function on incoming"""
+ *         return self.c_call( incoming, function, arguments )
  */
 
 /* Python wrapper */
@@ -1643,11 +1681,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_14pyArgConverter___call__
   __Pyx_RefNannySetupContext("__call__", 0);
 
   /* "src/wrapper.pyx":21
- * 	def __call__( self, object incoming, object function, tuple arguments ):
- * 		"""Call our function on incoming"""
- * 		return self.c_call( incoming, function, arguments )             # <<<<<<<<<<<<<<
- * 	cdef object c_call( self, object incoming, object function, tuple arguments ):
- * 		"""Implementation would do something here"""
+ *     def __call__( self, object incoming, object function, tuple arguments ):
+ *         """Call our function on incoming"""
+ *         return self.c_call( incoming, function, arguments )             # <<<<<<<<<<<<<<
+ *     cdef object c_call( self, object incoming, object function, tuple arguments ):
+ *         """Implementation would do something here"""
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_pyArgConverter *)__pyx_v_self->__pyx_vtab)->c_call(__pyx_v_self, __pyx_v_incoming, __pyx_v_function, __pyx_v_arguments); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1658,10 +1696,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_14pyArgConverter___call__
 
   /* "src/wrapper.pyx":19
  * cdef class pyArgConverter:
- * 	"""C-level API definition for pyArg converter objects"""
- * 	def __call__( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
- * 		"""Call our function on incoming"""
- * 		return self.c_call( incoming, function, arguments )
+ *     """C-level API definition for pyArg converter objects"""
+ *     def __call__( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
+ *         """Call our function on incoming"""
+ *         return self.c_call( incoming, function, arguments )
  */
 
   /* function exit code */
@@ -1676,10 +1714,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_14pyArgConverter___call__
 }
 
 /* "src/wrapper.pyx":22
- * 		"""Call our function on incoming"""
- * 		return self.c_call( incoming, function, arguments )
- * 	cdef object c_call( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
- * 		"""Implementation would do something here"""
+ *         """Call our function on incoming"""
+ *         return self.c_call( incoming, function, arguments )
+ *     cdef object c_call( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
+ *         """Implementation would do something here"""
  * cdef class cArgumentConverter:
  */
 
@@ -1697,10 +1735,10 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_14pyArgConverter_c_call(CY
 
 /* "src/wrapper.pyx":26
  * cdef class cArgumentConverter:
- * 	"""C-level API definition for cArgument convert objects"""
- * 	def __call__( self, object element  ):             # <<<<<<<<<<<<<<
- * 		"""Call our function on incoming"""
- * 		return self.c_call( element )
+ *     """C-level API definition for cArgument convert objects"""
+ *     def __call__( self, object element  ):             # <<<<<<<<<<<<<<
+ *         """Call our function on incoming"""
+ *         return self.c_call( element )
  */
 
 /* Python wrapper */
@@ -1769,11 +1807,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_18cArgumentConverter___ca
   __Pyx_RefNannySetupContext("__call__", 0);
 
   /* "src/wrapper.pyx":28
- * 	def __call__( self, object element  ):
- * 		"""Call our function on incoming"""
- * 		return self.c_call( element )             # <<<<<<<<<<<<<<
- * 	cdef object c_call( self, object incoming ):
- * 		"""Implementation would do something here"""
+ *     def __call__( self, object element  ):
+ *         """Call our function on incoming"""
+ *         return self.c_call( element )             # <<<<<<<<<<<<<<
+ *     cdef object c_call( self, object incoming ):
+ *         """Implementation would do something here"""
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_cArgumentConverter *)__pyx_v_self->__pyx_vtab)->c_call(__pyx_v_self, __pyx_v_element); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1784,10 +1822,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_18cArgumentConverter___ca
 
   /* "src/wrapper.pyx":26
  * cdef class cArgumentConverter:
- * 	"""C-level API definition for cArgument convert objects"""
- * 	def __call__( self, object element  ):             # <<<<<<<<<<<<<<
- * 		"""Call our function on incoming"""
- * 		return self.c_call( element )
+ *     """C-level API definition for cArgument convert objects"""
+ *     def __call__( self, object element  ):             # <<<<<<<<<<<<<<
+ *         """Call our function on incoming"""
+ *         return self.c_call( element )
  */
 
   /* function exit code */
@@ -1802,10 +1840,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_18cArgumentConverter___ca
 }
 
 /* "src/wrapper.pyx":29
- * 		"""Call our function on incoming"""
- * 		return self.c_call( element )
- * 	cdef object c_call( self, object incoming ):             # <<<<<<<<<<<<<<
- * 		"""Implementation would do something here"""
+ *         """Call our function on incoming"""
+ *         return self.c_call( element )
+ *     cdef object c_call( self, object incoming ):             # <<<<<<<<<<<<<<
+ *         """Implementation would do something here"""
  * cdef class returnConverter:
  */
 
@@ -1823,10 +1861,10 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_18cArgumentConverter_c_cal
 
 /* "src/wrapper.pyx":33
  * cdef class returnConverter:
- * 	"""C-level API definition for cArgument convert objects"""
- * 	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		"""Call our function on incoming"""
- * 		return self.c_call( result, baseOperation, pyArgs, cArgs )
+ *     """C-level API definition for cArgument convert objects"""
+ *     def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         """Call our function on incoming"""
+ *         return self.c_call( result, baseOperation, pyArgs, cArgs )
  */
 
 /* Python wrapper */
@@ -1928,11 +1966,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnConverter___call_
   __Pyx_RefNannySetupContext("__call__", 0);
 
   /* "src/wrapper.pyx":35
- * 	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
- * 		"""Call our function on incoming"""
- * 		return self.c_call( result, baseOperation, pyArgs, cArgs )             # <<<<<<<<<<<<<<
- * 	cdef object c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
- * 		"""Implementation would do something here"""
+ *     def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *         """Call our function on incoming"""
+ *         return self.c_call( result, baseOperation, pyArgs, cArgs )             # <<<<<<<<<<<<<<
+ *     cdef object c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *         """Implementation would do something here"""
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_returnConverter *)__pyx_v_self->__pyx_vtab)->c_call(__pyx_v_self, __pyx_v_result, __pyx_v_baseOperation, __pyx_v_pyArgs, __pyx_v_cArgs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1943,10 +1981,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnConverter___call_
 
   /* "src/wrapper.pyx":33
  * cdef class returnConverter:
- * 	"""C-level API definition for cArgument convert objects"""
- * 	def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		"""Call our function on incoming"""
- * 		return self.c_call( result, baseOperation, pyArgs, cArgs )
+ *     """C-level API definition for cArgument convert objects"""
+ *     def __call__( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         """Call our function on incoming"""
+ *         return self.c_call( result, baseOperation, pyArgs, cArgs )
  */
 
   /* function exit code */
@@ -1961,10 +1999,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnConverter___call_
 }
 
 /* "src/wrapper.pyx":36
- * 		"""Call our function on incoming"""
- * 		return self.c_call( result, baseOperation, pyArgs, cArgs )
- * 	cdef object c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		"""Implementation would do something here"""
+ *         """Call our function on incoming"""
+ *         return self.c_call( result, baseOperation, pyArgs, cArgs )
+ *     cdef object c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         """Implementation would do something here"""
  * 
  */
 
@@ -1981,11 +2019,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15returnConverter_c_call(C
 }
 
 /* "src/wrapper.pyx":47
- * 	cdef object converter
- * 	cdef cArgConverter c_converter
- * 	def __init__( self, wrapper, index, converter ):             # <<<<<<<<<<<<<<
- * 		self.wrapper = wrapper
- * 		self.index = index
+ *     cdef object converter
+ *     cdef cArgConverter c_converter
+ *     def __init__( self, wrapper, index, converter ):             # <<<<<<<<<<<<<<
+ *         self.wrapper = wrapper
+ *         self.index = index
  */
 
 /* Python wrapper */
@@ -2071,11 +2109,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement___init_
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":48
- * 	cdef cArgConverter c_converter
- * 	def __init__( self, wrapper, index, converter ):
- * 		self.wrapper = wrapper             # <<<<<<<<<<<<<<
- * 		self.index = index
- * 		if isinstance( converter, cArgConverter ):
+ *     cdef cArgConverter c_converter
+ *     def __init__( self, wrapper, index, converter ):
+ *         self.wrapper = wrapper             # <<<<<<<<<<<<<<
+ *         self.index = index
+ *         if isinstance( converter, cArgConverter ):
  */
   __Pyx_INCREF(__pyx_v_wrapper);
   __Pyx_GIVEREF(__pyx_v_wrapper);
@@ -2084,32 +2122,32 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement___init_
   __pyx_v_self->wrapper = __pyx_v_wrapper;
 
   /* "src/wrapper.pyx":49
- * 	def __init__( self, wrapper, index, converter ):
- * 		self.wrapper = wrapper
- * 		self.index = index             # <<<<<<<<<<<<<<
- * 		if isinstance( converter, cArgConverter ):
- * 			self.c_converter = converter
+ *     def __init__( self, wrapper, index, converter ):
+ *         self.wrapper = wrapper
+ *         self.index = index             # <<<<<<<<<<<<<<
+ *         if isinstance( converter, cArgConverter ):
+ *             self.c_converter = converter
  */
   __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_index); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->index = __pyx_t_1;
 
   /* "src/wrapper.pyx":50
- * 		self.wrapper = wrapper
- * 		self.index = index
- * 		if isinstance( converter, cArgConverter ):             # <<<<<<<<<<<<<<
- * 			self.c_converter = converter
- * 			self.doCAPI = True
+ *         self.wrapper = wrapper
+ *         self.index = index
+ *         if isinstance( converter, cArgConverter ):             # <<<<<<<<<<<<<<
+ *             self.c_converter = converter
+ *             self.doCAPI = True
  */
   __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_converter, __pyx_ptype_17OpenGL_accelerate_7wrapper_cArgConverter); 
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
     /* "src/wrapper.pyx":51
- * 		self.index = index
- * 		if isinstance( converter, cArgConverter ):
- * 			self.c_converter = converter             # <<<<<<<<<<<<<<
- * 			self.doCAPI = True
- * 			self.callable = True
+ *         self.index = index
+ *         if isinstance( converter, cArgConverter ):
+ *             self.c_converter = converter             # <<<<<<<<<<<<<<
+ *             self.doCAPI = True
+ *             self.callable = True
  */
     if (!(likely(((__pyx_v_converter) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_converter, __pyx_ptype_17OpenGL_accelerate_7wrapper_cArgConverter))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_4 = __pyx_v_converter;
@@ -2121,39 +2159,39 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement___init_
     __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":52
- * 		if isinstance( converter, cArgConverter ):
- * 			self.c_converter = converter
- * 			self.doCAPI = True             # <<<<<<<<<<<<<<
- * 			self.callable = True
- * 		else:
+ *         if isinstance( converter, cArgConverter ):
+ *             self.c_converter = converter
+ *             self.doCAPI = True             # <<<<<<<<<<<<<<
+ *             self.callable = True
+ *         else:
  */
     __pyx_v_self->doCAPI = 1;
 
     /* "src/wrapper.pyx":53
- * 			self.c_converter = converter
- * 			self.doCAPI = True
- * 			self.callable = True             # <<<<<<<<<<<<<<
- * 		else:
- * 			self.converter = converter
+ *             self.c_converter = converter
+ *             self.doCAPI = True
+ *             self.callable = True             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.converter = converter
  */
     __pyx_v_self->callable = 1;
 
     /* "src/wrapper.pyx":50
- * 		self.wrapper = wrapper
- * 		self.index = index
- * 		if isinstance( converter, cArgConverter ):             # <<<<<<<<<<<<<<
- * 			self.c_converter = converter
- * 			self.doCAPI = True
+ *         self.wrapper = wrapper
+ *         self.index = index
+ *         if isinstance( converter, cArgConverter ):             # <<<<<<<<<<<<<<
+ *             self.c_converter = converter
+ *             self.doCAPI = True
  */
     goto __pyx_L3;
   }
 
   /* "src/wrapper.pyx":55
- * 			self.callable = True
- * 		else:
- * 			self.converter = converter             # <<<<<<<<<<<<<<
- * 			self.doCAPI = False
- * 			self.callable = hasattr( converter, '__call__' )
+ *             self.callable = True
+ *         else:
+ *             self.converter = converter             # <<<<<<<<<<<<<<
+ *             self.doCAPI = False
+ *             self.callable = hasattr( converter, '__call__' )
  */
   /*else*/ {
     __Pyx_INCREF(__pyx_v_converter);
@@ -2163,20 +2201,20 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement___init_
     __pyx_v_self->converter = __pyx_v_converter;
 
     /* "src/wrapper.pyx":56
- * 		else:
- * 			self.converter = converter
- * 			self.doCAPI = False             # <<<<<<<<<<<<<<
- * 			self.callable = hasattr( converter, '__call__' )
- * 	def __call__( self, tuple pyArgs ):
+ *         else:
+ *             self.converter = converter
+ *             self.doCAPI = False             # <<<<<<<<<<<<<<
+ *             self.callable = hasattr( converter, '__call__' )
+ *     def __call__( self, tuple pyArgs ):
  */
     __pyx_v_self->doCAPI = 0;
 
     /* "src/wrapper.pyx":57
- * 			self.converter = converter
- * 			self.doCAPI = False
- * 			self.callable = hasattr( converter, '__call__' )             # <<<<<<<<<<<<<<
- * 	def __call__( self, tuple pyArgs ):
- * 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
+ *             self.converter = converter
+ *             self.doCAPI = False
+ *             self.callable = hasattr( converter, '__call__' )             # <<<<<<<<<<<<<<
+ *     def __call__( self, tuple pyArgs ):
+ *         """If callable, call converter( pyArgs, index, wrapper ), else return converter"""
  */
     __pyx_t_3 = PyObject_HasAttr(__pyx_v_converter, __pyx_n_s_call); if (unlikely(__pyx_t_3 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_self->callable = __pyx_t_3;
@@ -2184,11 +2222,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement___init_
   __pyx_L3:;
 
   /* "src/wrapper.pyx":47
- * 	cdef object converter
- * 	cdef cArgConverter c_converter
- * 	def __init__( self, wrapper, index, converter ):             # <<<<<<<<<<<<<<
- * 		self.wrapper = wrapper
- * 		self.index = index
+ *     cdef object converter
+ *     cdef cArgConverter c_converter
+ *     def __init__( self, wrapper, index, converter ):             # <<<<<<<<<<<<<<
+ *         self.wrapper = wrapper
+ *         self.index = index
  */
 
   /* function exit code */
@@ -2204,11 +2242,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement___init_
 }
 
 /* "src/wrapper.pyx":58
- * 			self.doCAPI = False
- * 			self.callable = hasattr( converter, '__call__' )
- * 	def __call__( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
- * 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
- * 		return self.c_call( pyArgs )
+ *             self.doCAPI = False
+ *             self.callable = hasattr( converter, '__call__' )
+ *     def __call__( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
+ *         """If callable, call converter( pyArgs, index, wrapper ), else return converter"""
+ *         return self.c_call( pyArgs )
  */
 
 /* Python wrapper */
@@ -2282,11 +2320,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_2
   __Pyx_RefNannySetupContext("__call__", 0);
 
   /* "src/wrapper.pyx":60
- * 	def __call__( self, tuple pyArgs ):
- * 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
- * 		return self.c_call( pyArgs )             # <<<<<<<<<<<<<<
- * 	cdef object c_call( self, tuple pyArgs ):
- * 		try:
+ *     def __call__( self, tuple pyArgs ):
+ *         """If callable, call converter( pyArgs, index, wrapper ), else return converter"""
+ *         return self.c_call( pyArgs )             # <<<<<<<<<<<<<<
+ *     cdef object c_call( self, tuple pyArgs ):
+ *         try:
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgCalculatorElement *)__pyx_v_self->__pyx_vtab)->c_call(__pyx_v_self, __pyx_v_pyArgs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -2296,11 +2334,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_2
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":58
- * 			self.doCAPI = False
- * 			self.callable = hasattr( converter, '__call__' )
- * 	def __call__( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
- * 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
- * 		return self.c_call( pyArgs )
+ *             self.doCAPI = False
+ *             self.callable = hasattr( converter, '__call__' )
+ *     def __call__( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
+ *         """If callable, call converter( pyArgs, index, wrapper ), else return converter"""
+ *         return self.c_call( pyArgs )
  */
 
   /* function exit code */
@@ -2315,11 +2353,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_2
 }
 
 /* "src/wrapper.pyx":61
- * 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
- * 		return self.c_call( pyArgs )
- * 	cdef object c_call( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
- * 		try:
- * 			if self.doCAPI:
+ *         """If callable, call converter( pyArgs, index, wrapper ), else return converter"""
+ *         return self.c_call( pyArgs )
+ *     cdef object c_call( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
+ *         try:
+ *             if self.doCAPI:
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgCalculatorElement *__pyx_v_self, PyObject *__pyx_v_pyArgs) {
@@ -2344,11 +2382,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":62
- * 		return self.c_call( pyArgs )
- * 	cdef object c_call( self, tuple pyArgs ):
- * 		try:             # <<<<<<<<<<<<<<
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+ *         return self.c_call( pyArgs )
+ *     cdef object c_call( self, tuple pyArgs ):
+ *         try:             # <<<<<<<<<<<<<<
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
  */
   {
     __Pyx_ExceptionSave(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3);
@@ -2358,21 +2396,21 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
     /*try:*/ {
 
       /* "src/wrapper.pyx":63
- * 	cdef object c_call( self, tuple pyArgs ):
- * 		try:
- * 			if self.doCAPI:             # <<<<<<<<<<<<<<
- * 				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
- * 			elif self.callable:
+ *     cdef object c_call( self, tuple pyArgs ):
+ *         try:
+ *             if self.doCAPI:             # <<<<<<<<<<<<<<
+ *                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+ *             elif self.callable:
  */
       __pyx_t_4 = (__pyx_v_self->doCAPI != 0);
       if (__pyx_t_4) {
 
         /* "src/wrapper.pyx":64
- * 		try:
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )             # <<<<<<<<<<<<<<
- * 			elif self.callable:
- * 				return self.converter.__call__( pyArgs, self.index, self.wrapper )
+ *         try:
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )             # <<<<<<<<<<<<<<
+ *             elif self.callable:
+ *                 return self.converter.__call__( pyArgs, self.index, self.wrapper )
  */
         __Pyx_XDECREF(__pyx_r);
         __pyx_t_5 = __pyx_v_self->wrapper;
@@ -2385,30 +2423,30 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
         goto __pyx_L7_try_return;
 
         /* "src/wrapper.pyx":63
- * 	cdef object c_call( self, tuple pyArgs ):
- * 		try:
- * 			if self.doCAPI:             # <<<<<<<<<<<<<<
- * 				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
- * 			elif self.callable:
+ *     cdef object c_call( self, tuple pyArgs ):
+ *         try:
+ *             if self.doCAPI:             # <<<<<<<<<<<<<<
+ *                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+ *             elif self.callable:
  */
       }
 
       /* "src/wrapper.pyx":65
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
- * 			elif self.callable:             # <<<<<<<<<<<<<<
- * 				return self.converter.__call__( pyArgs, self.index, self.wrapper )
- * 		except Exception, err:
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+ *             elif self.callable:             # <<<<<<<<<<<<<<
+ *                 return self.converter.__call__( pyArgs, self.index, self.wrapper )
+ *         except Exception, err:
  */
       __pyx_t_4 = (__pyx_v_self->callable != 0);
       if (__pyx_t_4) {
 
         /* "src/wrapper.pyx":66
- * 				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
- * 			elif self.callable:
- * 				return self.converter.__call__( pyArgs, self.index, self.wrapper )             # <<<<<<<<<<<<<<
- * 		except Exception, err:
- * 			err.args += ( self.index, self.wrapper )
+ *                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+ *             elif self.callable:
+ *                 return self.converter.__call__( pyArgs, self.index, self.wrapper )             # <<<<<<<<<<<<<<
+ *         except Exception, err:
+ *             err.args += ( self.index, self.wrapper )
  */
         __Pyx_XDECREF(__pyx_r);
         __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->converter, __pyx_n_s_call); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
@@ -2450,20 +2488,20 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
         goto __pyx_L7_try_return;
 
         /* "src/wrapper.pyx":65
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
- * 			elif self.callable:             # <<<<<<<<<<<<<<
- * 				return self.converter.__call__( pyArgs, self.index, self.wrapper )
- * 		except Exception, err:
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+ *             elif self.callable:             # <<<<<<<<<<<<<<
+ *                 return self.converter.__call__( pyArgs, self.index, self.wrapper )
+ *         except Exception, err:
  */
       }
 
       /* "src/wrapper.pyx":62
- * 		return self.c_call( pyArgs )
- * 	cdef object c_call( self, tuple pyArgs ):
- * 		try:             # <<<<<<<<<<<<<<
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+ *         return self.c_call( pyArgs )
+ *     cdef object c_call( self, tuple pyArgs ):
+ *         try:             # <<<<<<<<<<<<<<
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
  */
     }
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2478,11 +2516,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
 
     /* "src/wrapper.pyx":67
- * 			elif self.callable:
- * 				return self.converter.__call__( pyArgs, self.index, self.wrapper )
- * 		except Exception, err:             # <<<<<<<<<<<<<<
- * 			err.args += ( self.index, self.wrapper )
- * 			raise
+ *             elif self.callable:
+ *                 return self.converter.__call__( pyArgs, self.index, self.wrapper )
+ *         except Exception, err:             # <<<<<<<<<<<<<<
+ *             err.args += ( self.index, self.wrapper )
+ *             raise
  */
     __pyx_t_11 = PyErr_ExceptionMatches(__pyx_builtin_Exception);
     if (__pyx_t_11) {
@@ -2495,11 +2533,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
       __pyx_v_err = __pyx_t_5;
 
       /* "src/wrapper.pyx":68
- * 				return self.converter.__call__( pyArgs, self.index, self.wrapper )
- * 		except Exception, err:
- * 			err.args += ( self.index, self.wrapper )             # <<<<<<<<<<<<<<
- * 			raise
- * 		return self.converter
+ *                 return self.converter.__call__( pyArgs, self.index, self.wrapper )
+ *         except Exception, err:
+ *             err.args += ( self.index, self.wrapper )             # <<<<<<<<<<<<<<
+ *             raise
+ *         return self.converter
  */
       __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_err, __pyx_n_s_args); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_7);
@@ -2521,10 +2559,10 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
       /* "src/wrapper.pyx":69
- * 		except Exception, err:
- * 			err.args += ( self.index, self.wrapper )
- * 			raise             # <<<<<<<<<<<<<<
- * 		return self.converter
+ *         except Exception, err:
+ *             err.args += ( self.index, self.wrapper )
+ *             raise             # <<<<<<<<<<<<<<
+ *         return self.converter
  * 
  */
       __Pyx_GIVEREF(__pyx_t_6);
@@ -2538,11 +2576,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
     __pyx_L5_except_error:;
 
     /* "src/wrapper.pyx":62
- * 		return self.c_call( pyArgs )
- * 	cdef object c_call( self, tuple pyArgs ):
- * 		try:             # <<<<<<<<<<<<<<
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
+ *         return self.c_call( pyArgs )
+ *     cdef object c_call( self, tuple pyArgs ):
+ *         try:             # <<<<<<<<<<<<<<
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
  */
     __Pyx_XGIVEREF(__pyx_t_1);
     __Pyx_XGIVEREF(__pyx_t_2);
@@ -2559,9 +2597,9 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
   }
 
   /* "src/wrapper.pyx":70
- * 			err.args += ( self.index, self.wrapper )
- * 			raise
- * 		return self.converter             # <<<<<<<<<<<<<<
+ *             err.args += ( self.index, self.wrapper )
+ *             raise
+ *         return self.converter             # <<<<<<<<<<<<<<
  * 
  * cdef class CArgCalculator:
  */
@@ -2571,11 +2609,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":61
- * 		"""If callable, call converter( pyArgs, index, wrapper ), else return converter"""
- * 		return self.c_call( pyArgs )
- * 	cdef object c_call( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
- * 		try:
- * 			if self.doCAPI:
+ *         """If callable, call converter( pyArgs, index, wrapper ), else return converter"""
+ *         return self.c_call( pyArgs )
+ *     cdef object c_call( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
+ *         try:
+ *             if self.doCAPI:
  */
 
   /* function exit code */
@@ -2596,11 +2634,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21CArgCalculatorElement_c_
 }
 
 /* "src/wrapper.pyx":75
- * 	"""C-coded version of the c-arg calculator pattern"""
- * 	cdef list mapping
- * 	def __init__(             # <<<<<<<<<<<<<<
- * 		self,
- * 		wrapper,
+ *     """C-coded version of the c-arg calculator pattern"""
+ *     cdef list mapping
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *         self,
+ *         wrapper,
  */
 
 /* Python wrapper */
@@ -2682,11 +2720,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_14CArgCalculator___init__(struc
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":80
- * 		cConverters
- * 	):
- * 		self.mapping = [             # <<<<<<<<<<<<<<
- * 			CArgCalculatorElement(wrapper,i,converter)
- * 			for (i,converter) in enumerate( cConverters )
+ *         cConverters
+ *     ):
+ *         self.mapping = [             # <<<<<<<<<<<<<<
+ *             CArgCalculatorElement(wrapper,i,converter)
+ *             for (i,converter) in enumerate( cConverters )
  */
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -2694,11 +2732,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_14CArgCalculator___init__(struc
   __pyx_t_2 = __pyx_int_0;
 
   /* "src/wrapper.pyx":82
- * 		self.mapping = [
- * 			CArgCalculatorElement(wrapper,i,converter)
- * 			for (i,converter) in enumerate( cConverters )             # <<<<<<<<<<<<<<
- * 		]
- * 	def __call__( self, tuple pyArgs ):
+ *         self.mapping = [
+ *             CArgCalculatorElement(wrapper,i,converter)
+ *             for (i,converter) in enumerate( cConverters )             # <<<<<<<<<<<<<<
+ *         ]
+ *     def __call__( self, tuple pyArgs ):
  */
   if (likely(PyList_CheckExact(__pyx_v_cConverters)) || PyTuple_CheckExact(__pyx_v_cConverters)) {
     __pyx_t_3 = __pyx_v_cConverters; __Pyx_INCREF(__pyx_t_3); __pyx_t_4 = 0;
@@ -2750,11 +2788,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_14CArgCalculator___init__(struc
     __pyx_t_6 = 0;
 
     /* "src/wrapper.pyx":81
- * 	):
- * 		self.mapping = [
- * 			CArgCalculatorElement(wrapper,i,converter)             # <<<<<<<<<<<<<<
- * 			for (i,converter) in enumerate( cConverters )
- * 		]
+ *     ):
+ *         self.mapping = [
+ *             CArgCalculatorElement(wrapper,i,converter)             # <<<<<<<<<<<<<<
+ *             for (i,converter) in enumerate( cConverters )
+ *         ]
  */
     __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
@@ -2774,22 +2812,22 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_14CArgCalculator___init__(struc
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
     /* "src/wrapper.pyx":82
- * 		self.mapping = [
- * 			CArgCalculatorElement(wrapper,i,converter)
- * 			for (i,converter) in enumerate( cConverters )             # <<<<<<<<<<<<<<
- * 		]
- * 	def __call__( self, tuple pyArgs ):
+ *         self.mapping = [
+ *             CArgCalculatorElement(wrapper,i,converter)
+ *             for (i,converter) in enumerate( cConverters )             # <<<<<<<<<<<<<<
+ *         ]
+ *     def __call__( self, tuple pyArgs ):
  */
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "src/wrapper.pyx":80
- * 		cConverters
- * 	):
- * 		self.mapping = [             # <<<<<<<<<<<<<<
- * 			CArgCalculatorElement(wrapper,i,converter)
- * 			for (i,converter) in enumerate( cConverters )
+ *         cConverters
+ *     ):
+ *         self.mapping = [             # <<<<<<<<<<<<<<
+ *             CArgCalculatorElement(wrapper,i,converter)
+ *             for (i,converter) in enumerate( cConverters )
  */
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->mapping);
@@ -2798,11 +2836,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_14CArgCalculator___init__(struc
   __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":75
- * 	"""C-coded version of the c-arg calculator pattern"""
- * 	cdef list mapping
- * 	def __init__(             # <<<<<<<<<<<<<<
- * 		self,
- * 		wrapper,
+ *     """C-coded version of the c-arg calculator pattern"""
+ *     cdef list mapping
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *         self,
+ *         wrapper,
  */
 
   /* function exit code */
@@ -2824,11 +2862,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_14CArgCalculator___init__(struc
 }
 
 /* "src/wrapper.pyx":84
- * 			for (i,converter) in enumerate( cConverters )
- * 		]
- * 	def __call__( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
- * 		return self.c_call( pyArgs )
- * 	cdef list c_call( self, tuple pyArgs ):
+ *             for (i,converter) in enumerate( cConverters )
+ *         ]
+ *     def __call__( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
+ *         return self.c_call( pyArgs )
+ *     cdef list c_call( self, tuple pyArgs ):
  */
 
 /* Python wrapper */
@@ -2898,11 +2936,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_14CArgCalculator_2__call_
   __Pyx_RefNannySetupContext("__call__", 0);
 
   /* "src/wrapper.pyx":85
- * 		]
- * 	def __call__( self, tuple pyArgs ):
- * 		return self.c_call( pyArgs )             # <<<<<<<<<<<<<<
- * 	cdef list c_call( self, tuple pyArgs ):
- * 		return [
+ *         ]
+ *     def __call__( self, tuple pyArgs ):
+ *         return self.c_call( pyArgs )             # <<<<<<<<<<<<<<
+ *     cdef list c_call( self, tuple pyArgs ):
+ *         return [
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgCalculator *)__pyx_v_self->__pyx_vtab)->c_call(__pyx_v_self, __pyx_v_pyArgs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -2912,11 +2950,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_14CArgCalculator_2__call_
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":84
- * 			for (i,converter) in enumerate( cConverters )
- * 		]
- * 	def __call__( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
- * 		return self.c_call( pyArgs )
- * 	cdef list c_call( self, tuple pyArgs ):
+ *             for (i,converter) in enumerate( cConverters )
+ *         ]
+ *     def __call__( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
+ *         return self.c_call( pyArgs )
+ *     cdef list c_call( self, tuple pyArgs ):
  */
 
   /* function exit code */
@@ -2931,11 +2969,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_14CArgCalculator_2__call_
 }
 
 /* "src/wrapper.pyx":86
- * 	def __call__( self, tuple pyArgs ):
- * 		return self.c_call( pyArgs )
- * 	cdef list c_call( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
- * 		return [
- * 			(<CArgCalculatorElement> calc).c_call( pyArgs )
+ *     def __call__( self, tuple pyArgs ):
+ *         return self.c_call( pyArgs )
+ *     cdef list c_call( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
+ *         return [
+ *             (<CArgCalculatorElement> calc).c_call( pyArgs )
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_14CArgCalculator_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgCalculator *__pyx_v_self, PyObject *__pyx_v_pyArgs) {
@@ -2952,21 +2990,21 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_14CArgCalculator_c_call(st
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":87
- * 		return self.c_call( pyArgs )
- * 	cdef list c_call( self, tuple pyArgs ):
- * 		return [             # <<<<<<<<<<<<<<
- * 			(<CArgCalculatorElement> calc).c_call( pyArgs )
- * 			for calc in self.mapping
+ *         return self.c_call( pyArgs )
+ *     cdef list c_call( self, tuple pyArgs ):
+ *         return [             # <<<<<<<<<<<<<<
+ *             (<CArgCalculatorElement> calc).c_call( pyArgs )
+ *             for calc in self.mapping
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
   /* "src/wrapper.pyx":89
- * 		return [
- * 			(<CArgCalculatorElement> calc).c_call( pyArgs )
- * 			for calc in self.mapping             # <<<<<<<<<<<<<<
- * 		]
+ *         return [
+ *             (<CArgCalculatorElement> calc).c_call( pyArgs )
+ *             for calc in self.mapping             # <<<<<<<<<<<<<<
+ *         ]
  * 
  */
   if (unlikely(__pyx_v_self->mapping == Py_None)) {
@@ -2986,11 +3024,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_14CArgCalculator_c_call(st
     __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":88
- * 	cdef list c_call( self, tuple pyArgs ):
- * 		return [
- * 			(<CArgCalculatorElement> calc).c_call( pyArgs )             # <<<<<<<<<<<<<<
- * 			for calc in self.mapping
- * 		]
+ *     cdef list c_call( self, tuple pyArgs ):
+ *         return [
+ *             (<CArgCalculatorElement> calc).c_call( pyArgs )             # <<<<<<<<<<<<<<
+ *             for calc in self.mapping
+ *         ]
  */
     __pyx_t_4 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgCalculatorElement *)((struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgCalculatorElement *)__pyx_v_calc)->__pyx_vtab)->c_call(((struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgCalculatorElement *)__pyx_v_calc), __pyx_v_pyArgs); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
@@ -2998,10 +3036,10 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_14CArgCalculator_c_call(st
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":89
- * 		return [
- * 			(<CArgCalculatorElement> calc).c_call( pyArgs )
- * 			for calc in self.mapping             # <<<<<<<<<<<<<<
- * 		]
+ *         return [
+ *             (<CArgCalculatorElement> calc).c_call( pyArgs )
+ *             for calc in self.mapping             # <<<<<<<<<<<<<<
+ *         ]
  * 
  */
   }
@@ -3011,11 +3049,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_14CArgCalculator_c_call(st
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":86
- * 	def __call__( self, tuple pyArgs ):
- * 		return self.c_call( pyArgs )
- * 	cdef list c_call( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
- * 		return [
- * 			(<CArgCalculatorElement> calc).c_call( pyArgs )
+ *     def __call__( self, tuple pyArgs ):
+ *         return self.c_call( pyArgs )
+ *     cdef list c_call( self, tuple pyArgs ):             # <<<<<<<<<<<<<<
+ *         return [
+ *             (<CArgCalculatorElement> calc).c_call( pyArgs )
  */
 
   /* function exit code */
@@ -3033,11 +3071,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_14CArgCalculator_c_call(st
 }
 
 /* "src/wrapper.pyx":99
- * 	cdef object converter
- * 	cdef pyArgConverter c_converter
- * 	def __init__( self, wrapper, index, converter ):             # <<<<<<<<<<<<<<
- * 		self.wrapper = wrapper
- * 		self.index = index
+ *     cdef object converter
+ *     cdef pyArgConverter c_converter
+ *     def __init__( self, wrapper, index, converter ):             # <<<<<<<<<<<<<<
+ *         self.wrapper = wrapper
+ *         self.index = index
  */
 
 /* Python wrapper */
@@ -3123,11 +3161,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement___init
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":100
- * 	cdef pyArgConverter c_converter
- * 	def __init__( self, wrapper, index, converter ):
- * 		self.wrapper = wrapper             # <<<<<<<<<<<<<<
- * 		self.index = index
- * 		if isinstance( converter, pyArgConverter ):
+ *     cdef pyArgConverter c_converter
+ *     def __init__( self, wrapper, index, converter ):
+ *         self.wrapper = wrapper             # <<<<<<<<<<<<<<
+ *         self.index = index
+ *         if isinstance( converter, pyArgConverter ):
  */
   __Pyx_INCREF(__pyx_v_wrapper);
   __Pyx_GIVEREF(__pyx_v_wrapper);
@@ -3136,41 +3174,41 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement___init
   __pyx_v_self->wrapper = __pyx_v_wrapper;
 
   /* "src/wrapper.pyx":101
- * 	def __init__( self, wrapper, index, converter ):
- * 		self.wrapper = wrapper
- * 		self.index = index             # <<<<<<<<<<<<<<
- * 		if isinstance( converter, pyArgConverter ):
- * 			self.doCAPI = True
+ *     def __init__( self, wrapper, index, converter ):
+ *         self.wrapper = wrapper
+ *         self.index = index             # <<<<<<<<<<<<<<
+ *         if isinstance( converter, pyArgConverter ):
+ *             self.doCAPI = True
  */
   __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_index); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->index = __pyx_t_1;
 
   /* "src/wrapper.pyx":102
- * 		self.wrapper = wrapper
- * 		self.index = index
- * 		if isinstance( converter, pyArgConverter ):             # <<<<<<<<<<<<<<
- * 			self.doCAPI = True
- * 			self.c_converter = converter
+ *         self.wrapper = wrapper
+ *         self.index = index
+ *         if isinstance( converter, pyArgConverter ):             # <<<<<<<<<<<<<<
+ *             self.doCAPI = True
+ *             self.c_converter = converter
  */
   __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_converter, __pyx_ptype_17OpenGL_accelerate_7wrapper_pyArgConverter); 
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
     /* "src/wrapper.pyx":103
- * 		self.index = index
- * 		if isinstance( converter, pyArgConverter ):
- * 			self.doCAPI = True             # <<<<<<<<<<<<<<
- * 			self.c_converter = converter
- * 		else:
+ *         self.index = index
+ *         if isinstance( converter, pyArgConverter ):
+ *             self.doCAPI = True             # <<<<<<<<<<<<<<
+ *             self.c_converter = converter
+ *         else:
  */
     __pyx_v_self->doCAPI = 1;
 
     /* "src/wrapper.pyx":104
- * 		if isinstance( converter, pyArgConverter ):
- * 			self.doCAPI = True
- * 			self.c_converter = converter             # <<<<<<<<<<<<<<
- * 		else:
- * 			self.doCAPI = False
+ *         if isinstance( converter, pyArgConverter ):
+ *             self.doCAPI = True
+ *             self.c_converter = converter             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.doCAPI = False
  */
     if (!(likely(((__pyx_v_converter) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_converter, __pyx_ptype_17OpenGL_accelerate_7wrapper_pyArgConverter))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_4 = __pyx_v_converter;
@@ -3182,31 +3220,31 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement___init
     __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":102
- * 		self.wrapper = wrapper
- * 		self.index = index
- * 		if isinstance( converter, pyArgConverter ):             # <<<<<<<<<<<<<<
- * 			self.doCAPI = True
- * 			self.c_converter = converter
+ *         self.wrapper = wrapper
+ *         self.index = index
+ *         if isinstance( converter, pyArgConverter ):             # <<<<<<<<<<<<<<
+ *             self.doCAPI = True
+ *             self.c_converter = converter
  */
     goto __pyx_L3;
   }
 
   /* "src/wrapper.pyx":106
- * 			self.c_converter = converter
- * 		else:
- * 			self.doCAPI = False             # <<<<<<<<<<<<<<
- * 			self.converter = converter
- * 	def __call__( self, tuple args ):
+ *             self.c_converter = converter
+ *         else:
+ *             self.doCAPI = False             # <<<<<<<<<<<<<<
+ *             self.converter = converter
+ *     def __call__( self, tuple args ):
  */
   /*else*/ {
     __pyx_v_self->doCAPI = 0;
 
     /* "src/wrapper.pyx":107
- * 		else:
- * 			self.doCAPI = False
- * 			self.converter = converter             # <<<<<<<<<<<<<<
- * 	def __call__( self, tuple args ):
- * 		"""If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
+ *         else:
+ *             self.doCAPI = False
+ *             self.converter = converter             # <<<<<<<<<<<<<<
+ *     def __call__( self, tuple args ):
+ *         """If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
  */
     __Pyx_INCREF(__pyx_v_converter);
     __Pyx_GIVEREF(__pyx_v_converter);
@@ -3217,11 +3255,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement___init
   __pyx_L3:;
 
   /* "src/wrapper.pyx":99
- * 	cdef object converter
- * 	cdef pyArgConverter c_converter
- * 	def __init__( self, wrapper, index, converter ):             # <<<<<<<<<<<<<<
- * 		self.wrapper = wrapper
- * 		self.index = index
+ *     cdef object converter
+ *     cdef pyArgConverter c_converter
+ *     def __init__( self, wrapper, index, converter ):             # <<<<<<<<<<<<<<
+ *         self.wrapper = wrapper
+ *         self.index = index
  */
 
   /* function exit code */
@@ -3237,11 +3275,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement___init
 }
 
 /* "src/wrapper.pyx":108
- * 			self.doCAPI = False
- * 			self.converter = converter
- * 	def __call__( self, tuple args ):             # <<<<<<<<<<<<<<
- * 		"""If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
- * 		return self.c_call( args )
+ *             self.doCAPI = False
+ *             self.converter = converter
+ *     def __call__( self, tuple args ):             # <<<<<<<<<<<<<<
+ *         """If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
+ *         return self.c_call( args )
  */
 
 /* Python wrapper */
@@ -3315,11 +3353,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_
   __Pyx_RefNannySetupContext("__call__", 0);
 
   /* "src/wrapper.pyx":110
- * 	def __call__( self, tuple args ):
- * 		"""If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
- * 		return self.c_call( args )             # <<<<<<<<<<<<<<
- * 	cdef object c_call( self, tuple args ):
- * 		try:
+ *     def __call__( self, tuple args ):
+ *         """If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
+ *         return self.c_call( args )             # <<<<<<<<<<<<<<
+ *     cdef object c_call( self, tuple args ):
+ *         try:
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_PyArgCalculatorElement *)__pyx_v_self->__pyx_vtab)->c_call(__pyx_v_self, __pyx_v_args); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3329,11 +3367,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":108
- * 			self.doCAPI = False
- * 			self.converter = converter
- * 	def __call__( self, tuple args ):             # <<<<<<<<<<<<<<
- * 		"""If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
- * 		return self.c_call( args )
+ *             self.doCAPI = False
+ *             self.converter = converter
+ *     def __call__( self, tuple args ):             # <<<<<<<<<<<<<<
+ *         """If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
+ *         return self.c_call( args )
  */
 
   /* function exit code */
@@ -3348,11 +3386,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_
 }
 
 /* "src/wrapper.pyx":111
- * 		"""If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
- * 		return self.c_call( args )
- * 	cdef object c_call( self, tuple args ):             # <<<<<<<<<<<<<<
- * 		try:
- * 			if self.doCAPI:
+ *         """If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
+ *         return self.c_call( args )
+ *     cdef object c_call( self, tuple args ):             # <<<<<<<<<<<<<<
+ *         try:
+ *             if self.doCAPI:
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_PyArgCalculatorElement *__pyx_v_self, PyObject *__pyx_v_args) {
@@ -3378,11 +3416,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":112
- * 		return self.c_call( args )
- * 	cdef object c_call( self, tuple args ):
- * 		try:             # <<<<<<<<<<<<<<
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call(
+ *         return self.c_call( args )
+ *     cdef object c_call( self, tuple args ):
+ *         try:             # <<<<<<<<<<<<<<
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call(
  */
   {
     __Pyx_ExceptionSave(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3);
@@ -3392,30 +3430,30 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
     /*try:*/ {
 
       /* "src/wrapper.pyx":113
- * 	cdef object c_call( self, tuple args ):
- * 		try:
- * 			if self.doCAPI:             # <<<<<<<<<<<<<<
- * 				return self.c_converter.c_call(
- * 					args[self.index], self.wrapper, args,
+ *     cdef object c_call( self, tuple args ):
+ *         try:
+ *             if self.doCAPI:             # <<<<<<<<<<<<<<
+ *                 return self.c_converter.c_call(
+ *                     args[self.index], self.wrapper, args,
  */
       __pyx_t_4 = (__pyx_v_self->doCAPI != 0);
       if (__pyx_t_4) {
 
         /* "src/wrapper.pyx":114
- * 		try:
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call(             # <<<<<<<<<<<<<<
- * 					args[self.index], self.wrapper, args,
- * 				)
+ *         try:
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call(             # <<<<<<<<<<<<<<
+ *                     args[self.index], self.wrapper, args,
+ *                 )
  */
         __Pyx_XDECREF(__pyx_r);
 
         /* "src/wrapper.pyx":115
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call(
- * 					args[self.index], self.wrapper, args,             # <<<<<<<<<<<<<<
- * 				)
- * 			else:
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call(
+ *                     args[self.index], self.wrapper, args,             # <<<<<<<<<<<<<<
+ *                 )
+ *             else:
  */
         if (unlikely(__pyx_v_args == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -3427,11 +3465,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
         __Pyx_INCREF(__pyx_t_6);
 
         /* "src/wrapper.pyx":114
- * 		try:
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call(             # <<<<<<<<<<<<<<
- * 					args[self.index], self.wrapper, args,
- * 				)
+ *         try:
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call(             # <<<<<<<<<<<<<<
+ *                     args[self.index], self.wrapper, args,
+ *                 )
  */
         __pyx_t_7 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_pyArgConverter *)__pyx_v_self->c_converter->__pyx_vtab)->c_call(__pyx_v_self->c_converter, __pyx_t_5, __pyx_t_6, __pyx_v_args); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_7);
@@ -3442,20 +3480,20 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
         goto __pyx_L7_try_return;
 
         /* "src/wrapper.pyx":113
- * 	cdef object c_call( self, tuple args ):
- * 		try:
- * 			if self.doCAPI:             # <<<<<<<<<<<<<<
- * 				return self.c_converter.c_call(
- * 					args[self.index], self.wrapper, args,
+ *     cdef object c_call( self, tuple args ):
+ *         try:
+ *             if self.doCAPI:             # <<<<<<<<<<<<<<
+ *                 return self.c_converter.c_call(
+ *                     args[self.index], self.wrapper, args,
  */
       }
 
       /* "src/wrapper.pyx":118
- * 				)
- * 			else:
- * 				if self.converter is None:             # <<<<<<<<<<<<<<
- * 					return args[self.index]
- * 				if len(args) <= self.index:
+ *                 )
+ *             else:
+ *                 if self.converter is None:             # <<<<<<<<<<<<<<
+ *                     return args[self.index]
+ *                 if len(args) <= self.index:
  */
       /*else*/ {
         __pyx_t_4 = (__pyx_v_self->converter == Py_None);
@@ -3463,11 +3501,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
         if (__pyx_t_8) {
 
           /* "src/wrapper.pyx":119
- * 			else:
- * 				if self.converter is None:
- * 					return args[self.index]             # <<<<<<<<<<<<<<
- * 				if len(args) <= self.index:
- * 					return _NULL
+ *             else:
+ *                 if self.converter is None:
+ *                     return args[self.index]             # <<<<<<<<<<<<<<
+ *                 if len(args) <= self.index:
+ *                     return _NULL
  */
           __Pyx_XDECREF(__pyx_r);
           if (unlikely(__pyx_v_args == Py_None)) {
@@ -3481,20 +3519,20 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
           goto __pyx_L7_try_return;
 
           /* "src/wrapper.pyx":118
- * 				)
- * 			else:
- * 				if self.converter is None:             # <<<<<<<<<<<<<<
- * 					return args[self.index]
- * 				if len(args) <= self.index:
+ *                 )
+ *             else:
+ *                 if self.converter is None:             # <<<<<<<<<<<<<<
+ *                     return args[self.index]
+ *                 if len(args) <= self.index:
  */
         }
 
         /* "src/wrapper.pyx":120
- * 				if self.converter is None:
- * 					return args[self.index]
- * 				if len(args) <= self.index:             # <<<<<<<<<<<<<<
- * 					return _NULL
- * 				return self.converter(
+ *                 if self.converter is None:
+ *                     return args[self.index]
+ *                 if len(args) <= self.index:             # <<<<<<<<<<<<<<
+ *                     return _NULL
+ *                 return self.converter(
  */
         if (unlikely(__pyx_v_args == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
@@ -3505,11 +3543,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
         if (__pyx_t_8) {
 
           /* "src/wrapper.pyx":121
- * 					return args[self.index]
- * 				if len(args) <= self.index:
- * 					return _NULL             # <<<<<<<<<<<<<<
- * 				return self.converter(
- * 					args[self.index], self.wrapper, args
+ *                     return args[self.index]
+ *                 if len(args) <= self.index:
+ *                     return _NULL             # <<<<<<<<<<<<<<
+ *                 return self.converter(
+ *                     args[self.index], self.wrapper, args
  */
           __Pyx_XDECREF(__pyx_r);
           __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
@@ -3519,29 +3557,29 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
           goto __pyx_L7_try_return;
 
           /* "src/wrapper.pyx":120
- * 				if self.converter is None:
- * 					return args[self.index]
- * 				if len(args) <= self.index:             # <<<<<<<<<<<<<<
- * 					return _NULL
- * 				return self.converter(
+ *                 if self.converter is None:
+ *                     return args[self.index]
+ *                 if len(args) <= self.index:             # <<<<<<<<<<<<<<
+ *                     return _NULL
+ *                 return self.converter(
  */
         }
 
         /* "src/wrapper.pyx":122
- * 				if len(args) <= self.index:
- * 					return _NULL
- * 				return self.converter(             # <<<<<<<<<<<<<<
- * 					args[self.index], self.wrapper, args
- * 				)
+ *                 if len(args) <= self.index:
+ *                     return _NULL
+ *                 return self.converter(             # <<<<<<<<<<<<<<
+ *                     args[self.index], self.wrapper, args
+ *                 )
  */
         __Pyx_XDECREF(__pyx_r);
 
         /* "src/wrapper.pyx":123
- * 					return _NULL
- * 				return self.converter(
- * 					args[self.index], self.wrapper, args             # <<<<<<<<<<<<<<
- * 				)
- * 		except Exception, err:
+ *                     return _NULL
+ *                 return self.converter(
+ *                     args[self.index], self.wrapper, args             # <<<<<<<<<<<<<<
+ *                 )
+ *         except Exception, err:
  */
         if (unlikely(__pyx_v_args == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -3551,11 +3589,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
         __Pyx_GOTREF(__pyx_t_6);
 
         /* "src/wrapper.pyx":124
- * 				return self.converter(
- * 					args[self.index], self.wrapper, args
- * 				)             # <<<<<<<<<<<<<<
- * 		except Exception, err:
- * 			if hasattr( err, 'args' ):
+ *                 return self.converter(
+ *                     args[self.index], self.wrapper, args
+ *                 )             # <<<<<<<<<<<<<<
+ *         except Exception, err:
+ *             if hasattr( err, 'args' ):
  */
         __Pyx_INCREF(__pyx_v_self->converter);
         __pyx_t_5 = __pyx_v_self->converter; __pyx_t_10 = NULL;
@@ -3594,11 +3632,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
       }
 
       /* "src/wrapper.pyx":112
- * 		return self.c_call( args )
- * 	cdef object c_call( self, tuple args ):
- * 		try:             # <<<<<<<<<<<<<<
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call(
+ *         return self.c_call( args )
+ *     cdef object c_call( self, tuple args ):
+ *         try:             # <<<<<<<<<<<<<<
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call(
  */
     }
     __pyx_L3_error:;
@@ -3609,11 +3647,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
 
     /* "src/wrapper.pyx":125
- * 					args[self.index], self.wrapper, args
- * 				)
- * 		except Exception, err:             # <<<<<<<<<<<<<<
- * 			if hasattr( err, 'args' ):
- * 				err.args += ( self.converter, )
+ *                     args[self.index], self.wrapper, args
+ *                 )
+ *         except Exception, err:             # <<<<<<<<<<<<<<
+ *             if hasattr( err, 'args' ):
+ *                 err.args += ( self.converter, )
  */
     __pyx_t_12 = PyErr_ExceptionMatches(__pyx_builtin_Exception);
     if (__pyx_t_12) {
@@ -3626,21 +3664,21 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
       __pyx_v_err = __pyx_t_5;
 
       /* "src/wrapper.pyx":126
- * 				)
- * 		except Exception, err:
- * 			if hasattr( err, 'args' ):             # <<<<<<<<<<<<<<
- * 				err.args += ( self.converter, )
- * 			raise
+ *                 )
+ *         except Exception, err:
+ *             if hasattr( err, 'args' ):             # <<<<<<<<<<<<<<
+ *                 err.args += ( self.converter, )
+ *             raise
  */
       __pyx_t_8 = PyObject_HasAttr(__pyx_v_err, __pyx_n_s_args); if (unlikely(__pyx_t_8 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __pyx_t_4 = (__pyx_t_8 != 0);
       if (__pyx_t_4) {
 
         /* "src/wrapper.pyx":127
- * 		except Exception, err:
- * 			if hasattr( err, 'args' ):
- * 				err.args += ( self.converter, )             # <<<<<<<<<<<<<<
- * 			raise
+ *         except Exception, err:
+ *             if hasattr( err, 'args' ):
+ *                 err.args += ( self.converter, )             # <<<<<<<<<<<<<<
+ *             raise
  * 
  */
         __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_err, __pyx_n_s_args); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
@@ -3658,18 +3696,18 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
         /* "src/wrapper.pyx":126
- * 				)
- * 		except Exception, err:
- * 			if hasattr( err, 'args' ):             # <<<<<<<<<<<<<<
- * 				err.args += ( self.converter, )
- * 			raise
+ *                 )
+ *         except Exception, err:
+ *             if hasattr( err, 'args' ):             # <<<<<<<<<<<<<<
+ *                 err.args += ( self.converter, )
+ *             raise
  */
       }
 
       /* "src/wrapper.pyx":128
- * 			if hasattr( err, 'args' ):
- * 				err.args += ( self.converter, )
- * 			raise             # <<<<<<<<<<<<<<
+ *             if hasattr( err, 'args' ):
+ *                 err.args += ( self.converter, )
+ *             raise             # <<<<<<<<<<<<<<
  * 
  * cdef class PyArgCalculator:
  */
@@ -3684,11 +3722,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
     __pyx_L5_except_error:;
 
     /* "src/wrapper.pyx":112
- * 		return self.c_call( args )
- * 	cdef object c_call( self, tuple args ):
- * 		try:             # <<<<<<<<<<<<<<
- * 			if self.doCAPI:
- * 				return self.c_converter.c_call(
+ *         return self.c_call( args )
+ *     cdef object c_call( self, tuple args ):
+ *         try:             # <<<<<<<<<<<<<<
+ *             if self.doCAPI:
+ *                 return self.c_converter.c_call(
  */
     __Pyx_XGIVEREF(__pyx_t_1);
     __Pyx_XGIVEREF(__pyx_t_2);
@@ -3704,11 +3742,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
   }
 
   /* "src/wrapper.pyx":111
- * 		"""If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
- * 		return self.c_call( args )
- * 	cdef object c_call( self, tuple args ):             # <<<<<<<<<<<<<<
- * 		try:
- * 			if self.doCAPI:
+ *         """If converter is not None, call converter( pyArgs[self.index],  wrapper, pyArgs ), else return args[self.index]"""
+ *         return self.c_call( args )
+ *     cdef object c_call( self, tuple args ):             # <<<<<<<<<<<<<<
+ *         try:
+ *             if self.doCAPI:
  */
 
   /* function exit code */
@@ -3729,11 +3767,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_22PyArgCalculatorElement_c
 }
 
 /* "src/wrapper.pyx":135
- * 	cdef int length
- * 	cdef object wrapper
- * 	def __init__(             # <<<<<<<<<<<<<<
- * 		self,
- * 		wrapper,
+ *     cdef int length
+ *     cdef object wrapper
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *         self,
+ *         wrapper,
  */
 
 /* Python wrapper */
@@ -3818,11 +3856,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator___init__(stru
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":140
- * 		pyConverters
- * 	):
- * 		self.wrapper = wrapper             # <<<<<<<<<<<<<<
- * 		self.mapping = [
- * 			PyArgCalculatorElement(self,i,converter)
+ *         pyConverters
+ *     ):
+ *         self.wrapper = wrapper             # <<<<<<<<<<<<<<
+ *         self.mapping = [
+ *             PyArgCalculatorElement(self,i,converter)
  */
   __Pyx_INCREF(__pyx_v_wrapper);
   __Pyx_GIVEREF(__pyx_v_wrapper);
@@ -3831,11 +3869,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator___init__(stru
   __pyx_v_self->wrapper = __pyx_v_wrapper;
 
   /* "src/wrapper.pyx":141
- * 	):
- * 		self.wrapper = wrapper
- * 		self.mapping = [             # <<<<<<<<<<<<<<
- * 			PyArgCalculatorElement(self,i,converter)
- * 			for (i,converter) in enumerate( pyConverters )
+ *     ):
+ *         self.wrapper = wrapper
+ *         self.mapping = [             # <<<<<<<<<<<<<<
+ *             PyArgCalculatorElement(self,i,converter)
+ *             for (i,converter) in enumerate( pyConverters )
  */
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -3843,11 +3881,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator___init__(stru
   __pyx_t_2 = __pyx_int_0;
 
   /* "src/wrapper.pyx":143
- * 		self.mapping = [
- * 			PyArgCalculatorElement(self,i,converter)
- * 			for (i,converter) in enumerate( pyConverters )             # <<<<<<<<<<<<<<
- * 		]
- * 		self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])
+ *         self.mapping = [
+ *             PyArgCalculatorElement(self,i,converter)
+ *             for (i,converter) in enumerate( pyConverters )             # <<<<<<<<<<<<<<
+ *         ]
+ *         self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])
  */
   if (likely(PyList_CheckExact(__pyx_v_pyConverters)) || PyTuple_CheckExact(__pyx_v_pyConverters)) {
     __pyx_t_3 = __pyx_v_pyConverters; __Pyx_INCREF(__pyx_t_3); __pyx_t_4 = 0;
@@ -3899,11 +3937,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator___init__(stru
     __pyx_t_6 = 0;
 
     /* "src/wrapper.pyx":142
- * 		self.wrapper = wrapper
- * 		self.mapping = [
- * 			PyArgCalculatorElement(self,i,converter)             # <<<<<<<<<<<<<<
- * 			for (i,converter) in enumerate( pyConverters )
- * 		]
+ *         self.wrapper = wrapper
+ *         self.mapping = [
+ *             PyArgCalculatorElement(self,i,converter)             # <<<<<<<<<<<<<<
+ *             for (i,converter) in enumerate( pyConverters )
+ *         ]
  */
     __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
@@ -3923,22 +3961,22 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator___init__(stru
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
     /* "src/wrapper.pyx":143
- * 		self.mapping = [
- * 			PyArgCalculatorElement(self,i,converter)
- * 			for (i,converter) in enumerate( pyConverters )             # <<<<<<<<<<<<<<
- * 		]
- * 		self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])
+ *         self.mapping = [
+ *             PyArgCalculatorElement(self,i,converter)
+ *             for (i,converter) in enumerate( pyConverters )             # <<<<<<<<<<<<<<
+ *         ]
+ *         self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])
  */
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "src/wrapper.pyx":141
- * 	):
- * 		self.wrapper = wrapper
- * 		self.mapping = [             # <<<<<<<<<<<<<<
- * 			PyArgCalculatorElement(self,i,converter)
- * 			for (i,converter) in enumerate( pyConverters )
+ *     ):
+ *         self.wrapper = wrapper
+ *         self.mapping = [             # <<<<<<<<<<<<<<
+ *             PyArgCalculatorElement(self,i,converter)
+ *             for (i,converter) in enumerate( pyConverters )
  */
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->mapping);
@@ -3947,11 +3985,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator___init__(stru
   __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":145
- * 			for (i,converter) in enumerate( pyConverters )
- * 		]
- * 		self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])             # <<<<<<<<<<<<<<
+ *             for (i,converter) in enumerate( pyConverters )
+ *         ]
+ *         self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])             # <<<<<<<<<<<<<<
  * 
- * 	def __call__( self, tuple args ):
+ *     def __call__( self, tuple args ):
  */
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -4011,11 +4049,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator___init__(stru
   __pyx_v_self->length = __pyx_t_4;
 
   /* "src/wrapper.pyx":135
- * 	cdef int length
- * 	cdef object wrapper
- * 	def __init__(             # <<<<<<<<<<<<<<
- * 		self,
- * 		wrapper,
+ *     cdef int length
+ *     cdef object wrapper
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *         self,
+ *         wrapper,
  */
 
   /* function exit code */
@@ -4038,11 +4076,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator___init__(stru
 }
 
 /* "src/wrapper.pyx":147
- * 		self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])
+ *         self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])
  * 
- * 	def __call__( self, tuple args ):             # <<<<<<<<<<<<<<
- * 		return self.c_call( args )
- * 	cdef list c_call( self, tuple args ):
+ *     def __call__( self, tuple args ):             # <<<<<<<<<<<<<<
+ *         return self.c_call( args )
+ *     cdef list c_call( self, tuple args ):
  */
 
 /* Python wrapper */
@@ -4113,10 +4151,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator_2__call
 
   /* "src/wrapper.pyx":148
  * 
- * 	def __call__( self, tuple args ):
- * 		return self.c_call( args )             # <<<<<<<<<<<<<<
- * 	cdef list c_call( self, tuple args ):
- * 		if self.length > len(args):
+ *     def __call__( self, tuple args ):
+ *         return self.c_call( args )             # <<<<<<<<<<<<<<
+ *     cdef list c_call( self, tuple args ):
+ *         if self.length > len(args):
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_PyArgCalculator *)__pyx_v_self->__pyx_vtab)->c_call(__pyx_v_self, __pyx_v_args); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -4126,11 +4164,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator_2__call
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":147
- * 		self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])
+ *         self.length = len([ p for p in pyConverters if not getattr(p,'optional',False)])
  * 
- * 	def __call__( self, tuple args ):             # <<<<<<<<<<<<<<
- * 		return self.c_call( args )
- * 	cdef list c_call( self, tuple args ):
+ *     def __call__( self, tuple args ):             # <<<<<<<<<<<<<<
+ *         return self.c_call( args )
+ *     cdef list c_call( self, tuple args ):
  */
 
   /* function exit code */
@@ -4145,11 +4183,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15PyArgCalculator_2__call
 }
 
 /* "src/wrapper.pyx":149
- * 	def __call__( self, tuple args ):
- * 		return self.c_call( args )
- * 	cdef list c_call( self, tuple args ):             # <<<<<<<<<<<<<<
- * 		if self.length > len(args):
- * 			raise ValueError(
+ *     def __call__( self, tuple args ):
+ *         return self.c_call( args )
+ *     cdef list c_call( self, tuple args ):             # <<<<<<<<<<<<<<
+ *         if self.length > len(args):
+ *             raise ValueError(
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_PyArgCalculator *__pyx_v_self, PyObject *__pyx_v_args) {
@@ -4169,11 +4207,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":150
- * 		return self.c_call( args )
- * 	cdef list c_call( self, tuple args ):
- * 		if self.length > len(args):             # <<<<<<<<<<<<<<
- * 			raise ValueError(
- * 				"""%s requires %r arguments (%s), received %s: %r"""%(
+ *         return self.c_call( args )
+ *     cdef list c_call( self, tuple args ):
+ *         if self.length > len(args):             # <<<<<<<<<<<<<<
+ *             raise ValueError(
+ *                 """%s requires %r arguments (%s), received %s: %r"""%(
  */
   if (unlikely(__pyx_v_args == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
@@ -4184,11 +4222,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
   if (__pyx_t_2) {
 
     /* "src/wrapper.pyx":153
- * 			raise ValueError(
- * 				"""%s requires %r arguments (%s), received %s: %r"""%(
- * 					self.wrapper.wrappedOperation.__name__,             # <<<<<<<<<<<<<<
- * 					self.length,
- * 					", ".join( self.wrapper.pyConverterNames ),
+ *             raise ValueError(
+ *                 """%s requires %r arguments (%s), received %s: %r"""%(
+ *                     self.wrapper.wrappedOperation.__name__,             # <<<<<<<<<<<<<<
+ *                     self.length,
+ *                     ", ".join( self.wrapper.pyConverterNames ),
  */
     __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->wrapper, __pyx_n_s_wrappedOperation); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -4197,21 +4235,21 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
     /* "src/wrapper.pyx":154
- * 				"""%s requires %r arguments (%s), received %s: %r"""%(
- * 					self.wrapper.wrappedOperation.__name__,
- * 					self.length,             # <<<<<<<<<<<<<<
- * 					", ".join( self.wrapper.pyConverterNames ),
- * 					len(args),
+ *                 """%s requires %r arguments (%s), received %s: %r"""%(
+ *                     self.wrapper.wrappedOperation.__name__,
+ *                     self.length,             # <<<<<<<<<<<<<<
+ *                     ", ".join( self.wrapper.pyConverterNames ),
+ *                     len(args),
  */
     __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
 
     /* "src/wrapper.pyx":155
- * 					self.wrapper.wrappedOperation.__name__,
- * 					self.length,
- * 					", ".join( self.wrapper.pyConverterNames ),             # <<<<<<<<<<<<<<
- * 					len(args),
- * 					args
+ *                     self.wrapper.wrappedOperation.__name__,
+ *                     self.length,
+ *                     ", ".join( self.wrapper.pyConverterNames ),             # <<<<<<<<<<<<<<
+ *                     len(args),
+ *                     args
  */
     __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->wrapper, __pyx_n_s_pyConverterNames); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
@@ -4220,11 +4258,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
     /* "src/wrapper.pyx":156
- * 					self.length,
- * 					", ".join( self.wrapper.pyConverterNames ),
- * 					len(args),             # <<<<<<<<<<<<<<
- * 					args
- * 				)
+ *                     self.length,
+ *                     ", ".join( self.wrapper.pyConverterNames ),
+ *                     len(args),             # <<<<<<<<<<<<<<
+ *                     args
+ *                 )
  */
     if (unlikely(__pyx_v_args == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
@@ -4235,11 +4273,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
     __Pyx_GOTREF(__pyx_t_5);
 
     /* "src/wrapper.pyx":153
- * 			raise ValueError(
- * 				"""%s requires %r arguments (%s), received %s: %r"""%(
- * 					self.wrapper.wrappedOperation.__name__,             # <<<<<<<<<<<<<<
- * 					self.length,
- * 					", ".join( self.wrapper.pyConverterNames ),
+ *             raise ValueError(
+ *                 """%s requires %r arguments (%s), received %s: %r"""%(
+ *                     self.wrapper.wrappedOperation.__name__,             # <<<<<<<<<<<<<<
+ *                     self.length,
+ *                     ", ".join( self.wrapper.pyConverterNames ),
  */
     __pyx_t_7 = PyTuple_New(5); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
@@ -4260,22 +4298,22 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
     __pyx_t_5 = 0;
 
     /* "src/wrapper.pyx":152
- * 		if self.length > len(args):
- * 			raise ValueError(
- * 				"""%s requires %r arguments (%s), received %s: %r"""%(             # <<<<<<<<<<<<<<
- * 					self.wrapper.wrappedOperation.__name__,
- * 					self.length,
+ *         if self.length > len(args):
+ *             raise ValueError(
+ *                 """%s requires %r arguments (%s), received %s: %r"""%(             # <<<<<<<<<<<<<<
+ *                     self.wrapper.wrappedOperation.__name__,
+ *                     self.length,
  */
     __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_s_requires_r_arguments_s_receiv, __pyx_t_7); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
     /* "src/wrapper.pyx":151
- * 	cdef list c_call( self, tuple args ):
- * 		if self.length > len(args):
- * 			raise ValueError(             # <<<<<<<<<<<<<<
- * 				"""%s requires %r arguments (%s), received %s: %r"""%(
- * 					self.wrapper.wrappedOperation.__name__,
+ *     cdef list c_call( self, tuple args ):
+ *         if self.length > len(args):
+ *             raise ValueError(             # <<<<<<<<<<<<<<
+ *                 """%s requires %r arguments (%s), received %s: %r"""%(
+ *                     self.wrapper.wrappedOperation.__name__,
  */
     __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
@@ -4290,30 +4328,30 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
     /* "src/wrapper.pyx":150
- * 		return self.c_call( args )
- * 	cdef list c_call( self, tuple args ):
- * 		if self.length > len(args):             # <<<<<<<<<<<<<<
- * 			raise ValueError(
- * 				"""%s requires %r arguments (%s), received %s: %r"""%(
+ *         return self.c_call( args )
+ *     cdef list c_call( self, tuple args ):
+ *         if self.length > len(args):             # <<<<<<<<<<<<<<
+ *             raise ValueError(
+ *                 """%s requires %r arguments (%s), received %s: %r"""%(
  */
   }
 
   /* "src/wrapper.pyx":160
- * 				)
- * 			)
- * 		return [             # <<<<<<<<<<<<<<
- * 			(<PyArgCalculatorElement> calc).c_call( args )
- * 			for calc in self.mapping
+ *                 )
+ *             )
+ *         return [             # <<<<<<<<<<<<<<
+ *             (<PyArgCalculatorElement> calc).c_call( args )
+ *             for calc in self.mapping
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_5 = PyList_New(0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
 
   /* "src/wrapper.pyx":162
- * 		return [
- * 			(<PyArgCalculatorElement> calc).c_call( args )
- * 			for calc in self.mapping             # <<<<<<<<<<<<<<
- * 		]
+ *         return [
+ *             (<PyArgCalculatorElement> calc).c_call( args )
+ *             for calc in self.mapping             # <<<<<<<<<<<<<<
+ *         ]
  * 
  */
   if (unlikely(__pyx_v_self->mapping == Py_None)) {
@@ -4333,11 +4371,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
     __pyx_t_6 = 0;
 
     /* "src/wrapper.pyx":161
- * 			)
- * 		return [
- * 			(<PyArgCalculatorElement> calc).c_call( args )             # <<<<<<<<<<<<<<
- * 			for calc in self.mapping
- * 		]
+ *             )
+ *         return [
+ *             (<PyArgCalculatorElement> calc).c_call( args )             # <<<<<<<<<<<<<<
+ *             for calc in self.mapping
+ *         ]
  */
     __pyx_t_6 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_PyArgCalculatorElement *)((struct __pyx_obj_17OpenGL_accelerate_7wrapper_PyArgCalculatorElement *)__pyx_v_calc)->__pyx_vtab)->c_call(((struct __pyx_obj_17OpenGL_accelerate_7wrapper_PyArgCalculatorElement *)__pyx_v_calc), __pyx_v_args); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
@@ -4345,10 +4383,10 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
     /* "src/wrapper.pyx":162
- * 		return [
- * 			(<PyArgCalculatorElement> calc).c_call( args )
- * 			for calc in self.mapping             # <<<<<<<<<<<<<<
- * 		]
+ *         return [
+ *             (<PyArgCalculatorElement> calc).c_call( args )
+ *             for calc in self.mapping             # <<<<<<<<<<<<<<
+ *         ]
  * 
  */
   }
@@ -4358,11 +4396,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":149
- * 	def __call__( self, tuple args ):
- * 		return self.c_call( args )
- * 	cdef list c_call( self, tuple args ):             # <<<<<<<<<<<<<<
- * 		if self.length > len(args):
- * 			raise ValueError(
+ *     def __call__( self, tuple args ):
+ *         return self.c_call( args )
+ *     cdef list c_call( self, tuple args ):             # <<<<<<<<<<<<<<
+ *         if self.length > len(args):
+ *             raise ValueError(
  */
 
   /* function exit code */
@@ -4382,11 +4420,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15PyArgCalculator_c_call(s
 }
 
 /* "src/wrapper.pyx":168
- * 	cdef list cResolvers
- * 	cdef int resolver_length
- * 	def __init__( self, cResolvers ):             # <<<<<<<<<<<<<<
- * 		self.cResolvers = cResolvers
- * 		self.resolver_length = len(self.cResolvers)
+ *     cdef list cResolvers
+ *     cdef int resolver_length
+ *     def __init__( self, cResolvers ):             # <<<<<<<<<<<<<<
+ *         self.cResolvers = cResolvers
+ *         self.resolver_length = len(self.cResolvers)
  */
 
 /* Python wrapper */
@@ -4452,11 +4490,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_19CArgumentCalculator___init__(
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":169
- * 	cdef int resolver_length
- * 	def __init__( self, cResolvers ):
- * 		self.cResolvers = cResolvers             # <<<<<<<<<<<<<<
- * 		self.resolver_length = len(self.cResolvers)
- * 	def __call__( self, tuple cArgs ):
+ *     cdef int resolver_length
+ *     def __init__( self, cResolvers ):
+ *         self.cResolvers = cResolvers             # <<<<<<<<<<<<<<
+ *         self.resolver_length = len(self.cResolvers)
+ *     def __call__( self, tuple cArgs ):
  */
   if (!(likely(PyList_CheckExact(__pyx_v_cResolvers))||((__pyx_v_cResolvers) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_cResolvers)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 169; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_1 = __pyx_v_cResolvers;
@@ -4468,11 +4506,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_19CArgumentCalculator___init__(
   __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":170
- * 	def __init__( self, cResolvers ):
- * 		self.cResolvers = cResolvers
- * 		self.resolver_length = len(self.cResolvers)             # <<<<<<<<<<<<<<
- * 	def __call__( self, tuple cArgs ):
- * 		return self.c_call( cArgs )
+ *     def __init__( self, cResolvers ):
+ *         self.cResolvers = cResolvers
+ *         self.resolver_length = len(self.cResolvers)             # <<<<<<<<<<<<<<
+ *     def __call__( self, tuple cArgs ):
+ *         return self.c_call( cArgs )
  */
   __pyx_t_1 = __pyx_v_self->cResolvers;
   __Pyx_INCREF(__pyx_t_1);
@@ -4485,11 +4523,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_19CArgumentCalculator___init__(
   __pyx_v_self->resolver_length = __pyx_t_2;
 
   /* "src/wrapper.pyx":168
- * 	cdef list cResolvers
- * 	cdef int resolver_length
- * 	def __init__( self, cResolvers ):             # <<<<<<<<<<<<<<
- * 		self.cResolvers = cResolvers
- * 		self.resolver_length = len(self.cResolvers)
+ *     cdef list cResolvers
+ *     cdef int resolver_length
+ *     def __init__( self, cResolvers ):             # <<<<<<<<<<<<<<
+ *         self.cResolvers = cResolvers
+ *         self.resolver_length = len(self.cResolvers)
  */
 
   /* function exit code */
@@ -4505,11 +4543,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_19CArgumentCalculator___init__(
 }
 
 /* "src/wrapper.pyx":171
- * 		self.cResolvers = cResolvers
- * 		self.resolver_length = len(self.cResolvers)
- * 	def __call__( self, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		return self.c_call( cArgs )
- * 	cdef list c_call( self, tuple cArgs ):
+ *         self.cResolvers = cResolvers
+ *         self.resolver_length = len(self.cResolvers)
+ *     def __call__( self, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         return self.c_call( cArgs )
+ *     cdef list c_call( self, tuple cArgs ):
  */
 
 /* Python wrapper */
@@ -4579,11 +4617,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_2__
   __Pyx_RefNannySetupContext("__call__", 0);
 
   /* "src/wrapper.pyx":172
- * 		self.resolver_length = len(self.cResolvers)
- * 	def __call__( self, tuple cArgs ):
- * 		return self.c_call( cArgs )             # <<<<<<<<<<<<<<
- * 	cdef list c_call( self, tuple cArgs ):
- * 		cdef int i
+ *         self.resolver_length = len(self.cResolvers)
+ *     def __call__( self, tuple cArgs ):
+ *         return self.c_call( cArgs )             # <<<<<<<<<<<<<<
+ *     cdef list c_call( self, tuple cArgs ):
+ *         cdef int i
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgumentCalculator *)__pyx_v_self->__pyx_vtab)->c_call(__pyx_v_self, __pyx_v_cArgs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -4593,11 +4631,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_2__
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":171
- * 		self.cResolvers = cResolvers
- * 		self.resolver_length = len(self.cResolvers)
- * 	def __call__( self, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		return self.c_call( cArgs )
- * 	cdef list c_call( self, tuple cArgs ):
+ *         self.cResolvers = cResolvers
+ *         self.resolver_length = len(self.cResolvers)
+ *     def __call__( self, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         return self.c_call( cArgs )
+ *     cdef list c_call( self, tuple cArgs ):
  */
 
   /* function exit code */
@@ -4612,11 +4650,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_2__
 }
 
 /* "src/wrapper.pyx":173
- * 	def __call__( self, tuple cArgs ):
- * 		return self.c_call( cArgs )
- * 	cdef list c_call( self, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		cdef int i
- * 		cdef int resolver_length
+ *     def __call__( self, tuple cArgs ):
+ *         return self.c_call( cArgs )
+ *     cdef list c_call( self, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         cdef int i
+ *         cdef int resolver_length
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_CArgumentCalculator *__pyx_v_self, PyObject *__pyx_v_cArgs) {
@@ -4647,11 +4685,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":177
- * 		cdef int resolver_length
- * 		cdef object converter
- * 		if len(cArgs) != self.resolver_length:             # <<<<<<<<<<<<<<
- * 			raise TypeError(
- * 				"""Expected %s C arguments for resolution, got %s"""%(
+ *         cdef int resolver_length
+ *         cdef object converter
+ *         if len(cArgs) != self.resolver_length:             # <<<<<<<<<<<<<<
+ *             raise TypeError(
+ *                 """Expected %s C arguments for resolution, got %s"""%(
  */
   if (unlikely(__pyx_v_cArgs == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
@@ -4662,11 +4700,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
   if (__pyx_t_2) {
 
     /* "src/wrapper.pyx":180
- * 			raise TypeError(
- * 				"""Expected %s C arguments for resolution, got %s"""%(
- * 					self.resolver_length,len(cArgs)             # <<<<<<<<<<<<<<
- * 				)
- * 			)
+ *             raise TypeError(
+ *                 """Expected %s C arguments for resolution, got %s"""%(
+ *                     self.resolver_length,len(cArgs)             # <<<<<<<<<<<<<<
+ *                 )
+ *             )
  */
     __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->resolver_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -4687,22 +4725,22 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
     __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":179
- * 		if len(cArgs) != self.resolver_length:
- * 			raise TypeError(
- * 				"""Expected %s C arguments for resolution, got %s"""%(             # <<<<<<<<<<<<<<
- * 					self.resolver_length,len(cArgs)
- * 				)
+ *         if len(cArgs) != self.resolver_length:
+ *             raise TypeError(
+ *                 """Expected %s C arguments for resolution, got %s"""%(             # <<<<<<<<<<<<<<
+ *                     self.resolver_length,len(cArgs)
+ *                 )
  */
     __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Expected_s_C_arguments_for_resol, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
     /* "src/wrapper.pyx":178
- * 		cdef object converter
- * 		if len(cArgs) != self.resolver_length:
- * 			raise TypeError(             # <<<<<<<<<<<<<<
- * 				"""Expected %s C arguments for resolution, got %s"""%(
- * 					self.resolver_length,len(cArgs)
+ *         cdef object converter
+ *         if len(cArgs) != self.resolver_length:
+ *             raise TypeError(             # <<<<<<<<<<<<<<
+ *                 """Expected %s C arguments for resolution, got %s"""%(
+ *                     self.resolver_length,len(cArgs)
  */
     __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
@@ -4717,20 +4755,20 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
     /* "src/wrapper.pyx":177
- * 		cdef int resolver_length
- * 		cdef object converter
- * 		if len(cArgs) != self.resolver_length:             # <<<<<<<<<<<<<<
- * 			raise TypeError(
- * 				"""Expected %s C arguments for resolution, got %s"""%(
+ *         cdef int resolver_length
+ *         cdef object converter
+ *         if len(cArgs) != self.resolver_length:             # <<<<<<<<<<<<<<
+ *             raise TypeError(
+ *                 """Expected %s C arguments for resolution, got %s"""%(
  */
   }
 
   /* "src/wrapper.pyx":183
- * 				)
- * 			)
- * 		result = [None]*self.resolver_length             # <<<<<<<<<<<<<<
- * 		for i in range( self.resolver_length ):
- * 			converter = self.cResolvers[i]
+ *                 )
+ *             )
+ *         result = [None]*self.resolver_length             # <<<<<<<<<<<<<<
+ *         for i in range( self.resolver_length ):
+ *             converter = self.cResolvers[i]
  */
   __pyx_t_4 = PyList_New(1 * ((__pyx_v_self->resolver_length<0) ? 0:__pyx_v_self->resolver_length)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
@@ -4745,22 +4783,22 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
   __pyx_t_4 = 0;
 
   /* "src/wrapper.pyx":184
- * 			)
- * 		result = [None]*self.resolver_length
- * 		for i in range( self.resolver_length ):             # <<<<<<<<<<<<<<
- * 			converter = self.cResolvers[i]
- * 			if converter is None:
+ *             )
+ *         result = [None]*self.resolver_length
+ *         for i in range( self.resolver_length ):             # <<<<<<<<<<<<<<
+ *             converter = self.cResolvers[i]
+ *             if converter is None:
  */
   __pyx_t_6 = __pyx_v_self->resolver_length;
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
     __pyx_v_i = __pyx_t_7;
 
     /* "src/wrapper.pyx":185
- * 		result = [None]*self.resolver_length
- * 		for i in range( self.resolver_length ):
- * 			converter = self.cResolvers[i]             # <<<<<<<<<<<<<<
- * 			if converter is None:
- * 				result[i] = cArgs[i]
+ *         result = [None]*self.resolver_length
+ *         for i in range( self.resolver_length ):
+ *             converter = self.cResolvers[i]             # <<<<<<<<<<<<<<
+ *             if converter is None:
+ *                 result[i] = cArgs[i]
  */
     if (unlikely(__pyx_v_self->cResolvers == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -4772,22 +4810,22 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
     __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":186
- * 		for i in range( self.resolver_length ):
- * 			converter = self.cResolvers[i]
- * 			if converter is None:             # <<<<<<<<<<<<<<
- * 				result[i] = cArgs[i]
- * 			elif isinstance( converter, cArgumentConverter ):
+ *         for i in range( self.resolver_length ):
+ *             converter = self.cResolvers[i]
+ *             if converter is None:             # <<<<<<<<<<<<<<
+ *                 result[i] = cArgs[i]
+ *             elif isinstance( converter, cArgumentConverter ):
  */
     __pyx_t_2 = (__pyx_v_converter == Py_None);
     __pyx_t_8 = (__pyx_t_2 != 0);
     if (__pyx_t_8) {
 
       /* "src/wrapper.pyx":187
- * 			converter = self.cResolvers[i]
- * 			if converter is None:
- * 				result[i] = cArgs[i]             # <<<<<<<<<<<<<<
- * 			elif isinstance( converter, cArgumentConverter ):
- * 				# TODO: should pre-calculate this, isinstance is a very
+ *             converter = self.cResolvers[i]
+ *             if converter is None:
+ *                 result[i] = cArgs[i]             # <<<<<<<<<<<<<<
+ *             elif isinstance( converter, cArgumentConverter ):
+ *                 # TODO: should pre-calculate this, isinstance is a very
  */
       if (unlikely(__pyx_v_cArgs == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -4799,32 +4837,32 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
       /* "src/wrapper.pyx":186
- * 		for i in range( self.resolver_length ):
- * 			converter = self.cResolvers[i]
- * 			if converter is None:             # <<<<<<<<<<<<<<
- * 				result[i] = cArgs[i]
- * 			elif isinstance( converter, cArgumentConverter ):
+ *         for i in range( self.resolver_length ):
+ *             converter = self.cResolvers[i]
+ *             if converter is None:             # <<<<<<<<<<<<<<
+ *                 result[i] = cArgs[i]
+ *             elif isinstance( converter, cArgumentConverter ):
  */
       goto __pyx_L6;
     }
 
     /* "src/wrapper.pyx":188
- * 			if converter is None:
- * 				result[i] = cArgs[i]
- * 			elif isinstance( converter, cArgumentConverter ):             # <<<<<<<<<<<<<<
- * 				# TODO: should pre-calculate this, isinstance is a very
- * 				# heavy operation.
+ *             if converter is None:
+ *                 result[i] = cArgs[i]
+ *             elif isinstance( converter, cArgumentConverter ):             # <<<<<<<<<<<<<<
+ *                 # TODO: should pre-calculate this, isinstance is a very
+ *                 # heavy operation.
  */
     __pyx_t_8 = __Pyx_TypeCheck(__pyx_v_converter, __pyx_ptype_17OpenGL_accelerate_7wrapper_cArgumentConverter); 
     __pyx_t_2 = (__pyx_t_8 != 0);
     if (__pyx_t_2) {
 
       /* "src/wrapper.pyx":191
- * 				# TODO: should pre-calculate this, isinstance is a very
- * 				# heavy operation.
- * 				try:             # <<<<<<<<<<<<<<
- * 					result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
- * 				except Exception, err:
+ *                 # TODO: should pre-calculate this, isinstance is a very
+ *                 # heavy operation.
+ *                 try:             # <<<<<<<<<<<<<<
+ *                     result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
+ *                 except Exception, err:
  */
       {
         __Pyx_ExceptionSave(&__pyx_t_9, &__pyx_t_10, &__pyx_t_11);
@@ -4834,11 +4872,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
         /*try:*/ {
 
           /* "src/wrapper.pyx":192
- * 				# heavy operation.
- * 				try:
- * 					result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )             # <<<<<<<<<<<<<<
- * 				except Exception, err:
- * 					err.args += (converter,)
+ *                 # heavy operation.
+ *                 try:
+ *                     result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )             # <<<<<<<<<<<<<<
+ *                 except Exception, err:
+ *                     err.args += (converter,)
  */
           if (unlikely(__pyx_v_cArgs == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -4853,11 +4891,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
           /* "src/wrapper.pyx":191
- * 				# TODO: should pre-calculate this, isinstance is a very
- * 				# heavy operation.
- * 				try:             # <<<<<<<<<<<<<<
- * 					result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
- * 				except Exception, err:
+ *                 # TODO: should pre-calculate this, isinstance is a very
+ *                 # heavy operation.
+ *                 try:             # <<<<<<<<<<<<<<
+ *                     result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
+ *                 except Exception, err:
  */
         }
         __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -4870,11 +4908,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
 
         /* "src/wrapper.pyx":193
- * 				try:
- * 					result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
- * 				except Exception, err:             # <<<<<<<<<<<<<<
- * 					err.args += (converter,)
- * 					raise
+ *                 try:
+ *                     result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
+ *                 except Exception, err:             # <<<<<<<<<<<<<<
+ *                     err.args += (converter,)
+ *                     raise
  */
         __pyx_t_12 = PyErr_ExceptionMatches(__pyx_builtin_Exception);
         if (__pyx_t_12) {
@@ -4887,11 +4925,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
           __pyx_v_err = __pyx_t_4;
 
           /* "src/wrapper.pyx":194
- * 					result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
- * 				except Exception, err:
- * 					err.args += (converter,)             # <<<<<<<<<<<<<<
- * 					raise
- * 			else:
+ *                     result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
+ *                 except Exception, err:
+ *                     err.args += (converter,)             # <<<<<<<<<<<<<<
+ *                     raise
+ *             else:
  */
           __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_err, __pyx_n_s_args); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L9_except_error;}
           __Pyx_GOTREF(__pyx_t_13);
@@ -4908,11 +4946,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
 
           /* "src/wrapper.pyx":195
- * 				except Exception, err:
- * 					err.args += (converter,)
- * 					raise             # <<<<<<<<<<<<<<
- * 			else:
- * 				try:
+ *                 except Exception, err:
+ *                     err.args += (converter,)
+ *                     raise             # <<<<<<<<<<<<<<
+ *             else:
+ *                 try:
  */
           __Pyx_GIVEREF(__pyx_t_5);
           __Pyx_GIVEREF(__pyx_t_4);
@@ -4925,11 +4963,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
         __pyx_L9_except_error:;
 
         /* "src/wrapper.pyx":191
- * 				# TODO: should pre-calculate this, isinstance is a very
- * 				# heavy operation.
- * 				try:             # <<<<<<<<<<<<<<
- * 					result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
- * 				except Exception, err:
+ *                 # TODO: should pre-calculate this, isinstance is a very
+ *                 # heavy operation.
+ *                 try:             # <<<<<<<<<<<<<<
+ *                     result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
+ *                 except Exception, err:
  */
         __Pyx_XGIVEREF(__pyx_t_9);
         __Pyx_XGIVEREF(__pyx_t_10);
@@ -4940,21 +4978,21 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
       }
 
       /* "src/wrapper.pyx":188
- * 			if converter is None:
- * 				result[i] = cArgs[i]
- * 			elif isinstance( converter, cArgumentConverter ):             # <<<<<<<<<<<<<<
- * 				# TODO: should pre-calculate this, isinstance is a very
- * 				# heavy operation.
+ *             if converter is None:
+ *                 result[i] = cArgs[i]
+ *             elif isinstance( converter, cArgumentConverter ):             # <<<<<<<<<<<<<<
+ *                 # TODO: should pre-calculate this, isinstance is a very
+ *                 # heavy operation.
  */
       goto __pyx_L6;
     }
 
     /* "src/wrapper.pyx":197
- * 					raise
- * 			else:
- * 				try:             # <<<<<<<<<<<<<<
- * 					result[i] = converter( cArgs[i] )
- * 				except Exception, err:
+ *                     raise
+ *             else:
+ *                 try:             # <<<<<<<<<<<<<<
+ *                     result[i] = converter( cArgs[i] )
+ *                 except Exception, err:
  */
     /*else*/ {
       {
@@ -4965,11 +5003,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
         /*try:*/ {
 
           /* "src/wrapper.pyx":198
- * 			else:
- * 				try:
- * 					result[i] = converter( cArgs[i] )             # <<<<<<<<<<<<<<
- * 				except Exception, err:
- * 					err.args += (converter,)
+ *             else:
+ *                 try:
+ *                     result[i] = converter( cArgs[i] )             # <<<<<<<<<<<<<<
+ *                 except Exception, err:
+ *                     err.args += (converter,)
  */
           if (unlikely(__pyx_v_cArgs == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -5008,11 +5046,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
           /* "src/wrapper.pyx":197
- * 					raise
- * 			else:
- * 				try:             # <<<<<<<<<<<<<<
- * 					result[i] = converter( cArgs[i] )
- * 				except Exception, err:
+ *                     raise
+ *             else:
+ *                 try:             # <<<<<<<<<<<<<<
+ *                     result[i] = converter( cArgs[i] )
+ *                 except Exception, err:
  */
         }
         __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -5028,11 +5066,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
         /* "src/wrapper.pyx":199
- * 				try:
- * 					result[i] = converter( cArgs[i] )
- * 				except Exception, err:             # <<<<<<<<<<<<<<
- * 					err.args += (converter,)
- * 					raise
+ *                 try:
+ *                     result[i] = converter( cArgs[i] )
+ *                 except Exception, err:             # <<<<<<<<<<<<<<
+ *                     err.args += (converter,)
+ *                     raise
  */
         __pyx_t_12 = PyErr_ExceptionMatches(__pyx_builtin_Exception);
         if (__pyx_t_12) {
@@ -5045,11 +5083,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
           __pyx_v_err = __pyx_t_5;
 
           /* "src/wrapper.pyx":200
- * 					result[i] = converter( cArgs[i] )
- * 				except Exception, err:
- * 					err.args += (converter,)             # <<<<<<<<<<<<<<
- * 					raise
- * 		return result
+ *                     result[i] = converter( cArgs[i] )
+ *                 except Exception, err:
+ *                     err.args += (converter,)             # <<<<<<<<<<<<<<
+ *                     raise
+ *         return result
  */
           __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_err, __pyx_n_s_args); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L19_except_error;}
           __Pyx_GOTREF(__pyx_t_4);
@@ -5066,10 +5104,10 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
           /* "src/wrapper.pyx":201
- * 				except Exception, err:
- * 					err.args += (converter,)
- * 					raise             # <<<<<<<<<<<<<<
- * 		return result
+ *                 except Exception, err:
+ *                     err.args += (converter,)
+ *                     raise             # <<<<<<<<<<<<<<
+ *         return result
  * 
  */
           __Pyx_GIVEREF(__pyx_t_3);
@@ -5083,11 +5121,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
         __pyx_L19_except_error:;
 
         /* "src/wrapper.pyx":197
- * 					raise
- * 			else:
- * 				try:             # <<<<<<<<<<<<<<
- * 					result[i] = converter( cArgs[i] )
- * 				except Exception, err:
+ *                     raise
+ *             else:
+ *                 try:             # <<<<<<<<<<<<<<
+ *                     result[i] = converter( cArgs[i] )
+ *                 except Exception, err:
  */
         __Pyx_XGIVEREF(__pyx_t_11);
         __Pyx_XGIVEREF(__pyx_t_10);
@@ -5101,9 +5139,9 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
   }
 
   /* "src/wrapper.pyx":202
- * 					err.args += (converter,)
- * 					raise
- * 		return result             # <<<<<<<<<<<<<<
+ *                     err.args += (converter,)
+ *                     raise
+ *         return result             # <<<<<<<<<<<<<<
  * 
  * cdef class CallFuncPyConverter( pyArgConverter ):
  */
@@ -5113,11 +5151,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":173
- * 	def __call__( self, tuple cArgs ):
- * 		return self.c_call( cArgs )
- * 	cdef list c_call( self, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		cdef int i
- * 		cdef int resolver_length
+ *     def __call__( self, tuple cArgs ):
+ *         return self.c_call( cArgs )
+ *     cdef list c_call( self, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         cdef int i
+ *         cdef int resolver_length
  */
 
   /* function exit code */
@@ -5140,11 +5178,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CArgumentCalculator_c_ca
 }
 
 /* "src/wrapper.pyx":207
- * 	"""PyConverter that takes a callable and calls it on incoming"""
- * 	cdef object function
- * 	def __init__( self, function ):             # <<<<<<<<<<<<<<
- * 		"""Store the function"""
- * 		self.function = function
+ *     """PyConverter that takes a callable and calls it on incoming"""
+ *     cdef object function
+ *     def __init__( self, function ):             # <<<<<<<<<<<<<<
+ *         """Store the function"""
+ *         self.function = function
  */
 
 /* Python wrapper */
@@ -5209,11 +5247,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter___init__(
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":209
- * 	def __init__( self, function ):
- * 		"""Store the function"""
- * 		self.function = function             # <<<<<<<<<<<<<<
- * 	cdef object c_call( self, object incoming, object function, tuple arguments ):
- * 		"""Call our function on incoming"""
+ *     def __init__( self, function ):
+ *         """Store the function"""
+ *         self.function = function             # <<<<<<<<<<<<<<
+ *     cdef object c_call( self, object incoming, object function, tuple arguments ):
+ *         """Call our function on incoming"""
  */
   __Pyx_INCREF(__pyx_v_function);
   __Pyx_GIVEREF(__pyx_v_function);
@@ -5222,11 +5260,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter___init__(
   __pyx_v_self->function = __pyx_v_function;
 
   /* "src/wrapper.pyx":207
- * 	"""PyConverter that takes a callable and calls it on incoming"""
- * 	cdef object function
- * 	def __init__( self, function ):             # <<<<<<<<<<<<<<
- * 		"""Store the function"""
- * 		self.function = function
+ *     """PyConverter that takes a callable and calls it on incoming"""
+ *     cdef object function
+ *     def __init__( self, function ):             # <<<<<<<<<<<<<<
+ *         """Store the function"""
+ *         self.function = function
  */
 
   /* function exit code */
@@ -5236,11 +5274,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter___init__(
 }
 
 /* "src/wrapper.pyx":210
- * 		"""Store the function"""
- * 		self.function = function
- * 	cdef object c_call( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
- * 		"""Call our function on incoming"""
- * 		return self.function( incoming )
+ *         """Store the function"""
+ *         self.function = function
+ *     cdef object c_call( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
+ *         """Call our function on incoming"""
+ *         return self.function( incoming )
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_CallFuncPyConverter *__pyx_v_self, PyObject *__pyx_v_incoming, CYTHON_UNUSED PyObject *__pyx_v_function, CYTHON_UNUSED PyObject *__pyx_v_arguments) {
@@ -5256,11 +5294,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter_c_ca
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":212
- * 	cdef object c_call( self, object incoming, object function, tuple arguments ):
- * 		"""Call our function on incoming"""
- * 		return self.function( incoming )             # <<<<<<<<<<<<<<
- * 	def __repr__( self ):
- * 		"""Have a useful representation"""
+ *     cdef object c_call( self, object incoming, object function, tuple arguments ):
+ *         """Call our function on incoming"""
+ *         return self.function( incoming )             # <<<<<<<<<<<<<<
+ *     def __repr__( self ):
+ *         """Have a useful representation"""
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_self->function);
@@ -5294,11 +5332,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter_c_ca
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":210
- * 		"""Store the function"""
- * 		self.function = function
- * 	cdef object c_call( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
- * 		"""Call our function on incoming"""
- * 		return self.function( incoming )
+ *         """Store the function"""
+ *         self.function = function
+ *     cdef object c_call( self, object incoming, object function, tuple arguments ):             # <<<<<<<<<<<<<<
+ *         """Call our function on incoming"""
+ *         return self.function( incoming )
  */
 
   /* function exit code */
@@ -5316,11 +5354,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter_c_ca
 }
 
 /* "src/wrapper.pyx":213
- * 		"""Call our function on incoming"""
- * 		return self.function( incoming )
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		"""Have a useful representation"""
- * 		return '%s( %r )'%(
+ *         """Call our function on incoming"""
+ *         return self.function( incoming )
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         """Have a useful representation"""
+ *         return '%s( %r )'%(
  */
 
 /* Python wrapper */
@@ -5351,20 +5389,20 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter_2__
   __Pyx_RefNannySetupContext("__repr__", 0);
 
   /* "src/wrapper.pyx":215
- * 	def __repr__( self ):
- * 		"""Have a useful representation"""
- * 		return '%s( %r )'%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.function,
+ *     def __repr__( self ):
+ *         """Have a useful representation"""
+ *         return '%s( %r )'%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.function,
  */
   __Pyx_XDECREF(__pyx_r);
 
   /* "src/wrapper.pyx":216
- * 		"""Have a useful representation"""
- * 		return '%s( %r )'%(
- * 			self.__class__.__name__,             # <<<<<<<<<<<<<<
- * 			self.function,
- * 		)
+ *         """Have a useful representation"""
+ *         return '%s( %r )'%(
+ *             self.__class__.__name__,             # <<<<<<<<<<<<<<
+ *             self.function,
+ *         )
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -5373,10 +5411,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter_2__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":217
- * 		return '%s( %r )'%(
- * 			self.__class__.__name__,
- * 			self.function,             # <<<<<<<<<<<<<<
- * 		)
+ *         return '%s( %r )'%(
+ *             self.__class__.__name__,
+ *             self.function,             # <<<<<<<<<<<<<<
+ *         )
  * cdef class DefaultCConverter(cArgConverter):
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -5389,11 +5427,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter_2__
   __pyx_t_2 = 0;
 
   /* "src/wrapper.pyx":215
- * 	def __repr__( self ):
- * 		"""Have a useful representation"""
- * 		return '%s( %r )'%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.function,
+ *     def __repr__( self ):
+ *         """Have a useful representation"""
+ *         return '%s( %r )'%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.function,
  */
   __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_r, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -5403,11 +5441,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter_2__
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":213
- * 		"""Call our function on incoming"""
- * 		return self.function( incoming )
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		"""Have a useful representation"""
- * 		return '%s( %r )'%(
+ *         """Call our function on incoming"""
+ *         return self.function( incoming )
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         """Have a useful representation"""
+ *         return '%s( %r )'%(
  */
 
   /* function exit code */
@@ -5424,10 +5462,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_19CallFuncPyConverter_2__
 
 /* "src/wrapper.pyx":221
  * cdef class DefaultCConverter(cArgConverter):
- * 	cdef int index
- * 	def __init__( self, index ):             # <<<<<<<<<<<<<<
- * 		"""Just store index for future access"""
- * 		self.index = index
+ *     cdef int index
+ *     def __init__( self, index ):             # <<<<<<<<<<<<<<
+ *         """Just store index for future access"""
+ *         self.index = index
  */
 
 /* Python wrapper */
@@ -5496,21 +5534,21 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_17DefaultCConverter___init__(st
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":223
- * 	def __init__( self, index ):
- * 		"""Just store index for future access"""
- * 		self.index = index             # <<<<<<<<<<<<<<
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		try:
+ *     def __init__( self, index ):
+ *         """Just store index for future access"""
+ *         self.index = index             # <<<<<<<<<<<<<<
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         try:
  */
   __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_index); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->index = __pyx_t_1;
 
   /* "src/wrapper.pyx":221
  * cdef class DefaultCConverter(cArgConverter):
- * 	cdef int index
- * 	def __init__( self, index ):             # <<<<<<<<<<<<<<
- * 		"""Just store index for future access"""
- * 		self.index = index
+ *     cdef int index
+ *     def __init__( self, index ):             # <<<<<<<<<<<<<<
+ *         """Just store index for future access"""
+ *         self.index = index
  */
 
   /* function exit code */
@@ -5525,11 +5563,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_17DefaultCConverter___init__(st
 }
 
 /* "src/wrapper.pyx":224
- * 		"""Just store index for future access"""
- * 		self.index = index
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
- * 		try:
- * 			return pyArgs[ self.index ]
+ *         """Just store index for future access"""
+ *         self.index = index
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
+ *         try:
+ *             return pyArgs[ self.index ]
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_DefaultCConverter *__pyx_v_self, PyObject *__pyx_v_pyArgs, CYTHON_UNUSED int __pyx_v_index, CYTHON_UNUSED PyObject *__pyx_v_baseOperation) {
@@ -5553,11 +5591,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":225
- * 		self.index = index
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		try:             # <<<<<<<<<<<<<<
- * 			return pyArgs[ self.index ]
- * 		except IndexError, err:
+ *         self.index = index
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         try:             # <<<<<<<<<<<<<<
+ *             return pyArgs[ self.index ]
+ *         except IndexError, err:
  */
   {
     __Pyx_ExceptionSave(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3);
@@ -5567,11 +5605,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call
     /*try:*/ {
 
       /* "src/wrapper.pyx":226
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		try:
- * 			return pyArgs[ self.index ]             # <<<<<<<<<<<<<<
- * 		except IndexError, err:
- * 			raise ValueError(
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         try:
+ *             return pyArgs[ self.index ]             # <<<<<<<<<<<<<<
+ *         except IndexError, err:
+ *             raise ValueError(
  */
       __Pyx_XDECREF(__pyx_r);
       if (unlikely(__pyx_v_pyArgs == Py_None)) {
@@ -5585,22 +5623,22 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call
       goto __pyx_L7_try_return;
 
       /* "src/wrapper.pyx":225
- * 		self.index = index
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		try:             # <<<<<<<<<<<<<<
- * 			return pyArgs[ self.index ]
- * 		except IndexError, err:
+ *         self.index = index
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         try:             # <<<<<<<<<<<<<<
+ *             return pyArgs[ self.index ]
+ *         except IndexError, err:
  */
     }
     __pyx_L3_error:;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":227
- * 		try:
- * 			return pyArgs[ self.index ]
- * 		except IndexError, err:             # <<<<<<<<<<<<<<
- * 			raise ValueError(
- * 				"""Expected parameter index %r, but pyArgs only length %s"""%(
+ *         try:
+ *             return pyArgs[ self.index ]
+ *         except IndexError, err:             # <<<<<<<<<<<<<<
+ *             raise ValueError(
+ *                 """Expected parameter index %r, but pyArgs only length %s"""%(
  */
     __pyx_t_5 = PyErr_ExceptionMatches(__pyx_builtin_IndexError);
     if (__pyx_t_5) {
@@ -5613,21 +5651,21 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call
       __pyx_v_err = __pyx_t_6;
 
       /* "src/wrapper.pyx":230
- * 			raise ValueError(
- * 				"""Expected parameter index %r, but pyArgs only length %s"""%(
- * 				self.index,             # <<<<<<<<<<<<<<
- * 				len(pyArgs )
- * 			))
+ *             raise ValueError(
+ *                 """Expected parameter index %r, but pyArgs only length %s"""%(
+ *                 self.index,             # <<<<<<<<<<<<<<
+ *                 len(pyArgs )
+ *             ))
  */
       __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 230; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_8);
 
       /* "src/wrapper.pyx":231
- * 				"""Expected parameter index %r, but pyArgs only length %s"""%(
- * 				self.index,
- * 				len(pyArgs )             # <<<<<<<<<<<<<<
- * 			))
- * 	def __repr__( self ):
+ *                 """Expected parameter index %r, but pyArgs only length %s"""%(
+ *                 self.index,
+ *                 len(pyArgs )             # <<<<<<<<<<<<<<
+ *             ))
+ *     def __repr__( self ):
  */
       if (unlikely(__pyx_v_pyArgs == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
@@ -5638,11 +5676,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call
       __Pyx_GOTREF(__pyx_t_10);
 
       /* "src/wrapper.pyx":230
- * 			raise ValueError(
- * 				"""Expected parameter index %r, but pyArgs only length %s"""%(
- * 				self.index,             # <<<<<<<<<<<<<<
- * 				len(pyArgs )
- * 			))
+ *             raise ValueError(
+ *                 """Expected parameter index %r, but pyArgs only length %s"""%(
+ *                 self.index,             # <<<<<<<<<<<<<<
+ *                 len(pyArgs )
+ *             ))
  */
       __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 230; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_11);
@@ -5654,22 +5692,22 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call
       __pyx_t_10 = 0;
 
       /* "src/wrapper.pyx":229
- * 		except IndexError, err:
- * 			raise ValueError(
- * 				"""Expected parameter index %r, but pyArgs only length %s"""%(             # <<<<<<<<<<<<<<
- * 				self.index,
- * 				len(pyArgs )
+ *         except IndexError, err:
+ *             raise ValueError(
+ *                 """Expected parameter index %r, but pyArgs only length %s"""%(             # <<<<<<<<<<<<<<
+ *                 self.index,
+ *                 len(pyArgs )
  */
       __pyx_t_10 = __Pyx_PyString_Format(__pyx_kp_s_Expected_parameter_index_r_but_p, __pyx_t_11); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
       /* "src/wrapper.pyx":228
- * 			return pyArgs[ self.index ]
- * 		except IndexError, err:
- * 			raise ValueError(             # <<<<<<<<<<<<<<
- * 				"""Expected parameter index %r, but pyArgs only length %s"""%(
- * 				self.index,
+ *             return pyArgs[ self.index ]
+ *         except IndexError, err:
+ *             raise ValueError(             # <<<<<<<<<<<<<<
+ *                 """Expected parameter index %r, but pyArgs only length %s"""%(
+ *                 self.index,
  */
       __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_11);
@@ -5687,11 +5725,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call
     __pyx_L5_except_error:;
 
     /* "src/wrapper.pyx":225
- * 		self.index = index
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		try:             # <<<<<<<<<<<<<<
- * 			return pyArgs[ self.index ]
- * 		except IndexError, err:
+ *         self.index = index
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         try:             # <<<<<<<<<<<<<<
+ *             return pyArgs[ self.index ]
+ *         except IndexError, err:
  */
     __Pyx_XGIVEREF(__pyx_t_1);
     __Pyx_XGIVEREF(__pyx_t_2);
@@ -5707,11 +5745,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call
   }
 
   /* "src/wrapper.pyx":224
- * 		"""Just store index for future access"""
- * 		self.index = index
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
- * 		try:
- * 			return pyArgs[ self.index ]
+ *         """Just store index for future access"""
+ *         self.index = index
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
+ *         try:
+ *             return pyArgs[ self.index ]
  */
 
   /* function exit code */
@@ -5732,11 +5770,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_17DefaultCConverter_c_call
 }
 
 /* "src/wrapper.pyx":233
- * 				len(pyArgs )
- * 			))
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *                 len(pyArgs )
+ *             ))
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
 /* Python wrapper */
@@ -5764,20 +5802,20 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_17DefaultCConverter_2__re
   __Pyx_RefNannySetupContext("__repr__", 0);
 
   /* "src/wrapper.pyx":234
- * 			))
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.index,
+ *             ))
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.index,
  */
   __Pyx_XDECREF(__pyx_r);
 
   /* "src/wrapper.pyx":235
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,             # <<<<<<<<<<<<<<
- * 			self.index,
- * 		)
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,             # <<<<<<<<<<<<<<
+ *             self.index,
+ *         )
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -5786,21 +5824,21 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_17DefaultCConverter_2__re
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":236
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
- * 			self.index,             # <<<<<<<<<<<<<<
- * 		)
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
+ *             self.index,             # <<<<<<<<<<<<<<
+ *         )
  * 
  */
   __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
   /* "src/wrapper.pyx":235
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,             # <<<<<<<<<<<<<<
- * 			self.index,
- * 		)
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,             # <<<<<<<<<<<<<<
+ *             self.index,
+ *         )
  */
   __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -5812,11 +5850,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_17DefaultCConverter_2__re
   __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":234
- * 			))
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.index,
+ *             ))
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.index,
  */
   __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_s_r, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -5826,11 +5864,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_17DefaultCConverter_2__re
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":233
- * 				len(pyArgs )
- * 			))
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *                 len(pyArgs )
+ *             ))
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
   /* function exit code */
@@ -5847,11 +5885,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_17DefaultCConverter_2__re
 }
 
 /* "src/wrapper.pyx":256
- * 	cdef returnConverter c_returnValues
- * 	cdef int doCReturnAPI
- * 	def __init__(             # <<<<<<<<<<<<<<
- * 		self, wrappedOperation,
- * 		calculate_pyArgs=None, calculate_cArgs=None,
+ *     cdef returnConverter c_returnValues
+ *     cdef int doCReturnAPI
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *         self, wrappedOperation,
+ *         calculate_pyArgs=None, calculate_cArgs=None,
  */
 
 /* Python wrapper */
@@ -5874,30 +5912,30 @@ static int __pyx_pw_17OpenGL_accelerate_7wrapper_7Wrapper_1__init__(PyObject *__
     PyObject* values[6] = {0,0,0,0,0,0};
 
     /* "src/wrapper.pyx":258
- * 	def __init__(
- * 		self, wrappedOperation,
- * 		calculate_pyArgs=None, calculate_cArgs=None,             # <<<<<<<<<<<<<<
- * 		calculate_cArguments=None,
- * 		storeValues=None, returnValues=None,
+ *     def __init__(
+ *         self, wrappedOperation,
+ *         calculate_pyArgs=None, calculate_cArgs=None,             # <<<<<<<<<<<<<<
+ *         calculate_cArguments=None,
+ *         storeValues=None, returnValues=None,
  */
     values[1] = ((PyObject *)Py_None);
     values[2] = ((PyObject *)Py_None);
 
     /* "src/wrapper.pyx":259
- * 		self, wrappedOperation,
- * 		calculate_pyArgs=None, calculate_cArgs=None,
- * 		calculate_cArguments=None,             # <<<<<<<<<<<<<<
- * 		storeValues=None, returnValues=None,
- * 	):
+ *         self, wrappedOperation,
+ *         calculate_pyArgs=None, calculate_cArgs=None,
+ *         calculate_cArguments=None,             # <<<<<<<<<<<<<<
+ *         storeValues=None, returnValues=None,
+ *     ):
  */
     values[3] = ((PyObject *)Py_None);
 
     /* "src/wrapper.pyx":260
- * 		calculate_pyArgs=None, calculate_cArgs=None,
- * 		calculate_cArguments=None,
- * 		storeValues=None, returnValues=None,             # <<<<<<<<<<<<<<
- * 	):
- * 		if calculate_pyArgs is not None:
+ *         calculate_pyArgs=None, calculate_cArgs=None,
+ *         calculate_cArguments=None,
+ *         storeValues=None, returnValues=None,             # <<<<<<<<<<<<<<
+ *     ):
+ *         if calculate_pyArgs is not None:
  */
     values[4] = ((PyObject *)Py_None);
     values[5] = ((PyObject *)Py_None);
@@ -5978,11 +6016,11 @@ static int __pyx_pw_17OpenGL_accelerate_7wrapper_7Wrapper_1__init__(PyObject *__
   __pyx_r = __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(((struct __pyx_obj_17OpenGL_accelerate_7wrapper_Wrapper *)__pyx_v_self), __pyx_v_wrappedOperation, __pyx_v_calculate_pyArgs, __pyx_v_calculate_cArgs, __pyx_v_calculate_cArguments, __pyx_v_storeValues, __pyx_v_returnValues);
 
   /* "src/wrapper.pyx":256
- * 	cdef returnConverter c_returnValues
- * 	cdef int doCReturnAPI
- * 	def __init__(             # <<<<<<<<<<<<<<
- * 		self, wrappedOperation,
- * 		calculate_pyArgs=None, calculate_cArgs=None,
+ *     cdef returnConverter c_returnValues
+ *     cdef int doCReturnAPI
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *         self, wrappedOperation,
+ *         calculate_pyArgs=None, calculate_cArgs=None,
  */
 
   /* function exit code */
@@ -6006,33 +6044,33 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
   __Pyx_INCREF(__pyx_v_calculate_cArguments);
 
   /* "src/wrapper.pyx":262
- * 		storeValues=None, returnValues=None,
- * 	):
- * 		if calculate_pyArgs is not None:             # <<<<<<<<<<<<<<
- * 			if not isinstance( calculate_pyArgs, PyArgCalculator ):
- * 				calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
+ *         storeValues=None, returnValues=None,
+ *     ):
+ *         if calculate_pyArgs is not None:             # <<<<<<<<<<<<<<
+ *             if not isinstance( calculate_pyArgs, PyArgCalculator ):
+ *                 calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
  */
   __pyx_t_1 = (__pyx_v_calculate_pyArgs != Py_None);
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
     /* "src/wrapper.pyx":263
- * 	):
- * 		if calculate_pyArgs is not None:
- * 			if not isinstance( calculate_pyArgs, PyArgCalculator ):             # <<<<<<<<<<<<<<
- * 				calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
- * 			self.calculate_pyArgs = calculate_pyArgs
+ *     ):
+ *         if calculate_pyArgs is not None:
+ *             if not isinstance( calculate_pyArgs, PyArgCalculator ):             # <<<<<<<<<<<<<<
+ *                 calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
+ *             self.calculate_pyArgs = calculate_pyArgs
  */
     __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_calculate_pyArgs, __pyx_ptype_17OpenGL_accelerate_7wrapper_PyArgCalculator); 
     __pyx_t_1 = ((!(__pyx_t_2 != 0)) != 0);
     if (__pyx_t_1) {
 
       /* "src/wrapper.pyx":264
- * 		if calculate_pyArgs is not None:
- * 			if not isinstance( calculate_pyArgs, PyArgCalculator ):
- * 				calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )             # <<<<<<<<<<<<<<
- * 			self.calculate_pyArgs = calculate_pyArgs
- * 			self.doPyargs = True
+ *         if calculate_pyArgs is not None:
+ *             if not isinstance( calculate_pyArgs, PyArgCalculator ):
+ *                 calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )             # <<<<<<<<<<<<<<
+ *             self.calculate_pyArgs = calculate_pyArgs
+ *             self.doPyargs = True
  */
       __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
@@ -6049,20 +6087,20 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
       __pyx_t_4 = 0;
 
       /* "src/wrapper.pyx":263
- * 	):
- * 		if calculate_pyArgs is not None:
- * 			if not isinstance( calculate_pyArgs, PyArgCalculator ):             # <<<<<<<<<<<<<<
- * 				calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
- * 			self.calculate_pyArgs = calculate_pyArgs
+ *     ):
+ *         if calculate_pyArgs is not None:
+ *             if not isinstance( calculate_pyArgs, PyArgCalculator ):             # <<<<<<<<<<<<<<
+ *                 calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
+ *             self.calculate_pyArgs = calculate_pyArgs
  */
     }
 
     /* "src/wrapper.pyx":265
- * 			if not isinstance( calculate_pyArgs, PyArgCalculator ):
- * 				calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
- * 			self.calculate_pyArgs = calculate_pyArgs             # <<<<<<<<<<<<<<
- * 			self.doPyargs = True
- * 		else:
+ *             if not isinstance( calculate_pyArgs, PyArgCalculator ):
+ *                 calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
+ *             self.calculate_pyArgs = calculate_pyArgs             # <<<<<<<<<<<<<<
+ *             self.doPyargs = True
+ *         else:
  */
     if (!(likely(((__pyx_v_calculate_pyArgs) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_calculate_pyArgs, __pyx_ptype_17OpenGL_accelerate_7wrapper_PyArgCalculator))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_4 = __pyx_v_calculate_pyArgs;
@@ -6074,30 +6112,30 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
     __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":266
- * 				calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
- * 			self.calculate_pyArgs = calculate_pyArgs
- * 			self.doPyargs = True             # <<<<<<<<<<<<<<
- * 		else:
- * 			self.doPyargs = False
+ *                 calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
+ *             self.calculate_pyArgs = calculate_pyArgs
+ *             self.doPyargs = True             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.doPyargs = False
  */
     __pyx_v_self->doPyargs = 1;
 
     /* "src/wrapper.pyx":262
- * 		storeValues=None, returnValues=None,
- * 	):
- * 		if calculate_pyArgs is not None:             # <<<<<<<<<<<<<<
- * 			if not isinstance( calculate_pyArgs, PyArgCalculator ):
- * 				calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
+ *         storeValues=None, returnValues=None,
+ *     ):
+ *         if calculate_pyArgs is not None:             # <<<<<<<<<<<<<<
+ *             if not isinstance( calculate_pyArgs, PyArgCalculator ):
+ *                 calculate_pyArgs = PyArgCalculator( self, calculate_pyArgs )
  */
     goto __pyx_L3;
   }
 
   /* "src/wrapper.pyx":268
- * 			self.doPyargs = True
- * 		else:
- * 			self.doPyargs = False             # <<<<<<<<<<<<<<
- * 		if calculate_cArgs is not None:
- * 			if not isinstance( calculate_cArgs, CArgCalculator ):
+ *             self.doPyargs = True
+ *         else:
+ *             self.doPyargs = False             # <<<<<<<<<<<<<<
+ *         if calculate_cArgs is not None:
+ *             if not isinstance( calculate_cArgs, CArgCalculator ):
  */
   /*else*/ {
     __pyx_v_self->doPyargs = 0;
@@ -6105,33 +6143,33 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
   __pyx_L3:;
 
   /* "src/wrapper.pyx":269
- * 		else:
- * 			self.doPyargs = False
- * 		if calculate_cArgs is not None:             # <<<<<<<<<<<<<<
- * 			if not isinstance( calculate_cArgs, CArgCalculator ):
- * 				calculate_cArgs = CArgCalculator( self, calculate_cArgs )
+ *         else:
+ *             self.doPyargs = False
+ *         if calculate_cArgs is not None:             # <<<<<<<<<<<<<<
+ *             if not isinstance( calculate_cArgs, CArgCalculator ):
+ *                 calculate_cArgs = CArgCalculator( self, calculate_cArgs )
  */
   __pyx_t_1 = (__pyx_v_calculate_cArgs != Py_None);
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
     /* "src/wrapper.pyx":270
- * 			self.doPyargs = False
- * 		if calculate_cArgs is not None:
- * 			if not isinstance( calculate_cArgs, CArgCalculator ):             # <<<<<<<<<<<<<<
- * 				calculate_cArgs = CArgCalculator( self, calculate_cArgs )
- * 			self.calculate_cArgs = calculate_cArgs
+ *             self.doPyargs = False
+ *         if calculate_cArgs is not None:
+ *             if not isinstance( calculate_cArgs, CArgCalculator ):             # <<<<<<<<<<<<<<
+ *                 calculate_cArgs = CArgCalculator( self, calculate_cArgs )
+ *             self.calculate_cArgs = calculate_cArgs
  */
     __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_calculate_cArgs, __pyx_ptype_17OpenGL_accelerate_7wrapper_CArgCalculator); 
     __pyx_t_1 = ((!(__pyx_t_2 != 0)) != 0);
     if (__pyx_t_1) {
 
       /* "src/wrapper.pyx":271
- * 		if calculate_cArgs is not None:
- * 			if not isinstance( calculate_cArgs, CArgCalculator ):
- * 				calculate_cArgs = CArgCalculator( self, calculate_cArgs )             # <<<<<<<<<<<<<<
- * 			self.calculate_cArgs = calculate_cArgs
- * 			self.doCargs = True
+ *         if calculate_cArgs is not None:
+ *             if not isinstance( calculate_cArgs, CArgCalculator ):
+ *                 calculate_cArgs = CArgCalculator( self, calculate_cArgs )             # <<<<<<<<<<<<<<
+ *             self.calculate_cArgs = calculate_cArgs
+ *             self.doCargs = True
  */
       __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
@@ -6148,20 +6186,20 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
       __pyx_t_3 = 0;
 
       /* "src/wrapper.pyx":270
- * 			self.doPyargs = False
- * 		if calculate_cArgs is not None:
- * 			if not isinstance( calculate_cArgs, CArgCalculator ):             # <<<<<<<<<<<<<<
- * 				calculate_cArgs = CArgCalculator( self, calculate_cArgs )
- * 			self.calculate_cArgs = calculate_cArgs
+ *             self.doPyargs = False
+ *         if calculate_cArgs is not None:
+ *             if not isinstance( calculate_cArgs, CArgCalculator ):             # <<<<<<<<<<<<<<
+ *                 calculate_cArgs = CArgCalculator( self, calculate_cArgs )
+ *             self.calculate_cArgs = calculate_cArgs
  */
     }
 
     /* "src/wrapper.pyx":272
- * 			if not isinstance( calculate_cArgs, CArgCalculator ):
- * 				calculate_cArgs = CArgCalculator( self, calculate_cArgs )
- * 			self.calculate_cArgs = calculate_cArgs             # <<<<<<<<<<<<<<
- * 			self.doCargs = True
- * 		else:
+ *             if not isinstance( calculate_cArgs, CArgCalculator ):
+ *                 calculate_cArgs = CArgCalculator( self, calculate_cArgs )
+ *             self.calculate_cArgs = calculate_cArgs             # <<<<<<<<<<<<<<
+ *             self.doCargs = True
+ *         else:
  */
     if (!(likely(((__pyx_v_calculate_cArgs) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_calculate_cArgs, __pyx_ptype_17OpenGL_accelerate_7wrapper_CArgCalculator))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_3 = __pyx_v_calculate_cArgs;
@@ -6173,30 +6211,30 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
     __pyx_t_3 = 0;
 
     /* "src/wrapper.pyx":273
- * 				calculate_cArgs = CArgCalculator( self, calculate_cArgs )
- * 			self.calculate_cArgs = calculate_cArgs
- * 			self.doCargs = True             # <<<<<<<<<<<<<<
- * 		else:
- * 			self.doCargs = False
+ *                 calculate_cArgs = CArgCalculator( self, calculate_cArgs )
+ *             self.calculate_cArgs = calculate_cArgs
+ *             self.doCargs = True             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.doCargs = False
  */
     __pyx_v_self->doCargs = 1;
 
     /* "src/wrapper.pyx":269
- * 		else:
- * 			self.doPyargs = False
- * 		if calculate_cArgs is not None:             # <<<<<<<<<<<<<<
- * 			if not isinstance( calculate_cArgs, CArgCalculator ):
- * 				calculate_cArgs = CArgCalculator( self, calculate_cArgs )
+ *         else:
+ *             self.doPyargs = False
+ *         if calculate_cArgs is not None:             # <<<<<<<<<<<<<<
+ *             if not isinstance( calculate_cArgs, CArgCalculator ):
+ *                 calculate_cArgs = CArgCalculator( self, calculate_cArgs )
  */
     goto __pyx_L5;
   }
 
   /* "src/wrapper.pyx":275
- * 			self.doCargs = True
- * 		else:
- * 			self.doCargs = False             # <<<<<<<<<<<<<<
- * 		if calculate_cArguments is not None:
- * 			if not isinstance( calculate_cArguments, CArgumentCalculator ):
+ *             self.doCargs = True
+ *         else:
+ *             self.doCargs = False             # <<<<<<<<<<<<<<
+ *         if calculate_cArguments is not None:
+ *             if not isinstance( calculate_cArguments, CArgumentCalculator ):
  */
   /*else*/ {
     __pyx_v_self->doCargs = 0;
@@ -6204,33 +6242,33 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
   __pyx_L5:;
 
   /* "src/wrapper.pyx":276
- * 		else:
- * 			self.doCargs = False
- * 		if calculate_cArguments is not None:             # <<<<<<<<<<<<<<
- * 			if not isinstance( calculate_cArguments, CArgumentCalculator ):
- * 				calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
+ *         else:
+ *             self.doCargs = False
+ *         if calculate_cArguments is not None:             # <<<<<<<<<<<<<<
+ *             if not isinstance( calculate_cArguments, CArgumentCalculator ):
+ *                 calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
  */
   __pyx_t_1 = (__pyx_v_calculate_cArguments != Py_None);
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
     /* "src/wrapper.pyx":277
- * 			self.doCargs = False
- * 		if calculate_cArguments is not None:
- * 			if not isinstance( calculate_cArguments, CArgumentCalculator ):             # <<<<<<<<<<<<<<
- * 				calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
- * 			self.calculate_cArguments = calculate_cArguments
+ *             self.doCargs = False
+ *         if calculate_cArguments is not None:
+ *             if not isinstance( calculate_cArguments, CArgumentCalculator ):             # <<<<<<<<<<<<<<
+ *                 calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
+ *             self.calculate_cArguments = calculate_cArguments
  */
     __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_calculate_cArguments, __pyx_ptype_17OpenGL_accelerate_7wrapper_CArgumentCalculator); 
     __pyx_t_1 = ((!(__pyx_t_2 != 0)) != 0);
     if (__pyx_t_1) {
 
       /* "src/wrapper.pyx":278
- * 		if calculate_cArguments is not None:
- * 			if not isinstance( calculate_cArguments, CArgumentCalculator ):
- * 				calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )             # <<<<<<<<<<<<<<
- * 			self.calculate_cArguments = calculate_cArguments
- * 			self.doCarguments = True
+ *         if calculate_cArguments is not None:
+ *             if not isinstance( calculate_cArguments, CArgumentCalculator ):
+ *                 calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )             # <<<<<<<<<<<<<<
+ *             self.calculate_cArguments = calculate_cArguments
+ *             self.doCarguments = True
  */
       __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
@@ -6247,20 +6285,20 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
       __pyx_t_4 = 0;
 
       /* "src/wrapper.pyx":277
- * 			self.doCargs = False
- * 		if calculate_cArguments is not None:
- * 			if not isinstance( calculate_cArguments, CArgumentCalculator ):             # <<<<<<<<<<<<<<
- * 				calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
- * 			self.calculate_cArguments = calculate_cArguments
+ *             self.doCargs = False
+ *         if calculate_cArguments is not None:
+ *             if not isinstance( calculate_cArguments, CArgumentCalculator ):             # <<<<<<<<<<<<<<
+ *                 calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
+ *             self.calculate_cArguments = calculate_cArguments
  */
     }
 
     /* "src/wrapper.pyx":279
- * 			if not isinstance( calculate_cArguments, CArgumentCalculator ):
- * 				calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
- * 			self.calculate_cArguments = calculate_cArguments             # <<<<<<<<<<<<<<
- * 			self.doCarguments = True
- * 		else:
+ *             if not isinstance( calculate_cArguments, CArgumentCalculator ):
+ *                 calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
+ *             self.calculate_cArguments = calculate_cArguments             # <<<<<<<<<<<<<<
+ *             self.doCarguments = True
+ *         else:
  */
     if (!(likely(((__pyx_v_calculate_cArguments) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_calculate_cArguments, __pyx_ptype_17OpenGL_accelerate_7wrapper_CArgumentCalculator))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_4 = __pyx_v_calculate_cArguments;
@@ -6272,30 +6310,30 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
     __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":280
- * 				calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
- * 			self.calculate_cArguments = calculate_cArguments
- * 			self.doCarguments = True             # <<<<<<<<<<<<<<
- * 		else:
- * 			self.doCarguments = False
+ *                 calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
+ *             self.calculate_cArguments = calculate_cArguments
+ *             self.doCarguments = True             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.doCarguments = False
  */
     __pyx_v_self->doCarguments = 1;
 
     /* "src/wrapper.pyx":276
- * 		else:
- * 			self.doCargs = False
- * 		if calculate_cArguments is not None:             # <<<<<<<<<<<<<<
- * 			if not isinstance( calculate_cArguments, CArgumentCalculator ):
- * 				calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
+ *         else:
+ *             self.doCargs = False
+ *         if calculate_cArguments is not None:             # <<<<<<<<<<<<<<
+ *             if not isinstance( calculate_cArguments, CArgumentCalculator ):
+ *                 calculate_cArguments = CArgumentCalculator( self, calculate_cArguments )
  */
     goto __pyx_L7;
   }
 
   /* "src/wrapper.pyx":282
- * 			self.doCarguments = True
- * 		else:
- * 			self.doCarguments = False             # <<<<<<<<<<<<<<
- * 		self.wrappedOperation = wrappedOperation
- * 		self.storeValues = storeValues
+ *             self.doCarguments = True
+ *         else:
+ *             self.doCarguments = False             # <<<<<<<<<<<<<<
+ *         self.wrappedOperation = wrappedOperation
+ *         self.storeValues = storeValues
  */
   /*else*/ {
     __pyx_v_self->doCarguments = 0;
@@ -6303,11 +6341,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
   __pyx_L7:;
 
   /* "src/wrapper.pyx":283
- * 		else:
- * 			self.doCarguments = False
- * 		self.wrappedOperation = wrappedOperation             # <<<<<<<<<<<<<<
- * 		self.storeValues = storeValues
- * 		if isinstance( returnValues, returnConverter ):
+ *         else:
+ *             self.doCarguments = False
+ *         self.wrappedOperation = wrappedOperation             # <<<<<<<<<<<<<<
+ *         self.storeValues = storeValues
+ *         if isinstance( returnValues, returnConverter ):
  */
   __Pyx_INCREF(__pyx_v_wrappedOperation);
   __Pyx_GIVEREF(__pyx_v_wrappedOperation);
@@ -6316,11 +6354,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
   __pyx_v_self->wrappedOperation = __pyx_v_wrappedOperation;
 
   /* "src/wrapper.pyx":284
- * 			self.doCarguments = False
- * 		self.wrappedOperation = wrappedOperation
- * 		self.storeValues = storeValues             # <<<<<<<<<<<<<<
- * 		if isinstance( returnValues, returnConverter ):
- * 			self.doCReturnAPI = True
+ *             self.doCarguments = False
+ *         self.wrappedOperation = wrappedOperation
+ *         self.storeValues = storeValues             # <<<<<<<<<<<<<<
+ *         if isinstance( returnValues, returnConverter ):
+ *             self.doCReturnAPI = True
  */
   __Pyx_INCREF(__pyx_v_storeValues);
   __Pyx_GIVEREF(__pyx_v_storeValues);
@@ -6329,40 +6367,40 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
   __pyx_v_self->storeValues = __pyx_v_storeValues;
 
   /* "src/wrapper.pyx":285
- * 		self.wrappedOperation = wrappedOperation
- * 		self.storeValues = storeValues
- * 		if isinstance( returnValues, returnConverter ):             # <<<<<<<<<<<<<<
- * 			self.doCReturnAPI = True
- * 			self.doReturnValues = True
+ *         self.wrappedOperation = wrappedOperation
+ *         self.storeValues = storeValues
+ *         if isinstance( returnValues, returnConverter ):             # <<<<<<<<<<<<<<
+ *             self.doCReturnAPI = True
+ *             self.doReturnValues = True
  */
   __pyx_t_1 = __Pyx_TypeCheck(__pyx_v_returnValues, __pyx_ptype_17OpenGL_accelerate_7wrapper_returnConverter); 
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
     /* "src/wrapper.pyx":286
- * 		self.storeValues = storeValues
- * 		if isinstance( returnValues, returnConverter ):
- * 			self.doCReturnAPI = True             # <<<<<<<<<<<<<<
- * 			self.doReturnValues = True
- * 			self.c_returnValues = returnValues
+ *         self.storeValues = storeValues
+ *         if isinstance( returnValues, returnConverter ):
+ *             self.doCReturnAPI = True             # <<<<<<<<<<<<<<
+ *             self.doReturnValues = True
+ *             self.c_returnValues = returnValues
  */
     __pyx_v_self->doCReturnAPI = 1;
 
     /* "src/wrapper.pyx":287
- * 		if isinstance( returnValues, returnConverter ):
- * 			self.doCReturnAPI = True
- * 			self.doReturnValues = True             # <<<<<<<<<<<<<<
- * 			self.c_returnValues = returnValues
- * 		elif returnValues is None:
+ *         if isinstance( returnValues, returnConverter ):
+ *             self.doCReturnAPI = True
+ *             self.doReturnValues = True             # <<<<<<<<<<<<<<
+ *             self.c_returnValues = returnValues
+ *         elif returnValues is None:
  */
     __pyx_v_self->doReturnValues = 1;
 
     /* "src/wrapper.pyx":288
- * 			self.doCReturnAPI = True
- * 			self.doReturnValues = True
- * 			self.c_returnValues = returnValues             # <<<<<<<<<<<<<<
- * 		elif returnValues is None:
- * 			self.doReturnValues = False
+ *             self.doCReturnAPI = True
+ *             self.doReturnValues = True
+ *             self.c_returnValues = returnValues             # <<<<<<<<<<<<<<
+ *         elif returnValues is None:
+ *             self.doReturnValues = False
  */
     if (!(likely(((__pyx_v_returnValues) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_returnValues, __pyx_ptype_17OpenGL_accelerate_7wrapper_returnConverter))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_4 = __pyx_v_returnValues;
@@ -6374,70 +6412,70 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
     __pyx_t_4 = 0;
 
     /* "src/wrapper.pyx":285
- * 		self.wrappedOperation = wrappedOperation
- * 		self.storeValues = storeValues
- * 		if isinstance( returnValues, returnConverter ):             # <<<<<<<<<<<<<<
- * 			self.doCReturnAPI = True
- * 			self.doReturnValues = True
+ *         self.wrappedOperation = wrappedOperation
+ *         self.storeValues = storeValues
+ *         if isinstance( returnValues, returnConverter ):             # <<<<<<<<<<<<<<
+ *             self.doCReturnAPI = True
+ *             self.doReturnValues = True
  */
     goto __pyx_L9;
   }
 
   /* "src/wrapper.pyx":289
- * 			self.doReturnValues = True
- * 			self.c_returnValues = returnValues
- * 		elif returnValues is None:             # <<<<<<<<<<<<<<
- * 			self.doReturnValues = False
- * 		else:
+ *             self.doReturnValues = True
+ *             self.c_returnValues = returnValues
+ *         elif returnValues is None:             # <<<<<<<<<<<<<<
+ *             self.doReturnValues = False
+ *         else:
  */
   __pyx_t_2 = (__pyx_v_returnValues == Py_None);
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
     /* "src/wrapper.pyx":290
- * 			self.c_returnValues = returnValues
- * 		elif returnValues is None:
- * 			self.doReturnValues = False             # <<<<<<<<<<<<<<
- * 		else:
- * 			self.doCReturnAPI = False
+ *             self.c_returnValues = returnValues
+ *         elif returnValues is None:
+ *             self.doReturnValues = False             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.doCReturnAPI = False
  */
     __pyx_v_self->doReturnValues = 0;
 
     /* "src/wrapper.pyx":289
- * 			self.doReturnValues = True
- * 			self.c_returnValues = returnValues
- * 		elif returnValues is None:             # <<<<<<<<<<<<<<
- * 			self.doReturnValues = False
- * 		else:
+ *             self.doReturnValues = True
+ *             self.c_returnValues = returnValues
+ *         elif returnValues is None:             # <<<<<<<<<<<<<<
+ *             self.doReturnValues = False
+ *         else:
  */
     goto __pyx_L9;
   }
 
   /* "src/wrapper.pyx":292
- * 			self.doReturnValues = False
- * 		else:
- * 			self.doCReturnAPI = False             # <<<<<<<<<<<<<<
- * 			self.doReturnValues = True
- * 			self.returnValues = returnValues
+ *             self.doReturnValues = False
+ *         else:
+ *             self.doCReturnAPI = False             # <<<<<<<<<<<<<<
+ *             self.doReturnValues = True
+ *             self.returnValues = returnValues
  */
   /*else*/ {
     __pyx_v_self->doCReturnAPI = 0;
 
     /* "src/wrapper.pyx":293
- * 		else:
- * 			self.doCReturnAPI = False
- * 			self.doReturnValues = True             # <<<<<<<<<<<<<<
- * 			self.returnValues = returnValues
+ *         else:
+ *             self.doCReturnAPI = False
+ *             self.doReturnValues = True             # <<<<<<<<<<<<<<
+ *             self.returnValues = returnValues
  * 
  */
     __pyx_v_self->doReturnValues = 1;
 
     /* "src/wrapper.pyx":294
- * 			self.doCReturnAPI = False
- * 			self.doReturnValues = True
- * 			self.returnValues = returnValues             # <<<<<<<<<<<<<<
+ *             self.doCReturnAPI = False
+ *             self.doReturnValues = True
+ *             self.returnValues = returnValues             # <<<<<<<<<<<<<<
  * 
- * 	def __call__( self, *args ):
+ *     def __call__( self, *args ):
  */
     __Pyx_INCREF(__pyx_v_returnValues);
     __Pyx_GIVEREF(__pyx_v_returnValues);
@@ -6448,11 +6486,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
   __pyx_L9:;
 
   /* "src/wrapper.pyx":256
- * 	cdef returnConverter c_returnValues
- * 	cdef int doCReturnAPI
- * 	def __init__(             # <<<<<<<<<<<<<<
- * 		self, wrappedOperation,
- * 		calculate_pyArgs=None, calculate_cArgs=None,
+ *     cdef returnConverter c_returnValues
+ *     cdef int doCReturnAPI
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *         self, wrappedOperation,
+ *         calculate_pyArgs=None, calculate_cArgs=None,
  */
 
   /* function exit code */
@@ -6472,11 +6510,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper___init__(struct __pyx_
 }
 
 /* "src/wrapper.pyx":296
- * 			self.returnValues = returnValues
+ *             self.returnValues = returnValues
  * 
- * 	def __call__( self, *args ):             # <<<<<<<<<<<<<<
- * 		cdef tuple pyArgs, cArgs, cArguments
- * 		if self.doPyargs:
+ *     def __call__( self, *args ):             # <<<<<<<<<<<<<<
+ *         cdef tuple pyArgs, cArgs, cArguments
+ *         if self.doPyargs:
  */
 
 /* Python wrapper */
@@ -6524,21 +6562,21 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
   __Pyx_RefNannySetupContext("__call__", 0);
 
   /* "src/wrapper.pyx":298
- * 	def __call__( self, *args ):
- * 		cdef tuple pyArgs, cArgs, cArguments
- * 		if self.doPyargs:             # <<<<<<<<<<<<<<
- * 			pyArgs = tuple(self.calculate_pyArgs.c_call( args ))
- * 		else:
+ *     def __call__( self, *args ):
+ *         cdef tuple pyArgs, cArgs, cArguments
+ *         if self.doPyargs:             # <<<<<<<<<<<<<<
+ *             pyArgs = tuple(self.calculate_pyArgs.c_call( args ))
+ *         else:
  */
   __pyx_t_1 = (__pyx_v_self->doPyargs != 0);
   if (__pyx_t_1) {
 
     /* "src/wrapper.pyx":299
- * 		cdef tuple pyArgs, cArgs, cArguments
- * 		if self.doPyargs:
- * 			pyArgs = tuple(self.calculate_pyArgs.c_call( args ))             # <<<<<<<<<<<<<<
- * 		else:
- * 			pyArgs = args
+ *         cdef tuple pyArgs, cArgs, cArguments
+ *         if self.doPyargs:
+ *             pyArgs = tuple(self.calculate_pyArgs.c_call( args ))             # <<<<<<<<<<<<<<
+ *         else:
+ *             pyArgs = args
  */
     __pyx_t_2 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_PyArgCalculator *)__pyx_v_self->calculate_pyArgs->__pyx_vtab)->c_call(__pyx_v_self->calculate_pyArgs, __pyx_v_args); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
@@ -6553,21 +6591,21 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
     __pyx_t_3 = 0;
 
     /* "src/wrapper.pyx":298
- * 	def __call__( self, *args ):
- * 		cdef tuple pyArgs, cArgs, cArguments
- * 		if self.doPyargs:             # <<<<<<<<<<<<<<
- * 			pyArgs = tuple(self.calculate_pyArgs.c_call( args ))
- * 		else:
+ *     def __call__( self, *args ):
+ *         cdef tuple pyArgs, cArgs, cArguments
+ *         if self.doPyargs:             # <<<<<<<<<<<<<<
+ *             pyArgs = tuple(self.calculate_pyArgs.c_call( args ))
+ *         else:
  */
     goto __pyx_L3;
   }
 
   /* "src/wrapper.pyx":301
- * 			pyArgs = tuple(self.calculate_pyArgs.c_call( args ))
- * 		else:
- * 			pyArgs = args             # <<<<<<<<<<<<<<
- * 		if self.doCargs:
- * 			cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))
+ *             pyArgs = tuple(self.calculate_pyArgs.c_call( args ))
+ *         else:
+ *             pyArgs = args             # <<<<<<<<<<<<<<
+ *         if self.doCargs:
+ *             cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))
  */
   /*else*/ {
     __Pyx_INCREF(__pyx_v_args);
@@ -6576,21 +6614,21 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
   __pyx_L3:;
 
   /* "src/wrapper.pyx":302
- * 		else:
- * 			pyArgs = args
- * 		if self.doCargs:             # <<<<<<<<<<<<<<
- * 			cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))
- * 		else:
+ *         else:
+ *             pyArgs = args
+ *         if self.doCargs:             # <<<<<<<<<<<<<<
+ *             cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))
+ *         else:
  */
   __pyx_t_1 = (__pyx_v_self->doCargs != 0);
   if (__pyx_t_1) {
 
     /* "src/wrapper.pyx":303
- * 			pyArgs = args
- * 		if self.doCargs:
- * 			cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))             # <<<<<<<<<<<<<<
- * 		else:
- * 			cArgs = pyArgs
+ *             pyArgs = args
+ *         if self.doCargs:
+ *             cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))             # <<<<<<<<<<<<<<
+ *         else:
+ *             cArgs = pyArgs
  */
     __pyx_t_3 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_CArgCalculator *)__pyx_v_self->calculate_cArgs->__pyx_vtab)->c_call(__pyx_v_self->calculate_cArgs, __pyx_v_pyArgs); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -6605,21 +6643,21 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
     __pyx_t_2 = 0;
 
     /* "src/wrapper.pyx":302
- * 		else:
- * 			pyArgs = args
- * 		if self.doCargs:             # <<<<<<<<<<<<<<
- * 			cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))
- * 		else:
+ *         else:
+ *             pyArgs = args
+ *         if self.doCargs:             # <<<<<<<<<<<<<<
+ *             cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))
+ *         else:
  */
     goto __pyx_L4;
   }
 
   /* "src/wrapper.pyx":305
- * 			cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))
- * 		else:
- * 			cArgs = pyArgs             # <<<<<<<<<<<<<<
- * 		if self.doCarguments:
- * 			cArguments = tuple(self.calculate_cArguments( cArgs ))
+ *             cArgs = tuple(self.calculate_cArgs.c_call( pyArgs ))
+ *         else:
+ *             cArgs = pyArgs             # <<<<<<<<<<<<<<
+ *         if self.doCarguments:
+ *             cArguments = tuple(self.calculate_cArguments( cArgs ))
  */
   /*else*/ {
     __Pyx_INCREF(__pyx_v_pyArgs);
@@ -6628,21 +6666,21 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
   __pyx_L4:;
 
   /* "src/wrapper.pyx":306
- * 		else:
- * 			cArgs = pyArgs
- * 		if self.doCarguments:             # <<<<<<<<<<<<<<
- * 			cArguments = tuple(self.calculate_cArguments( cArgs ))
- * 		else:
+ *         else:
+ *             cArgs = pyArgs
+ *         if self.doCarguments:             # <<<<<<<<<<<<<<
+ *             cArguments = tuple(self.calculate_cArguments( cArgs ))
+ *         else:
  */
   __pyx_t_1 = (__pyx_v_self->doCarguments != 0);
   if (__pyx_t_1) {
 
     /* "src/wrapper.pyx":307
- * 			cArgs = pyArgs
- * 		if self.doCarguments:
- * 			cArguments = tuple(self.calculate_cArguments( cArgs ))             # <<<<<<<<<<<<<<
- * 		else:
- * 			cArguments = cArgs
+ *             cArgs = pyArgs
+ *         if self.doCarguments:
+ *             cArguments = tuple(self.calculate_cArguments( cArgs ))             # <<<<<<<<<<<<<<
+ *         else:
+ *             cArguments = cArgs
  */
     __Pyx_INCREF(((PyObject *)__pyx_v_self->calculate_cArguments));
     __pyx_t_3 = ((PyObject *)__pyx_v_self->calculate_cArguments); __pyx_t_4 = NULL;
@@ -6677,21 +6715,21 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
     __pyx_t_3 = 0;
 
     /* "src/wrapper.pyx":306
- * 		else:
- * 			cArgs = pyArgs
- * 		if self.doCarguments:             # <<<<<<<<<<<<<<
- * 			cArguments = tuple(self.calculate_cArguments( cArgs ))
- * 		else:
+ *         else:
+ *             cArgs = pyArgs
+ *         if self.doCarguments:             # <<<<<<<<<<<<<<
+ *             cArguments = tuple(self.calculate_cArguments( cArgs ))
+ *         else:
  */
     goto __pyx_L5;
   }
 
   /* "src/wrapper.pyx":309
- * 			cArguments = tuple(self.calculate_cArguments( cArgs ))
- * 		else:
- * 			cArguments = cArgs             # <<<<<<<<<<<<<<
- * 		try:
- * 			result = self.wrappedOperation( *cArguments )
+ *             cArguments = tuple(self.calculate_cArguments( cArgs ))
+ *         else:
+ *             cArguments = cArgs             # <<<<<<<<<<<<<<
+ *         try:
+ *             result = self.wrappedOperation( *cArguments )
  */
   /*else*/ {
     __Pyx_INCREF(__pyx_v_cArgs);
@@ -6700,11 +6738,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
   __pyx_L5:;
 
   /* "src/wrapper.pyx":310
- * 		else:
- * 			cArguments = cArgs
- * 		try:             # <<<<<<<<<<<<<<
- * 			result = self.wrappedOperation( *cArguments )
- * 		except (ctypes.ArgumentError,TypeError,AttributeError), err:
+ *         else:
+ *             cArguments = cArgs
+ *         try:             # <<<<<<<<<<<<<<
+ *             result = self.wrappedOperation( *cArguments )
+ *         except (ctypes.ArgumentError,TypeError,AttributeError), err:
  */
   {
     __Pyx_ExceptionSave(&__pyx_t_6, &__pyx_t_7, &__pyx_t_8);
@@ -6714,11 +6752,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
     /*try:*/ {
 
       /* "src/wrapper.pyx":311
- * 			cArguments = cArgs
- * 		try:
- * 			result = self.wrappedOperation( *cArguments )             # <<<<<<<<<<<<<<
- * 		except (ctypes.ArgumentError,TypeError,AttributeError), err:
- * 			err.args = err.args + (cArguments,)
+ *             cArguments = cArgs
+ *         try:
+ *             result = self.wrappedOperation( *cArguments )             # <<<<<<<<<<<<<<
+ *         except (ctypes.ArgumentError,TypeError,AttributeError), err:
+ *             err.args = err.args + (cArguments,)
  */
       __pyx_t_3 = __Pyx_PyObject_Call(__pyx_v_self->wrappedOperation, __pyx_v_cArguments, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L6_error;}
       __Pyx_GOTREF(__pyx_t_3);
@@ -6726,11 +6764,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
       __pyx_t_3 = 0;
 
       /* "src/wrapper.pyx":310
- * 		else:
- * 			cArguments = cArgs
- * 		try:             # <<<<<<<<<<<<<<
- * 			result = self.wrappedOperation( *cArguments )
- * 		except (ctypes.ArgumentError,TypeError,AttributeError), err:
+ *         else:
+ *             cArguments = cArgs
+ *         try:             # <<<<<<<<<<<<<<
+ *             result = self.wrappedOperation( *cArguments )
+ *         except (ctypes.ArgumentError,TypeError,AttributeError), err:
  */
     }
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -6744,11 +6782,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
     /* "src/wrapper.pyx":312
- * 		try:
- * 			result = self.wrappedOperation( *cArguments )
- * 		except (ctypes.ArgumentError,TypeError,AttributeError), err:             # <<<<<<<<<<<<<<
- * 			err.args = err.args + (cArguments,)
- * 			raise err
+ *         try:
+ *             result = self.wrappedOperation( *cArguments )
+ *         except (ctypes.ArgumentError,TypeError,AttributeError), err:             # <<<<<<<<<<<<<<
+ *             err.args = err.args + (cArguments,)
+ *             raise err
  */
     __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ctypes); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -6767,11 +6805,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
       __pyx_v_err = __pyx_t_3;
 
       /* "src/wrapper.pyx":313
- * 			result = self.wrappedOperation( *cArguments )
- * 		except (ctypes.ArgumentError,TypeError,AttributeError), err:
- * 			err.args = err.args + (cArguments,)             # <<<<<<<<<<<<<<
- * 			raise err
- * 		except error.GLError, err:
+ *             result = self.wrappedOperation( *cArguments )
+ *         except (ctypes.ArgumentError,TypeError,AttributeError), err:
+ *             err.args = err.args + (cArguments,)             # <<<<<<<<<<<<<<
+ *             raise err
+ *         except error.GLError, err:
  */
       __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_err, __pyx_n_s_args); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
       __Pyx_GOTREF(__pyx_t_4);
@@ -6788,22 +6826,22 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
       /* "src/wrapper.pyx":314
- * 		except (ctypes.ArgumentError,TypeError,AttributeError), err:
- * 			err.args = err.args + (cArguments,)
- * 			raise err             # <<<<<<<<<<<<<<
- * 		except error.GLError, err:
- * 			err.cArgs = cArgs
+ *         except (ctypes.ArgumentError,TypeError,AttributeError), err:
+ *             err.args = err.args + (cArguments,)
+ *             raise err             # <<<<<<<<<<<<<<
+ *         except error.GLError, err:
+ *             err.cArgs = cArgs
  */
       __Pyx_Raise(__pyx_v_err, 0, 0, 0);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
     }
 
     /* "src/wrapper.pyx":315
- * 			err.args = err.args + (cArguments,)
- * 			raise err
- * 		except error.GLError, err:             # <<<<<<<<<<<<<<
- * 			err.cArgs = cArgs
- * 			err.pyArgs = pyArgs
+ *             err.args = err.args + (cArguments,)
+ *             raise err
+ *         except error.GLError, err:             # <<<<<<<<<<<<<<
+ *             err.cArgs = cArgs
+ *             err.pyArgs = pyArgs
  */
     __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_error); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
     __Pyx_GOTREF(__pyx_t_5);
@@ -6822,29 +6860,29 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
       __pyx_v_err = __pyx_t_5;
 
       /* "src/wrapper.pyx":316
- * 			raise err
- * 		except error.GLError, err:
- * 			err.cArgs = cArgs             # <<<<<<<<<<<<<<
- * 			err.pyArgs = pyArgs
- * 			raise err
+ *             raise err
+ *         except error.GLError, err:
+ *             err.cArgs = cArgs             # <<<<<<<<<<<<<<
+ *             err.pyArgs = pyArgs
+ *             raise err
  */
       if (__Pyx_PyObject_SetAttrStr(__pyx_v_err, __pyx_n_s_cArgs, __pyx_v_cArgs) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
 
       /* "src/wrapper.pyx":317
- * 		except error.GLError, err:
- * 			err.cArgs = cArgs
- * 			err.pyArgs = pyArgs             # <<<<<<<<<<<<<<
- * 			raise err
- * 		# handle storage of persistent argument values...
+ *         except error.GLError, err:
+ *             err.cArgs = cArgs
+ *             err.pyArgs = pyArgs             # <<<<<<<<<<<<<<
+ *             raise err
+ *         # handle storage of persistent argument values...
  */
       if (__Pyx_PyObject_SetAttrStr(__pyx_v_err, __pyx_n_s_pyArgs, __pyx_v_pyArgs) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
 
       /* "src/wrapper.pyx":318
- * 			err.cArgs = cArgs
- * 			err.pyArgs = pyArgs
- * 			raise err             # <<<<<<<<<<<<<<
- * 		# handle storage of persistent argument values...
- * 		if self.storeValues is not None:
+ *             err.cArgs = cArgs
+ *             err.pyArgs = pyArgs
+ *             raise err             # <<<<<<<<<<<<<<
+ *         # handle storage of persistent argument values...
+ *         if self.storeValues is not None:
  */
       __Pyx_Raise(__pyx_v_err, 0, 0, 0);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
@@ -6853,11 +6891,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
     __pyx_L8_except_error:;
 
     /* "src/wrapper.pyx":310
- * 		else:
- * 			cArguments = cArgs
- * 		try:             # <<<<<<<<<<<<<<
- * 			result = self.wrappedOperation( *cArguments )
- * 		except (ctypes.ArgumentError,TypeError,AttributeError), err:
+ *         else:
+ *             cArguments = cArgs
+ *         try:             # <<<<<<<<<<<<<<
+ *             result = self.wrappedOperation( *cArguments )
+ *         except (ctypes.ArgumentError,TypeError,AttributeError), err:
  */
     __Pyx_XGIVEREF(__pyx_t_6);
     __Pyx_XGIVEREF(__pyx_t_7);
@@ -6868,22 +6906,22 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
   }
 
   /* "src/wrapper.pyx":320
- * 			raise err
- * 		# handle storage of persistent argument values...
- * 		if self.storeValues is not None:             # <<<<<<<<<<<<<<
- * 			self.storeValues(
- * 				result,
+ *             raise err
+ *         # handle storage of persistent argument values...
+ *         if self.storeValues is not None:             # <<<<<<<<<<<<<<
+ *             self.storeValues(
+ *                 result,
  */
   __pyx_t_1 = (__pyx_v_self->storeValues != Py_None);
   __pyx_t_12 = (__pyx_t_1 != 0);
   if (__pyx_t_12) {
 
     /* "src/wrapper.pyx":325
- * 				self,
- * 				pyArgs,
- * 				cArgs,             # <<<<<<<<<<<<<<
- * 			)
- * 		if self.doReturnValues:
+ *                 self,
+ *                 pyArgs,
+ *                 cArgs,             # <<<<<<<<<<<<<<
+ *             )
+ *         if self.doReturnValues:
  */
     __Pyx_INCREF(__pyx_v_self->storeValues);
     __pyx_t_5 = __pyx_v_self->storeValues; __pyx_t_3 = NULL;
@@ -6922,49 +6960,49 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
     /* "src/wrapper.pyx":320
- * 			raise err
- * 		# handle storage of persistent argument values...
- * 		if self.storeValues is not None:             # <<<<<<<<<<<<<<
- * 			self.storeValues(
- * 				result,
+ *             raise err
+ *         # handle storage of persistent argument values...
+ *         if self.storeValues is not None:             # <<<<<<<<<<<<<<
+ *             self.storeValues(
+ *                 result,
  */
   }
 
   /* "src/wrapper.pyx":327
- * 				cArgs,
- * 			)
- * 		if self.doReturnValues:             # <<<<<<<<<<<<<<
- * 			if self.doCReturnAPI:
- * 				return self.c_returnValues.c_call(
+ *                 cArgs,
+ *             )
+ *         if self.doReturnValues:             # <<<<<<<<<<<<<<
+ *             if self.doCReturnAPI:
+ *                 return self.c_returnValues.c_call(
  */
   __pyx_t_12 = (__pyx_v_self->doReturnValues != 0);
   if (__pyx_t_12) {
 
     /* "src/wrapper.pyx":328
- * 			)
- * 		if self.doReturnValues:
- * 			if self.doCReturnAPI:             # <<<<<<<<<<<<<<
- * 				return self.c_returnValues.c_call(
- * 					result, self, pyArgs, cArgs,
+ *             )
+ *         if self.doReturnValues:
+ *             if self.doCReturnAPI:             # <<<<<<<<<<<<<<
+ *                 return self.c_returnValues.c_call(
+ *                     result, self, pyArgs, cArgs,
  */
     __pyx_t_12 = (__pyx_v_self->doCReturnAPI != 0);
     if (__pyx_t_12) {
 
       /* "src/wrapper.pyx":329
- * 		if self.doReturnValues:
- * 			if self.doCReturnAPI:
- * 				return self.c_returnValues.c_call(             # <<<<<<<<<<<<<<
- * 					result, self, pyArgs, cArgs,
- * 				)
+ *         if self.doReturnValues:
+ *             if self.doCReturnAPI:
+ *                 return self.c_returnValues.c_call(             # <<<<<<<<<<<<<<
+ *                     result, self, pyArgs, cArgs,
+ *                 )
  */
       __Pyx_XDECREF(__pyx_r);
 
       /* "src/wrapper.pyx":330
- * 			if self.doCReturnAPI:
- * 				return self.c_returnValues.c_call(
- * 					result, self, pyArgs, cArgs,             # <<<<<<<<<<<<<<
- * 				)
- * 			else:
+ *             if self.doCReturnAPI:
+ *                 return self.c_returnValues.c_call(
+ *                     result, self, pyArgs, cArgs,             # <<<<<<<<<<<<<<
+ *                 )
+ *             else:
  */
       __pyx_t_2 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_7wrapper_returnConverter *)__pyx_v_self->c_returnValues->__pyx_vtab)->c_call(__pyx_v_self->c_returnValues, __pyx_v_result, ((PyObject *)__pyx_v_self), __pyx_v_pyArgs, __pyx_v_cArgs); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
@@ -6973,30 +7011,30 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
       goto __pyx_L0;
 
       /* "src/wrapper.pyx":328
- * 			)
- * 		if self.doReturnValues:
- * 			if self.doCReturnAPI:             # <<<<<<<<<<<<<<
- * 				return self.c_returnValues.c_call(
- * 					result, self, pyArgs, cArgs,
+ *             )
+ *         if self.doReturnValues:
+ *             if self.doCReturnAPI:             # <<<<<<<<<<<<<<
+ *                 return self.c_returnValues.c_call(
+ *                     result, self, pyArgs, cArgs,
  */
     }
 
     /* "src/wrapper.pyx":333
- * 				)
- * 			else:
- * 				return self.returnValues(             # <<<<<<<<<<<<<<
- * 					result,
- * 					self,
+ *                 )
+ *             else:
+ *                 return self.returnValues(             # <<<<<<<<<<<<<<
+ *                     result,
+ *                     self,
  */
     /*else*/ {
       __Pyx_XDECREF(__pyx_r);
 
       /* "src/wrapper.pyx":337
- * 					self,
- * 					pyArgs,
- * 					cArgs,             # <<<<<<<<<<<<<<
- * 				)
- * 		else:
+ *                     self,
+ *                     pyArgs,
+ *                     cArgs,             # <<<<<<<<<<<<<<
+ *                 )
+ *         else:
  */
       __Pyx_INCREF(__pyx_v_self->returnValues);
       __pyx_t_5 = __pyx_v_self->returnValues; __pyx_t_11 = NULL;
@@ -7038,18 +7076,18 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
     }
 
     /* "src/wrapper.pyx":327
- * 				cArgs,
- * 			)
- * 		if self.doReturnValues:             # <<<<<<<<<<<<<<
- * 			if self.doCReturnAPI:
- * 				return self.c_returnValues.c_call(
+ *                 cArgs,
+ *             )
+ *         if self.doReturnValues:             # <<<<<<<<<<<<<<
+ *             if self.doCReturnAPI:
+ *                 return self.c_returnValues.c_call(
  */
   }
 
   /* "src/wrapper.pyx":340
- * 				)
- * 		else:
- * 			return result             # <<<<<<<<<<<<<<
+ *                 )
+ *         else:
+ *             return result             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -7061,11 +7099,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
   }
 
   /* "src/wrapper.pyx":296
- * 			self.returnValues = returnValues
+ *             self.returnValues = returnValues
  * 
- * 	def __call__( self, *args ):             # <<<<<<<<<<<<<<
- * 		cdef tuple pyArgs, cArgs, cArguments
- * 		if self.doPyargs:
+ *     def __call__( self, *args ):             # <<<<<<<<<<<<<<
+ *         cdef tuple pyArgs, cArgs, cArguments
+ *         if self.doPyargs:
  */
 
   /* function exit code */
@@ -7090,11 +7128,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_2__call__(struct
 }
 
 /* "src/wrapper.pyx":252
- * 	cdef PyArgCalculator calculate_pyArgs
+ *     cdef PyArgCalculator calculate_pyArgs
  * 
- * 	cdef public object wrappedOperation, storeValues,returnValues             # <<<<<<<<<<<<<<
- * 	cdef int doPyargs, doCargs, doCarguments, doStoreValues, doReturnValues
- * 	cdef returnConverter c_returnValues
+ *     cdef public object wrappedOperation, storeValues,returnValues             # <<<<<<<<<<<<<<
+ *     cdef int doPyargs, doCargs, doCarguments, doStoreValues, doReturnValues
+ *     cdef returnConverter c_returnValues
  */
 
 /* Python wrapper */
@@ -7359,11 +7397,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_7Wrapper_12returnValues_4__del_
 }
 
 /* "src/wrapper.pyx":351
- * 	cdef public unsigned int index
- * 	cdef public str name
- * 	def __init__( self, str name ):             # <<<<<<<<<<<<<<
- * 		self.name = name
- * 	def finalise( self, wrapper ):
+ *     cdef public unsigned int index
+ *     cdef public str name
+ *     def __init__( self, str name ):             # <<<<<<<<<<<<<<
+ *         self.name = name
+ *     def finalise( self, wrapper ):
  */
 
 /* Python wrapper */
@@ -7429,11 +7467,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName___init__(struct
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":352
- * 	cdef public str name
- * 	def __init__( self, str name ):
- * 		self.name = name             # <<<<<<<<<<<<<<
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.pyArgIndex( self.name )
+ *     cdef public str name
+ *     def __init__( self, str name ):
+ *         self.name = name             # <<<<<<<<<<<<<<
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.pyArgIndex( self.name )
  */
   __Pyx_INCREF(__pyx_v_name);
   __Pyx_GIVEREF(__pyx_v_name);
@@ -7442,11 +7480,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName___init__(struct
   __pyx_v_self->name = __pyx_v_name;
 
   /* "src/wrapper.pyx":351
- * 	cdef public unsigned int index
- * 	cdef public str name
- * 	def __init__( self, str name ):             # <<<<<<<<<<<<<<
- * 		self.name = name
- * 	def finalise( self, wrapper ):
+ *     cdef public unsigned int index
+ *     cdef public str name
+ *     def __init__( self, str name ):             # <<<<<<<<<<<<<<
+ *         self.name = name
+ *     def finalise( self, wrapper ):
  */
 
   /* function exit code */
@@ -7456,11 +7494,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName___init__(struct
 }
 
 /* "src/wrapper.pyx":353
- * 	def __init__( self, str name ):
- * 		self.name = name
- * 	def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
- * 		self.index = wrapper.pyArgIndex( self.name )
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *     def __init__( self, str name ):
+ *         self.name = name
+ *     def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
+ *         self.index = wrapper.pyArgIndex( self.name )
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
  */
 
 /* Python wrapper */
@@ -7490,11 +7528,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_2finalise
   __Pyx_RefNannySetupContext("finalise", 0);
 
   /* "src/wrapper.pyx":354
- * 		self.name = name
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.pyArgIndex( self.name )             # <<<<<<<<<<<<<<
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		return pyArgs[ self.index ]
+ *         self.name = name
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.pyArgIndex( self.name )             # <<<<<<<<<<<<<<
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         return pyArgs[ self.index ]
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_wrapper, __pyx_n_s_pyArgIndex); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7528,11 +7566,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_2finalise
   __pyx_v_self->index = __pyx_t_5;
 
   /* "src/wrapper.pyx":353
- * 	def __init__( self, str name ):
- * 		self.name = name
- * 	def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
- * 		self.index = wrapper.pyArgIndex( self.name )
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *     def __init__( self, str name ):
+ *         self.name = name
+ *     def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
+ *         self.index = wrapper.pyArgIndex( self.name )
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
  */
 
   /* function exit code */
@@ -7552,11 +7590,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_2finalise
 }
 
 /* "src/wrapper.pyx":355
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.pyArgIndex( self.name )
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
- * 		return pyArgs[ self.index ]
- * 	def __repr__( self ):
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.pyArgIndex( self.name )
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
+ *         return pyArgs[ self.index ]
+ *     def __repr__( self ):
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_13getPyArgsName_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_getPyArgsName *__pyx_v_self, PyObject *__pyx_v_pyArgs, CYTHON_UNUSED int __pyx_v_index, CYTHON_UNUSED PyObject *__pyx_v_baseOperation) {
@@ -7569,11 +7607,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_13getPyArgsName_c_call(str
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":356
- * 		self.index = wrapper.pyArgIndex( self.name )
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		return pyArgs[ self.index ]             # <<<<<<<<<<<<<<
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
+ *         self.index = wrapper.pyArgIndex( self.name )
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         return pyArgs[ self.index ]             # <<<<<<<<<<<<<<
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
  */
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_pyArgs == Py_None)) {
@@ -7587,11 +7625,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_13getPyArgsName_c_call(str
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":355
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.pyArgIndex( self.name )
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
- * 		return pyArgs[ self.index ]
- * 	def __repr__( self ):
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.pyArgIndex( self.name )
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):             # <<<<<<<<<<<<<<
+ *         return pyArgs[ self.index ]
+ *     def __repr__( self ):
  */
 
   /* function exit code */
@@ -7606,11 +7644,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_13getPyArgsName_c_call(str
 }
 
 /* "src/wrapper.pyx":357
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		return pyArgs[ self.index ]
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         return pyArgs[ self.index ]
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
 /* Python wrapper */
@@ -7637,20 +7675,20 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_4__repr__
   __Pyx_RefNannySetupContext("__repr__", 0);
 
   /* "src/wrapper.pyx":358
- * 		return pyArgs[ self.index ]
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.name,
+ *         return pyArgs[ self.index ]
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.name,
  */
   __Pyx_XDECREF(__pyx_r);
 
   /* "src/wrapper.pyx":359
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,             # <<<<<<<<<<<<<<
- * 			self.name,
- * 		)
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,             # <<<<<<<<<<<<<<
+ *             self.name,
+ *         )
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -7659,10 +7697,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_4__repr__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":360
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
- * 			self.name,             # <<<<<<<<<<<<<<
- * 		)
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
+ *             self.name,             # <<<<<<<<<<<<<<
+ *         )
  * 
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7675,11 +7713,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_4__repr__
   __pyx_t_2 = 0;
 
   /* "src/wrapper.pyx":358
- * 		return pyArgs[ self.index ]
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.name,
+ *         return pyArgs[ self.index ]
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.name,
  */
   __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_r, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7689,11 +7727,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_4__repr__
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":357
- * 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
- * 		return pyArgs[ self.index ]
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
+ *         return pyArgs[ self.index ]
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
   /* function exit code */
@@ -7709,11 +7747,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_4__repr__
 }
 
 /* "src/wrapper.pyx":349
- * 	retrieves the named pyArg and returns it when called.
- * 	"""
- * 	cdef public unsigned int index             # <<<<<<<<<<<<<<
- * 	cdef public str name
- * 	def __init__( self, str name ):
+ *     retrieves the named pyArg and returns it when called.
+ *     """
+ *     cdef public unsigned int index             # <<<<<<<<<<<<<<
+ *     cdef public str name
+ *     def __init__( self, str name ):
  */
 
 /* Python wrapper */
@@ -7791,11 +7829,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_5index_2__set__
 }
 
 /* "src/wrapper.pyx":350
- * 	"""
- * 	cdef public unsigned int index
- * 	cdef public str name             # <<<<<<<<<<<<<<
- * 	def __init__( self, str name ):
- * 		self.name = name
+ *     """
+ *     cdef public unsigned int index
+ *     cdef public str name             # <<<<<<<<<<<<<<
+ *     def __init__( self, str name ):
+ *         self.name = name
  */
 
 /* Python wrapper */
@@ -7899,11 +7937,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_13getPyArgsName_4name_4__del__(
 }
 
 /* "src/wrapper.pyx":367
- * 	cdef public unsigned int index
- * 	cdef public str name
- * 	def __init__( self, str name ):             # <<<<<<<<<<<<<<
- * 		self.name = name
- * 	def finalise( self, wrapper ):
+ *     cdef public unsigned int index
+ *     cdef public str name
+ *     def __init__( self, str name ):             # <<<<<<<<<<<<<<
+ *         self.name = name
+ *     def finalise( self, wrapper ):
  */
 
 /* Python wrapper */
@@ -7969,11 +8007,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument___init__(str
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":368
- * 	cdef public str name
- * 	def __init__( self, str name ):
- * 		self.name = name             # <<<<<<<<<<<<<<
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.pyArgIndex( self.name )
+ *     cdef public str name
+ *     def __init__( self, str name ):
+ *         self.name = name             # <<<<<<<<<<<<<<
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.pyArgIndex( self.name )
  */
   __Pyx_INCREF(__pyx_v_name);
   __Pyx_GIVEREF(__pyx_v_name);
@@ -7982,11 +8020,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument___init__(str
   __pyx_v_self->name = __pyx_v_name;
 
   /* "src/wrapper.pyx":367
- * 	cdef public unsigned int index
- * 	cdef public str name
- * 	def __init__( self, str name ):             # <<<<<<<<<<<<<<
- * 		self.name = name
- * 	def finalise( self, wrapper ):
+ *     cdef public unsigned int index
+ *     cdef public str name
+ *     def __init__( self, str name ):             # <<<<<<<<<<<<<<
+ *         self.name = name
+ *     def finalise( self, wrapper ):
  */
 
   /* function exit code */
@@ -7996,11 +8034,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument___init__(str
 }
 
 /* "src/wrapper.pyx":369
- * 	def __init__( self, str name ):
- * 		self.name = name
- * 	def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
- * 		self.index = wrapper.pyArgIndex( self.name )
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *     def __init__( self, str name ):
+ *         self.name = name
+ *     def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
+ *         self.index = wrapper.pyArgIndex( self.name )
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
  */
 
 /* Python wrapper */
@@ -8030,11 +8068,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_2final
   __Pyx_RefNannySetupContext("finalise", 0);
 
   /* "src/wrapper.pyx":370
- * 		self.name = name
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.pyArgIndex( self.name )             # <<<<<<<<<<<<<<
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
- * 		"""Retrieve pyArgs[ self.index ]"""
+ *         self.name = name
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.pyArgIndex( self.name )             # <<<<<<<<<<<<<<
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *         """Retrieve pyArgs[ self.index ]"""
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_wrapper, __pyx_n_s_pyArgIndex); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 370; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -8068,11 +8106,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_2final
   __pyx_v_self->index = __pyx_t_5;
 
   /* "src/wrapper.pyx":369
- * 	def __init__( self, str name ):
- * 		self.name = name
- * 	def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
- * 		self.index = wrapper.pyArgIndex( self.name )
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *     def __init__( self, str name ):
+ *         self.name = name
+ *     def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
+ *         self.index = wrapper.pyArgIndex( self.name )
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
  */
 
   /* function exit code */
@@ -8092,11 +8130,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_2final
 }
 
 /* "src/wrapper.pyx":371
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.pyArgIndex( self.name )
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.pyArgIndex( self.name )
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_16returnPyArgument_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnPyArgument *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_result, CYTHON_UNUSED PyObject *__pyx_v_baseOperation, PyObject *__pyx_v_pyArgs, CYTHON_UNUSED PyObject *__pyx_v_cArgs) {
@@ -8109,11 +8147,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_16returnPyArgument_c_call(
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":373
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]             # <<<<<<<<<<<<<<
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]             # <<<<<<<<<<<<<<
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
  */
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_pyArgs == Py_None)) {
@@ -8127,11 +8165,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_16returnPyArgument_c_call(
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":371
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.pyArgIndex( self.name )
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.pyArgIndex( self.name )
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]
  */
 
   /* function exit code */
@@ -8146,11 +8184,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_16returnPyArgument_c_call(
 }
 
 /* "src/wrapper.pyx":374
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
 /* Python wrapper */
@@ -8177,20 +8215,20 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_4__rep
   __Pyx_RefNannySetupContext("__repr__", 0);
 
   /* "src/wrapper.pyx":375
- * 		return pyArgs[self.index]
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.name,
+ *         return pyArgs[self.index]
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.name,
  */
   __Pyx_XDECREF(__pyx_r);
 
   /* "src/wrapper.pyx":376
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,             # <<<<<<<<<<<<<<
- * 			self.name,
- * 		)
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,             # <<<<<<<<<<<<<<
+ *             self.name,
+ *         )
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -8199,10 +8237,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_4__rep
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":377
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
- * 			self.name,             # <<<<<<<<<<<<<<
- * 		)
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
+ *             self.name,             # <<<<<<<<<<<<<<
+ *         )
  * cdef class returnPyArgumentIndex(returnConverter):
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -8215,11 +8253,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_4__rep
   __pyx_t_2 = 0;
 
   /* "src/wrapper.pyx":375
- * 		return pyArgs[self.index]
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.name,
+ *         return pyArgs[self.index]
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.name,
  */
   __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_r, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -8229,11 +8267,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_4__rep
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":374
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
   /* function exit code */
@@ -8250,10 +8288,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_4__rep
 
 /* "src/wrapper.pyx":365
  * cdef class returnPyArgument(returnConverter):
- * 	"""ReturnValues returning the named pyArgs value"""
- * 	cdef public unsigned int index             # <<<<<<<<<<<<<<
- * 	cdef public str name
- * 	def __init__( self, str name ):
+ *     """ReturnValues returning the named pyArgs value"""
+ *     cdef public unsigned int index             # <<<<<<<<<<<<<<
+ *     cdef public str name
+ *     def __init__( self, str name ):
  */
 
 /* Python wrapper */
@@ -8331,11 +8369,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_5index_2__se
 }
 
 /* "src/wrapper.pyx":366
- * 	"""ReturnValues returning the named pyArgs value"""
- * 	cdef public unsigned int index
- * 	cdef public str name             # <<<<<<<<<<<<<<
- * 	def __init__( self, str name ):
- * 		self.name = name
+ *     """ReturnValues returning the named pyArgs value"""
+ *     cdef public unsigned int index
+ *     cdef public str name             # <<<<<<<<<<<<<<
+ *     def __init__( self, str name ):
+ *         self.name = name
  */
 
 /* Python wrapper */
@@ -8440,10 +8478,10 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_16returnPyArgument_4name_4__del
 
 /* "src/wrapper.pyx":381
  * cdef class returnPyArgumentIndex(returnConverter):
- * 	cdef public unsigned int index
- * 	def __init__( self, int index ):             # <<<<<<<<<<<<<<
- * 		self.index = index
- * 	def finalise( self, wrapper ):
+ *     cdef public unsigned int index
+ *     def __init__( self, int index ):             # <<<<<<<<<<<<<<
+ *         self.index = index
+ *     def finalise( self, wrapper ):
  */
 
 /* Python wrapper */
@@ -8504,20 +8542,20 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex___init_
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":382
- * 	cdef public unsigned int index
- * 	def __init__( self, int index ):
- * 		self.index = index             # <<<<<<<<<<<<<<
- * 	def finalise( self, wrapper ):
- * 		"""No finalisation required"""
+ *     cdef public unsigned int index
+ *     def __init__( self, int index ):
+ *         self.index = index             # <<<<<<<<<<<<<<
+ *     def finalise( self, wrapper ):
+ *         """No finalisation required"""
  */
   __pyx_v_self->index = __pyx_v_index;
 
   /* "src/wrapper.pyx":381
  * cdef class returnPyArgumentIndex(returnConverter):
- * 	cdef public unsigned int index
- * 	def __init__( self, int index ):             # <<<<<<<<<<<<<<
- * 		self.index = index
- * 	def finalise( self, wrapper ):
+ *     cdef public unsigned int index
+ *     def __init__( self, int index ):             # <<<<<<<<<<<<<<
+ *         self.index = index
+ *     def finalise( self, wrapper ):
  */
 
   /* function exit code */
@@ -8527,11 +8565,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex___init_
 }
 
 /* "src/wrapper.pyx":383
- * 	def __init__( self, int index ):
- * 		self.index = index
- * 	def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
- * 		"""No finalisation required"""
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *     def __init__( self, int index ):
+ *         self.index = index
+ *     def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
+ *         """No finalisation required"""
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
  */
 
 /* Python wrapper */
@@ -8561,11 +8599,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_2
 }
 
 /* "src/wrapper.pyx":385
- * 	def finalise( self, wrapper ):
- * 		"""No finalisation required"""
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]
+ *     def finalise( self, wrapper ):
+ *         """No finalisation required"""
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnPyArgumentIndex *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_result, CYTHON_UNUSED PyObject *__pyx_v_baseOperation, PyObject *__pyx_v_pyArgs, CYTHON_UNUSED PyObject *__pyx_v_cArgs) {
@@ -8578,11 +8616,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_c_
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":387
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]             # <<<<<<<<<<<<<<
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]             # <<<<<<<<<<<<<<
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
  */
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_pyArgs == Py_None)) {
@@ -8596,11 +8634,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_c_
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":385
- * 	def finalise( self, wrapper ):
- * 		"""No finalisation required"""
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]
+ *     def finalise( self, wrapper ):
+ *         """No finalisation required"""
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]
  */
 
   /* function exit code */
@@ -8615,11 +8653,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_c_
 }
 
 /* "src/wrapper.pyx":388
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
 /* Python wrapper */
@@ -8647,20 +8685,20 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_4
   __Pyx_RefNannySetupContext("__repr__", 0);
 
   /* "src/wrapper.pyx":389
- * 		return pyArgs[self.index]
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.index,
+ *         return pyArgs[self.index]
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.index,
  */
   __Pyx_XDECREF(__pyx_r);
 
   /* "src/wrapper.pyx":390
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,             # <<<<<<<<<<<<<<
- * 			self.index,
- * 		)
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,             # <<<<<<<<<<<<<<
+ *             self.index,
+ *         )
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -8669,21 +8707,21 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_4
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":391
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
- * 			self.index,             # <<<<<<<<<<<<<<
- * 		)
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
+ *             self.index,             # <<<<<<<<<<<<<<
+ *         )
  * cdef class returnCArgument(returnConverter):
  */
   __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_self->index); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
   /* "src/wrapper.pyx":390
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,             # <<<<<<<<<<<<<<
- * 			self.index,
- * 		)
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,             # <<<<<<<<<<<<<<
+ *             self.index,
+ *         )
  */
   __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -8695,11 +8733,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_4
   __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":389
- * 		return pyArgs[self.index]
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.index,
+ *         return pyArgs[self.index]
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.index,
  */
   __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_s_r, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -8709,11 +8747,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_4
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":388
- * 		"""Retrieve pyArgs[ self.index ]"""
- * 		return pyArgs[self.index]
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *         """Retrieve pyArgs[ self.index ]"""
+ *         return pyArgs[self.index]
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
   /* function exit code */
@@ -8730,11 +8768,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_4
 }
 
 /* "src/wrapper.pyx":380
- * 		)
+ *         )
  * cdef class returnPyArgumentIndex(returnConverter):
- * 	cdef public unsigned int index             # <<<<<<<<<<<<<<
- * 	def __init__( self, int index ):
- * 		self.index = index
+ *     cdef public unsigned int index             # <<<<<<<<<<<<<<
+ *     def __init__( self, int index ):
+ *         self.index = index
  */
 
 /* Python wrapper */
@@ -8812,11 +8850,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_21returnPyArgumentIndex_5index_
 }
 
 /* "src/wrapper.pyx":397
- * 	cdef public unsigned int index
- * 	cdef public str name
- * 	def __init__( self, str name ):             # <<<<<<<<<<<<<<
- * 		self.name = name
- * 	def finalise( self, wrapper ):
+ *     cdef public unsigned int index
+ *     cdef public str name
+ *     def __init__( self, str name ):             # <<<<<<<<<<<<<<
+ *         self.name = name
+ *     def finalise( self, wrapper ):
  */
 
 /* Python wrapper */
@@ -8882,11 +8920,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument___init__(stru
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "src/wrapper.pyx":398
- * 	cdef public str name
- * 	def __init__( self, str name ):
- * 		self.name = name             # <<<<<<<<<<<<<<
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.cArgIndex( self.name )
+ *     cdef public str name
+ *     def __init__( self, str name ):
+ *         self.name = name             # <<<<<<<<<<<<<<
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.cArgIndex( self.name )
  */
   __Pyx_INCREF(__pyx_v_name);
   __Pyx_GIVEREF(__pyx_v_name);
@@ -8895,11 +8933,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument___init__(stru
   __pyx_v_self->name = __pyx_v_name;
 
   /* "src/wrapper.pyx":397
- * 	cdef public unsigned int index
- * 	cdef public str name
- * 	def __init__( self, str name ):             # <<<<<<<<<<<<<<
- * 		self.name = name
- * 	def finalise( self, wrapper ):
+ *     cdef public unsigned int index
+ *     cdef public str name
+ *     def __init__( self, str name ):             # <<<<<<<<<<<<<<
+ *         self.name = name
+ *     def finalise( self, wrapper ):
  */
 
   /* function exit code */
@@ -8909,11 +8947,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument___init__(stru
 }
 
 /* "src/wrapper.pyx":399
- * 	def __init__( self, str name ):
- * 		self.name = name
- * 	def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
- * 		self.index = wrapper.cArgIndex( self.name )
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *     def __init__( self, str name ):
+ *         self.name = name
+ *     def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
+ *         self.index = wrapper.cArgIndex( self.name )
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
  */
 
 /* Python wrapper */
@@ -8943,11 +8981,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_2finali
   __Pyx_RefNannySetupContext("finalise", 0);
 
   /* "src/wrapper.pyx":400
- * 		self.name = name
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.cArgIndex( self.name )             # <<<<<<<<<<<<<<
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
- * 		"""Retrieve cArgs[ self.index ]"""
+ *         self.name = name
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.cArgIndex( self.name )             # <<<<<<<<<<<<<<
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *         """Retrieve cArgs[ self.index ]"""
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_wrapper, __pyx_n_s_cArgIndex); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -8981,11 +9019,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_2finali
   __pyx_v_self->index = __pyx_t_5;
 
   /* "src/wrapper.pyx":399
- * 	def __init__( self, str name ):
- * 		self.name = name
- * 	def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
- * 		self.index = wrapper.cArgIndex( self.name )
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *     def __init__( self, str name ):
+ *         self.name = name
+ *     def finalise( self, wrapper ):             # <<<<<<<<<<<<<<
+ *         self.index = wrapper.cArgIndex( self.name )
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
  */
 
   /* function exit code */
@@ -9005,11 +9043,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_2finali
 }
 
 /* "src/wrapper.pyx":401
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.cArgIndex( self.name )
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		"""Retrieve cArgs[ self.index ]"""
- * 		return cArgs[self.index]
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.cArgIndex( self.name )
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         """Retrieve cArgs[ self.index ]"""
+ *         return cArgs[self.index]
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15returnCArgument_c_call(struct __pyx_obj_17OpenGL_accelerate_7wrapper_returnCArgument *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_result, CYTHON_UNUSED PyObject *__pyx_v_baseOperation, CYTHON_UNUSED PyObject *__pyx_v_pyArgs, PyObject *__pyx_v_cArgs) {
@@ -9022,11 +9060,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15returnCArgument_c_call(s
   __Pyx_RefNannySetupContext("c_call", 0);
 
   /* "src/wrapper.pyx":403
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
- * 		"""Retrieve cArgs[ self.index ]"""
- * 		return cArgs[self.index]             # <<<<<<<<<<<<<<
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
+ *         """Retrieve cArgs[ self.index ]"""
+ *         return cArgs[self.index]             # <<<<<<<<<<<<<<
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
  */
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_cArgs == Py_None)) {
@@ -9040,11 +9078,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15returnCArgument_c_call(s
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":401
- * 	def finalise( self, wrapper ):
- * 		self.index = wrapper.cArgIndex( self.name )
- * 	cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
- * 		"""Retrieve cArgs[ self.index ]"""
- * 		return cArgs[self.index]
+ *     def finalise( self, wrapper ):
+ *         self.index = wrapper.cArgIndex( self.name )
+ *     cdef c_call( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):             # <<<<<<<<<<<<<<
+ *         """Retrieve cArgs[ self.index ]"""
+ *         return cArgs[self.index]
  */
 
   /* function exit code */
@@ -9059,11 +9097,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_7wrapper_15returnCArgument_c_call(s
 }
 
 /* "src/wrapper.pyx":404
- * 		"""Retrieve cArgs[ self.index ]"""
- * 		return cArgs[self.index]
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *         """Retrieve cArgs[ self.index ]"""
+ *         return cArgs[self.index]
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
 /* Python wrapper */
@@ -9090,20 +9128,20 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_4__repr
   __Pyx_RefNannySetupContext("__repr__", 0);
 
   /* "src/wrapper.pyx":405
- * 		return cArgs[self.index]
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.name,
+ *         return cArgs[self.index]
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.name,
  */
   __Pyx_XDECREF(__pyx_r);
 
   /* "src/wrapper.pyx":406
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,             # <<<<<<<<<<<<<<
- * 			self.name,
- * 		)
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,             # <<<<<<<<<<<<<<
+ *             self.name,
+ *         )
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -9112,10 +9150,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_4__repr
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "src/wrapper.pyx":407
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
- * 			self.name,             # <<<<<<<<<<<<<<
- * 		)
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
+ *             self.name,             # <<<<<<<<<<<<<<
+ *         )
  * 
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9128,11 +9166,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_4__repr
   __pyx_t_2 = 0;
 
   /* "src/wrapper.pyx":405
- * 		return cArgs[self.index]
- * 	def __repr__( self ):
- * 		return """%s( %r )"""%(             # <<<<<<<<<<<<<<
- * 			self.__class__.__name__,
- * 			self.name,
+ *         return cArgs[self.index]
+ *     def __repr__( self ):
+ *         return """%s( %r )"""%(             # <<<<<<<<<<<<<<
+ *             self.__class__.__name__,
+ *             self.name,
  */
   __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_r, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -9142,11 +9180,11 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_4__repr
   goto __pyx_L0;
 
   /* "src/wrapper.pyx":404
- * 		"""Retrieve cArgs[ self.index ]"""
- * 		return cArgs[self.index]
- * 	def __repr__( self ):             # <<<<<<<<<<<<<<
- * 		return """%s( %r )"""%(
- * 			self.__class__.__name__,
+ *         """Retrieve cArgs[ self.index ]"""
+ *         return cArgs[self.index]
+ *     def __repr__( self ):             # <<<<<<<<<<<<<<
+ *         return """%s( %r )"""%(
+ *             self.__class__.__name__,
  */
 
   /* function exit code */
@@ -9163,10 +9201,10 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_4__repr
 
 /* "src/wrapper.pyx":395
  * cdef class returnCArgument(returnConverter):
- * 	"""ReturnValues returning the named pyArgs value"""
- * 	cdef public unsigned int index             # <<<<<<<<<<<<<<
- * 	cdef public str name
- * 	def __init__( self, str name ):
+ *     """ReturnValues returning the named pyArgs value"""
+ *     cdef public unsigned int index             # <<<<<<<<<<<<<<
+ *     cdef public str name
+ *     def __init__( self, str name ):
  */
 
 /* Python wrapper */
@@ -9244,11 +9282,11 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_5index_2__set
 }
 
 /* "src/wrapper.pyx":396
- * 	"""ReturnValues returning the named pyArgs value"""
- * 	cdef public unsigned int index
- * 	cdef public str name             # <<<<<<<<<<<<<<
- * 	def __init__( self, str name ):
- * 		self.name = name
+ *     """ReturnValues returning the named pyArgs value"""
+ *     cdef public unsigned int index
+ *     cdef public str name             # <<<<<<<<<<<<<<
+ *     def __init__( self, str name ):
+ *         self.name = name
  */
 
 /* Python wrapper */
@@ -9344,6 +9382,502 @@ static int __pyx_pf_17OpenGL_accelerate_7wrapper_15returnCArgument_4name_4__del_
   __Pyx_GOTREF(__pyx_v_self->name);
   __Pyx_DECREF(__pyx_v_self->name);
   __pyx_v_self->name = ((PyObject*)Py_None);
+
+  /* function exit code */
+  __pyx_r = 0;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/wrapper.pyx":412
+ * cdef class MultiReturn(object):
+ *     cdef public list children
+ *     def __init__(self,*children):             # <<<<<<<<<<<<<<
+ *         self.children = list(children)
+ *     def append(self, child ):
+ */
+
+/* Python wrapper */
+static int __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_children = 0;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__init__ (wrapper)", 0);
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__init__", 0))) return -1;
+  __Pyx_INCREF(__pyx_args);
+  __pyx_v_children = __pyx_args;
+  __pyx_r = __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn___init__(((struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)__pyx_v_self), __pyx_v_children);
+
+  /* function exit code */
+  __Pyx_XDECREF(__pyx_v_children);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn___init__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self, PyObject *__pyx_v_children) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__init__", 0);
+
+  /* "src/wrapper.pyx":413
+ *     cdef public list children
+ *     def __init__(self,*children):
+ *         self.children = list(children)             # <<<<<<<<<<<<<<
+ *     def append(self, child ):
+ *         self.children.append( child )
+ */
+  __pyx_t_1 = PySequence_List(__pyx_v_children); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __Pyx_GOTREF(__pyx_v_self->children);
+  __Pyx_DECREF(__pyx_v_self->children);
+  __pyx_v_self->children = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "src/wrapper.pyx":412
+ * cdef class MultiReturn(object):
+ *     cdef public list children
+ *     def __init__(self,*children):             # <<<<<<<<<<<<<<
+ *         self.children = list(children)
+ *     def append(self, child ):
+ */
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("OpenGL_accelerate.wrapper.MultiReturn.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/wrapper.pyx":414
+ *     def __init__(self,*children):
+ *         self.children = list(children)
+ *     def append(self, child ):             # <<<<<<<<<<<<<<
+ *         self.children.append( child )
+ *     def __call__(self,*args,**named):
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_3append(PyObject *__pyx_v_self, PyObject *__pyx_v_child); /*proto*/
+static PyObject *__pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_3append(PyObject *__pyx_v_self, PyObject *__pyx_v_child) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("append (wrapper)", 0);
+  __pyx_r = __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_2append(((struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)__pyx_v_self), ((PyObject *)__pyx_v_child));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_2append(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self, PyObject *__pyx_v_child) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("append", 0);
+
+  /* "src/wrapper.pyx":415
+ *         self.children = list(children)
+ *     def append(self, child ):
+ *         self.children.append( child )             # <<<<<<<<<<<<<<
+ *     def __call__(self,*args,**named):
+ *         cdef list result = []
+ */
+  if (unlikely(__pyx_v_self->children == Py_None)) {
+    PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "append");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_PyList_Append(__pyx_v_self->children, __pyx_v_child); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "src/wrapper.pyx":414
+ *     def __init__(self,*children):
+ *         self.children = list(children)
+ *     def append(self, child ):             # <<<<<<<<<<<<<<
+ *         self.children.append( child )
+ *     def __call__(self,*args,**named):
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("OpenGL_accelerate.wrapper.MultiReturn.append", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/wrapper.pyx":416
+ *     def append(self, child ):
+ *         self.children.append( child )
+ *     def __call__(self,*args,**named):             # <<<<<<<<<<<<<<
+ *         cdef list result = []
+ *         for child in self.children:
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_5__call__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_5__call__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_args = 0;
+  PyObject *__pyx_v_named = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__call__ (wrapper)", 0);
+  if (unlikely(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__call__", 1))) return NULL;
+  __pyx_v_named = (__pyx_kwds) ? PyDict_Copy(__pyx_kwds) : PyDict_New(); if (unlikely(!__pyx_v_named)) return NULL;
+  __Pyx_GOTREF(__pyx_v_named);
+  __Pyx_INCREF(__pyx_args);
+  __pyx_v_args = __pyx_args;
+  __pyx_r = __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_4__call__(((struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)__pyx_v_self), __pyx_v_args, __pyx_v_named);
+
+  /* function exit code */
+  __Pyx_XDECREF(__pyx_v_args);
+  __Pyx_XDECREF(__pyx_v_named);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_4__call__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self, PyObject *__pyx_v_args, PyObject *__pyx_v_named) {
+  PyObject *__pyx_v_result = 0;
+  PyObject *__pyx_v_child = NULL;
+  PyObject *__pyx_v_err = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_t_7;
+  int __pyx_t_8;
+  PyObject *__pyx_t_9 = NULL;
+  PyObject *__pyx_t_10 = NULL;
+  PyObject *__pyx_t_11 = NULL;
+  PyObject *__pyx_t_12 = NULL;
+  PyObject *__pyx_t_13 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__call__", 0);
+
+  /* "src/wrapper.pyx":417
+ *         self.children.append( child )
+ *     def __call__(self,*args,**named):
+ *         cdef list result = []             # <<<<<<<<<<<<<<
+ *         for child in self.children:
+ *             try:
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_result = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "src/wrapper.pyx":418
+ *     def __call__(self,*args,**named):
+ *         cdef list result = []
+ *         for child in self.children:             # <<<<<<<<<<<<<<
+ *             try:
+ *                 result.append( child(*args,**named) )
+ */
+  if (unlikely(__pyx_v_self->children == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __pyx_v_self->children; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
+  for (;;) {
+    if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
+    #if CYTHON_COMPILING_IN_CPYTHON
+    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_3); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    #else
+    __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    #endif
+    __Pyx_XDECREF_SET(__pyx_v_child, __pyx_t_3);
+    __pyx_t_3 = 0;
+
+    /* "src/wrapper.pyx":419
+ *         cdef list result = []
+ *         for child in self.children:
+ *             try:             # <<<<<<<<<<<<<<
+ *                 result.append( child(*args,**named) )
+ *             except Exception as err:
+ */
+    {
+      __Pyx_ExceptionSave(&__pyx_t_4, &__pyx_t_5, &__pyx_t_6);
+      __Pyx_XGOTREF(__pyx_t_4);
+      __Pyx_XGOTREF(__pyx_t_5);
+      __Pyx_XGOTREF(__pyx_t_6);
+      /*try:*/ {
+
+        /* "src/wrapper.pyx":420
+ *         for child in self.children:
+ *             try:
+ *                 result.append( child(*args,**named) )             # <<<<<<<<<<<<<<
+ *             except Exception as err:
+ *                 err.args += ( child, args, named )
+ */
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_v_child, __pyx_v_args, __pyx_v_named); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_result, __pyx_t_3); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+        /* "src/wrapper.pyx":419
+ *         cdef list result = []
+ *         for child in self.children:
+ *             try:             # <<<<<<<<<<<<<<
+ *                 result.append( child(*args,**named) )
+ *             except Exception as err:
+ */
+      }
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      goto __pyx_L12_try_end;
+      __pyx_L5_error:;
+      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+      /* "src/wrapper.pyx":421
+ *             try:
+ *                 result.append( child(*args,**named) )
+ *             except Exception as err:             # <<<<<<<<<<<<<<
+ *                 err.args += ( child, args, named )
+ *                 raise
+ */
+      __pyx_t_8 = PyErr_ExceptionMatches(__pyx_builtin_Exception);
+      if (__pyx_t_8) {
+        __Pyx_AddTraceback("OpenGL_accelerate.wrapper.MultiReturn.__call__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+        if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_9, &__pyx_t_10) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 421; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_GOTREF(__pyx_t_9);
+        __Pyx_GOTREF(__pyx_t_10);
+        __Pyx_INCREF(__pyx_t_9);
+        __pyx_v_err = __pyx_t_9;
+
+        /* "src/wrapper.pyx":422
+ *                 result.append( child(*args,**named) )
+ *             except Exception as err:
+ *                 err.args += ( child, args, named )             # <<<<<<<<<<<<<<
+ *                 raise
+ *         return result
+ */
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_err, __pyx_n_s_args); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 422; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+        __Pyx_GOTREF(__pyx_t_11);
+        __pyx_t_12 = PyTuple_New(3); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 422; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+        __Pyx_GOTREF(__pyx_t_12);
+        __Pyx_INCREF(__pyx_v_child);
+        __Pyx_GIVEREF(__pyx_v_child);
+        PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_v_child);
+        __Pyx_INCREF(__pyx_v_args);
+        __Pyx_GIVEREF(__pyx_v_args);
+        PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_v_args);
+        __Pyx_INCREF(__pyx_v_named);
+        __Pyx_GIVEREF(__pyx_v_named);
+        PyTuple_SET_ITEM(__pyx_t_12, 2, __pyx_v_named);
+        __pyx_t_13 = PyNumber_InPlaceAdd(__pyx_t_11, __pyx_t_12); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 422; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+        __Pyx_GOTREF(__pyx_t_13);
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_err, __pyx_n_s_args, __pyx_t_13) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 422; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+        __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+
+        /* "src/wrapper.pyx":423
+ *             except Exception as err:
+ *                 err.args += ( child, args, named )
+ *                 raise             # <<<<<<<<<<<<<<
+ *         return result
+ * 
+ */
+        __Pyx_GIVEREF(__pyx_t_3);
+        __Pyx_GIVEREF(__pyx_t_9);
+        __Pyx_XGIVEREF(__pyx_t_10);
+        __Pyx_ErrRestore(__pyx_t_3, __pyx_t_9, __pyx_t_10);
+        __pyx_t_3 = 0; __pyx_t_9 = 0; __pyx_t_10 = 0; 
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+      }
+      goto __pyx_L7_except_error;
+      __pyx_L7_except_error:;
+
+      /* "src/wrapper.pyx":419
+ *         cdef list result = []
+ *         for child in self.children:
+ *             try:             # <<<<<<<<<<<<<<
+ *                 result.append( child(*args,**named) )
+ *             except Exception as err:
+ */
+      __Pyx_XGIVEREF(__pyx_t_4);
+      __Pyx_XGIVEREF(__pyx_t_5);
+      __Pyx_XGIVEREF(__pyx_t_6);
+      __Pyx_ExceptionReset(__pyx_t_4, __pyx_t_5, __pyx_t_6);
+      goto __pyx_L1_error;
+      __pyx_L12_try_end:;
+    }
+
+    /* "src/wrapper.pyx":418
+ *     def __call__(self,*args,**named):
+ *         cdef list result = []
+ *         for child in self.children:             # <<<<<<<<<<<<<<
+ *             try:
+ *                 result.append( child(*args,**named) )
+ */
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "src/wrapper.pyx":424
+ *                 err.args += ( child, args, named )
+ *                 raise
+ *         return result             # <<<<<<<<<<<<<<
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_result);
+  __pyx_r = __pyx_v_result;
+  goto __pyx_L0;
+
+  /* "src/wrapper.pyx":416
+ *     def append(self, child ):
+ *         self.children.append( child )
+ *     def __call__(self,*args,**named):             # <<<<<<<<<<<<<<
+ *         cdef list result = []
+ *         for child in self.children:
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_12);
+  __Pyx_XDECREF(__pyx_t_13);
+  __Pyx_AddTraceback("OpenGL_accelerate.wrapper.MultiReturn.__call__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_result);
+  __Pyx_XDECREF(__pyx_v_child);
+  __Pyx_XDECREF(__pyx_v_err);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/wrapper.pyx":411
+ * 
+ * cdef class MultiReturn(object):
+ *     cdef public list children             # <<<<<<<<<<<<<<
+ *     def __init__(self,*children):
+ *         self.children = list(children)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_8children___get__(((struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_8children___get__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_self->children);
+  __pyx_r = __pyx_v_self->children;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static int __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_2__set__(((struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_2__set__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self, PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__set__", 0);
+  if (!(likely(PyList_CheckExact(__pyx_v_value))||((__pyx_v_value) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_value)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_v_value;
+  __Pyx_INCREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __Pyx_GOTREF(__pyx_v_self->children);
+  __Pyx_DECREF(__pyx_v_self->children);
+  __pyx_v_self->children = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("OpenGL_accelerate.wrapper.MultiReturn.children.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static int __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_5__del__(PyObject *__pyx_v_self); /*proto*/
+static int __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_5__del__(PyObject *__pyx_v_self) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_4__del__(((struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_4__del__(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *__pyx_v_self) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__del__", 0);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  __Pyx_GOTREF(__pyx_v_self->children);
+  __Pyx_DECREF(__pyx_v_self->children);
+  __pyx_v_self->children = ((PyObject*)Py_None);
 
   /* function exit code */
   __pyx_r = 0;
@@ -10632,7 +11166,7 @@ static PyTypeObject __pyx_type_17OpenGL_accelerate_7wrapper_Wrapper = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
-  "C-coded most-generic form of the wrapper's core function\n\t\n\tApplies a series of wrapper stages to the core function in order \n\tto expand and/or convert parameters into formats which are compatible\n\twith the underlying (ctypes) library.  Requires the use of the \n\tCalculator objects defined later in this module in order to provide \n\tefficient operations.\n\t", /*tp_doc*/
+  "C-coded most-generic form of the wrapper's core function\n    \n    Applies a series of wrapper stages to the core function in order \n    to expand and/or convert parameters into formats which are compatible\n    with the underlying (ctypes) library.  Requires the use of the \n    Calculator objects defined later in this module in order to provide \n    efficient operations.\n    ", /*tp_doc*/
   __pyx_tp_traverse_17OpenGL_accelerate_7wrapper_Wrapper, /*tp_traverse*/
   __pyx_tp_clear_17OpenGL_accelerate_7wrapper_Wrapper, /*tp_clear*/
   0, /*tp_richcompare*/
@@ -10754,7 +11288,7 @@ static PyTypeObject __pyx_type_17OpenGL_accelerate_7wrapper_getPyArgsName = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
-  "CConverter returning named Python argument\n\t\n\tIntended for use in cConverters, the function returned \n\tretrieves the named pyArg and returns it when called.\n\t", /*tp_doc*/
+  "CConverter returning named Python argument\n    \n    Intended for use in cConverters, the function returned \n    retrieves the named pyArg and returns it when called.\n    ", /*tp_doc*/
   0, /*tp_traverse*/
   0, /*tp_clear*/
   0, /*tp_richcompare*/
@@ -11112,6 +11646,131 @@ static PyTypeObject __pyx_type_17OpenGL_accelerate_7wrapper_returnCArgument = {
   __pyx_pw_17OpenGL_accelerate_7wrapper_15returnCArgument_1__init__, /*tp_init*/
   0, /*tp_alloc*/
   __pyx_tp_new_17OpenGL_accelerate_7wrapper_returnCArgument, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+};
+
+static PyObject *__pyx_tp_new_17OpenGL_accelerate_7wrapper_MultiReturn(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *p;
+  PyObject *o;
+  if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
+    o = (*t->tp_alloc)(t, 0);
+  } else {
+    o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
+  }
+  if (unlikely(!o)) return 0;
+  p = ((struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)o);
+  p->children = ((PyObject*)Py_None); Py_INCREF(Py_None);
+  return o;
+}
+
+static void __pyx_tp_dealloc_17OpenGL_accelerate_7wrapper_MultiReturn(PyObject *o) {
+  struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *p = (struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)o;
+  #if PY_VERSION_HEX >= 0x030400a1
+  if (unlikely(Py_TYPE(o)->tp_finalize) && !_PyGC_FINALIZED(o)) {
+    if (PyObject_CallFinalizerFromDealloc(o)) return;
+  }
+  #endif
+  PyObject_GC_UnTrack(o);
+  Py_CLEAR(p->children);
+  (*Py_TYPE(o)->tp_free)(o);
+}
+
+static int __pyx_tp_traverse_17OpenGL_accelerate_7wrapper_MultiReturn(PyObject *o, visitproc v, void *a) {
+  int e;
+  struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *p = (struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)o;
+  if (p->children) {
+    e = (*v)(p->children, a); if (e) return e;
+  }
+  return 0;
+}
+
+static int __pyx_tp_clear_17OpenGL_accelerate_7wrapper_MultiReturn(PyObject *o) {
+  PyObject* tmp;
+  struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *p = (struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn *)o;
+  tmp = ((PyObject*)p->children);
+  p->children = ((PyObject*)Py_None); Py_INCREF(Py_None);
+  Py_XDECREF(tmp);
+  return 0;
+}
+
+static PyObject *__pyx_getprop_17OpenGL_accelerate_7wrapper_11MultiReturn_children(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_1__get__(o);
+}
+
+static int __pyx_setprop_17OpenGL_accelerate_7wrapper_11MultiReturn_children(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+  if (v) {
+    return __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_3__set__(o, v);
+  }
+  else {
+    return __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_8children_5__del__(o);
+  }
+}
+
+static PyMethodDef __pyx_methods_17OpenGL_accelerate_7wrapper_MultiReturn[] = {
+  {"append", (PyCFunction)__pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_3append, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static struct PyGetSetDef __pyx_getsets_17OpenGL_accelerate_7wrapper_MultiReturn[] = {
+  {(char *)"children", __pyx_getprop_17OpenGL_accelerate_7wrapper_11MultiReturn_children, __pyx_setprop_17OpenGL_accelerate_7wrapper_11MultiReturn_children, 0, 0},
+  {0, 0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_17OpenGL_accelerate_7wrapper_MultiReturn = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "OpenGL_accelerate.wrapper.MultiReturn", /*tp_name*/
+  sizeof(struct __pyx_obj_17OpenGL_accelerate_7wrapper_MultiReturn), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_17OpenGL_accelerate_7wrapper_MultiReturn, /*tp_dealloc*/
+  0, /*tp_print*/
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_5__call__, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_17OpenGL_accelerate_7wrapper_MultiReturn, /*tp_traverse*/
+  __pyx_tp_clear_17OpenGL_accelerate_7wrapper_MultiReturn, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_17OpenGL_accelerate_7wrapper_MultiReturn, /*tp_methods*/
+  0, /*tp_members*/
+  __pyx_getsets_17OpenGL_accelerate_7wrapper_MultiReturn, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  __pyx_pw_17OpenGL_accelerate_7wrapper_11MultiReturn_1__init__, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_17OpenGL_accelerate_7wrapper_MultiReturn, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -11532,6 +12191,10 @@ PyMODINIT_FUNC PyInit_wrapper(void)
   if (__Pyx_SetVtable(__pyx_type_17OpenGL_accelerate_7wrapper_returnCArgument.tp_dict, __pyx_vtabptr_17OpenGL_accelerate_7wrapper_returnCArgument) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (PyObject_SetAttrString(__pyx_m, "returnCArgument", (PyObject *)&__pyx_type_17OpenGL_accelerate_7wrapper_returnCArgument) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_17OpenGL_accelerate_7wrapper_returnCArgument = &__pyx_type_17OpenGL_accelerate_7wrapper_returnCArgument;
+  if (PyType_Ready(&__pyx_type_17OpenGL_accelerate_7wrapper_MultiReturn) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_type_17OpenGL_accelerate_7wrapper_MultiReturn.tp_print = 0;
+  if (PyObject_SetAttrString(__pyx_m, "MultiReturn", (PyObject *)&__pyx_type_17OpenGL_accelerate_7wrapper_MultiReturn) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_17OpenGL_accelerate_7wrapper_MultiReturn = &__pyx_type_17OpenGL_accelerate_7wrapper_MultiReturn;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
