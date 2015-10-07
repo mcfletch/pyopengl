@@ -361,31 +361,28 @@ def glGetShaderSource( baseOperation, obj ):
     return ''
 
 @_lazy( glGetActiveAttrib )
-def glGetActiveAttrib(baseOperation, program, index, bufSize=None):
+def glGetActiveAttrib(baseOperation, program, index, bufSize=None,*args):
     """Retrieves information about the attribute variable.
 
     program -- specifies the program to be queried
     index -- index of the attribute to be queried 
     
-    The following parameters are optional with PyOpenGL, if any is left
-    as None, then the "pythonic return value" will be the result of the query:
+    Following parameters are optional:
     
-        name, size, type
-    
-    if *all* of them are provided, then the function will return nothing
-    and you should access the values as in the C API.
-    
-    bufSize -- determines the size of the buffer (limits number of bytes written)
+    bufSize -- determines the size of the buffer (limits number of bytes written),
+               if not provided, will be GL_ACTIVE_ATTRIBUTE_MAX_LENGTH
     length -- pointer-to-GLsizei that will hold the resulting length of the name
     size -- pointer-to-GLint that will hold the size of the attribute
     type -- pointer-to-GLenum that will hold the type constant of the attribute
     name -- pointer-to-GLchar that will hold the (null-terminated) name string
+    
+    returns (bytes) name, (int)size, (enum)type
     """
     if bufSize is None:
         bufSize = int(glGetProgramiv( program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH))
     if bufSize <= 0:
         raise RuntimeError( 'Active attribute length reported', bufsize )
-    name,size,type = baseOperation( program, index, bufSize )[1:]
+    name,size,type = baseOperation( program, index, bufSize, *args )[1:]
     if hasattr(name,'tostring'):
         name = name.tostring().rstrip('\000')
     elif hasattr(name,'value'):
@@ -393,13 +390,28 @@ def glGetActiveAttrib(baseOperation, program, index, bufSize=None):
     return name,size,type
 
 @_lazy( glGetActiveUniform )
-def glGetActiveUniform(baseOperation,program, index,bufSize=None):
-    """Retrieve the name, size and type of the uniform of the index in the program"""
-    max_index = int(glGetProgramiv( program, GL_OBJECT_ACTIVE_UNIFORMS ))
+def glGetActiveUniform(baseOperation,program, index,bufSize=None,*args):
+    """Retrieve the name, size and type of the uniform of the index in the program
+    
+    program -- specifies the program to be queried
+    index -- index of the uniform to be queried 
+    
+    Following parameters are optional:
+    
+    bufSize -- determines the size of the buffer (limits number of bytes written),
+               if not provided, will be GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH
+    length -- pointer-to-GLsizei that will hold the resulting length of the name
+    size -- pointer-to-GLint that will hold the size of the attribute
+    type -- pointer-to-GLenum that will hold the type constant of the attribute
+    name -- pointer-to-GLchar that will hold the (null-terminated) name string
+    
+    returns (bytes) name, (int)size, (enum)type
+    """
+    max_index = int(glGetProgramiv( program, GL_ACTIVE_UNIFORMS ))
     if bufSize is None:
-        bufSize = int(glGetProgramiv( program, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH))
+        bufSize = int(glGetProgramiv( program, GL_ACTIVE_UNIFORM_MAX_LENGTH))
     if index < max_index and index >= 0:
-        length,name,size,type = baseOperation( program, index, bufSize )
+        length,name,size,type = baseOperation( program, index, bufSize, *args )
         if hasattr(name,'tostring'):
             name = name.tostring().rstrip('\000')
         elif hasattr(name,'value'):

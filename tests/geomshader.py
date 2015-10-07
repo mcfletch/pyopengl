@@ -40,13 +40,22 @@ def main():
     
     # test that we can describe the attributes in the shader
     for i in range( glGetProgramiv( program, GL_ACTIVE_ATTRIBUTES )):
-        result = glGetActiveAttrib( program, i )
-        name,size,type = result
+        name,size,type = glGetActiveAttrib( program, i )
         print( 'Arribute %s(%i) -> %s %s'%(name,i,size,type))
+        
+        length,size,type,name = GLsizei(),GLint(),GLenum(),(GLchar*8)()
+        glGetActiveAttrib( program, i, None, length,size,type,name )
+        assert length.value == len(name.value),(length.value,name.value)
+        assert type.value == 5126, type.value
+        
     for i in range( glGetProgramiv( program, GL_ACTIVE_UNIFORMS )):
-        result = glGetActiveUniform( program, i )
-        name,size,type = result
+        name,size,type = glGetActiveUniform( program, i )
         print( 'Uniform %s(%i) -> %s %s'%(name,i,size,type))
+        
+        length,size,type,name = GLsizei(),GLint(),GLenum(),(GLchar*5)()
+        glGetActiveUniform( program, i, 5, length, size, type, name )
+        assert length.value == len(name.value),(length.value,name.value)
+        assert type.value == 5126, type.value
         
 
     buff = (ctypes.c_char_p * 1)( as_8_bit("outValue\000") )
