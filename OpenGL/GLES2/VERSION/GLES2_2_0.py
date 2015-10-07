@@ -360,7 +360,7 @@ def glGetActiveUniform(baseOperation,program, index,bufSize=None,*args):
     if index < max_index and index >= 0:
         length,name,size,type = baseOperation( program, index, bufSize, *args )
         if hasattr(name,'tostring'):
-            name = name.tostring().rstrip('\000')
+            name = name.tostring().rstrip(b'\000')
         elif hasattr(name,'value'):
             name = name.value
         return name,size,type
@@ -390,7 +390,7 @@ def glGetActiveAttrib(baseOperation, program, index, bufSize=None,*args):
         raise RuntimeError( 'Active attribute length reported', bufsize )
     name,size,type = baseOperation( program, index, bufSize, *args )[1:]
     if hasattr(name,'tostring'):
-        name = name.tostring().rstrip('\000')
+        name = name.tostring().rstrip(b'\000')
     elif hasattr(name,'value'):
         name = name.value
     return name,size,type
