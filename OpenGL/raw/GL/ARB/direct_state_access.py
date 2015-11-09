@@ -40,8 +40,8 @@ def glClearNamedBufferData(buffer,internalformat,format,type,data):pass
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLintptr,_cs.GLsizeiptr,_cs.GLenum,_cs.GLenum,ctypes.c_void_p)
 def glClearNamedBufferSubData(buffer,internalformat,offset,size,format,type,data):pass
 @_f
-@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLfloat,_cs.GLint)
-def glClearNamedFramebufferfi(framebuffer,buffer,depth,stencil):pass
+@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,_cs.GLfloat,_cs.GLint)
+def glClearNamedFramebufferfi(framebuffer,buffer,drawbuffer,depth,stencil):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint,arrays.GLfloatArray)
 def glClearNamedFramebufferfv(framebuffer,buffer,drawbuffer,value):pass

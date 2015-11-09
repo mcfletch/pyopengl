@@ -24,7 +24,7 @@ EGL_OBJECT_SURFACE_KHR=_C('EGL_OBJECT_SURFACE_KHR',0x33B3)
 EGL_OBJECT_SYNC_KHR=_C('EGL_OBJECT_SYNC_KHR',0x33B5)
 EGL_OBJECT_THREAD_KHR=_C('EGL_OBJECT_THREAD_KHR',0x33B0)
 @_f
-@_p.types(_cs.EGLint,_cs.EGLDEBUGPROC,arrays.EGLAttribArray)
+@_p.types(_cs.EGLint,_cs.EGLDEBUGPROCKHR,arrays.EGLAttribArray)
 def eglDebugMessageControlKHR(callback,attrib_list):pass
 @_f
 @_p.types(_cs.EGLint,_cs.EGLDisplay,_cs.EGLenum,_cs.EGLObjectKHR,_cs.EGLLabelKHR)
