@@ -830,7 +830,7 @@ class Tests( unittest.TestCase ):
         """Test that we can run glGet... on registered constants without crashing..."""
         from OpenGL.raw.GL import _glgets
         for key,value in _glgets._glget_size_mapping.items():
-            print( 'Trying glGetFloatv( 0x%x )'%(key,))
+            #print( 'Trying glGetFloatv( 0x%x )'%(key,))
             if key == 0x92c1: # GL_ATOMIC_COUNTER_BUFFER_BINDING crashes intel hardware... sigh...
                 continue
             try:
