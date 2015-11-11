@@ -150,7 +150,7 @@ if CallFuncPyConverter is None:
             """Return pyArgs[self.index] or raise a ValueError"""
             try:
                 return pyArgs[ self.index ]
-            except IndexError as err:
+            except IndexError:
                 raise ValueError(
                     """Expected parameter index %r, but pyArgs only length %s"""%(
                     self.index,
@@ -169,7 +169,7 @@ if CallFuncPyConverter is None:
             """Return pyArgs[ self.index ]"""
             try:
                 return pyArgs[ self.index ]
-            except AttributeError as err:
+            except AttributeError:
                 raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
 
     class Output( CConverter ):
@@ -202,12 +202,12 @@ if CallFuncPyConverter is None:
             result = cArgs[ self.outIndex ]
             try:
                 thisSize = self.getSize(pyArgs)
-            except KeyError as err:
+            except KeyError:
                 return result 
             if thisSize == (1,):
                 try:
                     return result[0]
-                except TypeError as err:
+                except TypeError:
                     return result
             else:
                 return result
@@ -236,12 +236,12 @@ if CallFuncPyConverter is None:
             """Retrieve the array size for this argument"""
             try:
                 specifier = pyArgs[ self.index ]
-            except AttributeError as err:
+            except AttributeError:
                 raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
             else:
                 try:
                     return self.lookup( specifier )
-                except KeyError as err:
+                except KeyError:
                     raise KeyError( """Unknown specifier %s"""%( specifier ))
     class SizedOutputOrInput( SizedOutput ):
         DO_OUTPUT = (None,NULL)
