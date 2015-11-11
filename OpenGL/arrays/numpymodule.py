@@ -5,7 +5,7 @@ would like to have all return values be int/float if they are of  compatible
 type as well.
 """
 REGISTRY_NAME = 'numpy'
-import operator,logging
+import logging
 from OpenGL import _configflags
 _log = logging.getLogger( __name__ )
 try:
@@ -13,11 +13,12 @@ try:
 except ImportError as err:
     raise ImportError( """No numpy module present: %s"""%(err))
 import OpenGL
+assert OpenGL
 import ctypes
-from OpenGL._bytes import long, integer_types
+from OpenGL._bytes import long
 from OpenGL.raw.GL import _types 
 from OpenGL.raw.GL.VERSION import GL_1_1
-from OpenGL import constant, error
+from OpenGL import error
 from OpenGL.arrays import formathandler
 c_void_p = ctypes.c_void_p
 from OpenGL import acceleratesupport
@@ -40,22 +41,22 @@ if NumpyHandler is None:
             """Convert given instance to a data-pointer value (integer)"""
             try:
                 return long(instance.__array_interface__['data'][0])
-            except AttributeError as err:
+            except AttributeError:
                 instance = cls.asArray( instance )
                 try:
                     return long(instance.__array_interface__['data'][0])
-                except AttributeError as err:
+                except AttributeError:
                     return long(instance.__array_data__[0],0)
     else:
         def dataPointer( cls, instance ):
             """Convert given instance to a data-pointer value (integer)"""
             try:
                 return long(instance.__array_data__[0],0)
-            except AttributeError as err:
+            except AttributeError:
                 instance = cls.asArray( instance )
                 try:
                     return long(instance.__array_interface__['data'][0])
-                except AttributeError as err:
+                except AttributeError:
                     return long(instance.__array_data__[0],0)
     try:
         del testArray
@@ -80,6 +81,7 @@ if NumpyHandler is None:
         @classmethod
         def zeros( cls, dims, typeCode ):
             """Return Numpy array of zeros in given size"""
+            dims = numpy.array( dims, dtype='i')
             return numpy.zeros( dims, GL_TYPE_TO_ARRAY_MAPPING[typeCode])
         @classmethod
         def arrayToGLType( cls, value ):
@@ -103,7 +105,7 @@ if NumpyHandler is None:
             """Given a data-value, calculate number of bytes required to represent"""
             try:
                 return value.nbytes
-            except AttributeError as err:
+            except AttributeError:
                 if cls.ERROR_ON_COPY:
                     raise error.CopyError(
                         """Non-numpy array passed to numpy arrayByteCount: %s""",
@@ -138,7 +140,7 @@ if NumpyHandler is None:
             typeCode = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
             try:
                 contiguous = source.flags.contiguous
-            except AttributeError as err:
+            except AttributeError:
                 if typeCode:
                     return numpy.ascontiguousarray( source, typeCode )
                 else:
@@ -179,7 +181,7 @@ if NumpyHandler is None:
         def from_param( cls, instance, typeCode=None ):
             try:
                 pointer = cls.dataPointer( instance )
-            except TypeError as err:
+            except TypeError:
                 array = cls.asArray( instance, typeCode )
                 pp = cls.dataPointer( array )
                 pp._temporary_array_ = (array,)
