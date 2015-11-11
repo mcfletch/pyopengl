@@ -1206,6 +1206,16 @@ class Tests( unittest.TestCase ):
                                 ((0.0, 0.0, 0.0), (0.0, 0.8, 0.3), (0.8, 0.3, 0.0), (0.2, 0.3, 0.9), (0.2, 0.8, 0.5), (0.0, 0.0, 0.0)), (1, 1, 3, 0.5, 2, 1))
         else:
             logging.warn("No GLE extrusion library")
+    if array:
+        def test_array_subclass( self ):
+            s = Subclassed([0,1,2,3,4])
+            result = arraydatatype.ArrayDatatype.asArray( s )
+            assert isinstance( result, Subclassed )
+        
+if array:
+    class Subclassed( ndarray ):
+        pass 
+    
         
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
