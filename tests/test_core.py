@@ -19,6 +19,7 @@ pygame.display.init()
 import OpenGL 
 if os.environ.get( 'TEST_NO_ACCELERATE' ):
     OpenGL.USE_ACCELERATE = False
+#OpenGL.FULL_LOGGING = True
 OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
 OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING = True
@@ -1050,7 +1051,7 @@ class Tests( unittest.TestCase ):
         # ctypes based buffer api does not work on Python 3.x
         def test_bytearray_support( self ):
             import struct 
-            data = struct.pack( 'fff', .5, .4, .3 )
+            data = struct.pack( b'fff', .5, .4, .3 )
             color = bytearray( data )
             glColor3fv( color )
         if sys.version_info[:2] > (2,6):
@@ -1073,7 +1074,7 @@ class Tests( unittest.TestCase ):
             if sys.version_info[:2] >= (3,0):
                 # only supports buffer protocol in 3.x
                 structures.extend([
-                    (silly_array.array('I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
+                    (silly_array.array(b'I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
                 ])
             try:
                 structures.append( (memoryview(b'this'),4,1,True,1,b'B',[4],[1]) )
