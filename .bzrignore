@@ -54,3 +54,6 @@ tests/.numpy
 tests/.pygame
 tests/.test-envs
 tests/.wheels
+wheelhouse
+.tox
+accelerate/.tox
