@@ -1194,7 +1194,18 @@ class Tests( unittest.TestCase ):
                 image
             )
             assert texture
-        
+    def test_gle_loads( self ):
+        from OpenGL.GLE import (
+            gleSetJoinStyle,
+            TUBE_NORM_EDGE, TUBE_JN_ANGLE, TUBE_JN_CAP,
+            glePolyCone,
+        )
+        if (gleSetJoinStyle):
+            gleSetJoinStyle(TUBE_NORM_EDGE | TUBE_JN_ANGLE | TUBE_JN_CAP)
+            glePolyCone(((-6.0, 6.0, 0.0), (6.0, 6.0, 0.0), (6.0, -6.0, 0.0), (-6.0, -6.0, 0.0), (-6.0, 6.0, 0.0), (6.0, 6.0, 0.0)),
+                                ((0.0, 0.0, 0.0), (0.0, 0.8, 0.3), (0.8, 0.3, 0.0), (0.2, 0.3, 0.9), (0.2, 0.8, 0.5), (0.0, 0.0, 0.0)), (1, 1, 3, 0.5, 2, 1))
+        else:
+            logging.warn("No GLE extrusion library")
         
 if __name__ == "__main__":
     logging.basicConfig( level=logging.INFO )
