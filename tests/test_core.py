@@ -1194,7 +1194,7 @@ class Tests( unittest.TestCase ):
                 image
             )
             assert texture
-    def test_gle_loads( self ):
+    def test_gle( self ):
         from OpenGL.GLE import (
             gleSetJoinStyle,
             TUBE_NORM_EDGE, TUBE_JN_ANGLE, TUBE_JN_CAP,
