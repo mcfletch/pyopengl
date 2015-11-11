@@ -1074,7 +1074,7 @@ class Tests( unittest.TestCase ):
             if sys.version_info[:2] >= (3,0):
                 # only supports buffer protocol in 3.x
                 structures.extend([
-                    (silly_array.array(b'I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
+                    (silly_array.array('I',[1,2,3]),12,4,False,1,b'I',[3],[4]),
                 ])
             try:
                 structures.append( (memoryview(b'this'),4,1,True,1,b'B',[4],[1]) )
