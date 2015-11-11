@@ -16,6 +16,22 @@ setup.py::
 Note that to compile PyOpenGL_accelerate you will need to have 
 a functioning Python extension-compiling environment.
 
+Learning PyOpenGL
+-----------------
+
+If you are new to PyOpenGL, you likely want to start with the OpenGLContext `tutorial page`_.
+Those tutorials require OpenGLContext, (which is a big wrapper including a whole
+scenegraph engine, VRML97 parser, lots of demos, etc) you can install that with::
+
+    $ pip install "OpenGLContext-full==3.1.1
+
+The `documentation pages`_ are useful for looking up the parameters and semantics of 
+PyOpenGL calls.
+
+.. _`tutorial page`: http://pyopengl.sourceforge.net/context/tutorials/index.html
+.. _`documentation pages`: http://pyopengl.sourceforge.net/documentation/
+
+
 Running Tests
 --------------
 
