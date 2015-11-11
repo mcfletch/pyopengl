@@ -4,10 +4,10 @@
 Will *only* work for Python 2.6+, and pretty much just works for strings
 under 2.6 (in terms of the common object types).
 """
-import ctypes,sys,operator,logging,traceback
+import sys,operator,logging,traceback
 from OpenGL.arrays import _buffers
 from OpenGL.raw.GL import _types
-from OpenGL.raw.GL.VERSION import GL_1_1
+#from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL.arrays import formathandler
 from OpenGL import _configflags
 from OpenGL import acceleratesupport
@@ -36,16 +36,16 @@ if not BufferHandler:
         """Buffer-protocol data-type handler for OpenGL"""
         isOutput=False
         ERROR_ON_COPY = _configflags.ERROR_ON_COPY
-        if sys.version_info[:2] >= (3,0):
+        if sys.version_info[0] >= 3:
             @classmethod
             def from_param( cls, value, typeCode=None ):
                 if not isinstance( value, _buffers.Py_buffer ):
                     value = cls.asArray( value )
                     #raise TypeError( """Can't convert value to py-buffer in from_param""" )
-                return value
+                # TODO: only do this IFF value.internal is None
+                return _types.GLvoidp( value.buf )
+#                return value
         else:
-            # Not sure *why* 2.7 segfaults with the "use a buffer as the buffer"
-            # version above, but it works fine with the value.buf here
             @classmethod
             def from_param( cls, value, typeCode=None ):
                 if not isinstance( value, _buffers.Py_buffer ):
