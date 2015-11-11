@@ -1,6 +1,5 @@
 """GLX (x-windows)-specific platform features"""
 import ctypes, ctypes.util
-from functools import wraps
 from OpenGL.platform import baseplatform, ctypesloader
 
 class GLXPlatform( baseplatform.BasePlatform ):
@@ -26,7 +25,7 @@ class GLXPlatform( baseplatform.BasePlatform ):
                 'GLU',
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
     @baseplatform.lazy_property
     def GLUT( self ):
@@ -36,7 +35,7 @@ class GLXPlatform( baseplatform.BasePlatform ):
                 'glut', 
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
     # GLX doesn't seem to have its own loadable module?
     @baseplatform.lazy_property
@@ -50,7 +49,7 @@ class GLXPlatform( baseplatform.BasePlatform ):
                 'GLESv1_CM', # ick
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
     @baseplatform.lazy_property
     def GLES2(self):
@@ -60,7 +59,7 @@ class GLXPlatform( baseplatform.BasePlatform ):
                 'GLESv2', 
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
     @baseplatform.lazy_property
     def GLES3(self):
@@ -84,7 +83,7 @@ class GLXPlatform( baseplatform.BasePlatform ):
                 'gle', 
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
 
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )
