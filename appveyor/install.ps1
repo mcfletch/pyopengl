@@ -71,21 +71,6 @@ function InstallPip ($python_home) {
     }
 }
 
-function InstallCachedPackage($python_home, $pkg, $version, $architecture){
-    $pip_path = $python_home + "/Scripts/pip.exe"
-    if ($architecture -eq "32") {
-        $platform_suffix = "win32"
-    } else {
-        $platform_suffix = "amd64"
-    }
-    $python = $python_home+"\\python.exe"
-    if (-not(Test-Path "c:\\tmp\\wheelhouse\\$pkg-*-$version-*$architecture*.whl")) {
-        cmd /E:ON /V:ON /C .\\appveyor\\run_with_compiler.cmd $pip_path wheel -w c:\\tmp\\wheelhouse $pkg
-    }
-    & $pip_path install -f c:\\tmp\\wheelhouse --no-index --only-binary "$pkg"
-    
-}
-
 function InstallPackage ($python_home, $pkg) {
     $pip_path = $python_home + "/Scripts/pip.exe"
     & $pip_path install $pkg
@@ -95,7 +80,8 @@ function main () {
     InstallPython $env:PYTHON_VERSION $env:PYTHON_ARCH $env:PYTHON
     InstallPip $env:PYTHON
     InstallPackage $env:PYTHON wheel
-    InstallCachedPackage $env:PYTHON numpy $env:PYTHON_FRAGMENT $env:PYTHON_ARCH
+    $python_path = $env:PYTHON + "\\python.exe"
+    & $python_path ..\\appveyor\\install_cached_package.py numpy
 }
 
 main
