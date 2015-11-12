@@ -82,7 +82,7 @@ function InstallCachedPackage($python_home, $pkg, $version, $architecture){
     if (-not(Test-Path "c:\\tmp\\wheelhouse\\$pkg-$version-*$architecture*.whl")) {
         cmd /E:ON /V:ON /C .\\appveyor\\run_with_compiler.cmd $pip_path wheel -w c:\\tmp\\wheelhouse $pkg
     }
-    $pip_path install -f c:\\tmp\\wheelhouse $pkg
+    & $pip_path install -f c:\\tmp\\wheelhouse --no-index --only-binary $pkg
     
 }
 
