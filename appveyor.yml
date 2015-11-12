@@ -62,7 +62,7 @@ build: off
 
 cache:
 
-  - c:\\tmp\\wheelhouse -> appveyor\\rebuilddeps.txt
+  - c:\\tmp\\wheelhouse
 
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
