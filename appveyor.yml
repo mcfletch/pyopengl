@@ -55,8 +55,8 @@ install:
 build: off
 
 cache:
-
-    - c:\\wheelhouse -> appveyor\\install.ps1
+  # Recent pips don't let you specify the cache, sigh...
+  - %CSIDL_LOCAL_APPDATA%\pip\Cache -> appveyor\\install.ps1
 
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"

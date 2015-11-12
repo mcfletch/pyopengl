@@ -73,7 +73,7 @@ function InstallPip ($python_home) {
 
 function InstallCachedPackage($python_home, $pkg){
     $pip_path = $python_home + "/Scripts/pip.exe"
-    cmd /E:ON /V:ON /C .\\appveyor\\run_with_compiler.cmd $pip_path wheel --upgrade --find-links=c:\\wheelhouse --wheel-dir=c:\\wheelhouse $pkg
+    cmd /E:ON /V:ON /C .\\appveyor\\run_with_compiler.cmd $pip_path wheel --upgrade $pkg
 }
 
 function InstallPackage ($python_home, $pkg) {
