@@ -71,7 +71,7 @@ function InstallPip ($python_home) {
     }
 }
 
-function InstallCachedPackage($python_home, $pkg, $architecture){
+function InstallCachedPackage($python_home, $pkg, $version, $architecture){
     $pip_path = $python_home + "/Scripts/pip.exe"
     if ($architecture -eq "32") {
         $platform_suffix = "win32"
@@ -79,8 +79,7 @@ function InstallCachedPackage($python_home, $pkg, $architecture){
         $platform_suffix = "amd64"
     }
     $python = $python_home+"\\python.exe"
-    $python_version = ($python -c 'import sys;print('py%s%s'%sys.version_info[:2])') | Out-String
-    if (-not(Test-Path "c:\\tmp\\wheelhouse\\$pkg-$python_version-*$architecture*.whl")) {
+    if (-not(Test-Path "c:\\tmp\\wheelhouse\\$pkg-$version-*$architecture*.whl")) {
         cmd /E:ON /V:ON /C .\\appveyor\\run_with_compiler.cmd $pip_path wheel -w c:\\tmp\\wheelhouse $pkg
     }
     $pip_path install -f c:\\tmp\\wheelhouse $pkg
@@ -96,7 +95,7 @@ function main () {
     InstallPython $env:PYTHON_VERSION $env:PYTHON_ARCH $env:PYTHON
     InstallPip $env:PYTHON
     InstallPackage $env:PYTHON wheel
-    InstallCachedPackage $env:PYTHON numpy $env:PYTHON_ARCH
+    InstallCachedPackage $env:PYTHON numpy $env:PYTHON_FRAGMENT $env:PYTHON_ARCH
 }
 
 main

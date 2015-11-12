@@ -15,29 +15,35 @@ environment:
     - PYTHON: "C:\\Python27"
       PYTHON_VERSION: "2.7.9" # currently 2.7.9
       PYTHON_ARCH: "32"
+      PYTHON_FRAGMENT: py27
 
     - PYTHON: "C:\\Python33"
       PYTHON_VERSION: "3.3.5" # currently 3.3.5
       PYTHON_ARCH: "32"
+      PYTHON_FRAGMENT: py33
 
     - PYTHON: "C:\\Python34"
       PYTHON_VERSION: "3.4.3" # currently 3.4.3
       PYTHON_ARCH: "32"
+      PYTHON_FRAGMENT: py34
 
     - PYTHON: "C:\\Python27-x64"
       PYTHON_VERSION: "2.7.9" # currently 2.7.9
       PYTHON_ARCH: "64"
       WINDOWS_SDK_VERSION: "v7.0"
+      PYTHON_FRAGMENT: py27
 
     - PYTHON: "C:\\Python33-x64"
       PYTHON_VERSION: "3.3.5" # currently 3.3.5
       PYTHON_ARCH: "64"
       WINDOWS_SDK_VERSION: "v7.1"
+      PYTHON_FRAGMENT: py33
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.3" # currently 3.4.3
       PYTHON_ARCH: "64"
       WINDOWS_SDK_VERSION: "v7.1"
+      PYTHON_FRAGMENT: py34
 
     # Also build on a Python version not pre-installed by Appveyor.
     # See: https://github.com/ogrisel/python-appveyor-demo/issues/10
