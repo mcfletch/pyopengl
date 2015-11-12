@@ -55,7 +55,7 @@ install:
 build: off
 
 cache:
-  - "%CSIDL_LOCAL_APPDATA%\\pip\\Cache -> appveyor\\install.ps1"
+  - "%CSIDL_LOCAL_APPDATA%\\pip\\Cache -> appveyor\\rebuilddeps.txt"
 
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
@@ -63,6 +63,7 @@ test_script:
 
 after_test:
   - cd accelerate
+  - "ECHO %WITH_COMPILER% %PYTHON%/python.exe setup.py bdist_wheel"
   - "%WITH_COMPILER% %PYTHON%/python.exe setup.py bdist_wheel"
   - cd ..
 
