@@ -62,7 +62,7 @@ build: off
 
 cache:
 
-  - c:\\tmp\\wheelhouse
+  - c:\\tmp\\wheelhouse -> "appveyor\\dependencyversions.txt"
 
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
