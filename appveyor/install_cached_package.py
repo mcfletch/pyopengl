@@ -23,7 +23,7 @@ def main():
                 '-f',
                 'c:\\tmp\\wheelhouse',
                 '--no-index',
-                '--only-binary',
+                '--only-binary',':all:',
                 package,
         )
     except subprocess.CalledProcessError:
@@ -38,7 +38,7 @@ def main():
                 '-f',
                 'c:\\tmp\\wheelhouse',
                 '--no-index',
-                '--only-binary',
+                '--only-binary',':all:',
                 package,
         )
         
