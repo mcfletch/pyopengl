@@ -55,7 +55,6 @@ install:
 build: off
 
 cache:
-  # Recent pips don't let you specify the cache, sigh...
   - "%CSIDL_LOCAL_APPDATA%\\pip\\Cache" -> appveyor\\install.ps1
 
 test_script:
