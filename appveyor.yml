@@ -75,7 +75,7 @@ after_test:
   - cd ..
 
 artifacts:
-  - path: dist\*
+  - path: accelerate\dist\*
 
 #on_success:
 #  - TODO: upload the content of dist/*.whl to a public wheelhouse
