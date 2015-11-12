@@ -5,7 +5,6 @@
 $BASE_URL = "https://www.python.org/ftp/python/"
 $GET_PIP_URL = "https://bootstrap.pypa.io/get-pip.py"
 $GET_PIP_PATH = "C:\get-pip.py"
-$WITH_COMPILER = "cmd /E:ON /V:ON /C .\\run_with_compiler.cmd"
 
 
 function DownloadPython ($python_version, $platform_suffix) {
@@ -74,7 +73,7 @@ function InstallPip ($python_home) {
 
 function InstallCachedPackage($python_home, $pkg){
     $pip_path = $python_home + "/Scripts/pip.exe"
-    & $WITH_COMPILER $pip_path wheel --upgrade --find-links=c:\\wheelhouse --wheel-dir=c:\\wheelhouse $pkg
+    & cmd /E:ON /V:ON /C .\\run_with_compiler.cmd $pip_path wheel --upgrade --find-links=c:\\wheelhouse --wheel-dir=c:\\wheelhouse $pkg
 }
 
 function InstallPackage ($python_home, $pkg) {
