@@ -54,15 +54,14 @@ install:
 
 build: off
 
-before_test:
-  - cd accelerate
-
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
   - echo "Skipped"
 
 after_test:
-  - "%WITH_COMPILER% %PYTHON%/python setup.py bdist_wheel"
+  - cd accelerate
+  - "%WITH_COMPILER% %PYTHON%/python.exe setup.py bdist_wheel"
+  - cd ..
 
 artifacts:
   - path: dist\*
