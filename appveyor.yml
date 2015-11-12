@@ -55,7 +55,7 @@ install:
 build: off
 
 cache:
-  - "%CSIDL_LOCAL_APPDATA%\\pip\\Cache" -> appveyor\\install.ps1
+  - "%CSIDL_LOCAL_APPDATA%\\pip\\Cache -> appveyor\\install.ps1"
 
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
