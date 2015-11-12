@@ -79,7 +79,7 @@ function InstallCachedPackage($python_home, $pkg, $architecture){
         $platform_suffix = "amd64"
     }
     $python = $python_home+"\\python.exe"
-    $python_version = ($python -c "import sys;print('py%s%s'%sys.version_info[:2])") | Out-String
+    $python_version = ($python -c 'import sys;print('py%s%s'%sys.version_info[:2])') | Out-String
     if (-not(Test-Path "c:\\tmp\\wheelhouse\\$pkg-$python_version-*$architecture*.whl")) {
         cmd /E:ON /V:ON /C .\\appveyor\\run_with_compiler.cmd $pip_path wheel -w c:\\tmp\\wheelhouse $pkg
     }
