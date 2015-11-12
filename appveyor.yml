@@ -56,7 +56,7 @@ build: off
 
 cache:
 
-  - "C:\Users\appveyor\AppData\Local\pip\Cache -> appveyor\\rebuilddeps.txt"
+  - "C:\\Users\\appveyor\\AppData\\Local\\pip\\Cache -> appveyor\\rebuilddeps.txt"
 
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
