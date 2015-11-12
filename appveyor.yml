@@ -54,6 +54,10 @@ install:
 
 build: off
 
+cache:
+
+    - c:\\wheelhouse -> appveyor\\install.ps1
+
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
   - echo "Skipped"
