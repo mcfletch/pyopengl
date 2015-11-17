@@ -312,7 +312,7 @@ cdef class Output(cArgConverter):
 cdef class OutputOrInput( Output ):
     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
         """Return pyArgs[ self.index ]"""
-        if pyArgs[index] not in DO_OUTPUT:
+        if pyArgs[index] is not DO_OUTPUT[0] and pyArgs[index] is not DO_OUTPUT[1]:
             return self.arrayType.asArray( pyArgs[index] )
         return self.arrayType.c_zeros( self.c_getSize(pyArgs), self.arrayType.typeConstant )
 
