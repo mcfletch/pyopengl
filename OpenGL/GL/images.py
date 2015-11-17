@@ -397,14 +397,12 @@ def glGetTexImage( target, level,format,type, array=None, outputType=bytes ):
     if array is None:
         dims = _get_texture_level_dims(target,level)
         array = imageData = images.SetupPixelRead( format, tuple(dims), type )
-        owned = True
     else:
         if isinstance( array, integer_types):
             imageData = ctypes.c_void_p( array )
         else:
             array = arrayType.asArray( array )
             imageData = arrayType.voidDataPointer( array )
-        owned = False
     GL_1_1.glGetTexImage(
         target, level, format, type, imageData
     )
