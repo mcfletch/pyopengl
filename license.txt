@@ -135,24 +135,33 @@ distribution.  Copyright notice follows:
     licensed, not sold.  IBM retains title to the software, and grants you a
     nonexclusive license for the software.
 
-OpenGL-ctypes may include source code from the GLUT (GL Utility Toolkit) library, which is licensed 
-under the following license/copyright notice (available in OpenGL/DLLS/glut_README.txt if GLUT is 
-included in this distribution:
+OpenGL-ctypes may include source code from FreeGLUT (GL Utility Toolkit) library,
+which is licensed under the MIT/X-Consortium License, available in 
+OpenGL/DLLS/freeglut_COPYING.txt if FreeGLUT is included in this distribution:
 
-    The OpenGL Utility Toolkit distribution for Win32 (Windows NT &
-    Windows 95) contains source code modified from the original source
-    code for GLUT version 3.3 which was developed by Mark J. Kilgard.  The
-    original source code for GLUT is Copyright 1997 by Mark J. Kilgard.
-    GLUT for Win32 is Copyright 1997 by Nate Robins and is not in the
-    public domain, but it is freely distributable without licensing fees.
-    It is provided without guarantee or warrantee expressed or implied.
-    It was ported with the permission of Mark J. Kilgard by Nate Robins.
+    Freeglut code without an explicit copyright is covered by the following 
+    copyright:
 
-    THIS SOURCE CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-    EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-    OR MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+    Copyright (c) 1999-2000 Pawel W. Olszta. All Rights Reserved.
+    Permission is hereby granted, free of charge,  to any person obtaining a copy 
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction,  including without limitation the rights 
+    to use, copy,  modify, merge,  publish, distribute,  sublicense,  and/or sell 
+    copies or substantial portions of the Software.
 
-    OpenGL (R) is a registered trademark of Silicon Graphics, Inc.
+    The above  copyright notice  and this permission notice  shall be included in 
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE  IS PROVIDED "AS IS",  WITHOUT WARRANTY OF ANY KIND,  EXPRESS OR 
+    IMPLIED,  INCLUDING  BUT  NOT LIMITED  TO THE WARRANTIES  OF MERCHANTABILITY, 
+    FITNESS  FOR  A PARTICULAR PURPOSE  AND NONINFRINGEMENT.  IN  NO EVENT  SHALL 
+    PAWEL W. OLSZTA BE LIABLE FOR ANY CLAIM,  DAMAGES OR OTHER LIABILITY, WHETHER 
+    IN  AN ACTION  OF CONTRACT,  TORT OR OTHERWISE,  ARISING FROM,  OUT OF  OR IN 
+    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+    Except as contained in this notice,  the name of Pawel W. Olszta shall not be 
+    used  in advertising  or otherwise to promote the sale, use or other dealings 
+    in this Software without prior written authorization from Pawel W. Olszta.
 
 OpenGL-ctypes may include binary distributions of the Tk Togl widget, which is licensed under the 
 following license/copyright notice (available in OpenGL/Tk/*/LICENSE if Togl is included).
