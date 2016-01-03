@@ -79,7 +79,7 @@ artifacts:
   - path: accelerate\dist\*
     name: dist
   
-  - path: c:\\tmp\\wheelhouse\\*.whl
+  - path: c:\tmp\wheelhouse\*.whl
     name: numpy
 
 #on_success:
