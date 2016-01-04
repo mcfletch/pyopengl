@@ -15,15 +15,17 @@ def run_pip_command( *args ):
     print( 'Running: %s'%( ' '.join(command)))
     subprocess.check_call(command)
 
+WHEEL_HOUSE = 'c:\\projects\\pyopengl\\wheelhouse'
+
 def main():
     package = sys.argv[1]
-    if not os.path.exists( 'wheelhouse' ):
-        os.mkdir('wheelhouse')
+    if not os.path.exists( WHEEL_HOUSE ):
+        os.mkdir(WHEEL_HOUSE)
     try:
         run_pip_command(
             'install',
                 '-f',
-                'wheelhouse',
+                WHEEL_HOUSE,
                 '--no-index',
                 '--only-binary',':all:',
                 package,
@@ -32,13 +34,13 @@ def main():
         run_pip_command(
             'wheel',
                 '-w',
-                'wheelhouse',
+                WHEEL_HOUSE,
                 package,
         )
         run_pip_command(
             'install',
                 '-f',
-                'wheelhouse',
+                WHEEL_HOUSE,
                 '--no-index',
                 '--only-binary',':all:',
                 package,

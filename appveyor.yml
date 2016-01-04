@@ -61,7 +61,7 @@ build: off
 
 cache:
 
-  - wheelhouse -> appveyor\dependencyversions.txt
+  - c:\projects\pyopengl\wheelhouse -> appveyor\dependencyversions.txt
 
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
