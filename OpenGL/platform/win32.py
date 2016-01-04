@@ -4,9 +4,12 @@ import platform
 from OpenGL.platform import ctypesloader, baseplatform
 import sys
 
-if sys.hexversion < 0x2070000:
+if sys.hexversion <= 0x2070000:
     vc = 'vc7'
-# TODO: add Python 3.x compiler compatibility...
+elif sys.hexversion >= 0x3050000:
+    vc = 'vc14'
+elif sys.hexversion >= 0x3030000:
+    vc = 'vc10'
 else:
     vc = 'vc9'
 
@@ -32,7 +35,7 @@ class Win32Platform( baseplatform.BasePlatform ):
             return ctypesloader.loadLibrary(
                 ctypes.windll, 'glu32', mode = ctypes.RTLD_GLOBAL
             )
-        except OSError as err:
+        except OSError:
             return None
     @baseplatform.lazy_property
     def GLUT( self ):
@@ -43,7 +46,7 @@ class Win32Platform( baseplatform.BasePlatform ):
                 return ctypesloader.loadLibrary(
                     ctypes.windll, possible, mode = ctypes.RTLD_GLOBAL
                 )
-            except WindowsError as err:
+            except WindowsError:
                 pass
         return None
     @baseplatform.lazy_property
@@ -53,7 +56,7 @@ class Win32Platform( baseplatform.BasePlatform ):
                 GLE = ctypesloader.loadLibrary( ctypes.cdll, libName )
                 GLE.FunctionType = ctypes.CFUNCTYPE
                 return GLE
-            except WindowsError as err:
+            except WindowsError:
                 pass
             else:
                 break
