@@ -17,11 +17,13 @@ def run_pip_command( *args ):
 
 def main():
     package = sys.argv[1]
+    if not os.path.exists( 'wheelhouse' ):
+        os.mkdir('wheelhouse')
     try:
         run_pip_command(
             'install',
                 '-f',
-                'c:\\wheelhouse',
+                'wheelhouse',
                 '--no-index',
                 '--only-binary',':all:',
                 package,
@@ -30,13 +32,13 @@ def main():
         run_pip_command(
             'wheel',
                 '-w',
-                'c:\\wheelhouse',
+                'wheelhouse',
                 package,
         )
         run_pip_command(
             'install',
                 '-f',
-                'c:\\wheelhouse',
+                'wheelhouse',
                 '--no-index',
                 '--only-binary',':all:',
                 package,

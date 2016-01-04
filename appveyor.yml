@@ -63,7 +63,7 @@ build: off
 
 cache:
 
-  - c:\wheelhouse -> appveyor\dependencyversions.txt
+  - wheelhouse -> appveyor\dependencyversions.txt
 
 test_script:
     #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
@@ -79,7 +79,7 @@ artifacts:
   - path: accelerate\dist\*
     name: dist
   
-  - path: c:\wheelhouse\*.whl
+  - path: wheelhouse\*.whl
     name: numpy
 
 #on_success:
