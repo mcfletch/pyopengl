@@ -21,7 +21,7 @@ def main():
         run_pip_command(
             'install',
                 '-f',
-                'c:\\tmp\\wheelhouse',
+                'c:\\wheelhouse',
                 '--no-index',
                 '--only-binary',':all:',
                 package,
@@ -30,13 +30,13 @@ def main():
         run_pip_command(
             'wheel',
                 '-w',
-                'c:\\tmp\\wheelhouse',
+                'c:\\wheelhouse',
                 package,
         )
         run_pip_command(
             'install',
                 '-f',
-                'c:\\tmp\\wheelhouse',
+                'c:\\wheelhouse',
                 '--no-index',
                 '--only-binary',':all:',
                 package,
