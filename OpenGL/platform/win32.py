@@ -4,7 +4,7 @@ import platform
 from OpenGL.platform import ctypesloader, baseplatform
 import sys
 
-if sys.hexversion <= 0x2070000:
+if sys.hexversion < 0x2070000:
     vc = 'vc7'
 elif sys.hexversion >= 0x3050000:
     vc = 'vc14'
@@ -39,7 +39,7 @@ class Win32Platform( baseplatform.BasePlatform ):
             return None
     @baseplatform.lazy_property
     def GLUT( self ):
-        for possible in ('freeglut%s'%(size,),'freeglut', 'glut%s'%(size,)):
+        for possible in ('freeglut%s.%s'%(size,vc,), 'glut%s.%s'%(size,vc,)):
             # Prefer FreeGLUT if the user has installed it, fallback to the included 
             # GLUT if it is installed
             try:
@@ -51,7 +51,7 @@ class Win32Platform( baseplatform.BasePlatform ):
         return None
     @baseplatform.lazy_property
     def GLE( self ):
-        for libName in ('opengle%s.%s'%(size,vc,),'gle%s'%(size,)):
+        for libName in ('gle%s.%s'%(size,vc,), 'opengle%s.%s'%(size,vc,)):
             try:
                 GLE = ctypesloader.loadLibrary( ctypes.cdll, libName )
                 GLE.FunctionType = ctypes.CFUNCTYPE
