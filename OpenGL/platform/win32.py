@@ -128,7 +128,7 @@ class Win32Platform( baseplatform.BasePlatform ):
                 module,
                 error_checker=error_checker,
             )
-        except AttributeError as err:
+        except AttributeError:
             try:
                 return super( Win32Platform, self ).constructFunction(
                     functionName, self.GDI32,
@@ -139,7 +139,7 @@ class Win32Platform( baseplatform.BasePlatform ):
                     module,
                     error_checker=error_checker,
                 )
-            except AttributeError as err:
+            except AttributeError:
                 return super( Win32Platform, self ).constructFunction(
                     functionName, dll,
                     resultType, argTypes,
