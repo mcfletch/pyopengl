@@ -1156,6 +1156,7 @@ class Tests( unittest.TestCase ):
         def glsl_version():
             """Parse GL_SHADING_LANGUAGE_VERSION into [int(major),int(minor)]"""
             version = glGetString( GL_SHADING_LANGUAGE_VERSION )
+            version = version.split(' ')[0]
             version = [int(x) for x in version.split(as_8_bit('.'))[:2]]
             return version 
         if glsl_version() < [3,3]:
