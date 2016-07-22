@@ -5,7 +5,7 @@ so let's just localise the changes here...
 """
 import ctypes, logging, os, sys
 _log = logging.getLogger( 'OpenGL.platform.ctypesloader' )
-_log.setLevel( logging.DEBUG )
+#_log.setLevel( logging.DEBUG )
 ctypes_version = [
     int(x) for x in ctypes.__version__.split('.')
 ]
