@@ -3,9 +3,9 @@
 We keep rewriting functions as the main entry points change,
 so let's just localise the changes here...
 """
-import ctypes, logging, os
+import ctypes, logging, os, sys
 _log = logging.getLogger( 'OpenGL.platform.ctypesloader' )
-#_log.setLevel( logging.DEBUG )
+_log.setLevel( logging.DEBUG )
 ctypes_version = [
     int(x) for x in ctypes.__version__.split('.')
 ]
@@ -30,6 +30,53 @@ def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
     """
     if isinstance( dllType, ctypes.LibraryLoader ):
         dllType = dllType._dlltype
+    if os.name == 'posix':
+        return _loadLibraryPosix(dllType, name, mode)
+    else:
+        return _loadLibraryWindows(dllType, name, mode)
+
+
+def _loadLibraryPosix(dllType, name, mode):
+    """Load a given library for posix systems
+
+    The problem with util.find_library is that it does not respect linker runtime variables like
+    LD_LIBRARY_PATH.
+
+    Also we cannot rely on libGLU.so to be available, for example. Most of Linux distributions will
+    ship only libGLU.so.1 by default. Files ending with .so are normally used when compiling and are
+    provided by dev packages.
+
+    returns the ctypes C-module object
+    """
+    prefix = 'lib'
+    if sys.platform == 'darwin':
+        suffix = '.dylib'
+    else:
+        suffix = '.so'
+    base_name = prefix + name + suffix
+    filenames_to_try = []
+
+    # If a .so is missing, let's try libs with so version (e.g libGLU.so.9, libGLU.so.8 and so on)
+    if sys.platform.startswith('linux'):
+        filenames_to_try.extend(list(reversed([
+            base_name + '.%i' % i for i in range(0, 10)
+        ])))
+
+    for filename in filenames_to_try:
+        try:
+            result = dllType(filename, mode)
+            _log.debug( 'Loaded %s => %s %s', base_name, filename, result)
+            return result
+        except Exception as err:
+            pass 
+    
+    _log.info('''Failed to load library ( %r ): %s''', filename, err)
+
+def _loadLibraryWindows(dllType, name, mode):
+    """Load a given library for Windows systems
+
+    returns the ctypes C-module object
+    """
     fullName = None
     try:
         fullName = util.find_library( name )
