@@ -846,9 +846,13 @@ class Tests( unittest.TestCase ):
                     raise 
             else:
                 if value == (1,) and OpenGL.SIZE_1_ARRAY_UNPACK:
-                    result = float(result)
+                    try:
+                        result = float(result)
+                    except TypeError as err:
+                        err.args += (result,key)
+                        raise
                 else:
-                    assert ArrayDatatype.dimensions( result ) == value, result
+                    assert ArrayDatatype.dimensions( result ) == value, (result,ArrayDatatype.dimensions( result ), value)
     def test_max_compute_work_group_invocations(self):
         from OpenGL.extensions import hasGLExtension
         if hasGLExtension( 'GL_ARB_compute_shader' ):
@@ -1156,7 +1160,7 @@ class Tests( unittest.TestCase ):
         def glsl_version():
             """Parse GL_SHADING_LANGUAGE_VERSION into [int(major),int(minor)]"""
             version = glGetString( GL_SHADING_LANGUAGE_VERSION )
-            version = version.split(' ')[0]
+            version = version.split(as_8_bit(' '))[0]
             version = [int(x) for x in version.split(as_8_bit('.'))[:2]]
             return version 
         if glsl_version() < [3,3]:
