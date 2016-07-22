@@ -42,6 +42,7 @@ the tables described above!
 """
 from OpenGL.raw.GL.VERSION import GL_1_1 as _simple
 from OpenGL import arrays
+from OpenGL import error
 from OpenGL import _configflags
 import ctypes
 
@@ -66,8 +67,13 @@ def setupDefaultTransferMode( ):
     seldom matters in image data).  These assumptions are normally correct 
     when dealing with Python libraries which expose byte-arrays.
     """
-    _simple.glPixelStorei(_simple.GL_PACK_SWAP_BYTES, 0)
-    _simple.glPixelStorei(_simple.GL_PACK_LSB_FIRST, 0)
+    try:
+        _simple.glPixelStorei(_simple.GL_PACK_SWAP_BYTES, 0)
+        _simple.glPixelStorei(_simple.GL_PACK_LSB_FIRST, 0)
+    except error.GLError:
+        # GLES doesn't support pixel storage swapping...
+        pass
+        
 def rankPacking( rank ):
     """Set the pixel-transfer modes for a given image "rank" (# of dims)
     
@@ -76,8 +82,7 @@ def rankPacking( rank ):
     for func,which,arg in RANK_PACKINGS[rank]:
         try:
             func(which,arg)
-        except Exception as err:
-            # XXX should be logging a warning!
+        except error.GLError:
             pass
 
 def createTargetArray( format, dims, type ):
