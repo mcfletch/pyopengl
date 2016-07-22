@@ -293,7 +293,9 @@ def glGetShaderInfoLog( baseOperation, obj ):
 
     returns string which is '' if no message
     """
-    length = int(glGetShaderiv(obj, GL_INFO_LOG_LENGTH))
+    target = GLsizei()
+    glGetShaderiv(obj, GL_INFO_LOG_LENGTH,target)
+    length = target.value
     if length > 0:
         log = ctypes.create_string_buffer(length)
         baseOperation(obj, length, None, log)
@@ -305,7 +307,9 @@ def glGetProgramInfoLog( baseOperation, obj ):
 
     returns string which is '' if no message
     """
-    length = int(glGetProgramiv(obj, GL_INFO_LOG_LENGTH))
+    target = GLsizei()
+    glGetProgramiv(obj, GL_INFO_LOG_LENGTH,target)
+    length = target.value
     if length > 0:
         log = ctypes.create_string_buffer(length)
         baseOperation(obj, length, None, log)
