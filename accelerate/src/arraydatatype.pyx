@@ -28,8 +28,6 @@ cdef class HandlerRegistry:
         self.registry[key] = value
     def __call__( self, value ):
         return self.c_lookup( value )
-
-    
     
     cdef object c_lookup( self, object value ):
         """C-level lookup of handler for given value"""
@@ -42,8 +40,8 @@ cdef class HandlerRegistry:
         if not handler:
             if hasattr( typ, '__mro__' ):
                 for base in typ.__mro__:
-                    plugin = self.registry.get( base )
-                    if not plugin:
+                    handler = self.registry.get( base )
+                    if not handler:
                         plugin = self.match( base )
                         if plugin:
                             cls = plugin.load()
