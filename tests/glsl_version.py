@@ -7,6 +7,7 @@ from OpenGL._bytes import as_8_bit
 @pygamegltest.pygametest(name='Get GL_SHADING_LANGUAGE_VERSION')
 def show_glsl_version():
     version = glGetString( GL_SHADING_LANGUAGE_VERSION )
+    version = version.split(as_8_bit(' '))[0]
     version = [int(x) for x in version.split(as_8_bit('.'))[:2]]
     return version 
 
