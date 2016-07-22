@@ -1095,7 +1095,7 @@ _m[0x0BA3] = (1,) # GL_MODELVIEW_STACK_DEPTH
 _m[0x809D] = (1,) # GL_MULTISAMPLE
 _m[0x86B2] = (1,) # GL_MULTISAMPLE_3DFX
 _m[0x809D] = (1,) # GL_MULTISAMPLE_ARB
-_m[0x8E12] = (1,)#TODO Review http://www.opengl.org/registry/specs//NV/framebuffer_multisample_coverage.txt # GL_MULTISAMPLE_COVERAGE_MODES_NV
+_m[0x8E12] = (_L(0x8E11,calculation=lambda x: x*2 ),) # TODO Review http://www.opengl.org/registry/specs//NV/framebuffer_multisample_coverage.txt # GL_MULTISAMPLE_COVERAGE_MODES_NV
 _m[0x809D] = (1,) # GL_MULTISAMPLE_EXT
 _m[0x8534] = (1,) # GL_MULTISAMPLE_FILTER_HINT_NV
 _m[0x809D] = (1,) # GL_MULTISAMPLE_SGIS
