@@ -145,7 +145,7 @@ def returnFormat( data, type ):
             elif hasattr( data, '_type_' ):
                 s = ctypes.string_at( ctypes.cast( data, ctypes.c_voidp ), ctypes.sizeof( data ))
                 result = s[:] # copy into a new string
-                return s
+                return result
     return data
 
 

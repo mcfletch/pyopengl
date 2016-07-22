@@ -9,7 +9,6 @@ For comparison, here's what a straightforward implementation looks like:
         result = platform.PLATFORM.GL.glGetDoublev( pname, byref(result) )
         return Numeric.array( result )
 """
-from OpenGL import wrapper
 from OpenGL.GL.VERSION import GL_1_1 as _simple
 import ctypes
 GLenum = ctypes.c_uint

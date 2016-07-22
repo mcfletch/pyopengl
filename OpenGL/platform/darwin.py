@@ -52,7 +52,7 @@ class DarwinPlatform( baseplatform.BasePlatform ):
                 'GLUT', 
                 mode=ctypes.RTLD_GLOBAL 
             )
-        except OSError as err:
+        except OSError:
             return None
     @baseplatform.lazy_property
     def GLE(self): return self.GLUT
