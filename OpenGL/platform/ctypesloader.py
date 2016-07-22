@@ -54,7 +54,10 @@ def _loadLibraryPosix(dllType, name, mode):
     else:
         suffix = '.so'
     base_name = prefix + name + suffix
+    
     filenames_to_try = []
+    if sys.platform == 'darwin':
+        filenames_to_try.append(base_name)
 
     # If a .so is missing, let's try libs with so version (e.g libGLU.so.9, libGLU.so.8 and so on)
     if sys.platform.startswith('linux'):
