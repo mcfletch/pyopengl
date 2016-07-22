@@ -30,7 +30,7 @@ def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
     """
     if isinstance( dllType, ctypes.LibraryLoader ):
         dllType = dllType._dlltype
-    if os.name == 'posix':
+    if sys.platform.startswith('linux'):
         return _loadLibraryPosix(dllType, name, mode)
     else:
         return _loadLibraryWindows(dllType, name, mode)
@@ -49,21 +49,14 @@ def _loadLibraryPosix(dllType, name, mode):
     returns the ctypes C-module object
     """
     prefix = 'lib'
-    if sys.platform == 'darwin':
-        suffix = '.dylib'
-    else:
-        suffix = '.so'
+    suffix = '.so'
     base_name = prefix + name + suffix
     
     filenames_to_try = []
-    if sys.platform == 'darwin':
-        filenames_to_try.append(util.find_library(name))
-
     # If a .so is missing, let's try libs with so version (e.g libGLU.so.9, libGLU.so.8 and so on)
-    if sys.platform.startswith('linux'):
-        filenames_to_try.extend(list(reversed([
-            base_name + '.%i' % i for i in range(0, 10)
-        ])))
+    filenames_to_try.extend(list(reversed([
+        base_name + '.%i' % i for i in range(0, 10)
+    ])))
 
     for filename in filenames_to_try:
         try:
