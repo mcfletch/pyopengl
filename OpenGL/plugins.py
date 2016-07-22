@@ -14,7 +14,7 @@ class Plugin( object ):
         """Attempt to load and return our entry point"""
         try:
             return importByName( self.import_path )
-        except ImportError as err:
+        except ImportError:
             return None
     @classmethod
     def match( cls, *args ):
