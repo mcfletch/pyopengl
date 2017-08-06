@@ -13,37 +13,43 @@ environment:
     # See: http://www.appveyor.com/docs/installed-software#python
     
     - PYTHON: "C:\\Python27"
-      PYTHON_VERSION: "2.7.9" # currently 2.7.9
+      PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "32"
 
     - PYTHON: "C:\\Python34"
-      PYTHON_VERSION: "3.4.3" # currently 3.4.3
+      PYTHON_VERSION: "3.4.4"
       PYTHON_ARCH: "32"
 
     - PYTHON: "C:\\Python27-x64"
-      PYTHON_VERSION: "2.7.9" # currently 2.7.9
+      PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "64"
 
     - PYTHON: "C:\\Python34-x64"
-      PYTHON_VERSION: "3.4.3" # currently 3.4.3
+      PYTHON_VERSION: "3.4.4"
       PYTHON_ARCH: "64"
 
-    # Python versions not installed by default...
-    
-    - PYTHON: "C:\\Python266"
+    - PYTHON: "C:\\Python26"
       PYTHON_VERSION: "2.6.6"
       PYTHON_ARCH: "32"
 
-    - PYTHON: "C:\\Python266-x64"
+    - PYTHON: "C:\\Python26-x64"
       PYTHON_VERSION: "2.6.6"
       PYTHON_ARCH: "64"
 
     - PYTHON: "C:\\Python35"
-      PYTHON_VERSION: "3.5.0"
+      PYTHON_VERSION: "3.5.3"
       PYTHON_ARCH: "32"
 
     - PYTHON: "C:\\Python35-x64"
-      PYTHON_VERSION: "3.5.0"
+      PYTHON_VERSION: "3.5.3"
+      PYTHON_ARCH: "64"    
+
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: "3.6.1"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python36-x64"
+      PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "64"    
 
 branches:
@@ -59,12 +65,7 @@ install:
 
 build: off
 
-cache:
-
-  - c:\projects\pyopengl\wheelhouse -> appveyor\dependencyversions.txt
-
 test_script:
-    #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
   - echo "Skipped"
 
 after_test:
@@ -72,9 +73,12 @@ after_test:
   - "ECHO %WITH_COMPILER% %PYTHON%/python.exe setup.py bdist_wheel"
   - "%WITH_COMPILER% %PYTHON%/python.exe setup.py bdist_wheel"
   - cd ..
+  - "%PYTHON%/python.exe setup.py bdist_wheel"
 
 artifacts:
   - path: accelerate\dist\*
+    name: dist-accel
+  - path: dist\*
     name: dist
   
   - path: wheelhouse\*.whl
