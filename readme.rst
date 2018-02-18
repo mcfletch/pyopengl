@@ -39,18 +39,16 @@ PyOpenGL calls.
 Running Tests
 --------------
 
-You can run the PyOpenGL test suite only if you have prebuilt Pygame and 
-Numpy wheels, along with Python 2.7, 3.4 and 3.5. The 
-wheels for the test suite to use should be stored in a directory
-called "wheelhouse" at the same level as the root checkout here.
+You can run the PyOpenGL test suite only if you have prebuilt Pygame 
+wheels, along with Python 2.7, 3.6 and 3.5.
 
 To build the wheels on Ubuntu::
 
     $ hg clone https://bitbucket.org/pygame/pygame
-    $ apt-get build-dep pygame python-numpy
-    $ pip2.7 wheel ./pygame numpy
-    $ pip3.4 wheel ./pygame numpy
-    $ pip3.5 wheel ./pygame numpy
+    $ apt-get build-dep pygame
+    $ pip2.7 wheel ./pygame
+    $ pip3.6 wheel ./pygame
+    $ pip3.5 wheel ./pygame
 
 if you do that in the same directory where you checked out pyopengl
 you will have all of your wheels in the directory the pyopengl 
@@ -66,7 +64,7 @@ with Python versions:
 
     * 2.7
     * 3.5
-    * 3.4
+    * 3.6
 
 Where we test with and without the accelerate module and with and 
 without numpy installed in the environment.
