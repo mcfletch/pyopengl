@@ -43,7 +43,11 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
     @classmethod
     def arrayToGLType( cls, value ):
         """Given a value, guess OpenGL type of the corresponding pointer"""
-        result = ARRAY_TO_GL_TYPE_MAPPING.get( value._type_ )
+        result = None
+        typ = value._type_
+        while hasattr(typ,'_type_') and typ not in ARRAY_TO_GL_TYPE_MAPPING:
+            typ = typ._type_
+        result = ARRAY_TO_GL_TYPE_MAPPING.get( typ )
         if result is not None:
             return result
         raise TypeError(
@@ -121,6 +125,7 @@ ARRAY_TO_GL_TYPE_MAPPING = {
     _types.GLubyte: GL_1_1.GL_UNSIGNED_BYTE,
 }
 GL_TYPE_TO_ARRAY_MAPPING = {
+    _types.GL_VOID_P: _types.GLvoidp,
     GL_1_1.GL_DOUBLE: _types.GLdouble,
     GL_1_1.GL_FLOAT: _types.GLfloat,
     GL_1_1.GL_INT: _types.GLint,
