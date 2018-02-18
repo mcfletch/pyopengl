@@ -1,4 +1,5 @@
 from ctypes import *
+from ctypes import _SimpleCData
 from OpenGL import extensions
 from OpenGL.raw.GL._types import *
 from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls
@@ -69,8 +70,18 @@ FLOAT = c_float 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:57
 COLORREF = DWORD 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:58
 LPCOLORREF = POINTER(DWORD) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:58
 
-HANDLE = POINTER(None) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:60
+#HANDLE = POINTER(None) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:60
 # TODO: figure out how to make the handle not appear as a void_p within the code...
+# This decorates *every* c_void_p reference, as ctypes now reuses the references
+# which means it completely disables all of the array-handing machinery
+class HANDLE(_SimpleCData):
+    """Github Issue #8 CTypes shares all references to c_void_p
+    
+    We have to have a separate type to avoid short-circuiting all
+    of the array-handling machinery for real c_void_p arguments.
+    """
+    _type_ = "P"
+_check_size(HANDLE)
 HANDLE.final = True
 
 HGLRC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:62
