@@ -5,6 +5,9 @@ MANIFEST
 build
 dist
 callgrind.out*
+.cache
+.pytest_cache
+.vscode
 *.~?~
 documentation/pydoc/*.html
 src/glext.h

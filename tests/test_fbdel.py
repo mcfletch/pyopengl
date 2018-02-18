@@ -26,5 +26,6 @@ def main():
         pass # Older PyOpenGL, you may see a seg-fault here...
 
 # Print message to console, and kick off the main to get it rolling.
-main()
+if __name__ == "__main__":
+    main()
         
