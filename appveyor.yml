@@ -66,7 +66,7 @@ install:
 build: off
 
 test_script:
-  - echo "Skipped"
+  - "%PYTHON%/scripts/pytest -v"
 
 after_test:
   - cd accelerate
@@ -81,8 +81,5 @@ artifacts:
   - path: dist\*
     name: dist
   
-  - path: wheelhouse\*.whl
-    name: numpy
-
 #on_success:
 #  - TODO: upload the content of dist/*.whl to a public wheelhouse
