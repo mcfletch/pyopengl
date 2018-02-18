@@ -7,7 +7,10 @@ from OpenGL import plugins
 from OpenGL.arrays import formathandler, _arrayconstants as GL_1_1
 from OpenGL import logs
 _log = logs.getLog( 'OpenGL.arrays.arraydatatype' )
-
+try:
+    unicode
+except NameError:
+    unicode = str
 
 from OpenGL import acceleratesupport
 ADT = None
