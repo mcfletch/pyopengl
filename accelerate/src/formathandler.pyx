@@ -16,6 +16,7 @@ cdef class FormatHandler:
 	sub-class it in Python.
 	"""	
 	isOutput = False
+	isAccelerated = True
 	HANDLED_TYPES = ()
 	
 	def __init__( self):

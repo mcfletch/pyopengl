@@ -1,10 +1,16 @@
-import unittest, numpy, ctypes
-from OpenGL_accelerate import numpy_formathandler as npf
+import unittest, ctypes
+try:
+    import numpy 
+    from OpenGL_accelerate import numpy_formathandler as npf
+except ImportError:
+    numpy = None
 from OpenGL import error
 from OpenGL import GL
 from OpenGL._bytes import integer_types
 from OpenGL._configflags import ERROR_ON_COPY
+import pytest
 
+@pytest.mark.skipif( not numpy, reason="No numpy handler available")
 class TestAccelNumpy( unittest.TestCase ):
     def setUp( self ):
         self.array = numpy.array( [[1,2,3],[4,5,6]],'f')
@@ -64,7 +70,7 @@ class TestAccelNumpy( unittest.TestCase ):
         p = self.handler.arrayToGLType( self.array )
         assert p == GL.GL_FLOAT
         
-    def test_zeros( self ):
+    def test_zeros_constant( self ):
         z = self.handler.zeros( (2,3,4), GL.GL_FLOAT)
         assert z.shape == (2,3,4)
         assert z.dtype == numpy.float32
