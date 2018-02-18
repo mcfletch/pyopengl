@@ -62,13 +62,12 @@ init:
 
 install:
   - "powershell appveyor\\install.ps1"
-
-build_script:
-  # Build the compiled extension
   - "%CMD_IN_ENV% python setup.py install"
   - cd accelerate
   - "%CMD_IN_ENV% python setup.py install"
   - cd ..
+
+build: off
 
 test_script:
   - "%PYTHON%/scripts/pytest -v tests"
