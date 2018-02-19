@@ -315,6 +315,7 @@ class BasePlatform( object ):
         deprecated = False,
         module = None,
         error_checker = None,
+        force_extension = False,
     ):
         """Construct a "null" function pointer"""
         if deprecated:
@@ -332,7 +333,7 @@ class BasePlatform( object ):
                 cls.__module__ = module
         return cls(
             functionName, dll, resultType, argTypes, argNames, extension=extension, doc=doc,
-            error_checker = error_checker,
+            error_checker = error_checker, force_extension=force_extension,
         )
     def GetCurrentContext( self ):
         """Retrieve opaque pointer for the current context"""
@@ -356,7 +357,7 @@ class _NullFunctionPointer( object ):
     def __init__( 
         self, name, dll, resultType, argTypes, argNames, 
         extension=None, doc=None, deprecated=False,
-        error_checker = None,
+        error_checker = None, force_extension=None,
     ):
         from OpenGL import error
         self.__name__ = name
@@ -369,6 +370,7 @@ class _NullFunctionPointer( object ):
         self.doc = doc
         self.deprecated = deprecated
         self.error_checker = error_checker
+        self.force_extension = force_extension
     resolved = False
     def __nonzero__( self ):
         """Make this object appear to be NULL"""
@@ -388,6 +390,7 @@ class _NullFunctionPointer( object ):
                 argNames = self.argNames,
                 extension = self.extension,
                 error_checker = self.error_checker,
+                force_extension = self.force_extension,
             )
         except AttributeError as err:
             return None 
