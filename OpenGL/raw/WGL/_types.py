@@ -2,13 +2,14 @@ from ctypes import *
 from ctypes import _SimpleCData
 from OpenGL import extensions
 from OpenGL.raw.GL._types import *
+from OpenGL._bytes import as_8_bit
 from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls
 c_void = None
 
 class _WGLQuerier( extensions.ExtensionQuerier ):
-    prefix = 'WGL_'
+    prefix = as_8_bit('WGL_')
     assumed_version = [1,0]
-    version_prefix = 'WGL_VERSION_WGL_'
+    version_prefix = as_8_bit('WGL_VERSION_WGL_')
     def pullVersion( self ):
         # only one version...
         return [1,0]
@@ -18,7 +19,7 @@ class _WGLQuerier( extensions.ExtensionQuerier ):
         wglGetCurrentDC.restyle = HDC
         try:
             dc = wglGetCurrentDC()
-            proc_address = PLATFORM.getExtensionProcedure( 'wglGetExtensionsStringARB' )
+            proc_address = PLATFORM.getExtensionProcedure(as_8_bit('wglGetExtensionsStringARB') )
             wglGetExtensionStringARB = PLATFORM.functionTypeFor( PLATFORM.WGL )(
                 c_char_p,
                 HDC,
