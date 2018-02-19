@@ -70,10 +70,7 @@ install:
 build: off
 
 test_script:
-  - "%PYTHON%/scripts/pytest -v tests"
-  - cd accelerate
-  - "%PYTHON%/scripts/pytest -v tests"
-  - cd ..
+  - "ECHO pytest tests not being run"
 
 after_test:
   - cd accelerate
