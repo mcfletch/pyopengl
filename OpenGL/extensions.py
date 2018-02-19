@@ -102,10 +102,10 @@ class ExtensionQuerier( object ):
     
     def __call__( self, specifier ):
         specifier = as_8_bit(specifier).replace(as_8_bit('.'),as_8_bit('_'))
-        if not specifier.startswith( self.prefix ):
+        if not specifier.startswith( as_8_bit(self.prefix) ):
             return None 
         
-        if specifier.startswith( self.version_prefix ):
+        if specifier.startswith( as_8_bit(self.version_prefix) ):
             specifier = [
                 int(x)
                 for x in specifier[ len(self.version_prefix):].split(as_8_bit('_'))
