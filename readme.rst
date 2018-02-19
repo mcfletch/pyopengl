@@ -28,6 +28,10 @@ scenegraph engine, VRML97 parser, lots of demos, etc) you can install that with:
 Or you can clone it (including the tutorial sources) with::
 
     $ bzr branch lp:openglcontext
+
+or (for GitHub usage)::
+
+    $ git clone https://github.com/mcfletch/pyopengl.git
     
 The `documentation pages`_ are useful for looking up the parameters and semantics of 
 PyOpenGL calls.
@@ -39,32 +43,18 @@ PyOpenGL calls.
 Running Tests
 --------------
 
-You can run the PyOpenGL test suite only if you have prebuilt Pygame 
-wheels, along with Python 2.7, 3.6 and 3.5.
+You can run the PyOpenGL test suite from a source-code checkout, you will need:
 
-To build the wheels on Ubuntu::
+* git (for the checkout) or bzr (if you are checking out from launchpad)
+* GLUT (FreeGLUT)
+* GLExtrusion library (libgle)
+* GLU (normally available on any OpenGL-capable machine)
+* tox (`pip install tox`)
 
-    $ hg clone https://bitbucket.org/pygame/pygame
-    $ apt-get build-dep pygame
-    $ pip2.7 wheel ./pygame
-    $ pip3.6 wheel ./pygame
-    $ pip3.5 wheel ./pygame
-
-if you do that in the same directory where you checked out pyopengl
-you will have all of your wheels in the directory the pyopengl 
-tox suite is expecting.
-
-You'll obviously need `tox` installed to run tox, which looks
-like this::
+Running the test suite from a top-level checkout looks like::
 
     $ tox
 
-The result being a lot of tests being run in a matrix of environments,
-with Python versions:
-
-    * 2.7
-    * 3.5
-    * 3.6
-
-Where we test with and without the accelerate module and with and 
-without numpy installed in the environment.
+The result being a lot of tests being run in a matrix of environments.
+All of the environment will pull in pygame, some will also pull in 
+numpy. Some will have accelerate, and some will not.
