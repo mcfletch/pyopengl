@@ -74,7 +74,32 @@ if NumpyHandler is None:
                 if we have to copy an array object in order to produce
                 a contiguous array of the correct type.
         """
-        HANDLED_TYPES = (numpy.ndarray,)# list, tuple )
+        HANDLED_TYPES = (
+            numpy.ndarray,
+            numpy.bool_,
+            numpy.int8,
+            numpy.uint8,
+            numpy.int16,
+            numpy.uint16,
+            numpy.int32,
+            numpy.uint32,
+            numpy.int64,
+            numpy.uint64,
+            numpy.int64,
+            numpy.uint64,
+            numpy.float16,
+            numpy.float32,
+            numpy.float64,
+            numpy.float128,
+            numpy.complex64,
+            numpy.complex128,
+            numpy.complex256,
+            numpy.bytes_,
+            numpy.str_,
+            numpy.void,
+            numpy.datetime64,
+            numpy.timedelta64,
+        )# list, tuple )
         dataPointer = dataPointer
         isOutput = True
         ERROR_ON_COPY = _configflags.ERROR_ON_COPY

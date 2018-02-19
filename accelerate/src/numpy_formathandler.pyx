@@ -24,7 +24,32 @@ cdef class NumpyHandler(FormatHandler):
 	cdef public dict array_to_gl_constant
 	cdef public dict gl_constant_to_array
 	isOutput = True
-	HANDLED_TYPES = (np.ndarray,)
+	HANDLED_TYPES = (
+        np.ndarray,
+        np.bool_,
+        np.int8,
+        np.uint8,
+        np.int16,
+        np.uint16,
+        np.int32,
+        np.uint32,
+        np.int64,
+        np.uint64,
+        np.int64,
+        np.uint64,
+        np.float16,
+        np.float32,
+        np.float64,
+        np.float128,
+        np.complex64,
+        np.complex128,
+        np.complex256,
+        np.bytes_,
+        np.str_,
+        np.void,
+        np.datetime64,
+        np.timedelta64,
+    )
 	
 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):
 		if ERROR_ON_COPY is None:

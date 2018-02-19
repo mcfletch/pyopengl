@@ -232,17 +232,6 @@ FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler', [
     _bi+'.int',
     _bi+'.float',
     _bi+'.long',
-    'numpy.uint8',
-    'numpy.uint16',
-    'numpy.uint32',
-    'numpy.uint64',
-    'numpy.int8',
-    'numpy.int16',
-    'numpy.int32',
-    'numpy.int64',
-    'numpy.float32',
-    'numpy.float64',
-    'numpy.float128',
 ], isOutput=False )
 FormatHandler(
     'ctypesarrays', 'OpenGL.arrays.ctypesarrays.CtypesArrayHandler',
@@ -278,6 +267,17 @@ FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandl
 FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', [
     'numpy.ndarray',
     'numpy.core.memmap.memmap',
+    'numpy.uint8',
+    'numpy.uint16',
+    'numpy.uint32',
+    'numpy.uint64',
+    'numpy.int8',
+    'numpy.int16',
+    'numpy.int32',
+    'numpy.int64',
+    'numpy.float32',
+    'numpy.float64',
+    'numpy.float128',
 ],isOutput=True )
 FormatHandler( 'buffer', 'OpenGL.arrays.buffers.BufferHandler', [
     'OpenGL.arrays._buffers.Py_buffer',

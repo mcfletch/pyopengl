@@ -286,6 +286,34 @@ class TestCoreDatatype(basetestcase.BaseTest):
         s = Subclassed([0,1,2,3,4])
         result = arraydatatype.ArrayDatatype.asArray( s )
         assert isinstance( result, Subclassed )
+    
+    @pytest.mark.skipif( not np, reason="Numpy not available")
+    def test_byte_count_numpy( self ):
+        for a,expected in [
+            (np.array([1,2],dtype='f'),8),
+            (np.array([1,2],dtype='d'),16),
+            (np.array([1,2],dtype='B'),2),
+            (np.array([[1],[2]],dtype='B'),2),
+            (np.float32(),4),
+            (np.float64(),8),
+        ]:
+            handler = arraydatatype.ArrayDatatype.getHandler( a )
+            
+            assert type(a) in handler.HANDLED_TYPES, type(a)
+            calculated = arraydatatype.ArrayDatatype.arrayByteCount( a )
+            assert calculated == expected, "Byte count for %s was %s, expected %"%(
+                a, calculated, expected,
+            )
+    def test_byte_count( self ):
+        for a,expected in [
+            (ctypes.c_float(),4),
+            ((ctypes.c_float*3*4)(),4*3*4),
+            
+        ]:
+            calculated = arraydatatype.ArrayDatatype.arrayByteCount( a )
+            assert calculated == expected, "Byte count for %s was %s, expected %"%(
+                a, calculated, expected,
+            )
         
 if np:
     class Subclassed( np.ndarray ):
