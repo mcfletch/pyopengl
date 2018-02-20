@@ -1,5 +1,5 @@
 import basetestcase
-import os
+import os, logging
 import OpenGL
 from OpenGL.GL import *
 from OpenGL import GLU
@@ -8,6 +8,7 @@ try:
 except ImportError as err:
     np = None
 HERE = os.path.abspath(os.path.dirname(__file__))
+log = logging.getLogger(__name__)
 
 class TestEvaluators(basetestcase.BaseTest):
     evaluator_ctrlpoints = [[[ -1.5, -1.5, 4.0], [-0.5, -1.5, 2.0], [0.5, -1.5,
@@ -177,4 +178,4 @@ class TestEvaluators(basetestcase.BaseTest):
             glePolyCone(((-6.0, 6.0, 0.0), (6.0, 6.0, 0.0), (6.0, -6.0, 0.0), (-6.0, -6.0, 0.0), (-6.0, 6.0, 0.0), (6.0, 6.0, 0.0)),
                                 ((0.0, 0.0, 0.0), (0.0, 0.8, 0.3), (0.8, 0.3, 0.0), (0.2, 0.3, 0.9), (0.2, 0.8, 0.5), (0.0, 0.0, 0.0)), (1, 1, 3, 0.5, 2, 1))
         else:
-            logging.warn("No GLE extrusion library")
+            log.warn("No GLE extrusion library")
