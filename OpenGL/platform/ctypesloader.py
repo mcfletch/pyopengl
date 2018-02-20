@@ -57,16 +57,17 @@ def _loadLibraryPosix(dllType, name, mode):
     filenames_to_try.extend(list(reversed([
         base_name + '.%i' % i for i in range(0, 10)
     ])))
+    err = None
 
     for filename in filenames_to_try:
         try:
             result = dllType(filename, mode)
             _log.debug( 'Loaded %s => %s %s', base_name, filename, result)
             return result
-        except Exception as err:
-            pass 
+        except Exception as current_err:
+            err = current_err
     
-    _log.info('''Failed to load library ( %r ): %s''', filename, err)
+    _log.info('''Failed to load library ( %r ): %s''', filename, err or 'No filenames available to guess?')
 
 def _loadLibraryWindows(dllType, name, mode):
     """Load a given library for Windows systems
