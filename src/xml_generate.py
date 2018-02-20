@@ -6,18 +6,18 @@ import xmlreg, codegenerator
 import ctypetopytype
 log = logging.getLogger( 'xml-generate' )
 
-KHRONOS_URL = 'https://cvs.khronos.org/svn/repos/ogl/trunk/doc/registry/public/api/'
+KHRONOS_URL = 'https://github.com/KhronosGroup/OpenGL-Registry.git'
 KHRONOS_API = os.path.join( os.path.dirname(__file__), 'khronosapi' )
 
 def get_khronos( khronosapi ):
     if not os.path.exists( khronosapi ):
-        subprocess.check_call(['svn','co', KHRONOS_URL, khronosapi ])
+        subprocess.check_call(['git','clone', KHRONOS_URL, khronosapi ])
 
 def main(khronosapi=None):
     khronosapi = khronosapi or KHRONOS_API
     get_khronos( khronosapi )
     
-    files = sorted( glob.glob( os.path.join( khronosapi, '*.xml' ) ))
+    files = sorted( glob.glob( os.path.join( khronosapi, 'xml','*.xml' ) ))
     for file in files:
         generate_for_file( file )
 

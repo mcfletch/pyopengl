@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 """Registry for loading Khronos API definitions from XML files"""
 from lxml import etree as ET
-import os, sys, time, json, logging
+import os, sys, json, logging
 from OpenGL._bytes import as_8_bit
 log = logging.getLogger( __name__ )
 HERE = os.path.dirname( __file__ )
@@ -260,7 +260,10 @@ class Command( object ):
                 result.append( (target,DynamicInput(length)))
             elif '*' in length:
                 params = length.split('*')
-                in_set = [x for x in params if x in self.argNames]
+                in_set = [
+                    x for x in params 
+                    if x in self.argNames
+                ]
 #                if params == in_set:
                 result.append( (target,MultipleInput(params)))
 #                else:
