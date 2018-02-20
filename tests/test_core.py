@@ -388,10 +388,15 @@ class TestCore( basetestcase.BaseTest ):
     def test_glget( self ):
         """Test that we can run glGet... on registered constants without crashing..."""
         from OpenGL.raw.GL import _glgets
-        for key,value in _glgets._glget_size_mapping.items():
-            #print( 'Trying glGetFloatv( 0x%x )'%(key,))
-            if key == 0x92c1: # GL_ATOMIC_COUNTER_BUFFER_BINDING crashes intel hardware... sigh...
+        get_items = sorted(_glgets._glget_size_mapping.items())
+        for key,value in get_items:
+            # There are glGet values that will cause a crash during cleanup
+            # GL_ATOMIC_COUNTER_BUFFER_BINDING 0x92c1 crashes/segfaults
+            if key >= 0x8df9 and key <= 0x8e23:
                 continue
+            if key >= 0x92be and key <= 0x92c9:
+                continue
+            print( 'Trying glGetFloatv( 0x%x )'%(key,))
             try:
                 result = glGetFloatv( key )
             except error.GLError as err:
