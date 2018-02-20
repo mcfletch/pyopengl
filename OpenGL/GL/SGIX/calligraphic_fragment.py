@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.calligraphic_fragment to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides a minimal mechanism to control the copying of
+	fragment information to external hardware such as a calligraphic
+	display interface.  The initial implementation is intended to support
+	the calligraphic interface on InfiniteReality.  On InfiniteReality
+	when the interface is enabled, fragment information consisting of
+	some color and coverage data is sent to the interface.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/calligraphic_fragment.txt
 '''

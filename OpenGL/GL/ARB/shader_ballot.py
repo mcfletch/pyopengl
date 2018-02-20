@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.shader_ballot to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides the ability for a group of invocations which
+	execute in lockstep to do limited forms of cross-invocation communication
+	via a group broadcast of a invocation value, or broadcast of a bitarray
+	representing a predicate value from each invocation in the group.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/shader_ballot.txt
 '''

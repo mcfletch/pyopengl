@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.scalebias_hint to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds an precision hint for scaling and biasing
+	arithmetic. For large scale factors, hinting GL_NICEST produces the
+	most accurate results. The hint only applies to Octane2 VPro
+	graphics systems, to work around a hardware issue.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/scalebias_hint.txt
 '''

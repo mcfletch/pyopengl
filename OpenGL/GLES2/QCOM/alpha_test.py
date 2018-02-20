@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.QCOM.alpha_test to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension reintroduces the alpha test per-fragment operation
+	from OpenGL ES 1.x.  Some hardware has a dedicated unit capable of
+	performing this operation, and it can save ALU operations in the fragment
+	shader by avoiding the conditional discard.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/QCOM/alpha_test.txt
 '''

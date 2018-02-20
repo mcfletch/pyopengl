@@ -4,6 +4,19 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.path_rendering_shared_edge to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension introduces a new path command modifier to the
+	NV_path_rendering extension to indicate that a path command represents an
+	edge (either straight or curved) that is shared with another path.
+	
+	When used in conjunction with NV_framebuffer_mixed_samples, a shared edge
+	(or a whole path including shared edges) will use modified rasterization
+	rules in order to ensure that groups of raster samples associated with a
+	given coverage sample will all produce consistent coverage results, in
+	order to avoid artifacts described further in the issues section at the
+	end of this document.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/path_rendering_shared_edge.txt
 '''

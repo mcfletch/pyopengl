@@ -4,6 +4,26 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.EGL_image to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides a mechanism for creating texture and
+	renderbuffer objects sharing storage with specified EGLImage objects
+	(such objects are referred to as "EGLImage targets").
+	
+	The companion EGL_KHR_image_base and EGL_KHR_image extensions
+	provide the definition and rationale for EGLImage objects.
+	
+	Other EGL extensions, such as EGL_KHR_gl_texture_2D_image,
+	EGL_KHR_gl_texture_cubemap_image, EGL_KHR_gl_texture_3D_image,
+	EGL_KHR_gl_renderbuffer_image, and EGL_KHR_vg_parent_image, define
+	the related functionality of creating EGLImage objects from
+	"EGLImage sources" such as OpenGL ES texture or renderbuffers or
+	OpenVG VGImage objects.
+	
+	EGL extension specifications are located in the EGL Registry at
+	
+	    http://www.khronos.org/registry/egl/
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/EGL_image.txt
 '''

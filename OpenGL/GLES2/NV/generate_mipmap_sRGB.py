@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.generate_mipmap_sRGB to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	EXT_sRGB requires GenerateMipmap() to throw INVALID_OPERATION on textures
+	with sRGB encoding. NV_generate_mipmap_sRGB lifts this restriction.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/generate_mipmap_sRGB.txt
 '''

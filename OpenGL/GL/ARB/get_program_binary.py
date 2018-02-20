@@ -20,7 +20,7 @@ Overview (from the spec)
 	program binaries need be supplied.
 	
 	ProgramBinary may also accept binaries in vendor-specific formats
-	produced by specialized offline compilation tools. This extension does not 
+	produced by specialized offline compilation tools. This extension does not
 	add any such formats, but allows for them in further extensions. Though the
 	level of optimization may not be identical -- the offline shader compiler
 	may have the luxury of more aggressive optimization at its disposal --

@@ -4,13 +4,6 @@ This module customises the behaviour of the
 OpenGL.raw.WGL.NV.render_depth_texture to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension allows a depth buffer to be used for both rendering and
-	texturing.  It is built upon the ARB_render_texture extension; the only
-	addition in this extension is the ability to use a depth buffer as a
-	DEPTH_COMPONENT texture map.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/render_depth_texture.txt
 '''

@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.IMG.user_clip_plane to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	The OpenGL ES 1.0 Specification does not support user clip planes. This extension
+	adds the support for clip planes. This extension was superceded by OpenGL ES 1.1
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/IMG/user_clip_plane.txt
 '''

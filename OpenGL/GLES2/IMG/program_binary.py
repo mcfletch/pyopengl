@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.IMG.program_binary to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension makes available a program binary format, SGX_PROGRAM_BINARY_IMG.
+	It enables retrieving and loading of pre-linked program objects on chips designed 
+	by Imagination Technologies. 
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/IMG/program_binary.txt
 '''

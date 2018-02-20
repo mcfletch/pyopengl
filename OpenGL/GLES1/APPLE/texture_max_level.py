@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.APPLE.texture_max_level to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows an application to specify the maximum (coarsest) 
+	mipmap level that may be selected for the specified texture.  This maximum
+	level is also used to determine which mip levels are considered when 
+	determining texture completeness.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/APPLE/texture_max_level.txt
 '''

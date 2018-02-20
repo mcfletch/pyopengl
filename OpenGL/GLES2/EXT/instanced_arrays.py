@@ -4,6 +4,29 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.instanced_arrays to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	A common use case in GL for some applications is to be able to
+	draw the same object, or groups of similar objects that share
+	vertex data, primitive count and type, multiple times.  This 
+	extension provides a means of accelerating such use cases while 
+	reducing the number of API calls, and keeping the amount of 
+	duplicate data to a minimum.
+	
+	This extension introduces an array "divisor" for generic
+	vertex array attributes, which when non-zero specifies that the
+	attribute is "instanced."  An instanced attribute does not
+	advance per-vertex as usual, but rather after every <divisor>
+	conceptual draw calls.
+	
+	(Attributes which aren't instanced are repeated in their entirety
+	for every conceptual draw call.)
+	
+	By specifying transform data in an instanced attribute or series
+	of instanced attributes, vertex shaders can, in concert with the 
+	instancing draw calls, draw multiple instances of an object with 
+	one draw call.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/instanced_arrays.txt
 '''

@@ -4,6 +4,20 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.ANDROID.extension_pack_es31a to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension changes little functionality directly. Instead it serves to
+	roll up the 20 extensions it requires, allowing applications to check for
+	all of them at once, and enable all of their shading language features with
+	a single #extension statement. The Android platform provides special support
+	outside of OpenGL ES to help applications target this set of extensions.
+	
+	In addition, this extension ensures support for images, shader storage
+	buffers, and atomic counters in fragment shaders. In unextended OpenGL ES
+	the minimum value of the relevant implementation-defined limits is zero;
+	this extension raises these minimums to match the minimums for compute
+	shaders.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ANDROID/extension_pack_es31a.txt
 '''

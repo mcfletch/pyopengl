@@ -127,7 +127,7 @@ glGetShaderInfoLog=wrapper.wrapper(glGetShaderInfoLog).setOutput(
     'length',size=(1,),orPassIn=True
 )
 glGetShaderPrecisionFormat=wrapper.wrapper(glGetShaderPrecisionFormat).setOutput(
-    'precision',size=(2,),orPassIn=True
+    'precision',size=(1,),orPassIn=True
 ).setOutput(
     'range',size=(2,),orPassIn=True
 )

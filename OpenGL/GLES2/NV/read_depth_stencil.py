@@ -4,6 +4,26 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.read_depth_stencil to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Unextended OpenGL-ES 2.0 only supports using ReadPixels to read from the
+	default color buffer of the currently-bound framebuffer.  However, it is
+	useful for debugging to be able to read from depth and stencil buffers.
+	This extension re-introduces these features into OpenGL-ES 2.0.
+	
+	This document describes several extensions in order to allow an
+	implementation to support a subset of the total functionality.
+	
+	The NV_read_depth extension allows reading from the depth buffer using
+	ReadPixels.
+	
+	The NV_read_stencil extension allows reading from the stencil buffer using
+	ReadPixels.
+	
+	The NV_read_depth_stencil extension allows reading from packed
+	depth-stencil buffers using ReadPixels.
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/read_depth_stencil.txt
 '''

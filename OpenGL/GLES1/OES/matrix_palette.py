@@ -4,6 +4,31 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.matrix_palette to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds the ability to support vertex skinning in OpenGL ES.
+	A simplified version of the ARB_matrix_palette extension is used to
+	define OES_matrix_palette extension.
+	
+	This extension allow OpenGL ES to support a palette of matrices.  The matrix
+	palette defines a set of matrices that can be used to transform a vertex.
+	The matrix palette is not part of the model view matrix stack and is enabled
+	by setting the MATRIX_MODE to MATRIX_PALETTE_OES.
+	
+	The n vertex units use a palette of m modelview matrices (where n and m are
+	constrained to implementation defined maxima.)  Each vertex has a set of n
+	indices into the palette, and a corresponding set of n weights.
+	Matrix indices and weights can be changed for each vertex.  
+	
+	When this extension is utilized, the enabled units transform each
+	vertex by the modelview matrices specified by the vertices'
+	respective indices.  These results are subsequently scaled by the
+	weights of the respective units and then summed to create the
+	eyespace vertex.   
+	
+	A similar procedure is followed for normals.  Normals, however,
+	are transformed by the inverse transpose of the modelview matrix.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/matrix_palette.txt
 '''

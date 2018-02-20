@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.shader_atomic_fp16_vector to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides GLSL built-in functions and assembly opcodes
+	allowing shaders to perform a limited set of atomic read-modify-write
+	operations to buffer or texture memory with 16-bit floating point vector
+	surface formats.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/shader_atomic_fp16_vector.txt
 '''

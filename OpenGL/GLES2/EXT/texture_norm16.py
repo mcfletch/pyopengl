@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.texture_norm16 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	OpenGL ES 3.1 supports 8-bit (signed) normalized textures.
+	
+	This extension provides a set of new 16 bit signed normalized and
+	unsigned normalized fixed point texture, renderbuffer and
+	texture buffer formats.
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/texture_norm16.txt
 '''

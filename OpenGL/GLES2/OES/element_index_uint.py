@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.element_index_uint to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	OpenGL ES 1.0 supports DrawElements with <type> value of
+	UNSIGNED_BYTE and UNSIGNED_SHORT.  This extension adds
+	support for UNSIGNED_INT <type> values.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/element_index_uint.txt
 '''

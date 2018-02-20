@@ -322,9 +322,6 @@ def glGetObjectPtrLabel(ptr,bufSize,length,label):pass
 @_p.types(None,_cs.GLenum,arrays.GLvoidpArray)
 def glGetPointerv(pname,params):pass
 @_f
-@_p.types(None,_cs.GLenum,arrays.GLvoidpArray)
-def glGetPointerv(pname,params):pass
-@_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
 def glGetProgramInterfaceiv(program,programInterface,pname,params):pass
 @_f

@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OVR.multiview_multisampled_render_to_texture to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension brings to multiview rendering the functionality
+	originally introduced in EXT_multisampled_render_to_texture.
+	Essentially this just means adding one new function for
+	multisample multiview array attachments in the framebuffer object.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OVR/multiview_multisampled_render_to_texture.txt
 '''

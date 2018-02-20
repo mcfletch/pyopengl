@@ -4,6 +4,17 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.ARM.mali_shader_binary to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension enables OpenGL ES 2.0 applications running on ARM
+	Mali graphics cores to use shaders precompiled with the Mali ESSL
+	shader compiler.
+	
+	The shader objects loaded with this extension are equivalent to
+	shaders created from source, i.e. there are no additional
+	restrictions on which other shader objects they can be linked to,
+	nor on which OpenGL ES states they can be used with.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARM/mali_shader_binary.txt
 '''

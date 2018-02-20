@@ -4,6 +4,16 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.sample_mask_override_coverage to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows the fragment shader to control whether the
+	gl_SampleMask output can enable samples that were not covered by the
+	original primitive, or that failed the early depth/stencil tests.
+	This can be enabled by redeclaring the gl_SampleMask output with the
+	"override_coverage" layout qualifier:
+	
+	    layout(override_coverage) out int gl_SampleMask[];
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/sample_mask_override_coverage.txt
 '''

@@ -669,51 +669,51 @@ glGetNamedFramebufferParameterivEXT=wrapper.wrapper(glGetNamedFramebufferParamet
 glProgramUniform1dvEXT=wrapper.wrapper(glProgramUniform1dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform2dvEXT.value size not checked against count
+# INPUT glProgramUniform2dvEXT.value size not checked against count*2
 glProgramUniform2dvEXT=wrapper.wrapper(glProgramUniform2dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform3dvEXT.value size not checked against count
+# INPUT glProgramUniform3dvEXT.value size not checked against count*3
 glProgramUniform3dvEXT=wrapper.wrapper(glProgramUniform3dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniform4dvEXT.value size not checked against count
+# INPUT glProgramUniform4dvEXT.value size not checked against count*4
 glProgramUniform4dvEXT=wrapper.wrapper(glProgramUniform4dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix2dvEXT.value size not checked against count
+# INPUT glProgramUniformMatrix2dvEXT.value size not checked against count*4
 glProgramUniformMatrix2dvEXT=wrapper.wrapper(glProgramUniformMatrix2dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix3dvEXT.value size not checked against count
+# INPUT glProgramUniformMatrix3dvEXT.value size not checked against count*9
 glProgramUniformMatrix3dvEXT=wrapper.wrapper(glProgramUniformMatrix3dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix4dvEXT.value size not checked against count
+# INPUT glProgramUniformMatrix4dvEXT.value size not checked against count*16
 glProgramUniformMatrix4dvEXT=wrapper.wrapper(glProgramUniformMatrix4dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix2x3dvEXT.value size not checked against count
+# INPUT glProgramUniformMatrix2x3dvEXT.value size not checked against count*6
 glProgramUniformMatrix2x3dvEXT=wrapper.wrapper(glProgramUniformMatrix2x3dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix2x4dvEXT.value size not checked against count
+# INPUT glProgramUniformMatrix2x4dvEXT.value size not checked against count*8
 glProgramUniformMatrix2x4dvEXT=wrapper.wrapper(glProgramUniformMatrix2x4dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix3x2dvEXT.value size not checked against count
+# INPUT glProgramUniformMatrix3x2dvEXT.value size not checked against count*6
 glProgramUniformMatrix3x2dvEXT=wrapper.wrapper(glProgramUniformMatrix3x2dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix3x4dvEXT.value size not checked against count
+# INPUT glProgramUniformMatrix3x4dvEXT.value size not checked against count*12
 glProgramUniformMatrix3x4dvEXT=wrapper.wrapper(glProgramUniformMatrix3x4dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix4x2dvEXT.value size not checked against count
+# INPUT glProgramUniformMatrix4x2dvEXT.value size not checked against count*8
 glProgramUniformMatrix4x2dvEXT=wrapper.wrapper(glProgramUniformMatrix4x2dvEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix4x3dvEXT.value size not checked against count
+# INPUT glProgramUniformMatrix4x3dvEXT.value size not checked against count*12
 glProgramUniformMatrix4x3dvEXT=wrapper.wrapper(glProgramUniformMatrix4x3dvEXT).setInputArraySize(
     'value', None
 )

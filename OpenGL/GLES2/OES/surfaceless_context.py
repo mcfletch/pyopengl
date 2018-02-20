@@ -4,6 +4,16 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.surfaceless_context to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Applications that only want to render to framebuffer objects should
+	not need to create a throw-away EGL surface (typically a 1x1
+	pbuffer) just to get a current context.  The EGL extension
+	KHR_surfaceless_context provides a mechanism for making a context
+	current without a surface.  This extensions specifies the behaviour
+	of OpenGL ES 1.x and OpenGL ES 2.0 when such a context is made
+	current.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/surfaceless_context.txt
 '''

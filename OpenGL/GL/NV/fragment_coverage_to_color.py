@@ -4,6 +4,21 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.fragment_coverage_to_color to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows the fragment coverage value, represented as an
+	integer bitfield, to be substituted for a color output being written to a
+	single-component color buffer with integer components (e.g., R8UI).  The
+	capability provided by this extension is different from simply writing the
+	gl_SampleMask fragment shader output in that the coverage value written to
+	the framebuffer is taken after alpha test, stencil test, and depth test,
+	as well as after the multisample fragment operations such as
+	alpha-to-coverage.
+	
+	This functionality may be useful for deferred rendering algorithms, where
+	the second pass needs to know which samples belong to which original 
+	fragments.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/fragment_coverage_to_color.txt
 '''

@@ -4,6 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.QCOM.binning_control to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds some new hints to give more control to application
+	developers over the driver's binning algorithm.
+	
+	Only change this state right before changing rendertargets or right after
+	a swap or there will be a large performance penalty.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/QCOM/binning_control.txt
 '''

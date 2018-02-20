@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.texture_stencil8 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension accepts STENCIL_INDEX8 as a texture internal format, and
+	adds STENCIL_INDEX8 to the required internal format list. This removes the
+	need to use renderbuffers if a stencil-only format is desired.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/texture_stencil8.txt
 '''

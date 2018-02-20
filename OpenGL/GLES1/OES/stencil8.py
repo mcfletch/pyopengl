@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.stencil8 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension enables 8-bit stencil component as a valid
+	render buffer storage format.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/stencil8.txt
 '''

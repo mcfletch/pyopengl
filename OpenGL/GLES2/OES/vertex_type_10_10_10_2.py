@@ -4,6 +4,17 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.vertex_type_10_10_10_2 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds the following data formats:
+	
+	Two new vertex attribute data formats: a signed 10.10.10.2 and an unsigned 
+	10.10.10.2 vertex data format.  These vertex data formats describe a 3- or 4-tuple 
+	stream which can be used to store normals or other attributes in a quantized
+	form.  Normals, tangents, binormals and other vertex attributes can often be specified 
+	at reduced precision without introducing noticeable artifacts, reducing the 
+	amount of memory and memory bandwidth they consume.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/vertex_type_10_10_10_2.txt
 '''

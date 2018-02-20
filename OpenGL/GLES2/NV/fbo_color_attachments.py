@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.fbo_color_attachments to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension increases the number of available framebuffer object
+	color attachment points.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/fbo_color_attachments.txt
 '''

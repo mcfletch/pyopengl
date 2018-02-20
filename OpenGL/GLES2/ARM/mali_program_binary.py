@@ -4,6 +4,17 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.ARM.mali_program_binary to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	The OES_get_program_binary extension enables applications to retrieve program
+	binaries using GetProgramBinaryOES and reload them using ProgramBinaryOES.
+	
+	The mechanism for retrieval and reloading of program binaries is vendor
+	agnostic, but the binary format itself is vendor specific.
+	
+	This extension adds a token to identify program binaries that are
+	compatible with the ARM Mali family of GPUs.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARM/mali_program_binary.txt
 '''

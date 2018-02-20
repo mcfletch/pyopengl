@@ -4,6 +4,27 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.gpu_shader_int64 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	The extension introduces the following features for all shader types:
+	
+	  * support for 64-bit scalar and vector integer data types, including
+	    uniform API, uniform buffer object, transform feedback, and shader
+	    input and output support;
+	
+	  * new built-in functions to pack and unpack 64-bit integer types into a
+	    two-component 32-bit integer vector;
+	
+	  * new built-in functions to convert double-precision floating-point
+	    values to or from their 64-bit integer bit encodings;
+	
+	  * vector relational functions supporting comparisons of vectors of
+	    64-bit integer types; and
+	
+	  * common functions abs, sign, min, max, clamp, and mix supporting
+	    arguments of 64-bit integer types.
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/gpu_shader_int64.txt
 '''

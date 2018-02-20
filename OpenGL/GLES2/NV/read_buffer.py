@@ -4,6 +4,33 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.read_buffer to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Unextended OpenGL ES 2.0 only supports using ReadPixels to read from
+	the default color buffer of the currently-bound framebuffer.
+	However, it is useful for debugging to be able to read from
+	non-default color buffers.  Particularly, when the NV_draw_buffers
+	extension is supported, each framebuffer may contain multiple color
+	buffers. This extension provides a mechanism to select which color
+	buffer to read from.
+	
+	This document describes two extensions to allow an implementation to
+	support a subset of the total functionality.
+	
+	The NV_read_buffer extension adds the command ReadBufferNV, which is
+	used to select which color buffer of the currently-bound framebuffer
+	to use as the source for subsequent calls to ReadPixels,
+	CopyTexImage2D, and CopyTexSubImage2D. If the system-provided
+	framebuffer is bound, then ReadBufferNV accepts value BACK. If a
+	user-created FBO is bound, then ReadBufferNV accepts COLOR_ATTACHMENT0.
+	Additionally, if the NV_draw_buffers extension is supported,
+	ReadBufferNV accepts COLOR_ATTACHMENTn_NV (n is 0 to 15).
+	
+	The NV_read_buffer_front extension requires NV_read_buffer and adds
+	the ability to select the system-provided FRONT color buffer as the
+	source for read operations when the system-provided framebuffer is
+	bound and contains both a front and back buffer.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/read_buffer.txt
 '''

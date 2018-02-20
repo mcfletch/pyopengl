@@ -4,6 +4,23 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.texture_npot to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds support for the REPEAT and MIRRORED_REPEAT
+	texture wrap modes and the minification filters supported for
+	non-power of two 2D textures, cubemaps and for 3D textures, if
+	the OES_texture_3D extension is supported.
+	
+	Section 3.8.2 of the OpenGL ES 2.0 specification describes
+	rules for sampling from an incomplete texture. There were specific
+	rules added for non-power of two textures i.e. if the texture wrap
+	mode is not CLAMP_TO_EDGE or minification filter is not NEAREST or
+	LINEAR and the texture is a non-power-of-two texture, then sampling
+	the texture will return (0, 0, 0, 1).
+	
+	These rules are no longer applied by an implementation that supports
+	this extension.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/texture_npot.txt
 '''

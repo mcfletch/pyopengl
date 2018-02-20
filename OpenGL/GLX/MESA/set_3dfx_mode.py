@@ -4,12 +4,6 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.MESA.set_3dfx_mode to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	The Mesa Glide driver allows full-screen rendering or rendering into
-	an X window.  The glXSet3DfxModeMESA() function allows an application
-	to switch between full-screen and windowed rendering.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/MESA/set_3dfx_mode.txt
 '''

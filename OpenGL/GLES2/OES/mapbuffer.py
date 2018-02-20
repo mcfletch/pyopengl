@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.mapbuffer to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds to the vertex buffer object functionality supported
+	by OpenGL ES 1.1 or ES 2.0 by allowing the entire data storage of a
+	buffer object to be mapped into the client's address space.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/mapbuffer.txt
 '''

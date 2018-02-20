@@ -4,6 +4,29 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.sample_variables to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows fragment shaders more control over multisample
+	rendering. The mask of samples covered by a fragment can be read by
+	the shader and individual samples can be masked out. Additionally
+	fragment shaders can be run on individual samples and the sample's
+	ID and position read to allow better interaction with multisample
+	resources such as textures.
+	
+	In multisample rendering, an implementation is allowed to assign the
+	same sets of fragment shader input values to each sample, which then
+	allows the optimization where the shader is only evaluated once and
+	then distributed to the samples that have been determined to be
+	covered by the primitive currently being rasterized. This extension
+	does not change how values are interpolated, but it makes some details
+	of the current sample available. This means that where these features
+	are used (gl_SampleID and gl_SamplePosition), implementations must
+	run the fragment shader for each sample.
+	
+	In order to obtain per-sample interpolation on fragment inputs, either
+	OES_sample_shading or OES_shader_multisample_interpolation must
+	be used in conjunction with the features from this extension.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/sample_variables.txt
 '''

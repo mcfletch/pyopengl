@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.shader_clock to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension exposes a 64-bit monotonically incrementing shader
+	counter which may be used to derive local timing information within
+	a single shader invocation.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/shader_clock.txt
 '''

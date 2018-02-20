@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.parallel_shader_compile to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Compiling GLSL into implementation-specific code can be a time consuming
+	process, so a GL implementation may wish to perform the compilation in a
+	separate CPU thread. This extension provides a mechanism for the application
+	to provide a hint to limit the number of threads it wants to be used to
+	compile shaders, as well as a query to determine if the compilation process
+	is complete.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/parallel_shader_compile.txt
 '''

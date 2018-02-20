@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.igloo_interface to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This is an SGI internal (e.g. not documented or intended to be used
+	directly by applications) extension used only to help support
+	emulation of IrisGL through OpenGL.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/igloo_interface.txt
 '''

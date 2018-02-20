@@ -4,6 +4,25 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.APPLE.texture_2D_limited_npot to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Conventional OpenGL ES 1.X texturing is limited to images with
+	power-of-two (POT) dimensions.  APPLE_texture_2D_limited_npot extension 
+	relaxes these size restrictions for 2D textures.  The restrictions remain
+	in place for cube map and 3D textures, if supported.
+	
+	There is no additional procedural or enumerant API introduced by this
+	extension except that an implementation which exports the extension string
+	will allow an application to pass in 2D texture dimensions that may or may
+	not be a power of two.
+	
+	In the absence of OES_texture_npot, which lifts these restrictions, neither
+	mipmapping nor wrap modes other than CLAMP_TO_EDGE are supported in 
+	conjunction with NPOT 2D textures.  A NPOT 2D texture with a wrap mode that
+	is not CLAMP_TO_EDGE or a minfilter that is not NEAREST or LINEAR is 
+	considered incomplete.  If such a texture is bound to a texture unit, it is 
+	as if texture mapping were disabled for that texture unit.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/APPLE/texture_2D_limited_npot.txt
 '''

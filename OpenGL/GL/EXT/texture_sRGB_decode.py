@@ -16,10 +16,10 @@ Overview (from the spec)
 	This extension adds a Texture Parameter and Sampler Object parameter to
 	allow sRGB textures to be read directly, without decoding.
 	
-	The new parameter, TEXTURE_SRGB_DECODE_EXT controls whether the 
-	decoding happens at sample time. It only applies to textures with an 
-	internal format that is sRGB and is ignored for all other textures. 
-	This value defaults to DECODE_EXT, which indicates the texture 
+	The new parameter, TEXTURE_SRGB_DECODE_EXT controls whether the
+	decoding happens at sample time. It only applies to textures with an
+	internal format that is sRGB and is ignored for all other textures.
+	This value defaults to DECODE_EXT, which indicates the texture
 	should be decoded to linear color space.
 
 The official definition of this extension is available here:

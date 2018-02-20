@@ -41,7 +41,7 @@ Overview (from the spec)
 	conventions.  For example, the viewport rectangle in Direct3D needs to be
 	inverted within the window to work properly in OpenGL windowed rendering:
 	
-	   glViewport(d3d_viewport_x, 
+	   glViewport(d3d_viewport_x,
 	              window_height - (d3d_viewport_y + d3d_viewport_height),
 	              d3d_viewport_width, d3d_viewport_height);
 	

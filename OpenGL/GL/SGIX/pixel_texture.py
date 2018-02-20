@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.pixel_texture to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows the color components of pixel groups to be used as
+	texture coordinates, effectively converting a color image into a texture
+	coordinate image.  Because texture mapping is essentially a
+	multidimensional table lookup, this conversion supports multidimensional
+	color lookups for images.  Such multidimensional lookups can be used to
+	implement very accurate color space conversions.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/pixel_texture.txt
 '''

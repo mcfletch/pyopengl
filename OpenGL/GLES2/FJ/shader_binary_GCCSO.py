@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.FJ.shader_binary_GCCSO to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension enables loading precompiled binary shaders compatible with
+	chips designed by Fujitsu Semiconductor.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/FJ/shader_binary_GCCSO.txt
 '''

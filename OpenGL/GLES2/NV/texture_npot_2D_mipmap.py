@@ -4,6 +4,24 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.texture_npot_2D_mipmap to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Conventional OpenGL ES 2.0 allows the use of non-power-of-two (NPOT)
+	textures with the limitation that mipmap minification filters can
+	not be used. This extension relaxes this restriction and adds
+	limited mipmap support for 2D NPOT textures.
+	
+	With this extension, NPOT textures are specified and applied
+	identically to mipmapped power-of-two 2D textures with the following
+	limitations:
+	
+	  - The texture wrap modes must be CLAMP_TO_EDGE.
+	
+	  - Coordinates used for texture sampling on an NPOT texture using a
+	    mipmapped minification filter must lie within the range [0,1].
+	    Coordinate clamping is not performed by the GL in this case,
+	    causing values outside this range to produce undefined results.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/texture_npot_2D_mipmap.txt
 '''

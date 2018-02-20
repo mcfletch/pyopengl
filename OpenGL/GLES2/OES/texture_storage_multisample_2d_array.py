@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.texture_storage_multisample_2d_array to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides support for a new type of immutable texture,
+	two-dimensional multisample array textures. It depends on functionality
+	introduced in OpenGL ES 3.1 to support two-dimensional multisample
+	(non-array) textures.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/texture_storage_multisample_2d_array.txt
 '''

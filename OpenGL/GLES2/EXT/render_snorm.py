@@ -4,6 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.render_snorm to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	OpenGL ES 3.1 supports a variety of signed normalized texture and
+	renderbuffer formats which are not color-renderable.
+	
+	This extension enables signed normalized texture and renderbuffer
+	formats to be color-renderable.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/render_snorm.txt
 '''

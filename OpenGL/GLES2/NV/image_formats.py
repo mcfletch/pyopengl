@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.image_formats to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	OpenGL ES 3.1 specifies a variety of formats required to be usable
+	with texture images. This extension introduces the texture image
+	formats missing for parity with OpenGL 4.4.
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/image_formats.txt
 '''

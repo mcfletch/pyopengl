@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.blend_equation_separate to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	OpenGL ES 1.1 provides a single blend equation that applies to both RGB
+	and alpha portions of blending.  This extension provides a separate blend 
+	equation for RGB and alpha to match the generality available for blend 
+	factors.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/blend_equation_separate.txt
 '''

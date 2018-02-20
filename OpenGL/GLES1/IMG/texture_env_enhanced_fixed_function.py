@@ -4,6 +4,16 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.IMG.texture_env_enhanced_fixed_function to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds new texture environment functions to allow use of 
+	of blend modes supported in some early MBX-lite devices, including dot3 functionality. 
+	It is superceded by OpenGL-ES 1.1 which includes tex_env_combine.
+	
+	New functions may be specified by calling TexEnv with the following tokens: 
+	MODULATE_COLOR_IMG, RECIP_ADD_SIGNED_ALPHA_IMG, TEXTURE_ALPHA_MODULATE_IMG, 
+	FACTOR_ALPHA_MODULATE_IMG, FRAGMENT_ALPHA_MODULATE_IMG, ADD_BLEND_IMG, DOT3_RGBA.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/IMG/texture_env_enhanced_fixed_function.txt
 '''

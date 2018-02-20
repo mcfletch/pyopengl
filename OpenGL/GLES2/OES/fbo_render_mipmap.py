@@ -4,6 +4,17 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.fbo_render_mipmap to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	OES_framebuffer_object allows rendering to the base level of a 
+	texture only.  This extension removes this limitation by 
+	allowing implementations to support rendering to any mip-level
+	of a texture(s) that is attached to a framebuffer object(s).
+	
+	If this extension is supported, FramebufferTexture2DOES, and
+	FramebufferTexture3DOES can be used to render directly into 
+	any mip level of a texture image
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/fbo_render_mipmap.txt
 '''

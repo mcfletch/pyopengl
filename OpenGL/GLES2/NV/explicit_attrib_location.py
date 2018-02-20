@@ -4,6 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.explicit_attrib_location to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides a method to pre-assign attribute locations
+	to named vertex shader inputs.  This allows applications to globally
+	assign a particular semantic meaning, such as diffuse color or
+	vertex normal, to a particular attribute location without knowing
+	how that attribute will be named in any particular shader.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/explicit_attrib_location.txt
 '''

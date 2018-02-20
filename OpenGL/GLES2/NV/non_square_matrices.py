@@ -4,6 +4,10 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.non_square_matrices to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds support for non-square matrix variables in GLSL shaders.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/non_square_matrices.txt
 '''

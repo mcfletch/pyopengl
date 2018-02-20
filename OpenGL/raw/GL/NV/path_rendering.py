@@ -251,14 +251,32 @@ def glIsPointInFillPathNV(path,mask,x,y):pass
 @_p.types(_cs.GLboolean,_cs.GLuint,_cs.GLfloat,_cs.GLfloat)
 def glIsPointInStrokePathNV(path,x,y):pass
 @_f
+@_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
+def glMatrixFrustumEXT(mode,left,right,bottom,top,zNear,zFar):pass
+@_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glMatrixLoad3x2fNV(matrixMode,m):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glMatrixLoad3x3fNV(matrixMode,m):pass
 @_f
+@_p.types(None,_cs.GLenum)
+def glMatrixLoadIdentityEXT(mode):pass
+@_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glMatrixLoadTranspose3x3fNV(matrixMode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
+def glMatrixLoadTransposedEXT(mode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixLoadTransposefEXT(mode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
+def glMatrixLoaddEXT(mode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixLoadfEXT(mode,m):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glMatrixMult3x2fNV(matrixMode,m):pass
@@ -268,6 +286,45 @@ def glMatrixMult3x3fNV(matrixMode,m):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLfloatArray)
 def glMatrixMultTranspose3x3fNV(matrixMode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
+def glMatrixMultTransposedEXT(mode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixMultTransposefEXT(mode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLdoubleArray)
+def glMatrixMultdEXT(mode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,arrays.GLfloatArray)
+def glMatrixMultfEXT(mode,m):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
+def glMatrixOrthoEXT(mode,left,right,bottom,top,zNear,zFar):pass
+@_f
+@_p.types(None,_cs.GLenum)
+def glMatrixPopEXT(mode):pass
+@_f
+@_p.types(None,_cs.GLenum)
+def glMatrixPushEXT(mode):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
+def glMatrixRotatedEXT(mode,angle,x,y,z):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
+def glMatrixRotatefEXT(mode,angle,x,y,z):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
+def glMatrixScaledEXT(mode,x,y,z):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
+def glMatrixScalefEXT(mode,x,y,z):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLdouble,_cs.GLdouble,_cs.GLdouble)
+def glMatrixTranslatedEXT(mode,x,y,z):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLfloat,_cs.GLfloat,_cs.GLfloat)
+def glMatrixTranslatefEXT(mode,x,y,z):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,arrays.GLfloatArray)
 def glPathColorGenNV(color,genMode,colorFormat,coeffs):pass

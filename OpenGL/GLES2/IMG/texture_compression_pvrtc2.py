@@ -4,6 +4,19 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.IMG.texture_compression_pvrtc2 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides additional texture compression functionality
+	specific to Imagination Technologies PowerVR Texture compression format
+	(called PVRTC2) subject to all the requirements and limitations
+	described by the OpenGL ES 2.0 specification.
+	
+	This extension supports 4 and 2 bit per pixel texture compression
+	formats. Because the compression of PVRTC2 is CPU intensive,
+	it is not appropriate to carry out compression on the target
+	platform. Therefore this extension only supports the loading of
+	compressed texture data.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/IMG/texture_compression_pvrtc2.txt
 '''

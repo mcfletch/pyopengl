@@ -4,6 +4,21 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.polynomial_ffd to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds the capability to alter vertex coordinates,  the
+	corresponding normal coordinates, and texture coordinates based on a
+	client-specified trivariate polynomial functions.  These functions may be
+	thought of as a warping of object/texture space (or, alternatively, as a
+	warping of the object embedded in object/texture space).
+	
+	Deformations of space are used for a variety of modeling effects, including
+	character animation.  The deformation specified in this extension is one of
+	a variety of mappings that have been proposed.
+	
+	Only 3D to 3D deformation are considered.   We shall not consider
+	homogeneous deformations.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/polynomial_ffd.txt
 '''

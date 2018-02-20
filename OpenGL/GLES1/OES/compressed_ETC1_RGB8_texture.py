@@ -4,6 +4,20 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.compressed_ETC1_RGB8_texture to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	The goal of this extension is to allow direct support of
+	compressed textures in the Ericsson Texture Compression (ETC)
+	formats in OpenGL ES.
+	
+	ETC-compressed textures are handled in OpenGL ES using the
+	CompressedTexImage2D call.
+	
+	The definition of the "internalformat" parameter in the
+	CompressedTexImage2D call has been extended to support
+	ETC-compressed textures. 
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/compressed_ETC1_RGB8_texture.txt
 '''

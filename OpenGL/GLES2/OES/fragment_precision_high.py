@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.fragment_precision_high to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension has been withdrawn. See the specification of
+	GetShaderPrecisionFormat in section 6.1.8 of the OpenGL ES 2.0
+	Specification to determine within the API if high-precision fragment
+	shader varyings are supported by the implementation.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/fragment_precision_high.txt
 '''

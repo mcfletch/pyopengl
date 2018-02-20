@@ -4,6 +4,21 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.ARM.shader_framebuffer_fetch_depth_stencil to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Existing extensions, such as EXT_shader_framebuffer_fetch, allow fragment
+	shaders to read existing framebuffer color data as input. This enables
+	use-cases such as programmable blending, and other operations that may not
+	be possible to implement with fixed-function blending.
+	
+	This extension adds similar capabilities for depth and stencil values.
+	
+	One use-case for this is soft depth-blending of particles. Normally, this
+	would require two render passes: one that writes out the depth values of the
+	background geometry to a depth texture, and one that renders the particles
+	while reading from the depth texture to do the blending. This extension
+	allows this to be done in a single pass.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARM/shader_framebuffer_fetch_depth_stencil.txt
 '''

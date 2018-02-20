@@ -14,8 +14,8 @@ def _f( function ):
 GL_PARAMETER_BUFFER_ARB=_C('GL_PARAMETER_BUFFER_ARB',0x80EE)
 GL_PARAMETER_BUFFER_BINDING_ARB=_C('GL_PARAMETER_BUFFER_BINDING_ARB',0x80EF)
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLintptr,_cs.GLintptr,_cs.GLsizei,_cs.GLsizei)
+@_p.types(None,_cs.GLenum,ctypes.c_void_p,_cs.GLintptr,_cs.GLsizei,_cs.GLsizei)
 def glMultiDrawArraysIndirectCountARB(mode,indirect,drawcount,maxdrawcount,stride):pass
 @_f
-@_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLintptr,_cs.GLintptr,_cs.GLsizei,_cs.GLsizei)
+@_p.types(None,_cs.GLenum,_cs.GLenum,ctypes.c_void_p,_cs.GLintptr,_cs.GLsizei,_cs.GLsizei)
 def glMultiDrawElementsIndirectCountARB(mode,type,indirect,drawcount,maxdrawcount,stride):pass

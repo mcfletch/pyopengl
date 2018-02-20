@@ -27,10 +27,11 @@ Overview (from the spec)
 	performance consequences of this unless implementations make special
 	considerations for them, which is generally untenable.
 	
-	The WGL and GLX extensions add new context creation parameters the allow
-	an application to specify the behavior that is desired when a context is
-	made non-current, and specifically to opt out of the implicit flush
-	behavior. The GL extension allows querying the context flush behavior.
+	The EGL, GLX, and WGL extensions add new context creation parameters
+	that allow an application to specify the behavior that is desired when a
+	context is made non-current, and specifically to opt out of the implicit
+	flush behavior. The GL extension allows querying the context flush
+	behavior.
 
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/KHR/context_flush_control.txt

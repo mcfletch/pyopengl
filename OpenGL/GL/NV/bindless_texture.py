@@ -8,7 +8,7 @@ Overview (from the spec)
 	
 	This extension allows OpenGL applications to access texture objects in
 	shaders without first binding each texture to one of a limited number of
-	texture image units.  Using this extension, an application can query an
+	texture image units.  Using this extension, an application can query a
 	64-bit unsigned integer texture handle for each texture that it wants to
 	access and then use that handle directly in GLSL or assembly-based
 	shaders.  The ability to access textures without having to bind and/or
@@ -19,7 +19,7 @@ Overview (from the spec)
 	needed to manage resource bindings.
 	
 	This extension also provides similar capability for the image load, store,
-	and atomic functionality provided by OpenGL 4.2 and the
+	and atomic functionality provided by OpenGL 4.2, OpenGL ES 3.1 and the
 	ARB_shader_image_load_store and EXT_shader_image_load_store extensions,
 	where a texture can be accessed without first binding it to an image unit.
 	An image handle can be extracted from a texture object using an API with a
@@ -32,7 +32,7 @@ Overview (from the spec)
 	particular, sampler and image types may be used as shader inputs/outputs,
 	temporary variables, and uniform block members, and may be assigned to by
 	shader code.  Constructors are provided to convert 64-bit unsigned integer
-	handles to and from sampler and image data types.  Additionally, new APIs
+	values to and from sampler and image data types.  Additionally, new APIs
 	are provided to load values for sampler and image uniforms with 64-bit
 	handle inputs.  The use of existing integer-based Uniform* APIs is still
 	permitted, in which case the integer specified will identify a texture

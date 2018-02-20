@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.QCOM.extended_get to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension enables instrumenting the driver for debugging of OpenGL ES 
+	applications.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/QCOM/extended_get.txt
 '''

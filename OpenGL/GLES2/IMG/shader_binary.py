@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.IMG.shader_binary to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension enables loading precompiled binary shaders compatible with
+	chips designed by Imagination Technologies. 
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/IMG/shader_binary.txt
 '''

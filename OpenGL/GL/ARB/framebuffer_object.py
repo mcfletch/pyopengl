@@ -17,7 +17,7 @@ Overview (from the spec)
 	    EXT_framebuffer_object
 	    EXT_framebuffer_blit
 	    EXT_framebuffer_multisample
-	    EXT_packed_depth_stencil    
+	    EXT_packed_depth_stencil
 	
 	- Where appropriate, relax some of the constraints expressed by previous
 	  FBO-related extensions. In particular the requirement of matching
@@ -147,8 +147,8 @@ Overview (from the spec)
 	resolve.  Instead, the application explicitly controls when the
 	resolve operation is performed.  The resolve operation is affected
 	by calling BlitFramebuffer where the source is a multisample
-	application-created framebuffer object and the destination is a 
-	single-sample framebuffer object (either application-created or 
+	application-created framebuffer object and the destination is a
+	single-sample framebuffer object (either application-created or
 	window-system provided).
 	
 	This design for multisample resolve more closely matches current
@@ -183,7 +183,7 @@ Overview (from the spec)
 	the multisampled contents and eliminate the implicit per-sample
 	resolve operation, we avoid both of these problems.
 	
-	This extension also enables usage of packed depth-stencil formats in 
+	This extension also enables usage of packed depth-stencil formats in
 	renderbuffers (incorporating functionality from
 	EXT_packed_depth_stencil), as follows:
 	
@@ -256,7 +256,7 @@ Overview (from the spec)
 	In addition, a new base internal format, GL_DEPTH_STENCIL, can
 	be used by both texture images and renderbuffer storage.  When an
 	image with a DEPTH_STENCIL internal format is attached to both
-	the depth and stencil attachment points of a framebuffer object, 
+	the depth and stencil attachment points of a framebuffer object,
 	then it becomes both the depth and stencil
 	buffers of the framebuffer.  This fits nicely with hardware that
 	interleaves both depth and stencil data into a single buffer.  When

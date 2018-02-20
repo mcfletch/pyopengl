@@ -4,6 +4,23 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.fixed_point to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides the capability, for platforms that do
+	not have efficient floating-point support, to input data in a
+	fixed-point format, i.e.,  a scaled-integer format.  There are
+	several ways a platform could try to solve the problem, such as
+	using integer only commands, but there are many OpenGL commands
+	that have only floating-point or double-precision floating-point
+	parameters.  Also, it is likely that any credible application
+	running on such a platform will need to perform some computations
+	and will already be using some form of fixed-point representation.
+	This extension solves the problem by adding new ``fixed', and
+	``clamp fixed''  data types based on a a two's complement
+	S15.16 representation.  New versions of commands are created
+	with an 'x' suffix that take fixed or clampx parameters.
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/fixed_point.txt
 '''

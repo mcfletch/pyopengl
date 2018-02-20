@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.single_precision to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds commands with single-precision floating-point
+	parameters corresponding to the commands that only variants that
+	accept double-precision floating-point input.  This allows an
+	application to avoid using double-precision floating-point
+	data types.  New commands are added with an 'f' prefix.
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/single_precision.txt
 '''

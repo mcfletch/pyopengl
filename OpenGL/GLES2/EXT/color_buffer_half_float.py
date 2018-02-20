@@ -4,6 +4,16 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.color_buffer_half_float to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows 16-bit floating point formats as defined in
+	OES_texture_half_float to be rendered to via framebuffer objects.
+	
+	When using floating-point formats, certain color clamps are disabled.
+	
+	This extension also updates the framebuffer object API to allow querying
+	attachment component types.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/color_buffer_half_float.txt
 '''

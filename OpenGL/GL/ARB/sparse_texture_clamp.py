@@ -4,6 +4,19 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.sparse_texture_clamp to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension builds on the ARB_sparse_texture2 extension, providing the
+	following new functionality:
+	
+	  * New built-in GLSL texture lookup functions are provided that specify a
+	    minimum level of detail to use for lookups where the level of detail
+	    is computed automatically.  This allows shaders to avoid accessing
+	    unpopulated portions of high-resolution levels of detail when it knows
+	    that the memory accessed is unpopulated, either from a priori
+	    knowledge or from feedback provided by the return value of previously
+	    executed "sparse" texture lookup functions.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/sparse_texture_clamp.txt
 '''

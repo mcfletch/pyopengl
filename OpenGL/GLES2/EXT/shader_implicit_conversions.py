@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.shader_implicit_conversions to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides support for implicitly converting signed integer
+	types to unsigned types, as well as more general implicit conversion and
+	function overloading infrastructure to support new data types introduced by
+	other extensions.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/shader_implicit_conversions.txt
 '''

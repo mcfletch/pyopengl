@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.texture_sRGB_R8 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension introduces SR8_EXT as an acceptable internal format.
+	This allows efficient sRGB sampling for source images stored as a separate
+	texture per channel.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/texture_sRGB_R8.txt
 '''

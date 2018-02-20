@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.EGL_image_external_essl3 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	OES_EGL_image_external provides a mechanism for creating EGLImage texture
+	targets from EGLImages, but only specified language interactions for the
+	OpenGL ES Shading Language version 1.0. This extension adds support for
+	versions 3.x of the OpenGL ES Shading Language.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/EGL_image_external_essl3.txt
 '''

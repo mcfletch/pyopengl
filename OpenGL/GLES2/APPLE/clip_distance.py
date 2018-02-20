@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.APPLE.clip_distance to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds support for hardware clip planes to OpenGL ES 2.0
+	and 3.0.  These were present in OpenGL ES 1.1, but were removed to
+	better match certain hardware.  Since they're useful for certain
+	applications, notable CAD, we return them here.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/APPLE/clip_distance.txt
 '''

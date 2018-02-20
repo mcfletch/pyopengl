@@ -4,6 +4,14 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.byte_coordinates to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows specifying, additionally to all existing 
+	values, byte-valued vertex and texture coordinates to be used.
+	
+	The main reason for introducing the byte-argument is to allow 
+	storing data more compactly on memory-restricted environments.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/byte_coordinates.txt
 '''

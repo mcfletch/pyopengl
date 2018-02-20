@@ -4,6 +4,17 @@ This module customises the behaviour of the
 OpenGL.raw.GL.ARB.post_depth_coverage to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows the fragment shader to control whether values in
+	gl_SampleMaskIn[] reflect the coverage after application of the early
+	depth and stencil tests.  This feature can be enabled with the following
+	layout qualifier in the fragment shader:
+	
+	    layout(post_depth_coverage) in;
+	
+	Use of this feature implicitly enables early fragment tests.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/post_depth_coverage.txt
 '''

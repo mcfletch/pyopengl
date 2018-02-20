@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.standard_derivatives to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	The standard derivative built-in functions and semantics from OpenGL 2.0 are
+	optional for OpenGL ES 2.0.  When this extension is available, these
+	built-in functions are also available, as is a hint controlling the
+	quality/performance trade off.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/standard_derivatives.txt
 '''

@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.APPLE.texture_format_BGRA8888 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension introduces BGRA_EXT as an acceptable external format.  
+	This avoids byte swizzling when loading RGBA internal format
+	textures, which may be stored in BGRA order internally.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/APPLE/texture_format_BGRA8888.txt
 '''

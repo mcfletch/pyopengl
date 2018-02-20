@@ -4,10 +4,6 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.SUN.get_transparent_index to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	Gets the transparent pixel index for an overlay/underlay window pair.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SUN/get_transparent_index.txt
 '''

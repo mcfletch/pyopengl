@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.depth_texture to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension defines a new texture format that stores depth values in 
+	the texture.  Depth texture images are widely used for shadow casting but 
+	can also  be used for other effects such as image based rendering, displacement 
+	mapping etc.  
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/depth_texture.txt
 '''

@@ -4,6 +4,13 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OVR.multiview2 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	
+	This extension relaxes the restriction in OVR_multiview that only gl_Position
+	can depend on ViewID in the vertex shader.  With this change, view-dependent
+	outputs like reflection vectors and similar are allowed.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OVR/multiview2.txt
 '''

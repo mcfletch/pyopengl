@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.texture_type_2_10_10_10_REV to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds a new texture data type, unsigned 2.10.10.10 ABGR,
+	which can be used with RGB or RGBA formats.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/texture_type_2_10_10_10_REV.txt
 '''

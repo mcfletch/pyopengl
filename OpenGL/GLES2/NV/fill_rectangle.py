@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.fill_rectangle to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds a new PolygonMode setting where a triangle is
+	rasterized by computing and filling its axis-aligned screen-space bounding
+	box, disregarding the actual triangle edges. This can be useful for
+	drawing a rectangle without being split into two triangles with an
+	internal edge.  It is also useful to minimize the number of primitives
+	that need to be drawn, particularly for a user-interface.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/fill_rectangle.txt
 '''

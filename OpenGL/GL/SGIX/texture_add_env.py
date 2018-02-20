@@ -4,6 +4,17 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.texture_add_env to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	    New texture environment function ADD is supported with the following 
+	    equation: 
+		 		Cv = Cf + CcCt + Cb
+	
+	    New function may be specified by calling glTexEnv with GL_ADD token.
+	    New parameter Cb (bias) may be specified by calling TexEnv with
+	    TEXTURE_ENV_BIAS_SGIX token. 
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/texture_add_env.txt
 '''

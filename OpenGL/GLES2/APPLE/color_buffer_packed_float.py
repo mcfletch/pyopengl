@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.APPLE.color_buffer_packed_float to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension allows two packed floating point formats 
+	R11F_G11F_B10F and as RGB9_E5 defined in APPLE_texture_packed_float or
+	OpenGL ES 3.0 or to be rendered to via framebuffer objects.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/APPLE/color_buffer_packed_float.txt
 '''

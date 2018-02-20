@@ -4,6 +4,26 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.draw_buffers_indexed to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension builds upon the EXT_draw_buffers extension.
+	In EXT_draw_buffers (part of OpenGL ES 3.0), separate values could
+	be written to each color buffer, but the blend enable, blend functions,
+	blend equations and color write masks are global and apply to all color
+	outputs.
+	
+	This extension provides the ability to independently
+	  * enable or disable blending,
+	  * set the blend equations,
+	  * set the blend functions, and
+	  * set the color write masks
+	per color output.
+	
+	This extension introduces indexed versions of the enable,
+	blend equation, blend function, and color mask commands, as
+	well as associated indexed queries in order to control and
+	query these states independently on a per-color output basis.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/draw_buffers_indexed.txt
 '''

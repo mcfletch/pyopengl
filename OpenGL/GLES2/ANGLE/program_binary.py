@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.ANGLE.program_binary to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension makes available a program binary format,
+	PROGRAM_BINARY_ANGLE. It enables retrieving and loading of pre-linked
+	ANGLE program objects.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ANGLE/program_binary.txt
 '''

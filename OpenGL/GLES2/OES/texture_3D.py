@@ -4,6 +4,16 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.texture_3D to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds support for 3D textures.  The OpenGL ES 2.0 texture wrap
+	modes and mip-mapping is supported for power of two 3D textures.  Mip-
+	mapping and texture wrap modes other than CLAMP_TO_EDGE are not supported 
+	for non-power of two 3D textures.
+	
+	The OES_texture_npot extension, if supported, will enable mip-mapping and 
+	other wrap modes for non-power of two 3D textures.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/texture_3D.txt
 '''

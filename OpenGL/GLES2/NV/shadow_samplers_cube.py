@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.shadow_samplers_cube to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension expands the shadow map capability described in
+	EXT_shadow_samplers to include support for shadow samplers of cube
+	map textures.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/shadow_samplers_cube.txt
 '''

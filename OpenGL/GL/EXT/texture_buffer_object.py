@@ -32,9 +32,12 @@ Overview (from the spec)
 	one-dimensional textures; the maximum texture size supported for buffer
 	textures in the initial implementation of this extension is 2^27 texels,
 	versus 2^13 (8192) texels for otherwise equivalent one-dimensional
-	textures.  When a buffer object is attached to a buffer texture, a size is
-	not specified; rather, the number of texels in the texture is taken by
-	dividing the size of the buffer object by the size of each texel.
+	textures.  (Note that this extension only guarantees support for buffer
+	textures with 2^16 texels, but we expect most implementations to exceed
+	that substantially.)  When a buffer object is attached to a buffer
+	texture, a size is not specified; rather, the number of texels in the
+	texture is taken by dividing the size of the buffer object by the size of
+	each texel.
 
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/texture_buffer_object.txt

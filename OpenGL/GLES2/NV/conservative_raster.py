@@ -4,6 +4,25 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.conservative_raster to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds a "conservative" rasterization mode where any pixel
+	that is partially covered, even if no sample location is covered, is 
+	treated as fully covered and a corresponding fragment will be shaded.
+	
+	A new control is also added to modify window coordinate snapping 
+	precision.
+	
+	These controls can be used to implement "binning" to a low-resolution
+	render target, for example to determine which tiles of a sparse texture
+	need to be populated. An app can construct a framebuffer where there is
+	one pixel per tile in the sparse texture, and adjust the number of
+	subpixel bits such that snapping occurs to the same effective grid as when
+	rendering to the sparse texture. Then triangles should cover (at least)
+	the same pixels in the low-res framebuffer as they do tiles in the sparse
+	texture.
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/conservative_raster.txt
 '''

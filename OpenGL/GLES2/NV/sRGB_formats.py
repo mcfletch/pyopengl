@@ -4,6 +4,23 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.NV.sRGB_formats to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension adds new uncompressed and compressed color texture
+	formats with nonlinear sRGB color components.
+	
+	Luminance and luminance alpha provide support for textures
+	containing sRGB values with identical red, green, and blue
+	components.
+	
+	Compressed texture formats using S3TC and ETC1 compression
+	algorithms are also added to provide compressed sRGB texture
+	options.
+	
+	Finally, sized variant of sRGB, sLuminace, and sLuminance_alpha are
+	provided for immutable textures defined using the EXT_texture_storage
+	extension.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/sRGB_formats.txt
 '''

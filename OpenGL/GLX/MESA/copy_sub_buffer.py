@@ -4,13 +4,6 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.MESA.copy_sub_buffer to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	The glxCopySubBufferMESA() function copies a rectangular region
-	of the back color buffer to the front color buffer.  This can be
-	used to quickly repaint 3D windows in response to expose events
-	when the back color buffer cannot be damaged by other windows.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/MESA/copy_sub_buffer.txt
 '''

@@ -4,6 +4,19 @@ This module customises the behaviour of the
 OpenGL.raw.GL.NV.conservative_raster_dilate to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension extends the conservative rasterization functionality 
+	provided by NV_conservative_raster. It provides a new control to generate 
+	an "over-conservative" rasterization by dilating primitives prior to 
+	rasterization.
+	
+	When using conservative raster to bin geometry, this extension provides a 
+	programmable overlap region between adjacent primitives.  Regular 
+	rasterization bins triangles with a shared edge uniquely into pixels. 
+	Conservative raster has a one-pixel overlap along the shared edge.  Using 
+	a half-pixel raster dilation, this overlap region increases to two pixels.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/NV/conservative_raster_dilate.txt
 '''

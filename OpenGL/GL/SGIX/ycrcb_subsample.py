@@ -4,6 +4,10 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.ycrcb_subsample to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	(Need to construct a real extension spec based on this)
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/ycrcb_subsample.txt
 '''

@@ -4,6 +4,22 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.depth_pass_instrument to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension defines an instrument that uses the API defined in
+	SGIX_instruments.  The instrument specified by this extension is a
+	counter of the number of fragments which passed the Z test during
+	rasterization.  The maximum value of the counter is an
+	implementation-dependent constant.
+	
+	Some systems may maintain counters on different parts of the
+	system.  For example, a system with a frame buffer distributed
+	across multiple chips may maintain a count of the fragments which
+	passed the depth test on each individual chip.  In this extension,
+	a queriable constant is defined that indicates the number of 
+	responses to expect when a measurement is taken.  This 
+	mechanism allows GL implementations to be as efficient as possible.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/depth_pass_instrument.txt
 '''

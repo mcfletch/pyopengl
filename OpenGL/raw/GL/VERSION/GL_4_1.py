@@ -104,6 +104,9 @@ def glProgramBinary(program,binaryFormat,binary,length):pass
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
 def glProgramParameteri(program,pname,value):pass
 @_f
+@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLint)
+def glProgramParameteri(program,pname,value):pass
+@_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLdouble)
 def glProgramUniform1d(program,location,v0):pass
 @_f

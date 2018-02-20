@@ -4,6 +4,19 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.blend_subtract to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Blending capability is extended by respecifying the entire blend
+	equation.  While this document defines only two new equations, the
+	BlendEquationOES procedure that it defines will be used by subsequent
+	extensions to define additional blending equations.
+	
+	In addition to the default blending equation, two new blending equations
+	are specified.  These equations are similar to the default blending 
+	equation, but produce the difference of its left and right hand sides, 
+	rather than the sum.  Image differences are useful in many image 
+	processing applications.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/blend_subtract.txt
 '''

@@ -4,11 +4,6 @@ This module customises the behaviour of the
 OpenGL.raw.GLX.SGI.swap_control to provide a more 
 Python-friendly API
 
-Overview (from the spec)
-	
-	This extension allows an application to specify a minimum periodicity
-	of color buffer swaps, measured in video frame periods.
-
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGI/swap_control.txt
 '''

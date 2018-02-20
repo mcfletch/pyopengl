@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.VIV.shader_binary to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension enables loading precompiled binary shaders compatible with
+	chips designed by Vivante Corporation. 
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/VIV/shader_binary.txt
 '''

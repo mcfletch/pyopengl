@@ -33,7 +33,7 @@ glShaderBinary=wrapper.wrapper(glShaderBinary).setInputArraySize(
     'shaders', None
 )
 glGetShaderPrecisionFormat=wrapper.wrapper(glGetShaderPrecisionFormat).setOutput(
-    'precision',size=(2,),orPassIn=True
+    'precision',size=(1,),orPassIn=True
 ).setOutput(
     'range',size=(2,),orPassIn=True
 )

@@ -4,6 +4,30 @@ This module customises the behaviour of the
 OpenGL.raw.GL.SGIX.ycrcba to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension provides a method for OpenGL to read and store
+	images that are defined in standard YCRCB and YCRCBA video color
+	spaces.  As with the CYMK extension, conversion to RGBA takes place
+	immediately following the unpack pixel store, and preceding the
+	pack pixel store operations, and is only available on transfers to
+	and from memory.  The algorithms that convert between YCRCB and
+	RGBA are "black-box" in nature, and left undefined by the
+	extension, however it is recommended that conversion comply with
+	the CCIR standard. This extension specifies the format of a pixel
+	rectangle independent of component subsampling. Component
+	subsampling is specified using a separate extension.
+	
+	Two new formats are added, YCRCB_SGIX and YCRCBA_SGIX.
+	
+	YCRCB_SGIX is defined as a 3 component format representing the Cb,
+	Y, and Cr values per pixel. YCRCBA_SGIX is defined as a 4 component
+	format representing Cb, Y, Cr, and A values per pixel.
+	
+	As with the CMYK extension, this extension doesn't preclude the
+	possibility of other higher quality conversion methods.
+	
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/SGIX/ycrcba.txt
 '''

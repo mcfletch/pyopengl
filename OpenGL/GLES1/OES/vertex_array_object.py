@@ -4,6 +4,15 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.vertex_array_object to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension introduces vertex array objects which encapsulate
+	vertex array states on the server side (vertex buffer objects).
+	These objects aim to keep pointers to vertex data and to provide
+	names for different sets of vertex data. Therefore applications are
+	allowed to rapidly switch between different sets of vertex array
+	state, and to easily return to the default vertex array state.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/vertex_array_object.txt
 '''

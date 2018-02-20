@@ -4,6 +4,20 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.occlusion_query_boolean to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension defines a mechanism whereby an application can
+	query whether any pixels (or, more precisely, samples) are drawn
+	by a primitive or group of primitives.
+	
+	The primary purpose of such a query (hereafter referred to as an
+	"occlusion query") is to determine the visibility of an object.
+	Typically, the application will render the major occluders in the
+	scene, then perform an occlusion query for each detail object in
+	the scene. On subsequent frames, the previous results of the
+	occlusion queries can be used to decide whether to draw an object
+	or not.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/occlusion_query_boolean.txt
 '''

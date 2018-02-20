@@ -4,6 +4,12 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.EXT.float_blend to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension expands upon the EXT_color_buffer_float extension
+	to allow support for blending with 32-bit floating-point color
+	buffers.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/EXT/float_blend.txt
 '''

@@ -4,6 +4,19 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.query_matrix to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	Many applications may need to query the contents and status of the
+	current matrix at least for debugging purposes, especially as the
+	implementations are allowed to implement matrix machinery either in
+	any (possibly proprietary) floating point format, or in a fixed point
+	format that has the range and accuracy of at least 16.16 (signed 16 bit
+	integer part, unsigned 16 bit fractional part).
+	
+	This extension is intended to allow application to query the components
+	of the matrix and also their status, regardless whether the internal
+	representation is in fixed point or floating point.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/query_matrix.txt
 '''

@@ -4,6 +4,17 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.ANGLE.translated_shader_source to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	WebGL uses the GLSL ES 2.0 spec on all platforms, and translates these
+	shaders to the host platform's native language (HLSL, GLSL, and even GLSL
+	ES). For debugging purposes, it is useful to be able to examine the shader
+	after translation.
+	
+	This extension addes a new function to query the translated shader source,
+	and adds a new enum for GetShaderiv's <pname> parameter to query the
+	translated shader source length. 
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ANGLE/translated_shader_source.txt
 '''

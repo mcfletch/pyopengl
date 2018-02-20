@@ -4,6 +4,22 @@ This module customises the behaviour of the
 OpenGL.raw.GLES1.OES.point_size_array to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension extends how points and point sprites are rendered
+	by allowing an array of point sizes instead of a fixed input point
+	size given by PointSize.  This provides flexibility for applications
+	to do particle effects.
+	
+	The vertex arrays will be extended to include a point size array.
+	The point size array can be enabled/disabled via POINT_SIZE_ARRAY_OES.
+	
+	The point size array, if enabled, controls the sizes used to render
+	points and point sprites.  If point size array is enabled, the point
+	size defined by PointSize is ignored.  The point sizes supplied in the 
+	point size arrays will be the sizes used to render both points and
+	point sprites.
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/point_size_array.txt
 '''

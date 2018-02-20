@@ -4,6 +4,11 @@ This module customises the behaviour of the
 OpenGL.raw.GLES2.OES.rgb8_rgba8 to provide a more 
 Python-friendly API
 
+Overview (from the spec)
+	
+	This extension enables RGB8 and RGBA8 renderbuffer
+	storage formats
+
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/rgb8_rgba8.txt
 '''
