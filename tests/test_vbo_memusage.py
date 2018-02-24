@@ -31,3 +31,25 @@ def test_memory_usage():
     
     assert (after_np - start) <= 3000000, (after_np-start) # it's a 2.8MB buffer...
     assert (after_transfer - after_np) <= 3000000, (after_transfer-after_np) # again, should be about 2.8 extra MB used
+
+@pytest.mark.skipif(not psutil,reason='No psutil available')
+@pytest.mark.skipif(not np, reason="No numpy available")
+@pygamegltest.pygametest()
+def test_sf_2980896():
+    """Test SF#2980896 report of memory leak on VBO transfer"""
+    from OpenGL.arrays import vbo
+
+    data = np.arange(1000).astype(np.float32)
+    memory = get_current_memory()
+    for i in range(100): 
+        new_vbo = vbo.VBO(data)
+        with new_vbo:
+            # data is transferred to the VBO
+            assert new_vbo is not None, new_vbo
+        new_vbo.delete()
+        del new_vbo 
+        if i  < 1: 
+            # the *first* call can load lots of libraries, etc...
+            memory = get_current_memory()
+        else:
+            assert get_current_memory() - memory < 200, """Shouldn't have any (or at least much) extra RAM allocated..."""
