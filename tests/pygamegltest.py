@@ -21,7 +21,7 @@ Will create a new Pygame OpenGL context and let you run the function
 in that context. Each invocation gets a new context, so you should 
 not use this for large test suites.
 """
-import unittest, pygame, pygame.display
+import pygame, pygame.display
 from functools import wraps
 
 SCREEN = None
