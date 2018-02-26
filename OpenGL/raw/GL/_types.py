@@ -23,6 +23,7 @@ GL_UNSIGNED_INT64 = Constant( 'GL_UNSIGNED_INT64_AMD', 0x8BC2 )
 GL_FLOAT = Constant( 'GL_FLOAT', 0x1406 )
 GL_DOUBLE = Constant( 'GL_DOUBLE', 0x140a )
 GL_CHAR = bytes
+GL_HALF_FLOAT = Constant( 'GL_HALF_FLOAT_ARB',0x140B)
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
 GL_FIXED=Constant('GL_FIXED',0x140C)
 GL_VOID_P = object()
@@ -116,6 +117,7 @@ int64_t = ctypes.c_int64
 
 void = None
 
+# this is *wrong*, half is a *float* type, but ctypes doesn't have 16-bit float support
 GLhalfNV = GLhalfARB = ctypes.c_ushort
 
 # GL.ARB.sync extension, GLsync is an opaque pointer to a struct 

@@ -5,7 +5,9 @@ try:
     import numpy as np
 except ImportError as err:
     np = None
+from OpenGL.arrays import arraydatatype
 HERE = os.path.abspath(os.path.dirname(__file__))
+from OpenGL.GL.ARB import texture_rg
 
 class TestTextures(basetestcase.BaseTest):
     def test_enable_histogram( self ):
@@ -105,5 +107,15 @@ class TestTextures(basetestcase.BaseTest):
             pass 
         else:
             raise RuntimeError( """Should have failed with insufficient components in the type to hold the format""" )
-        
+    
 
+    def test_rg_format(self):
+        # Note: this is actually only known after context creation...
+        if not texture_rg.glInitTextureRgARB():
+            return 
+        texture = glGenTextures(1)
+        data = arraydatatype.GLfloatArray.asArray([.3,.5])
+        glBindTexture( GL_TEXTURE_2D,int(texture) )
+        glTexImage2D(GL_TEXTURE_2D, 0, texture_rg.GL_RG, 1, 1, 0, GL_RG, GL_FLOAT, data)
+    
+        

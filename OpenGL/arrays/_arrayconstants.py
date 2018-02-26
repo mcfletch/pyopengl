@@ -16,6 +16,7 @@ GL_UNSIGNED_INT64 = Constant( 'GL_UNSIGNED_INT64_AMD', 0x8BC2 )
 GL_FLOAT = Constant( 'GL_FLOAT', 0x1406 )
 GL_DOUBLE = Constant( 'GL_DOUBLE', 0x140a )
 GL_CHAR = bytes
+GL_HALF_FLOAT = Constant( 'GL_HALF_FLOAT_ARB',0x140B)
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
 GL_VOID_P = object()
 
