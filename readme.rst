@@ -58,3 +58,6 @@ Running the test suite from a top-level checkout looks like::
 The result being a lot of tests being run in a matrix of environments.
 All of the environment will pull in pygame, some will also pull in 
 numpy. Some will have accelerate, and some will not.
+
+.. image:: https://travis-ci.org/mcfletch/pyopengl.svg?branch=master
+    :target: https://travis-ci.org/mcfletch/pyopengl

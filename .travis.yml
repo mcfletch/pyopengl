@@ -6,7 +6,7 @@ python:
     - "3.6"
 install:
     - pip install pygame numpy cython pytest psutil
-    - pip install OpenGL_accelerate
+    - pip install ./accelerate
     - pip install .
 
 script: xvfb-run pytest -v
