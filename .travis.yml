@@ -5,7 +5,7 @@ python:
     - "3.5"
     - "3.6"
 install:
-    - pip install -r pygame numpy cython pytest psutil
+    - pip install pygame numpy cython pytest psutil
     - pip install OpenGL_accelerate
     - pip install .
 
