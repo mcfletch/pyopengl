@@ -9,6 +9,28 @@ install:
     - pip install ./accelerate
     - pip install .
 
+addons:
+  apt:
+     packages:
+        - freeglut3-dev
+        - libgl1-mesa-dev
+        - libxcursor-dev
+        - libpulse-dev
+        - libxinerama-dev
+        - libxrandr-dev
+        - libxv-dev
+        - mesa-utils
+        - libgl1-mesa-glx
+        - mesa-common-dev
+        - libglapi-mesa
+        - libgbm1
+        - libgl1-mesa-dri
+
+before_install:
+  - sudo apt-get update -qq -y
+  - export DEBIAN_FRONTEND=noninteractive
+  - sudo apt-get -yq --force-yes install libgl1-mesa-dev libgl1-mesa-glx mesa-common-dev libglapi-mesa libgbm1 libgl1-mesa-dri mesa-utils
+
 before_script:
   - xvfb-run -s "-screen 0 640x480x24 +extension GLX +extension RENDER" glxinfo
   
