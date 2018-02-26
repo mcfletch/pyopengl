@@ -9,4 +9,7 @@ install:
     - pip install ./accelerate
     - pip install .
 
-script: xvfb-run pytest -v tests
+before_script:
+  - xvfb-run -s "-screen 0 640x480x24 +extension GLX +extension RENDER" glxinfo
+  
+script: xvfb-run -s "-screen 0 640x480x24 +extension GLX +extension RENDER" pytest -v tests
