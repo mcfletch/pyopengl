@@ -383,7 +383,10 @@ class TestCore( basetestcase.BaseTest ):
         from OpenGL.raw.GL import _lookupint 
         l = _lookupint.LookupInt( GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLint )
         result = int(l)
-        assert result, "No compressed textures on this platform? that seems unlikely"
+        if not os.environ.get('TRAVIS'):
+            assert result, "No compressed textures on this platform? that seems unlikely"
+        else:
+            assert not result, "Travis xvfb doesn't normally have compressed textures, possible upgrade?"
     
     def test_glget( self ):
         """Test that we can run glGet... on registered constants without crashing..."""
