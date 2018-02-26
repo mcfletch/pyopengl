@@ -9,4 +9,4 @@ install:
     - pip install ./accelerate
     - pip install .
 
-script: xvfb-run pytest -v
+script: xvfb-run pytest -v tests/*
