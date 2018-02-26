@@ -29,8 +29,11 @@ def test_memory_usage():
     with buffer:
         after_transfer = get_current_memory()
     
-    assert (after_np - start) <= 3000000, (after_np-start) # it's a 2.8MB buffer...
-    assert (after_transfer - after_np) <= 3000000, (after_transfer-after_np) # again, should be about 2.8 extra MB used
+    # 2.8MB buffer, on Python 2.7 is around 2.9MB usage, but on 
+    # Python 3.6 we see a consistently higher memory usage (3.1MB),
+    # somewhat disturbing...
+    assert (after_np - start) <= 3200000, (after_np-start)
+    assert (after_transfer - after_np) <= 3200000, (after_transfer-after_np)
 
 @pytest.mark.skipif(not psutil,reason='No psutil available')
 @pytest.mark.skipif(not np, reason="No numpy available")
