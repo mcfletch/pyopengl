@@ -1,0 +1,4 @@
+tox
+cython>=28
+numpy
+-r ./test-requirements.txt

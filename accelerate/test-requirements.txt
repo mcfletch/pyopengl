@@ -1,4 +1,4 @@
 pygame
 pytest
-ipdb
+-r ./requirements.txt
 -e ../
