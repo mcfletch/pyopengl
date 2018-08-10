@@ -44,7 +44,7 @@ def cython_extension( name, include_dirs = (), ):
             HERE,
         ]+ list(include_dirs),
         define_macros = [
-#            ('NPY_NO_DEPRECATED_API','NPY_1_7_API_VERSION'),
+           ('NPY_NO_DEPRECATED_API','NPY_1_7_API_VERSION'),
         ],
     )
 
@@ -83,7 +83,8 @@ else:
             ),
         ]
     extensions.append( cython_extension(
-        'numpy_formathandler', includeDirectories
+        'numpy_formathandler', includeDirectories,
+
     ) )
 
 if __name__ == "__main__":
