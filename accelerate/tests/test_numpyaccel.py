@@ -4,18 +4,24 @@ try:
     from OpenGL_accelerate import numpy_formathandler as npf
 except ImportError:
     numpy = None
+    npf = None
+try:
+    from OpenGL_accelerate import buffers_formathandler as bpf
+except ImportError:
+    bpf = None
 from OpenGL import error
 from OpenGL import GL
 from OpenGL._bytes import integer_types
 from OpenGL._configflags import ERROR_ON_COPY
 import pytest
+pytestmark = pytest.mark.skipif(not numpy, reason="No numpy installed in order to run tests")
 
-@pytest.mark.skipif( not numpy, reason="No numpy handler available")
-class TestAccelNumpy( unittest.TestCase ):
+class _AccelArray( unittest.TestCase ):
+    handler_class = None
     def setUp( self ):
         self.array = numpy.array( [[1,2,3],[4,5,6]],'f')
-        self.handler = npf.NumpyHandler()
-        self.eoc_handler = npf.NumpyHandler( True )
+        self.handler = self.handler_class()
+        self.eoc_handler = self.handler_class( True )
     def test_from_param( self ):
         p = self.handler.from_param( self.array )
         assert isinstance( p, ctypes.c_void_p )
@@ -78,4 +84,11 @@ class TestAccelNumpy( unittest.TestCase ):
     def test_downconvert( self ):
         p = self.handler.asArray( numpy.array( [1,2,3],'d'), GL.GL_FLOAT )
         assert p.dtype == numpy.float32
-        
+
+@pytest.mark.skipif(not npf,reason="No numpy native format handler available")
+class TestNumpyNative(_AccelArray):
+    handler_class = npf.NumpyHandler
+
+@pytest.mark.skipif(not npf,reason="No numpy native format handler available")
+class TestBufferAPI(_AccelArray):
+    handler_class = bpf.MemoryviewHandler
