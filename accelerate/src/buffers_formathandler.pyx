@@ -101,6 +101,9 @@ cdef class MemoryviewHandler(FormatHandler):
         buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )
         cdef object constant = self.array_to_gl_constant.get( buffer.format )
         if constant is None:
+            if isinstance(buffer.format,bytes):
+                constant = self.array_to_gl_constant.get(buffer.format.decode('utf-8'))
+        if constant is None:
             raise TypeError(
                 """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
                     buffer.format, self.array_to_gl_constant.keys(), buffer.format,
@@ -121,7 +124,10 @@ cdef class MemoryviewHandler(FormatHandler):
 #        return result
     cdef c_unitSize( self, object instance, typeCode ):
         """Retrieve last dimension of the array"""
-        return PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) ).itemsize
+        cdef Py_buffer * buffer
+        view = self.c_as_memoryview( instance )
+        buffer = PyMemoryView_GET_BUFFER( view )
+        return buffer.shape[buffer.ndim-1]
     cdef c_dimensions( self, object instance ):
         """Retrieve full set of dimensions for the array as tuple"""
         cdef Py_buffer * buffer
