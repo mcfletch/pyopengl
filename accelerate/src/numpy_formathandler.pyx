@@ -14,11 +14,16 @@ cdef extern from "numpy/arrayobject.h":
 	cdef np.ndarray PyArray_FromArray( np.ndarray, np.dtype, int )
 	cdef np.ndarray PyArray_ContiguousFromAny( object op, int, int, int max_depth)
 	cdef int PyArray_Check( object )
-	int NPY_CARRAY
-	int NPY_FORCECAST
+	int NPY_ARRAY_CARRAY
+	int NPY_ARRAY_FORCECAST
 	int PyArray_ISCARRAY( np.ndarray instance )
 	cdef np.ndarray PyArray_Zeros(int nd, np.Py_intptr_t* dims, np.dtype, int fortran)
 	cdef void import_array()
+	cdef void* PyArray_DATA( np.ndarray )
+	cdef int PyArray_NDIM( np.ndarray )
+	cdef int *PyArray_DIMS( np.ndarray )
+	cdef np.dtype PyArray_DTYPE( np.ndarray )
+	cdef np.npy_intp PyArray_SIZE( np.ndarray )
 
 cdef class NumpyHandler(FormatHandler):
 	cdef public dict array_to_gl_constant
@@ -70,6 +75,7 @@ cdef class NumpyHandler(FormatHandler):
 			raise TypeError(
 				"""Numpy format handler passed a non-numpy-array object %s (of type %s)"""%( instance, type(instance) ),
 			)
+		
 		return <np.ndarray> instance
 		
 	cdef c_from_param( self, object instance, object typeCode ):
@@ -78,10 +84,10 @@ cdef class NumpyHandler(FormatHandler):
 		cdef np.dtype targetType
 		if typeCode:
 			targetType = <np.dtype>(self.gl_constant_to_array[ typeCode ])
-			if instance.dtype != targetType:
+			if PyArray_DTYPE(instance) != targetType:
 				raise CopyError(
 					"""Array of type %r passed, required array of type %r""",
-					instance.dtype.char, targetType.char,
+					PyArray_DTYPE(instance).char, targetType.char,
 				)					
 		if not PyArray_ISCARRAY( instance ):
 			raise CopyError(
@@ -89,11 +95,11 @@ cdef class NumpyHandler(FormatHandler):
 					working,
 				)
 			)
-		return c_void_p(<size_t> (working.data))
+		return c_void_p(<size_t> PyArray_DATA(working))
 	
 	cdef c_dataPointer( self, object instance ):
 		"""Retrieve data-pointer directly"""
-		return <size_t> (<np.ndarray>self.c_check_array( instance )).data 
+		return <size_t> PyArray_DATA(<np.ndarray>self.c_check_array( instance ))
 	cdef c_zeros( self, object dims, object typeCode ):
 		"""Create an array initialized to zeros"""
 		cdef np.ndarray c_dims
@@ -108,7 +114,8 @@ cdef class NumpyHandler(FormatHandler):
 			)
 		cdef np.dtype typecode = self.typeCodeToDtype( typeCode )
 		Py_INCREF( typecode )
-		return PyArray_Zeros( c_dims.shape[0], <np.npy_intp *>c_dims.data, typecode, 0 )
+		cdef np.npy_intp ndims = PyArray_SIZE(c_dims)
+		return PyArray_Zeros( <int>ndims, <np.npy_intp *>PyArray_DATA(c_dims), typecode, 0 )
 	cdef c_arraySize( self, object instance, object typeCode ):
 		"""Retrieve array size reference"""
 		return (<np.ndarray>self.c_check_array( instance )).size
@@ -118,11 +125,11 @@ cdef class NumpyHandler(FormatHandler):
 	cdef c_arrayToGLType( self, object instance ):
 		"""Given a value, guess OpenGL type of the corresponding pointer"""
 		cdef np.ndarray value = self.c_check_array( instance )
-		cdef object constant = self.array_to_gl_constant.get( value.dtype )
+		cdef object constant = self.array_to_gl_constant.get( PyArray_DTYPE(value) )
 		if constant is None:
 			raise TypeError(
 				"""Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
-					value.dtype, self.array_to_gl_constant.keys(), value,
+					PyArray_DTYPE(value), self.array_to_gl_constant.keys(), value,
 				)
 			)
 		return constant
@@ -137,7 +144,7 @@ cdef class NumpyHandler(FormatHandler):
 		return self.contiguous( working, typecode )
 	cdef c_unitSize( self, object instance, typeCode ):
 		"""Retrieve last dimension of the array"""
-		return instance.shape[instance.ndim-1]
+		return PyArray_DIMS(instance)[PyArray_NDIM(instance)-1]
 	cdef c_dimensions( self, object instance ):
 		"""Retrieve full set of dimensions for the array as tuple"""
 		return instance.shape
@@ -158,21 +165,22 @@ cdef class NumpyHandler(FormatHandler):
 					"""Non-contiguous array passed""",
 					instance,
 				)
-			elif instance.dtype != dtype:
+			elif PyArray_DTYPE(instance) != dtype:
 				raise CopyError(
 					"""Array of type %r passed, required array of type %r""",
-					instance.dtype.char, dtype.char,
+					PyArray_DTYPE(instance).char, dtype.char,
 				)
 			# okay, so just return...
 			return instance 
 		else:
 			# "convert" regardless (will return same instance if already contiguous)
-			if not PyArray_ISCARRAY( instance ) or instance.dtype != dtype:
+			if not PyArray_ISCARRAY( instance ) or PyArray_DTYPE(instance) != dtype:
 				# TODO: make sure there's no way to segfault here 
 				Py_INCREF( <object> dtype )
 				return PyArray_FromArray( 
-					instance, dtype, NPY_CARRAY|NPY_FORCECAST
+					instance, dtype, NPY_ARRAY_CARRAY|NPY_ARRAY_FORCECAST
 				)
+
 			else:
 				return instance
 
