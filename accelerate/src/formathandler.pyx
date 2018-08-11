@@ -82,7 +82,7 @@ cdef class FormatHandler:
 		raise NotImplementedError( """%s does not define unitSize method"""%(self,))
 	def dimensions( self, object instance ):
 		"""Retrieve full set of dimensions for the array as tuple"""
-		return self.c_dimensions( instance )
+		return tuple(self.c_dimensions( instance ))
 	cdef c_dimensions( self, object instance ):
 		"""Retrieve full set of dimensions for the array as tuple"""
 		raise NotImplementedError( """%s does not define dimensions method"""%(self,))
