@@ -44,7 +44,10 @@ def cython_extension( name, include_dirs = (), ):
             HERE,
         ]+ list(include_dirs),
         define_macros = [
-           ('NPY_NO_DEPRECATED_API','NPY_1_7_API_VERSION'),
+            # *cython* itself is using the deprecated api, and the 
+            # deprecated APIs are actually providing the attributes 
+            # that we use throughout our code...
+        #    ('NPY_NO_DEPRECATED_API','NPY_1_7_API_VERSION'),
         ],
     )
 
