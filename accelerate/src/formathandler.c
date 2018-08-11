@@ -2918,7 +2918,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_13formathandler_13FormatHandler_c_u
  * 		raise NotImplementedError( """%s does not define unitSize method"""%(self,))
  * 	def dimensions( self, object instance ):             # <<<<<<<<<<<<<<
  * 		"""Retrieve full set of dimensions for the array as tuple"""
- * 		return self.c_dimensions( instance )
+ * 		return tuple(self.c_dimensions( instance ))
  */
 
 /* Python wrapper */
@@ -2939,20 +2939,24 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_13formathandler_13FormatHandler_24
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("dimensions", 0);
 
   /* "src/formathandler.pyx":85
  * 	def dimensions( self, object instance ):
  * 		"""Retrieve full set of dimensions for the array as tuple"""
- * 		return self.c_dimensions( instance )             # <<<<<<<<<<<<<<
+ * 		return tuple(self.c_dimensions( instance ))             # <<<<<<<<<<<<<<
  * 	cdef c_dimensions( self, object instance ):
  * 		"""Retrieve full set of dimensions for the array as tuple"""
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_13formathandler_FormatHandler *)__pyx_v_self->__pyx_vtab)->c_dimensions(__pyx_v_self, __pyx_v_instance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_PySequence_Tuple(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
   /* "src/formathandler.pyx":83
@@ -2960,12 +2964,13 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_13formathandler_13FormatHandler_24
  * 		raise NotImplementedError( """%s does not define unitSize method"""%(self,))
  * 	def dimensions( self, object instance ):             # <<<<<<<<<<<<<<
  * 		"""Retrieve full set of dimensions for the array as tuple"""
- * 		return self.c_dimensions( instance )
+ * 		return tuple(self.c_dimensions( instance ))
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("OpenGL_accelerate.formathandler.FormatHandler.dimensions", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -2976,7 +2981,7 @@ static PyObject *__pyx_pf_17OpenGL_accelerate_13formathandler_13FormatHandler_24
 
 /* "src/formathandler.pyx":86
  * 		"""Retrieve full set of dimensions for the array as tuple"""
- * 		return self.c_dimensions( instance )
+ * 		return tuple(self.c_dimensions( instance ))
  * 	cdef c_dimensions( self, object instance ):             # <<<<<<<<<<<<<<
  * 		"""Retrieve full set of dimensions for the array as tuple"""
  * 		raise NotImplementedError( """%s does not define dimensions method"""%(self,))
@@ -3011,7 +3016,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_13formathandler_13FormatHandler_c_d
 
   /* "src/formathandler.pyx":86
  * 		"""Retrieve full set of dimensions for the array as tuple"""
- * 		return self.c_dimensions( instance )
+ * 		return tuple(self.c_dimensions( instance ))
  * 	cdef c_dimensions( self, object instance ):             # <<<<<<<<<<<<<<
  * 		"""Retrieve full set of dimensions for the array as tuple"""
  * 		raise NotImplementedError( """%s does not define dimensions method"""%(self,))

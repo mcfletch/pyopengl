@@ -1067,6 +1067,29 @@ static CYTHON_INLINE PyObject *__Pyx_CallUnboundCMethod2(__Pyx_CachedCFunction *
 #define __Pyx_CallUnboundCMethod2(cfunc, self, arg1, arg2)  __Pyx__CallUnboundCMethod2(cfunc, self, arg1, arg2)
 #endif
 
+/* IncludeStringH.proto */
+#include <string.h>
+
+/* decode_c_string_utf16.proto */
+static CYTHON_INLINE PyObject *__Pyx_PyUnicode_DecodeUTF16(const char *s, Py_ssize_t size, const char *errors) {
+    int byteorder = 0;
+    return PyUnicode_DecodeUTF16(s, size, errors, &byteorder);
+}
+static CYTHON_INLINE PyObject *__Pyx_PyUnicode_DecodeUTF16LE(const char *s, Py_ssize_t size, const char *errors) {
+    int byteorder = -1;
+    return PyUnicode_DecodeUTF16(s, size, errors, &byteorder);
+}
+static CYTHON_INLINE PyObject *__Pyx_PyUnicode_DecodeUTF16BE(const char *s, Py_ssize_t size, const char *errors) {
+    int byteorder = 1;
+    return PyUnicode_DecodeUTF16(s, size, errors, &byteorder);
+}
+
+/* decode_c_string.proto */
+static CYTHON_INLINE PyObject* __Pyx_decode_c_string(
+         const char* cstring, Py_ssize_t start, Py_ssize_t stop,
+         const char* encoding, const char* errors,
+         PyObject* (*decode_func)(const char *s, Py_ssize_t size, const char *errors));
+
 /* py_dict_keys.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyDict_Keys(PyObject* d);
 
@@ -2184,8 +2207,9 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   PyObject *__pyx_t_2 = NULL;
   int __pyx_t_3;
   int __pyx_t_4;
-  PyObject *__pyx_t_5 = NULL;
+  char *__pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("c_arrayToGLType", 0);
 
   /* "src/buffers_formathandler.pyx":101
@@ -2205,7 +2229,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
  *         buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )
  *         cdef object constant = self.array_to_gl_constant.get( buffer.format )             # <<<<<<<<<<<<<<
  *         if constant is None:
- *             raise TypeError(
+ *             if isinstance(buffer.format,bytes):
  */
   if (unlikely(__pyx_v_self->array_to_gl_constant == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "get");
@@ -2223,6 +2247,72 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
  *         buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )
  *         cdef object constant = self.array_to_gl_constant.get( buffer.format )
  *         if constant is None:             # <<<<<<<<<<<<<<
+ *             if isinstance(buffer.format,bytes):
+ *                 constant = self.array_to_gl_constant.get(buffer.format.decode('utf-8'))
+ */
+  __pyx_t_3 = (__pyx_v_constant == Py_None);
+  __pyx_t_4 = (__pyx_t_3 != 0);
+  if (__pyx_t_4) {
+
+    /* "src/buffers_formathandler.pyx":104
+ *         cdef object constant = self.array_to_gl_constant.get( buffer.format )
+ *         if constant is None:
+ *             if isinstance(buffer.format,bytes):             # <<<<<<<<<<<<<<
+ *                 constant = self.array_to_gl_constant.get(buffer.format.decode('utf-8'))
+ *         if constant is None:
+ */
+    __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_buffer->format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = PyObject_IsInstance(__pyx_t_2, __pyx_t_1); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 104, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_3 = (__pyx_t_4 != 0);
+    if (__pyx_t_3) {
+
+      /* "src/buffers_formathandler.pyx":105
+ *         if constant is None:
+ *             if isinstance(buffer.format,bytes):
+ *                 constant = self.array_to_gl_constant.get(buffer.format.decode('utf-8'))             # <<<<<<<<<<<<<<
+ *         if constant is None:
+ *             raise TypeError(
+ */
+      if (unlikely(__pyx_v_self->array_to_gl_constant == Py_None)) {
+        PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "get");
+        __PYX_ERR(0, 105, __pyx_L1_error)
+      }
+      __pyx_t_5 = __pyx_v_buffer->format;
+      __pyx_t_1 = __Pyx_decode_c_string(__pyx_t_5, 0, strlen(__pyx_t_5), NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_self->array_to_gl_constant, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_DECREF_SET(__pyx_v_constant, __pyx_t_2);
+      __pyx_t_2 = 0;
+
+      /* "src/buffers_formathandler.pyx":104
+ *         cdef object constant = self.array_to_gl_constant.get( buffer.format )
+ *         if constant is None:
+ *             if isinstance(buffer.format,bytes):             # <<<<<<<<<<<<<<
+ *                 constant = self.array_to_gl_constant.get(buffer.format.decode('utf-8'))
+ *         if constant is None:
+ */
+    }
+
+    /* "src/buffers_formathandler.pyx":103
+ *         buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )
+ *         cdef object constant = self.array_to_gl_constant.get( buffer.format )
+ *         if constant is None:             # <<<<<<<<<<<<<<
+ *             if isinstance(buffer.format,bytes):
+ *                 constant = self.array_to_gl_constant.get(buffer.format.decode('utf-8'))
+ */
+  }
+
+  /* "src/buffers_formathandler.pyx":106
+ *             if isinstance(buffer.format,bytes):
+ *                 constant = self.array_to_gl_constant.get(buffer.format.decode('utf-8'))
+ *         if constant is None:             # <<<<<<<<<<<<<<
  *             raise TypeError(
  *                 """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
  */
@@ -2230,70 +2320,70 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (unlikely(__pyx_t_4)) {
 
-    /* "src/buffers_formathandler.pyx":106
+    /* "src/buffers_formathandler.pyx":109
  *             raise TypeError(
  *                 """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
  *                     buffer.format, self.array_to_gl_constant.keys(), buffer.format,             # <<<<<<<<<<<<<<
  *                 )
  *             )
  */
-    __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_buffer->format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_buffer->format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     if (unlikely(__pyx_v_self->array_to_gl_constant == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "keys");
-      __PYX_ERR(0, 106, __pyx_L1_error)
+      __PYX_ERR(0, 109, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_PyDict_Keys(__pyx_v_self->array_to_gl_constant); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyDict_Keys(__pyx_v_self->array_to_gl_constant); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyBytes_FromString(__pyx_v_buffer->format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 106, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyBytes_FromString(__pyx_v_buffer->format); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 109, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
     __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_2);
+    PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_1);
-    __Pyx_GIVEREF(__pyx_t_5);
-    PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_t_5);
+    PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_1);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_6);
     __pyx_t_2 = 0;
     __pyx_t_1 = 0;
-    __pyx_t_5 = 0;
+    __pyx_t_6 = 0;
 
-    /* "src/buffers_formathandler.pyx":105
+    /* "src/buffers_formathandler.pyx":108
  *         if constant is None:
  *             raise TypeError(
  *                 """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(             # <<<<<<<<<<<<<<
  *                     buffer.format, self.array_to_gl_constant.keys(), buffer.format,
  *                 )
  */
-    __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_Don_t_know_GL_type_for_array_of, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_Don_t_know_GL_type_for_array_of, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 108, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "src/buffers_formathandler.pyx":104
- *         cdef object constant = self.array_to_gl_constant.get( buffer.format )
+    /* "src/buffers_formathandler.pyx":107
+ *                 constant = self.array_to_gl_constant.get(buffer.format.decode('utf-8'))
  *         if constant is None:
  *             raise TypeError(             # <<<<<<<<<<<<<<
  *                 """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
  *                     buffer.format, self.array_to_gl_constant.keys(), buffer.format,
  */
-    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 104, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_Raise(__pyx_t_6, 0, 0, 0);
+    __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 107, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __PYX_ERR(0, 104, __pyx_L1_error)
+    __Pyx_Raise(__pyx_t_7, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __PYX_ERR(0, 107, __pyx_L1_error)
 
-    /* "src/buffers_formathandler.pyx":103
- *         buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )
- *         cdef object constant = self.array_to_gl_constant.get( buffer.format )
+    /* "src/buffers_formathandler.pyx":106
+ *             if isinstance(buffer.format,bytes):
+ *                 constant = self.array_to_gl_constant.get(buffer.format.decode('utf-8'))
  *         if constant is None:             # <<<<<<<<<<<<<<
  *             raise TypeError(
  *                 """Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
  */
   }
 
-  /* "src/buffers_formathandler.pyx":109
+  /* "src/buffers_formathandler.pyx":112
  *                 )
  *             )
  *         return constant             # <<<<<<<<<<<<<<
@@ -2317,8 +2407,8 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("OpenGL_accelerate.buffers_formathandler.MemoryviewHandler.c_arrayToGLType", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
@@ -2328,7 +2418,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   return __pyx_r;
 }
 
-/* "src/buffers_formathandler.pyx":111
+/* "src/buffers_formathandler.pyx":114
  *         return constant
  * 
  *     cdef c_asArray( self, object instance, object typeCode ):             # <<<<<<<<<<<<<<
@@ -2342,7 +2432,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("c_asArray", 0);
 
-  /* "src/buffers_formathandler.pyx":113
+  /* "src/buffers_formathandler.pyx":116
  *     cdef c_asArray( self, object instance, object typeCode ):
  *         """Retrieve the given value as a (contiguous) array of type typeCode"""
  *         return self.c_as_memoryview( instance )             # <<<<<<<<<<<<<<
@@ -2350,13 +2440,13 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
  * #        cdef object result
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_21buffers_formathandler_MemoryviewHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_as_memoryview(__pyx_v_self, __pyx_v_instance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_21buffers_formathandler_MemoryviewHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_as_memoryview(__pyx_v_self, __pyx_v_instance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/buffers_formathandler.pyx":111
+  /* "src/buffers_formathandler.pyx":114
  *         return constant
  * 
  *     cdef c_asArray( self, object instance, object typeCode ):             # <<<<<<<<<<<<<<
@@ -2375,61 +2465,80 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   return __pyx_r;
 }
 
-/* "src/buffers_formathandler.pyx":122
+/* "src/buffers_formathandler.pyx":125
  * #            raise TypeError( 'Incompatible type: %s, needed %s', buffer.format, typeCode )
  * #        return result
  *     cdef c_unitSize( self, object instance, typeCode ):             # <<<<<<<<<<<<<<
  *         """Retrieve last dimension of the array"""
- *         return PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) ).itemsize
+ *         cdef Py_buffer * buffer
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17MemoryviewHandler_c_unitSize(struct __pyx_obj_17OpenGL_accelerate_21buffers_formathandler_MemoryviewHandler *__pyx_v_self, PyObject *__pyx_v_instance, CYTHON_UNUSED PyObject *__pyx_v_typeCode) {
+  Py_buffer *__pyx_v_buffer;
+  PyObject *__pyx_v_view = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("c_unitSize", 0);
 
-  /* "src/buffers_formathandler.pyx":124
- *     cdef c_unitSize( self, object instance, typeCode ):
+  /* "src/buffers_formathandler.pyx":128
  *         """Retrieve last dimension of the array"""
- *         return PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) ).itemsize             # <<<<<<<<<<<<<<
+ *         cdef Py_buffer * buffer
+ *         view = self.c_as_memoryview( instance )             # <<<<<<<<<<<<<<
+ *         buffer = PyMemoryView_GET_BUFFER( view )
+ *         return buffer.shape[buffer.ndim-1]
+ */
+  __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_21buffers_formathandler_MemoryviewHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_as_memoryview(__pyx_v_self, __pyx_v_instance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_view = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "src/buffers_formathandler.pyx":129
+ *         cdef Py_buffer * buffer
+ *         view = self.c_as_memoryview( instance )
+ *         buffer = PyMemoryView_GET_BUFFER( view )             # <<<<<<<<<<<<<<
+ *         return buffer.shape[buffer.ndim-1]
+ *     cdef c_dimensions( self, object instance ):
+ */
+  __pyx_v_buffer = PyMemoryView_GET_BUFFER(__pyx_v_view);
+
+  /* "src/buffers_formathandler.pyx":130
+ *         view = self.c_as_memoryview( instance )
+ *         buffer = PyMemoryView_GET_BUFFER( view )
+ *         return buffer.shape[buffer.ndim-1]             # <<<<<<<<<<<<<<
  *     cdef c_dimensions( self, object instance ):
  *         """Retrieve full set of dimensions for the array as tuple"""
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_21buffers_formathandler_MemoryviewHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_as_memoryview(__pyx_v_self, __pyx_v_instance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t((__pyx_v_buffer->shape[(__pyx_v_buffer->ndim - 1)])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyInt_FromSsize_t(PyMemoryView_GET_BUFFER(__pyx_t_1)->itemsize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_r = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/buffers_formathandler.pyx":122
+  /* "src/buffers_formathandler.pyx":125
  * #            raise TypeError( 'Incompatible type: %s, needed %s', buffer.format, typeCode )
  * #        return result
  *     cdef c_unitSize( self, object instance, typeCode ):             # <<<<<<<<<<<<<<
  *         """Retrieve last dimension of the array"""
- *         return PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) ).itemsize
+ *         cdef Py_buffer * buffer
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("OpenGL_accelerate.buffers_formathandler.MemoryviewHandler.c_unitSize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_view);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "src/buffers_formathandler.pyx":125
- *         """Retrieve last dimension of the array"""
- *         return PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) ).itemsize
+/* "src/buffers_formathandler.pyx":131
+ *         buffer = PyMemoryView_GET_BUFFER( view )
+ *         return buffer.shape[buffer.ndim-1]
  *     cdef c_dimensions( self, object instance ):             # <<<<<<<<<<<<<<
  *         """Retrieve full set of dimensions for the array as tuple"""
  *         cdef Py_buffer * buffer
@@ -2449,19 +2558,19 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("c_dimensions", 0);
 
-  /* "src/buffers_formathandler.pyx":128
+  /* "src/buffers_formathandler.pyx":134
  *         """Retrieve full set of dimensions for the array as tuple"""
  *         cdef Py_buffer * buffer
  *         buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )             # <<<<<<<<<<<<<<
  *         cdef dim = 0
  *         cdef list result
  */
-  __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_21buffers_formathandler_MemoryviewHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_as_memoryview(__pyx_v_self, __pyx_v_instance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_17OpenGL_accelerate_21buffers_formathandler_MemoryviewHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_as_memoryview(__pyx_v_self, __pyx_v_instance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_buffer = PyMemoryView_GET_BUFFER(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/buffers_formathandler.pyx":129
+  /* "src/buffers_formathandler.pyx":135
  *         cdef Py_buffer * buffer
  *         buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )
  *         cdef dim = 0             # <<<<<<<<<<<<<<
@@ -2471,37 +2580,37 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   __Pyx_INCREF(__pyx_int_0);
   __pyx_v_dim = __pyx_int_0;
 
-  /* "src/buffers_formathandler.pyx":131
+  /* "src/buffers_formathandler.pyx":137
  *         cdef dim = 0
  *         cdef list result
  *         result = []             # <<<<<<<<<<<<<<
  *         for dim in range(buffer.ndim):
  *             result.append( buffer.shape[dim] )
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_result = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "src/buffers_formathandler.pyx":132
+  /* "src/buffers_formathandler.pyx":138
  *         cdef list result
  *         result = []
  *         for dim in range(buffer.ndim):             # <<<<<<<<<<<<<<
  *             result.append( buffer.shape[dim] )
  *         return result
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_buffer->ndim); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_buffer->ndim); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
     __pyx_t_1 = __pyx_t_2; __Pyx_INCREF(__pyx_t_1); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 138, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   for (;;) {
@@ -2509,17 +2618,17 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_2); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 132, __pyx_L1_error)
+        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_2); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 138, __pyx_L1_error)
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_2); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 132, __pyx_L1_error)
+        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_2); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 138, __pyx_L1_error)
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       }
@@ -2529,7 +2638,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 132, __pyx_L1_error)
+          else __PYX_ERR(0, 138, __pyx_L1_error)
         }
         break;
       }
@@ -2538,19 +2647,19 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
     __Pyx_DECREF_SET(__pyx_v_dim, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "src/buffers_formathandler.pyx":133
+    /* "src/buffers_formathandler.pyx":139
  *         result = []
  *         for dim in range(buffer.ndim):
  *             result.append( buffer.shape[dim] )             # <<<<<<<<<<<<<<
  *         return result
  */
-    __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_v_dim); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 133, __pyx_L1_error)
-    __pyx_t_2 = PyInt_FromSsize_t((__pyx_v_buffer->shape[__pyx_t_5])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_v_dim); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_2 = PyInt_FromSsize_t((__pyx_v_buffer->shape[__pyx_t_5])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_result, __pyx_t_2); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_result, __pyx_t_2); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "src/buffers_formathandler.pyx":132
+    /* "src/buffers_formathandler.pyx":138
  *         cdef list result
  *         result = []
  *         for dim in range(buffer.ndim):             # <<<<<<<<<<<<<<
@@ -2560,7 +2669,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "src/buffers_formathandler.pyx":134
+  /* "src/buffers_formathandler.pyx":140
  *         for dim in range(buffer.ndim):
  *             result.append( buffer.shape[dim] )
  *         return result             # <<<<<<<<<<<<<<
@@ -2570,9 +2679,9 @@ static PyObject *__pyx_f_17OpenGL_accelerate_21buffers_formathandler_17Memoryvie
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "src/buffers_formathandler.pyx":125
- *         """Retrieve last dimension of the array"""
- *         return PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) ).itemsize
+  /* "src/buffers_formathandler.pyx":131
+ *         buffer = PyMemoryView_GET_BUFFER( view )
+ *         return buffer.shape[buffer.ndim-1]
  *     cdef c_dimensions( self, object instance ):             # <<<<<<<<<<<<<<
  *         """Retrieve full set of dimensions for the array as tuple"""
  *         cdef Py_buffer * buffer
@@ -3857,7 +3966,7 @@ static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(0, 63, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 81, __pyx_L1_error)
   __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) __PYX_ERR(0, 88, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 138, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5330,6 +5439,39 @@ bad:
             value = __Pyx_CallUnboundCMethod2(&__pyx_umethod_PyDict_Type_get, d, key, default_value);
     }
     return value;
+}
+
+/* decode_c_string */
+      static CYTHON_INLINE PyObject* __Pyx_decode_c_string(
+         const char* cstring, Py_ssize_t start, Py_ssize_t stop,
+         const char* encoding, const char* errors,
+         PyObject* (*decode_func)(const char *s, Py_ssize_t size, const char *errors)) {
+    Py_ssize_t length;
+    if (unlikely((start < 0) | (stop < 0))) {
+        size_t slen = strlen(cstring);
+        if (unlikely(slen > (size_t) PY_SSIZE_T_MAX)) {
+            PyErr_SetString(PyExc_OverflowError,
+                            "c-string too long to convert to Python");
+            return NULL;
+        }
+        length = (Py_ssize_t) slen;
+        if (start < 0) {
+            start += length;
+            if (start < 0)
+                start = 0;
+        }
+        if (stop < 0)
+            stop += length;
+    }
+    length = stop - start;
+    if (unlikely(length <= 0))
+        return PyUnicode_FromUnicode(NULL, 0);
+    cstring += start;
+    if (decode_func) {
+        return decode_func(cstring, length, errors);
+    } else {
+        return PyUnicode_Decode(cstring, length, encoding, errors);
+    }
 }
 
 /* CallUnboundCMethod0 */
