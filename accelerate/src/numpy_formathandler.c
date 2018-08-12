@@ -1064,8 +1064,8 @@ struct __pyx_obj_17OpenGL_accelerate_13formathandler_FormatHandler {
 };
 
 
-/* "src/numpy_formathandler.pyx":28
- * 	cdef np.npy_intp PyArray_SIZE( np.ndarray )
+/* "src/numpy_formathandler.pyx":35
+ * 	return desc
  * 
  * cdef class NumpyHandler(FormatHandler):             # <<<<<<<<<<<<<<
  * 	cdef public dict array_to_gl_constant
@@ -1101,8 +1101,8 @@ struct __pyx_vtabstruct_17OpenGL_accelerate_13formathandler_FormatHandler {
 static struct __pyx_vtabstruct_17OpenGL_accelerate_13formathandler_FormatHandler *__pyx_vtabptr_17OpenGL_accelerate_13formathandler_FormatHandler;
 
 
-/* "src/numpy_formathandler.pyx":28
- * 	cdef np.npy_intp PyArray_SIZE( np.ndarray )
+/* "src/numpy_formathandler.pyx":35
+ * 	return desc
  * 
  * cdef class NumpyHandler(FormatHandler):             # <<<<<<<<<<<<<<
  * 	cdef public dict array_to_gl_constant
@@ -1685,6 +1685,7 @@ static PyTypeObject *__pyx_ptype_17OpenGL_accelerate_13formathandler_FormatHandl
 
 /* Module declarations from 'OpenGL_accelerate.numpy_formathandler' */
 static PyTypeObject *__pyx_ptype_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler = 0;
+static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(PyArrayObject *); /*proto*/
 static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler___pyx_unpickle_NumpyHandler__set_state(struct __pyx_obj_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *, PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "OpenGL_accelerate.numpy_formathandler"
 extern int __pyx_module_is_main_OpenGL_accelerate__numpy_formathandler;
@@ -1711,7 +1712,6 @@ static const char __pyx_k_size[] = "size";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_void[] = "void";
 static const char __pyx_k_bytes[] = "bytes";
-static const char __pyx_k_dtype[] = "dtype";
 static const char __pyx_k_int16[] = "int16";
 static const char __pyx_k_int32[] = "int32";
 static const char __pyx_k_int64[] = "int64";
@@ -1827,7 +1827,6 @@ static PyObject *__pyx_n_s_configflags;
 static PyObject *__pyx_n_s_ctypes;
 static PyObject *__pyx_n_s_datetime64;
 static PyObject *__pyx_n_s_dict;
-static PyObject *__pyx_n_s_dtype;
 static PyObject *__pyx_n_s_float128;
 static PyObject *__pyx_n_s_float16;
 static PyObject *__pyx_n_s_float32;
@@ -1912,7 +1911,75 @@ static PyObject *__pyx_tuple__10;
 static PyObject *__pyx_codeobj__11;
 /* Late includes */
 
-/* "src/numpy_formathandler.pyx":59
+/* "src/numpy_formathandler.pyx":29
+ * 	cdef np.npy_intp PyArray_SIZE( np.ndarray )
+ * 
+ * cdef np.dtype array_descr( np.ndarray array ):             # <<<<<<<<<<<<<<
+ * 	"""Wrap PyArray_DESCR and incref to deal with the "borrowed" reference"""
+ * 	cdef np.dtype desc = PyArray_DESCR( array )
+ */
+
+static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(PyArrayObject *__pyx_v_array) {
+  PyArray_Descr *__pyx_v_desc = 0;
+  PyArray_Descr *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("array_descr", 0);
+
+  /* "src/numpy_formathandler.pyx":31
+ * cdef np.dtype array_descr( np.ndarray array ):
+ * 	"""Wrap PyArray_DESCR and incref to deal with the "borrowed" reference"""
+ * 	cdef np.dtype desc = PyArray_DESCR( array )             # <<<<<<<<<<<<<<
+ * 	Py_INCREF(<object> desc)
+ * 	return desc
+ */
+  __pyx_t_1 = ((PyObject *)PyArray_DESCR(__pyx_v_array)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_desc = ((PyArray_Descr *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "src/numpy_formathandler.pyx":32
+ * 	"""Wrap PyArray_DESCR and incref to deal with the "borrowed" reference"""
+ * 	cdef np.dtype desc = PyArray_DESCR( array )
+ * 	Py_INCREF(<object> desc)             # <<<<<<<<<<<<<<
+ * 	return desc
+ * 
+ */
+  Py_INCREF(((PyObject *)__pyx_v_desc));
+
+  /* "src/numpy_formathandler.pyx":33
+ * 	cdef np.dtype desc = PyArray_DESCR( array )
+ * 	Py_INCREF(<object> desc)
+ * 	return desc             # <<<<<<<<<<<<<<
+ * 
+ * cdef class NumpyHandler(FormatHandler):
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_desc));
+  __pyx_r = __pyx_v_desc;
+  goto __pyx_L0;
+
+  /* "src/numpy_formathandler.pyx":29
+ * 	cdef np.npy_intp PyArray_SIZE( np.ndarray )
+ * 
+ * cdef np.dtype array_descr( np.ndarray array ):             # <<<<<<<<<<<<<<
+ * 	"""Wrap PyArray_DESCR and incref to deal with the "borrowed" reference"""
+ * 	cdef np.dtype desc = PyArray_DESCR( array )
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("OpenGL_accelerate.numpy_formathandler.array_descr", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_desc);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/numpy_formathandler.pyx":66
  *     )
  * 
  * 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):             # <<<<<<<<<<<<<<
@@ -1969,7 +2036,7 @@ static int __pyx_pw_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler_1__
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 59, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 66, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1989,7 +2056,7 @@ static int __pyx_pw_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler_1__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 59, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 66, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("OpenGL_accelerate.numpy_formathandler.NumpyHandler.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2018,7 +2085,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
   __Pyx_INCREF(__pyx_v_a_to_gl);
   __Pyx_INCREF(__pyx_v_gl_to_a);
 
-  /* "src/numpy_formathandler.pyx":60
+  /* "src/numpy_formathandler.pyx":67
  * 
  * 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):
  * 		if ERROR_ON_COPY is None:             # <<<<<<<<<<<<<<
@@ -2029,41 +2096,41 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "src/numpy_formathandler.pyx":61
+    /* "src/numpy_formathandler.pyx":68
  * 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):
  * 		if ERROR_ON_COPY is None:
  * 			from OpenGL import _configflags             # <<<<<<<<<<<<<<
  * 			ERROR_ON_COPY = _configflags.ERROR_ON_COPY
  * 		if a_to_gl is None:
  */
-    __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_n_s_configflags);
     __Pyx_GIVEREF(__pyx_n_s_configflags);
     PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_configflags);
-    __pyx_t_4 = __Pyx_Import(__pyx_n_s_OpenGL, __pyx_t_3, -1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_Import(__pyx_n_s_OpenGL, __pyx_t_3, -1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_4, __pyx_n_s_configflags); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_4, __pyx_n_s_configflags); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_t_3);
     __pyx_v__configflags = __pyx_t_3;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "src/numpy_formathandler.pyx":62
+    /* "src/numpy_formathandler.pyx":69
  * 		if ERROR_ON_COPY is None:
  * 			from OpenGL import _configflags
  * 			ERROR_ON_COPY = _configflags.ERROR_ON_COPY             # <<<<<<<<<<<<<<
  * 		if a_to_gl is None:
  * 			from OpenGL.arrays.numpymodule import ARRAY_TO_GL_TYPE_MAPPING
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v__configflags, __pyx_n_s_ERROR_ON_COPY); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v__configflags, __pyx_n_s_ERROR_ON_COPY); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF_SET(__pyx_v_ERROR_ON_COPY, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "src/numpy_formathandler.pyx":60
+    /* "src/numpy_formathandler.pyx":67
  * 
  * 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):
  * 		if ERROR_ON_COPY is None:             # <<<<<<<<<<<<<<
@@ -2072,7 +2139,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
  */
   }
 
-  /* "src/numpy_formathandler.pyx":63
+  /* "src/numpy_formathandler.pyx":70
  * 			from OpenGL import _configflags
  * 			ERROR_ON_COPY = _configflags.ERROR_ON_COPY
  * 		if a_to_gl is None:             # <<<<<<<<<<<<<<
@@ -2083,29 +2150,29 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "src/numpy_formathandler.pyx":64
+    /* "src/numpy_formathandler.pyx":71
  * 			ERROR_ON_COPY = _configflags.ERROR_ON_COPY
  * 		if a_to_gl is None:
  * 			from OpenGL.arrays.numpymodule import ARRAY_TO_GL_TYPE_MAPPING             # <<<<<<<<<<<<<<
  * 			a_to_gl = ARRAY_TO_GL_TYPE_MAPPING
  * 		if gl_to_a is None:
  */
-    __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_n_s_ARRAY_TO_GL_TYPE_MAPPING);
     __Pyx_GIVEREF(__pyx_n_s_ARRAY_TO_GL_TYPE_MAPPING);
     PyList_SET_ITEM(__pyx_t_4, 0, __pyx_n_s_ARRAY_TO_GL_TYPE_MAPPING);
-    __pyx_t_3 = __Pyx_Import(__pyx_n_s_OpenGL_arrays_numpymodule, __pyx_t_4, -1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_Import(__pyx_n_s_OpenGL_arrays_numpymodule, __pyx_t_4, -1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_ARRAY_TO_GL_TYPE_MAPPING); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_ARRAY_TO_GL_TYPE_MAPPING); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_t_4);
     __pyx_v_ARRAY_TO_GL_TYPE_MAPPING = __pyx_t_4;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "src/numpy_formathandler.pyx":65
+    /* "src/numpy_formathandler.pyx":72
  * 		if a_to_gl is None:
  * 			from OpenGL.arrays.numpymodule import ARRAY_TO_GL_TYPE_MAPPING
  * 			a_to_gl = ARRAY_TO_GL_TYPE_MAPPING             # <<<<<<<<<<<<<<
@@ -2115,7 +2182,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
     __Pyx_INCREF(__pyx_v_ARRAY_TO_GL_TYPE_MAPPING);
     __Pyx_DECREF_SET(__pyx_v_a_to_gl, __pyx_v_ARRAY_TO_GL_TYPE_MAPPING);
 
-    /* "src/numpy_formathandler.pyx":63
+    /* "src/numpy_formathandler.pyx":70
  * 			from OpenGL import _configflags
  * 			ERROR_ON_COPY = _configflags.ERROR_ON_COPY
  * 		if a_to_gl is None:             # <<<<<<<<<<<<<<
@@ -2124,7 +2191,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
  */
   }
 
-  /* "src/numpy_formathandler.pyx":66
+  /* "src/numpy_formathandler.pyx":73
  * 			from OpenGL.arrays.numpymodule import ARRAY_TO_GL_TYPE_MAPPING
  * 			a_to_gl = ARRAY_TO_GL_TYPE_MAPPING
  * 		if gl_to_a is None:             # <<<<<<<<<<<<<<
@@ -2135,29 +2202,29 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "src/numpy_formathandler.pyx":67
+    /* "src/numpy_formathandler.pyx":74
  * 			a_to_gl = ARRAY_TO_GL_TYPE_MAPPING
  * 		if gl_to_a is None:
  * 			from OpenGL.arrays.numpymodule import GL_TYPE_TO_ARRAY_MAPPING             # <<<<<<<<<<<<<<
  * 			gl_to_a = GL_TYPE_TO_ARRAY_MAPPING
  * 		self.ERROR_ON_COPY = ERROR_ON_COPY
  */
-    __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_n_s_GL_TYPE_TO_ARRAY_MAPPING);
     __Pyx_GIVEREF(__pyx_n_s_GL_TYPE_TO_ARRAY_MAPPING);
     PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_GL_TYPE_TO_ARRAY_MAPPING);
-    __pyx_t_4 = __Pyx_Import(__pyx_n_s_OpenGL_arrays_numpymodule, __pyx_t_3, -1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_Import(__pyx_n_s_OpenGL_arrays_numpymodule, __pyx_t_3, -1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_4, __pyx_n_s_GL_TYPE_TO_ARRAY_MAPPING); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_4, __pyx_n_s_GL_TYPE_TO_ARRAY_MAPPING); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_t_3);
     __pyx_v_GL_TYPE_TO_ARRAY_MAPPING = __pyx_t_3;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "src/numpy_formathandler.pyx":68
+    /* "src/numpy_formathandler.pyx":75
  * 		if gl_to_a is None:
  * 			from OpenGL.arrays.numpymodule import GL_TYPE_TO_ARRAY_MAPPING
  * 			gl_to_a = GL_TYPE_TO_ARRAY_MAPPING             # <<<<<<<<<<<<<<
@@ -2167,7 +2234,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
     __Pyx_INCREF(__pyx_v_GL_TYPE_TO_ARRAY_MAPPING);
     __Pyx_DECREF_SET(__pyx_v_gl_to_a, __pyx_v_GL_TYPE_TO_ARRAY_MAPPING);
 
-    /* "src/numpy_formathandler.pyx":66
+    /* "src/numpy_formathandler.pyx":73
  * 			from OpenGL.arrays.numpymodule import ARRAY_TO_GL_TYPE_MAPPING
  * 			a_to_gl = ARRAY_TO_GL_TYPE_MAPPING
  * 		if gl_to_a is None:             # <<<<<<<<<<<<<<
@@ -2176,24 +2243,24 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
  */
   }
 
-  /* "src/numpy_formathandler.pyx":69
+  /* "src/numpy_formathandler.pyx":76
  * 			from OpenGL.arrays.numpymodule import GL_TYPE_TO_ARRAY_MAPPING
  * 			gl_to_a = GL_TYPE_TO_ARRAY_MAPPING
  * 		self.ERROR_ON_COPY = ERROR_ON_COPY             # <<<<<<<<<<<<<<
  * 		self.array_to_gl_constant = a_to_gl
  * 		self.gl_constant_to_array = gl_to_a
  */
-  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_ERROR_ON_COPY); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_ERROR_ON_COPY); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L1_error)
   __pyx_v_self->__pyx_base.ERROR_ON_COPY = __pyx_t_5;
 
-  /* "src/numpy_formathandler.pyx":70
+  /* "src/numpy_formathandler.pyx":77
  * 			gl_to_a = GL_TYPE_TO_ARRAY_MAPPING
  * 		self.ERROR_ON_COPY = ERROR_ON_COPY
  * 		self.array_to_gl_constant = a_to_gl             # <<<<<<<<<<<<<<
  * 		self.gl_constant_to_array = gl_to_a
  * 
  */
-  if (!(likely(PyDict_CheckExact(__pyx_v_a_to_gl))||((__pyx_v_a_to_gl) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_a_to_gl)->tp_name), 0))) __PYX_ERR(0, 70, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_v_a_to_gl))||((__pyx_v_a_to_gl) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_a_to_gl)->tp_name), 0))) __PYX_ERR(0, 77, __pyx_L1_error)
   __pyx_t_4 = __pyx_v_a_to_gl;
   __Pyx_INCREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_4);
@@ -2202,14 +2269,14 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
   __pyx_v_self->array_to_gl_constant = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "src/numpy_formathandler.pyx":71
+  /* "src/numpy_formathandler.pyx":78
  * 		self.ERROR_ON_COPY = ERROR_ON_COPY
  * 		self.array_to_gl_constant = a_to_gl
  * 		self.gl_constant_to_array = gl_to_a             # <<<<<<<<<<<<<<
  * 
  * 	cdef np.ndarray c_check_array( self, object instance ):
  */
-  if (!(likely(PyDict_CheckExact(__pyx_v_gl_to_a))||((__pyx_v_gl_to_a) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_gl_to_a)->tp_name), 0))) __PYX_ERR(0, 71, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_v_gl_to_a))||((__pyx_v_gl_to_a) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_gl_to_a)->tp_name), 0))) __PYX_ERR(0, 78, __pyx_L1_error)
   __pyx_t_4 = __pyx_v_gl_to_a;
   __Pyx_INCREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_4);
@@ -2218,7 +2285,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
   __pyx_v_self->gl_constant_to_array = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "src/numpy_formathandler.pyx":59
+  /* "src/numpy_formathandler.pyx":66
  *     )
  * 
  * 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):             # <<<<<<<<<<<<<<
@@ -2245,7 +2312,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler___i
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":73
+/* "src/numpy_formathandler.pyx":80
  * 		self.gl_constant_to_array = gl_to_a
  * 
  * 	cdef np.ndarray c_check_array( self, object instance ):             # <<<<<<<<<<<<<<
@@ -2261,7 +2328,7 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("c_check_array", 0);
 
-  /* "src/numpy_formathandler.pyx":74
+  /* "src/numpy_formathandler.pyx":81
  * 
  * 	cdef np.ndarray c_check_array( self, object instance ):
  * 		if not PyArray_Check( instance ):             # <<<<<<<<<<<<<<
@@ -2271,14 +2338,14 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   __pyx_t_1 = ((!(PyArray_Check(__pyx_v_instance) != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "src/numpy_formathandler.pyx":76
+    /* "src/numpy_formathandler.pyx":83
  * 		if not PyArray_Check( instance ):
  * 			raise TypeError(
  * 				"""Numpy format handler passed a non-numpy-array object %s (of type %s)"""%( instance, type(instance) ),             # <<<<<<<<<<<<<<
  * 			)
  * 
  */
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_instance);
     __Pyx_GIVEREF(__pyx_v_instance);
@@ -2286,25 +2353,25 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
     __Pyx_INCREF(((PyObject *)Py_TYPE(__pyx_v_instance)));
     __Pyx_GIVEREF(((PyObject *)Py_TYPE(__pyx_v_instance)));
     PyTuple_SET_ITEM(__pyx_t_2, 1, ((PyObject *)Py_TYPE(__pyx_v_instance)));
-    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_Numpy_format_handler_passed_a_no, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_Numpy_format_handler_passed_a_no, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 83, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "src/numpy_formathandler.pyx":75
+    /* "src/numpy_formathandler.pyx":82
  * 	cdef np.ndarray c_check_array( self, object instance ):
  * 		if not PyArray_Check( instance ):
  * 			raise TypeError(             # <<<<<<<<<<<<<<
  * 				"""Numpy format handler passed a non-numpy-array object %s (of type %s)"""%( instance, type(instance) ),
  * 			)
  */
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 75, __pyx_L1_error)
+    __PYX_ERR(0, 82, __pyx_L1_error)
 
-    /* "src/numpy_formathandler.pyx":74
+    /* "src/numpy_formathandler.pyx":81
  * 
  * 	cdef np.ndarray c_check_array( self, object instance ):
  * 		if not PyArray_Check( instance ):             # <<<<<<<<<<<<<<
@@ -2313,7 +2380,7 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
  */
   }
 
-  /* "src/numpy_formathandler.pyx":79
+  /* "src/numpy_formathandler.pyx":86
  * 			)
  * 
  * 		return <np.ndarray> instance             # <<<<<<<<<<<<<<
@@ -2325,7 +2392,7 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   __pyx_r = ((PyArrayObject *)__pyx_v_instance);
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":73
+  /* "src/numpy_formathandler.pyx":80
  * 		self.gl_constant_to_array = gl_to_a
  * 
  * 	cdef np.ndarray c_check_array( self, object instance ):             # <<<<<<<<<<<<<<
@@ -2345,7 +2412,7 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":81
+/* "src/numpy_formathandler.pyx":88
  * 		return <np.ndarray> instance
  * 
  * 	cdef c_from_param( self, object instance, object typeCode ):             # <<<<<<<<<<<<<<
@@ -2368,40 +2435,40 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("c_from_param", 0);
 
-  /* "src/numpy_formathandler.pyx":83
+  /* "src/numpy_formathandler.pyx":90
  * 	cdef c_from_param( self, object instance, object typeCode ):
  * 		"""simple function-based from_param"""
  * 		cdef np.ndarray working = self.c_check_array( instance )             # <<<<<<<<<<<<<<
  * 		cdef np.dtype targetType
  * 		if typeCode:
  */
-  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_working = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "src/numpy_formathandler.pyx":85
+  /* "src/numpy_formathandler.pyx":92
  * 		cdef np.ndarray working = self.c_check_array( instance )
  * 		cdef np.dtype targetType
  * 		if typeCode:             # <<<<<<<<<<<<<<
  * 			targetType = <np.dtype>(self.gl_constant_to_array[ typeCode ])
- * 			if PyArray_DTYPE(instance) != targetType:
+ * 			if array_descr(instance) != targetType:
  */
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_typeCode); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_typeCode); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 92, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "src/numpy_formathandler.pyx":86
+    /* "src/numpy_formathandler.pyx":93
  * 		cdef np.dtype targetType
  * 		if typeCode:
  * 			targetType = <np.dtype>(self.gl_constant_to_array[ typeCode ])             # <<<<<<<<<<<<<<
- * 			if PyArray_DTYPE(instance) != targetType:
+ * 			if array_descr(instance) != targetType:
  * 				raise CopyError(
  */
     if (unlikely(__pyx_v_self->gl_constant_to_array == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 86, __pyx_L1_error)
+      __PYX_ERR(0, 93, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->gl_constant_to_array, __pyx_v_typeCode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->gl_constant_to_array, __pyx_v_typeCode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = __pyx_t_1;
     __Pyx_INCREF(__pyx_t_3);
@@ -2409,46 +2476,46 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     __pyx_v_targetType = ((PyArray_Descr *)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "src/numpy_formathandler.pyx":87
+    /* "src/numpy_formathandler.pyx":94
  * 		if typeCode:
  * 			targetType = <np.dtype>(self.gl_constant_to_array[ typeCode ])
- * 			if PyArray_DTYPE(instance) != targetType:             # <<<<<<<<<<<<<<
+ * 			if array_descr(instance) != targetType:             # <<<<<<<<<<<<<<
  * 				raise CopyError(
  * 					"""Array of type %r passed, required array of type %r""",
  */
-    if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 87, __pyx_L1_error)
-    __pyx_t_3 = ((PyObject *)PyArray_DTYPE(((PyArrayObject *)__pyx_v_instance))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+    if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 94, __pyx_L1_error)
+    __pyx_t_3 = ((PyObject *)__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(((PyArrayObject *)__pyx_v_instance))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, ((PyObject *)__pyx_v_targetType), Py_NE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, ((PyObject *)__pyx_v_targetType), Py_NE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (unlikely(__pyx_t_2)) {
 
-      /* "src/numpy_formathandler.pyx":88
+      /* "src/numpy_formathandler.pyx":95
  * 			targetType = <np.dtype>(self.gl_constant_to_array[ typeCode ])
- * 			if PyArray_DTYPE(instance) != targetType:
+ * 			if array_descr(instance) != targetType:
  * 				raise CopyError(             # <<<<<<<<<<<<<<
  * 					"""Array of type %r passed, required array of type %r""",
- * 					PyArray_DTYPE(instance).char, targetType.char,
+ * 					array_descr(instance).char, targetType.char,
  */
-      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_CopyError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 88, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_CopyError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
 
-      /* "src/numpy_formathandler.pyx":90
+      /* "src/numpy_formathandler.pyx":97
  * 				raise CopyError(
  * 					"""Array of type %r passed, required array of type %r""",
- * 					PyArray_DTYPE(instance).char, targetType.char,             # <<<<<<<<<<<<<<
+ * 					array_descr(instance).char, targetType.char,             # <<<<<<<<<<<<<<
  * 				)
  * 		if not PyArray_ISCARRAY( instance ):
  */
-      if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 90, __pyx_L1_error)
-      __pyx_t_4 = ((PyObject *)PyArray_DTYPE(((PyArrayObject *)__pyx_v_instance))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
+      if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 97, __pyx_L1_error)
+      __pyx_t_4 = ((PyObject *)__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(((PyArrayObject *)__pyx_v_instance))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 97, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_char); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_char); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 97, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_targetType), __pyx_n_s_char); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_targetType), __pyx_n_s_char); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 97, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_t_6 = NULL;
       __pyx_t_7 = 0;
@@ -2465,7 +2532,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_kp_s_Array_of_type_r_passed_required, __pyx_t_5, __pyx_t_4};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2475,7 +2542,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_kp_s_Array_of_type_r_passed_required, __pyx_t_5, __pyx_t_4};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2483,7 +2550,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
       } else
       #endif
       {
-        __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 95, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         if (__pyx_t_6) {
           __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -2497,75 +2564,75 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
         PyTuple_SET_ITEM(__pyx_t_8, 2+__pyx_t_7, __pyx_t_4);
         __pyx_t_5 = 0;
         __pyx_t_4 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_Raise(__pyx_t_1, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __PYX_ERR(0, 88, __pyx_L1_error)
+      __PYX_ERR(0, 95, __pyx_L1_error)
 
-      /* "src/numpy_formathandler.pyx":87
+      /* "src/numpy_formathandler.pyx":94
  * 		if typeCode:
  * 			targetType = <np.dtype>(self.gl_constant_to_array[ typeCode ])
- * 			if PyArray_DTYPE(instance) != targetType:             # <<<<<<<<<<<<<<
+ * 			if array_descr(instance) != targetType:             # <<<<<<<<<<<<<<
  * 				raise CopyError(
  * 					"""Array of type %r passed, required array of type %r""",
  */
     }
 
-    /* "src/numpy_formathandler.pyx":85
+    /* "src/numpy_formathandler.pyx":92
  * 		cdef np.ndarray working = self.c_check_array( instance )
  * 		cdef np.dtype targetType
  * 		if typeCode:             # <<<<<<<<<<<<<<
  * 			targetType = <np.dtype>(self.gl_constant_to_array[ typeCode ])
- * 			if PyArray_DTYPE(instance) != targetType:
+ * 			if array_descr(instance) != targetType:
  */
   }
 
-  /* "src/numpy_formathandler.pyx":92
- * 					PyArray_DTYPE(instance).char, targetType.char,
+  /* "src/numpy_formathandler.pyx":99
+ * 					array_descr(instance).char, targetType.char,
  * 				)
  * 		if not PyArray_ISCARRAY( instance ):             # <<<<<<<<<<<<<<
  * 			raise CopyError(
  * 				"""from_param received a non-contiguous array! %s"""%(
  */
-  if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 92, __pyx_L1_error)
+  if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 99, __pyx_L1_error)
   __pyx_t_2 = ((!(PyArray_ISCARRAY(((PyArrayObject *)__pyx_v_instance)) != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "src/numpy_formathandler.pyx":93
+    /* "src/numpy_formathandler.pyx":100
  * 				)
  * 		if not PyArray_ISCARRAY( instance ):
  * 			raise CopyError(             # <<<<<<<<<<<<<<
  * 				"""from_param received a non-contiguous array! %s"""%(
  * 					working,
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_CopyError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_CopyError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
 
-    /* "src/numpy_formathandler.pyx":95
+    /* "src/numpy_formathandler.pyx":102
  * 			raise CopyError(
  * 				"""from_param received a non-contiguous array! %s"""%(
  * 					working,             # <<<<<<<<<<<<<<
  * 				)
  * 			)
  */
-    __pyx_t_8 = PyTuple_New(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 95, __pyx_L1_error)
+    __pyx_t_8 = PyTuple_New(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 102, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_INCREF(((PyObject *)__pyx_v_working));
     __Pyx_GIVEREF(((PyObject *)__pyx_v_working));
     PyTuple_SET_ITEM(__pyx_t_8, 0, ((PyObject *)__pyx_v_working));
 
-    /* "src/numpy_formathandler.pyx":94
+    /* "src/numpy_formathandler.pyx":101
  * 		if not PyArray_ISCARRAY( instance ):
  * 			raise CopyError(
  * 				"""from_param received a non-contiguous array! %s"""%(             # <<<<<<<<<<<<<<
  * 					working,
  * 				)
  */
-    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_from_param_received_a_non_contig, __pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_from_param_received_a_non_contig, __pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_8 = NULL;
@@ -2579,14 +2646,14 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
       }
     }
     if (!__pyx_t_8) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_t_4};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2595,20 +2662,20 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_t_4};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       } else
       #endif
       {
-        __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_8); __pyx_t_8 = NULL;
         __Pyx_GIVEREF(__pyx_t_4);
         PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_4);
         __pyx_t_4 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
@@ -2616,10 +2683,10 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 93, __pyx_L1_error)
+    __PYX_ERR(0, 100, __pyx_L1_error)
 
-    /* "src/numpy_formathandler.pyx":92
- * 					PyArray_DTYPE(instance).char, targetType.char,
+    /* "src/numpy_formathandler.pyx":99
+ * 					array_descr(instance).char, targetType.char,
  * 				)
  * 		if not PyArray_ISCARRAY( instance ):             # <<<<<<<<<<<<<<
  * 			raise CopyError(
@@ -2627,7 +2694,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  */
   }
 
-  /* "src/numpy_formathandler.pyx":98
+  /* "src/numpy_formathandler.pyx":105
  * 				)
  * 			)
  * 		return c_void_p(<size_t> PyArray_DATA(working))             # <<<<<<<<<<<<<<
@@ -2635,9 +2702,9 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  * 	cdef c_dataPointer( self, object instance ):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_c_void_p); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_c_void_p); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyInt_FromSize_t(((size_t)PyArray_DATA(__pyx_v_working))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_FromSize_t(((size_t)PyArray_DATA(__pyx_v_working))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -2650,14 +2717,14 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2666,20 +2733,20 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
@@ -2689,7 +2756,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":81
+  /* "src/numpy_formathandler.pyx":88
  * 		return <np.ndarray> instance
  * 
  * 	cdef c_from_param( self, object instance, object typeCode ):             # <<<<<<<<<<<<<<
@@ -2715,7 +2782,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":100
+/* "src/numpy_formathandler.pyx":107
  * 		return c_void_p(<size_t> PyArray_DATA(working))
  * 
  * 	cdef c_dataPointer( self, object instance ):             # <<<<<<<<<<<<<<
@@ -2730,7 +2797,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("c_dataPointer", 0);
 
-  /* "src/numpy_formathandler.pyx":102
+  /* "src/numpy_formathandler.pyx":109
  * 	cdef c_dataPointer( self, object instance ):
  * 		"""Retrieve data-pointer directly"""
  * 		return <size_t> PyArray_DATA(<np.ndarray>self.c_check_array( instance ))             # <<<<<<<<<<<<<<
@@ -2738,16 +2805,16 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  * 		"""Create an array initialized to zeros"""
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_FromSize_t(((size_t)PyArray_DATA(((PyArrayObject *)__pyx_t_1)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_FromSize_t(((size_t)PyArray_DATA(((PyArrayObject *)__pyx_t_1)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":100
+  /* "src/numpy_formathandler.pyx":107
  * 		return c_void_p(<size_t> PyArray_DATA(working))
  * 
  * 	cdef c_dataPointer( self, object instance ):             # <<<<<<<<<<<<<<
@@ -2767,7 +2834,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":103
+/* "src/numpy_formathandler.pyx":110
  * 		"""Retrieve data-pointer directly"""
  * 		return <size_t> PyArray_DATA(<np.ndarray>self.c_check_array( instance ))
  * 	cdef c_zeros( self, object dims, object typeCode ):             # <<<<<<<<<<<<<<
@@ -2797,7 +2864,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   __Pyx_RefNannySetupContext("c_zeros", 0);
   __Pyx_INCREF(__pyx_v_dims);
 
-  /* "src/numpy_formathandler.pyx":106
+  /* "src/numpy_formathandler.pyx":113
  * 		"""Create an array initialized to zeros"""
  * 		cdef np.ndarray c_dims
  * 		try:             # <<<<<<<<<<<<<<
@@ -2813,39 +2880,39 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "src/numpy_formathandler.pyx":108
+      /* "src/numpy_formathandler.pyx":115
  * 		try:
  * 			c_dims = PyArray_ContiguousFromAny(
  * 				[int(x) for x in dims], np.NPY_INTP, 1,1             # <<<<<<<<<<<<<<
  * 			)
  * 		except (ValueError,TypeError), err:
  */
-      __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 108, __pyx_L3_error)
+      __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 115, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
       if (likely(PyList_CheckExact(__pyx_v_dims)) || PyTuple_CheckExact(__pyx_v_dims)) {
         __pyx_t_5 = __pyx_v_dims; __Pyx_INCREF(__pyx_t_5); __pyx_t_6 = 0;
         __pyx_t_7 = NULL;
       } else {
-        __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_v_dims); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L3_error)
+        __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_v_dims); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 115, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 108, __pyx_L3_error)
+        __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 115, __pyx_L3_error)
       }
       for (;;) {
         if (likely(!__pyx_t_7)) {
           if (likely(PyList_CheckExact(__pyx_t_5))) {
             if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_5)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_8 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 108, __pyx_L3_error)
+            __pyx_t_8 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 115, __pyx_L3_error)
             #else
-            __pyx_t_8 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 108, __pyx_L3_error)
+            __pyx_t_8 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 115, __pyx_L3_error)
             __Pyx_GOTREF(__pyx_t_8);
             #endif
           } else {
             if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_5)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 108, __pyx_L3_error)
+            __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 115, __pyx_L3_error)
             #else
-            __pyx_t_8 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 108, __pyx_L3_error)
+            __pyx_t_8 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 115, __pyx_L3_error)
             __Pyx_GOTREF(__pyx_t_8);
             #endif
           }
@@ -2855,7 +2922,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
               if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else __PYX_ERR(0, 108, __pyx_L3_error)
+              else __PYX_ERR(0, 115, __pyx_L3_error)
             }
             break;
           }
@@ -2863,27 +2930,27 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
         }
         __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_8);
         __pyx_t_8 = 0;
-        __pyx_t_8 = __Pyx_PyNumber_Int(__pyx_v_x); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 108, __pyx_L3_error)
+        __pyx_t_8 = __Pyx_PyNumber_Int(__pyx_v_x); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 115, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_t_8))) __PYX_ERR(0, 108, __pyx_L3_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_t_8))) __PYX_ERR(0, 115, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "src/numpy_formathandler.pyx":107
+      /* "src/numpy_formathandler.pyx":114
  * 		cdef np.ndarray c_dims
  * 		try:
  * 			c_dims = PyArray_ContiguousFromAny(             # <<<<<<<<<<<<<<
  * 				[int(x) for x in dims], np.NPY_INTP, 1,1
  * 			)
  */
-      __pyx_t_5 = ((PyObject *)PyArray_ContiguousFromAny(__pyx_t_4, NPY_INTP, 1, 1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_t_5 = ((PyObject *)PyArray_ContiguousFromAny(__pyx_t_4, NPY_INTP, 1, 1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __pyx_v_c_dims = ((PyArrayObject *)__pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "src/numpy_formathandler.pyx":106
+      /* "src/numpy_formathandler.pyx":113
  * 		"""Create an array initialized to zeros"""
  * 		cdef np.ndarray c_dims
  * 		try:             # <<<<<<<<<<<<<<
@@ -2900,7 +2967,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "src/numpy_formathandler.pyx":110
+    /* "src/numpy_formathandler.pyx":117
  * 				[int(x) for x in dims], np.NPY_INTP, 1,1
  * 			)
  * 		except (ValueError,TypeError), err:             # <<<<<<<<<<<<<<
@@ -2910,23 +2977,23 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     __pyx_t_9 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ValueError) || __Pyx_PyErr_ExceptionMatches(__pyx_builtin_TypeError);
     if (__pyx_t_9) {
       __Pyx_AddTraceback("OpenGL_accelerate.numpy_formathandler.NumpyHandler.c_zeros", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_4, &__pyx_t_8) < 0) __PYX_ERR(0, 110, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_4, &__pyx_t_8) < 0) __PYX_ERR(0, 117, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_INCREF(__pyx_t_4);
       __pyx_v_err = __pyx_t_4;
 
-      /* "src/numpy_formathandler.pyx":111
+      /* "src/numpy_formathandler.pyx":118
  * 			)
  * 		except (ValueError,TypeError), err:
  * 			dims = (int(dims),)             # <<<<<<<<<<<<<<
  * 			c_dims = PyArray_ContiguousFromAny(
  * 				dims, np.NPY_INTP, 1,1
  */
-      __pyx_t_10 = __Pyx_PyNumber_Int(__pyx_v_dims); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 111, __pyx_L5_except_error)
+      __pyx_t_10 = __Pyx_PyNumber_Int(__pyx_v_dims); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 118, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 111, __pyx_L5_except_error)
+      __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 118, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_GIVEREF(__pyx_t_10);
       PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_10);
@@ -2934,14 +3001,14 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
       __Pyx_DECREF_SET(__pyx_v_dims, __pyx_t_11);
       __pyx_t_11 = 0;
 
-      /* "src/numpy_formathandler.pyx":112
+      /* "src/numpy_formathandler.pyx":119
  * 		except (ValueError,TypeError), err:
  * 			dims = (int(dims),)
  * 			c_dims = PyArray_ContiguousFromAny(             # <<<<<<<<<<<<<<
  * 				dims, np.NPY_INTP, 1,1
  * 			)
  */
-      __pyx_t_11 = ((PyObject *)PyArray_ContiguousFromAny(__pyx_v_dims, NPY_INTP, 1, 1)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 112, __pyx_L5_except_error)
+      __pyx_t_11 = ((PyObject *)PyArray_ContiguousFromAny(__pyx_v_dims, NPY_INTP, 1, 1)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 119, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_XDECREF_SET(__pyx_v_c_dims, ((PyArrayObject *)__pyx_t_11));
       __pyx_t_11 = 0;
@@ -2953,7 +3020,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* "src/numpy_formathandler.pyx":106
+    /* "src/numpy_formathandler.pyx":113
  * 		"""Create an array initialized to zeros"""
  * 		cdef np.ndarray c_dims
  * 		try:             # <<<<<<<<<<<<<<
@@ -2973,19 +3040,19 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     __pyx_L8_try_end:;
   }
 
-  /* "src/numpy_formathandler.pyx":115
+  /* "src/numpy_formathandler.pyx":122
  * 				dims, np.NPY_INTP, 1,1
  * 			)
  * 		cdef np.dtype typecode = self.typeCodeToDtype( typeCode )             # <<<<<<<<<<<<<<
  * 		Py_INCREF( typecode )
  * 		cdef np.npy_intp ndims = PyArray_SIZE(c_dims)
  */
-  __pyx_t_8 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->typeCodeToDtype(__pyx_v_self, __pyx_v_typeCode)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_8 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->typeCodeToDtype(__pyx_v_self, __pyx_v_typeCode)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_v_typecode = ((PyArray_Descr *)__pyx_t_8);
   __pyx_t_8 = 0;
 
-  /* "src/numpy_formathandler.pyx":116
+  /* "src/numpy_formathandler.pyx":123
  * 			)
  * 		cdef np.dtype typecode = self.typeCodeToDtype( typeCode )
  * 		Py_INCREF( typecode )             # <<<<<<<<<<<<<<
@@ -2994,7 +3061,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  */
   Py_INCREF(((PyObject *)__pyx_v_typecode));
 
-  /* "src/numpy_formathandler.pyx":117
+  /* "src/numpy_formathandler.pyx":124
  * 		cdef np.dtype typecode = self.typeCodeToDtype( typeCode )
  * 		Py_INCREF( typecode )
  * 		cdef np.npy_intp ndims = PyArray_SIZE(c_dims)             # <<<<<<<<<<<<<<
@@ -3003,7 +3070,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  */
   __pyx_v_ndims = PyArray_SIZE(__pyx_v_c_dims);
 
-  /* "src/numpy_formathandler.pyx":118
+  /* "src/numpy_formathandler.pyx":125
  * 		Py_INCREF( typecode )
  * 		cdef np.npy_intp ndims = PyArray_SIZE(c_dims)
  * 		return PyArray_Zeros( <int>ndims, <np.npy_intp *>PyArray_DATA(c_dims), typecode, 0 )             # <<<<<<<<<<<<<<
@@ -3011,13 +3078,13 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  * 		"""Retrieve array size reference"""
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_8 = ((PyObject *)PyArray_Zeros(((int)__pyx_v_ndims), ((npy_intp *)PyArray_DATA(__pyx_v_c_dims)), __pyx_v_typecode, 0)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_8 = ((PyObject *)PyArray_Zeros(((int)__pyx_v_ndims), ((npy_intp *)PyArray_DATA(__pyx_v_c_dims)), __pyx_v_typecode, 0)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_r = __pyx_t_8;
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":103
+  /* "src/numpy_formathandler.pyx":110
  * 		"""Retrieve data-pointer directly"""
  * 		return <size_t> PyArray_DATA(<np.ndarray>self.c_check_array( instance ))
  * 	cdef c_zeros( self, object dims, object typeCode ):             # <<<<<<<<<<<<<<
@@ -3045,7 +3112,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":119
+/* "src/numpy_formathandler.pyx":126
  * 		cdef np.npy_intp ndims = PyArray_SIZE(c_dims)
  * 		return PyArray_Zeros( <int>ndims, <np.npy_intp *>PyArray_DATA(c_dims), typecode, 0 )
  * 	cdef c_arraySize( self, object instance, object typeCode ):             # <<<<<<<<<<<<<<
@@ -3060,7 +3127,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("c_arraySize", 0);
 
-  /* "src/numpy_formathandler.pyx":121
+  /* "src/numpy_formathandler.pyx":128
  * 	cdef c_arraySize( self, object instance, object typeCode ):
  * 		"""Retrieve array size reference"""
  * 		return (<np.ndarray>self.c_check_array( instance )).size             # <<<<<<<<<<<<<<
@@ -3068,16 +3135,16 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  * 		"""Given a data-value, calculate number of bytes required to represent"""
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":119
+  /* "src/numpy_formathandler.pyx":126
  * 		cdef np.npy_intp ndims = PyArray_SIZE(c_dims)
  * 		return PyArray_Zeros( <int>ndims, <np.npy_intp *>PyArray_DATA(c_dims), typecode, 0 )
  * 	cdef c_arraySize( self, object instance, object typeCode ):             # <<<<<<<<<<<<<<
@@ -3097,7 +3164,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":122
+/* "src/numpy_formathandler.pyx":129
  * 		"""Retrieve array size reference"""
  * 		return (<np.ndarray>self.c_check_array( instance )).size
  * 	cdef c_arrayByteCount( self, object instance ):             # <<<<<<<<<<<<<<
@@ -3111,7 +3178,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("c_arrayByteCount", 0);
 
-  /* "src/numpy_formathandler.pyx":124
+  /* "src/numpy_formathandler.pyx":131
  * 	cdef c_arrayByteCount( self, object instance ):
  * 		"""Given a data-value, calculate number of bytes required to represent"""
  * 		return instance.nbytes             # <<<<<<<<<<<<<<
@@ -3119,13 +3186,13 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  * 		"""Given a value, guess OpenGL type of the corresponding pointer"""
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_instance, __pyx_n_s_nbytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_instance, __pyx_n_s_nbytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":122
+  /* "src/numpy_formathandler.pyx":129
  * 		"""Retrieve array size reference"""
  * 		return (<np.ndarray>self.c_check_array( instance )).size
  * 	cdef c_arrayByteCount( self, object instance ):             # <<<<<<<<<<<<<<
@@ -3144,7 +3211,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":125
+/* "src/numpy_formathandler.pyx":132
  * 		"""Given a data-value, calculate number of bytes required to represent"""
  * 		return instance.nbytes
  * 	cdef c_arrayToGLType( self, object instance ):             # <<<<<<<<<<<<<<
@@ -3164,40 +3231,40 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("c_arrayToGLType", 0);
 
-  /* "src/numpy_formathandler.pyx":127
+  /* "src/numpy_formathandler.pyx":134
  * 	cdef c_arrayToGLType( self, object instance ):
  * 		"""Given a value, guess OpenGL type of the corresponding pointer"""
  * 		cdef np.ndarray value = self.c_check_array( instance )             # <<<<<<<<<<<<<<
- * 		cdef object constant = self.array_to_gl_constant.get( PyArray_DTYPE(value) )
+ * 		cdef object constant = self.array_to_gl_constant.get( array_descr(value) )
  * 		if constant is None:
  */
-  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_value = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "src/numpy_formathandler.pyx":128
+  /* "src/numpy_formathandler.pyx":135
  * 		"""Given a value, guess OpenGL type of the corresponding pointer"""
  * 		cdef np.ndarray value = self.c_check_array( instance )
- * 		cdef object constant = self.array_to_gl_constant.get( PyArray_DTYPE(value) )             # <<<<<<<<<<<<<<
+ * 		cdef object constant = self.array_to_gl_constant.get( array_descr(value) )             # <<<<<<<<<<<<<<
  * 		if constant is None:
  * 			raise TypeError(
  */
   if (unlikely(__pyx_v_self->array_to_gl_constant == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "get");
-    __PYX_ERR(0, 128, __pyx_L1_error)
+    __PYX_ERR(0, 135, __pyx_L1_error)
   }
-  __pyx_t_1 = ((PyObject *)PyArray_DTYPE(__pyx_v_value)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(__pyx_v_value)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_self->array_to_gl_constant, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_self->array_to_gl_constant, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_constant = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":129
+  /* "src/numpy_formathandler.pyx":136
  * 		cdef np.ndarray value = self.c_check_array( instance )
- * 		cdef object constant = self.array_to_gl_constant.get( PyArray_DTYPE(value) )
+ * 		cdef object constant = self.array_to_gl_constant.get( array_descr(value) )
  * 		if constant is None:             # <<<<<<<<<<<<<<
  * 			raise TypeError(
  * 				"""Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
@@ -3206,22 +3273,22 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (unlikely(__pyx_t_4)) {
 
-    /* "src/numpy_formathandler.pyx":132
+    /* "src/numpy_formathandler.pyx":139
  * 			raise TypeError(
  * 				"""Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
- * 					PyArray_DTYPE(value), self.array_to_gl_constant.keys(), value,             # <<<<<<<<<<<<<<
+ * 					array_descr(value), self.array_to_gl_constant.keys(), value,             # <<<<<<<<<<<<<<
  * 				)
  * 			)
  */
-    __pyx_t_2 = ((PyObject *)PyArray_DTYPE(__pyx_v_value)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_2 = ((PyObject *)__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(__pyx_v_value)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     if (unlikely(__pyx_v_self->array_to_gl_constant == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "keys");
-      __PYX_ERR(0, 132, __pyx_L1_error)
+      __PYX_ERR(0, 139, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_PyDict_Keys(__pyx_v_self->array_to_gl_constant); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyDict_Keys(__pyx_v_self->array_to_gl_constant); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2);
@@ -3233,41 +3300,41 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
     __pyx_t_2 = 0;
     __pyx_t_1 = 0;
 
-    /* "src/numpy_formathandler.pyx":131
+    /* "src/numpy_formathandler.pyx":138
  * 		if constant is None:
  * 			raise TypeError(
  * 				"""Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(             # <<<<<<<<<<<<<<
- * 					PyArray_DTYPE(value), self.array_to_gl_constant.keys(), value,
+ * 					array_descr(value), self.array_to_gl_constant.keys(), value,
  * 				)
  */
-    __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Don_t_know_GL_type_for_array_of, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Don_t_know_GL_type_for_array_of, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "src/numpy_formathandler.pyx":130
- * 		cdef object constant = self.array_to_gl_constant.get( PyArray_DTYPE(value) )
+    /* "src/numpy_formathandler.pyx":137
+ * 		cdef object constant = self.array_to_gl_constant.get( array_descr(value) )
  * 		if constant is None:
  * 			raise TypeError(             # <<<<<<<<<<<<<<
  * 				"""Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
- * 					PyArray_DTYPE(value), self.array_to_gl_constant.keys(), value,
+ * 					array_descr(value), self.array_to_gl_constant.keys(), value,
  */
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_Raise(__pyx_t_5, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __PYX_ERR(0, 130, __pyx_L1_error)
+    __PYX_ERR(0, 137, __pyx_L1_error)
 
-    /* "src/numpy_formathandler.pyx":129
+    /* "src/numpy_formathandler.pyx":136
  * 		cdef np.ndarray value = self.c_check_array( instance )
- * 		cdef object constant = self.array_to_gl_constant.get( PyArray_DTYPE(value) )
+ * 		cdef object constant = self.array_to_gl_constant.get( array_descr(value) )
  * 		if constant is None:             # <<<<<<<<<<<<<<
  * 			raise TypeError(
  * 				"""Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
  */
   }
 
-  /* "src/numpy_formathandler.pyx":135
+  /* "src/numpy_formathandler.pyx":142
  * 				)
  * 			)
  * 		return constant             # <<<<<<<<<<<<<<
@@ -3279,7 +3346,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   __pyx_r = __pyx_v_constant;
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":125
+  /* "src/numpy_formathandler.pyx":132
  * 		"""Given a data-value, calculate number of bytes required to represent"""
  * 		return instance.nbytes
  * 	cdef c_arrayToGLType( self, object instance ):             # <<<<<<<<<<<<<<
@@ -3302,7 +3369,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":136
+/* "src/numpy_formathandler.pyx":143
  * 			)
  * 		return constant
  * 	cdef c_asArray( self, object instance, object typeCode ):             # <<<<<<<<<<<<<<
@@ -3321,14 +3388,14 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("c_asArray", 0);
 
-  /* "src/numpy_formathandler.pyx":138
+  /* "src/numpy_formathandler.pyx":145
  * 	cdef c_asArray( self, object instance, object typeCode ):
  * 		"""Retrieve the given value as a (contiguous) array of type typeCode"""
  * 		cdef np.ndarray working = (<np.ndarray>self.c_check_array( instance ))             # <<<<<<<<<<<<<<
  * 		cdef np.dtype typecode
  * 		if typeCode is None:
  */
-  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->c_check_array(__pyx_v_self, __pyx_v_instance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = __pyx_t_1;
   __Pyx_INCREF(__pyx_t_2);
@@ -3336,56 +3403,55 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   __pyx_v_working = ((PyArrayObject *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":140
+  /* "src/numpy_formathandler.pyx":147
  * 		cdef np.ndarray working = (<np.ndarray>self.c_check_array( instance ))
  * 		cdef np.dtype typecode
  * 		if typeCode is None:             # <<<<<<<<<<<<<<
- * 			typecode = working.dtype
+ * 			typecode = array_descr(working)
  * 		else:
  */
   __pyx_t_3 = (__pyx_v_typeCode == Py_None);
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "src/numpy_formathandler.pyx":141
+    /* "src/numpy_formathandler.pyx":148
  * 		cdef np.dtype typecode
  * 		if typeCode is None:
- * 			typecode = working.dtype             # <<<<<<<<<<<<<<
+ * 			typecode = array_descr(working)             # <<<<<<<<<<<<<<
  * 		else:
  * 			typecode = self.typeCodeToDtype( typeCode )
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_working), __pyx_n_s_dtype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_2 = ((PyObject *)__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(__pyx_v_working)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_5numpy_dtype))))) __PYX_ERR(0, 141, __pyx_L1_error)
     __pyx_v_typecode = ((PyArray_Descr *)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "src/numpy_formathandler.pyx":140
+    /* "src/numpy_formathandler.pyx":147
  * 		cdef np.ndarray working = (<np.ndarray>self.c_check_array( instance ))
  * 		cdef np.dtype typecode
  * 		if typeCode is None:             # <<<<<<<<<<<<<<
- * 			typecode = working.dtype
+ * 			typecode = array_descr(working)
  * 		else:
  */
     goto __pyx_L3;
   }
 
-  /* "src/numpy_formathandler.pyx":143
- * 			typecode = working.dtype
+  /* "src/numpy_formathandler.pyx":150
+ * 			typecode = array_descr(working)
  * 		else:
  * 			typecode = self.typeCodeToDtype( typeCode )             # <<<<<<<<<<<<<<
  * 		return self.contiguous( working, typecode )
  * 	cdef c_unitSize( self, object instance, typeCode ):
  */
   /*else*/ {
-    __pyx_t_2 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->typeCodeToDtype(__pyx_v_self, __pyx_v_typeCode)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_2 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->typeCodeToDtype(__pyx_v_self, __pyx_v_typeCode)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_typecode = ((PyArray_Descr *)__pyx_t_2);
     __pyx_t_2 = 0;
   }
   __pyx_L3:;
 
-  /* "src/numpy_formathandler.pyx":144
+  /* "src/numpy_formathandler.pyx":151
  * 		else:
  * 			typecode = self.typeCodeToDtype( typeCode )
  * 		return self.contiguous( working, typecode )             # <<<<<<<<<<<<<<
@@ -3393,13 +3459,13 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  * 		"""Retrieve last dimension of the array"""
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->contiguous(__pyx_v_self, __pyx_v_working, __pyx_v_typecode)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)((struct __pyx_vtabstruct_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->contiguous(__pyx_v_self, __pyx_v_working, __pyx_v_typecode)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":136
+  /* "src/numpy_formathandler.pyx":143
  * 			)
  * 		return constant
  * 	cdef c_asArray( self, object instance, object typeCode ):             # <<<<<<<<<<<<<<
@@ -3421,12 +3487,12 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":145
+/* "src/numpy_formathandler.pyx":152
  * 			typecode = self.typeCodeToDtype( typeCode )
  * 		return self.contiguous( working, typecode )
  * 	cdef c_unitSize( self, object instance, typeCode ):             # <<<<<<<<<<<<<<
  * 		"""Retrieve last dimension of the array"""
- * 		return PyArray_DIMS(instance)[PyArray_NDIM(instance)-1]
+ * 		return PyArray_DIM(instance, PyArray_NDIM(instance)-1)
  */
 
 static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler_c_unitSize(CYTHON_UNUSED struct __pyx_obj_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *__pyx_v_self, PyObject *__pyx_v_instance, CYTHON_UNUSED PyObject *__pyx_v_typeCode) {
@@ -3435,28 +3501,28 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("c_unitSize", 0);
 
-  /* "src/numpy_formathandler.pyx":147
+  /* "src/numpy_formathandler.pyx":154
  * 	cdef c_unitSize( self, object instance, typeCode ):
  * 		"""Retrieve last dimension of the array"""
- * 		return PyArray_DIMS(instance)[PyArray_NDIM(instance)-1]             # <<<<<<<<<<<<<<
+ * 		return PyArray_DIM(instance, PyArray_NDIM(instance)-1)             # <<<<<<<<<<<<<<
  * 	cdef c_dimensions( self, object instance ):
  * 		"""Retrieve full set of dimensions for the array as tuple"""
  */
   __Pyx_XDECREF(__pyx_r);
-  if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 147, __pyx_L1_error)
-  if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 147, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyInt_From_int((PyArray_DIMS(((PyArrayObject *)__pyx_v_instance))[(PyArray_NDIM(((PyArrayObject *)__pyx_v_instance)) - 1)])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+  if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 154, __pyx_L1_error)
+  if (!(likely(((__pyx_v_instance) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_instance, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(PyArray_DIM(((PyArrayObject *)__pyx_v_instance), (PyArray_NDIM(((PyArrayObject *)__pyx_v_instance)) - 1))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":145
+  /* "src/numpy_formathandler.pyx":152
  * 			typecode = self.typeCodeToDtype( typeCode )
  * 		return self.contiguous( working, typecode )
  * 	cdef c_unitSize( self, object instance, typeCode ):             # <<<<<<<<<<<<<<
  * 		"""Retrieve last dimension of the array"""
- * 		return PyArray_DIMS(instance)[PyArray_NDIM(instance)-1]
+ * 		return PyArray_DIM(instance, PyArray_NDIM(instance)-1)
  */
 
   /* function exit code */
@@ -3470,9 +3536,9 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":148
+/* "src/numpy_formathandler.pyx":155
  * 		"""Retrieve last dimension of the array"""
- * 		return PyArray_DIMS(instance)[PyArray_NDIM(instance)-1]
+ * 		return PyArray_DIM(instance, PyArray_NDIM(instance)-1)
  * 	cdef c_dimensions( self, object instance ):             # <<<<<<<<<<<<<<
  * 		"""Retrieve full set of dimensions for the array as tuple"""
  * 		return instance.shape
@@ -3484,7 +3550,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("c_dimensions", 0);
 
-  /* "src/numpy_formathandler.pyx":150
+  /* "src/numpy_formathandler.pyx":157
  * 	cdef c_dimensions( self, object instance ):
  * 		"""Retrieve full set of dimensions for the array as tuple"""
  * 		return instance.shape             # <<<<<<<<<<<<<<
@@ -3492,15 +3558,15 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
  * 	cdef np.dtype typeCodeToDtype( self, object typeCode ):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_instance, __pyx_n_s_shape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_instance, __pyx_n_s_shape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/numpy_formathandler.pyx":148
+  /* "src/numpy_formathandler.pyx":155
  * 		"""Retrieve last dimension of the array"""
- * 		return PyArray_DIMS(instance)[PyArray_NDIM(instance)-1]
+ * 		return PyArray_DIM(instance, PyArray_NDIM(instance)-1)
  * 	cdef c_dimensions( self, object instance ):             # <<<<<<<<<<<<<<
  * 		"""Retrieve full set of dimensions for the array as tuple"""
  * 		return instance.shape
@@ -3517,7 +3583,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandle
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":152
+/* "src/numpy_formathandler.pyx":159
  * 		return instance.shape
  * 
  * 	cdef np.dtype typeCodeToDtype( self, object typeCode ):             # <<<<<<<<<<<<<<
@@ -3535,7 +3601,7 @@ static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   int __pyx_t_5;
   __Pyx_RefNannySetupContext("typeCodeToDtype", 0);
 
-  /* "src/numpy_formathandler.pyx":154
+  /* "src/numpy_formathandler.pyx":161
  * 	cdef np.dtype typeCodeToDtype( self, object typeCode ):
  * 		"""Convert type-code specification to a numpy dtype instance"""
  * 		if isinstance( typeCode, np.dtype ):             # <<<<<<<<<<<<<<
@@ -3546,7 +3612,7 @@ static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "src/numpy_formathandler.pyx":155
+    /* "src/numpy_formathandler.pyx":162
  * 		"""Convert type-code specification to a numpy dtype instance"""
  * 		if isinstance( typeCode, np.dtype ):
  * 			return typeCode             # <<<<<<<<<<<<<<
@@ -3554,12 +3620,12 @@ static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
  * 			return np.dtype( typeCode )
  */
     __Pyx_XDECREF(((PyObject *)__pyx_r));
-    if (!(likely(((__pyx_v_typeCode) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_typeCode, __pyx_ptype_5numpy_dtype))))) __PYX_ERR(0, 155, __pyx_L1_error)
+    if (!(likely(((__pyx_v_typeCode) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_typeCode, __pyx_ptype_5numpy_dtype))))) __PYX_ERR(0, 162, __pyx_L1_error)
     __Pyx_INCREF(__pyx_v_typeCode);
     __pyx_r = ((PyArray_Descr *)__pyx_v_typeCode);
     goto __pyx_L0;
 
-    /* "src/numpy_formathandler.pyx":154
+    /* "src/numpy_formathandler.pyx":161
  * 	cdef np.dtype typeCodeToDtype( self, object typeCode ):
  * 		"""Convert type-code specification to a numpy dtype instance"""
  * 		if isinstance( typeCode, np.dtype ):             # <<<<<<<<<<<<<<
@@ -3568,16 +3634,16 @@ static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
  */
   }
 
-  /* "src/numpy_formathandler.pyx":156
+  /* "src/numpy_formathandler.pyx":163
  * 		if isinstance( typeCode, np.dtype ):
  * 			return typeCode
  * 		elif isinstance( typeCode, (bytes,unicode) ):             # <<<<<<<<<<<<<<
  * 			return np.dtype( typeCode )
  * 		else:
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_1 = PyObject_IsInstance(__pyx_v_typeCode, __pyx_t_3); 
   __pyx_t_5 = (__pyx_t_1 != 0);
@@ -3595,7 +3661,7 @@ static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "src/numpy_formathandler.pyx":157
+    /* "src/numpy_formathandler.pyx":164
  * 			return typeCode
  * 		elif isinstance( typeCode, (bytes,unicode) ):
  * 			return np.dtype( typeCode )             # <<<<<<<<<<<<<<
@@ -3603,13 +3669,13 @@ static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
  * 			return self.gl_constant_to_array[ typeCode ]
  */
     __Pyx_XDECREF(((PyObject *)__pyx_r));
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_5numpy_dtype), __pyx_v_typeCode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_5numpy_dtype), __pyx_v_typeCode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 164, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_r = ((PyArray_Descr *)__pyx_t_3);
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "src/numpy_formathandler.pyx":156
+    /* "src/numpy_formathandler.pyx":163
  * 		if isinstance( typeCode, np.dtype ):
  * 			return typeCode
  * 		elif isinstance( typeCode, (bytes,unicode) ):             # <<<<<<<<<<<<<<
@@ -3618,28 +3684,28 @@ static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
  */
   }
 
-  /* "src/numpy_formathandler.pyx":159
+  /* "src/numpy_formathandler.pyx":166
  * 			return np.dtype( typeCode )
  * 		else:
  * 			return self.gl_constant_to_array[ typeCode ]             # <<<<<<<<<<<<<<
  * 	cdef np.ndarray contiguous( self, np.ndarray instance, np.dtype dtype ):
- * 		"""Ensure that this instance is a contiguous array"""
+ * 		"""Ensure that this instance is a contiguous array
  */
   /*else*/ {
     __Pyx_XDECREF(((PyObject *)__pyx_r));
     if (unlikely(__pyx_v_self->gl_constant_to_array == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 159, __pyx_L1_error)
+      __PYX_ERR(0, 166, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->gl_constant_to_array, __pyx_v_typeCode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->gl_constant_to_array, __pyx_v_typeCode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_dtype))))) __PYX_ERR(0, 159, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_dtype))))) __PYX_ERR(0, 166, __pyx_L1_error)
     __pyx_r = ((PyArray_Descr *)__pyx_t_3);
     __pyx_t_3 = 0;
     goto __pyx_L0;
   }
 
-  /* "src/numpy_formathandler.pyx":152
+  /* "src/numpy_formathandler.pyx":159
  * 		return instance.shape
  * 
  * 	cdef np.dtype typeCodeToDtype( self, object typeCode ):             # <<<<<<<<<<<<<<
@@ -3659,12 +3725,12 @@ static PyArray_Descr *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":160
+/* "src/numpy_formathandler.pyx":167
  * 		else:
  * 			return self.gl_constant_to_array[ typeCode ]
  * 	cdef np.ndarray contiguous( self, np.ndarray instance, np.dtype dtype ):             # <<<<<<<<<<<<<<
- * 		"""Ensure that this instance is a contiguous array"""
- * 		if self.ERROR_ON_COPY:
+ * 		"""Ensure that this instance is a contiguous array
+ * 
  */
 
 static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler_contiguous(struct __pyx_obj_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *__pyx_v_self, PyArrayObject *__pyx_v_instance, PyArray_Descr *__pyx_v_dtype) {
@@ -3681,9 +3747,9 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   int __pyx_t_9;
   __Pyx_RefNannySetupContext("contiguous", 0);
 
-  /* "src/numpy_formathandler.pyx":162
- * 	cdef np.ndarray contiguous( self, np.ndarray instance, np.dtype dtype ):
- * 		"""Ensure that this instance is a contiguous array"""
+  /* "src/numpy_formathandler.pyx":177
+ * 		:rtype: np.ndarray
+ * 		"""
  * 		if self.ERROR_ON_COPY:             # <<<<<<<<<<<<<<
  * 			if not PyArray_ISCARRAY( instance ):
  * 				raise CopyError(
@@ -3691,8 +3757,8 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   __pyx_t_1 = (__pyx_v_self->__pyx_base.ERROR_ON_COPY != 0);
   if (__pyx_t_1) {
 
-    /* "src/numpy_formathandler.pyx":163
- * 		"""Ensure that this instance is a contiguous array"""
+    /* "src/numpy_formathandler.pyx":178
+ * 		"""
  * 		if self.ERROR_ON_COPY:
  * 			if not PyArray_ISCARRAY( instance ):             # <<<<<<<<<<<<<<
  * 				raise CopyError(
@@ -3701,22 +3767,22 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
     __pyx_t_1 = ((!(PyArray_ISCARRAY(__pyx_v_instance) != 0)) != 0);
     if (unlikely(__pyx_t_1)) {
 
-      /* "src/numpy_formathandler.pyx":164
+      /* "src/numpy_formathandler.pyx":179
  * 		if self.ERROR_ON_COPY:
  * 			if not PyArray_ISCARRAY( instance ):
  * 				raise CopyError(             # <<<<<<<<<<<<<<
  * 					"""Non-contiguous array passed""",
  * 					instance,
  */
-      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_CopyError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 164, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_CopyError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
 
-      /* "src/numpy_formathandler.pyx":166
+      /* "src/numpy_formathandler.pyx":181
  * 				raise CopyError(
  * 					"""Non-contiguous array passed""",
  * 					instance,             # <<<<<<<<<<<<<<
  * 				)
- * 			elif PyArray_DTYPE(instance) != dtype:
+ * 			elif array_descr(instance) != dtype:
  */
       __pyx_t_4 = NULL;
       __pyx_t_5 = 0;
@@ -3733,7 +3799,7 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_kp_s_Non_contiguous_array_passed, ((PyObject *)__pyx_v_instance)};
-        __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 179, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_GOTREF(__pyx_t_2);
       } else
@@ -3741,13 +3807,13 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_kp_s_Non_contiguous_array_passed, ((PyObject *)__pyx_v_instance)};
-        __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 179, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_GOTREF(__pyx_t_2);
       } else
       #endif
       {
-        __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 164, __pyx_L1_error)
+        __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 179, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         if (__pyx_t_4) {
           __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -3758,17 +3824,17 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
         __Pyx_INCREF(((PyObject *)__pyx_v_instance));
         __Pyx_GIVEREF(((PyObject *)__pyx_v_instance));
         PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, ((PyObject *)__pyx_v_instance));
-        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 179, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_Raise(__pyx_t_2, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __PYX_ERR(0, 164, __pyx_L1_error)
+      __PYX_ERR(0, 179, __pyx_L1_error)
 
-      /* "src/numpy_formathandler.pyx":163
- * 		"""Ensure that this instance is a contiguous array"""
+      /* "src/numpy_formathandler.pyx":178
+ * 		"""
  * 		if self.ERROR_ON_COPY:
  * 			if not PyArray_ISCARRAY( instance ):             # <<<<<<<<<<<<<<
  * 				raise CopyError(
@@ -3776,44 +3842,44 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
  */
     }
 
-    /* "src/numpy_formathandler.pyx":168
+    /* "src/numpy_formathandler.pyx":183
  * 					instance,
  * 				)
- * 			elif PyArray_DTYPE(instance) != dtype:             # <<<<<<<<<<<<<<
+ * 			elif array_descr(instance) != dtype:             # <<<<<<<<<<<<<<
  * 				raise CopyError(
  * 					"""Array of type %r passed, required array of type %r""",
  */
-    __pyx_t_2 = ((PyObject *)PyArray_DTYPE(__pyx_v_instance)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 168, __pyx_L1_error)
+    __pyx_t_2 = ((PyObject *)__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(__pyx_v_instance)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, ((PyObject *)__pyx_v_dtype), Py_NE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 168, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, ((PyObject *)__pyx_v_dtype), Py_NE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 183, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 168, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 183, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (unlikely(__pyx_t_1)) {
 
-      /* "src/numpy_formathandler.pyx":169
+      /* "src/numpy_formathandler.pyx":184
  * 				)
- * 			elif PyArray_DTYPE(instance) != dtype:
+ * 			elif array_descr(instance) != dtype:
  * 				raise CopyError(             # <<<<<<<<<<<<<<
  * 					"""Array of type %r passed, required array of type %r""",
- * 					PyArray_DTYPE(instance).char, dtype.char,
+ * 					array_descr(instance).char, dtype.char,
  */
-      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_CopyError); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 169, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_CopyError); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 184, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
 
-      /* "src/numpy_formathandler.pyx":171
+      /* "src/numpy_formathandler.pyx":186
  * 				raise CopyError(
  * 					"""Array of type %r passed, required array of type %r""",
- * 					PyArray_DTYPE(instance).char, dtype.char,             # <<<<<<<<<<<<<<
+ * 					array_descr(instance).char, dtype.char,             # <<<<<<<<<<<<<<
  * 				)
  * 			# okay, so just return...
  */
-      __pyx_t_6 = ((PyObject *)PyArray_DTYPE(__pyx_v_instance)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 171, __pyx_L1_error)
+      __pyx_t_6 = ((PyObject *)__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(__pyx_v_instance)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 186, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_char); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 171, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_char); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 186, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dtype), __pyx_n_s_char); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 171, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dtype), __pyx_n_s_char); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 186, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_7 = NULL;
       __pyx_t_5 = 0;
@@ -3830,7 +3896,7 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_kp_s_Array_of_type_r_passed_required, __pyx_t_4, __pyx_t_6};
-        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 169, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 184, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3840,7 +3906,7 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_kp_s_Array_of_type_r_passed_required, __pyx_t_4, __pyx_t_6};
-        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 169, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 184, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3848,7 +3914,7 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
       } else
       #endif
       {
-        __pyx_t_8 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 169, __pyx_L1_error)
+        __pyx_t_8 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 184, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         if (__pyx_t_7) {
           __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -3862,25 +3928,25 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
         PyTuple_SET_ITEM(__pyx_t_8, 2+__pyx_t_5, __pyx_t_6);
         __pyx_t_4 = 0;
         __pyx_t_6 = 0;
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 169, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 184, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(0, 169, __pyx_L1_error)
+      __PYX_ERR(0, 184, __pyx_L1_error)
 
-      /* "src/numpy_formathandler.pyx":168
+      /* "src/numpy_formathandler.pyx":183
  * 					instance,
  * 				)
- * 			elif PyArray_DTYPE(instance) != dtype:             # <<<<<<<<<<<<<<
+ * 			elif array_descr(instance) != dtype:             # <<<<<<<<<<<<<<
  * 				raise CopyError(
  * 					"""Array of type %r passed, required array of type %r""",
  */
     }
 
-    /* "src/numpy_formathandler.pyx":174
+    /* "src/numpy_formathandler.pyx":189
  * 				)
  * 			# okay, so just return...
  * 			return instance             # <<<<<<<<<<<<<<
@@ -3892,21 +3958,21 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
     __pyx_r = __pyx_v_instance;
     goto __pyx_L0;
 
-    /* "src/numpy_formathandler.pyx":162
- * 	cdef np.ndarray contiguous( self, np.ndarray instance, np.dtype dtype ):
- * 		"""Ensure that this instance is a contiguous array"""
+    /* "src/numpy_formathandler.pyx":177
+ * 		:rtype: np.ndarray
+ * 		"""
  * 		if self.ERROR_ON_COPY:             # <<<<<<<<<<<<<<
  * 			if not PyArray_ISCARRAY( instance ):
  * 				raise CopyError(
  */
   }
 
-  /* "src/numpy_formathandler.pyx":177
+  /* "src/numpy_formathandler.pyx":192
  * 		else:
  * 			# "convert" regardless (will return same instance if already contiguous)
- * 			if not PyArray_ISCARRAY( instance ) or PyArray_DTYPE(instance) != dtype:             # <<<<<<<<<<<<<<
+ * 			if not PyArray_ISCARRAY( instance ) or array_descr(instance) != dtype:             # <<<<<<<<<<<<<<
  * 				# TODO: make sure there's no way to segfault here
- * 				Py_INCREF( <object> dtype )
+ * 				Py_INCREF( <object> instance )
  */
   /*else*/ {
     __pyx_t_9 = ((!(PyArray_ISCARRAY(__pyx_v_instance) != 0)) != 0);
@@ -3915,62 +3981,71 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
       __pyx_t_1 = __pyx_t_9;
       goto __pyx_L6_bool_binop_done;
     }
-    __pyx_t_3 = ((PyObject *)PyArray_DTYPE(__pyx_v_instance)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_3 = ((PyObject *)__pyx_f_17OpenGL_accelerate_19numpy_formathandler_array_descr(__pyx_v_instance)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 192, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_t_3, ((PyObject *)__pyx_v_dtype), Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_2 = PyObject_RichCompare(__pyx_t_3, ((PyObject *)__pyx_v_dtype), Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 192, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 192, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_1 = __pyx_t_9;
     __pyx_L6_bool_binop_done:;
     if (__pyx_t_1) {
 
-      /* "src/numpy_formathandler.pyx":179
- * 			if not PyArray_ISCARRAY( instance ) or PyArray_DTYPE(instance) != dtype:
+      /* "src/numpy_formathandler.pyx":194
+ * 			if not PyArray_ISCARRAY( instance ) or array_descr(instance) != dtype:
  * 				# TODO: make sure there's no way to segfault here
+ * 				Py_INCREF( <object> instance )             # <<<<<<<<<<<<<<
+ * 				Py_INCREF( <object> dtype )
+ * 				return PyArray_FromArray(
+ */
+      Py_INCREF(((PyObject *)__pyx_v_instance));
+
+      /* "src/numpy_formathandler.pyx":195
+ * 				# TODO: make sure there's no way to segfault here
+ * 				Py_INCREF( <object> instance )
  * 				Py_INCREF( <object> dtype )             # <<<<<<<<<<<<<<
  * 				return PyArray_FromArray(
- * 					instance, dtype, NPY_ARRAY_CARRAY|NPY_ARRAY_FORCECAST
+ * 					instance,
  */
       Py_INCREF(((PyObject *)__pyx_v_dtype));
 
-      /* "src/numpy_formathandler.pyx":180
- * 				# TODO: make sure there's no way to segfault here
+      /* "src/numpy_formathandler.pyx":196
+ * 				Py_INCREF( <object> instance )
  * 				Py_INCREF( <object> dtype )
  * 				return PyArray_FromArray(             # <<<<<<<<<<<<<<
- * 					instance, dtype, NPY_ARRAY_CARRAY|NPY_ARRAY_FORCECAST
- * 				)
+ * 					instance,
+ * 					dtype,
  */
       __Pyx_XDECREF(((PyObject *)__pyx_r));
 
-      /* "src/numpy_formathandler.pyx":181
- * 				Py_INCREF( <object> dtype )
- * 				return PyArray_FromArray(
- * 					instance, dtype, NPY_ARRAY_CARRAY|NPY_ARRAY_FORCECAST             # <<<<<<<<<<<<<<
+      /* "src/numpy_formathandler.pyx":199
+ * 					instance,
+ * 					dtype,
+ * 					NPY_ARRAY_CARRAY|NPY_ARRAY_FORCECAST             # <<<<<<<<<<<<<<
  * 				)
  * 
  */
-      __pyx_t_2 = ((PyObject *)PyArray_FromArray(__pyx_v_instance, __pyx_v_dtype, (NPY_ARRAY_CARRAY | NPY_ARRAY_FORCECAST))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+      __pyx_t_2 = ((PyObject *)PyArray_FromArray(__pyx_v_instance, __pyx_v_dtype, (NPY_ARRAY_CARRAY | NPY_ARRAY_FORCECAST))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 196, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = ((PyArrayObject *)__pyx_t_2);
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "src/numpy_formathandler.pyx":177
+      /* "src/numpy_formathandler.pyx":192
  * 		else:
  * 			# "convert" regardless (will return same instance if already contiguous)
- * 			if not PyArray_ISCARRAY( instance ) or PyArray_DTYPE(instance) != dtype:             # <<<<<<<<<<<<<<
+ * 			if not PyArray_ISCARRAY( instance ) or array_descr(instance) != dtype:             # <<<<<<<<<<<<<<
  * 				# TODO: make sure there's no way to segfault here
- * 				Py_INCREF( <object> dtype )
+ * 				Py_INCREF( <object> instance )
  */
     }
 
-    /* "src/numpy_formathandler.pyx":185
+    /* "src/numpy_formathandler.pyx":203
  * 
  * 			else:
  * 				return instance             # <<<<<<<<<<<<<<
  * 
- * # Cython numpy tutorial neglects to mention this AFAICS
+ * 
  */
     /*else*/ {
       __Pyx_XDECREF(((PyObject *)__pyx_r));
@@ -3980,12 +4055,12 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
     }
   }
 
-  /* "src/numpy_formathandler.pyx":160
+  /* "src/numpy_formathandler.pyx":167
  * 		else:
  * 			return self.gl_constant_to_array[ typeCode ]
  * 	cdef np.ndarray contiguous( self, np.ndarray instance, np.dtype dtype ):             # <<<<<<<<<<<<<<
- * 		"""Ensure that this instance is a contiguous array"""
- * 		if self.ERROR_ON_COPY:
+ * 		"""Ensure that this instance is a contiguous array
+ * 
  */
 
   /* function exit code */
@@ -4004,7 +4079,7 @@ static PyArrayObject *__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyH
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":29
+/* "src/numpy_formathandler.pyx":36
  * 
  * cdef class NumpyHandler(FormatHandler):
  * 	cdef public dict array_to_gl_constant             # <<<<<<<<<<<<<<
@@ -4059,7 +4134,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler_20a
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__set__", 0);
-  if (!(likely(PyDict_CheckExact(__pyx_v_value))||((__pyx_v_value) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_value)->tp_name), 0))) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_v_value))||((__pyx_v_value) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_value)->tp_name), 0))) __PYX_ERR(0, 36, __pyx_L1_error)
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -4109,7 +4184,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler_20a
   return __pyx_r;
 }
 
-/* "src/numpy_formathandler.pyx":30
+/* "src/numpy_formathandler.pyx":37
  * cdef class NumpyHandler(FormatHandler):
  * 	cdef public dict array_to_gl_constant
  * 	cdef public dict gl_constant_to_array             # <<<<<<<<<<<<<<
@@ -4164,7 +4239,7 @@ static int __pyx_pf_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler_20g
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__set__", 0);
-  if (!(likely(PyDict_CheckExact(__pyx_v_value))||((__pyx_v_value) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_value)->tp_name), 0))) __PYX_ERR(0, 30, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_v_value))||((__pyx_v_value) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_value)->tp_name), 0))) __PYX_ERR(0, 37, __pyx_L1_error)
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -7708,7 +7783,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ctypes, __pyx_k_ctypes, sizeof(__pyx_k_ctypes), 0, 0, 1, 1},
   {&__pyx_n_s_datetime64, __pyx_k_datetime64, sizeof(__pyx_k_datetime64), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
-  {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
   {&__pyx_n_s_float128, __pyx_k_float128, sizeof(__pyx_k_float128), 0, 0, 1, 1},
   {&__pyx_n_s_float16, __pyx_k_float16, sizeof(__pyx_k_float16), 0, 0, 1, 1},
   {&__pyx_n_s_float32, __pyx_k_float32, sizeof(__pyx_k_float32), 0, 0, 1, 1},
@@ -7767,8 +7841,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 75, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 117, __pyx_L1_error)
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(2, 242, __pyx_L1_error)
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(2, 810, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(2, 1000, __pyx_L1_error)
@@ -7957,14 +8031,14 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtable_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler.typeCodeToDtype = (PyArray_Descr *(*)(struct __pyx_obj_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *, PyObject *))__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler_typeCodeToDtype;
   __pyx_vtable_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler.contiguous = (PyArrayObject *(*)(struct __pyx_obj_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler *, PyArrayObject *, PyArray_Descr *))__pyx_f_17OpenGL_accelerate_19numpy_formathandler_12NumpyHandler_contiguous;
   __pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler.tp_base = __pyx_ptype_17OpenGL_accelerate_13formathandler_FormatHandler;
-  if (PyType_Ready(&__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler.tp_dictoffset && __pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler.tp_dict, __pyx_vtabptr_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "NumpyHandler", (PyObject *)&__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler.tp_dict, __pyx_vtabptr_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "NumpyHandler", (PyObject *)&__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __pyx_ptype_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler = &__pyx_type_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -8305,323 +8379,323 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":31
+  /* "src/numpy_formathandler.pyx":38
  * 	cdef public dict array_to_gl_constant
  * 	cdef public dict gl_constant_to_array
  * 	isOutput = True             # <<<<<<<<<<<<<<
  * 	HANDLED_TYPES = (
  *         np.ndarray,
  */
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler->tp_dict, __pyx_n_s_isOutput, Py_True) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler->tp_dict, __pyx_n_s_isOutput, Py_True) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
   PyType_Modified(__pyx_ptype_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler);
 
-  /* "src/numpy_formathandler.pyx":34
+  /* "src/numpy_formathandler.pyx":41
  * 	HANDLED_TYPES = (
  *         np.ndarray,
  *         np.bool_,             # <<<<<<<<<<<<<<
  *         np.int8,
  *         np.uint8,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_bool); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_bool); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":35
+  /* "src/numpy_formathandler.pyx":42
  *         np.ndarray,
  *         np.bool_,
  *         np.int8,             # <<<<<<<<<<<<<<
  *         np.uint8,
  *         np.int16,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":36
+  /* "src/numpy_formathandler.pyx":43
  *         np.bool_,
  *         np.int8,
  *         np.uint8,             # <<<<<<<<<<<<<<
  *         np.int16,
  *         np.uint16,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":37
+  /* "src/numpy_formathandler.pyx":44
  *         np.int8,
  *         np.uint8,
  *         np.int16,             # <<<<<<<<<<<<<<
  *         np.uint16,
  *         np.int32,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":38
+  /* "src/numpy_formathandler.pyx":45
  *         np.uint8,
  *         np.int16,
  *         np.uint16,             # <<<<<<<<<<<<<<
  *         np.int32,
  *         np.uint32,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":39
+  /* "src/numpy_formathandler.pyx":46
  *         np.int16,
  *         np.uint16,
  *         np.int32,             # <<<<<<<<<<<<<<
  *         np.uint32,
  *         np.int64,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int32); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int32); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":40
+  /* "src/numpy_formathandler.pyx":47
  *         np.uint16,
  *         np.int32,
  *         np.uint32,             # <<<<<<<<<<<<<<
  *         np.int64,
  *         np.uint64,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint32); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint32); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":41
+  /* "src/numpy_formathandler.pyx":48
  *         np.int32,
  *         np.uint32,
  *         np.int64,             # <<<<<<<<<<<<<<
  *         np.uint64,
  *         np.int64,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int64); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int64); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":42
+  /* "src/numpy_formathandler.pyx":49
  *         np.uint32,
  *         np.int64,
  *         np.uint64,             # <<<<<<<<<<<<<<
  *         np.int64,
  *         np.uint64,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint64); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint64); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":43
+  /* "src/numpy_formathandler.pyx":50
  *         np.int64,
  *         np.uint64,
  *         np.int64,             # <<<<<<<<<<<<<<
  *         np.uint64,
  *         np.float16,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int64); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int64); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":44
+  /* "src/numpy_formathandler.pyx":51
  *         np.uint64,
  *         np.int64,
  *         np.uint64,             # <<<<<<<<<<<<<<
  *         np.float16,
  *         np.float32,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint64); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_uint64); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":45
+  /* "src/numpy_formathandler.pyx":52
  *         np.int64,
  *         np.uint64,
  *         np.float16,             # <<<<<<<<<<<<<<
  *         np.float32,
  *         np.float64,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float16); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float16); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":46
+  /* "src/numpy_formathandler.pyx":53
  *         np.uint64,
  *         np.float16,
  *         np.float32,             # <<<<<<<<<<<<<<
  *         np.float64,
  *         np.float128,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float32); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float32); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":47
+  /* "src/numpy_formathandler.pyx":54
  *         np.float16,
  *         np.float32,
  *         np.float64,             # <<<<<<<<<<<<<<
  *         np.float128,
  *         np.complex64,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":48
+  /* "src/numpy_formathandler.pyx":55
  *         np.float32,
  *         np.float64,
  *         np.float128,             # <<<<<<<<<<<<<<
  *         np.complex64,
  *         np.complex128,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float128); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float128); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":49
+  /* "src/numpy_formathandler.pyx":56
  *         np.float64,
  *         np.float128,
  *         np.complex64,             # <<<<<<<<<<<<<<
  *         np.complex128,
  *         np.complex256,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_complex64); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_complex64); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_17);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":50
+  /* "src/numpy_formathandler.pyx":57
  *         np.float128,
  *         np.complex64,
  *         np.complex128,             # <<<<<<<<<<<<<<
  *         np.complex256,
  *         np.bytes_,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_complex128); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_complex128); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":51
+  /* "src/numpy_formathandler.pyx":58
  *         np.complex64,
  *         np.complex128,
  *         np.complex256,             # <<<<<<<<<<<<<<
  *         np.bytes_,
  *         np.str_,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_19 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_complex256); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_complex256); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":52
+  /* "src/numpy_formathandler.pyx":59
  *         np.complex128,
  *         np.complex256,
  *         np.bytes_,             # <<<<<<<<<<<<<<
  *         np.str_,
  *         np.void,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_bytes_2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_bytes_2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":53
+  /* "src/numpy_formathandler.pyx":60
  *         np.complex256,
  *         np.bytes_,
  *         np.str_,             # <<<<<<<<<<<<<<
  *         np.void,
  *         np.datetime64,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":54
+  /* "src/numpy_formathandler.pyx":61
  *         np.bytes_,
  *         np.str_,
  *         np.void,             # <<<<<<<<<<<<<<
  *         np.datetime64,
  *         np.timedelta64,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_void); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_void); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_22);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":55
+  /* "src/numpy_formathandler.pyx":62
  *         np.str_,
  *         np.void,
  *         np.datetime64,             # <<<<<<<<<<<<<<
  *         np.timedelta64,
  *     )
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_23 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_datetime64); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_23 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_datetime64); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_23);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":56
+  /* "src/numpy_formathandler.pyx":63
  *         np.void,
  *         np.datetime64,
  *         np.timedelta64,             # <<<<<<<<<<<<<<
  *     )
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_timedelta64); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_timedelta64); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_24);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "src/numpy_formathandler.pyx":33
+  /* "src/numpy_formathandler.pyx":40
  * 	isOutput = True
  * 	HANDLED_TYPES = (
  *         np.ndarray,             # <<<<<<<<<<<<<<
  *         np.bool_,
  *         np.int8,
  */
-  __pyx_t_2 = PyTuple_New(24); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(24); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)__pyx_ptype_5numpy_ndarray));
   __Pyx_GIVEREF(((PyObject *)__pyx_ptype_5numpy_ndarray));
@@ -8695,11 +8769,11 @@ if (!__Pyx_RefNanny) {
   __pyx_t_22 = 0;
   __pyx_t_23 = 0;
   __pyx_t_24 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler->tp_dict, __pyx_n_s_HANDLED_TYPES, __pyx_t_2) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler->tp_dict, __pyx_n_s_HANDLED_TYPES, __pyx_t_2) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_17OpenGL_accelerate_19numpy_formathandler_NumpyHandler);
 
-  /* "src/numpy_formathandler.pyx":189
+  /* "src/numpy_formathandler.pyx":208
  * # Cython numpy tutorial neglects to mention this AFAICS
  * # get segfaults without it
  * import_array()             # <<<<<<<<<<<<<<

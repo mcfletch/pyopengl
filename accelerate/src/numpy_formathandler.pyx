@@ -22,8 +22,15 @@ cdef extern from "numpy/arrayobject.h":
 	cdef void* PyArray_DATA( np.ndarray )
 	cdef int PyArray_NDIM( np.ndarray )
 	cdef int *PyArray_DIMS( np.ndarray )
-	cdef np.dtype PyArray_DTYPE( np.ndarray )
+	cdef int PyArray_DIM( np.ndarray, int dim )
+	cdef np.dtype PyArray_DESCR( np.ndarray )
 	cdef np.npy_intp PyArray_SIZE( np.ndarray )
+
+cdef np.dtype array_descr( np.ndarray array ):
+	"""Wrap PyArray_DESCR and incref to deal with the "borrowed" reference"""
+	cdef np.dtype desc = PyArray_DESCR( array )
+	Py_INCREF(<object> desc)
+	return desc
 
 cdef class NumpyHandler(FormatHandler):
 	cdef public dict array_to_gl_constant
@@ -84,10 +91,10 @@ cdef class NumpyHandler(FormatHandler):
 		cdef np.dtype targetType
 		if typeCode:
 			targetType = <np.dtype>(self.gl_constant_to_array[ typeCode ])
-			if PyArray_DTYPE(instance) != targetType:
+			if array_descr(instance) != targetType:
 				raise CopyError(
 					"""Array of type %r passed, required array of type %r""",
-					PyArray_DTYPE(instance).char, targetType.char,
+					array_descr(instance).char, targetType.char,
 				)					
 		if not PyArray_ISCARRAY( instance ):
 			raise CopyError(
@@ -125,11 +132,11 @@ cdef class NumpyHandler(FormatHandler):
 	cdef c_arrayToGLType( self, object instance ):
 		"""Given a value, guess OpenGL type of the corresponding pointer"""
 		cdef np.ndarray value = self.c_check_array( instance )
-		cdef object constant = self.array_to_gl_constant.get( PyArray_DTYPE(value) )
+		cdef object constant = self.array_to_gl_constant.get( array_descr(value) )
 		if constant is None:
 			raise TypeError(
 				"""Don't know GL type for array of type %r, known types: %s\nvalue:%s"""%(
-					PyArray_DTYPE(value), self.array_to_gl_constant.keys(), value,
+					array_descr(value), self.array_to_gl_constant.keys(), value,
 				)
 			)
 		return constant
@@ -138,13 +145,13 @@ cdef class NumpyHandler(FormatHandler):
 		cdef np.ndarray working = (<np.ndarray>self.c_check_array( instance ))
 		cdef np.dtype typecode
 		if typeCode is None:
-			typecode = working.dtype 
+			typecode = array_descr(working)
 		else:
 			typecode = self.typeCodeToDtype( typeCode )
 		return self.contiguous( working, typecode )
 	cdef c_unitSize( self, object instance, typeCode ):
 		"""Retrieve last dimension of the array"""
-		return PyArray_DIMS(instance)[PyArray_NDIM(instance)-1]
+		return PyArray_DIM(instance, PyArray_NDIM(instance)-1)
 	cdef c_dimensions( self, object instance ):
 		"""Retrieve full set of dimensions for the array as tuple"""
 		return instance.shape
@@ -158,31 +165,43 @@ cdef class NumpyHandler(FormatHandler):
 		else:
 			return self.gl_constant_to_array[ typeCode ]
 	cdef np.ndarray contiguous( self, np.ndarray instance, np.dtype dtype ):
-		"""Ensure that this instance is a contiguous array"""
+		"""Ensure that this instance is a contiguous array
+		
+		:param instance: numpy instance to convert to contiguous array
+		:param dtype: numpy dtype to which to convert the array
+			IFF self.ERROR_ON_COPY then any required conversions 
+			will raise a :class:`CopyError`
+		
+		:rtype: np.ndarray
+		"""
 		if self.ERROR_ON_COPY:
 			if not PyArray_ISCARRAY( instance ):
 				raise CopyError(
 					"""Non-contiguous array passed""",
 					instance,
 				)
-			elif PyArray_DTYPE(instance) != dtype:
+			elif array_descr(instance) != dtype:
 				raise CopyError(
 					"""Array of type %r passed, required array of type %r""",
-					PyArray_DTYPE(instance).char, dtype.char,
+					array_descr(instance).char, dtype.char,
 				)
 			# okay, so just return...
 			return instance 
 		else:
 			# "convert" regardless (will return same instance if already contiguous)
-			if not PyArray_ISCARRAY( instance ) or PyArray_DTYPE(instance) != dtype:
+			if not PyArray_ISCARRAY( instance ) or array_descr(instance) != dtype:
 				# TODO: make sure there's no way to segfault here 
+				Py_INCREF( <object> instance )
 				Py_INCREF( <object> dtype )
 				return PyArray_FromArray( 
-					instance, dtype, NPY_ARRAY_CARRAY|NPY_ARRAY_FORCECAST
+					instance, 
+					dtype, 
+					NPY_ARRAY_CARRAY|NPY_ARRAY_FORCECAST
 				)
 
 			else:
 				return instance
+
 
 # Cython numpy tutorial neglects to mention this AFAICS
 # get segfaults without it
