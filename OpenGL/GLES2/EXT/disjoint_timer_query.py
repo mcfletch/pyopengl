@@ -50,6 +50,18 @@ glGenQueriesEXT=wrapper.wrapper(glGenQueriesEXT).setInputArraySize(
 glDeleteQueriesEXT=wrapper.wrapper(glDeleteQueriesEXT).setInputArraySize(
     'ids', None
 )
+# INPUT glGetQueryivEXT.params size not checked against 'pname'
+glGetQueryivEXT=wrapper.wrapper(glGetQueryivEXT).setInputArraySize(
+    'params', None
+)
+# INPUT glGetQueryObjectivEXT.params size not checked against 'pname'
+glGetQueryObjectivEXT=wrapper.wrapper(glGetQueryObjectivEXT).setInputArraySize(
+    'params', None
+)
+# INPUT glGetQueryObjectuivEXT.params size not checked against 'pname'
+glGetQueryObjectuivEXT=wrapper.wrapper(glGetQueryObjectuivEXT).setInputArraySize(
+    'params', None
+)
 glGetQueryObjecti64vEXT=wrapper.wrapper(glGetQueryObjecti64vEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )

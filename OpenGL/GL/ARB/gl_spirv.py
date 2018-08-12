@@ -263,17 +263,60 @@ Overview (from the spec)
 	
 	  max_vertices   ->  OutputVertices
 	
-	Mapping of other instructions
+	Mapping of barriers
 	
-	  %     -> OpUMod/OpSMod
-	  mod() -> OpFMod
-	  NA    -> OpSRem/OpFRem
+	  barrier() (compute) -> OpControlBarrier(/*Execution*/Workgroup,
+	                                          /*Memory*/Workgroup,
+	                                          /*Semantics*/AcquireRelease |
+	                                                       WorkgroupMemory)
+	
+	  barrier() (tess control) -> OpControlBarrier(/*Execution*/Workgroup,
+	                                               /*Memory*/Invocation,
+	                                               /*Semantics*/None)
+	
+	  memoryBarrier() -> OpMemoryBarrier(/*Memory*/Device,
+	                                     /*Semantics*/AcquireRelease |
+	                                                  UniformMemory |
+	                                                  WorkgroupMemory |
+	                                                  ImageMemory)
+	
+	  memoryBarrierBuffer() -> OpMemoryBarrier(/*Memory*/Device,
+	                                           /*Semantics*/AcquireRelease |
+	                                                        UniformMemory)
+	
+	  memoryBarrierShared() -> OpMemoryBarrier(/*Memory*/Device,
+	                                           /*Semantics*/AcquireRelease |
+	                                                        WorkgroupMemory)
+	
+	  memoryBarrierImage() -> OpMemoryBarrier(/*Memory*/Device,
+	                                          /*Semantics*/AcquireRelease |
+	                                                       ImageMemory)
+	
+	  groupMemoryBarrier() -> OpMemoryBarrier(/*Memory*/Workgroup,
+	                                          /*Semantics*/AcquireRelease |
+	                                                       UniformMemory |
+	                                                       WorkgroupMemory |
+	                                                       ImageMemory)
+	
+	Mapping of atomics
+	
+	  all atomic builtin functions -> Semantics = None(Relaxed)
 	
 	  atomicExchange()      -> OpAtomicExchange
 	  imageAtomicExchange() -> OpAtomicExchange
 	  atomicCompSwap()      -> OpAtomicCompareExchange
 	  imageAtomicCompSwap() -> OpAtomicCompareExchange
 	  NA                    -> OpAtomicCompareExchangeWeak
+	
+	  atomicCounterIncrement -> OpAtomicIIncrement
+	  atomicCounterDecrement -> OpAtomicIDecrement (with post decrement)
+	  atomicCounter          -> OpAtomicLoad
+	
+	Mapping of other instructions
+	
+	  %     -> OpUMod/OpSMod
+	  mod() -> OpFMod
+	  NA    -> OpSRem/OpFRem
 	
 	  pack/unpack (conversion)    -> pack/unpack in GLSL extended instructions
 	  pack/unpack (no conversion) -> OpBitcast
@@ -337,6 +380,10 @@ Overview (from the spec)
 	    differently for SPIR-V used in Vulkan and OpenGL
 	  . gl_FragColor can be written to, but it won't broadcast, for versions of
 	    OpenGL that support gl_FragColor
+	  . Vulkan does not allow multi-dimensional arrays of resources like
+	    UBOs and SSBOs in its SPIR-V environment spec. SPIR-V supports
+	    it and OpenGL already allows this for GLSL shaders. SPIR-V
+	    for OpenGL also allows it.
 	
 	Additions to the SPIR-V specification:
 	  + *Offset* can also apply to an object, for transform feedback.

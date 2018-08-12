@@ -596,7 +596,7 @@ def glDepthFunc(func):pass
 def glDepthMask(flag):pass
 @_f
 @_p.types(None,_cs.GLdouble,_cs.GLdouble)
-def glDepthRange(near,far):pass
+def glDepthRange(n,f):pass
 @_f
 @_p.types(None,_cs.GLenum)
 def glDisable(cap):pass

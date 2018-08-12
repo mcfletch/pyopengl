@@ -1,7 +1,7 @@
 '''OpenGL extension EXT.shader_framebuffer_fetch
 
 This module customises the behaviour of the 
-OpenGL.raw.GLES2.EXT.shader_framebuffer_fetch to provide a more 
+OpenGL.raw.GL.EXT.shader_framebuffer_fetch to provide a more 
 Python-friendly API
 
 Overview (from the spec)
@@ -45,9 +45,9 @@ http://www.opengl.org/registry/specs/EXT/shader_framebuffer_fetch.txt
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
-from OpenGL.raw.GLES2 import _types, _glgets
-from OpenGL.raw.GLES2.EXT.shader_framebuffer_fetch import *
-from OpenGL.raw.GLES2.EXT.shader_framebuffer_fetch import _EXTENSION_NAME
+from OpenGL.raw.GL import _types, _glgets
+from OpenGL.raw.GL.EXT.shader_framebuffer_fetch import *
+from OpenGL.raw.GL.EXT.shader_framebuffer_fetch import _EXTENSION_NAME
 
 def glInitShaderFramebufferFetchEXT():
     '''Return boolean indicating whether this extension is available'''

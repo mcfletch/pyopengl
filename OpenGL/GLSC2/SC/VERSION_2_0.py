@@ -74,6 +74,14 @@ glGetTexParameterfv=wrapper.wrapper(glGetTexParameterfv).setOutput(
 glGetTexParameteriv=wrapper.wrapper(glGetTexParameteriv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
+# INPUT glGetnUniformfv.params size not checked against bufSize
+glGetnUniformfv=wrapper.wrapper(glGetnUniformfv).setInputArraySize(
+    'params', None
+)
+# INPUT glGetnUniformiv.params size not checked against bufSize
+glGetnUniformiv=wrapper.wrapper(glGetnUniformiv).setInputArraySize(
+    'params', None
+)
 glGetVertexAttribfv=wrapper.wrapper(glGetVertexAttribfv).setOutput(
     'params',size=(4,),orPassIn=True
 )
@@ -86,6 +94,10 @@ glGetVertexAttribPointerv=wrapper.wrapper(glGetVertexAttribPointerv).setOutput(
 # INPUT glProgramBinary.binary size not checked against length
 glProgramBinary=wrapper.wrapper(glProgramBinary).setInputArraySize(
     'binary', None
+)
+# INPUT glReadnPixels.data size not checked against bufSize
+glReadnPixels=wrapper.wrapper(glReadnPixels).setInputArraySize(
+    'data', None
 )
 # INPUT glTexParameterfv.params size not checked against 'pname'
 glTexParameterfv=wrapper.wrapper(glTexParameterfv).setInputArraySize(

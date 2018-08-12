@@ -803,6 +803,8 @@ GL_MAX_CLIP_DISTANCES	(1,)
 GL_MAX_CLIP_PLANES	(1,)
 GL_MAX_COLOR_ATTACHMENTS	(1,)
 GL_MAX_COLOR_ATTACHMENTS_EXT	(1,)
+GL_MAX_COLOR_FRAMEBUFFER_SAMPLES_AMD	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/AMD/AMD_framebuffer_multisample_advanced.txt
+GL_MAX_COLOR_FRAMEBUFFER_STORAGE_SAMPLES_AMD	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/AMD/AMD_framebuffer_multisample_advanced.txt
 GL_MAX_COLOR_MATRIX_STACK_DEPTH	(1,)
 GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI	(1,)
 GL_MAX_COLOR_TEXTURE_SAMPLES	(1,)
@@ -852,6 +854,7 @@ GL_MAX_DEBUG_MESSAGE_LENGTH_ARB	(1,)
 GL_MAX_DEEP_3D_TEXTURE_DEPTH_NV	(1,)
 GL_MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV	(2,)
 GL_MAX_DEPTH	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_MAX_DEPTH_STENCIL_FRAMEBUFFER_SAMPLES_AMD	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/AMD/AMD_framebuffer_multisample_advanced.txt
 GL_MAX_DEPTH_TEXTURE_SAMPLES	(1,)
 GL_MAX_DRAW_BUFFERS	(1,)
 GL_MAX_DRAW_BUFFERS_ARB	(1,)
@@ -1206,6 +1209,7 @@ GL_NUM_SHADER_BINARY_FORMATS	(1,)
 GL_NUM_SPARSE_LEVELS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sparse_texture.txt
 GL_NUM_SPARSE_LEVELS_EXT	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/EXT/EXT_sparse_texture.txt
 GL_NUM_SPIR_V_EXTENSIONS	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/ARB/ARB_spirv_extensions.txt
+GL_NUM_SUPPORTED_MULTISAMPLE_MODES_AMD	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/AMD/AMD_framebuffer_multisample_advanced.txt
 GL_NUM_VIDEO_CAPTURE_STREAMS_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/video_capture.txt
 GL_NUM_WINDOW_RECTANGLES_EXT	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/EXT/EXT_window_rectangles.txt
 GL_OBJECT_ACTIVE_UNIFORMS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/shader_objects.txt
@@ -1570,6 +1574,7 @@ GL_RENDERBUFFER_RED_SIZE	(1,)
 GL_RENDERBUFFER_SAMPLES	(1,)
 GL_RENDERBUFFER_SAMPLES_IMG	(1,)
 GL_RENDERBUFFER_STENCIL_SIZE	(1,)
+GL_RENDERBUFFER_STORAGE_SAMPLES_AMD	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/AMD/AMD_framebuffer_multisample_advanced.txt
 GL_RENDERBUFFER_WIDTH	(1,)
 GL_RENDERER	(1,)
 GL_RENDER_GPU_MASK_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_gpu_multicast.txt
@@ -1736,6 +1741,7 @@ GL_SUBPIXEL_PRECISION_BIAS_Y_BITS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev
 GL_SUBSAMPLE_DISTANCE_AMD	(1,)	#TODO Review http://www.opengl.org/registry/specs//AMD/sample_positions.txt
 GL_SUPERSAMPLE_SCALE_X_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_internalformat_sample_query.txt
 GL_SUPERSAMPLE_SCALE_Y_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_internalformat_sample_query.txt
+GL_SUPPORTED_MULTISAMPLE_MODES_AMD	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/AMD/AMD_framebuffer_multisample_advanced.txt
 GL_SYNC_CONDITION	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sync.txt
 GL_SYNC_FLAGS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sync.txt
 GL_SYNC_STATUS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sync.txt

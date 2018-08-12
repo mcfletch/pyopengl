@@ -80,6 +80,14 @@ glGetUniformi64vARB=wrapper.wrapper(glGetUniformi64vARB).setInputArraySize(
 glGetUniformui64vARB=wrapper.wrapper(glGetUniformui64vARB).setInputArraySize(
     'params', None
 )
+# INPUT glGetnUniformi64vARB.params size not checked against bufSize
+glGetnUniformi64vARB=wrapper.wrapper(glGetnUniformi64vARB).setInputArraySize(
+    'params', None
+)
+# INPUT glGetnUniformui64vARB.params size not checked against bufSize
+glGetnUniformui64vARB=wrapper.wrapper(glGetnUniformui64vARB).setInputArraySize(
+    'params', None
+)
 # INPUT glProgramUniform1i64vARB.value size not checked against count
 glProgramUniform1i64vARB=wrapper.wrapper(glProgramUniform1i64vARB).setInputArraySize(
     'value', None
