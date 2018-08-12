@@ -170,6 +170,13 @@ import occurs the flags should no longer be changed.
         for the documentation-generation passes, really).
         
         Default: False
+    
+    TYPE_ANNOTATIONS -- if True, set up type annotations in __annotations__
+        on raw functions. This is mostly just so that people can play
+        with the use of e.g. mypy or the like, but the values put in the
+        annotations dictionary are generally either ctypes types or 
+        ArrayDataType references, so this isn't *likely* to be all that useful
+        without further work.
 """
 from OpenGL.version import __version__
 import os
@@ -198,6 +205,8 @@ FULL_LOGGING = environ_key( 'FULL_LOGGING', False )
 ALLOW_NUMPY_SCALARS = environ_key( 'ALLOW_NUMPY_SCALARS', False )
 UNSIGNED_BYTE_IMAGES_AS_STRING = environ_key( 'UNSIGNED_BYTE_IMAGES_AS_STRING', True )
 MODULE_ANNOTATIONS = False
+TYPE_ANNOTATIONS = False
+
 
 # Declarations of plugins provided by PyOpenGL itself
 from OpenGL.plugins import PlatformPlugin, FormatHandler

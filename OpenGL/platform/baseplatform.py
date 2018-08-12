@@ -75,9 +75,13 @@ class BasePlatform( object ):
     """
     
     EXPORTED_NAMES = [
-        'GetCurrentContext','CurrentContextIsValid',
-        'createBaseFunction', 'createExtensionFunction', 'copyBaseFunction',
-        'getGLUTFontPointer','nullFunction',
+        'GetCurrentContext',
+        'CurrentContextIsValid',
+        'createBaseFunction', 
+        'createExtensionFunction', 
+        'copyBaseFunction',
+        'getGLUTFontPointer',
+        'nullFunction',
         'GLUT_GUARD_CALLBACKS',
     ]
 

@@ -18,6 +18,7 @@ specific modules for examples to use when porting.
 """
 import os, sys
 from OpenGL.plugins import PlatformPlugin
+from OpenGL import _configflags
 
 def _load( ):
     """Load the os.name plugin for the platform functionality"""
@@ -44,6 +45,12 @@ def types(resultType,*argTypes):
             function.argNames = function.func_code.co_varnames
         else:
             function.argNames = function.__code__.co_varnames
+        if _configflags.TYPE_ANNOTATIONS:
+            function.__annotations__ = {
+                'return': resultType,
+            }
+            for name,typ in zip(function.argNames,argTypes):
+                function.__annotations__[name] = typ
         return function 
     return add_types
 
