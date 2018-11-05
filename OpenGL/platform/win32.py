@@ -115,7 +115,8 @@ class Win32Platform( baseplatform.BasePlatform ):
         extension = None,
         deprecated = False,
         module = None,
-        error_checker=None,
+        force_extension = False,
+        error_checker = None,
     ):
         """Override construct function to do win32-specific hacks to find entry points"""
         try:

@@ -52,16 +52,18 @@ cdef class NumpyHandler(FormatHandler):
         np.float16,
         np.float32,
         np.float64,
-        np.float128,
         np.complex64,
         np.complex128,
-        np.complex256,
         np.bytes_,
         np.str_,
         np.void,
         np.datetime64,
         np.timedelta64,
     )
+	if hasattr(np,'float128'):
+		HANDLED_TYPES += (np.float128,)
+	if hasattr(np,'complex256'):
+	    HANDLED_TYPES += (np.complex256,)
 	
 	def __init__( self, ERROR_ON_COPY=None, a_to_gl=None, gl_to_a=None ):
 		if ERROR_ON_COPY is None:

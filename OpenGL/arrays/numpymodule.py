@@ -90,16 +90,18 @@ if NumpyHandler is None:
             numpy.float16,
             numpy.float32,
             numpy.float64,
-            numpy.float128,
             numpy.complex64,
             numpy.complex128,
-            numpy.complex256,
             numpy.bytes_,
             numpy.str_,
             numpy.void,
             numpy.datetime64,
             numpy.timedelta64,
         )# list, tuple )
+        if hasattr(numpy,'float128'):
+            HANDLED_TYPES += (numpy.float128,)
+        if hasattr(numpy,'complex256'):
+            HANDLED_TYPES += (numpy.complex256,)
         dataPointer = dataPointer
         isOutput = True
         ERROR_ON_COPY = _configflags.ERROR_ON_COPY
