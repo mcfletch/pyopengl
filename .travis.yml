@@ -4,6 +4,8 @@ python:
     - "3.4"
     - "3.5"
     - "3.6"
+    - "3.7"
+
 install:
     - pip install pygame numpy cython pytest psutil
     - pip install ./accelerate
