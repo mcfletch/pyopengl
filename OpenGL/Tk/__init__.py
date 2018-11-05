@@ -98,7 +98,7 @@ if _default_root is None:
 # but that a different build is required for 64-bit Python.
 # Thus the directory structure is *not* the same as the 
 # original PyOpenGL versions.
-if sys.maxint > 2**32:
+if sys.maxsize > 2**32:
     suffix = '-64'
 else:
     suffix = ''
