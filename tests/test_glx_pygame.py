@@ -2,6 +2,10 @@ from __future__ import print_function
 #import OpenGL
 #OpenGL.USE_ACCELERATE=False
 from OpenGL.GL import *
+import pytest
+import sys
+if not sys.platform.startswith('linux'):
+    pytest.skip("Skipping GLX tests on non-linux platforms", allow_module_level=True)
 from OpenGL.GLX import *
 from OpenGL.GLX.EXT.texture_from_pixmap import *
 from pygamegltest import pygametest
