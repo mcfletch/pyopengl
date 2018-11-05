@@ -8,9 +8,9 @@ from OpenGL.raw.GL import _errors
 from OpenGL.constant import Constant as _C
 
 import ctypes
-_EXTENSION_NAME = 'GL_SGIX_async'
+_EXTENSION_NAME = 'GL_SGIX_async_'
 def _f( function ):
-    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_async',error_checker=_errors._error_checker)
+    return _p.createFunction( function,_p.PLATFORM.GL,'GL_SGIX_async_',error_checker=_errors._error_checker)
 GL_ASYNC_MARKER_SGIX=_C('GL_ASYNC_MARKER_SGIX',0x8329)
 @_f
 @_p.types(None,_cs.GLuint)

@@ -33,6 +33,7 @@ from OpenGL.constant import Constant
 from OpenGL import constants as GLconstants
 GLvoid = GL_types.GLvoid
 """
+    @classmethod
     def defaultEmitters( cls ):
         """Produce the set of default emitter classes
         """
@@ -40,6 +41,7 @@ GLvoid = GL_types.GLvoid
             OpenGLFunction(),
             OpenGLConstant(),
         ] + cls._super.defaultEmitters()
+    @classmethod
     def importAble( cls, name, value ):
         """Determine whether this name/object should be imported from known symbols"""
         return (
@@ -47,7 +49,6 @@ GLvoid = GL_types.GLvoid
             isinstance( value, constant.Constant ) or 
             value.__class__.__name__.endswith( 'CFunctionType') # this should be available *somewhere*!
         )
-    importAble = classmethod( importAble )
 
     def filter_items( self, items, expressions=None,symbols=None, types=None ):
         """Filter out PFN functions"""

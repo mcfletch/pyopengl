@@ -245,6 +245,8 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         self.dll = '_p.PLATFORM.%s'%(self.prefix,)
         if self.module[0].isdigit():
             self.module = '%s_%s'%(self.prefix,self.module,)
+        if self.module == 'async':
+            self.module = 'async_'
         self.camelModule = "".join([x.title() for x in self.module.split('_')])
         self.rawModule = self.module
         

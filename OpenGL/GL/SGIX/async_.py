@@ -1,7 +1,7 @@
-'''OpenGL extension SGIX.async
+'''OpenGL extension SGIX.async_
 
 This module customises the behaviour of the 
-OpenGL.raw.GL.SGIX.async to provide a more 
+OpenGL.raw.GL.SGIX.async_ to provide a more 
 Python-friendly API
 
 Overview (from the spec)
@@ -49,14 +49,14 @@ Overview (from the spec)
 	See SGIX_async_pixel for the asynchronous pixel commands.
 
 The official definition of this extension is available here:
-http://www.opengl.org/registry/specs/SGIX/async.txt
+http://www.opengl.org/registry/specs/SGIX/async_.txt
 '''
 from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.SGIX.async import *
-from OpenGL.raw.GL.SGIX.async import _EXTENSION_NAME
+from OpenGL.raw.GL.SGIX.async_ import *
+from OpenGL.raw.GL.SGIX.async_ import _EXTENSION_NAME
 
 def glInitAsyncSGIX():
     '''Return boolean indicating whether this extension is available'''
