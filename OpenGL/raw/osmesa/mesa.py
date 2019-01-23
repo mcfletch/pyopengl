@@ -1,5 +1,5 @@
 from OpenGL import arrays
-from OpenGL.raw.GL._types import GLenum,GLboolean,GLsizei,GLint
+from OpenGL.raw.GL._types import GLenum,GLboolean,GLsizei,GLint,GLuint
 from OpenGL.raw.osmesa._types import *
 from OpenGL.constant import Constant as _C
 from OpenGL import platform as _p
@@ -103,7 +103,7 @@ def OSMesaColorClamp(enable):
     """
 
 @_f
-@_p.types(OSMesaContext, arrays.GLCharArray, GLuint)
+@_p.types(OSMesaContext, arrays.GLcharArray, GLuint)
 def OSMesaPostprocess(osmesa, filter, enable_value):
     """Enable/disable Gallium post-process filters.
 
