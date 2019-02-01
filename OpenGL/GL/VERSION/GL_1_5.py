@@ -124,9 +124,6 @@ def glBufferSubData( baseOperation, target, offset, size=None, data=None ):
         size = ArrayDatatype.arrayByteCount( data )
     return baseOperation( target, offset, size, data )
 
-glGetBufferParameteriv = wrapper.wrapper(glGetBufferParameteriv).setOutput(
-    "params",(1,), orPassIn=True
-)
 @_lazy( glGetBufferPointerv )
 def glGetBufferPointerv( baseOperation, target, pname, params=None ):
     """Retrieve a ctypes pointer to buffer's data"""
