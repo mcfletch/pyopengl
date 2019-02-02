@@ -214,7 +214,7 @@ class TestCore( basetestcase.BaseTest ):
             glBindBuffer(GL_ARRAY_BUFFER, buffer)
             try:
                 mapped = glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_MAPPED)
-                assert mapped == [GL_FALSE], mapped
+                assert mapped == (GL_FALSE if OpenGL.SIZE_1_ARRAY_UNPACK else [GL_FALSE]), mapped
             finally:
                 glBindBuffer(GL_ARRAY_BUFFER, 0)
                 glDeleteVertexArrays(1,vertex_array)
