@@ -207,7 +207,7 @@ if CallFuncPyConverter is None:
             if thisSize == (1,):
                 try:
                     return result[0]
-                except TypeError:
+                except (IndexError,TypeError):
                     return result
             else:
                 return result

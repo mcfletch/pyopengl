@@ -207,6 +207,17 @@ class TestCore( basetestcase.BaseTest ):
             # bug report from Dan Helfman, delete shouldn't cause 
             # errors if called explicitly
             d.delete()
+        def test_glgetbufferparameter(self):
+            from OpenGL.arrays import vbo
+            buffer = glGenBuffers(1)
+            vertex_array = glGenVertexArrays(1,buffer)
+            glBindBuffer(GL_ARRAY_BUFFER, buffer)
+            try:
+                mapped = glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_MAPPED)
+                assert mapped == [GL_FALSE], mapped
+            finally:
+                # glBindVertexArray(None)
+                pass
     def test_fbo( self ):
         """Test that we support framebuffer objects
         
@@ -225,6 +236,7 @@ class TestCore( basetestcase.BaseTest ):
             GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, 
             depthbuffer
         )
+
         img = glGenTextures(1)
         glBindTexture(GL_TEXTURE_2D, img)
         # NOTE: these lines are *key*, without them you'll likely get an unsupported format error,
@@ -533,6 +545,7 @@ class TestCore( basetestcase.BaseTest ):
                 image
             )
             assert texture
+    
     
         
 if __name__ == "__main__":
