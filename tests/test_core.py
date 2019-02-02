@@ -216,8 +216,9 @@ class TestCore( basetestcase.BaseTest ):
                 mapped = glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_MAPPED)
                 assert mapped == [GL_FALSE], mapped
             finally:
-                # glBindVertexArray(None)
-                pass
+                glBindBuffer(GL_ARRAY_BUFFER, 0)
+                glDeleteVertexArrays(1,vertex_array)
+                glDeleteBuffers(1,buffer)
     def test_fbo( self ):
         """Test that we support framebuffer objects
         
