@@ -319,6 +319,10 @@ class Wrapper( LateBind ):
             raise AttributeError( """No argument named %r left in cConverters: %s"""%(
                 argName, self.wrappedOperation.argNames,
             ))
+        if self.cConverters[i] is not None:
+            raise RuntimeError("Double wrapping of output parameter: %r on %s"%(
+                argName, self.__name__
+            ))
         self.cConverters[i] = function
         return self
     def setCResolver( self, argName, function=NULL ):
