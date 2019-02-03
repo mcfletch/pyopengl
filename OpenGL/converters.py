@@ -231,7 +231,7 @@ if CallFuncPyConverter is None:
             ('outIndex','name', 'cArgIndex' ),
             ('index','specifier', 'pyArgIndex' ),
         ]
-        __slots__ = ('index','specifier','lookup','arrayType')
+        __slots__ = ('index','outIndex','specifier','lookup','arrayType')
         def getSize( self, pyArgs ):
             """Retrieve the array size for this argument"""
             try:
