@@ -124,7 +124,9 @@ cdef class NumpyHandler(FormatHandler):
         cdef np.dtype typecode = self.typeCodeToDtype( typeCode )
         Py_INCREF( typecode )
         cdef np.npy_intp ndims = PyArray_SIZE(c_dims)
-        return PyArray_Zeros( <int>ndims, <np.npy_intp *>PyArray_DATA(c_dims), typecode, 0 )
+        cdef np.ndarray result = PyArray_Zeros( <int>ndims, <np.npy_intp *>PyArray_DATA(c_dims), typecode, 0 )
+        # Py_INCREF( result )
+        return result
     cdef c_arraySize( self, object instance, object typeCode ):
         """Retrieve array size reference"""
         return (<np.ndarray>self.c_check_array( instance )).size
