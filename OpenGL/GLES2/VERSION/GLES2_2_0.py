@@ -248,6 +248,7 @@ glVertexAttribPointer=wrapper.wrapper(glVertexAttribPointer).setInputArraySize(
 from OpenGL import converters
 from OpenGL.lazywrapper import lazy as _lazy
 from OpenGL._bytes import _NULL_8_BYTE
+from OpenGL import contextdata 
 
 glShaderSource = platform.createExtensionFunction(
     'glShaderSource', dll=platform.PLATFORM.GLES2,
@@ -278,13 +279,6 @@ try:
     del conv
 except NameError as err:
     pass
-
-glGetShaderiv = wrapper.wrapper( glGetShaderiv ).setOutput(
-    'params',
-    size=(1,), 
-    arrayType=arrays.GLintArray,
-    orPassIn = True,
-)
 
 
 @_lazy( glGetShaderInfoLog )
@@ -445,12 +439,12 @@ def glVertexAttribPointer(
     in the contextdata structure in order to prevent null-
     reference errors in the renderer.
     """
-    array = ArrayDatatype.asArray( pointer, type )
+    array = arrays.ArrayDatatype.asArray( pointer, type )
     key = ('vertex-attrib',index)
     contextdata.setValue( key, array )
     return baseOperation(
         index, size, type,
         normalized, stride,
-        ArrayDatatype.voidDataPointer( array )
+        arrays.ArrayDatatype.voidDataPointer( array )
     )
 
