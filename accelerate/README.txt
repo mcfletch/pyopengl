@@ -1,1 +1,4 @@
-This is the Cython-coded accelerator module for PyOpenGL 3.x
+Acceleration code for PyOpenGL
+
+This set of C (Cython) extensions provides acceleration of common operations
+for slow points in PyOpenGL 3.x

@@ -8,6 +8,10 @@ try:
 except ImportError:
     from distutils.core import setup
 
+HERE = os.path.normpath(os.path.abspath(os.path.dirname( __file__ )))
+with open(os.path.join(HERE, 'readme.rst'), 'r') as f:
+    long_description = f.read()
+
 sys.path.insert(0, '.' )
 metadata = dict(
     version = [
@@ -29,6 +33,8 @@ metadata = dict(
         """Topic :: Software Development :: Libraries :: Python Modules""",
         """Intended Audience :: Developers""",
     ],
+    long_description = long_description,
+    long_description_content_type = 'text/x-rst',
 )
 
 def is_package( path ):
