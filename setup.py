@@ -17,7 +17,7 @@ metadata = dict(
     ][0],
     author = 'Mike C. Fletcher',
     author_email = 'mcfletch@vrplumber.com',
-    url = 'http://pyopengl.sourceforge.net',
+    url = 'https://github.com/mcfletch/pyopengl',
     license = 'BSD',
     download_url = "http://sourceforge.net/projects/pyopengl/files/PyOpenGL/",
     keywords = 'Graphics,3D,OpenGL,GLU,GLUT,GLE,GLX,EXT,ARB,Mesa,ctypes',
