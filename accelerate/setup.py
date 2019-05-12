@@ -15,6 +15,8 @@ else:
 import sys, os
 
 HERE = os.path.normpath(os.path.abspath(os.path.dirname( __file__ )))
+with open(os.path.join(HERE, 'README.txt'), 'r') as f:
+    long_description = f.read()
 
 version = None
 # get version from __init__.py
@@ -114,10 +116,8 @@ if __name__ == "__main__":
             """Intended Audience :: Developers""",
         ],
         'keywords': 'PyOpenGL,accelerate,Cython',
-        'long_description' : """Acceleration code for PyOpenGL
-
-This set of C (Cython) extensions provides acceleration of common operations
-for slow points in PyOpenGL 3.x.""",
+        'long_description' : long_description,
+        'long_description_content_type' : 'text/plain',
         'platforms': ['Win32','Linux','OS-X','Posix'],
     }
     ### Now the actual set up call

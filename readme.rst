@@ -27,7 +27,7 @@ scenegraph engine, VRML97 parser, lots of demos, etc) you can install that with:
 
 Or you can clone it (including the tutorial sources) with::
 
-    $ bzr branch lp:openglcontext
+    $ git clone https://github.com/mcfletch/openglcontext.git
 
 or (for GitHub usage)::
 
