@@ -17,6 +17,7 @@ cdef extern from "numpy/arrayobject.h":
     int NPY_ARRAY_CARRAY
     int NPY_ARRAY_FORCECAST
     int PyArray_ISCARRAY( np.ndarray instance )
+    int PyArray_ISCARRAY_RO( np.ndarray instance )
     cdef np.ndarray PyArray_Zeros(int nd, np.Py_intptr_t* dims, np.dtype, int fortran)
     cdef void import_array()
     cdef void* PyArray_DATA( np.ndarray )
@@ -98,7 +99,7 @@ cdef class NumpyHandler(FormatHandler):
                     """Array of type %r passed, required array of type %r""",
                     array_descr(instance).char, targetType.char,
                 )                    
-        if not PyArray_ISCARRAY( instance ):
+        if not PyArray_ISCARRAY_RO( instance ):
             raise CopyError(
                 """from_param received a non-contiguous array! %s"""%(
                     working,
@@ -179,7 +180,7 @@ cdef class NumpyHandler(FormatHandler):
         :rtype: np.ndarray
         """
         if self.ERROR_ON_COPY:
-            if not PyArray_ISCARRAY( instance ):
+            if not PyArray_ISCARRAY_RO( instance ):
                 raise CopyError(
                     """Non-contiguous array passed""",
                     instance,
@@ -193,7 +194,7 @@ cdef class NumpyHandler(FormatHandler):
             return instance 
         else:
             # "convert" regardless (will return same instance if already contiguous)
-            if not PyArray_ISCARRAY( instance ) or array_descr(instance) != dtype:
+            if not PyArray_ISCARRAY_RO( instance ) or array_descr(instance) != dtype:
                 # TODO: make sure there's no way to segfault here 
                 Py_INCREF( <object> instance )
                 Py_INCREF( <object> dtype )
