@@ -23,7 +23,7 @@ If you are new to PyOpenGL, you likely want to start with the OpenGLContext `tut
 Those tutorials require OpenGLContext, (which is a big wrapper including a whole
 scenegraph engine, VRML97 parser, lots of demos, etc) you can install that with::
 
-    $ pip2.7 install "OpenGLContext-full==3.1.1
+    $ pip2.7 install "OpenGLContext-full==3.1.1"
 
 Or you can clone it (including the tutorial sources) with::
 
