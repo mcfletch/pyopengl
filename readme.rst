@@ -61,3 +61,6 @@ numpy. Some will have accelerate, and some will not.
 
 .. image:: https://travis-ci.org/mcfletch/pyopengl.svg?branch=master
     :target: https://travis-ci.org/mcfletch/pyopengl
+
+.. image:: https://ci.appveyor.com/api/projects/status/MikeCFletcher/pyopengl/branch/master
+    :target: https://ci.appveyor.com/project/MikeCFletcher/pyopengl
