@@ -22,7 +22,7 @@ def wglGetSyncValuesOML(hdc,ust,msc,sbc):pass
 @_p.types(_cs.INT64,_cs.HDC,_cs.INT64,_cs.INT64,_cs.INT64)
 def wglSwapBuffersMscOML(hdc,target_msc,divisor,remainder):pass
 @_f
-@_p.types(_cs.INT64,_cs.HDC,_cs.c_int,_cs.INT64,_cs.INT64,_cs.INT64)
+@_p.types(_cs.INT64,_cs.HDC,_cs.INT,_cs.INT64,_cs.INT64,_cs.INT64)
 def wglSwapLayerBuffersMscOML(hdc,fuPlanes,target_msc,divisor,remainder):pass
 @_f
 @_p.types(_cs.BOOL,_cs.HDC,_cs.INT64,_cs.INT64,_cs.INT64,ctypes.POINTER(_cs.INT64),ctypes.POINTER(_cs.INT64),ctypes.POINTER(_cs.INT64))

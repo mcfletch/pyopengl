@@ -11,7 +11,7 @@ import ctypes
 _EXTENSION_NAME = 'WGL_EXT_colorspace'
 def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.WGL,'WGL_EXT_colorspace',error_checker=_errors._error_checker)
-WGL_COLORSPACE_EXT=_C('WGL_COLORSPACE_EXT',0x3087)
+WGL_COLORSPACE_EXT=_C('WGL_COLORSPACE_EXT',0x309D)
 WGL_COLORSPACE_LINEAR_EXT=_C('WGL_COLORSPACE_LINEAR_EXT',0x308A)
 WGL_COLORSPACE_SRGB_EXT=_C('WGL_COLORSPACE_SRGB_EXT',0x3089)
 

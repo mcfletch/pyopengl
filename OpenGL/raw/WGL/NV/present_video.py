@@ -14,10 +14,10 @@ def _f( function ):
 WGL_NUM_VIDEO_SLOTS_NV=_C('WGL_NUM_VIDEO_SLOTS_NV',0x20F0)
 @_f
 @_p.types(_cs.BOOL,_cs.HDC,_cs.c_uint,_cs.HVIDEOOUTPUTDEVICENV,ctypes.POINTER(_cs.c_int))
-def wglBindVideoDeviceNV(hDC,uVideoSlot,hVideoDevice,piAttribList):pass
+def wglBindVideoDeviceNV(hDc,uVideoSlot,hVideoDevice,piAttribList):pass
 @_f
 @_p.types(_cs.c_int,_cs.HDC,ctypes.POINTER(_cs.HVIDEOOUTPUTDEVICENV))
-def wglEnumerateVideoDevicesNV(hDC,phDeviceList):pass
+def wglEnumerateVideoDevicesNV(hDc,phDeviceList):pass
 @_f
 @_p.types(_cs.BOOL,_cs.c_int,ctypes.POINTER(_cs.c_int))
 def wglQueryCurrentContextNV(iAttribute,piValue):pass

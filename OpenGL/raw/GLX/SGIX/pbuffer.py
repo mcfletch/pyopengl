@@ -46,7 +46,7 @@ def glXDestroyGLXPbufferSGIX(dpy,pbuf):pass
 @_p.types(None,ctypes.POINTER(_cs.Display),_cs.GLXDrawable,ctypes.POINTER(_cs.c_ulong))
 def glXGetSelectedEventSGIX(dpy,drawable,mask):pass
 @_f
-@_p.types(_cs.c_int,ctypes.POINTER(_cs.Display),_cs.GLXPbufferSGIX,_cs.c_int,ctypes.POINTER(_cs.c_uint))
+@_p.types(None,ctypes.POINTER(_cs.Display),_cs.GLXPbufferSGIX,_cs.c_int,ctypes.POINTER(_cs.c_uint))
 def glXQueryGLXPbufferSGIX(dpy,pbuf,attribute,value):pass
 @_f
 @_p.types(None,ctypes.POINTER(_cs.Display),_cs.GLXDrawable,_cs.c_ulong)

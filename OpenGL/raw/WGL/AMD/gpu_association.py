@@ -43,7 +43,7 @@ def wglGetCurrentAssociatedContextAMD():pass
 @_p.types(_cs.UINT,_cs.UINT,ctypes.POINTER(_cs.UINT))
 def wglGetGPUIDsAMD(maxCount,ids):pass
 @_f
-@_p.types(_cs.INT,_cs.UINT,_cs.c_int,_cs.GLenum,_cs.UINT,ctypes.c_void_p)
+@_p.types(_cs.INT,_cs.UINT,_cs.INT,_cs.GLenum,_cs.UINT,ctypes.c_void_p)
 def wglGetGPUInfoAMD(id,property,dataType,size,data):pass
 @_f
 @_p.types(_cs.BOOL,_cs.HGLRC)

@@ -12,4 +12,9 @@ _EXTENSION_NAME = 'GLES2_MESA_framebuffer_flip_y'
 def _f( function ):
     return _p.createFunction( function,_p.PLATFORM.GLES2,'GLES2_MESA_framebuffer_flip_y',error_checker=_errors._error_checker)
 GL_FRAMEBUFFER_FLIP_Y_MESA=_C('GL_FRAMEBUFFER_FLIP_Y_MESA',0x8BBB)
-
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLint)
+def glFramebufferParameteriMESA(target,pname,param):pass
+@_f
+@_p.types(None,_cs.GLenum,_cs.GLenum,arrays.GLintArray)
+def glGetFramebufferParameterivMESA(target,pname,params):pass

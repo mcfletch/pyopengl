@@ -83,6 +83,10 @@ def as_unicode(x,encoding='utf-8'):
     if isinstance(x,unicode):
         return x
     elif isinstance(x,bytes):
-        return x.decode(encoding)
+        try:
+            return x.decode(encoding)
+        except UnicodeDecodeError as err:
+            return x.decode('latin-1')
     else:
         return unicode(x)
+

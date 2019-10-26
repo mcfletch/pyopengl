@@ -16,7 +16,7 @@ Overview (from the spec)
 	      const int start = 6;
 	      layout(location = start + 2) int vec4 v;
 	
-	2) Specify explicit byte offsets within a uniform or shader storage block. 
+	2) Specify explicit byte offsets within a uniform or shader storage block.
 	   For example, if you want two vec4 variables "batman" and "robin" to
 	   appear at byte offsets 0 and 64 in your block, you can say:
 	
@@ -33,7 +33,7 @@ Overview (from the spec)
 	        layout(align = 64) vec4 robin;
 	      };
 	
-	   This says the member 'robin' must start at the next address that is a 
+	   This says the member 'robin' must start at the next address that is a
 	   multiple of 64.  It allows constructing the same layout in C and in GLSL
 	   without inventing explicit offsets.
 	
@@ -64,7 +64,7 @@ Overview (from the spec)
 	      // consumes W component of first vector
 	      layout(location = 0, component = 3) in float robin;
 	
-	   Further, an array of vec3 and an array of float can be stored 
+	   Further, an array of vec3 and an array of float can be stored
 	   interleaved, using the following.
 	
 	      // consumes W component of 32 vectors
@@ -79,8 +79,8 @@ Overview (from the spec)
 	       layout(xfb_buffer = 0, xfb_offset = 24) out vec3 var2;
 	       layout(xfb_buffer = 1, xfb_offset = 0)  out vec4 var3;
 	
-	   The second line above says to write var2 out to byte offset 24 of 
-	   transform/feedback buffer 0.  (When doing this, output are only 
+	   The second line above says to write var2 out to byte offset 24 of
+	   transform/feedback buffer 0.  (When doing this, output are only
 	   captured when xfb_offset is used.)
 	
 	   To specify the total number of bytes per entry in a buffer:
@@ -90,7 +90,7 @@ Overview (from the spec)
 	   This is necessary if, say, var3 above, which uses bytes 0-11,
 	   does not fully fill the buffer, which in this case takes 32 bytes.
 	
-	   Use of this feature effectively eliminates the need to use previously 
+	   Use of this feature effectively eliminates the need to use previously
 	   existing API commands to describe the transform feedback layout.
 	
 	6) Allow locations on input and output blocks for SSO interface matching.

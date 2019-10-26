@@ -14,5 +14,5 @@ def _f( function ):
 GLX_3DFX_FULLSCREEN_MODE_MESA=_C('GLX_3DFX_FULLSCREEN_MODE_MESA',0x2)
 GLX_3DFX_WINDOW_MODE_MESA=_C('GLX_3DFX_WINDOW_MODE_MESA',0x1)
 @_f
-@_p.types(_cs.Bool,_cs.c_int)
+@_p.types(_cs.GLboolean,_cs.GLint)
 def glXSet3DfxModeMESA(mode):pass

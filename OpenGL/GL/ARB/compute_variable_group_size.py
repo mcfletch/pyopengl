@@ -7,12 +7,12 @@ Python-friendly API
 Overview (from the spec)
 	
 	This extension allows applications to write generic compute shaders that
-	operate on work groups with arbitrary dimensions.  Instead of specifying a
-	fixed work group size in the compute shader, an application can use a
+	operate on workgroups with arbitrary dimensions.  Instead of specifying a
+	fixed workgroup size in the compute shader, an application can use a
 	compute shader using the /local_size_variable/ layout qualifer to indicate
-	a variable work group size.  When using such compute shaders, the new
-	command DispatchComputeGroupSizeARB should be used to specify both a work
-	group size and work group count.
+	a variable workgroup size.  When using such compute shaders, the new
+	command DispatchComputeGroupSizeARB should be used to specify both a
+	workgroup size and workgroup count.
 	
 	In this extension, compute shaders with fixed group sizes must be
 	dispatched by DispatchCompute and DispatchComputeIndirect.  Compute
