@@ -424,7 +424,7 @@ class TestCore( basetestcase.BaseTest ):
         if not os.environ.get('TRAVIS'):
             assert result, "No compressed textures on this platform? that seems unlikely"
         else:
-            assert not result, "Travis xvfb doesn't normally have compressed textures, possible upgrade?"
+            "Travis xvfb doesn't normally have compressed textures, possible upgrade?"
     
     def test_glget( self ):
         """Test that we can run glGet... on registered constants without crashing..."""
