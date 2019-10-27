@@ -208,13 +208,38 @@ class TestCore( basetestcase.BaseTest ):
             # errors if called explicitly
             d.delete()
         def test_glgetbufferparameter(self):
-            from OpenGL.arrays import vbo
             buffer = glGenBuffers(1)
             vertex_array = glGenVertexArrays(1,buffer)
             glBindBuffer(GL_ARRAY_BUFFER, buffer)
             try:
                 mapped = glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_MAPPED)
                 assert mapped == (GL_FALSE if OpenGL.SIZE_1_ARRAY_UNPACK else [GL_FALSE]), mapped
+            finally:
+                glBindBuffer(GL_ARRAY_BUFFER, 0)
+                glDeleteVertexArrays(1,vertex_array)
+                glDeleteBuffers(1,buffer)
+    def test_glbufferparameter_create(self):
+        for create in [True,False]:
+            buffer = glGenBuffers(1)
+            vertex_array = glGenVertexArrays(1,buffer)
+            glBindBuffer(GL_ARRAY_BUFFER, buffer)
+            try:
+                for param, expected in [
+                    (GL_BUFFER_SIZE,0),
+                    (GL_BUFFER_MAPPED,GL_FALSE),
+                    (GL_BUFFER_STORAGE_FLAGS,0),
+                    (GL_BUFFER_USAGE,GL_STATIC_DRAW),
+                ]:
+                    if create:
+                        mapped = GLint(-1)
+                        glGetBufferParameteriv(GL_ARRAY_BUFFER, param, mapped)
+                        assert mapped.value == expected, (param, mapped, expected)
+                    else:
+                        mapped = glGetBufferParameteriv(GL_ARRAY_BUFFER, param)
+                        if param != GL_BUFFER_USAGE or OpenGL.SIZE_1_ARRAY_UNPACK:
+                            assert mapped == expected, (param, mapped, expected)
+                        else:
+                            assert mapped[0] == expected, (param, mapped[0], expected)
             finally:
                 glBindBuffer(GL_ARRAY_BUFFER, 0)
                 glDeleteVertexArrays(1,vertex_array)
