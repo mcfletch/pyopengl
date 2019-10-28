@@ -19,7 +19,7 @@ def lazy( baseFunction ):
     """
     def wrap( wrapper ):
         """Wrap wrapper with baseFunction"""
-        def __nonzero__( self ):
+        def __bool__( self ):
             return bool( baseFunction )
         def __repr__( self ):
             return '%s( %r )'%(
@@ -29,7 +29,8 @@ def lazy( baseFunction ):
         _with_wrapper = type( wrapper.__name__, (_LazyWrapper,), {
             '__repr__': __repr__,
             '__doc__': wrapper.__doc__,
-            '__nonzero__': __nonzero__,
+            '__nonzero__': __bool__,
+            '__bool__': __bool__,
             'wrappedOperation': baseFunction,
             'restype': getattr(wrapper, 'restype',getattr(baseFunction,'restype',None)),
         } )
