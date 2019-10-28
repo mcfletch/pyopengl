@@ -38,7 +38,7 @@ else:
 from OpenGL import error
 from OpenGL.GLU import *
 import OpenGL
-from OpenGL.extensions import alternate
+from OpenGL.extensions import alternate, GLQuerier
 from OpenGL.GL.framebufferobjects import *
 from OpenGL.GL.EXT.multi_draw_arrays import *
 from OpenGL.GL.ARB.imaging import *
@@ -48,7 +48,6 @@ glMultiDrawElements = alternate(
     glMultiDrawElementsEXT, glMultiDrawElements, 
 )
 import basetestcase
-    
 
 class TestCore( basetestcase.BaseTest ):
     def test_errors( self ):
@@ -170,7 +169,10 @@ class TestCore( basetestcase.BaseTest ):
         def test_vbo( self ):
             """Test utility vbo wrapper"""
             from OpenGL.arrays import vbo
-            assert vbo.get_implementation()
+            if not vbo.get_implementation():
+                return
+            if not glVertexPointerd or not glDrawElements:
+                return
             points = array( [
                 [0,0,0],
                 [0,1,0],
@@ -429,6 +431,8 @@ class TestCore( basetestcase.BaseTest ):
     
     def test_lookupint( self ):
         from OpenGL.raw.GL import _lookupint 
+        if GLQuerier.pullVersion() < [2]:
+            return
         l = _lookupint.LookupInt( GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLint )
         result = int(l)
         if not os.environ.get('TRAVIS'):
@@ -519,6 +523,8 @@ class TestCore( basetestcase.BaseTest ):
     
     
     def test_orinput_handling( self ):
+        if not glGenVertexArrays:
+            return None
         x = glGenVertexArrays(1)
         x = int(x) # check that we got x as an integer-compatible value
         x2 = GLuint()
@@ -534,6 +540,8 @@ class TestCore( basetestcase.BaseTest ):
     
     
     def test_get_read_fb_binding( self ):
+        if GLQuerier.pullVersion() < [3]:
+            return
         glGetInteger(GL_READ_FRAMEBUFFER_BINDING)
     
     def test_shader_compile_string( self ):
