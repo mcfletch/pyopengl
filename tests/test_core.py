@@ -3,6 +3,7 @@ from __future__ import print_function
 import pygame, pygame.display
 import logging, time, traceback, unittest, os
 logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 HERE = os.path.dirname( __file__ )
 import pickle
 try:
@@ -42,7 +43,6 @@ from OpenGL.GL.framebufferobjects import *
 from OpenGL.GL.EXT.multi_draw_arrays import *
 from OpenGL.GL.ARB.imaging import *
 from OpenGL._bytes import _NULL_8_BYTE
-
 
 glMultiDrawElements = alternate( 
     glMultiDrawElementsEXT, glMultiDrawElements, 
@@ -208,6 +208,8 @@ class TestCore( basetestcase.BaseTest ):
             # errors if called explicitly
             d.delete()
         def test_glgetbufferparameter(self):
+            if not glGenBuffers or not glGenVertexArrays:
+                return None
             buffer = glGenBuffers(1)
             vertex_array = glGenVertexArrays(1,buffer)
             glBindBuffer(GL_ARRAY_BUFFER, buffer)
@@ -219,6 +221,8 @@ class TestCore( basetestcase.BaseTest ):
                 glDeleteVertexArrays(1,vertex_array)
                 glDeleteBuffers(1,buffer)
     def test_glbufferparameter_create(self):
+        if not glGenBuffers or not glGenVertexArrays:
+            return None
         for create in [True,False]:
             buffer = glGenBuffers(1)
             vertex_array = glGenVertexArrays(1,buffer)
@@ -353,6 +357,8 @@ class TestCore( basetestcase.BaseTest ):
                 print('No multi_draw_arrays support')
     def test_glDrawBuffers_list( self ):
         """Test that glDrawBuffers with list argument doesn't crash"""
+        if not glDrawBuffers:
+            return
         a_type = GLenum*2
         args = a_type(
             GL_COLOR_ATTACHMENT0,
@@ -364,6 +370,10 @@ class TestCore( basetestcase.BaseTest ):
             assert err.err == GL_INVALID_OPERATION, err
     def test_glDrawBuffers_list_valid( self ):
         """Test that glDrawBuffers with list argument where value is set"""
+        if not glGenFramebuffers:
+            return
+        if not glDrawBuffers:
+            return
         previous = glGetIntegerv( GL_READ_BUFFER )
         fbo = glGenFramebuffers(1)
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
@@ -527,6 +537,8 @@ class TestCore( basetestcase.BaseTest ):
         glGetInteger(GL_READ_FRAMEBUFFER_BINDING)
     
     def test_shader_compile_string( self ):
+        if not glCreateShader:
+            return None
         shader = glCreateShader(GL_VERTEX_SHADER)
         
         def glsl_version():
@@ -549,6 +561,8 @@ class TestCore( basetestcase.BaseTest ):
             assert False, """Failed to compile"""
     
     def test_gen_framebuffers_twice( self ):
+        if not glGenFramebuffersEXT:
+            return
         glGenFramebuffersEXT(1)
         f1 = glGenFramebuffersEXT(1)
         f2 = glGenFramebuffersEXT(1)
