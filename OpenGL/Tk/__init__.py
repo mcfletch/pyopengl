@@ -119,7 +119,7 @@ try:
     _default_root.tk.call('package', 'require', 'Togl')
     _default_root.tk.eval('load {} Togl')
 except TclError as err:
-    _log.error( """Failure loading Togl package: %s""", err )
+    _log.error( """Failure loading Togl package: %s, on debian systems this is provided by `libtogl2`""", err )
     if _default_root:
         _default_root.destroy()
     raise
