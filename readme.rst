@@ -45,7 +45,7 @@ Running Tests
 
 You can run the PyOpenGL test suite from a source-code checkout, you will need:
 
-* git (for the checkout) or bzr (if you are checking out from launchpad)
+* git (for the checkout)
 * GLUT (FreeGLUT)
 * GLExtrusion library (libgle)
 * GLU (normally available on any OpenGL-capable machine)
