@@ -1,0 +1,3 @@
+# Requirements to generate the directdocs
+lxml
+genshi
