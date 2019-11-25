@@ -1,29 +1,26 @@
 #! /usr/bin/env python
 """Builds links from the OpenGL.org man pages to our "original" directory"""
-import os, sys, glob, shutil, re
+import os, sys, glob, shutil, re, subprocess
 
 MAN_TARGET = 'original'
 
 MAN_SOURCES = [
-    ('https://cvs.khronos.org/svn/repos/ogl/trunk/ecosystem/public/sdk/docs/man/','.man2'),
-    ('https://cvs.khronos.org/svn/repos/ogl/trunk/ecosystem/public/sdk/docs/man3','.man3'),
-    ('https://cvs.khronos.org/svn/repos/ogl/trunk/ecosystem/public/sdk/docs/man4','.man4'),
+    ('https://github.com/KhronosGroup/OpenGL-Refpages', 'OpenGL-Refpages'),
 ]
 
 def ensure_sources( ):
     """Ensure that the OpenGL.org man-page sources are available"""
     for source, target in MAN_SOURCES:
-        
-        if not os.path.isdir( target ):
-            os.system( "svn co --username anonymous --password anonymous %(source)s %(target)s"%locals())
+        if not os.path.exists(target):
+            subprocess.check_call(
+                'git clone %(source)s %(target)s'%locals(),
+                shell=True
+            )
         else:
-            cwd = os.getcwd()
-            try:
-                os.chdir( target )
-                command = 'svn up'
-                os.system( command )
-            finally:
-                os.chdir( cwd )
+            subprocess.check_call(
+                'cd %(target)s && git pull --ff-only'%locals(),
+                shell=True,
+            )
 
 def package_name( name ):
     if name.startswith( 'glX' ):
@@ -67,4 +64,4 @@ def link_sources( ):
 
 if __name__ == "__main__":
     ensure_sources()
-    link_sources()
+    # link_sources()
