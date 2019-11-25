@@ -1,14 +1,34 @@
 #! /usr/bin/env python
 """Downloads project source checkouts for integration as samples"""
-import os
+import os, subprocess
+SAMPLE_DIRECTORY = '.samples'
 
-class CVSSource( object ):
+class BaseSource( object ):
     def __init__( self, root, project=None, dirname=None ):
         self.root = root 
         self.project = project 
         if dirname is None:
             dirname = project
         self.dirname = dirname 
+    def checkout( self ):
+        command = self.checkout_command
+        print(command)
+        subprocess.check_output(command,shell=True)
+    def update( self ):
+        if os.path.exists( self.dirname ):
+            cwd = os.getcwd()
+            try:
+                os.chdir( self.dirname )
+                command = self.update_command
+                print(command)
+                subprocess.check_output(command,shell=True)
+            finally:
+                os.chdir( cwd )
+        else:
+            self.checkout()
+
+
+class CVSSource( BaseSource ):
     @property
     def checkout_command( self ):
         assert self.project 
@@ -20,25 +40,7 @@ class CVSSource( object ):
     @property 
     def update_command( self ):
         return 'cvs up -C'
-    def checkout( self ):
-        command = self.checkout_command
-        print command
-        os.system(
-            command
-        )
-    def update( self ):
-        if os.path.exists( self.dirname ):
-            cwd = os.getcwd()
-            try:
-                os.chdir( self.dirname )
-                command = self.update_command
-                print command
-                os.system( command )
-            finally:
-                os.chdir( cwd )
-        else:
-            self.checkout()
-class SVNSource( CVSSource ):
+class SVNSource( BaseSource ):
     @property
     def checkout_command( self ):
         assert self.root 
@@ -50,7 +52,7 @@ class SVNSource( CVSSource ):
     def update_command( self ):
         return 'svn up'
 
-class BZRSource( CVSSource ):
+class BZRSource( BaseSource ):
     @property
     def checkout_command( self ):
         assert self.root 
@@ -62,7 +64,7 @@ class BZRSource( CVSSource ):
     def update_command( self ):
         return 'bzr update'
 
-class HgSource( CVSSource ):
+class HgSource( BaseSource ):
     @property 
     def checkout_command( self ):
         assert self.root 
@@ -75,7 +77,7 @@ class HgSource( CVSSource ):
         """Note: requires enabling the fetch extension (sigh)"""
         return 'hg pull && hg update'
 
-class GITSource( CVSSource ):
+class GITSource( BaseSource ):
     @property
     def checkout_command( self ):
         assert self.root 
@@ -89,30 +91,20 @@ class GITSource( CVSSource ):
 
 
 checkouts = [
-#	CVSSource(
-#		':pserver:anonymous@pyopengl.cvs.sourceforge.net:/cvsroot/pyopengl',
-#		'OpenGLContext',
-#	),
-    BZRSource(
-        'lp:~mcfletch/openglcontext/trunk',
+    GITSource(
+        'https://github.com/mcfletch/openglcontext.git',
         'OpenGLContext',
     ),
-#	CVSSource(
-#		':pserver:anonymous@pyopengl.cvs.sourceforge.net:/cvsroot/pyopengl',
-#		'Demo/PyOpenGL-Demo',
-#		'PyOpenGL-Demo',
-#	),
-    BZRSource(
-        'lp:~mcfletch/pyopengl-demo/trunk',
+    GITSource(
+        'https://github.com/mcfletch/pyopengl-demo.git',
         'PyOpenGL-Demo',
     ),
-    
     CVSSource(
         ':pserver:anonymous@glinter.cvs.sourceforge.net:/cvsroot/glinter',
         'Glinter',
     ),
-    CVSSource(
-        ':pserver:anonymous@pymmlib.cvs.sourceforge.net:/cvsroot/pymmlib',
+    SVNSource(
+        'https://svn.code.sf.net/p/pymmlib/code/trunk',
         'pymmlib',
     ),
     CVSSource(
@@ -130,7 +122,7 @@ checkouts = [
         'pyui2',
     ),
     SVNSource(
-        'http://pymmlib.svn.sourceforge.net/viewvc/pymmlib/trunk/pymmlib/',
+        'https://svn.code.sf.net/p/pymmlib/code/trunk',
         dirname = 'pymmlib',
     ),
 #    SVNSource(
@@ -154,15 +146,15 @@ checkouts = [
 #        dirname = 'glchess',
 #    ),
     SVNSource(
-        'https://kamaelia.svn.sourceforge.net/svnroot/kamaelia/trunk',
+        'https://svn.code.sf.net/p/kamaelia/code/trunk',
         dirname = 'kamaelia',
     ),
-    SVNSource(
-        'http://pyggel.googlecode.com/svn/trunk',
+    GITSource(
+        'https://github.com/philippTheCat/pyggel.git',
         dirname = 'pyggel',
     ),
-    SVNSource(
-        'http://pygl2d.googlecode.com/svn/trunk',
+    GITSource(
+        'https://github.com/RyanHope/PyGL2D.git',
         dirname = 'pygl2d',
     ),
     BZRSource(
@@ -181,8 +173,8 @@ checkouts = [
         'https://bitbucket.org/tartley/gloopy',
         dirname = 'gloopy',
     ),
-    HgSource(
-        'https://code.google.com/p/visvis/',
+    GITSource(
+        'https://github.com/almarklein/visvis',
         dirname = 'visvis',
     ),
     HgSource(
@@ -207,8 +199,10 @@ checkouts = [
 ]
 
 if __name__ == "__main__":
+    if not os.path.exists(SAMPLE_DIRECTORY):
+        os.makedirs(SAMPLE_DIRECTORY)
     os.chdir( '.samples' )
     for checkout in checkouts:
-        print 'Project:', checkout.dirname
+        print('Project:', checkout.dirname)
         checkout.update()
     
