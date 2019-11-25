@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """Generates the PyOpenGL reference documentation"""
-import glob, os, datetime, subprocess
+import glob, os, datetime, subprocess, re, sys
 #import elementtree.ElementTree as ET
 import lxml.etree as ET
 from genshi.template import TemplateLoader
@@ -22,15 +22,18 @@ PACKAGES = ['GL','GLU','GLUT','GLE','GLX']
 DOCBOOK_NS = 'http://docbook.org/ns/docbook'
 MML_NS = "http://www.w3.org/1998/Math/MathML"
 XML_NS = "http://www.w3.org/XML/1998/namespace"
+LINK_NS = "http://www.w3.org/1999/xlink"
 
 WRAPPER = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book SYSTEM "test" [ <!ENTITY nbsp " "> ]>
 
 <book
     xmlns="%s"
-    xmlns:mml="%s">
+    xmlns:mml="%s"
+    xmlns:xlink="%s"
+>
 %%s
-</book>"""%( DOCBOOK_NS, MML_NS )
+</book>"""%( DOCBOOK_NS, MML_NS, LINK_NS )
 
 IMPLEMENTATION_MODULES = [
     # modules which contain external API entry points...
@@ -120,13 +123,15 @@ class RefSect( model.RefSect ):
         processed_sections = {}
         for section in tree[0].xpath( './/d:refsect1', namespaces=self.query_namespace):
             id = section.get( 'id' ) or section.get( '{%s}id'%(XML_NS))
-            if id and '-parameters' in id or id == 'parameters':
+            if id and '-parameters' in id or id.startswith('parameters'):
                 for varlist in section.xpath( './d:variablelist',namespaces=self.query_namespace):
                     self.process_variablelist( varlist )
             elif id and id.endswith( '-see_also' ):
                 for entry in section.xpath( './/d:citerefentry',namespaces=self.query_namespace):
                     title,volume = entry[0].text, entry[1].text
                     self.see_also.append( (title,volume) )
+            elif id:
+                self.discussions.append(section)
             elif not id:
                 log.warn( 'Found reference section without id: %s', section.items() )
                 self.discussions.append( section )
@@ -204,10 +209,17 @@ class RefSect( model.RefSect ):
 
         self.varrefs.extend( set )
 
-        
+HEADER_KILLER = re.compile( '[<][!]DOCTYPE.*?[>]', re.MULTILINE|re.DOTALL )
+def strip_bad_header( data ):
+    """Header in the xml files declared from opengl.org doesn't declare namespaces but files use them"""
+    match = HEADER_KILLER.search( data )
+    assert match 
+    return data[match.end():]
+       
 
 def load_file( filename ):
-    data = WRAPPER%(open(filename).read())
+    data = WRAPPER%(strip_bad_header(open(filename).read()))
+    # data = open(filename).read()
     parser = ET.ETCompatXMLParser(resolve_entities=False)
     try:
         return filter_comments( ET.XML( data, parser ) )
@@ -234,6 +246,13 @@ def init_output( ):
             os.remove( dst )
         os.link( src, dst )
 
+
+def api_entry_point(name):
+    for prefix in ['glu','glX','gl']:
+        if name.startswith(prefix):
+            return prefix 
+    return None
+
         
 REDIRECT = '''<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -245,6 +264,7 @@ REDIRECT = '''<html xmlns="http://www.w3.org/1999/xhtml">
 </html>'''
 
 def main():
+    limit_to = sys.argv[1:]
     init_output()
 
     log.info( 'Loading references' )
@@ -254,19 +274,33 @@ def main():
     else:
         log.warn( """Loading references directly, run ./references.py to pre-generate""" )
         samples = references.loadData()
+    base_names = set()
     files = []
-    for package in PACKAGES:
-        files.extend(
-            [(package,x) for x in glob.glob( 'original/%s/*.xml'%package )]
-        )
-    files.sort()
+    for package in ['gl4','gl2.1','eg3.1','es3.0','es3','es2.0','es1.1']:
+        for filename in glob.glob('OpenGL-Refpages/%s/*.xml'%(package,)):
+            base = os.path.basename(filename)
+            api = api_entry_point(base)
+            if api:
+                if limit_to:
+                    allowed = False
+                    for filter in limit_to:
+                        if filter in base:
+                            allowed=True 
+                    if not allowed:
+                        continue
+                if base not in base_names:
+                    base_names.add(base)
+                    files.append((api.upper(),filename))
+                else:
+                    log.info("%s exists in multiple apis", base)
+    files = sorted(files)[::-1]
     ref = Reference()
     for package,path in files:
         log.info( 'Loading: %s', path )
         #print 'loading', path
         try:
             tree = load_file( path )
-        except Exception, err:
+        except (Exception,ET.XMLSyntaxError) as err:
             err.args += (path,)
             raise
         else:
@@ -295,6 +329,7 @@ def main():
     for name,section in sorted(ref.sections.items()):
         output_file = os.path.join( OUTPUT_DIRECTORY,ref.url(section))
         log.warn( 'Generating: %s -> %s',name, output_file )
+        # log.info( 'Input xml: %s', ET.tostring(section.reference))
         stream = loader.load(
             'section.kid',
         ).generate(
