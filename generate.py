@@ -213,7 +213,8 @@ HEADER_KILLER = re.compile( '[<][!]DOCTYPE.*?[>]', re.MULTILINE|re.DOTALL )
 def strip_bad_header( data ):
     """Header in the xml files declared from opengl.org doesn't declare namespaces but files use them"""
     match = HEADER_KILLER.search( data )
-    assert match 
+    if not match: # GLUT and GLE don't have this...
+        return data
     return data[match.end():]
        
 
@@ -293,6 +294,9 @@ def main():
                     files.append((api.upper(),filename))
                 else:
                     log.info("%s exists in multiple apis", base)
+    for section in ['GLUT','GLE']:
+        for filename in glob.glob('original/%(section)s/*.xml'%locals()):
+            files.append((section,filename))
     files = sorted(files)[::-1]
     ref = Reference()
     for package,path in files:
