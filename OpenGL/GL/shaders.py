@@ -29,6 +29,9 @@ __all__ = [
     'compileShader',
     'GL_VALIDATE_STATUS',
     'GL_LINK_STATUS',
+    'ShaderCompilationError', 
+    'ShaderValidationError', 
+    'ShaderLinkError',
     # automatically added stuff here...
 ]
 
@@ -98,12 +101,12 @@ class ShaderProgram( int ):
         
         Validation has to occur *after* linking/loading
         
-        raises RuntimeError on failures
+        raises ShaderValidationError on failures
         """
         glValidateProgram( self )
         validation = glGetProgramiv( self, GL_VALIDATE_STATUS )
         if validation == GL_FALSE:
-            raise RuntimeError(
+            raise ShaderValidationError(
                 """Validation failure (%r): %s"""%(
                 validation,
                 glGetProgramInfoLog( self ),
@@ -114,11 +117,11 @@ class ShaderProgram( int ):
     def check_linked( self ):
         """Check link status for this program
         
-        raises RuntimeError on failures
+        raises ShaderLinkError on failures
         """
         link_status = glGetProgramiv( self, GL_LINK_STATUS )
         if link_status == GL_FALSE:
-            raise RuntimeError(
+            raise ShaderLinkError(
                 """Link failure (%s): %s"""%(
                 link_status,
                 glGetProgramInfoLog( self ),
@@ -191,7 +194,9 @@ def compileProgram(*shaders, **named):
         deleted from the GL.
 
     returns ShaderProgram() (GLuint) program reference
-    raises RuntimeError when a link/validation failure occurs
+    raises RuntimeError subclasses {
+        ShaderCompilationError, ShaderValidationError, ShaderLinkError,
+    } when a link/validation failure occurs
     """
     program = glCreateProgram()
     if named.get('separable'):
@@ -227,7 +232,7 @@ def compileShader( source, shaderType ):
     if not(result):
         # TODO: this will be wrong if the user has
         # disabled traditional unpacking array support.
-        raise RuntimeError(
+        raise ShaderCompilationError(
             """Shader compile failure (%s): %s"""%(
                 result,
                 glGetShaderInfoLog( shader ),
@@ -236,3 +241,10 @@ def compileShader( source, shaderType ):
             shaderType,
         )
     return shader
+
+class ShaderCompilationError(RuntimeError):
+    """Raised when a shader compilation fails"""
+class ShaderValidationError(RuntimeError):
+    """Raised when a program fails to validate"""
+class ShaderLinkError(RuntimeError):
+    """Raised when a shader link fails"""
