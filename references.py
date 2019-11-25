@@ -129,45 +129,44 @@ def loadData():
                 "debug/state.py":1,
                 "tests/glget.py":1,
             },
-            #baseURL = 'http://pyopengl.cvs.sourceforge.net/pyopengl/OpenGLContext',
-            baseURL = 'http://bazaar.launchpad.net/~mcfletch/openglcontext/trunk',
+            baseURL = 'http://github.com/mcfletch/openglcontext',
                        
             projectName = 'OpenGLContext',
-            urlTemplate = LOGGERHEAD,
+            urlTemplate = GITHUB,
         ),
         SampleSource(
             os.path.join(SAMPLES,'PyOpenGL-Demo'),
-            #baseURL = 'http://pyopengl.cvs.sourceforge.net/pyopengl/Demo/PyOpenGL-Demo',
-            baseURL = 'http://bazaar.launchpad.net/~mcfletch/pyopengl-demo/trunk',
+            baseURL = 'http://github.com/mcfletch/pyopengl-demo',
             projectName='OpenGL-Demo',
-            urlTemplate = LOGGERHEAD,
+            urlTemplate = GITHUB,
         ),
 
+        # SampleSource(
+        #     os.path.join(SAMPLES,'Glinter'),
+        #     baseURL = "http://glinter.cvs.sourceforge.net/glinter/Glinter/",
+        #     projectName='Glinter',
+        # ),
         SampleSource(
-            os.path.join(SAMPLES,'Glinter'),
-            baseURL = "http://glinter.cvs.sourceforge.net/glinter/Glinter/",
-            projectName='Glinter',
-        ),
-        SampleSource(
-            os.path.join( SAMPLES, 'pymmlib' ),
-            baseURL = "http://pymmlib.svn.sourceforge.net/viewvc/pymmlib/trunk/pymmlib",
+            os.path.join( SAMPLES, 'mmlib' ),
+            baseURL = "https://github.com/masci/mmLib",
             projectName='{Artistic License} PymmLib',
-            urlTemplate = VIEWSVN,
+            urlTemplate = GITHUB,
         ),
-        SampleSource(
-            os.path.join( SAMPLES, 'pybzedit' ),
-            baseURL = "http://pybzedit.cvs.sourceforge.net/pybzedit/pybzedit/",
-            projectName='pyBzEdit',
-        ),
-        SampleSource(
-            os.path.join( SAMPLES, 'pyui' ),
-            baseURL = "http://pyui.cvs.sourceforge.net/pyui/PyUIcvs/",
-            projectName='{LGPL} PyUI',
-        ),
+        # SampleSource(
+        #     os.path.join( SAMPLES, 'pybzedit' ),
+        #     baseURL = "http://pybzedit.cvs.sourceforge.net/pybzedit/pybzedit/",
+        #     projectName='pyBzEdit',
+        # ),
+        # SampleSource(
+        #     os.path.join( SAMPLES, 'pyui' ),
+        #     baseURL = "http://pyui.cvs.sourceforge.net/pyui/PyUIcvs/",
+        #     projectName='{LGPL} PyUI',
+        # ),
         SampleSource(
             os.path.join( SAMPLES, 'pyui2' ),
-            baseURL = "http://pyui2.cvs.sourceforge.net/pyui2/pyui2/",
+            baseURL = "https://github.com/Ripsnorta/pyui2",
             projectName='{LGPL} PyUI2',
+            urlTemplate=GITHUB,
         ),
         SampleSource(
             os.path.join( SAMPLES, 'visionegg' ),
@@ -189,15 +188,15 @@ def loadData():
 #        ),
         SampleSource(
             os.path.join( SAMPLES, 'pyggel' ),
-            baseURL ='http://code.google.com/p/pyggel',
+            baseURL ='https://github.com/philippTheCat/pyggel',
             projectName='{LGPL} Pyggel',
-            urlTemplate = GOOGLECODE,
+            urlTemplate = GITHUB,
         ),
         SampleSource(
             os.path.join( SAMPLES, 'pygl2d' ),
-            baseURL ='http://code.google.com/p/pygl2d',
+            baseURL ='https://github.com/RyanHope/PyGL2D',
             projectName='{LGPL} pygl2d',
-            urlTemplate = GOOGLECODE,
+            urlTemplate = GITHUB,
         ),
         SampleSource(
             os.path.join(SAMPLES,'scocca'),
@@ -207,9 +206,9 @@ def loadData():
         ),
         SampleSource(
             os.path.join( SAMPLES, 'kamaelia' ),
-            baseURL ='http://kamaelia.svn.sourceforge.net/viewvc/kamaelia/trunk/',
+            baseURL ='https://github.com/sparkslabs/kamaelia',
             projectName='{LGPL or GPL or MPL} Kamaelia',
-            urlTemplate = VIEWSVN,
+            urlTemplate = GITHUB,
         ),
         SampleSource(
             os.path.join( SAMPLES, 'agog' ),
@@ -231,9 +230,9 @@ def loadData():
         ),
         SampleSource(
             os.path.join( SAMPLES, 'visvis' ),
-            baseURL = 'http://code.google.com/p/visvis',
+            baseURL = 'https://github.com/almarklein/visvis',
             projectName = 'Visvis',
-            urlTemplate = GOOGLECODE_HG,
+            urlTemplate = GITHUB,
         ),
         SampleSource(
             os.path.join(SAMPLES,'programmable'),

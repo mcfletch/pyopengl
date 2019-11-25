@@ -99,31 +99,30 @@ checkouts = [
         'https://github.com/mcfletch/pyopengl-demo.git',
         'PyOpenGL-Demo',
     ),
-    CVSSource(
-        ':pserver:anonymous@glinter.cvs.sourceforge.net:/cvsroot/glinter',
-        'Glinter',
-    ),
-    SVNSource(
-        'https://svn.code.sf.net/p/pymmlib/code/trunk',
-        'pymmlib',
-    ),
-    CVSSource(
-        ':pserver:anonymous@pybzedit.cvs.sourceforge.net:/cvsroot/pybzedit',
-        'pybzedit',
-    ),
-    CVSSource(
-        ':pserver:anonymous@pyui.cvs.sourceforge.net:/cvsroot/pyui',
-        'PyUIcvs',
-        'pyui',
-    ),
-    CVSSource(
-        ':pserver:anonymous@pyui2.cvs.sourceforge.net:/cvsroot/pyui2',
-        'pyui2',
+    # CVSSource(
+    #     ':pserver:anonymous@glinter.cvs.sourceforge.net:/cvsroot/glinter',
+    #     'Glinter',
+    # ),
+    # CVSSource(
+    #     ':pserver:anonymous@pybzedit.cvs.sourceforge.net:/cvsroot/pybzedit',
+    #     'pybzedit',
+    # ),
+    # CVSSource(
+    #     ':pserver:anonymous@pyui.cvs.sourceforge.net:/cvsroot/pyui',
+    #     'PyUIcvs',
+    #     'pyui',
+    # ),
+    GITSource(
+        'https://github.com/Ripsnorta/pyui2.git',
         'pyui2',
     ),
-    SVNSource(
-        'https://svn.code.sf.net/p/pymmlib/code/trunk',
-        dirname = 'pymmlib',
+    # SVNSource(
+    #     'https://svn.code.sf.net/p/pymmlib/code/trunk',
+    #     'pymmlib',
+    # ),
+    GITSource(
+        'https://github.com/masci/mmLib.git',
+        dirname = 'mmlib',
     ),
 #    SVNSource(
 #        'http://visionegg.org/svn/trunk/visionegg',
@@ -145,8 +144,8 @@ checkouts = [
 #        'http://svn.gnome.org/svn/gnome-games/trunk/glchess',
 #        dirname = 'glchess',
 #    ),
-    SVNSource(
-        'https://svn.code.sf.net/p/kamaelia/code/trunk',
+    GITSource(
+        'https://github.com/sparkslabs/kamaelia.git',
         dirname = 'kamaelia',
     ),
     GITSource(
